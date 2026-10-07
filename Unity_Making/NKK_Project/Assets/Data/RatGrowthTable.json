@@ -1,0 +1,392 @@
+{
+ "Growth_Node": [
+  {
+   "node_id": 1,
+   "node_name": "갉기 훈련",
+   "code_id": "dmg",
+   "max_level": 25,
+   "req_node": 0,
+   "req_level": 0,
+   "effect_type": "Atk_Growth",
+   "value_01": 1.25,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "node_id": 2,
+   "node_name": "뒷발 근육",
+   "code_id": "legs",
+   "max_level": 10,
+   "req_node": 1,
+   "req_level": 3,
+   "effect_type": "Dash_Speed_Growth",
+   "value_01": 0.08,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "node_id": 3,
+   "node_name": "특수 액션",
+   "code_id": "act",
+   "max_level": 5,
+   "req_node": 1,
+   "req_level": 1,
+   "effect_type": "Action_Unlock",
+   "value_01": 0.3,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "node_id": 4,
+   "node_name": "재롱 본능",
+   "code_id": "show",
+   "max_level": 5,
+   "req_node": 1,
+   "req_level": 3,
+   "effect_type": "Trick_Chance_Growth",
+   "value_01": 0.4,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "node_id": 5,
+   "node_name": "급소 갉기",
+   "code_id": "crit",
+   "max_level": 5,
+   "req_node": 2,
+   "req_level": 5,
+   "effect_type": "Crit_Chance_Growth",
+   "value_01": 0.04,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "node_id": 6,
+   "node_name": "액션 위력",
+   "code_id": "actPow",
+   "max_level": 10,
+   "req_node": 3,
+   "req_level": 1,
+   "effect_type": "Action_Power_Growth",
+   "value_01": 0.3,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "node_id": 7,
+   "node_name": "특수 강화",
+   "code_id": "special",
+   "max_level": 5,
+   "req_node": 4,
+   "req_level": 2,
+   "effect_type": "Passive_Power_Growth",
+   "value_01": 0.35,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "node_id": 8,
+   "node_name": "액션 각성",
+   "code_id": "actX",
+   "max_level": 1,
+   "req_node": 6,
+   "req_level": 3,
+   "effect_type": "Action_Awaken",
+   "value_01": 0.0,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "node_id": 9,
+   "node_name": "각성",
+   "code_id": "ult",
+   "max_level": 1,
+   "req_node": 7,
+   "req_level": 5,
+   "effect_type": "Awaken",
+   "value_01": 3.0,
+   "value_02": 1.5,
+   "value_03": 1.5
+  }
+ ],
+ "Growth_Order": [
+  {
+   "order": 1,
+   "node_id": 1,
+   "is_repeat": 0
+  },
+  {
+   "order": 2,
+   "node_id": 3,
+   "is_repeat": 0
+  },
+  {
+   "order": 3,
+   "node_id": 1,
+   "is_repeat": 0
+  },
+  {
+   "order": 4,
+   "node_id": 2,
+   "is_repeat": 0
+  },
+  {
+   "order": 5,
+   "node_id": 4,
+   "is_repeat": 0
+  },
+  {
+   "order": 6,
+   "node_id": 1,
+   "is_repeat": 0
+  },
+  {
+   "order": 7,
+   "node_id": 6,
+   "is_repeat": 0
+  },
+  {
+   "order": 8,
+   "node_id": 1,
+   "is_repeat": 0
+  },
+  {
+   "order": 9,
+   "node_id": 2,
+   "is_repeat": 0
+  },
+  {
+   "order": 10,
+   "node_id": 7,
+   "is_repeat": 0
+  },
+  {
+   "order": 11,
+   "node_id": 5,
+   "is_repeat": 0
+  },
+  {
+   "order": 12,
+   "node_id": 6,
+   "is_repeat": 0
+  },
+  {
+   "order": 13,
+   "node_id": 4,
+   "is_repeat": 0
+  },
+  {
+   "order": 14,
+   "node_id": 1,
+   "is_repeat": 0
+  },
+  {
+   "order": 15,
+   "node_id": 7,
+   "is_repeat": 0
+  },
+  {
+   "order": 16,
+   "node_id": 6,
+   "is_repeat": 0
+  },
+  {
+   "order": 17,
+   "node_id": 8,
+   "is_repeat": 0
+  },
+  {
+   "order": 18,
+   "node_id": 5,
+   "is_repeat": 0
+  },
+  {
+   "order": 19,
+   "node_id": 7,
+   "is_repeat": 0
+  },
+  {
+   "order": 20,
+   "node_id": 7,
+   "is_repeat": 0
+  },
+  {
+   "order": 21,
+   "node_id": 7,
+   "is_repeat": 0
+  },
+  {
+   "order": 22,
+   "node_id": 9,
+   "is_repeat": 0
+  },
+  {
+   "order": 23,
+   "node_id": 1,
+   "is_repeat": 1
+  },
+  {
+   "order": 24,
+   "node_id": 6,
+   "is_repeat": 1
+  },
+  {
+   "order": 25,
+   "node_id": 2,
+   "is_repeat": 1
+  },
+  {
+   "order": 26,
+   "node_id": 3,
+   "is_repeat": 1
+  },
+  {
+   "order": 27,
+   "node_id": 5,
+   "is_repeat": 1
+  },
+  {
+   "order": 28,
+   "node_id": 4,
+   "is_repeat": 1
+  },
+  {
+   "order": 29,
+   "node_id": 1,
+   "is_repeat": 1
+  }
+ ],
+ "Action_Awaken": [
+  {
+   "effect_type": "Thunder",
+   "value_01": 2.0,
+   "value_02": 1.5,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Gun_Kata",
+   "value_01": 2.0,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Jump_Slam",
+   "value_01": 5.0,
+   "value_02": 1.667,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Dash_Slash",
+   "value_01": 7.0,
+   "value_02": 1.6,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Barrage",
+   "value_01": 2.0,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Sonic_Wave",
+   "value_01": 1.5,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Spin_Beam",
+   "value_01": 2.0,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Breath",
+   "value_01": 1.0,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Rolling_Ball",
+   "value_01": 2.8,
+   "value_02": 1.5,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Summon",
+   "value_01": 2.0,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Vortex",
+   "value_01": 1.5,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Meteor",
+   "value_01": 2.0,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Midas",
+   "value_01": 2.0,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Tornado",
+   "value_01": 1.6,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Cheer",
+   "value_01": 1.0,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Feast",
+   "value_01": 0.037,
+   "value_02": 0.0,
+   "value_03": 0.0
+  },
+  {
+   "effect_type": "Throw_Item",
+   "value_01": 3.0,
+   "value_02": 2.4,
+   "value_03": 0.0
+  }
+ ],
+ "Growth_Effect_Type": [
+  {
+   "effect_type": "Atk_Growth"
+  },
+  {
+   "effect_type": "Dash_Speed_Growth"
+  },
+  {
+   "effect_type": "Action_Unlock"
+  },
+  {
+   "effect_type": "Trick_Chance_Growth"
+  },
+  {
+   "effect_type": "Crit_Chance_Growth"
+  },
+  {
+   "effect_type": "Action_Power_Growth"
+  },
+  {
+   "effect_type": "Passive_Power_Growth"
+  },
+  {
+   "effect_type": "Action_Awaken"
+  },
+  {
+   "effect_type": "Awaken"
+  }
+ ]
+}

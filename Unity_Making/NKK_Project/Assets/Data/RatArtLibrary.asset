@@ -1,0 +1,1042 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2341199df860e1945a3936dccbd9214f, type: 3}
+  m_Name: RatArtLibrary
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.Rats.RatArtLibrary
+  entries:
+  - codeId: brownrat
+    head: {fileID: 21300000, guid: 062627e4ab5e3324ea343a68517e259c, type: 3}
+    torso: {fileID: 21300000, guid: a87a5b9a75661694095c0bc7910dbfc7, type: 3}
+    tail: {fileID: 21300000, guid: 854ac8184aa784944989a94b83a8a6e0, type: 3}
+    front: {fileID: 21300000, guid: 45a1e70c65576474097930c1e17df8fa, type: 3}
+    back: {fileID: 21300000, guid: b350b8f488e5ce14da7cf585e6602f25, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.434}
+    tailAnchor: {x: 0.943, y: 0.532}
+    shoulder: {x: 0.241, y: 0.438}
+    hip: {x: 0.736, y: 0.322}
+    legFront: 0.941
+    legBack: 0.797
+  - codeId: labrat
+    head: {fileID: 21300000, guid: 2e384229bf22fab428de3ac1d9b5ed5e, type: 3}
+    torso: {fileID: 21300000, guid: ac7fe5a71e453c546bdd1fe4e5342d94, type: 3}
+    tail: {fileID: 21300000, guid: 3ea4b1dd1e434544f95eb212cccf46ec, type: 3}
+    front: {fileID: 21300000, guid: bc0a85d3fa858904da1d46d9f17318da, type: 3}
+    back: {fileID: 21300000, guid: 337976edfdd78824db39563ac4449d9e, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.363}
+    tailAnchor: {x: 0.947, y: 0.551}
+    shoulder: {x: 0.241, y: 0.448}
+    hip: {x: 0.735, y: 0.322}
+    legFront: 1
+    legBack: 0.884
+  - codeId: buff
+    head: {fileID: 21300000, guid: 663288f0393eb3441a9dc45dcaf15e54, type: 3}
+    torso: {fileID: 21300000, guid: b7016c156e5f7244baef4d6e078590db, type: 3}
+    tail: {fileID: 21300000, guid: 1d5a1baaef0ca664a9eb3df0df37048b, type: 3}
+    front: {fileID: 21300000, guid: ab0c35e9ca3ec3f4ab10efbc5a4a85bd, type: 3}
+    back: {fileID: 21300000, guid: 0a257f848ae98ff4f87dd53f5b4d4693, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.366}
+    tailAnchor: {x: 0.947, y: 0.662}
+    shoulder: {x: 0.237, y: 0.508}
+    hip: {x: 0.734, y: 0.515}
+    legFront: 1
+    legBack: 0.787
+  - codeId: builder
+    head: {fileID: 21300000, guid: 8df01af177109dd4fb66880cc291ea04, type: 3}
+    torso: {fileID: 21300000, guid: 63e2badde4d8d0b4d8cacb90d2abbcd3, type: 3}
+    tail: {fileID: 21300000, guid: 9d4f9bf975f8db840b4da9e95377d763, type: 3}
+    front: {fileID: 21300000, guid: 5882b62eba603094f80a98012568ccc3, type: 3}
+    back: {fileID: 21300000, guid: 0f95d018e44e3c44cad76e66d58d50ef, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.07, y: 0.373}
+    tailAnchor: {x: 0.947, y: 0.429}
+    shoulder: {x: 0.24, y: 0.434}
+    hip: {x: 0.737, y: 0.298}
+    legFront: 1
+    legBack: 0.844
+  - codeId: chef
+    head: {fileID: 21300000, guid: eb3349ab872544042bd3174d5341db9e, type: 3}
+    torso: {fileID: 21300000, guid: 636330ae2296f4f478ab18cf4894c979, type: 3}
+    tail: {fileID: 21300000, guid: fb10c093366e0054dacc44bf7341e90c, type: 3}
+    front: {fileID: 21300000, guid: 8a03367c858e4ff40ab8c3b9daed534d, type: 3}
+    back: {fileID: 21300000, guid: a53430bdf7b83114c81565bb80a45668, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.067, y: 0.356}
+    tailAnchor: {x: 0.945, y: 0.506}
+    shoulder: {x: 0.236, y: 0.417}
+    hip: {x: 0.733, y: 0.319}
+    legFront: 0.893
+    legBack: 0.806
+  - codeId: courier
+    head: {fileID: 21300000, guid: 697df07232e69af4e9054782a3bae6ef, type: 3}
+    torso: {fileID: 21300000, guid: 1e0d421acfbd1ec45a2b0fab16233cbe, type: 3}
+    tail: {fileID: 21300000, guid: 4c63745e27014d8499c53b40d62c9f62, type: 3}
+    front: {fileID: 21300000, guid: 3aeeb4103f1899e4eb5354fd8b4b0e3d, type: 3}
+    back: {fileID: 21300000, guid: 8cc915758a4054e4f942be48fd428a1c, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.302}
+    tailAnchor: {x: 0.945, y: 0.508}
+    shoulder: {x: 0.238, y: 0.44}
+    hip: {x: 0.735, y: 0.298}
+    legFront: 1
+    legBack: 0.723
+  - codeId: fieldmouse
+    head: {fileID: 21300000, guid: 0ca00a765daefcc47957da8d991c0cd7, type: 3}
+    torso: {fileID: 21300000, guid: bbd75cfa7043b6b4f8ea8dd013a1befb, type: 3}
+    tail: {fileID: 21300000, guid: d7aecc2e428f1c2429a6edec51a79d9d, type: 3}
+    front: {fileID: 21300000, guid: ba3b0636c2d82f24d86d85d39608afc4, type: 3}
+    back: {fileID: 21300000, guid: bf91e428376506144a5a8da62cbcaf74, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.067, y: 0.453}
+    tailAnchor: {x: 0.945, y: 0.482}
+    shoulder: {x: 0.238, y: 0.471}
+    hip: {x: 0.738, y: 0.305}
+    legFront: 0.92
+    legBack: 0.808
+  - codeId: glowy
+    head: {fileID: 21300000, guid: 92649472796039647a4e697ca7edf006, type: 3}
+    torso: {fileID: 21300000, guid: 94548f81b9d5f964ab953741ff237780, type: 3}
+    tail: {fileID: 21300000, guid: ca0d6b00c5674984c9feace41d2521b7, type: 3}
+    front: {fileID: 21300000, guid: 2b532ac93731402409875a431cacc00a, type: 3}
+    back: {fileID: 21300000, guid: f469b5223fb7717449db2f4b81f86d88, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.411}
+    tailAnchor: {x: 0.947, y: 0.5}
+    shoulder: {x: 0.237, y: 0.435}
+    hip: {x: 0.737, y: 0.308}
+    legFront: 1
+    legBack: 0.958
+  - codeId: hamster
+    head: {fileID: 21300000, guid: ecd776489ec86ad4b8973cc61ee685ee, type: 3}
+    torso: {fileID: 21300000, guid: a6ae9f0e43bcf194a86500b7872f21bb, type: 3}
+    tail: {fileID: 21300000, guid: 4d17d94a460876245886398b5c3384be, type: 3}
+    front: {fileID: 21300000, guid: 86dbf934c3d58884ba5635c8784a7ecb, type: 3}
+    back: {fileID: 21300000, guid: 81b12f6e88c00954f9eb34e192bc0ffa, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.375}
+    tailAnchor: {x: 0.947, y: 0.539}
+    shoulder: {x: 0.237, y: 0.488}
+    hip: {x: 0.737, y: 0.295}
+    legFront: 1
+    legBack: 0.861
+  - codeId: hooded
+    head: {fileID: 21300000, guid: 077549db30745834a9f27ecd86ac7dba, type: 3}
+    torso: {fileID: 21300000, guid: 88d973cbc607cb04ea852513ac195da4, type: 3}
+    tail: {fileID: 21300000, guid: 093f9b2f37e00cc46bc926600cf25b54, type: 3}
+    front: {fileID: 21300000, guid: 50e7a60f6d2a5c74d9ddab28730f3955, type: 3}
+    back: {fileID: 21300000, guid: 4008b34bb01ea8d46922e47fee1eb1dd, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.067, y: 0.359}
+    tailAnchor: {x: 0.945, y: 0.554}
+    shoulder: {x: 0.238, y: 0.414}
+    hip: {x: 0.738, y: 0.321}
+    legFront: 0.882
+    legBack: 0.815
+  - codeId: mailman
+    head: {fileID: 21300000, guid: 5e2a60c6698f2954293dca6c77c0d387, type: 3}
+    torso: {fileID: 21300000, guid: 78eaa78945347b04dbf6bbb4d59513c6, type: 3}
+    tail: {fileID: 21300000, guid: 356c76db7575b5544bdde4944782bf58, type: 3}
+    front: {fileID: 21300000, guid: ed97e6747a4368f4fa2b9be1bad0a5a9, type: 3}
+    back: {fileID: 21300000, guid: cdb161b2cc66a9a4e9862c9fea79a7bf, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.306}
+    tailAnchor: {x: 0.942, y: 0.504}
+    shoulder: {x: 0.237, y: 0.388}
+    hip: {x: 0.737, y: 0.324}
+    legFront: 1
+    legBack: 0.855
+  - codeId: mouse
+    head: {fileID: 21300000, guid: cc855ee4fa414454c9ddbb61a4bead08, type: 3}
+    torso: {fileID: 21300000, guid: bd9b15dff09345741bb016bcddfef87f, type: 3}
+    tail: {fileID: 21300000, guid: 7bde978e5c0d9e643b16dd6120aa2394, type: 3}
+    front: {fileID: 21300000, guid: b7038c8e609697246af855d3b93afe23, type: 3}
+    back: {fileID: 21300000, guid: 92c675bfbfd04714b8a0c700f5d7bf7f, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.349}
+    tailAnchor: {x: 0.941, y: 0.566}
+    shoulder: {x: 0.237, y: 0.427}
+    hip: {x: 0.737, y: 0.322}
+    legFront: 0.858
+    legBack: 0.785
+  - codeId: mutant
+    head: {fileID: 21300000, guid: edc5a2d6192a0cd4dac2197b94973681, type: 3}
+    torso: {fileID: 21300000, guid: 9d8a1cc931e1c8a43b9bf5470b939214, type: 3}
+    tail: {fileID: 21300000, guid: 8b901de44171a524d94bb15aae37d950, type: 3}
+    front: {fileID: 21300000, guid: 697aaa444c3dbbb469c875990fcbd96f, type: 3}
+    back: {fileID: 21300000, guid: f600510a5cd49d14a8f3ed3229127aa6, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.471}
+    tailAnchor: {x: 0.945, y: 0.565}
+    shoulder: {x: 0.238, y: 0.478}
+    hip: {x: 0.735, y: 0.316}
+    legFront: 0.934
+    legBack: 0.959
+  - codeId: nerd
+    head: {fileID: 21300000, guid: 70031a00b9fdbfd4eac4ae932b0a4a57, type: 3}
+    torso: {fileID: 21300000, guid: c4f4896fcf3fffb4fb0757b1e7eb5534, type: 3}
+    tail: {fileID: 21300000, guid: 2635c32342e2b214097a519f6f78ad43, type: 3}
+    front: {fileID: 21300000, guid: 9a7da06bcb0ea3346836d2040d3ddcf5, type: 3}
+    back: {fileID: 21300000, guid: da0889c2301a8db458da8c984e305bbc, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.414}
+    tailAnchor: {x: 0.945, y: 0.551}
+    shoulder: {x: 0.236, y: 0.447}
+    hip: {x: 0.736, y: 0.326}
+    legFront: 0.838
+    legBack: 0.744
+  - codeId: party
+    head: {fileID: 21300000, guid: 0224c786c866bb9479993c879e43e66c, type: 3}
+    torso: {fileID: 21300000, guid: a5b60c148d98a454c955ffc95b7d17b7, type: 3}
+    tail: {fileID: 21300000, guid: 99b9ea98692487a46b3de692394c43b1, type: 3}
+    front: {fileID: 21300000, guid: 90e4764abcb1dca45b8aa2a186d61410, type: 3}
+    back: {fileID: 21300000, guid: fcd85c1a1d0ab3a4f844e991847a3bec, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.372}
+    tailAnchor: {x: 0.942, y: 0.497}
+    shoulder: {x: 0.24, y: 0.447}
+    hip: {x: 0.734, y: 0.325}
+    legFront: 1
+    legBack: 0.955
+  - codeId: scientist
+    head: {fileID: 21300000, guid: 087e1f15224156f46837f68aa94b1d50, type: 3}
+    torso: {fileID: 21300000, guid: 66e121342c5103c459965f36d71e08e3, type: 3}
+    tail: {fileID: 21300000, guid: 6f9be8a875f3b324092df6338695b8d1, type: 3}
+    front: {fileID: 21300000, guid: fb5b4d266d9da4041a74483d2a9d0c22, type: 3}
+    back: {fileID: 21300000, guid: 495c3cdab8df46848ae535366bbf3e02, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.352}
+    tailAnchor: {x: 0.942, y: 0.513}
+    shoulder: {x: 0.237, y: 0.425}
+    hip: {x: 0.737, y: 0.301}
+    legFront: 1
+    legBack: 0.906
+  - codeId: traveler
+    head: {fileID: 21300000, guid: 5beea794d847a8e41b3a816915f97187, type: 3}
+    torso: {fileID: 21300000, guid: 8bab61eff0e6dee4eb8edfefc626808f, type: 3}
+    tail: {fileID: 21300000, guid: c917348724a932d4ebb9fd8b283035a7, type: 3}
+    front: {fileID: 21300000, guid: b698fe0865aaecc4a9d0394015827834, type: 3}
+    back: {fileID: 21300000, guid: 69ec9e7f446270f48bc749348aeaead4, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.509}
+    tailAnchor: {x: 0.943, y: 0.541}
+    shoulder: {x: 0.241, y: 0.488}
+    hip: {x: 0.736, y: 0.416}
+    legFront: 0.95
+    legBack: 0.981
+  - codeId: cowboy
+    head: {fileID: 21300000, guid: 470d0cc5e6ae2944189fe84723f7d936, type: 3}
+    torso: {fileID: 21300000, guid: fa6d4174434754f48b154a28638f7504, type: 3}
+    tail: {fileID: 21300000, guid: 63103e2a8ae3b224cb850dfc030e0317, type: 3}
+    front: {fileID: 21300000, guid: bbbc4f50eca59f14b8526e8d48d6eaa0, type: 3}
+    back: {fileID: 21300000, guid: ff883f11d1b96dd468e35eac8d897cc9, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.07, y: 0.48}
+    tailAnchor: {x: 0.947, y: 0.644}
+    shoulder: {x: 0.24, y: 0.446}
+    hip: {x: 0.737, y: 0.454}
+    legFront: 0.955
+    legBack: 0.697
+  - codeId: cyborg
+    head: {fileID: 21300000, guid: e13f3c20542c5fe4a889bf21756764af, type: 3}
+    torso: {fileID: 21300000, guid: 7b1ff67c5a0531742aece0ddcad2432f, type: 3}
+    tail: {fileID: 21300000, guid: debda42fa2c8e834abde1bcca3f3bfce, type: 3}
+    front: {fileID: 21300000, guid: 3df3409e1c0e6af41b1212df2a7cc75b, type: 3}
+    back: {fileID: 21300000, guid: d3a44c1e4a6cb72489ec6994b81241c0, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.425}
+    tailAnchor: {x: 0.943, y: 0.6}
+    shoulder: {x: 0.24, y: 0.435}
+    hip: {x: 0.737, y: 0.316}
+    legFront: 0.905
+    legBack: 0.847
+  - codeId: firefighter
+    head: {fileID: 21300000, guid: b5761d730e23a1243b6fcbb5a11961ee, type: 3}
+    torso: {fileID: 21300000, guid: ac6a95df15ba19548be88238a201443d, type: 3}
+    tail: {fileID: 21300000, guid: 4ade082bc19605c45b01594be8ba0ae6, type: 3}
+    front: {fileID: 21300000, guid: 583e428f244331a40ac3ad987e5eeb16, type: 3}
+    back: {fileID: 21300000, guid: 295c548a785340a41a4129fb74456db8, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.598}
+    tailAnchor: {x: 0.946, y: 0.513}
+    shoulder: {x: 0.241, y: 0.559}
+    hip: {x: 0.735, y: 0.326}
+    legFront: 1
+    legBack: 1
+  - codeId: idol
+    head: {fileID: 21300000, guid: a145a7d3d1eada44f97d2ff5241a688f, type: 3}
+    torso: {fileID: 21300000, guid: 88d72e14d05a832418e90fcd022a40a6, type: 3}
+    tail: {fileID: 21300000, guid: 9dae78e095e52e34fa48a6f64b6c81d4, type: 3}
+    front: {fileID: 21300000, guid: d606db551c1a4c448902d07e6271f2c8, type: 3}
+    back: {fileID: 21300000, guid: 0d66f4bdfaa42e14bbbdc7f4d364fe9f, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.467}
+    tailAnchor: {x: 0.942, y: 0.501}
+    shoulder: {x: 0.237, y: 0.525}
+    hip: {x: 0.737, y: 0.372}
+    legFront: 1
+    legBack: 0.793
+  - codeId: miner
+    head: {fileID: 21300000, guid: 11d5e8334d32e8448aedc4a803e26ddf, type: 3}
+    torso: {fileID: 21300000, guid: 69ba7f6e5ccb36d4ca8db8147bc72851, type: 3}
+    tail: {fileID: 21300000, guid: f38bcc7385cd5ca46b7a94de7ebb6907, type: 3}
+    front: {fileID: 21300000, guid: 38faa6bed6f4c47419acfb957f74b55a, type: 3}
+    back: {fileID: 21300000, guid: 91e16ddb0a070f04faf8358429dc120f, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.47}
+    tailAnchor: {x: 0.944, y: 0.618}
+    shoulder: {x: 0.236, y: 0.425}
+    hip: {x: 0.733, y: 0.358}
+    legFront: 1
+    legBack: 0.805
+  - codeId: ninja
+    head: {fileID: 21300000, guid: 5463a7c992e0d3d48975823e39fcd299, type: 3}
+    torso: {fileID: 21300000, guid: b934bdd060851074995162cd0bfd8676, type: 3}
+    tail: {fileID: 21300000, guid: 4911a6ff20753414ea2c366ce5f64177, type: 3}
+    front: {fileID: 21300000, guid: f7a858cdc08516c4a86fd27a7ff75a91, type: 3}
+    back: {fileID: 21300000, guid: 8c7d41a0c64e3144793b399f381ec50b, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.312}
+    tailAnchor: {x: 0.942, y: 0.354}
+    shoulder: {x: 0.237, y: 0.31}
+    hip: {x: 0.737, y: 0.237}
+    legFront: 0.929
+    legBack: 0.813
+  - codeId: nurse
+    head: {fileID: 21300000, guid: 30e418ac804477445845eb40556482f7, type: 3}
+    torso: {fileID: 21300000, guid: 4abd127adfe8f0844904a08be05695ff, type: 3}
+    tail: {fileID: 21300000, guid: aaf5db779fd278640a359a361dedf26b, type: 3}
+    front: {fileID: 21300000, guid: ec50e9a50b77ff0498be7acd79a22164, type: 3}
+    back: {fileID: 21300000, guid: 548ff1196668c3a4aaedfca654fa5b29, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.32}
+    tailAnchor: {x: 0.942, y: 0.471}
+    shoulder: {x: 0.24, y: 0.409}
+    hip: {x: 0.734, y: 0.29}
+    legFront: 0.993
+    legBack: 0.871
+  - codeId: pandahamster
+    head: {fileID: 21300000, guid: c7b303f6601cf8842a6916d6bb35ca57, type: 3}
+    torso: {fileID: 21300000, guid: c32732880e129bc4088f5b3b56f61bd8, type: 3}
+    tail: {fileID: 21300000, guid: 5be8e42440dd2324cb9ac69cf4be1763, type: 3}
+    front: {fileID: 21300000, guid: ad079bfec0355e9459cf00437eaf3698, type: 3}
+    back: {fileID: 21300000, guid: 5ed89cd7265d24f448e4ee1d83a4c7bf, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.067, y: 0.386}
+    tailAnchor: {x: 0.945, y: 0.449}
+    shoulder: {x: 0.236, y: 0.414}
+    hip: {x: 0.733, y: 0.325}
+    legFront: 0.759
+    legBack: 0.878
+  - codeId: pirate
+    head: {fileID: 21300000, guid: 97db18d42f0c2b14da2c35f49738dc9c, type: 3}
+    torso: {fileID: 21300000, guid: b83beaa9c9758b5449bb80c4acd2f454, type: 3}
+    tail: {fileID: 21300000, guid: 42cd63f5f36a82d4caca02492f862607, type: 3}
+    front: {fileID: 21300000, guid: 8e845d5042a96be47b1cb56cc53d02b8, type: 3}
+    back: {fileID: 21300000, guid: ee9cb1cb3b9ae004d9fb2081f38fccdf, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.332}
+    tailAnchor: {x: 0.944, y: 0.534}
+    shoulder: {x: 0.238, y: 0.427}
+    hip: {x: 0.738, y: 0.373}
+    legFront: 0.9
+    legBack: 0.806
+  - codeId: police
+    head: {fileID: 21300000, guid: aa8d8f2b9804d1146a521f3ab4d711ef, type: 3}
+    torso: {fileID: 21300000, guid: b84edd9342399ec49acdb2ac398d3700, type: 3}
+    tail: {fileID: 21300000, guid: c450f25263e26874fbf42940d82ba870, type: 3}
+    front: {fileID: 21300000, guid: df0b341f69dda2943a4809acf5e879d0, type: 3}
+    back: {fileID: 21300000, guid: c845450195ba28040a9326b40a13c9b2, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.308}
+    tailAnchor: {x: 0.946, y: 0.553}
+    shoulder: {x: 0.238, y: 0.387}
+    hip: {x: 0.738, y: 0.319}
+    legFront: 0.868
+    legBack: 0.749
+  - codeId: skater
+    head: {fileID: 21300000, guid: a7302e1c41ce5eb45a9f4fc8ab717f6a, type: 3}
+    torso: {fileID: 21300000, guid: e4a0f751a56523646b022ef07eaaf52a, type: 3}
+    tail: {fileID: 21300000, guid: 36bf33daa42b3a740bd012fc7d67310d, type: 3}
+    front: {fileID: 21300000, guid: 6437832124c82dc4b869f1e108781716, type: 3}
+    back: {fileID: 21300000, guid: f0cf3ca906fca4b4b9465e10d181da7e, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.326}
+    tailAnchor: {x: 0.943, y: 0.518}
+    shoulder: {x: 0.236, y: 0.421}
+    hip: {x: 0.736, y: 0.314}
+    legFront: 0.67
+    legBack: 0.751
+  - codeId: sleepy
+    head: {fileID: 21300000, guid: 0234fbad91f856942908191baa3136a9, type: 3}
+    torso: {fileID: 21300000, guid: bb329d6a02269264593817c2d1b0258c, type: 3}
+    tail: {fileID: 21300000, guid: e2fe3346429c7c24b8ed637ebc17981a, type: 3}
+    front: {fileID: 21300000, guid: 548d7af56504ceb4e8aa406fad4bd1ec, type: 3}
+    back: {fileID: 21300000, guid: 7670680cf3e47b549a766358528ebae1, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.373}
+    tailAnchor: {x: 0.944, y: 0.469}
+    shoulder: {x: 0.236, y: 0.387}
+    hip: {x: 0.733, y: 0.309}
+    legFront: 0.838
+    legBack: 0.773
+  - codeId: soldier
+    head: {fileID: 21300000, guid: 56a6d3c1a2f525440a9a1e64db398d57, type: 3}
+    torso: {fileID: 21300000, guid: 97172dbf16c1be540bc424229ec9a867, type: 3}
+    tail: {fileID: 21300000, guid: 9d4ef443da3af99489b616155d0b1a28, type: 3}
+    front: {fileID: 21300000, guid: 71b4f9da4e1d45c4d832a1da7aca3585, type: 3}
+    back: {fileID: 21300000, guid: 0639ac7b6b82168458724237a85bb3f6, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.471}
+    tailAnchor: {x: 0.943, y: 0.544}
+    shoulder: {x: 0.241, y: 0.404}
+    hip: {x: 0.736, y: 0.354}
+    legFront: 0.903
+    legBack: 0.789
+  - codeId: alien
+    head: {fileID: 21300000, guid: 4aecc41a426b4374ba4f705fd68888e4, type: 3}
+    torso: {fileID: 21300000, guid: ff87aed32e1e901499076f436211a720, type: 3}
+    tail: {fileID: 21300000, guid: e2ed15b9aacd87240a4611123804f533, type: 3}
+    front: {fileID: 21300000, guid: 425cfcbed49ac3f439d5b42ad4dc37e9, type: 3}
+    back: {fileID: 21300000, guid: 13c8d6daaff2019468b7e60456d98535, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.441}
+    tailAnchor: {x: 0.947, y: 0.531}
+    shoulder: {x: 0.237, y: 0.46}
+    hip: {x: 0.734, y: 0.301}
+    legFront: 0.848
+    legBack: 0.783
+  - codeId: angel
+    head: {fileID: 21300000, guid: 8cb2d2a8c5ce7394fbc4b104715f4453, type: 3}
+    torso: {fileID: 21300000, guid: a22170ec3be1c6f4ab46dab391dc36d2, type: 3}
+    tail: {fileID: 21300000, guid: 3b11501365ce86c46b88ecd4de40a4a5, type: 3}
+    front: {fileID: 21300000, guid: f19a3caa4b4c57547a2689cfaa211a45, type: 3}
+    back: {fileID: 21300000, guid: 15ecedd43b59e734fa0d9c080c20b88a, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.599}
+    tailAnchor: {x: 0.945, y: 0.405}
+    shoulder: {x: 0.24, y: 0.733}
+    hip: {x: 0.733, y: 0.553}
+    legFront: 1.034
+    legBack: 1
+  - codeId: astro
+    head: {fileID: 21300000, guid: 234a511eb46d04a4c9f3cef4839d8f14, type: 3}
+    torso: {fileID: 21300000, guid: 94065f8df9d06494aa0a766825ce1001, type: 3}
+    tail: {fileID: 21300000, guid: 4d40b62d565d9db49a5db350dc2e490c, type: 3}
+    front: {fileID: 21300000, guid: f2b80a62ae487ee49a42d2ec6fbefa8e, type: 3}
+    back: {fileID: 21300000, guid: 606dd4fa89f61ff4681567285a9e19ae, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.469}
+    tailAnchor: {x: 0.946, y: 0.559}
+    shoulder: {x: 0.24, y: 0.57}
+    hip: {x: 0.737, y: 0.327}
+    legFront: 1
+    legBack: 1
+  - codeId: ballerina
+    head: {fileID: 21300000, guid: 931a943bed5fa144da11b62cb17e20ff, type: 3}
+    torso: {fileID: 21300000, guid: 5ca7122b297c9a6429c47739c66d7f1a, type: 3}
+    tail: {fileID: 21300000, guid: 1ea5594526ff7d3449bfdfe105d3f807, type: 3}
+    front: {fileID: 21300000, guid: 3aa1785916c0db649a77d82dbfac48e8, type: 3}
+    back: {fileID: 21300000, guid: 210d0a62a3b0eff459da95168fb8bdf7, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.367}
+    tailAnchor: {x: 0.945, y: 0.418}
+    shoulder: {x: 0.241, y: 0.534}
+    hip: {x: 0.738, y: 0.324}
+    legFront: 1
+    legBack: 1
+  - codeId: cosmic
+    head: {fileID: 21300000, guid: 36d1c63b288ab7d459bca7be8c8ba0f9, type: 3}
+    torso: {fileID: 21300000, guid: 3336c09069c4559469e482ed894262eb, type: 3}
+    tail: {fileID: 21300000, guid: 9453389b2328bfb49be8284926382eca, type: 3}
+    front: {fileID: 21300000, guid: 779c6e96fb91a444c86fcbb06725ee7e, type: 3}
+    back: {fileID: 21300000, guid: 8bfc43899bbab5f4da44a422c851f64c, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.363}
+    tailAnchor: {x: 0.944, y: 0.506}
+    shoulder: {x: 0.239, y: 0.569}
+    hip: {x: 0.733, y: 0.306}
+    legFront: 1
+    legBack: 0.975
+  - codeId: detective
+    head: {fileID: 21300000, guid: e7eb979befd446746be4c7356d8d3bb9, type: 3}
+    torso: {fileID: 21300000, guid: 1f0708fbf4a7bac4b807fdbcdf7361f8, type: 3}
+    tail: {fileID: 21300000, guid: bbb29d742a6db674686ca9e86ce6c506, type: 3}
+    front: {fileID: 21300000, guid: a68ad1ed34edbf84f94eef90f2c6f90f, type: 3}
+    back: {fileID: 21300000, guid: 2ea779e5058e84d41a8638dce7d0c03d, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.395}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.238, y: 0.448}
+    hip: {x: 0.736, y: 0.325}
+    legFront: 1
+    legBack: 0.817
+  - codeId: dino
+    head: {fileID: 21300000, guid: 098165711928e824f873d4297eeb82bc, type: 3}
+    torso: {fileID: 21300000, guid: f2b169dec96b1ae4993fbaff647af64a, type: 3}
+    tail: {fileID: 21300000, guid: 429559a6d8adad44fac4b7e23c9a8b94, type: 3}
+    front: {fileID: 21300000, guid: d003fb4aa65fb72498eb2752f45ebd2a, type: 3}
+    back: {fileID: 21300000, guid: 688283112041d2c4b9fe9c308df357bb, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.395}
+    tailAnchor: {x: 0.947, y: 0.677}
+    shoulder: {x: 0.241, y: 0.507}
+    hip: {x: 0.735, y: 0.473}
+    legFront: 1
+    legBack: 0.845
+  - codeId: dragon
+    head: {fileID: 21300000, guid: a675c67eddcccaf469125c7a6fe5da6e, type: 3}
+    torso: {fileID: 21300000, guid: efb1735d9866b6e438bcefe8fd606a78, type: 3}
+    tail: {fileID: 21300000, guid: fc793669a94d8ac4c8c09466db4aad41, type: 3}
+    front: {fileID: 21300000, guid: 7651ac37abab5564c87a8654fabb467a, type: 3}
+    back: {fileID: 21300000, guid: 9b8245b38fdd60b4595b97222ebb3c7e, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.067, y: 0.538}
+    tailAnchor: {x: 0.944, y: 0.627}
+    shoulder: {x: 0.24, y: 0.663}
+    hip: {x: 0.737, y: 0.437}
+    legFront: 1
+    legBack: 1
+  - codeId: emperor
+    head: {fileID: 21300000, guid: a74163d3533db8a499332792de41db32, type: 3}
+    torso: {fileID: 21300000, guid: 51daec12d172c8d4da2dbbbf75be3ed8, type: 3}
+    tail: {fileID: 21300000, guid: fbdbe0072a8587044b6aebc8d4f7e7e2, type: 3}
+    front: {fileID: 21300000, guid: 8f0a7e90931be9c4f9541acad0c70fb6, type: 3}
+    back: {fileID: 21300000, guid: 0132b02a600d53c4ca19da42418ef1d4, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.07, y: 0.356}
+    tailAnchor: {x: 0.942, y: 0.358}
+    shoulder: {x: 0.238, y: 0.417}
+    hip: {x: 0.738, y: 0.294}
+    legFront: 0.903
+    legBack: 0.895
+  - codeId: ghost
+    head: {fileID: 21300000, guid: 3c9f916f669d9584e9bd9cceae5af3d3, type: 3}
+    torso: {fileID: 21300000, guid: c550c2b488d2d5547886168189270843, type: 3}
+    tail: {fileID: 21300000, guid: 342a99ee285d8804f89c334759745acf, type: 3}
+    front: {fileID: 21300000, guid: 400030dc11a662c449c7b012802398a6, type: 3}
+    back: {fileID: 21300000, guid: 23fb8b86d0e3a3348982944968a6a020, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.432}
+    tailAnchor: {x: 0.943, y: 0.602}
+    shoulder: {x: 0.239, y: 0.609}
+    hip: {x: 0.739, y: 0.401}
+    legFront: 1
+    legBack: 1
+  - codeId: hero
+    head: {fileID: 21300000, guid: 6a1044f29fb855c499d213ac61751458, type: 3}
+    torso: {fileID: 21300000, guid: 35e436b7326c0714397c58606264d606, type: 3}
+    tail: {fileID: 21300000, guid: 506991d8ddd8d4b4fa679bc55ef0e7f3, type: 3}
+    front: {fileID: 21300000, guid: 4b15fc24f249d4d49803b5574a24c458, type: 3}
+    back: {fileID: 21300000, guid: f52d2a374d2dec1498334056d945586c, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.07, y: 0.468}
+    tailAnchor: {x: 0.947, y: 0.161}
+    shoulder: {x: 0.241, y: 0.62}
+    hip: {x: 0.738, y: 0.387}
+    legFront: 1
+    legBack: 1
+  - codeId: knight
+    head: {fileID: 21300000, guid: 2fc58d16cad0537439be739af927f4eb, type: 3}
+    torso: {fileID: 21300000, guid: b81a354188a654a4e8f651eae31da79d, type: 3}
+    tail: {fileID: 21300000, guid: 52466e3908bfb8e4f91b6a7cf2d41d95, type: 3}
+    front: {fileID: 21300000, guid: b0ba5c61b5068e74fb5e9f128bf1b7d5, type: 3}
+    back: {fileID: 21300000, guid: 6b20cb6b5d9bd064f8a455ec504a5671, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.439}
+    tailAnchor: {x: 0.944, y: 0.494}
+    shoulder: {x: 0.239, y: 0.402}
+    hip: {x: 0.733, y: 0.302}
+    legFront: 0.818
+    legBack: 0.882
+  - codeId: pharaoh
+    head: {fileID: 21300000, guid: d938e2f97607fe34b904305c3426c5c5, type: 3}
+    torso: {fileID: 21300000, guid: bafb166dff60e694ba2812f0de22cc3b, type: 3}
+    tail: {fileID: 21300000, guid: e8a7632434c2c57448e5195053cbf75e, type: 3}
+    front: {fileID: 21300000, guid: ba9c9adcd16b08d4b94f8cedb37bf691, type: 3}
+    back: {fileID: 21300000, guid: e478d96d8edbb9f488649bb5bae9e121, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.067, y: 0.389}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.24, y: 0.452}
+    hip: {x: 0.737, y: 0.323}
+    legFront: 0.96
+    legBack: 0.929
+  - codeId: ratking
+    head: {fileID: 21300000, guid: 6c56574d228f9424284fe65a6ca90917, type: 3}
+    torso: {fileID: 21300000, guid: 9aad19e706f8e42428134b8ebe56e793, type: 3}
+    tail: {fileID: 21300000, guid: 7761976a0c1bb0c46951ed64d95118d4, type: 3}
+    front: {fileID: 21300000, guid: b12640e748631a74bb4c070826ebda1f, type: 3}
+    back: {fileID: 21300000, guid: f2d3c5bd463d1a542984df04fb874431, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.363}
+    tailAnchor: {x: 0.943, y: 0.456}
+    shoulder: {x: 0.239, y: 0.394}
+    hip: {x: 0.736, y: 0.306}
+    legFront: 1
+    legBack: 0.938
+  - codeId: ratqueen
+    head: {fileID: 21300000, guid: ceee0069e0870be429d1c3b388f1ad8b, type: 3}
+    torso: {fileID: 21300000, guid: 6a01aa0bea4801b4cba10e7c4ecbd006, type: 3}
+    tail: {fileID: 21300000, guid: 66b05615f5af084428eb09a8795a8758, type: 3}
+    front: {fileID: 21300000, guid: d17deb2e4599267478fcc8e83a496562, type: 3}
+    back: {fileID: 21300000, guid: e50f6112265e50144acb65a7fdda709d, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.392}
+    tailAnchor: {x: 0.942, y: 0.547}
+    shoulder: {x: 0.237, y: 0.51}
+    hip: {x: 0.737, y: 0.387}
+    legFront: 1
+    legBack: 0.9
+  - codeId: robot
+    head: {fileID: 21300000, guid: a291f2bb5a5195b4aa9933a15247b771, type: 3}
+    torso: {fileID: 21300000, guid: 09dc09f99c6cd6a40a0eec0093858788, type: 3}
+    tail: {fileID: 21300000, guid: 73dbab39692f7f544836b14806c53224, type: 3}
+    front: {fileID: 21300000, guid: 78047980dc697aa4fa62a618afa704c6, type: 3}
+    back: {fileID: 21300000, guid: 05f46c51bece2f4429fbb6c875d0283d, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.466}
+    tailAnchor: {x: 0.947, y: 0.513}
+    shoulder: {x: 0.237, y: 0.43}
+    hip: {x: 0.734, y: 0.304}
+    legFront: 0.844
+    legBack: 0.757
+  - codeId: rocker
+    head: {fileID: 21300000, guid: 1b5706cf3529ef144b4459e80634190f, type: 3}
+    torso: {fileID: 21300000, guid: 012b4746c5809c94f8eeed06e50f9ea1, type: 3}
+    tail: {fileID: 21300000, guid: 32095f2ae06417f4984cc7ee087e5a68, type: 3}
+    front: {fileID: 21300000, guid: cf12fa276f4e67944bdb8e037295e440, type: 3}
+    back: {fileID: 21300000, guid: 19d8e167ef8ff8942b03956b55752026, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.248}
+    tailAnchor: {x: 0.943, y: 0.526}
+    shoulder: {x: 0.241, y: 0.39}
+    hip: {x: 0.736, y: 0.341}
+    legFront: 0.727
+    legBack: 0.772
+  - codeId: samurai
+    head: {fileID: 21300000, guid: 750297137d852b84c968864f715e778f, type: 3}
+    torso: {fileID: 21300000, guid: 11040b8d42c1bab439b078ed170cbcbb, type: 3}
+    tail: {fileID: 21300000, guid: dd1d2d87bee4a5445bd5c5ae64591447, type: 3}
+    front: {fileID: 21300000, guid: ac83fbd8df4291048a8de158ca187e52, type: 3}
+    back: {fileID: 21300000, guid: eafff0f6daf609b4b828cd465b06c291, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.336}
+    tailAnchor: {x: 0.943, y: 0.467}
+    shoulder: {x: 0.241, y: 0.582}
+    hip: {x: 0.736, y: 0.306}
+    legFront: 1
+    legBack: 1
+  - codeId: santa
+    head: {fileID: 21300000, guid: 7f45852b90a85e949a8885d2596d9a10, type: 3}
+    torso: {fileID: 21300000, guid: 2c25a8d5919f52a4eabe38f11ebb647d, type: 3}
+    tail: {fileID: 21300000, guid: 7a5f81fe4d5bb954ebf12f325fcf9045, type: 3}
+    front: {fileID: 21300000, guid: 4d8e0820b0f658b4f9e15228b4327998, type: 3}
+    back: {fileID: 21300000, guid: 90791e897386bab4ebcc8ef3ff8e452d, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.679}
+    tailAnchor: {x: 0.944, y: 0.554}
+    shoulder: {x: 0.236, y: 0.74}
+    hip: {x: 0.733, y: 0.582}
+    legFront: 1
+    legBack: 1
+  - codeId: sultan
+    head: {fileID: 21300000, guid: 7ec83dac5c7f26e4da545375f17f8c5a, type: 3}
+    torso: {fileID: 21300000, guid: d8ad94ad44d97cf4785fc0190dd99b2d, type: 3}
+    tail: {fileID: 21300000, guid: d4b0605925bb09348b99c62ac6f4d919, type: 3}
+    front: {fileID: 21300000, guid: e237a28b9d5522c40a374232a2975485, type: 3}
+    back: {fileID: 21300000, guid: 5ce6783a32c70134dba0ef8278fbcdba, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.07, y: 0.478}
+    tailAnchor: {x: 0.946, y: 0.525}
+    shoulder: {x: 0.238, y: 0.589}
+    hip: {x: 0.735, y: 0.382}
+    legFront: 1
+    legBack: 1
+  - codeId: vampire
+    head: {fileID: 21300000, guid: c68006456fcdfae4abd21cfb3605b54c, type: 3}
+    torso: {fileID: 21300000, guid: fd0fe033d3febad41bac5d77ed24f6f4, type: 3}
+    tail: {fileID: 21300000, guid: 2b0e8db12cb48f04fa35d9385aea9344, type: 3}
+    front: {fileID: 21300000, guid: 8dd627ac783d359468bb3d8942fcafd0, type: 3}
+    back: {fileID: 21300000, guid: 8af6e77997c8172408941239632562bd, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.07, y: 0.383}
+    tailAnchor: {x: 0.946, y: 0.689}
+    shoulder: {x: 0.237, y: 0.426}
+    hip: {x: 0.737, y: 0.46}
+    legFront: 1
+    legBack: 0.771
+  - codeId: viking
+    head: {fileID: 21300000, guid: ad2ca7e417d64c843a70d251cfd07c9e, type: 3}
+    torso: {fileID: 21300000, guid: 23a0ba0816c2d2c40bd67e1c760189c7, type: 3}
+    tail: {fileID: 21300000, guid: 463082ae7162e894aa64b40ed65a63ba, type: 3}
+    front: {fileID: 21300000, guid: 70702979bab0d5a4587a54da0b2a8434, type: 3}
+    back: {fileID: 21300000, guid: 286d63b6f01b58942b75547117206b58, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.369}
+    tailAnchor: {x: 0.943, y: 0.557}
+    shoulder: {x: 0.241, y: 0.396}
+    hip: {x: 0.736, y: 0.352}
+    legFront: 0.83
+    legBack: 0.931
+  - codeId: wizard
+    head: {fileID: 21300000, guid: f00d474fd3626d44f83a64693c391f3d, type: 3}
+    torso: {fileID: 21300000, guid: ceaaaed8e78074c4c8f33d96e443e29d, type: 3}
+    tail: {fileID: 21300000, guid: fd1ef01afd1ccd044ac20a64ca71ca71, type: 3}
+    front: {fileID: 21300000, guid: 6ed3ddbcacd1c414eaa756b3568deea9, type: 3}
+    back: {fileID: 21300000, guid: 13c68ef15e03e3c4ba0fea4f3ad26927, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.319}
+    tailAnchor: {x: 0.946, y: 0.529}
+    shoulder: {x: 0.241, y: 0.386}
+    hip: {x: 0.735, y: 0.297}
+    legFront: 0.993
+    legBack: 0.784
+  - codeId: zombie
+    head: {fileID: 21300000, guid: b26c320dd1b915a4aaee3a2471c80950, type: 3}
+    torso: {fileID: 21300000, guid: ac3712880fc627746a780a2bbdc4a76d, type: 3}
+    tail: {fileID: 21300000, guid: 0b90ea8c013519741949960037b89cdb, type: 3}
+    front: {fileID: 21300000, guid: 1495eeb6c617f534395d608f3abe65d1, type: 3}
+    back: {fileID: 21300000, guid: fb0334ea4cfd79f4c9c2e02cd62c1b07, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.353}
+    tailAnchor: {x: 0.944, y: 0.575}
+    shoulder: {x: 0.239, y: 0.42}
+    hip: {x: 0.733, y: 0.347}
+    legFront: 1
+    legBack: 0.731
+  - codeId: parkrat
+    head: {fileID: 21300000, guid: cb666083af7e13b40add530f4b9ed6fc, type: 3}
+    torso: {fileID: 21300000, guid: df8a7428fcbec2348afcfcc1b602b36c, type: 3}
+    tail: {fileID: 21300000, guid: d55eb3355acdb3248aecf4c80e3fd4fc, type: 3}
+    front: {fileID: 21300000, guid: edc1de9846c291544983f0a47f5f0196, type: 3}
+    back: {fileID: 21300000, guid: 908028196fbb787459989de1c7f7f41b, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.488}
+    tailAnchor: {x: 0.942, y: 0.526}
+    shoulder: {x: 0.237, y: 0.384}
+    hip: {x: 0.734, y: 0.337}
+    legFront: 0.634
+    legBack: 1
+  - codeId: plaguerat
+    head: {fileID: 21300000, guid: 522c8db961e481a4a8ed37b714a832bd, type: 3}
+    torso: {fileID: 21300000, guid: c01c027cb3880344e9513e89a1a74cdc, type: 3}
+    tail: {fileID: 21300000, guid: 88bd005933ae7df4fb769112eeaa132d, type: 3}
+    front: {fileID: 21300000, guid: 5173644d01c3b4240814426e35e832e2, type: 3}
+    back: {fileID: 21300000, guid: 6fedf94f285c42d4ba3c14832fe7eb21, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.406}
+    tailAnchor: {x: 0.942, y: 0.602}
+    shoulder: {x: 0.239, y: 0.615}
+    hip: {x: 0.732, y: 0.388}
+    legFront: 1
+    legBack: 1
+  - codeId: zapham
+    head: {fileID: 21300000, guid: 097c1a9d950dc0e4cb77d7b523316124, type: 3}
+    torso: {fileID: 21300000, guid: de3d21c1fd91cdc4488dcbe23cba90e1, type: 3}
+    tail: {fileID: 21300000, guid: 51331fe1a08e7964a91dc30dc0b1b26e, type: 3}
+    front: {fileID: 21300000, guid: 6fb98e16c2949034e90ce98b87cb3b5d, type: 3}
+    back: {fileID: 21300000, guid: 241d94bcc41686c4dbc0a18367c4f514, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.538}
+    tailAnchor: {x: 0.946, y: 0.5}
+    shoulder: {x: 0.241, y: 0.592}
+    hip: {x: 0.735, y: 0.296}
+    legFront: 1
+    legBack: 0.985
+  - codeId: streamrat
+    head: {fileID: 21300000, guid: aa681df1efdca78469cbd6c14950c1ad, type: 3}
+    torso: {fileID: 21300000, guid: 53dafbf24af84db41a140123adbdf80e, type: 3}
+    tail: {fileID: 21300000, guid: fff977a53066a6d4cbe1d0456e0e5d18, type: 3}
+    front: {fileID: 21300000, guid: e201903051e25ae458bd66757ecec27a, type: 3}
+    back: {fileID: 21300000, guid: 695a01a78a0ffa04f84ffd77730d9506, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.487}
+    tailAnchor: {x: 0.945, y: 0.532}
+    shoulder: {x: 0.241, y: 0.516}
+    hip: {x: 0.738, y: 0.467}
+    legFront: 1
+    legBack: 1
+  - codeId: starchef
+    head: {fileID: 21300000, guid: 794861c78dffa9142ba9b927310f5efe, type: 3}
+    torso: {fileID: 21300000, guid: ae87779fb5ce12c459c10726385800a5, type: 3}
+    tail: {fileID: 21300000, guid: 0527a94d27f729343a929a67fcf65b23, type: 3}
+    front: {fileID: 21300000, guid: e81b770c000d65e4ab73c30638c87d78, type: 3}
+    back: {fileID: 21300000, guid: 9852b44455722f9409d8053c7cf2f1a7, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.367}
+    tailAnchor: {x: 0.943, y: 0.543}
+    shoulder: {x: 0.241, y: 0.442}
+    hip: {x: 0.736, y: 0.312}
+    legFront: 0.969
+    legBack: 0.809
+  - codeId: ramjui
+    head: {fileID: 21300000, guid: 3c23b11c981268242a176d3064527772, type: 3}
+    torso: {fileID: 21300000, guid: d1bb734a4471a724f8d3f3152a15e142, type: 3}
+    tail: {fileID: 21300000, guid: 330cf75ed75f0e74f9e56aeda93b9a30, type: 3}
+    front: {fileID: 21300000, guid: a99c435eaeb84a94cb5f3c7859944a1a, type: 3}
+    back: {fileID: 21300000, guid: d3cdac83022edef408c0652ee1eff17a, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.067, y: 0.328}
+    tailAnchor: {x: 0.941, y: 0.582}
+    shoulder: {x: 0.237, y: 0.437}
+    hip: {x: 0.733, y: 0.416}
+    legFront: 1
+    legBack: 0.887
+  - codeId: jwerry
+    head: {fileID: 21300000, guid: ab1275c6adb5d7640ae8597e26d0bbdb, type: 3}
+    torso: {fileID: 21300000, guid: a6c983722ddb8cc4e86d0593e2f3a59b, type: 3}
+    tail: {fileID: 21300000, guid: 3cde15e85f101d4448cba6c102cd4db2, type: 3}
+    front: {fileID: 21300000, guid: ef28876fce0717c4580ba653999deca7, type: 3}
+    back: {fileID: 21300000, guid: f5eda0e3e4912d34388a4b529529976c, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.07, y: 0.297}
+    tailAnchor: {x: 0.945, y: 0.458}
+    shoulder: {x: 0.234, y: 0.428}
+    hip: {x: 0.734, y: 0.279}
+    legFront: 0.679
+    legBack: 0.731
+  - codeId: blackrat
+    head: {fileID: 21300000, guid: fa435ab600f988c459b31360c31029da, type: 3}
+    torso: {fileID: 21300000, guid: 99ce723a65122d747bbd2ba1d2b7ed13, type: 3}
+    tail: {fileID: 21300000, guid: bc8fc1031ca2bb349a83aaed6a5c457f, type: 3}
+    front: {fileID: 21300000, guid: ac8ece0e7d4454749b8b29ad13e302dd, type: 3}
+    back: {fileID: 21300000, guid: 8b95bbfd4f867c940a536838a6589257, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.067, y: 0.414}
+    tailAnchor: {x: 0.945, y: 0.494}
+    shoulder: {x: 0.238, y: 0.486}
+    hip: {x: 0.738, y: 0.308}
+    legFront: 0.997
+    legBack: 0.996
+  - codeId: boxer
+    head: {fileID: 21300000, guid: e265d5a2d3213b1498c03d4522baaf98, type: 3}
+    torso: {fileID: 21300000, guid: 99fcbc7b1bfcad04398f36cf637d71e6, type: 3}
+    tail: {fileID: 21300000, guid: 6909f3349408b43458e759848426f1ac, type: 3}
+    front: {fileID: 21300000, guid: 0892b52f50819cb45919c35249579c1a, type: 3}
+    back: {fileID: 21300000, guid: 2fcb6b967c3962043804089b677309a6, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.474}
+    tailAnchor: {x: 0.945, y: 0.542}
+    shoulder: {x: 0.238, y: 0.495}
+    hip: {x: 0.735, y: 0.323}
+    legFront: 0.885
+    legBack: 1
+  - codeId: dumbo
+    head: {fileID: 21300000, guid: a02533846a8e3ec45be2ff8241c5b768, type: 3}
+    torso: {fileID: 21300000, guid: fdf74c431d6efcf4096801f9beab0022, type: 3}
+    tail: {fileID: 21300000, guid: 5b1e541041ff2274b89003fde62bd287, type: 3}
+    front: {fileID: 21300000, guid: 89028a56b4c303c459cf93eb0d6e7925, type: 3}
+    back: {fileID: 21300000, guid: 4fa00fc5c349eba4f966b3d093100bf4, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.071, y: 0.414}
+    tailAnchor: {x: 0.945, y: 0.577}
+    shoulder: {x: 0.236, y: 0.472}
+    hip: {x: 0.732, y: 0.325}
+    legFront: 1
+    legBack: 0.837
+  - codeId: dwarfham
+    head: {fileID: 21300000, guid: fb34ee4272d477f45a9e1f7097d2b5ba, type: 3}
+    torso: {fileID: 21300000, guid: 33c734ba6c777ed409e8d88c15d73299, type: 3}
+    tail: {fileID: 21300000, guid: 5ba29cb395391e44ea4de4b282e52dcf, type: 3}
+    front: {fileID: 21300000, guid: d608b99c00d73a14599c4772227b2b97, type: 3}
+    back: {fileID: 21300000, guid: 23ea478c173d3d5459d4dedf76c2a755, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.404}
+    tailAnchor: {x: 0.944, y: 0.518}
+    shoulder: {x: 0.238, y: 0.551}
+    hip: {x: 0.738, y: 0.352}
+    legFront: 1
+    legBack: 1
+  - codeId: farmer
+    head: {fileID: 21300000, guid: 430febe11cba9774485ac56b1455db6a, type: 3}
+    torso: {fileID: 21300000, guid: e2db579f55d7aa44abe0841766d0cc21, type: 3}
+    tail: {fileID: 21300000, guid: 21b3b2e610e264c489a8e235bcfb7361, type: 3}
+    front: {fileID: 21300000, guid: 818fa14e1b12de946bdb90781b33c211, type: 3}
+    back: {fileID: 21300000, guid: 7bbc71c4e7a72f64f8c18cd92045878f, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.378}
+    tailAnchor: {x: 0.946, y: 0.49}
+    shoulder: {x: 0.238, y: 0.501}
+    hip: {x: 0.735, y: 0.416}
+    legFront: 1
+    legBack: 1
+  - codeId: gerbilc
+    head: {fileID: 21300000, guid: 5f060693193ecf942a0524564e3b424a, type: 3}
+    torso: {fileID: 21300000, guid: c307a419672548548b2d84b0bbd96c13, type: 3}
+    tail: {fileID: 21300000, guid: 2dfad4f041f5824459406eb1aa3c0a51, type: 3}
+    front: {fileID: 21300000, guid: 5461be0538e89e2438ff4c45795c1ce0, type: 3}
+    back: {fileID: 21300000, guid: fc91dc18a90c5e548bdd4211540f70f0, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.346}
+    tailAnchor: {x: 0.944, y: 0.518}
+    shoulder: {x: 0.236, y: 0.518}
+    hip: {x: 0.733, y: 0.372}
+    legFront: 1
+    legBack: 1
+  - codeId: painter
+    head: {fileID: 21300000, guid: fb10e1a71ffcb854abd085c8550330fd, type: 3}
+    torso: {fileID: 21300000, guid: 62de6cfdfd07faf44bda777f012bd86e, type: 3}
+    tail: {fileID: 21300000, guid: 18651e81046c6c14da23b8a33ccf744b, type: 3}
+    front: {fileID: 21300000, guid: 9d450f4da017bc54ebf001934b2cd20b, type: 3}
+    back: {fileID: 21300000, guid: 638ef64669a91174fb348814e9b9860d, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.393}
+    tailAnchor: {x: 0.946, y: 0.593}
+    shoulder: {x: 0.238, y: 0.407}
+    hip: {x: 0.731, y: 0.363}
+    legFront: 0.805
+    legBack: 0.805
+  - codeId: student
+    head: {fileID: 21300000, guid: 414fc2d595bf01c4894a193fcb7fc098, type: 3}
+    torso: {fileID: 21300000, guid: 6bc9f75bc9203864dbeb6c17885964b2, type: 3}
+    tail: {fileID: 21300000, guid: 3112b94dff669f0488f52a561b7f3d48, type: 3}
+    front: {fileID: 21300000, guid: f7fc2a6c7b5f18d41b892919439b7ef6, type: 3}
+    back: {fileID: 21300000, guid: afbd77c4257d9754ab6922b7ccbda9e0, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.541}
+    tailAnchor: {x: 0.947, y: 0.615}
+    shoulder: {x: 0.239, y: 0.594}
+    hip: {x: 0.734, y: 0.462}
+    legFront: 1
+    legBack: 0.992
+  - codeId: barista
+    head: {fileID: 21300000, guid: 0ad860bea0f772343b161c08e570db02, type: 3}
+    torso: {fileID: 21300000, guid: 2a50c0e9687c40f4090e66bae7cbf498, type: 3}
+    tail: {fileID: 21300000, guid: 9e200fa776206ec468f1663993d1cf6c, type: 3}
+    front: {fileID: 21300000, guid: ed93b05c61ec8b146bfa00cd9a81e231, type: 3}
+    back: {fileID: 21300000, guid: b9526bb8e7b56d8419f57ef86f5a0530, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.066, y: 0.446}
+    tailAnchor: {x: 0.941, y: 0.558}
+    shoulder: {x: 0.235, y: 0.466}
+    hip: {x: 0.735, y: 0.355}
+    legFront: 1
+    legBack: 0.869
+  - codeId: gardener
+    head: {fileID: 21300000, guid: e9520f487f50cc948b113b07730339e5, type: 3}
+    torso: {fileID: 21300000, guid: 19b679d170babc14d9d8cc3e85e92a16, type: 3}
+    tail: {fileID: 21300000, guid: 31ed4230684a4164980ed1b3146a387b, type: 3}
+    front: {fileID: 21300000, guid: 87e5a10c6da4a914cb17f689bc8b5b82, type: 3}
+    back: {fileID: 21300000, guid: f4f17cffe0e6a4642a021ea0053296e1, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.414}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.238, y: 0.424}
+    hip: {x: 0.738, y: 0.32}
+    legFront: 0.708
+    legBack: 0.857
+  - codeId: hairless
+    head: {fileID: 21300000, guid: 834403efd19f2d948b354868670125e5, type: 3}
+    torso: {fileID: 21300000, guid: ddde436bc79d7af4997edc3b1c7cf7aa, type: 3}
+    tail: {fileID: 21300000, guid: 3fec51715141f3d49a4f5cf5d21637a2, type: 3}
+    front: {fileID: 21300000, guid: dd2830b5c1fd39f4183d61a39560d584, type: 3}
+    back: {fileID: 21300000, guid: b4a159755c10c624ebb325c9c6f26eff, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.07, y: 0.429}
+    tailAnchor: {x: 0.943, y: 0.515}
+    shoulder: {x: 0.236, y: 0.508}
+    hip: {x: 0.732, y: 0.332}
+    legFront: 1
+    legBack: 1
+  - codeId: harvest
+    head: {fileID: 21300000, guid: 90fd951c907299a44a53e9bb64ecdf17, type: 3}
+    torso: {fileID: 21300000, guid: bc2f77dfa190d164e84dcf59072a0e9b, type: 3}
+    tail: {fileID: 21300000, guid: 675cf7aab17b67a468049cc9066b5b25, type: 3}
+    front: {fileID: 21300000, guid: 27dc8e07b5e36b54682f26114c3f2d05, type: 3}
+    back: {fileID: 21300000, guid: 5537d7da9b90b314a8a180fa05bfb47d, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.07, y: 0.394}
+    tailAnchor: {x: 0.939, y: 0.488}
+    shoulder: {x: 0.235, y: 0.479}
+    hip: {x: 0.73, y: 0.312}
+    legFront: 0.97
+    legBack: 0.817
+  - codeId: janitorat
+    head: {fileID: 21300000, guid: e793b07b35ecba74898dc720afe464dc, type: 3}
+    torso: {fileID: 21300000, guid: 5dafa092b0bf92f40a96cad022d52ee2, type: 3}
+    tail: {fileID: 21300000, guid: fcb64dff02760364f98e9fc928ece2a1, type: 3}
+    front: {fileID: 21300000, guid: 6499873cb05d7b642b549b46c1414799, type: 3}
+    back: {fileID: 21300000, guid: 6a1246aa5b574784fbcdea8a5d7512a0, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.072, y: 0.335}
+    tailAnchor: {x: 0.946, y: 0.551}
+    shoulder: {x: 0.241, y: 0.396}
+    hip: {x: 0.735, y: 0.334}
+    legFront: 0.631
+    legBack: 0.947
+  - codeId: jerboa
+    head: {fileID: 21300000, guid: 0f2cea8e4f37ea848aa9f22156e9f08a, type: 3}
+    torso: {fileID: 21300000, guid: 4460c799046629a49a2d133804b4df13, type: 3}
+    tail: {fileID: 21300000, guid: f292152eb29fa6a47948540f50b5724d, type: 3}
+    front: {fileID: 21300000, guid: 9282be03bc5ef1d469be74d899618a5b, type: 3}
+    back: {fileID: 21300000, guid: 79ff51ed0a65e784f82fbde65cfb799f, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.43}
+    tailAnchor: {x: 0.941, y: 0.541}
+    shoulder: {x: 0.237, y: 0.582}
+    hip: {x: 0.737, y: 0.32}
+    legFront: 1
+    legBack: 0.641
+  - codeId: spiny
+    head: {fileID: 21300000, guid: 6f076001e05bfdc439c17d64a99ffc38, type: 3}
+    torso: {fileID: 21300000, guid: aa073dc2bdd39084e8f86ad65f3b2e37, type: 3}
+    tail: {fileID: 21300000, guid: ce445bfc084a2234598bce89db206411, type: 3}
+    front: {fileID: 21300000, guid: bd7431aa4ce0a624cbd1052994a1bf92, type: 3}
+    back: {fileID: 21300000, guid: d8e52805f6e4c2b4fa90409f19790cb3, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.518}
+    tailAnchor: {x: 0.946, y: 0.549}
+    shoulder: {x: 0.236, y: 0.687}
+    hip: {x: 0.736, y: 0.483}
+    legFront: 1
+    legBack: 1
+  - codeId: jjdetective
+    head: {fileID: 21300000, guid: 3344c5c358c61124c96933594805b011, type: 3}
+    torso: {fileID: 21300000, guid: 3e0623e9a5e606a4e96eb85d8a379a44, type: 3}
+    tail: {fileID: 21300000, guid: d5f131bd1761baa458bb1a02aad593ea, type: 3}
+    front: {fileID: 21300000, guid: df84cea476b619e4aaaad2c308b1c6ed, type: 3}
+    back: {fileID: 21300000, guid: 30ef3f995aa106c48b179696e58feb77, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.395}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.238, y: 0.448}
+    hip: {x: 0.736, y: 0.325}
+    legFront: 1
+    legBack: 0.963
+  - codeId: fondue
+    head: {fileID: 21300000, guid: 678a95abdcd021047a9ca61e1b9b47fb, type: 3}
+    torso: {fileID: 21300000, guid: 6086c76fd214ba142bfca9303d891189, type: 3}
+    tail: {fileID: 21300000, guid: 59dcdc37fb364364287cbdd3695e977c, type: 3}
+    front: {fileID: 21300000, guid: ca912f00874c73e4b9a9374ad4a6c79b, type: 3}
+    back: {fileID: 21300000, guid: 220778804f67202419a359d0f92db934, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.395}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.238, y: 0.448}
+    hip: {x: 0.736, y: 0.325}
+    legFront: 1
+    legBack: 0.963
+  - codeId: pcmouse
+    head: {fileID: 0}
+    torso: {fileID: 0}
+    tail: {fileID: 0}
+    front: {fileID: 0}
+    back: {fileID: 0}
+    single: {fileID: 21300000, guid: 9d1762a7e9f0cd44789a0964f05a9c8e, type: 3}
+    neck: {x: 0, y: 0}
+    tailAnchor: {x: 0, y: 0}
+    shoulder: {x: 0, y: 0}
+    hip: {x: 0, y: 0}
+    legFront: 1
+    legBack: 1

@@ -1,0 +1,2104 @@
+{
+"items": [
+{
+"path": "Assets/Art/Rats/Parts/brownrat/head.png",
+"x": 0.819,
+"y": 0.138
+},
+{
+"path": "Assets/Art/Rats/Parts/brownrat/tail.png",
+"x": 0.048,
+"y": 0.802
+},
+{
+"path": "Assets/Art/Rats/Parts/brownrat/front.png",
+"x": 0.602,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/brownrat/back.png",
+"x": 0.633,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/labrat/head.png",
+"x": 0.789,
+"y": 0.15
+},
+{
+"path": "Assets/Art/Rats/Parts/labrat/tail.png",
+"x": 0.05,
+"y": 0.684
+},
+{
+"path": "Assets/Art/Rats/Parts/labrat/front.png",
+"x": 0.456,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/labrat/back.png",
+"x": 0.615,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/buff/head.png",
+"x": 0.69,
+"y": 0.145
+},
+{
+"path": "Assets/Art/Rats/Parts/buff/tail.png",
+"x": 0.047,
+"y": 0.794
+},
+{
+"path": "Assets/Art/Rats/Parts/buff/front.png",
+"x": 0.415,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/buff/back.png",
+"x": 0.575,
+"y": 0.904
+},
+{
+"path": "Assets/Art/Rats/Parts/builder/head.png",
+"x": 0.777,
+"y": 0.148
+},
+{
+"path": "Assets/Art/Rats/Parts/builder/tail.png",
+"x": 0.048,
+"y": 0.83
+},
+{
+"path": "Assets/Art/Rats/Parts/builder/front.png",
+"x": 0.556,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/builder/back.png",
+"x": 0.451,
+"y": 0.904
+},
+{
+"path": "Assets/Art/Rats/Parts/chef/head.png",
+"x": 0.697,
+"y": 0.136
+},
+{
+"path": "Assets/Art/Rats/Parts/chef/tail.png",
+"x": 0.048,
+"y": 0.79
+},
+{
+"path": "Assets/Art/Rats/Parts/chef/front.png",
+"x": 0.569,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/chef/back.png",
+"x": 0.599,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/courier/head.png",
+"x": 0.779,
+"y": 0.143
+},
+{
+"path": "Assets/Art/Rats/Parts/courier/tail.png",
+"x": 0.049,
+"y": 0.809
+},
+{
+"path": "Assets/Art/Rats/Parts/courier/front.png",
+"x": 0.761,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/courier/back.png",
+"x": 0.601,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/fieldmouse/head.png",
+"x": 0.653,
+"y": 0.147
+},
+{
+"path": "Assets/Art/Rats/Parts/fieldmouse/tail.png",
+"x": 0.049,
+"y": 0.755
+},
+{
+"path": "Assets/Art/Rats/Parts/fieldmouse/front.png",
+"x": 0.607,
+"y": 0.898
+},
+{
+"path": "Assets/Art/Rats/Parts/fieldmouse/back.png",
+"x": 0.625,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/glowy/head.png",
+"x": 0.743,
+"y": 0.138
+},
+{
+"path": "Assets/Art/Rats/Parts/glowy/tail.png",
+"x": 0.048,
+"y": 0.752
+},
+{
+"path": "Assets/Art/Rats/Parts/glowy/front.png",
+"x": 0.405,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/glowy/back.png",
+"x": 0.512,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/hamster/head.png",
+"x": 0.693,
+"y": 0.125
+},
+{
+"path": "Assets/Art/Rats/Parts/hamster/tail.png",
+"x": 0.043,
+"y": 0.5
+},
+{
+"path": "Assets/Art/Rats/Parts/hamster/front.png",
+"x": 0.465,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/hamster/back.png",
+"x": 0.577,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/hooded/head.png",
+"x": 0.753,
+"y": 0.144
+},
+{
+"path": "Assets/Art/Rats/Parts/hooded/tail.png",
+"x": 0.05,
+"y": 0.816
+},
+{
+"path": "Assets/Art/Rats/Parts/hooded/front.png",
+"x": 0.57,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/hooded/back.png",
+"x": 0.614,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/mailman/head.png",
+"x": 0.596,
+"y": 0.145
+},
+{
+"path": "Assets/Art/Rats/Parts/mailman/tail.png",
+"x": 0.046,
+"y": 0.55
+},
+{
+"path": "Assets/Art/Rats/Parts/mailman/front.png",
+"x": 0.476,
+"y": 0.899
+},
+{
+"path": "Assets/Art/Rats/Parts/mailman/back.png",
+"x": 0.531,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/mouse/head.png",
+"x": 0.667,
+"y": 0.141
+},
+{
+"path": "Assets/Art/Rats/Parts/mouse/tail.png",
+"x": 0.048,
+"y": 0.746
+},
+{
+"path": "Assets/Art/Rats/Parts/mouse/front.png",
+"x": 0.389,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/mouse/back.png",
+"x": 0.556,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/mutant/head.png",
+"x": 0.798,
+"y": 0.138
+},
+{
+"path": "Assets/Art/Rats/Parts/mutant/tail.png",
+"x": 0.048,
+"y": 0.796
+},
+{
+"path": "Assets/Art/Rats/Parts/mutant/front.png",
+"x": 0.523,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/mutant/back.png",
+"x": 0.572,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/nerd/head.png",
+"x": 0.789,
+"y": 0.144
+},
+{
+"path": "Assets/Art/Rats/Parts/nerd/tail.png",
+"x": 0.047,
+"y": 0.814
+},
+{
+"path": "Assets/Art/Rats/Parts/nerd/front.png",
+"x": 0.455,
+"y": 0.904
+},
+{
+"path": "Assets/Art/Rats/Parts/nerd/back.png",
+"x": 0.568,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/party/head.png",
+"x": 0.561,
+"y": 0.111
+},
+{
+"path": "Assets/Art/Rats/Parts/party/tail.png",
+"x": 0.046,
+"y": 0.432
+},
+{
+"path": "Assets/Art/Rats/Parts/party/front.png",
+"x": 0.514,
+"y": 0.898
+},
+{
+"path": "Assets/Art/Rats/Parts/party/back.png",
+"x": 0.654,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/scientist/head.png",
+"x": 0.749,
+"y": 0.155
+},
+{
+"path": "Assets/Art/Rats/Parts/scientist/tail.png",
+"x": 0.049,
+"y": 0.743
+},
+{
+"path": "Assets/Art/Rats/Parts/scientist/front.png",
+"x": 0.549,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/scientist/back.png",
+"x": 0.623,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/traveler/head.png",
+"x": 0.655,
+"y": 0.119
+},
+{
+"path": "Assets/Art/Rats/Parts/traveler/tail.png",
+"x": 0.039,
+"y": 0.519
+},
+{
+"path": "Assets/Art/Rats/Parts/traveler/front.png",
+"x": 0.522,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/traveler/back.png",
+"x": 0.577,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/cowboy/head.png",
+"x": 0.565,
+"y": 0.144
+},
+{
+"path": "Assets/Art/Rats/Parts/cowboy/tail.png",
+"x": 0.048,
+"y": 0.799
+},
+{
+"path": "Assets/Art/Rats/Parts/cowboy/front.png",
+"x": 0.547,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/cowboy/back.png",
+"x": 0.563,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/cyborg/head.png",
+"x": 0.737,
+"y": 0.151
+},
+{
+"path": "Assets/Art/Rats/Parts/cyborg/tail.png",
+"x": 0.047,
+"y": 0.686
+},
+{
+"path": "Assets/Art/Rats/Parts/cyborg/front.png",
+"x": 0.553,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/cyborg/back.png",
+"x": 0.644,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/firefighter/head.png",
+"x": 0.694,
+"y": 0.123
+},
+{
+"path": "Assets/Art/Rats/Parts/firefighter/tail.png",
+"x": 0.048,
+"y": 0.745
+},
+{
+"path": "Assets/Art/Rats/Parts/firefighter/front.png",
+"x": 0.513,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/firefighter/back.png",
+"x": 0.517,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/idol/head.png",
+"x": 0.524,
+"y": 0.132
+},
+{
+"path": "Assets/Art/Rats/Parts/idol/tail.png",
+"x": 0.048,
+"y": 0.516
+},
+{
+"path": "Assets/Art/Rats/Parts/idol/front.png",
+"x": 0.803,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/idol/back.png",
+"x": 0.628,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/miner/head.png",
+"x": 0.662,
+"y": 0.143
+},
+{
+"path": "Assets/Art/Rats/Parts/miner/tail.png",
+"x": 0.049,
+"y": 0.533
+},
+{
+"path": "Assets/Art/Rats/Parts/miner/front.png",
+"x": 0.444,
+"y": 0.904
+},
+{
+"path": "Assets/Art/Rats/Parts/miner/back.png",
+"x": 0.564,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/ninja/head.png",
+"x": 0.583,
+"y": 0.149
+},
+{
+"path": "Assets/Art/Rats/Parts/ninja/tail.png",
+"x": 0.047,
+"y": 0.764
+},
+{
+"path": "Assets/Art/Rats/Parts/ninja/front.png",
+"x": 0.513,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/ninja/back.png",
+"x": 0.614,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/nurse/head.png",
+"x": 0.612,
+"y": 0.145
+},
+{
+"path": "Assets/Art/Rats/Parts/nurse/tail.png",
+"x": 0.048,
+"y": 0.647
+},
+{
+"path": "Assets/Art/Rats/Parts/nurse/front.png",
+"x": 0.571,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/nurse/back.png",
+"x": 0.554,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/pandahamster/head.png",
+"x": 0.618,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/pandahamster/tail.png",
+"x": 0.041,
+"y": 0.528
+},
+{
+"path": "Assets/Art/Rats/Parts/pandahamster/front.png",
+"x": 0.236,
+"y": 0.904
+},
+{
+"path": "Assets/Art/Rats/Parts/pandahamster/back.png",
+"x": 0.5,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/pirate/head.png",
+"x": 0.612,
+"y": 0.143
+},
+{
+"path": "Assets/Art/Rats/Parts/pirate/tail.png",
+"x": 0.047,
+"y": 0.812
+},
+{
+"path": "Assets/Art/Rats/Parts/pirate/front.png",
+"x": 0.355,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/pirate/back.png",
+"x": 0.588,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/police/head.png",
+"x": 0.662,
+"y": 0.151
+},
+{
+"path": "Assets/Art/Rats/Parts/police/tail.png",
+"x": 0.048,
+"y": 0.828
+},
+{
+"path": "Assets/Art/Rats/Parts/police/front.png",
+"x": 0.539,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/police/back.png",
+"x": 0.645,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/skater/head.png",
+"x": 0.616,
+"y": 0.136
+},
+{
+"path": "Assets/Art/Rats/Parts/skater/tail.png",
+"x": 0.046,
+"y": 0.748
+},
+{
+"path": "Assets/Art/Rats/Parts/skater/front.png",
+"x": 0.534,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/skater/back.png",
+"x": 0.646,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/sleepy/head.png",
+"x": 0.603,
+"y": 0.151
+},
+{
+"path": "Assets/Art/Rats/Parts/sleepy/tail.png",
+"x": 0.048,
+"y": 0.717
+},
+{
+"path": "Assets/Art/Rats/Parts/sleepy/front.png",
+"x": 0.659,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/sleepy/back.png",
+"x": 0.609,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/soldier/head.png",
+"x": 0.752,
+"y": 0.153
+},
+{
+"path": "Assets/Art/Rats/Parts/soldier/tail.png",
+"x": 0.049,
+"y": 0.763
+},
+{
+"path": "Assets/Art/Rats/Parts/soldier/front.png",
+"x": 0.591,
+"y": 0.9
+},
+{
+"path": "Assets/Art/Rats/Parts/soldier/back.png",
+"x": 0.6,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/alien/head.png",
+"x": 0.642,
+"y": 0.143
+},
+{
+"path": "Assets/Art/Rats/Parts/alien/tail.png",
+"x": 0.047,
+"y": 0.796
+},
+{
+"path": "Assets/Art/Rats/Parts/alien/front.png",
+"x": 0.565,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/alien/back.png",
+"x": 0.665,
+"y": 0.904
+},
+{
+"path": "Assets/Art/Rats/Parts/angel/head.png",
+"x": 0.637,
+"y": 0.128
+},
+{
+"path": "Assets/Art/Rats/Parts/angel/tail.png",
+"x": 0.047,
+"y": 0.811
+},
+{
+"path": "Assets/Art/Rats/Parts/angel/front.png",
+"x": 0.58,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/angel/back.png",
+"x": 0.624,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/astro/head.png",
+"x": 0.696,
+"y": 0.137
+},
+{
+"path": "Assets/Art/Rats/Parts/astro/tail.png",
+"x": 0.048,
+"y": 0.714
+},
+{
+"path": "Assets/Art/Rats/Parts/astro/front.png",
+"x": 0.606,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/astro/back.png",
+"x": 0.696,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/ballerina/head.png",
+"x": 0.586,
+"y": 0.143
+},
+{
+"path": "Assets/Art/Rats/Parts/ballerina/tail.png",
+"x": 0.047,
+"y": 0.76
+},
+{
+"path": "Assets/Art/Rats/Parts/ballerina/front.png",
+"x": 0.513,
+"y": 0.9
+},
+{
+"path": "Assets/Art/Rats/Parts/ballerina/back.png",
+"x": 0.653,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/cosmic/head.png",
+"x": 0.718,
+"y": 0.129
+},
+{
+"path": "Assets/Art/Rats/Parts/cosmic/tail.png",
+"x": 0.047,
+"y": 0.496
+},
+{
+"path": "Assets/Art/Rats/Parts/cosmic/front.png",
+"x": 0.534,
+"y": 0.899
+},
+{
+"path": "Assets/Art/Rats/Parts/cosmic/back.png",
+"x": 0.587,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/detective/head.png",
+"x": 0.705,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/detective/tail.png",
+"x": 0.043,
+"y": 0.463
+},
+{
+"path": "Assets/Art/Rats/Parts/detective/front.png",
+"x": 0.774,
+"y": 0.936
+},
+{
+"path": "Assets/Art/Rats/Parts/detective/back.png",
+"x": 0.676,
+"y": 0.943
+},
+{
+"path": "Assets/Art/Rats/Parts/dino/head.png",
+"x": 0.703,
+"y": 0.127
+},
+{
+"path": "Assets/Art/Rats/Parts/dino/tail.png",
+"x": 0.048,
+"y": 0.723
+},
+{
+"path": "Assets/Art/Rats/Parts/dino/front.png",
+"x": 0.4,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/dino/back.png",
+"x": 0.652,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/dragon/head.png",
+"x": 0.678,
+"y": 0.145
+},
+{
+"path": "Assets/Art/Rats/Parts/dragon/tail.png",
+"x": 0.047,
+"y": 0.781
+},
+{
+"path": "Assets/Art/Rats/Parts/dragon/front.png",
+"x": 0.526,
+"y": 0.899
+},
+{
+"path": "Assets/Art/Rats/Parts/dragon/back.png",
+"x": 0.57,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/emperor/head.png",
+"x": 0.713,
+"y": 0.148
+},
+{
+"path": "Assets/Art/Rats/Parts/emperor/tail.png",
+"x": 0.047,
+"y": 0.748
+},
+{
+"path": "Assets/Art/Rats/Parts/emperor/front.png",
+"x": 0.583,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/emperor/back.png",
+"x": 0.515,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/ghost/head.png",
+"x": 0.684,
+"y": 0.13
+},
+{
+"path": "Assets/Art/Rats/Parts/ghost/tail.png",
+"x": 0.047,
+"y": 0.761
+},
+{
+"path": "Assets/Art/Rats/Parts/ghost/front.png",
+"x": 0.551,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/ghost/back.png",
+"x": 0.61,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/hero/head.png",
+"x": 0.637,
+"y": 0.121
+},
+{
+"path": "Assets/Art/Rats/Parts/hero/tail.png",
+"x": 0.048,
+"y": 0.833
+},
+{
+"path": "Assets/Art/Rats/Parts/hero/front.png",
+"x": 0.647,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/hero/back.png",
+"x": 0.64,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/knight/head.png",
+"x": 0.605,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/knight/tail.png",
+"x": 0.051,
+"y": 0.778
+},
+{
+"path": "Assets/Art/Rats/Parts/knight/front.png",
+"x": 0.524,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/knight/back.png",
+"x": 0.543,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/pharaoh/head.png",
+"x": 0.566,
+"y": 0.123
+},
+{
+"path": "Assets/Art/Rats/Parts/pharaoh/tail.png",
+"x": 0.047,
+"y": 0.819
+},
+{
+"path": "Assets/Art/Rats/Parts/pharaoh/front.png",
+"x": 0.574,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/pharaoh/back.png",
+"x": 0.573,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/ratking/head.png",
+"x": 0.682,
+"y": 0.148
+},
+{
+"path": "Assets/Art/Rats/Parts/ratking/tail.png",
+"x": 0.05,
+"y": 0.764
+},
+{
+"path": "Assets/Art/Rats/Parts/ratking/front.png",
+"x": 0.6,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/ratking/back.png",
+"x": 0.63,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/ratqueen/head.png",
+"x": 0.774,
+"y": 0.146
+},
+{
+"path": "Assets/Art/Rats/Parts/ratqueen/tail.png",
+"x": 0.046,
+"y": 0.764
+},
+{
+"path": "Assets/Art/Rats/Parts/ratqueen/front.png",
+"x": 0.59,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/ratqueen/back.png",
+"x": 0.671,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/robot/head.png",
+"x": 0.747,
+"y": 0.157
+},
+{
+"path": "Assets/Art/Rats/Parts/robot/tail.png",
+"x": 0.049,
+"y": 0.744
+},
+{
+"path": "Assets/Art/Rats/Parts/robot/front.png",
+"x": 0.547,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/robot/back.png",
+"x": 0.573,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/rocker/head.png",
+"x": 0.737,
+"y": 0.148
+},
+{
+"path": "Assets/Art/Rats/Parts/rocker/tail.png",
+"x": 0.049,
+"y": 0.727
+},
+{
+"path": "Assets/Art/Rats/Parts/rocker/front.png",
+"x": 0.715,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/rocker/back.png",
+"x": 0.563,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/samurai/head.png",
+"x": 0.719,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/samurai/tail.png",
+"x": 0.047,
+"y": 0.798
+},
+{
+"path": "Assets/Art/Rats/Parts/samurai/front.png",
+"x": 0.796,
+"y": 0.9
+},
+{
+"path": "Assets/Art/Rats/Parts/samurai/back.png",
+"x": 0.623,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/santa/head.png",
+"x": 0.563,
+"y": 0.133
+},
+{
+"path": "Assets/Art/Rats/Parts/santa/tail.png",
+"x": 0.048,
+"y": 0.803
+},
+{
+"path": "Assets/Art/Rats/Parts/santa/front.png",
+"x": 0.537,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/santa/back.png",
+"x": 0.636,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/sultan/head.png",
+"x": 0.658,
+"y": 0.123
+},
+{
+"path": "Assets/Art/Rats/Parts/sultan/tail.png",
+"x": 0.035,
+"y": 0.511
+},
+{
+"path": "Assets/Art/Rats/Parts/sultan/front.png",
+"x": 0.538,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/sultan/back.png",
+"x": 0.604,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/vampire/head.png",
+"x": 0.777,
+"y": 0.134
+},
+{
+"path": "Assets/Art/Rats/Parts/vampire/tail.png",
+"x": 0.048,
+"y": 0.791
+},
+{
+"path": "Assets/Art/Rats/Parts/vampire/front.png",
+"x": 0.663,
+"y": 0.899
+},
+{
+"path": "Assets/Art/Rats/Parts/vampire/back.png",
+"x": 0.632,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/viking/head.png",
+"x": 0.68,
+"y": 0.147
+},
+{
+"path": "Assets/Art/Rats/Parts/viking/tail.png",
+"x": 0.047,
+"y": 0.718
+},
+{
+"path": "Assets/Art/Rats/Parts/viking/front.png",
+"x": 0.767,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/viking/back.png",
+"x": 0.72,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/wizard/head.png",
+"x": 0.644,
+"y": 0.147
+},
+{
+"path": "Assets/Art/Rats/Parts/wizard/tail.png",
+"x": 0.049,
+"y": 0.751
+},
+{
+"path": "Assets/Art/Rats/Parts/wizard/front.png",
+"x": 0.516,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/wizard/back.png",
+"x": 0.596,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/zombie/head.png",
+"x": 0.808,
+"y": 0.152
+},
+{
+"path": "Assets/Art/Rats/Parts/zombie/tail.png",
+"x": 0.047,
+"y": 0.808
+},
+{
+"path": "Assets/Art/Rats/Parts/zombie/front.png",
+"x": 0.709,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/zombie/back.png",
+"x": 0.473,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/parkrat/head.png",
+"x": 0.569,
+"y": 0.116
+},
+{
+"path": "Assets/Art/Rats/Parts/parkrat/tail.png",
+"x": 0.048,
+"y": 0.77
+},
+{
+"path": "Assets/Art/Rats/Parts/parkrat/front.png",
+"x": 0.564,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/parkrat/back.png",
+"x": 0.567,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/pcmouse/head.png",
+"x": 0.712,
+"y": 0.121
+},
+{
+"path": "Assets/Art/Rats/Parts/pcmouse/tail.png",
+"x": 0.047,
+"y": 0.672
+},
+{
+"path": "Assets/Art/Rats/Parts/pcmouse/front.png",
+"x": 0.61,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/pcmouse/back.png",
+"x": 0.645,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/plaguerat/head.png",
+"x": 0.652,
+"y": 0.145
+},
+{
+"path": "Assets/Art/Rats/Parts/plaguerat/tail.png",
+"x": 0.047,
+"y": 0.746
+},
+{
+"path": "Assets/Art/Rats/Parts/plaguerat/front.png",
+"x": 0.742,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/plaguerat/back.png",
+"x": 0.421,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/zapham/head.png",
+"x": 0.651,
+"y": 0.131
+},
+{
+"path": "Assets/Art/Rats/Parts/zapham/tail.png",
+"x": 0.054,
+"y": 0.263
+},
+{
+"path": "Assets/Art/Rats/Parts/zapham/front.png",
+"x": 0.603,
+"y": 0.896
+},
+{
+"path": "Assets/Art/Rats/Parts/zapham/back.png",
+"x": 0.5,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/streamrat/head.png",
+"x": 0.604,
+"y": 0.136
+},
+{
+"path": "Assets/Art/Rats/Parts/streamrat/tail.png",
+"x": 0.048,
+"y": 0.488
+},
+{
+"path": "Assets/Art/Rats/Parts/streamrat/front.png",
+"x": 0.65,
+"y": 0.898
+},
+{
+"path": "Assets/Art/Rats/Parts/streamrat/back.png",
+"x": 0.599,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/starchef/head.png",
+"x": 0.645,
+"y": 0.13
+},
+{
+"path": "Assets/Art/Rats/Parts/starchef/tail.png",
+"x": 0.05,
+"y": 0.824
+},
+{
+"path": "Assets/Art/Rats/Parts/starchef/front.png",
+"x": 0.493,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/starchef/back.png",
+"x": 0.544,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/ramjui/head.png",
+"x": 0.628,
+"y": 0.141
+},
+{
+"path": "Assets/Art/Rats/Parts/ramjui/tail.png",
+"x": 0.053,
+"y": 0.133
+},
+{
+"path": "Assets/Art/Rats/Parts/ramjui/front.png",
+"x": 0.489,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/ramjui/back.png",
+"x": 0.586,
+"y": 0.904
+},
+{
+"path": "Assets/Art/Rats/Parts/jwerry/head.png",
+"x": 0.542,
+"y": 0.151
+},
+{
+"path": "Assets/Art/Rats/Parts/jwerry/tail.png",
+"x": 0.047,
+"y": 0.779
+},
+{
+"path": "Assets/Art/Rats/Parts/jwerry/front.png",
+"x": 0.588,
+"y": 0.908
+},
+{
+"path": "Assets/Art/Rats/Parts/jwerry/back.png",
+"x": 0.679,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/blackrat/head.png",
+"x": 0.791,
+"y": 0.134
+},
+{
+"path": "Assets/Art/Rats/Parts/blackrat/tail.png",
+"x": 0.047,
+"y": 0.741
+},
+{
+"path": "Assets/Art/Rats/Parts/blackrat/front.png",
+"x": 0.472,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/blackrat/back.png",
+"x": 0.5,
+"y": 0.904
+},
+{
+"path": "Assets/Art/Rats/Parts/boxer/head.png",
+"x": 0.649,
+"y": 0.142
+},
+{
+"path": "Assets/Art/Rats/Parts/boxer/tail.png",
+"x": 0.049,
+"y": 0.602
+},
+{
+"path": "Assets/Art/Rats/Parts/boxer/front.png",
+"x": 0.768,
+"y": 0.898
+},
+{
+"path": "Assets/Art/Rats/Parts/boxer/back.png",
+"x": 0.614,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/dumbo/head.png",
+"x": 0.642,
+"y": 0.144
+},
+{
+"path": "Assets/Art/Rats/Parts/dumbo/tail.png",
+"x": 0.048,
+"y": 0.526
+},
+{
+"path": "Assets/Art/Rats/Parts/dumbo/front.png",
+"x": 0.643,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/dumbo/back.png",
+"x": 0.569,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/dwarfham/head.png",
+"x": 0.655,
+"y": 0.123
+},
+{
+"path": "Assets/Art/Rats/Parts/dwarfham/tail.png",
+"x": 0.058,
+"y": 0.575
+},
+{
+"path": "Assets/Art/Rats/Parts/dwarfham/front.png",
+"x": 0.6,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/dwarfham/back.png",
+"x": 0.492,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/farmer/head.png",
+"x": 0.625,
+"y": 0.146
+},
+{
+"path": "Assets/Art/Rats/Parts/farmer/tail.png",
+"x": 0.047,
+"y": 0.615
+},
+{
+"path": "Assets/Art/Rats/Parts/farmer/front.png",
+"x": 0.523,
+"y": 0.899
+},
+{
+"path": "Assets/Art/Rats/Parts/farmer/back.png",
+"x": 0.571,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/gerbilc/head.png",
+"x": 0.657,
+"y": 0.143
+},
+{
+"path": "Assets/Art/Rats/Parts/gerbilc/tail.png",
+"x": 0.048,
+"y": 0.445
+},
+{
+"path": "Assets/Art/Rats/Parts/gerbilc/front.png",
+"x": 0.574,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/gerbilc/back.png",
+"x": 0.586,
+"y": 0.899
+},
+{
+"path": "Assets/Art/Rats/Parts/painter/head.png",
+"x": 0.544,
+"y": 0.148
+},
+{
+"path": "Assets/Art/Rats/Parts/painter/tail.png",
+"x": 0.047,
+"y": 0.638
+},
+{
+"path": "Assets/Art/Rats/Parts/painter/front.png",
+"x": 0.754,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/painter/back.png",
+"x": 0.557,
+"y": 0.904
+},
+{
+"path": "Assets/Art/Rats/Parts/student/head.png",
+"x": 0.657,
+"y": 0.123
+},
+{
+"path": "Assets/Art/Rats/Parts/student/tail.png",
+"x": 0.054,
+"y": 0.504
+},
+{
+"path": "Assets/Art/Rats/Parts/student/front.png",
+"x": 0.574,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/student/back.png",
+"x": 0.518,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/barista/head.png",
+"x": 0.64,
+"y": 0.147
+},
+{
+"path": "Assets/Art/Rats/Parts/barista/tail.png",
+"x": 0.047,
+"y": 0.615
+},
+{
+"path": "Assets/Art/Rats/Parts/barista/front.png",
+"x": 0.685,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/barista/back.png",
+"x": 0.54,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/dumborat/head.png",
+"x": 0.64,
+"y": 0.169
+},
+{
+"path": "Assets/Art/Rats/Parts/dumborat/tail.png",
+"x": 0.048,
+"y": 0.738
+},
+{
+"path": "Assets/Art/Rats/Parts/dumborat/front.png",
+"x": 0.429,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/dumborat/back.png",
+"x": 0.492,
+"y": 0.903
+},
+{
+"path": "Assets/Art/Rats/Parts/gardener/head.png",
+"x": 0.611,
+"y": 0.134
+},
+{
+"path": "Assets/Art/Rats/Parts/gardener/tail.png",
+"x": 0.037,
+"y": 0.518
+},
+{
+"path": "Assets/Art/Rats/Parts/gardener/front.png",
+"x": 0.776,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/gardener/back.png",
+"x": 0.5,
+"y": 0.905
+},
+{
+"path": "Assets/Art/Rats/Parts/gerbilp/head.png",
+"x": 0.709,
+"y": 0.149
+},
+{
+"path": "Assets/Art/Rats/Parts/gerbilp/tail.png",
+"x": 0.048,
+"y": 0.452
+},
+{
+"path": "Assets/Art/Rats/Parts/gerbilp/front.png",
+"x": 0.631,
+"y": 0.897
+},
+{
+"path": "Assets/Art/Rats/Parts/gerbilp/back.png",
+"x": 0.472,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/hairless/head.png",
+"x": 0.824,
+"y": 0.159
+},
+{
+"path": "Assets/Art/Rats/Parts/hairless/tail.png",
+"x": 0.048,
+"y": 0.75
+},
+{
+"path": "Assets/Art/Rats/Parts/hairless/front.png",
+"x": 0.403,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/hairless/back.png",
+"x": 0.524,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/harvest/head.png",
+"x": 0.794,
+"y": 0.141
+},
+{
+"path": "Assets/Art/Rats/Parts/harvest/tail.png",
+"x": 0.048,
+"y": 0.816
+},
+{
+"path": "Assets/Art/Rats/Parts/harvest/front.png",
+"x": 0.411,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/harvest/back.png",
+"x": 0.47,
+"y": 0.906
+},
+{
+"path": "Assets/Art/Rats/Parts/janitorat/head.png",
+"x": 0.679,
+"y": 0.158
+},
+{
+"path": "Assets/Art/Rats/Parts/janitorat/tail.png",
+"x": 0.048,
+"y": 0.663
+},
+{
+"path": "Assets/Art/Rats/Parts/janitorat/front.png",
+"x": 0.26,
+"y": 0.909
+},
+{
+"path": "Assets/Art/Rats/Parts/janitorat/back.png",
+"x": 0.565,
+"y": 0.902
+},
+{
+"path": "Assets/Art/Rats/Parts/jerboa/head.png",
+"x": 0.671,
+"y": 0.136
+},
+{
+"path": "Assets/Art/Rats/Parts/jerboa/tail.png",
+"x": 0.048,
+"y": 0.417
+},
+{
+"path": "Assets/Art/Rats/Parts/jerboa/front.png",
+"x": 0.71,
+"y": 0.897
+},
+{
+"path": "Assets/Art/Rats/Parts/jerboa/back.png",
+"x": 0.512,
+"y": 0.901
+},
+{
+"path": "Assets/Art/Rats/Parts/spiny/head.png",
+"x": 0.68,
+"y": 0.149
+},
+{
+"path": "Assets/Art/Rats/Parts/spiny/tail.png",
+"x": 0.047,
+"y": 0.539
+},
+{
+"path": "Assets/Art/Rats/Parts/spiny/front.png",
+"x": 0.697,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/spiny/back.png",
+"x": 0.515,
+"y": 0.907
+},
+{
+"path": "Assets/Art/Rats/Parts/jjdetective/head.png",
+"x": 0.701,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/jjdetective/tail.png",
+"x": 0.043,
+"y": 0.429
+},
+{
+"path": "Assets/Art/Rats/Parts/jjdetective/front.png",
+"x": 0.594,
+"y": 0.939
+},
+{
+"path": "Assets/Art/Rats/Parts/jjdetective/back.png",
+"x": 0.751,
+"y": 0.942
+},
+{
+"path": "Assets/Art/Rats/Parts/fondue/head.png",
+"x": 0.655,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/fondue/tail.png",
+"x": 0.043,
+"y": 0.522
+},
+{
+"path": "Assets/Art/Rats/Parts/fondue/front.png",
+"x": 0.54,
+"y": 0.937
+},
+{
+"path": "Assets/Art/Rats/Parts/fondue/back.png",
+"x": 0.655,
+"y": 0.941
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/cheese/head.png",
+"x": 0.653,
+"y": 0.117
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/cheese/tail.png",
+"x": 0.0617,
+"y": 0.293
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/cheese/front.png",
+"x": 0.5213,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/cheese/back.png",
+"x": 0.3516,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/chonk/head.png",
+"x": 0.5922,
+"y": 0.146
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/chonk/tail.png",
+"x": 0.0609,
+"y": 0.323
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/chonk/front.png",
+"x": 0.4412,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/chonk/back.png",
+"x": 0.3706,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/fire/head.png",
+"x": 0.6074,
+"y": 0.127
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/fire/tail.png",
+"x": 0.0674,
+"y": 0.26
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/fire/front.png",
+"x": 0.5917,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/fire/back.png",
+"x": 0.3355,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/gym/head.png",
+"x": 0.6113,
+"y": 0.141
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/gym/tail.png",
+"x": 0.0639,
+"y": 0.318
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/gym/front.png",
+"x": 0.4286,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/gym/back.png",
+"x": 0.4412,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/laser/head.png",
+"x": 0.6573,
+"y": 0.123
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/laser/tail.png",
+"x": 0.0642,
+"y": 0.201
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/laser/front.png",
+"x": 0.5776,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/laser/back.png",
+"x": 0.3592,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/loaf/head.png",
+"x": 0.6657,
+"y": 0.117
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/loaf/tail.png",
+"x": 0.0664,
+"y": 0.29
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/loaf/front.png",
+"x": 0.5698,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/loaf/back.png",
+"x": 0.4545,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/mackerel/head.png",
+"x": 0.6424,
+"y": 0.121
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/mackerel/tail.png",
+"x": 0.0627,
+"y": 0.272
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/mackerel/front.png",
+"x": 0.5893,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/mackerel/back.png",
+"x": 0.3311,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/ninja/head.png",
+"x": 0.6445,
+"y": 0.122
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/ninja/tail.png",
+"x": 0.0649,
+"y": 0.258
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/ninja/front.png",
+"x": 0.5965,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/ninja/back.png",
+"x": 0.3425,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/space/head.png",
+"x": 0.6485,
+"y": 0.121
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/space/tail.png",
+"x": 0.0623,
+"y": 0.258
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/space/front.png",
+"x": 0.5603,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/space/back.png",
+"x": 0.4079,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/tuxedo/head.png",
+"x": 0.6358,
+"y": 0.127
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/tuxedo/tail.png",
+"x": 0.0661,
+"y": 0.253
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/tuxedo/front.png",
+"x": 0.5893,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/tuxedo/back.png",
+"x": 0.3288,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/researcher/head.png",
+"x": 0.589,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/researcher/scared.png",
+"x": 0.496,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/researcher/arm.png",
+"x": 0.438,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/researcher/leg.png",
+"x": 0.626,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/guard/head.png",
+"x": 0.596,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/guard/scared.png",
+"x": 0.486,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/guard/arm.png",
+"x": 0.436,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/guard/leg.png",
+"x": 0.595,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/janitor/head.png",
+"x": 0.638,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/janitor/scared.png",
+"x": 0.5,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/janitor/arm.png",
+"x": 0.429,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/janitor/leg.png",
+"x": 0.575,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_chief/head.png",
+"x": 0.528,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_chief/scared.png",
+"x": 0.473,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_chief/arm.png",
+"x": 0.486,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_chief/leg.png",
+"x": 0.622,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_mad/head.png",
+"x": 0.509,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_mad/scared.png",
+"x": 0.444,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_mad/arm.png",
+"x": 0.541,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_mad/leg.png",
+"x": 0.652,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_director/head.png",
+"x": 0.5,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_director/scared.png",
+"x": 0.469,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_director/arm.png",
+"x": 0.49,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_director/leg.png",
+"x": 0.648,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/cook/head.png",
+"x": 0.623,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/cook/scared.png",
+"x": 0.514,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/cook/arm.png",
+"x": 0.554,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/cook/leg.png",
+"x": 0.655,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_head.png",
+"x": 0.497,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_head_down.png",
+"x": 0.496,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_head_fried.png",
+"x": 0.498,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_arm.png",
+"x": 0.42,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_arm_open.png",
+"x": 0.426,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_leg.png",
+"x": 0.503,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_leg_bent.png",
+"x": 0.331,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_tail.png",
+"x": 0.516,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_tail_fried.png",
+"x": 0.479,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rss_arm_up.png",
+"x": 0.727,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rss_arm_up2.png",
+"x": 0.773,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rss_leg_crouch.png",
+"x": 0.42,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_arm_plant.png",
+"x": 0.489,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_leg_splay.png",
+"x": 0.41,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_head_up.png",
+"x": 0.495,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_leg_kneel.png",
+"x": 0.415,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_leg_kneeup.png",
+"x": 0.494,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_arm_reach.png",
+"x": 0.433,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_arm_punch.png",
+"x": 0.531,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_arm_back.png",
+"x": 0.127,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_head_fwd.png",
+"x": 0.5,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_tail_sweep.png",
+"x": 0.552,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_land_body.png",
+"x": 0.275,
+"y": 0
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_land_body2.png",
+"x": 0.512,
+"y": 0
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_head_bow.png",
+"x": 0.499,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_head_bow2.png",
+"x": 0.494,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_arm_up_back.png",
+"x": 0.832,
+"y": 0.05
+},
+{
+"path": "Assets/Art/Rats/FrontRig/rs_arm_up_back2.png",
+"x": 0.822,
+"y": 0.05
+}
+]
+}

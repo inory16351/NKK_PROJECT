@@ -1,0 +1,23 @@
+# Unity 자동 생성 (용량 큼, 커밋 안 함)
+Unity_Making/NKK_Project/[Ll]ibrary/
+Unity_Making/NKK_Project/[Tt]emp/
+Unity_Making/NKK_Project/[Oo]bj/
+Unity_Making/NKK_Project/[Bb]uild/
+Unity_Making/NKK_Project/[Bb]uilds/
+Unity_Making/NKK_Project/[Ll]ogs/
+Unity_Making/NKK_Project/[Uu]ser[Ss]ettings/
+Unity_Making/NKK_Project/MemoryCaptures/
+Unity_Making/NKK_Project/.vs/
+Unity_Making/NKK_Project/.idea/
+Unity_Making/NKK_Project/*.csproj
+Unity_Making/NKK_Project/*.sln
+Unity_Making/NKK_Project/Assets/Screenshots/
+Unity_Making/NKK_Project/Assets/Screenshots.meta
+
+# 이미지 원본 보관 폴더 (용량 큼 — 로컬에만)
+UnityResources/
+
+# 기타
+*.tmp
+.DS_Store
+Thumbs.db

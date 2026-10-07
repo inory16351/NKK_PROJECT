@@ -1,0 +1,267 @@
+{
+ "Human": [
+  {
+   "human_id": 90001,
+   "human_name": "연구원",
+   "code_id": "researcher",
+   "hp_mul": 3.0,
+   "value_mul": 6.0,
+   "speed_mul": 1.0,
+   "from_floor": 1,
+   "asset_folder": "Humans/Parts/researcher"
+  },
+  {
+   "human_id": 90002,
+   "human_name": "청소부",
+   "code_id": "janitor",
+   "hp_mul": 3.5,
+   "value_mul": 6.0,
+   "speed_mul": 0.9,
+   "from_floor": 1,
+   "asset_folder": "Humans/Parts/janitor"
+  },
+  {
+   "human_id": 90003,
+   "human_name": "경비원",
+   "code_id": "guard",
+   "hp_mul": 5.0,
+   "value_mul": 9.0,
+   "speed_mul": 1.1,
+   "from_floor": 3,
+   "asset_folder": "Humans/Parts/guard"
+  },
+  {
+   "human_id": 90004,
+   "human_name": "요리사",
+   "code_id": "cook",
+   "hp_mul": 4.0,
+   "value_mul": 8.0,
+   "speed_mul": 0.95,
+   "from_floor": 2,
+   "asset_folder": "Humans/Parts/cook"
+  }
+ ],
+ "Human_Line": [
+  {
+   "line_id": 91001,
+   "human_id": 90001,
+   "situation": "Panic",
+   "text": "쥐, 쥐다아아!!"
+  },
+  {
+   "line_id": 91002,
+   "human_id": 90001,
+   "situation": "Panic",
+   "text": "실험체가 탈출했어!"
+  },
+  {
+   "line_id": 91003,
+   "human_id": 90001,
+   "situation": "Panic",
+   "text": "꺄아아악!"
+  },
+  {
+   "line_id": 91004,
+   "human_id": 90001,
+   "situation": "Panic",
+   "text": "내 논문!!"
+  },
+  {
+   "line_id": 91005,
+   "human_id": 90002,
+   "situation": "Panic",
+   "text": "으악 쥐!!"
+  },
+  {
+   "line_id": 91006,
+   "human_id": 90002,
+   "situation": "Panic",
+   "text": "대걸레 어디 갔지?!"
+  },
+  {
+   "line_id": 91007,
+   "human_id": 90002,
+   "situation": "Panic",
+   "text": "퇴근할래…"
+  },
+  {
+   "line_id": 91008,
+   "human_id": 90003,
+   "situation": "Panic",
+   "text": "거, 거기 서!"
+  },
+  {
+   "line_id": 91009,
+   "human_id": 90003,
+   "situation": "Panic",
+   "text": "지원 요청!!"
+  },
+  {
+   "line_id": 91010,
+   "human_id": 90003,
+   "situation": "Panic",
+   "text": "나 무서운 거 싫어!!"
+  },
+  {
+   "line_id": 91011,
+   "human_id": 90004,
+   "situation": "Panic",
+   "text": "내 주방에 쥐가?!"
+  },
+  {
+   "line_id": 91012,
+   "human_id": 90004,
+   "situation": "Panic",
+   "text": "위생 점검 망했다!"
+  },
+  {
+   "line_id": 91013,
+   "human_id": 90004,
+   "situation": "Panic",
+   "text": "으악 쥐다!!"
+  },
+  {
+   "line_id": 91014,
+   "human_id": 90004,
+   "situation": "Panic",
+   "text": "누가 내 머리 잡아당겨?!"
+  },
+  {
+   "line_id": 91015,
+   "human_id": 0,
+   "situation": "Hit",
+   "text": "아얏!"
+  },
+  {
+   "line_id": 91016,
+   "human_id": 0,
+   "situation": "Hit",
+   "text": "물었어!!"
+  },
+  {
+   "line_id": 91017,
+   "human_id": 0,
+   "situation": "Hit",
+   "text": "저리 가!"
+  },
+  {
+   "line_id": 91018,
+   "human_id": 0,
+   "situation": "Hit",
+   "text": "히익!"
+  },
+  {
+   "line_id": 91019,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "으아아아악~!"
+  },
+  {
+   "line_id": 91020,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "엄마아아~!"
+  },
+  {
+   "line_id": 91021,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "산재 처리 부탁해요…"
+  },
+  {
+   "line_id": 91022,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "퇴사하겠습니다아아!"
+  },
+  {
+   "line_id": 91023,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "월급 루팡 실패~"
+  },
+  {
+   "line_id": 91024,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "논문 마감이…!"
+  },
+  {
+   "line_id": 91025,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "(비명)"
+  },
+  {
+   "line_id": 91026,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "이건 계약서에 없었어!!"
+  },
+  {
+   "line_id": 91027,
+   "human_id": 0,
+   "situation": "Poof",
+   "text": "펑!!"
+  },
+  {
+   "line_id": 91028,
+   "human_id": 0,
+   "situation": "Poof",
+   "text": "뿅!"
+  },
+  {
+   "line_id": 91029,
+   "human_id": 0,
+   "situation": "Poof",
+   "text": "퐁!"
+  },
+  {
+   "line_id": 91030,
+   "human_id": 0,
+   "situation": "Poof",
+   "text": "(퇴근 완료)"
+  },
+  {
+   "line_id": 91031,
+   "human_id": 0,
+   "situation": "Poof",
+   "text": "(조퇴)"
+  },
+  {
+   "line_id": 91032,
+   "human_id": 0,
+   "situation": "Item_Hit",
+   "text": "누가 던졌어!"
+  },
+  {
+   "line_id": 91033,
+   "human_id": 0,
+   "situation": "Item_Hit",
+   "text": "아야야!"
+  },
+  {
+   "line_id": 91034,
+   "human_id": 0,
+   "situation": "Item_Hit",
+   "text": "실험 장비가!"
+  }
+ ],
+ "Situation_Type": [
+  {
+   "situation": "Panic"
+  },
+  {
+   "situation": "Hit"
+  },
+  {
+   "situation": "Fly"
+  },
+  {
+   "situation": "Poof"
+  },
+  {
+   "situation": "Item_Hit"
+  }
+ ]
+}
