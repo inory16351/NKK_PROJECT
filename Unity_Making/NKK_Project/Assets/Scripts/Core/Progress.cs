@@ -14,7 +14,7 @@ namespace NKK
         public static Progress I { get; private set; }
 
         [Header("테스트")]
-        [Tooltip("로비가 생기기 전 임시: 조각이 모이면 판 중에 바로 강화 (웹게임은 로비에서 강화)")] public bool autoUpgradeInRun = true;
+        [Tooltip("테스트: 조각이 모이면 판 중에 바로 강화 (평소엔 꺼 둠 — 로비 쳇바퀴 훈련에서 강화)")] public bool autoUpgradeInRun;
         [Tooltip("저장 키 (PlayerPrefs)")] public string saveKey = "nkk_progress_v1";
         [Tooltip("테스트: 이 노드 id 들은 활성화된 것으로 침 (저장 안 함)")] public List<int> testSkills = new();
         [Tooltip("테스트: 이 훈장 이하 트리는 전부 활성화된 것으로 침 (0 = 끔)")] public int testSkillTier;
@@ -113,31 +113,56 @@ namespace NKK
             return true;
         }
 
-        // 레벨 L 까지 찍힌 노드 (효과 타입 → 레벨). 앞쪽은 정해진 순서, 이후 반복 구간을 돌며 찍을 수 있는 것부터
+        // 레벨 L 까지 찍힌 노드 (효과 타입 → 레벨)
         public Dictionary<GrowthEffectType, int> Tree(int L)
         {
             if (treeCache.TryGetValue(L, out var cached)) return cached;
             var db = GameDatabase.Instance;
-            var byId = new Dictionary<int, GrowthNodeRow>(); foreach (var gn in db.GrowthNodes) byId[gn.node_id] = gn;
+            var seq = Seq(L); var res = new Dictionary<GrowthEffectType, int>();
+            for (int i = 0; i < L && i < seq.Count; i++) { var e = db.GrowthNodeById(seq[i])?.Effect ?? GrowthEffectType.None; res[e] = (res.TryGetValue(e, out var v) ? v : 0) + 1; }
+            treeCache[L] = res;
+            return res;
+        }
+
+        // 레벨 L 에 찍히는 노드 (1부터) — 쳇바퀴 훈련 화면의 성장 길
+        public GrowthNodeRow NodeAt(int L) { var seq = Seq(L); return L >= 1 && L <= seq.Count ? GameDatabase.Instance.GrowthNodeById(seq[L - 1]) : null; }
+        // 그 효과 노드가 처음 찍히는 레벨 (없으면 0) — 특수 액션 Lv 3 · 필살기 Lv 7 같은 해금 표시
+        public int UnlockLevel(GrowthEffectType e) { for (int L = 1; L <= MaxLevel; L++) if (NodeAt(L)?.Effect == e) return L; return 0; }
+        public bool UltUnlocked(string code) => Tree(Level(code)).ContainsKey(GrowthEffectType.Ult_Unlock);
+
+        // 레벨마다 찍히는 노드 id 순서. 앞쪽은 정해진 순서(Growth_Order), 이후 반복 구간을 돌며 찍을 수 있는 것부터
+        readonly List<int> seqCache = new();
+        List<int> Seq(int L)
+        {
+            if (seqCache.Count >= L) return seqCache;
+            var db = GameDatabase.Instance;
             var lv = new Dictionary<int, int>();
             int LvOf(int id) => lv.TryGetValue(id, out var v) ? v : 0;
             bool Ok(GrowthNodeRow s) => LvOf(s.node_id) < s.max_level && (s.req_node == 0 || LvOf(s.req_node) >= s.req_level);
             var fixedOrder = new List<int>(); var repeat = new List<int>();
             foreach (var o in db.GrowthOrder) (o.is_repeat == 1 ? repeat : fixedOrder).Add(o.node_id);
-            int n = 0, i = 0, guard = 0;
-            while (n < L && guard++ < 5000)
+            seqCache.Clear();
+            int i = 0, guard = 0, max = Mathf.Max(L, MaxLevel);
+            while (seqCache.Count < max && guard++ < 5000)
             {
                 int id = i < fixedOrder.Count ? fixedOrder[i] : repeat.Count > 0 ? repeat[(i - fixedOrder.Count) % repeat.Count] : 0; i++;
-                byId.TryGetValue(id, out var s);
+                var s = db.GrowthNodeById(id);
                 if (s == null || !Ok(s)) { s = null; foreach (var c in db.GrowthNodes) if (Ok(c)) { s = c; break; } }   // 순서상 못 찍으면 찍을 수 있는 아무거나
                 if (s == null) break;
-                lv[s.node_id] = LvOf(s.node_id) + 1; n++;
+                lv[s.node_id] = LvOf(s.node_id) + 1; seqCache.Add(s.node_id);
             }
-            var res = new Dictionary<GrowthEffectType, int>();
-            foreach (var kv in lv) res[byId[kv.Key].Effect] = kv.Value;
-            treeCache[L] = res;
-            return res;
+            return seqCache;
         }
+
+        // 다 같이 훈련: 강화할 수 있는 종을 전부 올릴 수 있는 만큼. 반환 = 올린 횟수
+        public int UpgradeAll()
+        {
+            int n = 0;
+            foreach (var r in GameDatabase.Instance.Rats.Values) if (Seen(r.code_id) && r.unlock_rank <= tier) while (TryUpgrade(r)) n++;
+            if (n > 0) Save();
+            return n;
+        }
+        public int UpgradableCount { get { int n = 0; foreach (var r in GameDatabase.Instance.Rats.Values) if (Seen(r.code_id) && r.unlock_rank <= tier && CanUpgrade(r)) n++; return n; } }
 
         // ── 공용 스킬 (훈장별 트리, 노드 하나 = 한 번 활성화) ──
         void Update()

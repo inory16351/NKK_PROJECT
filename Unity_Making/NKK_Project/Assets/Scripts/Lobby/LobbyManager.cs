@@ -66,6 +66,7 @@ namespace NKK.Lobby
         {
             var p = Progress.I; if (!p || !GameDatabase.Instance) return false;
             if (id == "skill") foreach (var s in GameDatabase.Instance.CommonSkills) if (p.CanBuySkill(s)) return true;
+            if (id == "rats") return p.UpgradableCount > 0;
             return false;
         }
 

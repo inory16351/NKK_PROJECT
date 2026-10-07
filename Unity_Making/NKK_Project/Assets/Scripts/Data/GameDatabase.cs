@@ -160,5 +160,6 @@ namespace NKK.Data
         public UltCaptionRow UltCaption(int ultId, string key) => UltCaptions.TryGetValue((ultId, key), out var c) ? c : null;
 
         public RatGradeRow GradeOf(RatCharacterRow r) => Grades.TryGetValue(r.Grade, out var g) ? g : null;
+        public GrowthNodeRow GrowthNodeById(int id) { foreach (var n in GrowthNodes) if (n.node_id == id) return n; return null; }
     }
 }

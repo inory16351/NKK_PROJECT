@@ -29,7 +29,7 @@ namespace NKK.Data
     public enum GrowthEffectType
     {
         None, Atk_Growth, Dash_Speed_Growth, Action_Unlock, Trick_Chance_Growth, Crit_Chance_Growth, Action_Power_Growth,
-        Passive_Power_Growth, Action_Awaken, Awaken,
+        Passive_Power_Growth, Action_Awaken, Awaken, Ult_Unlock,
     }
 
     public enum CatCategory { Normal, Special }

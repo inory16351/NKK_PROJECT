@@ -104,7 +104,7 @@ namespace NKK.Ults
             var u = DB.RatsByCode.TryGetValue(code, out var row) ? DB.UltOf(row) : null;
             return u == null ? 0 : Mathf.Max(1, u.ult_gauge);
         }
-        public float Need(Rat r) => r ? Need(r.codeId) : 0;
+        public float Need(Rat r) => r && r.UltUnlocked ? Need(r.codeId) : 0;      // 필살기 해금(쳇바퀴 훈련) 전엔 게이지 없음
         public float Gauge01(Rat r) { float n = Need(r); return n > 0 ? Mathf.Clamp01(r.ultGauge / n) : 0; }
         public bool Full(Rat r) { float n = Need(r); return n > 0 && r.ultGauge >= n; }
 

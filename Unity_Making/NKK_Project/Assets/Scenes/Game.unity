@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b635d77ffdbba478112489511b159a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Progress
-  autoUpgradeInRun: 1
+  autoUpgradeInRun: 0
   saveKey: nkk_progress_v1
   testSkills: 
   testSkillTier: 0

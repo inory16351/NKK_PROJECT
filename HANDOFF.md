@@ -15,7 +15,7 @@
 - **작업 단계마다 결정할 게 생기면 바로 사용자에게 질문**하고 진행.
 - **수치 데이터는 엑셀 테이블로 관리** (`Data_Table/`, 아래 3장 형식).
 - **생성 담당:** `ItemManager` = 물건·사람 생성(주기·상한) / `StageManager` = 쥐덫·고양이 등장 확률.
-- **특수 능력(패시브)은 처음부터 켜짐**, **특수 액션은 조각 성장으로 해금**, **공용 스킬 묘기는 공용 스킬로 해금**.
+- **특수 능력(패시브)은 처음부터 켜짐**, **특수 액션 = 쳇바퀴 훈련 Lv 3**, **필살기 = 쳇바퀴 훈련 Lv 7** (조각으로 해금, 2026-10-07 사용자 결정), **공용 스킬 묘기는 공용 스킬로 해금**.
 - **이미지가 필요하면 Codex CLI 로 생성**, 토큰을 아끼려고 **한 장에 여러 개를 그려서 잘라 쓸 것** (5장).
 - **화풍: Untitled Goose Game 식 플랫** (외곽선·광택·그라데이션 없음, 쥐 파츠 그림과 같게). 참고 이미지 `-i UnityResources/Rats/Sheets/ballerina.png,UnityResources/Rats/ArtSheets/art_01_item_flask.png`
 - **만든 그림은 유니티 적용과 별개로 `UnityResources/Rats/<분류>/` 에 PNG + `Sheets/`(원본 시트·프롬프트) + README·미리보기로 정리**
@@ -175,7 +175,8 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
    - 끝: `Lobby.unity` (처음엔 빌더로 만들었고, 사용자 지시로 빌더 스크립트는 삭제 → 이제 씬을 MCP 로 직접 고침). `Scripts/Lobby/`: `LobbyManager`(팻말 글·페이지·출발) · `LobbyHome`(아지트: 배경 cover·쥐 생활·수다·빼꼼·훈장 줄·말풍선·마우스 누르기/던지기) · `LobbyRat`(웹 HOME actor 상태·자세) · `LobbySlot`(활동 자리) · `LobbyHot`(물건 버튼+판자 팻말) · `RunPage`(작전 회의: 층 길·구역·방·출동 멤버·등급 확률·기록·출발)
    - 끝: `Progress` 에 치즈·연구자료·티어·최고 층·탈출 횟수 저장, `StartFloorCap`, `PendingStartFloor` → `GameManager.Awake` 가 층·티어·치즈 받음, 5초마다 치즈 저장. 게임 ESC = `QuitMenu`(포기 창, `FxManager.Paused`) → 로비. 로비 ESC = 아지트로. 로비↔게임 왕복·치즈 이월 Play 확인
    - 끝: 쳇바퀴 = 받침대 `WheelStand` + 도는 바퀴 `WheelRing` (새 플랫 그림 `UnityResources/Rats/Lobby_New/`), 쥐가 안에서 달리면 `LobbyHome.wheelSpinSpeed` 로 회전
-   - 남음 (순서): 치즈 창고(스킬 지도) → 쳇바퀴 훈련(조각 강화, 그다음 `Progress.autoUpgradeInRun` 끄기) → 훈장 → 친구들(도감) → 낮잠 침대(기록·저장). 탭 아이콘·지도·쳇바퀴 등 로비 소품(`Rats/Lobby/lb_*`)은 예전 그림체 → 플랫으로 다시 만들지 결정
+   - 끝: 치즈 창고(SkillPage) · 쳇바퀴 훈련(TrainPage, §9-7)
+   - 남음 (순서): 훈장 → 친구들(도감) → 낮잠 침대(기록·저장). 탭 아이콘·지도·쳇바퀴 등 로비 소품(`Rats/Lobby/lb_*`)은 예전 그림체 → 플랫으로 다시 만들지 결정
 7. 로그라이크 메타(층 제한시간, 게임 오버, 연구자료), 저장
 8. 사운드: 웹은 WebAudio 로 합성 → 같은 합성을 WAV 로 뽑기 (BGM 만 필요하면 Gemini)
 9. 손에 든 소품 그림(ACT_HOLD), 슈퍼 요리사 쥐 탈것, 컴퓨터 마우스 쥐(한 장 그림) 확인
@@ -205,7 +206,7 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 그림은 **Codex 로만 생성** (`bash Tools/codex.sh exec ... < prompt.txt`, `-i` 참고 그림 여러 개, 자홍 배경 시트 → `Tools/slice_rat_parts.py` key_magenta 로 자르기). 코드로 그림 그리지 말 것. **먼저 웹 코드 그림 목록과 UnityResources 에서 기존 그림을 찾아 재사용.** 새 그림은 `UnityResources/Rats/<폴더>/` 에 시트·프롬프트·로그·README·_미리보기 와 함께 보관 후 `Assets/Art/Rats/<폴더>/` 복사.
 - 웹게임(`Proto_Game/rat-uprising.html`)과 같은 방식으로 만들 것 — 다르면 사용자가 지적함. 연출은 단조롭지 않게.
 - 병렬 작업: 서브에이전트는 맡은 파일만 고치고 Unity 조작 금지(임시 csproj 로 dotnet build 확인), Unity 반영(컴파일·씬 연결·Fill Props)은 메인이 마지막에. 사용자가 에디터에서 테스트 중이면 Unity 건드리지 말 것.
-- 남은 일: 코드에 직접 들어간 팝업 글(Rat.Action "찌릿!!/콰릉!", ItemManager.ZapChain "찌릿!", 웹 요리사 말 팝업 등) → 테이블/인스펙터로 · 로비 업적(훈장 연동) · 로비 쳇바퀴 훈련 → `Progress.autoUpgradeInRun` 끄기 · 벽 금 간 자국(웹은 선) · 사용자 플레이 피드백.
+- 남은 일: 코드에 직접 들어간 팝업 글(Rat.Action "찌릿!!/콰릉!", ItemManager.ZapChain "찌릿!", 웹 요리사 말 팝업 등) → 테이블/인스펙터로 · 로비 업적(훈장 연동) · 벽 금 간 자국(웹은 선) · 사용자 플레이 피드백.
 
 ## 9. 다음 작업 (2026-10-07 기준, 다른 에이전트 이어서) — 시작 전에 §0 규칙·§7·§8 꼭 읽기
 ### 9-1. 필살기 게이지 — 이미 완료 (확률 발동 아님)
@@ -295,6 +296,16 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 2. 그다음 **최소 상태(이전 트리 전부 + 지금 트리 승급 조건만큼)는 다음 훈장 조건 층을 아슬아슬하게(85~100%)**, **최대 상태(지금 트리까지 전부, 조각 1.5배)는 수월하게(40~60%)** — 적정 전투력 곡선(POW0·POW_GROW) 또는 노드 너프. 사용자에게 "허들 올리기 vs 노드 너프" 다시 물어볼 것 (직전 질문은 답 없이 넘어감).
 3. 승급이 판 후반(일반 40회쯤) 막힘: 일괄 승급이 최대 마리 수 절반을 남기는데 필요 수(완화 1.05)가 그보다 커짐 → promote_grow2·promote_soft 검토.
 4. 커밋 (오늘 작업 전부 미커밋).
+
+### 9-7. 쳇바퀴 훈련 (조각 강화) — 완료 (2026-10-07)
+- 사용자 결정: 성장은 웹처럼 **정해진 순서 자동** (훈련 = 조각으로 Lv+1, 노드는 Growth_Order 순서), **Lv 3 = 특수 액션 해금 · Lv 7 = 필살기 해금**, 패시브는 처음부터 켜짐.
+- 쥐 성장 테이블: 새 노드 10 `필살기 해금`(ultUnlock, effect `Ult_Unlock`) · Growth_Order 고정 구간 25개로 다시 짬 (선행 조건이 다 맞게 — 예전 순서는 특수 강화·급소 갉기가 선행 미달이라 엉뚱한 노드로 대체되고 있었음). 각성은 Lv 24. 원본 백업 `Data_Table/_backup_20261006/쥐 성장 테이블_before_ultunlock.xlsx`.
+- 코드: `Progress.NodeAt(L)`(레벨 L 에 찍히는 노드) · `UnlockLevel(effect)` · `UltUnlocked(code)` · `UpgradeAll()` · `UpgradableCount`. `Rat.UltUnlocked` → `UltimateManager.Need(Rat)` 가 해금 전엔 0 (게이지 안 참·버튼 안 뜸). 테스트 패널 필살기 발동은 해금과 상관없이 됨.
+- `Progress.autoUpgradeInRun` 기본 꺼짐 (Lobby·Game 씬 값도 끔) → 판 중엔 조각만 모이고 강화는 로비에서.
+- 로비 `Page_rats` (`Lobby/TrainPage.cs`, 씬에 MCP 로 직접 만듦): 왼쪽 ListCard = 등급 필터 칩(강화 가능 수 배지) · 다 같이 훈련 · 카드 그리드(그림·이름·Lv·조각 막대·훈련 버튼, 강화 가능 먼저) / 오른쪽 DetailCard = 그림·등급·Lv·설명·"다음 훈련으로 배우는 것"(다음 6레벨 노드, 해금 노드 강조) · 특수 능력 · 특수 액션(Lv 3 전엔 흐림 + "Lv {lv}에 해금") · 필살기(아이콘, Lv 7 전 흐림, 없는 종은 NoUlt) · 훈련하기. 글은 전부 씬(`Page_rats/Words` 포함). 팻말 알림 점 `LobbyManager.Alert("rats")`.
+- UI 쥐 그림 `Lobby/RatPortrait.cs`: RatRig 와 같은 관절 배치로 UI Image 8개(하이라키에 있음)를 조립해 칸에 맞춤 — 도감 등에서도 재사용.
+- 필살기 아이콘 = TrainPage 컴포넌트 메뉴 **Fill Ult Icons**.
+- **밸런스 영향**: 이제 필살기는 Lv 7 종만 씀. `BalanceProbe.MakeMeta` 는 조각 레벨을 일반·레어 종에만 나눠 줌 → 측정 때 필살기가 거의 안 나옴. 다음 측정 전에 "티어별로 필살기 해금된 종 수" 가정을 정해서 MakeMeta 에 반영할 것.
 
 **남은 일 (순서 제안)**
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.

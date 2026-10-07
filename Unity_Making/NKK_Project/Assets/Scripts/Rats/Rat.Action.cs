@@ -36,6 +36,7 @@ namespace NKK.Rats
         float ActRate => 1 + GV(GrowthEffectType.Action_Unlock, 1) * Mathf.Max(0, ActLv - 1);           // 발동 확률 ×, 주기 ÷
         float ActPower => (1 + GV(GrowthEffectType.Action_Power_Growth, 1) * GL(GrowthEffectType.Action_Power_Growth)) * (Awakened ? GV(GrowthEffectType.Awaken, 3) : 1);
         bool ActAwake => GL(GrowthEffectType.Action_Awaken) > 0;
+        public bool UltUnlocked => GL(GrowthEffectType.Ult_Unlock) > 0;         // 쳇바퀴 훈련으로 필살기 해금 노드가 찍혔나
 
         // ── 특수 액션 ──
         public RatSkillRow Action { get; private set; }
