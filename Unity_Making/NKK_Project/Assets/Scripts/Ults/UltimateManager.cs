@@ -104,12 +104,12 @@ namespace NKK.Ults
         public bool Full(Rat r) { float n = Need(r); return n > 0 && r.ultGauge >= n; }
 
         // 조건을 한 그 쥐만 참
-        public void Charge(Rat r, CondType c)
+        public void Charge(Rat r, CondType c, float times = 1)
         {
             if (!r || r.temp > 0 || DB == null) return;
             if (!DB.UltCharges.TryGetValue(c, out var g) || g <= 0) return;
             if (cur != null && cur.R == r) return;      // 쓰는 중엔 안 참
-            Add(r, g * CommonSkill.UltGaugeMul);
+            Add(r, g * times * CommonSkill.UltGaugeMul);
         }
         // 무리의 쥐 전부 (층 통과 등)
         public void ChargeAll(CondType c)

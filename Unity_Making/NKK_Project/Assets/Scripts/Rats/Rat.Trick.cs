@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NKK.Data;
 using NKK.Items;
 using UnityEngine;
 
@@ -91,7 +92,7 @@ namespace NKK.Rats
                     }
                     break;
             }
-            if (trickT >= trickDur) { Trick = TrickType.None; StopDash(0.15f, 0.4f); sq = 0.7f; }
+            if (trickT >= trickDur) { Manager.Ults?.Charge(this, CondType.Action_Use); Trick = TrickType.None; StopDash(0.15f, 0.4f); sq = 0.7f; }   // 묘기 성공 = 특수 액션과 같은 필살기 게이지
         }
 
         // 묘기 중 몸 전체 움직임 (웹게임 drawRat 의 trick 변환): 위로 뜨는 높이, 회전, 좌우·상하 배율
