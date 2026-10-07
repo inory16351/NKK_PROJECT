@@ -206,3 +206,22 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 웹게임(`Proto_Game/rat-uprising.html`)과 같은 방식으로 만들 것 — 다르면 사용자가 지적함. 연출은 단조롭지 않게.
 - 병렬 작업: 서브에이전트는 맡은 파일만 고치고 Unity 조작 금지(임시 csproj 로 dotnet build 확인), Unity 반영(컴파일·씬 연결·Fill Props)은 메인이 마지막에. 사용자가 에디터에서 테스트 중이면 Unity 건드리지 말 것.
 - 남은 일: 코드에 직접 들어간 팝업 글(Rat.Action "찌릿!!/콰릉!", ItemManager.ZapChain "찌릿!", 웹 요리사 말 팝업 등) → 테이블/인스펙터로 · 로비 업적(훈장 연동) · 로비 쳇바퀴 훈련 → `Progress.autoUpgradeInRun` 끄기 · 벽 금 간 자국(웹은 선) · 사용자 플레이 피드백.
+
+## 9. 다음 작업 (2026-10-07 기준, 다른 에이전트 이어서) — 시작 전에 §0 규칙·§7·§8 꼭 읽기
+### 9-1. 필살기 게이지 UI (게이지 차는 과정 보이기)
+- **이미 있는 것**: 게이지 로직 전부 `Scripts/Ults/UltimateManager.cs` — `Gauge(code)`, `Gauge01(code)`, `Need(code)`, `Full(code)`, `Charge(rat, CondType)`, 대기열·자동 사용. 충전 조건/양 = 쥐 테이블 `Ult_Charge` 시트, 요구량 = `Ultimate.ult_gauge` (÷ 공용 스킬 필살기 연습 `CommonSkill.UltGaugeMul`). 지금 UI 는 **다 찬 종만** 하단 `HUD/UltBar` 에 버튼(`UltButton.cs`, 템플릿 `UltButtonTemplate`)으로 뜸.
+- **할 일**: 무리에 있는 필살기 보유 종마다 게이지가 차오르는 모습을 하단 바에 표시 (아이콘 + 원형/막대 채움, 다 차면 지금 버튼처럼 반짝·클릭 가능). 아이콘 = `UltimateManager.icons` (UltIcons/ult_<id>). UI 그림은 `Assets/Art/Rats/UltUI` (ult_btn, ult_btn_ready, ult_ring, ult_burst, ult_tag) 재사용, 부족하면 Codex.
+- **정할 것 (사용자에게 먼저 질문)**: 표시 방식(원형 채움 vs 막대), 종이 많을 때 몇 개까지·정렬(많이 찬 순?), 화면에 그 종 쥐가 없을 때 표시 여부, 게이지 수치 노출 여부.
+- 글자는 씬 TMP(자리 `{name}` `{n}` 등)로, 코드에 글 쓰지 말 것. 오브젝트는 MCP 로 HUD 아래에 직접 만들기.
+
+### 9-2. 층별 제한시간 (웹 `floorTime` · `updateRunTimer`)
+- 웹: `floorTime(f) = round(190 + 35 × 층 방 수(LAYOUT.size) + (보스 층이면 BOSS_TIME + 30))` 초 (html 8985). 층 들어갈 때마다 다시 채움 (html 4718). 필살기·슈퍼 점프·층 이동·게임 오버 중에는 안 줄어듦 (8987). 0 이 되면 `startGameOver('time')` (8992). 로비/훈장 HUD 표시 `⏳ m:ss` (9174 근처) — 남은 시간이 적을 때 경고 연출 있는지 웹에서 확인.
+- Unity: `StageManager.EnterFloor` 에서 시간 채우기 (방 수 = `Layout.Count`, 보스 층 = `IsBossFloor`), 감소는 `GameManager` 또는 새 `RunTimer` 컴포넌트에서 — `FxManager.WorldFreeze`·`UltimateManager.Busy`·`SuperJumpManager.Busy`·층 이동 페이드 중엔 멈춤. 수치는 인스펙터(또는 데이터 테이블)로. HUD 에 시간 글 (씬 TMP, 자리 `{m}:{s}`).
+
+### 9-3. 게임 오버 연출 (웹 `startGameOver` · `updateGameOver` · `UI.showGameOver`, html 9069~9140, 9934)
+- 웹: 시간 초과(또는 보스 패배) → 화면 사방에서 **경비원 사람**(min(24, 12 + 쥐수/4)) 과 **고양이**(min(10, 5 + 쥐수/10)) 가 몰려옴, 빨간 번쩍·흔들림·배너("⏰ 시간 초과!" / "경비원과 고양이가 몰려온다!!") → 가장 가까운 쥐를 쫓아가 잡음(잡힌 쥐 기절 999, "잡았다!/포획!/찍?!" 팝업, 경비원 말풍선) · 남은 쥐는 도망 → 4.5초 뒤(또는 다 잡히고 2.2초) 결과 화면 `showGameOver(why)` (이유 문구, 이번 판 성과, 로비로).
+- Unity 재료: 사람 = `ItemManager` 사람 프리팹·`HumanArtLibrary` (경비원 guard 리그 있음), 고양이 = `CatManager`/`Cat` (고양이 그림 리그), 쥐 기절 = `Rat.Stun`, 배너 = `GameManager.ShowBanner`, 포기 창(QuitMenu)·로비 복귀 흐름 = `Progress`·씬 전환 참고. 쥐랜드 필살기 `UltRatlandLawsuit.cs` 의 포위·체포 연출이 같은 느낌이라 참고 가능.
+- 결과 화면 UI 는 씬에 직접(MCP) 만들고 글은 씬 TMP. 판이 끝날 때 치즈·연구 자료·업적은 남고 쥐·층은 초기화 (포기 창 문구와 같은 규칙).
+
+### 9-4. 작업 순서 제안
+9-2 (시간) → 9-3 (게임 오버) → 9-1 (게이지 UI, 사용자 질문 먼저). 각 단계마다 Unity 컴파일·플레이 확인 → 커밋 (`.gitignore` 는 Library 등만 제외).
