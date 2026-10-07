@@ -234,8 +234,8 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 연구자료 = `round(6 × 1.45^(층-1))` (보스 층 ×3) → `Progress.research`(저장) + `GameManager.RunResearch`(결과 창 "이번 판 연구자료"). 화면 속 쥐는 계단으로 총공격 돌진, 계단에 종이 파편·별.
 - 화면 `HUD/HeistFx`: 빨간 테두리 깜빡 · 경보등 2개 · "연구 자료를 훔쳤다!!!" / "빨리 도망가!!!"(0.45초~) / "연구자료 +{n}"(0.8초~) · 자료 뭉치 `Rogue/rg_docs` 통통 · 종이 12장 `Rogue/rg_paper` 가로지름. 연출 중엔 필살기 대기열·슈퍼 점프 멈춤, 제한시간도 멈춤(Climbing).
 - 테스트 패널에 **층 클리어 · 게임 오버** 버튼 추가 (`UltTestPanel.clearButton/gameOverButton`).
-- 아직 없음: 물건·가구 부술 때 가끔 연구자료 (웹 researchDrop: 가구 12% 1~3, 물건 1.2% 1).
+- 연구자료 드랍 — 완료: `Core/Research.cs` (Game 씬 `Research`, `Research.I.Earn`). 웹 researchDrop: 가구 12% (1~3) · 물건 1.2% (1), `ItemManager.OnSmashed` 에서. 화면에 보이면 종이 아이콘(`Rogue/rg_paper`, 템플릿 `Research/PaperIconTemplate`)이 통 튀어 오르고 "연구자료+{n}"(인스펙터 글). 층 클리어도 `Research.Earn` 으로 저장 (`Progress.research` + `GameManager.RunResearch`). 컴포넌트 메뉴 "테스트: 화면 가운데에 연구자료 +2".
 
 ### 9-5. 다음 작업 제안
-- 보스 (5층마다), 연구자료 드랍, 로비 치즈 창고(스킬 지도) 등 §6 남은 것.
+- 보스 (5층마다), 로비 치즈 창고(스킬 지도) 등 §6 남은 것.
 - 각 단계마다 Unity 컴파일·플레이 확인 → 커밋.

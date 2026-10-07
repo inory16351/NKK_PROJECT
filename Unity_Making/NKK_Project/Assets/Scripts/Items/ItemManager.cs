@@ -186,6 +186,7 @@ namespace NKK.Items
             float gain = it.value * (1 + 0.5f * Mathf.Min(it.Air, airMax)) * (it.Crit ? 2 : 1) * (it.By ? it.By.CheeseMult : 1) * (it.By && it.ByAction ? it.By.SkillKillCheeseMul : 1);
             Game.OnSmash(gain);
             if (it.By) { Rats.OnItemSmashedBy(it.By, it.x, it.y); Rats.Ults?.Charge(it.By, CondType.Destroy_Item); }
+            Research.I?.OnSmashed(it);                                          // 가끔 연구자료 (가구 12% · 물건 1.2%)
             var fx = FxManager.I;
             bool big = it.Data.is_big == 1 || it.Data.IsFurniture;
             float bigK = Mathf.Clamp(it.R / 16, 0.6f, 2.5f);

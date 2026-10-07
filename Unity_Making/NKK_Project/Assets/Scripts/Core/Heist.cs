@@ -76,8 +76,9 @@ namespace NKK
             Active = true; t = 0; moved = false; onMove = move;
             gained = Mathf.RoundToInt(ResearchFor(Game.Floor));
             var p = Progress.I;
-            if (p) { p.research += gained; p.OnFloorReached(Game.Floor + 1); p.Save(); }
-            Game.RunResearch += gained;
+            if (p) p.OnFloorReached(Game.Floor + 1);
+            if (Research.I) Research.I.Earn(gained, stairs.x, stairs.y, false);
+            else { if (p) { p.research += gained; p.Save(); } Game.RunResearch += gained; }
             if (amount) amount.text = (amountFormat ?? "+{n}").Replace("{n}", GameManager.Format(gained));
             // 화면 속 쥐는 계단으로 우르르
             if (Rats) Rats.StartRush(stairs);
