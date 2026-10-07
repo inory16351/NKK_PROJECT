@@ -262,10 +262,9 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - **유니티 창이 뒤에 있으면 배속이 크게 느려짐** (실시간의 0.5~3배). 측정 중엔 에디터를 앞에 두기 권장.
 - 결과 (현재 곡선): 1훈장 노드 0 → 1층 197초/295 (전투력 0.84배) · 2층 242초/295 (0.62배) · 3층 시간 초과 예상. 1훈장 37노드 → 1층 73초 (1.66배) · 2층 78초 (1.61배) · 3층 154초/338 (1.19배) · 4층 250초 넘어도 계단 못 엶 (0.8배). 치즈 1~3층 약 20K.
 - 4훈장(노드 100·조각 40) 7층부터 측정 중 끊음: 시작 쥐 12마리로 번식이 느려 7층 130초에 방 3/6, 전투력 970 / 적정 2760 → **중반 이후 곡선이 너무 가파를 가능성** (시작 쥐·번식 속도·POW_GROW 확인 필요).
-- 측정 중 정지할 때 콘솔에 NullReferenceException 10개 (스택 없음) — 원인 미확인, 다음 작업자가 확인.
+- 측정 중 NullReferenceException = 측정이 카메라를 꺼서 `FxManager.Coin` 의 Camera.main 이 null → 고침 (카메라 없으면 건너뜀).
 
 **남은 일 (순서 제안)**
-1. NullReferenceException 원인 확인 (Play → 측정 → 정지 흐름).
-2. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.
-3. 결과로 `gen_stage_table.py` 곡선(POW_GROW·HP_GROW·벽 배율·방 수)과 `gen_skill_tree.py` 값·비용(치즈 수입 대비 훈장 트리 1개 ≈ 판 3~5번), 보스 `hp_pow_sec`(지금 40), 티어 테이블 조건(연구자료·Skill_Node_Count 15/40/70/100/130/160/195) 조정 → 다시 생성·xlsx2json·측정.
-4. 10·15층 보스 등 나머지 §6.
+1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.
+2. 결과로 `gen_stage_table.py` 곡선(POW_GROW·HP_GROW·벽 배율·방 수)과 `gen_skill_tree.py` 값·비용(치즈 수입 대비 훈장 트리 1개 ≈ 판 3~5번), 보스 `hp_pow_sec`(지금 40), 티어 테이블 조건(연구자료·Skill_Node_Count 15/40/70/100/130/160/195) 조정 → 다시 생성·xlsx2json·측정.
+3. 10·15층 보스 등 나머지 §6.

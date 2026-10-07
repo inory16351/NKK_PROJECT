@@ -243,7 +243,7 @@ namespace NKK
         public void Coin(float x, float y, int n = 1)
         {
             if (!coinTemplate || !hudCanvas) return;
-            var c = Camera.main;
+            var c = Camera.main; if (!c) return;          // 밸런스 측정 중엔 카메라를 꺼서 없음
             for (int i = 0; i < n && coins.Count < coinMax; i++)
             {
                 CoinFx k;
