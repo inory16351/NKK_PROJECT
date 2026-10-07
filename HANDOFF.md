@@ -208,11 +208,10 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 남은 일: 코드에 직접 들어간 팝업 글(Rat.Action "찌릿!!/콰릉!", ItemManager.ZapChain "찌릿!", 웹 요리사 말 팝업 등) → 테이블/인스펙터로 · 로비 업적(훈장 연동) · 로비 쳇바퀴 훈련 → `Progress.autoUpgradeInRun` 끄기 · 벽 금 간 자국(웹은 선) · 사용자 플레이 피드백.
 
 ## 9. 다음 작업 (2026-10-07 기준, 다른 에이전트 이어서) — 시작 전에 §0 규칙·§7·§8 꼭 읽기
-### 9-1. 필살기 게이지 UI (게이지 차는 과정 보이기)
-- **이미 있는 것**: 게이지 로직 전부 `Scripts/Ults/UltimateManager.cs` — `Gauge(code)`, `Gauge01(code)`, `Need(code)`, `Full(code)`, `Charge(rat, CondType)`, 대기열·자동 사용. 충전 조건/양 = 쥐 테이블 `Ult_Charge` 시트, 요구량 = `Ultimate.ult_gauge` (÷ 공용 스킬 필살기 연습 `CommonSkill.UltGaugeMul`). 지금 UI 는 **다 찬 종만** 하단 `HUD/UltBar` 에 버튼(`UltButton.cs`, 템플릿 `UltButtonTemplate`)으로 뜸.
-- **할 일**: 무리에 있는 필살기 보유 종마다 게이지가 차오르는 모습을 하단 바에 표시 (아이콘 + 원형/막대 채움, 다 차면 지금 버튼처럼 반짝·클릭 가능). 아이콘 = `UltimateManager.icons` (UltIcons/ult_<id>). UI 그림은 `Assets/Art/Rats/UltUI` (ult_btn, ult_btn_ready, ult_ring, ult_burst, ult_tag) 재사용, 부족하면 Codex.
-- **정할 것 (사용자에게 먼저 질문)**: 표시 방식(원형 채움 vs 막대), 종이 많을 때 몇 개까지·정렬(많이 찬 순?), 화면에 그 종 쥐가 없을 때 표시 여부, 게이지 수치 노출 여부.
-- 글자는 씬 TMP(자리 `{name}` `{n}` 등)로, 코드에 글 쓰지 말 것. 오브젝트는 MCP 로 HUD 아래에 직접 만들기.
+### 9-1. 필살기 게이지 — 이미 완료 (확률 발동 아님)
+- 필살기는 **게이지 방식**으로만 발동: `UltimateManager.Charge` 로 종별 게이지가 차고(`Ult_Charge` 시트), 다 차면 하단 버튼(또는 공용 스킬 `Ult_Auto` 자동) → 대기열. 웹의 `ULT_CHANCE`(확률 발동)는 옮기지 않았음. 코드 안 `Random` 은 테스트용 쥐 소환 위치·컷인 제목 흔들림뿐.
+- 확률로 저절로 터지는 건 **슈퍼 점프**(`SuperJumpManager.chancePerSec` = 1/480 초당, 쿨 120초) — 웹과 같음.
+- 차오르는 과정 UI 는 **만들지 않음** (사용자 결정 2026-10-07).
 
 ### 9-2. 층별 제한시간 (웹 `floorTime` · `updateRunTimer`)
 - 웹: `floorTime(f) = round(190 + 35 × 층 방 수(LAYOUT.size) + (보스 층이면 BOSS_TIME + 30))` 초 (html 8985). 층 들어갈 때마다 다시 채움 (html 4718). 필살기·슈퍼 점프·층 이동·게임 오버 중에는 안 줄어듦 (8987). 0 이 되면 `startGameOver('time')` (8992). 로비/훈장 HUD 표시 `⏳ m:ss` (9174 근처) — 남은 시간이 적을 때 경고 연출 있는지 웹에서 확인.
@@ -224,4 +223,4 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 결과 화면 UI 는 씬에 직접(MCP) 만들고 글은 씬 TMP. 판이 끝날 때 치즈·연구 자료·업적은 남고 쥐·층은 초기화 (포기 창 문구와 같은 규칙).
 
 ### 9-4. 작업 순서 제안
-9-2 (시간) → 9-3 (게임 오버) → 9-1 (게이지 UI, 사용자 질문 먼저). 각 단계마다 Unity 컴파일·플레이 확인 → 커밋 (`.gitignore` 는 Library 등만 제외).
+9-2 (시간) → 9-3 (게임 오버). 각 단계마다 Unity 컴파일·플레이 확인 → 커밋 (`.gitignore` 는 Library 등만 제외).
