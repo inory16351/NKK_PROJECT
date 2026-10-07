@@ -40,7 +40,7 @@ namespace NKK.Rats
             Is(EffectType.Dash_Boost) && speed > PV(3) ? PV(2) :
             Is(EffectType.Pierce_Dash) && speed > PV(2) ? PV(1) : 1;
         float CritChance => Manager.baseCritChance + (Is(EffectType.Crit_Boost) ? PV(1) : 0);
-        float CritMult => Is(EffectType.Crit_Boost) ? PV(2) : Manager.critMultiplier;
+        float CritMult => (Is(EffectType.Crit_Boost) ? PV(2) : Manager.critMultiplier) + CommonSkill.CritDmgAdd;
         float WallMult => Is(EffectType.Wall_Breaker) ? PV(1) : 1;
         public float CheeseMult => Is(EffectType.Cheese_Boost) ? PV(1) : 1;
         public float ChainRadiusAdd => Is(EffectType.Chain_Explosion) ? PV(1) : 0;

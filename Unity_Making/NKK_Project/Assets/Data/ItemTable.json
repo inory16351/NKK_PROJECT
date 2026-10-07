@@ -18,7 +18,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_flask"
+   "asset": "Items/item_flask",
+   "from_floor": 1,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60002,
@@ -38,7 +41,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_erlen"
+   "asset": "Items/item_erlen",
+   "from_floor": 2,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60003,
@@ -58,7 +64,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_beaker"
+   "asset": "Items/item_beaker",
+   "from_floor": 1,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60004,
@@ -78,7 +87,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_tuberack"
+   "asset": "Items/item_tuberack",
+   "from_floor": 3,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60005,
@@ -98,7 +110,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_petri"
+   "asset": "Items/item_petri",
+   "from_floor": 1,
+   "unlock_skill": 0,
+   "to_floor": 12
   },
   {
    "item_id": 60006,
@@ -118,7 +133,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_pillbottle"
+   "asset": "Items/item_pillbottle",
+   "from_floor": 2,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60007,
@@ -138,7 +156,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_syringe"
+   "asset": "Items/item_syringe",
+   "from_floor": 1,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60008,
@@ -158,7 +179,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_clipboard"
+   "asset": "Items/item_clipboard",
+   "from_floor": 1,
+   "unlock_skill": 0,
+   "to_floor": 10
   },
   {
    "item_id": 60009,
@@ -178,7 +202,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_mug"
+   "asset": "Items/item_mug",
+   "from_floor": 1,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60010,
@@ -198,7 +225,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_goggles"
+   "asset": "Items/item_goggles",
+   "from_floor": 2,
+   "unlock_skill": 0,
+   "to_floor": 14
   },
   {
    "item_id": 60011,
@@ -218,7 +248,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_specimen"
+   "asset": "Items/item_specimen",
+   "from_floor": 1,
+   "unlock_skill": 92122,
+   "to_floor": 0
   },
   {
    "item_id": 60012,
@@ -238,7 +271,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_cage"
+   "asset": "Items/item_cage",
+   "from_floor": 5,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60013,
@@ -258,7 +294,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_stool"
+   "asset": "Items/item_stool",
+   "from_floor": 5,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60014,
@@ -278,7 +317,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_extinguisher"
+   "asset": "Items/item_extinguisher",
+   "from_floor": 4,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60015,
@@ -298,7 +340,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_watercooler"
+   "asset": "Items/item_watercooler",
+   "from_floor": 6,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60016,
@@ -318,7 +363,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_firstaid"
+   "asset": "Items/item_firstaid",
+   "from_floor": 3,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60017,
@@ -338,7 +386,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_microscope"
+   "asset": "Items/item_microscope",
+   "from_floor": 3,
+   "unlock_skill": 92222,
+   "to_floor": 0
   },
   {
    "item_id": 60018,
@@ -358,7 +409,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_biobin"
+   "asset": "Items/item_biobin",
+   "from_floor": 5,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60019,
@@ -378,7 +432,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_monitor"
+   "asset": "Items/item_monitor",
+   "from_floor": 10,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60020,
@@ -398,7 +455,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_centrifuge"
+   "asset": "Items/item_centrifuge",
+   "from_floor": 5,
+   "unlock_skill": 92322,
+   "to_floor": 0
   },
   {
    "item_id": 60021,
@@ -418,7 +478,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_cart"
+   "asset": "Items/item_cart",
+   "from_floor": 12,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 60022,
@@ -438,7 +501,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_gastank"
+   "asset": "Items/item_gastank",
+   "from_floor": 6,
+   "unlock_skill": 92422,
+   "to_floor": 0
   },
   {
    "item_id": 60023,
@@ -458,7 +524,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_drum"
+   "asset": "Items/item_drum",
+   "from_floor": 9,
+   "unlock_skill": 92522,
+   "to_floor": 0
   },
   {
    "item_id": 60024,
@@ -478,7 +547,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Items/item_server"
+   "asset": "Items/item_server",
+   "from_floor": 12,
+   "unlock_skill": 92622,
+   "to_floor": 0
   },
   {
    "item_id": 61001,
@@ -498,7 +570,10 @@
    "drop_02": 60003,
    "drop_03": 60006,
    "drop_04": 60002,
-   "asset": "Furniture/furn_shelf"
+   "asset": "Furniture/furn_shelf",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61002,
@@ -518,7 +593,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Furniture/furn_bookshelf"
+   "asset": "Furniture/furn_bookshelf",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61003,
@@ -538,7 +616,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Furniture/furn_cot"
+   "asset": "Furniture/furn_cot",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61004,
@@ -558,7 +639,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Furniture/furn_table"
+   "asset": "Furniture/furn_table",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61005,
@@ -578,7 +662,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Furniture/furn_chair"
+   "asset": "Furniture/furn_chair",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61006,
@@ -598,7 +685,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Furniture/furn_desk"
+   "asset": "Furniture/furn_desk",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61007,
@@ -618,7 +708,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Furniture/furn_locker"
+   "asset": "Furniture/furn_locker",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61008,
@@ -638,7 +731,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Furniture/furn_cabinet"
+   "asset": "Furniture/furn_cabinet",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61009,
@@ -658,7 +754,10 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Furniture/furn_sofa"
+   "asset": "Furniture/furn_sofa",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61010,
@@ -678,7 +777,10 @@
    "drop_02": 60005,
    "drop_03": 60004,
    "drop_04": 0,
-   "asset": "Furniture/furn_fridge"
+   "asset": "Furniture/furn_fridge",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61011,
@@ -698,7 +800,10 @@
    "drop_02": 60009,
    "drop_03": 60006,
    "drop_04": 0,
-   "asset": "Furniture/furn_vending"
+   "asset": "Furniture/furn_vending",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
   },
   {
    "item_id": 61012,
@@ -718,7 +823,194 @@
    "drop_02": 0,
    "drop_03": 0,
    "drop_04": 0,
-   "asset": "Furniture/furn_plant"
+   "asset": "Furniture/furn_plant",
+   "from_floor": 0,
+   "unlock_skill": 0,
+   "to_floor": 0
+  },
+  {
+   "item_id": 60025,
+   "item_name": "치즈 금고",
+   "code_id": "cheesesafe",
+   "item_category": "Item",
+   "radius": 24.0,
+   "hp_mul": 6.0,
+   "value_mul": 8.0,
+   "spawn_weight": 0.5,
+   "heavy": 0.0,
+   "is_big": 0,
+   "is_sturdy": 1,
+   "is_paper": 0,
+   "spill_color": "",
+   "drop_01": 0,
+   "drop_02": 0,
+   "drop_03": 0,
+   "drop_04": 0,
+   "asset": "Items/item_cheesesafe",
+   "from_floor": 1,
+   "unlock_skill": 92124,
+   "to_floor": 0
+  },
+  {
+   "item_id": 60026,
+   "item_name": "황금 치즈 트로피",
+   "code_id": "trophy",
+   "item_category": "Item",
+   "radius": 18.0,
+   "hp_mul": 5.0,
+   "value_mul": 10.0,
+   "spawn_weight": 0.5,
+   "heavy": 0.0,
+   "is_big": 0,
+   "is_sturdy": 1,
+   "is_paper": 0,
+   "spill_color": "",
+   "drop_01": 0,
+   "drop_02": 0,
+   "drop_03": 0,
+   "drop_04": 0,
+   "asset": "Items/item_trophy",
+   "from_floor": 3,
+   "unlock_skill": 92224,
+   "to_floor": 0
+  },
+  {
+   "item_id": 60027,
+   "item_name": "실험용 로봇 팔",
+   "code_id": "robotarm",
+   "item_category": "Item",
+   "radius": 26.0,
+   "hp_mul": 9.0,
+   "value_mul": 10.0,
+   "spawn_weight": 0.45,
+   "heavy": 0.0,
+   "is_big": 0,
+   "is_sturdy": 1,
+   "is_paper": 0,
+   "spill_color": "",
+   "drop_01": 0,
+   "drop_02": 0,
+   "drop_03": 0,
+   "drop_04": 0,
+   "asset": "Items/item_robotarm",
+   "from_floor": 5,
+   "unlock_skill": 92324,
+   "to_floor": 0
+  },
+  {
+   "item_id": 60028,
+   "item_name": "냉동 수면 캡슐",
+   "code_id": "cryopod",
+   "item_category": "Item",
+   "radius": 28.0,
+   "hp_mul": 14.0,
+   "value_mul": 14.0,
+   "spawn_weight": 0.35,
+   "heavy": 0.0,
+   "is_big": 1,
+   "is_sturdy": 1,
+   "is_paper": 0,
+   "spill_color": "#a9d3dc",
+   "drop_01": 0,
+   "drop_02": 0,
+   "drop_03": 0,
+   "drop_04": 0,
+   "asset": "Items/item_cryopod",
+   "from_floor": 8,
+   "unlock_skill": 92424,
+   "to_floor": 0
+  },
+  {
+   "item_id": 60029,
+   "item_name": "거대 치즈 바퀴",
+   "code_id": "cheesewheel",
+   "item_category": "Item",
+   "radius": 30.0,
+   "hp_mul": 16.0,
+   "value_mul": 20.0,
+   "spawn_weight": 0.35,
+   "heavy": 0.0,
+   "is_big": 1,
+   "is_sturdy": 1,
+   "is_paper": 0,
+   "spill_color": "#f2c14e",
+   "drop_01": 0,
+   "drop_02": 0,
+   "drop_03": 0,
+   "drop_04": 0,
+   "asset": "Items/item_cheesewheel",
+   "from_floor": 10,
+   "unlock_skill": 92524,
+   "to_floor": 0
+  },
+  {
+   "item_id": 60030,
+   "item_name": "금괴 상자",
+   "code_id": "goldcrate",
+   "item_category": "Item",
+   "radius": 28.0,
+   "hp_mul": 18.0,
+   "value_mul": 24.0,
+   "spawn_weight": 0.3,
+   "heavy": 0.0,
+   "is_big": 1,
+   "is_sturdy": 1,
+   "is_paper": 0,
+   "spill_color": "",
+   "drop_01": 0,
+   "drop_02": 0,
+   "drop_03": 0,
+   "drop_04": 0,
+   "asset": "Items/item_goldcrate",
+   "from_floor": 13,
+   "unlock_skill": 92624,
+   "to_floor": 0
+  },
+  {
+   "item_id": 60031,
+   "item_name": "데이터 코어",
+   "code_id": "datacore",
+   "item_category": "Item",
+   "radius": 24.0,
+   "hp_mul": 20.0,
+   "value_mul": 26.0,
+   "spawn_weight": 0.3,
+   "heavy": 0.0,
+   "is_big": 1,
+   "is_sturdy": 1,
+   "is_paper": 0,
+   "spill_color": "#7fe0d0",
+   "drop_01": 0,
+   "drop_02": 0,
+   "drop_03": 0,
+   "drop_04": 0,
+   "asset": "Items/item_datacore",
+   "from_floor": 16,
+   "unlock_skill": 92724,
+   "to_floor": 0
+  },
+  {
+   "item_id": 60032,
+   "item_name": "다이아몬드 치즈",
+   "code_id": "cheesegem",
+   "item_category": "Item",
+   "radius": 20.0,
+   "hp_mul": 24.0,
+   "value_mul": 36.0,
+   "spawn_weight": 0.25,
+   "heavy": 0.0,
+   "is_big": 0,
+   "is_sturdy": 1,
+   "is_paper": 0,
+   "spill_color": "",
+   "drop_01": 0,
+   "drop_02": 0,
+   "drop_03": 0,
+   "drop_04": 0,
+   "asset": "Items/item_cheesegem",
+   "from_floor": 20,
+   "unlock_skill": 92824,
+   "to_floor": 0
   }
  ],
  "Zone": [
@@ -727,100 +1019,35 @@
    "zone_name": "지하 비밀 실험실",
    "from_floor": 1,
    "floor_type": "Lab",
-   "tint": "",
-   "item_01": 60001,
-   "item_02": 60002,
-   "item_03": 60003,
-   "item_04": 60004,
-   "item_05": 60005,
-   "item_06": 60006,
-   "item_07": 60007,
-   "item_08": 60008,
-   "item_09": 60009,
-   "item_10": 60010,
-   "item_11": 60011,
-   "item_12": 0,
-   "item_13": 0
+   "tint": ""
   },
   {
    "zone_id": 70002,
    "zone_name": "실험동물 사육동",
    "from_floor": 5,
    "floor_type": "Corridor",
-   "tint": "",
-   "item_01": 60001,
-   "item_02": 60002,
-   "item_03": 60003,
-   "item_04": 60005,
-   "item_05": 60007,
-   "item_06": 60012,
-   "item_07": 60013,
-   "item_08": 60014,
-   "item_09": 60015,
-   "item_10": 60016,
-   "item_11": 60017,
-   "item_12": 60018,
-   "item_13": 60011
+   "tint": ""
   },
   {
    "zone_id": 70003,
    "zone_name": "약품 연구동",
    "from_floor": 10,
    "floor_type": "Lab",
-   "tint": "rgba(157,213,168,.16)",
-   "item_01": 60002,
-   "item_02": 60001,
-   "item_03": 60006,
-   "item_04": 60007,
-   "item_05": 60017,
-   "item_06": 60019,
-   "item_07": 60020,
-   "item_08": 60021,
-   "item_09": 60022,
-   "item_10": 60023,
-   "item_11": 60004,
-   "item_12": 60018,
-   "item_13": 0
+   "tint": "rgba(157,213,168,.16)"
   },
   {
    "zone_id": 70004,
    "zone_name": "전산·관리동",
    "from_floor": 15,
    "floor_type": "Corridor",
-   "tint": "rgba(143,179,199,.2)",
-   "item_01": 60019,
-   "item_02": 60024,
-   "item_03": 60021,
-   "item_04": 60013,
-   "item_05": 60015,
-   "item_06": 60009,
-   "item_07": 60008,
-   "item_08": 60016,
-   "item_09": 60014,
-   "item_10": 60020,
-   "item_11": 0,
-   "item_12": 0,
-   "item_13": 0
+   "tint": "rgba(143,179,199,.2)"
   },
   {
    "zone_id": 70005,
    "zone_name": "연구소장 층",
    "from_floor": 20,
    "floor_type": "Lab",
-   "tint": "rgba(227,196,106,.18)",
-   "item_01": 60019,
-   "item_02": 60024,
-   "item_03": 60023,
-   "item_04": 60022,
-   "item_05": 60020,
-   "item_06": 60011,
-   "item_07": 60009,
-   "item_08": 60021,
-   "item_09": 60017,
-   "item_10": 60012,
-   "item_11": 0,
-   "item_12": 0,
-   "item_13": 0
+   "tint": "rgba(227,196,106,.18)"
   }
  ],
  "Furniture_Layout": [

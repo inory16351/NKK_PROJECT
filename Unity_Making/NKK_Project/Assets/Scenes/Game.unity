@@ -225,7 +225,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Progress
   autoUpgradeInRun: 1
   saveKey: nkk_progress_v1
-  testSkillLevels: []
+  testSkills: 
+  testSkillTier: 0
   cheese: 0
   research: 0
   tier: 1
@@ -769,6 +770,22 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 3e392604cdcf78249806da9098e98222, type: 3}
   - codeId: furn_plant
     sprite: {fileID: 21300000, guid: 8d6400c82c5a33745a90d36942f502a2, type: 3}
+  - codeId: cheesesafe
+    sprite: {fileID: 21300000, guid: 0ef0db4633d211a4ead8231712ebf160, type: 3}
+  - codeId: trophy
+    sprite: {fileID: 21300000, guid: 634069e023a2d5e4fa7b0f548a0949f7, type: 3}
+  - codeId: robotarm
+    sprite: {fileID: 21300000, guid: 71f19b49be61fc44489b96e210c043ca, type: 3}
+  - codeId: cryopod
+    sprite: {fileID: 21300000, guid: e7053eac78fa93c4bbd08797b992a7b4, type: 3}
+  - codeId: cheesewheel
+    sprite: {fileID: 21300000, guid: 625e932df0d4c124994b04536c8d80ed, type: 3}
+  - codeId: goldcrate
+    sprite: {fileID: 21300000, guid: bd7d8eeab6252ab459aa8ac1650b7695, type: 3}
+  - codeId: datacore
+    sprite: {fileID: 21300000, guid: b1e0ae671e8b38a4e8297b584fc29019, type: 3}
+  - codeId: cheesegem
+    sprite: {fileID: 21300000, guid: 632a7d15c28e6b649a1d36a7a2ecb6d3, type: 3}
   roomCap: 24
   spawnInterval: 1.2
   itemHpGrow: 3.6

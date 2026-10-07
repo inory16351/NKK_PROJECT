@@ -31,39 +31,31 @@ namespace NKK
         public static void Run(int tier, int startFloor, int endFloor, float giveUp = 600, int simHz = 20)
         {
             var p = Progress.I;
-            p.saveKey = "nkk_probe"; p.ResetAll(); p.autoUpgradeInRun = false; p.testSkillLevels.Clear();
+            p.saveKey = "nkk_probe"; p.ResetAll(); p.autoUpgradeInRun = false; p.testSkills.Clear(); p.testSkillTier = 0;
             p.tier = tier; p.maxFloor = Mathf.Max(startFloor, 1);
             MakeMeta(p, tier);
             Progress.PendingStartFloor = startFloor;
             EndFloor = endFloor; GiveUp = giveUp; SimHz = simHz; Active = true;
-            int sk = 0; foreach (var e in p.testSkillLevels) sk += e.level;
-            Results.Add($"── 티어 {tier} · {startFloor}층부터 · 스킬 합 {sk} · 조각 합 {ShardSum(p)}");
+            Results.Add($"── 티어 {tier} · {startFloor}층부터 · 스킬 노드 {p.testSkills.Count} · 조각 합 {ShardSum(p)}");
             SceneManager.LoadScene("Game");
         }
 
-        // 티어 t 에 오를 때 필요했던 성장 (티어 테이블 t 행의 Skill_Level_Sum · Shard_Level_Sum 조건값)
+        // 티어 t 에 오를 때 필요했던 성장 (티어 테이블 t 행의 Skill_Node_Count · Shard_Level_Sum 조건값)
         static void MakeMeta(Progress p, int tier)
         {
             var db = GameDatabase.Instance;
             if (!db.Tiers.TryGetValue(tier, out var tr)) return;
             float Need(string type) => tr.cond1_type == type ? tr.cond1_value : tr.cond2_type == type ? tr.cond2_value : tr.cond3_type == type ? tr.cond3_value : 0;
-            int skillSum = Mathf.RoundToInt(Need("Skill_Level_Sum")), shardSum = Mathf.RoundToInt(Need("Shard_Level_Sum"));
-            // 공용 스킬: 찍을 수 있는 것 중 가장 싼 것부터
-            var lv = new Dictionary<string, int>();
+            int skillSum = Mathf.RoundToInt(Need("Skill_Node_Count")), shardSum = Mathf.RoundToInt(Need("Shard_Level_Sum"));
+            // 공용 스킬: 열린 노드 중 가장 싼 것부터 (그 훈장 이하 트리)
             for (int n = 0; n < skillSum; n++)
             {
-                CommonSkillRow best = null; double bc = double.MaxValue;
+                CommonSkillRow best = null; float bc = float.MaxValue;
                 foreach (var s in db.CommonSkills)
-                {
-                    int l = lv.TryGetValue(s.code_id, out var v) ? v : 0;
-                    if (tier < s.unlock_tier || (!s.Infinite && l >= s.max_level)) continue;
-                    if (s.req_skill != 0 && db.CommonSkillsById.TryGetValue(s.req_skill, out var r) && (lv.TryGetValue(r.code_id, out var rl) ? rl : 0) < s.req_level) continue;
-                    double c = s.Cost(l); if (c < bc) { bc = c; best = s; }
-                }
+                    if (s.tier <= tier && !s.IsRoot && p.StateOf(s) == Progress.SkillState.Open && s.cost_cheese < bc) { bc = s.cost_cheese; best = s; }
                 if (best == null) break;
-                lv[best.code_id] = (lv.TryGetValue(best.code_id, out var bv) ? bv : 0) + 1;
+                p.testSkills.Add(best.skill_id);
             }
-            foreach (var kv in lv) p.testSkillLevels.Add(new Progress.SkillEntry { code = kv.Key, level = kv.Value });
             // 조각 강화: 해금된 일반·레어 종에 고르게
             var pool = new List<RatCharacterRow>();
             foreach (var r in db.Rats.Values) if (r.unlock_rank <= tier && (int)r.Grade <= 1) pool.Add(r);

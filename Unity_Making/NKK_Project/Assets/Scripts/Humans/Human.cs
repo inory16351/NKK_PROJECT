@@ -38,7 +38,7 @@ namespace NKK.Humans
             x = px; y = py; face = Random.value < 0.5f ? 1 : -1; t = Random.Range(1f, 3f); walk = Random.Range(0f, 6f);
             int zi = m.Game.Floor - 1;
             hpMax = hp = 12 * row.hp_mul * Mathf.Pow(m.itemHpGrow, zi) * m.humanHpMul;
-            value = 3 * row.value_mul * Mathf.Pow(m.valueGrow, zi) * m.humanValueMul * CommonSkill.CheeseMul;
+            value = 3 * row.value_mul * Mathf.Pow(m.valueGrow, zi) * m.humanValueMul * CommonSkill.CreatureCheeseMul;
             rig.Build(art);
             // 그림자는 사람 정렬 그룹 밖(바닥 바로 위)에 → 실행 중엔 그림자 묶음으로 옮김
             if (shadow && m.Rats && m.Rats.shadowRoot) { shadow.transform.SetParent(m.Rats.shadowRoot, true); shadow.sortingOrder = m.Rats.shadowSortOrder; }

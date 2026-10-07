@@ -59,7 +59,8 @@ namespace NKK.Rats
         public void Place(float px, float py) { x = px; y = py; vx = vy = z = vz = 0; rushT = 0; mode = Mode.Pause; t = Random.Range(0f, 0.5f); }
 
         // 공격력 = 테이블 × 특수 능력 × 종별 성장 × 공용 스킬 (반란의 시작·이빨 강화·쥐 헬스장) × 광란
-        public float Damage => Data.atk * PassiveDamageMult * GrowthAtkMult * CommonSkill.AtkMul((int)Data.Grade) * (frenzy > 0 ? 1.5f : 1) * (zombie > 0 ? 2 : 1);
+        // 공용 스킬: 공격력 + 고정값(등급별) → ×(1 + 공격력 % 합) ×(1 + 피해량 % 합)
+        public float Damage => (Data.atk + CommonSkill.AtkFlat((int)Data.Grade)) * PassiveDamageMult * GrowthAtkMult * CommonSkill.AtkMul((int)Data.Grade) * (frenzy > 0 ? 1.5f : 1) * (zombie > 0 ? 2 : 1);
         float RunSpeed => Manager.baseSpeed * GradeData.move_speed * PassiveSpeedMult * CommonSkill.MoveSpeedMul * (frenzy > 0 ? 1.5f : 1);
         float RushMult => Rushing ? Manager.RushDamage : 1;
 
@@ -240,6 +241,16 @@ namespace NKK.Rats
             BumpHumans(rushing);
         }
 
+        // 공용 스킬 연타: 확률로 (1 + 추가 공격 수) 배 피해 + 팝업
+        float MultiHit(float px, float py)
+        {
+            float c = CommonSkill.MultiHitChance;
+            if (c <= 0 || Random.value >= c) return 1;
+            int n = 1 + CommonSkill.MultiHitCount;
+            if (FxManager.I && OnScreen()) FxManager.I.Popup(px, py, "x" + n + "!", new Color(1, 0.86f, 0.52f), 18, 0.5f, 50);
+            return n;
+        }
+
         // 보스 들이받기 (웹: 보스도 사람 목록에 있어서 ratBumpHumans 로 맞음)
         bool BumpBoss(bool rushing)
         {
@@ -253,7 +264,7 @@ namespace NKK.Rats
             biteCD = 0.22f; bite = 1; sq = 1.25f;
             if (!rushing) StopDash(0.1f, 0.35f);
             bool crit = Random.value < CritChance + GrowthCritAdd + CommonSkill.CritAdd;
-            b.Damage(Damage * RushMult * (crit ? CritMult : 1), this, Mathf.Atan2(-ny, -nx), crit);
+            b.Damage(Damage * RushMult * MultiHit(b.x, b.y) * (crit ? CritMult : 1), this, Mathf.Atan2(-ny, -nx), crit);
             FxManager.I?.Stars(b.x - nx * b.R * 0.5f, b.y - ny * b.R * 0.5f, 40, crit ? 6 : 2, Color.white, new Color(1, 0.95f, 0.75f));
             return true;
         }
@@ -273,7 +284,7 @@ namespace NKK.Rats
                 biteCD = 0.22f; bite = 1; sq = 1.25f;
                 if (!rushing) StopDash(0.1f, 0.35f);
                 bool crit = Random.value < Manager.baseCritChance + CommonSkill.CritAdd;
-                h.Damage(Damage * RushMult * (crit ? Manager.critMultiplier : 1), this, Mathf.Atan2(-ny, -nx), crit);
+                h.Damage(Damage * RushMult * (crit ? Manager.critMultiplier + CommonSkill.CritDmgAdd : 1), this, Mathf.Atan2(-ny, -nx), crit);
                 FxManager.I?.Stars(h.x - nx * h.R * 0.5f, h.y - ny * h.R * 0.5f, 40, crit ? 6 : 2, Color.white, new Color(1, 0.95f, 0.75f));
                 return;
             }
@@ -282,7 +293,7 @@ namespace NKK.Rats
         void Bump(Item it, float nx, float ny, float spd)
         {
             float ang = Mathf.Atan2(-ny, -nx);
-            float dmg = Damage * RushMult * DashHitMult(spd);
+            float dmg = Damage * RushMult * DashHitMult(spd) * MultiHit(it.x, it.y);
             bool crit = Random.value < CritChance + GrowthCritAdd + CommonSkill.CritAdd;
             PassiveBeforeHit(it);
             it.Damage(dmg * (crit ? CritMult : 1), this, crit, ang);

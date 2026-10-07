@@ -42,8 +42,7 @@ namespace NKK.Data
         public readonly List<HumanLineRow> HumanLines = new();
         public readonly List<CommonSkillRow> CommonSkills = new();
         public readonly Dictionary<int, CommonSkillRow> CommonSkillsById = new();
-        public readonly Dictionary<string, CommonSkillRow> CommonSkillsByCode = new();
-        public readonly Dictionary<CommonEffectType, CommonSkillRow> CommonSkillsByEffect = new();
+        public readonly Dictionary<int, List<CommonSkillRow>> CommonSkillsByTier = new();
         public readonly Dictionary<SkillBranch, SkillBranchRow> SkillBranches = new();
         public readonly List<BossRow> Bosses = new();
         public readonly List<BossLineRow> BossLines = new();
@@ -61,7 +60,7 @@ namespace NKK.Data
             Rats.Clear(); RatsByCode.Clear(); RatSkills.Clear(); Ultimates.Clear(); UltCaptions.Clear(); UltCharges.Clear(); Grades.Clear();
             GrowthNodes.Clear(); GrowthOrder.Clear(); ActionAwaken.Clear(); Cats.Clear(); CatSkills.Clear();
             Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear(); Bosses.Clear(); BossLines.Clear();
-            CommonSkills.Clear(); CommonSkillsById.Clear(); CommonSkillsByCode.Clear(); CommonSkillsByEffect.Clear(); SkillBranches.Clear();
+            CommonSkills.Clear(); CommonSkillsById.Clear(); CommonSkillsByTier.Clear(); SkillBranches.Clear();
 
             if (ratTable)
             {
@@ -100,7 +99,12 @@ namespace NKK.Data
             if (commonSkillTable)
             {
                 var f = JsonUtility.FromJson<CommonSkillTableFile>(commonSkillTable.text);
-                foreach (var s in f.Common_Skill) { CommonSkills.Add(s); CommonSkillsById[s.skill_id] = s; CommonSkillsByCode[s.code_id] = s; CommonSkillsByEffect[s.Effect] = s; }
+                foreach (var s in f.Common_Skill)
+                {
+                    CommonSkills.Add(s); CommonSkillsById[s.skill_id] = s;
+                    if (!CommonSkillsByTier.TryGetValue(s.tier, out var l)) CommonSkillsByTier[s.tier] = l = new List<CommonSkillRow>();
+                    l.Add(s);
+                }
                 foreach (var b in f.Branch) SkillBranches[b.Branch] = b;
             }
             if (stageTable) { var f = JsonUtility.FromJson<StageTableFile>(stageTable.text); if (f.Boss != null) Bosses.AddRange(f.Boss); if (f.Boss_Line != null) BossLines.AddRange(f.Boss_Line); }

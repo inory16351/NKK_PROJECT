@@ -227,6 +227,10 @@ namespace NKK.Rats
                 row ??= RollSpecies(0);
                 if (row != null) Spawn(row, World.RW / 2 + Random.Range(-200f, 200f), World.RH / 2 + Random.Range(-120f, 120f));
             }
+            // 공용 스킬 시작 쥐: 그 등급에서 해금된 종 하나씩 (없으면 아래 등급)
+            if (startRats.Count == 0)
+                foreach (var (g, cnt) in CommonSkill.StartRats())
+                    for (int i = 0; i < cnt; i++) { var row = SpeciesOfGrade(g); if (row != null) Spawn(row, World.RW / 2 + Random.Range(-200f, 200f), World.RH / 2 + Random.Range(-120f, 120f)); }
         }
 
         public void PlaceAll(float cx, float cy)
@@ -277,6 +281,19 @@ namespace NKK.Rats
             return w;
         }
 
+        // 이 등급(없으면 아래 등급)에서 해금된 종 하나
+        public RatCharacterRow SpeciesOfGrade(int grade)
+        {
+            var db = GameDatabase.Instance;
+            for (int g = Mathf.Clamp(grade, 0, 5); g >= 0; g--)
+            {
+                var list = new List<RatCharacterRow>();
+                foreach (var r in db.Rats.Values) if ((int)r.Grade == g && r.unlock_rank <= Game.Tier) list.Add(r);
+                if (list.Count > 0) return list[Random.Range(0, list.Count)];
+            }
+            return null;
+        }
+
         public RatCharacterRow RollSpecies(float bonus)
         {
             var db = GameDatabase.Instance;
@@ -292,7 +309,7 @@ namespace NKK.Rats
             return null;
         }
 
-        float BreedChance(int pop) => Mathf.Clamp(1f / (1 + Mathf.Pow(Mathf.Max(0, pop - breedFree) / breedHalf, breedExp)), breedMinChance, 1);
+        float BreedChance(int pop) => Mathf.Clamp(1f / (1 + Mathf.Pow(Mathf.Max(0, pop - breedFree) / breedHalf, breedExp)) + CommonSkill.BreedChanceAdd(pop), breedMinChance, 1);   // + 공용 스킬 번식 확률
 
         void Breed()
         {

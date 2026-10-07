@@ -1,0 +1,18 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: items_new.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each object sits centered in its own cell, standing on the bottom third of the cell, with a wide magenta margin; objects must NOT touch or cross cell borders.
+- STYLE IS THE MOST IMPORTANT RULE: match the attached reference lab objects exactly (the server rack and the cage): same soft 3/4 front view of a standing object, same flat muted colors, same gentle simple shading, same scale feel. Untitled Goose Game flat look, no black outlines, no glow, no drop shadow on the floor, no background.
+- These are new valuable, sturdy objects that appear in a secret rat-experiment laboratory. Each must read clearly at small size.
+
+Row 1:
+ 1) a squat heavy steel safe with a round dial and a small yellow cheese-wedge emblem on the door
+ 2) a shiny golden trophy cup shaped like a cheese wedge on a small black base
+ 3) a lab robot arm machine: a grey base box with a jointed orange robotic arm holding a gripper
+ 4) a tall glass cryo-sleep capsule on a metal base, pale blue frosted glass, small control panel (big object, taller than the others)
+Row 2:
+ 5) a giant round wheel of yellow cheese with holes, with a red wax rind band, standing on its edge
+ 6) an open wooden crate full of stacked gold bars
+ 7) a glowing data core: a dark metal pedestal with a big glowing teal glass cube on top (flat glow color, no bloom)
+ 8) a small marble pedestal with a large sparkling diamond-cut cheese gem (pale yellow crystal) on top

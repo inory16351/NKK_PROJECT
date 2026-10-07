@@ -200,7 +200,8 @@ namespace NKK.Stage
         // ── 벽 ──
         static string WallKey(int i, int j, int di, int dj) => di != 0 ? $"v,{i + (di > 0 ? 1 : 0)},{j}" : $"h,{i},{j + (dj > 0 ? 1 : 0)}";
 
-        float WallMax(int ti, int tj)
+        float WallMax(int ti, int tj) => WallMaxBase(ti, tj) * CommonSkill.WallHpMul;     // 공용 스킬 벽 체력 감소
+        float WallMaxBase(int ti, int tj)
         {
             int f = Game.Floor;
             if (IsStairsRoom(ti, tj)) return PowNeed(f) * Mathf.Min(wallPowStairs, 2 + 6 * (f - 1));
@@ -271,7 +272,9 @@ namespace NKK.Stage
                 else Game.ShowBanner("계단 발견!", $"계단에 닿으면 {Game.Floor + 1}층으로");
             }
             Items.OnRoomOpened(t);
-            if (!IsStairsRoom(t.x, t.y) && Game.Floor >= trapFromFloor) SpawnTraps(t, UnityEngine.Random.value < trapTwoChance ? 2 : 1);
+            // 쥐덫: 공용 스킬로 등장 확률(기본 100%)·2개 확률을 줄임
+            if (!IsStairsRoom(t.x, t.y) && Game.Floor >= trapFromFloor && UnityEngine.Random.value < CommonSkill.TrapSingleChance)
+                SpawnTraps(t, UnityEngine.Random.value < trapTwoChance - CommonSkill.TrapMultiDown ? 2 : 1);
             RoomOpened?.Invoke(t);
         }
 

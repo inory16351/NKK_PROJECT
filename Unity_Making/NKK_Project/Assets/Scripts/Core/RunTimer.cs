@@ -47,7 +47,7 @@ namespace NKK
         string timeFormat;
         float pulse;
 
-        public float FloorTime(int f) => Mathf.Round(baseTime + perRoom * Stage.Layout.Count + (Stage.IsBossFloor(f) ? bossExtra : 0));
+        public float FloorTime(int f) => Mathf.Round(baseTime + perRoom * Stage.Layout.Count + (Stage.IsBossFloor(f) ? bossExtra : 0) + CommonSkill.TimeAdd);   // + 공용 스킬 제한시간
 
         void Awake()
         {

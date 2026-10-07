@@ -7,10 +7,11 @@ using UnityEngine.UI;
 
 namespace NKK.Lobby
 {
-    // 탈출 준비실 · 치즈 창고 = 공용 스킬 지도 (웹 buildMap / renderSkillDetail).
-    // 지도: 노드는 공용 스킬 테이블 pos_x·pos_y 칸에, 선행 스킬끼리 끈으로 연결. 끌어서 이동 · 휠로 확대.
-    // 노드 상태 (Progress.StateOf): 찍음 · 열림 · ?(힌트) · 훈장 부족(자물쇠) · 숨김. 선택된 노드를 한 번 더 누르면 강화.
-    // 글은 전부 씬의 TMP 텍스트에 적혀 있고, 코드는 자리표시({lv} {max} {cost} {tier} {req} {need} {branch})와 테이블 값(이름·설명)만 채움.
+    // 탈출 준비실 · 치즈 창고 = 공용 스킬 지도. 찍찍!! 훈장마다 트리 하나 (위 탭으로 고름).
+    // 노드는 공용 스킬 테이블 pos_x·pos_y 칸에, 여는 노드(link_1·link_2)와 끈으로 연결. 끌어서 이동 · 휠로 확대.
+    // 노드 상태 (Progress.StateOf): 활성화 · 열림(살 수 있음) · 잠김(이어진 노드 먼저) · 훈장 부족(자물쇠). 선택된 노드를 한 번 더 누르면 활성화.
+    // 아직 못 단 훈장 탭을 고르면 아래에 훈장 승급 패널 (연구자료 + 조건 3개). 바로 다음 훈장이면 승급 버튼.
+    // 글은 전부 씬의 TMP 텍스트에 적혀 있고, 코드는 자리표시({cost} {res} {state} {tier} {have} {need} {name} {branch})와 테이블 값(이름·설명)만 채움.
     public class SkillPage : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IScrollHandler
     {
         public LobbyManager manager;
@@ -19,12 +20,15 @@ namespace NKK.Lobby
         [Tooltip("지도 보이는 영역 (RectMask2D)")] public RectTransform viewport;
         [Tooltip("노드·끈이 들어가는 판 (이동·확대됨)")] public RectTransform content;
         public RectTransform lineLayer, nodeLayer;
-        [Tooltip("칸 간격 (픽셀)")] public float step = 170;
-        public Vector2 zoomRange = new(0.5f, 1.5f);
+        [Tooltip("칸 간격 (픽셀)")] public float step = 190;
+        public Vector2 zoomRange = new(0.45f, 1.5f);
         [Tooltip("휠 한 칸 확대 배율")] public float zoomStep = 1.12f;
 
+        [Header("훈장 탭 (1~8훈장 순서, 자식 Lock = 못 단 훈장 자물쇠 · Sel = 고른 탭)")]
+        public Button[] tierTabs;
+
         [Header("템플릿 (꺼져 있음)")]
-        [Tooltip("노드: 자식 Icon(Image) · Lv · Name · Cost(TMP) · Q(TMP '?') · Lock(Image) · LockText(TMP) · Sel(선택 표시)")] public Button nodeTemplate;
+        [Tooltip("노드: 자식 Icon(Image) · Name · Cost(TMP) · Lock(Image) · LockText(TMP) · Sel(선택 표시)")] public Button nodeTemplate;
         [Tooltip("핵심 노드 (마름모), 자식 구성 같음")] public Button keyTemplate;
         [Tooltip("끈 (Image, 가로로 늘림)")] public Image lineTemplate;
         public Sprite nodeOff, nodeOn, nodeLock, keyOff, keyOn;
@@ -32,36 +36,58 @@ namespace NKK.Lobby
 
         [Header("상세 카드")]
         public Image detailIcon;
-        public TMP_Text detailName, detailLevel, detailExplain, detailReq, detailCost;
+        public TMP_Text detailName, detailState, detailExplain, detailReq;
         public Image branchRibbon;
         public TMP_Text branchText;
+        [Tooltip("비용 줄: 치즈 · 연구자료 (연구자료 0 이면 숨김)")] public TMP_Text costCheese, costResearch;
+        public GameObject costResearchRow;
         public Button buyButton;
         public TMP_Text buyLabel;
-        [Tooltip("최대 레벨일 때 강화 버튼 글 (자식 텍스트에 적힘)")] public TMP_Text maxWord;
-        [Tooltip("? 노드 이름 대신 쓰는 글")] public TMP_Text hintWord;
-        [Tooltip("최대 레벨이 없을 때 쓰는 글")] public TMP_Text infWord;
-        [Tooltip("훈장 부족 / 선행 부족 안내 글 (자리표시 {tier} · {req} {need})")] public TMP_Text tierReqTemplate, skillReqTemplate;
+        [Tooltip("상태 글 (씬 Words): 활성화 · 열림 · 잠김 · 훈장 부족({tier})")] public TMP_Text stOwned, stOpen, stLocked, stTier;
+        [Tooltip("버튼 글: 이미 활성화 · 못 삼")] public TMP_Text wOwned, wCant;
+        [Tooltip("노드 비용 글 뒤에 붙는 연구자료 ({n})")] public TMP_Text wNodeResearch;
+        [Tooltip("시작점 노드 설명 ({tier} {name})")] public TMP_Text wRoot;
 
-        string sel = "core";
+        [Header("훈장 승급 패널 (못 단 훈장 탭)")]
+        public GameObject rankPanel;
+        [Tooltip("제목 ({tier} {name})")] public TMP_Text rankTitle;
+        [Tooltip("조건 줄 3개 + 연구자료 줄 (자리 {have} {need}). 조건 이름 글은 씬 Words")] public TMP_Text[] rankConds;
+        public TMP_Text rankResearch;
+        [Tooltip("조건 이름 글: 최고 층 · 조각 강화 합 · 스킬 노드 수 ({have} {need})")] public TMP_Text cMaxFloor, cShard, cSkill;
+        public Button rankButton;
+        [Tooltip("앞 훈장을 먼저 달아야 할 때 글 ({tier})")] public TMP_Text rankPrev;
+        public Color okColor = new(0.29f, 0.55f, 0.3f), noColor = new(0.75f, 0.35f, 0.3f);
+
+        int viewTier = 1, sel;
         float zoom = 1; bool dragging;
         readonly List<GameObject> spawned = new();
         readonly Dictionary<TMP_Text, string> tpl = new();
         readonly Dictionary<string, Sprite> icons = new();
 
         string T(TMP_Text t) { if (!t) return ""; if (!tpl.TryGetValue(t, out var s)) tpl[t] = s = t.text; return s; }
-        void SetT(TMP_Text t, params (string k, object v)[] kv) { if (!t) return; var s = T(t); foreach (var (k, v) in kv) s = s.Replace("{" + k + "}", v.ToString()); t.text = s; }
+        string F(TMP_Text t, params (string k, object v)[] kv) { var s = T(t); foreach (var (k, v) in kv) s = s.Replace("{" + k + "}", v?.ToString()); return s; }
+        void SetT(TMP_Text t, params (string k, object v)[] kv) { if (t) t.text = F(t, kv); }
 
         void Awake()
         {
             foreach (var t in new Component[] { nodeTemplate, keyTemplate, lineTemplate }) if (t) t.gameObject.SetActive(false);
             if (buyButton) buyButton.onClick.AddListener(Buy);
-            foreach (var t in new[] { buyLabel, detailLevel, detailCost, branchText }) T(t);
+            if (rankButton) rankButton.onClick.AddListener(RankUp);
+            if (tierTabs != null) for (int i = 0; i < tierTabs.Length; i++) { int t = i + 1; if (tierTabs[i]) tierTabs[i].onClick.AddListener(() => ShowTier(t)); }
+            foreach (var t in new[] { buyLabel, detailState, costCheese, costResearch, branchText, rankTitle, rankResearch, rankPrev }) T(t);
+            if (rankConds != null) foreach (var t in rankConds) T(t);
         }
 
-        Sprite Icon(CommonSkillRow s) => icons.TryGetValue(s.code_id, out var sp) ? sp : null;
-
-        [Tooltip("스킬 아이콘 (코드 id 순서 상관없음, 파일 이름 cs_<코드 id>)")] public Sprite[] iconSprites;
-        void CacheIcons() { if (iconSprites == null) return; foreach (var s in iconSprites) if (s && s.name.StartsWith("cs_")) icons[s.name.Substring(3)] = s; }
+        [Tooltip("스킬 아이콘 (파일 이름 cs_<이름>)")] public Sprite[] iconSprites;
+        void CacheIcons() { if (iconSprites == null) return; foreach (var s in iconSprites) if (s) icons[s.name] = s; }
+        Sprite Icon(CommonSkillRow s)
+        {
+            if (s == null || string.IsNullOrEmpty(s.skill_asset)) return null;
+            string n = s.skill_asset.Substring(s.skill_asset.LastIndexOf('/') + 1);
+            return icons.TryGetValue(n, out var sp) ? sp : null;
+        }
+        [Tooltip("훈장 배지 (rk_1 ~ rk_8) — 시작점 노드 아이콘")] public Sprite[] badgeSprites;
+        Sprite RootIcon(int t) => badgeSprites != null && t - 1 < badgeSprites.Length ? badgeSprites[t - 1] : null;
 
         Color BranchColor(CommonSkillRow s)
         {
@@ -70,54 +96,104 @@ namespace NKK.Lobby
         }
 
         Vector2 At(CommonSkillRow s) => new(s.pos_x * step, -s.pos_y * step);
+        static string TierName(int t) => GameDatabase.Instance.Tiers.TryGetValue(t, out var r) ? r.tier_name : "";
 
-        // LobbyManager 가 페이지를 열 때 (SendMessage)
+        // LobbyManager 가 페이지를 열 때 (SendMessage) → 지금 훈장 트리
         public void Render()
+        {
+            var p = Progress.I;
+            int max = GameDatabase.Instance.CommonSkillsByTier.Count;
+            ShowTier(Mathf.Clamp(p ? p.tier : 1, 1, Mathf.Max(1, max)));
+        }
+
+        public void ShowTier(int t)
+        {
+            var db = GameDatabase.Instance;
+            bool changed = t != viewTier || sel == 0;
+            viewTier = t;
+            if (changed && db.CommonSkillsByTier.TryGetValue(t, out var l) && l.Count > 0)
+            {
+                sel = l[0].skill_id;
+                foreach (var s in l) if (s.IsRoot) sel = s.skill_id;
+                FitView(l);
+            }
+            Draw();
+        }
+
+        // 트리 전체가 보이게 확대 배율·위치 맞춤
+        void FitView(List<CommonSkillRow> l)
+        {
+            if (!content || !viewport || l.Count == 0) return;
+            Vector2 mn = new(float.MaxValue, float.MaxValue), mx = new(float.MinValue, float.MinValue);
+            foreach (var s in l) { var a = At(s); mn = Vector2.Min(mn, a); mx = Vector2.Max(mx, a); }
+            var size = mx - mn + new Vector2(step * 1.2f, step * 1.4f);
+            var vr = viewport.rect;
+            zoom = Mathf.Clamp(Mathf.Min(vr.width / size.x, vr.height / size.y), zoomRange.x, zoomRange.y);
+            content.localScale = Vector3.one * zoom;
+            content.anchoredPosition = -(mn + mx) / 2 * zoom;
+        }
+
+        void Draw()
         {
             CacheIcons();
             foreach (var g in spawned) Destroy(g);
             spawned.Clear();
-            var p = Progress.I; var db = GameDatabase.Instance; int tier = p ? p.tier : 1;
-            // 끈: 선행 → 이 스킬 (둘 다 숨김이 아닐 때)
-            foreach (var s in db.CommonSkills)
-            {
-                if (s.req_skill == 0 || !db.CommonSkillsById.TryGetValue(s.req_skill, out var r)) continue;
-                var st = p.StateOf(s, tier); var rs = p.StateOf(r, tier);
-                if (st == Progress.SkillState.Hidden || rs == Progress.SkillState.Hidden) continue;
-                var l = Instantiate(lineTemplate, lineLayer); l.gameObject.SetActive(true); spawned.Add(l.gameObject);
-                Vector2 a = At(r), b = At(s), d = b - a;
-                var rt = l.rectTransform; rt.anchoredPosition = (a + b) / 2; rt.sizeDelta = new Vector2(d.magnitude, rt.sizeDelta.y);
-                rt.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg);
-                l.color = st == Progress.SkillState.Owned ? lineOn : st == Progress.SkillState.Open ? lineOpen : lineOff;
-            }
-            // 노드
-            foreach (var s in db.CommonSkills)
-            {
-                var st = p.StateOf(s, tier);
-                if (st == Progress.SkillState.Hidden) continue;
-                var b = Instantiate(s.IsKey ? keyTemplate : nodeTemplate, nodeLayer); b.gameObject.SetActive(true); spawned.Add(b.gameObject);
-                ((RectTransform)b.transform).anchoredPosition = At(s);
-                int lv = p.SkillLv(s);
-                var img = b.GetComponent<Image>();
-                img.sprite = st == Progress.SkillState.TierLock ? nodeLock : st == Progress.SkillState.Owned ? (s.IsKey ? keyOn : nodeOn) : (s.IsKey ? keyOff : nodeOff);
-                img.color = st == Progress.SkillState.Hint ? new Color(1, 1, 1, 0.75f) : Color.white;
-                bool show = st == Progress.SkillState.Owned || st == Progress.SkillState.Open;
-                Child(b, "Icon", show, c => { var i = c.GetComponent<Image>(); i.sprite = Icon(s); i.color = st == Progress.SkillState.Open && lv == 0 ? new Color(1, 1, 1, 0.85f) : Color.white; });
-                Child(b, "Q", st == Progress.SkillState.Hint, null);
-                Child(b, "Lock", st == Progress.SkillState.TierLock, null);
-                Child(b, "LockText", st == Progress.SkillState.TierLock, c => SetT(c.GetComponent<TMP_Text>(), ("tier", s.unlock_tier)));
-                Child(b, "Name", show, c => c.GetComponent<TMP_Text>().text = s.skill_name);
-                Child(b, "Lv", show, c => SetT(c.GetComponent<TMP_Text>(), ("lv", lv), ("max", s.Infinite ? (infWord ? infWord.text : "-") : s.max_level.ToString())));
-                Child(b, "Cost", show && !p.IsMax(s), c =>
+            var p = Progress.I; var db = GameDatabase.Instance;
+            // 탭
+            if (tierTabs != null)
+                for (int i = 0; i < tierTabs.Length; i++)
                 {
-                    var t = c.GetComponent<TMP_Text>(); SetT(t, ("cost", LobbyManager.Fmt(p.SkillCost(s))));
-                    t.color = p.CanBuySkill(s) ? new Color(0.29f, 0.22f, 0.17f) : new Color(0.62f, 0.5f, 0.42f);
+                    var b = tierTabs[i]; if (!b) continue;
+                    var lk = b.transform.Find("Lock"); if (lk) lk.gameObject.SetActive(p.tier < i + 1);
+                    var se = b.transform.Find("Sel"); if (se) se.gameObject.SetActive(viewTier == i + 1);
+                }
+            if (!db.CommonSkillsByTier.TryGetValue(viewTier, out var nodes)) nodes = new List<CommonSkillRow>();
+            // 끈: 여는 노드 → 이 노드
+            foreach (var s in nodes)
+                foreach (int lid in new[] { s.link_1, s.link_2 })
+                {
+                    if (lid == 0 || !db.CommonSkillsById.TryGetValue(lid, out var r)) continue;
+                    var st = p.StateOf(s);
+                    var l = Instantiate(lineTemplate, lineLayer); l.gameObject.SetActive(true); spawned.Add(l.gameObject);
+                    Vector2 a = At(r), b = At(s), d = b - a;
+                    var rt = l.rectTransform; rt.anchoredPosition = (a + b) / 2; rt.sizeDelta = new Vector2(d.magnitude, rt.sizeDelta.y);
+                    rt.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg);
+                    l.color = st == Progress.SkillState.Owned ? lineOn : st == Progress.SkillState.Open ? lineOpen : lineOff;
+                }
+            // 노드
+            foreach (var s in nodes)
+            {
+                var st = p.StateOf(s);
+                bool key = s.IsKey || s.IsRoot;
+                var b = Instantiate(key ? keyTemplate : nodeTemplate, nodeLayer); b.gameObject.SetActive(true); spawned.Add(b.gameObject);
+                ((RectTransform)b.transform).anchoredPosition = At(s);
+                var img = b.GetComponent<Image>();
+                img.sprite = st == Progress.SkillState.TierLock ? nodeLock : st == Progress.SkillState.Owned ? (key ? keyOn : nodeOn) : (key ? keyOff : nodeOff);
+                img.color = st == Progress.SkillState.Locked ? new Color(1, 1, 1, 0.7f) : Color.white;
+                var bc = BranchColor(s);
+                Child(b, "Icon", true, c =>
+                {
+                    var i = c.GetComponent<Image>(); i.sprite = s.IsRoot ? RootIcon(s.tier) : Icon(s);
+                    i.color = st == Progress.SkillState.Owned ? Color.white : st == Progress.SkillState.Open ? new Color(1, 1, 1, 0.9f) : new Color(0.55f, 0.5f, 0.45f, 0.75f);
                 });
-                Child(b, "Sel", s.code_id == sel, null);
-                var code = s.code_id;
-                b.onClick.AddListener(() => { if (dragging) return; if (sel == code && st != Progress.SkillState.Hint) Buy(); else { sel = code; Render(); } });
+                Child(b, "Q", false, null);
+                Child(b, "Lv", false, null);
+                Child(b, "Lock", st == Progress.SkillState.TierLock && s.IsRoot, null);
+                Child(b, "LockText", false, null);
+                Child(b, "Name", true, c => { var t = c.GetComponent<TMP_Text>(); t.text = s.IsRoot ? F(wRoot, ("tier", s.tier), ("name", TierName(s.tier))) : s.skill_name; });
+                Child(b, "Cost", !s.IsRoot && st != Progress.SkillState.Owned, c =>
+                {
+                    var t = c.GetComponent<TMP_Text>();
+                    string res = s.cost_research > 0 && wNodeResearch ? F(wNodeResearch, ("n", LobbyManager.Fmt(s.cost_research))) : "";
+                    t.text = F(t, ("cost", LobbyManager.Fmt(s.cost_cheese))) + res;
+                    t.color = st == Progress.SkillState.Open && p.CanAffordSkill(s) ? new Color(0.29f, 0.22f, 0.17f) : new Color(0.62f, 0.5f, 0.42f);
+                });
+                Child(b, "Sel", s.skill_id == sel, c => { var i = c.GetComponent<Image>(); if (i) i.color = bc; });
+                int id = s.skill_id;
+                b.onClick.AddListener(() => { if (dragging) return; if (sel == id) Buy(); else { sel = id; Draw(); } });
             }
-            RenderDetail();
+            DrawDetail();
+            DrawRank();
         }
 
         static void Child(Button b, string name, bool on, System.Action<Transform> set)
@@ -126,34 +202,74 @@ namespace NKK.Lobby
             c.gameObject.SetActive(on); if (on) set?.Invoke(c);
         }
 
-        void RenderDetail()
+        void DrawDetail()
         {
-            var p = Progress.I; var db = GameDatabase.Instance; int tier = p ? p.tier : 1;
-            if (!db.CommonSkillsByCode.TryGetValue(sel, out var s)) return;
-            var st = p.StateOf(s, tier); int lv = p.SkillLv(s);
-            bool hint = st == Progress.SkillState.Hint;
-            if (detailIcon) { detailIcon.sprite = Icon(s); detailIcon.color = hint ? new Color(0.3f, 0.25f, 0.2f, 0.6f) : Color.white; }
-            if (detailName) detailName.text = hint && hintWord ? hintWord.text : s.skill_name;
-            SetT(detailLevel, ("lv", lv), ("max", s.Infinite ? (infWord ? infWord.text : "-") : s.max_level.ToString()));
-            if (detailExplain) detailExplain.text = hint ? "" : s.skill_explain;
+            var p = Progress.I; var db = GameDatabase.Instance;
+            if (!db.CommonSkillsById.TryGetValue(sel, out var s)) return;
+            var st = p.StateOf(s);
+            if (detailIcon) { detailIcon.sprite = s.IsRoot ? RootIcon(s.tier) : Icon(s); detailIcon.color = st == Progress.SkillState.Owned || st == Progress.SkillState.Open ? Color.white : new Color(0.55f, 0.5f, 0.45f, 0.8f); }
+            if (detailName) detailName.text = s.IsRoot ? F(wRoot, ("tier", s.tier), ("name", TierName(s.tier))) : s.skill_name;
+            if (detailExplain) detailExplain.text = s.skill_explain;
+            if (detailState)
+                detailState.text = st switch
+                {
+                    Progress.SkillState.Owned => T(stOwned),
+                    Progress.SkillState.Open => T(stOpen),
+                    Progress.SkillState.Locked => T(stLocked),
+                    _ => F(stTier, ("tier", s.tier)),
+                };
             if (db.SkillBranches.TryGetValue(s.Branch, out var br)) { SetT(branchText, ("branch", br.branch_name)); if (branchRibbon) branchRibbon.color = BranchColor(s); }
-            // 필요 조건 안내
-            string req = "";
-            if (tier < s.unlock_tier && tierReqTemplate) req = T(tierReqTemplate).Replace("{tier}", s.unlock_tier.ToString());
-            else if (s.req_skill != 0 && db.CommonSkillsById.TryGetValue(s.req_skill, out var r) && p.SkillLv(r) < s.req_level && skillReqTemplate)
-                req = T(skillReqTemplate).Replace("{req}", r.skill_name).Replace("{need}", s.req_level.ToString());
-            if (detailReq) { detailReq.text = req; detailReq.gameObject.SetActive(req != ""); }
-            bool max = p.IsMax(s);
-            SetT(detailCost, ("cost", max ? "-" : LobbyManager.Fmt(p.SkillCost(s))));
-            if (buyButton) buyButton.interactable = p.CanBuySkill(s);
-            if (buyLabel) { if (max && maxWord) buyLabel.text = maxWord.text; else SetT(buyLabel, ("cost", LobbyManager.Fmt(p.SkillCost(s)))); }
+            if (detailReq) detailReq.gameObject.SetActive(false);
+            bool buyable = !s.IsRoot && st != Progress.SkillState.Owned;
+            SetT(costCheese, ("cost", LobbyManager.Fmt(s.cost_cheese)));
+            SetT(costResearch, ("res", LobbyManager.Fmt(s.cost_research)));
+            if (costCheese) costCheese.transform.parent.gameObject.SetActive(buyable);
+            if (costResearchRow) costResearchRow.SetActive(buyable && s.cost_research > 0);
+            if (costCheese) costCheese.color = p.cheese >= s.cost_cheese ? new Color(0.29f, 0.22f, 0.17f) : noColor;
+            if (costResearch) costResearch.color = p.research >= s.cost_research ? new Color(0.29f, 0.22f, 0.17f) : noColor;
+            if (buyButton) { buyButton.gameObject.SetActive(!s.IsRoot); buyButton.interactable = p.CanBuySkill(s); }
+            if (buyLabel) buyLabel.text = st == Progress.SkillState.Owned ? T(wOwned) : p.CanBuySkill(s) ? T(buyLabel) : T(wCant);
+        }
+
+        // 못 단 훈장 탭: 승급 조건 · 연구자료 · 버튼
+        void DrawRank()
+        {
+            var p = Progress.I; var db = GameDatabase.Instance;
+            bool show = rankPanel && viewTier > p.tier;
+            if (rankPanel) rankPanel.SetActive(show);
+            if (!show || !db.Tiers.TryGetValue(viewTier, out var tr)) return;
+            SetT(rankTitle, ("tier", viewTier), ("name", tr.tier_name));
+            bool next = viewTier == p.tier + 1;
+            var conds = new[] { (tr.cond1_type, tr.cond1_value), (tr.cond2_type, tr.cond2_value), (tr.cond3_type, tr.cond3_value) };
+            for (int i = 0; rankConds != null && i < rankConds.Length; i++)
+            {
+                var t = rankConds[i]; if (!t) continue;
+                bool on = i < conds.Length && !string.IsNullOrEmpty(conds[i].Item1) && conds[i].Item1 != "None";
+                t.gameObject.SetActive(on); if (!on) continue;
+                var (type, need) = conds[i];
+                var w = type == "Max_Floor" ? cMaxFloor : type == "Shard_Level_Sum" ? cShard : cSkill;
+                float have = p.CondValue(type);
+                t.text = F(w, ("have", Mathf.FloorToInt(have)), ("need", Mathf.RoundToInt(need)));
+                t.color = have >= need ? okColor : noColor;
+            }
+            SetT(rankResearch, ("have", LobbyManager.Fmt(p.research)), ("need", LobbyManager.Fmt(tr.research_cost)));
+            if (rankResearch) rankResearch.color = p.research >= tr.research_cost ? okColor : noColor;
+            if (rankButton) { rankButton.gameObject.SetActive(next); rankButton.interactable = next && p.CanRankUp(); }
+            if (rankPrev) { rankPrev.gameObject.SetActive(!next); SetT(rankPrev, ("tier", viewTier - 1)); }
         }
 
         void Buy()
         {
             var p = Progress.I; var db = GameDatabase.Instance;
-            if (!db.CommonSkillsByCode.TryGetValue(sel, out var s) || !p.BuySkill(s)) return;
-            Render();
+            if (!db.CommonSkillsById.TryGetValue(sel, out var s) || !p.BuySkill(s)) return;
+            Draw();
+        }
+
+        void RankUp()
+        {
+            var p = Progress.I;
+            if (!p.RankUp()) return;
+            ShowTier(p.tier);
         }
 
         // ── 지도 끌기 · 휠 확대 ──

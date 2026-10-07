@@ -12,7 +12,7 @@
    "cond3_type": "None",
    "cond3_value": 0.0,
    "birth_grade_k": 1.0,
-   "start_rat_count": 6,
+   "start_rat_count": 5,
    "start_floor_cap": 1,
    "badge_asset": "Rogue/rk_1",
    "rat_atk_mul": 1.0
@@ -26,10 +26,10 @@
    "cond1_value": 2.0,
    "cond2_type": "Shard_Level_Sum",
    "cond2_value": 2.0,
-   "cond3_type": "Skill_Level_Sum",
+   "cond3_type": "Skill_Node_Count",
    "cond3_value": 15.0,
    "birth_grade_k": 1.25,
-   "start_rat_count": 8,
+   "start_rat_count": 5,
    "start_floor_cap": 3,
    "badge_asset": "Rogue/rk_2",
    "rat_atk_mul": 1.25
@@ -43,10 +43,10 @@
    "cond1_value": 4.0,
    "cond2_type": "Shard_Level_Sum",
    "cond2_value": 8.0,
-   "cond3_type": "Skill_Level_Sum",
-   "cond3_value": 50.0,
+   "cond3_type": "Skill_Node_Count",
+   "cond3_value": 40.0,
    "birth_grade_k": 1.5,
-   "start_rat_count": 10,
+   "start_rat_count": 5,
    "start_floor_cap": 5,
    "badge_asset": "Rogue/rk_3",
    "rat_atk_mul": 1.5
@@ -60,10 +60,10 @@
    "cond1_value": 7.0,
    "cond2_type": "Shard_Level_Sum",
    "cond2_value": 22.0,
-   "cond3_type": "Skill_Level_Sum",
-   "cond3_value": 110.0,
+   "cond3_type": "Skill_Node_Count",
+   "cond3_value": 70.0,
    "birth_grade_k": 1.75,
-   "start_rat_count": 12,
+   "start_rat_count": 5,
    "start_floor_cap": 7,
    "badge_asset": "Rogue/rk_4",
    "rat_atk_mul": 1.75
@@ -77,10 +77,10 @@
    "cond1_value": 10.0,
    "cond2_type": "Shard_Level_Sum",
    "cond2_value": 40.0,
-   "cond3_type": "Skill_Level_Sum",
-   "cond3_value": 170.0,
+   "cond3_type": "Skill_Node_Count",
+   "cond3_value": 100.0,
    "birth_grade_k": 2.0,
-   "start_rat_count": 14,
+   "start_rat_count": 5,
    "start_floor_cap": 9,
    "badge_asset": "Rogue/rk_5",
    "rat_atk_mul": 2.0
@@ -94,10 +94,10 @@
    "cond1_value": 13.0,
    "cond2_type": "Shard_Level_Sum",
    "cond2_value": 65.0,
-   "cond3_type": "Skill_Level_Sum",
-   "cond3_value": 240.0,
+   "cond3_type": "Skill_Node_Count",
+   "cond3_value": 130.0,
    "birth_grade_k": 2.25,
-   "start_rat_count": 16,
+   "start_rat_count": 5,
    "start_floor_cap": 11,
    "badge_asset": "Rogue/rk_6",
    "rat_atk_mul": 2.25
@@ -111,10 +111,10 @@
    "cond1_value": 16.0,
    "cond2_type": "Shard_Level_Sum",
    "cond2_value": 95.0,
-   "cond3_type": "Skill_Level_Sum",
-   "cond3_value": 320.0,
+   "cond3_type": "Skill_Node_Count",
+   "cond3_value": 160.0,
    "birth_grade_k": 2.5,
-   "start_rat_count": 18,
+   "start_rat_count": 5,
    "start_floor_cap": 13,
    "badge_asset": "Rogue/rk_7",
    "rat_atk_mul": 2.5
@@ -128,10 +128,10 @@
    "cond1_value": 20.0,
    "cond2_type": "Shard_Level_Sum",
    "cond2_value": 135.0,
-   "cond3_type": "Skill_Level_Sum",
-   "cond3_value": 410.0,
+   "cond3_type": "Skill_Node_Count",
+   "cond3_value": 195.0,
    "birth_grade_k": 2.75,
-   "start_rat_count": 20,
+   "start_rat_count": 5,
    "start_floor_cap": 15,
    "badge_asset": "Rogue/rk_8",
    "rat_atk_mul": 2.75
@@ -148,7 +148,7 @@
    "cond_type": "Shard_Level_Sum"
   },
   {
-   "cond_type": "Skill_Level_Sum"
+   "cond_type": "Skill_Node_Count"
   }
  ]
 }

@@ -45,3 +45,8 @@ Codex 로 만든 공용 스킬 아이콘 원본 (256×256 투명 PNG). 화풍 = 
 | 92034 | 필살기 연습 | 특별 | cs_ultcd.png |
 | 92035 | 슈퍼 점프 연습 | 특별 | cs_sjump.png |
 | - | 잠김 (자물쇠) | - | cs_lock.png |
+
+## 추가 아이콘 (2026-10-07, 훈장별 트리 개편)
+`Sheets/skill_icons_c.png` (4x4 투명, 프롬프트 `prompt_c.txt`, 노이즈 제거 후 256 정사각형) · 미리보기 `Sheets/_preview_c.png`
+cs_clock(제한시간) · cs_skip(스테이지 스킵) · cs_promote(승급) · cs_startrat(시작 쥐) · cs_multihit(연타) · cs_critdmg(치명타 피해) · cs_dmg(피해량) · cs_wallcrack(벽 체력 감소) · cs_bosshp(보스 체력 감소) · cs_newitem(신규 물건) · cs_cheeseitem(물건 치즈) · cs_cheesecreature(생명체 치즈) · cs_trickcheese(묘기 치즈) · cs_trickgauge(묘기 게이지) · cs_trapmulti(다중 쥐덫) · cs_shield(쥐덫 감소)
+노드 → 아이콘 연결은 `Tools/gen_skill_tree.py` 의 ICON 표.

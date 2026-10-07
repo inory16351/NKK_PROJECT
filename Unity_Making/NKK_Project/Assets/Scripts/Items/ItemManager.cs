@@ -27,7 +27,7 @@ namespace NKK.Items
 
         [Header("생성 (웹게임 기준)")]
         [Tooltip("열린 방 하나당 물건 상한 (zoneCap). 물건 사재기 스킬로 늘어남")] public int roomCap = 24;
-        public int RoomCap => Mathf.RoundToInt(roomCap * CommonSkill.ItemCapMul);
+        public int RoomCap => Mathf.RoundToInt((roomCap + CommonSkill.ItemCapAdd) * CommonSkill.ItemCapMul);
         [Tooltip("생성 주기 (초)")] public float spawnInterval = 1.2f;
         [Tooltip("물건 체력 = 12 × 체력 배율 × 이 값^(층-1 + 방 거리×0.1)")] public float itemHpGrow = 3.6f;
         [Tooltip("치즈 = 3 × 치즈 배율 × 이 값^(층-1 + 방 거리×0.1)")] public float valueGrow = 1.8f;
@@ -120,11 +120,14 @@ namespace NKK.Items
             FxManager.I?.ClearSpills();
         }
 
+        // 나올 수 있는 물건: 물건 테이블 등장 층 ≤ 지금 층 ≤ 사라지는 층, 해금 스킬(공용 스킬 New_Item 노드)을 찍었음
+        public bool CanAppear(ItemRow r, int f) => !r.IsFurniture && f >= r.from_floor && (r.to_floor <= 0 || f <= r.to_floor) && CommonSkill.ItemUnlocked(r.unlock_skill);
+
         ItemRow PickWeighted(ZoneRow z)
         {
-            var db = GameDatabase.Instance; float s = 0;
+            var db = GameDatabase.Instance; float s = 0; int f = Game.Floor;
             var list = new List<ItemRow>();
-            foreach (var id in z.Items()) if (db.Items.TryGetValue(id, out var r)) { list.Add(r); s += r.spawn_weight; }
+            foreach (var r in db.Items.Values) if (CanAppear(r, f)) { list.Add(r); s += r.spawn_weight; }
             float x = Random.value * s;
             foreach (var r in list) { x -= r.spawn_weight; if (x <= 0) return r; }
             return list.Count > 0 ? list[0] : null;
@@ -175,7 +178,7 @@ namespace NKK.Items
             var r = StageManager.RoomOf(x, y);
             float zi = Game.Floor - 1 + StageManager.RoomDist(r) * 0.1f;
             var it = Instantiate(itemPrefab, itemRoot ? itemRoot : transform);
-            float cheese = 3 * row.value_mul * Mathf.Pow(valueGrow, zi) * CommonSkill.CheeseMul * (row.IsFurniture ? CommonSkill.FurnitureCheeseMul : 1);
+            float cheese = 3 * row.value_mul * Mathf.Pow(valueGrow, zi) * CommonSkill.ItemCheeseMul * (row.IsFurniture ? CommonSkill.FurnitureCheeseMul : 1);
             it.Init(this, row, spr, x, y, 12 * row.hp_mul * Mathf.Pow(itemHpGrow, zi), cheese, instant);
             items.Add(it);
             if (!row.IsFurniture && Random.value < CommonSkill.GoldChance) it.MakeGold(CommonSkill.GoldCheeseMul, 1);     // 황금 물건 스킬
@@ -184,7 +187,8 @@ namespace NKK.Items
 
         public void OnSmashed(Item it)
         {
-            float gain = it.value * (1 + 0.5f * Mathf.Min(it.Air, airMax)) * (it.Crit ? 2 : 1) * (it.By ? it.By.CheeseMult : 1) * (it.By && it.ByAction ? it.By.SkillKillCheeseMul : 1);
+            float gain = it.value * (1 + 0.5f * Mathf.Min(it.Air, airMax)) * (it.Crit ? 2 : 1) * (it.By ? it.By.CheeseMult : 1) * (it.By && it.ByAction ? it.By.SkillKillCheeseMul : 1)
+                * (it.By && it.By.Trick != Rat.TrickType.None ? CommonSkill.TrickCheeseMul : 1);       // 묘기 중에 부숨 → 묘기 치즈
             Game.OnSmash(gain);
             if (it.By) { Rats.OnItemSmashedBy(it.By, it.x, it.y); Rats.Ults?.Charge(it.By, CondType.Destroy_Item); }
             Research.I?.OnSmashed(it);                                          // 가끔 연구자료 (가구 12% · 물건 1.2%)

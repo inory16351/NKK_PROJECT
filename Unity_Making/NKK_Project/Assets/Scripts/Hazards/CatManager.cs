@@ -76,7 +76,7 @@ namespace NKK.Hazards
             }
             if (!ok) return false;
             var c = Instantiate(catPrefab, catRoot ? catRoot : transform);
-            c.Init(this, row, skill, art, x, y, CatHP(row) * CommonSkill.CatHpMul, 3 * Mathf.Pow(Items.valueGrow, Game.Floor - 1) * valueMul * CommonSkill.CheeseMul);
+            c.Init(this, row, skill, art, x, y, CatHP(row) * CommonSkill.CatHpMul, 3 * Mathf.Pow(Items.valueGrow, Game.Floor - 1) * valueMul * CommonSkill.CreatureCheeseMul);
             Current = c;
             var fx = FxManager.I; if (fx) fx.Dust(x, y, 10, 1.4f);
             bool special = row.Category == CatCategory.Special;

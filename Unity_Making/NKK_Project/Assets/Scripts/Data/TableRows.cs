@@ -103,6 +103,7 @@ namespace NKK.Data
     {
         public int item_id; public string item_name, code_id, item_category;
         public float radius, hp_mul, value_mul, spawn_weight, heavy; public int is_big, is_sturdy, is_paper;
+        public int from_floor, to_floor, unlock_skill;      // 등장 층 · 사라지는 층 (0 = 계속) · 해금 스킬 노드 (0 = 없음)
         public string spill_color; public int drop_01, drop_02, drop_03, drop_04; public string asset;
         public bool IsFurniture => item_category == "Furniture";
         public IEnumerable<int> Drops() { foreach (var d in new[] { drop_01, drop_02, drop_03, drop_04 }) if (d != 0) yield return d; }
@@ -134,21 +135,20 @@ namespace NKK.Data
 
     [Serializable] public class HumanRow { public int human_id; public string human_name, code_id; public float hp_mul, value_mul, speed_mul; public int from_floor; public string asset_folder; }
     [Serializable] public class HumanLineRow { public int line_id, human_id; public string situation, text; }
-    // 공용 스킬 (공용 스킬 테이블 Common_Skill). 레벨 L → L+1 비용 = ceil(cost_base × cost_grow ^ L) 치즈
+    // 공용 스킬 노드 (공용 스킬 테이블 Common_Skill, Tools/gen_skill_tree.py 로 생성).
+    // 찍찍!! 훈장(tier)마다 트리 하나, 노드는 한 번만 활성화. link_1/link_2 중 하나라도 활성화되면 열림. 시작점(effect None, 링크 없음)은 그 훈장이면 자동 활성화
     [Serializable]
     public class CommonSkillRow
     {
-        public int skill_id; public string skill_name, code_id, branch; public int is_key, pos_x, pos_y, req_skill, req_level, unlock_tier, max_level;
-        public float cost_base, cost_grow; public string effect_type;
-        public float value_01, value_02, value_03, value_04, value_05, value_06;
-        public string skill_icon, skill_asset, skill_explain;
+        public int skill_id, tier; public string skill_name, branch; public int is_key, pos_x, pos_y, link_1, link_2;
+        public float cost_cheese, cost_research; public string effect_type;
+        public float value_01, value_02, value_03;
+        public string skill_asset, skill_explain;
         public SkillBranch Branch => E.P<SkillBranch>(branch);
         public CommonEffectType Effect => E.P<CommonEffectType>(effect_type);
         public bool IsKey => is_key == 1;
-        public bool Infinite => max_level <= 0;
-        // float 칸(2.4 → 2.4000000953…) 오차 때문에 소수 4자리로 반올림 후 계산
-        public double Cost(int level) => System.Math.Ceiling(System.Math.Round(System.Math.Round((double)cost_base, 4) * System.Math.Pow(System.Math.Round((double)cost_grow, 4), level), 6));
-        public float V(int i) => i switch { 1 => value_01, 2 => value_02, 3 => value_03, 4 => value_04, 5 => value_05, 6 => value_06, _ => 0 };
+        public bool IsRoot => link_1 == 0 && link_2 == 0;
+        public float V(int i) => i switch { 1 => value_01, 2 => value_02, 3 => value_03, _ => 0 };
     }
 
     [Serializable] public class SkillBranchRow { public string branch, branch_name, color; public SkillBranch Branch => E.P<SkillBranch>(branch); }

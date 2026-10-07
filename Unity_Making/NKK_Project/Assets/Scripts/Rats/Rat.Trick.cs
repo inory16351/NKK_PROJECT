@@ -32,10 +32,11 @@ namespace NKK.Rats
         {
             float k = TrickChanceMult;
             bool big = it.Data.is_big == 1 || it.R > 30;
-            if (Random.value < CommonSkill.WindmillChance(big) * k) { StartTrick(TrickType.Windmill, ang); return; }
-            if (Random.value < CommonSkill.AxelChance * k) { StartTrick(TrickType.Axel, ang); return; }
-            if (Random.value < CommonSkill.CannonChance * k) { StartTrick(TrickType.Cannon, ang + Mathf.PI + Random.Range(-0.8f, 0.8f)); return; }
-            if (Random.value < (Manager.baseFlipChance + CommonSkill.BackflipAdd) * k) StartTrick(TrickType.Flip, ang);
+            // 공용 묘기는 훈장 트리에서 해금해야 나옴 (1 백덤블링 · 2 윈드밀 · 3 트리플 악셀 · 4 쥐 대포알). 윈드밀은 큰 물건에서 1.5배
+            if (Random.value < CommonSkill.TrickChance(2) * (big ? 1.5f : 1) * k) { StartTrick(TrickType.Windmill, ang); return; }
+            if (Random.value < CommonSkill.TrickChance(3) * k) { StartTrick(TrickType.Axel, ang); return; }
+            if (Random.value < CommonSkill.TrickChance(4) * k) { StartTrick(TrickType.Cannon, ang + Mathf.PI + Random.Range(-0.8f, 0.8f)); return; }
+            if (Random.value < CommonSkill.TrickChance(1) * k) StartTrick(TrickType.Flip, ang);
         }
 
         public bool StartTrick(TrickType type, float ang)
@@ -92,7 +93,7 @@ namespace NKK.Rats
                     }
                     break;
             }
-            if (trickT >= trickDur) { Manager.Ults?.Charge(this, CondType.Action_Use); Trick = TrickType.None; StopDash(0.15f, 0.4f); sq = 0.7f; }   // 묘기 성공 = 특수 액션과 같은 필살기 게이지
+            if (trickT >= trickDur) { Manager.Ults?.Charge(this, CondType.Action_Use, CommonSkill.TrickGaugeMul); Trick = TrickType.None; StopDash(0.15f, 0.4f); sq = 0.7f; }   // 묘기 성공 = 특수 액션과 같은 필살기 게이지
         }
 
         // 묘기 중 몸 전체 움직임 (웹게임 drawRat 의 trick 변환): 위로 뜨는 높이, 회전, 좌우·상하 배율

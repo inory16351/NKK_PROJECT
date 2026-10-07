@@ -35,19 +35,23 @@ namespace NKK.Data
     public enum CatCategory { Normal, Special }
     public enum CatEffectType { None, Hiss_Fear, Double_Pounce, Crit_Pounce, Jump_Press, Roll_Charge, Crowd_Teleport, Laser_Stun, Roar_Blast, Fireball, Gravity_Wave }
 
-    // 공용 스킬 트리 (공용 스킬 테이블)
-    public enum SkillBranch { Core, Gnaw, Pack, Loot, Trick, Escape, Special }
+    // 공용 스킬 트리 (공용 스킬 테이블, 찍찍!! 훈장별 트리) — 가지 = 지도 색
+    public enum SkillBranch { Core, Combat, Growth, Loot, Trick, Special }
 
-    // 공용 스킬 효과 = 로직 이름 (value_01~06 의미는 공용 스킬 테이블 Common_Effect_Type 시트)
+    // 공용 스킬 효과 = 로직 이름 (value_01~03 의미는 공용 스킬 테이블 Common_Effect_Type 시트). 같은 효과끼리 더함
     public enum CommonEffectType
     {
         None,
-        All_Power_Cheese, All_Atk_Mul, Crit_Chance_Add, Grade_Atk_Add, Bite_Zap, Chain_Blast, Furniture_Bonus, Cheese_Meteor,
-        Air_Collide_Cheese, Boss_Dmg_Add,
-        Move_Speed_Add, Max_Pop_Add, Caffeine, Breed_Cool, Twin_Chance, Mutation_Chance, Birth_Frenzy,
-        Cheese_Mul, Spawn_Rate, Combo_Time_Add, Item_Cap_Add, Rocket_Delivery, Gold_Item_Chance,
-        Backflip_Chance, Triple_Axel_Chance, Cannonball_Chance, Windmill_Chance, Air_Bonus_Add,
-        Wall_Dmg_Add, Trap_Safe, Rush_Up, Catnip, Offline_Income,
-        Ult_Practice, Super_Jump_Practice, Ult_Auto,
+        // 전투
+        Atk_Flat, Atk_Pct, Dmg_Pct, Wall_Dmg_Pct, Crit_Chance, Crit_Dmg, Multi_Hit, Boss_Dmg_Pct,
+        // 승급·시간·시작 쥐
+        Start_Rat, Promote_Need, Pop_Cap, Time_Add, Breed_Chance, Move_Speed_Pct, Breed_Cool_Pct,
+        // 자원 파밍
+        Item_Count_Flat, Item_Count_Pct, Cheese_Pct, New_Item, Rocket_CD, Gold_Item, Spawn_Rate_Pct, Combo_Time_Pct,
+        // 묘기
+        Trick_Unlock, Trick_Chance, Trick_Cheese_Pct, Trick_Gauge_Pct, Trap_Single_Down, Trap_Multi_Down,
+        // 해금·특수
+        Stage_Skip, Wall_Hp_Down, Boss_Hp_Down, Ult_Gauge_Pct, Ult_Power_Pct, Ult_Auto, Super_Jump_Pct,
+        Bite_Zap, Chain_Blast, Cheese_Meteor, Twin_Chance, Mutation_Chance, Birth_Frenzy, Furniture_Pct, Air_Cheese_Pct, Rush_Up, Cat_Hp_Down,
     }
 }
