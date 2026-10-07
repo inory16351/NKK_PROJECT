@@ -1,0 +1,23 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rat_skill_icons_7.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha). No text, no letters, no numbers, no labels, no grid lines, no frames or badges behind the icons.
+- A sheet of 14 game SKILL ICONS in an exact 6 columns x 4 rows grid (each cell 256x256), filled left to right, top to bottom (leave the remaining cells empty). Each icon is ONE simple object or tiny scene centered in its cell, filling about 65% of the cell, with a wide empty margin; icons must NOT touch or cross cell borders. Same size and same slight 3/4 front view for all.
+- STYLE IS THE MOST IMPORTANT RULE. Match the attached reference images (lab rat parts and lab items): the art style of Untitled Goose Game. Completely FLAT vector shapes, NO outlines or strokes, NO dark contour lines, no glossy highlights, no gradients, no shine, no glow, no motion lines, no drop shadows. A few flat color areas with at most one slightly darker flat tone. Soft muted pastel palette, low saturation, calm picture-book feel. Simple readable silhouettes that read at 64px.
+- Each icon illustrates the Korean skill name below (a skill of a cute lab rat character). Draw the key object or action the name suggests (the emoji is a hint). If a rat appears, it is a small cute rat in the same flat style.
+
+Cells:
+1) "광선총" (🛸) — 1.5초마다 레이저 발사, 물건 5개 관통
+2) "외계인 친구들" (🛸) — 22초마다 → 외계인 친구들: 동료 6마리 소환 (6초 동안 함께 난동)
+3) "후원 택배 폭탄" (🎁) — 택배가 떨어질 때 화면에 있으면 자기 주변에 3개 추가 배달
+4) "흐에~ 샤우팅" (🎙️) — 주변에 동료가 5마리 이상 모이면 (16초마다) → 흐에~ 샤우팅: 음파 충격파 5번 + 주변 동료 광란 (반경 220)
+5) "찌리찌리" (⚡) — 이 쥐가 부순 물건은 크게 폭발 (반경 +100)
+6) "람쥐썬더" (⚡) — 14초마다 → 람쥐썬더: 두 앞발을 하늘로! 번개 8줄기가 주변 물건에 꽂힘 (피해 ×12.0)
+7) "뻔뻔한 한 방" (😏) — 크리티컬 확률 +32%, 크리티컬 ×5.0
+8) "감사합니다!!" (🎩) — 주변에 동료가 5마리 이상 모이면 (15초마다) → 감사합니다!!: 주변 동료 전원 광란 7.0초 (속도·피해 ×1.5)
+9) "비밀 레시피" (👨‍🍳) — 이 쥐가 부순 물건은 크게 폭발 (반경 +100)
+10) "다지기 연타" (🔪) — 물건에 부딪힐 때 4% 확률로 → 다지기 연타: 앞의 물건을 초고속 12연타 (타당 피해 ×4.0)
+11) "단서 수집" (🔍) — 물건을 부술 때마다 단서 1개, 단서 8개가 모이면 즉시 추리 (돋보기와 단서 쪽지)
+12) "진실은 언제나 하나!" (👉) — 가장 튼튼한 물건을 손가락으로 가리켜 강타 (가리키는 쥐 손가락과 반짝)
+13) "치즈 추가" (🧀) — 스킬로 부순 물건에서 치즈 2배 (치즈 더미와 + 표시 없이 두 개의 치즈)
+14) "치즈 분수" (⛲) — 8방향으로 치즈 탄환 분수처럼 발사 (사방으로 튀는 녹은 치즈 방울)

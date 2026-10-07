@@ -1,0 +1,257 @@
+{
+ "jjdetective": {
+  "parts": [
+   "Parts/jjdetective/head.png",
+   "Parts/jjdetective/torso.png",
+   "Parts/jjdetective/tail.png",
+   "Parts/jjdetective/front.png",
+   "Parts/jjdetective/back.png"
+  ],
+  "pivot": {
+   "head": [
+    0.642,
+    0.86
+   ],
+   "tail": [
+    0.043,
+    0.523
+   ],
+   "front": [
+    0.695,
+    0.056
+   ],
+   "back": [
+    0.691,
+    0.055
+   ]
+  },
+  "pivotUnity": {
+   "head": [
+    0.642,
+    0.14
+   ],
+   "tail": [
+    0.043,
+    0.477
+   ],
+   "front": [
+    0.695,
+    0.944
+   ],
+   "back": [
+    0.691,
+    0.945
+   ]
+  },
+  "torsoAnchor": {
+   "neck": [
+    0.069,
+    0.395
+   ],
+   "tail": [
+    0.944,
+    0.531
+   ],
+   "shoulder": [
+    0.238,
+    0.448
+   ],
+   "hip": [
+    0.736,
+    0.325
+   ]
+  },
+  "torsoAnchorUnity": {
+   "neck": [
+    0.069,
+    0.605
+   ],
+   "tail": [
+    0.944,
+    0.469
+   ],
+   "shoulder": [
+    0.238,
+    0.552
+   ],
+   "hip": [
+    0.736,
+    0.675
+   ]
+  },
+  "legScale": {
+   "front": 1,
+   "back": 1.036
+  }
+ },
+ "fondue": {
+  "parts": [
+   "Parts/fondue/head.png",
+   "Parts/fondue/torso.png",
+   "Parts/fondue/tail.png",
+   "Parts/fondue/front.png",
+   "Parts/fondue/back.png"
+  ],
+  "pivot": {
+   "head": [
+    0.56,
+    0.86
+   ],
+   "tail": [
+    0.043,
+    0.332
+   ],
+   "front": [
+    0.611,
+    0.054
+   ],
+   "back": [
+    0.673,
+    0.055
+   ]
+  },
+  "pivotUnity": {
+   "head": [
+    0.56,
+    0.14
+   ],
+   "tail": [
+    0.043,
+    0.668
+   ],
+   "front": [
+    0.611,
+    0.946
+   ],
+   "back": [
+    0.673,
+    0.945
+   ]
+  },
+  "torsoAnchor": {
+   "neck": [
+    0.069,
+    0.395
+   ],
+   "tail": [
+    0.944,
+    0.531
+   ],
+   "shoulder": [
+    0.238,
+    0.448
+   ],
+   "hip": [
+    0.736,
+    0.325
+   ]
+  },
+  "torsoAnchorUnity": {
+   "neck": [
+    0.069,
+    0.605
+   ],
+   "tail": [
+    0.944,
+    0.469
+   ],
+   "shoulder": [
+    0.238,
+    0.552
+   ],
+   "hip": [
+    0.736,
+    0.675
+   ]
+  },
+  "legScale": {
+   "front": 1,
+   "back": 1.181
+  }
+ },
+ "detective": {
+  "parts": [
+   "Parts/detective/head.png",
+   "Parts/detective/torso.png",
+   "Parts/detective/tail.png",
+   "Parts/detective/front.png",
+   "Parts/detective/back.png"
+  ],
+  "pivot": {
+   "head": [
+    0.727,
+    0.853
+   ],
+   "tail": [
+    0.049,
+    0.227
+   ],
+   "front": [
+    0.803,
+    0.097
+   ],
+   "back": [
+    0.616,
+    0.096
+   ]
+  },
+  "pivotUnity": {
+   "head": [
+    0.727,
+    0.147
+   ],
+   "tail": [
+    0.049,
+    0.773
+   ],
+   "front": [
+    0.803,
+    0.903
+   ],
+   "back": [
+    0.616,
+    0.904
+   ]
+  },
+  "torsoAnchor": {
+   "neck": [
+    0.067,
+    0.352
+   ],
+   "tail": [
+    0.945,
+    0.525
+   ],
+   "shoulder": [
+    0.239,
+    0.505
+   ],
+   "hip": [
+    0.736,
+    0.329
+   ]
+  },
+  "torsoAnchorUnity": {
+   "neck": [
+    0.067,
+    0.648
+   ],
+   "tail": [
+    0.945,
+    0.475
+   ],
+   "shoulder": [
+    0.239,
+    0.495
+   ],
+   "hip": [
+    0.736,
+    0.671
+   ]
+  },
+  "legScale": {
+   "front": 1,
+   "back": 0.801
+  }
+ }
+}

@@ -14,9 +14,6 @@ Unity_Making/NKK_Project/*.sln
 Unity_Making/NKK_Project/Assets/Screenshots/
 Unity_Making/NKK_Project/Assets/Screenshots.meta
 
-# 이미지 원본 보관 폴더 (용량 큼 — 로컬에만)
-UnityResources/
-
 # 기타
 *.tmp
 .DS_Store

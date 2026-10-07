@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: stage_wall.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, opaque. 5 horizontal bands stacked top to bottom, each band exactly 1536 wide and about 204 px tall, separated by thin 1-2px pure magenta (#FF00FF) lines so they can be cut apart. No labels, no text.
+- Each band is a long strip of INTERIOR WALL seen straight from the front (like the back wall of a room in a 3/4 top-down game): along the very top a slightly lighter flat wall-top cap (about 15% of the band height), then the wall face, then a baseboard along the bottom. The strip must be SEAMLESS HORIZONTALLY (repeating pattern, left edge continues into right edge). No doors, no windows, no objects, no shadows from outside.
+- Style: match the attached reference image — soft flat vector cartoon, pastel, low contrast, NO thick dark outlines. Calm background so characters stand out.
+
+Bands (top to bottom):
+1) Underground secret lab: pale gray painted concrete block wall, faint block lines, thin yellow-black safety stripe baseboard.
+2) Lab animal housing wing: pale mint-green painted wall with light wainscot panels, white baseboard.
+3) Chemical research wing: white glossy wall tiles (small square tiles) with a sage-green horizontal accent stripe, gray baseboard.
+4) IT / admin wing: pale blue-gray office wall with subtle vertical panel seams and a thin cable tray along the top, dark gray baseboard.
+5) Lab director's floor: warm cream wallpaper with faint vertical damask pattern, honey-colored wooden wainscot and baseboard with a thin gold trim.

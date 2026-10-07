@@ -1,0 +1,20 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ult_props.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1536, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings — perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- A sheet of 9 game props in an exact 3 columns x 3 rows grid (each cell 512x512). Each prop is ONE single connected shape centered in its cell with a clean magenta margin, never touching or crossing cell borders. No loose floating bits, no sparkles, no motion lines.
+- STYLE: match the attached references exactly (Untitled Goose Game style game props): completely FLAT color shapes, NO outlines, NO black linework, no gradients, no glow. Soft muted pastel palette with one slightly darker flat tone for shading. Slight 3/4 front view like the references.
+
+Cells (left to right, top to bottom):
+Row 1:
+1) A huge round cooking pot (stock pot) with two side handles, front view, filled to the brim with bubbling melted yellow cheese (bubbles are part of the cheese surface, connected).
+2) A big round puffy afro hairdo, burnt black-grey with a few small connected smoke-curl tips on top (it will sit on a mouse head).
+3) A short staircase of 6 glowing cream-gold steps rising diagonally from bottom-left to top-right, floating, steps connected as one shape.
+Row 2:
+4) A legendary sword alone (no stone): straight silver blade pointing UP, golden crossguard, blue grip, round pommel at the bottom. Vertical, fill the cell height.
+5) A tangled round ball of several pink-grey rat tails knotted together (like a ball of yarn made of tails), a few tail ends sticking out but connected.
+6) An old computer error popup window: a flat grey-blue rounded window with a darker title bar, a small round warning icon on the left, and two empty rounded buttons at the bottom. No text.
+Row 3:
+7) A theater spotlight beam: a tall soft pale-yellow cone of light, narrow at the top and wide at the bottom, ending in a flat oval pool of light at the bottom. Flat single tone, slightly transparent-looking pale color (but painted opaque).
+8) A cracked egg splat on the floor seen from a low 3/4 top-down angle: white irregular splash with a yellow yolk and two broken shell pieces attached. Wide and flat.
+9) An empty horizontal gauge bar frame: a long rounded capsule with a soft brown rim and a cream empty inside, about 5 times wider than tall.

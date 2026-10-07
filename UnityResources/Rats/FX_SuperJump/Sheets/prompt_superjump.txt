@@ -1,0 +1,16 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_superjump.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings — perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- A sheet of 6 game effect sprites in an exact 3 columns x 2 rows grid (each cell 512x512). Each sprite is ONE single connected shape centered in its cell with a clean magenta margin, never touching or crossing cell borders. No loose floating bits.
+- STYLE: match the attached references (Untitled Goose Game style cartoon effects): completely FLAT color shapes, NO outlines, NO black linework, no gradients, no glow, no blur. Light pale colors (cream white and pale butter yellow, one slightly darker flat tone for shading) so they can be tinted in the game.
+
+Cells (left to right, top to bottom):
+Row 1:
+1) SHOCKWAVE RING seen from DIRECTLY ABOVE (perfect circle, not tilted): a thick round cream-white ring band with soft round dust-cloud puffs bulging along its outer edge, all connected. The inside of the ring is EMPTY (pure magenta hole, large, about 60% of the diameter). Fill the cell.
+2) IMPACT STAR BURST: a big chunky comic impact flash, 8 sharp uneven rays like a starburst, pale butter-yellow outer layer with a cream-white inner core layer. Fill the cell.
+3) TWINKLE STAR: a slim 4-pointed sparkle star (long thin vertical and horizontal points, concave sides), cream white with a tiny pale yellow center.
+Row 2:
+4) COMIC SPIKY BURST: a wide horizontal jagged explosion speech-bubble shape (about 2.5 times wider than tall, many alternating short and long spikes around the edge), pale cream-yellow flat inside with a slightly darker golden spiky outer layer. Empty inside (no symbols), used behind big text.
+5) SMALL CARTOON STAR: a chunky 5-pointed star with slightly rounded tips, pale gold with a lighter cream highlight shape on one side.
+6) SPEED STREAK: one long thin vertical tapered streak (pointed at both ends, thickest near the bottom), cream white, about 8 times taller than wide, filling the cell height.

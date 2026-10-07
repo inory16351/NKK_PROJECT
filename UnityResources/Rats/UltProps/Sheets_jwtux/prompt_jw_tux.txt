@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: jw_tux.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+The 3 attached images are body parts of a cartoon mouse character (in this order): 1) torso (body, side view, head attaches at the LEFT end, tail at the RIGHT end), 2) front leg (hangs down, paw at bottom), 3) back leg (hangs down, foot at bottom pointing left).
+Redraw these SAME 3 parts dressed in a black TUXEDO, keeping each part's silhouette, outline shape, proportions, orientation and pose EXACTLY the same as its reference (same aspect ratio, same edges), only the clothing colors change:
+- Torso: the whole orange fur becomes a dark charcoal-black tuxedo jacket (#2A2430, one slightly lighter flat tone for soft shading); the cream belly area at the bottom becomes a crisp white dress shirt (#F7F3EC). The pink round cut faces at both ends stay as they are.
+- Front leg: the upper 70% becomes a black tuxedo sleeve (same color as jacket), then a narrow white shirt cuff band, and the paw at the bottom stays exactly as in the reference (cream/peach paw).
+- Back leg: the upper two thirds becomes black tuxedo trousers (same color), the lower leg and the foot stay exactly as in the reference (orange fur + cream foot).
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings — perfectly uniform. No text.
+- Exactly 3 columns x 1 row (each cell 512x1024): torso in cell 1, front leg in cell 2, back leg in cell 3. Each part centered in its cell, as large as possible while keeping a clean magenta margin; never touching the cell borders.
+- STYLE: match the references exactly: flat colors, NO outlines, no black linework, no gradients, no glow.

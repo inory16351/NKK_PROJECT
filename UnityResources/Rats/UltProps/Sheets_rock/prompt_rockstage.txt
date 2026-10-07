@@ -1,0 +1,20 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rock_stage_sheet.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1536, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings — perfectly uniform, no noise. No text, no letters, no numbers, no logos anywhere.
+- A sheet of 9 game props for a tiny rock concert put on by mice, in an exact 3 columns x 3 rows grid (each cell 512x512). Each prop is ONE single connected shape centered in its cell with a clean magenta margin, never touching or crossing cell borders. No loose floating bits, no sparkles, no motion lines, no cast shadows on the background.
+- STYLE: match the attached references exactly (Untitled Goose Game style game props): completely FLAT color shapes, NO outlines, NO black linework, no gradients, no glow. Soft muted palette (warm browns, charcoal greys, dusty red, cream, muted gold) with one slightly darker flat tone for shading. Slight 3/4 front view from a little above, like the references.
+
+Cells (left to right, top to bottom):
+Row 1:
+1) A ROCK CONCERT STAGE PLATFORM: a wide low wooden stage riser seen from the front at 3/4 view, flat top deck in warm wood planks, front face is dark charcoal fabric skirt, a row of small round cream-gold footlights along the front top edge. About 3 times wider than tall. Empty, nothing on it.
+2) A tall SPEAKER STACK: two big charcoal speaker cabinets stacked on top of each other, each with large round grey woofer cones and a small tweeter, rounded corners. Vertical, about 1.6 times taller than wide.
+3) A small GUITAR AMPLIFIER combo: a boxy dark brown amp with a cream top panel of round knobs and a grille cloth front. Roughly square.
+Row 2:
+4) An overhead LIGHTING TRUSS RIG: a long horizontal grey metal truss bar (zigzag lattice) with 4 round stage can-lights hanging under it, lights in dusty red, pale blue, gold, and dusty red. Very wide, about 4 times wider than tall.
+5) A small rock DRUM KIT: bass drum in front (plain dusty red shell with a cream drum head, no logo), a snare, two toms and one cymbal on a stand, all touching as one shape.
+6) A SMASHED ELECTRIC GUITAR: the same guitar as the reference but snapped in two at the neck, the two halves still overlapping as one connected shape, a few splinters attached, strings dangling.
+Row 3:
+7) A MICROPHONE ON A STAND: a silver round microphone on a straight grey stand with a round heavy base. Vertical.
+8) A single STAGE SPOTLIGHT LAMP: one cylindrical charcoal can-light on a small yoke bracket, the round front lens pale cream, angled slightly down to the right.
+9) A STAGE PYRO FLAME JET: a tall column of flat stylized fire (orange and gold flame shapes, layered, connected) shooting up from a small dark metal box at the bottom. Vertical, about 2.2 times taller than wide.

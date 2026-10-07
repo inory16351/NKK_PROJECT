@@ -1,0 +1,2 @@
+stand 583x431 axle_y_from_top 69
+ring (794, 786)

@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: wheel_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha). No text, no labels, no grid lines.
+- Two separate pieces of ONE hamster exercise wheel that looks EXACTLY like the first attached image (same gray metal, same thin round rim with many evenly spaced cross rungs, same soft painted shading), seen exactly from the front, side by side with a wide empty gap:
+  LEFT HALF: ONLY the round wheel: the circular rim with evenly spaced cross rungs all around (like a ladder bent into a ring), thin spokes from the rim to a small round hub exactly in the center. Perfectly circular and rotationally symmetric so it can spin. No stand, no legs, nothing crossing in front. About 620px wide, centered in the left half.
+  RIGHT HALF: ONLY the stand: an A-frame of two straight metal legs meeting at a small round axle cap at the top, standing on a flat base bar. No wheel, no rim. Same scale: the height from the base bar to the axle cap center equals the wheel's radius plus a little.
+- ART STYLE: exactly match the attached hideout background illustration and the attached wheel: soft painted storybook illustration, gentle shading and soft highlights on the metal, warm cozy lighting, no thick black outlines.

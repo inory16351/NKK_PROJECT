@@ -1,0 +1,6890 @@
+{
+ "note": "pivot/torsoAnchor: 이미지 좌상단 기준 0~1. pivotUnity/torsoAnchorUnity: 유니티 Sprite pivot 용 좌하단 기준 0~1. 모든 파츠는 같은 배율(원본 시트 해상도). 캐릭터는 왼쪽을 봄.",
+ "species": {
+  "brownrat": {
+   "parts": [
+    "Parts/brownrat/head.png",
+    "Parts/brownrat/torso.png",
+    "Parts/brownrat/tail.png",
+    "Parts/brownrat/front.png",
+    "Parts/brownrat/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.819,
+     0.862
+    ],
+    "tail": [
+     0.048,
+     0.198
+    ],
+    "front": [
+     0.602,
+     0.099
+    ],
+    "back": [
+     0.633,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.819,
+     0.138
+    ],
+    "tail": [
+     0.048,
+     0.802
+    ],
+    "front": [
+     0.602,
+     0.901
+    ],
+    "back": [
+     0.633,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.434
+    ],
+    "tail": [
+     0.943,
+     0.532
+    ],
+    "shoulder": [
+     0.241,
+     0.438
+    ],
+    "hip": [
+     0.736,
+     0.322
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.566
+    ],
+    "tail": [
+     0.943,
+     0.468
+    ],
+    "shoulder": [
+     0.241,
+     0.562
+    ],
+    "hip": [
+     0.736,
+     0.678
+    ]
+   },
+   "legScale": {
+    "front": 0.941,
+    "back": 0.797
+   }
+  },
+  "labrat": {
+   "parts": [
+    "Parts/labrat/head.png",
+    "Parts/labrat/torso.png",
+    "Parts/labrat/tail.png",
+    "Parts/labrat/front.png",
+    "Parts/labrat/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.789,
+     0.85
+    ],
+    "tail": [
+     0.05,
+     0.316
+    ],
+    "front": [
+     0.456,
+     0.094
+    ],
+    "back": [
+     0.615,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.789,
+     0.15
+    ],
+    "tail": [
+     0.05,
+     0.684
+    ],
+    "front": [
+     0.456,
+     0.906
+    ],
+    "back": [
+     0.615,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.363
+    ],
+    "tail": [
+     0.947,
+     0.551
+    ],
+    "shoulder": [
+     0.241,
+     0.448
+    ],
+    "hip": [
+     0.735,
+     0.322
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.637
+    ],
+    "tail": [
+     0.947,
+     0.449
+    ],
+    "shoulder": [
+     0.241,
+     0.552
+    ],
+    "hip": [
+     0.735,
+     0.678
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.884
+   }
+  },
+  "buff": {
+   "parts": [
+    "Parts/buff/head.png",
+    "Parts/buff/torso.png",
+    "Parts/buff/tail.png",
+    "Parts/buff/front.png",
+    "Parts/buff/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.69,
+     0.855
+    ],
+    "tail": [
+     0.047,
+     0.206
+    ],
+    "front": [
+     0.415,
+     0.094
+    ],
+    "back": [
+     0.575,
+     0.096
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.69,
+     0.145
+    ],
+    "tail": [
+     0.047,
+     0.794
+    ],
+    "front": [
+     0.415,
+     0.906
+    ],
+    "back": [
+     0.575,
+     0.904
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.366
+    ],
+    "tail": [
+     0.947,
+     0.662
+    ],
+    "shoulder": [
+     0.237,
+     0.508
+    ],
+    "hip": [
+     0.734,
+     0.515
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.634
+    ],
+    "tail": [
+     0.947,
+     0.338
+    ],
+    "shoulder": [
+     0.237,
+     0.492
+    ],
+    "hip": [
+     0.734,
+     0.485
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.787
+   }
+  },
+  "builder": {
+   "parts": [
+    "Parts/builder/head.png",
+    "Parts/builder/torso.png",
+    "Parts/builder/tail.png",
+    "Parts/builder/front.png",
+    "Parts/builder/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.777,
+     0.852
+    ],
+    "tail": [
+     0.048,
+     0.17
+    ],
+    "front": [
+     0.556,
+     0.093
+    ],
+    "back": [
+     0.451,
+     0.096
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.777,
+     0.148
+    ],
+    "tail": [
+     0.048,
+     0.83
+    ],
+    "front": [
+     0.556,
+     0.907
+    ],
+    "back": [
+     0.451,
+     0.904
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.07,
+     0.373
+    ],
+    "tail": [
+     0.947,
+     0.429
+    ],
+    "shoulder": [
+     0.24,
+     0.434
+    ],
+    "hip": [
+     0.737,
+     0.298
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.07,
+     0.627
+    ],
+    "tail": [
+     0.947,
+     0.571
+    ],
+    "shoulder": [
+     0.24,
+     0.566
+    ],
+    "hip": [
+     0.737,
+     0.702
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.844
+   }
+  },
+  "chef": {
+   "parts": [
+    "Parts/chef/head.png",
+    "Parts/chef/torso.png",
+    "Parts/chef/tail.png",
+    "Parts/chef/front.png",
+    "Parts/chef/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.697,
+     0.864
+    ],
+    "tail": [
+     0.048,
+     0.21
+    ],
+    "front": [
+     0.569,
+     0.098
+    ],
+    "back": [
+     0.599,
+     0.097
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.697,
+     0.136
+    ],
+    "tail": [
+     0.048,
+     0.79
+    ],
+    "front": [
+     0.569,
+     0.902
+    ],
+    "back": [
+     0.599,
+     0.903
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.067,
+     0.356
+    ],
+    "tail": [
+     0.945,
+     0.506
+    ],
+    "shoulder": [
+     0.236,
+     0.417
+    ],
+    "hip": [
+     0.733,
+     0.319
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.067,
+     0.644
+    ],
+    "tail": [
+     0.945,
+     0.494
+    ],
+    "shoulder": [
+     0.236,
+     0.583
+    ],
+    "hip": [
+     0.733,
+     0.681
+    ]
+   },
+   "legScale": {
+    "front": 0.893,
+    "back": 0.806
+   }
+  },
+  "courier": {
+   "parts": [
+    "Parts/courier/head.png",
+    "Parts/courier/torso.png",
+    "Parts/courier/tail.png",
+    "Parts/courier/front.png",
+    "Parts/courier/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.779,
+     0.857
+    ],
+    "tail": [
+     0.049,
+     0.191
+    ],
+    "front": [
+     0.761,
+     0.095
+    ],
+    "back": [
+     0.601,
+     0.092
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.779,
+     0.143
+    ],
+    "tail": [
+     0.049,
+     0.809
+    ],
+    "front": [
+     0.761,
+     0.905
+    ],
+    "back": [
+     0.601,
+     0.908
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.302
+    ],
+    "tail": [
+     0.945,
+     0.508
+    ],
+    "shoulder": [
+     0.238,
+     0.44
+    ],
+    "hip": [
+     0.735,
+     0.298
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.698
+    ],
+    "tail": [
+     0.945,
+     0.492
+    ],
+    "shoulder": [
+     0.238,
+     0.56
+    ],
+    "hip": [
+     0.735,
+     0.702
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.723
+   }
+  },
+  "fieldmouse": {
+   "parts": [
+    "Parts/fieldmouse/head.png",
+    "Parts/fieldmouse/torso.png",
+    "Parts/fieldmouse/tail.png",
+    "Parts/fieldmouse/front.png",
+    "Parts/fieldmouse/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.653,
+     0.853
+    ],
+    "tail": [
+     0.049,
+     0.245
+    ],
+    "front": [
+     0.607,
+     0.102
+    ],
+    "back": [
+     0.625,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.653,
+     0.147
+    ],
+    "tail": [
+     0.049,
+     0.755
+    ],
+    "front": [
+     0.607,
+     0.898
+    ],
+    "back": [
+     0.625,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.067,
+     0.453
+    ],
+    "tail": [
+     0.945,
+     0.482
+    ],
+    "shoulder": [
+     0.238,
+     0.471
+    ],
+    "hip": [
+     0.738,
+     0.305
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.067,
+     0.547
+    ],
+    "tail": [
+     0.945,
+     0.518
+    ],
+    "shoulder": [
+     0.238,
+     0.529
+    ],
+    "hip": [
+     0.738,
+     0.695
+    ]
+   },
+   "legScale": {
+    "front": 0.92,
+    "back": 0.808
+   }
+  },
+  "glowy": {
+   "parts": [
+    "Parts/glowy/head.png",
+    "Parts/glowy/torso.png",
+    "Parts/glowy/tail.png",
+    "Parts/glowy/front.png",
+    "Parts/glowy/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.743,
+     0.862
+    ],
+    "tail": [
+     0.048,
+     0.248
+    ],
+    "front": [
+     0.405,
+     0.099
+    ],
+    "back": [
+     0.512,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.743,
+     0.138
+    ],
+    "tail": [
+     0.048,
+     0.752
+    ],
+    "front": [
+     0.405,
+     0.901
+    ],
+    "back": [
+     0.512,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.411
+    ],
+    "tail": [
+     0.947,
+     0.5
+    ],
+    "shoulder": [
+     0.237,
+     0.435
+    ],
+    "hip": [
+     0.737,
+     0.308
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.589
+    ],
+    "tail": [
+     0.947,
+     0.5
+    ],
+    "shoulder": [
+     0.237,
+     0.565
+    ],
+    "hip": [
+     0.737,
+     0.692
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.958
+   }
+  },
+  "hamster": {
+   "parts": [
+    "Parts/hamster/head.png",
+    "Parts/hamster/torso.png",
+    "Parts/hamster/tail.png",
+    "Parts/hamster/front.png",
+    "Parts/hamster/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.693,
+     0.875
+    ],
+    "tail": [
+     0.043,
+     0.5
+    ],
+    "front": [
+     0.465,
+     0.093
+    ],
+    "back": [
+     0.577,
+     0.097
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.693,
+     0.125
+    ],
+    "tail": [
+     0.043,
+     0.5
+    ],
+    "front": [
+     0.465,
+     0.907
+    ],
+    "back": [
+     0.577,
+     0.903
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.375
+    ],
+    "tail": [
+     0.947,
+     0.539
+    ],
+    "shoulder": [
+     0.237,
+     0.488
+    ],
+    "hip": [
+     0.737,
+     0.295
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.625
+    ],
+    "tail": [
+     0.947,
+     0.461
+    ],
+    "shoulder": [
+     0.237,
+     0.512
+    ],
+    "hip": [
+     0.737,
+     0.705
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.861
+   }
+  },
+  "hooded": {
+   "parts": [
+    "Parts/hooded/head.png",
+    "Parts/hooded/torso.png",
+    "Parts/hooded/tail.png",
+    "Parts/hooded/front.png",
+    "Parts/hooded/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.753,
+     0.856
+    ],
+    "tail": [
+     0.05,
+     0.184
+    ],
+    "front": [
+     0.57,
+     0.092
+    ],
+    "back": [
+     0.614,
+     0.094
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.753,
+     0.144
+    ],
+    "tail": [
+     0.05,
+     0.816
+    ],
+    "front": [
+     0.57,
+     0.908
+    ],
+    "back": [
+     0.614,
+     0.906
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.067,
+     0.359
+    ],
+    "tail": [
+     0.945,
+     0.554
+    ],
+    "shoulder": [
+     0.238,
+     0.414
+    ],
+    "hip": [
+     0.738,
+     0.321
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.067,
+     0.641
+    ],
+    "tail": [
+     0.945,
+     0.446
+    ],
+    "shoulder": [
+     0.238,
+     0.586
+    ],
+    "hip": [
+     0.738,
+     0.679
+    ]
+   },
+   "legScale": {
+    "front": 0.882,
+    "back": 0.815
+   }
+  },
+  "mailman": {
+   "parts": [
+    "Parts/mailman/head.png",
+    "Parts/mailman/torso.png",
+    "Parts/mailman/tail.png",
+    "Parts/mailman/front.png",
+    "Parts/mailman/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.596,
+     0.855
+    ],
+    "tail": [
+     0.046,
+     0.45
+    ],
+    "front": [
+     0.476,
+     0.101
+    ],
+    "back": [
+     0.531,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.596,
+     0.145
+    ],
+    "tail": [
+     0.046,
+     0.55
+    ],
+    "front": [
+     0.476,
+     0.899
+    ],
+    "back": [
+     0.531,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.306
+    ],
+    "tail": [
+     0.942,
+     0.504
+    ],
+    "shoulder": [
+     0.237,
+     0.388
+    ],
+    "hip": [
+     0.737,
+     0.324
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.694
+    ],
+    "tail": [
+     0.942,
+     0.496
+    ],
+    "shoulder": [
+     0.237,
+     0.612
+    ],
+    "hip": [
+     0.737,
+     0.676
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.855
+   }
+  },
+  "mouse": {
+   "parts": [
+    "Parts/mouse/head.png",
+    "Parts/mouse/torso.png",
+    "Parts/mouse/tail.png",
+    "Parts/mouse/front.png",
+    "Parts/mouse/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.667,
+     0.859
+    ],
+    "tail": [
+     0.048,
+     0.254
+    ],
+    "front": [
+     0.389,
+     0.093
+    ],
+    "back": [
+     0.556,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.667,
+     0.141
+    ],
+    "tail": [
+     0.048,
+     0.746
+    ],
+    "front": [
+     0.389,
+     0.907
+    ],
+    "back": [
+     0.556,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.349
+    ],
+    "tail": [
+     0.941,
+     0.566
+    ],
+    "shoulder": [
+     0.237,
+     0.427
+    ],
+    "hip": [
+     0.737,
+     0.322
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.651
+    ],
+    "tail": [
+     0.941,
+     0.434
+    ],
+    "shoulder": [
+     0.237,
+     0.573
+    ],
+    "hip": [
+     0.737,
+     0.678
+    ]
+   },
+   "legScale": {
+    "front": 0.858,
+    "back": 0.785
+   }
+  },
+  "mutant": {
+   "parts": [
+    "Parts/mutant/head.png",
+    "Parts/mutant/torso.png",
+    "Parts/mutant/tail.png",
+    "Parts/mutant/front.png",
+    "Parts/mutant/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.798,
+     0.862
+    ],
+    "tail": [
+     0.048,
+     0.204
+    ],
+    "front": [
+     0.523,
+     0.097
+    ],
+    "back": [
+     0.572,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.798,
+     0.138
+    ],
+    "tail": [
+     0.048,
+     0.796
+    ],
+    "front": [
+     0.523,
+     0.903
+    ],
+    "back": [
+     0.572,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.471
+    ],
+    "tail": [
+     0.945,
+     0.565
+    ],
+    "shoulder": [
+     0.238,
+     0.478
+    ],
+    "hip": [
+     0.735,
+     0.316
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.529
+    ],
+    "tail": [
+     0.945,
+     0.435
+    ],
+    "shoulder": [
+     0.238,
+     0.522
+    ],
+    "hip": [
+     0.735,
+     0.684
+    ]
+   },
+   "legScale": {
+    "front": 0.934,
+    "back": 0.959
+   }
+  },
+  "nerd": {
+   "parts": [
+    "Parts/nerd/head.png",
+    "Parts/nerd/torso.png",
+    "Parts/nerd/tail.png",
+    "Parts/nerd/front.png",
+    "Parts/nerd/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.789,
+     0.856
+    ],
+    "tail": [
+     0.047,
+     0.186
+    ],
+    "front": [
+     0.455,
+     0.096
+    ],
+    "back": [
+     0.568,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.789,
+     0.144
+    ],
+    "tail": [
+     0.047,
+     0.814
+    ],
+    "front": [
+     0.455,
+     0.904
+    ],
+    "back": [
+     0.568,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.414
+    ],
+    "tail": [
+     0.945,
+     0.551
+    ],
+    "shoulder": [
+     0.236,
+     0.447
+    ],
+    "hip": [
+     0.736,
+     0.326
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.586
+    ],
+    "tail": [
+     0.945,
+     0.449
+    ],
+    "shoulder": [
+     0.236,
+     0.553
+    ],
+    "hip": [
+     0.736,
+     0.674
+    ]
+   },
+   "legScale": {
+    "front": 0.838,
+    "back": 0.744
+   }
+  },
+  "party": {
+   "parts": [
+    "Parts/party/head.png",
+    "Parts/party/torso.png",
+    "Parts/party/tail.png",
+    "Parts/party/front.png",
+    "Parts/party/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.561,
+     0.889
+    ],
+    "tail": [
+     0.046,
+     0.568
+    ],
+    "front": [
+     0.514,
+     0.102
+    ],
+    "back": [
+     0.654,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.561,
+     0.111
+    ],
+    "tail": [
+     0.046,
+     0.432
+    ],
+    "front": [
+     0.514,
+     0.898
+    ],
+    "back": [
+     0.654,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.372
+    ],
+    "tail": [
+     0.942,
+     0.497
+    ],
+    "shoulder": [
+     0.24,
+     0.447
+    ],
+    "hip": [
+     0.734,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.628
+    ],
+    "tail": [
+     0.942,
+     0.503
+    ],
+    "shoulder": [
+     0.24,
+     0.553
+    ],
+    "hip": [
+     0.734,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.955
+   }
+  },
+  "scientist": {
+   "parts": [
+    "Parts/scientist/head.png",
+    "Parts/scientist/torso.png",
+    "Parts/scientist/tail.png",
+    "Parts/scientist/front.png",
+    "Parts/scientist/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.749,
+     0.845
+    ],
+    "tail": [
+     0.049,
+     0.257
+    ],
+    "front": [
+     0.549,
+     0.095
+    ],
+    "back": [
+     0.623,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.749,
+     0.155
+    ],
+    "tail": [
+     0.049,
+     0.743
+    ],
+    "front": [
+     0.549,
+     0.905
+    ],
+    "back": [
+     0.623,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.352
+    ],
+    "tail": [
+     0.942,
+     0.513
+    ],
+    "shoulder": [
+     0.237,
+     0.425
+    ],
+    "hip": [
+     0.737,
+     0.301
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.648
+    ],
+    "tail": [
+     0.942,
+     0.487
+    ],
+    "shoulder": [
+     0.237,
+     0.575
+    ],
+    "hip": [
+     0.737,
+     0.699
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.906
+   }
+  },
+  "traveler": {
+   "parts": [
+    "Parts/traveler/head.png",
+    "Parts/traveler/torso.png",
+    "Parts/traveler/tail.png",
+    "Parts/traveler/front.png",
+    "Parts/traveler/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.655,
+     0.881
+    ],
+    "tail": [
+     0.039,
+     0.481
+    ],
+    "front": [
+     0.522,
+     0.092
+    ],
+    "back": [
+     0.577,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.655,
+     0.119
+    ],
+    "tail": [
+     0.039,
+     0.519
+    ],
+    "front": [
+     0.522,
+     0.908
+    ],
+    "back": [
+     0.577,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.509
+    ],
+    "tail": [
+     0.943,
+     0.541
+    ],
+    "shoulder": [
+     0.241,
+     0.488
+    ],
+    "hip": [
+     0.736,
+     0.416
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.491
+    ],
+    "tail": [
+     0.943,
+     0.459
+    ],
+    "shoulder": [
+     0.241,
+     0.512
+    ],
+    "hip": [
+     0.736,
+     0.584
+    ]
+   },
+   "legScale": {
+    "front": 0.95,
+    "back": 0.981
+   }
+  },
+  "cowboy": {
+   "parts": [
+    "Parts/cowboy/head.png",
+    "Parts/cowboy/torso.png",
+    "Parts/cowboy/tail.png",
+    "Parts/cowboy/front.png",
+    "Parts/cowboy/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.565,
+     0.856
+    ],
+    "tail": [
+     0.048,
+     0.201
+    ],
+    "front": [
+     0.547,
+     0.097
+    ],
+    "back": [
+     0.563,
+     0.092
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.565,
+     0.144
+    ],
+    "tail": [
+     0.048,
+     0.799
+    ],
+    "front": [
+     0.547,
+     0.903
+    ],
+    "back": [
+     0.563,
+     0.908
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.07,
+     0.48
+    ],
+    "tail": [
+     0.947,
+     0.644
+    ],
+    "shoulder": [
+     0.24,
+     0.446
+    ],
+    "hip": [
+     0.737,
+     0.454
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.07,
+     0.52
+    ],
+    "tail": [
+     0.947,
+     0.356
+    ],
+    "shoulder": [
+     0.24,
+     0.554
+    ],
+    "hip": [
+     0.737,
+     0.546
+    ]
+   },
+   "legScale": {
+    "front": 0.955,
+    "back": 0.697
+   }
+  },
+  "cyborg": {
+   "parts": [
+    "Parts/cyborg/head.png",
+    "Parts/cyborg/torso.png",
+    "Parts/cyborg/tail.png",
+    "Parts/cyborg/front.png",
+    "Parts/cyborg/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.737,
+     0.849
+    ],
+    "tail": [
+     0.047,
+     0.314
+    ],
+    "front": [
+     0.553,
+     0.099
+    ],
+    "back": [
+     0.644,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.737,
+     0.151
+    ],
+    "tail": [
+     0.047,
+     0.686
+    ],
+    "front": [
+     0.553,
+     0.901
+    ],
+    "back": [
+     0.644,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.425
+    ],
+    "tail": [
+     0.943,
+     0.6
+    ],
+    "shoulder": [
+     0.24,
+     0.435
+    ],
+    "hip": [
+     0.737,
+     0.316
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.575
+    ],
+    "tail": [
+     0.943,
+     0.4
+    ],
+    "shoulder": [
+     0.24,
+     0.565
+    ],
+    "hip": [
+     0.737,
+     0.684
+    ]
+   },
+   "legScale": {
+    "front": 0.905,
+    "back": 0.847
+   }
+  },
+  "firefighter": {
+   "parts": [
+    "Parts/firefighter/head.png",
+    "Parts/firefighter/torso.png",
+    "Parts/firefighter/tail.png",
+    "Parts/firefighter/front.png",
+    "Parts/firefighter/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.694,
+     0.877
+    ],
+    "tail": [
+     0.048,
+     0.255
+    ],
+    "front": [
+     0.513,
+     0.095
+    ],
+    "back": [
+     0.517,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.694,
+     0.123
+    ],
+    "tail": [
+     0.048,
+     0.745
+    ],
+    "front": [
+     0.513,
+     0.905
+    ],
+    "back": [
+     0.517,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.598
+    ],
+    "tail": [
+     0.946,
+     0.513
+    ],
+    "shoulder": [
+     0.241,
+     0.559
+    ],
+    "hip": [
+     0.735,
+     0.326
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.402
+    ],
+    "tail": [
+     0.946,
+     0.487
+    ],
+    "shoulder": [
+     0.241,
+     0.441
+    ],
+    "hip": [
+     0.735,
+     0.674
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "idol": {
+   "parts": [
+    "Parts/idol/head.png",
+    "Parts/idol/torso.png",
+    "Parts/idol/tail.png",
+    "Parts/idol/front.png",
+    "Parts/idol/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.524,
+     0.868
+    ],
+    "tail": [
+     0.048,
+     0.484
+    ],
+    "front": [
+     0.803,
+     0.099
+    ],
+    "back": [
+     0.628,
+     0.099
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.524,
+     0.132
+    ],
+    "tail": [
+     0.048,
+     0.516
+    ],
+    "front": [
+     0.803,
+     0.901
+    ],
+    "back": [
+     0.628,
+     0.901
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.467
+    ],
+    "tail": [
+     0.942,
+     0.501
+    ],
+    "shoulder": [
+     0.237,
+     0.525
+    ],
+    "hip": [
+     0.737,
+     0.372
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.533
+    ],
+    "tail": [
+     0.942,
+     0.499
+    ],
+    "shoulder": [
+     0.237,
+     0.475
+    ],
+    "hip": [
+     0.737,
+     0.628
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.793
+   }
+  },
+  "miner": {
+   "parts": [
+    "Parts/miner/head.png",
+    "Parts/miner/torso.png",
+    "Parts/miner/tail.png",
+    "Parts/miner/front.png",
+    "Parts/miner/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.662,
+     0.857
+    ],
+    "tail": [
+     0.049,
+     0.467
+    ],
+    "front": [
+     0.444,
+     0.096
+    ],
+    "back": [
+     0.564,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.662,
+     0.143
+    ],
+    "tail": [
+     0.049,
+     0.533
+    ],
+    "front": [
+     0.444,
+     0.904
+    ],
+    "back": [
+     0.564,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.47
+    ],
+    "tail": [
+     0.944,
+     0.618
+    ],
+    "shoulder": [
+     0.236,
+     0.425
+    ],
+    "hip": [
+     0.733,
+     0.358
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.53
+    ],
+    "tail": [
+     0.944,
+     0.382
+    ],
+    "shoulder": [
+     0.236,
+     0.575
+    ],
+    "hip": [
+     0.733,
+     0.642
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.805
+   }
+  },
+  "ninja": {
+   "parts": [
+    "Parts/ninja/head.png",
+    "Parts/ninja/torso.png",
+    "Parts/ninja/tail.png",
+    "Parts/ninja/front.png",
+    "Parts/ninja/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.583,
+     0.851
+    ],
+    "tail": [
+     0.047,
+     0.236
+    ],
+    "front": [
+     0.513,
+     0.092
+    ],
+    "back": [
+     0.614,
+     0.092
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.583,
+     0.149
+    ],
+    "tail": [
+     0.047,
+     0.764
+    ],
+    "front": [
+     0.513,
+     0.908
+    ],
+    "back": [
+     0.614,
+     0.908
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.312
+    ],
+    "tail": [
+     0.942,
+     0.354
+    ],
+    "shoulder": [
+     0.237,
+     0.31
+    ],
+    "hip": [
+     0.737,
+     0.237
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.688
+    ],
+    "tail": [
+     0.942,
+     0.646
+    ],
+    "shoulder": [
+     0.237,
+     0.69
+    ],
+    "hip": [
+     0.737,
+     0.763
+    ]
+   },
+   "legScale": {
+    "front": 0.929,
+    "back": 0.813
+   }
+  },
+  "nurse": {
+   "parts": [
+    "Parts/nurse/head.png",
+    "Parts/nurse/torso.png",
+    "Parts/nurse/tail.png",
+    "Parts/nurse/front.png",
+    "Parts/nurse/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.612,
+     0.855
+    ],
+    "tail": [
+     0.048,
+     0.353
+    ],
+    "front": [
+     0.571,
+     0.097
+    ],
+    "back": [
+     0.554,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.612,
+     0.145
+    ],
+    "tail": [
+     0.048,
+     0.647
+    ],
+    "front": [
+     0.571,
+     0.903
+    ],
+    "back": [
+     0.554,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.32
+    ],
+    "tail": [
+     0.942,
+     0.471
+    ],
+    "shoulder": [
+     0.24,
+     0.409
+    ],
+    "hip": [
+     0.734,
+     0.29
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.68
+    ],
+    "tail": [
+     0.942,
+     0.529
+    ],
+    "shoulder": [
+     0.24,
+     0.591
+    ],
+    "hip": [
+     0.734,
+     0.71
+    ]
+   },
+   "legScale": {
+    "front": 0.993,
+    "back": 0.871
+   }
+  },
+  "pandahamster": {
+   "parts": [
+    "Parts/pandahamster/head.png",
+    "Parts/pandahamster/torso.png",
+    "Parts/pandahamster/tail.png",
+    "Parts/pandahamster/front.png",
+    "Parts/pandahamster/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.618,
+     0.86
+    ],
+    "tail": [
+     0.041,
+     0.472
+    ],
+    "front": [
+     0.236,
+     0.096
+    ],
+    "back": [
+     0.5,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.618,
+     0.14
+    ],
+    "tail": [
+     0.041,
+     0.528
+    ],
+    "front": [
+     0.236,
+     0.904
+    ],
+    "back": [
+     0.5,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.067,
+     0.386
+    ],
+    "tail": [
+     0.945,
+     0.449
+    ],
+    "shoulder": [
+     0.236,
+     0.414
+    ],
+    "hip": [
+     0.733,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.067,
+     0.614
+    ],
+    "tail": [
+     0.945,
+     0.551
+    ],
+    "shoulder": [
+     0.236,
+     0.586
+    ],
+    "hip": [
+     0.733,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 0.759,
+    "back": 0.878
+   }
+  },
+  "pirate": {
+   "parts": [
+    "Parts/pirate/head.png",
+    "Parts/pirate/torso.png",
+    "Parts/pirate/tail.png",
+    "Parts/pirate/front.png",
+    "Parts/pirate/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.612,
+     0.857
+    ],
+    "tail": [
+     0.047,
+     0.188
+    ],
+    "front": [
+     0.355,
+     0.099
+    ],
+    "back": [
+     0.588,
+     0.092
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.612,
+     0.143
+    ],
+    "tail": [
+     0.047,
+     0.812
+    ],
+    "front": [
+     0.355,
+     0.901
+    ],
+    "back": [
+     0.588,
+     0.908
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.332
+    ],
+    "tail": [
+     0.944,
+     0.534
+    ],
+    "shoulder": [
+     0.238,
+     0.427
+    ],
+    "hip": [
+     0.738,
+     0.373
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.668
+    ],
+    "tail": [
+     0.944,
+     0.466
+    ],
+    "shoulder": [
+     0.238,
+     0.573
+    ],
+    "hip": [
+     0.738,
+     0.627
+    ]
+   },
+   "legScale": {
+    "front": 0.9,
+    "back": 0.806
+   }
+  },
+  "police": {
+   "parts": [
+    "Parts/police/head.png",
+    "Parts/police/torso.png",
+    "Parts/police/tail.png",
+    "Parts/police/front.png",
+    "Parts/police/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.662,
+     0.849
+    ],
+    "tail": [
+     0.048,
+     0.172
+    ],
+    "front": [
+     0.539,
+     0.097
+    ],
+    "back": [
+     0.645,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.662,
+     0.151
+    ],
+    "tail": [
+     0.048,
+     0.828
+    ],
+    "front": [
+     0.539,
+     0.903
+    ],
+    "back": [
+     0.645,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.308
+    ],
+    "tail": [
+     0.946,
+     0.553
+    ],
+    "shoulder": [
+     0.238,
+     0.387
+    ],
+    "hip": [
+     0.738,
+     0.319
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.692
+    ],
+    "tail": [
+     0.946,
+     0.447
+    ],
+    "shoulder": [
+     0.238,
+     0.613
+    ],
+    "hip": [
+     0.738,
+     0.681
+    ]
+   },
+   "legScale": {
+    "front": 0.868,
+    "back": 0.749
+   }
+  },
+  "skater": {
+   "parts": [
+    "Parts/skater/head.png",
+    "Parts/skater/torso.png",
+    "Parts/skater/tail.png",
+    "Parts/skater/front.png",
+    "Parts/skater/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.616,
+     0.864
+    ],
+    "tail": [
+     0.046,
+     0.252
+    ],
+    "front": [
+     0.534,
+     0.095
+    ],
+    "back": [
+     0.646,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.616,
+     0.136
+    ],
+    "tail": [
+     0.046,
+     0.748
+    ],
+    "front": [
+     0.534,
+     0.905
+    ],
+    "back": [
+     0.646,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.326
+    ],
+    "tail": [
+     0.943,
+     0.518
+    ],
+    "shoulder": [
+     0.236,
+     0.421
+    ],
+    "hip": [
+     0.736,
+     0.314
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.674
+    ],
+    "tail": [
+     0.943,
+     0.482
+    ],
+    "shoulder": [
+     0.236,
+     0.579
+    ],
+    "hip": [
+     0.736,
+     0.686
+    ]
+   },
+   "legScale": {
+    "front": 0.67,
+    "back": 0.751
+   }
+  },
+  "sleepy": {
+   "parts": [
+    "Parts/sleepy/head.png",
+    "Parts/sleepy/torso.png",
+    "Parts/sleepy/tail.png",
+    "Parts/sleepy/front.png",
+    "Parts/sleepy/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.603,
+     0.849
+    ],
+    "tail": [
+     0.048,
+     0.283
+    ],
+    "front": [
+     0.659,
+     0.097
+    ],
+    "back": [
+     0.609,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.603,
+     0.151
+    ],
+    "tail": [
+     0.048,
+     0.717
+    ],
+    "front": [
+     0.659,
+     0.903
+    ],
+    "back": [
+     0.609,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.373
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.236,
+     0.387
+    ],
+    "hip": [
+     0.733,
+     0.309
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.627
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.236,
+     0.613
+    ],
+    "hip": [
+     0.733,
+     0.691
+    ]
+   },
+   "legScale": {
+    "front": 0.838,
+    "back": 0.773
+   }
+  },
+  "soldier": {
+   "parts": [
+    "Parts/soldier/head.png",
+    "Parts/soldier/torso.png",
+    "Parts/soldier/tail.png",
+    "Parts/soldier/front.png",
+    "Parts/soldier/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.752,
+     0.847
+    ],
+    "tail": [
+     0.049,
+     0.237
+    ],
+    "front": [
+     0.591,
+     0.1
+    ],
+    "back": [
+     0.6,
+     0.092
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.752,
+     0.153
+    ],
+    "tail": [
+     0.049,
+     0.763
+    ],
+    "front": [
+     0.591,
+     0.9
+    ],
+    "back": [
+     0.6,
+     0.908
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.471
+    ],
+    "tail": [
+     0.943,
+     0.544
+    ],
+    "shoulder": [
+     0.241,
+     0.404
+    ],
+    "hip": [
+     0.736,
+     0.354
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.529
+    ],
+    "tail": [
+     0.943,
+     0.456
+    ],
+    "shoulder": [
+     0.241,
+     0.596
+    ],
+    "hip": [
+     0.736,
+     0.646
+    ]
+   },
+   "legScale": {
+    "front": 0.903,
+    "back": 0.789
+   }
+  },
+  "alien": {
+   "parts": [
+    "Parts/alien/head.png",
+    "Parts/alien/torso.png",
+    "Parts/alien/tail.png",
+    "Parts/alien/front.png",
+    "Parts/alien/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.642,
+     0.857
+    ],
+    "tail": [
+     0.047,
+     0.204
+    ],
+    "front": [
+     0.565,
+     0.099
+    ],
+    "back": [
+     0.665,
+     0.096
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.642,
+     0.143
+    ],
+    "tail": [
+     0.047,
+     0.796
+    ],
+    "front": [
+     0.565,
+     0.901
+    ],
+    "back": [
+     0.665,
+     0.904
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.441
+    ],
+    "tail": [
+     0.947,
+     0.531
+    ],
+    "shoulder": [
+     0.237,
+     0.46
+    ],
+    "hip": [
+     0.734,
+     0.301
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.559
+    ],
+    "tail": [
+     0.947,
+     0.469
+    ],
+    "shoulder": [
+     0.237,
+     0.54
+    ],
+    "hip": [
+     0.734,
+     0.699
+    ]
+   },
+   "legScale": {
+    "front": 0.848,
+    "back": 0.783
+   }
+  },
+  "angel": {
+   "parts": [
+    "Parts/angel/head.png",
+    "Parts/angel/torso.png",
+    "Parts/angel/tail.png",
+    "Parts/angel/front.png",
+    "Parts/angel/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.637,
+     0.872
+    ],
+    "tail": [
+     0.047,
+     0.189
+    ],
+    "front": [
+     0.58,
+     0.093
+    ],
+    "back": [
+     0.624,
+     0.097
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.637,
+     0.128
+    ],
+    "tail": [
+     0.047,
+     0.811
+    ],
+    "front": [
+     0.58,
+     0.907
+    ],
+    "back": [
+     0.624,
+     0.903
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.599
+    ],
+    "tail": [
+     0.945,
+     0.405
+    ],
+    "shoulder": [
+     0.24,
+     0.733
+    ],
+    "hip": [
+     0.733,
+     0.553
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.401
+    ],
+    "tail": [
+     0.945,
+     0.595
+    ],
+    "shoulder": [
+     0.24,
+     0.267
+    ],
+    "hip": [
+     0.733,
+     0.447
+    ]
+   },
+   "legScale": {
+    "front": 1.034,
+    "back": 1
+   }
+  },
+  "astro": {
+   "parts": [
+    "Parts/astro/head.png",
+    "Parts/astro/torso.png",
+    "Parts/astro/tail.png",
+    "Parts/astro/front.png",
+    "Parts/astro/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.696,
+     0.863
+    ],
+    "tail": [
+     0.048,
+     0.286
+    ],
+    "front": [
+     0.606,
+     0.093
+    ],
+    "back": [
+     0.696,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.696,
+     0.137
+    ],
+    "tail": [
+     0.048,
+     0.714
+    ],
+    "front": [
+     0.606,
+     0.907
+    ],
+    "back": [
+     0.696,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.469
+    ],
+    "tail": [
+     0.946,
+     0.559
+    ],
+    "shoulder": [
+     0.24,
+     0.57
+    ],
+    "hip": [
+     0.737,
+     0.327
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.531
+    ],
+    "tail": [
+     0.946,
+     0.441
+    ],
+    "shoulder": [
+     0.24,
+     0.43
+    ],
+    "hip": [
+     0.737,
+     0.673
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "ballerina": {
+   "parts": [
+    "Parts/ballerina/head.png",
+    "Parts/ballerina/torso.png",
+    "Parts/ballerina/tail.png",
+    "Parts/ballerina/front.png",
+    "Parts/ballerina/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.586,
+     0.857
+    ],
+    "tail": [
+     0.047,
+     0.24
+    ],
+    "front": [
+     0.513,
+     0.1
+    ],
+    "back": [
+     0.653,
+     0.097
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.586,
+     0.143
+    ],
+    "tail": [
+     0.047,
+     0.76
+    ],
+    "front": [
+     0.513,
+     0.9
+    ],
+    "back": [
+     0.653,
+     0.903
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.367
+    ],
+    "tail": [
+     0.945,
+     0.418
+    ],
+    "shoulder": [
+     0.241,
+     0.534
+    ],
+    "hip": [
+     0.738,
+     0.324
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.633
+    ],
+    "tail": [
+     0.945,
+     0.582
+    ],
+    "shoulder": [
+     0.241,
+     0.466
+    ],
+    "hip": [
+     0.738,
+     0.676
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "cosmic": {
+   "parts": [
+    "Parts/cosmic/head.png",
+    "Parts/cosmic/torso.png",
+    "Parts/cosmic/tail.png",
+    "Parts/cosmic/front.png",
+    "Parts/cosmic/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.718,
+     0.871
+    ],
+    "tail": [
+     0.047,
+     0.504
+    ],
+    "front": [
+     0.534,
+     0.101
+    ],
+    "back": [
+     0.587,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.718,
+     0.129
+    ],
+    "tail": [
+     0.047,
+     0.496
+    ],
+    "front": [
+     0.534,
+     0.899
+    ],
+    "back": [
+     0.587,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.363
+    ],
+    "tail": [
+     0.944,
+     0.506
+    ],
+    "shoulder": [
+     0.239,
+     0.569
+    ],
+    "hip": [
+     0.733,
+     0.306
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.637
+    ],
+    "tail": [
+     0.944,
+     0.494
+    ],
+    "shoulder": [
+     0.239,
+     0.431
+    ],
+    "hip": [
+     0.733,
+     0.694
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.975
+   }
+  },
+  "detective": {
+   "parts": [
+    "Parts/detective/head.png",
+    "Parts/detective/torso.png",
+    "Parts/detective/tail.png",
+    "Parts/detective/front.png",
+    "Parts/detective/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.705,
+     0.86
+    ],
+    "tail": [
+     0.043,
+     0.537
+    ],
+    "front": [
+     0.774,
+     0.064
+    ],
+    "back": [
+     0.676,
+     0.057
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.705,
+     0.14
+    ],
+    "tail": [
+     0.043,
+     0.463
+    ],
+    "front": [
+     0.774,
+     0.936
+    ],
+    "back": [
+     0.676,
+     0.943
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.817
+   }
+  },
+  "dino": {
+   "parts": [
+    "Parts/dino/head.png",
+    "Parts/dino/torso.png",
+    "Parts/dino/tail.png",
+    "Parts/dino/front.png",
+    "Parts/dino/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.703,
+     0.873
+    ],
+    "tail": [
+     0.048,
+     0.277
+    ],
+    "front": [
+     0.4,
+     0.095
+    ],
+    "back": [
+     0.652,
+     0.094
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.703,
+     0.127
+    ],
+    "tail": [
+     0.048,
+     0.723
+    ],
+    "front": [
+     0.4,
+     0.905
+    ],
+    "back": [
+     0.652,
+     0.906
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.395
+    ],
+    "tail": [
+     0.947,
+     0.677
+    ],
+    "shoulder": [
+     0.241,
+     0.507
+    ],
+    "hip": [
+     0.735,
+     0.473
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.605
+    ],
+    "tail": [
+     0.947,
+     0.323
+    ],
+    "shoulder": [
+     0.241,
+     0.493
+    ],
+    "hip": [
+     0.735,
+     0.527
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.845
+   }
+  },
+  "dragon": {
+   "parts": [
+    "Parts/dragon/head.png",
+    "Parts/dragon/torso.png",
+    "Parts/dragon/tail.png",
+    "Parts/dragon/front.png",
+    "Parts/dragon/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.678,
+     0.855
+    ],
+    "tail": [
+     0.047,
+     0.219
+    ],
+    "front": [
+     0.526,
+     0.101
+    ],
+    "back": [
+     0.57,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.678,
+     0.145
+    ],
+    "tail": [
+     0.047,
+     0.781
+    ],
+    "front": [
+     0.526,
+     0.899
+    ],
+    "back": [
+     0.57,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.067,
+     0.538
+    ],
+    "tail": [
+     0.944,
+     0.627
+    ],
+    "shoulder": [
+     0.24,
+     0.663
+    ],
+    "hip": [
+     0.737,
+     0.437
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.067,
+     0.462
+    ],
+    "tail": [
+     0.944,
+     0.373
+    ],
+    "shoulder": [
+     0.24,
+     0.337
+    ],
+    "hip": [
+     0.737,
+     0.563
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "emperor": {
+   "parts": [
+    "Parts/emperor/head.png",
+    "Parts/emperor/torso.png",
+    "Parts/emperor/tail.png",
+    "Parts/emperor/front.png",
+    "Parts/emperor/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.713,
+     0.852
+    ],
+    "tail": [
+     0.047,
+     0.252
+    ],
+    "front": [
+     0.583,
+     0.095
+    ],
+    "back": [
+     0.515,
+     0.097
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.713,
+     0.148
+    ],
+    "tail": [
+     0.047,
+     0.748
+    ],
+    "front": [
+     0.583,
+     0.905
+    ],
+    "back": [
+     0.515,
+     0.903
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.07,
+     0.356
+    ],
+    "tail": [
+     0.942,
+     0.358
+    ],
+    "shoulder": [
+     0.238,
+     0.417
+    ],
+    "hip": [
+     0.738,
+     0.294
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.07,
+     0.644
+    ],
+    "tail": [
+     0.942,
+     0.642
+    ],
+    "shoulder": [
+     0.238,
+     0.583
+    ],
+    "hip": [
+     0.738,
+     0.706
+    ]
+   },
+   "legScale": {
+    "front": 0.903,
+    "back": 0.895
+   }
+  },
+  "ghost": {
+   "parts": [
+    "Parts/ghost/head.png",
+    "Parts/ghost/torso.png",
+    "Parts/ghost/tail.png",
+    "Parts/ghost/front.png",
+    "Parts/ghost/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.684,
+     0.87
+    ],
+    "tail": [
+     0.047,
+     0.239
+    ],
+    "front": [
+     0.551,
+     0.098
+    ],
+    "back": [
+     0.61,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.684,
+     0.13
+    ],
+    "tail": [
+     0.047,
+     0.761
+    ],
+    "front": [
+     0.551,
+     0.902
+    ],
+    "back": [
+     0.61,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.432
+    ],
+    "tail": [
+     0.943,
+     0.602
+    ],
+    "shoulder": [
+     0.239,
+     0.609
+    ],
+    "hip": [
+     0.739,
+     0.401
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.568
+    ],
+    "tail": [
+     0.943,
+     0.398
+    ],
+    "shoulder": [
+     0.239,
+     0.391
+    ],
+    "hip": [
+     0.739,
+     0.599
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "hero": {
+   "parts": [
+    "Parts/hero/head.png",
+    "Parts/hero/torso.png",
+    "Parts/hero/tail.png",
+    "Parts/hero/front.png",
+    "Parts/hero/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.637,
+     0.879
+    ],
+    "tail": [
+     0.048,
+     0.167
+    ],
+    "front": [
+     0.647,
+     0.098
+    ],
+    "back": [
+     0.64,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.637,
+     0.121
+    ],
+    "tail": [
+     0.048,
+     0.833
+    ],
+    "front": [
+     0.647,
+     0.902
+    ],
+    "back": [
+     0.64,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.07,
+     0.468
+    ],
+    "tail": [
+     0.947,
+     0.161
+    ],
+    "shoulder": [
+     0.241,
+     0.62
+    ],
+    "hip": [
+     0.738,
+     0.387
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.07,
+     0.532
+    ],
+    "tail": [
+     0.947,
+     0.839
+    ],
+    "shoulder": [
+     0.241,
+     0.38
+    ],
+    "hip": [
+     0.738,
+     0.613
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "knight": {
+   "parts": [
+    "Parts/knight/head.png",
+    "Parts/knight/torso.png",
+    "Parts/knight/tail.png",
+    "Parts/knight/front.png",
+    "Parts/knight/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.605,
+     0.86
+    ],
+    "tail": [
+     0.051,
+     0.222
+    ],
+    "front": [
+     0.524,
+     0.092
+    ],
+    "back": [
+     0.543,
+     0.099
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.605,
+     0.14
+    ],
+    "tail": [
+     0.051,
+     0.778
+    ],
+    "front": [
+     0.524,
+     0.908
+    ],
+    "back": [
+     0.543,
+     0.901
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.439
+    ],
+    "tail": [
+     0.944,
+     0.494
+    ],
+    "shoulder": [
+     0.239,
+     0.402
+    ],
+    "hip": [
+     0.733,
+     0.302
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.561
+    ],
+    "tail": [
+     0.944,
+     0.506
+    ],
+    "shoulder": [
+     0.239,
+     0.598
+    ],
+    "hip": [
+     0.733,
+     0.698
+    ]
+   },
+   "legScale": {
+    "front": 0.818,
+    "back": 0.882
+   }
+  },
+  "pharaoh": {
+   "parts": [
+    "Parts/pharaoh/head.png",
+    "Parts/pharaoh/torso.png",
+    "Parts/pharaoh/tail.png",
+    "Parts/pharaoh/front.png",
+    "Parts/pharaoh/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.566,
+     0.877
+    ],
+    "tail": [
+     0.047,
+     0.181
+    ],
+    "front": [
+     0.574,
+     0.097
+    ],
+    "back": [
+     0.573,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.566,
+     0.123
+    ],
+    "tail": [
+     0.047,
+     0.819
+    ],
+    "front": [
+     0.574,
+     0.903
+    ],
+    "back": [
+     0.573,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.067,
+     0.389
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.24,
+     0.452
+    ],
+    "hip": [
+     0.737,
+     0.323
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.067,
+     0.611
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.24,
+     0.548
+    ],
+    "hip": [
+     0.737,
+     0.677
+    ]
+   },
+   "legScale": {
+    "front": 0.96,
+    "back": 0.929
+   }
+  },
+  "ratking": {
+   "parts": [
+    "Parts/ratking/head.png",
+    "Parts/ratking/torso.png",
+    "Parts/ratking/tail.png",
+    "Parts/ratking/front.png",
+    "Parts/ratking/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.682,
+     0.852
+    ],
+    "tail": [
+     0.05,
+     0.236
+    ],
+    "front": [
+     0.6,
+     0.099
+    ],
+    "back": [
+     0.63,
+     0.092
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.682,
+     0.148
+    ],
+    "tail": [
+     0.05,
+     0.764
+    ],
+    "front": [
+     0.6,
+     0.901
+    ],
+    "back": [
+     0.63,
+     0.908
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.363
+    ],
+    "tail": [
+     0.943,
+     0.456
+    ],
+    "shoulder": [
+     0.239,
+     0.394
+    ],
+    "hip": [
+     0.736,
+     0.306
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.637
+    ],
+    "tail": [
+     0.943,
+     0.544
+    ],
+    "shoulder": [
+     0.239,
+     0.606
+    ],
+    "hip": [
+     0.736,
+     0.694
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.938
+   }
+  },
+  "ratqueen": {
+   "parts": [
+    "Parts/ratqueen/head.png",
+    "Parts/ratqueen/torso.png",
+    "Parts/ratqueen/tail.png",
+    "Parts/ratqueen/front.png",
+    "Parts/ratqueen/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.774,
+     0.854
+    ],
+    "tail": [
+     0.046,
+     0.236
+    ],
+    "front": [
+     0.59,
+     0.095
+    ],
+    "back": [
+     0.671,
+     0.094
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.774,
+     0.146
+    ],
+    "tail": [
+     0.046,
+     0.764
+    ],
+    "front": [
+     0.59,
+     0.905
+    ],
+    "back": [
+     0.671,
+     0.906
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.392
+    ],
+    "tail": [
+     0.942,
+     0.547
+    ],
+    "shoulder": [
+     0.237,
+     0.51
+    ],
+    "hip": [
+     0.737,
+     0.387
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.608
+    ],
+    "tail": [
+     0.942,
+     0.453
+    ],
+    "shoulder": [
+     0.237,
+     0.49
+    ],
+    "hip": [
+     0.737,
+     0.613
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.9
+   }
+  },
+  "robot": {
+   "parts": [
+    "Parts/robot/head.png",
+    "Parts/robot/torso.png",
+    "Parts/robot/tail.png",
+    "Parts/robot/front.png",
+    "Parts/robot/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.747,
+     0.843
+    ],
+    "tail": [
+     0.049,
+     0.256
+    ],
+    "front": [
+     0.547,
+     0.097
+    ],
+    "back": [
+     0.573,
+     0.094
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.747,
+     0.157
+    ],
+    "tail": [
+     0.049,
+     0.744
+    ],
+    "front": [
+     0.547,
+     0.903
+    ],
+    "back": [
+     0.573,
+     0.906
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.466
+    ],
+    "tail": [
+     0.947,
+     0.513
+    ],
+    "shoulder": [
+     0.237,
+     0.43
+    ],
+    "hip": [
+     0.734,
+     0.304
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.534
+    ],
+    "tail": [
+     0.947,
+     0.487
+    ],
+    "shoulder": [
+     0.237,
+     0.57
+    ],
+    "hip": [
+     0.734,
+     0.696
+    ]
+   },
+   "legScale": {
+    "front": 0.844,
+    "back": 0.757
+   }
+  },
+  "rocker": {
+   "parts": [
+    "Parts/rocker/head.png",
+    "Parts/rocker/torso.png",
+    "Parts/rocker/tail.png",
+    "Parts/rocker/front.png",
+    "Parts/rocker/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.737,
+     0.852
+    ],
+    "tail": [
+     0.049,
+     0.273
+    ],
+    "front": [
+     0.715,
+     0.095
+    ],
+    "back": [
+     0.563,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.737,
+     0.148
+    ],
+    "tail": [
+     0.049,
+     0.727
+    ],
+    "front": [
+     0.715,
+     0.905
+    ],
+    "back": [
+     0.563,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.248
+    ],
+    "tail": [
+     0.943,
+     0.526
+    ],
+    "shoulder": [
+     0.241,
+     0.39
+    ],
+    "hip": [
+     0.736,
+     0.341
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.752
+    ],
+    "tail": [
+     0.943,
+     0.474
+    ],
+    "shoulder": [
+     0.241,
+     0.61
+    ],
+    "hip": [
+     0.736,
+     0.659
+    ]
+   },
+   "legScale": {
+    "front": 0.727,
+    "back": 0.772
+   }
+  },
+  "samurai": {
+   "parts": [
+    "Parts/samurai/head.png",
+    "Parts/samurai/torso.png",
+    "Parts/samurai/tail.png",
+    "Parts/samurai/front.png",
+    "Parts/samurai/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.719,
+     0.86
+    ],
+    "tail": [
+     0.047,
+     0.202
+    ],
+    "front": [
+     0.796,
+     0.1
+    ],
+    "back": [
+     0.623,
+     0.094
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.719,
+     0.14
+    ],
+    "tail": [
+     0.047,
+     0.798
+    ],
+    "front": [
+     0.796,
+     0.9
+    ],
+    "back": [
+     0.623,
+     0.906
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.336
+    ],
+    "tail": [
+     0.943,
+     0.467
+    ],
+    "shoulder": [
+     0.241,
+     0.582
+    ],
+    "hip": [
+     0.736,
+     0.306
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.664
+    ],
+    "tail": [
+     0.943,
+     0.533
+    ],
+    "shoulder": [
+     0.241,
+     0.418
+    ],
+    "hip": [
+     0.736,
+     0.694
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "santa": {
+   "parts": [
+    "Parts/santa/head.png",
+    "Parts/santa/torso.png",
+    "Parts/santa/tail.png",
+    "Parts/santa/front.png",
+    "Parts/santa/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.563,
+     0.867
+    ],
+    "tail": [
+     0.048,
+     0.197
+    ],
+    "front": [
+     0.537,
+     0.094
+    ],
+    "back": [
+     0.636,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.563,
+     0.133
+    ],
+    "tail": [
+     0.048,
+     0.803
+    ],
+    "front": [
+     0.537,
+     0.906
+    ],
+    "back": [
+     0.636,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.679
+    ],
+    "tail": [
+     0.944,
+     0.554
+    ],
+    "shoulder": [
+     0.236,
+     0.74
+    ],
+    "hip": [
+     0.733,
+     0.582
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.321
+    ],
+    "tail": [
+     0.944,
+     0.446
+    ],
+    "shoulder": [
+     0.236,
+     0.26
+    ],
+    "hip": [
+     0.733,
+     0.418
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "sultan": {
+   "parts": [
+    "Parts/sultan/head.png",
+    "Parts/sultan/torso.png",
+    "Parts/sultan/tail.png",
+    "Parts/sultan/front.png",
+    "Parts/sultan/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.658,
+     0.877
+    ],
+    "tail": [
+     0.035,
+     0.489
+    ],
+    "front": [
+     0.538,
+     0.095
+    ],
+    "back": [
+     0.604,
+     0.094
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.658,
+     0.123
+    ],
+    "tail": [
+     0.035,
+     0.511
+    ],
+    "front": [
+     0.538,
+     0.905
+    ],
+    "back": [
+     0.604,
+     0.906
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.07,
+     0.478
+    ],
+    "tail": [
+     0.946,
+     0.525
+    ],
+    "shoulder": [
+     0.238,
+     0.589
+    ],
+    "hip": [
+     0.735,
+     0.382
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.07,
+     0.522
+    ],
+    "tail": [
+     0.946,
+     0.475
+    ],
+    "shoulder": [
+     0.238,
+     0.411
+    ],
+    "hip": [
+     0.735,
+     0.618
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "vampire": {
+   "parts": [
+    "Parts/vampire/head.png",
+    "Parts/vampire/torso.png",
+    "Parts/vampire/tail.png",
+    "Parts/vampire/front.png",
+    "Parts/vampire/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.777,
+     0.866
+    ],
+    "tail": [
+     0.048,
+     0.209
+    ],
+    "front": [
+     0.663,
+     0.101
+    ],
+    "back": [
+     0.632,
+     0.099
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.777,
+     0.134
+    ],
+    "tail": [
+     0.048,
+     0.791
+    ],
+    "front": [
+     0.663,
+     0.899
+    ],
+    "back": [
+     0.632,
+     0.901
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.07,
+     0.383
+    ],
+    "tail": [
+     0.946,
+     0.689
+    ],
+    "shoulder": [
+     0.237,
+     0.426
+    ],
+    "hip": [
+     0.737,
+     0.46
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.07,
+     0.617
+    ],
+    "tail": [
+     0.946,
+     0.311
+    ],
+    "shoulder": [
+     0.237,
+     0.574
+    ],
+    "hip": [
+     0.737,
+     0.54
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.771
+   }
+  },
+  "viking": {
+   "parts": [
+    "Parts/viking/head.png",
+    "Parts/viking/torso.png",
+    "Parts/viking/tail.png",
+    "Parts/viking/front.png",
+    "Parts/viking/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.68,
+     0.853
+    ],
+    "tail": [
+     0.047,
+     0.282
+    ],
+    "front": [
+     0.767,
+     0.094
+    ],
+    "back": [
+     0.72,
+     0.097
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.68,
+     0.147
+    ],
+    "tail": [
+     0.047,
+     0.718
+    ],
+    "front": [
+     0.767,
+     0.906
+    ],
+    "back": [
+     0.72,
+     0.903
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.369
+    ],
+    "tail": [
+     0.943,
+     0.557
+    ],
+    "shoulder": [
+     0.241,
+     0.396
+    ],
+    "hip": [
+     0.736,
+     0.352
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.631
+    ],
+    "tail": [
+     0.943,
+     0.443
+    ],
+    "shoulder": [
+     0.241,
+     0.604
+    ],
+    "hip": [
+     0.736,
+     0.648
+    ]
+   },
+   "legScale": {
+    "front": 0.83,
+    "back": 0.931
+   }
+  },
+  "wizard": {
+   "parts": [
+    "Parts/wizard/head.png",
+    "Parts/wizard/torso.png",
+    "Parts/wizard/tail.png",
+    "Parts/wizard/front.png",
+    "Parts/wizard/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.644,
+     0.853
+    ],
+    "tail": [
+     0.049,
+     0.249
+    ],
+    "front": [
+     0.516,
+     0.099
+    ],
+    "back": [
+     0.596,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.644,
+     0.147
+    ],
+    "tail": [
+     0.049,
+     0.751
+    ],
+    "front": [
+     0.516,
+     0.901
+    ],
+    "back": [
+     0.596,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.319
+    ],
+    "tail": [
+     0.946,
+     0.529
+    ],
+    "shoulder": [
+     0.241,
+     0.386
+    ],
+    "hip": [
+     0.735,
+     0.297
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.681
+    ],
+    "tail": [
+     0.946,
+     0.471
+    ],
+    "shoulder": [
+     0.241,
+     0.614
+    ],
+    "hip": [
+     0.735,
+     0.703
+    ]
+   },
+   "legScale": {
+    "front": 0.993,
+    "back": 0.784
+   }
+  },
+  "zombie": {
+   "parts": [
+    "Parts/zombie/head.png",
+    "Parts/zombie/torso.png",
+    "Parts/zombie/tail.png",
+    "Parts/zombie/front.png",
+    "Parts/zombie/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.808,
+     0.848
+    ],
+    "tail": [
+     0.047,
+     0.192
+    ],
+    "front": [
+     0.709,
+     0.093
+    ],
+    "back": [
+     0.473,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.808,
+     0.152
+    ],
+    "tail": [
+     0.047,
+     0.808
+    ],
+    "front": [
+     0.709,
+     0.907
+    ],
+    "back": [
+     0.473,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.353
+    ],
+    "tail": [
+     0.944,
+     0.575
+    ],
+    "shoulder": [
+     0.239,
+     0.42
+    ],
+    "hip": [
+     0.733,
+     0.347
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.647
+    ],
+    "tail": [
+     0.944,
+     0.425
+    ],
+    "shoulder": [
+     0.239,
+     0.58
+    ],
+    "hip": [
+     0.733,
+     0.653
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.731
+   }
+  },
+  "parkrat": {
+   "parts": [
+    "Parts/parkrat/head.png",
+    "Parts/parkrat/torso.png",
+    "Parts/parkrat/tail.png",
+    "Parts/parkrat/front.png",
+    "Parts/parkrat/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.569,
+     0.884
+    ],
+    "tail": [
+     0.048,
+     0.23
+    ],
+    "front": [
+     0.564,
+     0.094
+    ],
+    "back": [
+     0.567,
+     0.094
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.569,
+     0.116
+    ],
+    "tail": [
+     0.048,
+     0.77
+    ],
+    "front": [
+     0.564,
+     0.906
+    ],
+    "back": [
+     0.567,
+     0.906
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.488
+    ],
+    "tail": [
+     0.942,
+     0.526
+    ],
+    "shoulder": [
+     0.237,
+     0.384
+    ],
+    "hip": [
+     0.734,
+     0.337
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.512
+    ],
+    "tail": [
+     0.942,
+     0.474
+    ],
+    "shoulder": [
+     0.237,
+     0.616
+    ],
+    "hip": [
+     0.734,
+     0.663
+    ]
+   },
+   "legScale": {
+    "front": 0.634,
+    "back": 1
+   }
+  },
+  "pcmouse": {
+   "parts": [
+    "Parts/pcmouse/head.png",
+    "Parts/pcmouse/torso.png",
+    "Parts/pcmouse/tail.png",
+    "Parts/pcmouse/front.png",
+    "Parts/pcmouse/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.712,
+     0.879
+    ],
+    "tail": [
+     0.047,
+     0.328
+    ],
+    "front": [
+     0.61,
+     0.098
+    ],
+    "back": [
+     0.645,
+     0.094
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.712,
+     0.121
+    ],
+    "tail": [
+     0.047,
+     0.672
+    ],
+    "front": [
+     0.61,
+     0.902
+    ],
+    "back": [
+     0.645,
+     0.906
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.067,
+     0.429
+    ],
+    "tail": [
+     0.94,
+     0.564
+    ],
+    "shoulder": [
+     0.239,
+     0.688
+    ],
+    "hip": [
+     0.731,
+     0.393
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.067,
+     0.571
+    ],
+    "tail": [
+     0.94,
+     0.436
+    ],
+    "shoulder": [
+     0.239,
+     0.312
+    ],
+    "hip": [
+     0.731,
+     0.607
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "plaguerat": {
+   "parts": [
+    "Parts/plaguerat/head.png",
+    "Parts/plaguerat/torso.png",
+    "Parts/plaguerat/tail.png",
+    "Parts/plaguerat/front.png",
+    "Parts/plaguerat/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.652,
+     0.855
+    ],
+    "tail": [
+     0.047,
+     0.254
+    ],
+    "front": [
+     0.742,
+     0.093
+    ],
+    "back": [
+     0.421,
+     0.092
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.652,
+     0.145
+    ],
+    "tail": [
+     0.047,
+     0.746
+    ],
+    "front": [
+     0.742,
+     0.907
+    ],
+    "back": [
+     0.421,
+     0.908
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.406
+    ],
+    "tail": [
+     0.942,
+     0.602
+    ],
+    "shoulder": [
+     0.239,
+     0.615
+    ],
+    "hip": [
+     0.732,
+     0.388
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.594
+    ],
+    "tail": [
+     0.942,
+     0.398
+    ],
+    "shoulder": [
+     0.239,
+     0.385
+    ],
+    "hip": [
+     0.732,
+     0.612
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "zapham": {
+   "parts": [
+    "Parts/zapham/head.png",
+    "Parts/zapham/torso.png",
+    "Parts/zapham/tail.png",
+    "Parts/zapham/front.png",
+    "Parts/zapham/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.651,
+     0.869
+    ],
+    "tail": [
+     0.054,
+     0.737
+    ],
+    "front": [
+     0.603,
+     0.104
+    ],
+    "back": [
+     0.5,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.651,
+     0.131
+    ],
+    "tail": [
+     0.054,
+     0.263
+    ],
+    "front": [
+     0.603,
+     0.896
+    ],
+    "back": [
+     0.5,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.538
+    ],
+    "tail": [
+     0.946,
+     0.5
+    ],
+    "shoulder": [
+     0.241,
+     0.592
+    ],
+    "hip": [
+     0.735,
+     0.296
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.462
+    ],
+    "tail": [
+     0.946,
+     0.5
+    ],
+    "shoulder": [
+     0.241,
+     0.408
+    ],
+    "hip": [
+     0.735,
+     0.704
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.985
+   }
+  },
+  "streamrat": {
+   "parts": [
+    "Parts/streamrat/head.png",
+    "Parts/streamrat/torso.png",
+    "Parts/streamrat/tail.png",
+    "Parts/streamrat/front.png",
+    "Parts/streamrat/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.604,
+     0.864
+    ],
+    "tail": [
+     0.048,
+     0.512
+    ],
+    "front": [
+     0.65,
+     0.102
+    ],
+    "back": [
+     0.599,
+     0.099
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.604,
+     0.136
+    ],
+    "tail": [
+     0.048,
+     0.488
+    ],
+    "front": [
+     0.65,
+     0.898
+    ],
+    "back": [
+     0.599,
+     0.901
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.487
+    ],
+    "tail": [
+     0.945,
+     0.532
+    ],
+    "shoulder": [
+     0.241,
+     0.516
+    ],
+    "hip": [
+     0.738,
+     0.467
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.513
+    ],
+    "tail": [
+     0.945,
+     0.468
+    ],
+    "shoulder": [
+     0.241,
+     0.484
+    ],
+    "hip": [
+     0.738,
+     0.533
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "starchef": {
+   "parts": [
+    "Parts/starchef/head.png",
+    "Parts/starchef/torso.png",
+    "Parts/starchef/tail.png",
+    "Parts/starchef/front.png",
+    "Parts/starchef/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.645,
+     0.87
+    ],
+    "tail": [
+     0.05,
+     0.176
+    ],
+    "front": [
+     0.493,
+     0.095
+    ],
+    "back": [
+     0.544,
+     0.099
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.645,
+     0.13
+    ],
+    "tail": [
+     0.05,
+     0.824
+    ],
+    "front": [
+     0.493,
+     0.905
+    ],
+    "back": [
+     0.544,
+     0.901
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.367
+    ],
+    "tail": [
+     0.943,
+     0.543
+    ],
+    "shoulder": [
+     0.241,
+     0.442
+    ],
+    "hip": [
+     0.736,
+     0.312
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.633
+    ],
+    "tail": [
+     0.943,
+     0.457
+    ],
+    "shoulder": [
+     0.241,
+     0.558
+    ],
+    "hip": [
+     0.736,
+     0.688
+    ]
+   },
+   "legScale": {
+    "front": 0.969,
+    "back": 0.809
+   }
+  },
+  "ramjui": {
+   "parts": [
+    "Parts/ramjui/head.png",
+    "Parts/ramjui/torso.png",
+    "Parts/ramjui/tail.png",
+    "Parts/ramjui/front.png",
+    "Parts/ramjui/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.628,
+     0.859
+    ],
+    "tail": [
+     0.053,
+     0.867
+    ],
+    "front": [
+     0.489,
+     0.093
+    ],
+    "back": [
+     0.586,
+     0.096
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.628,
+     0.141
+    ],
+    "tail": [
+     0.053,
+     0.133
+    ],
+    "front": [
+     0.489,
+     0.907
+    ],
+    "back": [
+     0.586,
+     0.904
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.067,
+     0.328
+    ],
+    "tail": [
+     0.941,
+     0.582
+    ],
+    "shoulder": [
+     0.237,
+     0.437
+    ],
+    "hip": [
+     0.733,
+     0.416
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.067,
+     0.672
+    ],
+    "tail": [
+     0.941,
+     0.418
+    ],
+    "shoulder": [
+     0.237,
+     0.563
+    ],
+    "hip": [
+     0.733,
+     0.584
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.887
+   }
+  },
+  "jwerry": {
+   "parts": [
+    "Parts/jwerry/head.png",
+    "Parts/jwerry/torso.png",
+    "Parts/jwerry/tail.png",
+    "Parts/jwerry/front.png",
+    "Parts/jwerry/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.542,
+     0.849
+    ],
+    "tail": [
+     0.047,
+     0.221
+    ],
+    "front": [
+     0.588,
+     0.092
+    ],
+    "back": [
+     0.679,
+     0.097
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.542,
+     0.151
+    ],
+    "tail": [
+     0.047,
+     0.779
+    ],
+    "front": [
+     0.588,
+     0.908
+    ],
+    "back": [
+     0.679,
+     0.903
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.07,
+     0.297
+    ],
+    "tail": [
+     0.945,
+     0.458
+    ],
+    "shoulder": [
+     0.234,
+     0.428
+    ],
+    "hip": [
+     0.734,
+     0.279
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.07,
+     0.703
+    ],
+    "tail": [
+     0.945,
+     0.542
+    ],
+    "shoulder": [
+     0.234,
+     0.572
+    ],
+    "hip": [
+     0.734,
+     0.721
+    ]
+   },
+   "legScale": {
+    "front": 0.679,
+    "back": 0.731
+   }
+  },
+  "blackrat": {
+   "parts": [
+    "Parts/blackrat/head.png",
+    "Parts/blackrat/torso.png",
+    "Parts/blackrat/tail.png",
+    "Parts/blackrat/front.png",
+    "Parts/blackrat/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.791,
+     0.866
+    ],
+    "tail": [
+     0.047,
+     0.259
+    ],
+    "front": [
+     0.472,
+     0.095
+    ],
+    "back": [
+     0.5,
+     0.096
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.791,
+     0.134
+    ],
+    "tail": [
+     0.047,
+     0.741
+    ],
+    "front": [
+     0.472,
+     0.905
+    ],
+    "back": [
+     0.5,
+     0.904
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.067,
+     0.414
+    ],
+    "tail": [
+     0.945,
+     0.494
+    ],
+    "shoulder": [
+     0.238,
+     0.486
+    ],
+    "hip": [
+     0.738,
+     0.308
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.067,
+     0.586
+    ],
+    "tail": [
+     0.945,
+     0.506
+    ],
+    "shoulder": [
+     0.238,
+     0.514
+    ],
+    "hip": [
+     0.738,
+     0.692
+    ]
+   },
+   "legScale": {
+    "front": 0.997,
+    "back": 0.996
+   }
+  },
+  "boxer": {
+   "parts": [
+    "Parts/boxer/head.png",
+    "Parts/boxer/torso.png",
+    "Parts/boxer/tail.png",
+    "Parts/boxer/front.png",
+    "Parts/boxer/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.649,
+     0.858
+    ],
+    "tail": [
+     0.049,
+     0.398
+    ],
+    "front": [
+     0.768,
+     0.102
+    ],
+    "back": [
+     0.614,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.649,
+     0.142
+    ],
+    "tail": [
+     0.049,
+     0.602
+    ],
+    "front": [
+     0.768,
+     0.898
+    ],
+    "back": [
+     0.614,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.474
+    ],
+    "tail": [
+     0.945,
+     0.542
+    ],
+    "shoulder": [
+     0.238,
+     0.495
+    ],
+    "hip": [
+     0.735,
+     0.323
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.526
+    ],
+    "tail": [
+     0.945,
+     0.458
+    ],
+    "shoulder": [
+     0.238,
+     0.505
+    ],
+    "hip": [
+     0.735,
+     0.677
+    ]
+   },
+   "legScale": {
+    "front": 0.885,
+    "back": 1
+   }
+  },
+  "dumbo": {
+   "parts": [
+    "Parts/dumbo/head.png",
+    "Parts/dumbo/torso.png",
+    "Parts/dumbo/tail.png",
+    "Parts/dumbo/front.png",
+    "Parts/dumbo/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.642,
+     0.856
+    ],
+    "tail": [
+     0.048,
+     0.474
+    ],
+    "front": [
+     0.643,
+     0.097
+    ],
+    "back": [
+     0.569,
+     0.094
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.642,
+     0.144
+    ],
+    "tail": [
+     0.048,
+     0.526
+    ],
+    "front": [
+     0.643,
+     0.903
+    ],
+    "back": [
+     0.569,
+     0.906
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.071,
+     0.414
+    ],
+    "tail": [
+     0.945,
+     0.577
+    ],
+    "shoulder": [
+     0.236,
+     0.472
+    ],
+    "hip": [
+     0.732,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.071,
+     0.586
+    ],
+    "tail": [
+     0.945,
+     0.423
+    ],
+    "shoulder": [
+     0.236,
+     0.528
+    ],
+    "hip": [
+     0.732,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.837
+   }
+  },
+  "dwarfham": {
+   "parts": [
+    "Parts/dwarfham/head.png",
+    "Parts/dwarfham/torso.png",
+    "Parts/dwarfham/tail.png",
+    "Parts/dwarfham/front.png",
+    "Parts/dwarfham/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.655,
+     0.877
+    ],
+    "tail": [
+     0.058,
+     0.425
+    ],
+    "front": [
+     0.6,
+     0.098
+    ],
+    "back": [
+     0.492,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.655,
+     0.123
+    ],
+    "tail": [
+     0.058,
+     0.575
+    ],
+    "front": [
+     0.6,
+     0.902
+    ],
+    "back": [
+     0.492,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.404
+    ],
+    "tail": [
+     0.944,
+     0.518
+    ],
+    "shoulder": [
+     0.238,
+     0.551
+    ],
+    "hip": [
+     0.738,
+     0.352
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.596
+    ],
+    "tail": [
+     0.944,
+     0.482
+    ],
+    "shoulder": [
+     0.238,
+     0.449
+    ],
+    "hip": [
+     0.738,
+     0.648
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "farmer": {
+   "parts": [
+    "Parts/farmer/head.png",
+    "Parts/farmer/torso.png",
+    "Parts/farmer/tail.png",
+    "Parts/farmer/front.png",
+    "Parts/farmer/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.625,
+     0.854
+    ],
+    "tail": [
+     0.047,
+     0.385
+    ],
+    "front": [
+     0.523,
+     0.101
+    ],
+    "back": [
+     0.571,
+     0.097
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.625,
+     0.146
+    ],
+    "tail": [
+     0.047,
+     0.615
+    ],
+    "front": [
+     0.523,
+     0.899
+    ],
+    "back": [
+     0.571,
+     0.903
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.378
+    ],
+    "tail": [
+     0.946,
+     0.49
+    ],
+    "shoulder": [
+     0.238,
+     0.501
+    ],
+    "hip": [
+     0.735,
+     0.416
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.622
+    ],
+    "tail": [
+     0.946,
+     0.51
+    ],
+    "shoulder": [
+     0.238,
+     0.499
+    ],
+    "hip": [
+     0.735,
+     0.584
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "gerbilc": {
+   "parts": [
+    "Parts/gerbilc/head.png",
+    "Parts/gerbilc/torso.png",
+    "Parts/gerbilc/tail.png",
+    "Parts/gerbilc/front.png",
+    "Parts/gerbilc/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.657,
+     0.857
+    ],
+    "tail": [
+     0.048,
+     0.555
+    ],
+    "front": [
+     0.574,
+     0.098
+    ],
+    "back": [
+     0.586,
+     0.101
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.657,
+     0.143
+    ],
+    "tail": [
+     0.048,
+     0.445
+    ],
+    "front": [
+     0.574,
+     0.902
+    ],
+    "back": [
+     0.586,
+     0.899
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.346
+    ],
+    "tail": [
+     0.944,
+     0.518
+    ],
+    "shoulder": [
+     0.236,
+     0.518
+    ],
+    "hip": [
+     0.733,
+     0.372
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.654
+    ],
+    "tail": [
+     0.944,
+     0.482
+    ],
+    "shoulder": [
+     0.236,
+     0.482
+    ],
+    "hip": [
+     0.733,
+     0.628
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "painter": {
+   "parts": [
+    "Parts/painter/head.png",
+    "Parts/painter/torso.png",
+    "Parts/painter/tail.png",
+    "Parts/painter/front.png",
+    "Parts/painter/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.544,
+     0.852
+    ],
+    "tail": [
+     0.047,
+     0.362
+    ],
+    "front": [
+     0.754,
+     0.098
+    ],
+    "back": [
+     0.557,
+     0.096
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.544,
+     0.148
+    ],
+    "tail": [
+     0.047,
+     0.638
+    ],
+    "front": [
+     0.754,
+     0.902
+    ],
+    "back": [
+     0.557,
+     0.904
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.393
+    ],
+    "tail": [
+     0.946,
+     0.593
+    ],
+    "shoulder": [
+     0.238,
+     0.407
+    ],
+    "hip": [
+     0.731,
+     0.363
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.607
+    ],
+    "tail": [
+     0.946,
+     0.407
+    ],
+    "shoulder": [
+     0.238,
+     0.593
+    ],
+    "hip": [
+     0.731,
+     0.637
+    ]
+   },
+   "legScale": {
+    "front": 0.805,
+    "back": 0.805
+   }
+  },
+  "student": {
+   "parts": [
+    "Parts/student/head.png",
+    "Parts/student/torso.png",
+    "Parts/student/tail.png",
+    "Parts/student/front.png",
+    "Parts/student/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.657,
+     0.877
+    ],
+    "tail": [
+     0.054,
+     0.496
+    ],
+    "front": [
+     0.574,
+     0.095
+    ],
+    "back": [
+     0.518,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.657,
+     0.123
+    ],
+    "tail": [
+     0.054,
+     0.504
+    ],
+    "front": [
+     0.574,
+     0.905
+    ],
+    "back": [
+     0.518,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.541
+    ],
+    "tail": [
+     0.947,
+     0.615
+    ],
+    "shoulder": [
+     0.239,
+     0.594
+    ],
+    "hip": [
+     0.734,
+     0.462
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.459
+    ],
+    "tail": [
+     0.947,
+     0.385
+    ],
+    "shoulder": [
+     0.239,
+     0.406
+    ],
+    "hip": [
+     0.734,
+     0.538
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.992
+   }
+  },
+  "barista": {
+   "parts": [
+    "Parts/barista/head.png",
+    "Parts/barista/torso.png",
+    "Parts/barista/tail.png",
+    "Parts/barista/front.png",
+    "Parts/barista/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.64,
+     0.853
+    ],
+    "tail": [
+     0.047,
+     0.385
+    ],
+    "front": [
+     0.685,
+     0.095
+    ],
+    "back": [
+     0.54,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.64,
+     0.147
+    ],
+    "tail": [
+     0.047,
+     0.615
+    ],
+    "front": [
+     0.685,
+     0.905
+    ],
+    "back": [
+     0.54,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.066,
+     0.446
+    ],
+    "tail": [
+     0.941,
+     0.558
+    ],
+    "shoulder": [
+     0.235,
+     0.466
+    ],
+    "hip": [
+     0.735,
+     0.355
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.066,
+     0.554
+    ],
+    "tail": [
+     0.941,
+     0.442
+    ],
+    "shoulder": [
+     0.235,
+     0.534
+    ],
+    "hip": [
+     0.735,
+     0.645
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.869
+   }
+  },
+  "dumborat": {
+   "parts": [
+    "Parts/dumborat/head.png",
+    "Parts/dumborat/torso.png",
+    "Parts/dumborat/tail.png",
+    "Parts/dumborat/front.png",
+    "Parts/dumborat/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.64,
+     0.831
+    ],
+    "tail": [
+     0.048,
+     0.262
+    ],
+    "front": [
+     0.429,
+     0.095
+    ],
+    "back": [
+     0.492,
+     0.097
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.64,
+     0.169
+    ],
+    "tail": [
+     0.048,
+     0.738
+    ],
+    "front": [
+     0.429,
+     0.905
+    ],
+    "back": [
+     0.492,
+     0.903
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.412
+    ],
+    "tail": [
+     0.944,
+     0.472
+    ],
+    "shoulder": [
+     0.241,
+     0.474
+    ],
+    "hip": [
+     0.735,
+     0.305
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.588
+    ],
+    "tail": [
+     0.944,
+     0.528
+    ],
+    "shoulder": [
+     0.241,
+     0.526
+    ],
+    "hip": [
+     0.735,
+     0.695
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.998
+   }
+  },
+  "gardener": {
+   "parts": [
+    "Parts/gardener/head.png",
+    "Parts/gardener/torso.png",
+    "Parts/gardener/tail.png",
+    "Parts/gardener/front.png",
+    "Parts/gardener/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.611,
+     0.866
+    ],
+    "tail": [
+     0.037,
+     0.482
+    ],
+    "front": [
+     0.776,
+     0.093
+    ],
+    "back": [
+     0.5,
+     0.095
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.611,
+     0.134
+    ],
+    "tail": [
+     0.037,
+     0.518
+    ],
+    "front": [
+     0.776,
+     0.907
+    ],
+    "back": [
+     0.5,
+     0.905
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.414
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.424
+    ],
+    "hip": [
+     0.738,
+     0.32
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.586
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.576
+    ],
+    "hip": [
+     0.738,
+     0.68
+    ]
+   },
+   "legScale": {
+    "front": 0.708,
+    "back": 0.857
+   }
+  },
+  "gerbilp": {
+   "parts": [
+    "Parts/gerbilp/head.png",
+    "Parts/gerbilp/torso.png",
+    "Parts/gerbilp/tail.png",
+    "Parts/gerbilp/front.png",
+    "Parts/gerbilp/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.709,
+     0.851
+    ],
+    "tail": [
+     0.048,
+     0.548
+    ],
+    "front": [
+     0.631,
+     0.103
+    ],
+    "back": [
+     0.472,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.709,
+     0.149
+    ],
+    "tail": [
+     0.048,
+     0.452
+    ],
+    "front": [
+     0.631,
+     0.897
+    ],
+    "back": [
+     0.472,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.402
+    ],
+    "tail": [
+     0.946,
+     0.605
+    ],
+    "shoulder": [
+     0.236,
+     0.433
+    ],
+    "hip": [
+     0.736,
+     0.344
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.598
+    ],
+    "tail": [
+     0.946,
+     0.395
+    ],
+    "shoulder": [
+     0.236,
+     0.567
+    ],
+    "hip": [
+     0.736,
+     0.656
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.796
+   }
+  },
+  "hairless": {
+   "parts": [
+    "Parts/hairless/head.png",
+    "Parts/hairless/torso.png",
+    "Parts/hairless/tail.png",
+    "Parts/hairless/front.png",
+    "Parts/hairless/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.824,
+     0.841
+    ],
+    "tail": [
+     0.048,
+     0.25
+    ],
+    "front": [
+     0.403,
+     0.098
+    ],
+    "back": [
+     0.524,
+     0.099
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.824,
+     0.159
+    ],
+    "tail": [
+     0.048,
+     0.75
+    ],
+    "front": [
+     0.403,
+     0.902
+    ],
+    "back": [
+     0.524,
+     0.901
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.07,
+     0.429
+    ],
+    "tail": [
+     0.943,
+     0.515
+    ],
+    "shoulder": [
+     0.236,
+     0.508
+    ],
+    "hip": [
+     0.732,
+     0.332
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.07,
+     0.571
+    ],
+    "tail": [
+     0.943,
+     0.485
+    ],
+    "shoulder": [
+     0.236,
+     0.492
+    ],
+    "hip": [
+     0.732,
+     0.668
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "harvest": {
+   "parts": [
+    "Parts/harvest/head.png",
+    "Parts/harvest/torso.png",
+    "Parts/harvest/tail.png",
+    "Parts/harvest/front.png",
+    "Parts/harvest/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.794,
+     0.859
+    ],
+    "tail": [
+     0.048,
+     0.184
+    ],
+    "front": [
+     0.411,
+     0.098
+    ],
+    "back": [
+     0.47,
+     0.094
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.794,
+     0.141
+    ],
+    "tail": [
+     0.048,
+     0.816
+    ],
+    "front": [
+     0.411,
+     0.902
+    ],
+    "back": [
+     0.47,
+     0.906
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.07,
+     0.394
+    ],
+    "tail": [
+     0.939,
+     0.488
+    ],
+    "shoulder": [
+     0.235,
+     0.479
+    ],
+    "hip": [
+     0.73,
+     0.312
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.07,
+     0.606
+    ],
+    "tail": [
+     0.939,
+     0.512
+    ],
+    "shoulder": [
+     0.235,
+     0.521
+    ],
+    "hip": [
+     0.73,
+     0.688
+    ]
+   },
+   "legScale": {
+    "front": 0.97,
+    "back": 0.817
+   }
+  },
+  "janitorat": {
+   "parts": [
+    "Parts/janitorat/head.png",
+    "Parts/janitorat/torso.png",
+    "Parts/janitorat/tail.png",
+    "Parts/janitorat/front.png",
+    "Parts/janitorat/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.679,
+     0.842
+    ],
+    "tail": [
+     0.048,
+     0.337
+    ],
+    "front": [
+     0.26,
+     0.091
+    ],
+    "back": [
+     0.565,
+     0.098
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.679,
+     0.158
+    ],
+    "tail": [
+     0.048,
+     0.663
+    ],
+    "front": [
+     0.26,
+     0.909
+    ],
+    "back": [
+     0.565,
+     0.902
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.072,
+     0.335
+    ],
+    "tail": [
+     0.946,
+     0.551
+    ],
+    "shoulder": [
+     0.241,
+     0.396
+    ],
+    "hip": [
+     0.735,
+     0.334
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.072,
+     0.665
+    ],
+    "tail": [
+     0.946,
+     0.449
+    ],
+    "shoulder": [
+     0.241,
+     0.604
+    ],
+    "hip": [
+     0.735,
+     0.666
+    ]
+   },
+   "legScale": {
+    "front": 0.631,
+    "back": 0.947
+   }
+  },
+  "jerboa": {
+   "parts": [
+    "Parts/jerboa/head.png",
+    "Parts/jerboa/torso.png",
+    "Parts/jerboa/tail.png",
+    "Parts/jerboa/front.png",
+    "Parts/jerboa/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.671,
+     0.864
+    ],
+    "tail": [
+     0.048,
+     0.583
+    ],
+    "front": [
+     0.71,
+     0.103
+    ],
+    "back": [
+     0.512,
+     0.099
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.671,
+     0.136
+    ],
+    "tail": [
+     0.048,
+     0.417
+    ],
+    "front": [
+     0.71,
+     0.897
+    ],
+    "back": [
+     0.512,
+     0.901
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.43
+    ],
+    "tail": [
+     0.941,
+     0.541
+    ],
+    "shoulder": [
+     0.237,
+     0.582
+    ],
+    "hip": [
+     0.737,
+     0.32
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.57
+    ],
+    "tail": [
+     0.941,
+     0.459
+    ],
+    "shoulder": [
+     0.237,
+     0.418
+    ],
+    "hip": [
+     0.737,
+     0.68
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.641
+   }
+  },
+  "spiny": {
+   "parts": [
+    "Parts/spiny/head.png",
+    "Parts/spiny/torso.png",
+    "Parts/spiny/tail.png",
+    "Parts/spiny/front.png",
+    "Parts/spiny/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.68,
+     0.851
+    ],
+    "tail": [
+     0.047,
+     0.461
+    ],
+    "front": [
+     0.697,
+     0.093
+    ],
+    "back": [
+     0.515,
+     0.093
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.68,
+     0.149
+    ],
+    "tail": [
+     0.047,
+     0.539
+    ],
+    "front": [
+     0.697,
+     0.907
+    ],
+    "back": [
+     0.515,
+     0.907
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.068,
+     0.518
+    ],
+    "tail": [
+     0.946,
+     0.549
+    ],
+    "shoulder": [
+     0.236,
+     0.687
+    ],
+    "hip": [
+     0.736,
+     0.483
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.068,
+     0.482
+    ],
+    "tail": [
+     0.946,
+     0.451
+    ],
+    "shoulder": [
+     0.236,
+     0.313
+    ],
+    "hip": [
+     0.736,
+     0.517
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
+  },
+  "jjdetective": {
+   "parts": [
+    "Parts/jjdetective/head.png",
+    "Parts/jjdetective/torso.png",
+    "Parts/jjdetective/tail.png",
+    "Parts/jjdetective/front.png",
+    "Parts/jjdetective/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.701,
+     0.86
+    ],
+    "tail": [
+     0.043,
+     0.571
+    ],
+    "front": [
+     0.594,
+     0.061
+    ],
+    "back": [
+     0.751,
+     0.058
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.701,
+     0.14
+    ],
+    "tail": [
+     0.043,
+     0.429
+    ],
+    "front": [
+     0.594,
+     0.939
+    ],
+    "back": [
+     0.751,
+     0.942
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.963
+   }
+  },
+  "fondue": {
+   "parts": [
+    "Parts/fondue/head.png",
+    "Parts/fondue/torso.png",
+    "Parts/fondue/tail.png",
+    "Parts/fondue/front.png",
+    "Parts/fondue/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.655,
+     0.86
+    ],
+    "tail": [
+     0.043,
+     0.478
+    ],
+    "front": [
+     0.54,
+     0.063
+    ],
+    "back": [
+     0.655,
+     0.059
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.655,
+     0.14
+    ],
+    "tail": [
+     0.043,
+     0.522
+    ],
+    "front": [
+     0.54,
+     0.937
+    ],
+    "back": [
+     0.655,
+     0.941
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.963
+   }
+  }
+ }
+}

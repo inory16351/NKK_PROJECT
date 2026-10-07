@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: skill_icons_b.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha). No text, no letters, no numbers, no labels, no grid lines, no frames or badges behind the icons.
+- A sheet of 12 game SKILL ICONS in an exact 4 columns x 3 rows grid (each cell 384x341). Each icon is a single object centered in its cell inside a square area, about 230px wide, with clear empty margin, never touching or crossing cell borders. All icons at a consistent size and viewing angle (slight 3/4 front view).
+- Style: match the attached reference image — soft flat vector cartoon, warm pastel colors, smooth subtle shading, NO thick dark outlines. Cute, chunky, very readable at small size (64px). Theme: lab rats rebelling in a research lab.
+
+Cells (left to right, top to bottom):
+Row 1: 1) a single ice skate with a little sparkle, 2) a small rat curled up into a ball rolling with motion lines, 3) a small rat spinning on its back breakdancing with a swirl around it, 4) a soccer ball bouncing with a small motion arc
+Row 2: 5) a pickaxe, 6) a wooden mousetrap with a small wrench on it, 7) a red megaphone with sound wave lines, 8) a green catnip leaf sprig tied with a pink gift ribbon
+Row 3: 9) a sleepy crescent moon with tiny stars, 10) a movie clapperboard, 11) a coiled metal spring with an upward sparkle arrow, 12) a closed padlock (pale gray-blue)

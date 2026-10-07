@@ -1,0 +1,21 @@
+Use your built-in image generation tool to create TWO separate images and save them as PNG files in the current working directory: first "fx_sj2.png", then "sj_band_sheet.png". Do not write code to draw them; they must be generated illustrations. After saving both, reply only with the two file names.
+
+IMAGE 1: fx_sj2.png
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere, perfectly uniform. No text, letters or numbers.
+- Exact 3 columns x 2 rows grid (cells 512x512). Each drawing is ONE connected shape centered in its cell with a clean magenta margin, never crossing cell borders.
+- Completely FLAT colors, no gradients, no glow, no blur, no outlines unless stated.
+Cells:
+1) A plain round disk (perfect circle), pure white, flat. About 300px diameter.
+2) A floor impact crater seen from DIRECTLY ABOVE: a dark grey-brown irregular round dent (about 45% of the cell wide) with 9 thick jagged crack lines radiating outward from its rim to near the cell edge, all connected to the dent. Single flat dark grey-brown color (#3c322d), nothing else.
+3) A plain 5-pointed star with sharp straight edges (classic star, inner radius about 45% of outer), pure white, flat. About 380px wide.
+4) A plain 4-pointed sparkle star with straight sharp edges (4 long points up/down/left/right, very narrow waist), pure white, flat.
+5) A soft round dust puff cloud (cluster of 5 overlapping circles), pure white, flat.
+6) A long thin straight vertical line with rounded ends, pure white, about 14px wide and 470px tall.
+
+IMAGE 2: sj_band_sheet.png
+- 1536x1024, solid flat MAGENTA background (#FF00FF) behind it.
+- In the middle: ONE wide horizontal rectangle comic panel band spanning nearly the full width (about 1500px wide x 420px tall), perfectly straight rectangle with square corners.
+- The band fill is warm yellow #F0C878.
+- Over the yellow: a regular comic HALFTONE dot pattern of round salmon-red dots (#E3A574 on the yellow, i.e. soft red-orange, flat) on a staggered grid about 20px apart. The dots are BIG (about 12px) around a point 30% from the left edge at mid height, and gradually get SMALLER farther from that point, becoming tiny specks near the right end.
+- A thick dark brown-black border (#3C322D) around the whole rectangle, about 12px thick, crisp flat.
+- No text, no characters, nothing else inside the band.

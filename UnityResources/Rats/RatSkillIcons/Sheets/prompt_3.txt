@@ -1,0 +1,33 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rat_skill_icons_3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha). No text, no letters, no numbers, no labels, no grid lines, no frames or badges behind the icons.
+- A sheet of 24 game SKILL ICONS in an exact 6 columns x 4 rows grid (each cell 256x256), filled left to right, top to bottom. Each icon is ONE simple object or tiny scene centered in its cell, filling about 65% of the cell, with a wide empty margin; icons must NOT touch or cross cell borders. Same size and same slight 3/4 front view for all.
+- STYLE IS THE MOST IMPORTANT RULE. Match the attached reference images (lab rat parts and lab items): the art style of Untitled Goose Game. Completely FLAT vector shapes, NO outlines or strokes, NO dark contour lines, no glossy highlights, no gradients, no shine, no glow, no motion lines, no drop shadows. A few flat color areas with at most one slightly darker flat tone. Soft muted pastel palette, low saturation, calm picture-book feel. Simple readable silhouettes that read at 64px.
+- Each icon illustrates the Korean skill name below (a skill of a cute lab rat character). Draw the key object or action the name suggests (the emoji is a hint). If a rat appears, it is a small cute rat in the same flat style.
+
+Cells:
+1) "등기 배달" (✉️) — 택배가 떨어질 때 화면에 있으면 자기 주변에 1개 추가 배달
+2) "속달 편지 폭격" (✉️) — 22초마다 → 속달 편지 폭격: 주변에 5개 투척 폭격
+3) "총알 배송" (📦) — 택배가 떨어질 때 화면에 있으면 자기 주변에 1개 추가 배달
+4) "로켓 배송" (🚀) — 택배 투하 때 화면에 있으면 60% 확률로 → 로켓 배송: 하늘에서 5개 낙하
+5) "파티 브레이크" (🎉) — 부딪힐 때 10% 확률로 전매특허 묘기
+6) "파티 타임" (🥳) — 25 콤보 이상일 때 부딪히면 10% 확률로 → 파티 타임: 주변 동료 전원 광란 4.3초 (속도·피해 ×1.5)
+7) "청소 수거" (🧹) — 이 쥐가 부순 물건 치즈 ×1.5
+8) "대걸레 스윙" (🧹) — 자기가 부순 물건에서 4% 확률로 🧹 드랍 → 같은 종이 주우면 → 대걸레 스윙: 주변에 5개 투척 폭격
+9) "에스프레소 샷" (☕) — 한 번 더 갉을 확률 26%
+10) "커피 한 잔씩" (☕) — 20초마다 → 커피 한 잔씩: 주변 동료 전원 광란 4.3초 (속도·피해 ×1.5)
+11) "새싹 키우기" (🌱) — 번식 쿨타임 ÷1.6, 새끼가 윗등급일 확률 ↑
+12) "꽃밭 대가족" (🌻) — 새끼를 낳을 때 35% 확률로 → 꽃밭 대가족: 동료 3마리 소환 (6초 동안 함께 난동)
+13) "물감 폭탄" (🎨) — 들이받을 때 20% 확률로 폭탄 투척 (반경 83)
+14) "물감 난사" (🎨) — 자기가 부순 물건에서 4% 확률로 🎨 드랍 → 같은 종이 주우면 → 물감 난사: 주변에 5개 투척 폭격
+15) "킥플립" (🛹) — 부딪힐 때 10% 확률로 전매특허 묘기
+16) "하프파이프 킥플립" (🛹) — 자기가 부순 물건에서 4% 확률로 🛹 드랍 → 같은 종이 주우면 → 하프파이프 킥플립: 3번 뛰어올라 쾅! 내려찍기 (반경 100)
+17) "형광 오라" (☢️) — 주변(반경 70)에 계속 방사능 피해
+18) "방사능 폭주" (☢️) — 15 콤보 이상일 때 부딪히면 8% 확률로 → 방사능 폭주: 주변 물건을 빨아들인 뒤 대폭발 (반경 234)
+19) "불안정 세포" (🧬) — 이 쥐가 부순 물건은 크게 폭발 (반경 +43)
+20) "세포 분열" (🧬) — 물건에 부딪힐 때 3% 확률로 → 세포 분열: 동료 3마리 소환 (6초 동안 함께 난동)
+21) "3대 500" (💪) — 물건을 ×1.5 세게 날림 (날아간 물건 충돌 피해도 ↑)
+22) "3대 500 던지기" (🏋️) — 물건에 부딪힐 때 4% 확률로 → 3대 500 던지기: 주변 물건을 번쩍 들어 집어던짐 (충돌 피해 ×5.1)
+23) "그림자 이동" (🥷) — 1.8초마다 순간이동해서 물건을 급습 (피해 ×2)
+24) "그림자 분신술" (🥷) — 물건에 부딪힐 때 3% 확률로 → 그림자 분신술: 동료 3마리 소환 (6초 동안 함께 난동)

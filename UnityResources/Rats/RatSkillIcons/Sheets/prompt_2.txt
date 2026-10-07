@@ -1,0 +1,33 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rat_skill_icons_2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha). No text, no letters, no numbers, no labels, no grid lines, no frames or badges behind the icons.
+- A sheet of 24 game SKILL ICONS in an exact 6 columns x 4 rows grid (each cell 256x256), filled left to right, top to bottom. Each icon is ONE simple object or tiny scene centered in its cell, filling about 65% of the cell, with a wide empty margin; icons must NOT touch or cross cell borders. Same size and same slight 3/4 front view for all.
+- STYLE IS THE MOST IMPORTANT RULE. Match the attached reference images (lab rat parts and lab items): the art style of Untitled Goose Game. Completely FLAT vector shapes, NO outlines or strokes, NO dark contour lines, no glossy highlights, no gradients, no shine, no glow, no motion lines, no drop shadows. A few flat color areas with at most one slightly darker flat tone. Soft muted pastel palette, low saturation, calm picture-book feel. Simple readable silhouettes that read at 64px.
+- Each icon illustrates the Korean skill name below (a skill of a cute lab rat character). Draw the key object or action the name suggests (the emoji is a hint). If a rat appears, it is a small cute rat in the same flat style.
+
+Cells:
+1) "소문 청취" (👂) — 크리티컬 확률 +8%, 크리티컬 ×3.5
+2) "귀 펄럭 소문 폭탄" (👂) — 20초마다 → 귀 펄럭 소문 폭탄: 음파 충격파 5번 + 주변 동료 광란 (반경 160)
+3) "모래 파기" (🏜️) — 벽에 주는 피해 ×3.0
+4) "모래 질주" (🏜️) — 벽을 들이받을 때 10% 확률로 → 모래 질주: 물건 사이를 4번 순간 돌진하며 일섬 (피해 ×3.0)
+5) "판다 구르기" (🐼) — 부딪힐 때 7% 확률로 몸을 말아 대포알처럼 튕겨다님
+6) "판다 대왕 구르기" (🐼) — 물건에 부딪힐 때 4% 확률로 → 판다 대왕 구르기: 거대한 공이 되어 3초간 굴러다니며 파괴 (피해 ×2.0)
+7) "천둥 코골이" (😴) — 자주 잠듦. 자는 동안 코골이 충격파 (반경 75)
+8) "지진 코골이" (💤) — 잠들 때 50% 확률로 → 지진 코골이: 음파 충격파 5번 + 주변 동료 광란 (반경 160)
+9) "풍년 농사" (🌾) — 번식 쿨타임 ÷1.6, 새끼가 윗등급일 확률 ↑
+10) "감자 투척" (🥔) — 자기가 부순 물건에서 4% 확률로 🥔 드랍 → 같은 종이 주우면 → 감자 투척: 주변에 5개 투척 폭격
+11) "원투 펀치" (🥊) — 물건을 ×1.4 세게 날림 (날아간 물건 충돌 피해도 ↑)
+12) "어퍼컷" (🥊) — 물건에 부딪힐 때 4% 확률로 → 어퍼컷: 3번 뛰어올라 쾅! 내려찍기 (반경 100)
+13) "벼락치기" (📚) — 크리티컬 확률 +10%, 크리티컬 ×3.6
+14) "쉬는 시간!" (🔔) — 20 콤보 이상일 때 부딪히면 10% 확률로 → 쉬는 시간!: 주변 동료 전원 광란 4.3초 (속도·피해 ×1.5)
+15) "플라스크 투척" (⚗️) — 들이받을 때 20% 확률로 폭탄 투척 (반경 83)
+16) "플라스크 난사" (⚗️) — 자기가 부순 물건에서 4% 확률로 ⚗️ 드랍 → 같은 종이 주우면 → 플라스크 난사: 주변에 5개 투척 폭격
+17) "약점 계산" (🤓) — 크리티컬 확률 +10%, 크리티컬 ×3.6
+18) "연필 난타" (✏️) — 물건에 부딪힐 때 3% 확률로 → 연필 난타: 앞의 물건을 초고속 12연타 (타당 피해 ×1.3)
+19) "해체 작업" (⛏️) — 벽에 주는 피해 ×3.6
+20) "오함마 철거" (🔨) — 자기가 부순 물건에서 4% 확률로 🔨 드랍 → 같은 종이 주우면 → 오함마 철거: 3번 뛰어올라 쾅! 내려찍기 (반경 100)
+21) "칼질 연타" (🔪) — 한 번 더 갉을 확률 26%
+22) "칼질 난무" (🔪) — 물건에 부딪힐 때 3% 확률로 → 칼질 난무: 앞의 물건을 초고속 12연타 (타당 피해 ×1.3)
+23) "여행 가방" (🎒) — 이 쥐가 부순 물건 치즈 ×1.5
+24) "배낭 굴리기" (🎒) — 물건에 부딪힐 때 3% 확률로 → 배낭 굴리기: 거대한 공이 되어 3초간 굴러다니며 파괴 (피해 ×2.6)

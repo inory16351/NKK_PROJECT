@@ -1,0 +1,20 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ult_ui.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings — perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- A sheet of 9 game UI pieces for an ULTIMATE SKILL system, in an exact 3 columns x 3 rows grid (each cell 512x341). Each piece is ONE single connected shape centered in its cell with a clean magenta margin, never touching or crossing cell borders. No loose floating bits.
+- STYLE: match the attached UI kit reference exactly (cozy flat cartoon game UI, Untitled Goose Game mood): completely FLAT color shapes, NO black outlines, no gradients, no glossy highlights, no glow. Warm cream, soft brown, muted gold, soft red palette. Each piece has at most one slightly darker flat tone for a simple rim/shadow.
+
+Cells (left to right, top to bottom):
+Row 1:
+1) A round button badge, front view, perfectly circular: a cream flat disc face with a thick warm-brown rim and a thin darker bottom lip (like a pressable round button). Empty face (an icon will be placed on it later). Fill about 85% of the cell height.
+2) The same round button badge but "ready" version: muted gold rim with 8 small rounded spikes around it like a sun badge, cream face, empty face.
+3) A soft sunburst: 12 wide rounded golden-cream rays radiating from a center disc, all connected into one star shape (to spin behind a ready button).
+Row 2:
+4) A very wide horizontal banner strip for a cut-in title: a slanted paper ribbon band (parallelogram with slightly torn ends), soft red with a cream inner stripe along its length, fills the full cell width. Empty, no text.
+5) A wide achievement plaque: a rounded cream-and-brown wooden plate (about 3.5 times wider than tall) with a small gold trophy cup attached on its left end. Empty plate area for text.
+6) A small rounded pill-shaped tag: cream face with a soft brown rim, about 2.5 times wider than tall. Empty.
+Row 3:
+7) A small gold trophy cup with two handles on a short brown base, front view.
+8) A round soft ring halo: a thick flat golden ring (donut) with a hollow center, perfectly circular.
+9) A small cute flat lightning-bolt shaped badge in muted gold (for an "auto" mark), chunky and rounded.

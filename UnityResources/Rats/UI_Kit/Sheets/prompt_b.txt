@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ui_kit_b.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha). No text, no letters, no numbers, no icons, no symbols, no labels, no grid lines.
+- A sheet of 16 game UI pieces in an exact 4 columns x 4 rows grid (each cell 384x256). Each piece centered in its cell with empty margin, never touching or crossing cell borders. Pieces are seen straight from the front (no perspective) and must be perfectly symmetric where noted.
+- STYLE IS THE MOST IMPORTANT RULE. Match the attached reference images (lab rat parts and lab items): the art style of Untitled Goose Game. Completely FLAT vector shapes, NO outlines or strokes, NO dark contour lines, no glossy highlights, no gradients, no glow, no drop shadows outside the shape. Built from a few flat color areas with at most one slightly darker flat tone (e.g. a thicker darker bottom edge to show depth). Soft muted warm palette (cream paper #efe2c6, warm wood browns, sage green, dusty red, warm gray). Calm, minimal, picture-book feel.
+
+Cells (left to right, top to bottom):
+Row 1: 1) a blank round skill node: cream disc with a thick flat ring in warm tan (symmetric circle), 2) the same round node but the ring is mustard yellow and the disc slightly brighter (owned / active), 3) the same round node but pale gray-blue and faded (locked), 4) a blank diamond (rotated square) skill node with rounded corners, cream face and thick tan rim (key node, symmetric)
+Row 2: 5) the same diamond node with a mustard yellow rim (owned key node), 6) a small plain red circle dot (notification dot), 7) a small round cream button with a darker tan rim (for a close button, blank face), 8) a small round sage green button (blank face)
+Row 3: 9) an empty horizontal progress bar track: long rounded capsule in dark warm brown, plain, 10) a progress bar fill: long rounded capsule in mustard yellow with one slightly darker flat bottom tone, 11) a progress bar fill: same capsule in sage green, 12) a small square floor tile button: rounded square light wood tile (for picking a floor number), blank face
+Row 4: 13) the same square tile but sage green (selected), 14) the same square tile but pale gray (locked), 15) a small flat tag / label ribbon in dusty red with notched right end, plain, 16) a thin horizontal dashed rope / string line connecting two small knots (for hanging signs)

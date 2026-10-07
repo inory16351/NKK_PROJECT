@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: skill_icons_a.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha). No text, no letters, no numbers, no labels, no grid lines, no frames or badges behind the icons.
+- A sheet of 24 game SKILL ICONS in an exact 6 columns x 4 rows grid (each cell 256x256). Each icon is a single object centered in its cell, filling about 75% of the cell, with clear empty margin, never touching or crossing cell borders. All icons at a consistent size and viewing angle (slight 3/4 front view).
+- Style: match the attached reference image — soft flat vector cartoon, warm pastel colors, smooth subtle shading, NO thick dark outlines. Cute, chunky, very readable at small size (64px). Theme: lab rats rebelling in a research lab.
+
+Cells (left to right, top to bottom):
+Row 1: 1) a small cute gray rat raising one tiny fist, wearing a red bandana (rebellion), 2) two big shiny rat front teeth (incisors) with a sparkle, 3) a red-white bullseye target with a little bite mark taken out of it, 4) a tiny barbell dumbbell, 5) a rat tooth crackling with a yellow lightning bolt, 6) a bowling ball smashing into pins with a small orange explosion puff
+Row 2: 7) a cardboard moving box with bite marks on the corner, 8) a cheese wedge falling as a meteor with a fiery orange tail, 9) a comic impact burst star (orange/yellow, no text), 10) an angry orange cat head with a red target crosshair over it, 11) a little running sneaker with wind speed lines, 12) a cozy twig-and-paper-scrap nest
+Row 3: 13) a steaming coffee mug with a tiny lightning sparkle, 14) two pink hearts overlapping, 15) two tiny baby mice sitting side by side, 16) a glowing green DNA double helix, 17) a party popper with confetti bursting, 18) a cheese wedge with a magnifying glass in front of it
+Row 4: 19) a bubbling chemistry flask with a little box crate, 20) a cartoon flame, 21) a stacked pile of lab supplies (boxes, flasks, beaker), 22) a parcel box strapped to a small rocket, 23) a golden crown with gems, 24) a small rat doing a backflip with a curved motion arrow

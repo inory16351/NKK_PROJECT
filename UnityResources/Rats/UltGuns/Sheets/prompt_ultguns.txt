@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ult_guns.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings - perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- A sheet of 4 game props in an exact 2 columns x 2 rows grid (each cell 512x512). Each prop is ONE single connected shape centered in its cell with a clean magenta margin, never touching or crossing cell borders. No loose floating bits, no sparkles, no motion lines.
+- STYLE: match the attached references (Untitled Goose Game style game props): completely FLAT color shapes, NO outlines, NO black linework, no gradients, no glow. Muted palette with one slightly darker flat tone for shading. Pure side view.
+
+Cells (left to right, top to bottom):
+Row 1:
+1) A chunky cartoon semi-automatic PISTOL in pure side view, the barrel/muzzle pointing to the LEFT, grip at the bottom right. Very readable classic handgun silhouette: long rectangular slide with a clearly visible dark muzzle hole at the left end, light steel-grey slide top with a few slide grooves, dark charcoal frame, a clearly visible round trigger guard with trigger, and a warm brown grip angled down-right. Big, bold, toy-like proportions. Fill most of the cell width.
+2) The exact same pistol shape and pose (muzzle pointing LEFT) but made of shiny GOLD (flat golden yellow with a darker gold shading tone) with a cream ivory grip. A luxury golden gun.
+Row 2:
+3) A single brass bullet shell casing lying horizontally: a small golden-brass cylinder with a slightly darker rim at the right end and an open dark mouth at the left end. Draw it large so it fills about half the cell width.
+4) A bullet tracer streak: a long thin horizontal tapered streak, rounded bright cream-white head on the LEFT, fading into a thinner pale yellow tail toward the right (flat bands of color, not a gradient). About 6 times wider than tall, fill the cell width.

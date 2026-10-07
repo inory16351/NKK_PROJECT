@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_color.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha), no text, no labels, no grid lines.
+- A sprite sheet of 16 separate game effect sprites arranged in an even 4 columns x 4 rows grid (each cell about 384x256). Each sprite centered in its cell with generous empty margin, never touching or crossing cell borders.
+- Style: match the attached reference image — soft flat vector cartoon, warm pastel colors, smooth subtle shading, NO thick dark outlines. Cute, for a casual game about lab rats.
+
+Cells (left to right, top to bottom):
+Row 1: 1) shiny golden cheese coin seen from the front (round coin with a small cheese wedge emblem), 2) the same coin seen from the side/tilted (for spin animation), 3) small glowing pale-yellow bullet tracer streak pointing right (bright head, fading tail), 4) round orange fireball with flame tail pointing left (moving right)
+Row 2: 5) straight horizontal laser beam segment filling the cell width (glowing pink-red core with white center line, soft glow edges, ends cut flat so it can be stretched), 6) straight horizontal electric beam segment filling the cell width (cyan/white), 7) tall vertical lightning bolt zig-zag (pale cyan glow, white core) top to bottom of the cell, 8) another different tall vertical lightning bolt with a small side branch
+Row 3: 9) small whirlwind tornado funnel (light gray-blue with motion swirl lines), 10) soft gray smoke puff cloud, 11) single cartoon flame (orange-yellow), 12) green toxic bubble / gas puff
+Row 4: 13) blue cartoon sweat drop, 14) sleepy "Z" letter shape bubble (soft blue-white, only the letter Z shape), 15) little pink heart-shaped love burst with tiny sparkles, 16) brown dirt clod lumps (pile of dug soil, small)

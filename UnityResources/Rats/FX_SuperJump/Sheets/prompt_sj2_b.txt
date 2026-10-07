@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create THREE separate images and save them as PNG files in the current working directory: "sj_lines_a.png", "sj_lines_b.png", "sj_vignette.png". Do not write code to draw them; they must be generated illustrations. After saving all three, reply only with the three file names.
+
+IMAGE 1 and IMAGE 2: sj_lines_a.png and sj_lines_b.png (two different random variations of the same thing)
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere else, perfectly uniform.
+- Manga FOCUS LINES (concentration lines): about 70 thin sharp pure-white wedge spikes, each starting wide at the outer edge of the image and tapering to a sharp point pointing toward the exact center. Random uneven spacing and random lengths: the points stop at different distances from the center, leaving an empty magenta circle in the middle about 45% of the image width.
+- Flat pure white, no gradients, no glow. No text. The two images must have clearly different random line arrangements.
+
+IMAGE 3: sj_vignette.png
+- 1024x1024 grayscale image, no magenta.
+- A smooth circular radial gradient: pure BLACK disk in the center (radius about 175px from the center), smoothly brightening outward to pure WHITE at radius about 450px, and pure white from there out to the corners.
+- Perfectly smooth, centered, symmetric. Nothing else, no texture, no text.

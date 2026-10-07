@@ -1,0 +1,3 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ult_speedlines_sheet.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec: 1024x1024, solid flat MAGENTA background (#FF00FF), perfectly uniform. A manga/comic "focus lines" (speed lines) overlay: about 60 thin pure WHITE wedge-shaped lines radiating outward from the center of the image toward the edges, varying widths and lengths, all lines start at a random distance from the center so the middle (a circle about 40% of the image width) stays completely empty magenta. Flat white only, no gradients, no glow, no text, no other colors.

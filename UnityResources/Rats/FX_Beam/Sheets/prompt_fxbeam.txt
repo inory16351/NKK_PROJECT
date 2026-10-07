@@ -1,0 +1,21 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_beam.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1536, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings - perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- A sheet of 9 game visual-effect sprites in an exact 3 columns x 3 rows grid (each cell 512x512). Each effect is ONE single connected shape inside its cell with a clean magenta margin, never touching or crossing cell borders. No loose floating bits, no separate sparkles, no particles.
+- STYLE: flat 2D cartoon game effects like the attached muzzle-flash reference (Untitled Goose Game-like flat shapes): completely FLAT color shapes, NO outlines, NO black linework, no gradients, no soft glow, no blur. Crisp hard edges.
+- COLOR: every effect is drawn ONLY in two flat tones so it can be color-tinted in the game engine: an outer band of light cool grey (#C8CCD8) and an inner core of pure white (#FFFFFF). Nothing else (no yellow, no blue, no shadows).
+
+Cells (left to right, top to bottom):
+Row 1:
+1) A tall vertical lightning bolt: a sharp jagged zig-zag bolt running from the very top of the cell to the very bottom, with two or three short forked side branches attached. White core inside a grey outer band. Fill the cell height.
+2) A short horizontal lightning segment: one jagged zig-zag electric streak running left to right across the cell width (about 4-5 zig-zags), thick, white core with grey outer band. Both ends pointed.
+3) A small electric spark: a star-like crackle of 6 to 8 sharp jagged spikes radiating from a small center, white center with grey outer band.
+Row 2:
+4) A laser beam body segment: a perfectly straight HORIZONTAL band running edge to edge across the cell width (left end and right end cut perfectly straight and vertical), about 140 pixels tall, perfectly uniform along its length (every vertical slice identical): grey outer band on top and bottom, a wide pure white core stripe in the middle. No taper, no ends, no decorations.
+5) A laser muzzle flare seen from the side: a big round bright white blob with 6 to 8 long pointed starburst rays, grey outer layer, pointing mostly to the right like the reference but more round and radial.
+6) A laser impact splash: a wide spiky burst/splat of jagged sharp rays spraying outward in all directions from a center (like an explosion star), white core and grey outer band.
+Row 3:
+7) A katana slash arc: a thin crescent moon shaped sword-swipe trail, a wide curved arc (about 160 degrees) that is thick in the middle and tapers to razor sharp points at both ends. White inner edge, grey outer band. Fill the cell width.
+8) A straight slash streak: a very long thin horizontal blade streak, thick in the middle and tapering to needle points at both ends, spanning almost the whole cell width. White center line with grey outer band.
+9) A cross slash: two straight thin tapered slash streaks crossing in an X shape (connected at the center), each tapering to needle points. White center with grey outer band.

@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: stage_floor.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, opaque. A sheet of 6 SEAMLESS TILEABLE floor textures arranged in an exact 3 columns x 2 rows grid of 512x512 squares, edge to edge, no gaps, no borders, no labels, no text.
+- Each square is a flat floor texture seen from DIRECTLY ABOVE (orthographic top-down), evenly lit, no perspective, no objects, no furniture, no cast shadows, no vignette. Each square must tile seamlessly with itself (left edge matches right edge, top matches bottom). If the texture has tiles/planks, the pattern must fit an exact whole number of repeats inside 512px.
+- Style: match the attached reference image — soft flat vector cartoon, pastel, low contrast, subtle texture only, NO thick dark outlines. It is the background of a busy casual game, so keep it calm and light so characters stand out.
+
+Squares (left to right, top to bottom):
+1) Underground secret lab: pale cool gray-white vinyl floor tiles, 4x4 square tiles per texture with thin soft gray grout, a few faint scuffs.
+2) Lab animal housing wing: pale mint-green linoleum floor, 2x2 large sheets with faint seams, tiny scattered wood-shaving specks.
+3) Chemical research wing: very pale sage-green clean ceramic tiles, 4x4 square tiles, faint chemical stain spots here and there.
+4) IT / admin wing: pale blue-gray carpet tiles, 4x4 squares with alternating subtle fiber direction.
+5) Lab director's floor: warm cream wooden parquet (herringbone), soft honey tones, elegant.
+6) Plain pale warm-gray concrete floor with very subtle speckles.

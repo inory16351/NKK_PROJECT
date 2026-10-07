@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_anim.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha), no text, no labels, no frame numbers, no grid lines.
+- A sprite sheet of game effect ANIMATIONS: 4 rows, each row is ONE animation of 6 frames left to right (6 columns x 4 rows, each cell 256x256). Each frame centered in its cell, never touching or crossing cell borders. The effect must be drawn at the same center point in every frame so the frames line up.
+- Style: match the attached reference image — soft flat vector cartoon, warm pastel colors, smooth subtle shading, NO thick dark outlines. Cute and readable, for a 3/4 top-down casual game.
+
+Rows:
+Row 1: cartoon explosion — frame 1 small bright yellow-white flash, frames 2-3 growing round orange/yellow fireball puff, frames 4-5 turning into gray-brown smoke clouds, frame 6 a few small fading smoke wisps.
+Row 2: white dust "poof" cloud — frame 1 small puff, grows into a fluffy round cloud ring, then breaks apart into small puffs and fades (frame 6 nearly gone).
+Row 3: hit impact flash — frame 1 small white spark, frames 2-3 big spiky white/pale-yellow comic impact star burst with radiating lines, frames 4-6 shrinking and breaking into small sparkles.
+Row 4: electric lightning strike impact on the ground — pale cyan/white electric spark burst with small zig-zag branches and a flat elliptical ground glow, growing then crackling out and fading.

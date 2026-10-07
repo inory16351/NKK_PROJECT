@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_tint.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha), no ground, no shadows outside the shapes, no text, no labels, no grid lines.
+- A sprite sheet of 16 separate game effect sprites arranged in an even 4 columns x 4 rows grid (each cell about 384x256). Each sprite centered in its cell with generous empty margin, never touching or crossing cell borders.
+- Style: match the attached reference image — soft flat vector cartoon, pastel, smooth subtle shading, NO thick dark outlines.
+- IMPORTANT COLOR RULE: every sprite is drawn in WHITE / very light gray only (grayscale, light shading allowed) so the game can tint it any color at runtime. No hues.
+
+Cells (left to right, top to bottom):
+Row 1: 1) sharp broken glass/ceramic shard (triangle-ish), 2) a different chunky broken shard fragment, 3) small splinter/sliver fragment, 4) torn paper scrap slightly curled
+Row 2: 5) chubby five-point cartoon star, 6) four-point twinkle sparkle with soft glow, 7) fluffy round dust cloud puff, 8) soft round glowing dot (radial falloff)
+Row 3: 9) shockwave ring seen from directly above (circle outline, thicker on one side, soft inner glow, empty center), 10) liquid splash stain puddle seen from above (irregular blob with droplets), 11) a different splat stain puddle seen from above, 12) cute heart
+Row 4: 13) swirling vortex spiral seen from above, 14) a cluster of tiny crumbs, 15) curved crescent sword slash arc trail (fading at both ends), 16) small cheese wedge with holes (still white/gray only)

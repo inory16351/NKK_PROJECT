@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: jw_stage.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1536, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings — perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- A sheet of 4 flat game UI shapes in an exact 2 columns x 2 rows grid (each cell 768x768). Each shape is centered in its cell with a clean magenta margin of about 40 px, never touching or crossing cell borders.
+- STYLE: match the attached references (Untitled Goose Game style flat shapes): completely FLAT single colors, NO outlines, NO black linework, no gradients, no glow, no texture.
+
+Cells (left to right, top to bottom):
+1) A theater darkness mask: a big SQUARE filled with one flat very dark purple-navy color (#120E1C), with a horizontal OVAL HOLE cut out exactly in its center. The oval hole is about 30% of the square width wide and about 13% of the square width tall (width:height about 2.3:1). Inside the hole you see the pure magenta background (#FF00FF). Hard clean edge.
+2) A plain flat SQUARE filled with the same very dark purple-navy color (#120E1C). Nothing else.
+3) A comic speech bubble: a wide rounded rectangle (about 3 times wider than tall) in flat warm cream white (#FFFAF0) with a small triangular tail pointing down from the bottom center, plus a flat soft brown (#8A5A34) rim about 4% thick around the whole shape including the tail. Empty inside, no text.
+4) An iris-out mask: a big SQUARE filled with flat very dark purple-black (#0D0A12), with a perfect CIRCLE HOLE cut out exactly in its center, the circle about 30% of the square width in diameter. Inside the hole you see the pure magenta background (#FF00FF). Hard clean edge.

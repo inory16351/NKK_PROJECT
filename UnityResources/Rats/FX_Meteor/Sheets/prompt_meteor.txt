@@ -1,0 +1,18 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_meteor.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings — perfectly uniform, no noise, no texture. No text, no letters, no grid lines, no frames.
+- A sheet of 8 game VFX sprites for a falling METEOR attack, in an exact 4 columns x 2 rows grid (each cell 384x512). Each sprite is ONE single connected shape centered in its cell with a clean magenta margin, never touching or crossing cell borders. No loose floating bits, no separate sparkles or dots — everything in one sprite is connected.
+- STYLE: match the attached references exactly (flat 2D game FX, Untitled Goose Game style): completely FLAT color shapes, NO outlines, NO black linework, no gradients, no glow halos, no realistic rendering. Few flat colors with one slightly darker/lighter flat tone. Warm saturated but soft palette (orange, yellow, cream, brown, grey). Bold readable silhouettes.
+
+Cells (left to right, top to bottom):
+Row 1:
+1) A big round brown cratered meteor rock wrapped in a flat orange-yellow fire tail, falling DOWN and slightly LEFT, so the flame tail streams UP and to the RIGHT behind it (rock at the bottom-left of the shape, long tail toward the top-right). Fill the tall cell.
+2) The same brown cratered meteor rock alone, round, no fire (for spinning).
+3) A long flame streak alone (teardrop shape: round wide head at the bottom, long tapering tail pointing straight UP), orange outer with yellow and cream inner layers. Fill the tall cell.
+4) A big flat impact explosion burst: a jagged round orange fireball with a yellow-cream core and spiky flame tips around it, seen from the front.
+Row 2:
+5) A ground crater seen from a low 3/4 top-down angle: a wide flat dark-brown oval hole with a lighter rim and a few connected cracks radiating outward on the floor. Very wide and flat (about 3 times wider than tall).
+6) A big puffy smoke cloud, flat warm grey-brown with a lighter top, made of several round puffs merged into one shape.
+7) A single small chunky rock debris piece, brown with one lighter facet, slightly glowing orange edge on one side (flat color, no glow halo).
+8) A red-orange warning target on the floor seen from a low 3/4 top-down angle: a wide flat oval ring with a thick border and small connected inward-pointing triangle notches (like a landing marker). Very wide and flat (about 3 times wider than tall), hollow middle.
