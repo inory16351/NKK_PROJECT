@@ -30,6 +30,7 @@ namespace NKK.Stage
         public ItemManager Items;
         public RatManager Rats;
         public CatManager Cats;
+        [Tooltip("층 클리어 연출 (연구 자료를 훔쳤다!!!). 비우면 바로 다음 층")] public Heist Heist;
 
         [Header("방 배치")]
         [Tooltip("방 수 = min(최대, 기본 + 층 × 증가) (+ 보스 층 1)")] public int roomBase = 3;
@@ -365,7 +366,16 @@ namespace NKK.Stage
             if (climbing || !Open.Contains(StairsRoom)) return;
             var sp = StairsPos;
             foreach (var r in Rats.Rats)
-                if (Mathf.Abs(r.x - sp.x) < stairsTouch.x && Mathf.Abs(r.y - sp.y) < stairsTouch.y) { climbing = true; Game.FadeThen(() => EnterFloor(Game.Floor + 1)); break; }
+                if (r.temp <= 0 && !r.UltOn && Mathf.Abs(r.x - sp.x) < stairsTouch.x && Mathf.Abs(r.y - sp.y) < stairsTouch.y) { Climb(); break; }
+        }
+
+        // 층 클리어: 탈취 연출 → (moveAt 초 뒤) 페이드 → 다음 층. 테스트 버튼도 이걸 부름
+        public void Climb()
+        {
+            if (climbing || GameOver.Active) return;
+            climbing = true;
+            if (Heist) Heist.Begin(StairsPos, () => Game.FadeThen(() => EnterFloor(Game.Floor + 1)));
+            else Game.FadeThen(() => EnterFloor(Game.Floor + 1));
         }
     }
 

@@ -284,7 +284,7 @@ namespace NKK.Ults
             bool auto = CommonSkill.UltAuto;
             if (auto) foreach (var r in Rats.Rats) if (Full(r)) Request(r);
             // 대기열 → 하나씩
-            if (cur == null && !FxManager.Paused && !(SuperJump && SuperJump.Busy))
+            if (cur == null && !FxManager.Paused && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing))
                 while (queue.Count > 0) { var r = queue[0]; queue.RemoveAt(0); if (r && r.temp <= 0 && Full(r) && TryStart(r)) break; }
 
             if (cur != null && cutPhase) StepCut(udt);

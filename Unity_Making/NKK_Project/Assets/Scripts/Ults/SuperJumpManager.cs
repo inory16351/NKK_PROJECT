@@ -136,7 +136,7 @@ namespace NKK.Ults
             if (!Busy)
             {
                 UpdateUi(dt);
-                if (FxManager.Paused || (Ults && Ults.Busy) || GameOver.Active) return;
+                if (FxManager.Paused || (Ults && Ults.Busy) || GameOver.Active || Heist.Active) return;
                 if ((coolT -= Time.deltaTime) <= 0 && Random.value < chancePerSec * CommonSkill.SuperJumpMul * Time.deltaTime) Trigger(false);
                 return;
             }

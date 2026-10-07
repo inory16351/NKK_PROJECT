@@ -6,12 +6,16 @@ using UnityEngine.UI;
 
 namespace NKK.Ults
 {
-    // 테스트용 (게임 화면 왼쪽 위): ◀ 필살기 고르기 ▶ · 필살기 발동 · 슈퍼 점프 발동. 출시 때는 이 오브젝트를 끄면 됨
+    // 테스트용 (게임 화면 왼쪽 위): ◀ 필살기 고르기 ▶ · 필살기 발동 · 슈퍼 점프 발동 · 층 클리어 · 게임 오버. 출시 때는 이 오브젝트를 끄면 됨
     public class UltTestPanel : MonoBehaviour
     {
         public UltimateManager Ults;
         public SuperJumpManager SuperJump;
         public Button prev, next, ultButton, superJumpButton;
+        [Tooltip("층 클리어 연출 바로 보기 (계단 닿은 것처럼)")] public Button clearButton;
+        [Tooltip("게임 오버 연출 바로 보기 (시간 초과)")] public Button gameOverButton;
+        public NKK.Stage.StageManager Stage;
+        public GameOver Over;
         [Tooltip("고른 필살기 (자리: {name} 쥐 이름, {ult} 필살기 이름)")] public TMP_Text pickText;
         [Tooltip("아이콘 (선택)")] public Image pickIcon;
 
@@ -28,6 +32,8 @@ namespace NKK.Ults
             if (next) next.onClick.AddListener(() => Move(1));
             if (ultButton) ultButton.onClick.AddListener(() => { if (list.Count > 0) Ults.TestUlt(list[idx].code_id); });
             if (superJumpButton) superJumpButton.onClick.AddListener(() => SuperJump.Trigger(true));
+            if (clearButton) clearButton.onClick.AddListener(() => { if (Stage && !Ults.Busy && !SuperJump.Busy) Stage.Climb(); });
+            if (gameOverButton) gameOverButton.onClick.AddListener(() => { if (Over && !Heist.Active) Over.Begin(GameOver.Why.Time); });
             Show();
         }
 
