@@ -24,16 +24,17 @@ namespace NKK
         public static float GiveUp = 600;
         public static readonly List<string> Results = new();
 
-        int floor; float t0, maxPow;
+        int floor; float t0, maxPow, limit, promoT; double cheese0;
+        RunTimer timer;
         bool done;
 
         // 측정 시작 (Play 중에 호출). 저장은 측정 전용 키 nkk_probe 에만 함
-        public static void Run(int tier, int startFloor, int endFloor, float giveUp = 600, int simHz = 20)
+        public static void Run(int tier, int startFloor, int endFloor, float giveUp = 600, int simHz = 20, int nodes = -1, int shards = -1)
         {
             var p = Progress.I;
             p.saveKey = "nkk_probe"; p.ResetAll(); p.autoUpgradeInRun = false; p.testSkills.Clear(); p.testSkillTier = 0;
             p.tier = tier; p.maxFloor = Mathf.Max(startFloor, 1);
-            MakeMeta(p, tier);
+            MakeMeta(p, tier, nodes, shards);
             Progress.PendingStartFloor = startFloor;
             EndFloor = endFloor; GiveUp = giveUp; SimHz = simHz; Active = true;
             Results.Add($"── 티어 {tier} · {startFloor}층부터 · 스킬 노드 {p.testSkills.Count} · 조각 합 {ShardSum(p)}");
@@ -41,12 +42,12 @@ namespace NKK
         }
 
         // 티어 t 에 오를 때 필요했던 성장 (티어 테이블 t 행의 Skill_Node_Count · Shard_Level_Sum 조건값)
-        static void MakeMeta(Progress p, int tier)
+        static void MakeMeta(Progress p, int tier, int nodes = -1, int shards = -1)
         {
             var db = GameDatabase.Instance;
             if (!db.Tiers.TryGetValue(tier, out var tr)) return;
             float Need(string type) => tr.cond1_type == type ? tr.cond1_value : tr.cond2_type == type ? tr.cond2_value : tr.cond3_type == type ? tr.cond3_value : 0;
-            int skillSum = Mathf.RoundToInt(Need("Skill_Node_Count")), shardSum = Mathf.RoundToInt(Need("Shard_Level_Sum"));
+            int skillSum = nodes >= 0 ? nodes : Mathf.RoundToInt(Need("Skill_Node_Count")), shardSum = shards >= 0 ? shards : Mathf.RoundToInt(Need("Shard_Level_Sum"));
             // 공용 스킬: 열린 노드 중 가장 싼 것부터 (그 훈장 이하 트리)
             for (int n = 0; n < skillSum; n++)
             {
@@ -69,18 +70,22 @@ namespace NKK
             QualitySettings.vSyncCount = 0; Application.targetFrameRate = -1;
             Time.captureDeltaTime = 1f / SimHz;
             foreach (var c in Camera.allCameras) c.enabled = false;           // 화면 안 그림 (빠르게)
-            floor = Game.Floor; t0 = Time.time; maxPow = 0;
+            timer = FindFirstObjectByType<RunTimer>(); if (timer) timer.testFreeze = true;     // 제한시간은 재기만 함
+            floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; limit = 0;
         }
 
         void Update()
         {
             if (!Active || done || !Game) return;
+            // 플레이어처럼: 쥐가 꽉 차면 일괄 승급 (5초마다)
+            if ((promoT -= Time.deltaTime) <= 0) { promoT = 5; if (Rats.RealCount >= Rats.PopCap - 1) Rats.PromoteAll(); }
             float pow = Rats.TotalPower(); maxPow = Mathf.Max(maxPow, pow);
             float dt = Time.time - t0;
+            if (limit <= 0 && timer) limit = timer.Max;
             if (Game.Floor != floor)
             {
-                Add($"{floor}층 {dt:0}초 · 쥐 {Rats.RealCount} · 전투력 {GameManager.Format(maxPow)} / 적정 {GameManager.Format(Stage.PowNeed(floor))} ({maxPow / Stage.PowNeed(floor):0.00}배)");
-                floor = Game.Floor; t0 = Time.time; maxPow = 0;
+                Add($"{floor}층 {dt:0}초 / 제한 {limit:0}초 · 쥐 {Rats.RealCount} · 전투력 {GameManager.Format(maxPow)} / 적정 {GameManager.Format(Stage.PowNeed(floor))} ({maxPow / Stage.PowNeed(floor):0.00}배) · 치즈 +{GameManager.Format(Game.Cheese - cheese0)}");
+                floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; limit = 0;
                 if (floor > EndFloor) Finish();
             }
             else if (dt > GiveUp)

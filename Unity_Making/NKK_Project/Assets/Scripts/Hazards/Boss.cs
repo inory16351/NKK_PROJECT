@@ -97,7 +97,7 @@ namespace NKK.Hazards
             Data = row; Test = test; State = BState.Wait;
             x = px; y = py; z = vz = vx = vy = 0; rot = vr = 0; t = 0; jit = 0; sq = 1; attacking = air = false; atkCd = Random.Range(row.atk_cd_min, row.atk_cd_max);
             hpMax = hp = (test ? Mathf.Max(1, Stage.PowNeed(Game.Floor) * row.hp_pow_sec) : HpFor(row, Game.Floor)) * CommonSkill.BossHpMul(row.floor);   // 테스트 = 지금 층 기준 (잡을 수 있게) · 보스 체력 감소 노드
-            value = 3 * Mathf.Pow(Items.valueGrow, (test ? Game.Floor : Mathf.Max(Game.Floor, row.floor)) - 1) * row.cheese_mul * CommonSkill.CreatureCheeseMul;
+            value = 3 * Stage.CheeseK(test ? Game.Floor : Mathf.Max(Game.Floor, row.floor)) * row.cheese_mul * CommonSkill.CreatureCheeseMul;
             var art = Items.humanArt ? Items.humanArt.Get(row.code_id) : null;
             if (art == null) { Debug.LogWarning("[Boss] 그림 없음: " + row.code_id); State = BState.Off; return; }
             rig.height = Items.humanHeight * row.scale;

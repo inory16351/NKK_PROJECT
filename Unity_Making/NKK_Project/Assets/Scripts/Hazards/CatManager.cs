@@ -45,7 +45,7 @@ namespace NKK.Hazards
         public float CatHP(CatCharacterRow row)
         {
             int f = Game.Floor;
-            return Mathf.Max(12 * Mathf.Pow(Items.itemHpGrow, f - 1) * 3 * 4, Stage.PowNeed(f) * hpPowMul) * row.hp_mul;
+            return Mathf.Max(12 * Stage.ItemHpK(f) * 3 * 4, Stage.PowNeed(f) * hpPowMul) * row.hp_mul;
         }
 
         public void Clear()
@@ -76,7 +76,7 @@ namespace NKK.Hazards
             }
             if (!ok) return false;
             var c = Instantiate(catPrefab, catRoot ? catRoot : transform);
-            c.Init(this, row, skill, art, x, y, CatHP(row) * CommonSkill.CatHpMul, 3 * Mathf.Pow(Items.valueGrow, Game.Floor - 1) * valueMul * CommonSkill.CreatureCheeseMul);
+            c.Init(this, row, skill, art, x, y, CatHP(row) * CommonSkill.CatHpMul, 3 * Stage.CheeseK(Game.Floor) * valueMul * CommonSkill.CreatureCheeseMul);
             Current = c;
             var fx = FxManager.I; if (fx) fx.Dust(x, y, 10, 1.4f);
             bool special = row.Category == CatCategory.Special;

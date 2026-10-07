@@ -29,8 +29,8 @@ namespace NKK.Items
         [Tooltip("열린 방 하나당 물건 상한 (zoneCap). 물건 사재기 스킬로 늘어남")] public int roomCap = 24;
         public int RoomCap => Mathf.RoundToInt((roomCap + CommonSkill.ItemCapAdd) * CommonSkill.ItemCapMul);
         [Tooltip("생성 주기 (초)")] public float spawnInterval = 1.2f;
-        [Tooltip("물건 체력 = 12 × 체력 배율 × 이 값^(층-1 + 방 거리×0.1)")] public float itemHpGrow = 3.6f;
-        [Tooltip("치즈 = 3 × 치즈 배율 × 이 값^(층-1 + 방 거리×0.1)")] public float valueGrow = 1.8f;
+        [Tooltip("물건 체력 = 12 × 체력 배율 × 스테이지 테이블 item_hp × 이 값^(방 거리×0.1)")] public float itemHpGrow = 3.6f;
+        [Tooltip("치즈 = 3 × 치즈 배율 × 스테이지 테이블 cheese × 이 값^(방 거리×0.1)")] public float valueGrow = 1.8f;
         [Tooltip("충돌 반지름 = 테이블 radius × 이 값")] public float radiusScale = 1.45f;
         [Tooltip("방 가장자리 여백")] public float spawnMargin = 50;
         [Tooltip("가구가 하나씩 빠질 확률 (방마다 조금씩 다르게)")] public float furnitureSkip = 0.15f;
@@ -176,10 +176,10 @@ namespace NKK.Items
         {
             spriteMap.TryGetValue(row.code_id, out var spr);
             var r = StageManager.RoomOf(x, y);
-            float zi = Game.Floor - 1 + StageManager.RoomDist(r) * 0.1f;
+            float zd = StageManager.RoomDist(r) * 0.1f;          // 층 = 스테이지 테이블 배율, 방 거리 = 성장^(거리 × 0.1)
             var it = Instantiate(itemPrefab, itemRoot ? itemRoot : transform);
-            float cheese = 3 * row.value_mul * Mathf.Pow(valueGrow, zi) * CommonSkill.ItemCheeseMul * (row.IsFurniture ? CommonSkill.FurnitureCheeseMul : 1);
-            it.Init(this, row, spr, x, y, 12 * row.hp_mul * Mathf.Pow(itemHpGrow, zi), cheese, instant);
+            float cheese = 3 * row.value_mul * Stage.CheeseK(Game.Floor) * Mathf.Pow(valueGrow, zd) * CommonSkill.ItemCheeseMul * (row.IsFurniture ? CommonSkill.FurnitureCheeseMul : 1);
+            it.Init(this, row, spr, x, y, 12 * row.hp_mul * Stage.ItemHpK(Game.Floor) * Mathf.Pow(itemHpGrow, zd), cheese, instant);
             items.Add(it);
             if (!row.IsFurniture && Random.value < CommonSkill.GoldChance) it.MakeGold(CommonSkill.GoldCheeseMul, 1);     // 황금 물건 스킬
             return it;

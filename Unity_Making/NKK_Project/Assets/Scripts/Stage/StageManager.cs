@@ -101,13 +101,19 @@ namespace NKK.Stage
         public bool IsBossFloor(int f) => f % bossEvery == 0;
         public Vector2 StairsPos => new((StairsRoom.x + 0.5f) * World.RW, StairsRoom.y * World.RH + stairsY);
 
-        public float PowNeed(int f) => powNeed0 * Mathf.Pow(powNeedGrow, f - 1) * (f - 1 < powEarly.Length ? powEarly[f - 1] : 1);
+        // 층 밸런스 = 스테이지 테이블 Stage (없으면 인스펙터 옛 수식)
+        StageRow Row(int f) => GameDatabase.Instance ? GameDatabase.Instance.StageOf(f) : null;
+        public float PowNeed(int f) { var r = Row(f); return r != null ? r.pow_need : powNeed0 * Mathf.Pow(powNeedGrow, f - 1) * (f - 1 < powEarly.Length ? powEarly[f - 1] : 1); }
+        public float ItemHpK(int f) { var r = Row(f); return r != null ? r.item_hp : Mathf.Pow(3.6f, f - 1); }
+        public float CheeseK(int f) { var r = Row(f); return r != null ? r.cheese : Mathf.Pow(1.8f, f - 1); }
+        public float TimeAdd(int f) { var r = Row(f); return r != null ? r.time_add : 0; }
 
         // ── 층 생성 ──
         void GenLayout(int f)
         {
             var rnd = new SeededRandom((uint)(f * 7919 + 17));
-            int n = Mathf.Min(roomMax, roomBase + Mathf.FloorToInt(f * roomPerFloor)) + (IsBossFloor(f) ? 1 : 0);
+            var sr = Row(f);
+            int n = sr != null && sr.rooms > 0 ? sr.rooms : Mathf.Min(roomMax, roomBase + Mathf.FloorToInt(f * roomPerFloor)) + (IsBossFloor(f) ? 1 : 0);
             var list = new List<Vector2Int> { Vector2Int.zero };
             Layout.Clear(); Layout.Add(Vector2Int.zero);
             int guard = 0;
@@ -204,8 +210,9 @@ namespace NKK.Stage
         float WallMaxBase(int ti, int tj)
         {
             int f = Game.Floor;
-            if (IsStairsRoom(ti, tj)) return PowNeed(f) * Mathf.Min(wallPowStairs, 2 + 6 * (f - 1));
-            return PowNeed(f) * wallPow * (1 + 0.25f * RoomDist(new Vector2Int(ti, tj)));
+            var sr = Row(f);
+            if (IsStairsRoom(ti, tj)) return PowNeed(f) * (sr != null ? sr.wall_stairs : Mathf.Min(wallPowStairs, 2 + 6 * (f - 1)));
+            return PowNeed(f) * (sr != null ? sr.wall_normal : wallPow) * (1 + 0.25f * RoomDist(new Vector2Int(ti, tj)));
         }
 
         public float WallHP(int i, int j, int di, int dj) => walls.TryGetValue(WallKey(i, j, di, dj), out var v) ? v : WallMax(i + di, j + dj);

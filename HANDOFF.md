@@ -245,8 +245,27 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 테스트 패널 **보스 소환**: 화면 가운데에 불러 바로 전투 (체력·치즈는 지금 층 기준, 이 층 진짜 보스가 대기 중이었으면 끝난 뒤 되돌림).
 - 글은 Boss 인스펙터(floorSub·fightSub·downTitle·downSub·stompPopup·cheesePopup). 10·15층 보스 등은 아직 없음.
 
-### 9-6. 다음 작업 (사용자 요청 2026-10-07)
-- 공용 스킬 트리 개편: 찍찍!! 훈장(티어)별 트리, 노드 하나 = 한 번 활성화(레벨 없음) → 이웃 노드 열림, 같은 효과 노드 여러 개 가능, 묘기는 해금 방식, 로비 UI 에 훈장별 트리 표시. 효과 목록(전투/승급·시간·시작 쥐/자원 파밍/묘기/해금·스테이지 스킵)은 사용자 메시지 기준, 배치는 밸런싱하며 결정.
-- 승급(같은 등급 10마리 → 윗등급 1마리) 기능 이식 (노드 "승급에 필요한 쥐 수 감소"에 필요).
-- 스테이지 테이블에 층별 밸런스(방 수·적정 전투력·벽·시간·보스) 시트 추가 + 공격력 % 곱연산 억제·클리어 시간 재밸런스 (BalanceProbe 로 측정).
-- 각 단계마다 Unity 컴파일·플레이 확인 → 커밋.
+### 9-6. 훈장별 공용 스킬 트리 · 승급 · 스테이지 테이블 (2026-10-07, 진행 중)
+**끝난 것 (커밋됨)**
+- 공용 스킬 = 찍찍!! 훈장(티어 1~8)마다 트리 하나, 노드 38개(시작점 포함). 노드는 **한 번 활성화**, link_1/2 중 하나라도 활성화되면 열림. 같은 효과는 값을 **더함**(공격력 % 와 피해량 % 는 각각 더한 뒤 둘만 곱함). 생성기 `Tools/gen_skill_tree.py` (칸 배치 SLOTS · 훈장별 효과 T[t] · 비용 CHEESE/RESEARCH · 아이콘 ICON) → `공용 스킬 테이블.xlsx` → xlsx2json.
+  - 비용: 치즈 + 연구자료(2훈장부터). 묘기 해금: 1훈장 백덤블링 · 2 윈드밀 · 3 트리플 악셀 · 4 쥐 대포알 (해금 전엔 안 나옴, `CommonSkill.TrickChance`).
+  - 효과 계산 `Core/CommonSkill.cs` (Progress.SkillVersion 캐시). 효과 목록·의미 = 테이블 Common_Effect_Type 시트.
+  - `Progress`: 노드 저장 `nodes`(예전 레벨식 skills 는 무시), `StateOf`(Owned/Open/Locked/TierLock), `BuySkill`, **훈장 승급** `CanRankUp/RankUp`(티어 테이블 연구자료 + 조건: Max_Floor · Shard_Level_Sum · **Skill_Node_Count**), 시작 층 = 1 + 스테이지 스킵 노드. 테스트: 인스펙터 `testSkills`(노드 id) · `testSkillTier`(그 훈장 이하 전부).
+  - 로비 `Lobby/SkillPage.cs`: 훈장 탭 8개(`MapCard/Tabs`) · 탭 열면 트리 전체 맞춤 · 못 단 훈장 탭 = 승급 패널(`MapCard/RankPanel`) · 상세 카드 비용 2줄(치즈·연구자료). 글은 씬 `DetailCard/Words`.
+  - 묘기 성공 = 특수 액션처럼 필살기 게이지 +5 (`Action_Use`) × 묘기 게이지 노드.
+- 물건: 물건 테이블 `from_floor`·`to_floor`·`unlock_skill` — 층·스킬 해금에 따라 나오는 물건이 늘어남 (구간 Zone 의 물건 목록 칸은 삭제, 바닥 그림용만). 새 물건 8종(Codex, `UnityResources/Rats/Items_New/`) 훈장별 "신규 물건" 노드로 해금. 새 아이콘 16종 `SkillIcons/Sheets/skill_icons_c.png`.
+- 승급(게임 화면): `RatManager.Promote/PromoteAll/PromoteNeed`(기본 10마리, 노드로 감소, 최소 4, 일괄 때 6마리 남김) + `Rats/PromotePanel.cs` (HUD 왼쪽 아래 `HUD/Promote`).
+- 스테이지 테이블 **Stage 시트**(층 1~30: 방 수 · 적정 전투력 · 물건 체력 배율 · 치즈 배율 · 계단/일반 벽 배율 · 추가 시간). 생성기 `Tools/gen_stage_table.py` (POW0 400 · POW_GROW 1.38 · HP_GROW 1.38 · CHEESE_GROW 1.5 · 벽 계단 3+0.6(f-1) 최대 10 · 일반 1.2). 30층 넘으면 마지막 두 층 비율로 이어서. 코드: `StageManager.PowNeed/ItemHpK/CheeseK/TimeAdd`, 물건·사람·고양이·보스·제한시간이 이걸 씀. (예전 수식은 ×3.3/×3.6 이라 새 덧셈식 스킬로 못 따라감)
+
+**밸런스 측정 (BalanceProbe, Game 씬 컴포넌트 켜 둠 — 측정 아닐 땐 스스로 꺼짐)**
+- 사용: Play 중 `NKK.BalanceProbe.Results.Clear(); NKK.BalanceProbe.Run(티어, 시작층, 끝층, 포기초, 20, 노드수, 조각합);` → `NKK.BalanceProbe.Report()` 로 읽기. 저장은 `nkk_probe` 키만 씀. 제한시간은 재기만 함(멈춤), 쥐가 꽉 차면 5초마다 일괄 승급, 클릭 총공격 없음(최소 성능).
+- **유니티 창이 뒤에 있으면 배속이 크게 느려짐** (실시간의 0.5~3배). 측정 중엔 에디터를 앞에 두기 권장.
+- 결과 (현재 곡선): 1훈장 노드 0 → 1층 197초/295 (전투력 0.84배) · 2층 242초/295 (0.62배) · 3층 시간 초과 예상. 1훈장 37노드 → 1층 73초 (1.66배) · 2층 78초 (1.61배) · 3층 154초/338 (1.19배) · 4층 250초 넘어도 계단 못 엶 (0.8배). 치즈 1~3층 약 20K.
+- 4훈장(노드 100·조각 40) 7층부터 측정 중 끊음: 시작 쥐 12마리로 번식이 느려 7층 130초에 방 3/6, 전투력 970 / 적정 2760 → **중반 이후 곡선이 너무 가파를 가능성** (시작 쥐·번식 속도·POW_GROW 확인 필요).
+- 측정 중 정지할 때 콘솔에 NullReferenceException 10개 (스택 없음) — 원인 미확인, 다음 작업자가 확인.
+
+**남은 일 (순서 제안)**
+1. NullReferenceException 원인 확인 (Play → 측정 → 정지 흐름).
+2. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.
+3. 결과로 `gen_stage_table.py` 곡선(POW_GROW·HP_GROW·벽 배율·방 수)과 `gen_skill_tree.py` 값·비용(치즈 수입 대비 훈장 트리 1개 ≈ 판 3~5번), 보스 `hp_pow_sec`(지금 40), 티어 테이블 조건(연구자료·Skill_Node_Count 15/40/70/100/130/160/195) 조정 → 다시 생성·xlsx2json·측정.
+4. 10·15층 보스 등 나머지 §6.

@@ -165,7 +165,9 @@ namespace NKK.Data
         public Color Color => ColorUtility.TryParseHtmlString(color, out var c) ? c : Color.white;
     }
     [Serializable] public class BossLineRow { public int line_id, boss_id; public string situation, text; }
-    [Serializable] public class StageTableFile { public List<BossRow> Boss; public List<BossLineRow> Boss_Line; }
+    // 층 밸런스 (스테이지 테이블 Stage, Tools/gen_stage_table.py 로 생성)
+    [Serializable] public class StageRow { public int floor, rooms; public float pow_need, item_hp, cheese, wall_stairs, wall_normal, time_add; }
+    [Serializable] public class StageTableFile { public List<StageRow> Stage; public List<BossRow> Boss; public List<BossLineRow> Boss_Line; }
     [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; }
     [Serializable] public class HumanRigMetaFile { public List<HumanRigMetaRow> items; }
 }

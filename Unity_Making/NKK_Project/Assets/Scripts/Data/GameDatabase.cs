@@ -44,6 +44,7 @@ namespace NKK.Data
         public readonly Dictionary<int, CommonSkillRow> CommonSkillsById = new();
         public readonly Dictionary<int, List<CommonSkillRow>> CommonSkillsByTier = new();
         public readonly Dictionary<SkillBranch, SkillBranchRow> SkillBranches = new();
+        public readonly List<StageRow> Stages = new();
         public readonly List<BossRow> Bosses = new();
         public readonly List<BossLineRow> BossLines = new();
 
@@ -59,7 +60,7 @@ namespace NKK.Data
         {
             Rats.Clear(); RatsByCode.Clear(); RatSkills.Clear(); Ultimates.Clear(); UltCaptions.Clear(); UltCharges.Clear(); Grades.Clear();
             GrowthNodes.Clear(); GrowthOrder.Clear(); ActionAwaken.Clear(); Cats.Clear(); CatSkills.Clear();
-            Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear(); Bosses.Clear(); BossLines.Clear();
+            Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear(); Stages.Clear(); Bosses.Clear(); BossLines.Clear();
             CommonSkills.Clear(); CommonSkillsById.Clear(); CommonSkillsByTier.Clear(); SkillBranches.Clear();
 
             if (ratTable)
@@ -107,7 +108,7 @@ namespace NKK.Data
                 }
                 foreach (var b in f.Branch) SkillBranches[b.Branch] = b;
             }
-            if (stageTable) { var f = JsonUtility.FromJson<StageTableFile>(stageTable.text); if (f.Boss != null) Bosses.AddRange(f.Boss); if (f.Boss_Line != null) BossLines.AddRange(f.Boss_Line); }
+            if (stageTable) { var f = JsonUtility.FromJson<StageTableFile>(stageTable.text); if (f.Stage != null) { Stages.AddRange(f.Stage); Stages.Sort((a, b) => a.floor.CompareTo(b.floor)); } if (f.Boss != null) Bosses.AddRange(f.Boss); if (f.Boss_Line != null) BossLines.AddRange(f.Boss_Line); }
             Debug.Log($"[GameDatabase] 쥐 {Rats.Count} · 스킬 {RatSkills.Count} · 필살기 {Ultimates.Count} · 등급 {Grades.Count} · 성장 노드 {GrowthNodes.Count} · 고양이 {Cats.Count} · 물건 {Items.Count} · 티어 {Tiers.Count} · 사람 {Humans.Count} · 공용 스킬 {CommonSkills.Count}");
         }
 
@@ -120,6 +121,22 @@ namespace NKK.Data
             var l = new List<string>();
             foreach (var r in HumanLines) if (r.situation == situation && (r.human_id == humanId || r.human_id == 0)) l.Add(r.text);
             return l.Count > 0 ? l[UnityEngine.Random.Range(0, l.Count)] : null;
+        }
+
+        // 층 밸런스: 표에 있으면 그 행, 마지막 층을 넘으면 마지막 두 층 비율로 이어서 계산한 행
+        public StageRow StageOf(int floor)
+        {
+            if (Stages.Count == 0) return null;
+            floor = Mathf.Max(1, floor);
+            foreach (var s in Stages) if (s.floor == floor) return s;
+            var last = Stages[^1]; var prev = Stages.Count > 1 ? Stages[^2] : last;
+            int n = floor - last.floor;
+            float G(float a, float b) => b > 0 && a > 0 ? Mathf.Pow(a / b, n) : 1;
+            return new StageRow
+            {
+                floor = floor, rooms = last.rooms, wall_stairs = last.wall_stairs, wall_normal = last.wall_normal, time_add = last.time_add,
+                pow_need = last.pow_need * G(last.pow_need, prev.pow_need), item_hp = last.item_hp * G(last.item_hp, prev.item_hp), cheese = last.cheese * G(last.cheese, prev.cheese),
+            };
         }
 
         // 보스: 그 층에 나오는 보스 (없으면 null)
