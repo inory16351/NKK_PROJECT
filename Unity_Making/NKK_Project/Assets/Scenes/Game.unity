@@ -24858,6 +24858,22 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: e587995ff22a54a40bf74f68507a8dee, type: 3}
   - name: lawyer_rat_b
     sprite: {fileID: 21300000, guid: 0ba4aaaeb14f85f48bea73cf7d11cec4, type: 3}
+  - name: lawyer_rat_doc
+    sprite: {fileID: 21300000, guid: cfe69d29605f444bb4e6c983aba152a8, type: 3}
+  - name: lawyer_rat_point
+    sprite: {fileID: 21300000, guid: ab83a0eb6ab84017a3c62a002e7d1abf, type: 3}
+  - name: police_rat_a
+    sprite: {fileID: 21300000, guid: 6e18ce2fe65d4089a321539c723bfcaa, type: 3}
+  - name: police_rat_b
+    sprite: {fileID: 21300000, guid: 12797002e3184cbd86d3b834fc07aa49, type: 3}
+  - name: police_rat_cuff
+    sprite: {fileID: 21300000, guid: 2e44604b29f54264b93cb003508543ba, type: 3}
+  - name: police_siren
+    sprite: {fileID: 21300000, guid: 71cf5c1c10d04439bbee9fbf0bb1b0de, type: 3}
+  - name: police_tape
+    sprite: {fileID: 21300000, guid: 4625b5e6ed9749c08ce0a28258d9606b, type: 3}
+  - name: prop_handcuffs
+    sprite: {fileID: 21300000, guid: bf02de7170e04e10a86484fe1e95a0ae, type: 3}
   - name: rat_knot
     sprite: {fileID: 21300000, guid: 9e89a9fbd121d8e48bd9928b744715d4, type: 3}
   - name: ratland_castle

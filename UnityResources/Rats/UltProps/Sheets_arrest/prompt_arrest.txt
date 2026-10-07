@@ -1,0 +1,15 @@
+Use case: stylized-concept
+Asset type: ONE sprite sheet for a Unity 2D rat comedy game, landscape 4 columns by 2 rows, 2048x1024.
+Input references: image 1 is lawyer_rat_a, visual style and lawyer identity reference; image 2 is guard_rat_a, rat anatomy and flat illustration reference. Create NEW assets matching their gray rat heads, pink ears paws and long tails, black oval eyes, simple silhouettes.
+Style: flat Untitled Goose Game style, clean solid colored shapes, no outlines, minimal shading, no gradients or texture.
+Background: perfectly solid magenta #FF00FF everywhere outside sprites. Invisible equal grid, no grid lines, no cell borders. Each asset fully contained in its own equal cell with ample magenta margin; tail, equipment and feet must never cross cells. No text, lettering, symbols that resemble text, logos, watermarks or labels anywhere.
+Exact order left to right:
+Top row cell 1: armed riot-police rat standing facing LEFT, navy helmet with clear visor, navy armored vest, large riot shield and baton. Full body.
+Top row cell 2: SAME riot-police rat in a dynamic running frame facing LEFT, same helmet visor vest shield baton, full body.
+Top row cell 3: SAME riot-police rat facing LEFT, leaning forward, holding open silver handcuffs out with reaching paw, shield on other arm, full body.
+Top row cell 4: gray rat lawyer black suit white shirt black tie, facing LEFT, finger pointed accusingly forward, brown briefcase at side, full body.
+Bottom row cell 1: same gray rat lawyer black suit white shirt black tie, facing LEFT, raising an off-white blank legal document overhead, brown briefcase, full body.
+Bottom row cell 2: a separate silver-gray pair of open handcuffs joined by a short chain, large clear silhouette.
+Bottom row cell 3: one straight long horizontal yellow police tape strip with sparse black diagonal warning stripes and blank yellow middle; NO words.
+Bottom row cell 4: one compact police siren light bar, red left dome blue right dome dark base; no surrounding light rays.
+Keep characters equally scaled and matching across cells; orthographic side/three-quarter view like references, no ground plane or cast shadow, all assets isolated for chroma key slicing.

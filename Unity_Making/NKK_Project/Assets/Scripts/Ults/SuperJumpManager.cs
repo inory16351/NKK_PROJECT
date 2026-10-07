@@ -302,7 +302,7 @@ namespace NKK.Ults
                     var it = f.it; if (it.State != Item.ItemState.Held) continue;
                     float a = Random.Range(0, Mathf.PI * 2);
                     it.SkillHit(Mathf.Max(sjD, it.hp + it.hpMax), r);
-                    it.Fling(Mathf.Cos(a) * 260, Mathf.Sin(a) * 260, 520); n++;
+                    it.SmashNow(); n++;          // 웹처럼 둥실 뜬 그 자리(공중)에서 한꺼번에 박살
                 }
                 else if (f.h) { f.h.Blast(Random.Range(0, Mathf.PI * 2), Random.Range(300f, 520f), Mathf.Max(sjD * 2, f.h.hp + 1), r); f.h.vz = Random.Range(900f, 1200f); }
                 else if (f.r) f.vz = 120;

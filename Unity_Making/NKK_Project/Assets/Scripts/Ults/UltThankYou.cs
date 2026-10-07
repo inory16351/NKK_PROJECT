@@ -115,7 +115,7 @@ namespace NKK.Ults
             MakeCat();
             // 턱시도 줴리: 몸통·앞다리·뒷다리 그림을 턱시도 그림으로 (원래 그림과 같은 크기·피벗) + 나비넥타이
             Tuxedo();
-            tie = Prop("jwc_bowtie", R.x, R.y, 0, 15 * R.GradeData.size);
+            tie = Prop("jwc_bowtie", R.x, R.y, 0, 8 * R.GradeData.size);
             // 극장 커튼 · 위 장식 · 게이지 · 팻말
             curtainL = Prop("jwc_curtain", stX, stY, 0, 200); if (curtainL != null) curtainL.flip = true;
             curtainR = Prop("jwc_curtain", stX, stY, 0, 200);
@@ -322,7 +322,7 @@ namespace NKK.Ults
             if (tie != null && R.rig && R.rig.head)
             {
                 var n = World.FromUnity(R.rig.head.transform.position);
-                tie.x = n.x; tie.y = n.y; tie.z = -3 * R.GradeData.size; tie.sortBias = jo + 1 - World.SortOrder(tie.y);
+                tie.x = n.x + R.face * 2.5f * R.GradeData.size; tie.y = n.y; tie.z = -7 * R.GradeData.size; tie.sortBias = jo + 1 - World.SortOrder(tie.y);
             }
             foreach (var st in stuck) if (st.p != null) { st.p.x = R.x + st.ox * R.face; st.p.y = R.y; st.p.z = st.oz; st.p.sortBias = 2; }
         }

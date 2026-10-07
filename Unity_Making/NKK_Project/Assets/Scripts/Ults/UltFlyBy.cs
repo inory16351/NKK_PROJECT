@@ -12,7 +12,7 @@ namespace NKK.Ults
     {
         // 쥐돌프 (썰매 끄는 순록 쥐). 리그는 쥐 프리팹을 복제해 그림만 씀 (게임 쥐 아님)
         class Deer { public Rat r; public float x, y, z, hic, wob, dizzy; public int n; public UltProp rein, glow, nose, cheek, antler, bells, bottle, swirl; }
-        const int DEER_N = 3; const float DEER_LEN = 30, DEER_0 = 84, DEER_GAP = 38;
+        const int DEER_N = 8; const float DEER_LEN = 30, DEER_0 = 84, DEER_GAP = 38;
         readonly List<Deer> deer = new();
         readonly List<(UltProp p, float life, float vx)> bubbles = new();
         static readonly Color NoseRed = new(1f, 0.22f, 0.18f), Rosy = new(1f, 0.5f, 0.58f), Rein = new(0.55f, 0.42f, 0.31f), Pink = new(1f, 0.82f, 0.86f);
@@ -103,7 +103,7 @@ namespace NKK.Ults
                 r.enabled = false; r.name = "UltDeer";
                 if (r.shadow) r.shadow.enabled = false;
                 r.rig.Build(art, DEER_LEN);
-                var d = new Deer { r = r, n = i, x = x + face * (DEER_0 + i * DEER_GAP), y = y, z = 0, hic = Rand(0.7f, 1.6f) + i * 0.4f };
+                var d = new Deer { r = r, n = i, x = x + face * (DEER_0 + i / 2 * DEER_GAP), y = y, z = 0, hic = Rand(0.7f, 1.6f) + i * 0.4f };
                 d.rein = Prop("ult_gauge_bar", x, y, 0, 10); if (d.rein != null) d.rein.tint = Rein;
                 d.glow = Prop("dot", x, y, 0, 10); if (d.glow != null) d.glow.tint = NoseRed;
                 d.cheek = Prop("dot", x, y, 0, 10); if (d.cheek != null) { d.cheek.tint = Rosy; d.cheek.flat = 0.7f; }
@@ -122,11 +122,11 @@ namespace NKK.Ults
             foreach (var d in deer)
             {
                 if (!d.r) continue;
-                int i = d.n;
+                int i = d.n / 2, side = d.n % 2 == 0 ? -1 : 1;       // 2마리씩 4줄
                 // 썰매 앞 (진행 방향 쪽으로 살짝 끌고 감) + 술 취한 갈지자. 뒤따라오며 출렁 (급강하 때 채찍처럼)
                 float lead = DEER_0 + i * DEER_GAP;
                 float tx = x + face * lead * Mathf.Max(0.6f, Mathf.Abs(Mathf.Cos(h))) + Mathf.Sin(t * 3.3f + i) * 6;
-                float ty = y + Mathf.Sin(h) * lead * 0.7f + Mathf.Sin(t * 2.6f + i * 1.9f) * 16;
+                float ty = y + Mathf.Sin(h) * lead * 0.7f + side * 14 + Mathf.Sin(t * 2.6f + d.n * 1.9f) * 10;
                 float tz = z + 8 + Mathf.Abs(Mathf.Sin(t * 11 + i * 1.3f)) * 7 * lift - 10 * d.wob;
                 float kk = Mathf.Min(1, dt * (9 - i * 1.5f));
                 d.x += (tx - d.x) * kk; d.y += (ty - d.y) * kk; d.z += (tz - d.z) * Mathf.Min(1, dt * (8 - i * 1.5f));

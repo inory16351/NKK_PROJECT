@@ -55,7 +55,7 @@ namespace NKK.Ults
             c.vz0 = (0.5f * G * dur * dur - z) / dur;
             c.p = NewProp(chunkArt ? "cheese_chunk" : "cheese_bullet");
             if (c.p != null) { c.p.w = c.w; c.p.sortBias = 20; }
-            c.mark = NewProp("meteor_target");
+            c.mark = null;     // 바닥 조준점은 안 띄움 (사용자 요청)
             if (c.mark != null) { c.mark.ground = true; c.mark.tint = new Color(1f, 0.82f, 0.25f); c.mark.alpha = 0; c.mark.sortBias = 5; c.mark.x = tx; c.mark.y = ty; }
             chunks.Add(c);
             StepChunk(c, 0);

@@ -228,6 +228,9 @@ namespace NKK.Items
             return true;
         }
 
+        // 지금 자리(공중 포함)에서 바로 박살 (슈퍼 점프: 웹 skillBlastItem → smashItem)
+        public void SmashNow() { if (State == ItemState.Dead) return; State = ItemState.Fly; air = Mathf.Max(air, 2); crit = true; Smash(); }
+
         void Smash()
         {
             State = ItemState.Dead;

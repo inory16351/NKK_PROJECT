@@ -194,11 +194,11 @@ namespace NKK.Items
                 Color spill = Color.clear;
                 bool hasSpill = !string.IsNullOrEmpty(it.Data.spill_color) && ColorUtility.TryParseHtmlString(it.Data.spill_color, out spill);
                 Color c0 = hasSpill ? spill : new Color(0.85f, 0.85f, 0.82f), c1 = it.Data.is_paper == 1 ? new Color(0.98f, 0.97f, 0.94f) : Color.white;
-                fx.Burst(it.x, it.y, 20, Mathf.RoundToInt(5 + bigK * 5), c0, c1, 120 * (0.7f + bigK * 0.3f), 380 * (0.7f + bigK * 0.3f));
-                fx.Stars(it.x, it.y, 20, 4, Color.white, new Color(1, 0.95f, 0.75f));
+                fx.Burst(it.x, it.y, 20 + it.z, Mathf.RoundToInt(5 + bigK * 5), c0, c1, 120 * (0.7f + bigK * 0.3f), 380 * (0.7f + bigK * 0.3f));
+                fx.Stars(it.x, it.y, 20 + it.z, 4, Color.white, new Color(1, 0.95f, 0.75f));
                 fx.Dust(it.x, it.y, big ? 6 : 3, big ? 1.4f : 0.8f);
                 fx.Ring(it.x, it.y, it.R + 30, new Color(1, 1, 1, 0.55f), 0.3f);
-                fx.Anim("poof", it.x, it.y, 0, 0.5f + bigK * 0.35f);
+                fx.Anim("poof", it.x, it.y, it.z, 0.5f + bigK * 0.35f);
                 if (hasSpill) fx.Spill(it.x, it.y, it.R, spill);
                 fx.Coin(it.x, it.y);
                 fx.Shake(0.02f + bigK * 0.02f);

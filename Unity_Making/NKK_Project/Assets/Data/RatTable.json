@@ -6235,6 +6235,20 @@
    "color": "#ffffff"
   },
   {
+   "ultimate_id": 30022,
+   "cap_key": "c10",
+   "text": "전원 포위! 꼬리도 들고!",
+   "size": 30.0,
+   "color": "#E03D40"
+  },
+  {
+   "ultimate_id": 30022,
+   "cap_key": "c11",
+   "text": "체포 완료! 찍?!",
+   "size": 20.0,
+   "color": "#FFFFFF"
+  },
+  {
    "ultimate_id": 30023,
    "cap_key": "c1",
    "text": "만세! 만만세!",
