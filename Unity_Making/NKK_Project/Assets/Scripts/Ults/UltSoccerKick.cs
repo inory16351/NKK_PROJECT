@@ -27,7 +27,7 @@ namespace NKK.Ults
         public override void Begin()
         {
             Beat(0.05f, () => Cap("c1"));
-            int extra = R.ClueBounces(M.Clues(R.codeId));
+            int extra = R.ClueBounces(R.clues);
             // 단서 보너스: 2개마다 공 +1 (최대 +3), 나머지는 난장판 시간 연장
             nBalls = 5 + Mathf.Min(3, extra / 2);
             chaosEnd = WIND + 3.9f + Mathf.Min(0.8f, extra * 0.15f);

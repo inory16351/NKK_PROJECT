@@ -13,9 +13,9 @@ using UnityEditor;
 namespace NKK.Ults
 {
     // 필살기 게이지 매니저.
-    // · 게이지는 종마다 따로: 그 종의 쥐가 Ult_Charge 시트 조건(물건·벽 파괴, 액션, 번식, 사람·고양이 퇴치, 층 통과…)을 하면 참.
-    // · 요구량 = 쥐 테이블 Ultimate.ult_gauge ÷ 공용 스킬 '필살기 연습' 배율. 다 차면 하단에 그 종 버튼이 뜸.
-    // · 버튼을 누르거나(또는 '필살기 자동 사용' 공용 스킬) → 대기열. 필살기는 한 번에 하나: 앞 필살기가 끝나야 다음 것.
+    // · 게이지는 쥐 한 마리마다 따로 (Rat.ultGauge): 그 쥐가 Ult_Charge 시트 조건(물건·벽 파괴, 액션, 번식, 사람·고양이 퇴치, 층 통과…)을 하면 참.
+    // · 요구량 = 쥐 테이블 Ultimate.ult_gauge, 충전량 × 공용 스킬 '필살기 연습' 배율. 다 차면 하단에 그 쥐 버튼이 뜨고 머리 위에 반짝이.
+    // · 버튼을 누르거나(또는 '필살기 자동 사용' 공용 스킬) → 대기열. 필살기는 모은 그 쥐가 씀. 한 번에 하나: 앞 필살기가 끝나야 다음 것.
     // · 진행: ① 컷인 (cutTime 초, 화면 정지 · 확대 · 제목) → ② 상황극 (UltXxx.Dur 초, 게임 진행) → ③ 업적 알림
     public class UltimateManager : MonoBehaviour
     {
@@ -31,6 +31,12 @@ namespace NKK.Ults
         [Tooltip("버튼이 늘어서는 곳 (가로 정렬)")] public RectTransform bar;
         [Tooltip("버튼 템플릿 (꺼 둔 채로 두면 복제해서 씀)")] public UltButton buttonTemplate;
         [Tooltip("필살기 아이콘 (테이블 ult_icon = UltIcons/ult_<id>) — 컴포넌트 메뉴 Fill Icons")] public List<FxManager.NamedSprite> icons = new();
+        [Tooltip("버튼 최대 개수 (더 많이 차면 먼저 찬 쥐부터 보이고 나머지는 자리가 나면)")] public int maxButtons = 8;
+
+        [Header("다 찬 쥐 머리 위 표시")]
+        [Tooltip("반짝이 그림 (필살기 색으로 물듦). 비우면 표시 안 함")] public Sprite readyMark;
+        [Tooltip("크기 · 기절 별 높이에서 더 올림 (게임 단위, 쥐 크기 배율이 곱해짐)")] public float readyMarkSize = 26, readyMarkLift = 14;
+        [Tooltip("하단 버튼에 마우스를 올리면 이 배율로 커짐")] public float readyMarkHover = 1.9f;
 
         [Header("컷인 (Canvas 자식)")]
         public CanvasGroup cutIn;
@@ -67,9 +73,10 @@ namespace NKK.Ults
         [Tooltip("테스트: 시작부터 모든 게이지를 채움")] public bool testFullGauge;
 
         // ── 상태 ──
-        readonly Dictionary<string, float> gauge = new(), clues = new();
-        readonly List<string> queue = new();
-        readonly Dictionary<string, UltButton> buttons = new();
+        readonly List<Rat> queue = new();
+        readonly Dictionary<Rat, UltButton> buttons = new();
+        readonly List<Rat> buttonOrder = new();
+        readonly HashSet<Rat> testFilled = new();
         UltBase cur; bool cutPhase; float cutT, actorT, flashA; Color flashCol;
         float capBigT = -9, capSmallT = -9, achvT = -9;
 
@@ -92,35 +99,31 @@ namespace NKK.Ults
             var u = DB.RatsByCode.TryGetValue(code, out var row) ? DB.UltOf(row) : null;
             return u == null ? 0 : Mathf.Max(1, u.ult_gauge);
         }
-        public float Gauge(string code) => gauge.TryGetValue(code, out var g) ? g : 0;
-        public float Gauge01(string code) { float n = Need(code); return n > 0 ? Mathf.Clamp01(Gauge(code) / n) : 0; }
-        public bool Full(string code) { float n = Need(code); return n > 0 && Gauge(code) >= n; }
+        public float Need(Rat r) => r ? Need(r.codeId) : 0;
+        public float Gauge01(Rat r) { float n = Need(r); return n > 0 ? Mathf.Clamp01(r.ultGauge / n) : 0; }
+        public bool Full(Rat r) { float n = Need(r); return n > 0 && r.ultGauge >= n; }
 
+        // 조건을 한 그 쥐만 참
         public void Charge(Rat r, CondType c)
         {
-            if (!r || r.temp > 0 || DB == null || DB.UltOf(r.Data) == null) return;
+            if (!r || r.temp > 0 || DB == null) return;
             if (!DB.UltCharges.TryGetValue(c, out var g) || g <= 0) return;
-            if (cur != null && cur.R && cur.R.codeId == r.codeId) return;      // 쓰는 중엔 안 참
-            Add(r.codeId, g * CommonSkill.UltGaugeMul);
+            if (cur != null && cur.R == r) return;      // 쓰는 중엔 안 참
+            Add(r, g * CommonSkill.UltGaugeMul);
         }
-        // 무리에 있는 종 전부 (층 통과 등)
+        // 무리의 쥐 전부 (층 통과 등)
         public void ChargeAll(CondType c)
         {
             if (!DB.UltCharges.TryGetValue(c, out var g) || g <= 0) return;
-            var done = new HashSet<string>();
-            foreach (var r in Rats.Rats) if (r.temp <= 0 && DB.UltOf(r.Data) != null && done.Add(r.codeId)) Add(r.codeId, g * CommonSkill.UltGaugeMul);
+            foreach (var r in Rats.Rats) if (r.temp <= 0) Add(r, g * CommonSkill.UltGaugeMul);
         }
-        void Add(string code, float v) { float n = Need(code); if (n <= 0) return; gauge[code] = Mathf.Min(n, Gauge(code) + v); }
-
-        // 단서 (찍찍 탐정 패시브) — 종 전체가 같이 모음, 필살기 쓰면 0
-        public void AddClues(string code, float v) => clues[code] = Clues(code) + v;
-        public float Clues(string code) => clues.TryGetValue(code, out var c) ? c : 0;
+        void Add(Rat r, float v) { float n = Need(r); if (n <= 0) return; r.ultGauge = Mathf.Min(n, r.ultGauge + v); }
 
         // ── 사용 ──
-        public void Request(string code)
+        public void Request(Rat r)
         {
-            if (GameOver.Active || !Full(code) || queue.Contains(code) || (cur != null && cur.R && cur.R.codeId == code)) return;
-            queue.Add(code);
+            if (GameOver.Active || !r || r.temp > 0 || !Full(r) || queue.Contains(r) || (cur != null && cur.R == r)) return;
+            queue.Add(r);
         }
 
         // 테스트 버튼: 게이지 채우고 바로 사용. 그 종 쥐가 화면에 없으면 화면 가운데 근처에 15초짜리로 불러옴
@@ -139,9 +142,9 @@ namespace NKK.Ults
                 r.temp = 15; r.noBreed = 99; r.breedCD = 99;
                 FxManager.I?.Dust(x, y, 8, 1.2f);
             }
-            gauge[code] = Need(code);
-            queue.Remove(code);
-            return TryStart(code, r);
+            r.ultGauge = Need(r);
+            queue.Remove(r);
+            return TryStart(r);
         }
 
         public void CancelAll()
@@ -150,28 +153,15 @@ namespace NKK.Ults
             if (cur != null) Stop(false);
         }
 
-        Rat PickRat(string code)
+        bool TryStart(Rat r)
         {
-            Rat any = null;
-            foreach (var r in Rats.Rats)
-            {
-                if (r.codeId != code || r.temp > 0 || r.UltOn) continue;
-                if (r.OnScreen(-0.05f)) return r;
-                any ??= r;
-            }
-            return any;
-        }
-
-        bool TryStart(string code, Rat forced = null)
-        {
-            var r = forced ? forced : PickRat(code);
-            if (!r) return false;
+            if (!r || r.UltOn) return false;
             var u = DB.UltOf(r.Data);
             var type = u != null && !string.IsNullOrEmpty(u.script) ? System.Type.GetType("NKK.Ults." + u.script) : null;
-            if (type == null) { Debug.LogWarning($"[UltimateManager] 필살기 코드 없음: {u?.script} ({code})"); gauge[code] = 0; return false; }
+            if (type == null) { Debug.LogWarning($"[UltimateManager] 필살기 코드 없음: {u?.script} ({r.codeId})"); r.ultGauge = 0; return false; }
             cur = (UltBase)System.Activator.CreateInstance(type);
             cur.Setup(this, r, u);
-            gauge[code] = 0;
+            r.ultGauge = 0;
             r.UltGrab(); r.z = 0; r.vz = 0;
             cur.Pre();
             cutPhase = true; cutT = 0; actorT = 0.3f;
@@ -229,7 +219,7 @@ namespace NKK.Ults
             s.ReleaseAll();
             if (r)
             {
-                if (r.CollectsClues) clues[r.codeId] = 0;
+                r.clues = 0;
                 r.z = Mathf.Max(0, r.z);
                 r.UltRelease();
                 if (!Stage.Open.Contains(StageManager.RoomOf(r.x, r.y))) { r.x = s.X0; r.y = s.Y0; }
@@ -289,19 +279,18 @@ namespace NKK.Ults
         {
             if (DB == null) return;
             float udt = Time.unscaledDeltaTime, dt = Mathf.Min(Time.deltaTime, 0.05f);
-            if (testFullGauge) foreach (var r in Rats.Rats) if (DB.UltOf(r.Data) != null && !gauge.ContainsKey(r.codeId)) gauge[r.codeId] = Need(r.codeId);
+            if (testFullGauge) foreach (var r in Rats.Rats) if (r.temp <= 0 && testFilled.Add(r)) r.ultGauge = Need(r);
             // 자동 사용 (공용 스킬)
             bool auto = CommonSkill.UltAuto;
-            if (auto) foreach (var kv in new List<string>(gauge.Keys)) if (Full(kv) && HasRat(kv)) Request(kv);
+            if (auto) foreach (var r in Rats.Rats) if (Full(r)) Request(r);
             // 대기열 → 하나씩
             if (cur == null && !FxManager.Paused && !(SuperJump && SuperJump.Busy))
-                while (queue.Count > 0) { var code = queue[0]; queue.RemoveAt(0); if (Full(code) && TryStart(code)) break; }
+                while (queue.Count > 0) { var r = queue[0]; queue.RemoveAt(0); if (r && r.temp <= 0 && Full(r) && TryStart(r)) break; }
 
             if (cur != null && cutPhase) StepCut(udt);
             else if (cur != null) StepAct(dt);
             UpdateUi(udt, auto);
         }
-        bool HasRat(string code) { foreach (var r in Rats.Rats) if (r.codeId == code && r.temp <= 0) return true; return false; }
 
         void StepCut(float udt)
         {
@@ -348,23 +337,31 @@ namespace NKK.Ults
         void UpdateUi(float udt, bool auto)
         {
             float t = Time.unscaledTime;
-            // 버튼: 다 찼고 그 종 쥐가 있으면 보임
+            // 버튼: 게이지가 다 찬 쥐 한 마리마다 하나 (먼저 찬 쥐부터, 최대 maxButtons)
             if (bar && buttonTemplate)
             {
-                foreach (var kv in gauge)
+                for (int i = buttonOrder.Count - 1; i >= 0; i--)
                 {
-                    string code = kv.Key;
-                    bool show = Full(code) && HasRat(code);
-                    buttons.TryGetValue(code, out var b);
-                    if (show && !b)
-                    {
-                        b = Instantiate(buttonTemplate, bar); b.gameObject.SetActive(true); b.name = "Ult_" + code;
-                        var row = DB.RatsByCode[code]; var u = DB.UltOf(row);
-                        b.Setup(code, Icon(u), row.character_name, Request);
-                        buttons[code] = b;
-                    }
-                    else if (!show && b) { Destroy(b.gameObject); buttons.Remove(code); }
-                    if (show && b) b.Refresh(queue.Contains(code) || (cur != null && cur.R && cur.R.codeId == code), auto);
+                    var r = buttonOrder[i];
+                    if (r && r.temp <= 0 && Full(r)) continue;
+                    if (buttons.TryGetValue(r, out var old) && old) Destroy(old.gameObject);
+                    if (r) r.ultHover = false;
+                    buttons.Remove(r); buttonOrder.RemoveAt(i);
+                }
+                foreach (var r in Rats.Rats)
+                {
+                    if (buttonOrder.Count >= maxButtons) break;
+                    if (r.temp > 0 || buttons.ContainsKey(r) || !Full(r)) continue;
+                    var b = Instantiate(buttonTemplate, bar); b.gameObject.SetActive(true); b.name = "Ult_" + r.codeId;
+                    var rr = r;
+                    b.Setup(Icon(DB.UltOf(r.Data)), r.Data.character_name, () => Request(rr));
+                    buttons[r] = b; buttonOrder.Add(r);
+                }
+                foreach (var r in buttonOrder)
+                {
+                    var b = buttons[r];
+                    b.Refresh(queue.Contains(r), auto);
+                    r.ultHover = b.Hovered;
                 }
             }
             // 자막

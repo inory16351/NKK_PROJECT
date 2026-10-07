@@ -1,11 +1,13 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace NKK.Ults
 {
-    // 하단 필살기 버튼 하나 (템플릿을 복제해서 씀). 글자는 씬의 TMP 에 쓰여 있고 코드는 {name} 자리만 채움
-    public class UltButton : MonoBehaviour
+    // 하단 필살기 버튼 하나 = 게이지가 다 찬 쥐 한 마리 (템플릿을 복제해서 씀). 글자는 씬의 TMP 에 쓰여 있고 코드는 {name} 자리만 채움.
+    // 마우스를 올리면 Hovered → 그 쥐 머리 위 표시가 커짐
+    public class UltButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Button button;
         public Image icon;
@@ -16,18 +18,21 @@ namespace NKK.Ults
         [Tooltip("다른 필살기가 끝나기를 기다리는 중 표시 (씬에서 글 넣기)")] public GameObject waitMark;
         [Tooltip("자동 사용 표시")] public GameObject autoMark;
 
-        [HideInInspector] public string code;
+        public bool Hovered { get; private set; }
         string nameFormat;
         float born;
 
-        public void Setup(string code, Sprite spr, string ratName, System.Action<string> onClick)
+        public void Setup(Sprite spr, string ratName, System.Action onClick)
         {
-            this.code = code;
             if (icon) { icon.sprite = spr; icon.enabled = spr; }
             if (nameText) { nameFormat ??= nameText.text; nameText.text = nameFormat.Replace("{name}", ratName); }
-            if (button) { button.onClick.RemoveAllListeners(); button.onClick.AddListener(() => onClick(code)); }
+            if (button) { button.onClick.RemoveAllListeners(); button.onClick.AddListener(() => onClick()); }
             born = Time.unscaledTime;
         }
+
+        public void OnPointerEnter(PointerEventData e) => Hovered = true;
+        public void OnPointerExit(PointerEventData e) => Hovered = false;
+        void OnDisable() => Hovered = false;
 
         public void Refresh(bool waiting, bool auto)
         {

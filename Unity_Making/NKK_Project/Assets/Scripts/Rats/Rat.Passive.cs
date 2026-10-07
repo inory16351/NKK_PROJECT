@@ -57,10 +57,10 @@ namespace NKK.Rats
         public float SkillKillCheeseMul => Is(EffectType.Skill_Cheese_Bonus) ? 1 + PV(1) : 1;
 
         // 단서 수집 (찍찍 탐정): 물건을 부술 때마다 단서 +밸류_01. 단서 밸류_02 개마다 필살기 공이 한 번 더 튕김 (최대 +밸류_03).
-        // 단서는 종 전체가 같이 모음 (UltimateManager 가 들고 있음, 필살기를 쓰면 0)
+        // 단서는 모은 그 쥐만 가짐 (Rat.clues, 그 쥐가 필살기를 쓰면 0)
         public void OnSmashedItem()
         {
-            if (Is(EffectType.Clue_Collect) && temp <= 0) Manager.Ults?.AddClues(codeId, PV(1));
+            if (Is(EffectType.Clue_Collect) && temp <= 0) clues += PV(1);
         }
         public bool CollectsClues => Is(EffectType.Clue_Collect);
         public int ClueBounces(float clues) => Is(EffectType.Clue_Collect) && PV(2) > 0 ? Mathf.Min(Mathf.RoundToInt(PV(3)), Mathf.FloorToInt(clues / PV(2))) : 0;

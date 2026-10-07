@@ -187,7 +187,7 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 웹 원본 수치를 그대로 옮겼으니 밸런스 조정은 테이블/인스펙터에서.
 
 ## 7. 필살기 · 슈퍼 점프 · 이펙트 (2026-10-06~07)
-- **필살기 게이지** `Scripts/Ults/UltimateManager.cs` (Game 씬 `UltimateManager`): 종마다 게이지. 충전 조건 = 쥐 테이블 `Ult_Charge` 시트, 요구량 = `Ultimate.ult_gauge` ÷ 공용 스킬 필살기 연습. 다 차면 `HUD/UltBar` 버튼 → 대기열(한 번에 하나). 공용 스킬 `Ult_Auto` 면 자동.
+- **필살기 게이지** `Scripts/Ults/UltimateManager.cs` (Game 씬 `UltimateManager`): **쥐 개체마다 게이지** (`Rat.ultGauge`, 2026-10-07 사용자 결정 — 같은 종이 여럿이면 모은 그 쥐가 씀). 충전 조건 = 쥐 테이블 `Ult_Charge` 시트(조건을 한 그 쥐만 참, 층 통과는 전원), 요구량 = `Ultimate.ult_gauge`, 충전량 × 공용 스킬 필살기 연습. 다 차면 그 쥐 머리 위 반짝이(`readyMark` = `FX/Tint/twinkle`, 필살기 색) + `HUD/UltBar` 에 **그 쥐 버튼 하나**(최대 `maxButtons` 8, 버튼에 마우스 → 그 쥐 반짝이 커짐) → 대기열(한 번에 하나). 공용 스킬 `Ult_Auto` 면 자동. 찍찍 탐정 단서도 개체별 (`Rat.clues`).
   - 흐름: 컷인(`HUD/UltCutIn`) → 상황극(`UltXxx : UltBase`, 33종 `Scripts/Ults/Ult*.cs`, 테이블 `Ultimate.script` = 클래스 이름) → 업적(`HUD/UltAchievement`, 오른쪽 위). 업적은 `Progress` 저장 — **로비 표시는 찍찍!! 훈장과 나중에 연동**.
   - 글 = `Ult_Caption` 시트 (키 c1…, `{n}`). 소품 = `UltimateManager.props` (컴포넌트 메뉴 **Fill Props** — 새 그림 넣으면 꼭 다시 실행), 아이콘 = Fill Icons.
   - 도우미 `UltBase`, 쥐 `Rat.Ult.cs` (UltOn·UltPose·HideBody·좀비·기절 별), 물건 `Item.Held/SkillHit/Fling/Survive`.
@@ -209,7 +209,7 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 
 ## 9. 다음 작업 (2026-10-07 기준, 다른 에이전트 이어서) — 시작 전에 §0 규칙·§7·§8 꼭 읽기
 ### 9-1. 필살기 게이지 — 이미 완료 (확률 발동 아님)
-- 필살기는 **게이지 방식**으로만 발동: `UltimateManager.Charge` 로 종별 게이지가 차고(`Ult_Charge` 시트), 다 차면 하단 버튼(또는 공용 스킬 `Ult_Auto` 자동) → 대기열. 웹의 `ULT_CHANCE`(확률 발동)는 옮기지 않았음. 코드 안 `Random` 은 테스트용 쥐 소환 위치·컷인 제목 흔들림뿐.
+- 필살기는 **게이지 방식**으로만 발동: `UltimateManager.Charge` 로 쥐 개체별 게이지가 차고(`Ult_Charge` 시트), 다 차면 하단 버튼(또는 공용 스킬 `Ult_Auto` 자동) → 대기열. 웹의 `ULT_CHANCE`(확률 발동)는 옮기지 않았음. 코드 안 `Random` 은 테스트용 쥐 소환 위치·컷인 제목 흔들림뿐.
 - 확률로 저절로 터지는 건 **슈퍼 점프**(`SuperJumpManager.chancePerSec` = 1/480 초당, 쿨 120초) — 웹과 같음.
 - 차오르는 과정 UI 는 **만들지 않음** (사용자 결정 2026-10-07).
 

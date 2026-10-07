@@ -24812,7 +24812,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4290769919
   m_fontColor: {r: 1, g: 0.953, b: 0.749, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -25200,7 +25200,6 @@ MonoBehaviour:
   nameText: {fileID: 529434978}
   waitMark: {fileID: 1388084065}
   autoMark: {fileID: 1677500424}
-  code: 
 --- !u!224 &1361355698
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27001,6 +27000,11 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: e4d15c2e6c05ef74eb998f18e3f88007, type: 3}
   - name: ult_30033
     sprite: {fileID: 21300000, guid: 898fa6f0860e99d45895384a31896d17, type: 3}
+  maxButtons: 8
+  readyMark: {fileID: 21300000, guid: c813175b874b22f43b25bbeed37128f7, type: 3}
+  readyMarkSize: 26
+  readyMarkLift: 14
+  readyMarkHover: 1.9
   cutIn: {fileID: 1092915643}
   cutTitle: {fileID: 1980283625}
   cutSub: {fileID: 533848400}

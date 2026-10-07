@@ -57,6 +57,34 @@ namespace NKK.Rats
             foreach (var sr in rig.GetComponentsInChildren<SpriteRenderer>()) { var k = sr.color; sr.color = new Color(c.r, c.g, c.b, k.a); }
         }
 
+        // ── 필살기 게이지 · 단서 (쥐 한 마리마다 따로. 쓰는 것도 모은 그 쥐) ──
+        [HideInInspector] public float ultGauge;           // UltimateManager.Charge 로 참, 필살기 쓰면 0
+        [HideInInspector] public float clues;              // 찍찍 탐정 단서: 이 쥐가 부순 만큼, 필살기 쓰면 0
+        [HideInInspector] public bool ultHover;            // 하단 버튼에 마우스가 올라감 → 머리 위 표시 크게
+
+        // 게이지가 다 찬 쥐: 머리 위에 필살기 색 반짝이 (UltimateManager.readyMark)
+        SpriteRenderer readyMark;
+        void UltReadyMark()
+        {
+            var um = Manager.Ults;
+            bool on = um && um.readyMark && !UltOn && !HideBody && temp <= 0 && um.Full(this);
+            if (!on) { if (readyMark && readyMark.enabled) readyMark.enabled = false; return; }
+            if (!readyMark)
+            {
+                var go = new GameObject("UltReadyMark"); go.transform.SetParent(transform, false);
+                readyMark = go.AddComponent<SpriteRenderer>(); readyMark.sprite = um.readyMark;
+                var u = NKK.Data.GameDatabase.Instance.UltOf(Data);
+                readyMark.color = u != null ? Color.Lerp(u.Color, Color.white, 0.25f) : Color.white;
+            }
+            float sc = Manager.ratScale * GradeData.size, t = Time.time + x * 0.01f;
+            float w = um.readyMarkSize * sc * (ultHover ? um.readyMarkHover : 1) * (1 + 0.12f * Mathf.Sin(t * 6)) * World.U / Mathf.Max(0.001f, readyMark.sprite.bounds.size.x);
+            readyMark.enabled = true;
+            readyMark.transform.localPosition = new Vector3(0, (Manager.stunStarHeight + um.readyMarkLift) * sc + Mathf.Sin(t * 3) * 4, 0) * World.U;
+            readyMark.transform.localScale = Vector3.one * w;
+            readyMark.transform.localRotation = Quaternion.Euler(0, 0, t * 90);
+            readyMark.sortingOrder = World.SortOrder(y) + 31;
+        }
+
         // ── 기절 별 (웹게임: 기절·데굴데굴 중 머리 위에 ★ 3개가 빙글빙글) ──
         SpriteRenderer[] stunStars;
         void StunStars()
