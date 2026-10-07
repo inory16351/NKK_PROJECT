@@ -267,6 +267,30 @@ namespace NKK.Lobby
                 shadow.sortingOrder = order - 1;
             }
             DrawHeld(len, order);
+            DrawDizzy(t, len, order);
+        }
+
+        // 던져져서 헤롱헤롱: 머리 위에 별 3개가 빙글빙글 (게임 쥐 기절 별과 같은 모양)
+        SpriteRenderer[] stars;
+        void DrawDizzy(float t, float len, int order)
+        {
+            bool on = (state == State.Dizzy || (state == State.Land && dizzy > 0)) && home.dizzyStar;
+            if (!on) { if (stars != null && stars[0].enabled) foreach (var s in stars) s.enabled = false; return; }
+            if (stars == null)
+            {
+                stars = new SpriteRenderer[3];
+                for (int i = 0; i < 3; i++) { var go = new GameObject("DizzyStar"); go.transform.SetParent(transform, false); stars[i] = go.AddComponent<SpriteRenderer>(); stars[i].sprite = home.dizzyStar; stars[i].color = home.dizzyStarColor; }
+            }
+            float w = len * home.dizzyStarSize / Mathf.Max(0.001f, home.dizzyStar.bounds.size.x);
+            for (int i = 0; i < 3; i++)
+            {
+                float a = t * 8 + i * 2.09f, s = Mathf.Sin(a);
+                var sr = stars[i]; sr.enabled = true;
+                sr.transform.localPosition = new Vector3(Mathf.Cos(a) * len * 0.26f + face * len * 0.18f, len * 0.62f + s * len * 0.08f, 0);
+                sr.transform.localScale = Vector3.one * w * (0.85f + 0.15f * s);
+                sr.transform.localRotation = Quaternion.Euler(0, 0, t * 200 + i * 40);
+                sr.sortingOrder = order + (s > 0 ? -1 : 30);
+            }
         }
 
         // 손에 든 것: 치즈(먹기) · 아령(들기) · 찻잔(차)

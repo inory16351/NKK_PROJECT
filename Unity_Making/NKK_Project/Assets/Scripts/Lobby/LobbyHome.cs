@@ -35,6 +35,10 @@ namespace NKK.Lobby
         [Tooltip("몸길이 기준 (리그 빌드용 게임 단위)")] public float rigLength = 46;
 
         [Header("손에 든 것")]
+        [Header("던져진 쥐 헤롱헤롱 별")]
+        public Sprite dizzyStar;
+        public Color dizzyStarColor = new(0.94f, 0.78f, 0.47f);
+        [Tooltip("별 크기 = 쥐 몸길이 × 이 값")] public float dizzyStarSize = 0.22f;
         public Sprite heldCheese;
         public Sprite heldDumbbell;
         public Sprite heldCup;

@@ -4839,6 +4839,9 @@ MonoBehaviour:
   walkSpeed: 0.09
   castRange: {x: 6, y: 13}
   rigLength: 46
+  dizzyStar: {fileID: 21300000, guid: 5ca7f4a2f93d20b4ba53b1b5531a6a17, type: 3}
+  dizzyStarColor: {r: 0.94, g: 0.78, b: 0.47, a: 1}
+  dizzyStarSize: 0.22
   heldCheese: {fileID: 21300000, guid: 22712a1b16dd7a04fa96b5d46b627e18, type: 3}
   heldDumbbell: {fileID: 21300000, guid: 936f0930335061d47b26a806a5062d91, type: 3}
   heldCup: {fileID: 21300000, guid: 62248e26ab820dd4cab1a862797a69a6, type: 3}
@@ -11403,9 +11406,9 @@ RectTransform:
   - {fileID: 888348617}
   m_Father: {fileID: 1846494738}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -33}
   m_SizeDelta: {x: 240, y: 66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1008890216
@@ -13023,9 +13026,9 @@ RectTransform:
   - {fileID: 1855097380}
   m_Father: {fileID: 1846494738}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 133, y: -33}
   m_SizeDelta: {x: 240, y: 66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1118727343

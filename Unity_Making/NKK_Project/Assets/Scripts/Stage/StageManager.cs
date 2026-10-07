@@ -352,6 +352,7 @@ namespace NKK.Stage
         {
             if ((powT -= Time.deltaTime) <= 0) { powT = 0.5f; Power = Rats.TotalPower(); }
             Game.SetStageInfo(Power, PowNeed(Game.Floor), Open.Count, Layout.Count);
+            if (stairs) stairs.enabled = Open.Contains(StairsRoom);          // 계단 방이 열리기 전엔 계단 안 보임
             if (FxManager.WorldFreeze) return;
             float dt = Mathf.Min(Time.deltaTime, 0.05f);
             foreach (var tp in traps) tp.Tick(dt, Rats, trapRadius, trapStun * CommonSkill.TrapStunMul, trapReload);   // 덫 해체 전문가
