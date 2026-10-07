@@ -23,6 +23,7 @@ namespace NKK.Rats
 
         public RatCharacterRow Data { get; private set; }
         public RatGradeRow GradeData { get; private set; }
+        public float SkillDamage => Damage * (GradeData != null && GradeData.skill_power > 0 ? GradeData.skill_power : 1);     // 특수 액션·필살기·슈퍼 점프 피해 기준 (등급 테이블 스킬 위력 배율)
         public RatManager Manager { get; private set; }
         public float Speed { get; private set; }
         public float Radius => Manager.ratRadius * GradeData.size;
@@ -62,7 +63,7 @@ namespace NKK.Rats
         // 공용 스킬: 공격력 + 고정값(등급별) → ×(1 + 공격력 % 합) ×(1 + 피해량 % 합)
         public float Damage => (Data.atk + CommonSkill.AtkFlat((int)Data.Grade)) * PassiveDamageMult * GrowthAtkMult * CommonSkill.AtkMul((int)Data.Grade) * (frenzy > 0 ? 1.5f : 1) * (zombie > 0 ? 2 : 1);
         float RunSpeed => Manager.baseSpeed * GradeData.move_speed * PassiveSpeedMult * CommonSkill.MoveSpeedMul * (frenzy > 0 ? 1.5f : 1);
-        float RushMult => Rushing ? Manager.RushDamage : 1;
+        float RushHit(object target) => Rushing ? Manager.RushDamage * Manager.RushStack(target) : 1;     // 총공격 배율 × 중첩 제한
 
         public void Tick(float dt)
         {
@@ -192,7 +193,7 @@ namespace NKK.Rats
             if (Trick == TrickType.Cannon) { Manager.Stage.DamageWall(i, j, di, dj, Damage * 2 * Manager.digMult * CommonSkill.WallDmgMul * WallMult, this); FxManager.I?.Shake(0.04f); return; }
             if (v <= 60 || wallCD > 0) return;
             wallCD = 0.3f; bite = 1; sq = 0.8f;
-            Manager.Stage.DamageWall(i, j, di, dj, Damage * Manager.digMult * CommonSkill.WallDmgMul * RushMult * WallMult, this);
+            Manager.Stage.DamageWall(i, j, di, dj, Damage * Manager.digMult * CommonSkill.WallDmgMul * RushHit(StageManager.WallKey(i, j, di, dj)) * WallMult, this);
             ActTrigger(CondType.Hit_Wall);
             FxManager.I?.Dust(x, y, 2, 0.6f);
         }
@@ -264,7 +265,7 @@ namespace NKK.Rats
             biteCD = 0.22f; bite = 1; sq = 1.25f;
             if (!rushing) StopDash(0.1f, 0.35f);
             bool crit = Random.value < CritChance + GrowthCritAdd + CommonSkill.CritAdd;
-            b.Damage(Damage * RushMult * MultiHit(b.x, b.y) * (crit ? CritMult : 1), this, Mathf.Atan2(-ny, -nx), crit);
+            b.Damage(Damage * RushHit(b) * MultiHit(b.x, b.y) * (crit ? CritMult : 1), this, Mathf.Atan2(-ny, -nx), crit);
             FxManager.I?.Stars(b.x - nx * b.R * 0.5f, b.y - ny * b.R * 0.5f, 40, crit ? 6 : 2, Color.white, new Color(1, 0.95f, 0.75f));
             return true;
         }
@@ -284,7 +285,7 @@ namespace NKK.Rats
                 biteCD = 0.22f; bite = 1; sq = 1.25f;
                 if (!rushing) StopDash(0.1f, 0.35f);
                 bool crit = Random.value < Manager.baseCritChance + CommonSkill.CritAdd;
-                h.Damage(Damage * RushMult * (crit ? Manager.critMultiplier + CommonSkill.CritDmgAdd : 1), this, Mathf.Atan2(-ny, -nx), crit);
+                h.Damage(Damage * RushHit(h) * (crit ? Manager.critMultiplier + CommonSkill.CritDmgAdd : 1), this, Mathf.Atan2(-ny, -nx), crit);
                 FxManager.I?.Stars(h.x - nx * h.R * 0.5f, h.y - ny * h.R * 0.5f, 40, crit ? 6 : 2, Color.white, new Color(1, 0.95f, 0.75f));
                 return;
             }
@@ -293,7 +294,7 @@ namespace NKK.Rats
         void Bump(Item it, float nx, float ny, float spd)
         {
             float ang = Mathf.Atan2(-ny, -nx);
-            float dmg = Damage * RushMult * DashHitMult(spd) * MultiHit(it.x, it.y);
+            float dmg = Damage * RushHit(it) * DashHitMult(spd) * MultiHit(it.x, it.y);
             bool crit = Random.value < CritChance + GrowthCritAdd + CommonSkill.CritAdd;
             PassiveBeforeHit(it);
             it.Damage(dmg * (crit ? CritMult : 1), this, crit, ang);

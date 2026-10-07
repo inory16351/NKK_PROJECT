@@ -293,7 +293,7 @@ namespace NKK.Ults
         {
             Go(Phase.Drop); boomT = Time.unscaledTime;
             FxManager.WorldFreeze = false;              // 날아간 물건·사람이 다시 움직이게
-            float sjD = r.Damage * damageK;
+            float sjD = r.SkillDamage * damageK;
             int n = 0;
             foreach (var f in fl)
             {

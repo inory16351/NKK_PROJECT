@@ -47,6 +47,7 @@ namespace NKK.Data
         public readonly List<StageRow> Stages = new();
         public readonly List<BossRow> Bosses = new();
         public readonly List<BossLineRow> BossLines = new();
+        public readonly Dictionary<string, BossAtkRow> BossAtks = new();
 
         void Awake()
         {
@@ -60,7 +61,7 @@ namespace NKK.Data
         {
             Rats.Clear(); RatsByCode.Clear(); RatSkills.Clear(); Ultimates.Clear(); UltCaptions.Clear(); UltCharges.Clear(); Grades.Clear();
             GrowthNodes.Clear(); GrowthOrder.Clear(); ActionAwaken.Clear(); Cats.Clear(); CatSkills.Clear();
-            Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear(); Stages.Clear(); Bosses.Clear(); BossLines.Clear();
+            Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear(); Stages.Clear(); Bosses.Clear(); BossLines.Clear(); BossAtks.Clear();
             CommonSkills.Clear(); CommonSkillsById.Clear(); CommonSkillsByTier.Clear(); SkillBranches.Clear();
 
             if (ratTable)
@@ -108,7 +109,7 @@ namespace NKK.Data
                 }
                 foreach (var b in f.Branch) SkillBranches[b.Branch] = b;
             }
-            if (stageTable) { var f = JsonUtility.FromJson<StageTableFile>(stageTable.text); if (f.Stage != null) { Stages.AddRange(f.Stage); Stages.Sort((a, b) => a.floor.CompareTo(b.floor)); } if (f.Boss != null) Bosses.AddRange(f.Boss); if (f.Boss_Line != null) BossLines.AddRange(f.Boss_Line); }
+            if (stageTable) { var f = JsonUtility.FromJson<StageTableFile>(stageTable.text); if (f.Stage != null) { Stages.AddRange(f.Stage); Stages.Sort((a, b) => a.floor.CompareTo(b.floor)); } if (f.Boss != null) Bosses.AddRange(f.Boss); if (f.Boss_Line != null) BossLines.AddRange(f.Boss_Line); if (f.Atk_Type != null) foreach (var a in f.Atk_Type) BossAtks[a.atk_type] = a; Bosses.Sort((a, b) => a.floor.CompareTo(b.floor)); }
             Debug.Log($"[GameDatabase] 쥐 {Rats.Count} · 스킬 {RatSkills.Count} · 필살기 {Ultimates.Count} · 등급 {Grades.Count} · 성장 노드 {GrowthNodes.Count} · 고양이 {Cats.Count} · 물건 {Items.Count} · 티어 {Tiers.Count} · 사람 {Humans.Count} · 공용 스킬 {CommonSkills.Count}");
         }
 
@@ -140,7 +141,14 @@ namespace NKK.Data
         }
 
         // 보스: 그 층에 나오는 보스 (없으면 null)
-        public BossRow BossOf(int floor) { foreach (var b in Bosses) if (b.floor == floor) return b; return null; }
+        // 보스: 그 층 보스. 표에 없는 보스 층(5층마다)은 표의 보스를 층 순서대로 반복 (웹 bossOf)
+        public BossRow BossOf(int floor)
+        {
+            foreach (var b in Bosses) if (b.floor == floor) return b;
+            if (Bosses.Count == 0 || floor % 5 != 0 || floor < Bosses[0].floor) return null;
+            return Bosses[(floor / 5 - 1) % Bosses.Count];
+        }
+        public BossAtkRow BossAtk(string type) => !string.IsNullOrEmpty(type) && BossAtks.TryGetValue(type, out var a) ? a : null;
         public string BossLine(string situation, int bossId)
         {
             var l = new List<string>();

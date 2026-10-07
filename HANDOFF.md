@@ -264,6 +264,38 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 4훈장(노드 100·조각 40) 7층부터 측정 중 끊음: 시작 쥐 12마리로 번식이 느려 7층 130초에 방 3/6, 전투력 970 / 적정 2760 → **중반 이후 곡선이 너무 가파를 가능성** (시작 쥐·번식 속도·POW_GROW 확인 필요).
 - 측정 중 NullReferenceException = 측정이 카메라를 꺼서 `FxManager.Coin` 의 Camera.main 이 null → 고침 (카메라 없으면 건너뜀).
 
+**2026-10-07 오후 — 승급 개편 · 공격력 1.8배 · 번식 비율 · 총공격 제한 (커밋 전)**
+- 측정 버그: 카메라를 꺼서 `Rat.OnScreen`(승급 정렬)·고양이 등장(`Camera.main`)이 깨짐 → 이전 측정은 "승급 0·고양이 없음"이었음. 이제 메인 카메라는 켜 두고 cullingMask 0.
+- 시작 쥐 (사용자 결정): 티어 테이블 start_rat_count 6/8/12/18/25/32/40/48, 스킬 시작 쥐 노드 마릿수 늘림 (2·4·6훈장 G8 = 시작 쥐).
+- **승급** (사용자 결정, 메모리 nkk-promote-decisions): 필요 마릿수 = 올림(promote_base 1.5 × promote_grow 1.3^k), k = 이번 판 그 등급 승급 횟수 → promote_soft 8 넘으면 promote_grow2 1.05 로 완만 (쥐 등급 테이블 칸). 일괄 승급은 최대 마리 수 × promoteKeepRatio(0.5) 남김. 공용 스킬 Promote_Need 삭제 → **Promote_Double**(승급 때 2~4% 확률로 2마리, 팝업 `promoteDoublePopup` 씬 인스펙터).
+- **공격력** (사용자 결정): 쥐 공격력은 등급 비례 유지, 등급 간 1.8배 → atk_base 10/18/32/58/105/189, 쥐 캐릭터 atk = atk_base × 티어 rat_atk_mul(unlock_rank) 로 다시 계산. 액션·필살기·슈퍼 점프 피해 = `Rat.SkillDamage` = 공격력 × 등급 skill_power(1/0.83/0.66/0.52/0.42/0.34 = 예전 위력 유지값, 측정하며 조정).
+- **번식** (사용자 결정): 확률 = 1/(1+((마리 수÷최대 마리 수)/breedHalfRatio 0.5)^breedRatioExp 3), 5마리 이하 100%.
+- **총공격** (사용자 결정): 같은 대상이 rushStackWindow 0.5초에 rushStackMax 12번 넘게 맞으면 rushStackOverMult 20%. 클릭 쿨타임 rushCooldown 3초(돌진 끝난 뒤, 최소 1초), `RatManager.ClickRush`. 공용 스킬 **Rush_CD** -0.5초 (2훈장 S6 · 5훈장 S6 · 8훈장 S5).
+- 측정 도구: 대기열 `BalanceProbe.Queue` + `RunQueue()` (인자 8번째 = 승급 방식 0/1/2), `UseUlt`(필살기 차면 바로, `UltimateManager.ForceAuto`), `UseRush`(쿨타임마다 보스→계단 벽→약한 벽 총공격), 시간 = `RunTimer.Used/LastUsed`(필살기·연출 제외), 제한 넘으면 실패.
+- 측정 결과 (일괄 승급·필살기·총공격 사용): 3훈장 7층 63% · 8층 실패 (목표대로, 총공격 넣기 전). 4훈장 7~11층 전부 통과 (10층 보스 27%, 11층 0.71배인데 84%). 5훈장 10층 21% · 11층 실패. 6훈장 13~17층 통과 (16층 0.56배인데 16%). 7훈장 16~20층 통과 (20층 보스 0.58배로 12%). **총공격·필살기가 너무 셈** — 고훈장일수록 전체 시간의 절반 이상이 필살기, 보스가 허들 역할 못 함. 계단 방 벽(적정 × 3+0.6(층-1))은 총공격 없으면 못 뚫음.
+- `Assets/_Recovery/0 (1).unity` = 컴퓨터 꺼질 때 유니티가 만든 복구 씬(필요 없음).
+
+**2026-10-07 저녁 — 이어서 바뀐 것 (커밋 전, 전부 Play 확인·콘솔 에러 없음)**
+- 총공격 너프 (사용자 결정): rushDamageMult 1.5 · rushStackMax 6 · rushStackOverMult 0.1 (씬 값도).
+- 필살기 (사용자 결정): 게이지 2배 (Ultimate.ult_gauge 100~240) · ultDamageK 13 · ultItemK 4.5 · **필살기 쿨타임** `UltimateManager.ultCooldown` 25초(최소 8, 하나 끝난 뒤 다음까지, 게이지는 계속 참) · 공용 스킬 **Ult_CD** (4훈장 S2 -3 · 6훈장 S6 -3 · 8훈장 S2 -4초).
+- 보스 체력 감소 노드(Boss_Hp_Down) 완전 삭제 (사용자: 없애기로 했던 것). 실제로는 1훈장 -50% 가 모든 보스에 걸려 있었음 → 보스 체력 2배가 됨. S4 자리 = **보스에게 주는 피해 +10~25% · 보스 층 시간 +3~4초** (Boss_Dmg_Pct value_02 = 보스 층 추가 초, `CommonSkill.BossTimeAdd`).
+- **새 보스 5종** (사용자 결정: 그림 Codex 새로, 보스전 별도 시간 없음): 스테이지 테이블 Boss 6행(5 경비대장 · 10 광기의 수석 연구원 · 15 연구소장 · 20 거대 메인쿤 · 25 마녀 고양이 · 30 우주 고양이, 그 뒤 반복 `GameDatabase.BossOf`) · 칸 rig(Human/Cat)·atk2_type·atk2_chance · **Atk_Type 시트**(공격별 radius·stun·count·windup·dur, 보스 행 atk_radius/atk_stun 은 삭제) · Boss_Line 새 대사.
+  - `Hazards/Boss.cs`: 공격 Stomp·Pounce·Flask·Hairball·Fireball·Swing(guardEvery 번마다 경비원 count 명, `ItemManager.SpawnHumanAt`)·Gravity, 투사체(`Boss/BossShotTemplate` 루트 오브젝트, flask/hairball/fireball 스프라이트), 고양이 보스 = `Boss/CatRig`(Cat 프리팹 리그 복사, 크기 = catLength × scale 3.4, 웹은 ×4.2), 테스트 보스 소환 = 누를 때마다 다음 보스. 팝업 글 = 인스펙터(pouncePopup 냥냥펀치!! · swingPopup 퍽!! · gravityPopup 무중력!! · hairPopup 털뭉치! · guardCall 경비! 경비이!!).
+  - 그림: `UnityResources/Rats/Humans/Sheets/boss_v3/`(연구원·연구소장 시트·프롬프트·README, 예전 웹 파츠 old_web_parts/) → Parts/boss_mad·boss_director · `UnityResources/Rats/BossProps/`(flask·hairball·splash_green) → `Assets/Art/Rats/BossProps/`.
+- **훈장 승급 조건** (사용자 결정): Skill_Node_Count = **지금 훈장 트리에서** 찍은 수 (`Progress.SkillCountIn(tier)`), 티어 테이블 2→8훈장 15·18·20·22·24·26·28.
+- **제한시간** (사용자 결정): 모든 층 **180초** (방 수 무관, `RunTimer.perRoom` 0) · 보스 층 +30 · 제한시간 노드 G2·G6 16개 합 +120초 (3~12초) · 보스 노드 합 +30초 → 다 찍으면 300 + 보스 60. 방 수는 최대 9 그대로.
+- 측정 도구: `BalanceProbe.MakeMeta` = **이전 훈장 트리 전부 + 지금 트리 nodes 개**(싼 것부터, -1 = 다음 훈장 조건 수, 99 = 전부) · 조각 shards(-1 = 조건) · `Calib`(적정 고정: `StageManager.PowOverride` = 무리 전투력 → "전투력 = 적정일 때 몇 초" 측정, 제한시간 넘어도 계속) · 보스전 시간 줄(`└ 보스전 N초`). **측정 중엔 스크립트 수정 금지** (플레이 중 도메인 리로드로 GameDatabase null·StunStars 에러 대량 발생).
+
+**측정 결과 요약**
+- 최소 상태(이전 트리 전부 + 승급 조건만큼, 제한시간 개편 전): 다음 훈장 조건 층을 17~49% 시간에 통과, 전투력 1.3~1.7배 → 너무 쉬움.
+- 적정 고정(전투력 = 적정, 제한 180+노드): 2훈장 2·3·4·5층 16·18·54·106% · 3훈장 4~8층 24·74(보스)·57·71·169% · 4훈장 7~11층 27·96·92·84(보스)·75% · 5훈장 10~14층 45(보스)·131·145·69·44% · 6훈장 13·14·15층 91·40·106(보스)%. **층마다 편차 큼** (방 배치·시작 방 거리·계단 벽 배율 3+0.6(층-1)).
+
+**다음 할 일 (사용자 목표)**
+1. **전투력 = 적정일 때 제한시간의 70~80%** 로 클리어되게: 적정 고정 모드로 층별 여러 번 재서 평균 → `gen_stage_table.py` 벽 배율(wall_normal·wall_stairs, 방 수 많은 층은 낮추기, 거리 가중 0.25 검토)·보스 hp_pow_sec 조정. 편차 줄이기(계단 벽 배율 상한 등)도.
+2. 그다음 **최소 상태(이전 트리 전부 + 지금 트리 승급 조건만큼)는 다음 훈장 조건 층을 아슬아슬하게(85~100%)**, **최대 상태(지금 트리까지 전부, 조각 1.5배)는 수월하게(40~60%)** — 적정 전투력 곡선(POW0·POW_GROW) 또는 노드 너프. 사용자에게 "허들 올리기 vs 노드 너프" 다시 물어볼 것 (직전 질문은 답 없이 넘어감).
+3. 승급이 판 후반(일반 40회쯤) 막힘: 일괄 승급이 최대 마리 수 절반을 남기는데 필요 수(완화 1.05)가 그보다 커짐 → promote_grow2·promote_soft 검토.
+4. 커밋 (오늘 작업 전부 미커밋).
+
 **남은 일 (순서 제안)**
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.
 2. 결과로 `gen_stage_table.py` 곡선(POW_GROW·HP_GROW·벽 배율·방 수)과 `gen_skill_tree.py` 값·비용(치즈 수입 대비 훈장 트리 1개 ≈ 판 3~5번), 보스 `hp_pow_sec`(지금 40), 티어 테이블 조건(연구자료·Skill_Node_Count 15/40/70/100/130/160/195) 조정 → 다시 생성·xlsx2json·측정.

@@ -60,19 +60,38 @@ namespace NKK.Rats
         public int PopCap => popCap + CommonSkill.MaxPopAdd;
         [Tooltip("번식 쿨타임 (초)")] public float breedCool = 4;
         [Tooltip("이 마리 수까지는 부딪히면 100% 탄생")] public int breedFree = 5;
-        [Tooltip("확률 = 1 / (1 + ((인구-무료)/HALF)^EXP)")] public float breedHalf = 10;
-        public float breedExp = 1.6f;
+        [Tooltip("확률 = 1 / (1 + ((인구 ÷ 최대 마리 수) / 이 비율)^지수). 최대 마리 수의 이 비율일 때 50%")] [Range(0.05f, 1)] public float breedHalfRatio = 0.5f;
+        [Tooltip("클수록 최대 마리 수 가까이에서 확 떨어짐")] public float breedRatioExp = 3;
         public float breedMinChance = 0.002f;
         [Tooltip("탄생 실패 시 둘 다 쉬는 시간")] public float breedFailCD = 0.8f;
 
         [Header("총공격 (클릭)")]
         [Tooltip("돌진 시간 (초)")] public float rushTime = 1.5f;
-        [Tooltip("돌진 중 피해 배율")] public float rushDamageMult = 2;
+        [Tooltip("돌진 중 피해 배율")] public float rushDamageMult = 1.5f;
         public float RushTime => rushTime + CommonSkill.RushTimeAdd;           // 총공격 스킬
         public float RushDamage => rushDamageMult + CommonSkill.RushMulAdd;
         [Tooltip("돌진 속도 = 이동 속도 × 이 값")] public float rushSpeedMult = 2.6f;
         [Tooltip("돌진 끝나고도 번식 금지 (초)")] public float rushNoBreed = 1;
         [Tooltip("이 픽셀보다 많이 끌면 클릭이 아니라 화면 이동")] public float clickDragPixels = 16;
+        [Tooltip("클릭 총공격 쿨타임: 돌진이 끝난 뒤 이 초 동안 다시 못 씀 (공용 스킬로 줄어듦)")] public float rushCooldown = 3;
+        [Tooltip("공용 스킬로 줄어도 최소 (초)")] public float rushCooldownMin = 1;
+        [Tooltip("같은 대상이 이 시간(초) 안에 총공격으로 맞은 횟수를 셈")] public float rushStackWindow = 0.5f;
+        [Tooltip("그 시간 안에 이 횟수까지는 피해 그대로")] public int rushStackMax = 6;
+        [Tooltip("넘은 타격의 피해 배율")] [Range(0, 1)] public float rushStackOverMult = 0.1f;
+        public float RushCooldown => Mathf.Max(rushCooldownMin, rushCooldown - CommonSkill.RushCdLess);
+        public bool RushReady => rushCdLeft <= 0;
+        float rushCdLeft;
+        readonly Dictionary<object, (float t0, int n)> rushStacks = new();
+        // 총공격 중첩 제한: 같은 대상(물건·사람·보스·벽 키)이 짧은 시간에 너무 많이 맞으면 넘은 타격은 약하게
+        public float RushStack(object target)
+        {
+            if (target == null) return 1;
+            float now = Time.time;
+            if (rushStacks.Count > 400) { var old = new List<object>(); foreach (var kv in rushStacks) if (now - kv.Value.t0 > rushStackWindow) old.Add(kv.Key); foreach (var o in old) rushStacks.Remove(o); }
+            var s = rushStacks.TryGetValue(target, out var v) && now - v.t0 <= rushStackWindow ? (v.t0, v.n + 1) : (now, 1);
+            rushStacks[target] = s;
+            return s.Item2 <= rushStackMax ? 1 : rushStackOverMult;
+        }
 
         public readonly List<Rat> Rats = new();
         readonly List<(float t, System.Action a)> timers = new();
@@ -108,6 +127,13 @@ namespace NKK.Rats
             int b = (int)r.Body; return b < rigLengthByBody.Length ? rigLengthByBody[b] : 44;
         }
 
+        // 화면 안 진짜 쥐 하나 (없으면 null) — 보스 투척 목표
+        public Rat RandomOnScreen()
+        {
+            var l = new List<Rat>();
+            foreach (var o in Rats) if (o.temp <= 0 && !o.UltOn && o.OnScreen()) l.Add(o);
+            return l.Count > 0 ? l[Random.Range(0, l.Count)] : null;
+        }
         public Rat NearestRat(float x, float y, float maxD)
         {
             Rat best = null; float bd = maxD;
@@ -178,13 +204,26 @@ namespace NKK.Rats
         public int RealCount => Rats.Count - TempCount;
         public void RemoveTemp(Rat r) { FxManager.I?.Dust(r.x, r.y, 6, 1); Rats.Remove(r); Destroy(r.gameObject); }
 
-        // ── 승급 (웹 promote): 같은 등급 N마리 희생 → 윗등급 무작위 1마리. N = promoteCost - 공용 스킬 (최소 promoteMin) ──
-        [Header("승급 (웹 promote)")]
-        [Tooltip("같은 등급 몇 마리 → 윗등급 1마리 (공용 스킬 '승급 필요 쥐 감소'로 줄어듦)")] public int promoteCost = 10;
-        [Tooltip("공용 스킬로 줄어도 최소")] public int promoteMin = 4;
-        [Tooltip("일괄 승급 때 남겨 둘 마리 수 (번식용)")] public int promoteKeep = 6;
+        // ── 승급: 같은 등급 N마리 희생 → 윗등급 무작위 1마리 (공용 스킬 확률로 2마리) ──
+        // N = 올림(등급 테이블 promote_base × promote_grow^k), k = 이번 판에 그 등급을 승급한 횟수 (판마다 0부터)
+        //   N 이 promote_soft 에 닿은 뒤로는 promote_soft × promote_grow2^(넘은 횟수) 로 완만하게 (이어지게)
+        [Header("승급")]
+        [Tooltip("일괄 승급 때 남겨 둘 마리 수 (번식용, 최소)")] public int promoteKeep = 6;
+        [Tooltip("일괄 승급 때 최대 마리 수의 이 비율만큼은 남김")] [Range(0, 1)] public float promoteKeepRatio = 0.5f;
+        public int PromoteKeepCount => Mathf.Max(promoteKeep, Mathf.CeilToInt(PopCap * promoteKeepRatio));
         [Tooltip("승급한 쥐 위 팝업 글")] public string promotePopup;
-        public int PromoteNeed(int g) => Mathf.Max(promoteMin, promoteCost - CommonSkill.PromoteLess(g));
+        [Tooltip("공용 스킬로 2마리가 나왔을 때 팝업 글")] public string promoteDoublePopup;
+        readonly int[] promoteTimes = new int[6];
+        public int PromoteTimes(int g) => g >= 0 && g < promoteTimes.Length ? promoteTimes[g] : 0;
+        public int PromoteNeed(int g)
+        {
+            if (!GameDatabase.Instance.Grades.TryGetValue((Grade)g, out var gr) || gr.promote_base <= 0) return 999;
+            float k = PromoteTimes(g), grow = Mathf.Max(1.0001f, gr.promote_grow), n;
+            float kSoft = gr.promote_soft > gr.promote_base ? Mathf.Log(gr.promote_soft / gr.promote_base) / Mathf.Log(grow) : float.MaxValue;
+            if (k <= kSoft) n = gr.promote_base * Mathf.Pow(grow, k);
+            else n = gr.promote_soft * Mathf.Pow(Mathf.Max(1, gr.promote_grow2), k - kSoft);
+            return Mathf.Max(1, Mathf.CeilToInt(n - 0.0001f));
+        }
         public int CountGrade(int g) { int n = 0; foreach (var r in Rats) if (r.temp <= 0 && !r.UltOn && (int)r.Data.Grade == g) n++; return n; }
         public bool CanPromote(int g) => g >= 0 && g < 5 && GradeOpen(g + 1, Game.Tier) && CountGrade(g) >= PromoteNeed(g) && RealCount - PromoteNeed(g) + 1 >= 2 && !GameOver.Active;
         public Rat Promote(int g)
@@ -202,26 +241,30 @@ namespace NKK.Rats
                 if (fx && r.OnScreen()) fx.Stars(r.x, r.y, 10, 8, gc, Color.white, 60, 200);
                 Rats.Remove(r); Destroy(r.gameObject);
             }
+            promoteTimes[g]++;
             var row = SpeciesOfGrade(g + 1);
             var nr = row != null ? Spawn(row, cx, cy) : null;
+            bool twice = Random.value < CommonSkill.PromoteDouble(g);
+            if (twice) { var row2 = SpeciesOfGrade(g + 1); if (row2 != null) Spawn(row2, cx + Random.Range(-40f, 40f), cy + Random.Range(-30f, 30f)); }
             var nc = GameDatabase.Instance.Grades.TryGetValue((Grade)(g + 1), out var ng) && ColorUtility.TryParseHtmlString(ng.color, out var c1) ? c1 : Color.white;
             if (fx)
             {
                 for (int i = 0; i < 3; i++) fx.Ring(cx, cy, 40 + i * 30, i % 2 == 1 ? Color.white : nc, 0.5f + i * 0.15f);
-                if (!string.IsNullOrEmpty(promotePopup)) fx.Popup(cx, cy, promotePopup, nc, 26, 1.5f, 60);
+                var pop = twice && !string.IsNullOrEmpty(promoteDoublePopup) ? promoteDoublePopup : promotePopup;
+                if (!string.IsNullOrEmpty(pop)) fx.Popup(cx, cy, pop, nc, twice ? 30 : 26, 1.5f, 60);
                 fx.Shake(0.1f);
             }
             Ults?.Flash(nc, 0.15f);
             return nr;
         }
-        // 일괄 승급: 낮은 등급부터 되는 만큼 (번식용 promoteKeep 마리는 남김). 승급 횟수
+        // 일괄 승급: 낮은 등급부터 되는 만큼 (번식용 PromoteKeepCount 마리는 남김). 승급 횟수
         public int PromoteAll()
         {
             int n = 0;
             for (int guard = 0; guard < 500; guard++)
             {
                 int g = -1; for (int k = 0; k < 5; k++) if (CanPromote(k)) { g = k; break; }
-                if (g < 0 || RealCount - PromoteNeed(g) + 1 < promoteKeep) break;
+                if (g < 0 || RealCount - PromoteNeed(g) + 1 < PromoteKeepCount) break;
                 if (!Promote(g)) break;
                 n++;
             }
@@ -360,7 +403,8 @@ namespace NKK.Rats
             return null;
         }
 
-        float BreedChance(int pop) => Mathf.Clamp(1f / (1 + Mathf.Pow(Mathf.Max(0, pop - breedFree) / breedHalf, breedExp)) + CommonSkill.BreedChanceAdd(pop), breedMinChance, 1);   // + 공용 스킬 번식 확률
+        // 번식 확률: 무료 마리 수 이하는 100%, 그 위로는 최대 마리 수 대비 채운 비율로 떨어짐 (최대 마리 수가 늘면 번식도 같이 잘 됨) + 공용 스킬 번식 확률
+        float BreedChance(int pop) => Mathf.Clamp((pop <= breedFree ? 1 : 1f / (1 + Mathf.Pow((float)pop / Mathf.Max(1, PopCap) / breedHalfRatio, breedRatioExp))) + CommonSkill.BreedChanceAdd(pop), breedMinChance, 1);
 
         void Breed()
         {
@@ -428,8 +472,16 @@ namespace NKK.Rats
             if (pressed && m.leftButton.wasReleasedThisFrame)
             {
                 pressed = false;
-                if (!dragged) StartRush(World.FromUnity(Camera.main.ScreenToWorldPoint(sp)));
+                if (!dragged) ClickRush(World.FromUnity(Camera.main.ScreenToWorldPoint(sp)));
             }
+        }
+
+        // 클릭 총공격 (쿨타임 적용). 밸런스 측정도 이걸 씀
+        public bool ClickRush(Vector2 p)
+        {
+            if (!RushReady || RushActive) return false;
+            StartRush(p); rushCdLeft = RushTime + RushCooldown;
+            return true;
         }
 
         public void StartRush(Vector2 p)
@@ -468,7 +520,7 @@ namespace NKK.Rats
             if (FxManager.WorldFreeze) return;
             HandleInput();
             float dt = Mathf.Min(Time.deltaTime, 0.05f);
-            rushLeft -= dt;
+            rushLeft -= dt; rushCdLeft -= dt;
             for (int i = timers.Count - 1; i >= 0; i--) { var tm = timers[i]; tm.t -= dt; if (tm.t <= 0) { timers.RemoveAt(i); tm.a(); } else timers[i] = tm; }
             UpdateAuras();
             UpdateBullets(dt);

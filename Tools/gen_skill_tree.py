@@ -32,59 +32,59 @@ BRANCH = {'C': 'Combat', 'G': 'Growth', 'L': 'Loot', 'K': 'Trick', 'S': 'Special
 T = {}
 T[1] = dict(
     C1=('Atk_Flat', 1), C2=('Dmg_Pct', 0.10), C3=('Atk_Flat', 2), C4=('Atk_Flat', 2, 1), C5=('Atk_Flat', 3, 2, 1), C6=('Wall_Dmg_Pct', 0.10), C7=('Wall_Dmg_Pct', 0.15), C8=('Dmg_Pct', 0.15),
-    G1=('Start_Rat', 1, 1), G2=('Time_Add', 3), G3=('Start_Rat', 1, 1), G4=('Breed_Chance', 0.10, 10), G5=('Pop_Cap', 10), G6=('Time_Add', 5), G7=('Promote_Need', 1, 1), G8=('Start_Rat', 1, 1),
+    G1=('Start_Rat', 2, 1), G2=('Time_Add', 3), G3=('Start_Rat', 2, 1), G4=('Breed_Chance', 0.10, 10), G5=('Pop_Cap', 10), G6=('Time_Add', 4), G7=('Promote_Double', 0.03, 1), G8=('Start_Rat', 3, 1),
     L1=('Item_Count_Flat', 1), L2=('Cheese_Pct', 0.10), L3=('Item_Count_Flat', 1), L4=('Cheese_Pct', 0.15), L5=('Cheese_Pct', 0.30, 1), L6=('New_Item', 60011), L7=('Cheese_Pct', 0.30, 2), L8=('New_Item', 60025),
     K1=('Trick_Unlock', 1, 0.03), K2=('Trick_Cheese_Pct', 0.20), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 1, 0.02), K5=('Trap_Multi_Down', 0.10), K6=('Trick_Cheese_Pct', 0.40), K7=('Trick_Gauge_Pct', 0.25),
-    S1=('Stage_Skip', 1), S2=('Wall_Hp_Down', 0.05), S3=('Stage_Skip', 1), S4=('Boss_Hp_Down', 0.50, 5), S5=('Rocket_CD', 5), S6=('Ult_Gauge_Pct', 0.10),
+    S1=('Stage_Skip', 1), S2=('Wall_Hp_Down', 0.05), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.1, 4), S5=('Rocket_CD', 5), S6=('Ult_Gauge_Pct', 0.10),
 )
 T[2] = dict(
     C1=('Atk_Flat', 2), C2=('Atk_Pct', 0.10), C3=('Crit_Chance', 0.03), C4=('Atk_Flat', 4, 2), C5=('Atk_Pct', 0.15, 2, 1), C6=('Wall_Dmg_Pct', 0.15), C7=('Crit_Dmg', 0.50), C8=('Dmg_Pct', 0.15),
-    G1=('Start_Rat', 1, 1), G2=('Time_Add', 5), G3=('Start_Rat', 1, 2), G4=('Breed_Chance', 0.05), G5=('Pop_Cap', 10), G6=('Time_Add', 8), G7=('Promote_Need', 1, 1), G8=('Move_Speed_Pct', 0.10),
+    G1=('Start_Rat', 3, 1), G2=('Time_Add', 5), G3=('Start_Rat', 2, 2), G4=('Breed_Chance', 0.05), G5=('Pop_Cap', 10), G6=('Time_Add', 5), G7=('Promote_Double', 0.03, 1), G8=('Start_Rat', 4, 1),
     L1=('Item_Count_Flat', 1), L2=('Cheese_Pct', 0.15), L3=('Item_Count_Pct', 0.10), L4=('Cheese_Pct', 0.35, 2), L5=('Cheese_Pct', 0.35, 1), L6=('New_Item', 60017), L7=('Item_Count_Pct', 0.15), L8=('New_Item', 60026),
     K1=('Trick_Unlock', 2, 0.02), K2=('Trick_Chance', 2, 0.02), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 1, 0.02), K5=('Trap_Multi_Down', 0.10), K6=('Trick_Cheese_Pct', 0.40), K7=('Trick_Gauge_Pct', 0.25),
-    S1=('Stage_Skip', 1), S2=('Wall_Hp_Down', 0.05), S3=('Stage_Skip', 1), S4=('Boss_Hp_Down', 0.30, 10), S5=('Ult_Gauge_Pct', 0.15), S6=('Combo_Time_Pct', 0.20),
+    S1=('Stage_Skip', 1), S2=('Wall_Hp_Down', 0.05), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.1, 4), S5=('Ult_Gauge_Pct', 0.15), S6=('Rush_CD', 0.5),
 )
 T[3] = dict(
     C1=('Atk_Flat', 3), C2=('Atk_Pct', 0.15), C3=('Multi_Hit', 0.05, 1), C4=('Atk_Flat', 6, 3), C5=('Atk_Pct', 0.20, 3, 1), C6=('Wall_Dmg_Pct', 0.20), C7=('Crit_Chance', 0.03), C8=('Dmg_Pct', 0.20),
-    G1=('Start_Rat', 1, 2), G2=('Time_Add', 8), G3=('Start_Rat', 1, 2), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 15), G6=('Time_Add', 10), G7=('Promote_Need', 1, 2), G8=('Promote_Need', 1, 1),
+    G1=('Start_Rat', 2, 2), G2=('Time_Add', 6), G3=('Start_Rat', 2, 2), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 15), G6=('Time_Add', 6), G7=('Promote_Double', 0.03, 2), G8=('Promote_Double', 0.02, 1),
     L1=('Item_Count_Flat', 2), L2=('Cheese_Pct', 0.15), L3=('Item_Count_Pct', 0.15), L4=('Cheese_Pct', 0.40, 2), L5=('Cheese_Pct', 0.40, 1), L6=('New_Item', 60020), L7=('Furniture_Pct', 0.30, 0.30), L8=('New_Item', 60027),
     K1=('Trick_Unlock', 3, 0.015), K2=('Trick_Chance', 3, 0.015), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 2, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Cheese_Pct', 0.50), K7=('Trick_Gauge_Pct', 0.25),
-    S1=('Stage_Skip', 2), S2=('Bite_Zap', 0.05, 2, 0.5), S3=('Stage_Skip', 1), S4=('Boss_Hp_Down', 0.30, 15), S5=('Chain_Blast', 30, 0.20), S6=('Wall_Hp_Down', 0.05),
+    S1=('Stage_Skip', 2), S2=('Bite_Zap', 0.05, 2, 0.5), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.15, 4), S5=('Chain_Blast', 30, 0.20), S6=('Wall_Hp_Down', 0.05),
 )
 T[4] = dict(
     C1=('Atk_Flat', 5), C2=('Atk_Pct', 0.20), C3=('Crit_Dmg', 0.50), C4=('Atk_Flat', 10, 4), C5=('Atk_Pct', 0.25, 4, 1), C6=('Wall_Dmg_Pct', 0.20), C7=('Boss_Dmg_Pct', 0.25), C8=('Dmg_Pct', 0.20),
-    G1=('Start_Rat', 1, 3), G2=('Time_Add', 10), G3=('Start_Rat', 2, 2), G4=('Breed_Chance', 0.05), G5=('Pop_Cap', 15), G6=('Time_Add', 10), G7=('Promote_Need', 1, 3), G8=('Move_Speed_Pct', 0.10),
+    G1=('Start_Rat', 2, 3), G2=('Time_Add', 7), G3=('Start_Rat', 3, 2), G4=('Breed_Chance', 0.05), G5=('Pop_Cap', 15), G6=('Time_Add', 7), G7=('Promote_Double', 0.03, 3), G8=('Start_Rat', 6, 1),
     L1=('Item_Count_Pct', 0.15), L2=('Cheese_Pct', 0.20), L3=('Spawn_Rate_Pct', 0.20), L4=('Cheese_Pct', 0.50, 2), L5=('Cheese_Pct', 0.50, 1), L6=('New_Item', 60022), L7=('Gold_Item', 0.03, 5), L8=('New_Item', 60028),
     K1=('Trick_Unlock', 4, 0.015), K2=('Trick_Chance', 4, 0.015), K3=('Trick_Chance', 0, 0.01), K4=('Trick_Chance', 3, 0.015), K5=('Trap_Single_Down', 0.05), K6=('Trick_Cheese_Pct', 0.50), K7=('Trick_Gauge_Pct', 0.30),
-    S1=('Stage_Skip', 2), S2=('Ult_Gauge_Pct', 0.20), S3=('Stage_Skip', 1), S4=('Boss_Hp_Down', 0.25, 20), S5=('Ult_Power_Pct', 0.30), S6=('Rush_Up', 0.5, 0.5),
+    S1=('Stage_Skip', 2), S2=('Ult_CD', 3), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.15, 4), S5=('Ult_Power_Pct', 0.30), S6=('Rush_Up', 0.5, 0.5),
 )
 T[5] = dict(
     C1=('Atk_Flat', 8), C2=('Atk_Pct', 0.25), C3=('Multi_Hit', 0.05, 2), C4=('Atk_Flat', 15, 5), C5=('Atk_Pct', 0.30, 5, 1), C6=('Wall_Dmg_Pct', 0.25), C7=('Crit_Chance', 0.04), C8=('Dmg_Pct', 0.25),
-    G1=('Start_Rat', 1, 3), G2=('Time_Add', 12), G3=('Start_Rat', 1, 4), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 20), G6=('Time_Add', 12), G7=('Promote_Need', 1, 4), G8=('Mutation_Chance', 0.10),
+    G1=('Start_Rat', 2, 3), G2=('Time_Add', 8), G3=('Start_Rat', 1, 4), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 20), G6=('Time_Add', 8), G7=('Promote_Double', 0.03, 4), G8=('Mutation_Chance', 0.10),
     L1=('Item_Count_Pct', 0.20), L2=('Cheese_Pct', 0.20), L3=('Spawn_Rate_Pct', 0.20), L4=('Cheese_Pct', 0.60, 2), L5=('Cheese_Pct', 0.60, 1), L6=('New_Item', 60023), L7=('Gold_Item', 0.04), L8=('New_Item', 60029),
     K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.50), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 1, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Chance', 2, 0.02), K7=('Trick_Gauge_Pct', 0.30),
-    S1=('Stage_Skip', 2), S2=('Cheese_Meteor', 12, 0.30), S3=('Stage_Skip', 1), S4=('Boss_Hp_Down', 0.25, 25), S5=('Cheese_Meteor', 0, 0.30), S6=('Wall_Hp_Down', 0.05),
+    S1=('Stage_Skip', 2), S2=('Cheese_Meteor', 12, 0.30), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.2, 4), S5=('Cheese_Meteor', 0, 0.30), S6=('Rush_CD', 0.5),
 )
 T[6] = dict(
     C1=('Atk_Flat', 12), C2=('Atk_Pct', 0.30), C3=('Crit_Dmg', 0.75), C4=('Atk_Flat', 22, 6), C5=('Atk_Pct', 0.30, 6, 1), C6=('Wall_Dmg_Pct', 0.25), C7=('Boss_Dmg_Pct', 0.30), C8=('Dmg_Pct', 0.30),
-    G1=('Start_Rat', 1, 4), G2=('Time_Add', 15), G3=('Start_Rat', 2, 3), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 20), G6=('Time_Add', 15), G7=('Promote_Need', 1, 5), G8=('Move_Speed_Pct', 0.10),
+    G1=('Start_Rat', 2, 4), G2=('Time_Add', 9), G3=('Start_Rat', 3, 3), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 20), G6=('Time_Add', 9), G7=('Promote_Double', 0.03, 5), G8=('Start_Rat', 6, 2),
     L1=('Item_Count_Pct', 0.20), L2=('Cheese_Pct', 0.25), L3=('Spawn_Rate_Pct', 0.25), L4=('Cheese_Pct', 0.70, 2), L5=('Cheese_Pct', 0.70, 1), L6=('New_Item', 60024), L7=('Gold_Item', 0.04), L8=('New_Item', 60030),
     K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.60), K3=('Trick_Chance', 3, 0.02), K4=('Trick_Chance', 4, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Gauge_Pct', 0.30), K7=('Trick_Chance', 0, 0.01),
-    S1=('Stage_Skip', 2), S2=('Ult_Auto', 1), S3=('Stage_Skip', 2), S4=('Boss_Hp_Down', 0.25, 30), S5=('Super_Jump_Pct', 0.50), S6=('Ult_Gauge_Pct', 0.20),
+    S1=('Stage_Skip', 2), S2=('Ult_Auto', 1), S3=('Stage_Skip', 2), S4=('Boss_Dmg_Pct', 0.2, 4), S5=('Super_Jump_Pct', 0.50), S6=('Ult_CD', 3),
 )
 T[7] = dict(
     C1=('Atk_Flat', 18), C2=('Atk_Pct', 0.30), C3=('Multi_Hit', 0.05, 2), C4=('Atk_Flat', 30, 5, 1), C5=('Atk_Pct', 0.35, 4, 1), C6=('Wall_Dmg_Pct', 0.30), C7=('Crit_Chance', 0.04), C8=('Dmg_Pct', 0.30),
-    G1=('Start_Rat', 1, 5), G2=('Time_Add', 15), G3=('Start_Rat', 1, 4), G4=('Birth_Frenzy', 4, 200, 1.5), G5=('Pop_Cap', 25), G6=('Time_Add', 20), G7=('Promote_Need', 1, 1), G8=('Mutation_Chance', 0.15),
+    G1=('Start_Rat', 1, 5), G2=('Time_Add', 10), G3=('Start_Rat', 2, 4), G4=('Birth_Frenzy', 4, 200, 1.5), G5=('Pop_Cap', 25), G6=('Time_Add', 10), G7=('Promote_Double', 0.03, 0), G8=('Mutation_Chance', 0.15),
     L1=('Item_Count_Pct', 0.25), L2=('Cheese_Pct', 0.25), L3=('Spawn_Rate_Pct', 0.25), L4=('Cheese_Pct', 0.80, 2), L5=('Cheese_Pct', 0.80, 1), L6=('Gold_Item', 0.05), L7=('Air_Cheese_Pct', 0.50), L8=('New_Item', 60031),
     K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.70), K3=('Trick_Chance', 1, 0.02), K4=('Trick_Chance', 2, 0.02), K5=('Trick_Chance', 3, 0.02), K6=('Trick_Gauge_Pct', 0.40), K7=('Trick_Chance', 4, 0.02),
-    S1=('Stage_Skip', 2), S2=('Cat_Hp_Down', 0.30, 0.30), S3=('Stage_Skip', 2), S4=('Boss_Hp_Down', 0.25, 35), S5=('Ult_Power_Pct', 0.50), S6=('Rush_Up', 0.5, 0.5),
+    S1=('Stage_Skip', 2), S2=('Cat_Hp_Down', 0.30, 0.30), S3=('Stage_Skip', 2), S4=('Boss_Dmg_Pct', 0.25, 3), S5=('Ult_Power_Pct', 0.50), S6=('Rush_Up', 0.5, 0.5),
 )
 T[8] = dict(
     C1=('Atk_Flat', 25), C2=('Atk_Pct', 0.40), C3=('Crit_Dmg', 1.00), C4=('Atk_Flat', 40, 6), C5=('Atk_Pct', 0.50, 6), C6=('Wall_Dmg_Pct', 0.30), C7=('Boss_Dmg_Pct', 0.50), C8=('Dmg_Pct', 0.40),
-    G1=('Start_Rat', 1, 6), G2=('Time_Add', 20), G3=('Start_Rat', 2, 4), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 30), G6=('Time_Add', 20), G7=('Promote_Need', 1, 2), G8=('Mutation_Chance', 0.15),
+    G1=('Start_Rat', 1, 6), G2=('Time_Add', 11), G3=('Start_Rat', 3, 4), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 30), G6=('Time_Add', 12), G7=('Promote_Double', 0.04, 0), G8=('Mutation_Chance', 0.15),
     L1=('Item_Count_Pct', 0.30), L2=('Cheese_Pct', 0.30), L3=('Spawn_Rate_Pct', 0.30), L4=('Cheese_Pct', 1.00, 2), L5=('Cheese_Pct', 1.00, 1), L6=('Gold_Item', 0.05), L7=('Combo_Time_Pct', 0.30), L8=('New_Item', 60032),
     K1=('Trick_Chance', 0, 0.02), K2=('Trick_Cheese_Pct', 1.00), K3=('Trick_Chance', 0, 0.01), K4=('Trick_Gauge_Pct', 0.50), K5=('Trap_Single_Down', 0.05), K6=('Trap_Multi_Down', 0.05), K7=('Trick_Chance', 0, 0.01),
-    S1=('Stage_Skip', 3), S2=('Ult_Gauge_Pct', 0.30), S3=('Stage_Skip', 3), S4=('Boss_Hp_Down', 0.25, 40), S5=('Super_Jump_Pct', 0.50), S6=('Ult_Power_Pct', 0.50),
+    S1=('Stage_Skip', 3), S2=('Ult_CD', 4), S3=('Stage_Skip', 3), S4=('Boss_Dmg_Pct', 0.25, 3), S5=('Rush_CD', 0.5), S6=('Ult_Power_Pct', 0.50),
 )
 
 # 훈장별 비용 기본 (치즈 · 연구자료). 깊이(가운데에서 몇 칸)마다 늘어남
@@ -104,8 +104,8 @@ def name(e, v):
     return {
         'Atk_Flat': f'{gw} 쥐 공격력 +{v1:g}', 'Atk_Pct': f'{gw} 쥐 공격력 +{pct(v1)}', 'Dmg_Pct': f'모든 쥐 피해량 +{pct(v1)}',
         'Wall_Dmg_Pct': f'벽에 주는 피해 +{pct(v1)}', 'Crit_Chance': f'치명타 확률 +{pct(v1)}', 'Crit_Dmg': f'치명타 피해 +{pct(v1)}',
-        'Multi_Hit': f'{pct(v1)} 확률로 {int(v2) + 1}번 공격', 'Boss_Dmg_Pct': f'보스에게 주는 피해 +{pct(v1)}',
-        'Start_Rat': f'시작 {g} 쥐 +{int(v1)}마리', 'Promote_Need': f'{g}→{GRADE.get(int(v2) + 1, "")} 승급 필요 쥐 -{int(v1)}',
+        'Multi_Hit': f'{pct(v1)} 확률로 {int(v2) + 1}번 공격', 'Boss_Dmg_Pct': (f'보스에게 주는 피해 +{pct(v1)} · 보스 층 시간 +{v2:g}초' if v2 else f'보스에게 주는 피해 +{pct(v1)}'),
+        'Start_Rat': f'시작 {g} 쥐 +{int(v1)}마리', 'Promote_Double': (f'{g}→{GRADE.get(int(v2) + 1, "")} 승급 때 {pct(v1)} 확률로 2마리' if v2 else f'승급 때 {pct(v1)} 확률로 2마리'),
         'Pop_Cap': f'쥐 최대 마리 수 +{int(v1)}', 'Time_Add': f'층 제한시간 +{v1:g}초',
         'Breed_Chance': (f'쥐 {int(v2)}마리 미만일 때 번식 확률 +{pct(v1)}' if v2 else f'번식 확률 +{pct(v1)}'),
         'Move_Speed_Pct': f'쥐 이동 속도 +{pct(v1)}', 'Breed_Cool_Pct': f'번식 쿨타임 -{pct(v1)}',
@@ -116,23 +116,23 @@ def name(e, v):
         'Trick_Unlock': f'묘기 해금: {TRICK.get(int(v1), "")}', 'Trick_Chance': f'{TRICK.get(int(v1), "")} 확률 +{pct(v2)}',
         'Trick_Cheese_Pct': f'묘기로 얻는 치즈 +{pct(v1)}', 'Trick_Gauge_Pct': f'묘기 성공 시 필살기 게이지 +{pct(v1)}',
         'Trap_Single_Down': f'쥐덫 등장 확률 -{pct(v1)}', 'Trap_Multi_Down': f'쥐덫 2개 등장 확률 -{pct(v1)}',
-        'Stage_Skip': f'스테이지 스킵 +{int(v1)}층', 'Wall_Hp_Down': f'벽 체력 -{pct(v1)}', 'Boss_Hp_Down': f'{int(v2)}층 보스 체력 -{pct(v1)}',
+        'Stage_Skip': f'스테이지 스킵 +{int(v1)}층', 'Wall_Hp_Down': f'벽 체력 -{pct(v1)}',
         'Ult_Gauge_Pct': f'필살기 게이지 충전 +{pct(v1)}', 'Ult_Power_Pct': f'필살기 위력 +{pct(v1)}', 'Ult_Auto': '필살기 자동 사용',
         'Super_Jump_Pct': f'슈퍼 점프 확률 +{pct(v1)}', 'Bite_Zap': f'전기 이빨: {pct(v1)} 확률로 {int(v2)}개 감전',
         'Chain_Blast': f'연쇄 폭발 범위 +{v1:g} · 피해 +{pct(v2)}', 'Cheese_Meteor': (f'치즈 운석 ({v1:g}초마다)' if v1 else f'치즈 운석 위력 +{pct(v2)}'),
         'Twin_Chance': f'쌍둥이 확률 +{pct(v1)}', 'Mutation_Chance': f'높은 등급 탄생 +{pct(v1)}', 'Birth_Frenzy': f'탄생 축제 {v1:g}초 (주변 쥐 광란)',
         'Furniture_Pct': f'가구 피해 +{pct(v1)} · 가구 치즈 +{pct(v2)}', 'Air_Cheese_Pct': f'공중 충돌 치즈 +{pct(v1)}',
-        'Rush_Up': f'총공격 시간 +{v1:g}초 · 위력 +{v2:g}', 'Cat_Hp_Down': f'고양이 체력 -{pct(v1)} · 겁 -{pct(v2)}',
+        'Rush_Up': f'총공격 시간 +{v1:g}초 · 위력 +{v2:g}', 'Rush_CD': f'총공격 쿨타임 -{v1:g}초', 'Ult_CD': f'필살기 쿨타임 -{v1:g}초', 'Cat_Hp_Down': f'고양이 체력 -{pct(v1)} · 겁 -{pct(v2)}',
     }[e]
 
 
 ICON = {'Atk_Flat': 'teeth', 'Atk_Pct': 'gym', 'Dmg_Pct': 'dmg', 'Wall_Dmg_Pct': 'dig', 'Crit_Chance': 'critc', 'Crit_Dmg': 'critdmg', 'Multi_Hit': 'multihit',
-        'Boss_Dmg_Pct': 'bossd', 'Start_Rat': 'startrat', 'Promote_Need': 'promote', 'Pop_Cap': 'nest', 'Time_Add': 'clock', 'Breed_Chance': 'breed',
+        'Boss_Dmg_Pct': 'bossd', 'Start_Rat': 'startrat', 'Promote_Double': 'promote', 'Pop_Cap': 'nest', 'Time_Add': 'clock', 'Breed_Chance': 'breed',
         'Move_Speed_Pct': 'speed', 'Breed_Cool_Pct': 'breed', 'Item_Count_Flat': 'stock', 'Item_Count_Pct': 'stock', 'Cheese_Pct': 'cheese', 'New_Item': 'newitem',
         'Rocket_CD': 'truck', 'Gold_Item': 'goldx', 'Spawn_Rate_Pct': 'spawn', 'Combo_Time_Pct': 'combo', 'Trick_Cheese_Pct': 'trickcheese', 'Trick_Gauge_Pct': 'trickgauge',
-        'Trap_Single_Down': 'shield', 'Trap_Multi_Down': 'trapmulti', 'Stage_Skip': 'skip', 'Wall_Hp_Down': 'wallcrack', 'Boss_Hp_Down': 'bosshp', 'Ult_Gauge_Pct': 'ultcd',
+        'Trap_Single_Down': 'shield', 'Trap_Multi_Down': 'trapmulti', 'Stage_Skip': 'skip', 'Wall_Hp_Down': 'wallcrack', 'Ult_Gauge_Pct': 'ultcd',
         'Ult_Power_Pct': 'ultcd', 'Ult_Auto': 'autoult', 'Super_Jump_Pct': 'sjump', 'Bite_Zap': 'zap', 'Chain_Blast': 'chainx', 'Cheese_Meteor': 'meteor',
-        'Twin_Chance': 'twins', 'Mutation_Chance': 'mutate', 'Birth_Frenzy': 'frenzy', 'Furniture_Pct': 'furnd', 'Air_Cheese_Pct': 'tumble', 'Rush_Up': 'rush', 'Cat_Hp_Down': 'catnip'}
+        'Twin_Chance': 'twins', 'Mutation_Chance': 'mutate', 'Birth_Frenzy': 'frenzy', 'Furniture_Pct': 'furnd', 'Air_Cheese_Pct': 'tumble', 'Rush_Up': 'rush', 'Rush_CD': 'rush', 'Ult_CD': 'ultcd', 'Cat_Hp_Down': 'catnip'}
 
 EFFECT_DOC = [
     ('None', '효과 없음 (훈장 시작점)', '-', '-', '-'),
@@ -143,11 +143,11 @@ EFFECT_DOC = [
     ('Crit_Chance', '치명타 확률 + 합', '확률', '-', '-'),
     ('Crit_Dmg', '치명타 배율 + 합 (기본 RatManager.critMultiplier)', '배율 증가', '-', '-'),
     ('Multi_Hit', '부딪힐 때 확률 합으로 추가 공격', '확률', '추가 공격 수 (가장 큰 값)', '-'),
-    ('Boss_Dmg_Pct', '보스에게 주는 피해 ×(1 + 합)', '증가율', '-', '-'),
+    ('Boss_Dmg_Pct', '보스에게 주는 피해 ×(1 + 합) · 보스 층 제한시간 + 밸류_02 합 (초)', '증가율', '보스 층 추가 시간 (초)', '-'),
     ('Start_Rat', '판 시작 쥐 + 밸류_01 마리 (그 등급에서 해금된 종 하나씩)', '마리 수', '등급 (1 일반 ~ 6 신화)', '-'),
-    ('Promote_Need', '승급(같은 등급 N마리 → 윗등급 1마리)에 필요한 쥐 - 합 (최소 RatManager.promoteMin)', '줄어드는 수', '등급 (1 일반 ~ 5 전설)', '-'),
+    ('Promote_Double', '승급(같은 등급 N마리 → 윗등급 1마리) 때 확률 합으로 윗등급 쥐가 2마리 나옴. N = 올림(등급 테이블 promote_base × promote_grow^이번 판 승급 횟수)', '확률', '승급하는 등급 (0 = 모든 승급, 1 일반 ~ 5 전설)', '-'),
     ('Pop_Cap', '쥐 최대 마리 수 + 합', '마리 수', '-', '-'),
-    ('Time_Add', '층 제한시간 + 합 (초)', '초', '-', '-'),
+    ('Time_Add', '층 제한시간 + 합 (초). 기본 RunTimer.baseTime 180초 (모든 층 같음)', '초', '-', '-'),
     ('Breed_Chance', '번식 확률 + 밸류_01 (밸류_02 > 0 이면 쥐가 그 수 미만일 때만)', '확률', '마리 수 조건 (0 = 항상)', '-'),
     ('Move_Speed_Pct', '쥐 이동 속도 ×(1 + 합)', '증가율', '-', '-'),
     ('Breed_Cool_Pct', '번식 쿨타임 ÷(1 + 합)', '감소율', '-', '-'),
@@ -167,7 +167,6 @@ EFFECT_DOC = [
     ('Trap_Multi_Down', '쥐덫이 2개 나올 확률 - 합 (기본 StageManager.trapTwoChance)', '감소', '-', '-'),
     ('Stage_Skip', '로비에서 고를 수 있는 시작 층 + 합 (최고 기록을 넘지 못함)', '층', '-', '-'),
     ('Wall_Hp_Down', '벽 체력 ×(1 - 합) (최소 0.5)', '감소율', '-', '-'),
-    ('Boss_Hp_Down', '보스 체력 ×(1 - 합) (최소 0.3)', '감소율', '보스 층 (0 = 모든 보스)', '-'),
     ('Ult_Gauge_Pct', '필살기 게이지 충전 ×(1 + 합)', '증가율', '-', '-'),
     ('Ult_Power_Pct', '필살기 피해 ×(1 + 합)', '증가율', '-', '-'),
     ('Ult_Auto', '필살기 자동 사용', '-', '-', '-'),
@@ -180,6 +179,8 @@ EFFECT_DOC = [
     ('Birth_Frenzy', '탄생 축제: 새끼가 태어나면 주변 쥐 광란 (시간 합 · 반경·배율은 가장 큰 값)', '시간 (초)', '반경', '배율'),
     ('Furniture_Pct', '가구 피해 ×(1 + 밸류_01 합) · 가구 치즈 ×(1 + 밸류_02 합)', '피해 증가', '치즈 증가', '-'),
     ('Air_Cheese_Pct', '공중에서 부딪힌 물건 치즈 ×(1 + 합)', '증가율', '-', '-'),
+    ('Ult_CD', '필살기 하나가 끝난 뒤 다음 필살기까지 쿨타임 - 합 (초, 기본 UltimateManager.ultCooldown, 최소 ultCooldownMin)', '초', '-', '-'),
+    ('Rush_CD', '클릭 총공격 쿨타임 - 합 (초, 최소 RatManager.rushCooldownMin)', '초', '-', '-'),
     ('Rush_Up', '총공격 시간 + 밸류_01 합 · 배율 + 밸류_02 합', '초', '배율', '-'),
     ('Cat_Hp_Down', '고양이 체력 ×(1 - 밸류_01 합) · 쥐가 겁먹는 시간 ×(1 - 밸류_02 합)', '감소율', '감소율', '-'),
 ]

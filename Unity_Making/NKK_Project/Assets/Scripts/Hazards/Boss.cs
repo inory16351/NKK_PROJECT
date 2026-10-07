@@ -12,7 +12,9 @@ namespace NKK.Hazards
 {
     // 층 보스 (웹게임 makeBoss · startBossFight · updateBoss · bossStompLand · bossDown 이식). 스테이지 테이블 Boss · Boss_Line.
     // · 보스 층에 들어가면 계단 방에서 대기 (Wait) → 계단 방 벽이 무너지는 순간 전투 (Fight): 배너 + 대사 + 번쩍
-    // · 전투: 가장 가까운 쥐 쪽으로 쿵쿵 걸어옴, 공격 간격마다 공격 (Stomp = 웅크렸다 점프 내려찍기 → 반경 안 쥐 기절·데굴, 물건 날아감)
+    // · 전투: 가장 가까운 쥐 쪽으로 쿵쿵 걸어옴, 공격 간격마다 공격 (atk_type, atk2_chance 확률로 atk2_type). 공격 수치 = Atk_Type 시트
+    //   Stomp/Pounce 점프 내려찍기 · Flask/Hairball/Fireball 투척 · Swing 휘두르기(몇 번에 한 번 경비원 호출) · Gravity 무중력 파동
+    // · 리그: Human = 사람 리그(사람 그림 모음) · Cat = 고양이 리그(고양이 그림 모음, 웹 drawBossCat)
     // · 쥐가 들이받으면 피해 (Rat.BumpBoss), 필살기·슈퍼 점프 폭발도 (ItemManager.BlastActors). 체력 0 → 빙글빙글 하늘로 (Dying) → 격파 배너·치즈
     // · 살아 있는 동안 계단을 못 씀 (Blocking). 테스트 버튼은 화면 가운데에 불러 바로 싸움 (층 기록 없음)
     // 씬 오브젝트 하나 (사람 리그를 그대로 씀). 그림 = 사람 그림 모음(HumanArtLibrary)의 code_id
@@ -28,7 +30,15 @@ namespace NKK.Hazards
         public ItemManager Items;
         public UltimateManager Ults;
         public HumanRig rig;
+        [Tooltip("고양이 보스 리그 (Cat)")] public RatRig catRig;
+        [Tooltip("고양이 그림 모음 · 몸길이 기준")] public CatManager Cats;
         [Tooltip("접지 그림자")] public SpriteRenderer shadow;
+
+        [Header("투사체 (Flask · Hairball · Fireball)")]
+        [Tooltip("투사체 그림 틀 (꺼 둠, 복제해서 씀)")] public SpriteRenderer shotTemplate;
+        public Sprite flaskSprite, hairballSprite, fireballSprite;
+        [Tooltip("투사체 크기 (게임 단위) · 날아가는 시간 · 위로 · 중력")] public float shotSize = 70, shotTime = 0.7f, shotUp = 520, shotGravity = 1500;
+        [Tooltip("떨어진 자리 얼룩 색 (플라스크 · 헤어볼 · 불덩이)")] public Color flaskSpill = new(0.62f, 0.84f, 0.66f, 0.45f), hairSpill = new(0.78f, 0.64f, 0.48f, 0.4f), fireSpill = new(0.89f, 0.6f, 0.35f, 0.35f);
 
         [Header("HUD 체력바 (꺼 둠)")]
         public GameObject bar;
@@ -42,12 +52,20 @@ namespace NKK.Hazards
         public string downTitle, downSub;
         [Tooltip("테스트 보스 격파 부제")] public string testDownSub;
         [Tooltip("내려찍기 착지 팝업")] public string stompPopup;
+        [Tooltip("고양이 덮치기 착지 팝업")] public string pouncePopup;
+        [Tooltip("휘두르기 팝업")] public string swingPopup;
+        [Tooltip("무중력 파동 팝업")] public string gravityPopup;
+        [Tooltip("헤어볼 떨어질 때 팝업")] public string hairPopup;
+        [Tooltip("경비원 부를 때 말")] public string guardCall;
         [Tooltip("치즈 팝업 (자리표시 {n})")] public string cheesePopup;
 
         [Header("수치")]
         [Tooltip("계단 기준 대기 위치 (게임 단위, 아래로 +)")] public float waitOffsetY = 220;
-        [Tooltip("웅크림 시간 · 점프 세기 · 중력")] public float windup = 0.5f, jumpV = 900, gravity = 1800;
-        [Tooltip("공격 하나 길이 (초)")] public float atkTime = 2;
+        [Tooltip("점프 세기 (내려찍기 · 덮치기) · 중력")] public float jumpV = 900, pounceV = 700, gravity = 1800;
+        [Tooltip("휘두르기에 맞은 쥐 날리는 속도 · 위로")] public float swingSpeed = 520, swingUp = 420;
+        [Tooltip("무중력: 쥐 떠오르는 속도 최소·최대 · 물건 날리는 속도")] public float gravUpMin = 600, gravUpMax = 850, gravItem = 200;
+        [Tooltip("휘두르기 몇 번마다 경비원 호출 (0 = 안 부름, 호출 수 = Atk_Type count)")] public int guardEvery = 2;
+        [Tooltip("고양이 보스 말 높이 (몸길이 배율)")] public float catSayLift = 0.9f;
         [Tooltip("쥐를 날리는 속도 · 위로")] public float ragdollSpeed = 480, ragdollUp = 460;
         [Tooltip("물건 날리는 속도")] public float itemLaunch = 400;
         [Tooltip("쓰러질 때 위로 날아가는 속도 · 회전 · 사라지는 높이")] public float downV = 1500, downSpin = 9, downHeight = 2400;
@@ -63,11 +81,18 @@ namespace NKK.Hazards
         public bool CanHit => State == BState.Fight;
         public float R => Items.humanRadius * (Data != null ? Data.radius_mul : 1);
 
-        int face = 1;
+        int face = 1, shots, swings;
         float t, walk, atkCd, atkT, rot, vr, jit, sq = 1, hitT, sayCD, value;
-        bool attacking, air;
+        bool attacking, air, atkHit;
+        string atkType;                 // 지금 하는 공격 (Atk_Type)
+        BossAtkRow atk;
+        class Shot { public float x, y, z, vx, vy, vz, rot; public string type; public SpriteRenderer r; }
+        readonly System.Collections.Generic.List<Shot> flying = new();
+        bool Cat => Data != null && Data.IsCat;
+        float Height => Cat ? (Cats ? Cats.catLength : 115) * Data.scale * catSayLift : rig.height;
         string nameFormat;
         BossRow stash;          // 테스트 보스를 부를 때 이 층 진짜 보스 (끝나면 되돌림)
+        int testN = -1;
         float stashHp;
 
         static GameDatabase DB => GameDatabase.Instance;
@@ -82,7 +107,8 @@ namespace NKK.Hazards
 
         void SetVisible(bool on)
         {
-            if (rig) rig.gameObject.SetActive(on);
+            if (rig) rig.gameObject.SetActive(on && !Cat);
+            if (catRig) catRig.gameObject.SetActive(on && Cat);
             if (shadow) shadow.enabled = on;
         }
 
@@ -96,12 +122,22 @@ namespace NKK.Hazards
         {
             Data = row; Test = test; State = BState.Wait;
             x = px; y = py; z = vz = vx = vy = 0; rot = vr = 0; t = 0; jit = 0; sq = 1; attacking = air = false; atkCd = Random.Range(row.atk_cd_min, row.atk_cd_max);
-            hpMax = hp = (test ? Mathf.Max(1, Stage.PowNeed(Game.Floor) * row.hp_pow_sec) : HpFor(row, Game.Floor)) * CommonSkill.BossHpMul(row.floor);   // 테스트 = 지금 층 기준 (잡을 수 있게) · 보스 체력 감소 노드
+            hpMax = hp = (test ? Mathf.Max(1, Stage.PowNeed(Game.Floor) * row.hp_pow_sec) : HpFor(row, Game.Floor));   // 테스트 = 지금 층 기준 (잡을 수 있게)
             value = 3 * Stage.CheeseK(test ? Game.Floor : Mathf.Max(Game.Floor, row.floor)) * row.cheese_mul * CommonSkill.CreatureCheeseMul;
-            var art = Items.humanArt ? Items.humanArt.Get(row.code_id) : null;
-            if (art == null) { Debug.LogWarning("[Boss] 그림 없음: " + row.code_id); State = BState.Off; return; }
-            rig.height = Items.humanHeight * row.scale;
-            rig.Build(art);
+            shots = swings = 0; atkType = null; atk = null;
+            if (row.IsCat)
+            {
+                var art = Cats && Cats.catArt ? Cats.catArt.Get(row.code_id) : null;
+                if (art == null || !catRig) { Debug.LogWarning("[Boss] 고양이 그림 없음: " + row.code_id); State = BState.Off; return; }
+                catRig.Build(art, Cats.catLength * row.scale, -1, true);
+            }
+            else
+            {
+                var art = Items.humanArt ? Items.humanArt.Get(row.code_id) : null;
+                if (art == null) { Debug.LogWarning("[Boss] 그림 없음: " + row.code_id); State = BState.Off; return; }
+                rig.height = Items.humanHeight * row.scale;
+                rig.Build(art);
+            }
             SetVisible(true);
             Current = this;
         }
@@ -120,7 +156,7 @@ namespace NKK.Hazards
         public void Clear()
         {
             State = BState.Off; Data = null; stash = null; Test = false;
-            SetVisible(false);
+            SetVisible(false); ClearShots();
             if (bar) bar.SetActive(false);
             if (Current == this) Current = null;
         }
@@ -143,7 +179,8 @@ namespace NKK.Hazards
         {
             if (State == BState.Fight || State == BState.Dying || DB.Bosses.Count == 0) return;
             BossRow keep = State == BState.Wait && !Test ? Data : null;
-            var row = DB.BossOf(5) ?? DB.Bosses[0];
+            testN = (testN + 1) % DB.Bosses.Count;          // 누를 때마다 다음 보스 (웹 bossTestN)
+            var row = DB.Bosses[testN];
             var c = Ults ? Ults.ViewRect(0).center : new Vector2(World.RW / 2, World.RH / 2);
             Spawn(row, c.x, c.y + 60, true);
             stash = keep;
@@ -154,7 +191,7 @@ namespace NKK.Hazards
         void Say(string line, float life = 1.2f)
         {
             if (string.IsNullOrEmpty(line) || sayCD > 0) return;
-            FxManager.I?.Popup(x, y, line, Color.white, 22, life, rig.height * 1.05f);
+            FxManager.I?.Popup(x, y, line, Color.white, 22, life, Height * 1.05f);
             sayCD = 1.2f;
         }
 
@@ -177,7 +214,7 @@ namespace NKK.Hazards
         void Down()
         {
             State = BState.Dying; t = 0; hp = 0; attacking = false;
-            vx = Random.Range(-120f, 120f); vy = -40; vz = downV; vr = downSpin;
+            vx = Random.Range(-120f, 120f); vy = -40; vz = downV; vr = downSpin; ClearShots();
             if (!Test) Game.ShowBanner(Fill(downTitle), Fill(downSub));
             else Game.ShowBanner(Fill(downTitle), Fill(testDownSub));
             Game.OnSmash(value, 5);
@@ -210,6 +247,7 @@ namespace NKK.Hazards
                 return;
             }
             float px = x, py = y;
+            UpdateShots(dt);
             if (z > 0 || vz > 0) { vz -= gravity * dt; z = Mathf.Max(0, z + vz * dt); if (z <= 0) { vz = 0; if (air) Land(); } }
             if (!attacking)
             {
@@ -218,22 +256,61 @@ namespace NKK.Hazards
                 atkCd -= dt;
                 if (atkCd <= 0 && !(Ults && Ults.Busy))
                 {
-                    attacking = true; air = false; atkT = 0; atkCd = Random.Range(Data.atk_cd_min, Data.atk_cd_max); vx = vy = 0;
+                    bool two = !string.IsNullOrEmpty(Data.atk2_type) && Data.atk2_type != "None" && Random.value < Data.atk2_chance;
+                    atkType = two ? Data.atk2_type : Data.atk_type;
+                    atk = DB.BossAtk(atkType);
+                    attacking = true; air = false; atkHit = false; shots = 0; atkT = 0; atkCd = Random.Range(Data.atk_cd_min, Data.atk_cd_max); vx = vy = 0;
                     Say(DB.BossLine("Attack", Data.boss_id), 0.9f);
                 }
             }
+            else if (atk == null) attacking = false;
             else
             {
                 atkT += dt; vx *= 0.85f; vy *= 0.85f;
-                // Stomp: 웅크림 (덜덜) → 가장 가까운 쥐 쪽으로 점프
-                if (atkT < windup) jit = 3;
-                else if (!air && z <= 0 && atkT < windup + 0.1f)
+                switch (atkType)
                 {
-                    air = true; vz = jumpV;
-                    var r = Rats.NearestRat(x, y, 900);
-                    if (r) { vx = (r.x - x) * 1.2f; vy = (r.y - y) * 1.2f; }
+                    case "Stomp":
+                    case "Pounce":
+                        // 웅크림 (덜덜) → 가장 가까운 쥐 쪽으로 점프 (고양이는 낮고 빠르게)
+                        if (atkT < atk.windup) jit = atkType == "Pounce" ? 1 : 3;
+                        else if (!air && z <= 0 && atkT < atk.windup + 0.1f)
+                        {
+                            air = true; vz = atkType == "Pounce" ? pounceV : jumpV;
+                            var r = Rats.NearestRat(x, y, 900);
+                            if (r) { vx = (r.x - x) * 1.2f; vy = (r.y - y) * 1.2f; }
+                        }
+                        if (atkT > atk.dur && z <= 0) attacking = false;
+                        break;
+                    case "Flask":
+                    case "Hairball":
+                    case "Fireball":
+                        // 덜덜 → 화면 속 쥐에게 0.22초 간격으로 던짐
+                        jit = atkT < atk.windup ? 2 : 0;
+                        if (atkT > atk.windup + shots * 0.22f && shots < atk.count)
+                        {
+                            shots++;
+                            var r = Rats.RandomOnScreen() ?? Rats.NearestRat(x, y, 2000);
+                            if (r)
+                            {
+                                float tx = r.x + Random.Range(-40f, 40f), ty = r.y + Random.Range(-30f, 30f);
+                                if (!Stage.Open.Contains(StageManager.RoomOf(tx, ty))) { tx = r.x; ty = r.y; }      // 방 바깥(벽 너머)엔 안 떨어지게
+                                Throw(tx, ty, atkType);
+                            }
+                        }
+                        if (atkT > atk.dur) attacking = false;
+                        break;
+                    case "Swing":
+                        if (atkT < atk.windup) jit = 2.5f;
+                        else if (!atkHit) { atkHit = true; Swing(); }
+                        if (atkT > atk.dur) attacking = false;
+                        break;
+                    case "Gravity":
+                        if (atkT < atk.windup) jit = 2;
+                        else if (!atkHit) { atkHit = true; GravityWave(); }
+                        if (atkT > atk.dur) attacking = false;
+                        break;
+                    default: attacking = false; break;
                 }
-                if (atkT > atkTime && z <= 0) attacking = false;
             }
             x += vx * dt; y += vy * dt;
             Stage.Confine(ref x, ref y, ref vx, ref vy, R, px, py, 0.3f);
@@ -245,12 +322,13 @@ namespace NKK.Hazards
         void Land()
         {
             air = false; sq = 0.7f;
-            float R0 = Data.atk_radius;
+            bool pounce = atkType == "Pounce";
+            float R0 = atk != null ? atk.radius : 300, stunT = atk != null ? atk.stun : 2;
             foreach (var r in Rats.Rats)
             {
                 if (r.UltOn) continue;
                 float dx = r.x - x, dy = r.y - y;
-                if (dx * dx + dy * dy < R0 * R0) r.Ragdoll(Mathf.Atan2(dy, dx), ragdollSpeed, ragdollUp, Data.atk_stun);
+                if (dx * dx + dy * dy < R0 * R0) r.Ragdoll(Mathf.Atan2(dy, dx), ragdollSpeed, ragdollUp, stunT);
             }
             foreach (var it in Items.InRange(x, y, R0))
                 if (it.State == Item.ItemState.Rest) it.Launch(Mathf.Atan2(it.y - y, it.x - x), itemLaunch, false);
@@ -258,9 +336,111 @@ namespace NKK.Hazards
             fx.Ring(x, y, R0, Data.Color, 0.45f); fx.Ring(x, y, R0 * 0.6f, Color.white, 0.35f);
             fx.Dust(x, y, 20, 2.4f); fx.Anim("poof", x, y, 0, 2.2f); fx.Shake(0.5f);
             fx.Spill(x, y, 110, new Color(0.24f, 0.2f, 0.18f, 0.3f));
-            if (!string.IsNullOrEmpty(stompPopup)) fx.Popup(x, y, stompPopup, Color.white, 40, 0.8f, 60);
+            string pop = pounce ? pouncePopup : stompPopup;
+            if (!string.IsNullOrEmpty(pop)) fx.Popup(x, y, pop, pounce ? Data.Color : Color.white, pounce ? 34 : 40, 0.8f, pounce ? 120 : 60);
             if (Ults) Ults.Flash(Color.white, 0.2f);
         }
+
+        // ── 휘두르기 (웹 swing): 반경 안 쥐 기절·날림, 몇 번에 한 번 경비원 호출 ──
+        void Swing()
+        {
+            float R0 = atk.radius;
+            foreach (var r in Rats.Rats)
+            {
+                if (r.UltOn) continue;
+                float dx = r.x - x, dy = r.y - y;
+                if (dx * dx + dy * dy < R0 * R0) r.Ragdoll(Mathf.Atan2(dy, dx), swingSpeed, swingUp, atk.stun);
+            }
+            var fx = FxManager.I;
+            if (fx && Ults && Ults.OnScreen(x, y, 0))
+            {
+                fx.Ring(x, y, R0, Data.Color, 0.4f);
+                fx.Slash(x + face * 60, y, 80, face > 0 ? 0 : Mathf.PI, R0 * 0.9f, Data.Color);
+                if (!string.IsNullOrEmpty(swingPopup)) fx.Popup(x, y, swingPopup, Color.white, 34, 0.7f, 160);
+                fx.Shake(0.35f);
+            }
+            if (guardEvery > 0 && ++swings % guardEvery == 0)
+            {
+                for (int i = 0; i < Mathf.Max(1, atk.count); i++) Items.SpawnHumanAt("guard", x + Random.Range(-120f, 120f), y + Random.Range(-60f, 80f));
+                fx?.Dust(x, y, 10, 1.6f);
+                sayCD = 0; Say(guardCall, 1.2f);
+            }
+        }
+
+        // ── 무중력 파동 (웹 gravity): 반경 안 쥐가 둥실 떠올랐다 떨어지며 기절, 물건도 떠오름 ──
+        void GravityWave()
+        {
+            float R0 = atk.radius;
+            foreach (var r in Rats.Rats)
+            {
+                if (r.UltOn) continue;
+                float dx = r.x - x, dy = r.y - y;
+                if (dx * dx + dy * dy < R0 * R0) r.Ragdoll(Random.Range(0, Mathf.PI * 2), 40, Random.Range(gravUpMin, gravUpMax), atk.stun);
+            }
+            foreach (var it in Items.InRange(x, y, R0))
+                if (it.State == Item.ItemState.Rest) it.Launch(Random.Range(0, Mathf.PI * 2), gravItem, false);
+            var fx = FxManager.I;
+            if (fx && Ults && Ults.OnScreen(x, y, 0))
+            {
+                fx.Ring(x, y, R0, Data.Color, 0.6f); fx.Ring(x, y, R0 * 0.6f, Color.white, 0.45f);
+                fx.Stars(x, y, 80, 24, Data.Color, Color.white, 150, 400); fx.Shake(0.3f);
+                if (!string.IsNullOrEmpty(gravityPopup)) fx.Popup(x, y, gravityPopup, Data.Color, 34, 0.8f, 200);
+            }
+        }
+
+        // ── 투사체 (웹 bossThrow · updateBossShots) ──
+        void Throw(float tx, float ty, string type)
+        {
+            if (!shotTemplate) return;
+            var sp = type == "Hairball" ? hairballSprite : type == "Fireball" ? fireballSprite : flaskSprite;
+            var r = Instantiate(shotTemplate, shotTemplate.transform.parent);
+            r.sprite = sp; r.gameObject.SetActive(true); r.enabled = true;
+            float k = sp ? shotSize * World.U / Mathf.Max(0.001f, sp.bounds.size.x) : 1;
+            r.transform.localScale = Vector3.one * k;
+            flying.Add(new Shot { x = x, y = y, z = type == "Hairball" ? 120 : 200, vx = (tx - x) / shotTime, vy = (ty - y) / shotTime, vz = shotUp, type = type, r = r });
+        }
+
+        void UpdateShots(float dt)
+        {
+            for (int i = flying.Count - 1; i >= 0; i--)
+            {
+                var s = flying[i];
+                s.x += s.vx * dt; s.y += s.vy * dt; s.vz -= shotGravity * dt; s.z += s.vz * dt; s.rot += dt * 14;
+                if (s.r)
+                {
+                    s.r.transform.position = World.ToUnity(s.x, s.y, Mathf.Max(0, s.z));
+                    s.r.transform.rotation = Quaternion.Euler(0, 0, -s.rot * Mathf.Rad2Deg);
+                    s.r.sortingOrder = World.SortOrder(s.y) + 40;
+                }
+                if (s.z > 0) continue;
+                ShotLand(s);
+                if (s.r) Destroy(s.r.gameObject);
+                flying.RemoveAt(i);
+            }
+        }
+
+        void ShotLand(Shot s)
+        {
+            var a = DB.BossAtk(s.type);
+            float R0 = a != null ? a.radius : 110, stunT = a != null ? a.stun : 2.5f;
+            foreach (var r in Rats.Rats)
+            {
+                if (r.UltOn) continue;
+                float dx = r.x - s.x, dy = r.y - s.y;
+                if (dx * dx + dy * dy < R0 * R0) r.Ragdoll(Mathf.Atan2(dy, dx), 60, 260, stunT);
+            }
+            var fx = FxManager.I;
+            if (!fx || !(Ults && Ults.OnScreen(s.x, s.y, 0))) return;
+            Color c0 = s.type == "Fireball" ? new Color(0.94f, 0.78f, 0.47f) : s.type == "Hairball" ? new Color(0.78f, 0.64f, 0.48f) : new Color(0.62f, 0.84f, 0.66f);
+            fx.Ring(s.x, s.y, R0, c0, 0.5f);
+            fx.Burst(s.x, s.y, 10, 18, c0, Color.white, 150, 420);
+            fx.Spill(s.x, s.y, R0 * 0.8f, s.type == "Fireball" ? fireSpill : s.type == "Hairball" ? hairSpill : flaskSpill);
+            fx.Anim(s.type == "Fireball" ? "explosion" : "poof", s.x, s.y, 0, s.type == "Fireball" ? 1.2f : 1);
+            fx.Shake(0.12f);
+            if (s.type == "Hairball" && !string.IsNullOrEmpty(hairPopup)) fx.Popup(s.x, s.y, hairPopup, Color.white, 18, 0.7f, 30);
+        }
+
+        void ClearShots() { foreach (var s in flying) if (s.r) Destroy(s.r.gameObject); flying.Clear(); }
 
         // 하늘로 사라짐 → 계단 열림 (테스트면 이 층 진짜 보스를 되돌림)
         void Finish()
@@ -304,18 +484,49 @@ namespace NKK.Hazards
             {
                 p.angry = true;
                 bool up = air || z > 0;
-                p.armN = up ? 2.6f : 1.2f; p.armF = up ? -2.6f : -1.2f; p.legN = up ? 0.8f : 0; p.legF = up ? -0.6f : 0;
+                if (atkType == "Swing" && atk != null)
+                {
+                    // 주먹 휘두르기: 웅크림 동안 뒤로 젖혔다가 앞으로 크게
+                    float k = Mathf.Clamp01((atkT - atk.windup) / 0.18f);
+                    p.armN = atkT < atk.windup ? -2.2f : Mathf.Lerp(-2.2f, 1.9f, k); p.armF = -0.4f;
+                }
+                else if (atkType == "Flask" && atk != null)
+                {
+                    // 던지기: 팔을 뒤로 → 던질 때마다 앞으로
+                    float ph = (atkT - atk.windup) / 0.22f, f = ph - Mathf.Floor(ph);
+                    p.armN = atkT < atk.windup ? -2.4f : Mathf.Lerp(1.6f, -2f, f); p.armF = 0.4f;
+                }
+                else { p.armN = up ? 2.6f : 1.2f; p.armF = up ? -2.6f : -1.2f; p.legN = up ? 0.8f : 0; p.legF = up ? -0.6f : 0; }
             }
             else if (hitT > 0) p.angry = true;
             return p;
         }
 
+        // 고양이 보스 (웹 drawBossCat · catPose): 걷기 · 웅크림 · 덮치기 · 던지기 · 날아감
+        RatRig.Pose MakeCatPose()
+        {
+            float tt = Time.time;
+            var p = new RatRig.Pose { head = Mathf.Sin(tt * 1.6f) * 0.06f, tail = 0.1f + Mathf.Sin(tt * 3) * 0.25f, sx = 1, sy = 1 };
+            if (State == BState.Wait) { p.tail = 0.3f + Mathf.Sin(tt * 2) * 0.3f; return p; }
+            if (State == BState.Dying) { p.front = Mathf.Sin(tt * 30) * 1.4f; p.farFront = Mathf.Cos(tt * 27) * 1.4f; p.back = Mathf.Sin(tt * 28) * 1.2f; p.farBack = Mathf.Cos(tt * 25) * 1.2f; p.tail = Mathf.Sin(tt * 20); p.head = Mathf.Sin(tt * 15) * 0.4f; return p; }
+            if (attacking && atk != null)
+            {
+                bool jump = atkType == "Pounce" || atkType == "Stomp";
+                if (jump && (air || z > 0)) { p.front = 1.3f; p.farFront = 1.1f; p.back = -1.1f; p.farBack = -0.9f; p.tilt = -0.25f; p.tail = 1; p.head = -0.15f; return p; }
+                if (atkT < atk.windup) { p.front = 0.3f; p.farFront = 0.3f; p.back = 0.4f; p.farBack = 0.4f; p.tilt = 0.12f; p.bob = 6; p.tail = 0.9f + Mathf.Sin(tt * 20) * 0.2f; return p; }
+                if (!jump) { p.front = 2.1f; p.farFront = 0.5f; p.tilt = -0.3f; p.head = -0.2f; p.tail = 1.1f; return p; }
+            }
+            if (Mathf.Sqrt(vx * vx + vy * vy) > 12) { float sn = Mathf.Sin(walk); p.front = sn * 0.5f; p.farBack = sn * 0.45f; p.farFront = -sn * 0.5f; p.back = -sn * 0.45f; p.bob = -Mathf.Abs(Mathf.Cos(walk)) * 2.5f; p.tail = Mathf.Sin(walk * 0.5f) * 0.3f + 0.1f; }
+            return p;
+        }
+
         void LateUpdate()
         {
-            if (State == BState.Off || State == BState.Dead || !rig) return;
+            if (State == BState.Off || State == BState.Dead || (!rig && !catRig)) return;
             float jx = jit > 0 ? Random.Range(-jit, jit) : 0;
             transform.position = World.ToUnity(x + jx, y, z);
-            rig.Apply(MakePose(), 1, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), 1);
+            if (Cat) catRig.Apply(MakeCatPose(), 1, face, sq, World.SortOrder(y), 0, State == BState.Dying ? rot : 0);
+            else rig.Apply(MakePose(), 1, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), 1);
             if (shadow)
             {
                 float w = R * 1.4f * (1 - Mathf.Min(0.7f, z / 900)), sw = shadow.sprite ? shadow.sprite.bounds.size.x : 1;

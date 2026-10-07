@@ -172,7 +172,8 @@ namespace NKK.Rats
 
         public bool OnScreen(float margin = 0.02f)
         {
-            var vp = Camera.main.WorldToViewportPoint(transform.position);
+            var cam = Camera.main; if (!cam) return false;      // 밸런스 측정 중엔 카메라가 꺼져 있음
+            var vp = cam.WorldToViewportPoint(transform.position);
             return vp.x > -margin && vp.x < 1 + margin && vp.y > -margin && vp.y < 1 + margin;
         }
     }

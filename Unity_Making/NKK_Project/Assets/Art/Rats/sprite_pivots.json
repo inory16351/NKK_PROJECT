@@ -1907,42 +1907,52 @@
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_mad/head.png",
-"x": 0.509,
+"x": 0.578,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_mad/angry.png",
+"x": 0.477,
 "y": 0.03
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_mad/scared.png",
-"x": 0.444,
+"x": 0.59,
 "y": 0.03
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_mad/arm.png",
-"x": 0.541,
+"x": 0.487,
 "y": 0.96
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_mad/leg.png",
-"x": 0.652,
+"x": 0.693,
 "y": 0.96
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_director/head.png",
-"x": 0.5,
+"x": 0.556,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_director/angry.png",
+"x": 0.565,
 "y": 0.03
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_director/scared.png",
-"x": 0.469,
+"x": 0.564,
 "y": 0.03
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_director/arm.png",
-"x": 0.49,
+"x": 0.439,
 "y": 0.96
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_director/leg.png",
-"x": 0.648,
+"x": 0.7,
 "y": 0.96
 },
 {

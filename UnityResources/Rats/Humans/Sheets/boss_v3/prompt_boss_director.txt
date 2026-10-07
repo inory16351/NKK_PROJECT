@@ -1,0 +1,18 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boss_director_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 3 columns x 2 rows (each cell 512x512). Each drawing sits centered in its own cell with a wide magenta margin; drawings must NOT touch or cross cell borders, and parts must not touch each other.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference sheets exactly (the security chief sheet shows the exact part layout and style to match) (cut-out human body parts for a 2D paper-doll rig, same scale feel). Untitled Goose Game look: completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows. A few flat color areas with at most one slightly darker flat tone. Soft muted palette.
+- Side view, the character FACES LEFT (nose pointing to the left), exactly like the reference heads.
+
+Character: "Lab Director", the stingy boss of the whole laboratory. A big, wide, pompous elderly man with a big belly, much bigger than a normal researcher. Bald on top with grey hair on the sides, thick black rectangular glasses, small grey mustache. Expensive dark charcoal suit with a red tie.
+
+Row 1 (three HEADS, each cut flat at the neck, a short neck stump only, NO shoulders, NO collar, NO clothing below the neck):
+ 1) NORMAL head: bald with grey side hair, black glasses, small mustache, smug arrogant look with half-closed eyes.
+ 2) ANGRY SHOUTING head: same man, glasses slipping, red face, mouth wide open yelling, a vein mark on the bald head.
+ 3) SCARED head: same man, glasses crooked, small panicked eyes, mouth open in a wobbly scream, sweat drops on the bald head.
+Row 2:
+ 4) TORSO ONLY: a wide chest and big round belly in a dark charcoal suit jacket with a white shirt collar showing at the top, a red tie, a gold pen in the breast pocket. IMPORTANT: ABSOLUTELY NO ARMS, NO SLEEVES, NO HANDS on the torso — it is cut flat and clean at both shoulders and at the neck, like a headless armless mannequin; the bottom is cut flat at the hips. Only a short flat neck stump on top.
+ 5) ONE WHOLE ARM ONLY: hanging straight down, cut flat at the top (shoulder), dark charcoal suit sleeve with a white shirt cuff and a gold cufflink, ending in a big bare fist at the bottom. Long enough to reach from shoulder to below the belt.
+ 6) ONE WHOLE LEG ONLY: hanging straight down, cut flat at the top (hip), dark charcoal suit trousers, a shiny black leather dress shoe at the bottom with the toe pointing LEFT.

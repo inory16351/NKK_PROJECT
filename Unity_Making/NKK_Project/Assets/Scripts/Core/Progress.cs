@@ -157,6 +157,7 @@ namespace NKK
         public bool HasSkill(int id) => GameDatabase.Instance && GameDatabase.Instance.CommonSkillsById.TryGetValue(id, out var s) && HasSkill(s);
         // 활성화한 노드 수 (시작점 제외) — 훈장 승급 조건
         public int SkillCount { get { int n = 0; foreach (var s in GameDatabase.Instance.CommonSkills) if (!s.IsRoot && HasSkill(s)) n++; return n; } }
+        public int SkillCountIn(int t) { int n = 0; foreach (var s in GameDatabase.Instance.CommonSkills) if (s.tier == t && !s.IsRoot && HasSkill(s)) n++; return n; }     // 그 훈장 트리에서 찍은 수
 
         bool LinkOwned(CommonSkillRow s)
         {
@@ -188,7 +189,7 @@ namespace NKK
         {
             "Max_Floor" => maxFloor,
             "Shard_Level_Sum" => ShardLevelSum,
-            "Skill_Node_Count" => SkillCount,
+            "Skill_Node_Count" => SkillCountIn(tier),        // 지금 훈장 트리에서 찍은 노드 수
             _ => 0,
         };
         public int ShardLevelSum { get { int n = 0; foreach (var e in rats.Values) n += e.level; return n; } }

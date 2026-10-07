@@ -103,7 +103,8 @@ namespace NKK.Stage
 
         // 층 밸런스 = 스테이지 테이블 Stage (없으면 인스펙터 옛 수식)
         StageRow Row(int f) => GameDatabase.Instance ? GameDatabase.Instance.StageOf(f) : null;
-        public float PowNeed(int f) { var r = Row(f); return r != null ? r.pow_need : powNeed0 * Mathf.Pow(powNeedGrow, f - 1) * (f - 1 < powEarly.Length ? powEarly[f - 1] : 1); }
+        public static float PowOverride;      // 밸런스 측정 '적정 고정' 모드: > 0 이면 적정 전투력을 이 값으로 (무리 전투력과 같게)
+        public float PowNeed(int f) { if (PowOverride > 0) return PowOverride; var r = Row(f); return r != null ? r.pow_need : powNeed0 * Mathf.Pow(powNeedGrow, f - 1) * (f - 1 < powEarly.Length ? powEarly[f - 1] : 1); }
         public float ItemHpK(int f) { var r = Row(f); return r != null ? r.item_hp : Mathf.Pow(3.6f, f - 1); }
         public float CheeseK(int f) { var r = Row(f); return r != null ? r.cheese : Mathf.Pow(1.8f, f - 1); }
         public float TimeAdd(int f) { var r = Row(f); return r != null ? r.time_add : 0; }
@@ -204,7 +205,7 @@ namespace NKK.Stage
         }
 
         // ── 벽 ──
-        static string WallKey(int i, int j, int di, int dj) => di != 0 ? $"v,{i + (di > 0 ? 1 : 0)},{j}" : $"h,{i},{j + (dj > 0 ? 1 : 0)}";
+        public static string WallKey(int i, int j, int di, int dj) => di != 0 ? $"v,{i + (di > 0 ? 1 : 0)},{j}" : $"h,{i},{j + (dj > 0 ? 1 : 0)}";
 
         float WallMax(int ti, int tj) => WallMaxBase(ti, tj) * CommonSkill.WallHpMul;     // 공용 스킬 벽 체력 감소
         float WallMaxBase(int ti, int tj)

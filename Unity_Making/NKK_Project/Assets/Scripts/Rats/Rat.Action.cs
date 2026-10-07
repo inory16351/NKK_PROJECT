@@ -203,7 +203,7 @@ namespace NKK.Rats
         void ActionStep(float dt)
         {
             act.t += dt; act.hitT -= dt;
-            float k = act.t / act.dur, atk = Damage * act.P;
+            float k = act.t / act.dur, atk = SkillDamage * act.P;
             var fx = FxManager.I; var items = Manager.Items;
             void Drag(float d) { float f = Mathf.Max(0, 1 - d * dt); vx *= f; vy *= f; }
             switch (ActionType)

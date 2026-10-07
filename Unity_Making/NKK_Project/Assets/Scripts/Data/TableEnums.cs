@@ -45,13 +45,13 @@ namespace NKK.Data
         // 전투
         Atk_Flat, Atk_Pct, Dmg_Pct, Wall_Dmg_Pct, Crit_Chance, Crit_Dmg, Multi_Hit, Boss_Dmg_Pct,
         // 승급·시간·시작 쥐
-        Start_Rat, Promote_Need, Pop_Cap, Time_Add, Breed_Chance, Move_Speed_Pct, Breed_Cool_Pct,
+        Start_Rat, Promote_Double, Pop_Cap, Time_Add, Breed_Chance, Move_Speed_Pct, Breed_Cool_Pct,
         // 자원 파밍
         Item_Count_Flat, Item_Count_Pct, Cheese_Pct, New_Item, Rocket_CD, Gold_Item, Spawn_Rate_Pct, Combo_Time_Pct,
         // 묘기
         Trick_Unlock, Trick_Chance, Trick_Cheese_Pct, Trick_Gauge_Pct, Trap_Single_Down, Trap_Multi_Down,
         // 해금·특수
-        Stage_Skip, Wall_Hp_Down, Boss_Hp_Down, Ult_Gauge_Pct, Ult_Power_Pct, Ult_Auto, Super_Jump_Pct,
-        Bite_Zap, Chain_Blast, Cheese_Meteor, Twin_Chance, Mutation_Chance, Birth_Frenzy, Furniture_Pct, Air_Cheese_Pct, Rush_Up, Cat_Hp_Down,
+        Stage_Skip, Wall_Hp_Down, Ult_Gauge_Pct, Ult_Power_Pct, Ult_Auto, Super_Jump_Pct,
+        Bite_Zap, Chain_Blast, Cheese_Meteor, Twin_Chance, Mutation_Chance, Birth_Frenzy, Furniture_Pct, Air_Cheese_Pct, Rush_Up, Cat_Hp_Down, Rush_CD, Ult_CD,
     }
 }

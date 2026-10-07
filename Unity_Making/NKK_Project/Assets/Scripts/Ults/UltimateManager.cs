@@ -67,8 +67,10 @@ namespace NKK.Ults
         [Tooltip("컷인 시간 (초)")] public float cutTime = 1.4f;
         [Tooltip("컷인 확대")] public float cutZoom = 1.6f;
         [Tooltip("필살기 반경 (끝날 때 휘말림)")] public float ultRadius = 560;
-        [Tooltip("필살기 피해 = 공격력 × 이 값 (ultD)")] public float ultDamageK = 25;
-        [Tooltip("물건 하나 피해 = 공격력 × 이 값 (ultItemD)")] public float ultItemK = 8;
+        [Tooltip("필살기 피해 = 공격력 × 이 값 (ultD)")] public float ultDamageK = 13;
+        [Tooltip("물건 하나 피해 = 공격력 × 이 값 (ultItemD)")] public float ultItemK = 4.5f;
+        [Tooltip("필살기 하나가 끝나고 다음 필살기까지 기다리는 시간 (초, 공용 스킬로 줄어듦). 게이지는 계속 참")] public float ultCooldown = 25;
+        [Tooltip("공용 스킬로 줄어도 최소 (초)")] public float ultCooldownMin = 8;
         [Tooltip("상황극 중 주변 사람·고양이 휘말림 반경 · 속도 (0.3초마다)")] public float actorRadius = 220, actorSpeed = 620;
         [Tooltip("테스트: 시작부터 모든 게이지를 채움")] public bool testFullGauge;
 
@@ -81,6 +83,9 @@ namespace NKK.Ults
         float capBigT = -9, capSmallT = -9, achvT = -9;
 
         public bool Busy => cur != null;
+        public float Cooldown => Mathf.Max(ultCooldownMin, ultCooldown - CommonSkill.UltCdLess);
+        public float CooldownLeft => cdLeft;
+        float cdLeft;
         public UltBase Current => cur;
         static GameDatabase DB => GameDatabase.Instance;
 
@@ -203,6 +208,7 @@ namespace NKK.Ults
             if (cutIn) cutIn.gameObject.SetActive(false);
             if (Cam) { Cam.ultFollow = false; Cam.ultZoom = 1; }
             if (s == null) return;
+            cdLeft = Cooldown;                          // 다음 필살기까지 쿨타임
             var r = s.R;
             if (done)
             {
@@ -226,8 +232,8 @@ namespace NKK.Ults
             }
         }
 
-        public float UltDamage(Rat r) => r.Damage * ultDamageK * CommonSkill.UltPowerMul;
-        public float UltItemDamage(Rat r) => r.Damage * ultItemK * CommonSkill.UltPowerMul;
+        public float UltDamage(Rat r) => r.SkillDamage * ultDamageK * CommonSkill.UltPowerMul;
+        public float UltItemDamage(Rat r) => r.SkillDamage * ultItemK * CommonSkill.UltPowerMul;
 
         // ── 글자 ──
         public string CaptionText(int ultId, string key, object n = null)
@@ -275,16 +281,19 @@ namespace NKK.Ults
         }
         public bool OnScreen(float x, float y, float margin = 120) => ViewRect(-margin).Contains(new Vector2(x, y));
 
+        public static bool ForceAuto;     // 밸런스 측정: 플레이어처럼 필살기가 차면 바로 씀
+
         void Update()
         {
             if (DB == null) return;
             float udt = Time.unscaledDeltaTime, dt = Mathf.Min(Time.deltaTime, 0.05f);
             if (testFullGauge) foreach (var r in Rats.Rats) if (r.temp <= 0 && testFilled.Add(r)) r.ultGauge = Need(r);
             // 자동 사용 (공용 스킬)
-            bool auto = CommonSkill.UltAuto;
+            bool auto = CommonSkill.UltAuto || ForceAuto;
             if (auto) foreach (var r in Rats.Rats) if (Full(r)) Request(r);
             // 대기열 → 하나씩
-            if (cur == null && !FxManager.Paused && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing))
+            if (cur == null) cdLeft -= dt;
+            if (cur == null && cdLeft <= 0 && !FxManager.Paused && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing))
                 while (queue.Count > 0) { var r = queue[0]; queue.RemoveAt(0); if (r && r.temp <= 0 && Full(r) && TryStart(r)) break; }
 
             if (cur != null && cutPhase) StepCut(udt);

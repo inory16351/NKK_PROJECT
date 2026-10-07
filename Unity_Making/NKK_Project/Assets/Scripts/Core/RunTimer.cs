@@ -18,10 +18,10 @@ namespace NKK
         public SuperJumpManager SuperJump;
         public GameOver Over;
 
-        [Header("제한시간 = 기본 + 방 수 × 방당 (+ 보스 층이면 추가) 초")]
-        public float baseTime = 190;
-        public float perRoom = 35;
-        [Tooltip("웹: BOSS_TIME(60) + 30")] public float bossExtra = 90;
+        [Header("제한시간 = 기본 + 방 수 × 방당 (+ 보스 층이면 추가) + 공용 스킬 초 (2026-10-07: 모든 층 180초 통일, 보스 층 +30)")]
+        public float baseTime = 180;
+        [Tooltip("0 = 방 수와 상관없이 같음")] public float perRoom = 0;
+        [Tooltip("보스 층 추가 (공용 스킬 '보스에게 주는 피해' 노드의 시간이 더해짐)")] public float bossExtra = 30;
 
         [Header("경고")]
         [Tooltip("남은 시간이 이 초를 지나는 순간 경고 배너")] public int[] warnAt = { 60, 30, 10 };
@@ -43,11 +43,12 @@ namespace NKK
         [Header("상태 (보기용)")]
         public float Left;
         public float Max = 1;
+        [HideInInspector] public float Used, LastUsed;      // 이번 층에서 실제로 흐른 제한시간 (testFreeze 여도 셈 — 밸런스 측정용)
 
         string timeFormat;
         float pulse;
 
-        public float FloorTime(int f) => Mathf.Round(baseTime + perRoom * Stage.Layout.Count + (Stage.IsBossFloor(f) ? bossExtra : 0) + Stage.TimeAdd(f) + CommonSkill.TimeAdd);   // + 스테이지 테이블 · 공용 스킬 제한시간
+        public float FloorTime(int f) => Mathf.Round(baseTime + perRoom * Stage.Layout.Count + (Stage.IsBossFloor(f) ? bossExtra + CommonSkill.BossTimeAdd : 0) + Stage.TimeAdd(f) + CommonSkill.TimeAdd);   // + 스테이지 테이블 · 공용 스킬 제한시간
 
         void Awake()
         {
@@ -56,13 +57,15 @@ namespace NKK
         }
         void OnDestroy() { if (Stage) Stage.FloorEntered -= Refill; }
 
-        public void Refill() { Max = Left = FloorTime(Game.Floor); }
+        public void Refill() { Max = Left = FloorTime(Game.Floor); LastUsed = Used; Used = 0; }     // LastUsed = 지난 층에서 쓴 시간
 
-        bool Stopped => GameOver.Active || testFreeze || FxManager.WorldFreeze || FxManager.Paused || Stage.Climbing
+        bool Stopped => testFreeze || Halted;
+        bool Halted => GameOver.Active || FxManager.WorldFreeze || FxManager.Paused || Stage.Climbing
                         || (Ults && Ults.Busy) || (SuperJump && SuperJump.Busy);
 
         void Update()
         {
+            if (!Halted) Used += Time.deltaTime;
             if (!Stopped && Left > 0)
             {
                 float before = Left;

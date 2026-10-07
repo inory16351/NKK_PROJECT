@@ -53,6 +53,8 @@ namespace NKK.Data
     public class RatGradeRow
     {
         public string grade, grade_name, color; public float size, move_speed, birth_weight, skill_power, shard_k; public int atk_base;
+        // 승급 필요 마릿수 = 올림(promote_base × promote_grow^k), k = 이번 판 승급 횟수. promote_soft 마리를 넘으면 그 뒤로는 promote_grow2 로 완만하게
+        public float promote_base, promote_grow, promote_soft, promote_grow2;
         public Grade Grade => E.P<Grade>(grade);
     }
 
@@ -160,14 +162,17 @@ namespace NKK.Data
     [Serializable]
     public class BossRow
     {
-        public int boss_id; public string boss_name, code_id; public int floor; public string atk_type, color;
-        public float scale, radius_mul, hp_pow_sec, cheese_mul, move_speed, atk_cd_min, atk_cd_max, atk_radius, atk_stun;
+        public int boss_id; public string boss_name, code_id, rig; public int floor; public string atk_type, atk2_type, color;
+        public float atk2_chance, scale, radius_mul, hp_pow_sec, cheese_mul, move_speed, atk_cd_min, atk_cd_max;
+        public bool IsCat => rig == "Cat";
         public Color Color => ColorUtility.TryParseHtmlString(color, out var c) ? c : Color.white;
     }
     [Serializable] public class BossLineRow { public int line_id, boss_id; public string situation, text; }
+    // 보스 공격별 수치 (스테이지 테이블 Atk_Type 시트)
+    [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; }
     // 층 밸런스 (스테이지 테이블 Stage, Tools/gen_stage_table.py 로 생성)
     [Serializable] public class StageRow { public int floor, rooms; public float pow_need, item_hp, cheese, wall_stairs, wall_normal, time_add; }
-    [Serializable] public class StageTableFile { public List<StageRow> Stage; public List<BossRow> Boss; public List<BossLineRow> Boss_Line; }
+    [Serializable] public class StageTableFile { public List<StageRow> Stage; public List<BossRow> Boss; public List<BossLineRow> Boss_Line; public List<BossAtkRow> Atk_Type; }
     [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; }
     [Serializable] public class HumanRigMetaFile { public List<HumanRigMetaRow> items; }
 }

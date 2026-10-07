@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boss_props.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x512, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 3 columns x 1 row (each cell 512x512). Each drawing sits centered in its own cell with a wide magenta margin; drawings must NOT touch or cross cell borders.
+- STYLE: copy the attached reference sheets (flat cut-out game art). Untitled Goose Game look: completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows. A few flat color areas with at most one slightly darker flat tone. Soft muted palette.
+
+ 1) A thrown round-bottom chemistry FLASK filled with bubbling bright green liquid, a cork in the neck, tilted a little. Seen from the side.
+ 2) A big fluffy cat HAIRBALL: a messy ball of orange-brown cat fur with a few loose tufts, slightly gross and funny.
+ 3) A flat green chemical SPLASH puddle seen from above at a slight angle (wide ellipse shape with splattered blobby edges and a few droplets around it).

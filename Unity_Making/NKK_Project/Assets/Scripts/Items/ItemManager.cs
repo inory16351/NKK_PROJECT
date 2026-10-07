@@ -469,6 +469,18 @@ namespace NKK.Items
             }
         }
 
+        // 정해진 사람 하나를 그 자리에 (보스 연구소장의 경비원 호출). 사람 상한 무시
+        public Human SpawnHumanAt(string code, float x, float y)
+        {
+            HumanRow row = null; foreach (var h in GameDatabase.Instance.Humans) if (h.code_id == code) { row = h; break; }
+            var art = row != null && humanArt ? humanArt.Get(code) : null;
+            if (art == null || !humanPrefab) return null;
+            var hu = Instantiate(humanPrefab, humanRoot ? humanRoot : transform);
+            hu.Init(this, row, art, x, y);
+            Humans.Add(hu);
+            return hu;
+        }
+
         // 층 시작 · 방이 열렸을 때 (StageManager 가 부름)
         public void OnFloorStart() => SpawnHumans(Vector2Int.zero, Game.Floor == 1 ? humanStartFirst : humanStartOther);
         public void OnRoomOpened(Vector2Int room) { if (!Stage.IsStairsRoom(room.x, room.y)) SpawnHumans(room, 1 + (Random.value < 0.5f ? 1 : 0)); }

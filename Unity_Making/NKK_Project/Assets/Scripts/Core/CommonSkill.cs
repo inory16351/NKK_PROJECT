@@ -45,6 +45,7 @@ namespace NKK
         public static float MultiHitChance => Sum(CommonEffectType.Multi_Hit);
         public static int MultiHitCount => Mathf.Max(1, Mathf.RoundToInt(Max(CommonEffectType.Multi_Hit, 2, 1)));
         public static float BossDmgMul => 1 + Sum(CommonEffectType.Boss_Dmg_Pct);
+        public static float BossTimeAdd => Sum(CommonEffectType.Boss_Dmg_Pct, 2);      // 보스 층 제한시간 + (초)
 
         // ── 승급·시간·시작 쥐 ──
         // 시작 쥐: (등급 0 일반 ~ 5 신화, 마리 수) 목록
@@ -54,8 +55,8 @@ namespace NKK
             foreach (var r in Of(CommonEffectType.Start_Rat)) l.Add((Mathf.Clamp(Mathf.RoundToInt(r.value_02) - 1, 0, 5), Mathf.RoundToInt(r.value_01)));
             return l;
         }
-        // 승급 필요 수 감소 (gradeIndex 0 일반 → 레어 ...)
-        public static int PromoteLess(int gradeIndex) { int n = 0; foreach (var r in Of(CommonEffectType.Promote_Need)) { int g = Mathf.RoundToInt(r.value_02); if (g == 0 || g == gradeIndex + 1) n += Mathf.RoundToInt(r.value_01); } return n; }
+        // 승급할 때 윗등급 쥐가 2마리 나올 확률 (gradeIndex = 승급하는 쪽 0 일반 → 레어 ..., 밸류_02 = 그 등급 1~5, 0 = 모든 승급)
+        public static float PromoteDouble(int gradeIndex) { float s = 0; foreach (var r in Of(CommonEffectType.Promote_Double)) { int g = Mathf.RoundToInt(r.value_02); if (g == 0 || g == gradeIndex + 1) s += r.value_01; } return s; }
         public static int MaxPopAdd => Mathf.RoundToInt(Sum(CommonEffectType.Pop_Cap));
         public static float TimeAdd => Sum(CommonEffectType.Time_Add);
         public static float BreedChanceAdd(int pop) { float s = 0; foreach (var r in Of(CommonEffectType.Breed_Chance)) if (r.value_02 <= 0 || pop < r.value_02) s += r.value_01; return s; }
@@ -110,10 +111,10 @@ namespace NKK
         // ── 해금·특수 ──
         public static int StageSkip => Mathf.RoundToInt(Sum(CommonEffectType.Stage_Skip));
         public static float WallHpMul => Mathf.Max(0.5f, 1 - Sum(CommonEffectType.Wall_Hp_Down));
-        public static float BossHpMul(int floor) { float s = 0; foreach (var r in Of(CommonEffectType.Boss_Hp_Down)) { int f = Mathf.RoundToInt(r.value_02); if (f == 0 || f == floor) s += r.value_01; } return Mathf.Max(0.3f, 1 - s); }
         public static float UltGaugeMul => 1 + Sum(CommonEffectType.Ult_Gauge_Pct);
         public static float UltPowerMul => 1 + Sum(CommonEffectType.Ult_Power_Pct);
         public static bool UltAuto => Has(CommonEffectType.Ult_Auto);
+        public static float UltCdLess => Sum(CommonEffectType.Ult_CD);          // 필살기 쿨타임 감소 (초)
         public static float SuperJumpMul => 1 + Sum(CommonEffectType.Super_Jump_Pct);
         public static float ZapChance => Sum(CommonEffectType.Bite_Zap);
         public static int ZapTargets => Mathf.RoundToInt(Max(CommonEffectType.Bite_Zap, 2));
@@ -125,6 +126,7 @@ namespace NKK
         public static float MeteorPowerK => 1 + Sum(CommonEffectType.Cheese_Meteor, 2);
         public static float RushTimeAdd => Sum(CommonEffectType.Rush_Up);
         public static float RushMulAdd => Sum(CommonEffectType.Rush_Up, 2);
+        public static float RushCdLess => Sum(CommonEffectType.Rush_CD);          // 총공격 쿨타임 감소 (초)
         public static float CatHpMul => Mathf.Max(0.1f, 1 - Sum(CommonEffectType.Cat_Hp_Down));
         public static float CatFearMul => Mathf.Max(0.1f, 1 - Sum(CommonEffectType.Cat_Hp_Down, 2));
     }
