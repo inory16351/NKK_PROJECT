@@ -178,6 +178,57 @@ namespace NKK.Rats
         public int RealCount => Rats.Count - TempCount;
         public void RemoveTemp(Rat r) { FxManager.I?.Dust(r.x, r.y, 6, 1); Rats.Remove(r); Destroy(r.gameObject); }
 
+        // ── 승급 (웹 promote): 같은 등급 N마리 희생 → 윗등급 무작위 1마리. N = promoteCost - 공용 스킬 (최소 promoteMin) ──
+        [Header("승급 (웹 promote)")]
+        [Tooltip("같은 등급 몇 마리 → 윗등급 1마리 (공용 스킬 '승급 필요 쥐 감소'로 줄어듦)")] public int promoteCost = 10;
+        [Tooltip("공용 스킬로 줄어도 최소")] public int promoteMin = 4;
+        [Tooltip("일괄 승급 때 남겨 둘 마리 수 (번식용)")] public int promoteKeep = 6;
+        [Tooltip("승급한 쥐 위 팝업 글")] public string promotePopup;
+        public int PromoteNeed(int g) => Mathf.Max(promoteMin, promoteCost - CommonSkill.PromoteLess(g));
+        public int CountGrade(int g) { int n = 0; foreach (var r in Rats) if (r.temp <= 0 && !r.UltOn && (int)r.Data.Grade == g) n++; return n; }
+        public bool CanPromote(int g) => g >= 0 && g < 5 && GradeOpen(g + 1, Game.Tier) && CountGrade(g) >= PromoteNeed(g) && RealCount - PromoteNeed(g) + 1 >= 2 && !GameOver.Active;
+        public Rat Promote(int g)
+        {
+            if (!CanPromote(g)) return null;
+            int need = PromoteNeed(g);
+            var pool = new List<Rat>();
+            foreach (var r in Rats) if (r.temp <= 0 && !r.UltOn && (int)r.Data.Grade == g) pool.Add(r);
+            pool.Sort((a, b) => b.OnScreen().CompareTo(a.OnScreen()));       // 화면 안 쥐부터
+            float cx = 0, cy = 0; var fx = FxManager.I;
+            var gc = GameDatabase.Instance.Grades.TryGetValue((Grade)g, out var gr) && ColorUtility.TryParseHtmlString(gr.color, out var c0) ? c0 : Color.white;
+            for (int i = 0; i < need; i++)
+            {
+                var r = pool[i]; cx += r.x / need; cy += r.y / need;
+                if (fx && r.OnScreen()) fx.Stars(r.x, r.y, 10, 8, gc, Color.white, 60, 200);
+                Rats.Remove(r); Destroy(r.gameObject);
+            }
+            var row = SpeciesOfGrade(g + 1);
+            var nr = row != null ? Spawn(row, cx, cy) : null;
+            var nc = GameDatabase.Instance.Grades.TryGetValue((Grade)(g + 1), out var ng) && ColorUtility.TryParseHtmlString(ng.color, out var c1) ? c1 : Color.white;
+            if (fx)
+            {
+                for (int i = 0; i < 3; i++) fx.Ring(cx, cy, 40 + i * 30, i % 2 == 1 ? Color.white : nc, 0.5f + i * 0.15f);
+                if (!string.IsNullOrEmpty(promotePopup)) fx.Popup(cx, cy, promotePopup, nc, 26, 1.5f, 60);
+                fx.Shake(0.1f);
+            }
+            Ults?.Flash(nc, 0.15f);
+            return nr;
+        }
+        // 일괄 승급: 낮은 등급부터 되는 만큼 (번식용 promoteKeep 마리는 남김). 승급 횟수
+        public int PromoteAll()
+        {
+            int n = 0;
+            for (int guard = 0; guard < 500; guard++)
+            {
+                int g = -1; for (int k = 0; k < 5; k++) if (CanPromote(k)) { g = k; break; }
+                if (g < 0 || RealCount - PromoteNeed(g) + 1 < promoteKeep) break;
+                if (!Promote(g)) break;
+                n++;
+            }
+            return n;
+        }
+        public bool CanPromoteAny { get { for (int k = 0; k < 5; k++) if (CanPromote(k)) return true; return false; } }
+
         // 드랍 소품 (조건 Drop_Prop): 같은 종이 닿으면 줍고 바로 액션
         class Pickup { public float x, y, t, life; public string code; public SpriteRenderer r; }
         readonly List<Pickup> pickups = new();
