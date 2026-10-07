@@ -139,6 +139,24 @@ namespace NKK.Hazards
             walk += dt * Mathf.Sqrt(vx * vx + vy * vy) / 12;
         }
 
+        // ── 게임 오버 습격 (웹 updateGameOver 고양이): GameOver 가 Tick 대신 부름. 품종 스킬 없이 쫓아가 덮침 ──
+        [HideInInspector] public bool raid;
+        public void BeginRaid(float hopPhase) { raid = true; alpha = 1; State = CState.Prowl; t = hopPhase; }
+        // 목표에 닿으면 true
+        public bool RaidStep(float dt, Rat target, float spd, float reach, float pounceRange)
+        {
+            t += dt;
+            if (!target) { vx = vy = 0; State = CState.Prowl; z = 0; return false; }
+            float dx = target.x - x, dy = target.y - y, d = Mathf.Sqrt(dx * dx + dy * dy);
+            face = dx >= 0 ? 1 : -1;
+            State = d < pounceRange ? CState.Pounce : CState.Prowl;
+            if (d < reach) { vx = vy = 0; z = 0; return true; }
+            vx = dx / d * spd; vy = dy / d * spd; x += vx * dt; y += vy * dt;
+            z = State == CState.Pounce ? Mathf.Abs(Mathf.Sin(t * 8)) * 40 : 0;
+            walk += dt * 14;
+            return false;
+        }
+
         float Dist(float ox, float oy) => Mathf.Sqrt((ox - x) * (ox - x) + (oy - y) * (oy - y));
 
         int PounceHit(float rad, float stunT)
@@ -238,7 +256,7 @@ namespace NKK.Hazards
             var fx = FxManager.I;
             if (fx)
             {
-                bool show = Alive;
+                bool show = Alive && !raid;
                 if (show) { bar ??= fx.GetHpBar(); fx.ShowHpBar(bar, x, y, z + 92, 90, Mathf.Clamp01(hp / hpMax), 1); }
                 else if (bar != null) { fx.ReleaseHpBar(bar); bar = null; }
             }

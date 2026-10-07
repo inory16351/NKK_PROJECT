@@ -245,6 +245,42 @@
    "human_id": 0,
    "situation": "Item_Hit",
    "text": "실험 장비가!"
+  },
+  {
+   "line_id": 91035,
+   "human_id": 90003,
+   "situation": "Raid",
+   "text": "저기 있다!!"
+  },
+  {
+   "line_id": 91036,
+   "human_id": 90003,
+   "situation": "Raid",
+   "text": "전원 포획!!"
+  },
+  {
+   "line_id": 91037,
+   "human_id": 90003,
+   "situation": "Raid",
+   "text": "한 마리도 놓치지 마!"
+  },
+  {
+   "line_id": 91038,
+   "human_id": 90003,
+   "situation": "Raid_Catch",
+   "text": "한 마리 잡았다!"
+  },
+  {
+   "line_id": 91039,
+   "human_id": 90003,
+   "situation": "Raid_Catch",
+   "text": "가만히 있어!"
+  },
+  {
+   "line_id": 91040,
+   "human_id": 90003,
+   "situation": "Raid_Catch",
+   "text": "포획 완료!"
   }
  ],
  "Situation_Type": [
@@ -262,6 +298,12 @@
   },
   {
    "situation": "Item_Hit"
+  },
+  {
+   "situation": "Raid"
+  },
+  {
+   "situation": "Raid_Catch"
   }
  ]
 }

@@ -163,6 +163,21 @@ namespace NKK.Humans
             }
         }
 
+        // ── 게임 오버 습격 (웹 updateGameOver 경비원): GameOver 가 Tick 대신 부름. 벽 무시, 목표 쥐로 곧장 ──
+        public void BeginRaid() { appear = 1; State = HState.Walk; vx = vy = 0; }
+        public void RaidSay(string situation) { sayCD = 0; Say(situation); }
+        // 목표에 닿으면 true
+        public bool RaidStep(float dt, Rat target, float spd, float reach)
+        {
+            sayCD -= dt; walk += dt * 12;
+            if (!target) { vx = vy = 0; return false; }
+            float dx = target.x - x, dy = target.y - y, d = Mathf.Sqrt(dx * dx + dy * dy);
+            face = dx >= 0 ? 1 : -1;
+            if (d < reach) { vx = vy = 0; return true; }
+            vx = dx / d * spd; vy = dy / d * spd; x += vx * dt; y += vy * dt;
+            return false;
+        }
+
         void FlyStep(float dt)
         {
             float px = x, py = y;

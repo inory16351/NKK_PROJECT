@@ -13,6 +13,8 @@ namespace NKK
         [Tooltip("현재 층 (물건 체력·치즈·구간이 이 값으로 정해짐)")] public int Floor = 1;
         [Tooltip("현재 티어 (훈장). 탄생 등급 배율·해금 쥐가 이 값으로 정해짐")] public int Tier = 1;
         public double Cheese;
+        [Tooltip("이번 판 시작 층 (보기용)")] public int StartFloor = 1;
+        [Tooltip("이번 판에 모은 연구자료 (보기용, 층 탈취 연출이 생기면 채움)")] public double RunResearch;
 
         [Header("콤보 (웹게임 기준)")]
         [Tooltip("콤보 유지 시간 (초)")] public float comboTime = 1.6f;
@@ -51,6 +53,7 @@ namespace NKK
                 if (Progress.PendingStartFloor > 0) { Floor = Progress.PendingStartFloor; Progress.PendingStartFloor = 0; }
                 Tier = p.tier; Cheese = p.cheese;
             }
+            StartFloor = Floor;
         }
 
         // 판에서 번 치즈를 진행도에 반영 (판이 끝나도 남음)

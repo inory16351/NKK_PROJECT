@@ -81,6 +81,8 @@ namespace NKK.Stage
         public Vector2Int StairsRoom { get; private set; }
         public float Power { get; private set; }
         public event Action<Vector2Int> RoomOpened;
+        public event Action FloorEntered;          // 층 시작 (제한시간 채우기 등)
+        public bool Climbing => climbing;          // 계단 → 다음 층 페이드 중
 
         readonly Dictionary<string, float> walls = new();
         readonly List<Trap> traps = new();
@@ -149,6 +151,7 @@ namespace NKK.Stage
             if (Game.cam) Game.cam.CenterOn(World.RW / 2, World.RH / 2);
             Game.ShowBanner($"{Game.Floor}층 · {GameDatabase.Instance.ZoneOf(Game.Floor)?.zone_name}", "계단 방 벽을 부숴라!");
             climbing = false;
+            FloorEntered?.Invoke();
         }
 
         void MakeRoom(Vector2Int k)
@@ -355,6 +358,7 @@ namespace NKK.Stage
             if (stairs) stairs.enabled = Open.Contains(StairsRoom);          // 계단 방이 열리기 전엔 계단 안 보임
             if (FxManager.WorldFreeze) return;
             float dt = Mathf.Min(Time.deltaTime, 0.05f);
+            if (GameOver.Active) return;                                       // 게임 오버 습격 중엔 고양이 등장·계단 없음
             foreach (var tp in traps) tp.Tick(dt, Rats, trapRadius, trapStun * CommonSkill.TrapStunMul, trapReload);   // 덫 해체 전문가
             UpdateCats(dt);
             // 계단: 계단 방이 열렸으면 쥐가 닿는 순간 위층으로 (보스·탈취 연출은 이후 단계)

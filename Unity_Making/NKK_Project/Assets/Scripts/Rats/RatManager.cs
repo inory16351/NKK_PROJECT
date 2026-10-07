@@ -353,7 +353,7 @@ namespace NKK.Rats
         // ── 클릭: 짧게 누르면 총공격, 끌면 화면 이동 (CameraController) ──
         void HandleInput()
         {
-            var m = Mouse.current; if (m == null) return;
+            var m = Mouse.current; if (m == null || GameOver.Active) return;      // 게임 오버 습격 중엔 총공격 없음
             Vector2 sp = m.position.ReadValue();
             if (m.leftButton.wasPressedThisFrame) { pressed = !(EventSystem.current && EventSystem.current.IsPointerOverGameObject()); dragged = false; pressPos = sp; }
             if (pressed && (sp - pressPos).magnitude > clickDragPixels) dragged = true;

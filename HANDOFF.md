@@ -1,7 +1,7 @@
 # 찍!찍!!찍!!! — 유니티 이식 진행 상황 (인수인계)
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서만 보고 다음 작업자가 이어갈 수 있게 정리함.
-마지막 갱신: 2026-10-06
+마지막 갱신: 2026-10-07
 
 ---
 
@@ -213,14 +213,23 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 확률로 저절로 터지는 건 **슈퍼 점프**(`SuperJumpManager.chancePerSec` = 1/480 초당, 쿨 120초) — 웹과 같음.
 - 차오르는 과정 UI 는 **만들지 않음** (사용자 결정 2026-10-07).
 
-### 9-2. 층별 제한시간 (웹 `floorTime` · `updateRunTimer`)
-- 웹: `floorTime(f) = round(190 + 35 × 층 방 수(LAYOUT.size) + (보스 층이면 BOSS_TIME + 30))` 초 (html 8985). 층 들어갈 때마다 다시 채움 (html 4718). 필살기·슈퍼 점프·층 이동·게임 오버 중에는 안 줄어듦 (8987). 0 이 되면 `startGameOver('time')` (8992). 로비/훈장 HUD 표시 `⏳ m:ss` (9174 근처) — 남은 시간이 적을 때 경고 연출 있는지 웹에서 확인.
-- Unity: `StageManager.EnterFloor` 에서 시간 채우기 (방 수 = `Layout.Count`, 보스 층 = `IsBossFloor`), 감소는 `GameManager` 또는 새 `RunTimer` 컴포넌트에서 — `FxManager.WorldFreeze`·`UltimateManager.Busy`·`SuperJumpManager.Busy`·층 이동 페이드 중엔 멈춤. 수치는 인스펙터(또는 데이터 테이블)로. HUD 에 시간 글 (씬 TMP, 자리 `{m}:{s}`).
+### 9-2. 층별 제한시간 — 완료 (2026-10-07)
+- `Core/RunTimer.cs` (Game 씬 `RunTimer`): 웹 floorTime = `baseTime 190 + perRoom 35 × 방 수 + (보스 층 bossExtra 90)`. `StageManager.FloorEntered` 이벤트로 층마다 다시 채움.
+- 필살기(`UltimateManager.Busy`)·슈퍼 점프·`FxManager.WorldFreeze/Paused`·층 이동 페이드(`StageManager.Climbing`)·게임 오버 중엔 멈춤. 인스펙터 `testFreeze` = 시간 안 줄어듦, 컴포넌트 메뉴 "테스트: 12초 남기기".
+- 60·30·10초 경고 배너(글 = 인스펙터 `warnTitle {n}`·`warnSub`) + 빨간 번쩍, 30초 아래 빨갛게 깜빡, 10초 아래 1초마다 글이 통 튐. 0초 → `GameOver.Begin(Time)`.
+- HUD: `HUD/TimeText` (글 "남은 시간 {m}:{s}") · `HUD/TimeBar/Fill` (가로 앵커로 줄어듦).
 
-### 9-3. 게임 오버 연출 (웹 `startGameOver` · `updateGameOver` · `UI.showGameOver`, html 9069~9140, 9934)
-- 웹: 시간 초과(또는 보스 패배) → 화면 사방에서 **경비원 사람**(min(24, 12 + 쥐수/4)) 과 **고양이**(min(10, 5 + 쥐수/10)) 가 몰려옴, 빨간 번쩍·흔들림·배너("⏰ 시간 초과!" / "경비원과 고양이가 몰려온다!!") → 가장 가까운 쥐를 쫓아가 잡음(잡힌 쥐 기절 999, "잡았다!/포획!/찍?!" 팝업, 경비원 말풍선) · 남은 쥐는 도망 → 4.5초 뒤(또는 다 잡히고 2.2초) 결과 화면 `showGameOver(why)` (이유 문구, 이번 판 성과, 로비로).
-- Unity 재료: 사람 = `ItemManager` 사람 프리팹·`HumanArtLibrary` (경비원 guard 리그 있음), 고양이 = `CatManager`/`Cat` (고양이 그림 리그), 쥐 기절 = `Rat.Stun`, 배너 = `GameManager.ShowBanner`, 포기 창(QuitMenu)·로비 복귀 흐름 = `Progress`·씬 전환 참고. 쥐랜드 필살기 `UltRatlandLawsuit.cs` 의 포위·체포 연출이 같은 느낌이라 참고 가능.
-- 결과 화면 UI 는 씬에 직접(MCP) 만들고 글은 씬 TMP. 판이 끝날 때 치즈·연구 자료·업적은 남고 쥐·층은 초기화 (포기 창 문구와 같은 규칙).
+### 9-3. 게임 오버 — 완료 (2026-10-07)
+- `Core/GameOver.cs` (Game 씬 `GameOver`, 정적 `GameOver.Active`): 웹 startGameOver/updateGameOver/drawGameOverFx/showGameOver 1:1.
+  - 경비원 `min(24, 12 + 쥐/4)` (사람 프리팹 + `Human.BeginRaid/RaidStep`, Items.Humans 목록엔 안 넣음) · 고양이 `min(10, 5 + 쥐/10)` 실제 품종 (`Cat.BeginRaid/RaidStep`, 체력바 숨김) — 화면 사방에서 가장 가까운 쥐로. 잡힌 쥐 = 기절 999 + `Held` + 철창(`GameOverCages/CageTemplate`, 웹 그림 `Rogue/rg_cage`). 남은 쥐는 360 안의 습격자 반대로 도망.
+  - 경비원 대사 = 사람 테이블 Human_Line 새 상황 `Raid`·`Raid_Catch` (Situation_Type 에도 추가). 잡힐 때 팝업·배너 글 = 인스펙터.
+  - 화면: `HUD/GameOverFx` (붉은 비네트 `sj_vignette` 맥박 · 2.5초부터 어두워짐 · 양쪽 경보등 `rg_siren` + 빙글 빛줄기 `sj_streak` · "일망타진!!!" 3.2초까지).
+  - 4.5초 뒤(다 잡히면 2.2초) + 0.6초 → `HUD/GameOver/Panel` 결과 창 (이유 WhyTime/WhyBoss, 성과 `{floor} {start} {research} {best} {n}`, 아지트로 버튼 → 치즈 저장 후 Lobby).
+  - 게임 오버 중엔 총공격 클릭·필살기 요청·슈퍼 점프·ESC 포기 창·고양이 등장·계단·쥐덫 멈춤.
+  - `GameManager.StartFloor`(이번 판 시작 층) · `RunResearch`(이번 판 연구자료, 아직 0 — 층 탈취 연출 만들 때 채울 것). 보스 패배(`Why.Boss`)는 보스 만들 때 `GameOver.Begin(GameOver.Why.Boss)` 호출.
+  - 테스트: GameOver 컴포넌트 메뉴 "테스트: 게임 오버 (시간 초과)".
 
-### 9-4. 작업 순서 제안
-9-2 (시간) → 9-3 (게임 오버). 각 단계마다 Unity 컴파일·플레이 확인 → 커밋 (`.gitignore` 는 Library 등만 제외).
+### 9-4. 다음 작업 제안
+- 층 클리어 탈취 연출 (웹 startHeist "연구 자료를 훔쳤다!!! 빨리 도망가!!!", 연구자료 획득 → `RunResearch`·`Progress.research`) — 그림 `Rogue/rg_docs`·`rg_paper` 있음.
+- 보스 (5층마다), 로비 치즈 창고(스킬 지도) 등 §6 남은 것.
+- 각 단계마다 Unity 컴파일·플레이 확인 → 커밋.

@@ -100,7 +100,7 @@ namespace NKK.Ults
         // 테스트 버튼: 가장자리 쪽 쥐로 (카메라가 데려오는 걸 보이게)
         public bool Trigger(bool forced)
         {
-            if (Busy || (Ults && Ults.Busy) || FxManager.Paused) return false;
+            if (Busy || (Ults && Ults.Busy) || FxManager.Paused || GameOver.Active) return false;
             var vr = Ults ? Ults.ViewRect(0) : new Rect();
             var pool = new List<Rat>();
             foreach (var o in Rats.Rats) if (o.temp <= 0 && !o.UltOn && o.OnScreen(-0.05f)) pool.Add(o);
@@ -136,7 +136,7 @@ namespace NKK.Ults
             if (!Busy)
             {
                 UpdateUi(dt);
-                if (FxManager.Paused || (Ults && Ults.Busy)) return;
+                if (FxManager.Paused || (Ults && Ults.Busy) || GameOver.Active) return;
                 if ((coolT -= Time.deltaTime) <= 0 && Random.value < chancePerSec * CommonSkill.SuperJumpMul * Time.deltaTime) Trigger(false);
                 return;
             }

@@ -119,7 +119,7 @@ namespace NKK.Ults
         // ── 사용 ──
         public void Request(string code)
         {
-            if (!Full(code) || queue.Contains(code) || (cur != null && cur.R && cur.R.codeId == code)) return;
+            if (GameOver.Active || !Full(code) || queue.Contains(code) || (cur != null && cur.R && cur.R.codeId == code)) return;
             queue.Add(code);
         }
 

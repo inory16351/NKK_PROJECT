@@ -25,7 +25,7 @@ namespace NKK
         void Update()
         {
             var k = Keyboard.current;
-            if (k != null && k.escapeKey.wasPressedThisFrame) { if (panel && panel.activeSelf) Close(); else Open(); }
+            if (k != null && k.escapeKey.wasPressedThisFrame && !GameOver.Active) { if (panel && panel.activeSelf) Close(); else Open(); }
         }
 
         public void Open() { if (!panel) return; panel.SetActive(true); FxManager.Paused = true; Time.timeScale = 0; }
