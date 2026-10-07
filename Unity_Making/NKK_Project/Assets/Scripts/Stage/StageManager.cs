@@ -48,6 +48,7 @@ namespace NKK.Stage
         [Header("벽 체력 = 적정 전투력 × 배율")]
         [Tooltip("계단 방 벽: min(최대, 2 + 6 × (층-1))")] public float wallPowStairs = 20;
         [Tooltip("일반 벽 × (1 + 0.25 × 시작 방과의 거리)")] public float wallPow = 1.5f;
+        [Tooltip("일반 벽 거리 가중: × (1 + 이 값 × 시작 방과의 거리). 스테이지 테이블이 층 지형에 맞춰 벽 배율을 정하므로 0")] public float wallDistK = 0;
         [Tooltip("전투력이 적정보다 낮으면 벽 피해 = (전투력÷적정)^지수")] public float wallGateStairs = 1.5f;
         public float wallGate = 0.5f;
 
@@ -213,7 +214,7 @@ namespace NKK.Stage
             int f = Game.Floor;
             var sr = Row(f);
             if (IsStairsRoom(ti, tj)) return PowNeed(f) * (sr != null ? sr.wall_stairs : Mathf.Min(wallPowStairs, 2 + 6 * (f - 1)));
-            return PowNeed(f) * (sr != null ? sr.wall_normal : wallPow) * (1 + 0.25f * RoomDist(new Vector2Int(ti, tj)));
+            return PowNeed(f) * (sr != null ? sr.wall_normal : wallPow) * (1 + wallDistK * RoomDist(new Vector2Int(ti, tj)));
         }
 
         public float WallHP(int i, int j, int di, int dj) => walls.TryGetValue(WallKey(i, j, di, dj), out var v) ? v : WallMax(i + di, j + dj);

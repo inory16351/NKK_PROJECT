@@ -28,6 +28,9 @@ namespace NKK
         public static bool UseRush = true;
         public static bool Calib;                   // 적정 고정: 적정 전투력 = 지금 무리 전투력 (전투력 = 적정일 때 몇 초 걸리나 재기)          // 플레이어처럼 클릭 총공격 (쿨타임마다: 보스 → 계단 방 벽 → 가장 약한 벽)           // 필살기가 차면 바로 씀 (플레이어처럼, Ults.UltimateManager.ForceAuto)
         public static readonly List<string> Results = new();
+        public static float BaseTime = 180, BossBaseTime = 30;      // 목표 비교 기준 (노드 추가 시간 빼고): 일반 180초 · 보스 층 +30
+        // 층마다 한 줄 (적정 고정 분석용): 층, 제한시간 기준 사용 초, 기준 초, 계단 거리, 경로 벽 배율 합, 방 수, 성공 여부
+        public static readonly List<float[]> Rows = new();
         // 이어서 돌릴 측정 (Run 인자: 티어, 시작 층, 끝 층, 포기 초, simHz, 노드 수, 조각 합[, 승급 방식]). 하나 끝나면 다음 것 자동 시작
         public static readonly List<float[]> Queue = new();
         public static void RunQueue()
@@ -89,7 +92,7 @@ namespace NKK
             // 화면 안 그림 (빠르게). 메인 카메라는 켜 둔 채 아무것도 안 그림 → Camera.main 을 쓰는 코드(고양이 등장·화면 안 판정)가 그대로 돎
             foreach (var c in Camera.allCameras) { if (c == Camera.main) { mask = c.cullingMask; c.cullingMask = 0; } else { c.enabled = false; offCams.Add(c); } }
             timer = FindFirstObjectByType<RunTimer>(); if (timer) timer.testFreeze = true;     // 제한시간은 재기만 함
-            floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; limit = 0;
+            floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; limit = 0; pathD = -1;
         }
 
         void Update()
@@ -106,18 +109,22 @@ namespace NKK
             float pow = Rats.TotalPower(); maxPow = Mathf.Max(maxPow, pow);
             float dt = Time.time - t0, used = timer ? timer.Used : dt;      // used = 제한시간 기준 (필살기·연출 중엔 안 셈)
             if (limit <= 0 && timer) limit = timer.Max;
+            if (pathD < 0 && Stage.Layout.Count > 0) { StageManager.PowOverride = Calib ? Mathf.Max(1, Rats.TotalPower()) : 0; (pathSum, pathD) = PathWalls(); pathRooms = Stage.Layout.Count; }
             if (LogEvery > 0 && (logT += Time.deltaTime) >= LogEvery) { logT = 0; Add($"   {floor}층 {dt:0}초 · 쥐 {Rats.RealCount} · 전투력 {GameManager.Format(pow)} ({pow / Stage.PowNeed(floor):0.00}배) · 방 {Stage.Open.Count}/{Stage.Layout.Count}"); }
             if (Game.Floor != floor)
             {
                 if (timer) used = timer.LastUsed;      // 새 층으로 넘어오며 타이머가 이미 다시 채워짐
                 Add($"{floor}층 {used:0}초 / 제한 {limit:0}초 (전체 {dt:0}초) · 쥐 {Rats.RealCount} (승급 {Rats.PromoteTimes(0)}/{Rats.PromoteTimes(1)}/{Rats.PromoteTimes(2)}/{Rats.PromoteTimes(3)}/{Rats.PromoteTimes(4)}) · 전투력 {GameManager.Format(maxPow)} / 적정 {GameManager.Format(Stage.PowNeed(floor))} ({maxPow / Stage.PowNeed(floor):0.00}배) · 치즈 +{GameManager.Format(Game.Cheese - cheese0)}");
                 if (bossDur > 0) Add($"   └ 보스전 {bossDur:0}초");
-                floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; limit = 0; bossT0 = -1; bossDur = 0;
+                Add($"   └ 기준 {BaseLimit(floor):0}초의 {used / BaseLimit(floor) * 100:0}% · 계단 거리 {pathD} · 경로 벽 배율 합 {pathSum:0.0} · 방 {pathRooms}");
+                Rows.Add(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 1, bossDur });
+                floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; limit = 0; bossT0 = -1; bossDur = 0; pathD = -1;
                 if (floor > EndFloor) Finish();
             }
             else if ((!Calib && limit > 0 && used > limit) || dt > Mathf.Max(GiveUp, limit * 2))      // 적정 고정 모드는 제한시간을 넘어도 끝까지 잼
             {
                 if (bossT0 >= 0) Add($"   └ 보스전 {(bossDur > 0 ? bossDur : (timer ? timer.Used : dt) - bossT0):0}초{(bossDur > 0 ? "" : " (못 잡음)")}");
+                Rows.Add(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 0, bossDur });
                 Add($"{floor}층 실패 (제한 {limit:0}초 넘음, 전체 {dt:0}초) · 쥐 {Rats.RealCount} · 전투력 {GameManager.Format(pow)} / 적정 {GameManager.Format(Stage.PowNeed(floor))} ({pow / Stage.PowNeed(floor):0.00}배) · 방 {Stage.Open.Count}/{Stage.Layout.Count}");
                 Finish();
             }
@@ -130,17 +137,21 @@ namespace NKK
             Vector2 p = default; bool found = false;
             var b = Hazards.Boss.Current;
             if (b && b.CanHit) { p = new Vector2(b.x, b.y); found = true; }
+            else if (Stage.Open.Contains(Stage.StairsRoom) && (!b || !b.Blocking)) { p = Stage.StairsPos; found = true; }     // 계단 방이 열렸으면 계단으로
             else
             {
-                float bestHp = float.MaxValue; bool bestStairs = false;
+                // 플레이어처럼 계단 쪽 길을 뚫음: 열린 방에 붙은 안 열린 방 중 계단 방까지 (레이아웃 안) 거리가 가장 가까운 벽 → 같으면 약한 벽
+                var toStairs = new Dictionary<Vector2Int, int> { [Stage.StairsRoom] = 0 }; var q = new Queue<Vector2Int>(); q.Enqueue(Stage.StairsRoom);
+                while (q.Count > 0) { var c = q.Dequeue(); foreach (var dd in StageManager.Dirs) { var k = c + dd; if (Stage.Layout.Contains(k) && !toStairs.ContainsKey(k)) { toStairs[k] = toStairs[c] + 1; q.Enqueue(k); } } }
+                float bestHp = float.MaxValue; int bestD = int.MaxValue;
                 foreach (var k in Stage.Open)
                     foreach (var d in StageManager.Dirs)
                     {
                         var t = k + d;
                         if (Stage.Open.Contains(t) || !Stage.Layout.Contains(t)) continue;
-                        bool st = Stage.IsStairsRoom(t.x, t.y); float hp = Stage.WallHP(k.x, k.y, d.x, d.y);
-                        if (found && (bestStairs && !st || bestStairs == st && hp >= bestHp)) continue;
-                        found = true; bestStairs = st; bestHp = hp;
+                        int dist = toStairs.TryGetValue(t, out var v) ? v : 99; float hp = Stage.WallHP(k.x, k.y, d.x, d.y);
+                        if (found && (dist > bestD || dist == bestD && hp >= bestHp)) continue;
+                        found = true; bestD = dist; bestHp = hp;
                         p = new Vector2((k.x + 0.5f + d.x * 0.5f) * World.RW - d.x * 40, (k.y + 0.5f + d.y * 0.5f) * World.RH - d.y * 40);
                     }
             }
@@ -148,6 +159,20 @@ namespace NKK
             if (Game.cam) Game.cam.CenterOn(p.x, p.y);
             Rats.ClickRush(p);
         }
+
+        // 시작 방 → 계단 방 최단 경로의 벽 체력 배율 합 (적정 대비) · 계단 거리
+        (float sum, int d) PathWalls()
+        {
+            var dist = new Dictionary<Vector2Int, int> { [Vector2Int.zero] = 0 }; var par = new Dictionary<Vector2Int, Vector2Int>();
+            var q = new Queue<Vector2Int>(); q.Enqueue(Vector2Int.zero);
+            while (q.Count > 0) { var c = q.Dequeue(); foreach (var dd in StageManager.Dirs) { var k = c + dd; if (Stage.Layout.Contains(k) && !dist.ContainsKey(k)) { dist[k] = dist[c] + 1; par[k] = c; q.Enqueue(k); } } }
+            var st = Stage.StairsRoom; if (!dist.ContainsKey(st)) return (0, 0);
+            float need = Stage.PowNeed(floor), sum = 0; var cur = st;
+            while (cur != Vector2Int.zero) { var pv = par[cur]; sum += Stage.WallHPMax(pv.x, pv.y, cur.x - pv.x, cur.y - pv.y) / Mathf.Max(1, need); cur = pv; }
+            return (sum, dist[st]);
+        }
+        float pathSum; int pathD, pathRooms;
+        float BaseLimit(int f) => BaseTime + (Stage.IsBossFloor(f) ? BossBaseTime : 0);
 
         void Add(string s) { Results.Add(s); Debug.Log("[BalanceProbe] " + s); }
         void Finish()
@@ -159,6 +184,7 @@ namespace NKK
             if (Queue.Count > 0) RunQueue();
         }
 
+        public static string RowsCsv() { var sb = new StringBuilder("floor,used,base,d,path,rooms,ok,boss").AppendLine(); foreach (var r in Rows) sb.AppendLine(string.Join(",", r)); return sb.ToString(); }
         public static string Report() { var sb = new StringBuilder(); foreach (var l in Results) sb.AppendLine(l); return sb.ToString(); }
     }
 }

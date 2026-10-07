@@ -4,12 +4,14 @@
 곡선은 아래 숫자로 조절 → 다시 실행. 표에 없는 층(마지막 층 넘어서)은 마지막 두 층 비율로 이어서 계산.
 사용: python Tools/gen_stage_table.py && python Tools/xlsx2json.py"""
 import os, copy, math
+from collections import deque
+import numpy as np
 import openpyxl
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, 'Data_Table', '스테이지 테이블.xlsx')
 
-FLOORS = 30
+FLOORS = 50
 POW0, POW_GROW = 400, 1.38          # 적정 전투력: 1층 · 층마다 곱
 HP_GROW = 1.38                      # 물건·사람 체력 배율 (1층 1)
 CHEESE_GROW = 1.5                   # 치즈 배율 (1층 1)
@@ -20,12 +22,67 @@ def rooms(f):
     return min(9, 3 + (f - 1) // 2) + (1 if f % BOSS_EVERY == 0 else 0)
 
 
-def wall_stairs(f):                 # 계단 방 벽 = 적정 × 이 값
-    return round(min(10, 3 + 0.6 * (f - 1)), 2)
+# ── 벽 체력: 층마다 실제 지형(계단까지 최단 경로)을 계산해서 "경로 벽 배율 합"이 목표 S(f) 가 되게 ──
+# 목표: 전투력 = 적정일 때 제한시간(180초, 보스 층 210초)의 70~80% (TARGET_SEC 135초, 보스 층은 보스전 BOSS_FIGHT_SEC 빼고)
+# 측정(BalanceProbe 적정 고정): 걸린 시간 ≈ 경로 벽 배율 합(공용 스킬 벽 체력 감소 적용 후) × SPU[f] (배율 1당 초).
+#   SPU 는 지형마다 크게 다름 (복도처럼 바깥벽이 많은 지형은 쥐가 엉뚱한 벽에 부딪혀 느림) → 층별 측정값. 없으면 SPU_DEFAULT
+#   층을 다시 재면 SPU 를 고치고 다시 실행.  S = 목표 초 ÷ (SPU × SKILL_WALL_MUL)
+TARGET_SEC = 135
+BOSS_TOTAL_SEC = 157                  # 보스 층 (210초의 75%)
+BOSS_FIGHT_SEC = 40                   # 보스전 목표 (스테이지 테이블 Boss 시트 hp_pow_sec 로 맞춤)
+SPU = {                               # 2026-10-07 측정: 2회 중앙값 → 3회차(이 표로 잼)에서 60% 아래였던 층은 SPU × 측정%/75 로 보정
+    1: 1.44, 2: 1.87, 3: 1.81, 4: 3.42, 5: 14.4, 6: 8.2, 7: 8.8, 8: 17.5, 9: 10.4, 10: 9.4,
+    11: 35.5, 12: 21.3, 13: 10.5, 14: 10.9, 15: 21.9, 16: 2.22, 17: 20.7, 18: 11.8, 19: 8.3, 20: 5.15,
+    21: 15.5, 22: 2.96, 23: 8.0, 24: 3.78, 25: 9.9,
+}
+SPU_DEFAULT = 10.0
+SKILL_WALL_MUL = {1: 1.0, 2: 0.97, 3: 0.95, 4: 0.92, 5: 0.9, 6: 0.9, 7: 0.87}   # 그 층을 깰 즈음의 공용 스킬 벽 체력 배율 (8층부터 0.85)
+STAIRS_SHARE = 0.5                    # 경로 벽 합 중 계단 방 벽 몫 (나머지는 경로의 일반 벽에 똑같이)
+MIN_NORMAL = 0.8                      # 일반 벽 배율 최소
 
 
-def wall_normal(f):                 # 일반 벽 = 적정 × 이 값 × (1 + 0.25 × 시작 방과의 거리)
-    return 1.2
+def path_target(f):
+    sec = BOSS_TOTAL_SEC - BOSS_FIGHT_SEC if f % BOSS_EVERY == 0 else TARGET_SEC
+    return sec / (SPU.get(f, SPU_DEFAULT) * SKILL_WALL_MUL.get(f, 0.85))
+
+
+# StageManager.GenLayout / SeededRandom 과 똑같은 지형 (층 번호가 시드). maxRow = StageManager.maxRow
+M32 = 0xFFFFFFFF
+class Seeded:
+    def __init__(self, seed): self.a = seed & M32
+    def next(self):
+        self.a = (self.a + 0x6D2B79F5) & M32; t = self.a
+        t = ((t ^ (t >> 15)) * (t | 1)) & M32
+        t ^= (t + (((t ^ (t >> 7)) * (t | 61)) & M32)) & M32
+        return float(np.float32(np.float32((t ^ (t >> 14)) & M32) / np.float32(4294967296.0)))
+
+DIRS = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+def stairs_dist(f, n, max_row=3):
+    rnd = Seeded(f * 7919 + 17); lst = [(0, 0)]; lay = {(0, 0)}; g = 0
+    while len(lst) < n and g < 500:
+        g += 1
+        b = lst[-1] if rnd.next() < 0.6 else lst[int(math.floor(np.float32(rnd.next()) * np.float32(len(lst))))]
+        d = DIRS[int(math.floor(np.float32(rnd.next()) * np.float32(4)))]
+        k = (b[0] + d[0], b[1] + d[1])
+        if k in lay or abs(k[1]) > max_row: continue
+        lay.add(k); lst.append(k)
+    dist = {(0, 0): 0}; q = deque([(0, 0)])
+    while q:
+        c = q.popleft()
+        for d in DIRS:
+            k = (c[0] + d[0], c[1] + d[1])
+            if k in lay and k not in dist: dist[k] = dist[c] + 1; q.append(k)
+    best = (0, 0)
+    for k, v in dist.items():
+        if v > dist[best]: best = k
+    return dist[best]
+
+
+def walls(f):                       # (계단 방 벽, 일반 벽) 배율 — 일반 벽은 거리 가중 없음 (StageManager.wallDistK 0)
+    S, d = path_target(f), stairs_dist(f, rooms(f))
+    if d <= 1: return round(S, 2), 1.2
+    normal = max(MIN_NORMAL, S * (1 - STAIRS_SHARE) / (d - 1))
+    return round(S - normal * (d - 1), 2), round(normal, 2)
 
 
 def nice(v):
@@ -46,7 +103,7 @@ def main():
         for r, v in enumerate((h, k, t), 1): ws.cell(r, c, v)._style = copy.copy(st[r - 1])
     for f in range(1, FLOORS + 1):
         row = [f, rooms(f), nice(POW0 * POW_GROW ** (f - 1)), nice(HP_GROW ** (f - 1)), nice(CHEESE_GROW ** (f - 1)),
-               wall_stairs(f), wall_normal(f), 0, '보스 층' if f % BOSS_EVERY == 0 else '']
+               *walls(f), 0, '보스 층' if f % BOSS_EVERY == 0 else '']
         for c, v in enumerate(row, 1): ws.cell(3 + f, c, v)._style = copy.copy(st[3])
     for c, w in enumerate([6, 8, 14, 14, 12, 12, 12, 14, 12], 1): ws.column_dimensions[openpyxl.utils.get_column_letter(c)].width = w
     cd = wb['Column_Desc']
@@ -54,7 +111,7 @@ def main():
     for k, d in [('pow_need', 'Stage: 적정 전투력(찍찍!!) = 무리 공격력 합. 모자라면 벽 피해 = (전투력÷적정)^지수 (계단 방 1.5 · 일반 0.5)'),
                  ('item_hp', 'Stage: 물건·사람·고양이 체력 = 기본(12 × 물건 체력 배율) × 이 값 × 3.6^(방 거리 × 0.1)'),
                  ('cheese', 'Stage: 물건·사람·고양이·보스 치즈 = 기본(3 × 치즈 배율) × 이 값 × 1.8^(방 거리 × 0.1)'),
-                 ('wall_stairs / wall_normal', 'Stage: 벽 체력 = 적정 전투력 × 이 값 (일반 벽은 × (1 + 0.25 × 시작 방 거리))'),
+                 ('wall_stairs / wall_normal', 'Stage: 벽 체력 = 적정 전투력 × 이 값. 생성기가 층 지형(계단까지 경로)을 보고 경로 벽 합이 목표가 되게 정함'),
                  ('time_add', 'Stage: 층 제한시간에 더하는 초 (기본 190 + 35 × 방 수 + 보스 층 90)'),
                  ('Stage 생성', 'Tools/gen_stage_table.py 로 생성 (곡선 숫자를 바꾸고 다시 실행)')]:
         if k in have: continue
