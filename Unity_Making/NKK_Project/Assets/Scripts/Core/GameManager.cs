@@ -72,8 +72,10 @@ namespace NKK
 
         public void AddCombo(int n) { Combo += n; comboT = comboTime * CommonSkill.ComboTimeMul; }
 
+        public string BannerTitle { get; private set; }
         public void ShowBanner(string text, string sub = "")
         {
+            BannerTitle = text;
             if (bannerText) bannerText.text = text;
             if (bannerSubText) bannerSubText.text = sub;
             bannerT = bannerTime;

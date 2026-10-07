@@ -156,6 +156,16 @@ namespace NKK.Data
     [Serializable] public class CommonSkillTableFile { public List<CommonSkillRow> Common_Skill; public List<SkillBranchRow> Branch; }
 
     [Serializable] public class HumanTableFile { public List<HumanRow> Human; public List<HumanLineRow> Human_Line; }
+    // 보스 (스테이지 테이블 Boss · Boss_Line)
+    [Serializable]
+    public class BossRow
+    {
+        public int boss_id; public string boss_name, code_id; public int floor; public string atk_type, color;
+        public float scale, radius_mul, hp_pow_sec, cheese_mul, move_speed, atk_cd_min, atk_cd_max, atk_radius, atk_stun;
+        public Color Color => ColorUtility.TryParseHtmlString(color, out var c) ? c : Color.white;
+    }
+    [Serializable] public class BossLineRow { public int line_id, boss_id; public string situation, text; }
+    [Serializable] public class StageTableFile { public List<BossRow> Boss; public List<BossLineRow> Boss_Line; }
     [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; }
     [Serializable] public class HumanRigMetaFile { public List<HumanRigMetaRow> items; }
 }

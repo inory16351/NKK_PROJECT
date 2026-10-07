@@ -31,6 +31,7 @@ namespace NKK.Stage
         public RatManager Rats;
         public CatManager Cats;
         [Tooltip("층 클리어 연출 (연구 자료를 훔쳤다!!!). 비우면 바로 다음 층")] public Heist Heist;
+        [Tooltip("층 보스 (스테이지 테이블 Boss). 보스 층이면 계단 방에서 대기, 살아 있는 동안 계단 못 씀")] public Boss Boss;
 
         [Header("방 배치")]
         [Tooltip("방 수 = min(최대, 기본 + 층 × 증가) (+ 보스 층 1)")] public int roomBase = 3;
@@ -151,6 +152,7 @@ namespace NKK.Stage
             Rats.PlaceAll(World.RW / 2, World.RH / 2);
             if (Game.cam) Game.cam.CenterOn(World.RW / 2, World.RH / 2);
             Game.ShowBanner($"{Game.Floor}층 · {GameDatabase.Instance.ZoneOf(Game.Floor)?.zone_name}", "계단 방 벽을 부숴라!");
+            if (Boss) Boss.OnFloorEnter();                                     // 보스 층: 계단 방에 보스 대기 + 배너 부제
             climbing = false;
             FloorEntered?.Invoke();
         }
@@ -263,7 +265,11 @@ namespace NKK.Stage
             Game.ShowBanner("벽 붕괴! 방 확장", $"{Game.Floor}층 · 방 {Open.Count}/{Layout.Count}");
             if (!IsStairsRoom(t.x, t.y)) Items.FurnishRoom(t);
             Items.FillRoom(t, Mathf.CeilToInt(Items.RoomCap / 2f));
-            if (IsStairsRoom(t.x, t.y)) Game.ShowBanner("계단 발견!", $"계단에 닿으면 {Game.Floor + 1}층으로");
+            if (IsStairsRoom(t.x, t.y))
+            {
+                if (Boss && Boss.State == Boss.BState.Wait) Boss.StartFight();   // 보스 전투 시작
+                else Game.ShowBanner("계단 발견!", $"계단에 닿으면 {Game.Floor + 1}층으로");
+            }
             Items.OnRoomOpened(t);
             if (!IsStairsRoom(t.x, t.y) && Game.Floor >= trapFromFloor) SpawnTraps(t, UnityEngine.Random.value < trapTwoChance ? 2 : 1);
             RoomOpened?.Invoke(t);
@@ -291,7 +297,7 @@ namespace NKK.Stage
         // ── 고양이: 평소엔 실제 품종만, 특별 복장 고양이는 아주 후반에 가끔 ──
         void UpdateCats(float dt)
         {
-            if (!Cats || Game.Floor < catFromFloor || Cats.Current) return;
+            if (!Cats || Game.Floor < catFromFloor || Cats.Current || (Boss && Boss.CanHit)) return;     // 보스전 중엔 고양이 없음
             if ((catT -= dt) > 0) return;
             catT = UnityEngine.Random.Range(catInterval.x, catInterval.y);
             var normal = new List<CatCharacterRow>(); var special = new List<CatCharacterRow>();
@@ -363,7 +369,7 @@ namespace NKK.Stage
             foreach (var tp in traps) tp.Tick(dt, Rats, trapRadius, trapStun * CommonSkill.TrapStunMul, trapReload);   // 덫 해체 전문가
             UpdateCats(dt);
             // 계단: 계단 방이 열렸으면 쥐가 닿는 순간 위층으로 (보스·탈취 연출은 이후 단계)
-            if (climbing || !Open.Contains(StairsRoom)) return;
+            if (climbing || !Open.Contains(StairsRoom) || (Boss && Boss.Blocking)) return;      // 보스가 살아 있으면 계단 못 씀
             var sp = StairsPos;
             foreach (var r in Rats.Rats)
                 if (r.temp <= 0 && !r.UltOn && Mathf.Abs(r.x - sp.x) < stairsTouch.x && Mathf.Abs(r.y - sp.y) < stairsTouch.y) { Climb(); break; }

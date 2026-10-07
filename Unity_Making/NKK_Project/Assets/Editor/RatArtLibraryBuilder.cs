@@ -64,7 +64,7 @@ public static class HumanArtLibraryBuilder
             if (!S(d + "torso.png")) continue;
             lib.entries.Add(new NKK.Humans.HumanArtLibrary.Entry
             {
-                codeId = m.code_id, head = S(d + "head.png"), scared = S(d + "scared.png"), torso = S(d + "torso.png"),
+                codeId = m.code_id, head = S(d + "head.png"), scared = S(d + "scared.png"), angry = S(d + "angry.png"), torso = S(d + "torso.png"),
                 arm = S(d + "arm.png"), leg = S(d + "leg.png"), neck = V(m.neck), shoulder = V(m.shoulder), hip = V(m.hip),
             });
         }

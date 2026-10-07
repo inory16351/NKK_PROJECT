@@ -1,0 +1,18 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boss_chief_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 3 columns x 2 rows (each cell 512x512). Each drawing sits centered in its own cell with a wide magenta margin; drawings must NOT touch or cross cell borders, and parts must not touch each other.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference sheet exactly (cut-out human body parts for a 2D paper-doll rig, same scale feel). Untitled Goose Game look: completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows. A few flat color areas with at most one slightly darker flat tone. Soft muted palette.
+- Side view, the character FACES LEFT (nose pointing to the left), exactly like the reference heads.
+
+Character: "Security Chief", the big boss of the lab guards. A huge, burly, barrel-chested middle-aged man, much bigger and tougher than a normal guard. Navy-blue officer uniform with gold details.
+
+Row 1 (three HEADS, each cut flat at the neck, a short neck stump only, NO shoulders, NO collar, NO clothing below the neck):
+ 1) NORMAL head: square heavy jaw, thick black walrus mustache, dark mirrored aviator sunglasses, stern frown, short grey sideburns, wearing a navy peaked officer cap with a shiny gold badge and gold braid on the visor.
+ 2) ANGRY SHOUTING head: same man, sunglasses pushed down a little showing furious eyebrows, mouth wide open yelling, a small vein mark on the temple, same cap.
+ 3) SCARED head: same man, sunglasses slipping off showing small panicked eyes, mouth open in a wobbly scream, a few sweat drops, cap tilted.
+Row 2:
+ 4) TORSO ONLY: a big barrel chest and belly in a navy uniform shirt with gold shoulder epaulettes ON TOP of the shoulders, two small rows of colorful medal ribbons on the chest, a black utility belt with a gold buckle and a walkie-talkie pouch at the bottom. IMPORTANT: ABSOLUTELY NO ARMS, NO SLEEVES, NO HANDS on the torso — it is cut flat and clean at both shoulders and at the neck, like a headless armless mannequin; the bottom is cut flat at the hips. Only a short flat neck stump on top.
+ 5) ONE WHOLE ARM ONLY: hanging straight down, cut flat at the top (shoulder), thick navy sleeve with two gold stripes near the cuff, ending in a big white-gloved fist at the bottom. Long enough to reach from shoulder to below the belt.
+ 6) ONE WHOLE LEG ONLY: hanging straight down, cut flat at the top (hip), navy trousers with a thin gold side stripe, a big heavy black combat boot at the bottom with the toe pointing LEFT.

@@ -19,6 +19,7 @@ namespace NKK.Data
         public TextAsset tierTable;
         public TextAsset humanTable;
         public TextAsset commonSkillTable;
+        public TextAsset stageTable;
 
         public readonly Dictionary<int, RatCharacterRow> Rats = new();
         public readonly Dictionary<string, RatCharacterRow> RatsByCode = new();
@@ -44,6 +45,8 @@ namespace NKK.Data
         public readonly Dictionary<string, CommonSkillRow> CommonSkillsByCode = new();
         public readonly Dictionary<CommonEffectType, CommonSkillRow> CommonSkillsByEffect = new();
         public readonly Dictionary<SkillBranch, SkillBranchRow> SkillBranches = new();
+        public readonly List<BossRow> Bosses = new();
+        public readonly List<BossLineRow> BossLines = new();
 
         void Awake()
         {
@@ -57,7 +60,7 @@ namespace NKK.Data
         {
             Rats.Clear(); RatsByCode.Clear(); RatSkills.Clear(); Ultimates.Clear(); UltCaptions.Clear(); UltCharges.Clear(); Grades.Clear();
             GrowthNodes.Clear(); GrowthOrder.Clear(); ActionAwaken.Clear(); Cats.Clear(); CatSkills.Clear();
-            Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear();
+            Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear(); Bosses.Clear(); BossLines.Clear();
             CommonSkills.Clear(); CommonSkillsById.Clear(); CommonSkillsByCode.Clear(); CommonSkillsByEffect.Clear(); SkillBranches.Clear();
 
             if (ratTable)
@@ -100,6 +103,7 @@ namespace NKK.Data
                 foreach (var s in f.Common_Skill) { CommonSkills.Add(s); CommonSkillsById[s.skill_id] = s; CommonSkillsByCode[s.code_id] = s; CommonSkillsByEffect[s.Effect] = s; }
                 foreach (var b in f.Branch) SkillBranches[b.Branch] = b;
             }
+            if (stageTable) { var f = JsonUtility.FromJson<StageTableFile>(stageTable.text); if (f.Boss != null) Bosses.AddRange(f.Boss); if (f.Boss_Line != null) BossLines.AddRange(f.Boss_Line); }
             Debug.Log($"[GameDatabase] 쥐 {Rats.Count} · 스킬 {RatSkills.Count} · 필살기 {Ultimates.Count} · 등급 {Grades.Count} · 성장 노드 {GrowthNodes.Count} · 고양이 {Cats.Count} · 물건 {Items.Count} · 티어 {Tiers.Count} · 사람 {Humans.Count} · 공용 스킬 {CommonSkills.Count}");
         }
 
@@ -111,6 +115,15 @@ namespace NKK.Data
         {
             var l = new List<string>();
             foreach (var r in HumanLines) if (r.situation == situation && (r.human_id == humanId || r.human_id == 0)) l.Add(r.text);
+            return l.Count > 0 ? l[UnityEngine.Random.Range(0, l.Count)] : null;
+        }
+
+        // 보스: 그 층에 나오는 보스 (없으면 null)
+        public BossRow BossOf(int floor) { foreach (var b in Bosses) if (b.floor == floor) return b; return null; }
+        public string BossLine(string situation, int bossId)
+        {
+            var l = new List<string>();
+            foreach (var r in BossLines) if (r.situation == situation && r.boss_id == bossId) l.Add(r.text);
             return l.Count > 0 ? l[UnityEngine.Random.Range(0, l.Count)] : null;
         }
 

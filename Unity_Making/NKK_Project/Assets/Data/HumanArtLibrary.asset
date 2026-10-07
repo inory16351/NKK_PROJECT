@@ -19,6 +19,7 @@ MonoBehaviour:
     torso: {fileID: 21300000, guid: e85f7b7f73487de4aa92a965ef812164, type: 3}
     arm: {fileID: 21300000, guid: ec2d573549c46244a8e06464be6a9aae, type: 3}
     leg: {fileID: 21300000, guid: 97ddd389ddd1f8d4ab484955a8f1a788, type: 3}
+    angry: {fileID: 0}
     neck: {x: 0.454, y: 0.03}
     shoulder: {x: 0.486, y: 0.12}
     hip: {x: 0.495, y: 0.95}
@@ -28,6 +29,7 @@ MonoBehaviour:
     torso: {fileID: 21300000, guid: 118d815a9a9a264498994cd57b1b0de8, type: 3}
     arm: {fileID: 21300000, guid: 4d4bf1a185a33f348933af8d7a2e164f, type: 3}
     leg: {fileID: 21300000, guid: 5cd8cce7a12225e40b43364d6d5393a9, type: 3}
+    angry: {fileID: 0}
     neck: {x: 0.498, y: 0.03}
     shoulder: {x: 0.504, y: 0.12}
     hip: {x: 0.496, y: 0.95}
@@ -37,6 +39,7 @@ MonoBehaviour:
     torso: {fileID: 21300000, guid: bb86a6c023ed3374099f519821a9c91f, type: 3}
     arm: {fileID: 21300000, guid: b6daa3212aea88a47ae74524c7abb779, type: 3}
     leg: {fileID: 21300000, guid: 8d72dea75d58f05459765ba266221b1b, type: 3}
+    angry: {fileID: 0}
     neck: {x: 0.435, y: 0.03}
     shoulder: {x: 0.466, y: 0.12}
     hip: {x: 0.506, y: 0.95}
@@ -46,15 +49,17 @@ MonoBehaviour:
     torso: {fileID: 21300000, guid: 4bee2d0e9cb211443a086cfe45f40511, type: 3}
     arm: {fileID: 21300000, guid: acaead9cee9da1945b763ad5a0b6d892, type: 3}
     leg: {fileID: 21300000, guid: b6e511242b32d5646bd96053c2bf135b, type: 3}
-    neck: {x: 0.568, y: 0.03}
-    shoulder: {x: 0.568, y: 0.12}
-    hip: {x: 0.511, y: 0.95}
+    angry: {fileID: 21300000, guid: 585b1da5f936baf418e8fe3e331dccdd, type: 3}
+    neck: {x: 0.529, y: 0.03}
+    shoulder: {x: 0.529, y: 0.12}
+    hip: {x: 0.496, y: 0.95}
   - codeId: boss_mad
     head: {fileID: 21300000, guid: 7a98e31d07ed7d040aa5db468fda70ba, type: 3}
     scared: {fileID: 21300000, guid: 089e143f6f74ff34185159c1306204c1, type: 3}
     torso: {fileID: 21300000, guid: 38be9d69f3ce1b84a82b53e050aa71bb, type: 3}
     arm: {fileID: 21300000, guid: c361445833e4b534dbf6c111e1ae34f1, type: 3}
     leg: {fileID: 21300000, guid: 9ee83768ba9fb97449bacdc512588150, type: 3}
+    angry: {fileID: 0}
     neck: {x: 0.513, y: 0.03}
     shoulder: {x: 0.508, y: 0.12}
     hip: {x: 0.495, y: 0.95}
@@ -64,6 +69,7 @@ MonoBehaviour:
     torso: {fileID: 21300000, guid: b78672df487c87141ab561a8babb5d36, type: 3}
     arm: {fileID: 21300000, guid: 8342f63fa71856e468b5be47f2fb9f10, type: 3}
     leg: {fileID: 21300000, guid: 1d5e6ce40eac48f468142683f4e0fe39, type: 3}
+    angry: {fileID: 0}
     neck: {x: 0.573, y: 0.03}
     shoulder: {x: 0.498, y: 0.12}
     hip: {x: 0.5, y: 0.95}
@@ -73,6 +79,7 @@ MonoBehaviour:
     torso: {fileID: 21300000, guid: cbea043c7e114a04c89d7dea2a4e87e8, type: 3}
     arm: {fileID: 21300000, guid: b9331bd6ed919be4295afa0118dc828a, type: 3}
     leg: {fileID: 21300000, guid: a502f498e3bc7e54685ce4abaff463c3, type: 3}
+    angry: {fileID: 0}
     neck: {x: 0.598, y: 0.03}
     shoulder: {x: 0.508, y: 0.12}
     hip: {x: 0.394, y: 0.95}

@@ -236,6 +236,17 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 테스트 패널에 **층 클리어 · 게임 오버** 버튼 추가 (`UltTestPanel.clearButton/gameOverButton`).
 - 연구자료 드랍 — 완료: `Core/Research.cs` (Game 씬 `Research`, `Research.I.Earn`). 웹 researchDrop: 가구 12% (1~3) · 물건 1.2% (1), `ItemManager.OnSmashed` 에서. 화면에 보이면 종이 아이콘(`Rogue/rg_paper`, 템플릿 `Research/PaperIconTemplate`)이 통 튀어 오르고 "연구자료+{n}"(인스펙터 글). 층 클리어도 `Research.Earn` 으로 저장 (`Progress.research` + `GameManager.RunResearch`). 컴포넌트 메뉴 "테스트: 화면 가운데에 연구자료 +2".
 
-### 9-5. 다음 작업 제안
-- 보스 (5층마다), 로비 치즈 창고(스킬 지도) 등 §6 남은 것.
+### 9-5. 5층 보스 — 완료 (2026-10-07)
+- `Hazards/Boss.cs` (Game 씬 `Boss`, 정적 `Boss.Current`): 웹 makeBoss/startBossFight/updateBoss/bossStompLand/bossDown 이식. 사람 리그(`Boss/Rig`, 키 = 사람 × scale) + 그림자.
+- 데이터 = 새 **스테이지 테이블** (`Data_Table/스테이지 테이블.xlsx` → `StageTable.json`, GameDatabase.stageTable — Game·Lobby 씬 둘 다 연결): `Boss`(층·공격 타입·크기·체력 = 적정 전투력 × hp_pow_sec·치즈·속도·공격 간격/반경/기절) · `Boss_Line`(Intro/Attack/Hit/Down 대사).
+- 흐름: 보스 층 진입 → 계단 방에서 대기(배너 부제 "보스 층! 계단 방에 {name}") → 계단 방 벽이 무너지면 전투(배너·대사·번쩍·카메라) → 쥐 쪽으로 걸어옴, 3~4.5초마다 내려찍기(웅크림 0.5초·화난 얼굴 → 점프 → 착지 반경 300 쥐 기절 2초·데굴, 물건 날아감, 쿠웅!) → 체력 0 → 하늘로 빙글 → 격파 배너·치즈·코인. 살아 있는 동안 계단 막힘, 고양이 안 나옴.
+- 피해: 쥐 들이받기(`Rat.BumpBoss`, 보스전 중 45% 확률로 보스 쪽으로 돌진) · 필살기/슈퍼 점프(`ItemManager.BlastActors`) · 충격파(`Aoe`). 맞을 때마다 그 쥐 필살기 게이지 `Hit_Boss`. HUD `HUD/BossBar`(이름·체력·맞을 때 흰 번쩍).
+- 그림: Codex 새 디자인 `UnityResources/Rats/Humans/Sheets/boss_v2/` (몸통에 팔 없음 — 예전 시트는 팔이 4개로 보였음). 사람 리그에 **화난 머리**(`angry`, Pose.angry) 추가.
+- 테스트 패널 **보스 소환**: 화면 가운데에 불러 바로 전투 (체력·치즈는 지금 층 기준, 이 층 진짜 보스가 대기 중이었으면 끝난 뒤 되돌림).
+- 글은 Boss 인스펙터(floorSub·fightSub·downTitle·downSub·stompPopup·cheesePopup). 10·15층 보스 등은 아직 없음.
+
+### 9-6. 다음 작업 (사용자 요청 2026-10-07)
+- 공용 스킬 트리 개편: 찍찍!! 훈장(티어)별 트리, 노드 하나 = 한 번 활성화(레벨 없음) → 이웃 노드 열림, 같은 효과 노드 여러 개 가능, 묘기는 해금 방식, 로비 UI 에 훈장별 트리 표시. 효과 목록(전투/승급·시간·시작 쥐/자원 파밍/묘기/해금·스테이지 스킵)은 사용자 메시지 기준, 배치는 밸런싱하며 결정.
+- 승급(같은 등급 10마리 → 윗등급 1마리) 기능 이식 (노드 "승급에 필요한 쥐 수 감소"에 필요).
+- 스테이지 테이블에 층별 밸런스(방 수·적정 전투력·벽·시간·보스) 시트 추가 + 공격력 % 곱연산 억제·클리어 시간 재밸런스 (BalanceProbe 로 측정).
 - 각 단계마다 Unity 컴파일·플레이 확인 → 커밋.

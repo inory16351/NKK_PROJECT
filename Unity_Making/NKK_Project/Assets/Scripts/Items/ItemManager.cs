@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NKK.Data;
+using NKK.Hazards;
 using NKK.Humans;
 using NKK.Rats;
 using NKK.Stage;
@@ -242,6 +243,8 @@ namespace NKK.Items
             foreach (var h in Humans) if (Vector2.Distance(new Vector2(h.x, h.y), new Vector2(x, y)) < R + h.R && h.Blast(Mathf.Atan2(h.y - y, h.x - x) + Random.Range(-0.3f, 0.3f), spd, dmg, by)) n++;
             var c = Cats ? Cats.Current : null;
             if (c && c.Alive && Vector2.Distance(new Vector2(c.x, c.y), new Vector2(x, y)) < R + c.R && c.Damage(dmg, Mathf.Atan2(c.y - y, c.x - x), by)) n++;
+            var b = Boss.Current;                                               // 보스는 날아가지 않고 피해만
+            if (b && b.CanHit && Vector2.Distance(new Vector2(b.x, b.y), new Vector2(x, y)) < R + b.R && b.Damage(dmg, by, Mathf.Atan2(b.y - y, b.x - x), false)) n++;
             return n;
         }
 
@@ -253,6 +256,8 @@ namespace NKK.Items
             foreach (var h in Humans)
                 if (h.State != Human.HState.Fly && h.State != Human.HState.Dead && Vector2.Distance(new Vector2(h.x, h.y), new Vector2(x, y)) < rad + h.R)
                     h.Damage(dmg, by, Mathf.Atan2(h.y - y, h.x - x));
+            var b = Boss.Current;
+            if (b && b.CanHit && b.z < 100 && Vector2.Distance(new Vector2(b.x, b.y), new Vector2(x, y)) < rad + b.R) b.Damage(dmg, by, Mathf.Atan2(b.y - y, b.x - x), false);
             if (ring) FxManager.I?.Ring(x, y, rad, new Color(1, 1, 1, 0.7f), 0.3f);
         }
 

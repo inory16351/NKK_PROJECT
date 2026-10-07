@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NKK.Data;
+using NKK.Hazards;
 using NKK.Humans;
 using NKK.Items;
 using NKK.Stage;
@@ -126,7 +127,9 @@ namespace NKK.Rats
                 var sides = st.ClosedSides(room.x, room.y);
                 if (sides.Count > 0) { var d = sides[Random.Range(0, sides.Count)]; a = Mathf.Atan2(d.y, d.x) + Random.Range(-0.7f, 0.7f); }
             }
-            if (st.Open.Contains(st.StairsRoom) && Random.value < 0.12f) { var s = st.StairsPos; a = Mathf.Atan2(s.y - y, s.x - x) + Random.Range(-0.3f, 0.3f); }
+            var boss = Boss.Current;
+            if (boss && boss.CanHit && Random.value < 0.45f && Manager.Ults && Manager.Ults.OnScreen(boss.x, boss.y, 0)) a = Mathf.Atan2(boss.y - y, boss.x - x) + Random.Range(-0.3f, 0.3f);   // 보스한테 우르르
+            else if (st.Open.Contains(st.StairsRoom) && !(boss && boss.Blocking) && Random.value < 0.12f) { var s = st.StairsPos; a = Mathf.Atan2(s.y - y, s.x - x) + Random.Range(-0.3f, 0.3f); }
             // 쥐덫의 치즈 미끼에 홀려서 (가끔)
             var bait = Random.value < 0.1f ? st.NearestArmedTrap(x, y, 320) : null;
             if (bait) a = Mathf.Atan2(bait.y - y, bait.x - x) + Random.Range(-0.08f, 0.08f);
@@ -233,7 +236,26 @@ namespace NKK.Rats
                 Bump(it, nx, ny, spd);
                 return;
             }
+            if (BumpBoss(rushing)) return;
             BumpHumans(rushing);
+        }
+
+        // 보스 들이받기 (웹: 보스도 사람 목록에 있어서 ratBumpHumans 로 맞음)
+        bool BumpBoss(bool rushing)
+        {
+            var b = Boss.Current;
+            if (!b || !b.CanHit || b.z > 40) return false;
+            float dx = x - b.x, dy = y - b.y, d = Mathf.Sqrt(dx * dx + dy * dy), R = Radius + b.R;
+            if (d > R) return false;
+            float nx = dx / (d > 0 ? d : 1), ny = dy / (d > 0 ? d : 1);
+            x = b.x + nx * (R + 1); y = b.y + ny * (R + 1);
+            float dot = vx * nx + vy * ny; if (dot < 0) { vx -= 2 * dot * nx; vy -= 2 * dot * ny; }
+            biteCD = 0.22f; bite = 1; sq = 1.25f;
+            if (!rushing) StopDash(0.1f, 0.35f);
+            bool crit = Random.value < CritChance + GrowthCritAdd + CommonSkill.CritAdd;
+            b.Damage(Damage * RushMult * (crit ? CritMult : 1), this, Mathf.Atan2(-ny, -nx), crit);
+            FxManager.I?.Stars(b.x - nx * b.R * 0.5f, b.y - ny * b.R * 0.5f, 40, crit ? 6 : 2, Color.white, new Color(1, 0.95f, 0.75f));
+            return true;
         }
 
         // 사람 들이받기 (웹게임 ratBumpHumans)

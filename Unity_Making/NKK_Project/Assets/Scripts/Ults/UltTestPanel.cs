@@ -16,6 +16,8 @@ namespace NKK.Ults
         [Tooltip("게임 오버 연출 바로 보기 (시간 초과)")] public Button gameOverButton;
         public NKK.Stage.StageManager Stage;
         public GameOver Over;
+        [Tooltip("5층 보스를 화면 가운데에 불러 바로 싸움")] public Button bossButton;
+        public NKK.Hazards.Boss Boss;
         [Tooltip("고른 필살기 (자리: {name} 쥐 이름, {ult} 필살기 이름)")] public TMP_Text pickText;
         [Tooltip("아이콘 (선택)")] public Image pickIcon;
 
@@ -33,6 +35,7 @@ namespace NKK.Ults
             if (ultButton) ultButton.onClick.AddListener(() => { if (list.Count > 0) Ults.TestUlt(list[idx].code_id); });
             if (superJumpButton) superJumpButton.onClick.AddListener(() => SuperJump.Trigger(true));
             if (clearButton) clearButton.onClick.AddListener(() => { if (Stage && !Ults.Busy && !SuperJump.Busy) Stage.Climb(); });
+            if (bossButton) bossButton.onClick.AddListener(() => { if (Boss && !Ults.Busy && !SuperJump.Busy && !GameOver.Active) Boss.TestSpawn(); });
             if (gameOverButton) gameOverButton.onClick.AddListener(() => { if (Over && !Heist.Active) Over.Begin(GameOver.Why.Time); });
             Show();
         }

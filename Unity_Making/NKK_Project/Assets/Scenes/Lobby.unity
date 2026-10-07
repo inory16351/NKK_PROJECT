@@ -7932,6 +7932,7 @@ MonoBehaviour:
   tierTable: {fileID: 4900000, guid: 19fdae8000668bd42a514fe8e1f6c913, type: 3}
   humanTable: {fileID: 4900000, guid: db5d4ca62f771e14ebe5ecc78a10b299, type: 3}
   commonSkillTable: {fileID: 4900000, guid: 5cd2c1740ed474e4ab247085e226a352, type: 3}
+  stageTable: {fileID: 4900000, guid: e321de2c922b18343a3415634cf808aa, type: 3}
 --- !u!4 &755047824
 Transform:
   m_ObjectHideFlags: 0

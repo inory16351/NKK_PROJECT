@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 namespace NKK.Humans
 {
-    // 사람 그림 모음 (머리·겁먹은 머리·몸통·팔·다리 + 몸통 부착점). 메뉴 NKK/Build Human Art Library 로 채움
+    // 사람 그림 모음 (머리·겁먹은 머리·화난 머리(보스, 없어도 됨)·몸통·팔·다리 + 몸통 부착점). 메뉴 NKK/Build Human Art Library 로 채움
     [CreateAssetMenu(menuName = "NKK/Human Art Library")]
     public class HumanArtLibrary : ScriptableObject
     {
@@ -14,6 +14,7 @@ namespace NKK.Humans
         {
             public string codeId;
             public Sprite head, scared, torso, arm, leg;
+            [Tooltip("화난 머리 (보스 공격 때, 없으면 head)")] public Sprite angry;
             [Tooltip("몸통 이미지 좌상단 기준 0~1")] public Vector2 neck, shoulder, hip;
         }
         public List<Entry> entries = new();
@@ -60,7 +61,7 @@ namespace NKK.Humans
             armFar.sortingOrder = 0; legFar.sortingOrder = 1; legNear.sortingOrder = 2; torso.sortingOrder = 3; head.sortingOrder = 4; armNear.sortingOrder = 5;
         }
 
-        public struct Pose { public float legN, legF, armN, armF, lean, head, bob, sx, sy; public bool scared; }
+        public struct Pose { public float legN, legF, armN, armF, lean, head, bob, sx, sy; public bool scared, angry; }
 
         // scale = 크기 배율, rot = 날아갈 때 회전(라디안, 몸 가운데 기준), sq = 통통 튈 때 납작
         public void Apply(in Pose p, float scale, int face, float rot, float sq, int sortOrder, float alpha)
@@ -73,7 +74,7 @@ namespace NKK.Humans
             visual.localRotation = Quaternion.Euler(0, 0, -rot * Mathf.Rad2Deg);
             visual.localPosition = new Vector3(0, p.bob * World.U, 0) + (Vector3)(Vector2)(Quaternion.Euler(0, 0, -rot * Mathf.Rad2Deg) * new Vector3(0, -cy, 0)) + new Vector3(0, cy, 0);
             visual.localScale = new Vector3(sx, sy, 1);
-            head.sprite = p.scared && art.scared ? art.scared : art.head;
+            head.sprite = p.scared && art.scared ? art.scared : p.angry && art.angry ? art.angry : art.head;
             const float D = Mathf.Rad2Deg;
             body.localRotation = Quaternion.Euler(0, 0, -p.lean * D);
             armFar.transform.localRotation = Quaternion.Euler(0, 0, p.armF * D);

@@ -1,0 +1,102 @@
+{
+ "Boss": [
+  {
+   "boss_id": 95001,
+   "boss_name": "경비대장 강철수",
+   "code_id": "boss_chief",
+   "floor": 5,
+   "atk_type": "Stomp",
+   "color": "#8fb3c7",
+   "scale": 2.8,
+   "radius_mul": 2.8,
+   "hp_pow_sec": 40.0,
+   "cheese_mul": 300.0,
+   "move_speed": 95.0,
+   "atk_cd_min": 3.0,
+   "atk_cd_max": 4.5,
+   "atk_radius": 300.0,
+   "atk_stun": 2.0
+  }
+ ],
+ "Boss_Line": [
+  {
+   "line_id": 96001,
+   "boss_id": 95001,
+   "situation": "Intro",
+   "text": "쥐는 한 마리도 못 지나간다!"
+  },
+  {
+   "line_id": 96002,
+   "boss_id": 95001,
+   "situation": "Attack",
+   "text": "흐으읍!"
+  },
+  {
+   "line_id": 96003,
+   "boss_id": 95001,
+   "situation": "Attack",
+   "text": "짓밟아 주마!"
+  },
+  {
+   "line_id": 96004,
+   "boss_id": 95001,
+   "situation": "Hit",
+   "text": "아야!"
+  },
+  {
+   "line_id": 96005,
+   "boss_id": 95001,
+   "situation": "Hit",
+   "text": "이 녀석들이!"
+  },
+  {
+   "line_id": 96006,
+   "boss_id": 95001,
+   "situation": "Hit",
+   "text": "끄악!"
+  },
+  {
+   "line_id": 96007,
+   "boss_id": 95001,
+   "situation": "Hit",
+   "text": "비켜!"
+  },
+  {
+   "line_id": 96008,
+   "boss_id": 95001,
+   "situation": "Down",
+   "text": "기억해 두겠다아아~!"
+  },
+  {
+   "line_id": 96009,
+   "boss_id": 95001,
+   "situation": "Down",
+   "text": "퇴직금은?!"
+  },
+  {
+   "line_id": 96010,
+   "boss_id": 95001,
+   "situation": "Down",
+   "text": "으아아아~!"
+  }
+ ],
+ "Atk_Type": [
+  {
+   "atk_type": "Stomp"
+  }
+ ],
+ "Situation_Type": [
+  {
+   "situation": "Intro"
+  },
+  {
+   "situation": "Attack"
+  },
+  {
+   "situation": "Hit"
+  },
+  {
+   "situation": "Down"
+  }
+ ]
+}
