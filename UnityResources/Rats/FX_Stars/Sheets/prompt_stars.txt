@@ -1,0 +1,17 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: stars_sheet.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings, perfectly uniform, no noise, no shadows on the background. No text, no letters, no numbers, no grid lines.
+- A sheet of 6 game effect sprites in an exact 3 columns x 2 rows grid (each cell 512x512). Each sprite is ONE single solid connected shape, centered in its cell, filling about 75% of the cell, with a clean magenta margin, never touching cell borders. No loose floating bits, no tiny extra sparkles around them, no motion lines.
+- STYLE: match the attached references exactly (Untitled Goose Game style, cozy flat game art like the mouse head and the beaker): completely FLAT color shapes, NO outlines, NO black or dark linework, NO glow, NO halo, NO lens flare, NO glossy highlights, NO gradients, NO 3D bevel. Soft rounded corners on every point (tips gently rounded, not needle-sharp). Simple shading = at most ONE slightly darker flat tone on one side (like the references).
+- COLOR RULE: sprites 1-5 are WHITE with one very light warm grey (#E6E2DC) flat shading tone only — no hues — so the game can tint them at runtime. Sprite 6 is the only colored one.
+
+Cells (left to right, top to bottom):
+Row 1:
+1) A chubby friendly five-point star, plump rounded tips, slightly soft/puffy proportions, upright. White + light grey shade on the lower-right half.
+2) A chunky four-point twinkle sparkle (like a fat plus/diamond star with concave curved sides), short thick arms with rounded tips, symmetric. White + light grey shade on two arms.
+3) A small soft sparkle: a tiny compact four-point sparkle, very rounded, almost like a soft rounded diamond with pinched sides. White, nearly no shading.
+Row 2:
+4) A cartoon star burst / pop: a round center with 8 short chunky rounded rays around it, all one connected shape (like a flat comic "pop" badge). White + light grey shade.
+5) A slightly taller and slimmer four-point twinkle with longer vertical arms than horizontal arms, rounded tips, one solid shape. White + light grey shade.
+6) The same chubby five-point star as cell 1 but colored: warm muted butter-yellow (#F2CF6B) with a slightly darker mustard flat shade (#DDB04F) on the lower-right half. No outline, no highlight.

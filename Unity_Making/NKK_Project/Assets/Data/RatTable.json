@@ -4809,13 +4809,13 @@
    "cond2_value_01": 0.0,
    "cond2_value_02": 0.0,
    "effect_type": "Cheese_Fountain",
-   "value_01": 8.0,
-   "value_02": 4.0,
-   "value_03": 0.3,
-   "value_04": 4.0,
-   "value_05": 700.0,
-   "value_06": 22.5,
-   "duration": 1.4,
+   "value_01": 10.0,
+   "value_02": 6.0,
+   "value_03": 0.2,
+   "value_04": 2.5,
+   "value_05": 750.0,
+   "value_06": 18.0,
+   "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "⛲",
    "skill_asset": "",
@@ -7269,6 +7269,27 @@
    "text": "(공은 경찰이 압수해 갔다)",
    "size": 26.0,
    "color": "#9aa0a6"
+  },
+  {
+   "ultimate_id": 30032,
+   "cap_key": "c7",
+   "text": "{n}연타!",
+   "size": 20.0,
+   "color": "#fffaf0"
+  },
+  {
+   "ultimate_id": 30032,
+   "cap_key": "c8",
+   "text": "쾅!",
+   "size": 26.0,
+   "color": "#ffffff"
+  },
+  {
+   "ultimate_id": 30032,
+   "cap_key": "c9",
+   "text": "총 {n}연타!",
+   "size": 34.0,
+   "color": "#8fb3d7"
   },
   {
    "ultimate_id": 30033,

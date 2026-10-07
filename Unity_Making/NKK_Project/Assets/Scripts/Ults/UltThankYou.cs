@@ -12,7 +12,7 @@ namespace NKK.Ults
     //   → ② 막상 나온 건 아재개그 팻말 → ③ 갑분싸 → ④ 관객(쥐들 + 앞줄 턱시도 고양이)이 계란·토마토·슬리퍼 투척
     //   → ⑤ 턱시도 줴리는 뻔뻔하게 좌우 번갈아 90도 인사, 점점 빨라짐(인사마다 펑) → ⑥ 마지막 인사 대폭발 → 아이리스 아웃
     // 무대: 어둠(jw_dark 판 + 스프라이트 마스크로 줴리 둘레 타원 구멍, 줴리 몸은 마스크로 빼서 밝게) + 빛 기둥 ult_spotlight · 극장 커튼·위 장식 · 악기
-    //   · 게이지 막대(ult_gauge_bar) · 팻말(jwc_card) · 관객 말풍선(jw_bubble, 9칸 늘이기). 줴리 옷은 웹처럼 픽셀 재칠이 안 돼서 나비넥타이만
+    //   · 게이지 막대(ult_gauge_bar) · 팻말(jwc_card) · 관객 말풍선(jw_bubble, 9칸 늘이기). 줴리 옷 = 턱시도 파츠(jwt_torso·front·back)로 바꿔 끼움 + 나비넥타이
     // 화면 고정 소품은 웹 화면 좌표(1280×720)를 카메라 보이는 범위에 맞춰 옮김. 글은 전부 자막 시트 (말풍선·게이지·팻말 글 = 월드 글자)
     // 자막: c1 (갑분싸) · c2 야유 · c3~c5 감사합니다 · c6 (…인정이지) · c7 컷인 제목 · c8·c9 게이지 제목 · c10 게이지 {n}% · c11 로딩 중
     //   c12~c23 아재개그 (질문·답 6쌍) · c24~c48 관객 대사 · c49·c50 야유 팝업 · c51 귀뚤 · c52 (빠직) · c53·c54 딱·퍽 · c55~c57 펑 · c58·c59 음표 · c61 끝 인사
@@ -62,6 +62,7 @@ namespace NKK.Ults
         readonly List<GameObject> temps = new();                        // 직접 만든 것 (마스크·말풍선) — 끝나면 지움
         readonly List<(SpriteRenderer sr, SpriteMask m)> bodyMasks = new();
         Sprite dotSprite, bubSprite;
+        readonly List<(SpriteRenderer sr, Sprite orig, Sprite tux)> tuxSwap = new();     // 턱시도로 바꾼 리그 그림 (끝나면 되돌림)
 
         public override void Pre() { var s = CapText("c7"); if (!string.IsNullOrEmpty(s)) Title = s; }
 
@@ -106,7 +107,8 @@ namespace NKK.Ults
                 crowd.Add(s);
             }
             MakeCat();
-            // 턱시도 대신 나비넥타이 (몸 색은 그대로)
+            // 턱시도 줴리: 몸통·앞다리·뒷다리 그림을 턱시도 그림으로 (원래 그림과 같은 크기·피벗) + 나비넥타이
+            Tuxedo();
             tie = Prop("jwc_bowtie", R.x, R.y, 0, 15 * R.GradeData.size);
             // 극장 커튼 · 위 장식 · 게이지 · 팻말
             curtainL = Prop("jwc_curtain", stX, stY, 0, 200); if (curtainL != null) curtainL.flip = true;
@@ -469,6 +471,18 @@ namespace NKK.Ults
                 bodyMasks.Add((sr, m));
             }
         }
+        void Tuxedo()
+        {
+            if (!R.rig || R.rig.IsSingle) return;
+            var rg = R.rig;
+            foreach (var (sr, id) in new[] { (rg.torso, "jwt_torso"), (rg.front, "jwt_front"), (rg.farFront, "jwt_front"), (rg.back, "jwt_back"), (rg.farBack, "jwt_back") })
+            {
+                var src = SpriteOf(id); if (!sr || !sr.sprite || !src) continue;
+                var o = sr.sprite;
+                var tux = Sprite.Create(src.texture, src.rect, new Vector2(o.pivot.x / o.rect.width, o.pivot.y / o.rect.height), o.pixelsPerUnit * src.rect.width / o.rect.width, 0, SpriteMeshType.FullRect);
+                tuxSwap.Add((sr, o, tux)); sr.sprite = tux;
+            }
+        }
         Sprite SpriteOf(string name) { var p = M.MakeProp(name); if (p == null) return null; var sp = p.r ? p.r.sprite : null; p.Destroy(); return sp; }
 
         // ── 관객 대사 = 관객 머리 위 말풍선 (같은 관객이 겹쳐 말하면 최신 것만) ──
@@ -493,22 +507,39 @@ namespace NKK.Ults
             tk.o = Pick(far.Count > 0 ? far : pool);
         }
         // 웹 말풍선: 글 13 굵게, 폭 = 글 폭 + 16, 높이 22, 모서리 10, 꼬리 7, 말하는 쥐 머리 52 위 (고양이 120). 0.1초 통 커지고 끝 0.2초 흐려짐
+        //   다른 관객 말풍선과 겹치면 위로 쌓음 (먼저 뜬 것이 아래)
         void StepTalk(float t)
         {
             var seen = new HashSet<object>();
+            var live = new List<Talk>();
             for (int i = talk.Count - 1; i >= 0; i--)
             {
                 var m = talk[i];
                 if (!m.on) { if (t < m.t0) continue; m.on = true; m.t0 = t; }
-                float age = t - m.t0;
-                if (age >= m.dur || (!m.cat && !m.o)) { KillBubble(m); talk.RemoveAt(i); continue; }
-                object who = m.cat ? cat : m.o;
-                bool show = seen.Add(who) && iris < 0.3f;
-                string txt = CapText(m.key);
+                if (t - m.t0 >= m.dur || (!m.cat && !m.o)) { KillBubble(m); talk.RemoveAt(i); continue; }
+                bool show = seen.Add(m.cat ? cat : m.o) && iris < 0.3f;
                 if (!m.txt) { m.txt = Label(); m.bub = NewBubble(); }
-                float k = Mathf.Min(1, age / 0.1f), fade = Mathf.Clamp01((m.dur - age) / 0.2f) * (show ? 1 : 0);
+                if (show) live.Add(m);
+                else { if (m.bub) m.bub.enabled = false; HideLabel(m.txt); }
+            }
+            live.Sort((a, b) => a.t0.CompareTo(b.t0));
+            var placed = new List<Vector4>();      // 화면 기준 (가운데 x, 가운데 높이, 폭, 높이)
+            const float bh = 22, tail = 8, gap = 4;
+            foreach (var m in live)
+            {
+                float age = t - m.t0, k = Mathf.Min(1, age / 0.1f), fade = Mathf.Clamp01((m.dur - age) / 0.2f);
+                string txt = CapText(m.key);
                 float x = m.cat ? cat.x : m.o.x, y = m.cat ? cat.y : m.o.y, zc = m.cat ? 120 : m.o.z + 52;     // 말풍선 몸통 가운데 높이
-                float bw = TextWidth(m.txt, txt, 13) + 16, bh = 22, tail = 8;
+                float bw = TextWidth(m.txt, txt, 13) + 16;
+                // 쌓기: 화면 높이 = z − y·TILT
+                for (int guard = 0; guard < 8; guard++)
+                {
+                    float sy = zc - y * World.TILT; bool hit = false;
+                    foreach (var q in placed)
+                        if (Mathf.Abs(q.x - x) < (q.z + bw) / 2 + gap && Mathf.Abs(q.y - sy) < bh + tail + gap) { zc += q.y - sy + bh + tail + gap; hit = true; break; }
+                    if (!hit) break;
+                }
+                placed.Add(new Vector4(x, zc - y * World.TILT, bw, bh));
                 if (m.bub)
                 {
                     m.bub.size = new Vector2(bw, bh + tail) * World.U;
@@ -517,7 +548,7 @@ namespace NKK.Ults
                     m.bub.sortingOrder = 31000 + L_BUB * 10; m.bub.enabled = fade > 0.01f;
                     var c = Color.white; c.a = fade; m.bub.color = c;
                 }
-                SetWorldLabel(m.txt, txt, x, y, zc + k, 13, INK, fade, k, k);
+                SetWorldLabel(m.txt, txt, x, y, zc, 13, INK, fade, k, k);
             }
         }
         SpriteRenderer NewBubble()
@@ -669,6 +700,8 @@ namespace NKK.Ults
             var t = Object.Instantiate(tpl, tpl.transform.parent);
             t.gameObject.SetActive(true); t.name = "UltLabel"; t.text = "";
             t.alignment = TextAlignmentOptions.Center; t.textWrappingMode = TextWrappingModes.NoWrap; t.fontStyle |= FontStyles.Bold;
+            t.rectTransform.pivot = new Vector2(0.5f, 0.5f);      // 팝업 틀은 아래 기준이라 글이 위로 뜸 → 가운데 기준으로
+            t.overflowMode = TextOverflowModes.Overflow;
             t.rectTransform.localRotation = Quaternion.identity;
             labels.Add(t);
             return t;
@@ -717,6 +750,8 @@ namespace NKK.Ults
             foreach (var go in temps) if (go) Object.Destroy(go);
             temps.Clear(); bodyMasks.Clear();
             if (bubSprite) Object.Destroy(bubSprite);
+            foreach (var (sr, orig, tux) in tuxSwap) { if (sr && sr.sprite == tux) sr.sprite = orig; if (tux) Object.Destroy(tux); }
+            tuxSwap.Clear();
             foreach (var t in labels) if (t) Object.Destroy(t.gameObject);
             labels.Clear();
             if (cat != null && cat.c) { if (cat.c.shadow) Object.Destroy(cat.c.shadow.gameObject); Object.Destroy(cat.c.gameObject); }

@@ -186,17 +186,23 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
 - 진행도 초기화: `Progress` 컴포넌트 우클릭 → "진행도 초기화" (또는 PlayerPrefs 키 `nkk_progress_v1` 삭제).
 - 웹 원본 수치를 그대로 옮겼으니 밸런스 조정은 테이블/인스펙터에서.
 
-## 7. 필살기 · 슈퍼 점프 · 새 쥐 (2026-10-06 추가)
-- **필살기 게이지** `Scripts/Ults/UltimateManager.cs` (Game 씬 `UltimateManager` 오브젝트): 종마다 게이지. 충전 조건 = 쥐 테이블 `Ult_Charge` 시트 (물건·벽 파괴, 액션 사용, 번식, 사람·고양이 퇴치, 층 통과…), 요구량 = `Ultimate.ult_gauge` ÷ 공용 스킬 필살기 연습. 다 차면 하단 `HUD/UltBar` 버튼 → 대기열 (한 번에 하나). 공용 스킬 `Ult_Auto`(필살기 자동 사용) 있으면 자동.
-  - 진행: 컷인(정지·확대·제목 띠, `HUD/UltCutIn`) → 상황극(`UltXxx : UltBase`, 33종 `Scripts/Ults/Ult*.cs`, 테이블 `Ultimate.script` = 클래스 이름) → 업적 알림(`HUD/UltAchievement`, 오른쪽 위). 업적은 `Progress` 에 저장 — **로비 표시는 나중에 찍찍!! 훈장과 연동 예정**.
-  - 자막·팝업 글 = `Ult_Caption` 시트 (키 c1, c2…, `{n}` 자리). 코드에 글 쓰지 않음. 소품 그림 = `UltimateManager.props` (컴포넌트 메뉴 **Fill Props**: FX, FX_Meteor, UltProps, Parody, NewRats, Props, FrontRig, FX/Tint 폴더). 아이콘 = Fill Icons (UltIcons).
-  - 공용 도우미 `UltBase` (GrabRat/GrabItem/DropItem/FlingItem/Crush/Shock/Walk/Prop/Cap…), 쥐 쪽 `Rat.Ult.cs` (UltOn·UltPose·HideBody, 기절 별, 좀비 상태), 물건 `Item.Held/SkillHit/Fling/Survive`.
-- **슈퍼 점프** `Scripts/Ults/SuperJumpManager.cs`: 낮은 확률 자동 발동 (공용 스킬 Super_Jump_Practice), 진행 중 `FxManager.WorldFreeze`. 컷인 속 쥐 = 전용 카메라 → RenderTexture → `HUD/SuperJumpFx/CutIn/BandRat`.
-- **테스트 패널** `HUD/TestPanel` (왼쪽 위): `< >` 로 필살기 고르기 · 필살기 발동 · 슈퍼 점프. 출시 때 끄기.
-- **이펙트 그림** (전부 Codex 생성, `UnityResources/Rats/<폴더>/README.md`): FX_Meteor(운석), FX_Beam(레이저·번개·베기, FxManager Beam/Bolt/BigBeam/Slash), FX_SuperJump, UltUI(버튼·컷인 띠·집중선), UltIcons(필살기 아이콘 33+자동), UltProps(냄비·록 무대·총·줴리 무대 등), UltGuns.
-- **새 쥐** 10078 찍찍 탐정(jjdetective) · 10079 치즈 퐁듀 쥐(fondue, 테스터훈 패러디): 파츠 v2 (네 발 쥐 규격, `UnityResources/Rats/NewRats/`), 몸길이 덮어쓰기 36 / 40 (RatManager). 쥐록 홈즈(detective, 셜록 패러디) 코트 파츠로 교체.
-- **슈퍼 요리사 쥐** 탈것: `Rat.Mount.cs` (mount_cook 프레임).
-- **폰트**: 정적 SDF + 동적 보조 폰트 3종(`Assets/Fonts/* Dynamic SDF`)을 대체 목록·TMP 전역 대체에 연결 → 낱자모·기호 표시. 이모지·╯·⚠ 는 어떤 폰트에도 없음 → 테이블에서 쓰지 말 것.
-- **판정 순서**: 물건에 부딪히면 특수 액티브 먼저 굴리고, 안 터지면 공용 묘기 확률.
-- **공격력 밸런스**: 쥐 공격력 = 등급 atk_base × 티어 rat_atk_mul (등급·티어 테이블).
-- 남은 일: 로비 쳇바퀴 훈련(조각 강화 UI) → 그 뒤 `Progress.autoUpgradeInRun` 끄기 · 업적 로비 화면(훈장 연동) · 사용자 플레이 피드백 반영.
+## 7. 필살기 · 슈퍼 점프 · 이펙트 (2026-10-06~07)
+- **필살기 게이지** `Scripts/Ults/UltimateManager.cs` (Game 씬 `UltimateManager`): 종마다 게이지. 충전 조건 = 쥐 테이블 `Ult_Charge` 시트, 요구량 = `Ultimate.ult_gauge` ÷ 공용 스킬 필살기 연습. 다 차면 `HUD/UltBar` 버튼 → 대기열(한 번에 하나). 공용 스킬 `Ult_Auto` 면 자동.
+  - 흐름: 컷인(`HUD/UltCutIn`) → 상황극(`UltXxx : UltBase`, 33종 `Scripts/Ults/Ult*.cs`, 테이블 `Ultimate.script` = 클래스 이름) → 업적(`HUD/UltAchievement`, 오른쪽 위). 업적은 `Progress` 저장 — **로비 표시는 찍찍!! 훈장과 나중에 연동**.
+  - 글 = `Ult_Caption` 시트 (키 c1…, `{n}`). 소품 = `UltimateManager.props` (컴포넌트 메뉴 **Fill Props** — 새 그림 넣으면 꼭 다시 실행), 아이콘 = Fill Icons.
+  - 도우미 `UltBase`, 쥐 `Rat.Ult.cs` (UltOn·UltPose·HideBody·좀비·기절 별), 물건 `Item.Held/SkillHit/Fling/Survive`.
+  - 웹과 다른 보강: 찍찍 탐정 = 공 5개 핀볼, 산타·마법사 = 돌아다님, 쥐.D = 록 무대, 바이킹 강화, 스트리머 = 앞발에 쌍권총, 드래곤 = 입에서 브레스, 람쥐썬더 = 웹 구조(옆모습 꼭두각시 + 앞모습 히어로 랜딩 파츠) + 전기 연출 강화. **실사 다람쥐 `rsp_*` 그림 금지.**
+- **슈퍼 점프** `Scripts/Ults/SuperJumpManager.cs`: 웹 drawSuperJump 1:1 (만화 칸 `sj_band`, 깜빡이는 집중선, 컷인 속 쥐 = 전용 카메라→RenderTexture→`HUD/SuperJumpFx/CutIn/BandRat`, 만화 글씨 재질 `Assets/Fonts/SJ Comic *.mat`). 진행 중 `FxManager.WorldFreeze`.
+- **테스트 패널** `HUD/TestPanel` (왼쪽 위): `< >` 필살기 고르기 · 필살기 발동 · 슈퍼 점프. 출시 때 끄기.
+- **이펙트**: FxManager Beam/Bolt/BoltLine(Zap 핸들, 살아 있는 동안 다시 꺾임)/Spark/Slash/BigBeam/Crackle (`Art/Rats/FX_Beam`). 운석 = `ItemManager.Meteor.cs` (`FX_Meteor`). 별 = 그림체 맞춘 새 별 (`UnityResources/Rats/FX_Stars`).
+- **벽**: 웹 drawWallSeg 방식 — 열린 방 사이 벽 없음, 위·아래 벽 = 벽 면, 옆 = 윗면 띠, 정렬로 물건 안 가림. 벽 체력바 = `WallBar.cs` 템플릿 (FxManager worldCanvas 아래, StageManager.wallBarTemplate). 카메라 배경 #3d4a45.
+- **새 쥐** jjdetective·fondue (파츠 v2, 몸길이 덮어쓰기 36/40), 쥐록 홈즈 코트 파츠. **슈퍼 요리사 쥐** 탈것 = `Rat.Mount.cs` (cook_mount 사람 리그, Rat 프리팹 메뉴 Fill Mount Parts). **줴리** 필살기: 턱시도 파츠 `jwt_*`, 마스크 어둠, 말풍선.
+- **폰트**: 정적 SDF + 동적 보조 3종(`Assets/Fonts/* Dynamic SDF`)을 대체 목록·TMP 전역 대체에 연결. 이모지·╯·⚠ 는 어떤 폰트에도 없음 → 쓰지 말 것.
+- **판정 순서**: 물건에 부딪히면 특수 액티브 먼저, 안 터지면 공용 묘기.
+- **Git**: `.gitignore` = Unity Library/Temp/Logs/UserSettings/csproj/Screenshots 만 제외 (UnityResources 포함). 다른 PC 에서 열면 Library 자동 재생성.
+
+## 8. 작업 방식 (에이전트 인수인계)
+- 그림은 **Codex 로만 생성** (`bash Tools/codex.sh exec ... < prompt.txt`, `-i` 참고 그림 여러 개, 자홍 배경 시트 → `Tools/slice_rat_parts.py` key_magenta 로 자르기). 코드로 그림 그리지 말 것. **먼저 웹 코드 그림 목록과 UnityResources 에서 기존 그림을 찾아 재사용.** 새 그림은 `UnityResources/Rats/<폴더>/` 에 시트·프롬프트·로그·README·_미리보기 와 함께 보관 후 `Assets/Art/Rats/<폴더>/` 복사.
+- 웹게임(`Proto_Game/rat-uprising.html`)과 같은 방식으로 만들 것 — 다르면 사용자가 지적함. 연출은 단조롭지 않게.
+- 병렬 작업: 서브에이전트는 맡은 파일만 고치고 Unity 조작 금지(임시 csproj 로 dotnet build 확인), Unity 반영(컴파일·씬 연결·Fill Props)은 메인이 마지막에. 사용자가 에디터에서 테스트 중이면 Unity 건드리지 말 것.
+- 남은 일: 코드에 직접 들어간 팝업 글(Rat.Action "찌릿!!/콰릉!", ItemManager.ZapChain "찌릿!", 웹 요리사 말 팝업 등) → 테이블/인스펙터로 · 로비 업적(훈장 연동) · 로비 쳇바퀴 훈련 → `Progress.autoUpgradeInRun` 끄기 · 벽 금 간 자국(웹은 선) · 사용자 플레이 피드백.

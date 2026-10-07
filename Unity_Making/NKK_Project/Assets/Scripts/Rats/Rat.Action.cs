@@ -142,10 +142,52 @@ namespace NKK.Rats
             if (act.held && act.held.State == Item.ItemState.Rest) act.held.z = 0;
             act.on = false; z = 0; vz = 0; ballScale = 1;
             if (actFx != null) { actFx.End(); actFx = null; }
+            LandCheeseLobs();
             StopDash(0.2f, 0.5f);
         }
 
         float ballScale = 1;
+
+        // ── 치즈 분수 덩어리: 높이 포물선으로 날아가 떨어진 자리에 범위 피해 + 웅덩이 ──
+        class CheeseLob { public float x, y, z, vx, vy, vz, dmg; public SpriteRenderer r; }
+        readonly List<CheeseLob> cheeseLobs = new();
+        const float LOB_G = 1500;
+        void LobCheese(float ang, float dist, float tf, float dmg)
+        {
+            float tx = x + Mathf.Cos(ang) * dist, ty = y + Mathf.Sin(ang) * dist, z0 = 40;
+            var l = new CheeseLob { x = x, y = y, z = z0, vx = (tx - x) / tf, vy = (ty - y) / tf, vz = (0.5f * LOB_G * tf * tf - z0) / tf, dmg = dmg };
+            var tpl = Manager.bulletTemplate;
+            if (tpl)
+            {
+                l.r = Instantiate(tpl, tpl.transform.parent); l.r.gameObject.SetActive(true);
+                if (Manager.cheeseBulletSprite) l.r.sprite = Manager.cheeseBulletSprite;
+                l.r.color = Manager.cheeseBulletColor; l.r.transform.localScale = tpl.transform.localScale * Random.Range(1.4f, 2.1f);
+                l.r.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f));
+            }
+            cheeseLobs.Add(l);
+        }
+        void StepCheeseLobs(float dt)
+        {
+            for (int i = cheeseLobs.Count - 1; i >= 0; i--)
+            {
+                var l = cheeseLobs[i];
+                l.x += l.vx * dt; l.y += l.vy * dt; l.vz -= LOB_G * dt; l.z += l.vz * dt;
+                if (l.r) { l.r.transform.position = World.ToUnity(l.x, l.y, l.z); l.r.transform.Rotate(0, 0, 540 * dt); l.r.sortingOrder = World.SortOrder(l.y) + 6; }
+                if (l.z <= 0) { SplatCheese(l); cheeseLobs.RemoveAt(i); }
+            }
+        }
+        void LandCheeseLobs() { foreach (var l in cheeseLobs) SplatCheese(l); cheeseLobs.Clear(); }
+        void SplatCheese(CheeseLob l)
+        {
+            if (l.r) Destroy(l.r.gameObject);
+            if (!Manager.Stage || Manager.Stage.Open.Contains(NKK.Stage.StageManager.RoomOf(l.x, l.y)))
+                Manager.Items.Aoe(l.x, l.y, 55, l.dmg, this, false);
+            var fx = FxManager.I; if (!fx) return;
+            var ch = Manager.cheeseBulletColor;
+            if (fx.AddSticker("cheese_puddle", l.x, l.y, 0, Random.Range(50f, 85f), Random.Range(4f, 7f), 0, true) == null) fx.Spill(l.x, l.y, 26, ch);
+            fx.Burst(l.x, l.y, 6, 8, ch, Color.white, 90, 260); fx.Ring(l.x, l.y, 55, new Color(ch.r, ch.g, ch.b, 0.85f), 0.28f);
+            fx.Spray(l.x, l.y, 6, Random.Range(0, Mathf.PI * 2), 70, 4, Mathf.PI, ch, Color.white);
+        }
         Item NearestItem(float R, System.Func<Item, bool> pred = null)
         {
             Item best = null; float bd = R;
@@ -409,17 +451,38 @@ namespace NKK.Rats
                 case EffectType.Cheese_Fountain:
                 {
                     // 치즈 분수: 밸류_01 방향으로 치즈 탄환을 밸류_03 초 간격으로 밸류_02 번 (번마다 밸류_06 도씩 돌림). 탄환 피해 = 공격력 × 밸류_04, 밸류_05 = 탄환 속도. 각성: 횟수 × AW1
+                    //   + 번마다 사방 무작위 탄환(속도·사거리 제각각) + 높이 솟구쳐 떨어지는 치즈 덩어리 (떨어진 자리 범위 피해 + 치즈 웅덩이)
                     vx = vy = 0; z = Mathf.Abs(Mathf.Sin(act.t * 10)) * 10;
                     int waves = Mathf.RoundToInt(AV(2) * (act.x && AW(1) > 0 ? AW(1) : 1)), dirs = Mathf.Max(1, Mathf.RoundToInt(AV(1)));
+                    float bsp = AV(5) > 0 ? AV(5) : 520, bdmg = atk * AV(4);
+                    var ch = Manager.cheeseBulletColor;
                     if (act.n < waves && act.t >= 0.15f + act.n * AV(3))
                     {
                         for (int d = 0; d < dirs; d++)
                         {
                             float an = act.ang + d * Mathf.PI * 2 / dirs + act.n * AV(6) * Mathf.Deg2Rad;
-                            Manager.FireBullet(this, x, y, an, AV(5) > 0 ? AV(5) : 520, atk * AV(4), 0.45f, true, Manager.cheeseBulletSprite, Manager.cheeseBulletColor);
+                            Manager.FireBullet(this, x, y, an, bsp, bdmg, 0.45f, true, Manager.cheeseBulletSprite, ch);
                         }
-                        act.n++; fx?.Dust(x, y, 3, 0.8f);
+                        // 사방 무작위 탄환 (속도·사거리 제각각)
+                        for (int d = 0; d < dirs; d++)
+                            Manager.FireBullet(this, x, y, Random.Range(0, Mathf.PI * 2), bsp * Random.Range(0.5f, 1.4f), bdmg * 0.6f, Random.Range(0.3f, 0.8f), true, Manager.cheeseBulletSprite, ch);
+                        // 높이 솟구치는 덩어리 (액션 안에 떨어지도록 비행 시간 제한)
+                        float left = act.dur - act.t - 0.03f;
+                        if (left > 0.3f) for (int l = 0, nl = Random.Range(3, 5); l < nl; l++) LobCheese(Random.Range(0, Mathf.PI * 2), Random.Range(120f, 460f), Mathf.Min(left, Random.Range(0.5f, 0.85f)), bdmg * 0.8f);
+                        act.n++;
+                        if (fx)
+                        {
+                            fx.Dust(x, y, 4, 0.9f); fx.Ring(x, y, 70, new Color(ch.r, ch.g, ch.b, 0.8f), 0.3f);
+                            fx.Burst(x, y, 40, 10, ch, Color.white, 120, 380); fx.Shake(0.03f);
+                        }
                     }
+                    // 분수 물줄기: 위로 솟는 치즈 방울 + 사방 분사
+                    if (fx && OnScreen())
+                    {
+                        fx.Burst(x, y, 46 + Random.Range(0f, 20f), 2, ch, new Color(1, 0.95f, 0.75f), 40, 200, 3, 7);
+                        if (act.hitT <= 0) { act.hitT = 0.06f; fx.Spray(x, y, 30, Random.Range(0, Mathf.PI * 2), Random.Range(80f, 180f), 5, 0.5f, ch, new Color(1, 0.95f, 0.75f)); }
+                    }
+                    StepCheeseLobs(dt);
                     break;
                 }
                 case EffectType.Cheer:
@@ -499,7 +562,7 @@ namespace NKK.Rats
                 case EffectType.Midas: p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; p.front = 2.5f; p.farFront = 2.4f; p.head = -0.3f; p.tail = 1.3f; break;
                 case EffectType.Tornado: p.front = 1.5f; p.farFront = -1.5f; p.back = 1.2f; p.farBack = -1.2f; p.tail = 1.4f; p.head = -0.2f; break;
                 case EffectType.Truth_Point: p.tilt = -0.5f; p.back = -0.25f; p.farBack = 0.25f; p.front = 1.9f; p.farFront = 0.4f; p.head = -0.25f; p.tail = 1.2f; break;
-                case EffectType.Cheese_Fountain: { p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; float s2 = Mathf.Sin(t * 12); p.front = 2.5f + s2 * 0.3f; p.farFront = 2.3f - s2 * 0.3f; p.head = -0.35f; p.tail = 1.3f; break; }
+                case EffectType.Cheese_Fountain: { p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; float s2 = Mathf.Sin(t * 12); p.front = 2.5f + s2 * 0.4f; p.farFront = 2.3f - s2 * 0.4f; p.head = -0.4f + Mathf.Sin(t * 20) * 0.08f; p.tail = 1.3f + Mathf.Sin(t * 16) * 0.3f; p.sy = 1 + Mathf.Abs(Mathf.Sin(t * 10)) * 0.08f; p.sx = 2 - p.sy; break; }
                 case EffectType.Cheer: { p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; float s = Mathf.Sin(t * 9); p.front = 2.6f * Mathf.Max(0.3f, s); p.farFront = 2.6f * Mathf.Max(0.3f, -s); p.head = -0.3f; p.tail = 1.3f; break; }
                 case EffectType.Feast: p.front = 0.9f + Mathf.Sin(t * 50) * 0.5f; p.farFront = 0.8f - Mathf.Sin(t * 50) * 0.5f; p.head = 0.25f; p.tail = 0.6f; break;
                 case EffectType.Throw_Item: p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; p.front = act.held ? 2.9f : 1.4f; p.farFront = act.held ? 2.7f : 1; p.head = -0.35f; p.tail = 1; break;

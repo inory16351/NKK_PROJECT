@@ -139,7 +139,7 @@ namespace NKK.Items
             for (int n = 0; n < 12; n++)       // 빈자리 찾기
             {
                 float x = Random.Range(L + World.WM + spawnMargin + rad, L + World.RW - World.WM - spawnMargin - rad);
-                float y = Random.Range(T + World.WM + spawnMargin + rad, T + World.RH - World.WM - 40 - rad);
+                float y = Random.Range(T + World.WM + spawnMargin + rad, T + World.RH - World.WM - 70 - rad);
                 bool ok = true;
                 foreach (var o in InRange(x, y, rad + 80)) if (Vector2.Distance(new Vector2(o.x, o.y), new Vector2(x, y)) < o.R + rad + 6) { ok = false; break; }
                 if (!ok) continue;

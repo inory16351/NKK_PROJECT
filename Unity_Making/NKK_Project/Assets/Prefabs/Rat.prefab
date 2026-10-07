@@ -86,6 +86,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f270f7029e33a43bc04a2b561f8b1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Rats.Rat
+  frenzy: 0
+  temp: 0
+  ghost: 0
+  mountCodeId: starchef
+  mountBody: {fileID: 21300000, guid: 63979e2c12f4bca40b66e26b29863723, type: 3}
+  mountButt: {fileID: 21300000, guid: d950fef404ee0994489c9c09dbbec136, type: 3}
+  mountThigh: {fileID: 21300000, guid: 4fb54814c93970b40936064ecb770a2b, type: 3}
+  mountShin: {fileID: 21300000, guid: b7a9f06e2ca702e43902088e800d0a44, type: 3}
+  mountUparm: {fileID: 21300000, guid: 8892d04db616b6c4794de9a5b019384d, type: 3}
+  mountForearm: {fileID: 21300000, guid: 0d0f79535b553dc49ab8b59a13c94fee, type: 3}
+  mountStrain: {fileID: 21300000, guid: 571d1226e10d29d488350e67854eeac4, type: 3}
+  mountCry: {fileID: 21300000, guid: 283125d59aa4b2646a8ac56ebe7b3223, type: 3}
+  mountTiredSprite: {fileID: 21300000, guid: a26433a05dad9594daffd8141a7eea77, type: 3}
+  mountRatScale: 0.5
+  mountHeadH: 54
+  mountTiredWidth: 128
+  mountFarColor: {r: 0.78, g: 0.78, b: 0.78, a: 1}
+  mountHairColor: {r: 0.478, g: 0.294, b: 0.18, a: 1}
+  MountTired: 0
+  MountJit: 0
+  buff: 0
+  packN: 0
+  sleep: 0
+  UltOn: 0
+  UltRot: 0
+  UltLift: 0
+  UltSx: 1
+  UltSy: 1
+  UltJit: 0
+  HideBody: 0
+  zombie: 0
   rig: {fileID: 8175341874790260483}
   shadow: {fileID: 2735971020156306239}
   codeId: 
@@ -98,9 +129,13 @@ MonoBehaviour:
   vz: 0
   face: 1
   rushT: 0
+  KnockPower: 1
+  stun: 0
+  flee: 0
   breedCD: 0
   noBreed: 0
   rushLock: 0
+  catCD: 0
 --- !u!1 &3112003385854529402
 GameObject:
   m_ObjectHideFlags: 0

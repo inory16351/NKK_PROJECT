@@ -238,8 +238,12 @@ MonoBehaviour:
   wallBottom: {fileID: 5975963494591747235}
   wallLeft: {fileID: 8032133393086451871}
   wallRight: {fileID: 8091102792882876384}
+  wallLeftEnd: {fileID: 0}
+  wallRightEnd: {fileID: 0}
+  lockedMark: {fileID: 0}
   wallHeight: 46
-  closedTint: {r: 0.35, g: 0.32, b: 0.3, a: 1}
+  closedTint: {r: 0.3, g: 0.28, b: 0.36, a: 1}
+  endShade: 0.76
   crackedTint: {r: 0.85, g: 0.55, b: 0.45, a: 1}
   shakeAmount: 4
 --- !u!1 &6486648973995211191

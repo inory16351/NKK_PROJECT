@@ -49,6 +49,11 @@ namespace NKK.Stage
         [Tooltip("전투력이 적정보다 낮으면 벽 피해 = (전투력÷적정)^지수")] public float wallGateStairs = 1.5f;
         public float wallGate = 0.5f;
 
+        [Header("벽 체력바 (웹 drawWallBar)")]
+        [Tooltip("월드 캔버스 안 템플릿 (꺼 둬도 됨). 부술 수 있는 막힌 벽마다 하나씩 복제")] public WallBar wallBarTemplate;
+        [Tooltip("벽 윗면 위로 띄우는 높이 (게임 단위)")] public float wallBarLift = 14;
+        [Tooltip("켜면 화면 확대·축소해도 화면에서 같은 크기 (웹과 같음)")] public bool wallBarFixedSize = true;
+
         [Header("쥐덫 등장")]
         public Trap trapPrefab;
         public Transform trapRoot;
@@ -156,14 +161,18 @@ namespace NKK.Stage
             rooms[k] = r;
         }
 
-        // 벽 그림: 열린 방끼리는 벽 없음. 아직 안 열린 방은 어둡게
+        // 벽 그림 (웹 visibleWalls): 열린 방에서 안 열린 쪽에만 벽. 열린 방끼리는 벽 없이 한 공간으로 이어짐.
+        // 안 열린 방은 열린 방과 붙어 있으면 어둡게, 아니면 안 그림
         void RefreshWalls()
         {
+            var up = new Vector2Int(0, -1); var down = new Vector2Int(0, 1); var left = new Vector2Int(-1, 0); var right = new Vector2Int(1, 0);
             foreach (var kv in rooms)
             {
-                var k = kv.Key; bool open = Open.Contains(k);
-                bool Closed(Vector2Int d) => !(open && Open.Contains(k + d));
-                kv.Value.SetState(open, Closed(new Vector2Int(0, -1)), Closed(new Vector2Int(0, 1)), Closed(new Vector2Int(-1, 0)), Closed(new Vector2Int(1, 0)));
+                var k = kv.Key; bool open = Open.Contains(k), peek = false;
+                foreach (var d in Dirs) if (Open.Contains(k + d)) peek = true;
+                bool Wall(Vector2Int at, Vector2Int d) => Open.Contains(at) && !Open.Contains(at + d);
+                // 아래 방에서 같은 쪽 옆 벽이 이어지면 끝 단면 생략
+                kv.Value.SetState(open, peek, Wall(k, up), Wall(k, down), Wall(k, left), Wall(k, right), !Wall(k + down, left), !Wall(k + down, right));
             }
         }
 
@@ -304,7 +313,40 @@ namespace NKK.Stage
             return Rect.MinMaxRect(i0 * World.RW, j0 * World.RH, (i1 + 1) * World.RW, (j1 + 1) * World.RH);
         }
 
-        void Start() => EnterFloor(Game.Floor);
+        void Start()
+        {
+            if (wallBarTemplate) { wallBarScale = wallBarTemplate.transform.localScale; wallBarTemplate.gameObject.SetActive(false); }
+            EnterFloor(Game.Floor);
+        }
+
+        // ── 벽 체력바: 열린 방 → 레이아웃 안 안 열린 방 쪽 벽마다, 벽 가운데 윗면 위 (연구소 바깥벽은 없음) ──
+        readonly List<WallBar> wallBars = new();
+        Vector3 wallBarScale = Vector3.one;
+        void LateUpdate()
+        {
+            int n = 0;
+            if (wallBarTemplate)
+            {
+                var cam = Game ? Game.cam : null;
+                float inv = wallBarFixedSize && cam ? 1 / Mathf.Max(0.01f, cam.zoom * cam.ultZoom) : 1;
+                float lift = (roomPrefab ? roomPrefab.wallHeight : 46) + wallBarLift;
+                foreach (var k in Open)
+                    foreach (var d in Dirs)
+                    {
+                        var t = k + d;
+                        if (Open.Contains(t) || !Layout.Contains(t)) continue;
+                        if (n == wallBars.Count) wallBars.Add(Instantiate(wallBarTemplate, wallBarTemplate.transform.parent));
+                        var b = wallBars[n++];
+                        if (!b.gameObject.activeSelf) b.gameObject.SetActive(true);
+                        float cx = (k.x + 0.5f + d.x * 0.5f) * World.RW, cy = (k.y + 0.5f + d.y * 0.5f) * World.RH;
+                        b.transform.position = World.ToUnity(cx, cy, lift);
+                        b.transform.localScale = wallBarScale * inv;
+                        float hp = WallHP(k.x, k.y, d.x, d.y);
+                        b.Set(hp, Mathf.Clamp01(hp / WallMax(t.x, t.y)));
+                    }
+            }
+            for (; n < wallBars.Count; n++) if (wallBars[n].gameObject.activeSelf) wallBars[n].gameObject.SetActive(false);
+        }
 
         void Update()
         {

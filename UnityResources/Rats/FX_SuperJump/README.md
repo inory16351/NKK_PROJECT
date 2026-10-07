@@ -18,3 +18,5 @@ Codex 원본: `Sheets/` — `fx_sj2.png`(자홍 3×2) · `sj_band_sheet.png` · 
 | `sj_puff.png`, `sj_ring.png`, `sj_impact.png`, `sj_twinkle.png`, `sj_star.png`, `sj_streak.png` | 여분 (지금 코드에서 안 씀) |
 
 Unity 사본: `Assets/Art/Rats/FX_SuperJump/`
+
+- 2026-10-07: `sj_star5`·`sj_sparkle`·`sj_twinkle`·`sj_star` 를 게임 그림체로 다시 그림 → `../FX_Stars/README.md` (옛 그림 `../FX_Stars/old/`)
