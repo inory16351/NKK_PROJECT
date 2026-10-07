@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_cheese.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings — perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- A sheet of 4 game effect sprites in an exact 2 columns x 2 rows grid (each cell 512x512). Each sprite is ONE single connected shape centered in its cell with a clean magenta margin, never touching or crossing cell borders. No loose floating bits, no sparkles, no motion lines.
+- STYLE: match the attached references exactly (Untitled Goose Game style flat game art): completely FLAT color shapes, NO outlines, NO black linework, no gradients, no glow. Melted cheese palette like the attached cheese puddle / cheese drop: warm yellow (#FFD84A-ish) with one slightly darker orange-yellow flat tone for shading and a pale cream highlight tone.
+
+Cells (left to right, top to bottom):
+Row 1:
+1) CHEESE SPLASH EXPLOSION: a big burst of melted cheese exploding outward, shaped like the attached explosion burst (spiky star-like burst) but made of gooey cheese: round blobby splash tips and thick cheese droplets attached to the ends of the spikes, pale cream center, yellow middle, orange-yellow outer edge. Fills most of the cell.
+2) FLYING CHEESE CHUNK: a gooey lump of half-melted cheese (an irregular rounded wedge-ish blob with 2-3 round holes like swiss cheese) with a short thick dripping goo tail trailing behind it to the lower left, as if thrown through the air.
+Row 2:
+3) CHEESE SPLASH CROWN: a side view of melted cheese splashing up from the floor on impact — a wide low crown splash: flat oval base with several thick gooey cheese tendrils rising up and curling outward, ending in round blobs (all connected). Wider than tall.
+4) SMALL CHEESE BLOB: a single small round-ish glob of melted cheese with one tiny drip, like a droplet of goo (simple, chunky).

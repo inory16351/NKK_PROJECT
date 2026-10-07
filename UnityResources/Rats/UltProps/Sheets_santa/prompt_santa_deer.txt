@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: santa_deer.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1536, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings — perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- A sheet of 4 small game props in an exact 2 columns x 2 rows grid (each cell 768x768). Each prop is ONE single connected shape centered in its cell with a clean magenta margin, never touching or crossing cell borders. No loose floating bits, no sparkles, no motion lines.
+- STYLE: match the attached references exactly (Untitled Goose Game style game props, same as the sleigh and the mouse head): completely FLAT color shapes, NO outlines, NO black linework, no gradients, no glow. Soft muted palette with one slightly darker flat tone for shading. Side view.
+
+Cells (left to right, top to bottom):
+1) A reindeer antlers headband seen from the SIDE: a thin red headband arc with two branching soft brown antlers sticking up from it (one slightly behind the other). It will be worn on a small mouse head, so the bottom is an open arc. Fill most of the cell.
+2) A round shiny RED clown-like reindeer nose ball (Rudolph nose): a plain red circle with one small flat lighter red highlight spot. Fill about half of the cell.
+3) A small green glass bottle lying tilted about 30 degrees, with a cream label band (blank, no text) and a small cap, like a cheap drink bottle. Side view.
+4) A collar for a reindeer: a short curved red leather strap with three round golden jingle bells hanging from it, all connected as one shape.

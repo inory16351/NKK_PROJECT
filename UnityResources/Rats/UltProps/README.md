@@ -52,3 +52,17 @@ Codex 시트 `Sheets_jwtux/jw_tux.png` (자홍 3칸) · `prompt_jw_tux.txt` · `
 | `jwt_front.png` | 앞다리 (소매 + 흰 소맷부리) |
 | `jwt_back.png` | 뒷다리 (바지) |
 Unity 사본: `Assets/Art/Rats/UltProps/` (.meta 는 원래 파츠 것을 복사 → 피벗 같음). 코드가 필살기 동안 리그 그림만 바꿔 끼우고 끝나면 되돌림.
+
+## v3 (2026-10-07) — `Sheets_v3/` (Codex 4×4)
+쥐랜드 성 대개장: `ratland_castle`, `lawyer_rat_a/b`(변호사 걷기), `seizure_tag`(압류 딱지, 글은 자막 c4) · 여왕 근위대: `guard_rat_a/b`(행진), `royal_carriage` · 황제 폭죽 터짐: `fw_mouse`, `fw_gold`, `fw_pink`, `fw_blue`, `fw_ring`, `fw_core`, `color_puff` · 새 아이콘 → `../UltIcons/ult_30022.png`, `ult_30017.png` (옛것 `../UltIcons/_old/`)
+
+# 산타 쥐돌프 소품 (2026-10-07, 산타 생쥐 UltFlyBy)
+술 취한 쥐돌프(갈색쥐 리그 3마리)가 썰매를 끎. Codex 시트 `Sheets_santa/santa_deer.png` (자홍 2×2) · `prompt_santa_deer.txt` · `log_santa_deer.txt` · 참고 `ref_*.png` · 자르기 `slice_santa.py` (key_magenta + 연결 영역) · `_미리보기.png`
+
+| 파일 | 쓰임 |
+|---|---|
+| `deer_antlers.png` | 사슴뿔 머리띠 (쥐돌프 정수리) |
+| `deer_nose.png` | 루돌프 빨간 코 (뒤에 `dot` 빨간 빛 번쩍) |
+| `deer_bottle.png` | 가운데 쥐돌프 앞발 술병 |
+| `deer_bells.png` | 방울 목걸이 |
+Unity 사본: `Assets/Art/Rats/UltProps/` (.meta 는 egg_splat 설정 복사, guid 새로). 볼 = `dot`, 딸꾹 방울 = `ring`, 어질어질 = `swirl` (Art/FX/Tint 재사용)

@@ -14,6 +14,7 @@ namespace NKK.Ults
     // 무대: 어둠(jw_dark 판 + 스프라이트 마스크로 줴리 둘레 타원 구멍, 줴리 몸은 마스크로 빼서 밝게) + 빛 기둥 ult_spotlight · 극장 커튼·위 장식 · 악기
     //   · 게이지 막대(ult_gauge_bar) · 팻말(jwc_card) · 관객 말풍선(jw_bubble, 9칸 늘이기). 줴리 옷 = 턱시도 파츠(jwt_torso·front·back)로 바꿔 끼움 + 나비넥타이
     // 화면 고정 소품은 웹 화면 좌표(1280×720)를 카메라 보이는 범위에 맞춰 옮김. 글은 전부 자막 시트 (말풍선·게이지·팻말 글 = 월드 글자)
+    // 글자 모양 = 웹: 제목·숫자·팝업·끝 인사 = comicText (채움 + 굵은 #3c322d 테두리 + 색 그림자), 팻말·말풍선 = 흰 바탕 위 진한 글 (테두리 없음). 재질은 팝업 글자 재질을 복사해 런타임에 만듦
     // 자막: c1 (갑분싸) · c2 야유 · c3~c5 감사합니다 · c6 (…인정이지) · c7 컷인 제목 · c8·c9 게이지 제목 · c10 게이지 {n}% · c11 로딩 중
     //   c12~c23 아재개그 (질문·답 6쌍) · c24~c48 관객 대사 · c49·c50 야유 팝업 · c51 귀뚤 · c52 (빠직) · c53·c54 딱·퍽 · c55~c57 펑 · c58·c59 음표 · c61 끝 인사
     public class UltThankYou : UltBase
@@ -31,7 +32,7 @@ namespace NKK.Ults
         static readonly Vector4 BUB_BORDER = new(60, 119, 60, 60);
         const float BUB_PPU = 737;
         // 화면 맨 앞 정렬 (WorldCanvas 32500 보다 아래)
-        const int L_DARK = 0, L_CONE = 1, L_INST = 2, L_SPLAT = 3, L_CAT = 4, L_CATTIE = 5, L_PROJ = 7, L_BUB = 8, L_CURTAIN = 10, L_VAL = 11, L_GAUGE = 12, L_STICK = 14, L_CARD = 15, L_IRIS = 20;
+        const int L_DARK = 0, L_CONE = 1, L_INST = 2, L_SPLAT = 3, L_CAT = 4, L_CATTIE = 5, L_PROJ = 7, L_BUB = 8, L_GRAY = 9, L_CURTAIN = 10, L_VAL = 11, L_GAUGE = 12, L_STICK = 14, L_CARD = 15, L_IRIS = 20;
 
         class Seat { public Rat o; public float sx0, sy0, seatX, seatY, throwT; public bool dots; }
         class Inst { public UltProp p; public float x, y, w, pop, t0; public int order; }
@@ -49,6 +50,11 @@ namespace NKK.Ults
         readonly List<Stuck> stuck = new();
         readonly List<Talk> talk = new();
         readonly List<TMP_Text> labels = new();
+        class PopTxt { public TMP_Text t; public float x, y, z, vz, life, max, size; public Color col; }
+        readonly List<PopTxt> pops = new();
+        readonly Dictionary<Color, Material> comicMats = new();
+        Material plainMat;
+        UltProp grayPlate;
         readonly HashSet<Item> popped = new();
         readonly HashSet<string> flags = new();
 
@@ -119,7 +125,9 @@ namespace NKK.Ults
             if (gFill != null) gFill.visible = false;
             stick = Prop("ult_gauge_bar", stX, stY, 0, 100); if (stick != null) { stick.visible = false; stick.tint = WOOD; }
             card = Prop("jwc_card", stX, stY, 0, 100); if (card != null) card.visible = false;
-            gTitle = Label(); gNum = Label(); gLoad = Label(); cardTxt = Label(); byeTxt = Label();
+            gTitle = Label(); gNum = Label(); gLoad = Label(); cardTxt = Label(true); byeTxt = Label();
+            // 갑분싸 회색 막: 화면 번쩍(HUD 라서 글자까지 덮어 어두워짐) 대신 커튼·게이지·팻말 아래 판 (웹 ui 순서)
+            grayPlate = Prop("dot", stX, stY, 0, 100); if (grayPlate != null) { grayPlate.tint = new Color(0.357f, 0.345f, 0.4f); grayPlate.visible = false; }
         }
 
         public override void Step(float dt, float k)
@@ -141,6 +149,7 @@ namespace NKK.Ults
             spX += (R.x - spX) * Mathf.Min(1, dt * 4); spY += (R.y - spY) * Mathf.Min(1, dt * 4);
             Projectiles(dt);
             StepTalk(t);
+            StepPops(dt);
             DrawStage(t);
             DrawUi(t);
         }
@@ -172,11 +181,11 @@ namespace NKK.Ults
                     {
                         s.throwT = t + Rand(0.7f, 1.5f);
                         Throw(o.x, o.y, 30, Pick(new[] { "egg", "egg", "egg", "egg", "tomato", "slipper" }), false);
-                        if (Random.value < 0.3f) PopupCap(Pick(new[] { "c49", "c40", "c39", "c50" }), o.x, o.y, RED, 16, 0.8f, 50);
+                        if (Random.value < 0.3f) PopCap(Pick(new[] { "c49", "c40", "c39", "c50" }), o.x, o.y, RED, 16, 0.8f, 50);
                     }
                 }
                 else { o.z = 0; o.UltPose = P(head: 0.2f, tail: -0.2f); }
-                if (t > T_A + 0.2f && t < T_BOO && !s.dots && Random.value < dt * 1.5f) { s.dots = true; PopupCap("c38", o.x, o.y, GRAY, 18, 0.9f, 50); }
+                if (t > T_A + 0.2f && t < T_BOO && !s.dots && Random.value < dt * 1.5f) { s.dots = true; PopCap("c38", o.x, o.y, GRAY, 18, 0.9f, 50); }
             }
         }
 
@@ -201,11 +210,11 @@ namespace NKK.Ults
             cat.jit = 0;
             if (t < 1.0f) { float e = Smooth(t / 1.0f); cat.x = Mathf.Lerp(vr.xMax + 120, cat.tx, e); cat.mode = "walk"; cat.walk += dt * 14; }
             else if (t < T_A + 0.1f) cat.mode = "still";
-            else if (t < T_BOO) { cat.mode = "flinch"; cat.jit = 1.5f; if (flags.Add("catMad")) PopupCap("c52", cat.x, cat.y, RED, 34, 1.2f, 110); }
+            else if (t < T_BOO) { cat.mode = "flinch"; cat.jit = 1.5f; if (flags.Add("catMad")) PopCap("c52", cat.x, cat.y, RED, 34, 1.2f, 110); }
             else if (booing)
             {
                 cat.mode = "crack";                                                      // 앞발 들고 부들부들 = 야유
-                if (t > 6.85f && flags.Add("catThrow")) { Throw(cat.x, cat.y, 60, "slipper", true); PopupCap("c49", cat.x, cat.y, RED, 22, 1, 120); }
+                if (t > 6.85f && flags.Add("catThrow")) { Throw(cat.x, cat.y, 60, "slipper", true); PopCap("c49", cat.x, cat.y, RED, 22, 1, 120); }
                 if (t > 8.9f && flags.Add("catThrow2")) Throw(cat.x, cat.y, 60, "slipper", true);
             }
             else cat.mode = "flinch";
@@ -269,7 +278,7 @@ namespace NKK.Ults
                 // ③ 답 → 갑분싸 → 야유. 줴리는 박수 받을 준비 (뻔뻔한 미소로 꼿꼿이)
                 R.UltJit = 0; R.UltPose = BowPose(0, t);
                 foreach (var kk in new[] { 5.8f, 6.15f, 6.45f })
-                    if (t > kk && flags.Add("cr" + kk)) PopupCap("c51", stX + Rand(-250, 250), stY + Rand(-60, 60), GRAY, 14, 0.7f, 30);
+                    if (t > kk && flags.Add("cr" + kk)) PopCap("c51", stX + Rand(-250, 250), stY + Rand(-60, 60), GRAY, 14, 0.7f, 30);
                 Say("c2", (0.15f, "c36"), (0.45f, "c28"), (0.7f, "c37"), (1.0f, "c38"));
                 if (t > T_BOO && flags.Add("boo")) Fx?.Shake(0.15f);
                 if (t > T_BOO) Say("c3", (0, "c39"), (0.15f, "c40"), (0.3f, "c41"));
@@ -347,7 +356,14 @@ namespace NKK.Ults
         // ── 화면 연출 (웹 ui): 갑분싸 회색 · 커튼 · 게이지 · 팻말 · 아이리스 아웃 ──
         void DrawUi(float t)
         {
-            if (gray > 0.01f) Flash(new Color(0.36f, 0.35f, 0.4f), gray * 0.45f);
+            if (grayPlate != null)
+            {
+                // dot(부드러운 원)을 화면보다 훨씬 크게 → 화면 안엔 가운데 꽉 찬 부분만 보임
+                grayPlate.visible = gray > 0.01f; grayPlate.alpha = gray * 0.45f;
+                grayPlate.x = vr.center.x; grayPlate.y = vr.center.y; grayPlate.z = 0; grayPlate.w = vr.width * 4;
+                grayPlate.flat = vr.height * World.TILT * 4 / Mathf.Max(1, grayPlate.w * Aspect(grayPlate));
+                OnTop(grayPlate, L_GRAY);
+            }
             // 극장 커튼: 가운데에서 양옆으로 걷힘 (폭 230px, 화면 높이 전체)
             float cw = 230, open = Smooth(Mathf.Min(1, t / 0.8f));
             ScreenProp(curtainL, Mathf.Lerp(640 - cw, -cw * 0.55f, open) + cw / 2, 360, cw, 720, L_CURTAIN);
@@ -518,7 +534,7 @@ namespace NKK.Ults
                 if (!m.on) { if (t < m.t0) continue; m.on = true; m.t0 = t; }
                 if (t - m.t0 >= m.dur || (!m.cat && !m.o)) { KillBubble(m); talk.RemoveAt(i); continue; }
                 bool show = seen.Add(m.cat ? cat : m.o) && iris < 0.3f;
-                if (!m.txt) { m.txt = Label(); m.bub = NewBubble(); }
+                if (!m.txt) { m.txt = Label(true); m.bub = NewBubble(); }
                 if (show) live.Add(m);
                 else { if (m.bub) m.bub.enabled = false; HideLabel(m.txt); }
             }
@@ -590,7 +606,7 @@ namespace NKK.Ults
             {
                 if (side != 0 && Mathf.Sign(I.x - R.x) != side) continue;
                 I.pop = 1;
-                if (OnScreen(I.x, I.y) && Random.value < 0.7f) PopupCap(Random.value < 0.5f ? "c58" : "c59", I.x + Rand(-10, 10), I.y, Pick(new[] { CREAM, GOLD, LILAC }), 22, 0.7f, 60 + I.w * 0.6f);
+                if (OnScreen(I.x, I.y) && Random.value < 0.7f) PopCap(Random.value < 0.5f ? "c58" : "c59", I.x + Rand(-10, 10), I.y, Pick(new[] { CREAM, GOLD, LILAC }), 22, 0.7f, 60 + I.w * 0.6f);
             }
         }
 
@@ -607,7 +623,7 @@ namespace NKK.Ults
                 if (OnScreen(it.x, it.y))
                 {
                     Fx?.Stars(it.x, it.y, 20, 10, GOLD, RED, 120, 360); Fx?.Burst(it.x, it.y, 20, 6, CREAM, LILAC, 120, 360, 3, 7);
-                    PopupCap("c" + Random.Range(55, 58), it.x, it.y, CREAM, 18, 0.5f, 40);
+                    PopCap("c" + Random.Range(55, 58), it.x, it.y, CREAM, 18, 0.5f, 40);
                 }
                 DropItem(it, Mathf.Cos(a) * 380, Mathf.Sin(a) * 380, 360, ItemD * 2 * big);
                 BlastActors(it.x, it.y, 70, 480, UltD * 0.3f);
@@ -653,7 +669,7 @@ namespace NKK.Ults
                 KillProp(p.p); proj.RemoveAt(i);
                 if (p.hit && p.kind != "slipper") AddStuck(p.kind);
                 else AddSplat(p.kind, p.tx, p.ty);
-                if (p.hit) PopupCap(p.kind == "slipper" ? "c53" : "c54", p.tx, p.ty, Color.white, 18, 0.5f, 50);
+                if (p.hit) PopCap(p.kind == "slipper" ? "c53" : "c54", p.tx, p.ty, Color.white, 18, 0.5f, 50);
                 if (p.kind == "egg") Fx?.Burst(p.tx, p.ty, p.hit ? 24 : 4, 5, GOLD, PAPER, 50, 130, 2, 3);          // 노른자·흰자 튐
                 else if (p.kind == "tomato") Fx?.Burst(p.tx, p.ty, p.hit ? 30 : 4, 6, TOMATO, new Color(0.72f, 0.2f, 0.16f), 60, 160, 2, 4);
                 else Fx?.Dust(p.tx, p.ty, 2, 0.6f);
@@ -693,8 +709,8 @@ namespace NKK.Ults
             if (stuck.Count > 4) { KillProp(stuck[0].p); stuck.RemoveAt(0); }   // 몸에 묻은 건 몇 개만 (줴리가 가려지지 않게)
         }
 
-        // ── 월드 글자 (팝업 글자 틀을 복제, 끝나면 지움) ──
-        TMP_Text Label()
+        // ── 월드 글자 (팝업 글자 틀을 복제, 끝나면 지움). plain = 흰 바탕 위 진한 글 (팻말·말풍선), 아니면 만화 글씨 ──
+        TMP_Text Label(bool plain = false)
         {
             var tpl = Fx ? Fx.popupTemplate : null; if (!tpl) return null;
             var t = Object.Instantiate(tpl, tpl.transform.parent);
@@ -703,17 +719,76 @@ namespace NKK.Ults
             t.rectTransform.pivot = new Vector2(0.5f, 0.5f);      // 팝업 틀은 아래 기준이라 글이 위로 뜸 → 가운데 기준으로
             t.overflowMode = TextOverflowModes.Overflow;
             t.rectTransform.localRotation = Quaternion.identity;
+            if (plain) t.fontSharedMaterial = Plain(tpl);
             labels.Add(t);
             return t;
         }
         void KillLabel(TMP_Text t) { if (!t) return; labels.Remove(t); Object.Destroy(t.gameObject); }
+
+        // 웹 comicText: 채움 + 굵은 #3c322d 테두리(크기 × 0.2) + 오른쪽 아래 색 그림자. 그림자 색마다 재질 하나
+        Material Comic(Color fill)
+        {
+            var sh = ShadowOf(fill);
+            if (comicMats.TryGetValue(sh, out var m) && m) return m;
+            m = new Material(Fx.popupTemplate.fontSharedMaterial) { name = "UltComic" };
+            m.EnableKeyword(ShaderUtilities.Keyword_Outline); m.EnableKeyword(ShaderUtilities.Keyword_Underlay);
+            m.SetFloat(ShaderUtilities.ID_FaceDilate, 0.12f);
+            m.SetFloat(ShaderUtilities.ID_OutlineWidth, 0.28f); m.SetColor(ShaderUtilities.ID_OutlineColor, INK);
+            m.SetColor(ShaderUtilities.ID_UnderlayColor, sh);
+            m.SetFloat(ShaderUtilities.ID_UnderlayOffsetX, 0.6f); m.SetFloat(ShaderUtilities.ID_UnderlayOffsetY, -0.8f);
+            m.SetFloat(ShaderUtilities.ID_UnderlayDilate, 0.28f); m.SetFloat(ShaderUtilities.ID_UnderlaySoftness, 0);
+            comicMats[sh] = m;
+            return m;
+        }
+        // 흰 바탕 위 글: 테두리·그림자 없이 진하게 (웹 = #3c322d 채움만)
+        Material Plain(TMP_Text tpl)
+        {
+            if (plainMat) return plainMat;
+            plainMat = new Material(tpl.fontSharedMaterial) { name = "UltPlain" };
+            plainMat.DisableKeyword(ShaderUtilities.Keyword_Underlay); plainMat.DisableKeyword(ShaderUtilities.Keyword_Outline);
+            plainMat.SetFloat(ShaderUtilities.ID_OutlineWidth, 0); plainMat.SetFloat(ShaderUtilities.ID_FaceDilate, 0.08f);
+            plainMat.SetColor(ShaderUtilities.ID_UnderlayColor, new Color(0, 0, 0, 0));
+            return plainMat;
+        }
+        // 글 색 → 그림자 색 (웹 comicText 짝: 크림·금 → 산호, 빨강 → 진한 빨강, 회색 → 회갈색, 흰색·하늘 → 파랑)
+        static Color ShadowOf(Color c)
+        {
+            if (Near(c, GOLD) || Near(c, CREAM) || Near(c, PAPER)) return new Color(0.851f, 0.471f, 0.416f);
+            if (Near(c, RED) || Near(c, TOMATO)) return new Color(0.55f, 0.2f, 0.18f);
+            if (Near(c, GRAY)) return new Color(0.49f, 0.455f, 0.42f);
+            if (Near(c, LILAC)) return new Color(0.45f, 0.36f, 0.55f);
+            return new Color(0.498f, 0.659f, 0.749f);
+        }
+        static bool Near(Color a, Color b) => Mathf.Abs(a.r - b.r) + Mathf.Abs(a.g - b.g) + Mathf.Abs(a.b - b.b) < 0.08f;
+
+        // 월드 팝업 (웹 popup): 만화 글씨로 떠오르며 통 커졌다 줄고 사라짐 (FxManager 팝업 대신 — 글자 재질을 맞추려고)
+        void PopCap(string key, float x, float y, Color col, float size = 20, float life = 1, float z = 40)
+        {
+            var s = CapText(key); if (string.IsNullOrEmpty(s) || !OnScreen(x, y)) return;
+            if (pops.Count > 30) { KillLabel(pops[0].t); pops.RemoveAt(0); }
+            var t = Label(); if (!t) return;
+            t.text = s;
+            pops.Add(new PopTxt { t = t, x = x, y = y, z = z, vz = 80, life = life, max = life, size = size, col = col });
+        }
+        void StepPops(float dt)
+        {
+            for (int i = pops.Count - 1; i >= 0; i--)
+            {
+                var p = pops[i]; p.life -= dt;
+                if (p.life <= 0 || !p.t) { KillLabel(p.t); pops.RemoveAt(i); continue; }
+                p.z += p.vz * dt; p.vz *= 1 - dt * 2.5f;
+                float age = p.max - p.life, sc = age < 0.1f ? 0.5f + age / 0.1f * 0.7f : 1.2f - Mathf.Min(0.2f, age - 0.1f);
+                SetWorldLabel(p.t, p.t.text, p.x, p.y, p.z, p.size, p.col, Mathf.Min(1, p.life / p.max * 3) * (1 - iris), sc, sc);
+            }
+        }
         static void HideLabel(TMP_Text t) { if (t) t.alpha = 0; }
         // 화면 좌표(px) 글자. size = 웹 px
         void SetLabel(TMP_Text t, string s, float px, float py, float size, Color col, float alpha, float sx = 1, float sy = 1)
             => SetWorldLabel(t, s, vr.xMin + px * S, vr.yMin + py * S / World.TILT, 0, size * S, col, alpha, sx, sy);
-        static void SetWorldLabel(TMP_Text t, string s, float x, float y, float z, float size, Color col, float alpha, float sx = 1, float sy = 1)
+        void SetWorldLabel(TMP_Text t, string s, float x, float y, float z, float size, Color col, float alpha, float sx = 1, float sy = 1)
         {
             if (!t) return;
+            if (!plainMat || t.fontSharedMaterial != plainMat) { var m = Comic(col); if (t.fontSharedMaterial != m) t.fontSharedMaterial = m; }
             if (t.text != s) t.text = s;
             t.fontSize = size; col.a = alpha; t.color = col;
             t.rectTransform.position = World.ToUnity(x, y, z);
@@ -753,7 +828,11 @@ namespace NKK.Ults
             foreach (var (sr, orig, tux) in tuxSwap) { if (sr && sr.sprite == tux) sr.sprite = orig; if (tux) Object.Destroy(tux); }
             tuxSwap.Clear();
             foreach (var t in labels) if (t) Object.Destroy(t.gameObject);
-            labels.Clear();
+            labels.Clear(); pops.Clear();
+            foreach (var m in comicMats.Values) if (m) Object.Destroy(m);
+            comicMats.Clear();
+            if (plainMat) Object.Destroy(plainMat);
+            plainMat = null;
             if (cat != null && cat.c) { if (cat.c.shadow) Object.Destroy(cat.c.shadow.gameObject); Object.Destroy(cat.c.gameObject); }
             cat = null;
             if (R) { R.UltJit = 0; R.z = 0; }
