@@ -10,6 +10,7 @@
    "life_time": 16.0,
    "size_mul": 1.0,
    "skill": 50001,
+   "crowd_skill": 50011,
    "character_desc": "동네 어디에나 있는 치즈 태비. 평범하게 부수고, 평범하게 귀엽다.",
    "asset_folder": "Cats/Parts/cheese"
   },
@@ -23,6 +24,7 @@
    "life_time": 16.0,
    "size_mul": 1.0,
    "skill": 50002,
+   "crowd_skill": 50012,
    "character_desc": "조용하고 우아하게… 그리고 아주 빠르게 컵을 민다.",
    "asset_folder": "Cats/Parts/mackerel"
   },
@@ -36,6 +38,7 @@
    "life_time": 16.0,
    "size_mul": 1.0,
    "skill": 50003,
+   "crowd_skill": 50013,
    "character_desc": "태어날 때부터 정장 차림. 급소만 골라 친다.",
    "asset_folder": "Cats/Parts/tuxedo"
   },
@@ -49,6 +52,7 @@
    "life_time": 16.0,
    "size_mul": 1.12,
    "skill": 50004,
+   "crowd_skill": 50014,
    "character_desc": "털이 너무 많아서 움직이기 싫다. 대신 앉으면 다 부서진다.",
    "asset_folder": "Cats/Parts/chonk"
   },
@@ -62,6 +66,7 @@
    "life_time": 16.0,
    "size_mul": 1.0,
    "skill": 50005,
+   "crowd_skill": 50015,
    "character_desc": "다리가 짧아서 걷는 것보다 구르는 게 빠르다.",
    "asset_folder": "Cats/Parts/loaf"
   },
@@ -75,6 +80,7 @@
    "life_time": 16.0,
    "size_mul": 1.0,
    "skill": 50006,
+   "crowd_skill": 50016,
    "character_desc": "야생의 피가 흐른다. 눈 깜짝할 새 옆에 와 있다.",
    "asset_folder": "Cats/Parts/ninja"
   },
@@ -88,6 +94,7 @@
    "life_time": 16.0,
    "size_mul": 1.0,
    "skill": 50007,
+   "crowd_skill": 50017,
    "character_desc": "털이 없는 대신 눈빛이 너무 강렬해서 물건이 깨진다.",
    "asset_folder": "Cats/Parts/laser"
   },
@@ -101,6 +108,7 @@
    "life_time": 16.0,
    "size_mul": 1.12,
    "skill": 50008,
+   "crowd_skill": 50018,
    "character_desc": "고양이계의 헤비급. 앞발 한 번이면 식탁이 흔들린다.",
    "asset_folder": "Cats/Parts/gym"
   },
@@ -114,6 +122,7 @@
    "life_time": 22.0,
    "size_mul": 1.15,
    "skill": 50009,
+   "crowd_skill": 50019,
    "character_desc": "할로윈 모자를 쓰더니 진짜로 마법을 쓰기 시작했다.",
    "asset_folder": "Cats/Parts/fire"
   },
@@ -127,6 +136,7 @@
    "life_time": 22.0,
    "size_mul": 1.15,
    "skill": 50010,
+   "crowd_skill": 50020,
    "character_desc": "어디서 우주복을 구했는지는 아무도 모른다. 무중력으로 에너지를 모은다.",
    "asset_folder": "Cats/Parts/space"
   }
@@ -341,6 +351,216 @@
    "cool_time": 0.0,
    "skill_icon": "🌌",
    "skill_explain": "주변 쥐를 공중으로 띄우고 기절"
+  },
+  {
+   "skill_id": 50011,
+   "skill_name": "냥냥 대폭격",
+   "cond1_type": "Interval",
+   "cond1_value_01": 2.5,
+   "cond1_value_02": 3.5,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Crowd_Slam",
+   "value_01": 200.0,
+   "value_02": 2.0,
+   "value_03": 0.55,
+   "value_04": 0.35,
+   "value_05": 0.0,
+   "value_06": 0.0,
+   "duration": 0.5,
+   "cool_time": 0.0,
+   "skill_icon": "",
+   "skill_explain": "쥐가 가장 많이 모인 곳으로 뛰어올라 내려찍기, 범위 안 쥐 기절"
+  },
+  {
+   "skill_id": 50012,
+   "skill_name": "냥펀치 연타",
+   "cond1_type": "Interval",
+   "cond1_value_01": 3.0,
+   "cond1_value_02": 4.0,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Crowd_Combo",
+   "value_01": 150.0,
+   "value_02": 1.3,
+   "value_03": 0.4,
+   "value_04": 3.0,
+   "value_05": 0.22,
+   "value_06": 0.0,
+   "duration": 0.5,
+   "cool_time": 0.0,
+   "skill_icon": "",
+   "skill_explain": "무리를 찾아 작은 내려찍기 3연속 (매번 새 무리를 노림)"
+  },
+  {
+   "skill_id": 50013,
+   "skill_name": "급소 찌르기",
+   "cond1_type": "Interval",
+   "cond1_value_01": 2.0,
+   "cond1_value_02": 3.0,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Crowd_Pinpoint",
+   "value_01": 120.0,
+   "value_02": 3.2,
+   "value_03": 0.35,
+   "value_04": 0.25,
+   "value_05": 0.0,
+   "value_06": 0.0,
+   "duration": 0.5,
+   "cool_time": 0.0,
+   "skill_icon": "",
+   "skill_explain": "좁지만 아주 빠르게, 오래 기절시키는 일격"
+  },
+  {
+   "skill_id": 50014,
+   "skill_name": "뱃살 프레스",
+   "cond1_type": "Interval",
+   "cond1_value_01": 3.5,
+   "cond1_value_02": 4.5,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Crowd_Belly",
+   "value_01": 300.0,
+   "value_02": 2.2,
+   "value_03": 0.8,
+   "value_04": 0.55,
+   "value_05": 420.0,
+   "value_06": 0.0,
+   "duration": 0.5,
+   "cool_time": 0.0,
+   "skill_icon": "",
+   "skill_explain": "아주 넓은 범위를 뱃살로 깔아뭉갬, 물건도 날아감"
+  },
+  {
+   "skill_id": 50015,
+   "skill_name": "식빵 볼링",
+   "cond1_type": "Interval",
+   "cond1_value_01": 3.0,
+   "cond1_value_02": 4.0,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Crowd_Roll",
+   "value_01": 170.0,
+   "value_02": 1.6,
+   "value_03": 0.5,
+   "value_04": 80.0,
+   "value_05": 950.0,
+   "value_06": 0.0,
+   "duration": 0.5,
+   "cool_time": 0.0,
+   "skill_icon": "",
+   "skill_explain": "무리를 향해 데굴데굴 굴러 지나가는 쥐를 쓰러뜨리고 끝에서 쿵"
+  },
+  {
+   "skill_id": 50016,
+   "skill_name": "그림자 습격",
+   "cond1_type": "Interval",
+   "cond1_value_01": 2.5,
+   "cond1_value_02": 3.5,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Crowd_Blink",
+   "value_01": 180.0,
+   "value_02": 1.8,
+   "value_03": 0.35,
+   "value_04": 0.0,
+   "value_05": 0.0,
+   "value_06": 0.0,
+   "duration": 0.5,
+   "cool_time": 0.0,
+   "skill_icon": "",
+   "skill_explain": "연기처럼 사라졌다가 무리 한가운데 나타나 내려찍기 (거리 무관)"
+  },
+  {
+   "skill_id": 50017,
+   "skill_name": "레이저 폭격",
+   "cond1_type": "Interval",
+   "cond1_value_01": 3.0,
+   "cond1_value_02": 4.0,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Crowd_Laser",
+   "value_01": 170.0,
+   "value_02": 2.4,
+   "value_03": 0.6,
+   "value_04": 2.0,
+   "value_05": 0.0,
+   "value_06": 0.0,
+   "duration": 0.5,
+   "cool_time": 0.0,
+   "skill_icon": "",
+   "skill_explain": "가만히 서서 쥐가 많은 곳 2군데에 하늘 레이저"
+  },
+  {
+   "skill_id": 50018,
+   "skill_name": "지진 내려찍기",
+   "cond1_type": "Interval",
+   "cond1_value_01": 3.0,
+   "cond1_value_02": 4.0,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Crowd_Quake",
+   "value_01": 140.0,
+   "value_02": 1.5,
+   "value_03": 0.6,
+   "value_04": 3.0,
+   "value_05": 80.0,
+   "value_06": 0.18,
+   "duration": 0.5,
+   "cool_time": 0.0,
+   "skill_icon": "",
+   "skill_explain": "내려찍은 자리에서 충격파가 3겹으로 퍼짐"
+  },
+  {
+   "skill_id": 50019,
+   "skill_name": "운석 마법",
+   "cond1_type": "Interval",
+   "cond1_value_01": 3.0,
+   "cond1_value_02": 4.0,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Crowd_Meteor",
+   "value_01": 150.0,
+   "value_02": 1.8,
+   "value_03": 0.7,
+   "value_04": 3.0,
+   "value_05": 0.0,
+   "value_06": 0.0,
+   "duration": 0.5,
+   "cool_time": 0.0,
+   "skill_icon": "",
+   "skill_explain": "쥐가 많은 곳 3군데에 운석 소환"
+  },
+  {
+   "skill_id": 50020,
+   "skill_name": "블랙홀",
+   "cond1_type": "Interval",
+   "cond1_value_01": 3.5,
+   "cond1_value_02": 4.5,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Crowd_Vortex",
+   "value_01": 280.0,
+   "value_02": 2.0,
+   "value_03": 0.7,
+   "value_04": 520.0,
+   "value_05": 0.0,
+   "value_06": 0.0,
+   "duration": 0.5,
+   "cool_time": 0.0,
+   "skill_icon": "",
+   "skill_explain": "무리 한가운데 블랙홀 → 쥐를 빨아들인 뒤 띄워서 기절"
   }
  ],
  "Cond_Type": [
@@ -381,6 +601,36 @@
   },
   {
    "effect_type": "Gravity_Wave"
+  },
+  {
+   "effect_type": "Crowd_Slam"
+  },
+  {
+   "effect_type": "Crowd_Combo"
+  },
+  {
+   "effect_type": "Crowd_Pinpoint"
+  },
+  {
+   "effect_type": "Crowd_Belly"
+  },
+  {
+   "effect_type": "Crowd_Roll"
+  },
+  {
+   "effect_type": "Crowd_Blink"
+  },
+  {
+   "effect_type": "Crowd_Laser"
+  },
+  {
+   "effect_type": "Crowd_Quake"
+  },
+  {
+   "effect_type": "Crowd_Meteor"
+  },
+  {
+   "effect_type": "Crowd_Vortex"
   }
  ]
 }

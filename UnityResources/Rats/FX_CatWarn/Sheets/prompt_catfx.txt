@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cat_fx.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings, perfectly uniform, no noise. No text, no letters, no numbers.
+- STYLE: match the attached reference (cozy flat cartoon game art, Untitled Goose Game mood): completely FLAT color shapes, NO black outlines, no gradients, no glow halos. Each piece is ONE connected shape with clean magenta margin; pieces never touch.
+- Exact 2 columns x 2 rows grid (each cell 512x512), each piece centered in its cell.
+
+1) SKY LASER PILLAR: a tall vertical beam coming down from the top of the cell to a small flat ellipse splash at the bottom, made of a hot pink-red (#ff5a6e) outer band and a cream-white (#fff3e0) inner core, slightly wider at the bottom. Fills the cell height, about 30% of cell width.
+2) BLACK HOLE VORTEX (seen from above, perfect circle filling 90% of the cell): a flat spiral swirl of 4 curved arms in deep purple (#5b3f8c) and lavender (#b9a3e3) around a dark center (#2a1f3d), with tiny cream star dots on the arms.
+3) GROUND CRACK (seen from above, filling 85% of the cell): a cartoon ground crack burst, dark brown (#5c3b2a) jagged crack lines radiating from a center hole, with a few light tan broken floor chips, all connected.
+4) METEOR: a chunky round brown-gray rock (#8a7466) with lighter spots, trailing a flat orange-yellow flame tail (#f4a340 / #ffd36b) toward the upper right, falling diagonally down-left.

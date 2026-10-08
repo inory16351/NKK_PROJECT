@@ -81,7 +81,7 @@ namespace NKK.Data
     public class CatCharacterRow
     {
         public int character_id; public string character_name, code_id, cat_category; public int spawn_floor;
-        public float hp_mul, life_time, size_mul; public int skill; public string character_desc, asset_folder;
+        public float hp_mul, life_time, size_mul; public int skill, crowd_skill; public string character_desc, asset_folder;
         public CatCategory Category => E.P<CatCategory>(cat_category);
     }
 

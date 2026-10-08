@@ -33,7 +33,8 @@ namespace NKK.Data
     }
 
     public enum CatCategory { Normal, Special }
-    public enum CatEffectType { None, Hiss_Fear, Double_Pounce, Crit_Pounce, Jump_Press, Roll_Charge, Crowd_Teleport, Laser_Stun, Roar_Blast, Fireball, Gravity_Wave }
+    public enum CatEffectType { None, Hiss_Fear, Double_Pounce, Crit_Pounce, Jump_Press, Roll_Charge, Crowd_Teleport, Laser_Stun, Roar_Blast, Fireball, Gravity_Wave,
+        Crowd_Slam, Crowd_Combo, Crowd_Pinpoint, Crowd_Belly, Crowd_Roll, Crowd_Blink, Crowd_Laser, Crowd_Quake, Crowd_Meteor, Crowd_Vortex }
 
     // 공용 스킬 트리 (공용 스킬 테이블, 찍찍!! 훈장별 트리) — 가지 = 지도 색
     public enum SkillBranch { Core, Combat, Growth, Loot, Trick, Special }

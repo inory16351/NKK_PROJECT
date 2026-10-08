@@ -1,0 +1,15 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cat_warn.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings, perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- STYLE: match the attached reference exactly (cozy flat cartoon game art, Untitled Goose Game mood): completely FLAT color shapes, NO black outlines, no gradients, no glow. Each piece is ONE connected shape with a clean magenta margin; pieces never touch.
+- Exact 3 columns x 2 rows grid (each cell 512x512), each piece centered in its cell.
+
+Row 1:
+1) DANGER ZONE RIM (seen perfectly from above, a perfect circle filling 92% of the cell): a thick warm red-orange (#e2603f) ring made of 12 chunky rounded dashes with small gaps between them, hollow center (magenta inside).
+2) DANGER ZONE FILL (top view, perfect circle filling 92% of the cell): a flat solid soft red-orange disc (#e8775a) with a big cream (#fbe9d0) cat paw print (one big pad + four toe beans) in the center.
+3) CAT CLAW SLASH MARK: three parallel curved claw scratch strokes, cream-white with a thin red-orange edge, diagonal.
+Row 2:
+4) ALERT BUBBLE: a round cream speech bubble with a short tail at the bottom, containing a big bold red-orange exclamation mark shape (a rounded bar and a dot, drawn as shapes).
+5) TARGET MARKER: a small downward pointing chunky red-orange arrow/chevron with a cream inner stripe.
+6) STUN STARS RING: five small cute yellow stars arranged in a circle (connected by a thin cream ring), seen slightly from the side.
