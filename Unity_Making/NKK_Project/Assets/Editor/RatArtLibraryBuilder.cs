@@ -65,7 +65,7 @@ public static class HumanArtLibraryBuilder
             lib.entries.Add(new NKK.Humans.HumanArtLibrary.Entry
             {
                 codeId = m.code_id, head = S(d + "head.png"), scared = S(d + "scared.png"), angry = S(d + "angry.png"), torso = S(d + "torso.png"),
-                arm = S(d + "arm.png"), leg = S(d + "leg.png"), neck = V(m.neck), shoulder = V(m.shoulder), hip = V(m.hip),
+                arm = S(d + "arm.png"), leg = S(d + "leg.png"), neck = V(m.neck), shoulder = V(m.shoulder), hip = V(m.hip), front = m.front == 1,
             });
         }
         EditorUtility.SetDirty(lib);

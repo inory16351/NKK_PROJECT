@@ -1,0 +1,16 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boss_side_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1536, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 3 columns x 3 rows (each cell 512x512). Each drawing sits centered in its own cell with a wide magenta margin; drawings must NOT touch or cross cell borders, and parts must not touch each other.
+- STYLE IS THE MOST IMPORTANT RULE: cut-out body parts for a 2D paper-doll rig, Untitled Goose Game look: completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows. Match the attached boss outfit sheet colors and details exactly.
+- VIEW IS THE SECOND MOST IMPORTANT RULE: everything is a strict SIDE VIEW (profile), the character FACES LEFT, exactly like the attached security guard side parts (ref_side_guard): the torso is seen from the side (narrow, chest bulging toward the LEFT, back on the right), NOT from the front. The bosses' heads (in the outfit sheet) are already side profiles facing left; these new parts must fit under those heads.
+
+Columns = three different boss characters (use the attached outfit sheet rows: row 1 = security chief, row 2 = mad scientist, row 3 = lab director):
+ Column 1: SECURITY CHIEF — big burly man, navy blue uniform jacket with gold buttons, gold epaulette on the shoulder, medal ribbons on the chest, black belt with gold buckle and a radio on the belt, navy trousers with a gold side stripe, black boots, white glove.
+ Column 2: MAD CHIEF RESEARCHER — tall skinny hunched old man, long white lab coat with green chemical stains over a pale blue shirt, brown belt, brown trousers, white rubber boots, teal rubber glove.
+ Column 3: LAB DIRECTOR — short fat bald old man, dark charcoal suit jacket over white shirt with red tie, round belly bulging forward, black trousers, black shoes, white shirt cuff and bare hand.
+
+Row 1 (TORSOS): SIDE VIEW torso only, facing left. ABSOLUTELY NO ARMS, NO SLEEVES, NO HANDS — cut flat at the shoulder line and at the neck (short flat neck stump on top) and cut flat at the hips at the bottom. The chest/belly bulges toward the left.
+Row 2 (ARMS): ONE WHOLE ARM ONLY, side view, hanging straight down, cut flat at the top (shoulder), sleeve of that character's outfit, ending in the hand at the bottom. Long enough to reach from shoulder to below the belt.
+Row 3 (LEGS): ONE WHOLE LEG ONLY, side view, hanging straight down, cut flat at the top (hip), that character's trousers, with the shoe/boot at the bottom whose toe points LEFT.

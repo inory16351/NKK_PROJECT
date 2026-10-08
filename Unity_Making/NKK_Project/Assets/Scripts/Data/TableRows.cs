@@ -179,6 +179,6 @@ namespace NKK.Data
     [Serializable] public class AchievementRow { public int achv_id; public string achv_name, achv_desc, cond_type; public int target_id, need; public string achv_icon; public int sort_order; }
     [Serializable] public class AchievementTableFile { public List<AchievementRow> Achievement; }
     [Serializable] public class StageTableFile { public List<StageRow> Stage; public List<BossRow> Boss; public List<BossLineRow> Boss_Line; public List<BossAtkRow> Atk_Type; }
-    [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; }
+    [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; public int front; }
     [Serializable] public class HumanRigMetaFile { public List<HumanRigMetaRow> items; }
 }

@@ -386,6 +386,9 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - **판마다 랜덤 지형** (사용자 결정: 배치만 랜덤 — 어느 벽을 뚫을지가 곧 길 선택): `StageManager.RunSeed`(GameManager.Awake 에서 판마다 새로) · `FloorSeed(f)` → 방 배치·계단·가구 배치. 인스펙터 `randomLayout` 끄면 예전 층 번호 시드. 벽 체력은 **생성된 길 기준 자동 계산**: 스테이지 테이블 새 칸 `wall_path`(경로 벽 배율 합 목표) 를 계단 거리 d 로 나눔 (일반 = max(0.8, 합×0.5÷(d-1)), 계단 = 나머지, `stairsShare`·`minNormalWall`). `gen_stage_table.py` 는 SPU 를 앞뒤 2층 중앙값(`spu_smooth`)으로 매끄럽게 해서 wall_path 계산 (층별 SPU 는 그 층 지형 하나에 맞춘 값이라). wall_stairs·wall_normal 은 wall_path 0 일 때만. **다음 측정은 랜덤 지형이라 층당 4회 이상** 재고, SPU 갱신도 층별이 아니라 구간 평균으로 볼 것.
 - **쏟아짐** (사용자: 큰 물건도 부서질 때 쏟아지게 + 물건에 맞는 새 물체, 금고 = 돈): 새 물건 16종 (60033~60048, 분류 **Spill** = 평소 생성 안 됨, `ItemRow.IsSpill`, 부술 수 있고 치즈 줌). 그림 Codex `UnityResources/Rats/Items_Spill/` (README 에 어디서 쏟아지는지 표). 큰 물건 8종 + 가구 전부에 drop_01~04 지정 (원본 백업 `Data_Table/_backup_20261008/`). `ItemManager.OnSmashed` 는 가구만이 아니라 drop 있는 물건 전부 쏟음. 물건 그림 = ItemManager 메뉴 Fill Item Sprites (Game 씬 반영함).
 
+- **인간형 보스 3종 몸통·팔·다리 옆모습으로 새로** (사용자: 리깅 이상 — 정면 몸통 + 옆모습 머리, 팔이 몸통에 묻힘): `UnityResources/Rats/Humans/Sheets/boss_v4/` (README). 목살을 머리 목 폭·피부색에 맞춤. `HumanArtLibrary.Entry.front`(정면 몸통이면 팔 양옆·다리 벌림·목 가운데) 코드는 남겨 둠 — pivots.json 에 "front": 1 일 때만 (지금은 전부 0).
+- **보스는 계단 방에만 보임** (사용자: 보스가 계단 방에 안 나옴 — 실제론 계단 방 좌표였지만 안 열린 방은 바닥이 안 그려져 허공에 떠 보였음): 대기 중 계단 방이 안 보이면 숨김, 옆 방이 열려 어둡게 보이면 실루엣(`Boss.waitDarkTint`), 계단 방이 열리면 원래 색 + 전투. 보스 층 계단은 보스를 잡아야 쓸 수 있음 (`Boss.Blocking`, 이미 있던 것).
+
 **남은 일 (순서 제안)**
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.
 2. 결과로 `gen_stage_table.py` 곡선(POW_GROW·HP_GROW·벽 배율·방 수)과 `gen_skill_tree.py` 값·비용(치즈 수입 대비 훈장 트리 1개 ≈ 판 3~5번), 보스 `hp_pow_sec`(지금 40), 티어 테이블 조건(연구자료·Skill_Node_Count 15/40/70/100/130/160/195) 조정 → 다시 생성·xlsx2json·측정.

@@ -61,6 +61,8 @@ namespace NKK.Hazards
 
         [Header("수치")]
         [Tooltip("계단 기준 대기 위치 (게임 단위, 아래로 +)")] public float waitOffsetY = 220;
+        [Tooltip("대기 중 계단 방이 아직 안 열렸지만 옆 방이 열려 어둡게 보일 때 보스 색 (실루엣). 계단 방이 안 보이면 보스도 숨김")] public Color waitDarkTint = new(0.22f, 0.22f, 0.26f, 1f);
+        readonly System.Collections.Generic.List<(SpriteRenderer r, Color c)> baseColors = new();
         [Tooltip("점프 세기 (내려찍기 · 덮치기) · 중력")] public float jumpV = 900, pounceV = 700, gravity = 1800;
         [Tooltip("휘두르기에 맞은 쥐 날리는 속도 · 위로")] public float swingSpeed = 520, swingUp = 420;
         [Tooltip("무중력: 쥐 떠오르는 속도 최소·최대 · 물건 날리는 속도")] public float gravUpMin = 600, gravUpMax = 850, gravItem = 200;
@@ -139,6 +141,8 @@ namespace NKK.Hazards
                 rig.Build(art);
             }
             SetVisible(true);
+            baseColors.Clear();
+            foreach (var r in (row.IsCat ? (Component)catRig : rig).GetComponentsInChildren<SpriteRenderer>(true)) baseColors.Add((r, r.color));
             Current = this;
         }
 
@@ -523,10 +527,24 @@ namespace NKK.Hazards
         void LateUpdate()
         {
             if (State == BState.Off || State == BState.Dead || (!rig && !catRig)) return;
+            // 층 보스 대기: 계단 방이 화면에 그려질 때만 보임 (안 열린 방은 바닥이 안 그려져 보스만 허공에 떠 보였음)
+            //   계단 방 열림 = 원래 색 · 옆 방이 열려 어둡게 보임 = 실루엣 · 그 외 = 숨김
+            int look = 2;
+            if (State == BState.Wait && !Test)
+            {
+                var sr = Stage.StairsRoom; bool peek = false;
+                foreach (var d in StageManager.Dirs) if (Stage.IsOpen(sr.x + d.x, sr.y + d.y)) peek = true;
+                look = Stage.IsOpen(sr.x, sr.y) ? 2 : peek ? 1 : 0;
+            }
+            SetVisible(look > 0);
+            if (look == 0) return;
             float jx = jit > 0 ? Random.Range(-jit, jit) : 0;
             transform.position = World.ToUnity(x + jx, y, z);
             if (Cat) catRig.Apply(MakeCatPose(), 1, face, sq, World.SortOrder(y), 0, State == BState.Dying ? rot : 0);
             else rig.Apply(MakePose(), 1, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), 1);
+            // 실루엣 색 (사람 리그는 Apply 가 매번 색을 되돌림, 고양이 리그는 원래 색으로 되돌림)
+            var k = look == 1 ? waitDarkTint : Color.white;
+            if (Cat || look == 1) foreach (var (r, c) in baseColors) if (r) r.color = new Color(c.r * k.r, c.g * k.g, c.b * k.b, c.a);
             if (shadow)
             {
                 float w = R * 1.4f * (1 - Mathf.Min(0.7f, z / 900)), sw = shadow.sprite ? shadow.sprite.bounds.size.x : 1;
