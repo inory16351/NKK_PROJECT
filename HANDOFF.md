@@ -136,6 +136,12 @@ NKK.BalanceProbe.RunQueue();   // 결과: NKK.BalanceProbe.Results / RowsCsv() �
 
 ## 7. 남은 일 (순서 제안)
 
+0. **[다음 에이전트 작업] 보스 테이블 분리 + 인간형 보스 두 번째 일반 공격** (사용자 지시 2026-10-08)
+   - **보스 테이블 새로 만들기**: 지금 보스 데이터는 `스테이지 테이블.xlsx` 의 `Boss` · `Boss_Line` · `Atk_Type` · `Situation_Type` 시트에 섞여 있음 → 새 파일 `Data_Table/보스 테이블.xlsx` (JSON `BossTable`) 로 옮기고 스테이지 테이블에서는 삭제 (`Column_Desc` 의 보스 칸 설명도 같이 옮김).
+     - 고칠 곳: `Tools/xlsx2json.py NAMES` 에 `'보스 테이블': 'BossTable'` · `Data/TableRows.cs` 에 `BossTableFile { Boss, Boss_Line, Atk_Type }` (지금 `StageTableFile` 안에 있음) · `Data/GameDatabase.cs` 에 `public TextAsset bossTable` + 로드 (지금 stageTable 로드 줄에서 보스 부분 분리) · **Game·Lobby 두 씬의 GameDatabase 에 BossTable.json 연결**.
+     - 도구도 같이: `Tools/update_spu.py` 가 `스테이지 테이블` 의 `Boss` 시트 `hp_pow_sec` 를 고침(69~75줄) → 보스 테이블로 · `Tools/gen_stage_table.py` 112줄이 `wb['Boss']` 셀 스타일을 복사함 → Stage 시트 스타일로 바꿀 것 (Boss 시트가 없으면 에러).
+     - 옮기기 전 백업 `Data_Table/_backup_YYYYMMDD/`, 옮긴 뒤 xlsx2json → Play 로 5층 보스 대기·전투·필살 패턴 확인.
+   - **두 번째 일반 공격** (지금 `atk2_type` 이 None 인 3명, 40% 확률로): 경비대장 = 진압봉 휘두르기 · 수석 연구원 = 독가스 구름(바닥에 남아 들어온 쥐 기절) · 연구소장 = 서류 가방 던지기 (제안, 사용자 확인 후). Atk_Type 행 추가 + `Hazards/Boss.cs` 공격 switch 에 case 추가 (기존 Flask·Swing·Throw 재사용 가능), 대사 Boss_Line `Attack`. 필요하면 Codex 로 소품 그림 (진압봉·가스 구름·서류 가방).
 1. **사용자 플레이 피드백 반영**: 보스 필살 패턴 12종·고양이 무리 스킬 10종의 화면 연출·세기 (데이터 발동은 확인, 화면은 일부만 봄). 보스 건너뜀이 또 생기면 Editor.log `[Boss]` 확인.
 2. **밸런스**: 사용자 성장 곡선 → `gen_stage_table.py`(POW_GROW·HP_GROW·벽)·`gen_skill_tree.py`(값·비용) 조정 → 측정 (§6). 보스전 시간(필살 패턴 포함)·고양이 방해 정도도 같이. 높은 층(10층+) 사람 수도 아직 안 잼.
 3. **로비 남은 페이지**: 친구들(도감, `RatPortrait` 재사용) · 낮잠 침대(기록·저장). 탭 아이콘·지도 등 로비 소품을 플랫으로 다시 만들지 사용자 결정.
