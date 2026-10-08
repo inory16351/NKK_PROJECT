@@ -15,6 +15,7 @@
 - **작업 단계마다 결정할 게 생기면 바로 사용자에게 질문**하고 진행.
 - **수치 데이터는 엑셀 테이블로 관리** (`Data_Table/`, 아래 3장 형식).
 - **생성 담당:** `ItemManager` = 물건·사람 생성(주기·상한) / `StageManager` = 쥐덫·고양이 등장 확률.
+- **판 시작 쥐**: 티어 테이블 6·7·8·8·9·10·11·12 + 시작 쥐 노드 합 +12 (8훈장 다 찍으면 24마리, 2026-10-08 사용자 결정)
 - **특수 능력(패시브)은 처음부터 켜짐**, **특수 액션 = 쳇바퀴 훈련 Lv 3**, **필살기 = 쳇바퀴 훈련 Lv 7** (조각으로 해금, 2026-10-07 사용자 결정), **공용 스킬 묘기는 공용 스킬로 해금**.
 - **이미지가 필요하면 Codex CLI 로 생성**, 토큰을 아끼려고 **한 장에 여러 개를 그려서 잘라 쓸 것** (5장).
 - **화풍: Untitled Goose Game 식 플랫** (외곽선·광택·그라데이션 없음, 쥐 파츠 그림과 같게). 참고 이미지 `-i UnityResources/Rats/Sheets/ballerina.png,UnityResources/Rats/ArtSheets/art_01_item_flask.png`
@@ -348,6 +349,22 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - **찍찍!! 훈장 페이지** `Lobby/RankPage.cs` (`Page_rank`, 웹 renderRank): 위 = 훈장 사다리 8칸(지금·자물쇠) / 왼쪽 = 고른 훈장 배지·상태·효과(시작 쥐·윗등급 배율, 지금 → 그 훈장)·승급 조건 막대·훈장 달기 / 가운데 = 그 훈장에 오는 친구들(안 만난 친구는 그림자 + ???) / 오른쪽 = **업적**. 팻말 알림 점 = `CanRankUp`.
 - **업적** (사용자: 나중에 확장 → '업적' 으로): 새 `업적 테이블`(Achievement: achv_id·이름·설명·cond_type·target_id·need·achv_icon·정렬, Achv_Cond_Type). 지금은 필살기 33종 완주 = `Ult_Use`(Progress 의 필살기 기록). `Progress.AchvProgress/AchvDone`. 아이콘 33개 = 같은 메달 틀 + 상징 (`UnityResources/Rats/AchvIcons/`, README). 게임 중 업적 토스트는 아직 필살기 테이블 ult_achv 를 씀 (이름은 같음) — 조건 타입을 늘릴 때 토스트도 업적 테이블로 옮길 것.
 - **글자 정리**: UI 조각 그림의 음영(카드 아래 18px 띠 · 판자 아래 13px 띠와 양쪽 못 · 타일 아래 36px 띠 · 팻말 위 끈) 위에 글이 겹치던 것을 앞면 안으로 옮김 (작전 회의 층 타일·정보 줄·기록 칸, 쳇바퀴 카드·필터·성장 길·능력 카드, 훈장 효과 줄·업적 줄·친구 칸, 트리 노드). 판자 버튼 라벨은 전부 아래 음영·양쪽 못 여백 + 한 줄 자동 크기. 넘치던 글(카드 Lv·이름·능력 제목·출동 멤버 설명·치즈 창고 상세 이름)은 칸 높이/자동 크기. 점검은 Play 중 TMP textBounds 를 그림 앞면과 비교하는 스크립트로 함 (Badge 숫자 점은 일부러 밖).
+
+### 9-10. 2026-10-08 오후 — 업적 알림·스위치 · 고양이 보스 그림 · 고양이 다리 입체 · 시작 쥐 · 계단 거리 (일부 미커밋)
+- **업적 알림** `Core/AchievementToast.cs` (Game 씬 `HUD/AchievementToast` → 패널 `HUD/UltAchievement`, 메달 아이콘 `Icon` 추가, 위치 y -215): 업적 테이블 기준. UltimateManager 의 예전 업적 패널 코드는 삭제, 필살기 끝나면 `Progress.OnUltUsed(ultId)`.
+- **업적 스위치** (사용자 결정): 저장 파일마다 `SaveData.achvOn`(달성한 업적 id). `Progress.CheckAchv` 는 스위치가 꺼져 있고 조건(AchvProgress ≥ need)을 넘을 때만 켜고 `AchvGot(row)` 한 번. `AchvDone` = 스위치. 다시 알림 없음.
+- **고양이 보스 전용 그림** 20 `boss_zero` · 25 `boss_witch` · 30 `boss_commander` (`UnityResources/Rats/Cats/Sheets/boss_cats/` README, 새 도구 `Tools/slice_cat_parts.py --boss` = 자홍 테두리 제거 + 다리를 몸통 중간 높이에). 스테이지 테이블 Boss code_id 교체, CatArtLibrary 다시 빌드함. 리그 미리보기 `boss_cats/_rig_preview.png`.
+- **고양이 다리 입체** (사용자 결정): 가까운 다리 = 몸통 앞, 먼 다리만 뒤 → `Cat.cs`·`Boss.cs`·`UltThankYou.cs` 의 `rig.Build(..., legsBehind: false)`. **코드만 고침, 아직 컴파일·Play 확인 안 함** (측정 Play 중이라). 다음 작업자: 컴파일 후 일반 고양이 10종·보스 3종 모습 확인.
+- **시작 쥐**: 티어 테이블 start_rat_count 6·7·8·8·9·10·11·12, 공용 스킬 Start_Rat = 각 훈장 G1 +1 · 짝수 훈장 G3 +1 (합 12), 빠진 자리(G3 홀수 훈장·G8)는 Breed_Chance +5%. 노드 마릿수는 등급 무관, 훈장 확률로 뽑음.
+- **최대 마리 수**: 기본 popCap 30 + Pop_Cap 노드 합 145 = 175.
+- **계단 거리 상한** (사용자 결정): `StageManager.stairsMaxDist` 4 = 계단 방은 거리 4 이내 중 가장 먼 방 (긴 복도 끝 계단은 쥐가 안 모여 벽을 얇게 해도 170~250% 걸렸음). `gen_stage_table.py STAIRS_MAX_DIST` 와 같게.
+
+**층 밸런스 측정 — 다음 작업자가 이어서 (목표: 전투력 = 적정일 때 180초 · 보스 층 210초의 70~80%)**
+- 라운드 4 (계단 총공격 수정 후, 상한·시작 쥐 변경 전): 중앙값 68%, 61번 중 25번이 60~90%. 결과 `Tools/probe_results/` 에 없으면 HANDOFF §9-8 표 참고.
+- 그 결과로 `gen_stage_table.py` SPU 갱신(지형이 안 바뀐 층만 `SPU × 측정%/75`, 0.6~1.6배 제한), 계단 거리 상한으로 지형이 바뀐 층(8·11·13·15·17·18·21·25·26·28·30)은 SPU 빠짐(기본 10). 테이블 재생성 완료.
+- 라운드 5 를 돌리던 중 중단 (시작 쥐·계단 상한·새 SPU 반영 상태). **할 일**: ① 유니티 컴파일 (고양이 다리 코드) ② Play 후 §9-8 의 큐 코드로 측정 2회 ③ 층별 중앙값으로 SPU 갱신 → `python Tools/gen_stage_table.py && python Tools/xlsx2json.py` ④ 다시 측정, 70~80% 될 때까지 반복 ⑤ 커밋.
+- 측정 주의: 유니티 창을 앞에 (뒤면 느림), 측정 중 스크립트 수정 금지, BalanceProbe 는 화면을 안 그려서 측정 중엔 게임 캡처 불가.
+- 초반 층(1~4)·16·22·24층은 벽을 크게 늘려도 시간이 잘 안 늘어남 (번식으로 전투력이 커짐) — SPU 갱신이 수렴 안 하면 그 층들은 제한시간 대신 목표를 조정할지 사용자에게 물을 것.
 
 **남은 일 (순서 제안)**
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.

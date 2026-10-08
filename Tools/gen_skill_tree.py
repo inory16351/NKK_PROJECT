@@ -32,56 +32,56 @@ BRANCH = {'C': 'Combat', 'G': 'Growth', 'L': 'Loot', 'K': 'Trick', 'S': 'Special
 T = {}
 T[1] = dict(
     C1=('Atk_Flat', 1), C2=('Dmg_Pct', 0.10), C3=('Atk_Flat', 2), C4=('Atk_Flat', 2, 1), C5=('Atk_Flat', 3, 2, 1), C6=('Wall_Dmg_Pct', 0.10), C7=('Wall_Dmg_Pct', 0.15), C8=('Dmg_Pct', 0.15),
-    G1=('Start_Rat', 1, 1), G2=('Time_Add', 3), G3=('Start_Rat', 1, 1), G4=('Breed_Chance', 0.10, 10), G5=('Pop_Cap', 10), G6=('Time_Add', 4), G7=('Promote_Double', 0.03, 1), G8=('Start_Rat', 1, 1),
+    G1=('Start_Rat', 1, 1), G2=('Time_Add', 3), G3=('Breed_Chance', 0.05), G4=('Breed_Chance', 0.10, 10), G5=('Pop_Cap', 10), G6=('Time_Add', 4), G7=('Promote_Double', 0.03, 1), G8=('Breed_Chance', 0.05),
     L1=('Item_Count_Flat', 1), L2=('Cheese_Pct', 0.10), L3=('Item_Count_Flat', 1), L4=('Cheese_Pct', 0.15), L5=('Cheese_Pct', 0.30, 1), L6=('New_Item', 60011), L7=('Cheese_Pct', 0.30, 2), L8=('New_Item', 60025),
     K1=('Trick_Unlock', 1, 0.03), K2=('Trick_Cheese_Pct', 0.20), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 1, 0.02), K5=('Trap_Multi_Down', 0.10), K6=('Trick_Cheese_Pct', 0.40), K7=('Trick_Gauge_Pct', 0.25),
     S1=('Stage_Skip', 1), S2=('Wall_Hp_Down', 0.05), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.1, 4), S5=('Rocket_CD', 5), S6=('Ult_Gauge_Pct', 0.10),
 )
 T[2] = dict(
     C1=('Atk_Flat', 2), C2=('Atk_Pct', 0.10), C3=('Crit_Chance', 0.03), C4=('Atk_Flat', 4, 2), C5=('Atk_Pct', 0.15, 2, 1), C6=('Wall_Dmg_Pct', 0.15), C7=('Crit_Dmg', 0.50), C8=('Dmg_Pct', 0.15),
-    G1=('Start_Rat', 1, 1), G2=('Time_Add', 5), G3=('Start_Rat', 1, 2), G4=('Breed_Chance', 0.05), G5=('Pop_Cap', 10), G6=('Time_Add', 5), G7=('Promote_Double', 0.03, 1), G8=('Start_Rat', 2, 1),
+    G1=('Start_Rat', 1, 1), G2=('Time_Add', 5), G3=('Start_Rat', 1, 1), G4=('Breed_Chance', 0.05), G5=('Pop_Cap', 10), G6=('Time_Add', 5), G7=('Promote_Double', 0.03, 1), G8=('Breed_Chance', 0.05),
     L1=('Item_Count_Flat', 1), L2=('Cheese_Pct', 0.15), L3=('Item_Count_Pct', 0.10), L4=('Cheese_Pct', 0.35, 2), L5=('Cheese_Pct', 0.35, 1), L6=('New_Item', 60017), L7=('Item_Count_Pct', 0.15), L8=('New_Item', 60026),
     K1=('Trick_Unlock', 2, 0.02), K2=('Trick_Chance', 2, 0.02), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 1, 0.02), K5=('Trap_Multi_Down', 0.10), K6=('Trick_Cheese_Pct', 0.40), K7=('Trick_Gauge_Pct', 0.25),
     S1=('Stage_Skip', 1), S2=('Wall_Hp_Down', 0.05), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.1, 4), S5=('Ult_Gauge_Pct', 0.15), S6=('Rush_CD', 0.5),
 )
 T[3] = dict(
     C1=('Atk_Flat', 3), C2=('Atk_Pct', 0.15), C3=('Multi_Hit', 0.05, 1), C4=('Atk_Flat', 6, 3), C5=('Atk_Pct', 0.20, 3, 1), C6=('Wall_Dmg_Pct', 0.20), C7=('Crit_Chance', 0.03), C8=('Dmg_Pct', 0.20),
-    G1=('Start_Rat', 1, 2), G2=('Time_Add', 6), G3=('Start_Rat', 1, 2), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 15), G6=('Time_Add', 6), G7=('Promote_Double', 0.03, 2), G8=('Promote_Double', 0.02, 1),
+    G1=('Start_Rat', 1, 1), G2=('Time_Add', 6), G3=('Breed_Chance', 0.05), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 15), G6=('Time_Add', 6), G7=('Promote_Double', 0.03, 2), G8=('Promote_Double', 0.02, 1),
     L1=('Item_Count_Flat', 2), L2=('Cheese_Pct', 0.15), L3=('Item_Count_Pct', 0.15), L4=('Cheese_Pct', 0.40, 2), L5=('Cheese_Pct', 0.40, 1), L6=('New_Item', 60020), L7=('Furniture_Pct', 0.30, 0.30), L8=('New_Item', 60027),
     K1=('Trick_Unlock', 3, 0.015), K2=('Trick_Chance', 3, 0.015), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 2, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Cheese_Pct', 0.50), K7=('Trick_Gauge_Pct', 0.25),
     S1=('Stage_Skip', 2), S2=('Bite_Zap', 0.05, 2, 0.5), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.15, 4), S5=('Chain_Blast', 30, 0.20), S6=('Wall_Hp_Down', 0.05),
 )
 T[4] = dict(
     C1=('Atk_Flat', 5), C2=('Atk_Pct', 0.20), C3=('Crit_Dmg', 0.50), C4=('Atk_Flat', 10, 4), C5=('Atk_Pct', 0.25, 4, 1), C6=('Wall_Dmg_Pct', 0.20), C7=('Boss_Dmg_Pct', 0.25), C8=('Dmg_Pct', 0.20),
-    G1=('Start_Rat', 1, 3), G2=('Time_Add', 7), G3=('Start_Rat', 2, 2), G4=('Breed_Chance', 0.05), G5=('Pop_Cap', 15), G6=('Time_Add', 7), G7=('Promote_Double', 0.03, 3), G8=('Start_Rat', 3, 1),
+    G1=('Start_Rat', 1, 1), G2=('Time_Add', 7), G3=('Start_Rat', 1, 1), G4=('Breed_Chance', 0.05), G5=('Pop_Cap', 15), G6=('Time_Add', 7), G7=('Promote_Double', 0.03, 3), G8=('Breed_Chance', 0.05),
     L1=('Item_Count_Pct', 0.15), L2=('Cheese_Pct', 0.20), L3=('Spawn_Rate_Pct', 0.20), L4=('Cheese_Pct', 0.50, 2), L5=('Cheese_Pct', 0.50, 1), L6=('New_Item', 60022), L7=('Gold_Item', 0.03, 5), L8=('New_Item', 60028),
     K1=('Trick_Unlock', 4, 0.015), K2=('Trick_Chance', 4, 0.015), K3=('Trick_Chance', 0, 0.01), K4=('Trick_Chance', 3, 0.015), K5=('Trap_Single_Down', 0.05), K6=('Trick_Cheese_Pct', 0.50), K7=('Trick_Gauge_Pct', 0.30),
     S1=('Stage_Skip', 2), S2=('Ult_CD', 3), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.15, 4), S5=('Ult_Power_Pct', 0.30), S6=('Rush_Up', 0.5, 0.5),
 )
 T[5] = dict(
     C1=('Atk_Flat', 8), C2=('Atk_Pct', 0.25), C3=('Multi_Hit', 0.05, 2), C4=('Atk_Flat', 15, 5), C5=('Atk_Pct', 0.30, 5, 1), C6=('Wall_Dmg_Pct', 0.25), C7=('Crit_Chance', 0.04), C8=('Dmg_Pct', 0.25),
-    G1=('Start_Rat', 1, 3), G2=('Time_Add', 8), G3=('Start_Rat', 1, 4), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 20), G6=('Time_Add', 8), G7=('Promote_Double', 0.03, 4), G8=('Mutation_Chance', 0.10),
+    G1=('Start_Rat', 1, 1), G2=('Time_Add', 8), G3=('Breed_Chance', 0.05), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 20), G6=('Time_Add', 8), G7=('Promote_Double', 0.03, 4), G8=('Mutation_Chance', 0.10),
     L1=('Item_Count_Pct', 0.20), L2=('Cheese_Pct', 0.20), L3=('Spawn_Rate_Pct', 0.20), L4=('Cheese_Pct', 0.60, 2), L5=('Cheese_Pct', 0.60, 1), L6=('New_Item', 60023), L7=('Gold_Item', 0.04), L8=('New_Item', 60029),
     K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.50), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 1, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Chance', 2, 0.02), K7=('Trick_Gauge_Pct', 0.30),
     S1=('Stage_Skip', 2), S2=('Cheese_Meteor', 12, 0.30), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.2, 4), S5=('Cheese_Meteor', 0, 0.30), S6=('Rush_CD', 0.5),
 )
 T[6] = dict(
     C1=('Atk_Flat', 12), C2=('Atk_Pct', 0.30), C3=('Crit_Dmg', 0.75), C4=('Atk_Flat', 22, 6), C5=('Atk_Pct', 0.30, 6, 1), C6=('Wall_Dmg_Pct', 0.25), C7=('Boss_Dmg_Pct', 0.30), C8=('Dmg_Pct', 0.30),
-    G1=('Start_Rat', 2, 4), G2=('Time_Add', 9), G3=('Start_Rat', 2, 3), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 20), G6=('Time_Add', 9), G7=('Promote_Double', 0.03, 5), G8=('Start_Rat', 3, 2),
+    G1=('Start_Rat', 1, 1), G2=('Time_Add', 9), G3=('Start_Rat', 1, 1), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 20), G6=('Time_Add', 9), G7=('Promote_Double', 0.03, 5), G8=('Breed_Chance', 0.05),
     L1=('Item_Count_Pct', 0.20), L2=('Cheese_Pct', 0.25), L3=('Spawn_Rate_Pct', 0.25), L4=('Cheese_Pct', 0.70, 2), L5=('Cheese_Pct', 0.70, 1), L6=('New_Item', 60024), L7=('Gold_Item', 0.04), L8=('New_Item', 60030),
     K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.60), K3=('Trick_Chance', 3, 0.02), K4=('Trick_Chance', 4, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Gauge_Pct', 0.30), K7=('Trick_Chance', 0, 0.01),
     S1=('Stage_Skip', 2), S2=('Ult_Auto', 1), S3=('Stage_Skip', 2), S4=('Boss_Dmg_Pct', 0.2, 4), S5=('Super_Jump_Pct', 0.50), S6=('Ult_CD', 3),
 )
 T[7] = dict(
     C1=('Atk_Flat', 18), C2=('Atk_Pct', 0.30), C3=('Multi_Hit', 0.05, 2), C4=('Atk_Flat', 30, 5, 1), C5=('Atk_Pct', 0.35, 4, 1), C6=('Wall_Dmg_Pct', 0.30), C7=('Crit_Chance', 0.04), C8=('Dmg_Pct', 0.30),
-    G1=('Start_Rat', 1, 5), G2=('Time_Add', 10), G3=('Start_Rat', 2, 4), G4=('Birth_Frenzy', 4, 200, 1.5), G5=('Pop_Cap', 25), G6=('Time_Add', 10), G7=('Promote_Double', 0.03, 0), G8=('Mutation_Chance', 0.15),
+    G1=('Start_Rat', 1, 1), G2=('Time_Add', 10), G3=('Breed_Chance', 0.05), G4=('Birth_Frenzy', 4, 200, 1.5), G5=('Pop_Cap', 25), G6=('Time_Add', 10), G7=('Promote_Double', 0.03, 0), G8=('Mutation_Chance', 0.15),
     L1=('Item_Count_Pct', 0.25), L2=('Cheese_Pct', 0.25), L3=('Spawn_Rate_Pct', 0.25), L4=('Cheese_Pct', 0.80, 2), L5=('Cheese_Pct', 0.80, 1), L6=('Gold_Item', 0.05), L7=('Air_Cheese_Pct', 0.50), L8=('New_Item', 60031),
     K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.70), K3=('Trick_Chance', 1, 0.02), K4=('Trick_Chance', 2, 0.02), K5=('Trick_Chance', 3, 0.02), K6=('Trick_Gauge_Pct', 0.40), K7=('Trick_Chance', 4, 0.02),
     S1=('Stage_Skip', 2), S2=('Cat_Hp_Down', 0.30, 0.30), S3=('Stage_Skip', 2), S4=('Boss_Dmg_Pct', 0.25, 3), S5=('Ult_Power_Pct', 0.50), S6=('Rush_Up', 0.5, 0.5),
 )
 T[8] = dict(
     C1=('Atk_Flat', 25), C2=('Atk_Pct', 0.40), C3=('Crit_Dmg', 1.00), C4=('Atk_Flat', 40, 6), C5=('Atk_Pct', 0.50, 6), C6=('Wall_Dmg_Pct', 0.30), C7=('Boss_Dmg_Pct', 0.50), C8=('Dmg_Pct', 0.40),
-    G1=('Start_Rat', 1, 6), G2=('Time_Add', 11), G3=('Start_Rat', 2, 4), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 30), G6=('Time_Add', 12), G7=('Promote_Double', 0.04, 0), G8=('Mutation_Chance', 0.15),
+    G1=('Start_Rat', 1, 1), G2=('Time_Add', 11), G3=('Start_Rat', 1, 1), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 30), G6=('Time_Add', 12), G7=('Promote_Double', 0.04, 0), G8=('Mutation_Chance', 0.15),
     L1=('Item_Count_Pct', 0.30), L2=('Cheese_Pct', 0.30), L3=('Spawn_Rate_Pct', 0.30), L4=('Cheese_Pct', 1.00, 2), L5=('Cheese_Pct', 1.00, 1), L6=('Gold_Item', 0.05), L7=('Combo_Time_Pct', 0.30), L8=('New_Item', 60032),
     K1=('Trick_Chance', 0, 0.02), K2=('Trick_Cheese_Pct', 1.00), K3=('Trick_Chance', 0, 0.01), K4=('Trick_Gauge_Pct', 0.50), K5=('Trap_Single_Down', 0.05), K6=('Trap_Multi_Down', 0.05), K7=('Trick_Chance', 0, 0.01),
     S1=('Stage_Skip', 3), S2=('Ult_CD', 4), S3=('Stage_Skip', 3), S4=('Boss_Dmg_Pct', 0.25, 3), S5=('Rush_CD', 0.5), S6=('Ult_Power_Pct', 0.50),

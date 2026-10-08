@@ -143,3 +143,42 @@ MonoBehaviour:
     hip: {x: 0.79532164, y: 0.7675}
     legFront: 0.75
     legBack: 0.711
+  - codeId: boss_zero
+    head: {fileID: 21300000, guid: 2ed6db2f359836348b443d06f9efea2a, type: 3}
+    torso: {fileID: 21300000, guid: 5e3d19cba909d3a4b8ca6750043f95fb, type: 3}
+    tail: {fileID: 21300000, guid: 83c2fb0c3d23b3340be3c537bd0568b0, type: 3}
+    front: {fileID: 21300000, guid: 0aedb7d92659f5040be2a27fb15e0e53, type: 3}
+    back: {fileID: 21300000, guid: f741df63933ac4547960f0010b2b16b5, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.791, y: 0.5}
+    legFront: 1.104
+    legBack: 1.056
+  - codeId: boss_witch
+    head: {fileID: 21300000, guid: b7732f6b595391a44bd30041775ae086, type: 3}
+    torso: {fileID: 21300000, guid: 8103b183af1786d4ca6a2a00c371fc4f, type: 3}
+    tail: {fileID: 21300000, guid: 014b0a002b343b14a8461d36b2c38b55, type: 3}
+    front: {fileID: 21300000, guid: aee9c491a8b0e8046b605f3db615826c, type: 3}
+    back: {fileID: 21300000, guid: 8749a4ab259e744488a3fe09517af57f, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.791, y: 0.5}
+    legFront: 1.018
+    legBack: 0.97
+  - codeId: boss_commander
+    head: {fileID: 21300000, guid: eabe6312f6f606b4a8f7fdd28db566a4, type: 3}
+    torso: {fileID: 21300000, guid: 13b200b9f56448946bd4b55e187e78e1, type: 3}
+    tail: {fileID: 21300000, guid: bd8d8855c45616e40933b4432440ed7e, type: 3}
+    front: {fileID: 21300000, guid: e7053bd612c56b748872ed48f8dccf06, type: 3}
+    back: {fileID: 21300000, guid: c0a49bc8b08a5fe4aa14cb998ac850c8, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.791, y: 0.5}
+    legFront: 1.046
+    legBack: 0.997

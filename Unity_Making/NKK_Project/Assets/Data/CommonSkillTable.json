@@ -212,7 +212,7 @@
   {
    "skill_id": 92111,
    "tier": 1,
-   "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name": "번식 확률 +5%",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -221,11 +221,11 @@
    "link_2": 0,
    "cost_cheese": 85.0,
    "cost_research": 0.0,
-   "effect_type": "Start_Rat",
-   "value_01": 1.0,
-   "value_02": 1.0,
+   "effect_type": "Breed_Chance",
+   "value_01": 0.05,
+   "value_02": 0.0,
    "value_03": 0.0,
-   "skill_asset": "SkillIcons/cs_startrat",
+   "skill_asset": "SkillIcons/cs_breed",
    "skill_explain": ""
   },
   {
@@ -307,7 +307,7 @@
   {
    "skill_id": 92116,
    "tier": 1,
-   "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name": "번식 확률 +5%",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -316,11 +316,11 @@
    "link_2": 0,
    "cost_cheese": 130.0,
    "cost_research": 0.0,
-   "effect_type": "Start_Rat",
-   "value_01": 1.0,
-   "value_02": 1.0,
+   "effect_type": "Breed_Chance",
+   "value_01": 0.05,
+   "value_02": 0.0,
    "value_03": 0.0,
-   "skill_asset": "SkillIcons/cs_startrat",
+   "skill_asset": "SkillIcons/cs_breed",
    "skill_explain": ""
   },
   {
@@ -945,7 +945,7 @@
    "cost_research": 2.0,
    "effect_type": "Start_Rat",
    "value_01": 1.0,
-   "value_02": 2.0,
+   "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
    "skill_explain": ""
@@ -1029,7 +1029,7 @@
   {
    "skill_id": 92216,
    "tier": 2,
-   "skill_name": "시작 쥐 +2마리 (등급은 훈장 확률)",
+   "skill_name": "번식 확률 +5%",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -1038,11 +1038,11 @@
    "link_2": 0,
    "cost_cheese": 1600.0,
    "cost_research": 3.0,
-   "effect_type": "Start_Rat",
-   "value_01": 2.0,
-   "value_02": 1.0,
+   "effect_type": "Breed_Chance",
+   "value_01": 0.05,
+   "value_02": 0.0,
    "value_03": 0.0,
-   "skill_asset": "SkillIcons/cs_startrat",
+   "skill_asset": "SkillIcons/cs_breed",
    "skill_explain": ""
   },
   {
@@ -1629,7 +1629,7 @@
    "cost_research": 3.0,
    "effect_type": "Start_Rat",
    "value_01": 1.0,
-   "value_02": 2.0,
+   "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
    "skill_explain": ""
@@ -1656,7 +1656,7 @@
   {
    "skill_id": 92311,
    "tier": 3,
-   "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name": "번식 확률 +5%",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -1665,11 +1665,11 @@
    "link_2": 0,
    "cost_cheese": 13000.0,
    "cost_research": 6.0,
-   "effect_type": "Start_Rat",
-   "value_01": 1.0,
-   "value_02": 2.0,
+   "effect_type": "Breed_Chance",
+   "value_01": 0.05,
+   "value_02": 0.0,
    "value_03": 0.0,
-   "skill_asset": "SkillIcons/cs_startrat",
+   "skill_asset": "SkillIcons/cs_breed",
    "skill_explain": ""
   },
   {
@@ -2351,7 +2351,7 @@
    "cost_research": 6.0,
    "effect_type": "Start_Rat",
    "value_01": 1.0,
-   "value_02": 3.0,
+   "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
    "skill_explain": ""
@@ -2378,7 +2378,7 @@
   {
    "skill_id": 92411,
    "tier": 4,
-   "skill_name": "시작 쥐 +2마리 (등급은 훈장 확률)",
+   "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -2388,8 +2388,8 @@
    "cost_cheese": 150000.0,
    "cost_research": 11.0,
    "effect_type": "Start_Rat",
-   "value_01": 2.0,
-   "value_02": 2.0,
+   "value_01": 1.0,
+   "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
    "skill_explain": ""
@@ -2473,7 +2473,7 @@
   {
    "skill_id": 92416,
    "tier": 4,
-   "skill_name": "시작 쥐 +3마리 (등급은 훈장 확률)",
+   "skill_name": "번식 확률 +5%",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -2482,11 +2482,11 @@
    "link_2": 0,
    "cost_cheese": 220000.0,
    "cost_research": 14.0,
-   "effect_type": "Start_Rat",
-   "value_01": 3.0,
-   "value_02": 1.0,
+   "effect_type": "Breed_Chance",
+   "value_01": 0.05,
+   "value_02": 0.0,
    "value_03": 0.0,
-   "skill_asset": "SkillIcons/cs_startrat",
+   "skill_asset": "SkillIcons/cs_breed",
    "skill_explain": ""
   },
   {
@@ -3073,7 +3073,7 @@
    "cost_research": 12.0,
    "effect_type": "Start_Rat",
    "value_01": 1.0,
-   "value_02": 3.0,
+   "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
    "skill_explain": ""
@@ -3100,7 +3100,7 @@
   {
    "skill_id": 92511,
    "tier": 5,
-   "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name": "번식 확률 +5%",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3109,11 +3109,11 @@
    "link_2": 0,
    "cost_cheese": 1700000.0,
    "cost_research": 21.0,
-   "effect_type": "Start_Rat",
-   "value_01": 1.0,
-   "value_02": 4.0,
+   "effect_type": "Breed_Chance",
+   "value_01": 0.05,
+   "value_02": 0.0,
    "value_03": 0.0,
-   "skill_asset": "SkillIcons/cs_startrat",
+   "skill_asset": "SkillIcons/cs_breed",
    "skill_explain": ""
   },
   {
@@ -3784,7 +3784,7 @@
   {
    "skill_id": 92609,
    "tier": 6,
-   "skill_name": "시작 쥐 +2마리 (등급은 훈장 확률)",
+   "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3794,8 +3794,8 @@
    "cost_cheese": 9000000.0,
    "cost_research": 25.0,
    "effect_type": "Start_Rat",
-   "value_01": 2.0,
-   "value_02": 4.0,
+   "value_01": 1.0,
+   "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
    "skill_explain": ""
@@ -3822,7 +3822,7 @@
   {
    "skill_id": 92611,
    "tier": 6,
-   "skill_name": "시작 쥐 +2마리 (등급은 훈장 확률)",
+   "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3832,8 +3832,8 @@
    "cost_cheese": 19000000.0,
    "cost_research": 43.0,
    "effect_type": "Start_Rat",
-   "value_01": 2.0,
-   "value_02": 3.0,
+   "value_01": 1.0,
+   "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
    "skill_explain": ""
@@ -3917,7 +3917,7 @@
   {
    "skill_id": 92616,
    "tier": 6,
-   "skill_name": "시작 쥐 +3마리 (등급은 훈장 확률)",
+   "skill_name": "번식 확률 +5%",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3926,11 +3926,11 @@
    "link_2": 0,
    "cost_cheese": 28000000.0,
    "cost_research": 55.0,
-   "effect_type": "Start_Rat",
-   "value_01": 3.0,
-   "value_02": 2.0,
+   "effect_type": "Breed_Chance",
+   "value_01": 0.05,
+   "value_02": 0.0,
    "value_03": 0.0,
-   "skill_asset": "SkillIcons/cs_startrat",
+   "skill_asset": "SkillIcons/cs_breed",
    "skill_explain": ""
   },
   {
@@ -4517,7 +4517,7 @@
    "cost_research": 50.0,
    "effect_type": "Start_Rat",
    "value_01": 1.0,
-   "value_02": 5.0,
+   "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
    "skill_explain": ""
@@ -4544,7 +4544,7 @@
   {
    "skill_id": 92711,
    "tier": 7,
-   "skill_name": "시작 쥐 +2마리 (등급은 훈장 확률)",
+   "skill_name": "번식 확률 +5%",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -4553,11 +4553,11 @@
    "link_2": 0,
    "cost_cheese": 220000000.0,
    "cost_research": 85.0,
-   "effect_type": "Start_Rat",
-   "value_01": 2.0,
-   "value_02": 4.0,
+   "effect_type": "Breed_Chance",
+   "value_01": 0.05,
+   "value_02": 0.0,
    "value_03": 0.0,
-   "skill_asset": "SkillIcons/cs_startrat",
+   "skill_asset": "SkillIcons/cs_breed",
    "skill_explain": ""
   },
   {
@@ -5239,7 +5239,7 @@
    "cost_research": 100.0,
    "effect_type": "Start_Rat",
    "value_01": 1.0,
-   "value_02": 6.0,
+   "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
    "skill_explain": ""
@@ -5266,7 +5266,7 @@
   {
    "skill_id": 92811,
    "tier": 8,
-   "skill_name": "시작 쥐 +2마리 (등급은 훈장 확률)",
+   "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -5276,8 +5276,8 @@
    "cost_cheese": 2400000000.0,
    "cost_research": 170.0,
    "effect_type": "Start_Rat",
-   "value_01": 2.0,
-   "value_02": 4.0,
+   "value_01": 1.0,
+   "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
    "skill_explain": ""

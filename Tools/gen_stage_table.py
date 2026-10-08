@@ -30,10 +30,9 @@ def rooms(f):
 TARGET_SEC = 135
 BOSS_TOTAL_SEC = 157                  # 보스 층 (210초의 75%)
 BOSS_FIGHT_SEC = 40                   # 보스전 목표 (스테이지 테이블 Boss 시트 hp_pow_sec 로 맞춤)
-SPU = {                               # 2026-10-07 측정: 2회 중앙값 → 3회차(이 표로 잼)에서 60% 아래였던 층은 SPU × 측정%/75 로 보정
-    1: 1.44, 2: 1.87, 3: 1.81, 4: 3.42, 5: 14.4, 6: 8.2, 7: 8.8, 8: 17.5, 9: 10.4, 10: 9.4,
-    11: 35.5, 12: 21.3, 13: 10.5, 14: 10.9, 15: 21.9, 16: 2.22, 17: 20.7, 18: 11.8, 19: 8.3, 20: 5.15,
-    21: 15.5, 22: 2.96, 23: 8.0, 24: 3.78, 25: 9.9,
+SPU = {                               # 측정 2026-10-08 (라운드 4, 계단 총공격 수정 후) 로 SPU × 측정%/75 갱신. 계단 거리 상한으로 지형이 바뀐 층은 빠짐 (기본값)
+    1: 1.29, 2: 1.75, 3: 1.58, 4: 2.85, 5: 17.48, 6: 8.61, 7: 7.12, 9: 10.23, 10: 8.67, 12: 21.26,
+    14: 11.72, 16: 1.46, 19: 5.63, 20: 4.24, 22: 1.82, 23: 5.51, 24: 2.56,
 }
 SPU_DEFAULT = 10.0
 SKILL_WALL_MUL = {1: 1.0, 2: 0.97, 3: 0.95, 4: 0.92, 5: 0.9, 6: 0.9, 7: 0.87}   # 그 층을 깰 즈음의 공용 스킬 벽 체력 배율 (8층부터 0.85)
@@ -57,6 +56,9 @@ class Seeded:
         return float(np.float32(np.float32((t ^ (t >> 14)) & M32) / np.float32(4294967296.0)))
 
 DIRS = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+STAIRS_MAX_DIST = 4                   # 계단 방 = 시작 방에서 이 거리 이내 중 가장 먼 방 (StageManager.stairsMaxDist 와 같게)
+
+
 def stairs_dist(f, n, max_row=3):
     rnd = Seeded(f * 7919 + 17); lst = [(0, 0)]; lay = {(0, 0)}; g = 0
     while len(lst) < n and g < 500:
@@ -74,7 +76,7 @@ def stairs_dist(f, n, max_row=3):
             if k in lay and k not in dist: dist[k] = dist[c] + 1; q.append(k)
     best = (0, 0)
     for k, v in dist.items():
-        if v > dist[best]: best = k
+        if v > dist[best] and v <= STAIRS_MAX_DIST: best = k
     return dist[best]
 
 

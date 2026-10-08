@@ -26,6 +26,7 @@ namespace NKK
         {
             public List<Entry> rats = new(); public List<SkillEntry> skills = new(); public List<AchvEntry> achvs = new();
             public List<int> nodes = new();      // 활성화한 공용 스킬 노드 (훈장별 트리). skills 는 예전 레벨식 (안 씀)
+            public List<int> achvOn = new();     // 업적 스위치: 달성한 업적 id (이 저장 파일 기준, 한 번 켜지면 계속 켜짐)
             public double cheese, research; public int tier = 1, maxFloor = 1, runs;
         }
 
@@ -53,12 +54,14 @@ namespace NKK
         // ── 업적 (업적 테이블 Achievement) ──
         // 저장하는 건 조건의 바탕 기록뿐 (지금: 필살기별 완주 횟수, 저장 이름 achvs 는 예전 그대로). 달성 여부는 업적 테이블 조건으로 계산
         readonly Dictionary<int, int> achvs = new();
+        readonly HashSet<int> achvOn = new();         // 업적 스위치 (저장 파일마다)
+        public bool AchvSwitch(int achvId) => achvOn.Contains(achvId);
         public int UltUses(int ultId) => achvs.TryGetValue(ultId, out var n) ? n : 0;
         // 업적 테이블 한 줄의 진행 수 (조건 타입별) · 달성 여부
         public int AchvProgress(AchievementRow a) => a == null ? 0 : a.cond_type switch { "Ult_Use" => UltUses(a.target_id), _ => 0 };
-        public bool AchvDone(AchievementRow a) => a != null && AchvProgress(a) >= Mathf.Max(1, a.need);
-        // 업적 달성 알림 (줄, 이번에 처음 달성) — 게임 화면 AchievementToast 가 받음. 이미 단 업적도 기록이 오르면 다시 알림 (처음 = false)
-        public event Action<AchievementRow, bool> AchvGot;
+        public bool AchvDone(AchievementRow a) => a != null && achvOn.Contains(a.achv_id);       // 달성 = 스위치가 켜짐
+        // 업적 달성 알림 — 스위치가 처음 켜질 때 한 번만 (게임 화면 AchievementToast 가 받음)
+        public event Action<AchievementRow> AchvGot;
 
         // 필살기를 끝까지 씀 → Ult_Use 업적 확인
         public void OnUltUsed(int ultId)
@@ -73,8 +76,9 @@ namespace NKK
             foreach (var a in db.Achievements)
             {
                 if (a.cond_type != type || a.target_id != target) continue;
-                int prog = AchvProgress(a), need = Mathf.Max(1, a.need);
-                if (prog >= need) AchvGot?.Invoke(a, prog == need);
+                if (achvOn.Contains(a.achv_id) || AchvProgress(a) < Mathf.Max(1, a.need)) continue;     // 이미 켜진 스위치 · 조건 미달은 무시
+                achvOn.Add(a.achv_id); Save();
+                AchvGot?.Invoke(a);
             }
         }
         public event Action<int> SkillLeveled;
@@ -250,13 +254,14 @@ namespace NKK
         {
             var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs }; d.rats.AddRange(rats.Values);
             d.nodes.AddRange(skills);
+            d.achvOn.AddRange(achvOn);
             foreach (var kv in achvs) d.achvs.Add(new AchvEntry { ult = kv.Key, count = kv.Value });     // 필살기 완주 횟수
             PlayerPrefs.SetString(saveKey, JsonUtility.ToJson(d)); PlayerPrefs.Save();
         }
 
         void Load()
         {
-            rats.Clear(); skills.Clear(); achvs.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0;
+            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0;
             var s = PlayerPrefs.GetString(saveKey, "");
             if (string.IsNullOrEmpty(s)) return;
             var d = JsonUtility.FromJson<SaveData>(s);
@@ -265,10 +270,11 @@ namespace NKK
             if (d.nodes != null) foreach (var id in d.nodes) skills.Add(id);
             SkillVersion++;
             if (d.achvs != null) foreach (var e in d.achvs) achvs[e.ult] = e.count;
+            if (d.achvOn != null) foreach (var id in d.achvOn) achvOn.Add(id);
         }
 
         [ContextMenu("진행도 초기화")]
-        public void ResetAll() { rats.Clear(); skills.Clear(); achvs.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0; SkillVersion++; PlayerPrefs.DeleteKey(saveKey); }
+        public void ResetAll() { rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0; SkillVersion++; PlayerPrefs.DeleteKey(saveKey); }
 
         // 시작 층 최대 = min(1 + 스테이지 스킵 노드 합, 최고 기록)
         public int StartFloorCap(int t = 0) => Mathf.Max(1, Mathf.Min(1 + CommonSkill.StageSkip, maxFloor));

@@ -6,8 +6,8 @@
    "pow_need": 400.0,
    "item_hp": 1.0,
    "cheese": 1.0,
-   "wall_stairs": 46.88,
-   "wall_normal": 46.88,
+   "wall_stairs": 52.33,
+   "wall_normal": 52.33,
    "time_add": 0.0
   },
   {
@@ -16,8 +16,8 @@
    "pow_need": 552.0,
    "item_hp": 1.38,
    "cheese": 1.5,
-   "wall_stairs": 37.21,
-   "wall_normal": 37.21,
+   "wall_stairs": 39.76,
+   "wall_normal": 39.76,
    "time_add": 0.0
   },
   {
@@ -26,8 +26,8 @@
    "pow_need": 762.0,
    "item_hp": 1.9,
    "cheese": 2.25,
-   "wall_stairs": 39.26,
-   "wall_normal": 39.26,
+   "wall_stairs": 44.97,
+   "wall_normal": 44.97,
    "time_add": 0.0
   },
   {
@@ -36,8 +36,8 @@
    "pow_need": 1050.0,
    "item_hp": 2.63,
    "cheese": 3.38,
-   "wall_stairs": 21.45,
-   "wall_normal": 10.73,
+   "wall_stairs": 25.74,
+   "wall_normal": 12.87,
    "time_add": 0.0
   },
   {
@@ -46,8 +46,8 @@
    "pow_need": 1450.0,
    "item_hp": 3.63,
    "cheese": 5.06,
-   "wall_stairs": 4.51,
-   "wall_normal": 2.26,
+   "wall_stairs": 3.72,
+   "wall_normal": 1.86,
    "time_add": 0.0
   },
   {
@@ -56,8 +56,8 @@
    "pow_need": 2000.0,
    "item_hp": 5.0,
    "cheese": 7.59,
-   "wall_stairs": 9.15,
-   "wall_normal": 3.05,
+   "wall_stairs": 8.71,
+   "wall_normal": 2.9,
    "time_add": 0.0
   },
   {
@@ -66,8 +66,8 @@
    "pow_need": 2760.0,
    "item_hp": 6.91,
    "cheese": 11.39,
-   "wall_stairs": 8.82,
-   "wall_normal": 2.94,
+   "wall_stairs": 10.9,
+   "wall_normal": 3.63,
    "time_add": 0.0
   },
   {
@@ -76,8 +76,8 @@
    "pow_need": 3810.0,
    "item_hp": 9.53,
    "cheese": 17.09,
-   "wall_stairs": 4.54,
-   "wall_normal": 1.13,
+   "wall_stairs": 7.94,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -86,8 +86,8 @@
    "pow_need": 5260.0,
    "item_hp": 13.15,
    "cheese": 25.63,
-   "wall_stairs": 7.64,
-   "wall_normal": 3.82,
+   "wall_stairs": 7.76,
+   "wall_normal": 3.88,
    "time_add": 0.0
   },
   {
@@ -96,8 +96,8 @@
    "pow_need": 7260.0,
    "item_hp": 18.15,
    "cheese": 38.44,
-   "wall_stairs": 7.32,
-   "wall_normal": 2.44,
+   "wall_stairs": 7.94,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -106,8 +106,8 @@
    "pow_need": 10000.0,
    "item_hp": 25.05,
    "cheese": 57.67,
-   "wall_stairs": 1.27,
-   "wall_normal": 0.8,
+   "wall_stairs": 7.94,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -116,8 +116,8 @@
    "pow_need": 13800.0,
    "item_hp": 34.57,
    "cheese": 86.5,
-   "wall_stairs": 3.73,
-   "wall_normal": 1.86,
+   "wall_stairs": 3.74,
+   "wall_normal": 1.87,
    "time_add": 0.0
   },
   {
@@ -126,8 +126,8 @@
    "pow_need": 19100.0,
    "item_hp": 47.7,
    "cheese": 130.0,
-   "wall_stairs": 7.56,
-   "wall_normal": 1.89,
+   "wall_stairs": 7.94,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -136,8 +136,8 @@
    "pow_need": 26300.0,
    "item_hp": 65.83,
    "cheese": 195.0,
-   "wall_stairs": 7.29,
-   "wall_normal": 2.43,
+   "wall_stairs": 6.78,
+   "wall_normal": 2.26,
    "time_add": 0.0
   },
   {
@@ -146,8 +146,8 @@
    "pow_need": 36300.0,
    "item_hp": 90.85,
    "cheese": 292.0,
-   "wall_stairs": 3.09,
-   "wall_normal": 0.8,
+   "wall_stairs": 6.88,
+   "wall_normal": 2.29,
    "time_add": 0.0
   },
   {
@@ -156,8 +156,8 @@
    "pow_need": 50100.0,
    "item_hp": 125.0,
    "cheese": 438.0,
-   "wall_stairs": 35.77,
-   "wall_normal": 35.77,
+   "wall_stairs": 54.39,
+   "wall_normal": 54.39,
    "time_add": 0.0
   },
   {
@@ -166,8 +166,8 @@
    "pow_need": 69200.0,
    "item_hp": 173.0,
    "cheese": 657.0,
-   "wall_stairs": 3.67,
-   "wall_normal": 0.8,
+   "wall_stairs": 7.94,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -176,8 +176,8 @@
    "pow_need": 95500.0,
    "item_hp": 239.0,
    "cheese": 985.0,
-   "wall_stairs": 6.73,
-   "wall_normal": 1.68,
+   "wall_stairs": 7.94,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -186,8 +186,8 @@
    "pow_need": 132000.0,
    "item_hp": 329.0,
    "cheese": 1480.0,
-   "wall_stairs": 9.57,
-   "wall_normal": 3.19,
+   "wall_stairs": 14.11,
+   "wall_normal": 4.7,
    "time_add": 0.0
   },
   {
@@ -196,8 +196,8 @@
    "pow_need": 182000.0,
    "item_hp": 455.0,
    "cheese": 2220.0,
-   "wall_stairs": 13.36,
-   "wall_normal": 4.45,
+   "wall_stairs": 16.23,
+   "wall_normal": 5.41,
    "time_add": 0.0
   },
   {
@@ -206,8 +206,8 @@
    "pow_need": 251000.0,
    "item_hp": 627.0,
    "cheese": 3330.0,
-   "wall_stairs": 5.12,
-   "wall_normal": 1.02,
+   "wall_stairs": 7.94,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -216,8 +216,8 @@
    "pow_need": 346000.0,
    "item_hp": 866.0,
    "cheese": 4990.0,
-   "wall_stairs": 26.83,
-   "wall_normal": 8.94,
+   "wall_stairs": 43.63,
+   "wall_normal": 14.54,
    "time_add": 0.0
   },
   {
@@ -226,8 +226,8 @@
    "pow_need": 478000.0,
    "item_hp": 1190.0,
    "cheese": 7480.0,
-   "wall_stairs": 9.93,
-   "wall_normal": 3.31,
+   "wall_stairs": 14.41,
+   "wall_normal": 4.8,
    "time_add": 0.0
   },
   {
@@ -236,8 +236,8 @@
    "pow_need": 660000.0,
    "item_hp": 1650.0,
    "cheese": 11200.0,
-   "wall_stairs": 21.01,
-   "wall_normal": 7.0,
+   "wall_stairs": 31.02,
+   "wall_normal": 10.34,
    "time_add": 0.0
   },
   {
@@ -246,8 +246,8 @@
    "pow_need": 910000.0,
    "item_hp": 2280.0,
    "cheese": 16800.0,
-   "wall_stairs": 6.95,
-   "wall_normal": 1.74,
+   "wall_stairs": 6.88,
+   "wall_normal": 2.29,
    "time_add": 0.0
   },
   {
@@ -257,7 +257,7 @@
    "item_hp": 3140.0,
    "cheese": 25300.0,
    "wall_stairs": 7.94,
-   "wall_normal": 1.13,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -277,7 +277,7 @@
    "item_hp": 5980.0,
    "cheese": 56800.0,
    "wall_stairs": 7.94,
-   "wall_normal": 1.32,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -297,7 +297,7 @@
    "item_hp": 11400.0,
    "cheese": 128000.0,
    "wall_stairs": 6.88,
-   "wall_normal": 0.86,
+   "wall_normal": 2.29,
    "time_add": 0.0
   },
   {
@@ -317,7 +317,7 @@
    "item_hp": 21700.0,
    "cheese": 288000.0,
    "wall_stairs": 7.94,
-   "wall_normal": 1.59,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -327,7 +327,7 @@
    "item_hp": 29900.0,
    "cheese": 431000.0,
    "wall_stairs": 7.94,
-   "wall_normal": 1.59,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -367,7 +367,7 @@
    "item_hp": 109000.0,
    "cheese": 2180000.0,
    "wall_stairs": 7.94,
-   "wall_normal": 1.59,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -417,7 +417,7 @@
    "item_hp": 543000.0,
    "cheese": 16600000.0,
    "wall_stairs": 7.94,
-   "wall_normal": 1.99,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -447,7 +447,7 @@
    "item_hp": 1430000.0,
    "cheese": 56000000.0,
    "wall_stairs": 6.88,
-   "wall_normal": 1.72,
+   "wall_normal": 2.29,
    "time_add": 0.0
   },
   {
@@ -457,7 +457,7 @@
    "item_hp": 1970000.0,
    "cheese": 84000000.0,
    "wall_stairs": 7.94,
-   "wall_normal": 1.99,
+   "wall_normal": 2.65,
    "time_add": 0.0
   },
   {
@@ -559,7 +559,7 @@
   {
    "boss_id": 95004,
    "boss_name": "실험체 제로 (거대 메인쿤)",
-   "code_id": "gym",
+   "code_id": "boss_zero",
    "rig": "Cat",
    "floor": 20,
    "atk_type": "Pounce",
@@ -577,7 +577,7 @@
   {
    "boss_id": 95005,
    "boss_name": "대마법사 마녀 고양이",
-   "code_id": "fire",
+   "code_id": "boss_witch",
    "rig": "Cat",
    "floor": 25,
    "atk_type": "Fireball",
@@ -595,7 +595,7 @@
   {
    "boss_id": 95006,
    "boss_name": "우주 고양이 사령관",
-   "code_id": "space",
+   "code_id": "boss_commander",
    "rig": "Cat",
    "floor": 30,
    "atk_type": "Gravity",

@@ -197,7 +197,7 @@ namespace NKK.Ults
             if (!cm || !cm.catPrefab || art == null) return;
             var c = Object.Instantiate(cm.catPrefab, cm.catRoot ? cm.catRoot : cm.transform);
             c.enabled = false; c.name = "UltCat_tuxedo";
-            c.rig.Build(art, cm.catLength * 0.9f, 1, true);
+            c.rig.Build(art, cm.catLength * 0.9f, 1, false);
             float tx = stX + 115, ty = stY + dirY * 70, vx = 0, vy = 0;
             M.Stage.Confine(ref tx, ref ty, ref vx, ref vy, 40, stX, stY, 0);
             cat = new CatActor { c = c, x = vr.xMax + 120, y = ty, tx = tx };

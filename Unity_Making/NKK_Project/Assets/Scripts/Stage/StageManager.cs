@@ -38,6 +38,7 @@ namespace NKK.Stage
         public float roomPerFloor = 0.6f;
         public int roomMax = 9;
         [Tooltip("세로로 뻗을 수 있는 최대 칸")] public int maxRow = 3;
+        [Tooltip("계단 방 = 시작 방에서 이 거리(방 이동 횟수) 이내 중 가장 먼 방. 긴 복도 끝 계단은 쥐가 잘 안 모여 너무 느려짐 (Tools/gen_stage_table.py STAIRS_MAX_DIST 와 같게)")] public int stairsMaxDist = 4;
         public int bossEvery = 5;
 
         [Header("적정 전투력 (찍찍!!) = 기본 × 증가^(층-1) × 초반 보정")]
@@ -126,11 +127,11 @@ namespace NKK.Stage
                 if (Layout.Contains(k) || Mathf.Abs(k.y) > maxRow) continue;
                 Layout.Add(k); list.Add(k);
             }
-            // 계단 방 = 방 이동 횟수가 가장 먼 방
+            // 계단 방 = 방 이동 횟수가 stairsMaxDist 이내 중 가장 먼 방
             var dist = new Dictionary<Vector2Int, int> { [Vector2Int.zero] = 0 };
             var q = new Queue<Vector2Int>(); q.Enqueue(Vector2Int.zero);
             while (q.Count > 0) { var c = q.Dequeue(); foreach (var d in Dirs) { var k = c + d; if (Layout.Contains(k) && !dist.ContainsKey(k)) { dist[k] = dist[c] + 1; q.Enqueue(k); } } }
-            var best = Vector2Int.zero; foreach (var kv in dist) if (kv.Value > dist[best]) best = kv.Key;
+            var best = Vector2Int.zero; foreach (var kv in dist) if (kv.Value > dist[best] && kv.Value <= stairsMaxDist) best = kv.Key;
             StairsRoom = best;
         }
 

@@ -29,7 +29,7 @@
    "cond3_type": "Skill_Node_Count",
    "cond3_value": 15.0,
    "birth_grade_k": 1.25,
-   "start_rat_count": 8,
+   "start_rat_count": 7,
    "start_floor_cap": 3,
    "badge_asset": "Rogue/rk_2",
    "rat_atk_mul": 1.25
@@ -46,7 +46,7 @@
    "cond3_type": "Skill_Node_Count",
    "cond3_value": 18.0,
    "birth_grade_k": 1.5,
-   "start_rat_count": 12,
+   "start_rat_count": 8,
    "start_floor_cap": 5,
    "badge_asset": "Rogue/rk_3",
    "rat_atk_mul": 1.5
@@ -63,7 +63,7 @@
    "cond3_type": "Skill_Node_Count",
    "cond3_value": 20.0,
    "birth_grade_k": 1.75,
-   "start_rat_count": 18,
+   "start_rat_count": 8,
    "start_floor_cap": 7,
    "badge_asset": "Rogue/rk_4",
    "rat_atk_mul": 1.75
@@ -80,7 +80,7 @@
    "cond3_type": "Skill_Node_Count",
    "cond3_value": 22.0,
    "birth_grade_k": 2.0,
-   "start_rat_count": 25,
+   "start_rat_count": 9,
    "start_floor_cap": 9,
    "badge_asset": "Rogue/rk_5",
    "rat_atk_mul": 2.0
@@ -97,7 +97,7 @@
    "cond3_type": "Skill_Node_Count",
    "cond3_value": 24.0,
    "birth_grade_k": 2.25,
-   "start_rat_count": 32,
+   "start_rat_count": 10,
    "start_floor_cap": 11,
    "badge_asset": "Rogue/rk_6",
    "rat_atk_mul": 2.25
@@ -114,7 +114,7 @@
    "cond3_type": "Skill_Node_Count",
    "cond3_value": 26.0,
    "birth_grade_k": 2.5,
-   "start_rat_count": 40,
+   "start_rat_count": 11,
    "start_floor_cap": 13,
    "badge_asset": "Rogue/rk_7",
    "rat_atk_mul": 2.5
@@ -131,7 +131,7 @@
    "cond3_type": "Skill_Node_Count",
    "cond3_value": 28.0,
    "birth_grade_k": 2.75,
-   "start_rat_count": 48,
+   "start_rat_count": 12,
    "start_floor_cap": 15,
    "badge_asset": "Rogue/rk_8",
    "rat_atk_mul": 2.75

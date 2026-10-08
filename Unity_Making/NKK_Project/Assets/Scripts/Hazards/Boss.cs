@@ -129,7 +129,7 @@ namespace NKK.Hazards
             {
                 var art = Cats && Cats.catArt ? Cats.catArt.Get(row.code_id) : null;
                 if (art == null || !catRig) { Debug.LogWarning("[Boss] 고양이 그림 없음: " + row.code_id); State = BState.Off; return; }
-                catRig.Build(art, Cats.catLength * row.scale, -1, true);
+                catRig.Build(art, Cats.catLength * row.scale, -1, false);      // 가까운 다리는 몸통 앞, 먼 다리만 뒤 (입체)
             }
             else
             {

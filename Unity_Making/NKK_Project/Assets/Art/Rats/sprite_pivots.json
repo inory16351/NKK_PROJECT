@@ -1821,6 +1821,66 @@
 "y": 0.95
 },
 {
+"path": "Assets/Art/Rats/Cats/Parts/boss_zero/head.png",
+"x": 0.417,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_zero/tail.png",
+"x": 0.044,
+"y": 0.524
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_zero/front.png",
+"x": 0.493,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_zero/back.png",
+"x": 0.433,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_witch/head.png",
+"x": 0.483,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_witch/tail.png",
+"x": 0.044,
+"y": 0.49
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_witch/front.png",
+"x": 0.562,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_witch/back.png",
+"x": 0.413,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_commander/head.png",
+"x": 0.498,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_commander/tail.png",
+"x": 0.044,
+"y": 0.417
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_commander/front.png",
+"x": 0.555,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_commander/back.png",
+"x": 0.392,
+"y": 0.945
+},
+{
 "path": "Assets/Art/Rats/Humans/Parts/researcher/head.png",
 "x": 0.589,
 "y": 0.03

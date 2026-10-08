@@ -35,7 +35,7 @@ namespace NKK.Hazards
             mgr = m; Data = row; Skill = skill; codeId = row.code_id; name = $"Cat_{row.code_id}";
             x = px; y = py; hpMax = hp = hpValue; value = cheese;
             life = row.life_time; cd = 1.5f; skillT = Random.Range(2.5f, 4f);
-            rig.Build(art, m.catLength * row.size_mul, row.code_id == "chonk" ? 0.72f : 1, true);
+            rig.Build(art, m.catLength * row.size_mul, row.code_id == "chonk" ? 0.72f : 1, false);      // 가까운 다리는 몸통 앞 (입체)
             if (shadow && m.Rats.shadowRoot) { shadow.transform.SetParent(m.Rats.shadowRoot, true); shadow.sortingOrder = m.Rats.shadowSortOrder; }
         }
 
