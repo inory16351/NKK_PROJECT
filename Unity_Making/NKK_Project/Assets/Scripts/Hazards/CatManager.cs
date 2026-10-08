@@ -41,7 +41,7 @@ namespace NKK.Hazards
         [Tooltip("등장 후 첫 무리 스킬까지 (초)")] public float slamFirst = 1.2f;
         [Tooltip("무리 쪽으로 달려가는 속도 · 이 거리 안이면 웅크림 시작 · 원거리 스킬(레이저·운석·블랙홀) 사거리")] public float slamChaseSpeed = 400, slamLeapRange = 650, castRange = 1100;
         [Tooltip("범위 안 쥐 날리는 속도 · 위로 · 기본 물건 날리는 속도 · 기본 체공 (초)")] public float slamFling = 380, slamUp = 420, slamItemLaunch = 300, slamAir = 0.35f;
-        [Tooltip("착지 팝업 (자리표시 {skill} 스킬 이름 · {n} 기절한 쥐 수)")] public string slamPopup = "{skill}!! {n}마리 기절";
+        [Tooltip("착지 팝업 (자리표시 {skill} 스킬 이름 · {n} 기절한 쥐 수, 빈칸 = 안 띄움. 기절은 쥐마다 RatManager.stunPopup)")] public string slamPopup = "";
         [Tooltip("웅크릴 때 고양이 말 (무작위)")] public string[] slamCalls = { "거기 모였냥?!", "딱 걸렸냥!", "냥냥냥!!", "다 잡았다옹!" };
         [Tooltip("등장 배너 부제 (자리표시 {skill} {crowd})")] public string spawnSub = "{crowd} · 쥐가 몰린 곳에 빨간 원이 뜨면 피하기 · 들이받아서 날려버려요!";
 

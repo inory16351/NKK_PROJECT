@@ -154,7 +154,13 @@ namespace NKK.Rats
         [HideInInspector] public float catCD;      // 고양이 연속 들이받기 간격
 
         // 기절 (보스 공격·쥐덫·고양이)
-        public void Stun(float t) { stun = Mathf.Max(stun, t); rushT = 0; }
+        // 새로 기절하면 머리 위에 작은 "기절!!" (RatManager.stunPopup)
+        public void Stun(float t)
+        {
+            bool fresh = stun <= 0 && t >= Manager.stunPopupMin;
+            stun = Mathf.Max(stun, t); rushT = 0;
+            if (fresh) Manager.StunPopup(this);
+        }
 
         // 고양이 공격에 맞아 날아감: 데굴데굴
         public void Ragdoll(float ang, float spd, float upV, float stunT)

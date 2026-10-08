@@ -9700,6 +9700,11 @@ MonoBehaviour:
   stunStarHeight: 30
   zombieTint: {r: 0.72, g: 0.92, b: 0.62, a: 1}
   burnTint: {r: 1, g: 0.35, b: 0.25, a: 1}
+  stunPopup: "\uAE30\uC808!!"
+  stunPopupColor: {r: 1, g: 0.6, b: 0.45, a: 1}
+  stunPopupSize: 15
+  stunPopupMin: 0.5
+  stunPopupPerFrame: 12
   startRats: []
   startCount: 0
   ratScale: 1.25
@@ -49504,7 +49509,7 @@ MonoBehaviour:
   slamUp: 420
   slamItemLaunch: 360
   slamAir: 0.35
-  slamPopup: "{skill}!! {n}\uB9C8\uB9AC \uAE30\uC808"
+  slamPopup: 
   slamCalls:
   - "\uAC70\uAE30 \uBAA8\uC600\uB0E5?!"
   - "\uB531 \uAC78\uB838\uB0E5!"

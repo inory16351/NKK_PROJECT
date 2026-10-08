@@ -35,6 +35,11 @@ namespace NKK.Rats
 
         [Tooltip("좀비 상태 쥐 색 (좀비 아포칼립스 필살기)")] public Color zombieTint = new(0.72f, 0.92f, 0.62f);
         [Tooltip("불판 위 쥐 색 (보스 이븐하게 익혀드릴게요)")] public Color burnTint = new(1f, 0.35f, 0.25f);
+        [Tooltip("새로 기절한 쥐 머리 위 팝업 (빈칸 = 안 띄움) · 색 · 크기 · 이 초 이상 기절할 때만 · 한 프레임 최대 개수")] public string stunPopup = "기절!!";
+        public Color stunPopupColor = new(1f, 0.6f, 0.45f);
+        public float stunPopupSize = 15, stunPopupMin = 0.5f;
+        public int stunPopupPerFrame = 12;
+        int stunPopFrame, stunPopN;
 
         [Header("시작 쥐")]
         [Tooltip("테스트용: 시작할 때 만들 쥐 (코드 id). 비어 있으면 티어 테이블 시작 마릿수만큼 탄생 확률로 뽑음")] public List<string> startRats = new();
@@ -541,6 +546,15 @@ namespace NKK.Rats
                     rushMarker.color = new Color(1, 1, 1, 0.5f + 0.3f * Mathf.Sin(Time.time * 12));
                 }
             }
+        }
+    
+        // 새로 기절한 쥐 머리 위 "기절!!" (한 프레임 stunPopupPerFrame 개까지)
+        public void StunPopup(Rat r)
+        {
+            if (string.IsNullOrEmpty(stunPopup) || !FxManager.I) return;
+            if (stunPopFrame != Time.frameCount) { stunPopFrame = Time.frameCount; stunPopN = 0; }
+            if (++stunPopN > stunPopupPerFrame) return;
+            FxManager.I.Popup(r.x, r.y, stunPopup, stunPopupColor, stunPopupSize, 0.9f, r.z + 40);
         }
     }
 }
