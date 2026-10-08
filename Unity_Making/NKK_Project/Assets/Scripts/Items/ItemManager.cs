@@ -396,6 +396,12 @@ namespace NKK.Items
         {
             var k = StageManager.RoomOf(x, y);
             if (!Stage.Open.Contains(k)) return false;
+            // 막힌 벽 두께 안에 떨어지면 물건이 벽에 가려 안 보임 → 방 바닥 안쪽으로 (열린 쪽은 그대로)
+            float m = World.WM + 30, L = k.x * World.RW, T = k.y * World.RH;
+            if (!Stage.IsOpen(k.x - 1, k.y)) x = Mathf.Max(x, L + m);
+            if (!Stage.IsOpen(k.x + 1, k.y)) x = Mathf.Min(x, L + World.RW - m);
+            if (!Stage.IsOpen(k.x, k.y - 1)) y = Mathf.Max(y, T + m + 20);
+            if (!Stage.IsOpen(k.x, k.y + 1)) y = Mathf.Min(y, T + World.RH - m);
             var row = PickWeighted(GameDatabase.Instance.ZoneOf(Game.Floor));
             if (row == null) return false;
             SpriteRenderer r = null;

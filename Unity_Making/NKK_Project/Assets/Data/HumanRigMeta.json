@@ -14,7 +14,8 @@
 0.495,
 0.95
 ],
-"front": 0
+"front": 0,
+"head_scale": 1.0
 },
 {
 "code_id": "guard",
@@ -30,7 +31,8 @@
 0.496,
 0.95
 ],
-"front": 0
+"front": 0,
+"head_scale": 1.0
 },
 {
 "code_id": "janitor",
@@ -46,7 +48,8 @@
 0.506,
 0.95
 ],
-"front": 0
+"front": 0,
+"head_scale": 1.0
 },
 {
 "code_id": "boss_chief",
@@ -62,7 +65,8 @@
 0.489,
 0.95
 ],
-"front": 0
+"front": 0,
+"head_scale": 0.85
 },
 {
 "code_id": "boss_mad",
@@ -78,7 +82,8 @@
 0.522,
 0.95
 ],
-"front": 0
+"front": 0,
+"head_scale": 0.85
 },
 {
 "code_id": "boss_director",
@@ -94,7 +99,8 @@
 0.497,
 0.95
 ],
-"front": 0
+"front": 0,
+"head_scale": 0.85
 },
 {
 "code_id": "cook",
@@ -110,7 +116,8 @@
 0.394,
 0.95
 ],
-"front": 0
+"front": 0,
+"head_scale": 1.0
 }
 ]
 }

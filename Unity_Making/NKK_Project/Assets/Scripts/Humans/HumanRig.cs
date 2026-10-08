@@ -17,6 +17,7 @@ namespace NKK.Humans
             [Tooltip("화난 머리 (보스 공격 때, 없으면 head)")] public Sprite angry;
             [Tooltip("몸통 이미지 좌상단 기준 0~1")] public Vector2 neck, shoulder, hip;
             [Tooltip("몸통이 정면 그림 (보스): 팔은 몸통 양옆, 다리는 벌려서, 목은 가운데, 먼 쪽 어둡게 안 함")] public bool front;
+            [Tooltip("머리 크기 배율 (목 기준). 보스 머리가 몸통만큼 커서 0.85")] public float headScale = 1;
         }
         public List<Entry> entries = new();
         public Entry Get(string id) { foreach (var e in entries) if (e.codeId == id) return e; return null; }
@@ -45,7 +46,8 @@ namespace NKK.Humans
             art = e; group = GetComponent<SortingGroup>();
             torso.sprite = e.torso; head.sprite = e.head; armFar.sprite = armNear.sprite = e.arm; legFar.sprite = legNear.sprite = e.leg;
             armFar.color = legFar.color = e.front ? Color.white : farColor;
-            float tw = e.torso.rect.width, th = e.torso.rect.height, lh = e.leg.rect.height, hh = e.head.rect.height;
+            float hsc = e.headScale > 0 ? e.headScale : 1;
+            float tw = e.torso.rect.width, th = e.torso.rect.height, lh = e.leg.rect.height, hh = e.head.rect.height * hsc;
             float legLen = lh * 0.95f;
             unit = height / (legLen + th * e.hip.y + hh * 0.85f);
             hipPx = new Vector2(0, -legLen);
@@ -56,6 +58,7 @@ namespace NKK.Humans
             Vector3 Rel(Vector2 px) => L(px) - L(hipPx);
             torso.transform.localPosition = Rel(new Vector2(tx + tw / 2, ty + th / 2));
             head.transform.localPosition = Rel(neckPx);
+            head.transform.localScale = Vector3.one * hsc;
             if (e.front)
             {
                 // 정면 몸통: 팔은 양 어깨 끝, 다리는 좌우로 (옆모습처럼 가운데 겹치면 팔이 같은 색 몸통에 묻혀 손만 보임)

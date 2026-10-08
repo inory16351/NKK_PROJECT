@@ -24,6 +24,7 @@ MonoBehaviour:
     shoulder: {x: 0.486, y: 0.12}
     hip: {x: 0.495, y: 0.95}
     front: 0
+    headScale: 1
   - codeId: guard
     head: {fileID: 21300000, guid: 47be7eed186c5ff4ba940737a9a4c071, type: 3}
     scared: {fileID: 21300000, guid: 2dc6a6888f1e44e458d452f2bdccd0d0, type: 3}
@@ -35,6 +36,7 @@ MonoBehaviour:
     shoulder: {x: 0.504, y: 0.12}
     hip: {x: 0.496, y: 0.95}
     front: 0
+    headScale: 1
   - codeId: janitor
     head: {fileID: 21300000, guid: 7fd5a56292f125b42bf67e3cb88c0e13, type: 3}
     scared: {fileID: 21300000, guid: af5d7c2baed42cf4d94f64dead1e20ef, type: 3}
@@ -46,6 +48,7 @@ MonoBehaviour:
     shoulder: {x: 0.466, y: 0.12}
     hip: {x: 0.506, y: 0.95}
     front: 0
+    headScale: 1
   - codeId: boss_chief
     head: {fileID: 21300000, guid: 966ceed8b11416541baafe7e29f0e7e6, type: 3}
     scared: {fileID: 21300000, guid: c396234e282f42f4d9b39d810e3131b8, type: 3}
@@ -57,6 +60,7 @@ MonoBehaviour:
     shoulder: {x: 0.582, y: 0.12}
     hip: {x: 0.489, y: 0.95}
     front: 0
+    headScale: 0.85
   - codeId: boss_mad
     head: {fileID: 21300000, guid: 7a98e31d07ed7d040aa5db468fda70ba, type: 3}
     scared: {fileID: 21300000, guid: 089e143f6f74ff34185159c1306204c1, type: 3}
@@ -68,6 +72,7 @@ MonoBehaviour:
     shoulder: {x: 0.544, y: 0.12}
     hip: {x: 0.522, y: 0.95}
     front: 0
+    headScale: 0.85
   - codeId: boss_director
     head: {fileID: 21300000, guid: e96d819ffc7b98c4999c69e70f656a3a, type: 3}
     scared: {fileID: 21300000, guid: a07f3412da477fe4a99a48a4867bb884, type: 3}
@@ -79,6 +84,7 @@ MonoBehaviour:
     shoulder: {x: 0.525, y: 0.12}
     hip: {x: 0.497, y: 0.95}
     front: 0
+    headScale: 0.85
   - codeId: cook
     head: {fileID: 21300000, guid: 0ea6389bf1d7f584891cd98b0697d767, type: 3}
     scared: {fileID: 21300000, guid: 2a4b8163431a5554bb86d8b1b9211e14, type: 3}
@@ -90,3 +96,4 @@ MonoBehaviour:
     shoulder: {x: 0.508, y: 0.12}
     hip: {x: 0.394, y: 0.95}
     front: 0
+    headScale: 1

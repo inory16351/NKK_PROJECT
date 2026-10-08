@@ -38,7 +38,7 @@ hm = []
 for hid, m in json.load(io.open(os.path.join(RES, 'Humans', 'Parts', 'pivots.json'), encoding='utf-8')).items():
     a = m['anchor']
     # front = 몸통이 정면 그림이면 pivots.json 에 "front": 1 (팔은 몸통 양옆, 다리 벌림, 목 가운데 — HumanRig.Build). 지금은 전부 옆모습
-    hm.append({'code_id': hid, 'neck': a['neck'], 'shoulder': a['shoulder'], 'hip': a['hip'], 'front': int(m.get('front', 0))})
+    hm.append({'code_id': hid, 'neck': a['neck'], 'shoulder': a['shoulder'], 'hip': a['hip'], 'front': int(m.get('front', 0)), 'head_scale': float(m.get('headScale', 1))})   # head_scale = 머리 크기 배율 (보스 머리가 몸통만큼 커서 0.85)
 OUT3 = os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Data', 'HumanRigMeta.json')
 json.dump({'items': hm}, io.open(OUT3, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 print(len(hm), 'human rigs ->', OUT3)
