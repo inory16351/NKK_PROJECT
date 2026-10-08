@@ -109,6 +109,8 @@ namespace NKK.Stage
         public static int RoomDist(Vector2Int r) => Mathf.Abs(r.x) + Mathf.Abs(r.y);
         public bool IsStairsRoom(int i, int j) => i == StairsRoom.x && j == StairsRoom.y;
         public bool IsBossFloor(int f) => f % bossEvery == 0;
+        // 보스가 대기 중인 계단 방 (보스 층): 멀리 있어도 어둡게 그려서 보스가 어디 있는지 보이게
+        public bool BossWaitRoom(Vector2Int k) => k == StairsRoom && Boss && Boss.State == Boss.BState.Wait && !Boss.Test;
         public Vector2 StairsPos => new((StairsRoom.x + 0.5f) * World.RW, StairsRoom.y * World.RH + stairsY);
 
         // 층 밸런스 = 스테이지 테이블 Stage (없으면 인스펙터 옛 수식)
@@ -177,7 +179,7 @@ namespace NKK.Stage
             Rats.PlaceAll(World.RW / 2, World.RH / 2);
             if (Game.cam) Game.cam.CenterOn(World.RW / 2, World.RH / 2);
             Game.ShowBanner($"{Game.Floor}층 · {GameDatabase.Instance.ZoneOf(Game.Floor)?.zone_name}", "계단 방 벽을 부숴라!");
-            if (Boss) Boss.OnFloorEnter();                                     // 보스 층: 계단 방에 보스 대기 + 배너 부제
+            if (Boss) { Boss.OnFloorEnter(); RefreshWalls(); }                // 보스 층: 계단 방에 보스 대기 + 배너 부제 (계단 방 어둡게 다시 그림)
             climbing = false;
             FloorEntered?.Invoke();
         }
@@ -199,7 +201,7 @@ namespace NKK.Stage
             var up = new Vector2Int(0, -1); var down = new Vector2Int(0, 1); var left = new Vector2Int(-1, 0); var right = new Vector2Int(1, 0);
             foreach (var kv in rooms)
             {
-                var k = kv.Key; bool open = Open.Contains(k), peek = false;
+                var k = kv.Key; bool open = Open.Contains(k), peek = BossWaitRoom(k);       // 보스 층 계단 방은 처음부터 어둡게 보임 (보스 실루엣)
                 foreach (var d in Dirs) if (Open.Contains(k + d)) peek = true;
                 bool Wall(Vector2Int at, Vector2Int d) => Open.Contains(at) && !Open.Contains(at + d);
                 // 아래 방에서 같은 쪽 옆 벽이 이어지면 끝 단면 생략
@@ -268,6 +270,19 @@ namespace NKK.Stage
             else BreakWall(i, j, di, dj);
         }
 
+        // 벽 무너짐 연출 (WallFx): 무너지는 벽 선 (게임 좌표) + 그 구간 벽 윗면 색
+        void BreakFx(int i, int j, int di, int dj, bool stairs)
+        {
+            if (!WallFx.I) return;
+            float L = i * World.RW, T = j * World.RH, x0, y0, x1, y1;
+            if (di != 0) { x0 = x1 = L + (di > 0 ? World.RW : 0); y0 = T; y1 = T + World.RH; }
+            else { y0 = y1 = T + (dj > 0 ? World.RH : 0); x0 = L; x1 = L + World.RW; }
+            Color col = Color.white;
+            var zone = GameDatabase.Instance.ZoneOf(Game.Floor);
+            if (zone != null && zoneLooks != null) foreach (var z in zoneLooks) if (z.zoneId == zone.zone_id) { col = z.wallCap; break; }
+            WallFx.I.Break(x0, y0, x1, y1, col, rooms.TryGetValue(new Vector2Int(i, j), out var r) ? r.wallHeight : 46, stairs, di, dj);      // 잔해는 새로 열리는 방 쪽으로
+        }
+
         public void DamageWall(int i, int j, int di, int dj, float dmg, Rat by = null)
         {
             if (by) wallBy = by;
@@ -285,6 +300,7 @@ namespace NKK.Stage
             walls.Remove(WallKey(i, j, di, dj));
             var t = new Vector2Int(i + di, j + dj);
             if (Open.Contains(t)) return;
+            BreakFx(i, j, di, dj, IsStairsRoom(t.x, t.y));
             Open.Add(t);
             if (wallBy) Rats.Ults?.Charge(wallBy, CondType.Destroy_Wall);      // 벽 붕괴 → 마지막으로 친 쥐 종 필살기 게이지
             foreach (var d in Dirs) if (Open.Contains(t + d)) walls.Remove(WallKey(t.x, t.y, d.x, d.y));

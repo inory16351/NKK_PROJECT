@@ -41,7 +41,7 @@ namespace NKK
             Run((int)a[0], (int)a[1], (int)a[2], a[3], (int)a[4], (int)a[5], (int)a[6]);
         }
 
-        int floor, mask = ~0; float t0, maxPow, limit, promoT, logT, bossT0 = -1, bossDur; double cheese0;
+        int floor, mask = ~0; float t0, maxPow, limit, promoT, logT, bossT0 = -1, bossDur; double cheese0, research0;
         readonly List<Camera> offCams = new();
         RunTimer timer;
         bool done;
@@ -92,7 +92,7 @@ namespace NKK
             // 화면 안 그림 (빠르게). 메인 카메라는 켜 둔 채 아무것도 안 그림 → Camera.main 을 쓰는 코드(고양이 등장·화면 안 판정)가 그대로 돎
             foreach (var c in Camera.allCameras) { if (c == Camera.main) { mask = c.cullingMask; c.cullingMask = 0; } else { c.enabled = false; offCams.Add(c); } }
             timer = FindFirstObjectByType<RunTimer>(); if (timer) timer.testFreeze = true;     // 제한시간은 재기만 함
-            floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; limit = 0; pathD = -1;
+            floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; research0 = Game.RunResearch; limit = 0; pathD = -1;
         }
 
         void Update()
@@ -114,17 +114,17 @@ namespace NKK
             if (Game.Floor != floor)
             {
                 if (timer) used = timer.LastUsed;      // 새 층으로 넘어오며 타이머가 이미 다시 채워짐
-                Add($"{floor}층 {used:0}초 / 제한 {limit:0}초 (전체 {dt:0}초) · 쥐 {Rats.RealCount} (승급 {Rats.PromoteTimes(0)}/{Rats.PromoteTimes(1)}/{Rats.PromoteTimes(2)}/{Rats.PromoteTimes(3)}/{Rats.PromoteTimes(4)}) · 전투력 {GameManager.Format(maxPow)} / 적정 {GameManager.Format(Stage.PowNeed(floor))} ({maxPow / Stage.PowNeed(floor):0.00}배) · 치즈 +{GameManager.Format(Game.Cheese - cheese0)}");
+                Add($"{floor}층 {used:0}초 / 제한 {limit:0}초 (전체 {dt:0}초) · 쥐 {Rats.RealCount} (승급 {Rats.PromoteTimes(0)}/{Rats.PromoteTimes(1)}/{Rats.PromoteTimes(2)}/{Rats.PromoteTimes(3)}/{Rats.PromoteTimes(4)}) · 전투력 {GameManager.Format(maxPow)} / 적정 {GameManager.Format(Stage.PowNeed(floor))} ({maxPow / Stage.PowNeed(floor):0.00}배) · 치즈 +{GameManager.Format(Game.Cheese - cheese0)} · 연구자료 +{Game.RunResearch - research0:0}");
                 if (bossDur > 0) Add($"   └ 보스전 {bossDur:0}초");
                 Add($"   └ 기준 {BaseLimit(floor):0}초의 {used / BaseLimit(floor) * 100:0}% · 계단 거리 {pathD} · 경로 벽 배율 합 {pathSum:0.0} · 방 {pathRooms}");
-                Rows.Add(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 1, bossDur });
-                floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; limit = 0; bossT0 = -1; bossDur = 0; pathD = -1;
+                Rows.Add(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 1, bossDur, (float)(Game.Cheese - cheese0), (float)(Game.RunResearch - research0) });
+                floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; research0 = Game.RunResearch; limit = 0; bossT0 = -1; bossDur = 0; pathD = -1;
                 if (floor > EndFloor) Finish();
             }
             else if ((!Calib && limit > 0 && used > limit) || dt > Mathf.Max(GiveUp, limit * 2))      // 적정 고정 모드는 제한시간을 넘어도 끝까지 잼
             {
                 if (bossT0 >= 0) Add($"   └ 보스전 {(bossDur > 0 ? bossDur : (timer ? timer.Used : dt) - bossT0):0}초{(bossDur > 0 ? "" : " (못 잡음)")}");
-                Rows.Add(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 0, bossDur });
+                Rows.Add(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 0, bossDur, (float)(Game.Cheese - cheese0), (float)(Game.RunResearch - research0) });
                 Add($"{floor}층 실패 (제한 {limit:0}초 넘음, 전체 {dt:0}초) · 쥐 {Rats.RealCount} · 전투력 {GameManager.Format(pow)} / 적정 {GameManager.Format(Stage.PowNeed(floor))} ({pow / Stage.PowNeed(floor):0.00}배) · 방 {Stage.Open.Count}/{Stage.Layout.Count}");
                 Finish();
             }
@@ -184,7 +184,7 @@ namespace NKK
             if (Queue.Count > 0) RunQueue();
         }
 
-        public static string RowsCsv() { var sb = new StringBuilder("floor,used,base,d,path,rooms,ok,boss").AppendLine(); foreach (var r in Rows) sb.AppendLine(string.Join(",", r)); return sb.ToString(); }
+        public static string RowsCsv() { var sb = new StringBuilder("floor,used,base,d,path,rooms,ok,boss,cheese,research").AppendLine(); foreach (var r in Rows) sb.AppendLine(string.Join(",", r)); return sb.ToString(); }
         public static string Report() { var sb = new StringBuilder(); foreach (var l in Results) sb.AppendLine(l); return sb.ToString(); }
     }
 }

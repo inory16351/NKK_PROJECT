@@ -1,0 +1,16 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boss_v5_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 3 columns x 2 rows (each cell 512x512). Each drawing centered in its own cell with a wide magenta margin; drawings must NOT touch or cross cell borders.
+- STYLE: cut-out paper-doll parts, Untitled Goose Game look: completely FLAT shapes, NO outlines, NO black linework, no gloss, no gradients, no glow, no drop shadows. Copy the attached references' colors and details exactly.
+- Strict SIDE VIEW, the character FACES LEFT.
+
+Row 1 = the SECURITY CHIEF's three HEADS (copy ref_chief_heads exactly: same face, navy peaked cap with gold badge and gold braid, black aviator sunglasses, big black mustache, grey sideburn hair, same skin color), BUT FIX THE NECK: each head ends in a SHORT, NARROW neck stump directly UNDER THE CENTER OF THE SKULL (under the ear), cut flat horizontally at the bottom. The back of the head and the nape must curve inward smoothly into the neck; NOTHING may bulge or stick out behind/below the back of the head. No collar, no shoulders, no clothing.
+ 1) NORMAL head: stern face, mouth closed.
+ 2) ANGRY SHOUTING head: mouth wide open yelling, anger vein mark on the temple.
+ 3) SCARED head: mouth open in a scream, eyebrows up, a few sweat drops.
+Row 2 = ONE WHOLE ARM for each boss, hanging straight down, side view. VERY IMPORTANT: the TOP of every arm is a ROUNDED SHOULDER CAP made of the SLEEVE FABRIC (like the guard and janitor arms in ref_arms) — NOT a flat cut, NO visible skin-colored cross-section, NO ellipse on top.
+ 4) SECURITY CHIEF arm: navy blue sleeve with two gold cuff stripes, white glove hand.
+ 5) MAD SCIENTIST arm: white lab coat sleeve with green chemical stains, teal rubber glove hand.
+ 6) LAB DIRECTOR arm: dark charcoal suit sleeve, white shirt cuff with a gold cufflink, bare hand.

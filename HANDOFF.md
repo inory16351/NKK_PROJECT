@@ -387,7 +387,14 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - **쏟아짐** (사용자: 큰 물건도 부서질 때 쏟아지게 + 물건에 맞는 새 물체, 금고 = 돈): 새 물건 16종 (60033~60048, 분류 **Spill** = 평소 생성 안 됨, `ItemRow.IsSpill`, 부술 수 있고 치즈 줌). 그림 Codex `UnityResources/Rats/Items_Spill/` (README 에 어디서 쏟아지는지 표). 큰 물건 8종 + 가구 전부에 drop_01~04 지정 (원본 백업 `Data_Table/_backup_20261008/`). `ItemManager.OnSmashed` 는 가구만이 아니라 drop 있는 물건 전부 쏟음. 물건 그림 = ItemManager 메뉴 Fill Item Sprites (Game 씬 반영함).
 
 - **인간형 보스 3종 몸통·팔·다리 옆모습으로 새로** (사용자: 리깅 이상 — 정면 몸통 + 옆모습 머리, 팔이 몸통에 묻힘): `UnityResources/Rats/Humans/Sheets/boss_v4/` (README). 목살을 머리 목 폭·피부색에 맞춤. `HumanArtLibrary.Entry.front`(정면 몸통이면 팔 양옆·다리 벌림·목 가운데) 코드는 남겨 둠 — pivots.json 에 "front": 1 일 때만 (지금은 전부 0).
-- **보스는 계단 방에만 보임** (사용자: 보스가 계단 방에 안 나옴 — 실제론 계단 방 좌표였지만 안 열린 방은 바닥이 안 그려져 허공에 떠 보였음): 대기 중 계단 방이 안 보이면 숨김, 옆 방이 열려 어둡게 보이면 실루엣(`Boss.waitDarkTint`), 계단 방이 열리면 원래 색 + 전투. 보스 층 계단은 보스를 잡아야 쓸 수 있음 (`Boss.Blocking`, 이미 있던 것).
+- **보스는 계단 방에서 대기** (2026-10-08 수정 2번째 — 사용자: 5층에서 보스가 안 나옴. 실제론 대기 중이었지만 멀리 있는 계단 방이 안 그려져 숨겨 둠): 보스 층은 계단 방을 처음부터 어둡게 그림(`StageManager.BossWaitRoom`) + 보스는 그 안에 실루엣(`Boss.waitDarkTint`) → 계단 방이 열리면 원래 색 + 전투. 보스를 잡아야 계단 사용(`Boss.Blocking`). 필살기는 버튼을 눌러야 발동 (자동 = 6훈장 Ult_Auto 노드 · 측정 ForceAuto 뿐, Play 로 확인).
+
+- **보스 v5**: 경비대장 머리 3종·보스 팔 3종 다시 (목 뒤 튀어나옴·팔 단면) — `Humans/Sheets/boss_v5/` README. 머리 크기 `head_scale`(pivots.json headScale → HumanRigMeta → HumanArtLibrary.Entry.headScale): 경비대장 0.775 · 연구원·연구소장 0.85.
+- **로켓 배송**: 상자가 막힌 벽 두께 안에 떨어지면 물건이 벽에 가려짐 → 착지 위치를 방 바닥 안쪽으로.
+- **총공격 범위** 공용 효과 `Rush_Range` (1·3·5·7훈장 S3, +15/15/20/20%): 화면 밖으로 화면 크기 × 합 만큼 쥐도 모임 (`RatManager.StartRush`). 자리를 내준 스테이지 스킵은 같은 트리 S1 에 더해 합 유지.
+- **쥐 벽 넘어감** (사용자: 벽 통과하는 스킬들): 측정 중 감지(`Rat.WallEscapeCheck`, 에디터 전용 · BalanceProbe 결과에 `[벽 밖]`) 56건 → 거의 전부 총공격 등으로 몰려 쥐끼리 미는 힘이 Confine 뒤에 적용돼 벽 안으로 밀린 것 (+ 벽 틈 질주·윈드밀 각 1). **`Rat.KeepInside`** = LateUpdate 에서 한 번 더 Confine, 닫힌 방이면 마지막 안전 위치로.
+- **벽 파괴 연출**: 금 자국 3단계 (`Room.crackTemplate/crackSprites/crackAt`) + **`Stage/WallFx.cs`** (Game 씬 `WallFx`): 벽 선 따라 연쇄 폭발(explosion 애니) → 벽돌·콘크리트가 새로 열리는 방 쪽으로 부채꼴로 쏟아짐(큰 덩어리 slabCount) · 먼지 밀려 나감 · 충격파 · 역경직 · 흔들림 · "콰광!!". v2 (사용자 참고 사진: 폭발 + 방사형 잔해 줄기 + 바깥으로 뿜는 연기): 잔해 발사 속도 1300·낮게·부채꼴 0.75, 빠른 잔해 뒤 흙먼지 꼬리(trail*), 연기 기둥 smokeCount 6 이 열리는 방 쪽으로 뿜어져 부풀어 오름(smoke*). `StageManager.BreakFx`. 그림 `UnityResources/Rats/FX_Wall/`.
+- **경제 개편** (사용자: 치즈가 남아돎 → 연구자료 부족 즈음 치즈도 바닥, 훈장마다 1훈장 약 2판 → 8훈장 약 6판, 성장 곡선은 나중에 다시): 측정 `Tools/probe_results/round8_econ.csv`(층별 치즈·연구자료, BalanceProbe Rows 에 cheese·research 칸 추가). 연구자료 = `Heist` 8 × 1.25^(층-1) (예전 6 × 1.45, 보스 ×3). 노드 연구자료 `gen_skill_tree.py RESEARCH`, 승급 티어 테이블 research_cost 36·40·140·460·940·2460·8650, 노드 치즈 = 노드 연구자료 × `CHEESE_PER_RES`(층대 치즈÷연구자료 수입 × (트리+승급)÷트리), 1훈장 트리 치즈 합 21,300. 예전: 7·8훈장은 한 판도 안 돌고 넘어감(0.24·0.03판).
 
 **남은 일 (순서 제안)**
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.

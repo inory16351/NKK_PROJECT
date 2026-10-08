@@ -122,6 +122,7 @@ namespace NKK
         public static float RushTimeAdd => Sum(CommonEffectType.Rush_Up);
         public static float RushMulAdd => Sum(CommonEffectType.Rush_Up, 2);
         public static float RushCdLess => Sum(CommonEffectType.Rush_CD);          // 총공격 쿨타임 감소 (초)
+        public static float RushRange => Sum(CommonEffectType.Rush_Range);        // 총공격 범위: 화면 밖으로 화면 크기 × 이 비율까지
         public static float CatHpMul => Mathf.Max(0.1f, 1 - Sum(CommonEffectType.Cat_Hp_Down));
         public static float CatFearMul => Mathf.Max(0.1f, 1 - Sum(CommonEffectType.Cat_Hp_Down, 2));
     }

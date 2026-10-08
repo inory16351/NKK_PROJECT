@@ -7224,6 +7224,7 @@ MonoBehaviour:
   guardCall: "\uACBD\uBE44! \uACBD\uBE44\uC774!!"
   cheesePopup: "\uCE58\uC988+{n}"
   waitOffsetY: 220
+  waitDarkTint: {r: 0.22, g: 0.22, b: 0.26, a: 1}
   jumpV: 900
   pounceV: 700
   gravity: 1800
@@ -8888,6 +8889,8 @@ MonoBehaviour:
   head: {fileID: 752902350}
   armNear: {fileID: 289228645}
   farColor: {r: 0.8, g: 0.78, b: 0.79, a: 1}
+  frontArmSide: 0.4
+  frontLegSpread: 0.2
   height: 150
 --- !u!4 &313730711
 Transform:
@@ -18520,6 +18523,93 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &712030467
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 712030469}
+  - component: {fileID: 712030468}
+  m_Layer: 0
+  m_Name: WallFx
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &712030468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712030467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef943f5ad13bd174b81d206b3d6e3ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.Stage.WallFx
+  debrisTemplate: {fileID: 716915481}
+  debrisSprites:
+  - {fileID: 21300000, guid: 756a94a59bee29741969283916a94ac0, type: 3}
+  - {fileID: 21300000, guid: 756a94a59bee29741969283916a94ac0, type: 3}
+  - {fileID: 21300000, guid: 51e8739272e91fb4e92db83998fe14e8, type: 3}
+  - {fileID: 21300000, guid: 30ade6a8c86193d44a931ad245fe4921, type: 3}
+  dustSprite: {fileID: 21300000, guid: 015587515cacb2646a913c63f1ad8ca9, type: 3}
+  debrisCount: 40
+  stairsMul: 1.6
+  debrisSize: {x: 26, y: 56}
+  debrisSpeed: {x: 1300, y: 420}
+  gravity: 1100
+  debrisLife: 2.2
+  dustCount: 9
+  dustSize: 120
+  shadeMin: 0.75
+  brickColor: {r: 0.66, g: 0.46, b: 0.38, a: 1}
+  brickMix: 0.65
+  shake: 0.25
+  spread: 0.75
+  slabCount: 5
+  slabSize: {x: 60, y: 95}
+  dustPush: 260
+  smokeCount: 6
+  smokeSize: {x: 150, y: 320}
+  smokePush: {x: 450, y: 900}
+  smokeLife: 1.8
+  smokeDrag: 2.4
+  smokeColor: {r: 0.5, g: 0.43, b: 0.38, a: 0.9}
+  trailMinSpeed: 450
+  trailGap: 0.03
+  trailSize: {x: 14, y: 30}
+  trailLife: 0.5
+  trailColor: {r: 0.55, g: 0.45, b: 0.38, a: 0.7}
+  blastCount: 5
+  blastGap: 0.05
+  blastScale: 2.2
+  hitstop: 0.07
+  breakWords:
+  - "\uC640\uB974\uB974!!"
+  - "\uCF70\uAD11!!"
+  - "\uCFE0\uB974\uB989!!"
+--- !u!4 &712030469
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712030467}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 716915482}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &715628723
 GameObject:
   m_ObjectHideFlags: 0
@@ -18657,6 +18747,97 @@ RectTransform:
   m_AnchoredPosition: {x: 115, y: -16}
   m_SizeDelta: {x: 300, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &716915480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 716915482}
+  - component: {fileID: 716915481}
+  m_Layer: 0
+  m_Name: DebrisTemplate
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &716915481
+SpriteRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716915480}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_Sprite: {fileID: 21300000, guid: 756a94a59bee29741969283916a94ac0, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 2.34, y: 1.86}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_SpriteSortPoint: 0
+--- !u!4 &716915482
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716915480}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 712030469}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &730249098
 GameObject:
   m_ObjectHideFlags: 0
@@ -44963,3 +45144,4 @@ SceneRoots:
   - {fileID: 442566251}
   - {fileID: 200370563}
   - {fileID: 694979148}
+  - {fileID: 712030469}

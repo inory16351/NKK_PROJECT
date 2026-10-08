@@ -1942,22 +1942,22 @@
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_chief/head.png",
-"x": 0.461,
+"x": 0.582,
 "y": 0.03
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_chief/angry.png",
-"x": 0.454,
+"x": 0.417,
 "y": 0.03
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_chief/scared.png",
-"x": 0.43,
+"x": 0.441,
 "y": 0.03
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_chief/arm.png",
-"x": 0.518,
+"x": 0.579,
 "y": 0.96
 },
 {
@@ -1982,7 +1982,7 @@
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_mad/arm.png",
-"x": 0.505,
+"x": 0.58,
 "y": 0.96
 },
 {
@@ -2007,7 +2007,7 @@
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_director/arm.png",
-"x": 0.487,
+"x": 0.519,
 "y": 0.96
 },
 {

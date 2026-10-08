@@ -352,10 +352,41 @@ namespace NKK.Rats
             return p;
         }
 
+        // 모든 이동(쥐끼리 밀기·넉백·순간이동 스킬·묘기)이 끝난 뒤 한 번 더 벽 판정: 벽 두께 안·닫힌 방이면 마지막 안전 위치 쪽으로 되돌림.
+        // (Move 의 Confine 뒤에 다른 힘이 밀어서 쥐가 벽을 넘어 보이던 것 — 측정 2026-10-08: 56건, 거의 전부 몰려서 밀린 경우)
+        float safeX = float.NaN, safeY;
+        void KeepInside()
+        {
+            var st = Manager.Stage; if (!st || UltOn || st.Climbing) { safeX = float.NaN; return; }
+            if (float.IsNaN(safeX)) { if (st.Open.Contains(StageManager.RoomOf(x, y))) { safeX = x; safeY = y; } return; }
+            float ovx = vx, ovy = vy;
+            st.Confine(ref x, ref y, ref vx, ref vy, Radius, safeX, safeY, 0);
+            vx = ovx; vy = ovy;                               // 속도는 Move 가 정함 (여기선 위치만)
+            if (st.Open.Contains(StageManager.RoomOf(x, y))) { safeX = x; safeY = y; } else { x = safeX; y = safeY; }
+        }
+
+#if UNITY_EDITOR
+        // 개발용: 쥐가 열린 방 밖(벽 너머)에 있으면 그때 하던 일을 한 번씩 기록 (벽 통과 스킬 찾기). BalanceProbe 결과에도 남김
+        static readonly HashSet<string> wallEscapes = new();
+        void WallEscapeCheck()
+        {
+            var st = Manager.Stage; if (!st || temp > 0 || st.Climbing) return;
+            if (st.Open.Contains(StageManager.RoomOf(x, y))) return;
+            string why = act.on && Action != null ? $"특수 액션 {Action.skill_name}({ActionType})" : Trick != TrickType.None ? $"묘기 {Trick}" : UltOn ? "필살기" : stun > 0 ? "기절·날아감" : tumbleT > 0 ? "나뒹굼" : $"그 밖 (패시브 {Data.character_name})";
+            if (!wallEscapes.Add(codeId + why)) return;
+            string line = $"[벽 밖] {Data.character_name} · {why} · 위치 {x:0},{y:0}";
+            Debug.LogWarning(line); BalanceProbe.Results.Add(line);
+        }
+#endif
+
         void LateUpdate()
         {
             if (!Manager) return;
+            KeepInside();
             transform.position = World.ToUnity(x, y, z) + UltJitter();
+#if UNITY_EDITOR
+            WallEscapeCheck();
+#endif
             float scale = Manager.ratScale * GradeData.size * EaseOutBack(born);
             TrickTransform(out float lift, out float trot, out float tsx, out float tsy, out float pivotH);
             ActionTransform(ref trot, ref tsx, ref tsy, ref lift);
