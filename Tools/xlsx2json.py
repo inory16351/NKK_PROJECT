@@ -10,7 +10,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, 'Data_Table')
 DST = os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Data')
 # 엑셀 파일 이름 → JSON 이름 (C# 에서 쓰는 이름)
-NAMES = {'쥐 캐릭터 테이블': 'RatTable', '쥐 등급 테이블': 'RatGradeTable', '쥐 성장 테이블': 'RatGrowthTable', '고양이 캐릭터 테이블': 'CatTable', '물건 테이블': 'ItemTable', '티어 테이블': 'TierTable', '사람 테이블': 'HumanTable', '공용 스킬 테이블': 'CommonSkillTable', '스테이지 테이블': 'StageTable', '업적 테이블': 'AchievementTable'}
+NAMES = {'쥐 캐릭터 테이블': 'RatTable', '쥐 등급 테이블': 'RatGradeTable', '쥐 성장 테이블': 'RatGrowthTable', '고양이 캐릭터 테이블': 'CatTable', '물건 테이블': 'ItemTable', '티어 테이블': 'TierTable', '사람 테이블': 'HumanTable', '공용 스킬 테이블': 'CommonSkillTable', '스테이지 테이블': 'StageTable', '보스 테이블': 'BossTable', '업적 테이블': 'AchievementTable'}
 
 
 errors = []          # 자료형이 안 맞는 칸 (숫자 칸에 글자 등) → 위치를 알려 주고 그 파일은 JSON 을 안 씀

@@ -7575,6 +7575,37 @@ MonoBehaviour:
   boxSize: 360
   potionSize: 70
   frogSize: 46
+  batonSprite: {fileID: 21300000, guid: 8297e0610f015084b8a8b4e0cb3d58c1, type: 3}
+  briefcaseSprite: {fileID: 21300000, guid: 013907ccdc129fe41809f41bc54ba583, type: 3}
+  torchSprite: {fileID: 21300000, guid: c6e5d05f193052449a8a98f22d2bd2d7, type: 3}
+  butterCatSprite: {fileID: 21300000, guid: a6ab6d3d7a3519441bb616465e1f40f2, type: 3}
+  maxwellSprite: {fileID: 21300000, guid: 30485173f7f8df748bffa8b680b40729, type: 3}
+  grillSprite: {fileID: 21300000, guid: d71abdfd6c2aa0d419f4dfca573858f1, type: 3}
+  gasSprite: {fileID: 21300000, guid: 69a3dd9bcb3a9044bb0c7588f47222d2, type: 3}
+  batonSize: 120
+  torchSize: 90
+  briefcaseSize: 95
+  skillPopup: '{skill}!!'
+  tungPopup: "\uD241!"
+  sahurPopup: "\uC0AC\uD6C4\uB974!!"
+  tungStunMul: 0.35
+  tungRadStart: 0.45
+  gasExpose: 0.5
+  grillExpose: 1
+  gasPopup: "\uCF5C\uB85D!"
+  grillPopup: "\uC774\uBE10\uD558\uAC8C \uC775\uC5C8\uB124\uC694!"
+  gasColor: {r: 0.62, g: 0.84, b: 0.45, a: 0.55}
+  grillColor: {r: 0.98, g: 0.62, b: 0.25, a: 1}
+  unbrokenDmgMul: 0.4
+  unbrokenColor: {r: 1, g: 0.82, b: 0.3, a: 1}
+  unbrokenPopup: "\uC548 \uAEBE\uC5EC!!"
+  happyPopup: Happy!
+  hopMove: 260
+  butterSize: 110
+  butterSpeed: 380
+  butterSpin: 2.2
+  butterHover: 60
+  butterPopup: "\uBB34\uD55C\uB3D9\uB825!"
   State: 0
   x: 0
   y: 0
@@ -17668,6 +17699,7 @@ MonoBehaviour:
   humanTable: {fileID: 4900000, guid: db5d4ca62f771e14ebe5ecc78a10b299, type: 3}
   commonSkillTable: {fileID: 4900000, guid: 5cd2c1740ed474e4ab247085e226a352, type: 3}
   stageTable: {fileID: 4900000, guid: e321de2c922b18343a3415634cf808aa, type: 3}
+  bossTable: {fileID: 4900000, guid: ed30fc240027f714dbe9a676d19664df, type: 3}
   achievementTable: {fileID: 4900000, guid: 57ddb5ec84e2bde49bd0cc7c6d39fb91, type: 3}
 --- !u!4 &602674878
 Transform:

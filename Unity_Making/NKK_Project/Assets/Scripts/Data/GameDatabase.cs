@@ -20,6 +20,7 @@ namespace NKK.Data
         public TextAsset humanTable;
         public TextAsset commonSkillTable;
         public TextAsset stageTable;
+        public TextAsset bossTable;
         public TextAsset achievementTable;
 
         public readonly Dictionary<int, RatCharacterRow> Rats = new();
@@ -112,7 +113,8 @@ namespace NKK.Data
                 foreach (var b in f.Branch) SkillBranches[b.Branch] = b;
             }
             if (achievementTable) { var f = JsonUtility.FromJson<AchievementTableFile>(achievementTable.text); if (f.Achievement != null) { Achievements.AddRange(f.Achievement); Achievements.Sort((a, b) => a.sort_order.CompareTo(b.sort_order)); } }
-            if (stageTable) { var f = JsonUtility.FromJson<StageTableFile>(stageTable.text); if (f.Stage != null) { Stages.AddRange(f.Stage); Stages.Sort((a, b) => a.floor.CompareTo(b.floor)); } if (f.Boss != null) Bosses.AddRange(f.Boss); if (f.Boss_Line != null) BossLines.AddRange(f.Boss_Line); if (f.Atk_Type != null) foreach (var a in f.Atk_Type) BossAtks[a.atk_type] = a; Bosses.Sort((a, b) => a.floor.CompareTo(b.floor)); }
+            if (stageTable) { var f = JsonUtility.FromJson<StageTableFile>(stageTable.text); if (f.Stage != null) { Stages.AddRange(f.Stage); Stages.Sort((a, b) => a.floor.CompareTo(b.floor)); } }
+            if (bossTable) { var f = JsonUtility.FromJson<BossTableFile>(bossTable.text); if (f.Boss != null) Bosses.AddRange(f.Boss); if (f.Boss_Line != null) BossLines.AddRange(f.Boss_Line); if (f.Atk_Type != null) foreach (var a in f.Atk_Type) BossAtks[a.atk_type] = a; Bosses.Sort((a, b) => a.floor.CompareTo(b.floor)); }
             Debug.Log($"[GameDatabase] 쥐 {Rats.Count} · 스킬 {RatSkills.Count} · 필살기 {Ultimates.Count} · 등급 {Grades.Count} · 성장 노드 {GrowthNodes.Count} · 고양이 {Cats.Count} · 물건 {Items.Count} · 티어 {Tiers.Count} · 사람 {Humans.Count} · 공용 스킬 {CommonSkills.Count}");
         }
 

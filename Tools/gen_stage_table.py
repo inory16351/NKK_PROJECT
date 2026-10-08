@@ -109,7 +109,7 @@ def nice(v):
 
 def main():
     wb = openpyxl.load_workbook(PATH)
-    st = [copy.copy(wb['Boss'].cell(r, 1)._style) for r in (1, 2, 3, 4)]
+    st = [copy.copy(wb['Stage'].cell(r, 1)._style) for r in (1, 2, 3, 4)]       # 머리·데이터 칸 스타일 (Stage 시트를 지우기 전에 복사)
     if 'Stage' in wb.sheetnames: del wb['Stage']
     ws = wb.create_sheet('Stage', 0)
     head = ['층', '방 수', '적정 전투력', '물건 체력 배율', '치즈 배율', '계단 벽 배율', '일반 벽 배율', '경로 벽 합', '추가 제한시간', '메모']

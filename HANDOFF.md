@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-14).
-마지막 갱신: 2026-10-08 · 마지막 커밋 `bf9248d` 이후
+마지막 갱신: 2026-10-08 저녁 (보스 스킬)
 
 ---
 
@@ -65,7 +65,8 @@
 | 사람 | Human 4 · Human_Line |
 | 공용 스킬 | Common_Skill (훈장 8 × 트리, `gen_skill_tree.py` 로 생성) · Branch · Common_Effect_Type |
 | 업적 | Achievement 33 · Achv_Cond_Type |
-| 스테이지 | Stage 1~50층 (`gen_stage_table.py` 생성: 방 수·적정 전투력·물건 체력·치즈·wall_path·추가 시간) · Boss 6 (공격·체력 hp_pow_sec·**special1/2_type·special_chance**) · Boss_Line (Intro/Attack/Hit/Down/**Special**) · Atk_Type 20 (반경·기절·개수·웅크림·길이·화면 이름) |
+| 스테이지 | Stage 1~50층 (`gen_stage_table.py` 생성: 방 수·적정 전투력·물건 체력·치즈·wall_path·추가 시간) |
+| **보스** | Boss 6 (공격·두 번째 공격·체력 hp_pow_sec·special1/2_type·special_chance·**skill_type·skill_cd·skill_first**) · Boss_Line (Intro/Attack/Hit/Down/Special/**Skill**) · Atk_Type 29 (반경·기절·개수·웅크림·길이·화면 이름) |
 
 새 테이블: `xlsx2json.py NAMES` 추가 → `Data/TableRows.cs` 행 클래스 → `Data/GameDatabase.cs` 로드.
 
@@ -80,7 +81,7 @@
 | `Core/` | `GameManager`(층·치즈·콤보·HUD·배너·페이드) · `CameraController`(줌·끌기·흔들림·**Peek 미리보기**) · `FxManager`(파티클·팝업·고리·얼룩·코인·체력바·레이저·번개·**하트**) · `Progress`(저장·스킬·훈장·업적) · `CommonSkill`(공용 스킬 효과 합) · `RunTimer` · `GameOver` · `Heist`(층 탈취 연출) · `Research` · `AchievementToast` · `BalanceProbe`(측정) · `QuitMenu` |
 | `Stage/` | `StageManager`(랜덤 지형·벽·계단·쥐덫·고양이 등장·**Climb/TestClear**) · `Room` · `WallBar` · `WallFx`(벽 폭파) · **`Minimap`** |
 | `Rats/` | `Rat`(+ `.Passive` `.Trick` `.Action` `.Ult` `.Mount`) · `RatManager`(번식·총공격·승급) · `RatRig` · `PromotePanel` · **`PopCounter`** |
-| `Hazards/` | `Boss`(대기·전투·공격 7종·**필살 패턴 12종**) · `Cat`(품종 스킬 + **무리 스킬**) · `CatManager`(등장·**무리 찾기·경고 원·낙하물·블랙홀**) · `Trap` |
+| `Hazards/` | `Boss`(대기·전투·공격 10종·필살 패턴 12종·**쿨타임 스킬 6종**) · `Cat`(품종 스킬 + **무리 스킬**) · `CatManager`(등장·**무리 찾기·경고 원·낙하물·블랙홀**) · `Trap` |
 | `Items/` · `Humans/` | 물건 물리·생성·택배·운석, 사람 생성(`ItemManager`) / 사람 리그·행동 |
 | `Ults/` | `UltimateManager` · `UltBase` + 필살기 33종 `Ult*.cs` · `SuperJumpManager` · `UltTestPanel`(테스트 패널) |
 | `Lobby/` | `LobbyManager`(페이지·출발) · `LobbyHome`(아지트) · `RunPage`(작전 회의) · `RankPage`(찍찍!! 훈장·업적) · `TrainPage`(쳇바퀴 훈련) · `SkillPage`(치즈 창고 = 공용 스킬 트리) · `RatTreePopup` · `RatPortrait` · `IconBook` |
@@ -93,14 +94,14 @@
 
 **보스** (5층마다, 30층 뒤 반복): 계단 방에서 대기(어두운 방에 실루엣 + 층 진입 때 카메라가 잠깐 비춤) → 계단 방이 열리면 전투. **보스를 잡기 전엔 어떤 경로로도 계단 못 씀** (`Boss.FloorCleared`, 보스가 사라졌으면 다시 불러 전투). 테스트 "층 클리어" 버튼도 보스가 있으면 보스전을 시작함. 체력 70%·35% 에서 필살 패턴, 그 뒤 25% 확률로 섞어 씀. 로그 `[Boss]` (Editor.log 검색).
 
-| 보스 | 기본 공격 | 필살 1 · 필살 2 |
-|---|---|---|
-| 5 경비대장 | 내려찍기 | 3단 공중 내려찍기 · 안전 고깔 폭격 |
-| 10 광기의 수석 연구원 | 플라스크 | 약품 대방출 파티 · 자가 실험 거대화 |
-| 15 연구소장 | 휘두르기 + 경비원 | 결재 서류 폭탄 · 긴급 이사회 소집 |
-| 20 실험체 제로(메인쿤) | 덮치기 · 헤어볼 | 새벽 3시 우다다 · 상자 들어가기 |
-| 25 대마법사 마녀 고양이 | 불덩이 · 덮치기 | 운석 소나기 · 개구리 저주 |
-| 30 우주 고양이 사령관 | 무중력 · 덮치기 | 궤도 레이저 포격 · 초거대 블랙홀 |
+| 보스 | 일반 공격 (두 번째 40%) | 쿨타임 스킬 (12초, 밈) | 필살 1 · 필살 2 |
+|---|---|---|---|
+| 5 경비대장 | 내려찍기 · 진압봉 | 퉁퉁퉁 사후르 | 3단 공중 내려찍기 · 안전 고깔 폭격 |
+| 10 광기의 수석 연구원 | 플라스크 · 독가스 구름 | 이븐하게 익혀드릴게요 (불판) | 약품 대방출 파티 · 자가 실험 거대화 |
+| 15 연구소장 | 휘두르기 + 경비원 · 서류 가방 | 중꺾마 (피해 감소) | 결재 서류 폭탄 · 긴급 이사회 소집 |
+| 20 실험체 제로(메인쿤) | 덮치기 · 헤어볼 | 해피해피해피 (점프) | 새벽 3시 우다다 · 상자 들어가기 |
+| 25 대마법사 마녀 고양이 | 불덩이 · 덮치기 | 무한동력 버터 고양이 | 운석 소나기 · 개구리 저주 |
+| 30 우주 고양이 사령관 | 무중력 · 덮치기 | 맥스웰 고양이 낙하 | 궤도 레이저 포격 · 초거대 블랙홀 |
 
 **고양이** (2층부터 35~60초 뒤, 그 뒤 55~85초 간격, 한 번에 한 마리, 보스전 중엔 안 나옴): **체력 0 까지 안 떠남**. 품종 스킬(하악질 등) + **무리 스킬**: 쥐가 가장 많이 모인 곳 → 바닥 빨간 경고 원 + 머리 위 느낌표 → 고양이마다 다른 범위 기절 (코숏 대폭격 · 러시안 블루 연타 · 턱시도 급소 · 페르시안 뱃살 · 먼치킨 볼링 · 벵갈 순간이동 · 스핑크스 레이저 · 메인쿤 지진 · 마녀 운석 · 우주복 블랙홀). 공통 수치 = CatManager 인스펙터 "무리 스킬 공통", `logCrowd` 로 발동 기록.
 
@@ -136,13 +137,8 @@ NKK.BalanceProbe.RunQueue();   // 결과: NKK.BalanceProbe.Results / RowsCsv() �
 
 ## 7. 남은 일 (순서 제안)
 
-0. **[다음 에이전트 작업] 보스 테이블 분리 + 인간형 보스 두 번째 일반 공격** (사용자 지시 2026-10-08)
-   - **보스 테이블 새로 만들기**: 지금 보스 데이터는 `스테이지 테이블.xlsx` 의 `Boss` · `Boss_Line` · `Atk_Type` · `Situation_Type` 시트에 섞여 있음 → 새 파일 `Data_Table/보스 테이블.xlsx` (JSON `BossTable`) 로 옮기고 스테이지 테이블에서는 삭제 (`Column_Desc` 의 보스 칸 설명도 같이 옮김).
-     - 고칠 곳: `Tools/xlsx2json.py NAMES` 에 `'보스 테이블': 'BossTable'` · `Data/TableRows.cs` 에 `BossTableFile { Boss, Boss_Line, Atk_Type }` (지금 `StageTableFile` 안에 있음) · `Data/GameDatabase.cs` 에 `public TextAsset bossTable` + 로드 (지금 stageTable 로드 줄에서 보스 부분 분리) · **Game·Lobby 두 씬의 GameDatabase 에 BossTable.json 연결**.
-     - 도구도 같이: `Tools/update_spu.py` 가 `스테이지 테이블` 의 `Boss` 시트 `hp_pow_sec` 를 고침(69~75줄) → 보스 테이블로 · `Tools/gen_stage_table.py` 112줄이 `wb['Boss']` 셀 스타일을 복사함 → Stage 시트 스타일로 바꿀 것 (Boss 시트가 없으면 에러).
-     - 옮기기 전 백업 `Data_Table/_backup_YYYYMMDD/`, 옮긴 뒤 xlsx2json → Play 로 5층 보스 대기·전투·필살 패턴 확인.
-   - **두 번째 일반 공격** (지금 `atk2_type` 이 None 인 3명, 40% 확률로): 경비대장 = 진압봉 휘두르기 · 수석 연구원 = 독가스 구름(바닥에 남아 들어온 쥐 기절) · 연구소장 = 서류 가방 던지기 (제안, 사용자 확인 후). Atk_Type 행 추가 + `Hazards/Boss.cs` 공격 switch 에 case 추가 (기존 Flask·Swing·Throw 재사용 가능), 대사 Boss_Line `Attack`. 필요하면 Codex 로 소품 그림 (진압봉·가스 구름·서류 가방).
-1. **사용자 플레이 피드백 반영**: 보스 필살 패턴 12종·고양이 무리 스킬 10종의 화면 연출·세기 (데이터 발동은 확인, 화면은 일부만 봄). 보스 건너뜀이 또 생기면 Editor.log `[Boss]` 확인.
+0. ~~보스 테이블 분리 + 두 번째 일반 공격 + 쿨타임 스킬(밈) 6종~~ → 끝 (LOG §9-17). 사용자가 직접 보스전을 해 보고 세기·연출 피드백.
+1. **사용자 플레이 피드백 반영**: 보스 필살 패턴 12종·쿨타임 스킬 6종·고양이 무리 스킬 10종의 화면 연출·세기 (데이터 발동은 확인, 화면은 일부만 봄). 보스 건너뜀이 또 생기면 Editor.log `[Boss]` 확인.
 2. **밸런스**: 사용자 성장 곡선 → `gen_stage_table.py`(POW_GROW·HP_GROW·벽)·`gen_skill_tree.py`(값·비용) 조정 → 측정 (§6). 보스전 시간(필살 패턴 포함)·고양이 방해 정도도 같이. 높은 층(10층+) 사람 수도 아직 안 잼.
 3. **로비 남은 페이지**: 친구들(도감, `RatPortrait` 재사용) · 낮잠 침대(기록·저장). 탭 아이콘·지도 등 로비 소품을 플랫으로 다시 만들지 사용자 결정.
 4. 코드에 박힌 팝업 글(Rat.Action "찌릿!!", ItemManager.ZapChain, 고양이 "냥!" 등) → 테이블/인스펙터.
@@ -161,3 +157,4 @@ NKK.BalanceProbe.RunQueue();   // 결과: NKK.BalanceProbe.Results / RowsCsv() �
 | 10-07 | 필살기 33종·슈퍼 점프(§7) · 제한시간 · 게임 오버 · 층 탈취 · 보스 6종 · 공용 스킬 트리·훈장 · 쳇바퀴 훈련 · 층 벽 밸런스 1차 (§9-1~9-8) |
 | 10-08 오전 | 찍찍!! 훈장·업적 · 쥐 스킬 아이콘 · 고양이 보스 그림 · 측정 라운드 5~7 · 랜덤 지형 · 쏟아짐 · 벽 폭파 · 경제 개편 (§9-9~9-11) |
 | 10-08 오후 | 보스 건너뜀 수정·미니맵·쥐 마릿수·HUD 게이지 (§9-12) · 고양이 무리 스킬·사람 보충 (§9-13) · 훈장 = 트리 전부·번식 하트·보스 필살 패턴·층 길 스크롤 (§9-14) |
+| 10-08 저녁 | 보스 테이블 분리 · 두 번째 일반 공격 3종 · 보스 쿨타임 스킬(밈) 6종 (§9-17) |

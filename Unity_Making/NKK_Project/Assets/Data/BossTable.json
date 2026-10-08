@@ -1,0 +1,991 @@
+{
+ "Boss": [
+  {
+   "boss_id": 95001,
+   "boss_name": "경비대장 강철수",
+   "code_id": "boss_chief",
+   "rig": "Human",
+   "floor": 5,
+   "atk_type": "Stomp",
+   "atk2_type": "Baton",
+   "atk2_chance": 0.4,
+   "color": "#8fb3c7",
+   "scale": 2.8,
+   "radius_mul": 2.8,
+   "hp_pow_sec": 33.4,
+   "cheese_mul": 300.0,
+   "move_speed": 95.0,
+   "atk_cd_min": 3.0,
+   "atk_cd_max": 4.5,
+   "special1_type": "Mega_Stomp",
+   "special2_type": "Cone_Rain",
+   "special_chance": 0.25,
+   "skill_type": "Tung_Sahur",
+   "skill_cd": 12.0,
+   "skill_first": 6.0
+  },
+  {
+   "boss_id": 95002,
+   "boss_name": "광기의 수석 연구원",
+   "code_id": "boss_mad",
+   "rig": "Human",
+   "floor": 10,
+   "atk_type": "Flask",
+   "atk2_type": "Gas_Cloud",
+   "atk2_chance": 0.4,
+   "color": "#9dd5a8",
+   "scale": 2.8,
+   "radius_mul": 2.8,
+   "hp_pow_sec": 56.0,
+   "cheese_mul": 300.0,
+   "move_speed": 95.0,
+   "atk_cd_min": 3.0,
+   "atk_cd_max": 4.5,
+   "special1_type": "Potion_Party",
+   "special2_type": "Self_Experiment",
+   "special_chance": 0.25,
+   "skill_type": "Even_Cook",
+   "skill_cd": 12.0,
+   "skill_first": 6.0
+  },
+  {
+   "boss_id": 95003,
+   "boss_name": "연구소장",
+   "code_id": "boss_director",
+   "rig": "Human",
+   "floor": 15,
+   "atk_type": "Swing",
+   "atk2_type": "Briefcase",
+   "atk2_chance": 0.4,
+   "color": "#d9786a",
+   "scale": 2.8,
+   "radius_mul": 2.8,
+   "hp_pow_sec": 70.7,
+   "cheese_mul": 300.0,
+   "move_speed": 95.0,
+   "atk_cd_min": 3.0,
+   "atk_cd_max": 4.5,
+   "special1_type": "Paper_Storm",
+   "special2_type": "Board_Meeting",
+   "special_chance": 0.25,
+   "skill_type": "Unbroken",
+   "skill_cd": 12.0,
+   "skill_first": 6.0
+  },
+  {
+   "boss_id": 95004,
+   "boss_name": "실험체 제로 (거대 메인쿤)",
+   "code_id": "boss_zero",
+   "rig": "Cat",
+   "floor": 20,
+   "atk_type": "Pounce",
+   "atk2_type": "Hairball",
+   "atk2_chance": 0.4,
+   "color": "#e39a5a",
+   "scale": 3.4,
+   "radius_mul": 3.4,
+   "hp_pow_sec": 56.1,
+   "cheese_mul": 300.0,
+   "move_speed": 95.0,
+   "atk_cd_min": 3.0,
+   "atk_cd_max": 4.5,
+   "special1_type": "Zoomies",
+   "special2_type": "Box_Fit",
+   "special_chance": 0.25,
+   "skill_type": "Happy_Jump",
+   "skill_cd": 12.0,
+   "skill_first": 6.0
+  },
+  {
+   "boss_id": 95005,
+   "boss_name": "대마법사 마녀 고양이",
+   "code_id": "boss_witch",
+   "rig": "Cat",
+   "floor": 25,
+   "atk_type": "Fireball",
+   "atk2_type": "Pounce",
+   "atk2_chance": 0.4,
+   "color": "#cdb4db",
+   "scale": 3.4,
+   "radius_mul": 3.4,
+   "hp_pow_sec": 53.9,
+   "cheese_mul": 300.0,
+   "move_speed": 95.0,
+   "atk_cd_min": 3.0,
+   "atk_cd_max": 4.5,
+   "special1_type": "Meteor_Shower",
+   "special2_type": "Frog_Curse",
+   "special_chance": 0.25,
+   "skill_type": "Buttered_Cat",
+   "skill_cd": 12.0,
+   "skill_first": 6.0
+  },
+  {
+   "boss_id": 95006,
+   "boss_name": "우주 고양이 사령관",
+   "code_id": "boss_commander",
+   "rig": "Cat",
+   "floor": 30,
+   "atk_type": "Gravity",
+   "atk2_type": "Pounce",
+   "atk2_chance": 0.4,
+   "color": "#a9d3dc",
+   "scale": 3.4,
+   "radius_mul": 3.4,
+   "hp_pow_sec": 36.0,
+   "cheese_mul": 300.0,
+   "move_speed": 95.0,
+   "atk_cd_min": 3.0,
+   "atk_cd_max": 4.5,
+   "special1_type": "Orbital_Laser",
+   "special2_type": "Black_Hole",
+   "special_chance": 0.25,
+   "skill_type": "Maxwell_Drop",
+   "skill_cd": 12.0,
+   "skill_first": 6.0
+  }
+ ],
+ "Boss_Line": [
+  {
+   "line_id": 96001,
+   "boss_id": 95001,
+   "situation": "Intro",
+   "text": "쥐는 한 마리도 못 지나간다!"
+  },
+  {
+   "line_id": 96002,
+   "boss_id": 95001,
+   "situation": "Attack",
+   "text": "흐으읍!"
+  },
+  {
+   "line_id": 96003,
+   "boss_id": 95001,
+   "situation": "Attack",
+   "text": "짓밟아 주마!"
+  },
+  {
+   "line_id": 96004,
+   "boss_id": 95001,
+   "situation": "Hit",
+   "text": "아야!"
+  },
+  {
+   "line_id": 96005,
+   "boss_id": 95001,
+   "situation": "Hit",
+   "text": "이 녀석들이!"
+  },
+  {
+   "line_id": 96006,
+   "boss_id": 95001,
+   "situation": "Hit",
+   "text": "끄악!"
+  },
+  {
+   "line_id": 96007,
+   "boss_id": 95001,
+   "situation": "Hit",
+   "text": "비켜!"
+  },
+  {
+   "line_id": 96008,
+   "boss_id": 95001,
+   "situation": "Down",
+   "text": "기억해 두겠다아아~!"
+  },
+  {
+   "line_id": 96009,
+   "boss_id": 95001,
+   "situation": "Down",
+   "text": "퇴직금은?!"
+  },
+  {
+   "line_id": 96010,
+   "boss_id": 95001,
+   "situation": "Down",
+   "text": "으아아아~!"
+  },
+  {
+   "line_id": 96011,
+   "boss_id": 95002,
+   "situation": "Intro",
+   "text": "내 실험체들이 탈출해?!"
+  },
+  {
+   "line_id": 96012,
+   "boss_id": 95002,
+   "situation": "Attack",
+   "text": "실험체는 실험실로!"
+  },
+  {
+   "line_id": 96013,
+   "boss_id": 95002,
+   "situation": "Attack",
+   "text": "이거나 먹어라!"
+  },
+  {
+   "line_id": 96014,
+   "boss_id": 95002,
+   "situation": "Hit",
+   "text": "내 연구가!"
+  },
+  {
+   "line_id": 96015,
+   "boss_id": 95002,
+   "situation": "Hit",
+   "text": "으윽, 시약이!"
+  },
+  {
+   "line_id": 96016,
+   "boss_id": 95002,
+   "situation": "Hit",
+   "text": "감히!"
+  },
+  {
+   "line_id": 96017,
+   "boss_id": 95002,
+   "situation": "Down",
+   "text": "내 논문이이이~!"
+  },
+  {
+   "line_id": 96018,
+   "boss_id": 95002,
+   "situation": "Down",
+   "text": "실험 실패다아~!"
+  },
+  {
+   "line_id": 96019,
+   "boss_id": 95003,
+   "situation": "Intro",
+   "text": "예산 삭감이다!!"
+  },
+  {
+   "line_id": 96020,
+   "boss_id": 95003,
+   "situation": "Attack",
+   "text": "예산 삭감!"
+  },
+  {
+   "line_id": 96021,
+   "boss_id": 95003,
+   "situation": "Attack",
+   "text": "해고다!!"
+  },
+  {
+   "line_id": 96023,
+   "boss_id": 95003,
+   "situation": "Hit",
+   "text": "내 양복이!"
+  },
+  {
+   "line_id": 96024,
+   "boss_id": 95003,
+   "situation": "Hit",
+   "text": "이건 감사 대상이야!"
+  },
+  {
+   "line_id": 96025,
+   "boss_id": 95003,
+   "situation": "Hit",
+   "text": "아얏!"
+  },
+  {
+   "line_id": 96026,
+   "boss_id": 95003,
+   "situation": "Down",
+   "text": "퇴직금은?!"
+  },
+  {
+   "line_id": 96027,
+   "boss_id": 95003,
+   "situation": "Down",
+   "text": "기억해 두겠다아아~!"
+  },
+  {
+   "line_id": 96028,
+   "boss_id": 95004,
+   "situation": "Intro",
+   "text": "냐아아아옹!!!"
+  },
+  {
+   "line_id": 96029,
+   "boss_id": 95004,
+   "situation": "Attack",
+   "text": "냐아앙!!"
+  },
+  {
+   "line_id": 96030,
+   "boss_id": 95004,
+   "situation": "Attack",
+   "text": "크르르…"
+  },
+  {
+   "line_id": 96031,
+   "boss_id": 95004,
+   "situation": "Attack",
+   "text": "캑… 캑캑…"
+  },
+  {
+   "line_id": 96032,
+   "boss_id": 95004,
+   "situation": "Attack",
+   "text": "우웨엑(헤어볼)!"
+  },
+  {
+   "line_id": 96033,
+   "boss_id": 95004,
+   "situation": "Hit",
+   "text": "캬악!"
+  },
+  {
+   "line_id": 96034,
+   "boss_id": 95004,
+   "situation": "Hit",
+   "text": "냐앙?!"
+  },
+  {
+   "line_id": 96035,
+   "boss_id": 95004,
+   "situation": "Hit",
+   "text": "하악!"
+  },
+  {
+   "line_id": 96036,
+   "boss_id": 95004,
+   "situation": "Down",
+   "text": "냐아아아~!"
+  },
+  {
+   "line_id": 96037,
+   "boss_id": 95004,
+   "situation": "Down",
+   "text": "냐옹…(기절)"
+  },
+  {
+   "line_id": 96038,
+   "boss_id": 95005,
+   "situation": "Intro",
+   "text": "냐브라카다브라!!"
+  },
+  {
+   "line_id": 96039,
+   "boss_id": 95005,
+   "situation": "Attack",
+   "text": "냐브라카다브라!"
+  },
+  {
+   "line_id": 96040,
+   "boss_id": 95005,
+   "situation": "Attack",
+   "text": "불타라 냥!"
+  },
+  {
+   "line_id": 96041,
+   "boss_id": 95005,
+   "situation": "Attack",
+   "text": "냐아앙!!"
+  },
+  {
+   "line_id": 96042,
+   "boss_id": 95005,
+   "situation": "Hit",
+   "text": "내 모자가!"
+  },
+  {
+   "line_id": 96043,
+   "boss_id": 95005,
+   "situation": "Hit",
+   "text": "캬악!"
+  },
+  {
+   "line_id": 96044,
+   "boss_id": 95005,
+   "situation": "Hit",
+   "text": "주문이 꼬였다냥!"
+  },
+  {
+   "line_id": 96045,
+   "boss_id": 95005,
+   "situation": "Down",
+   "text": "마법이 풀렸다냐아~!"
+  },
+  {
+   "line_id": 96046,
+   "boss_id": 95005,
+   "situation": "Down",
+   "text": "냐아아아~!"
+  },
+  {
+   "line_id": 96047,
+   "boss_id": 95006,
+   "situation": "Intro",
+   "text": "이 연구소는 우주 냥국이 접수한다!"
+  },
+  {
+   "line_id": 96048,
+   "boss_id": 95006,
+   "situation": "Attack",
+   "text": "중력 해제 냥!"
+  },
+  {
+   "line_id": 96049,
+   "boss_id": 95006,
+   "situation": "Attack",
+   "text": "둥실둥실 냥~"
+  },
+  {
+   "line_id": 96050,
+   "boss_id": 95006,
+   "situation": "Attack",
+   "text": "냐아앙!!"
+  },
+  {
+   "line_id": 96051,
+   "boss_id": 95006,
+   "situation": "Hit",
+   "text": "헬멧에 금이!"
+  },
+  {
+   "line_id": 96052,
+   "boss_id": 95006,
+   "situation": "Hit",
+   "text": "캬악!"
+  },
+  {
+   "line_id": 96053,
+   "boss_id": 95006,
+   "situation": "Hit",
+   "text": "지구 쥐 주제에!"
+  },
+  {
+   "line_id": 96054,
+   "boss_id": 95006,
+   "situation": "Down",
+   "text": "우주로 돌아간다냐아~!"
+  },
+  {
+   "line_id": 96055,
+   "boss_id": 95006,
+   "situation": "Down",
+   "text": "냐아아아~!"
+  },
+  {
+   "line_id": 96056,
+   "boss_id": 95001,
+   "situation": "Special",
+   "text": "비상! 비상!! 전원 출동!!"
+  },
+  {
+   "line_id": 96057,
+   "boss_id": 95001,
+   "situation": "Special",
+   "text": "호루라기 삐이이익!!"
+  },
+  {
+   "line_id": 96058,
+   "boss_id": 95001,
+   "situation": "Special",
+   "text": "경비 30년의 내공을 보여주마!"
+  },
+  {
+   "line_id": 96059,
+   "boss_id": 95002,
+   "situation": "Special",
+   "text": "실험은 폭발이다아아!!"
+  },
+  {
+   "line_id": 96060,
+   "boss_id": 95002,
+   "situation": "Special",
+   "text": "이번엔 이걸 섞어볼까~?"
+  },
+  {
+   "line_id": 96061,
+   "boss_id": 95002,
+   "situation": "Special",
+   "text": "내 몸으로 직접 실험한다!!"
+  },
+  {
+   "line_id": 96062,
+   "boss_id": 95003,
+   "situation": "Special",
+   "text": "결재 올려!! 전부 다!!"
+  },
+  {
+   "line_id": 96063,
+   "boss_id": 95003,
+   "situation": "Special",
+   "text": "이사회 소집이다!!!"
+  },
+  {
+   "line_id": 96064,
+   "boss_id": 95003,
+   "situation": "Special",
+   "text": "예산은 너희들 몫이 아니다!"
+  },
+  {
+   "line_id": 96065,
+   "boss_id": 95004,
+   "situation": "Special",
+   "text": "냐아아아아앙!!!!"
+  },
+  {
+   "line_id": 96066,
+   "boss_id": 95004,
+   "situation": "Special",
+   "text": "(우다다다다다)"
+  },
+  {
+   "line_id": 96067,
+   "boss_id": 95004,
+   "situation": "Special",
+   "text": "상자다… 상자다…!!"
+  },
+  {
+   "line_id": 96068,
+   "boss_id": 95005,
+   "situation": "Special",
+   "text": "하늘이여 무너져라냥!"
+  },
+  {
+   "line_id": 96069,
+   "boss_id": 95005,
+   "situation": "Special",
+   "text": "개굴개굴해져라~!"
+  },
+  {
+   "line_id": 96070,
+   "boss_id": 95005,
+   "situation": "Special",
+   "text": "마법 학교 수석의 힘이다냥!"
+  },
+  {
+   "line_id": 96071,
+   "boss_id": 95006,
+   "situation": "Special",
+   "text": "궤도 포격 허가한다냥!"
+  },
+  {
+   "line_id": 96072,
+   "boss_id": 95006,
+   "situation": "Special",
+   "text": "블랙홀 생성 완료."
+  },
+  {
+   "line_id": 96073,
+   "boss_id": 95006,
+   "situation": "Special",
+   "text": "우주는 넓고 쥐는 작다냥."
+  },
+  {
+   "line_id": 96074,
+   "boss_id": 95001,
+   "situation": "Skill",
+   "text": "퉁! 퉁! 퉁! 사후르!!"
+  },
+  {
+   "line_id": 96075,
+   "boss_id": 95001,
+   "situation": "Skill",
+   "text": "사후르 시간이다!!"
+  },
+  {
+   "line_id": 96076,
+   "boss_id": 95001,
+   "situation": "Skill",
+   "text": "퉁퉁퉁퉁퉁퉁퉁퉁퉁 사후르!"
+  },
+  {
+   "line_id": 96077,
+   "boss_id": 95001,
+   "situation": "Attack",
+   "text": "진압봉 맛 좀 봐라!"
+  },
+  {
+   "line_id": 96078,
+   "boss_id": 95002,
+   "situation": "Skill",
+   "text": "이븐하게 익혀 드릴게요~"
+  },
+  {
+   "line_id": 96079,
+   "boss_id": 95002,
+   "situation": "Skill",
+   "text": "익힘 정도가 아주 이븐하네요!"
+  },
+  {
+   "line_id": 96080,
+   "boss_id": 95002,
+   "situation": "Skill",
+   "text": "쥐 요리는 굽기가 생명이지!"
+  },
+  {
+   "line_id": 96081,
+   "boss_id": 95002,
+   "situation": "Attack",
+   "text": "숨 참아 봐~ 독가스다!"
+  },
+  {
+   "line_id": 96082,
+   "boss_id": 95003,
+   "situation": "Skill",
+   "text": "중요한 건 꺾이지 않는 마음!!"
+  },
+  {
+   "line_id": 96083,
+   "boss_id": 95003,
+   "situation": "Skill",
+   "text": "중꺾마다!!"
+  },
+  {
+   "line_id": 96084,
+   "boss_id": 95003,
+   "situation": "Skill",
+   "text": "이 정도로 꺾일 소장이 아니다!"
+  },
+  {
+   "line_id": 96085,
+   "boss_id": 95003,
+   "situation": "Attack",
+   "text": "서류는 던지라고 있는 거야!"
+  },
+  {
+   "line_id": 96086,
+   "boss_id": 95004,
+   "situation": "Skill",
+   "text": "해피해피해피~!"
+  },
+  {
+   "line_id": 96087,
+   "boss_id": 95004,
+   "situation": "Skill",
+   "text": "(통 통 통)"
+  },
+  {
+   "line_id": 96088,
+   "boss_id": 95004,
+   "situation": "Skill",
+   "text": "냥피냥피냥피!"
+  },
+  {
+   "line_id": 96089,
+   "boss_id": 95005,
+   "situation": "Skill",
+   "text": "무한동력이다냥!"
+  },
+  {
+   "line_id": 96090,
+   "boss_id": 95005,
+   "situation": "Skill",
+   "text": "식빵이 먼저냐, 고양이가 먼저냐!"
+  },
+  {
+   "line_id": 96091,
+   "boss_id": 95005,
+   "situation": "Skill",
+   "text": "버터 바른 고양이 출동~!"
+  },
+  {
+   "line_id": 96092,
+   "boss_id": 95006,
+   "situation": "Skill",
+   "text": "맥스웰 부대, 강하."
+  },
+  {
+   "line_id": 96093,
+   "boss_id": 95006,
+   "situation": "Skill",
+   "text": "빙글빙글 맥스웰 투하!"
+  },
+  {
+   "line_id": 96094,
+   "boss_id": 95006,
+   "situation": "Skill",
+   "text": "(맥스웰 테마 흥얼흥얼)"
+  }
+ ],
+ "Atk_Type": [
+  {
+   "atk_type": "None",
+   "radius": 0.0,
+   "stun": 0.0,
+   "count": 0,
+   "windup": 0.0,
+   "dur": 0.0,
+   "atk_name": "-"
+  },
+  {
+   "atk_type": "Stomp",
+   "radius": 300.0,
+   "stun": 2.0,
+   "count": 0,
+   "windup": 0.5,
+   "dur": 2.0,
+   "atk_name": "내려찍기"
+  },
+  {
+   "atk_type": "Pounce",
+   "radius": 280.0,
+   "stun": 2.0,
+   "count": 0,
+   "windup": 0.6,
+   "dur": 2.0,
+   "atk_name": "덮치기"
+  },
+  {
+   "atk_type": "Flask",
+   "radius": 110.0,
+   "stun": 2.5,
+   "count": 3,
+   "windup": 0.4,
+   "dur": 1.6,
+   "atk_name": "플라스크 투척"
+  },
+  {
+   "atk_type": "Hairball",
+   "radius": 110.0,
+   "stun": 2.5,
+   "count": 3,
+   "windup": 0.4,
+   "dur": 1.6,
+   "atk_name": "헤어볼"
+  },
+  {
+   "atk_type": "Fireball",
+   "radius": 110.0,
+   "stun": 2.5,
+   "count": 5,
+   "windup": 0.4,
+   "dur": 1.6,
+   "atk_name": "불덩이"
+  },
+  {
+   "atk_type": "Swing",
+   "radius": 280.0,
+   "stun": 1.6,
+   "count": 2,
+   "windup": 0.45,
+   "dur": 1.2,
+   "atk_name": "휘두르기"
+  },
+  {
+   "atk_type": "Gravity",
+   "radius": 360.0,
+   "stun": 2.0,
+   "count": 0,
+   "windup": 0.5,
+   "dur": 1.3,
+   "atk_name": "무중력 파동"
+  },
+  {
+   "atk_type": "Mega_Stomp",
+   "radius": 240.0,
+   "stun": 1.8,
+   "count": 3,
+   "windup": 0.5,
+   "dur": 0.0,
+   "atk_name": "3단 공중 내려찍기"
+  },
+  {
+   "atk_type": "Cone_Rain",
+   "radius": 100.0,
+   "stun": 1.6,
+   "count": 10,
+   "windup": 0.8,
+   "dur": 1.8,
+   "atk_name": "안전 고깔 폭격"
+  },
+  {
+   "atk_type": "Potion_Party",
+   "radius": 110.0,
+   "stun": 2.0,
+   "count": 14,
+   "windup": 0.6,
+   "dur": 2.2,
+   "atk_name": "약품 대방출 파티"
+  },
+  {
+   "atk_type": "Self_Experiment",
+   "radius": 230.0,
+   "stun": 1.5,
+   "count": 6,
+   "windup": 0.8,
+   "dur": 6.0,
+   "atk_name": "자가 실험: 거대화!!"
+  },
+  {
+   "atk_type": "Paper_Storm",
+   "radius": 130.0,
+   "stun": 2.0,
+   "count": 7,
+   "windup": 0.8,
+   "dur": 1.8,
+   "atk_name": "결재 서류 폭탄"
+  },
+  {
+   "atk_type": "Board_Meeting",
+   "radius": 380.0,
+   "stun": 1.8,
+   "count": 6,
+   "windup": 0.9,
+   "dur": 1.4,
+   "atk_name": "긴급 이사회 소집"
+  },
+  {
+   "atk_type": "Zoomies",
+   "radius": 120.0,
+   "stun": 1.6,
+   "count": 5,
+   "windup": 0.5,
+   "dur": 4.0,
+   "atk_name": "새벽 3시 우다다"
+  },
+  {
+   "atk_type": "Box_Fit",
+   "radius": 400.0,
+   "stun": 2.4,
+   "count": 0,
+   "windup": 2.0,
+   "dur": 1.0,
+   "atk_name": "상자 들어가기"
+  },
+  {
+   "atk_type": "Meteor_Shower",
+   "radius": 150.0,
+   "stun": 2.0,
+   "count": 8,
+   "windup": 0.9,
+   "dur": 2.0,
+   "atk_name": "운석 소나기"
+  },
+  {
+   "atk_type": "Frog_Curse",
+   "radius": 340.0,
+   "stun": 3.0,
+   "count": 0,
+   "windup": 0.9,
+   "dur": 1.0,
+   "atk_name": "개구리 저주"
+  },
+  {
+   "atk_type": "Orbital_Laser",
+   "radius": 160.0,
+   "stun": 2.2,
+   "count": 6,
+   "windup": 0.7,
+   "dur": 2.4,
+   "atk_name": "궤도 레이저 포격"
+  },
+  {
+   "atk_type": "Black_Hole",
+   "radius": 450.0,
+   "stun": 2.5,
+   "count": 0,
+   "windup": 2.0,
+   "dur": 1.0,
+   "atk_name": "초거대 블랙홀"
+  },
+  {
+   "atk_type": "Baton",
+   "radius": 260.0,
+   "stun": 1.6,
+   "count": 0,
+   "windup": 0.4,
+   "dur": 1.0,
+   "atk_name": "진압봉 휘두르기"
+  },
+  {
+   "atk_type": "Gas_Cloud",
+   "radius": 140.0,
+   "stun": 1.5,
+   "count": 2,
+   "windup": 0.4,
+   "dur": 5.0,
+   "atk_name": "독가스 구름"
+  },
+  {
+   "atk_type": "Briefcase",
+   "radius": 170.0,
+   "stun": 2.0,
+   "count": 1,
+   "windup": 0.45,
+   "dur": 1.4,
+   "atk_name": "서류 가방 던지기"
+  },
+  {
+   "atk_type": "Tung_Sahur",
+   "radius": 320.0,
+   "stun": 2.2,
+   "count": 3,
+   "windup": 0.5,
+   "dur": 1.5,
+   "atk_name": "퉁퉁퉁 사후르"
+  },
+  {
+   "atk_type": "Even_Cook",
+   "radius": 170.0,
+   "stun": 2.0,
+   "count": 2,
+   "windup": 0.7,
+   "dur": 6.0,
+   "atk_name": "이븐하게 익혀드릴게요"
+  },
+  {
+   "atk_type": "Unbroken",
+   "radius": 220.0,
+   "stun": 0.8,
+   "count": 0,
+   "windup": 0.6,
+   "dur": 6.0,
+   "atk_name": "중요한 건 꺾이지 않는 마음"
+  },
+  {
+   "atk_type": "Happy_Jump",
+   "radius": 170.0,
+   "stun": 1.0,
+   "count": 6,
+   "windup": 0.4,
+   "dur": 3.0,
+   "atk_name": "해피해피해피"
+  },
+  {
+   "atk_type": "Buttered_Cat",
+   "radius": 70.0,
+   "stun": 1.6,
+   "count": 4,
+   "windup": 0.8,
+   "dur": 4.0,
+   "atk_name": "무한동력 버터 고양이"
+  },
+  {
+   "atk_type": "Maxwell_Drop",
+   "radius": 120.0,
+   "stun": 1.8,
+   "count": 6,
+   "windup": 0.9,
+   "dur": 2.0,
+   "atk_name": "맥스웰 고양이 낙하"
+  }
+ ],
+ "Situation_Type": [
+  {
+   "situation": "Intro"
+  },
+  {
+   "situation": "Attack"
+  },
+  {
+   "situation": "Hit"
+  },
+  {
+   "situation": "Down"
+  },
+  {
+   "situation": "Special"
+  },
+  {
+   "situation": "Skill"
+  }
+ ]
+}

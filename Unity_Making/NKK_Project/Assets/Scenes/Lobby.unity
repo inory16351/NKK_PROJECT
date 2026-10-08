@@ -18038,6 +18038,7 @@ MonoBehaviour:
   humanTable: {fileID: 4900000, guid: db5d4ca62f771e14ebe5ecc78a10b299, type: 3}
   commonSkillTable: {fileID: 4900000, guid: 5cd2c1740ed474e4ab247085e226a352, type: 3}
   stageTable: {fileID: 4900000, guid: e321de2c922b18343a3415634cf808aa, type: 3}
+  bossTable: {fileID: 4900000, guid: ed30fc240027f714dbe9a676d19664df, type: 3}
   achievementTable: {fileID: 4900000, guid: 57ddb5ec84e2bde49bd0cc7c6d39fb91, type: 3}
 --- !u!4 &755047824
 Transform:
