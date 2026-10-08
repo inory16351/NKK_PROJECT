@@ -50,23 +50,32 @@ namespace NKK
         // 노드가 바뀔 때마다 +1 (CommonSkill 이 효과 합을 다시 계산)
         public int SkillVersion { get; private set; }
         int testHash;
-        // ── 업적 (필살기를 끝까지 쓰면 달성. 로비 표시는 나중에 찍찍!! 훈장과 연동) ──
+        // ── 업적 (업적 테이블 Achievement) ──
+        // 저장하는 건 조건의 바탕 기록뿐 (지금: 필살기별 완주 횟수, 저장 이름 achvs 는 예전 그대로). 달성 여부는 업적 테이블 조건으로 계산
         readonly Dictionary<int, int> achvs = new();
-        public event Action<int> AchievementGot;
-        public bool HasAchievement(int ultId) => achvs.ContainsKey(ultId);
-        public int AchievementCount(int ultId) => achvs.TryGetValue(ultId, out var n) ? n : 0;
-        public int AchievementTotal => achvs.Count;
+        public int UltUses(int ultId) => achvs.TryGetValue(ultId, out var n) ? n : 0;
         // 업적 테이블 한 줄의 진행 수 (조건 타입별) · 달성 여부
-        public int AchvProgress(AchievementRow a) => a == null ? 0 : a.cond_type switch { "Ult_Use" => AchievementCount(a.target_id), _ => 0 };
+        public int AchvProgress(AchievementRow a) => a == null ? 0 : a.cond_type switch { "Ult_Use" => UltUses(a.target_id), _ => 0 };
         public bool AchvDone(AchievementRow a) => a != null && AchvProgress(a) >= Mathf.Max(1, a.need);
-        public IEnumerable<int> Achievements => achvs.Keys;
-        // 처음 달성이면 true
-        public bool OnAchievement(int ultId)
+        // 업적 달성 알림 (줄, 이번에 처음 달성) — 게임 화면 AchievementToast 가 받음. 이미 단 업적도 기록이 오르면 다시 알림 (처음 = false)
+        public event Action<AchievementRow, bool> AchvGot;
+
+        // 필살기를 끝까지 씀 → Ult_Use 업적 확인
+        public void OnUltUsed(int ultId)
         {
-            bool first = !achvs.ContainsKey(ultId);
-            achvs[ultId] = AchievementCount(ultId) + 1;
-            Save(); AchievementGot?.Invoke(ultId);
-            return first;
+            achvs[ultId] = UltUses(ultId) + 1;
+            Save();
+            CheckAchv("Ult_Use", ultId);
+        }
+        void CheckAchv(string type, int target)
+        {
+            var db = GameDatabase.Instance; if (!db) return;
+            foreach (var a in db.Achievements)
+            {
+                if (a.cond_type != type || a.target_id != target) continue;
+                int prog = AchvProgress(a), need = Mathf.Max(1, a.need);
+                if (prog >= need) AchvGot?.Invoke(a, prog == need);
+            }
         }
         public event Action<int> SkillLeveled;
         readonly Dictionary<int, Dictionary<GrowthEffectType, int>> treeCache = new();
@@ -241,7 +250,7 @@ namespace NKK
         {
             var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs }; d.rats.AddRange(rats.Values);
             d.nodes.AddRange(skills);
-            foreach (var kv in achvs) d.achvs.Add(new AchvEntry { ult = kv.Key, count = kv.Value });
+            foreach (var kv in achvs) d.achvs.Add(new AchvEntry { ult = kv.Key, count = kv.Value });     // 필살기 완주 횟수
             PlayerPrefs.SetString(saveKey, JsonUtility.ToJson(d)); PlayerPrefs.Save();
         }
 

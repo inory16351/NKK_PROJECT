@@ -52,10 +52,6 @@ namespace NKK.Ults
         public TMP_Text captionSmall;
         public float bigCaptionSize = 40;
         [Tooltip("자막이 보이는 시간 (초)")] public float captionTime = 1.3f;
-        [Tooltip("업적 알림 패널 (오른쪽에서 밀려 들어옴)")] public RectTransform achvPanel;
-        [Tooltip("업적 이름 (자리: {achv})")] public TMP_Text achvTitle;
-        [Tooltip("처음 달성일 때만 보이는 표시 (NEW)")] public GameObject achvNew;
-        public float achvTime = 3.2f;
         [Tooltip("끝날 때 휘말린 사람 수 팝업 (자리: {n}). 비우면 안 띄움")] public string blastPopup = "";
 
         [Header("소품 그림 (UltXxx 의 Prop 이름) — 컴포넌트 메뉴 Fill Props")]
@@ -80,7 +76,7 @@ namespace NKK.Ults
         readonly List<Rat> buttonOrder = new();
         readonly HashSet<Rat> testFilled = new();
         UltBase cur; bool cutPhase; float cutT, actorT, flashA; Color flashCol;
-        float capBigT = -9, capSmallT = -9, achvT = -9;
+        float capBigT = -9, capSmallT = -9;
 
         public bool Busy => cur != null;
         public float Cooldown => Mathf.Max(ultCooldownMin, ultCooldown - CommonSkill.UltCdLess);
@@ -94,7 +90,6 @@ namespace NKK.Ults
             if (buttonTemplate) buttonTemplate.gameObject.SetActive(false);
             if (cutIn) { cutIn.alpha = 0; cutIn.gameObject.SetActive(false); }
             if (captionBig) captionBig.text = ""; if (captionSmall) captionSmall.text = "";
-            if (achvPanel) achvPanel.gameObject.SetActive(false);
             if (flash) flash.enabled = false;
         }
 
@@ -182,7 +177,7 @@ namespace NKK.Ults
             }
             return true;
         }
-        string subFormat, achvFormat;
+        string subFormat;
 
         // 컷인 끝 → 상황극 시작
         void BeginAct()
@@ -218,8 +213,7 @@ namespace NKK.Ults
                     int n = Items.BlastActors(r.x, r.y, ultRadius, 700, UltDamage(r) * 3, r);
                     if (n > 0 && !string.IsNullOrEmpty(blastPopup) && OnScreen(r.x, r.y)) FxManager.I?.Popup(r.x, r.y, blastPopup.Replace("{n}", n.ToString()), new Color(1, 0.95f, 0.75f), 22, 1.1f, 120);
                 }
-                bool first = Progress.I && Progress.I.OnAchievement(s.U.ultimate_id);
-                ShowAchievement(s.U.ult_achv, first);
+                if (Progress.I) Progress.I.OnUltUsed(s.U.ultimate_id);       // 업적 알림은 업적 테이블 기준 (AchievementToast)
             }
             s.Cleanup();
             s.ReleaseAll();
@@ -250,14 +244,6 @@ namespace NKK.Ults
             t.text = n != null ? c.text.Replace("{n}", n.ToString()) : c.text;
             t.color = !string.IsNullOrEmpty(c.color) && ColorUtility.TryParseHtmlString(c.color, out var col) ? col : Color.white;
             if (big) capBigT = Time.unscaledTime; else capSmallT = Time.unscaledTime;
-        }
-        void ShowAchievement(string achv, bool first)
-        {
-            if (!achvPanel || string.IsNullOrEmpty(achv)) return;
-            achvPanel.gameObject.SetActive(true);
-            if (achvNew) achvNew.SetActive(first);
-            if (achvTitle) { achvFormat ??= achvTitle.text; achvTitle.text = achvFormat.Contains("{achv}") ? achvFormat.Replace("{achv}", achv) : achv; }
-            achvT = Time.unscaledTime;
         }
         public void Flash(Color c, float a) { flashCol = c; flashA = Mathf.Max(flashA, a); }
 
@@ -376,17 +362,6 @@ namespace NKK.Ults
             // 자막
             Fade(captionBig, t - capBigT);
             Fade(captionSmall, t - capSmallT);
-            // 업적
-            if (achvPanel && achvPanel.gameObject.activeSelf)
-            {
-                float age = t - achvT;
-                if (age > achvTime) achvPanel.gameObject.SetActive(false);
-                else
-                {
-                    float slide = age < 0.3f ? Ease(age / 0.3f) : age > achvTime - 0.3f ? 1 - (age - achvTime + 0.3f) / 0.3f : 1;
-                    var p = achvPanel.anchoredPosition; achvPanel.anchoredPosition = new Vector2(achvY0 + (1 - slide) * (achvPanel.rect.width + 80), p.y);   // 오른쪽에서 밀려 들어옴
-                }
-            }
             // 번쩍
             if (flash)
             {
@@ -395,8 +370,6 @@ namespace NKK.Ults
                 var c = flashCol; c.a = flashA; flash.color = c;
             }
         }
-        float achvY0 { get { if (!achvYSet && achvPanel) { achvYCache = achvPanel.anchoredPosition.x; achvYSet = true; } return achvYCache; } }
-        float achvYCache; bool achvYSet;
 
         void Fade(TMP_Text txt, float age)
         {
