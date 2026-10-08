@@ -1,0 +1,61 @@
+# 줄바꿈: PC 마다 바뀌지 않게 (다른 PC 에서 클론해도 같은 파일)
+* text=auto
+
+# 유니티 YAML (유니티가 LF 로 저장) → 어느 PC 에서든 LF 그대로
+*.unity text eol=lf
+*.prefab text eol=lf
+*.asset text eol=lf
+*.meta text eol=lf
+*.mat text eol=lf
+*.anim text eol=lf
+*.controller text eol=lf
+*.overrideController text eol=lf
+*.physicMaterial text eol=lf
+*.physicsMaterial2D text eol=lf
+*.playable text eol=lf
+*.mask text eol=lf
+*.preset text eol=lf
+*.spriteatlas text eol=lf
+*.renderTexture text eol=lf
+*.mixer text eol=lf
+*.shadervariants text eol=lf
+*.lighting text eol=lf
+*.signal text eol=lf
+*.fontsettings text eol=lf
+*.guiskin text eol=lf
+*.terrainlayer text eol=lf
+*.inputactions text eol=lf
+*.asmdef text eol=lf
+*.asmref text eol=lf
+*.wlt text eol=lf
+*.json text eol=lf
+
+# 코드
+*.cs text diff=csharp
+*.shader text
+*.hlsl text
+*.py text
+*.sh text eol=lf
+
+# 바이너리 (줄바꿈 변환 금지)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.psd binary
+*.tga binary
+*.exr binary
+*.ttf binary
+*.otf binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+*.mp4 binary
+*.fbx binary
+*.dll binary
+*.so binary
+*.xlsx binary
+*.pdf binary
+*.zip binary
+*.7z binary
+*.bytes binary
