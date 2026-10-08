@@ -34,6 +34,7 @@ namespace NKK.Rats
         [Tooltip("별 크기 · 머리 위 높이 (게임 단위, 쥐 크기 배율이 곱해짐)")] public float stunStarSize = 11, stunStarHeight = 30;
 
         [Tooltip("좀비 상태 쥐 색 (좀비 아포칼립스 필살기)")] public Color zombieTint = new(0.72f, 0.92f, 0.62f);
+        [Tooltip("불판 위 쥐 색 (보스 이븐하게 익혀드릴게요)")] public Color burnTint = new(1f, 0.35f, 0.25f);
 
         [Header("시작 쥐")]
         [Tooltip("테스트용: 시작할 때 만들 쥐 (코드 id). 비어 있으면 티어 테이블 시작 마릿수만큼 탄생 확률로 뽑음")] public List<string> startRats = new();

@@ -23,6 +23,10 @@ namespace NKK.Rats
 
         Vector2 hipPx, neckPx, tailPx, shoulderPx;
         float legF = 1, legB = 1, headScale = 1;
+        Sprite artHead;
+        [Tooltip("머리 바꾸기 (보스 효과) 그림 크기 배율 · 목에서 앞으로 (원래 머리 폭 배율)")] public float headSwapScale = 1.5f, headSwapFwd = 0.35f;
+        [HideInInspector] public Sprite headReplace;       // 같은 크기·방향의 다른 머리 그림 (보스 눈 레이저 때 빨간 눈 등, Boss 가 매 프레임 정함)
+        [HideInInspector] public Sprite headOverride;      // 보스 효과로 바꾼 머리 (오른쪽을 보는 그림, Rat.Boss 가 매 프레임 정함)
         SortingGroup group;
 
         static Vector3 L(Vector2 px) => new(px.x / 100f, -px.y / 100f, 0);    // 리그 픽셀(y 아래 +) → 로컬
@@ -49,7 +53,7 @@ namespace NKK.Rats
                 return;
             }
 
-            torso.sprite = e.torso; head.sprite = e.head; tail.sprite = e.tail;
+            torso.sprite = e.torso; head.sprite = artHead = e.head; tail.sprite = e.tail;
             front.sprite = farFront.sprite = e.front; back.sprite = farBack.sprite = e.back;
             farFront.color = farBack.color = farLegColor;
             legF = e.legFront; legB = e.legBack;
@@ -84,6 +88,12 @@ namespace NKK.Rats
             if (legsBehind) { back.sortingOrder = 2; front.sortingOrder = 2; tail.sortingOrder = 1; }
         }
 
+        // 색 되돌리기 (보스 효과 칠하기 끝): 전부 흰색, 먼 다리만 어둡게. 투명도는 그대로
+        public void ResetColors()
+        {
+            foreach (var r in GetComponentsInChildren<SpriteRenderer>()) { var a = r.color.a; var c = (r == farFront || r == farBack) ? farLegColor : Color.white; c.a = a; r.color = c; }
+        }
+
         // 웹게임 ratPose 의 자세 값 (각도는 라디안, 캔버스 기준 → 유니티는 부호 반대)
         public struct Pose { public float head, headX, tail, front, back, farFront, farBack, bob, tilt, sx, sy; }
 
@@ -116,6 +126,15 @@ namespace NKK.Rats
             head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D);
             Vector3 hp = L(neckPx) - L(hipPx);
             head.transform.localPosition = hp + new Vector3(p.headX * u / 100f, 0, 0);
+            if (headOverride)
+            {
+                // 바꾼 머리: 원래 머리 폭에 맞추고, 쥐 그림(왼쪽을 봄)에 맞게 뒤집고, 목에서 앞(왼쪽)으로
+                float aw = artHead ? artHead.rect.width : headOverride.rect.width, k = aw / headOverride.rect.width * headSwapScale;
+                head.sprite = headOverride;
+                head.transform.localScale = new Vector3(-headScale * k, headScale * k, 1);
+                head.transform.localPosition += new Vector3(-aw * headScale * headSwapFwd / 100f, 0, 0);
+            }
+            else { var want = headReplace ? headReplace : artHead; if (head.sprite != want) { head.sprite = want; head.transform.localScale = Vector3.one * headScale; } }
             front.sortingOrder = p.front > 0.9f ? 7 : legsBehind ? 2 : 5;      // 치켜든 앞발은 얼굴 앞으로
         }
     }

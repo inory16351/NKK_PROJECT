@@ -172,7 +172,7 @@ namespace NKK.Data
     }
     [Serializable] public class BossLineRow { public int line_id, boss_id; public string situation, text; }
     // 보스 공격별 수치 (보스 테이블 Atk_Type 시트)
-    [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; public string atk_name; }
+    [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; public string atk_name, line; }
     // 층 밸런스 (스테이지 테이블 Stage, Tools/gen_stage_table.py 로 생성)
     [Serializable] public class StageRow { public int floor, rooms; public float pow_need, item_hp, cheese, wall_stairs, wall_normal, wall_path, time_add; }     // wall_path = 계단까지 경로 벽 배율 합 (판마다 지형이 바뀌어 StageManager 가 경로에 나눔)
     // 업적 (업적 테이블 Achievement): 조건 타입 cond_type + 대상 target_id + 필요 횟수 need. 설명 {ult} = 대상 필살기 이름

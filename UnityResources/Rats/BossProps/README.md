@@ -18,3 +18,6 @@
 - boss_coffin 관짝소년단 관 · boss_money 전액 현금 매입 돈다발 · boss_meeting 비상 회의 버튼 · boss_banana_cat 우는 바나나 고양이 (상자 대신)
 - boss_shark 트랄랄레로 상어 (떨어짐) · boss_shark_head 쥐 머리 상어 · boss_cup 발레리나 카푸치나 쥐 머리 커피잔 · boss_splash 물보라 (아직 안 씀)
 - 쥐 머리 표시는 옆모습으로 다시 (사용자: 옆모습이어야 함): `Sheets/boss_meme_side.png` (prompt_bossmeme_side.txt) → boss_shark_head.png · boss_cup.png (오른쪽을 봄). 앞모습은 *_front.png 로 보관 (안 씀)
+- `Sheets/boss_meme2.png` (prompt_bossmeme2.txt): boss_pallbearer_a/b 관짝소년단 운구단 두 포즈 (오른쪽을 봄, 번갈아 춤) · boss_ice 꽁꽁 얼어붙은 한강 얼음 바닥
+- `Sheets/meeting_bg.png` (prompt_meeting.txt) → `../BossCutscene/meeting_bg.png` 긴급 회의 컷씬 배경 (가운데 빈 원에 연구소장 얼굴)
+- boss_commander_head_laser.png: 우주 사령관 머리 (눈만 빨갛게 빛남, `Sheets/laser_eye/` 프롬프트·로그·참고). 원래 머리와 같은 크기·위치로 맞춰 `Assets/Art/Rats/Cats/Parts/boss_commander/head_laser.png` (피벗은 sprite_pivots.json 에 원래 머리와 같게). 홈랜더 눈 레이저를 모으고 쏘는 동안 이 머리로 바뀜
