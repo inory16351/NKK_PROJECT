@@ -115,6 +115,12 @@ namespace NKK.Hazards
         [Tooltip("해피해피해피: 쥐 쪽으로 가는 속도")] public float hopMove = 260;
         [Tooltip("버터 고양이: 크기 · 나는 속도 · 회전(초당 바퀴) · 떠 있는 높이")] public float butterSize = 110, butterSpeed = 380, butterSpin = 2.2f, butterHover = 60;
         [Tooltip("버터 고양이: 날릴 때 팝업")] public string butterPopup;
+        [Tooltip("맥스웰: 크기 · 떨어지는 시간 · 착지 뒤 춤추는 시간 (초)")] public float maxwellSize = 130, maxwellFall = 0.45f, maxwellDance = 4;
+        [Tooltip("맥스웰 춤: 흔들 빠르기(초당) · 기울기(도) · 걷는 속도 · 방향 바꾸는 간격(초) · 빙글 회전(초당 바퀴) · 원 반경 · 통통 높이")]
+        public float maxwellSwayHz = 2, maxwellTilt = 14, maxwellMove = 90, maxwellTurn = 1.2f, maxwellSpin = 1.5f, maxwellCircle = 90, maxwellHop = 40;
+        // 춤 종류 (마리마다 돌아가며): 0 좌우 흔들흔들 걷기 · 1 제자리 빙글빙글 (세로축 회전) · 2 빙글빙글 돌며 원 그리기 · 3 통통 튀며 좌우
+        class Maxwell { public float x, y, x0, y0, t, dir; public int kind; public bool landed; public SpriteRenderer r; }
+        readonly System.Collections.Generic.List<Maxwell> maxwells = new();
         float skillCd, unbrokenT;
         class Zone { public float x, y, rad, life, life0, stun, expose; public bool gas; public SpriteRenderer r; public readonly System.Collections.Generic.Dictionary<Rat, float> stay = new(); }
         readonly System.Collections.Generic.List<Zone> zones = new();
@@ -336,9 +342,10 @@ namespace NKK.Hazards
                 return;
             }
             float px = x, py = y;
-            UpdateShots(dt); UpdateGrow(dt); UpdateZones(dt); UpdateButters(dt);
+            UpdateShots(dt); UpdateGrow(dt); UpdateZones(dt); UpdateButters(dt); UpdateMaxwells(dt);
             if (unbrokenT > 0 && (unbrokenT -= dt) > 0 && Random.value < dt * 6) FxManager.I?.Stars(x, y, Height * 0.5f, 2, unbrokenColor, Color.white, 60, 160);
-            if (z > 0 || vz > 0) { vz -= gravity * dt; z = Mathf.Max(0, z + vz * dt); if (z <= 0) { vz = 0; if (air) Land(); } }
+            // 착지 판정은 내려찍기·덮치기만 (3단 점프는 UpdateSpecial 이 직접 셈, 여기서 air 를 끄면 같은 점프를 무한 반복)
+            if (z > 0 || vz > 0) { vz -= gravity * dt; z = Mathf.Max(0, z + vz * dt); if (z <= 0) { vz = 0; if (air && (atkType == "Stomp" || atkType == "Pounce")) Land(); } }
             if (!attacking)
             {
                 var r = Rats.NearestRat(x, y, 2000);
@@ -531,6 +538,7 @@ namespace NKK.Hazards
                     while (released < seqTargets.Count && atkT >= wind + released * gap)
                     {
                         var v = seqTargets[released++];
+                        if (atkType == "Maxwell_Drop") { AddMaxwell(v, released - 1); continue; }      // 떨어진 뒤 춤 (Boss 가 직접)
                         bool laser = atkType == "Orbital_Laser";
                         var sp = atkType == "Cone_Rain" ? coneSprite : atkType == "Paper_Storm" ? paperSprite : atkType == "Maxwell_Drop" ? maxwellSprite : null;
                         Cats?.AddStrike(!laser, v.x, v.y, atk.radius, atk.stun, SpName, sp, atkType == "Meteor_Shower");
@@ -741,8 +749,8 @@ namespace NKK.Hazards
         void BeginAttack()
         {
             Say(DB.BossLine("Attack", Data.boss_id), 0.9f);
-            if (atkType == "Baton") ShowProp(batonSprite, batonSize, true);
-            else if (atkType == "Briefcase") ShowProp(briefcaseSprite, briefcaseSize, true);
+            if (atkType == "Baton") ShowHeld(batonSprite, batonSize);
+            else if (atkType == "Briefcase") ShowHeld(briefcaseSprite, briefcaseSize);
         }
 
         void BeginSkill()
@@ -754,8 +762,8 @@ namespace NKK.Hazards
             int n = Mathf.Max(1, atk.count);
             switch (atkType)
             {
-                case "Tung_Sahur": ShowProp(batonSprite, batonSize, true); break;
-                case "Even_Cook": ShowProp(torchSprite, torchSize, true); PickTargets(n); break;
+                case "Tung_Sahur": ShowHeld(batonSprite, batonSize); break;
+                case "Even_Cook": ShowHeld(torchSprite, torchSize); PickTargets(n); break;
                 case "Maxwell_Drop": case "Buttered_Cat": PickTargets(n); break;
             }
         }
@@ -875,8 +883,86 @@ namespace NKK.Hazards
             }
         }
 
+        // ── 맥스웰 고양이: 빙글 돌며 떨어짐 → 착지 범위 기절 → maxwellDance 초 동안 춤 (종류마다 다르게), 닿은 쥐 기절 ──
+        void AddMaxwell(Vector2 at, int i)
+        {
+            if (!shotTemplate || !maxwellSprite) { Cats?.AddStrike(true, at.x, at.y, atk.radius, atk.stun, SpName); return; }
+            var r = Instantiate(shotTemplate, shotTemplate.transform.parent); r.sprite = maxwellSprite; r.gameObject.SetActive(true); r.enabled = true;
+            maxwells.Add(new Maxwell { x = at.x, y = at.y, x0 = at.x, y0 = at.y, kind = i % 4, dir = Random.value < 0.5f ? -1 : 1, r = r });
+        }
+
+        void UpdateMaxwells(float dt)
+        {
+            if (maxwells.Count == 0) return;
+            var a = DB.BossAtk("Maxwell_Drop");
+            float rad = a != null ? a.radius : 120, stunT = a != null ? a.stun : 1.8f;
+            var fx = FxManager.I;
+            const float TAU = Mathf.PI * 2;
+            for (int i = maxwells.Count - 1; i >= 0; i--)
+            {
+                var m = maxwells[i]; m.t += dt;
+                if (!m.r) { maxwells.RemoveAt(i); continue; }
+                float w = maxwellSize * World.U / Mathf.Max(0.001f, m.r.sprite.bounds.size.x);
+                if (!m.landed)
+                {
+                    // 빙글 돌며 떨어짐
+                    float k = Mathf.Clamp01(m.t / maxwellFall);
+                    m.r.transform.position = World.ToUnity(m.x, m.y, (1 - k) * 1100);
+                    m.r.transform.rotation = Quaternion.Euler(0, 0, (1 - k) * 540);
+                    m.r.transform.localScale = Vector3.one * w;
+                    m.r.sortingOrder = World.SortOrder(m.y) + 40;
+                    if (k >= 1)
+                    {
+                        m.landed = true; m.t = 0;
+                        int n = Cats ? Cats.StunArea(m.x, m.y, rad, stunT) : 0;
+                        if (Cats) { Cats.LaunchItems(m.x, m.y, rad, itemLaunch); Cats.HitFx(m.x, m.y, rad, SpName, n, 0.25f); }
+                        fx?.Anim("poof", m.x, m.y, 0, rad / 70);
+                    }
+                    continue;
+                }
+                if (m.t >= maxwellDance) { fx?.Anim("poof", m.x, m.y, 20, 1.4f); Destroy(m.r.gameObject); maxwells.RemoveAt(i); continue; }
+                float ph = m.t * maxwellSwayHz * TAU, z = 0, tilt = 0, sx = w * m.dir, sy = w;
+                // 걷는 종류는 방향을 가끔 바꾸고, 열린 방 밖으로 나가려 하면 돌아섬
+                if ((m.kind == 0 || m.kind == 3) && Mathf.Repeat(m.t, maxwellTurn) < dt) m.dir = -m.dir;
+                switch (m.kind)
+                {
+                    case 0:     // 좌우 흔들흔들 걷기 (기울며 들썩)
+                        m.x += m.dir * maxwellMove * dt;
+                        tilt = Mathf.Sin(ph) * maxwellTilt; z = Mathf.Abs(Mathf.Sin(ph)) * 8;
+                        break;
+                    case 1:     // 제자리 빙글빙글 (세로축 회전 = 가로로 뒤집힘)
+                        sx = w * Mathf.Cos(m.t * maxwellSpin * TAU); z = Mathf.Abs(Mathf.Sin(ph)) * 5;
+                        break;
+                    case 2:     // 빙글빙글 돌며 원 그리기
+                    {
+                        float c = m.t * TAU * 0.35f;
+                        m.x = m.x0 + Mathf.Sin(c) * maxwellCircle; m.y = m.y0 + (1 - Mathf.Cos(c)) * maxwellCircle * 0.6f;
+                        sx = w * Mathf.Cos(m.t * maxwellSpin * TAU);
+                        break;
+                    }
+                    default:    // 통통 튀며 좌우
+                        m.x += m.dir * maxwellMove * 1.3f * dt;
+                        z = Mathf.Abs(Mathf.Sin(ph)) * maxwellHop; sy = w * (z < 6 ? 0.85f : 1.05f);
+                        break;
+                }
+                if (!Stage.Open.Contains(StageManager.RoomOf(m.x, m.y))) { m.dir = -m.dir; m.x += m.dir * maxwellMove * dt * 2; m.x0 = m.x; m.y0 = m.y; }
+                m.r.transform.position = World.ToUnity(m.x, m.y, z);
+                m.r.transform.rotation = Quaternion.Euler(0, 0, tilt);
+                m.r.transform.localScale = new Vector3(sx, sy, 1);
+                m.r.sortingOrder = World.SortOrder(m.y) + 10;
+                foreach (var o in Rats.Rats)
+                {
+                    if (o.UltOn || o.stun > 0) continue;
+                    float dx = o.x - m.x, dy = o.y - m.y;
+                    if (dx * dx + dy * dy < rad * rad * 0.36f) o.Ragdoll(Mathf.Atan2(dy, dx), 260, 300, stunT * 0.5f);
+                }
+            }
+        }
+
         void ClearSkillFx()
         {
+            foreach (var m in maxwells) if (m.r) Destroy(m.r.gameObject);
+            maxwells.Clear();
             foreach (var z0 in zones) if (z0.r) Destroy(z0.r.gameObject);
             zones.Clear();
             foreach (var b in butters) if (b.r) Destroy(b.r.gameObject);
@@ -911,9 +997,41 @@ namespace NKK.Hazards
             specialProp.transform.localRotation = Quaternion.identity;
             float w = size * World.U / Mathf.Max(0.001f, sp.bounds.size.x);
             specialProp.transform.localScale = Vector3.one * w;
-            propAbove = aboveHead;
+            propAbove = aboveHead; propHeld = false;
         }
-        bool propAbove;
+        // 손에 쥐는 소품 (사람 보스: 진압봉 · 토치 · 서류 가방). 고양이 보스면 머리 위
+        void ShowHeld(Sprite sp, float size)
+        {
+            ShowProp(sp, size, true);
+            propHeld = !Cat && rig;
+        }
+        bool propAbove, propHeld;
+        [Tooltip("진압봉 그림에서 막대 방향 (도, 손잡이 → 끝) · 손잡이 위치 (막대 길이 중 끝에서 비율)")] public float batonArtAngle = -34, batonGrip = 0.14f;
+
+        // 손에 쥔 소품 놓기: 진압봉 = 손잡이를 손에, 팔 방향으로 뻗음 · 서류 가방 = 손잡이를 손에 매달림 · 토치 = 손에 쥐고 바라보는 쪽
+        void PlaceHeld()
+        {
+            var sp = specialProp.sprite; var hand = rig.Hand(out var dir);
+            Vector2 sz = sp.bounds.size * specialProp.transform.localScale.x;
+            if (sp == batonSprite)
+            {
+                float len = sz.magnitude * 0.92f, ang = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+                specialProp.transform.rotation = Quaternion.Euler(0, 0, ang - batonArtAngle);
+                specialProp.transform.position = hand + (Vector3)(dir * len * (0.5f - batonGrip));
+            }
+            else if (sp == briefcaseSprite)
+            {
+                specialProp.transform.rotation = Quaternion.identity;
+                specialProp.transform.position = hand + new Vector3(0, -sz.y * 0.42f, 0);
+            }
+            else
+            {
+                specialProp.transform.rotation = Quaternion.identity;
+                specialProp.transform.position = hand + new Vector3(face * sz.x * 0.1f, -sz.y * 0.1f, 0);
+            }
+            var s = specialProp.transform.localScale; s.x = Mathf.Abs(s.x) * (sp == batonSprite ? 1 : face); specialProp.transform.localScale = s;
+            specialProp.sortingOrder = World.SortOrder(y) + 1;
+        }
         void HideProp() { if (specialProp) specialProp.gameObject.SetActive(false); }
 
         void AddMark(Rat r, float life)
@@ -1178,7 +1296,8 @@ namespace NKK.Hazards
             if (Cat) catRig.Apply(MakeCatPose(), growK, face, sq, World.SortOrder(y), 0, State == BState.Dying ? rot : 0);
             else rig.Apply(MakePose(), growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), 1);
             UpdateMarks(Time.deltaTime);
-            if (specialProp && specialProp.gameObject.activeSelf)
+            if (specialProp && specialProp.gameObject.activeSelf && propHeld) PlaceHeld();
+            else if (specialProp && specialProp.gameObject.activeSelf)
             {
                 specialProp.transform.position = World.ToUnity(x + (propAbove ? face * 30 : 0), y, propAbove ? Height * 0.75f + Mathf.Sin(Time.time * 10) * 6 : boxSize * 0.38f);
                 specialProp.sortingOrder = World.SortOrder(y) + 30;
