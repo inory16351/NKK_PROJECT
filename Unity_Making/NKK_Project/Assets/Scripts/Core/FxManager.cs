@@ -42,7 +42,7 @@ namespace NKK
         [Header("하트 (쥐 번식: 솟아오르며 흔들리다 짧게 사라짐)")]
         [Tooltip("하트 틀 (꺼 둠, 복제해서 씀)")] public SpriteRenderer heartTemplate;
         [Tooltip("하트 그림 (무작위)")] public Sprite[] heartSprites;
-        [Tooltip("크기 (게임 단위, 최소~최대) · 솟는 속도 · 퍼짐 · 수명 (초)")] public Vector2 heartSize = new(16, 26), heartRise = new(110, 190);
+        [Tooltip("크기 (게임 단위, 최소~최대) · 솟는 속도 · 퍼짐 · 수명 (초)")] public Vector2 heartSize = new(26, 38), heartRise = new(130, 210);
         public float heartSpread = 22, heartLife = 0.75f;
         [Tooltip("흔들림 폭 (게임 단위) · 빠르기 · 동시에 최대 개수")] public float heartWobble = 10, heartWobbleSpeed = 9;
         public int heartMax = 120;
@@ -191,7 +191,7 @@ namespace NKK
         }
 
         // ── 하트 (번식): (x, y) 위로 n 개가 솟아오름 ──
-        public void Hearts(float x, float y, int n = 4, float z = 30)
+        public void Hearts(float x, float y, int n = 4, float z = 55)
         {
             if (!heartTemplate) return;
             for (int i = 0; i < n && hearts.Count < heartMax; i++)

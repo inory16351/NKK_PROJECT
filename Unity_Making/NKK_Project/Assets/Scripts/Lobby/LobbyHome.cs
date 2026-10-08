@@ -50,7 +50,8 @@ namespace NKK.Lobby
         [Tooltip("바퀴가 빨라지고 멈추는 정도")] public float wheelSpinAccel = 3;
         [Tooltip("쥐구멍 빼꼼 쥐 (SpriteMask 안에서만 보임)")] public LobbyRat peekRat;
         public Transform hole;
-        [Tooltip("전구 줄 훈장 1~8 (티어 이상만 진하게)")] public SpriteRenderer[] badges;
+        [Tooltip("윗쪽 들보 훈장 1~8 (티어 이상만 진하게)")] public SpriteRenderer[] badges;
+        [Tooltip("아직 못 단 훈장 색")] public Color lockedBadgeColor = new(0.45f, 0.38f, 0.33f, 0.55f);
         [Tooltip("티어 2 부터 탁자 위 치즈")] public SpriteRenderer propCheese;
         [Tooltip("티어 3 부터 탁자 위 찻잔")] public SpriteRenderer propCup;
 
@@ -152,7 +153,7 @@ namespace NKK.Lobby
         public void Refresh()
         {
             int tier = Progress.I ? Progress.I.tier : 1;
-            for (int i = 0; i < badges.Length; i++) if (badges[i]) badges[i].color = i < tier ? Color.white : new Color(0.55f, 0.47f, 0.4f, 0.25f);
+            for (int i = 0; i < badges.Length; i++) if (badges[i]) badges[i].color = i < tier ? Color.white : lockedBadgeColor;
             if (propCheese) propCheese.enabled = tier >= 2;
             if (propCup) propCup.enabled = tier >= 3;
             if (manager) foreach (var h in hots) h.Fill(manager.FillTokens, manager.Alert(h.id));

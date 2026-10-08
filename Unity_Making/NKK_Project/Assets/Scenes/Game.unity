@@ -16348,8 +16348,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8e1e0fde2bfb4e149b447027abc8201b, type: 3}
   - {fileID: 21300000, guid: 7ceb57d141b02f34e84438d5f6811c4a, type: 3}
   - {fileID: 21300000, guid: 29218b858de8e384899356e58f4aaabe, type: 3}
-  heartSize: {x: 16, y: 26}
-  heartRise: {x: 110, y: 190}
+  heartSize: {x: 26, y: 38}
+  heartRise: {x: 130, y: 210}
   heartSpread: 22
   heartLife: 0.75
   heartWobble: 10

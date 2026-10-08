@@ -433,3 +433,7 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.
 2. 결과로 `gen_stage_table.py` 곡선(POW_GROW·HP_GROW·벽 배율·방 수)과 `gen_skill_tree.py` 값·비용(치즈 수입 대비 훈장 트리 1개 ≈ 판 3~5번), 보스 `hp_pow_sec`(지금 40), 티어 테이블 조건(연구자료·Skill_Node_Count 15/40/70/100/130/160/195) 조정 → 다시 생성·xlsx2json·측정.
 3. 10·15층 보스 등 나머지 §6.
+
+### 9-15. 2026-10-08 — 로비 훈장 배지 위치 · 하트 크기
+- 아지트 훈장 배지 8개(`Home/Badges`)가 "쳇바퀴 훈련" 팻말 뒤에 가려짐 → 윗쪽 들보(찍찍!! 훈장 팻말 오른쪽, 화면 y≈112)로 한 줄 이동, 1.25배. 못 단 훈장 색 = `LobbyHome.lockedBadgeColor` (더 진하게).
+- 번식 하트 크기 26~38 · 솟는 속도 130~210 · 시작 높이 55 (쥐 몸에 가려지던 것). 캡처 `Captures/` (git 제외).
