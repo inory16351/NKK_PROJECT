@@ -1,0 +1,339 @@
+{
+ "Achievement": [
+  {
+   "achv_id": 40001,
+   "achv_name": "반동은 계산 안 했다",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30001,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40001",
+   "sort_order": 1
+  },
+  {
+   "achv_id": 40002,
+   "achv_name": "기본이야, 왓슨",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30002,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40002",
+   "sort_order": 2
+  },
+  {
+   "achv_id": 40003,
+   "achv_name": "감염자 0 → 전원",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30003,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40003",
+   "sort_order": 3
+  },
+  {
+   "achv_id": 40004,
+   "achv_name": "지구 뚫기",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30004,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40004",
+   "sort_order": 4
+  },
+  {
+   "achv_id": 40005,
+   "achv_name": "무중력은 공짜",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30005,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40005",
+   "sort_order": 5
+  },
+  {
+   "achv_id": 40006,
+   "achv_name": "치즈 퐁듀 대참사",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30006,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40006",
+   "sort_order": 6
+  },
+  {
+   "achv_id": 40007,
+   "achv_name": "빙의 대소동",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30007,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40007",
+   "sort_order": 7
+  },
+  {
+   "achv_id": 40008,
+   "achv_name": "레밍즈",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30008,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40008",
+   "sort_order": 8
+  },
+  {
+   "achv_id": 40009,
+   "achv_name": "셀프 멸종",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30009,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40009",
+   "sort_order": 9
+  },
+  {
+   "achv_id": 40010,
+   "achv_name": "인디아나 치즈",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30010,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40010",
+   "sort_order": 10
+  },
+  {
+   "achv_id": 40011,
+   "achv_name": "이미 부서져 있었다",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30011,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40011",
+   "sort_order": 11
+  },
+  {
+   "achv_id": 40012,
+   "achv_name": "모싱 피트",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30012,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40012",
+   "sort_order": 12
+  },
+  {
+   "achv_id": 40013,
+   "achv_name": "박쥐 운전면허 탈락",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30013,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40013",
+   "sort_order": 13
+  },
+  {
+   "achv_id": 40014,
+   "achv_name": "루돌프 코가 빨간 이유",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30014,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40014",
+   "sort_order": 14
+  },
+  {
+   "achv_id": 40015,
+   "achv_name": "구석에서 킥킥",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30015,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40015",
+   "sort_order": 15
+  },
+  {
+   "achv_id": 40016,
+   "achv_name": "실존하는 공포, 쥐왕",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30016,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40016",
+   "sort_order": 16
+  },
+  {
+   "achv_id": 40017,
+   "achv_name": "줄 서세요 (강제)",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30017,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40017",
+   "sort_order": 17
+  },
+  {
+   "achv_id": 40018,
+   "achv_name": "인간 대포(쥐)",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30018,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40018",
+   "sort_order": 18
+  },
+  {
+   "achv_id": 40019,
+   "achv_name": "무면허 변신",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30019,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40019",
+   "sort_order": 19
+  },
+  {
+   "achv_id": 40020,
+   "achv_name": "우주.exe 재시작",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30020,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40020",
+   "sort_order": 20
+  },
+  {
+   "achv_id": 40021,
+   "achv_name": "감전 주의 (진짜로)",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30021,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40021",
+   "sort_order": 21
+  },
+  {
+   "achv_id": 40022,
+   "achv_name": "저작권은 소중하니까요",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30022,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40022",
+   "sort_order": 22
+  },
+  {
+   "achv_id": 40023,
+   "achv_name": "불꽃놀이는 안전하게(안 함)",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30023,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40023",
+   "sort_order": 23
+  },
+  {
+   "achv_id": 40024,
+   "achv_name": "피라미드 팽이 챔피언",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30024,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40024",
+   "sort_order": 24
+  },
+  {
+   "achv_id": 40025,
+   "achv_name": "돌도 검이다",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30025,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40025",
+   "sort_order": 25
+  },
+  {
+   "achv_id": 40026,
+   "achv_name": "소원은 신중하게",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30026,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40026",
+   "sort_order": 26
+  },
+  {
+   "achv_id": 40027,
+   "achv_name": "표본 채집 완료",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30027,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40027",
+   "sort_order": 27
+  },
+  {
+   "achv_id": 40028,
+   "achv_name": "치즈 1000개에 쥐커드",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30028,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40028",
+   "sort_order": 28
+  },
+  {
+   "achv_id": 40029,
+   "achv_name": "찌리찌리찌리찌리",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30029,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40029",
+   "sort_order": 29
+  },
+  {
+   "achv_id": 40030,
+   "achv_name": "갑분싸 뒤 뻔뻔한 인사",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30030,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40030",
+   "sort_order": 30
+  },
+  {
+   "achv_id": 40031,
+   "achv_name": "별 셋 (폭발 포함)",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30031,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40031",
+   "sort_order": 31
+  },
+  {
+   "achv_id": 40032,
+   "achv_name": "범인은 제일 강한 놈",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30032,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40032",
+   "sort_order": 32
+  },
+  {
+   "achv_id": 40033,
+   "achv_name": "치즈와 원만히 해결하시길",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30033,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40033",
+   "sort_order": 33
+  }
+ ],
+ "Achv_Cond_Type": [
+  {
+   "cond_type": "Ult_Use"
+  }
+ ]
+}

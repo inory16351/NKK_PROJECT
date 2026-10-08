@@ -48,13 +48,8 @@ namespace NKK
         public static float BossTimeAdd => Sum(CommonEffectType.Boss_Dmg_Pct, 2);      // 보스 층 제한시간 + (초)
 
         // ── 승급·시간·시작 쥐 ──
-        // 시작 쥐: (등급 0 일반 ~ 5 신화, 마리 수) 목록
-        public static List<(int grade, int n)> StartRats()
-        {
-            var l = new List<(int, int)>();
-            foreach (var r in Of(CommonEffectType.Start_Rat)) l.Add((Mathf.Clamp(Mathf.RoundToInt(r.value_02) - 1, 0, 5), Mathf.RoundToInt(r.value_01)));
-            return l;
-        }
+        // 시작 쥐 추가 마릿수 (등급은 시작 쥐처럼 지금 훈장의 등급 확률로 뽑음 — 밸류_02 등급 칸은 안 씀)
+        public static int StartRatAdd => Mathf.RoundToInt(Sum(CommonEffectType.Start_Rat));
         // 승급할 때 윗등급 쥐가 2마리 나올 확률 (gradeIndex = 승급하는 쪽 0 일반 → 레어 ..., 밸류_02 = 그 등급 1~5, 0 = 모든 승급)
         public static float PromoteDouble(int gradeIndex) { float s = 0; foreach (var r in Of(CommonEffectType.Promote_Double)) { int g = Mathf.RoundToInt(r.value_02); if (g == 0 || g == gradeIndex + 1) s += r.value_01; } return s; }
         public static int MaxPopAdd => Mathf.RoundToInt(Sum(CommonEffectType.Pop_Cap));

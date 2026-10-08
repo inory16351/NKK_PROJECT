@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rat_skill_icons_redo.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha). No text, no letters, no numbers, no labels, no grid lines, no frames or badges behind the icons.
+- A sheet of 22 game SKILL ICONS in an exact 6 columns x 4 rows grid (each cell 256x256), filled strictly in the listed order left to right, top to bottom (leave the last 2 cells empty). Each icon is ONE simple object centered in its cell, filling about 65% of the cell, with a wide empty margin; icons must NOT touch or cross cell borders. Same size and same slight 3/4 front view for all. Do NOT draw rats or rat faces unless the cell asks for one.
+- STYLE IS THE MOST IMPORTANT RULE. Match the attached reference images (lab rat parts and lab items): the art style of Untitled Goose Game. Completely FLAT vector shapes, NO outlines or strokes, NO dark contour lines, no glossy highlights, no gradients, no shine, no glow, no motion lines, no drop shadows. A few flat color areas with at most one slightly darker flat tone. Soft muted pastel palette, low saturation, calm picture-book feel. Simple readable silhouettes that read at 64px.
+
+Cells:
+Row 1: 1) a cheese wedge with a small orange flame burning on top, 2) a yellow miner helmet with a round headlamp, 3) a yellow construction hard hat next to a small orange traffic cone, 4) a viking helmet with two curved horns, 5) a black spiky rocker wig with round dark sunglasses, 6) a red Santa sack bulging with presents
+Row 2: 7) a cardboard parcel box decorated with pink hearts, 8) a big round yellow electric plug with two prongs, 9) a small brown notebook with a paw print on the cover, 10) a round brown spiky chestnut burr ball, 11) a round ball made of green jungle leaves, 12) one big pink rat ear
+Row 3: 13) a small golden harp, 14) a red samurai helmet with gold horns, 15) a square maze tile seen from above with a yellow cheese wedge in the center, 16) a tightrope stretched between two short wooden poles, 17) a coiled metal spring, 18) a stack of three cracked wooden crates
+Row 4: 19) a red brick wall piece with a round hole punched through the middle, 20) a big round panda-pattern ball wearing a tiny gold crown, 21) a grey ninja throwing star, 22) a red hanging punching bag

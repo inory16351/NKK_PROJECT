@@ -63,6 +63,8 @@ namespace NKK.Data
     {
         public int node_id; public string node_name, code_id; public int max_level, req_node, req_level;
         public string effect_type; public float value_01, value_02, value_03;
+        public int pos_x, pos_y;                 // 쥐 스킬 트리 창의 칸
+        public string node_icon, node_desc;      // 아이콘: 경로 또는 @action · @passive · @ult (그 쥐의 아이콘) / 설명: {v1}~{v3} · {p1}~{p3}(×100)
         public GrowthEffectType Effect => E.P<GrowthEffectType>(effect_type);
     }
 
@@ -172,6 +174,9 @@ namespace NKK.Data
     [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; }
     // 층 밸런스 (스테이지 테이블 Stage, Tools/gen_stage_table.py 로 생성)
     [Serializable] public class StageRow { public int floor, rooms; public float pow_need, item_hp, cheese, wall_stairs, wall_normal, time_add; }
+    // 업적 (업적 테이블 Achievement): 조건 타입 cond_type + 대상 target_id + 필요 횟수 need. 설명 {ult} = 대상 필살기 이름
+    [Serializable] public class AchievementRow { public int achv_id; public string achv_name, achv_desc, cond_type; public int target_id, need; public string achv_icon; public int sort_order; }
+    [Serializable] public class AchievementTableFile { public List<AchievementRow> Achievement; }
     [Serializable] public class StageTableFile { public List<StageRow> Stage; public List<BossRow> Boss; public List<BossLineRow> Boss_Line; public List<BossAtkRow> Atk_Type; }
     [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; }
     [Serializable] public class HumanRigMetaFile { public List<HumanRigMetaRow> items; }

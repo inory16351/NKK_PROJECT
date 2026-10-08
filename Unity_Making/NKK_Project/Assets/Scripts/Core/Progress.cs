@@ -56,6 +56,9 @@ namespace NKK
         public bool HasAchievement(int ultId) => achvs.ContainsKey(ultId);
         public int AchievementCount(int ultId) => achvs.TryGetValue(ultId, out var n) ? n : 0;
         public int AchievementTotal => achvs.Count;
+        // 업적 테이블 한 줄의 진행 수 (조건 타입별) · 달성 여부
+        public int AchvProgress(AchievementRow a) => a == null ? 0 : a.cond_type switch { "Ult_Use" => AchievementCount(a.target_id), _ => 0 };
+        public bool AchvDone(AchievementRow a) => a != null && AchvProgress(a) >= Mathf.Max(1, a.need);
         public IEnumerable<int> Achievements => achvs.Keys;
         // 처음 달성이면 true
         public bool OnAchievement(int ultId)

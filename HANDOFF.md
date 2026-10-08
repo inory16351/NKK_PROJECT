@@ -1,7 +1,7 @@
 # 찍!찍!!찍!!! — 유니티 이식 진행 상황 (인수인계)
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서만 보고 다음 작업자가 이어갈 수 있게 정리함.
-마지막 갱신: 2026-10-07 (저녁)
+마지막 갱신: 2026-10-08
 
 ---
 
@@ -73,6 +73,7 @@
 | 티어 테이블 | TierTable | Tier(8: 비용·승급 조건·탄생 등급 배율·시작 마릿수) |
 | 사람 테이블 | HumanTable | Human(4) · Human_Line(대사 34) |
 | 공용 스킬 테이블 | CommonSkillTable | Common_Skill(35, id 92001~) · Branch(가지 7) · Common_Effect_Type · Column_Desc |
+| 업적 테이블 | AchievementTable | Achievement(33, id 40001~ · 조건 cond_type+target_id+need · 아이콘) · Achv_Cond_Type |
 
 새 테이블을 만들면 `Tools/xlsx2json.py` 의 `NAMES` 에 이름 추가 → `TableRows.cs` 에 행 클래스 → `GameDatabase.cs` 에서 로드.
 
@@ -176,7 +177,8 @@ bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C
    - 끝: `Progress` 에 치즈·연구자료·티어·최고 층·탈출 횟수 저장, `StartFloorCap`, `PendingStartFloor` → `GameManager.Awake` 가 층·티어·치즈 받음, 5초마다 치즈 저장. 게임 ESC = `QuitMenu`(포기 창, `FxManager.Paused`) → 로비. 로비 ESC = 아지트로. 로비↔게임 왕복·치즈 이월 Play 확인
    - 끝: 쳇바퀴 = 받침대 `WheelStand` + 도는 바퀴 `WheelRing` (새 플랫 그림 `UnityResources/Rats/Lobby_New/`), 쥐가 안에서 달리면 `LobbyHome.wheelSpinSpeed` 로 회전
    - 끝: 치즈 창고(SkillPage) · 쳇바퀴 훈련(TrainPage, §9-7)
-   - 남음 (순서): 훈장 → 친구들(도감) → 낮잠 침대(기록·저장). 탭 아이콘·지도·쳇바퀴 등 로비 소품(`Rats/Lobby/lb_*`)은 예전 그림체 → 플랫으로 다시 만들지 결정
+   - 끝: 찍찍!! 훈장 페이지 + 업적 (RankPage, §9-9)
+   - 남음 (순서): 친구들(도감) → 친구들(도감) → 낮잠 침대(기록·저장). 탭 아이콘·지도·쳇바퀴 등 로비 소품(`Rats/Lobby/lb_*`)은 예전 그림체 → 플랫으로 다시 만들지 결정
 7. 로그라이크 메타(층 제한시간, 게임 오버, 연구자료), 저장
 8. 사운드: 웹은 WebAudio 로 합성 → 같은 합성을 WAV 로 뽑기 (BGM 만 필요하면 Gemini)
 9. 손에 든 소품 그림(ACT_HOLD), 슈퍼 요리사 쥐 탈것, 컴퓨터 마우스 쥐(한 장 그림) 확인
@@ -335,6 +337,17 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 ```
 - 필살기: 측정 쥐의 조각 레벨은 일반·레어 종에만 → Lv 7 필살기 해금 종이 거의 없음 (필살기 없이 잰 값). 실제로 필살기가 열리면 더 빨라짐.
 - 26~50층은 SPU 미측정(10). 초반 층 벽이 매우 두꺼워졌으니 실제 플레이(전투력이 적정보다 낮을 때 벽 피해 감산)로도 한번 확인할 것.
+
+
+### 9-9. 찍찍!! 훈장 · 업적 · 쥐 스킬 아이콘 · 쥐별 스킬 트리 · 글자 정리 (2026-10-08)
+- **시작 쥐 노드** (사용자 결정): 공용 스킬 Start_Rat = 마릿수만 더함, 등급은 티어 시작 쥐처럼 지금 훈장의 등급 확률(`RatManager.RollSpecies`) — `CommonSkill.StartRatAdd`. 마릿수도 줄임 (훈장별 합 3·4·2·6·2·7·3·3, `gen_skill_tree.py` G1·G3·G8). 로비 출동 멤버 수에도 더함.
+- **쥐 스킬 아이콘 158개** (`UnityResources/Rats/RatSkillIcons/`, README): 10-06 에 만들어 두고 안 쓰던 Codex 시트 재사용 + 너무 비슷한 22개 다시 그림. 쥐 캐릭터 테이블 Skill `skill_asset` = `RatSkillIcons/rs_<id>`.
+- **성장 노드 아이콘**은 새로 안 그림 (사용자: 같은 효과면 재사용): 쥐 성장 테이블 Growth_Node 새 칸 `node_icon`(@action·@passive·@ult = 그 쥐의 아이콘 / 공용 스킬 아이콘) · `node_desc`(화면 설명, {v1}·{p1}) · `pos_x`·`pos_y`(트리 창 칸).
+- `Lobby/IconBook.cs` (Lobby 씬 `IconBook`): 아이콘 모음 (RatSkillIcons·SkillIcons·UltIcons·AchvIcons), 컴포넌트 메뉴 Fill Icons. `Skill/Ult/Node/Get`.
+- **쳇바퀴 상세 카드**: 특수 능력·특수 액션·필살기 카드와 "다음 훈련으로 배우는 것" 칩에 아이콘. **스킬 트리 보기** 버튼 → `Lobby/RatTreePopup.cs` (`Page_rats/TreePopup`): 성장 노드 트리(끈·아이콘·지금/최대·다음 훈련 Lv), 노드 누르면 오른쪽에 설명 + 그 쥐의 스킬 설명 + 오르는 훈련 Lv 목록. 해당 없는 노드(필살기 없는 종의 필살기 해금)는 흐리게. ESC = 창 먼저 닫기.
+- **찍찍!! 훈장 페이지** `Lobby/RankPage.cs` (`Page_rank`, 웹 renderRank): 위 = 훈장 사다리 8칸(지금·자물쇠) / 왼쪽 = 고른 훈장 배지·상태·효과(시작 쥐·윗등급 배율, 지금 → 그 훈장)·승급 조건 막대·훈장 달기 / 가운데 = 그 훈장에 오는 친구들(안 만난 친구는 그림자 + ???) / 오른쪽 = **업적**. 팻말 알림 점 = `CanRankUp`.
+- **업적** (사용자: 나중에 확장 → '업적' 으로): 새 `업적 테이블`(Achievement: achv_id·이름·설명·cond_type·target_id·need·achv_icon·정렬, Achv_Cond_Type). 지금은 필살기 33종 완주 = `Ult_Use`(Progress 의 필살기 기록). `Progress.AchvProgress/AchvDone`. 아이콘 33개 = 같은 메달 틀 + 상징 (`UnityResources/Rats/AchvIcons/`, README). 게임 중 업적 토스트는 아직 필살기 테이블 ult_achv 를 씀 (이름은 같음) — 조건 타입을 늘릴 때 토스트도 업적 테이블로 옮길 것.
+- **글자 정리**: UI 조각 그림의 음영(카드 아래 18px 띠 · 판자 아래 13px 띠와 양쪽 못 · 타일 아래 36px 띠 · 팻말 위 끈) 위에 글이 겹치던 것을 앞면 안으로 옮김 (작전 회의 층 타일·정보 줄·기록 칸, 쳇바퀴 카드·필터·성장 길·능력 카드, 훈장 효과 줄·업적 줄·친구 칸, 트리 노드). 판자 버튼 라벨은 전부 아래 음영·양쪽 못 여백 + 한 줄 자동 크기. 넘치던 글(카드 Lv·이름·능력 제목·출동 멤버 설명·치즈 창고 상세 이름)은 칸 높이/자동 크기. 점검은 Play 중 TMP textBounds 를 그림 앞면과 비교하는 스크립트로 함 (Badge 숫자 점은 일부러 밖).
 
 **남은 일 (순서 제안)**
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.

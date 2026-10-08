@@ -92,7 +92,7 @@ namespace NKK.Lobby
             if (bossText) bossText.gameObject.SetActive(startFloor % bossEvery == 0);
 
             // 출동 멤버: 티어 시작 마릿수 + 등급 확률
-            int crew = db.Tiers.TryGetValue(tier, out var tr) ? tr.start_rat_count : 6;
+            int crew = (db.Tiers.TryGetValue(tier, out var tr) ? tr.start_rat_count : 6) + CommonSkill.StartRatAdd;
             SetT(crewText, ("n", crew));
             var w = RatManager.GradeWeights(tier); float sum = 0; foreach (var x in w) sum += x;
             for (int g = 0; g < 6; g++)

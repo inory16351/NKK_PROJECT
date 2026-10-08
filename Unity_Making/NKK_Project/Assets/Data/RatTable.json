@@ -1207,7 +1207,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🐀",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20001",
    "skill_explain": "주변 쥐 1마리당 피해 +6% (최대 10마리)"
   },
   {
@@ -1230,7 +1230,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "📢",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21001",
    "skill_explain": "주변에 동료가 6마리 이상 모이면 (20초마다) → 하수구 동창회: 동료 3마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -1253,7 +1253,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🧱",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20002",
    "skill_explain": "벽에 주는 피해 ×3.0"
   },
   {
@@ -1276,7 +1276,7 @@
    "duration": 1.3,
    "cool_time": 6.0,
    "skill_icon": "💨",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21002",
    "skill_explain": "벽을 들이받을 때 12% 확률로 → 벽 틈 질주: 물건 사이를 4번 순간 돌진하며 일섬 (피해 ×3.0)"
   },
   {
@@ -1299,7 +1299,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🌀",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20003",
    "skill_explain": "돌진 속도 ×1.15, 돌진 박치기 피해 ×1.20"
   },
   {
@@ -1322,7 +1322,7 @@
    "duration": 1.3,
    "cool_time": 6.0,
    "skill_icon": "🌀",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21003",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 미로 폭주: 물건 사이를 4번 순간 돌진하며 일섬 (피해 ×3.0)"
   },
   {
@@ -1345,7 +1345,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "💢",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20004",
    "skill_explain": "물건을 ×1.3 세게 날림 (날아간 물건 충돌 피해도 ↑)"
   },
   {
@@ -1368,7 +1368,7 @@
    "duration": 1.55,
    "cool_time": 6.0,
    "skill_icon": "💢",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21004",
    "skill_explain": "10 콤보 이상일 때 부딪히면 8% 확률로 → 후드 3단 박치기: 3번 뛰어올라 쾅! 내려찍기 (반경 95)"
   },
   {
@@ -1391,7 +1391,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "💞",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20005",
    "skill_explain": "번식 쿨타임 ÷1.5, 새끼가 윗등급일 확률 ↑"
   },
   {
@@ -1414,7 +1414,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "🏡",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21005",
    "skill_explain": "새끼를 낳을 때 35% 확률로 → 대가족 상경: 동료 3마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -1437,7 +1437,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🌻",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20006",
    "skill_explain": "이 쥐가 부순 물건 치즈 ×1.4"
   },
   {
@@ -1460,7 +1460,7 @@
    "duration": 3.0,
    "cool_time": 6.0,
    "skill_icon": "🔵",
-   "skill_asset": "Props/hamsterball",
+   "skill_asset": "RatSkillIcons/rs_21006",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 공 드랍 → 같은 종이 주우면 → 햄스터 볼 폭주: 거대한 공이 되어 3초간 굴러다니며 파괴 (피해 ×2.0)"
   },
   {
@@ -1483,7 +1483,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🐀",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20007",
    "skill_explain": "주변 쥐 1마리당 피해 +6% (최대 10마리)"
   },
   {
@@ -1506,7 +1506,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "🌙",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21007",
    "skill_explain": "주변에 동료가 6마리 이상 모이면 (20초마다) → 다락방 습격: 동료 3마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -1529,7 +1529,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🎯",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20008",
    "skill_explain": "크리티컬 확률 +8%, 크리티컬 ×3.5"
   },
   {
@@ -1552,7 +1552,7 @@
    "duration": 1.3,
    "cool_time": 6.0,
    "skill_icon": "💨",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21008",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 맨몸 돌진: 물건 사이를 4번 순간 돌진하며 일섬 (피해 ×3.0)"
   },
   {
@@ -1575,7 +1575,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🌾",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20009",
    "skill_explain": "돌진 속도 ×1.15, 돌진 박치기 피해 ×1.20"
   },
   {
@@ -1598,7 +1598,7 @@
    "duration": 1.3,
    "cool_time": 6.0,
    "skill_icon": "🌾",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21009",
    "skill_explain": "벽을 들이받을 때 12% 확률로 → 이삭 줄타기: 물건 사이를 4번 순간 돌진하며 일섬 (피해 ×3.0)"
   },
   {
@@ -1621,7 +1621,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🌻",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20010",
    "skill_explain": "이 쥐가 부순 물건 치즈 ×1.4"
   },
   {
@@ -1644,7 +1644,7 @@
    "duration": 3.0,
    "cool_time": 6.0,
    "skill_icon": "🔵",
-   "skill_asset": "Props/hamsterball",
+   "skill_asset": "RatSkillIcons/rs_21010",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 공 드랍 → 같은 종이 주우면 → 정글 볼 굴리기: 거대한 공이 되어 3초간 굴러다니며 파괴 (피해 ×2.0)"
   },
   {
@@ -1667,7 +1667,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🌵",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20011",
    "skill_explain": "한 번 더 갉을 확률 20%"
   },
   {
@@ -1690,7 +1690,7 @@
    "duration": 1.55,
    "cool_time": 6.0,
    "skill_icon": "🌵",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21011",
    "skill_explain": "10 콤보 이상일 때 부딪히면 8% 확률로 → 가시 공 굴리기: 3번 뛰어올라 쾅! 내려찍기 (반경 95)"
   },
   {
@@ -1713,7 +1713,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🦘",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20012",
    "skill_explain": "돌진 속도 ×1.15, 돌진 박치기 피해 ×1.20"
   },
   {
@@ -1736,7 +1736,7 @@
    "duration": 1.3,
    "cool_time": 6.0,
    "skill_icon": "🦘",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21012",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 사막 대점프: 물건 사이를 4번 순간 돌진하며 일섬 (피해 ×3.0)"
   },
   {
@@ -1759,7 +1759,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "👂",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20013",
    "skill_explain": "크리티컬 확률 +8%, 크리티컬 ×3.5"
   },
   {
@@ -1782,7 +1782,7 @@
    "duration": 2.2,
    "cool_time": 6.0,
    "skill_icon": "👂",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21013",
    "skill_explain": "20초마다 → 귀 펄럭 소문 폭탄: 음파 충격파 5번 + 주변 동료 광란 (반경 160)"
   },
   {
@@ -1805,7 +1805,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🏜️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20014",
    "skill_explain": "벽에 주는 피해 ×3.0"
   },
   {
@@ -1828,7 +1828,7 @@
    "duration": 1.3,
    "cool_time": 6.0,
    "skill_icon": "🏜️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21014",
    "skill_explain": "벽을 들이받을 때 10% 확률로 → 모래 질주: 물건 사이를 4번 순간 돌진하며 일섬 (피해 ×3.0)"
   },
   {
@@ -1851,7 +1851,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🐼",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20015",
    "skill_explain": "부딪힐 때 7% 확률로 몸을 말아 대포알처럼 튕겨다님"
   },
   {
@@ -1874,7 +1874,7 @@
    "duration": 3.0,
    "cool_time": 6.0,
    "skill_icon": "🐼",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21015",
    "skill_explain": "물건에 부딪힐 때 4% 확률로 → 판다 대왕 구르기: 거대한 공이 되어 3초간 굴러다니며 파괴 (피해 ×2.0)"
   },
   {
@@ -1897,7 +1897,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "😴",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20016",
    "skill_explain": "자주 잠듦. 자는 동안 코골이 충격파 (반경 75)"
   },
   {
@@ -1920,7 +1920,7 @@
    "duration": 2.2,
    "cool_time": 6.0,
    "skill_icon": "💤",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21016",
    "skill_explain": "잠들 때 50% 확률로 → 지진 코골이: 음파 충격파 5번 + 주변 동료 광란 (반경 160)"
   },
   {
@@ -1943,7 +1943,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🌾",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20017",
    "skill_explain": "번식 쿨타임 ÷1.6, 새끼가 윗등급일 확률 ↑"
   },
   {
@@ -1966,7 +1966,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "🥔",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21017",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 감자 드랍 → 같은 종이 주우면 → 감자 투척: 주변에 5개 투척 폭격"
   },
   {
@@ -1989,7 +1989,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🥊",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20018",
    "skill_explain": "물건을 ×1.4 세게 날림 (날아간 물건 충돌 피해도 ↑)"
   },
   {
@@ -2012,7 +2012,7 @@
    "duration": 1.55,
    "cool_time": 6.0,
    "skill_icon": "🥊",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21018",
    "skill_explain": "물건에 부딪힐 때 4% 확률로 → 어퍼컷: 3번 뛰어올라 쾅! 내려찍기 (반경 100)"
   },
   {
@@ -2035,7 +2035,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "📚",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20019",
    "skill_explain": "크리티컬 확률 +10%, 크리티컬 ×3.6"
   },
   {
@@ -2058,7 +2058,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "🔔",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21019",
    "skill_explain": "20 콤보 이상일 때 부딪히면 10% 확률로 → 쉬는 시간!: 주변 동료 전원 광란 4.3초 (속도·피해 ×1.5)"
   },
   {
@@ -2081,7 +2081,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "⚗️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20020",
    "skill_explain": "들이받을 때 20% 확률로 폭탄 투척 (반경 83)"
   },
   {
@@ -2104,7 +2104,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "⚗️",
-   "skill_asset": "Props/flask",
+   "skill_asset": "RatSkillIcons/rs_21020",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 플라스크 드랍 → 같은 종이 주우면 → 플라스크 난사: 주변에 5개 투척 폭격"
   },
   {
@@ -2127,7 +2127,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🤓",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20021",
    "skill_explain": "크리티컬 확률 +10%, 크리티컬 ×3.6"
   },
   {
@@ -2150,7 +2150,7 @@
    "duration": 1.8,
    "cool_time": 6.0,
    "skill_icon": "✏️",
-   "skill_asset": "Props/pencil",
+   "skill_asset": "RatSkillIcons/rs_21021",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 연필 난타: 앞의 물건을 초고속 12연타 (타당 피해 ×1.3)"
   },
   {
@@ -2173,7 +2173,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "⛏️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20022",
    "skill_explain": "벽에 주는 피해 ×3.6"
   },
   {
@@ -2196,7 +2196,7 @@
    "duration": 1.55,
    "cool_time": 6.0,
    "skill_icon": "🔨",
-   "skill_asset": "Props/hammer",
+   "skill_asset": "RatSkillIcons/rs_21022",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 오함마 드랍 → 같은 종이 주우면 → 오함마 철거: 3번 뛰어올라 쾅! 내려찍기 (반경 100)"
   },
   {
@@ -2219,7 +2219,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🔪",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20023",
    "skill_explain": "한 번 더 갉을 확률 26%"
   },
   {
@@ -2242,7 +2242,7 @@
    "duration": 1.8,
    "cool_time": 6.0,
    "skill_icon": "🔪",
-   "skill_asset": "Props/knife",
+   "skill_asset": "RatSkillIcons/rs_21023",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 칼질 난무: 앞의 물건을 초고속 12연타 (타당 피해 ×1.3)"
   },
   {
@@ -2265,7 +2265,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🎒",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20024",
    "skill_explain": "이 쥐가 부순 물건 치즈 ×1.5"
   },
   {
@@ -2288,7 +2288,7 @@
    "duration": 3.0,
    "cool_time": 6.0,
    "skill_icon": "🎒",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21024",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 배낭 굴리기: 거대한 공이 되어 3초간 굴러다니며 파괴 (피해 ×2.6)"
   },
   {
@@ -2311,7 +2311,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "✉️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20025",
    "skill_explain": "택배가 떨어질 때 화면에 있으면 자기 주변에 1개 추가 배달"
   },
   {
@@ -2334,7 +2334,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "✉️",
-   "skill_asset": "Props/letter",
+   "skill_asset": "RatSkillIcons/rs_21025",
    "skill_explain": "22초마다 → 속달 편지 폭격: 주변에 5개 투척 폭격"
   },
   {
@@ -2357,7 +2357,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "📦",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20026",
    "skill_explain": "택배가 떨어질 때 화면에 있으면 자기 주변에 1개 추가 배달"
   },
   {
@@ -2380,7 +2380,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "🚀",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21026",
    "skill_explain": "택배 투하 때 화면에 있으면 60% 확률로 → 로켓 배송: 하늘에서 5개 낙하"
   },
   {
@@ -2403,7 +2403,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🎉",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20027",
    "skill_explain": "부딪힐 때 10% 확률로 전매특허 묘기"
   },
   {
@@ -2426,7 +2426,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "🥳",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21027",
    "skill_explain": "25 콤보 이상일 때 부딪히면 10% 확률로 → 파티 타임: 주변 동료 전원 광란 4.3초 (속도·피해 ×1.5)"
   },
   {
@@ -2449,7 +2449,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🧹",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20028",
    "skill_explain": "이 쥐가 부순 물건 치즈 ×1.5"
   },
   {
@@ -2472,7 +2472,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "🧹",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21028",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 대걸레 드랍 → 같은 종이 주우면 → 대걸레 스윙: 주변에 5개 투척 폭격"
   },
   {
@@ -2495,7 +2495,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "☕",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20029",
    "skill_explain": "한 번 더 갉을 확률 26%"
   },
   {
@@ -2518,7 +2518,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "☕",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21029",
    "skill_explain": "20초마다 → 커피 한 잔씩: 주변 동료 전원 광란 4.3초 (속도·피해 ×1.5)"
   },
   {
@@ -2541,7 +2541,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🌱",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20030",
    "skill_explain": "번식 쿨타임 ÷1.6, 새끼가 윗등급일 확률 ↑"
   },
   {
@@ -2564,7 +2564,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "🌻",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21030",
    "skill_explain": "새끼를 낳을 때 35% 확률로 → 꽃밭 대가족: 동료 3마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -2587,7 +2587,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🎨",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20031",
    "skill_explain": "들이받을 때 20% 확률로 폭탄 투척 (반경 83)"
   },
   {
@@ -2610,7 +2610,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "🎨",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21031",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 물감 드랍 → 같은 종이 주우면 → 물감 난사: 주변에 5개 투척 폭격"
   },
   {
@@ -2633,7 +2633,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🛹",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20032",
    "skill_explain": "부딪힐 때 10% 확률로 전매특허 묘기"
   },
   {
@@ -2656,7 +2656,7 @@
    "duration": 1.55,
    "cool_time": 6.0,
    "skill_icon": "🛹",
-   "skill_asset": "Props/skateboard",
+   "skill_asset": "RatSkillIcons/rs_21032",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 스케이트보드 드랍 → 같은 종이 주우면 → 하프파이프 킥플립: 3번 뛰어올라 쾅! 내려찍기 (반경 100)"
   },
   {
@@ -2679,7 +2679,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "☢️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20033",
    "skill_explain": "주변(반경 70)에 계속 방사능 피해"
   },
   {
@@ -2702,7 +2702,7 @@
    "duration": 2.0,
    "cool_time": 6.0,
    "skill_icon": "☢️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21033",
    "skill_explain": "15 콤보 이상일 때 부딪히면 8% 확률로 → 방사능 폭주: 주변 물건을 빨아들인 뒤 대폭발 (반경 234)"
   },
   {
@@ -2725,7 +2725,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🧬",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20034",
    "skill_explain": "이 쥐가 부순 물건은 크게 폭발 (반경 +43)"
   },
   {
@@ -2748,7 +2748,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "🧬",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21034",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 세포 분열: 동료 3마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -2771,7 +2771,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "💪",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20035",
    "skill_explain": "물건을 ×1.5 세게 날림 (날아간 물건 충돌 피해도 ↑)"
   },
   {
@@ -2794,7 +2794,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "🏋️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21035",
    "skill_explain": "물건에 부딪힐 때 4% 확률로 → 3대 500 던지기: 주변 물건을 번쩍 들어 집어던짐 (충돌 피해 ×5.1)"
   },
   {
@@ -2817,7 +2817,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🥷",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20036",
    "skill_explain": "1.8초마다 순간이동해서 물건을 급습 (피해 ×2)"
   },
   {
@@ -2840,7 +2840,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "🥷",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21036",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 그림자 분신술: 동료 3마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -2863,7 +2863,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🎤",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20037",
    "skill_explain": "반경 180 안의 동료 쥐 피해·속도 +17%"
   },
   {
@@ -2886,7 +2886,7 @@
    "duration": 2.2,
    "cool_time": 6.0,
    "skill_icon": "🎤",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21037",
    "skill_explain": "주변에 동료가 5마리 이상 모이면 (18초마다) → 게릴라 콘서트: 음파 충격파 5번 + 주변 동료 광란 (반경 174)"
   },
   {
@@ -2909,7 +2909,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🖱️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20038",
    "skill_explain": "한 번 더 갉을 확률 34%"
   },
   {
@@ -2932,7 +2932,7 @@
    "duration": 1.8,
    "cool_time": 6.0,
    "skill_icon": "🖱️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21038",
    "skill_explain": "물건에 부딪힐 때 4% 확률로 → 광클 연타: 앞의 물건을 초고속 12연타 (타당 피해 ×1.7)"
   },
   {
@@ -2955,7 +2955,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🚨",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20039",
    "skill_explain": "크리티컬 확률 +14%, 크리티컬 ×3.9"
   },
   {
@@ -2978,7 +2978,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "🚓",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21039",
    "skill_explain": "20 콤보 이상일 때 부딪히면 8% 확률로 → 지원 요청: 동료 3마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -3001,7 +3001,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🪓",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20040",
    "skill_explain": "벽에 주는 피해 ×4.4"
   },
   {
@@ -3024,7 +3024,7 @@
    "duration": 1.7,
    "cool_time": 6.0,
    "skill_icon": "🧯",
-   "skill_asset": "Props/extinguisher",
+   "skill_asset": "RatSkillIcons/rs_21040",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 소화기 드랍 → 같은 종이 주우면 → 소방 호스 난사: 부채꼴로 휘두르는 브레스 (사거리 204)"
   },
   {
@@ -3047,7 +3047,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🏴‍☠️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20041",
    "skill_explain": "이 쥐가 부순 물건 치즈 ×1.7"
   },
   {
@@ -3070,7 +3070,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "💣",
-   "skill_asset": "FX/bomb",
+   "skill_asset": "RatSkillIcons/rs_21041",
    "skill_explain": "15 콤보 이상일 때 부딪히면 8% 확률로 → 대포 일제 사격: 주변에 5개 투척 폭격"
   },
   {
@@ -3093,7 +3093,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🤠",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20042",
    "skill_explain": "물건을 ×1.5 세게 날림 (날아간 물건 충돌 피해도 ↑)"
   },
   {
@@ -3116,7 +3116,7 @@
    "duration": 2.0,
    "cool_time": 6.0,
    "skill_icon": "🪢",
-   "skill_asset": "Props/lasso",
+   "skill_asset": "RatSkillIcons/rs_21042",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 올가미 끌어오기: 주변 물건을 빨아들인 뒤 대폭발 (반경 234)"
   },
   {
@@ -3139,7 +3139,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "💉",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20043",
    "skill_explain": "번식 쿨타임 ÷1.9, 새끼가 윗등급일 확률 ↑"
   },
   {
@@ -3162,7 +3162,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "💉",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21043",
    "skill_explain": "새끼를 낳을 때 40% 확률로 → 링거 투혼: 주변 동료 전원 광란 4.7초 (속도·피해 ×1.5)"
   },
   {
@@ -3185,7 +3185,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "⛏️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20044",
    "skill_explain": "벽에 주는 피해 ×4.4"
   },
   {
@@ -3208,7 +3208,7 @@
    "duration": 1.55,
    "cool_time": 6.0,
    "skill_icon": "⛏️",
-   "skill_asset": "Props/pickaxe",
+   "skill_asset": "RatSkillIcons/rs_21044",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 곡괭이 드랍 → 같은 종이 주우면 → 곡괭이 내려찍기: 3번 뛰어올라 쾅! 내려찍기 (반경 106)"
   },
   {
@@ -3231,7 +3231,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "👁️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20045",
    "skill_explain": "1.9초마다 레이저 발사, 물건 3개 관통"
   },
   {
@@ -3254,7 +3254,7 @@
    "duration": 2.0,
    "cool_time": 6.0,
    "skill_icon": "👁️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21045",
    "skill_explain": "20초마다 → 360° 레이저: 360° 회전 레이저 (피해 ×4.4)"
   },
   {
@@ -3277,7 +3277,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "💣",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20046",
    "skill_explain": "들이받을 때 33% 확률로 폭탄 투척 (반경 92)"
   },
   {
@@ -3300,7 +3300,7 @@
    "duration": 2.4,
    "cool_time": 6.0,
    "skill_icon": "🎖️",
-   "skill_asset": "Props/gun",
+   "skill_asset": "RatSkillIcons/rs_21046",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 권총 드랍 → 같은 종이 주우면 → 건 카타: 빙글빙글 돌며 사방으로 총알 난사 (총알 피해 ×2.2)"
   },
   {
@@ -3323,7 +3323,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🦸",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20047",
    "skill_explain": "돌진할 때 멈추지 않고 물건을 뚫고 지나감 (피해 ×1.44)"
   },
   {
@@ -3346,7 +3346,7 @@
    "duration": 1.3,
    "cool_time": 6.0,
    "skill_icon": "🦸",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21047",
    "skill_explain": "10 콤보 이상일 때 부딪히면 8% 확률로 → 초음속 연속 펀치: 물건 사이를 4번 순간 돌진하며 일섬 (피해 ×6.6)"
   },
   {
@@ -3369,7 +3369,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🔍",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20048",
    "skill_explain": "크리티컬 확률 +18%, 크리티컬 ×4.1"
   },
   {
@@ -3392,7 +3392,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "🔍",
-   "skill_asset": "Props/magnifier",
+   "skill_asset": "RatSkillIcons/rs_21048",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 바리츠!: 주변 물건을 번쩍 들어 집어던짐 (충돌 피해 ×6.6)"
   },
   {
@@ -3415,7 +3415,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🧟",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20049",
    "skill_explain": "한 번 더 갉을 확률 44%"
   },
   {
@@ -3438,7 +3438,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "🧟",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21049",
    "skill_explain": "물건에 부딪힐 때 3% 확률로 → 좀비 떼: 동료 4마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -3461,7 +3461,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🩰",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20050",
    "skill_explain": "부딪힐 때 18% 확률로 전매특허 묘기"
   },
   {
@@ -3484,7 +3484,7 @@
    "duration": 2.6,
    "cool_time": 6.0,
    "skill_icon": "🩰",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21050",
    "skill_explain": "15 콤보 이상일 때 부딪히면 10% 확률로 → 32회전 그랑 푸에테: 회오리가 되어 휩쓸고 다님 (피해 ×2.2)"
   },
   {
@@ -3507,7 +3507,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🚀",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20051",
    "skill_explain": "부딪힐 때 15% 확률로 몸을 말아 대포알처럼 튕겨다님"
   },
   {
@@ -3530,7 +3530,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "🛰️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21051",
    "skill_explain": "22초마다 → 궤도 폭격: 하늘에서 6개 낙하"
   },
   {
@@ -3553,7 +3553,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🔥",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20052",
    "skill_explain": "1.7초마다 앞쪽으로 불꽃 (사거리 154)"
   },
   {
@@ -3576,7 +3576,7 @@
    "duration": 1.7,
    "cool_time": 6.0,
    "skill_icon": "🔥",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21052",
    "skill_explain": "20초마다 → 치즈 브레스: 부채꼴로 휘두르는 브레스 (사거리 214)"
   },
   {
@@ -3599,7 +3599,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "👻",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20053",
    "skill_explain": "돌진할 때 멈추지 않고 물건을 뚫고 지나감 (피해 ×1.44)"
   },
   {
@@ -3622,7 +3622,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "👻",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21053",
    "skill_explain": "벽을 들이받을 때 12% 확률로 → 유령 분신: 동료 4마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -3645,7 +3645,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "😇",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20054",
    "skill_explain": "번식 쿨타임 ÷2.1, 새끼가 윗등급일 확률 ↑"
   },
   {
@@ -3668,7 +3668,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "😇",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21054",
    "skill_explain": "24초마다 → 천상의 합창: 주변 동료 전원 광란 5.2초 (속도·피해 ×1.5)"
   },
   {
@@ -3691,7 +3691,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🦖",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20055",
    "skill_explain": "부딪힐 때마다 쿵! 착지 충격파 (반경 62)"
   },
   {
@@ -3714,7 +3714,7 @@
    "duration": 1.55,
    "cool_time": 6.0,
    "skill_icon": "🦖",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21055",
    "skill_explain": "물건에 부딪힐 때 4% 확률로 → 공룡 대지진: 3번 뛰어올라 쾅! 내려찍기 (반경 113)"
   },
   {
@@ -3737,7 +3737,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🔮",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20056",
    "skill_explain": "갉은 물건이 12% 확률로 황금으로 변함 (치즈 ×10)"
   },
   {
@@ -3760,7 +3760,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "☄️",
-   "skill_asset": "Props/wand",
+   "skill_asset": "RatSkillIcons/rs_21056",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 마법봉 드랍 → 같은 종이 주우면 → 메테오: 하늘에서 7개 낙하"
   },
   {
@@ -3783,7 +3783,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "⚔️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20057",
    "skill_explain": "돌진할 때 멈추지 않고 물건을 뚫고 지나감 (피해 ×1.60)"
   },
   {
@@ -3806,7 +3806,7 @@
    "duration": 1.3,
    "cool_time": 6.0,
    "skill_icon": "⚔️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21057",
    "skill_explain": "물건에 부딪힐 때 4% 확률로 → 발도술 일섬: 물건 사이를 4번 순간 돌진하며 일섬 (피해 ×9.0)"
   },
   {
@@ -3829,7 +3829,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🎸",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20058",
    "skill_explain": "반경 180 안의 동료 쥐 피해·속도 +30%"
   },
   {
@@ -3852,7 +3852,7 @@
    "duration": 2.2,
    "cool_time": 6.0,
    "skill_icon": "🎸",
-   "skill_asset": "Props/guitar",
+   "skill_asset": "RatSkillIcons/rs_21058",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 기타 드랍 → 같은 종이 주우면 → 기타 솔로: 음파 충격파 5번 + 주변 동료 광란 (반경 200)"
   },
   {
@@ -3875,7 +3875,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🦇",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20059",
    "skill_explain": "이 쥐가 부순 물건은 크게 폭발 (반경 +75)"
   },
   {
@@ -3898,7 +3898,7 @@
    "duration": 2.0,
    "cool_time": 6.0,
    "skill_icon": "🦇",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21059",
    "skill_explain": "22초마다 → 흡혈 소용돌이: 주변 물건을 빨아들인 뒤 대폭발 (반경 260)"
   },
   {
@@ -3921,7 +3921,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🎁",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20060",
    "skill_explain": "택배가 떨어질 때 화면에 있으면 자기 주변에 2개 추가 배달"
   },
   {
@@ -3944,7 +3944,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "🎁",
-   "skill_asset": "Props/gift",
+   "skill_asset": "RatSkillIcons/rs_21060",
    "skill_explain": "택배 투하 때 화면에 있으면 70% 확률로 → 선물 폭격: 주변에 7개 투척 폭격"
   },
   {
@@ -3967,7 +3967,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🧪",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20061",
    "skill_explain": "들이받을 때 45% 확률로 폭탄 투척 (반경 100)"
   },
   {
@@ -3990,7 +3990,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "🏹",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21061",
    "skill_explain": "15 콤보 이상일 때 부딪히면 8% 확률로 → 역병 석궁 난사: 주변에 7개 투척 폭격"
   },
   {
@@ -4013,7 +4013,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "👑",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20062",
    "skill_explain": "반경 180 안의 동료 쥐 피해·속도 +30%"
   },
   {
@@ -4036,7 +4036,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "👑",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21062",
    "skill_explain": "주변에 동료가 5마리 이상 모이면 (16초마다) → 왕의 군대: 동료 5마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -4059,7 +4059,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "👸",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20063",
    "skill_explain": "번식 쿨타임 ÷2.5, 새끼가 윗등급일 확률 ↑"
   },
   {
@@ -4082,7 +4082,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "👸",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21063",
    "skill_explain": "새끼를 낳을 때 40% 확률로 → 여왕의 축복: 주변 동료 전원 광란 6.0초 (속도·피해 ×1.5)"
   },
   {
@@ -4105,7 +4105,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🪓",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20064",
    "skill_explain": "물건을 ×1.9 세게 날림 (날아간 물건 충돌 피해도 ↑)"
   },
   {
@@ -4128,7 +4128,7 @@
    "duration": 1.55,
    "cool_time": 6.0,
    "skill_icon": "🪓",
-   "skill_asset": "Props/axe",
+   "skill_asset": "RatSkillIcons/rs_21064",
    "skill_explain": "자기가 부순 물건에서 4% 확률로 도끼 드랍 → 같은 종이 주우면 → 대지 가르기: 3번 뛰어올라 쾅! 내려찍기 (반경 125)"
   },
   {
@@ -4151,7 +4151,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🤖",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20065",
    "skill_explain": "1.7초마다 레이저 발사, 물건 4개 관통"
   },
   {
@@ -4174,7 +4174,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "🤖",
-   "skill_asset": "FX/missile",
+   "skill_asset": "RatSkillIcons/rs_21065",
    "skill_explain": "15 콤보 이상일 때 부딪히면 8% 확률로 → 미사일 폭격: 주변에 7개 투척 폭격"
   },
   {
@@ -4197,7 +4197,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🌌",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20066",
    "skill_explain": "주변(반경 86)에 계속 방사능 피해"
   },
   {
@@ -4220,7 +4220,7 @@
    "duration": 2.0,
    "cool_time": 6.0,
    "skill_icon": "🌌",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21066",
    "skill_explain": "20 콤보 이상일 때 부딪히면 10% 확률로 → 블랙홀: 주변 물건을 빨아들인 뒤 대폭발 (반경 260)"
   },
   {
@@ -4243,7 +4243,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "⚡",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20067",
    "skill_explain": "이 쥐가 부순 물건은 크게 폭발 (반경 +100)"
   },
   {
@@ -4266,7 +4266,7 @@
    "duration": 2.0,
    "cool_time": 6.0,
    "skill_icon": "⚡",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21067",
    "skill_explain": "18초마다 → 건전지 백만 볼트: 360° 회전 레이저 (피해 ×8.0)"
   },
   {
@@ -4289,7 +4289,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🎈",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20068",
    "skill_explain": "반경 180 안의 동료 쥐 피해·속도 +40%"
   },
   {
@@ -4312,7 +4312,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "🎈",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21068",
    "skill_explain": "주변에 동료가 5마리 이상 모이면 (18초마다) → 깜짝 퍼레이드: 주변 동료 전원 광란 7.0초 (속도·피해 ×1.5)"
   },
   {
@@ -4335,7 +4335,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "📜",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20069",
    "skill_explain": "반경 180 안의 동료 쥐 피해·속도 +40%"
   },
   {
@@ -4358,7 +4358,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "🏹",
-   "skill_asset": "FX/arrow",
+   "skill_asset": "RatSkillIcons/rs_21069",
    "skill_explain": "주변에 동료가 5마리 이상 모이면 (18초마다) → 궁수대 일제 사격: 주변에 8개 투척 폭격"
   },
   {
@@ -4381,7 +4381,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🏺",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20070",
    "skill_explain": "이 쥐가 부순 물건 치즈 ×2.6"
   },
   {
@@ -4404,7 +4404,7 @@
    "duration": 1.2,
    "cool_time": 6.0,
    "skill_icon": "🏺",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21070",
    "skill_explain": "황금 물건을 갉으면 50% 확률로 → 황금의 손: 주변 물건을 전부 황금으로 (반경 240, 치즈 ×10)"
   },
   {
@@ -4427,7 +4427,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🛡️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20071",
    "skill_explain": "돌진할 때 멈추지 않고 물건을 뚫고 지나감 (피해 ×1.80)"
   },
   {
@@ -4450,7 +4450,7 @@
    "duration": 1.3,
    "cool_time": 6.0,
    "skill_icon": "🛡️",
-   "skill_asset": "Props/shield",
+   "skill_asset": "RatSkillIcons/rs_21071",
    "skill_explain": "물건에 부딪힐 때 4% 확률로 → 랜스 차지: 물건 사이를 4번 순간 돌진하며 일섬 (피해 ×12.0)"
   },
   {
@@ -4473,7 +4473,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "💎",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20072",
    "skill_explain": "갉은 물건이 16% 확률로 황금으로 변함 (치즈 ×10)"
   },
   {
@@ -4496,7 +4496,7 @@
    "duration": 2.6,
    "cool_time": 6.0,
    "skill_icon": "🧞",
-   "skill_asset": "Props/lamp",
+   "skill_asset": "RatSkillIcons/rs_21072",
    "skill_explain": "24초마다 → 양탄자 회오리: 회오리가 되어 휩쓸고 다님 (피해 ×4.0)"
   },
   {
@@ -4519,7 +4519,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🛸",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20073",
    "skill_explain": "1.5초마다 레이저 발사, 물건 5개 관통"
   },
   {
@@ -4542,7 +4542,7 @@
    "duration": 0.9,
    "cool_time": 6.0,
    "skill_icon": "🛸",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21073",
    "skill_explain": "22초마다 → 외계인 친구들: 동료 6마리 소환 (6초 동안 함께 난동)"
   },
   {
@@ -4565,7 +4565,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🎁",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20074",
    "skill_explain": "택배가 떨어질 때 화면에 있으면 자기 주변에 3개 추가 배달"
   },
   {
@@ -4588,7 +4588,7 @@
    "duration": 2.2,
    "cool_time": 6.0,
    "skill_icon": "🎙️",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21074",
    "skill_explain": "주변에 동료가 5마리 이상 모이면 (16초마다) → 흐에~ 샤우팅: 음파 충격파 5번 + 주변 동료 광란 (반경 220)"
   },
   {
@@ -4611,7 +4611,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "⚡",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20075",
    "skill_explain": "이 쥐가 부순 물건은 크게 폭발 (반경 +100)"
   },
   {
@@ -4634,7 +4634,7 @@
    "duration": 1.9,
    "cool_time": 6.0,
    "skill_icon": "⚡",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21075",
    "skill_explain": "14초마다 → 람쥐썬더: 두 앞발을 하늘로! 번개 8줄기가 주변 물건에 꽂힘 (피해 ×12.0)"
   },
   {
@@ -4657,7 +4657,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "😏",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20076",
    "skill_explain": "크리티컬 확률 +32%, 크리티컬 ×5.0"
   },
   {
@@ -4680,7 +4680,7 @@
    "duration": 1.6,
    "cool_time": 6.0,
    "skill_icon": "🎩",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21076",
    "skill_explain": "주변에 동료가 5마리 이상 모이면 (15초마다) → 감사합니다!!: 주변 동료 전원 광란 7.0초 (속도·피해 ×1.5)"
   },
   {
@@ -4703,7 +4703,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "👨‍🍳",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20077",
    "skill_explain": "이 쥐가 부순 물건은 크게 폭발 (반경 +100)"
   },
   {
@@ -4726,7 +4726,7 @@
    "duration": 1.8,
    "cool_time": 6.0,
    "skill_icon": "🔪",
-   "skill_asset": "Props/knife",
+   "skill_asset": "RatSkillIcons/rs_21077",
    "skill_explain": "물건에 부딪힐 때 4% 확률로 → 다지기 연타: 앞의 물건을 초고속 12연타 (타당 피해 ×4.0)"
   },
   {
@@ -4749,7 +4749,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🔍",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20078",
    "skill_explain": "물건을 부술 때마다 단서 +1. 단서 10개마다 축구공 킥이 한 번 더 튕김 (최대 +6, 필살기 쓰면 초기화)"
   },
   {
@@ -4772,7 +4772,7 @@
    "duration": 1.2,
    "cool_time": 6.0,
    "skill_icon": "☝",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21078",
    "skill_explain": "10초마다 → 진실은 언제나 하나!: 체력이 가장 높은 물건을 가리켜 강력한 피해 (공격력 ×40)"
   },
   {
@@ -4795,7 +4795,7 @@
    "duration": 0.0,
    "cool_time": 0.0,
    "skill_icon": "🧀",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_20079",
    "skill_explain": "이 쥐의 특수 액션·필살기로 부순 물건 치즈 +100%"
   },
   {
@@ -4818,7 +4818,7 @@
    "duration": 1.5,
    "cool_time": 6.0,
    "skill_icon": "⛲",
-   "skill_asset": "",
+   "skill_asset": "RatSkillIcons/rs_21079",
    "skill_explain": "5초마다 → 치즈 분수: 8방향으로 치즈 탄환 4번 발사 (탄환 피해 ×4)"
   }
  ],

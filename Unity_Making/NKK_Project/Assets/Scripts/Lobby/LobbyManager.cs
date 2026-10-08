@@ -67,6 +67,7 @@ namespace NKK.Lobby
             var p = Progress.I; if (!p || !GameDatabase.Instance) return false;
             if (id == "skill") foreach (var s in GameDatabase.Instance.CommonSkills) if (p.CanBuySkill(s)) return true;
             if (id == "rats") return p.UpgradableCount > 0;
+            if (id == "rank") return p.CanRankUp();
             return false;
         }
 
@@ -115,7 +116,11 @@ namespace NKK.Lobby
             if (prepCheese) prepCheese.text = c; if (prepResearch) prepResearch.text = r;
             // 탈출 준비실에서 ESC = 아지트로
             var k = Keyboard.current;
-            if (k != null && k.escapeKey.wasPressedThisFrame && PrepOpen) CloseToHome();
+            if (k != null && k.escapeKey.wasPressedThisFrame && PrepOpen)
+            {
+                if (RatTreePopup.Current && RatTreePopup.Current.IsOpen) RatTreePopup.Current.Close();     // 창이 떠 있으면 창부터 닫음
+                else CloseToHome();
+            }
         }
     }
 }

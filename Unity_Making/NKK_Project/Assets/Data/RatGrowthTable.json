@@ -10,7 +10,11 @@
    "effect_type": "Atk_Growth",
    "value_01": 1.25,
    "value_02": 0.0,
-   "value_03": 0.0
+   "value_03": 0.0,
+   "node_icon": "SkillIcons/cs_teeth",
+   "node_desc": "이 종의 갉는 힘 ×{v1} (레벨마다 곱해짐)",
+   "pos_x": 1,
+   "pos_y": 0
   },
   {
    "node_id": 2,
@@ -22,7 +26,11 @@
    "effect_type": "Dash_Speed_Growth",
    "value_01": 0.08,
    "value_02": 0.0,
-   "value_03": 0.0
+   "value_03": 0.0,
+   "node_icon": "SkillIcons/cs_speed",
+   "node_desc": "돌진 속도 +{p1}% (레벨마다)",
+   "pos_x": 0,
+   "pos_y": 1
   },
   {
    "node_id": 3,
@@ -34,7 +42,11 @@
    "effect_type": "Action_Unlock",
    "value_01": 0.3,
    "value_02": 0.0,
-   "value_03": 0.0
+   "value_03": 0.0,
+   "node_icon": "@action",
+   "node_desc": "특수 액션 해금. 2레벨부터 발동 확률·빈도 +{p1}%씩",
+   "pos_x": 2,
+   "pos_y": 1
   },
   {
    "node_id": 4,
@@ -46,7 +58,11 @@
    "effect_type": "Trick_Chance_Growth",
    "value_01": 0.4,
    "value_02": 0.0,
-   "value_03": 0.0
+   "value_03": 0.0,
+   "node_icon": "SkillIcons/cs_flip",
+   "node_desc": "묘기 확률 +{p1}% (레벨마다)",
+   "pos_x": 3,
+   "pos_y": 1
   },
   {
    "node_id": 5,
@@ -58,7 +74,11 @@
    "effect_type": "Crit_Chance_Growth",
    "value_01": 0.04,
    "value_02": 0.0,
-   "value_03": 0.0
+   "value_03": 0.0,
+   "node_icon": "SkillIcons/cs_critc",
+   "node_desc": "크리티컬 확률 +{p1}% (레벨마다)",
+   "pos_x": 0,
+   "pos_y": 2
   },
   {
    "node_id": 6,
@@ -70,7 +90,11 @@
    "effect_type": "Action_Power_Growth",
    "value_01": 0.3,
    "value_02": 0.0,
-   "value_03": 0.0
+   "value_03": 0.0,
+   "node_icon": "@action",
+   "node_desc": "특수 액션 위력 +{p1}% (레벨마다)",
+   "pos_x": 2,
+   "pos_y": 2
   },
   {
    "node_id": 7,
@@ -82,7 +106,11 @@
    "effect_type": "Passive_Power_Growth",
    "value_01": 0.35,
    "value_02": 0.0,
-   "value_03": 0.0
+   "value_03": 0.0,
+   "node_icon": "@passive",
+   "node_desc": "특수 능력 세기 +{p1}% (레벨마다)",
+   "pos_x": 3,
+   "pos_y": 2
   },
   {
    "node_id": 8,
@@ -94,7 +122,11 @@
    "effect_type": "Action_Awaken",
    "value_01": 0.0,
    "value_02": 0.0,
-   "value_03": 0.0
+   "value_03": 0.0,
+   "node_icon": "@action",
+   "node_desc": "특수 액션 각성: 액션이 한 단계 더 화려하고 강해짐",
+   "pos_x": 2,
+   "pos_y": 3
   },
   {
    "node_id": 9,
@@ -106,7 +138,11 @@
    "effect_type": "Awaken",
    "value_01": 3.0,
    "value_02": 1.5,
-   "value_03": 1.5
+   "value_03": 1.5,
+   "node_icon": "SkillIcons/cs_core",
+   "node_desc": "각성: 갉는 힘 ×{v1} · 특수 능력 ×{v2} · 특수 액션 ×{v3}, 몸에서 빛이 남",
+   "pos_x": 3,
+   "pos_y": 3
   },
   {
    "node_id": 10,
@@ -118,7 +154,11 @@
    "effect_type": "Ult_Unlock",
    "value_01": 0.0,
    "value_02": 0.0,
-   "value_03": 0.0
+   "value_03": 0.0,
+   "node_icon": "@ult",
+   "node_desc": "필살기 해금: 필살기 게이지가 차기 시작",
+   "pos_x": 1,
+   "pos_y": 1
   }
  ],
  "Growth_Order": [

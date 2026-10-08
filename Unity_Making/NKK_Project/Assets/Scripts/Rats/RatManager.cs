@@ -313,7 +313,8 @@ namespace NKK.Rats
         void Start()
         {
             var db = GameDatabase.Instance;
-            int n = startCount > 0 ? startCount : (db.Tiers.TryGetValue(Game.Tier, out var t) ? t.start_rat_count : 6);
+            // 티어 시작 마릿수 + 공용 스킬 시작 쥐 (전부 지금 훈장의 등급 확률로)
+            int n = startCount > 0 ? startCount : (db.Tiers.TryGetValue(Game.Tier, out var t) ? t.start_rat_count : 6) + CommonSkill.StartRatAdd;
             for (int i = 0; i < n; i++)
             {
                 RatCharacterRow row = null;
@@ -321,10 +322,6 @@ namespace NKK.Rats
                 row ??= RollSpecies(0);
                 if (row != null) Spawn(row, World.RW / 2 + Random.Range(-200f, 200f), World.RH / 2 + Random.Range(-120f, 120f));
             }
-            // 공용 스킬 시작 쥐: 그 등급에서 해금된 종 하나씩 (없으면 아래 등급)
-            if (startRats.Count == 0)
-                foreach (var (g, cnt) in CommonSkill.StartRats())
-                    for (int i = 0; i < cnt; i++) { var row = SpeciesOfGrade(g); if (row != null) Spawn(row, World.RW / 2 + Random.Range(-200f, 200f), World.RH / 2 + Random.Range(-120f, 120f)); }
         }
 
         public void PlaceAll(float cx, float cy)

@@ -43,14 +43,14 @@ namespace NKK.Lobby
         public TMP_Text pDesc, aDesc, uDesc;
         [Tooltip("Lv {lv}에 해금 (해금 전에만 보임)")] public TMP_Text aLock, uLock;
         public CanvasGroup actionCard, ultCard;
-        public Image uIcon;
+        public Image pIcon, aIcon, uIcon;
         [Tooltip("필살기가 없는 종일 때 보이는 것")] public GameObject noUlt;
         [Tooltip("해금 전 카드 투명도")] public float lockedAlpha = 0.55f;
         public Button trainButton;
         [Tooltip("훈련 버튼 글 ({have} {need}) / 만렙 글")] public TMP_Text trainLabel, wTrainMax;
-
-        [Header("필살기 아이콘 (ult_<id>) — 컴포넌트 메뉴 Fill Ult Icons")]
-        public Sprite[] ultIcons;
+        [Header("스킬 트리 창")]
+        public Button treeButton;
+        public RatTreePopup treePopup;
 
         int filter = -1;        // -1 전체, 아니면 Grade
         string sel, sig;
@@ -72,6 +72,7 @@ namespace NKK.Lobby
             if (filterTemplate) { T(Txt(filterTemplate.transform, "Label")); T(Txt(filterTemplate.transform, "Badge/Text")); }
             if (upAllButton) upAllButton.onClick.AddListener(UpAll);
             if (trainButton) trainButton.onClick.AddListener(() => Train(sel));
+            if (treeButton) treeButton.onClick.AddListener(() => { if (treePopup && DB.RatsByCode.TryGetValue(sel ?? "", out var r)) treePopup.Open(r); });
         }
 
         static GameDatabase DB => GameDatabase.Instance;
@@ -171,6 +172,7 @@ namespace NKK.Lobby
             // 특수 능력 (처음부터 켜짐) · 특수 액션 (Action_Unlock 레벨) · 필살기 (Ult_Unlock 레벨)
             db.RatSkills.TryGetValue(r.passive_skill, out var ps); db.RatSkills.TryGetValue(r.action_skill, out var acs);
             SetT(pName, F(pName, ("name", ps?.skill_name))); SetT(pDesc, ps?.skill_explain);
+            SetIcon(pIcon, Icons ? Icons.Skill(ps) : null); SetIcon(aIcon, Icons ? Icons.Skill(acs) : null);
             int actLv = p.UnlockLevel(GrowthEffectType.Action_Unlock), ultLv = p.UnlockLevel(GrowthEffectType.Ult_Unlock);
             bool actOn = L >= actLv;
             if (actionCard) { actionCard.gameObject.SetActive(acs != null); actionCard.alpha = actOn ? 1 : lockedAlpha; }
@@ -183,7 +185,7 @@ namespace NKK.Lobby
             {
                 SetT(uName, F(uName, ("name", u.ultimate_name))); SetT(uDesc, u.dev_desc);
                 if (uLock) { uLock.gameObject.SetActive(!ultOn); uLock.text = F(uLock, ("lv", ultLv)); }
-                if (uIcon) { uIcon.sprite = UltIcon(u); uIcon.enabled = uIcon.sprite; }
+                SetIcon(uIcon, Icons ? Icons.Ult(u) : null);
             }
 
             // 성장 길: 다음 레벨들에 찍히는 노드 (해금 노드는 강조, 필살기 없는 종의 필살기 해금은 흐리게)
@@ -196,6 +198,7 @@ namespace NKK.Lobby
                     var c = Instantiate(pathTemplate, pathTemplate.parent); c.gameObject.SetActive(true); pathChips.Add(c.gameObject);
                     var tl = Txt(c, "Lv"); if (tl) tl.text = F(tl, ("lv", lv));
                     var tn = Txt(c, "Name"); if (tn) tn.text = n.node_name;
+                    SetIcon(c.Find("Icon")?.GetComponent<Image>(), Icons ? Icons.Node(n, r) : null);
                     var e = n.Effect;
                     bool key = e == GrowthEffectType.Ult_Unlock || e == GrowthEffectType.Action_Awaken || e == GrowthEffectType.Awaken || (e == GrowthEffectType.Action_Unlock && lv == actLv);
                     bool dim = (e == GrowthEffectType.Ult_Unlock && u == null) || (e == GrowthEffectType.Action_Unlock && acs == null);
@@ -207,13 +210,8 @@ namespace NKK.Lobby
             SetT(trainLabel, need > 0 ? F(trainLabel, ("have", Mathf.Max(0, have)), ("need", need)) : T(wTrainMax));
         }
 
-        Sprite UltIcon(RatUltimateRow u)
-        {
-            if (ultIcons == null || u == null || string.IsNullOrEmpty(u.ult_icon)) return null;
-            string n = u.ult_icon.Substring(u.ult_icon.LastIndexOf('/') + 1);
-            foreach (var s in ultIcons) if (s && s.name == n) return s;
-            return null;
-        }
+        static IconBook Icons => IconBook.I;
+        static void SetIcon(Image img, Sprite sp) { if (!img) return; img.sprite = sp; img.enabled = sp; }
 
         void Train(string code)
         {
@@ -244,15 +242,5 @@ namespace NKK.Lobby
             }
         }
 
-#if UNITY_EDITOR
-        [ContextMenu("Fill Ult Icons")]
-        void FillUltIcons()
-        {
-            var l = new List<Sprite>();
-            foreach (var g in UnityEditor.AssetDatabase.FindAssets("t:Sprite", new[] { "Assets/Art/Rats/UltIcons" }))
-            { var s = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(UnityEditor.AssetDatabase.GUIDToAssetPath(g)); if (s) l.Add(s); }
-            ultIcons = l.ToArray(); UnityEditor.EditorUtility.SetDirty(this);
-        }
-#endif
     }
 }
