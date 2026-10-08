@@ -21,6 +21,11 @@ namespace NKK
         [HideInInspector] public bool ultFollow;            // 필살기 쓰는 쥐 따라가기
         [HideInInspector] public Vector2 ultFocus;
         [Tooltip("필살기 쥐 따라가는 빠르기")] public float ultFollowSpeed = 6;
+        [Header("미리보기 (보스 층: 계단 방에서 기다리는 보스를 잠깐 비춤)")]
+        [Tooltip("가는 시간 · 머무는 시간 · 돌아오는 시간 (초)")] public float peekIn = 0.8f, peekHold = 1.4f, peekOut = 0.7f;
+        float peekT = -1, peekWait;
+        Vector3 peekFrom, peekTo;
+        public bool Peeking => peekT >= 0 || peekWait > 0;
         Vector3 lastShake;
         Camera cam;
         Vector3 dragOrigin; Vector2 pressPos; bool dragging, pressed;
@@ -31,6 +36,7 @@ namespace NKK
         {
             transform.position -= lastShake;               // 지난 프레임 흔들림 빼고 계산
             var m = Mouse.current;
+            if (UpdatePeek()) m = null;                    // 미리보기 중엔 끌기·제한 없이 카메라를 옮김
             if (m != null)
             {
                 float wheel = m.scroll.ReadValue().y;
@@ -56,7 +62,7 @@ namespace NKK
             // 가로 폭 viewWidth / zoom 이 화면에 꽉 차게
             float w = viewWidth / (zoom * ultZoom) * World.U;
             cam.orthographicSize = w / cam.aspect / 2;
-            Clamp();
+            if (peekT < 0) Clamp();
             lastShake = shakeOffset;
             transform.position += lastShake;
         }
@@ -74,6 +80,31 @@ namespace NKK
             transform.position = p;
         }
 
-        public void CenterOn(float x, float y) { var c = World.ToUnity(x, y); transform.position = new Vector3(c.x, c.y, transform.position.z); }
+        // 게임 좌표 (x, y) 를 delay 초 뒤 잠깐 비췄다가 지금 자리로 돌아옴 (열린 방 바깥이어도)
+        public void Peek(float x, float y, float delay = 0)
+        {
+            var c = World.ToUnity(x, y);
+            peekTo = new Vector3(c.x, c.y, transform.position.z);
+            peekWait = Mathf.Max(0.0001f, delay); peekT = -1;
+        }
+        public void CancelPeek() { if (peekT >= 0) transform.position = peekFrom; peekT = -1; peekWait = 0; }
+
+        bool UpdatePeek()
+        {
+            float dt = Time.unscaledDeltaTime;
+            if (peekWait > 0 && (peekWait -= dt) <= 0) { peekWait = 0; peekT = 0; peekFrom = transform.position; }
+            if (peekT < 0) return false;
+            peekT += dt;
+            float k;
+            if (peekT < peekIn) k = Smooth(peekT / peekIn);
+            else if (peekT < peekIn + peekHold) k = 1;
+            else if (peekT < peekIn + peekHold + peekOut) k = 1 - Smooth((peekT - peekIn - peekHold) / peekOut);
+            else { transform.position = peekFrom; peekT = -1; return false; }
+            transform.position = Vector3.Lerp(peekFrom, peekTo, k);
+            return true;
+        }
+        static float Smooth(float t) { t = Mathf.Clamp01(t); return t * t * (3 - 2 * t); }
+
+        public void CenterOn(float x, float y) { CancelPeek(); var c = World.ToUnity(x, y); transform.position = new Vector3(c.x, c.y, transform.position.z); }
     }
 }

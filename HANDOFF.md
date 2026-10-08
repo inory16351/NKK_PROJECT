@@ -396,6 +396,18 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - **벽 파괴 연출**: 금 자국 3단계 (`Room.crackTemplate/crackSprites/crackAt`) + **`Stage/WallFx.cs`** (Game 씬 `WallFx`): 벽 선 따라 연쇄 폭발(explosion 애니) → 벽돌·콘크리트가 새로 열리는 방 쪽으로 부채꼴로 쏟아짐(큰 덩어리 slabCount) · 먼지 밀려 나감 · 충격파 · 역경직 · 흔들림 · "콰광!!". v2 (사용자 참고 사진: 폭발 + 방사형 잔해 줄기 + 바깥으로 뿜는 연기): 잔해 발사 속도 1300·낮게·부채꼴 0.75, 빠른 잔해 뒤 흙먼지 꼬리(trail*), 연기 기둥 smokeCount 6 이 열리는 방 쪽으로 뿜어져 부풀어 오름(smoke*). `StageManager.BreakFx`. 그림 `UnityResources/Rats/FX_Wall/`.
 - **경제 개편** (사용자: 치즈가 남아돎 → 연구자료 부족 즈음 치즈도 바닥, 훈장마다 1훈장 약 2판 → 8훈장 약 6판, 성장 곡선은 나중에 다시): 측정 `Tools/probe_results/round8_econ.csv`(층별 치즈·연구자료, BalanceProbe Rows 에 cheese·research 칸 추가). 연구자료 = `Heist` 8 × 1.25^(층-1) (예전 6 × 1.45, 보스 ×3). 노드 연구자료 `gen_skill_tree.py RESEARCH`, 승급 티어 테이블 research_cost 36·40·140·460·940·2460·8650, 노드 치즈 = 노드 연구자료 × `CHEESE_PER_RES`(층대 치즈÷연구자료 수입 × (트리+승급)÷트리), 1훈장 트리 치즈 합 21,300. 예전: 7·8훈장은 한 판도 안 돌고 넘어감(0.24·0.03판).
 
+### 9-12. 2026-10-08 — 보스 건너뜀 버그 · 미니맵 · 쥐 마릿수 · 보스바/시간 게이지 그림
+- **보스 건너뜀 버그** (사용자: 보스전 없이 바로 다음 층, 한 번 깬 보스가 다시 들어가면 안 나옴): 로비→재입장 흐름도 보스는 정상 대기였음. 재현된 건 층 이동 예약(탈취 연출 2.2초 → 페이드 → `EnterFloor(Game.Floor + 1)`)이 늦게 오면 그때 층 기준으로 +1 해서 **4층 → 6층** 으로 한 층 더 넘어가는 것 + 테스트 "층 클리어" 버튼이 보스를 무시하고 넘어감. 수정:
+  - `StageManager.Climb`: 보스 살아 있으면 거부, 예약된 층(from+1)에만 들어감 (`Game.Floor == from` 일 때만).
+  - 안전장치 `Boss.DefeatedThisFloor`·`FloorCleared(f)`: 보스 층에서 이 층 보스를 안 잡았으면 어떤 경로로도 계단 못 씀. 계단 방이 열렸는데 보스가 Off/Dead 면 `Boss.OnStairsOpened()` 가 다시 불러 전투 (그림이 없어 못 부르면 에러 로그 + 통과 허용).
+  - 테스트 "층 클리어" = `StageManager.TestClear()`: 보스가 기다리면 계단 방까지 벽을 열어 보스전 시작, 아니면 다음 층.
+  - 로그: `[Boss] N층 보스 … → Wait` · `보스전 시작` · `격파 · 전투 N초` · `계단 막음` · `다시 불러옴` → 다시 생기면 Editor.log 에서 `[Boss]` 검색.
+- **보스 미리보기**: 보스 층 진입 0.7초 뒤 카메라가 계단 방의 보스 실루엣을 잠깐 비추고 돌아옴 (`CameraController.Peek` peekIn/Hold/Out, `Boss.peekOnEnter/peekDelay`, 측정 중엔 안 함).
+- **미니맵** `Stage/Minimap.cs` (Game 씬 `HUD/Minimap`, 오른쪽 아래, 웹 drawMinimap): 열린 방(ui_tile × 구간 색) · 부술 수 있는 옆방(ui_tile_lock 어둡게) · 보스 층이면 안 열린 계단 방도 붉게 + 보스 아이콘(전투 중엔 보스 위치) · 계단 아이콘 · 쥐 점(최대 200) · 카메라 테두리. 칸·점·아이콘은 `Area` 자식 틀(인스펙터에서 크기·색). 제목 `{floor}층 · {zone}`.
+- **쥐 마릿수** `Rats/PopCounter.cs` (`HUD/PopCount`, 제한시간 게이지 아래): `쥐 {n} / 최대 {max}` (RealCount / PopCap), 최대면 주황, 바뀌면 통통.
+- **보스 체력바·제한시간 게이지 그림** (Codex `UnityResources/Rats/HUD_Gauge/` README): 보스바 = 엠블럼 + 틀 + 홈(`Groove`) 안 채움(줄무늬, 보스 색) + 깎인 자국(`Trail`, `Boss.barTrail` trailDelay/Speed) + 맞을 때 번쩍·엠블럼 흔들림. 제한시간 = 초시계 아이콘 + 나무 틀 + 홈 안 채움.
+- 아직: 이전 요청 "일정 층수 이상 올라가면 사람들이 안 나옴" 은 조사만 (층 진입 땐 21층도 2명 나옴, 보충 humanRefill · HumanCap 확인 필요).
+
 **남은 일 (순서 제안)**
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.
 2. 결과로 `gen_stage_table.py` 곡선(POW_GROW·HP_GROW·벽 배율·방 수)과 `gen_skill_tree.py` 값·비용(치즈 수입 대비 훈장 트리 1개 ≈ 판 3~5번), 보스 `hp_pow_sec`(지금 40), 티어 테이블 조건(연구자료·Skill_Node_Count 15/40/70/100/130/160/195) 조정 → 다시 생성·xlsx2json·측정.

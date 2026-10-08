@@ -45,6 +45,10 @@ namespace NKK.Hazards
         [Tooltip("이름 (자리표시 {name})")] public TMP_Text barName;
         [Tooltip("채움 (가로 앵커로 줄어듦, 색 = 보스 테마 색)")] public RectTransform barFill;
         [Tooltip("맞을 때 번쩍이는 흰 덮개 (채움과 같은 크기)")] public Image barHit;
+        [Tooltip("깎인 체력 자국 (채움 뒤, 잠깐 있다가 천천히 따라 줄어듦)")] public RectTransform barTrail;
+        [Tooltip("자국이 따라오기 전 기다림 (초) · 따라오는 빠르기")] public float trailDelay = 0.45f, trailSpeed = 2.5f;
+        [Tooltip("보스 엠블럼 (맞을 때 흔들림)")] public RectTransform barEmblem;
+        float trailK = 1, trailWait, fightStart;
 
         [Header("글 (인스펙터, 자리표시 {name} {title} {floor})")]
         [Tooltip("보스 층에 들어갈 때 배너 부제")] public string floorSub;
@@ -61,6 +65,8 @@ namespace NKK.Hazards
 
         [Header("수치")]
         [Tooltip("계단 기준 대기 위치 (게임 단위, 아래로 +)")] public float waitOffsetY = 220;
+        [Tooltip("보스 층에 들어가면 카메라가 계단 방의 보스를 잠깐 비춤 (켜기 · 몇 초 뒤 = 화면이 밝아진 뒤)")] public bool peekOnEnter = true;
+        public float peekDelay = 0.7f;
         [Tooltip("대기 중 계단 방이 아직 안 열렸지만 옆 방이 열려 어둡게 보일 때 보스 색 (실루엣). 계단 방이 안 보이면 보스도 숨김")] public Color waitDarkTint = new(0.22f, 0.22f, 0.26f, 1f);
         readonly System.Collections.Generic.List<(SpriteRenderer r, Color c)> baseColors = new();
         [Tooltip("점프 세기 (내려찍기 · 덮치기) · 중력")] public float jumpV = 900, pounceV = 700, gravity = 1800;
@@ -79,6 +85,10 @@ namespace NKK.Hazards
         public BossRow Data { get; private set; }
         public bool Test { get; private set; }
 
+        // 이 층 보스를 잡았는지 (층에 들어갈 때 초기화). 보스 층에서 안 잡았으면 계단 못 씀 (어떤 이유로 보스가 사라져도)
+        public bool DefeatedThisFloor { get; private set; }
+        int bossFloor = -1;
+        public bool FloorCleared(int f) => bossFloor != f || DefeatedThisFloor;
         public bool Blocking => State == BState.Wait || State == BState.Fight || State == BState.Dying;   // 계단 막음
         public bool CanHit => State == BState.Fight;
         public float R => Items.humanRadius * (Data != null ? Data.radius_mul : 1);
@@ -150,11 +160,17 @@ namespace NKK.Hazards
         public void OnFloorEnter()
         {
             Clear();
+            DefeatedThisFloor = false; bossFloor = -1;
             var row = DB.BossOf(Game.Floor);
             if (row == null) return;
+            bossFloor = Game.Floor;
             var sp = Stage.StairsPos;
             Spawn(row, sp.x, sp.y + waitOffsetY, false);
-            if (State == BState.Wait) Game.ShowBanner(Game.BannerTitle, Fill(floorSub));
+            Debug.Log($"[Boss] {Game.Floor}층 보스 {row.boss_name} → {State}");
+            if (State != BState.Wait) return;
+            Game.ShowBanner(Game.BannerTitle, Fill(floorSub));
+            // 계단 방은 멀리 있어 카메라(열린 방 안만 움직임)로는 안 보임 → 잠깐 비춰서 보스가 있다는 걸 보여 줌
+            if (peekOnEnter && Game.cam && !BalanceProbe.Active) Game.cam.Peek(x, y - Height * 0.4f, peekDelay);
         }
 
         public void Clear()
@@ -165,9 +181,25 @@ namespace NKK.Hazards
             if (Current == this) Current = null;
         }
 
+        // 계단 방이 열림 (StageManager.BreakWall): 대기 중이면 전투. 이 층 보스를 아직 안 잡았는데 보스가 없으면 다시 불러서 전투 (안전장치)
+        public void OnStairsOpened()
+        {
+            if (Test || bossFloor != Game.Floor || DefeatedThisFloor) return;
+            if (State == BState.Off || State == BState.Dead)
+            {
+                Debug.LogWarning($"[Boss] {Game.Floor}층 계단 방이 열렸는데 보스가 {State} → 다시 불러옴");
+                var row = DB.BossOf(Game.Floor); if (row == null) return;
+                var sp = Stage.StairsPos; Spawn(row, sp.x, sp.y + waitOffsetY, false);
+                if (State != BState.Wait) { Debug.LogError($"[Boss] {Game.Floor}층 보스를 못 불러옴 (그림 없음?) → 이 층은 통과 허용"); DefeatedThisFloor = true; return; }
+            }
+            StartFight();
+        }
+
         public void StartFight()
         {
             if (State != BState.Wait) return;
+            if (!Test) Debug.Log($"[Boss] {Game.Floor}층 보스전 시작 (체력 {GameManager.Format(hpMax)})");
+            fightStart = Time.time;
             State = BState.Fight; t = 0;
             string intro = DB.BossLine("Intro", Data.boss_id);
             Game.ShowBanner(Data.boss_name, Fill(fightSub));
@@ -175,6 +207,7 @@ namespace NKK.Hazards
             if (Ults) Ults.Flash(new Color(0.91f, 0.47f, 0.42f), 0.3f);
             FxManager.I?.Shake(0.4f);
             if (Game.cam) Game.cam.CenterOn(x, y);
+            trailK = 1; trailWait = 0;
             if (bar) { bar.SetActive(true); if (barName) barName.text = (nameFormat ?? "{name}").Replace("{name}", Data.boss_name); }
         }
 
@@ -218,6 +251,8 @@ namespace NKK.Hazards
         void Down()
         {
             State = BState.Dying; t = 0; hp = 0; attacking = false;
+            if (!Test && bossFloor == Game.Floor) DefeatedThisFloor = true;
+            Debug.Log($"[Boss] {Game.Floor}층 보스 격파{(Test ? " (테스트)" : "")} · 전투 {Time.time - fightStart:0}초");
             vx = Random.Range(-120f, 120f); vy = -40; vz = downV; vr = downSpin; ClearShots();
             if (!Test) Game.ShowBanner(Fill(downTitle), Fill(downSub));
             else Game.ShowBanner(Fill(downTitle), Fill(testDownSub));
@@ -464,6 +499,11 @@ namespace NKK.Hazards
             if (!bar || !bar.activeSelf) return;
             if (State == BState.Dying && t > 1) { bar.SetActive(false); return; }
             float k = Mathf.Clamp01(hp / Mathf.Max(1, hpMax));
+            if (hitT > 0.2f) trailWait = trailDelay;
+            if ((trailWait -= udt) <= 0) trailK = Mathf.MoveTowards(trailK, k, udt * trailSpeed * Mathf.Max(0.05f, trailK - k));
+            if (trailK < k || State == BState.Wait) trailK = k;
+            if (barTrail) barTrail.anchorMax = new Vector2(trailK, barTrail.anchorMax.y);
+            if (barEmblem) barEmblem.localRotation = Quaternion.Euler(0, 0, hitT > 0 ? Mathf.Sin(Time.unscaledTime * 60) * 8 * hitT * 4 : 0);
             if (barFill)
             {
                 barFill.anchorMax = new Vector2(k, barFill.anchorMax.y);

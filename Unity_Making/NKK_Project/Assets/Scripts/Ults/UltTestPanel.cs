@@ -36,7 +36,7 @@ namespace NKK.Ults
             if (next) next.onClick.AddListener(() => Move(1));
             if (ultButton) ultButton.onClick.AddListener(() => { if (list.Count > 0) Ults.TestUlt(list[idx].code_id); });
             if (superJumpButton) superJumpButton.onClick.AddListener(() => SuperJump.Trigger(true));
-            if (clearButton) clearButton.onClick.AddListener(() => { if (Stage && !Ults.Busy && !SuperJump.Busy) Stage.Climb(); });
+            if (clearButton) clearButton.onClick.AddListener(() => { if (Stage && !Ults.Busy && !SuperJump.Busy) Stage.TestClear(); });
             if (bossButton) bossButton.onClick.AddListener(() => { if (Boss && !Ults.Busy && !SuperJump.Busy && !GameOver.Active) Boss.TestSpawn(); });
             if (gameOverButton) gameOverButton.onClick.AddListener(() => { if (Over && !Heist.Active) Over.Begin(GameOver.Why.Time); });
             if (resetButton) resetButton.onClick.AddListener(ResetSave);
