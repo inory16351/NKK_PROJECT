@@ -18562,19 +18562,30 @@ MonoBehaviour:
   debrisCount: 40
   stairsMul: 1.6
   debrisSize: {x: 26, y: 56}
-  debrisSpeed: {x: 850, y: 520}
-  gravity: 1500
-  debrisLife: 1.6
+  debrisSpeed: {x: 1300, y: 420}
+  gravity: 1100
+  debrisLife: 2.2
   dustCount: 9
   dustSize: 120
   shadeMin: 0.75
   brickColor: {r: 0.66, g: 0.46, b: 0.38, a: 1}
   brickMix: 0.65
   shake: 0.25
-  spread: 0.55
+  spread: 0.75
   slabCount: 5
   slabSize: {x: 60, y: 95}
   dustPush: 260
+  smokeCount: 6
+  smokeSize: {x: 150, y: 320}
+  smokePush: {x: 450, y: 900}
+  smokeLife: 1.8
+  smokeDrag: 2.4
+  smokeColor: {r: 0.5, g: 0.43, b: 0.38, a: 0.9}
+  trailMinSpeed: 450
+  trailGap: 0.03
+  trailSize: {x: 14, y: 30}
+  trailLife: 0.5
+  trailColor: {r: 0.55, g: 0.45, b: 0.38, a: 0.7}
   blastCount: 5
   blastGap: 0.05
   blastScale: 2.2

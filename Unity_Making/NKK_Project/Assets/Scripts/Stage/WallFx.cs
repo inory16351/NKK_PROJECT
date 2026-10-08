@@ -4,7 +4,8 @@ using UnityEngine;
 namespace NKK.Stage
 {
     // 벽 무너짐 연출 (Game 씬 WallFx): 영화 속 벽 폭파처럼 — 벽 선을 따라 폭발이 연달아 터지며 벽 잔해·벽돌이 새로 열리는 방 쪽으로 부채꼴로 쏟아져 날아감
-    // (큰 콘크리트 덩어리는 굴러감) → 바닥에서 통통 → 사라짐. 먼지구름도 같은 쪽으로 밀려 나감. 충격파·역경직·흔들림.
+    // (큰 콘크리트 덩어리는 굴러감) → 바닥에서 통통 → 사라짐. 빠른 잔해 뒤엔 흙먼지 꼬리(방사형 줄기), 연기 기둥이 열리는 방 쪽으로 뿜어져 부풀어 오름.
+    // 충격파·역경직·흔들림. (참고: 사용자가 준 폭발 사진 — 가운데 불꽃 + 방사형 잔해 줄기 + 바깥으로 뿜는 연기)
     // 파편 = 자식 템플릿(debrisTemplate, 꺼져 있음)을 복제해 씀. 그림 = UnityResources/Rats/FX_Wall (흰색 → 벽 색으로 칠함)
     public class WallFx : MonoBehaviour
     {
@@ -16,22 +17,32 @@ namespace NKK.Stage
         [Tooltip("벽 하나 무너질 때 파편 수 (계단 방 벽은 × stairsMul)")] public int debrisCount = 30;
         public float stairsMul = 1.6f;
         [Tooltip("파편 크기 (게임 단위, 최소·최대)")] public Vector2 debrisSize = new(26, 56);
-        [Tooltip("튀는 속도 (옆 · 위)")] public Vector2 debrisSpeed = new(480, 760);
-        [Tooltip("중력 (게임 단위/초²)")] public float gravity = 1500;
-        [Tooltip("파편 수명 (초)")] public float debrisLife = 1.6f;
+        [Tooltip("발사 속도 (앞 · 위)")] public Vector2 debrisSpeed = new(1300, 420);
+        [Tooltip("중력 (게임 단위/초²)")] public float gravity = 1100;
+        [Tooltip("파편 수명 (초)")] public float debrisLife = 2.2f;
         [Tooltip("먼지구름 수 · 크기")] public int dustCount = 7; public float dustSize = 120;
         [Tooltip("파편 색 = 벽 윗면 색 × 이 값 (어두운 면 섞음)")] public float shadeMin = 0.75f;
         [Tooltip("파편 기본 색 (벽돌) — 벽 윗면 색과 brickMix 만큼 섞음 (밝은 바닥에 묻히지 않게)")] public Color brickColor = new(0.66f, 0.46f, 0.38f); [Range(0, 1)] public float brickMix = 0.65f;
         [Tooltip("무너질 때 화면 흔들림 (계단 방 벽은 × 2)")] public float shake = 0.25f;
-        [Tooltip("날아가는 방향 퍼짐 (0 = 일직선, 1 = 옆으로 같은 만큼)")] public float spread = 0.55f;
+        [Tooltip("날아가는 방향 퍼짐 (0 = 일직선, 1 = 옆으로 같은 만큼)")] public float spread = 0.75f;
         [Tooltip("큰 덩어리 수 · 크기 (게임 단위)")] public int slabCount = 5; public Vector2 slabSize = new(60, 95);
         [Tooltip("먼지구름이 밀려 나가는 속도")] public float dustPush = 260;
+        [Header("연기 기둥 (열리는 방 쪽으로 뿜어짐)")]
+        public int smokeCount = 6;
+        [Tooltip("크기 (처음 → 끝)")] public Vector2 smokeSize = new(150, 320);
+        [Tooltip("뿜는 속도 (최소·최대) — 공기 저항으로 점점 느려짐")] public Vector2 smokePush = new(450, 900);
+        public float smokeLife = 1.8f, smokeDrag = 2.4f;
+        public Color smokeColor = new(0.5f, 0.43f, 0.38f, 0.9f);
+        [Header("잔해 꼬리 (흙먼지 줄기)")]
+        [Tooltip("이 속도보다 빠른 잔해만 꼬리를 남김")] public float trailMinSpeed = 450;
+        [Tooltip("꼬리 간격 (초) · 크기 · 수명")] public float trailGap = 0.03f; public Vector2 trailSize = new(14, 30); public float trailLife = 0.5f;
+        public Color trailColor = new(0.55f, 0.45f, 0.38f, 0.7f);
         [Tooltip("벽 선을 따라 터지는 폭발 수 · 간격(초) · 크기")] public int blastCount = 5; public float blastGap = 0.05f, blastScale = 2.2f;
         [Tooltip("무너질 때 역경직 (초)")] public float hitstop = 0.07f;
         [Tooltip("무너질 때 글자 (비우면 안 띄움)")] public string[] breakWords = { "와르르!!", "콰광!!", "쿠르릉!!" };
 
-        class Piece { public SpriteRenderer r; public float x, y, z, vx, vy, vz, rot, vr, life, max, size, delay; public bool dust; }
-        readonly List<Piece> live = new();
+        class Piece { public SpriteRenderer r; public float x, y, z, vx, vy, vz, rot, vr, life, max, size, size1, delay, trailT, drag; public bool dust; }
+        readonly List<Piece> live = new(), born = new();
         readonly Stack<SpriteRenderer> pool = new();
 
         void Awake() { I = this; if (debrisTemplate) debrisTemplate.gameObject.SetActive(false); }
@@ -79,6 +90,19 @@ namespace NKK.Stage
                     live.Add(new Piece { r = r, x = Mathf.Lerp(x0, x1, t), y = Mathf.Lerp(y0, y1, t), z = Random.Range(10f, h), vx = nx * push + Random.Range(-40f, 40f), vy = ny * push + Random.Range(-30f, 30f), vz = Random.Range(20f, 70f),
                         rot = Random.Range(0, 360f), vr = Random.Range(-40f, 40f), life = 1.1f, max = 1.1f, size = dustSize * Random.Range(0.7f, 1.2f), dust = true });
                 }
+            // 연기 기둥: 벽 가운데쯤에서 열리는 방 쪽 부채꼴로 크게 뿜어져 부풀어 오름
+            if (dustSprite)
+                for (int i = 0; i < smokeCount * (stairs ? 2 : 1); i++)
+                {
+                    float t = Random.Range(0.2f, 0.8f), a = Random.Range(-spread, spread), sp = Random.Range(smokePush.x, smokePush.y), sgn = aimed || Random.value < 0.5f ? 1 : -1;
+                    float dx = sgn * nx + tx * a, dy = sgn * ny + ty * a, dl = Mathf.Max(0.01f, Mathf.Sqrt(dx * dx + dy * dy));
+                    var r = Get(); r.sprite = dustSprite; float k = Random.Range(0.85f, 1.1f);
+                    r.color = new Color(smokeColor.r * k, smokeColor.g * k, smokeColor.b * k, smokeColor.a);
+                    live.Add(new Piece { r = r, x = Mathf.Lerp(x0, x1, t), y = Mathf.Lerp(y0, y1, t), z = h * 0.5f, vx = dx / dl * sp, vy = dy / dl * sp, vz = Random.Range(30f, 120f),
+                        rot = Random.Range(0, 360f), vr = Random.Range(-60f, 60f), life = smokeLife * Random.Range(0.8f, 1.2f), size = smokeSize.x * Random.Range(0.8f, 1.2f), size1 = smokeSize.y * Random.Range(0.8f, 1.2f),
+                        drag = smokeDrag, dust = true, delay = Random.Range(0, blastGap * blastCount) });
+                    live[^1].max = live[^1].life;
+                }
             var fx = FxManager.I;
             if (fx)
             {
@@ -114,11 +138,23 @@ namespace NKK.Stage
                 p.r.enabled = true;
                 p.life -= dt;
                 if (p.life <= 0) { p.r.gameObject.SetActive(false); pool.Push(p.r); live.RemoveAt(i); continue; }
-                if (p.dust) { float d = Mathf.Max(0, 1 - dt * 2.5f); p.vx *= d; p.vy *= d; p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt; p.size += dt * 90; }
+                if (p.dust)
+                {
+                    float d = Mathf.Max(0, 1 - dt * (p.drag > 0 ? p.drag : 2.5f)); p.vx *= d; p.vy *= d; p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt;
+                    if (p.size1 > 0) p.size += (p.size1 - p.size) * Mathf.Min(1, dt * 2.2f); else p.size += dt * 90;
+                }
                 else
                 {
                     p.vz -= gravity * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt;
                     if (p.z < 0) { p.z = 0; p.vz = -p.vz * 0.35f; p.vx *= 0.6f; p.vy *= 0.6f; p.vr *= 0.5f; }     // 바닥에서 통통
+                    // 빠르게 날아가는 잔해 뒤에 흙먼지 꼬리 (방사형 줄기)
+                    if (dustSprite && p.vx * p.vx + p.vy * p.vy > trailMinSpeed * trailMinSpeed && (p.trailT -= dt) <= 0)
+                    {
+                        p.trailT = trailGap;
+                        var tr = Get(); tr.sprite = dustSprite; tr.color = trailColor;
+                        float ts = Random.Range(trailSize.x, trailSize.y);
+                        born.Add(new Piece { r = tr, x = p.x, y = p.y, z = p.z, rot = Random.Range(0, 360f), life = trailLife, max = trailLife, size = ts, size1 = ts * 2.2f, drag = 6, dust = true });
+                    }
                 }
                 p.rot += p.vr * dt;
                 var r = p.r;
@@ -129,6 +165,7 @@ namespace NKK.Stage
                 r.sortingOrder = World.SortOrder(p.y) + 2;
                 var c = r.color; c.a = Mathf.Clamp01(p.life / Mathf.Min(0.4f, p.max)) * (p.dust ? 0.85f : 1); r.color = c;
             }
+            if (born.Count > 0) { live.AddRange(born); born.Clear(); }
         }
     }
 }

@@ -393,7 +393,7 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - **로켓 배송**: 상자가 막힌 벽 두께 안에 떨어지면 물건이 벽에 가려짐 → 착지 위치를 방 바닥 안쪽으로.
 - **총공격 범위** 공용 효과 `Rush_Range` (1·3·5·7훈장 S3, +15/15/20/20%): 화면 밖으로 화면 크기 × 합 만큼 쥐도 모임 (`RatManager.StartRush`). 자리를 내준 스테이지 스킵은 같은 트리 S1 에 더해 합 유지.
 - **쥐 벽 넘어감** (사용자: 벽 통과하는 스킬들): 측정 중 감지(`Rat.WallEscapeCheck`, 에디터 전용 · BalanceProbe 결과에 `[벽 밖]`) 56건 → 거의 전부 총공격 등으로 몰려 쥐끼리 미는 힘이 Confine 뒤에 적용돼 벽 안으로 밀린 것 (+ 벽 틈 질주·윈드밀 각 1). **`Rat.KeepInside`** = LateUpdate 에서 한 번 더 Confine, 닫힌 방이면 마지막 안전 위치로.
-- **벽 파괴 연출**: 금 자국 3단계 (`Room.crackTemplate/crackSprites/crackAt`) + **`Stage/WallFx.cs`** (Game 씬 `WallFx`): 벽 선 따라 연쇄 폭발(explosion 애니) → 벽돌·콘크리트가 새로 열리는 방 쪽으로 부채꼴로 쏟아짐(큰 덩어리 slabCount) · 먼지 밀려 나감 · 충격파 · 역경직 · 흔들림 · "콰광!!". `StageManager.BreakFx`. 그림 `UnityResources/Rats/FX_Wall/`.
+- **벽 파괴 연출**: 금 자국 3단계 (`Room.crackTemplate/crackSprites/crackAt`) + **`Stage/WallFx.cs`** (Game 씬 `WallFx`): 벽 선 따라 연쇄 폭발(explosion 애니) → 벽돌·콘크리트가 새로 열리는 방 쪽으로 부채꼴로 쏟아짐(큰 덩어리 slabCount) · 먼지 밀려 나감 · 충격파 · 역경직 · 흔들림 · "콰광!!". v2 (사용자 참고 사진: 폭발 + 방사형 잔해 줄기 + 바깥으로 뿜는 연기): 잔해 발사 속도 1300·낮게·부채꼴 0.75, 빠른 잔해 뒤 흙먼지 꼬리(trail*), 연기 기둥 smokeCount 6 이 열리는 방 쪽으로 뿜어져 부풀어 오름(smoke*). `StageManager.BreakFx`. 그림 `UnityResources/Rats/FX_Wall/`.
 - **경제 개편** (사용자: 치즈가 남아돎 → 연구자료 부족 즈음 치즈도 바닥, 훈장마다 1훈장 약 2판 → 8훈장 약 6판, 성장 곡선은 나중에 다시): 측정 `Tools/probe_results/round8_econ.csv`(층별 치즈·연구자료, BalanceProbe Rows 에 cheese·research 칸 추가). 연구자료 = `Heist` 8 × 1.25^(층-1) (예전 6 × 1.45, 보스 ×3). 노드 연구자료 `gen_skill_tree.py RESEARCH`, 승급 티어 테이블 research_cost 36·40·140·460·940·2460·8650, 노드 치즈 = 노드 연구자료 × `CHEESE_PER_RES`(층대 치즈÷연구자료 수입 × (트리+승급)÷트리), 1훈장 트리 치즈 합 21,300. 예전: 7·8훈장은 한 판도 안 돌고 넘어감(0.24·0.03판).
 
 **남은 일 (순서 제안)**
