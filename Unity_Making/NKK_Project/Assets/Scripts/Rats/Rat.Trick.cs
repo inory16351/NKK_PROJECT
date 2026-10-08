@@ -5,10 +5,10 @@ using UnityEngine;
 
 namespace NKK.Rats
 {
-    // 쥐 묘기 (웹게임 doTrick / trickStep): 킥플립·트리플 악셀·윈드밀·대포알 + 잠자기.
+    // 쥐 묘기 (웹게임 doTrick / trickStep): 킥플립·트리플 악셀·윈드밀·대포알 + 잠자기. 쳇바퀴 돌기는 유니티 전용 (5훈장 해금)
     public partial class Rat
     {
-        public enum TrickType { None, Flip, Axel, Windmill, Cannon }
+        public enum TrickType { None, Flip, Axel, Windmill, Cannon, Wheel }
 
         static readonly Dictionary<TrickType, (float dur, int pts, string[] text)> Tricks = new()
         {
@@ -16,6 +16,7 @@ namespace NKK.Rats
             [TrickType.Axel] = (1.05f, 2, new[] { "트리플 악셀!!", "3회전 성공!", "심사위원 전원 10점!" }),
             [TrickType.Windmill] = (1.15f, 2, new[] { "윈드밀!!", "브레이크 댄스!", "빙글빙글 파괴!" }),
             [TrickType.Cannon] = (1.3f, 2, new[] { "쥐 대포알!", "데굴데굴!", "핀볼 모드!" }),
+            [TrickType.Wheel] = (1.6f, 2, new[] { "쳇바퀴 돌기!!", "빙글빙글~", "어지러워!!" }),
         };
 
         public TrickType Trick { get; private set; }
@@ -32,9 +33,10 @@ namespace NKK.Rats
         {
             float k = TrickChanceMult;
             bool big = it.Data.is_big == 1 || it.R > 30;
-            // 공용 묘기는 훈장 트리에서 해금해야 나옴 (1 백덤블링 · 2 윈드밀 · 3 트리플 악셀 · 4 쥐 대포알). 윈드밀은 큰 물건에서 1.5배
+            // 공용 묘기는 훈장 트리에서 해금해야 나옴 (1 백덤블링 · 2 윈드밀 · 3 트리플 악셀 · 4 쥐 대포알 · 5 쳇바퀴 돌기). 윈드밀은 큰 물건에서 1.5배
             if (Random.value < CommonSkill.TrickChance(2) * (big ? 1.5f : 1) * k) { StartTrick(TrickType.Windmill, ang); return; }
             if (Random.value < CommonSkill.TrickChance(3) * k) { StartTrick(TrickType.Axel, ang); return; }
+            if (Random.value < CommonSkill.TrickChance(5) * k) { StartTrick(TrickType.Wheel, ang + Random.Range(-0.6f, 0.6f)); return; }
             if (Random.value < CommonSkill.TrickChance(4) * k) { StartTrick(TrickType.Cannon, ang + Mathf.PI + Random.Range(-0.8f, 0.8f)); return; }
             if (Random.value < CommonSkill.TrickChance(1) * k) StartTrick(TrickType.Flip, ang);
         }
@@ -45,6 +47,7 @@ namespace NKK.Rats
             Trick = type; trickT = 0; trickDur = Tricks[type].dur; trickHitT = 0; trickAng = ang; trickLanded = false; trickHits.Clear();
             if (type == TrickType.Flip) { vx = -Mathf.Cos(ang) * 170; vy = -Mathf.Sin(ang) * 170; }
             else if (type == TrickType.Cannon) { float s = 720 * DashSpeedMult; vx = Mathf.Cos(ang) * s; vy = Mathf.Sin(ang) * s; }
+            else if (type == TrickType.Wheel) { float s = Manager.wheelTrickSpeed * DashSpeedMult; vx = Mathf.Cos(ang) * s; vy = Mathf.Sin(ang) * s; face = vx >= 0 ? 1 : -1; }
             else { vx = vy = 0; }
             var fx = FxManager.I;
             if (fx) { fx.Dust(x, y, 4, 0.8f); var tx = Tricks[type].text; fx.Popup(x, y, tx[Random.Range(0, tx.Length)], new Color(1, 0.95f, 0.75f), 19, 0.9f, 50); }
@@ -75,7 +78,12 @@ namespace NKK.Rats
                     break;
                 case TrickType.Windmill:
                     walk += dt * 30;
-                    if (trickHitT <= 0) { trickHitT = 0.15f; Manager.Items.Aoe(x, y, 55, dmg * 0.5f, this); fx?.Dust(x, y, 2, 1); }
+                    if (trickHitT <= 0) { trickHitT = 0.15f; Manager.Items.Aoe(x, y, 55, dmg * 0.5f, this); fx?.Ring(x, y, 55, new Color(1, 1, 1, 0.7f), 0.25f); fx?.Dust(x, y, 2, 1); }     // 웹: 칠 때마다 흰 고리
+                    break;
+                case TrickType.Wheel:
+                    // 쳇바퀴 돌기: 바퀴처럼 굴러가며 지나가는 길의 물건을 계속 침 (벽에 부딪히면 튕겨 나감 — Move 기본)
+                    walk += dt * 30;
+                    if (trickHitT <= 0) { trickHitT = 0.12f; Manager.Items.Aoe(x, y, 50, dmg * 0.6f, this); fx?.Dust(x, y, 2, 1); }
                     break;
                 case TrickType.Cannon:
                     walk += dt * 40;
@@ -113,8 +121,13 @@ namespace NKK.Rats
                     else { float e = Mathf.Sin((k - 0.85f) / 0.15f * Mathf.PI); sx = 1 + e * 0.25f; sy = 1 - e * 0.2f; }
                     break;
                 }
-                case TrickType.Windmill: lift = pivotH * 0.1f; rot = k * Mathf.PI * 2 * 4 * f; sy = -1; break;
-                case TrickType.Cannon: lift = Mathf.Abs(Mathf.Sin(trickT * 9)) * 10; rot = trickT * 22 * f; sx = 0.8f; sy = 0.72f; break;
+                // 윈드밀: 등을 바닥에 대고 몸 중심을 축으로 뱅글뱅글 (웹: 축 높이 0.6hh, 뒤집힌 몸의 발이 축 위 0.5hh → 몸 중심 ≈ 축)
+                // 뒤집힌 몸은 발에서 아래로 뻗으므로 발 위치를 축 위쪽(pivotH 음수)에 둠. 예전엔 축 아래 hh 에 둬서 몸이 큰 원을 그림(바퀴처럼)
+                case TrickType.Windmill: { float hh = pivotH; lift = hh * 1.1f; pivotH = -hh * 0.5f; rot = k * Mathf.PI * 2 * 4 * f; sy = -1; break; }
+                // 대포알: 몸을 말고 데굴데굴 (웹: 축 높이 0.8hh + 통통, 발은 축 아래 0.9hh × 0.72)
+                // 쳇바퀴 돌기: 뒤집힌 몸이 축에서 떨어져 큰 원을 그리며 돎 (예전 윈드밀 버그 모습을 살린 것)
+                case TrickType.Wheel: lift = pivotH * 0.1f; rot = k * Mathf.PI * 2 * 5 * f; sy = -1; break;
+                case TrickType.Cannon: { float hh = pivotH; pivotH = hh * 0.65f; lift = hh * 0.15f + Mathf.Abs(Mathf.Sin(trickT * 9)) * 10; rot = trickT * 22 * f; sx = 0.8f; sy = 0.72f; break; }
             }
         }
 
@@ -130,6 +143,7 @@ namespace NKK.Rats
                     else { float e = (k - 0.85f) / 0.15f; p.front = Mathf.Lerp(0.25f, 2.6f, e); p.farFront = Mathf.Lerp(0.25f, 2.3f, e); p.tilt = Mathf.Lerp(0, -0.4f, e); p.head = -0.3f; p.tail = 1.2f; }
                     break;
                 case TrickType.Windmill: p.front = f * 1.5f; p.farFront = -f * 1.5f; p.back = Mathf.Sin(tt * 28 + 1.6f) * 1.5f; p.farBack = -Mathf.Sin(tt * 28 + 1.6f) * 1.5f; p.tail = Mathf.Sin(tt * 22) * 1.2f; p.head = Mathf.Sin(tt * 14) * 0.35f; break;
+                case TrickType.Wheel: p.front = f * 1.5f; p.farFront = -f * 1.5f; p.back = Mathf.Sin(tt * 28 + 1.6f) * 1.5f; p.farBack = -Mathf.Sin(tt * 28 + 1.6f) * 1.5f; p.tail = Mathf.Sin(tt * 22) * 1.2f; p.head = Mathf.Sin(tt * 14) * 0.35f; break;
                 case TrickType.Cannon: p.front = 1.9f; p.farFront = 1.9f; p.back = -1.9f; p.farBack = -1.9f; p.head = 0.8f; p.headX = 4; p.tail = -1.6f; p.sx = 0.9f; p.sy = 0.9f; break;
             }
         }

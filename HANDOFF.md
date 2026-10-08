@@ -366,6 +366,18 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - 측정 주의: 유니티 창을 앞에 (뒤면 느림), 측정 중 스크립트 수정 금지, BalanceProbe 는 화면을 안 그려서 측정 중엔 게임 캡처 불가.
 - 초반 층(1~4)·16·22·24층은 벽을 크게 늘려도 시간이 잘 안 늘어남 (번식으로 전투력이 커짐) — SPU 갱신이 수렴 안 하면 그 층들은 제한시간 대신 목표를 조정할지 사용자에게 물을 것.
 
+### 9-11. 2026-10-08 — 측정 라운드 5·6 · 보스 층 허들 · 저장값 초기화 버튼
+- **오류 원인 기록**: 측정 Play 중에 유니티 창에 포커스가 가면 밀려 있던 스크립트 변경이 자동 컴파일 → 도메인 리로드 → BalanceProbe 상태가 날아가고 `RatManager.GradeOpen` NullReference · `Rat.StunStars` IndexOutOfRange 대량 발생. **측정 전엔 꼭 컴파일 끝난 상태에서 Play 시작.**
+- **허용 범위** (사용자 결정): 일반 층은 **60~90% 면 OK** (83~88% 도 괜찮음) → 그 범위 밖인 층만 75% 쪽으로 SPU 보정.
+- **보스 층 = 허들** (사용자 결정): 210초의 **약 90%(189초)** 로 아슬아슬하게. 길 뚫기 117초(일반 층과 비슷) + **보스전 72초** (`gen_stage_table.py BOSS_TOTAL_SEC 189 · BOSS_FIGHT_SEC 72`). 보스전 시간은 Boss 시트 `hp_pow_sec` 로 맞춤.
+- **적정 찍찍(적정 전투력) 값은 시간에 맞춰 바꿔도 됨** (사용자 2026-10-08). 단 Calib 측정에선 적정 = 무리 전투력으로 덮어써서(화면 값이 계속 바뀌는 이유) 영향 없음 → 실제 전투력 측정(§9-6 다음 할 일 2번) 때 POW0·POW_GROW·층별 보정으로 조정.
+- 새 도구 `Tools/update_spu.py <csv...> [--write]`: BalanceProbe `RowsCsv()` 결과 → 일반 층 SPU, 보스 층은 길 뚫기(SPU)·보스전(hp_pow_sec) 따로 보정. 결과 파일은 `Tools/probe_results/roundN.csv`.
+- 라운드 6 (`round6.csv`) 뒤: SPU 안 바뀐 층은 라운드 5 와 합쳐(`round5_6_merged.csv`) 판단 — 92번 중 49번 목표 범위, 일반 층 대부분 60~90%. 남은 층 11·12·17·18·21 · 보스 층. hp_pow_sec 5층 33.4 · 15층 70.7. 층당 회차 편차 ±50% 라 2회로는 흔들림 → 4회 이상 합쳐 볼 것.
+- 라운드 5 (`round5.csv`, 65번): 목표 범위 29번. 느림 9·11·15(보스 145%)·17층, 빠름 12·13·14·16·21·23층, 25층 보스 50%. 보스전 34~55초 (목표 72) → hp_pow_sec 5층 26.3 · 10층 56 · 15층 57.8 · 20층 47.3 · 25층 71.6 (30층 36 그대로, 미측정). 테이블 재생성 완료 → 라운드 6 측정.
+- **윈드밀 버그 수정**: 몸을 뒤집은(sy -1) 채 회전축을 그대로 둬서 몸이 축에서 떨어져 큰 원(바퀴)을 그리며 돌았음 → 웹처럼 몸 중심 축 (`Rat.Trick.cs TrickTransform`, 축 높이 0.6hh·발 축 위 0.5hh) + 칠 때마다 흰 고리. 대포알도 축 보정.
+- **새 공용 묘기 5 "쳇바퀴 돌기"** (사용자: 바퀴처럼 도는 게 웃겨서 전용으로): 예전 윈드밀 버그 모습(뒤집혀 큰 원, 5바퀴) + 진행 방향으로 굴러가며 0.12초마다 반경 50 · 공격력 0.6배 (`TrickType.Wheel`, 속도 `RatManager.wheelTrickSpeed` 260, 1.6초). 해금 = **5훈장 K1** `Trick_Unlock 5` (예전 모든 묘기 +1%), 확률 = 6훈장 K7 · 8훈장 K3 `Trick_Chance 5 +2%` (`gen_skill_tree.py` TRICK 5). 아이콘 `cs_wheelspin` (기존 그림 합성, 로비 SkillPage iconSprites 에 추가). 팝업 글 3종은 다른 묘기처럼 `Rat.Trick.cs Tricks` 표.
+- **테스트 패널 "저장값 초기화"** 버튼 (`HUD/TestPanel/ResetButton`, `UltTestPanel.resetButton`): `Progress.ResetAll()` 후 저장 없이 Lobby 로 (GameManager 를 꺼서 5초 저장 막음). Play 확인 완료.
+
 **남은 일 (순서 제안)**
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.
 2. 결과로 `gen_stage_table.py` 곡선(POW_GROW·HP_GROW·벽 배율·방 수)과 `gen_skill_tree.py` 값·비용(치즈 수입 대비 훈장 트리 1개 ≈ 판 3~5번), 보스 `hp_pow_sec`(지금 40), 티어 테이블 조건(연구자료·Skill_Node_Count 15/40/70/100/130/160/195) 조정 → 다시 생성·xlsx2json·측정.

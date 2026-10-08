@@ -46,6 +46,7 @@ namespace NKK.Rats
         public float baseCritChance = 0.05f;
         public float critMultiplier = 3;
         [Tooltip("물건에 부딪힐 때 백덤블링 기본 확률 (백덤블링 스킬로 늘어남)")] public float baseFlipChance = 0.04f;
+        [Tooltip("쳇바퀴 돌기 묘기: 굴러가는 속도 (게임 단위/초)")] public float wheelTrickSpeed = 260f;
         [Tooltip("벽 피해 배율 (굴착 본능 스킬 자리)")] public float digMult = 1;
         [Tooltip("체형별 몸길이 (게임 단위): Rat, Mouse, Hamster, Gerbil, Squirrel")]
         public float[] rigLengthByBody = { 46, 36, 34, 38, 25 };

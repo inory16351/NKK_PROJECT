@@ -12,8 +12,8 @@ OUT = os.path.join(ROOT, 'Data_Table', '공용 스킬 테이블.xlsx')
 STYLE_SRC = os.path.join(ROOT, 'Data_Table', '사람 테이블.xlsx')
 
 GRADE = {0: '모든', 1: '일반', 2: '레어', 3: '에픽', 4: '유니크', 5: '전설', 6: '신화'}
-TRICK = {0: '모든 묘기', 1: '백덤블링', 2: '윈드밀', 3: '트리플 악셀', 4: '쥐 대포알'}
-TRICK_ICON = {0: 'flip', 1: 'flip', 2: 'windmill', 3: 'axel', 4: 'cannon'}
+TRICK = {0: '모든 묘기', 1: '백덤블링', 2: '윈드밀', 3: '트리플 악셀', 4: '쥐 대포알', 5: '쳇바퀴 돌기'}
+TRICK_ICON = {0: 'flip', 1: 'flip', 2: 'windmill', 3: 'axel', 4: 'cannon', 5: 'wheelspin'}
 NEW_ITEM = {60011: '표본 병', 60017: '현미경', 60020: '원심분리기', 60022: '가스통', 60023: '약품 드럼', 60024: '서버 랙',
             60025: '치즈 금고', 60026: '황금 치즈 트로피', 60027: '실험용 로봇 팔', 60028: '냉동 수면 캡슐',
             60029: '거대 치즈 바퀴', 60030: '금괴 상자', 60031: '데이터 코어', 60032: '다이아몬드 치즈'}
@@ -62,14 +62,14 @@ T[5] = dict(
     C1=('Atk_Flat', 8), C2=('Atk_Pct', 0.25), C3=('Multi_Hit', 0.05, 2), C4=('Atk_Flat', 15, 5), C5=('Atk_Pct', 0.30, 5, 1), C6=('Wall_Dmg_Pct', 0.25), C7=('Crit_Chance', 0.04), C8=('Dmg_Pct', 0.25),
     G1=('Start_Rat', 1, 1), G2=('Time_Add', 8), G3=('Breed_Chance', 0.05), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 20), G6=('Time_Add', 8), G7=('Promote_Double', 0.03, 4), G8=('Mutation_Chance', 0.10),
     L1=('Item_Count_Pct', 0.20), L2=('Cheese_Pct', 0.20), L3=('Spawn_Rate_Pct', 0.20), L4=('Cheese_Pct', 0.60, 2), L5=('Cheese_Pct', 0.60, 1), L6=('New_Item', 60023), L7=('Gold_Item', 0.04), L8=('New_Item', 60029),
-    K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.50), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 1, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Chance', 2, 0.02), K7=('Trick_Gauge_Pct', 0.30),
+    K1=('Trick_Unlock', 5, 0.02), K2=('Trick_Cheese_Pct', 0.50), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 1, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Chance', 2, 0.02), K7=('Trick_Gauge_Pct', 0.30),
     S1=('Stage_Skip', 2), S2=('Cheese_Meteor', 12, 0.30), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.2, 4), S5=('Cheese_Meteor', 0, 0.30), S6=('Rush_CD', 0.5),
 )
 T[6] = dict(
     C1=('Atk_Flat', 12), C2=('Atk_Pct', 0.30), C3=('Crit_Dmg', 0.75), C4=('Atk_Flat', 22, 6), C5=('Atk_Pct', 0.30, 6, 1), C6=('Wall_Dmg_Pct', 0.25), C7=('Boss_Dmg_Pct', 0.30), C8=('Dmg_Pct', 0.30),
     G1=('Start_Rat', 1, 1), G2=('Time_Add', 9), G3=('Start_Rat', 1, 1), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 20), G6=('Time_Add', 9), G7=('Promote_Double', 0.03, 5), G8=('Breed_Chance', 0.05),
     L1=('Item_Count_Pct', 0.20), L2=('Cheese_Pct', 0.25), L3=('Spawn_Rate_Pct', 0.25), L4=('Cheese_Pct', 0.70, 2), L5=('Cheese_Pct', 0.70, 1), L6=('New_Item', 60024), L7=('Gold_Item', 0.04), L8=('New_Item', 60030),
-    K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.60), K3=('Trick_Chance', 3, 0.02), K4=('Trick_Chance', 4, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Gauge_Pct', 0.30), K7=('Trick_Chance', 0, 0.01),
+    K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.60), K3=('Trick_Chance', 3, 0.02), K4=('Trick_Chance', 4, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Gauge_Pct', 0.30), K7=('Trick_Chance', 5, 0.02),
     S1=('Stage_Skip', 2), S2=('Ult_Auto', 1), S3=('Stage_Skip', 2), S4=('Boss_Dmg_Pct', 0.2, 4), S5=('Super_Jump_Pct', 0.50), S6=('Ult_CD', 3),
 )
 T[7] = dict(
@@ -83,7 +83,7 @@ T[8] = dict(
     C1=('Atk_Flat', 25), C2=('Atk_Pct', 0.40), C3=('Crit_Dmg', 1.00), C4=('Atk_Flat', 40, 6), C5=('Atk_Pct', 0.50, 6), C6=('Wall_Dmg_Pct', 0.30), C7=('Boss_Dmg_Pct', 0.50), C8=('Dmg_Pct', 0.40),
     G1=('Start_Rat', 1, 1), G2=('Time_Add', 11), G3=('Start_Rat', 1, 1), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 30), G6=('Time_Add', 12), G7=('Promote_Double', 0.04, 0), G8=('Mutation_Chance', 0.15),
     L1=('Item_Count_Pct', 0.30), L2=('Cheese_Pct', 0.30), L3=('Spawn_Rate_Pct', 0.30), L4=('Cheese_Pct', 1.00, 2), L5=('Cheese_Pct', 1.00, 1), L6=('Gold_Item', 0.05), L7=('Combo_Time_Pct', 0.30), L8=('New_Item', 60032),
-    K1=('Trick_Chance', 0, 0.02), K2=('Trick_Cheese_Pct', 1.00), K3=('Trick_Chance', 0, 0.01), K4=('Trick_Gauge_Pct', 0.50), K5=('Trap_Single_Down', 0.05), K6=('Trap_Multi_Down', 0.05), K7=('Trick_Chance', 0, 0.01),
+    K1=('Trick_Chance', 0, 0.02), K2=('Trick_Cheese_Pct', 1.00), K3=('Trick_Chance', 5, 0.02), K4=('Trick_Gauge_Pct', 0.50), K5=('Trap_Single_Down', 0.05), K6=('Trap_Multi_Down', 0.05), K7=('Trick_Chance', 0, 0.01),
     S1=('Stage_Skip', 3), S2=('Ult_CD', 4), S3=('Stage_Skip', 3), S4=('Boss_Dmg_Pct', 0.25, 3), S5=('Rush_CD', 0.5), S6=('Ult_Power_Pct', 0.50),
 )
 
@@ -159,7 +159,7 @@ EFFECT_DOC = [
     ('Gold_Item', '황금 물건 확률 + 합, 치즈 배율 = 가장 큰 밸류_02 (없으면 5)', '확률', '치즈 배율', '-'),
     ('Spawn_Rate_Pct', '물건 보충 속도 ×(1 + 합)', '증가율', '-', '-'),
     ('Combo_Time_Pct', '콤보 유지 시간 ×(1 + 합)', '증가율', '-', '-'),
-    ('Trick_Unlock', '묘기 해금 (해금 전엔 그 묘기가 안 나옴). 물건에 부딪힐 때 기본 확률 밸류_02', '묘기 (1 백덤블링 · 2 윈드밀 · 3 트리플 악셀 · 4 쥐 대포알)', '기본 확률', '-'),
+    ('Trick_Unlock', '묘기 해금 (해금 전엔 그 묘기가 안 나옴). 물건에 부딪힐 때 기본 확률 밸류_02', '묘기 (1 백덤블링 · 2 윈드밀 · 3 트리플 악셀 · 4 쥐 대포알 · 5 쳇바퀴 돌기)', '기본 확률', '-'),
     ('Trick_Chance', '묘기 확률 + 밸류_02 (해금된 묘기만)', '묘기 (0 = 해금된 묘기 전부)', '확률', '-'),
     ('Trick_Cheese_Pct', '묘기 중인 쥐가 부순 물건 치즈 ×(1 + 합)', '증가율', '-', '-'),
     ('Trick_Gauge_Pct', '묘기 성공 시 필살기 게이지 ×(1 + 합)', '증가율', '-', '-'),

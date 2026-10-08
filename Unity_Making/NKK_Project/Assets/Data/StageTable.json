@@ -46,8 +46,8 @@
    "pow_need": 1450.0,
    "item_hp": 3.63,
    "cheese": 5.06,
-   "wall_stairs": 3.72,
-   "wall_normal": 1.86,
+   "wall_stairs": 3.07,
+   "wall_normal": 1.53,
    "time_add": 0.0
   },
   {
@@ -86,8 +86,8 @@
    "pow_need": 5260.0,
    "item_hp": 13.15,
    "cheese": 25.63,
-   "wall_stairs": 7.76,
-   "wall_normal": 3.88,
+   "wall_stairs": 4.85,
+   "wall_normal": 2.43,
    "time_add": 0.0
   },
   {
@@ -106,8 +106,8 @@
    "pow_need": 10000.0,
    "item_hp": 25.05,
    "cheese": 57.67,
-   "wall_stairs": 7.94,
-   "wall_normal": 2.65,
+   "wall_stairs": 3.1,
+   "wall_normal": 1.03,
    "time_add": 0.0
   },
   {
@@ -116,8 +116,8 @@
    "pow_need": 13800.0,
    "item_hp": 34.57,
    "cheese": 86.5,
-   "wall_stairs": 3.74,
-   "wall_normal": 1.87,
+   "wall_stairs": 7.85,
+   "wall_normal": 3.92,
    "time_add": 0.0
   },
   {
@@ -126,8 +126,8 @@
    "pow_need": 19100.0,
    "item_hp": 47.7,
    "cheese": 130.0,
-   "wall_stairs": 7.94,
-   "wall_normal": 2.65,
+   "wall_stairs": 10.35,
+   "wall_normal": 3.45,
    "time_add": 0.0
   },
   {
@@ -136,8 +136,8 @@
    "pow_need": 26300.0,
    "item_hp": 65.83,
    "cheese": 195.0,
-   "wall_stairs": 6.78,
-   "wall_normal": 2.26,
+   "wall_stairs": 9.54,
+   "wall_normal": 3.18,
    "time_add": 0.0
   },
   {
@@ -146,8 +146,8 @@
    "pow_need": 36300.0,
    "item_hp": 90.85,
    "cheese": 292.0,
-   "wall_stairs": 6.88,
-   "wall_normal": 2.29,
+   "wall_stairs": 2.69,
+   "wall_normal": 0.9,
    "time_add": 0.0
   },
   {
@@ -156,8 +156,8 @@
    "pow_need": 50100.0,
    "item_hp": 125.0,
    "cheese": 438.0,
-   "wall_stairs": 54.39,
-   "wall_normal": 54.39,
+   "wall_stairs": 76.36,
+   "wall_normal": 76.36,
    "time_add": 0.0
   },
   {
@@ -166,8 +166,8 @@
    "pow_need": 69200.0,
    "item_hp": 173.0,
    "cheese": 657.0,
-   "wall_stairs": 7.94,
-   "wall_normal": 2.65,
+   "wall_stairs": 4.86,
+   "wall_normal": 1.62,
    "time_add": 0.0
   },
   {
@@ -176,8 +176,8 @@
    "pow_need": 95500.0,
    "item_hp": 239.0,
    "cheese": 985.0,
-   "wall_stairs": 7.94,
-   "wall_normal": 2.65,
+   "wall_stairs": 11.83,
+   "wall_normal": 3.94,
    "time_add": 0.0
   },
   {
@@ -206,8 +206,8 @@
    "pow_need": 251000.0,
    "item_hp": 627.0,
    "cheese": 3330.0,
-   "wall_stairs": 7.94,
-   "wall_normal": 2.65,
+   "wall_stairs": 18.6,
+   "wall_normal": 6.2,
    "time_add": 0.0
   },
   {
@@ -226,8 +226,8 @@
    "pow_need": 478000.0,
    "item_hp": 1190.0,
    "cheese": 7480.0,
-   "wall_stairs": 14.41,
-   "wall_normal": 4.8,
+   "wall_stairs": 18.47,
+   "wall_normal": 6.16,
    "time_add": 0.0
   },
   {
@@ -246,8 +246,8 @@
    "pow_need": 910000.0,
    "item_hp": 2280.0,
    "cheese": 16800.0,
-   "wall_stairs": 6.88,
-   "wall_normal": 2.29,
+   "wall_stairs": 17.21,
+   "wall_normal": 5.74,
    "time_add": 0.0
   },
   {
@@ -514,7 +514,7 @@
    "color": "#8fb3c7",
    "scale": 2.8,
    "radius_mul": 2.8,
-   "hp_pow_sec": 20.0,
+   "hp_pow_sec": 33.4,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
@@ -532,7 +532,7 @@
    "color": "#9dd5a8",
    "scale": 2.8,
    "radius_mul": 2.8,
-   "hp_pow_sec": 28.0,
+   "hp_pow_sec": 56.0,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
@@ -550,7 +550,7 @@
    "color": "#d9786a",
    "scale": 2.8,
    "radius_mul": 2.8,
-   "hp_pow_sec": 40.0,
+   "hp_pow_sec": 70.7,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
@@ -568,7 +568,7 @@
    "color": "#e39a5a",
    "scale": 3.4,
    "radius_mul": 3.4,
-   "hp_pow_sec": 36.0,
+   "hp_pow_sec": 47.3,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
@@ -586,7 +586,7 @@
    "color": "#cdb4db",
    "scale": 3.4,
    "radius_mul": 3.4,
-   "hp_pow_sec": 36.0,
+   "hp_pow_sec": 71.6,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
