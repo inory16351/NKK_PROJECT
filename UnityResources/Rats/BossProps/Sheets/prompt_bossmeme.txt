@@ -1,0 +1,16 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boss_meme.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere, perfectly uniform, no noise. No text, no letters, no numbers, no logos anywhere.
+- STYLE: match the attached references (cozy flat cartoon game art, Untitled Goose Game mood): completely FLAT colors, NO black outlines, no gradients, no glow. Each piece is ONE connected chunky shape with a clean magenta margin; pieces never touch.
+- Exact 4 columns x 2 rows grid (each cell 384x512), each piece centered, filling about 70% of its cell.
+Row 1:
+1) A dark brown wooden funeral coffin (classic hexagonal coffin shape) lying horizontally, side view, with simple brass handles, slightly comic.
+2) A chunky stack of green paper money bundles with paper bands (cash stack), 3/4 view.
+3) A big round red emergency meeting button under a clear glass dome on a grey pedestal (like a space game emergency button), front view.
+4) A crying fluffy orange cat wearing a full yellow banana costume (only the face shows through the opening of the banana suit, banana tip on top), big tears streaming, front view.
+Row 2:
+5) A cartoon blue shark standing upright on three legs wearing chunky blue sneakers (no logo), side view facing right, goofy grin.
+6) A cartoon blue shark head only (front view, open grin with small teeth), small and round, to be worn as a mask on a tiny animal's head.
+7) A white cappuccino cup with foam and a little latte-art heart, seen from the side slightly from above, small and round, to be worn on a tiny animal's head.
+8) A round light-blue water splash ripple seen from above (flat concentric ring shapes with a few droplets).

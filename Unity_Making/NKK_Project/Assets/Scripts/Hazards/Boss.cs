@@ -92,11 +92,23 @@ namespace NKK.Hazards
         [Tooltip("떨어지는 그림: 고깔 · 서류 더미 / 상자 · 약병 · 개구리")] public Sprite coneSprite, paperSprite, boxSprite, potionSprite, frogSprite;
         [Tooltip("상자·약병을 보여 줄 그림 (꺼 둠) · 개구리 표시 틀 (꺼 둠, 복제)")] public SpriteRenderer specialProp, markTemplate;
         [Tooltip("상자 크기 · 약병 크기 · 개구리 크기 (게임 단위)")] public float boxSize = 360, potionSize = 70, frogSize = 46;
+        [Header("발악 패턴 밈 (필살 패턴 id 는 그대로, 그림·연출만 밈)")]
+        [Tooltip("관(관짝소년단) · 돈다발(전액 현금 매입) · 비상 회의 버튼 · 바나나 고양이(우는) · 트랄랄레로 상어 · 상어 머리(쥐 머리 위) · 카푸치노 잔(쥐 머리 위)")]
+        public Sprite coffinSprite, moneySprite, meetingSprite, bananaCatSprite, sharkSprite, sharkHeadSprite, cupSprite;
+        [Tooltip("관 크기 · 관 운구 댄스 시간 · 상어 크기 · 비상 회의 버튼 크기")] public float coffinSize = 170, coffinDance = 1.8f, sharkSize = 130, meetingSize = 90;
+        [Tooltip("무야호 (3단 점프 뛸 때) · 오히려 좋아 (실험 폭발 뒤) · 비상 회의 · 한강 질주 · 바나나 고양이 우는 소리 · 카푸치나 저주 · 상어 저주 팝업")]
+        public string muyahoPopup, ohGoodPopup, meetingPopup, zoomPopup, tearPopup, cupPopup, sharkPopup;
+        [Tooltip("홈랜더 눈 레이저: 눈 위치 (앞으로 · 위로, 키 배율) · 색")] public float eyeFwd = 0.55f, eyeUp = 0.8f;
+        public Color eyeLaserColor = new(1f, 0.25f, 0.2f, 1f);
+        [Tooltip("STAY 블랙홀: 모든 쥐를 빨아들이는 속도 · 컷씬 (없으면 바로 튕겨 나옴)")] public float stayPull = 1100;
+        public BossCutscene cutscene;
+        bool stayCut, stayDone;
         bool sp1Done, sp2Done, boxed; string pendingSpecial;
         float growT, growK = 1, pulseEvery, pulseT;
         int seqI, released; float phaseT, lx0, ly0, ltx, lty;
         readonly System.Collections.Generic.List<Vector2> seqTargets = new();
-        class Mark { public SpriteRenderer r; public Rat rat; public float life; }
+        class Mark { public SpriteRenderer r; public Rat rat; public float life; public bool head; }
+        [Tooltip("머리에 씌우는 표시 (상어 머리 · 커피잔): 쥐 가운데에서 앞으로 · 높이 · 크기 배율 (개구리 크기 기준)")] public float headMarkFwd = 14, headMarkUp = 20, headMarkScale = 0.9f;
         readonly System.Collections.Generic.List<Mark> marks = new();
 
         [Header("두 번째 공격 · 쿨타임 스킬 (보스 테이블 atk2_type · skill_type, 수치 = Atk_Type)")]
@@ -119,7 +131,7 @@ namespace NKK.Hazards
         [Tooltip("맥스웰 춤: 흔들 빠르기(초당) · 기울기(도) · 걷는 속도 · 방향 바꾸는 간격(초) · 빙글 회전(초당 바퀴) · 원 반경 · 통통 높이")]
         public float maxwellSwayHz = 2, maxwellTilt = 14, maxwellMove = 90, maxwellTurn = 1.2f, maxwellSpin = 1.5f, maxwellCircle = 90, maxwellHop = 40;
         // 춤 종류 (마리마다 돌아가며): 0 좌우 흔들흔들 걷기 · 1 제자리 빙글빙글 (세로축 회전) · 2 빙글빙글 돌며 원 그리기 · 3 통통 튀며 좌우
-        class Maxwell { public float x, y, x0, y0, t, dir; public int kind; public bool landed; public SpriteRenderer r; }
+        class Maxwell { public float x, y, x0, y0, t, dir, rad, stun, size, dance; public int kind; public bool landed; public SpriteRenderer r; public Sprite mark; public string name; }
         readonly System.Collections.Generic.List<Maxwell> maxwells = new();
         float skillCd, unbrokenT;
         class Zone { public float x, y, rad, life, life0, stun, expose; public bool gas; public SpriteRenderer r; public readonly System.Collections.Generic.Dictionary<Rat, float> stay = new(); }
@@ -188,7 +200,7 @@ namespace NKK.Hazards
             value = 3 * Stage.CheeseK(test ? Game.Floor : Mathf.Max(Game.Floor, row.floor)) * row.cheese_mul * CommonSkill.CreatureCheeseMul;
             shots = swings = 0; atkType = null; atk = null;
             sp1Done = sp2Done = boxed = false; pendingSpecial = null; growT = 0; growK = 1; ClearMarks();
-            skillCd = row.skill_first; unbrokenT = 0;
+            skillCd = row.skill_first; unbrokenT = 0; forced = null;
             if (row.IsCat)
             {
                 var art = Cats && Cats.catArt ? Cats.catArt.Get(row.code_id) : null;
@@ -263,12 +275,18 @@ namespace NKK.Hazards
             if (bar) { bar.SetActive(true); if (barName) barName.text = (nameFormat ?? "{name}").Replace("{name}", Data.boss_name); }
         }
 
-        // 테스트 버튼: 화면 가운데에 불러서 바로 싸움 (이 층 보스가 대기 중이었으면 끝난 뒤 되돌림)
-        public void TestSpawn()
+        // 테스트 버튼: 화면 가운데에 불러서 바로 싸움 (이 층 보스가 대기 중이었으면 끝난 뒤 되돌림). index = 보스 목록 번호 (-1 = 다음 보스)
+        // 싸우는 중이면 지금 보스를 없애고 바로 바꿔 부름
+        public void TestSpawn(int index = -1)
         {
-            if (State == BState.Fight || State == BState.Dying || DB.Bosses.Count == 0) return;
-            BossRow keep = State == BState.Wait && !Test ? Data : null;
-            testN = (testN + 1) % DB.Bosses.Count;          // 누를 때마다 다음 보스 (웹 bossTestN)
+            if (DB.Bosses.Count == 0) return;
+            if (State == BState.Fight || State == BState.Dying)
+            {
+                if (!Test) return;          // 진짜 층 보스는 건드리지 않음
+                var back = stash; Clear(); stash = back;
+            }
+            BossRow keep = State == BState.Wait && !Test ? Data : stash;
+            testN = index >= 0 ? index % DB.Bosses.Count : (testN + 1) % DB.Bosses.Count;          // 누를 때마다 다음 보스 (웹 bossTestN)
             var row = DB.Bosses[testN];
             var c = Ults ? Ults.ViewRect(0).center : new Vector2(World.RW / 2, World.RH / 2);
             Spawn(row, c.x, c.y + 60, true);
@@ -276,6 +294,24 @@ namespace NKK.Hazards
             FxManager.I?.Dust(x, y, 16, 2.4f);
             StartFight();
         }
+
+        // 테스트: 보스가 쓰는 기술 목록 (일반 · 두 번째 · 쿨타임 스킬 · 발악 1 · 발악 2)
+        public System.Collections.Generic.List<string> Moves(BossRow row)
+        {
+            var l = new System.Collections.Generic.List<string>();
+            if (row == null) return l;
+            foreach (var m in new[] { row.atk_type, row.atk2_type, row.skill_type, row.special1_type, row.special2_type }) if (Valid(m) && !l.Contains(m)) l.Add(m);
+            return l;
+        }
+
+        // 테스트: 이 기술을 다음 공격으로 바로 씀 (싸우는 중일 때만, 지금 공격이 끝나면)
+        public bool ForceAttack(string type)
+        {
+            if (State != BState.Fight || !Valid(type)) return false;
+            forced = type; atkCd = 0;
+            return true;
+        }
+        string forced;
 
         void Say(string line, float life = 1.2f)
         {
@@ -357,7 +393,8 @@ namespace NKK.Hazards
                     bool two = !string.IsNullOrEmpty(Data.atk2_type) && Data.atk2_type != "None" && Random.value < Data.atk2_chance;
                     atkType = two ? Data.atk2_type : Data.atk_type;
                     // 필살: 체력 문턱이면 무조건, 둘 다 쓴 뒤엔 special_chance 확률로 둘 중 하나
-                    if (pendingSpecial != null) { atkType = pendingSpecial; pendingSpecial = null; }
+                    if (forced != null) { atkType = forced; forced = null; }          // 테스트 강제 발동
+                    else if (pendingSpecial != null) { atkType = pendingSpecial; pendingSpecial = null; }
                     else if (skill) { atkType = Data.skill_type; skillCd = Mathf.Max(1, Data.skill_cd); }
                     else if (sp1Done && sp2Done && Random.value < Data.special_chance) atkType = Random.value < 0.5f ? Data.special1_type : Data.special2_type;
                     atk = DB.BossAtk(atkType);
@@ -470,10 +507,11 @@ namespace NKK.Hazards
             {
                 case "Mega_Stomp": case "Cone_Rain": case "Paper_Storm": case "Meteor_Shower": case "Orbital_Laser":
                     PickTargets(n); break;
-                case "Black_Hole": PickTargets(1); break;
+                case "Black_Hole": PickTargets(1); stayCut = stayDone = false; break;
                 case "Potion_Party": case "Self_Experiment": ShowProp(potionSprite, potionSize, true); break;
+                case "Board_Meeting": ShowProp(meetingSprite, meetingSize, true); break;
                 case "Box_Fit":
-                    boxed = true; SetVisible(false); if (shadow) shadow.enabled = true; ShowProp(boxSprite, boxSize, false);
+                    boxed = true; SetVisible(false); if (shadow) shadow.enabled = true; ShowProp(bananaCatSprite ? bananaCatSprite : boxSprite, boxSize, false);
                     FxManager.I?.Dust(x, y, 14, 2); break;
             }
         }
@@ -518,7 +556,11 @@ namespace NKK.Hazards
                     if (!air)
                     {
                         jit = 3; ShowWarns(seqI, Mathf.Clamp01(phaseT / wind));
-                        if (phaseT >= wind) { air = true; phaseT = 0; lx0 = x; ly0 = y; ltx = seqTargets[seqI].x; lty = seqTargets[seqI].y; vz = jumpV * 1.1f; }
+                        if (phaseT >= wind)
+                        {
+                            air = true; phaseT = 0; lx0 = x; ly0 = y; ltx = seqTargets[seqI].x; lty = seqTargets[seqI].y; vz = jumpV * 1.1f;
+                            if (!string.IsNullOrEmpty(muyahoPopup)) fx?.Popup(x, y, muyahoPopup, Data.Color, 34 + seqI * 6, 0.9f, Height * 0.9f);      // 무야호~!!
+                        }
                     }
                     else
                     {
@@ -538,9 +580,12 @@ namespace NKK.Hazards
                     while (released < seqTargets.Count && atkT >= wind + released * gap)
                     {
                         var v = seqTargets[released++];
-                        if (atkType == "Maxwell_Drop") { AddMaxwell(v, released - 1); continue; }      // 떨어진 뒤 춤 (Boss 가 직접)
+                        if (atkType == "Maxwell_Drop") { AddDrop(v, maxwellSprite, maxwellSize, (released - 1) % 4, maxwellDance); continue; }      // 떨어진 뒤 춤 (Boss 가 직접)
+                        if (atkType == "Cone_Rain" && coffinSprite) { AddDrop(v, coffinSprite, coffinSize, 4, coffinDance); continue; }                // 관짝소년단: 관 → 운구 댄스
+                        if (atkType == "Meteor_Shower" && sharkSprite) { AddDrop(v, sharkSprite, sharkSize, 5, 0.25f, sharkHeadSprite); continue; }    // 트랄랄레로: 상어 → 맞은 쥐 머리 = 상어
+                        if (atkType == "Orbital_Laser") { EyeLaser(v); continue; }                                                                       // 홈랜더 눈 레이저
                         bool laser = atkType == "Orbital_Laser";
-                        var sp = atkType == "Cone_Rain" ? coneSprite : atkType == "Paper_Storm" ? paperSprite : atkType == "Maxwell_Drop" ? maxwellSprite : null;
+                        var sp = atkType == "Cone_Rain" ? coneSprite : atkType == "Paper_Storm" ? (moneySprite ? moneySprite : paperSprite) : null;
                         Cats?.AddStrike(!laser, v.x, v.y, atk.radius, atk.stun, SpName, sp, atkType == "Meteor_Shower");
                     }
                     if (released >= seqTargets.Count) { Cats?.HideWarns(); attacking = false; }
@@ -565,13 +610,15 @@ namespace NKK.Hazards
                 case "Self_Experiment":
                     // 약 마시기 → 거대화 (배경에서 dur 초 동안, 주기마다 충격파)
                     jit = 2.5f;
-                    if (atkT >= wind) { HideProp(); growT = atk.dur; pulseEvery = atk.dur / Mathf.Max(1, atk.count); pulseT = pulseEvery * 0.5f; fx?.Stars(x, y, Height, 30, Data.Color, Color.white, 200, 500); fx?.Shake(0.4f); fx?.Popup(x, y, SpName, Data.Color, 34, 1, Height); attacking = false; }
+                    if (atkT >= wind) { HideProp(); fx?.Anim("explosion", x, y, Height * 0.85f, 2.2f); if (!string.IsNullOrEmpty(ohGoodPopup)) fx?.Popup(x, y, ohGoodPopup, Data.Color, 40, 1.6f, Height * 1.2f); growT = atk.dur; pulseEvery = atk.dur / Mathf.Max(1, atk.count); pulseT = pulseEvery * 0.5f; fx?.Stars(x, y, Height, 30, Data.Color, Color.white, 200, 500); fx?.Shake(0.4f); fx?.Popup(x, y, SpName, Data.Color, 34, 1, Height); attacking = false; }
                     break;
                 case "Board_Meeting":
                     jit = atkT < wind ? 3 : 0;
+                    if (atkT < wind && Ults && Mathf.Repeat(atkT, 0.4f) < dt) Ults.Flash(new Color(1f, 0.15f, 0.15f), 0.12f);      // 비상 회의 경보
                     if (!atkHit && atkT >= wind)
                     {
-                        atkHit = true; SpecialHit(x, y, atk.radius, atk.stun, true);
+                        atkHit = true; HideProp(); SpecialHit(x, y, atk.radius, atk.stun, true);
+                        if (!string.IsNullOrEmpty(meetingPopup)) fx?.Popup(x, y, meetingPopup, new Color(1f, 0.3f, 0.3f), 44, 1.4f, Height * 1.1f);
                         for (int i = 0; i < Mathf.Max(1, atk.count); i++) { float a = i * Mathf.PI * 2 / atk.count; Items.SpawnHumanAt("guard", x + Mathf.Cos(a) * 220, y + Mathf.Sin(a) * 160); }
                         sayCD = 0; Say(guardCall, 1.2f);
                     }
@@ -590,27 +637,31 @@ namespace NKK.Hazards
                         float a = Random.Range(0, Mathf.PI * 2);
                         if (Cats && Random.value < 0.7f && Cats.FindCrowd(x, y, out var at, out _)) a = Mathf.Atan2(at.y - y, at.x - x);
                         vx = Mathf.Cos(a) * zoomSpeed; vy = Mathf.Sin(a) * zoomSpeed;
-                        fx?.Popup(x, y, "우다다다!!", Data.Color, 24, 0.6f, Height * 0.7f);
+                        if (!string.IsNullOrEmpty(zoomPopup)) fx?.Popup(x, y, zoomPopup, Data.Color, 24, 0.6f, Height * 0.7f);
                     }
                     else { float sp = Mathf.Sqrt(vx * vx + vy * vy); if (sp < zoomSpeed * 0.7f && sp > 1) { vx *= zoomSpeed / sp; vy *= zoomSpeed / sp; } }
                     foreach (var o in Rats.Rats) if (!o.UltOn && o.stun <= 0 && Vector2.Distance(new Vector2(o.x, o.y), new Vector2(x, y)) < atk.radius) o.Ragdoll(Mathf.Atan2(o.y - y, o.x - x), 520, 380, atk.stun);
-                    if (Random.value < dt * 30) fx?.Dust(x, y, 2, 1);
+                    if (Random.value < dt * 30) { fx?.Dust(x, y, 2, 1); fx?.Burst(x, y, 10, 3, new Color(0.55f, 0.78f, 0.95f), Color.white, 80, 220); }      // 한강 물보라
+                    if (Random.value < dt * 6) fx?.Ring(x, y, R * 1.2f, new Color(0.55f, 0.78f, 0.95f), 0.4f);
                     break;
                 }
                 case "Box_Fit":
                     // 상자 안 (무적, 들썩들썩) → 폭발
                     if (specialProp) { specialProp.transform.localRotation = Quaternion.Euler(0, 0, Mathf.Sin(atkT * 20) * 6 * k); }
+                    if (Random.value < dt * 12) fx?.Burst(x, y, boxSize * 0.6f, 2, new Color(0.55f, 0.78f, 0.95f), Color.white, 120, 260);      // 눈물
+                    if (Mathf.Repeat(atkT, 0.7f) < dt && !string.IsNullOrEmpty(tearPopup)) fx?.Popup(x + Random.Range(-60f, 60f), y, tearPopup, new Color(0.95f, 0.85f, 0.3f), 26, 0.7f, boxSize * 0.8f);
                     Cats?.ShowWarn(0, x, y, atk.radius, k);
                     if (atkT >= wind)
                     {
                         boxed = false; HideProp(); SetVisible(true); Cats?.HideWarns();
                         SpecialHit(x, y, atk.radius, atk.stun, true);
-                        fx?.Anim("explosion", x, y, 0, 3); if (!string.IsNullOrEmpty(boxPopup)) fx?.Popup(x, y, boxPopup, Data.Color, 40, 1, Height);
+                        fx?.Anim("explosion", x, y, 0, 3); fx?.Burst(x, y, 40, 30, new Color(0.98f, 0.86f, 0.3f), Color.white, 200, 600); if (!string.IsNullOrEmpty(boxPopup)) fx?.Popup(x, y, boxPopup, Data.Color, 40, 1, Height);
                         attacking = false;
                     }
                     break;
                 case "Frog_Curse":
                     jit = atkT < wind ? 2 : 0;
+                    if (atkT < wind) face = Mathf.Sin(atkT * 22) > 0 ? 1 : -1;      // 발레리나처럼 빙글빙글
                     Cats?.ShowWarn(0, x, y, atk.radius, k);
                     if (atkT >= wind)
                     {
@@ -620,7 +671,7 @@ namespace NKK.Hazards
                         {
                             if (o.UltOn || Vector2.Distance(new Vector2(o.x, o.y), new Vector2(x, y)) > atk.radius) continue;
                             o.Stun(atk.stun); o.vz = 260;
-                            if (n++ < 14) { AddMark(o, atk.stun); if (fx && n < 8) fx.Popup(o.x, o.y, frogPopup, new Color(0.55f, 0.85f, 0.45f), 18, 0.9f, 50); }
+                            if (n++ < 14) { AddMark(o, atk.stun + 1, cupSprite, cupSprite != null); if (fx && n < 8) fx.Popup(o.x, o.y, cupSprite ? cupPopup : frogPopup, new Color(0.55f, 0.85f, 0.45f), 18, 0.9f, 50); }
                         }
                         fx?.Ring(x, y, atk.radius, new Color(0.55f, 0.85f, 0.45f), 0.6f); fx?.Ring(x, y, atk.radius * 0.6f, Color.white, 0.45f);
                         fx?.Burst(x, y, 60, 30, new Color(0.55f, 0.85f, 0.45f), Color.white, 150, 500); fx?.Shake(0.3f);
@@ -629,25 +680,35 @@ namespace NKK.Hazards
                     break;
                 case "Black_Hole":
                 {
+                    // STAY: 모든 쥐를 빨아들임 → 컷씬 (책장 너머 과거의 자신) → 사방으로 튕겨 나옴
                     var c = seqTargets.Count > 0 ? seqTargets[0] : new Vector2(x, y);
-                    Cats?.ShowVortex(c.x, c.y, atk.radius, k); Cats?.ShowWarn(0, c.x, c.y, atk.radius, k);
-                    float sp = holePull * k;
-                    foreach (var o in Rats.Rats)
+                    if (!stayCut)
                     {
-                        if (o.UltOn) continue;
-                        float dx = c.x - o.x, dy = c.y - o.y, d = Mathf.Sqrt(dx * dx + dy * dy);
-                        if (d > atk.radius * 1.3f || d < 14) continue;
-                        float m = Mathf.Min(sp * dt, d - 12) / d; o.x += dx * m; o.y += dy * m;
+                        Cats?.ShowVortex(c.x, c.y, atk.radius, k); Cats?.ShowWarn(0, c.x, c.y, atk.radius, k);
+                        float sp = stayPull * (0.3f + 0.7f * k);
+                        foreach (var o in Rats.Rats)
+                        {
+                            if (o.UltOn) continue;
+                            float dx = c.x - o.x, dy = c.y - o.y, d = Mathf.Sqrt(dx * dx + dy * dy);
+                            o.Stun(0.3f);
+                            if (d < 14) continue;
+                            float m = Mathf.Min(sp * dt, d - 12) / d; o.x += dx * m; o.y += dy * m;
+                        }
+                        if (atkT >= wind)
+                        {
+                            stayCut = true; Cats?.HideWarns();
+                            fx?.Stars(c.x, c.y, 100, 40, Data.Color, Color.white, 200, 600); fx?.Shake(0.5f);
+                            if (cutscene && !BalanceProbe.Active) cutscene.Play(() => stayDone = true); else stayDone = true;
+                        }
+                        break;
                     }
-                    if (atkT >= wind)
-                    {
-                        Cats?.HideWarns();
-                        int n = 0;
-                        foreach (var o in Rats.Rats) if (!o.UltOn && Vector2.Distance(new Vector2(o.x, o.y), c) < atk.radius) { o.vz = Random.Range(650f, 900f); o.Stun(atk.stun); n++; }
-                        Cats?.HitFx(c.x, c.y, atk.radius, SpName, n, 0.45f);
-                        fx?.Stars(c.x, c.y, 100, 40, Data.Color, Color.white, 200, 600);
-                        attacking = false;
-                    }
+                    if (!stayDone) { Cats?.ShowVortex(c.x, c.y, atk.radius, 1); break; }
+                    int n = 0;
+                    foreach (var o in Rats.Rats) if (!o.UltOn) { o.Ragdoll(Random.Range(0, Mathf.PI * 2), Random.Range(350f, 750f), Random.Range(650f, 900f), atk.stun); n++; }
+                    Cats?.HitFx(c.x, c.y, atk.radius, SpName, n, 0.45f);
+                    fx?.Stars(c.x, c.y, 100, 60, Data.Color, Color.white, 300, 900);
+                    if (Ults) Ults.Flash(Color.white, 0.4f);
+                    attacking = false;
                     break;
                 }
                 case "Tung_Sahur":
@@ -768,6 +829,19 @@ namespace NKK.Hazards
             }
         }
 
+        // 홈랜더 눈 레이저: 보스 눈에서 목표까지 빔 두 줄 → 목표 범위 기절 + 탄 자국
+        void EyeLaser(Vector2 v)
+        {
+            face = v.x >= x ? 1 : -1;
+            float ex = x + face * Height * eyeFwd, ez = Height * eyeUp;
+            var fx = FxManager.I;
+            fx?.Beam(ex, y, ez, v.x, v.y, 0, eyeLaserColor, 0.35f, 1.3f);
+            fx?.Beam(ex - face * 14, y - 4, ez + 8, v.x + 12, v.y + 6, 0, eyeLaserColor, 0.35f, 1.1f);
+            int n = Cats ? Cats.StunArea(v.x, v.y, atk.radius, atk.stun, 120, 300) : 0;
+            Cats?.HitFx(v.x, v.y, atk.radius, SpName, n, 0.25f);
+            fx?.Spill(v.x, v.y, atk.radius * 0.5f, new Color(0.3f, 0.15f, 0.1f, 0.35f));
+        }
+
         // 진압봉: 바라보는 쪽 반원 안 쥐를 날림
         void BatonHit()
         {
@@ -883,26 +957,26 @@ namespace NKK.Hazards
             }
         }
 
-        // ── 맥스웰 고양이: 빙글 돌며 떨어짐 → 착지 범위 기절 → maxwellDance 초 동안 춤 (종류마다 다르게), 닿은 쥐 기절 ──
-        void AddMaxwell(Vector2 at, int i)
+        // ── 떨어지는 것 (맥스웰 고양이 · 관짝 · 트랄랄레로 상어): 빙글 돌며 떨어짐 → 착지 범위 기절 → dance 초 동안 춤, 닿은 쥐 기절 ──
+        // kind: 0 좌우 흔들흔들 걷기 · 1 제자리 빙글빙글 (세로축 회전) · 2 빙글빙글 돌며 원 그리기 · 3 통통 튀며 좌우 · 4 관 운구 댄스 (들썩들썩) · 5 춤 없음
+        void AddDrop(Vector2 at, Sprite sp, float size, int kind, float dance, Sprite mark = null)
         {
-            if (!shotTemplate || !maxwellSprite) { Cats?.AddStrike(true, at.x, at.y, atk.radius, atk.stun, SpName); return; }
-            var r = Instantiate(shotTemplate, shotTemplate.transform.parent); r.sprite = maxwellSprite; r.gameObject.SetActive(true); r.enabled = true;
-            maxwells.Add(new Maxwell { x = at.x, y = at.y, x0 = at.x, y0 = at.y, kind = i % 4, dir = Random.value < 0.5f ? -1 : 1, r = r });
+            if (!shotTemplate || !sp) { Cats?.AddStrike(true, at.x, at.y, atk.radius, atk.stun, SpName, sp); return; }
+            var r = Instantiate(shotTemplate, shotTemplate.transform.parent); r.sprite = sp; r.gameObject.SetActive(true); r.enabled = true;
+            maxwells.Add(new Maxwell { x = at.x, y = at.y, x0 = at.x, y0 = at.y, kind = kind, dir = Random.value < 0.5f ? -1 : 1, r = r,
+                rad = atk.radius, stun = atk.stun, size = size, dance = dance, mark = mark, name = SpName });
         }
 
         void UpdateMaxwells(float dt)
         {
             if (maxwells.Count == 0) return;
-            var a = DB.BossAtk("Maxwell_Drop");
-            float rad = a != null ? a.radius : 120, stunT = a != null ? a.stun : 1.8f;
             var fx = FxManager.I;
             const float TAU = Mathf.PI * 2;
             for (int i = maxwells.Count - 1; i >= 0; i--)
             {
                 var m = maxwells[i]; m.t += dt;
                 if (!m.r) { maxwells.RemoveAt(i); continue; }
-                float w = maxwellSize * World.U / Mathf.Max(0.001f, m.r.sprite.bounds.size.x);
+                float w = m.size * World.U / Mathf.Max(0.001f, m.r.sprite.bounds.size.x), rad = m.rad;
                 if (!m.landed)
                 {
                     // 빙글 돌며 떨어짐
@@ -914,13 +988,24 @@ namespace NKK.Hazards
                     if (k >= 1)
                     {
                         m.landed = true; m.t = 0;
-                        int n = Cats ? Cats.StunArea(m.x, m.y, rad, stunT) : 0;
-                        if (Cats) { Cats.LaunchItems(m.x, m.y, rad, itemLaunch); Cats.HitFx(m.x, m.y, rad, SpName, n, 0.25f); }
+                        int n = Cats ? Cats.StunArea(m.x, m.y, rad, m.stun) : 0;
+                        if (Cats) { Cats.LaunchItems(m.x, m.y, rad, itemLaunch); Cats.HitFx(m.x, m.y, rad, m.name, n, 0.25f); }
                         fx?.Anim("poof", m.x, m.y, 0, rad / 70);
+                        if (m.mark)
+                        {
+                            // 맞은 쥐 머리를 바꿈 (트랄랄레로 상어 머리)
+                            int c = 0;
+                            foreach (var o in Rats.Rats)
+                            {
+                                if (o.UltOn || (o.x - m.x) * (o.x - m.x) + (o.y - m.y) * (o.y - m.y) > rad * rad) continue;
+                                if (c++ < 12) AddMark(o, m.stun + 1.5f, m.mark, true);
+                                if (fx && c < 5 && !string.IsNullOrEmpty(sharkPopup)) fx.Popup(o.x, o.y, sharkPopup, new Color(0.45f, 0.7f, 0.95f), 18, 0.9f, 50);
+                            }
+                        }
                     }
                     continue;
                 }
-                if (m.t >= maxwellDance) { fx?.Anim("poof", m.x, m.y, 20, 1.4f); Destroy(m.r.gameObject); maxwells.RemoveAt(i); continue; }
+                if (m.t >= m.dance) { fx?.Anim("poof", m.x, m.y, 20, 1.4f); Destroy(m.r.gameObject); maxwells.RemoveAt(i); continue; }
                 float ph = m.t * maxwellSwayHz * TAU, z = 0, tilt = 0, sx = w * m.dir, sy = w;
                 // 걷는 종류는 방향을 가끔 바꾸고, 열린 방 밖으로 나가려 하면 돌아섬
                 if ((m.kind == 0 || m.kind == 3) && Mathf.Repeat(m.t, maxwellTurn) < dt) m.dir = -m.dir;
@@ -940,21 +1025,26 @@ namespace NKK.Hazards
                         sx = w * Mathf.Cos(m.t * maxwellSpin * TAU);
                         break;
                     }
-                    default:    // 통통 튀며 좌우
+                    case 3:     // 통통 튀며 좌우
                         m.x += m.dir * maxwellMove * 1.3f * dt;
                         z = Mathf.Abs(Mathf.Sin(ph)) * maxwellHop; sy = w * (z < 6 ? 0.85f : 1.05f);
                         break;
+                    case 4:     // 관 운구 댄스: 박자에 맞춰 들썩 + 좌우로 기우뚱
+                        z = Mathf.Abs(Mathf.Sin(ph * 1.2f)) * 26; tilt = Mathf.Sin(ph * 0.6f) * 9; sx = w;
+                        break;
+                    default: sx = w; break;
                 }
                 if (!Stage.Open.Contains(StageManager.RoomOf(m.x, m.y))) { m.dir = -m.dir; m.x += m.dir * maxwellMove * dt * 2; m.x0 = m.x; m.y0 = m.y; }
                 m.r.transform.position = World.ToUnity(m.x, m.y, z);
                 m.r.transform.rotation = Quaternion.Euler(0, 0, tilt);
                 m.r.transform.localScale = new Vector3(sx, sy, 1);
                 m.r.sortingOrder = World.SortOrder(m.y) + 10;
+                if (m.kind == 5) continue;
                 foreach (var o in Rats.Rats)
                 {
                     if (o.UltOn || o.stun > 0) continue;
                     float dx = o.x - m.x, dy = o.y - m.y;
-                    if (dx * dx + dy * dy < rad * rad * 0.36f) o.Ragdoll(Mathf.Atan2(dy, dx), 260, 300, stunT * 0.5f);
+                    if (dx * dx + dy * dy < rad * rad * 0.36f) o.Ragdoll(Mathf.Atan2(dy, dx), 260, 300, m.stun * 0.5f);
                 }
             }
         }
@@ -1034,11 +1124,14 @@ namespace NKK.Hazards
         }
         void HideProp() { if (specialProp) specialProp.gameObject.SetActive(false); }
 
-        void AddMark(Rat r, float life)
+        // 쥐 머리 위 표시 (개구리 · 커피잔 · 상어 머리). head = 머리 자리에 씌움 (머리를 바꾼 것처럼)
+        void AddMark(Rat r, float life, Sprite sp = null, bool head = false)
         {
-            if (!markTemplate || !frogSprite) return;
-            var m = Instantiate(markTemplate, markTemplate.transform.parent); m.sprite = frogSprite; m.gameObject.SetActive(true);
-            marks.Add(new Mark { r = m, rat = r, life = life });
+            sp = sp ? sp : frogSprite;
+            if (!markTemplate || !sp) return;
+            for (int i = marks.Count - 1; i >= 0; i--) if (marks[i].rat == r) { if (marks[i].r) Destroy(marks[i].r.gameObject); marks.RemoveAt(i); }      // 한 쥐에 하나만
+            var m = Instantiate(markTemplate, markTemplate.transform.parent); m.sprite = sp; m.gameObject.SetActive(true);
+            marks.Add(new Mark { r = m, rat = r, life = life, head = head });
         }
         void UpdateMarks(float dt)
         {
@@ -1047,8 +1140,9 @@ namespace NKK.Hazards
                 var m = marks[i]; m.life -= dt;
                 if (m.life <= 0 || !m.rat) { if (m.r) Destroy(m.r.gameObject); marks.RemoveAt(i); continue; }
                 float w = frogSize * World.U / Mathf.Max(0.001f, m.r.sprite.bounds.size.x) * (1 + 0.1f * Mathf.Sin(Time.time * 12 + i));
-                m.r.transform.position = World.ToUnity(m.rat.x, m.rat.y, m.rat.z + 34);
-                m.r.transform.localScale = Vector3.one * w;
+                if (m.head) w *= headMarkScale;
+                m.r.transform.position = World.ToUnity(m.rat.x + (m.head ? m.rat.face * headMarkFwd : 0), m.rat.y, m.rat.z + (m.head ? headMarkUp : 34));
+                m.r.transform.localScale = new Vector3(w * (m.head ? m.rat.face : 1), w, 1);
                 m.r.sortingOrder = World.SortOrder(m.rat.y) + 50;
                 var c = m.r.color; c.a = Mathf.Clamp01(m.life * 3); m.r.color = c;
             }

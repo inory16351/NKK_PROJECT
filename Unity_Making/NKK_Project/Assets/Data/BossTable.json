@@ -471,24 +471,6 @@
    "text": "냐아아아~!"
   },
   {
-   "line_id": 96056,
-   "boss_id": 95001,
-   "situation": "Special",
-   "text": "비상! 비상!! 전원 출동!!"
-  },
-  {
-   "line_id": 96057,
-   "boss_id": 95001,
-   "situation": "Special",
-   "text": "호루라기 삐이이익!!"
-  },
-  {
-   "line_id": 96058,
-   "boss_id": 95001,
-   "situation": "Special",
-   "text": "경비 30년의 내공을 보여주마!"
-  },
-  {
    "line_id": 96059,
    "boss_id": 95002,
    "situation": "Special",
@@ -505,78 +487,6 @@
    "boss_id": 95002,
    "situation": "Special",
    "text": "내 몸으로 직접 실험한다!!"
-  },
-  {
-   "line_id": 96062,
-   "boss_id": 95003,
-   "situation": "Special",
-   "text": "결재 올려!! 전부 다!!"
-  },
-  {
-   "line_id": 96063,
-   "boss_id": 95003,
-   "situation": "Special",
-   "text": "이사회 소집이다!!!"
-  },
-  {
-   "line_id": 96064,
-   "boss_id": 95003,
-   "situation": "Special",
-   "text": "예산은 너희들 몫이 아니다!"
-  },
-  {
-   "line_id": 96065,
-   "boss_id": 95004,
-   "situation": "Special",
-   "text": "냐아아아아앙!!!!"
-  },
-  {
-   "line_id": 96066,
-   "boss_id": 95004,
-   "situation": "Special",
-   "text": "(우다다다다다)"
-  },
-  {
-   "line_id": 96067,
-   "boss_id": 95004,
-   "situation": "Special",
-   "text": "상자다… 상자다…!!"
-  },
-  {
-   "line_id": 96068,
-   "boss_id": 95005,
-   "situation": "Special",
-   "text": "하늘이여 무너져라냥!"
-  },
-  {
-   "line_id": 96069,
-   "boss_id": 95005,
-   "situation": "Special",
-   "text": "개굴개굴해져라~!"
-  },
-  {
-   "line_id": 96070,
-   "boss_id": 95005,
-   "situation": "Special",
-   "text": "마법 학교 수석의 힘이다냥!"
-  },
-  {
-   "line_id": 96071,
-   "boss_id": 95006,
-   "situation": "Special",
-   "text": "궤도 포격 허가한다냥!"
-  },
-  {
-   "line_id": 96072,
-   "boss_id": 95006,
-   "situation": "Special",
-   "text": "블랙홀 생성 완료."
-  },
-  {
-   "line_id": 96073,
-   "boss_id": 95006,
-   "situation": "Special",
-   "text": "우주는 넓고 쥐는 작다냥."
   },
   {
    "line_id": 96074,
@@ -703,6 +613,108 @@
    "boss_id": 95006,
    "situation": "Skill",
    "text": "(맥스웰 테마 흥얼흥얼)"
+  },
+  {
+   "line_id": 96095,
+   "boss_id": 95001,
+   "situation": "Special",
+   "text": "무야호~!!!"
+  },
+  {
+   "line_id": 96096,
+   "boss_id": 95001,
+   "situation": "Special",
+   "text": "그만큼 신나신다는 거지!!"
+  },
+  {
+   "line_id": 96097,
+   "boss_id": 95001,
+   "situation": "Special",
+   "text": "관짝 들어갑니다~ (빠밤 빠밤)"
+  },
+  {
+   "line_id": 96098,
+   "boss_id": 95002,
+   "situation": "Special",
+   "text": "펑?! ...오히려 좋아!!"
+  },
+  {
+   "line_id": 96099,
+   "boss_id": 95002,
+   "situation": "Special",
+   "text": "실험 실패? 오히려 좋아!!"
+  },
+  {
+   "line_id": 96100,
+   "boss_id": 95003,
+   "situation": "Special",
+   "text": "이 층, 전액 현금 매입이다!!"
+  },
+  {
+   "line_id": 96101,
+   "boss_id": 95003,
+   "situation": "Special",
+   "text": "긴급 회의!! 누가 임포스터지?"
+  },
+  {
+   "line_id": 96102,
+   "boss_id": 95003,
+   "situation": "Special",
+   "text": "쥐가 임포스터다!! 투표해!!"
+  },
+  {
+   "line_id": 96103,
+   "boss_id": 95004,
+   "situation": "Special",
+   "text": "(한강 위를 걷는 고양이)"
+  },
+  {
+   "line_id": 96104,
+   "boss_id": 95004,
+   "situation": "Special",
+   "text": "꽁냥꽁냥~!!"
+  },
+  {
+   "line_id": 96105,
+   "boss_id": 95004,
+   "situation": "Special",
+   "text": "(엉엉엉엉) 바나나..."
+  },
+  {
+   "line_id": 96106,
+   "boss_id": 95005,
+   "situation": "Special",
+   "text": "트랄랄레로 트랄랄라~!"
+  },
+  {
+   "line_id": 96107,
+   "boss_id": 95005,
+   "situation": "Special",
+   "text": "발레리나 카푸치나~ 냥!"
+  },
+  {
+   "line_id": 96108,
+   "boss_id": 95005,
+   "situation": "Special",
+   "text": "머리를 바꿔 주겠다냥!"
+  },
+  {
+   "line_id": 96109,
+   "boss_id": 95006,
+   "situation": "Special",
+   "text": "우리는 답을 찾을 것이다. 늘 그랬듯이."
+  },
+  {
+   "line_id": 96110,
+   "boss_id": 95006,
+   "situation": "Special",
+   "text": "No... it's necessary."
+  },
+  {
+   "line_id": 96111,
+   "boss_id": 95006,
+   "situation": "Special",
+   "text": "눈에서 레이저 나간다냥."
   }
  ],
  "Atk_Type": [
@@ -785,7 +797,7 @@
    "count": 3,
    "windup": 0.5,
    "dur": 0.0,
-   "atk_name": "3단 공중 내려찍기"
+   "atk_name": "무야호~!! 3단 점프"
   },
   {
    "atk_type": "Cone_Rain",
@@ -794,7 +806,7 @@
    "count": 10,
    "windup": 0.8,
    "dur": 1.8,
-   "atk_name": "안전 고깔 폭격"
+   "atk_name": "관짝소년단"
   },
   {
    "atk_type": "Potion_Party",
@@ -812,7 +824,7 @@
    "count": 6,
    "windup": 0.8,
    "dur": 6.0,
-   "atk_name": "자가 실험: 거대화!!"
+   "atk_name": "오히려 좋아!!"
   },
   {
    "atk_type": "Paper_Storm",
@@ -821,7 +833,7 @@
    "count": 7,
    "windup": 0.8,
    "dur": 1.8,
-   "atk_name": "결재 서류 폭탄"
+   "atk_name": "전액 현금 매입"
   },
   {
    "atk_type": "Board_Meeting",
@@ -830,7 +842,7 @@
    "count": 6,
    "windup": 0.9,
    "dur": 1.4,
-   "atk_name": "긴급 이사회 소집"
+   "atk_name": "긴급 비상 회의!!"
   },
   {
    "atk_type": "Zoomies",
@@ -839,7 +851,7 @@
    "count": 5,
    "windup": 0.5,
    "dur": 4.0,
-   "atk_name": "새벽 3시 우다다"
+   "atk_name": "한강 고양이 질주"
   },
   {
    "atk_type": "Box_Fit",
@@ -848,7 +860,7 @@
    "count": 0,
    "windup": 2.0,
    "dur": 1.0,
-   "atk_name": "상자 들어가기"
+   "atk_name": "바나나 고양이"
   },
   {
    "atk_type": "Meteor_Shower",
@@ -857,7 +869,7 @@
    "count": 8,
    "windup": 0.9,
    "dur": 2.0,
-   "atk_name": "운석 소나기"
+   "atk_name": "트랄랄레로 트랄랄라"
   },
   {
    "atk_type": "Frog_Curse",
@@ -866,7 +878,7 @@
    "count": 0,
    "windup": 0.9,
    "dur": 1.0,
-   "atk_name": "개구리 저주"
+   "atk_name": "발레리나 카푸치나"
   },
   {
    "atk_type": "Orbital_Laser",
@@ -875,16 +887,16 @@
    "count": 6,
    "windup": 0.7,
    "dur": 2.4,
-   "atk_name": "궤도 레이저 포격"
+   "atk_name": "홈랜더 눈 레이저"
   },
   {
    "atk_type": "Black_Hole",
    "radius": 450.0,
    "stun": 2.5,
    "count": 0,
-   "windup": 2.0,
+   "windup": 3.0,
    "dur": 1.0,
-   "atk_name": "초거대 블랙홀"
+   "atk_name": "STAY"
   },
   {
    "atk_type": "Baton",
