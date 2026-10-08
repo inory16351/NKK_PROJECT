@@ -1,0 +1,28 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: items_spill.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1536, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 4 rows (each cell 384x384). Each object sits centered in its own cell with a wide magenta margin; objects must NOT touch or cross cell borders. Each object fills about 55% of its cell.
+- STYLE IS THE MOST IMPORTANT RULE: match the attached reference small lab objects exactly (mug, pill bottle, clipboard): same soft 3/4 view, same flat muted colors, same gentle simple shading, same scale feel. Untitled Goose Game flat look, no black outlines, no glow, no drop shadow on the floor, no background.
+- These are SMALL loose things that spill out when a big container in a rat-experiment laboratory breaks. Each must read clearly at small size.
+
+Row 1:
+ 1) a thick bundle of green paper money bills held by a paper band
+ 2) a small cloth sack of coins, tied at the top, a few gold coins peeking out
+ 3) a single shiny gold bar (ingot)
+ 4) a yellow wedge of cheese with holes
+Row 2:
+ 5) a computer hard disk drive (grey metal rectangle)
+ 6) a small green circuit board with chips
+ 7) a small metal chemical canister with a yellow hazard stripe
+ 8) a chunk of pale blue ice
+Row 3:
+ 9) a metal cog gear with a couple of bolts
+ 10) a closed hardcover book (red cover)
+ 11) a messy stack of white paper documents
+ 12) a pencil cup holding pencils and a ruler
+Row 4:
+ 13) a small white pillow
+ 14) a neatly folded white lab coat
+ 15) a tiny clay pot with a green sprout
+ 16) a soda can (red, plain, no logo)

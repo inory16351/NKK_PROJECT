@@ -46,6 +46,8 @@ namespace NKK
 
         void Awake()
         {
+            // 판 시작 = 게임 씬이 열림 → 새 판 시드 (층 지형이 판마다 다름)
+            NKK.Stage.StageManager.RunSeed = (uint)System.Environment.TickCount ^ (uint)UnityEngine.Random.Range(1, int.MaxValue);
             // 로비에서 들어오면 고른 시작 층, 티어·치즈는 저장된 값으로 (게임 씬을 바로 켜면 인스펙터 층)
             var p = Progress.I;
             if (p)

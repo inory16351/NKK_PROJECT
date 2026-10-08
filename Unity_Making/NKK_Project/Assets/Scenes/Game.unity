@@ -1015,6 +1015,38 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: b1e0ae671e8b38a4e8297b584fc29019, type: 3}
   - codeId: cheesegem
     sprite: {fileID: 21300000, guid: 632a7d15c28e6b649a1d36a7a2ecb6d3, type: 3}
+  - codeId: cash
+    sprite: {fileID: 21300000, guid: 413239b8dcb71c844876105be6dc65b6, type: 3}
+  - codeId: coinbag
+    sprite: {fileID: 21300000, guid: 903bf277b8d69344bbb586a4f50f62cf, type: 3}
+  - codeId: goldbar
+    sprite: {fileID: 21300000, guid: ec4dc2ec98f7c3648b104d8480a1b8df, type: 3}
+  - codeId: cheesewedge
+    sprite: {fileID: 21300000, guid: a0883b2ccbc504c4e94cbd168c93eace, type: 3}
+  - codeId: harddisk
+    sprite: {fileID: 21300000, guid: 6ec82bfcb54ac98458dcbf959778deeb, type: 3}
+  - codeId: circuit
+    sprite: {fileID: 21300000, guid: 224bdf20b4dfd60468e7825eeeee7abc, type: 3}
+  - codeId: chemcan
+    sprite: {fileID: 21300000, guid: aac59f783ed94ef4aabe9dd8ca6092ed, type: 3}
+  - codeId: ice
+    sprite: {fileID: 21300000, guid: d560ce6dd5b57d14db3ba1bc1e9eca75, type: 3}
+  - codeId: gear
+    sprite: {fileID: 21300000, guid: b536fe2c5899ef44caedf648d724fce9, type: 3}
+  - codeId: book
+    sprite: {fileID: 21300000, guid: cd16f645cfa95eb419b020d3ec230407, type: 3}
+  - codeId: papers
+    sprite: {fileID: 21300000, guid: 8716ab55e3260644c9e4812d2cf48c5c, type: 3}
+  - codeId: pencilcup
+    sprite: {fileID: 21300000, guid: 6892839a5cf8d2249b1e72b276e98267, type: 3}
+  - codeId: pillow
+    sprite: {fileID: 21300000, guid: 8e0627ebbbf400043bab10549c756767, type: 3}
+  - codeId: labcoat
+    sprite: {fileID: 21300000, guid: 6c6fe4d550e588f4f94fe241ccd6a831, type: 3}
+  - codeId: sprout
+    sprite: {fileID: 21300000, guid: c3d9c8bf206c118489858a6772e9f898, type: 3}
+  - codeId: soda
+    sprite: {fileID: 21300000, guid: 487de73a4ff0b334db1735d3fb3782ed, type: 3}
   roomCap: 24
   spawnInterval: 1.2
   itemHpGrow: 3.6
@@ -7989,6 +8021,9 @@ MonoBehaviour:
   maxRow: 3
   stairsMaxDist: 4
   bossEvery: 5
+  randomLayout: 1
+  stairsShare: 0.5
+  minNormalWall: 0.8
   powNeed0: 2000
   powNeedGrow: 3.3
   powEarly:
@@ -8467,6 +8502,7 @@ MonoBehaviour:
   baseCritChance: 0.05
   critMultiplier: 3
   baseFlipChance: 0.04
+  wheelTrickSpeed: 260
   digMult: 1
   rigLengthByBody:
   - 46

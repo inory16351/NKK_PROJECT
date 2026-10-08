@@ -121,7 +121,7 @@ namespace NKK.Items
         }
 
         // 나올 수 있는 물건: 물건 테이블 등장 층 ≤ 지금 층 ≤ 사라지는 층, 해금 스킬(공용 스킬 New_Item 노드)을 찍었음
-        public bool CanAppear(ItemRow r, int f) => !r.IsFurniture && f >= r.from_floor && (r.to_floor <= 0 || f <= r.to_floor) && CommonSkill.ItemUnlocked(r.unlock_skill);
+        public bool CanAppear(ItemRow r, int f) => !r.IsFurniture && !r.IsSpill && f >= r.from_floor && (r.to_floor <= 0 || f <= r.to_floor) && CommonSkill.ItemUnlocked(r.unlock_skill);
 
         ItemRow PickWeighted(ZoneRow z)
         {
@@ -153,14 +153,14 @@ namespace NKK.Items
             return false;
         }
 
-        // 방 테마별 가구 배치 (층·방 번호 시드라 같은 층은 늘 같은 배치). 시작 방은 실험실 테마
+        // 방 테마별 가구 배치 (판 시드 + 층·방 번호, StageManager.FloorSeed). 시작 방은 실험실 테마
         public void FurnishRoom(Vector2Int room)
         {
             var db = GameDatabase.Instance;
             var themes = new List<string>();
             foreach (var l in db.FurnitureLayouts) if (!themes.Contains(l.room_theme)) themes.Add(l.room_theme);
             if (themes.Count == 0) return;
-            var rnd = new SeededRandom((uint)(Game.Floor * 131 + room.x * 17 + room.y * 71 + 5));
+            var rnd = new SeededRandom(Stage.FloorSeed(Game.Floor) * 131u + (uint)(room.x * 17 + room.y * 71 + 5));
             string theme = room == Vector2Int.zero ? "Lab" : themes[Mathf.FloorToInt(rnd.Next() * themes.Count)];
             float x0 = room.x * World.RW + World.WM + 60, y0 = room.y * World.RH + World.WM + 60, w = World.RW - 2 * (World.WM + 60), h = World.RH - 2 * (World.WM + 60) - 20;
             foreach (var l in db.FurnitureLayouts)
@@ -212,14 +212,13 @@ namespace NKK.Items
                 else if (Random.value < smashWordChance) fx.Popup(it.x, it.y, smashWords[Random.Range(0, smashWords.Length)], Color.white, 20, 0.7f, 40);
                 if (it.Air >= 2) fx.Popup(it.x, it.y, $"AIR x{it.Air} 보너스!", new Color(0.61f, 0.96f, 1f), 20, 0.9f, 60);
             }
-            // 가구: 안에 든 작은 물건들이 우르르 쏟아져서 날아감
-            if (it.Data.IsFurniture)
-                foreach (var d in it.Data.Drops())
-                    if (GameDatabase.Instance.Items.TryGetValue(d, out var r))
-                    {
-                        var o = Spawn(r, it.x + Random.Range(-30f, 30f), it.y + Random.Range(-20f, 20f), true);
-                        o.z = 40; o.By = it.By; o.Launch(Random.Range(0, Mathf.PI * 2), Random.Range(160f, 300f), false); o.vz *= 0.8f;
-                    }
+            // 가구·큰 물건: 안에 든 작은 물건들이 우르르 쏟아져서 날아감 (물건 테이블 drop_01~04, 쏟아짐 전용 물건 = 분류 Spill)
+            foreach (var d in it.Data.Drops())
+                if (GameDatabase.Instance.Items.TryGetValue(d, out var r))
+                {
+                    var o = Spawn(r, it.x + Random.Range(-30f, 30f), it.y + Random.Range(-20f, 20f), true);
+                    o.z = 40; o.By = it.By; o.Launch(Random.Range(0, Mathf.PI * 2), Random.Range(160f, 300f), false); o.vz *= 0.8f;
+                }
             // 작은 연쇄: 주변 물건을 흔들고 최대 체력의 일부 피해 (도미노). 연쇄 폭발 능력이면 더 크게
             float chainAdd = (it.By ? it.By.ChainDamageAdd : 0) + CommonSkill.ChainDamageAdd, rr = it.R + 30 + (it.By ? it.By.ChainRadiusAdd : 0) + CommonSkill.ChainRadiusAdd;
             if (chainAdd > 0) { FxManager.I?.Ring(it.x, it.y, rr, new Color(0.91f, 0.64f, 0.63f, 0.8f), 0.3f); FxManager.I?.Shake(0.05f); }

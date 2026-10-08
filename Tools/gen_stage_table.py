@@ -46,6 +46,19 @@ def path_target(f):
     return sec / (SPU.get(f, SPU_DEFAULT) * SKILL_WALL_MUL.get(f, 0.85))
 
 
+# 판마다 지형이 랜덤 (StageManager.randomLayout, 2026-10-08 사용자) → 층별 SPU 는 그 층 지형 하나에 맞춘 값이라 그대로 못 씀.
+# 앞뒤 SMOOTH 층 측정값의 중앙값으로 매끄럽게 → wall_path = 경로 벽 배율 합 목표. 게임이 생성된 지형의 계단 거리로 계단/일반 벽에 나눔
+SMOOTH = 2
+def spu_smooth(f):
+    v = sorted(SPU[g] for g in range(f - SMOOTH, f + SMOOTH + 1) if g in SPU)
+    return v[len(v) // 2] if v else SPU_DEFAULT
+
+
+def wall_path(f):
+    sec = BOSS_TOTAL_SEC - BOSS_FIGHT_SEC if f % BOSS_EVERY == 0 else TARGET_SEC
+    return round(sec / (spu_smooth(f) * SKILL_WALL_MUL.get(f, 0.85)), 2)
+
+
 # StageManager.GenLayout / SeededRandom 과 똑같은 지형 (층 번호가 시드). maxRow = StageManager.maxRow
 M32 = 0xFFFFFFFF
 class Seeded:
@@ -99,22 +112,23 @@ def main():
     st = [copy.copy(wb['Boss'].cell(r, 1)._style) for r in (1, 2, 3, 4)]
     if 'Stage' in wb.sheetnames: del wb['Stage']
     ws = wb.create_sheet('Stage', 0)
-    head = ['층', '방 수', '적정 전투력', '물건 체력 배율', '치즈 배율', '계단 벽 배율', '일반 벽 배율', '추가 제한시간', '메모']
-    keys = ['floor', 'rooms', 'pow_need', 'item_hp', 'cheese', 'wall_stairs', 'wall_normal', 'time_add', '-']
-    types = ['int', 'int', 'float', 'float', 'float', 'float', 'float', 'float', '-']
+    head = ['층', '방 수', '적정 전투력', '물건 체력 배율', '치즈 배율', '계단 벽 배율', '일반 벽 배율', '경로 벽 합', '추가 제한시간', '메모']
+    keys = ['floor', 'rooms', 'pow_need', 'item_hp', 'cheese', 'wall_stairs', 'wall_normal', 'wall_path', 'time_add', '-']
+    types = ['int', 'int', 'float', 'float', 'float', 'float', 'float', 'float', 'float', '-']
     for c, (h, k, t) in enumerate(zip(head, keys, types), 1):
         for r, v in enumerate((h, k, t), 1): ws.cell(r, c, v)._style = copy.copy(st[r - 1])
     for f in range(1, FLOORS + 1):
         row = [f, rooms(f), nice(POW0 * POW_GROW ** (f - 1)), nice(HP_GROW ** (f - 1)), nice(CHEESE_GROW ** (f - 1)),
-               *walls(f), 0, '보스 층' if f % BOSS_EVERY == 0 else '']
+               *walls(f), wall_path(f), 0, '보스 층' if f % BOSS_EVERY == 0 else '']
         for c, v in enumerate(row, 1): ws.cell(3 + f, c, v)._style = copy.copy(st[3])
-    for c, w in enumerate([6, 8, 14, 14, 12, 12, 12, 14, 12], 1): ws.column_dimensions[openpyxl.utils.get_column_letter(c)].width = w
+    for c, w in enumerate([6, 8, 14, 14, 12, 12, 12, 12, 14, 12], 1): ws.column_dimensions[openpyxl.utils.get_column_letter(c)].width = w
     cd = wb['Column_Desc']
     have = {cd.cell(r, 1).value for r in range(4, cd.max_row + 1)}
     for k, d in [('pow_need', 'Stage: 적정 전투력(찍찍!!) = 무리 공격력 합. 모자라면 벽 피해 = (전투력÷적정)^지수 (계단 방 1.5 · 일반 0.5)'),
                  ('item_hp', 'Stage: 물건·사람·고양이 체력 = 기본(12 × 물건 체력 배율) × 이 값 × 3.6^(방 거리 × 0.1)'),
                  ('cheese', 'Stage: 물건·사람·고양이·보스 치즈 = 기본(3 × 치즈 배율) × 이 값 × 1.8^(방 거리 × 0.1)'),
                  ('wall_stairs / wall_normal', 'Stage: 벽 체력 = 적정 전투력 × 이 값. 생성기가 층 지형(계단까지 경로)을 보고 경로 벽 합이 목표가 되게 정함'),
+                 ('wall_path', 'Stage: 계단까지 최단 경로 벽 배율 합 목표. 판마다 지형이 랜덤이라 게임(StageManager)이 계단 거리 d 로 나눔: 일반 = max(0.8, 합×0.5÷(d-1)), 계단 = 나머지. 0 이면 wall_stairs·wall_normal 사용'),
                  ('time_add', 'Stage: 층 제한시간에 더하는 초 (기본 190 + 35 × 방 수 + 보스 층 90)'),
                  ('Stage 생성', 'Tools/gen_stage_table.py 로 생성 (곡선 숫자를 바꾸고 다시 실행)')]:
         if k in have: continue

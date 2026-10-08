@@ -40,6 +40,14 @@ namespace NKK.Stage
         [Tooltip("세로로 뻗을 수 있는 최대 칸")] public int maxRow = 3;
         [Tooltip("계단 방 = 시작 방에서 이 거리(방 이동 횟수) 이내 중 가장 먼 방. 긴 복도 끝 계단은 쥐가 잘 안 모여 너무 느려짐 (Tools/gen_stage_table.py STAIRS_MAX_DIST 와 같게)")] public int stairsMaxDist = 4;
         public int bossEvery = 5;
+        [Tooltip("판마다 지형 랜덤 (판 시드 RunSeed + 층). 끄면 예전처럼 층 번호 시드 (같은 층은 늘 같은 지형, 테스트용)")] public bool randomLayout = true;
+        [Tooltip("벽 체력 자동 계산 (스테이지 테이블 wall_path > 0): 계단까지 경로 벽 합 중 계단 방 벽 몫 · 일반 벽 최소 배율 (gen_stage_table.py STAIRS_SHARE · MIN_NORMAL)")] public float stairsShare = 0.5f, minNormalWall = 0.8f;
+
+        // 판 시드: 게임 씬이 열릴 때(= 판 시작) 새로 뽑음. 층 지형·가구 배치가 이 값 + 층 번호로 정해짐
+        public static uint RunSeed;
+        public uint FloorSeed(int f) => randomLayout ? (uint)(RunSeed * 2654435761u + (uint)f * 7919u + 17u) : (uint)(f * 7919 + 17);
+        public int StairsDist { get; private set; }
+        float curStairsWall = -1, curNormalWall = -1;     // 이 층 지형으로 계산한 벽 배율 (-1 = 테이블 wall_stairs·wall_normal)
 
         [Header("적정 전투력 (찍찍!!) = 기본 × 증가^(층-1) × 초반 보정")]
         public float powNeed0 = 2000;
@@ -114,7 +122,7 @@ namespace NKK.Stage
         // ── 층 생성 ──
         void GenLayout(int f)
         {
-            var rnd = new SeededRandom((uint)(f * 7919 + 17));
+            var rnd = new SeededRandom(FloorSeed(f));
             var sr = Row(f);
             int n = sr != null && sr.rooms > 0 ? sr.rooms : Mathf.Min(roomMax, roomBase + Mathf.FloorToInt(f * roomPerFloor)) + (IsBossFloor(f) ? 1 : 0);
             var list = new List<Vector2Int> { Vector2Int.zero };
@@ -132,7 +140,15 @@ namespace NKK.Stage
             var q = new Queue<Vector2Int>(); q.Enqueue(Vector2Int.zero);
             while (q.Count > 0) { var c = q.Dequeue(); foreach (var d in Dirs) { var k = c + d; if (Layout.Contains(k) && !dist.ContainsKey(k)) { dist[k] = dist[c] + 1; q.Enqueue(k); } } }
             var best = Vector2Int.zero; foreach (var kv in dist) if (kv.Value > dist[best] && kv.Value <= stairsMaxDist) best = kv.Key;
-            StairsRoom = best;
+            StairsRoom = best; StairsDist = dist[best];
+            // 벽 체력 자동 계산: 경로 벽 배율 합 = 테이블 wall_path (gen_stage_table.py walls() 와 같은 나눔)
+            curStairsWall = curNormalWall = -1;
+            if (sr != null && sr.wall_path > 0)
+            {
+                float S = sr.wall_path; int d = StairsDist;
+                if (d <= 1) { curStairsWall = S; curNormalWall = 1.2f; }
+                else { curNormalWall = Mathf.Max(minNormalWall, S * (1 - stairsShare) / (d - 1)); curStairsWall = Mathf.Max(1, S - curNormalWall * (d - 1)); }
+            }
         }
 
         Rat wallBy;
@@ -214,8 +230,8 @@ namespace NKK.Stage
         {
             int f = Game.Floor;
             var sr = Row(f);
-            if (IsStairsRoom(ti, tj)) return PowNeed(f) * (sr != null ? sr.wall_stairs : Mathf.Min(wallPowStairs, 2 + 6 * (f - 1)));
-            return PowNeed(f) * (sr != null ? sr.wall_normal : wallPow) * (1 + wallDistK * RoomDist(new Vector2Int(ti, tj)));
+            if (IsStairsRoom(ti, tj)) return PowNeed(f) * (curStairsWall > 0 ? curStairsWall : sr != null ? sr.wall_stairs : Mathf.Min(wallPowStairs, 2 + 6 * (f - 1)));
+            return PowNeed(f) * (curNormalWall > 0 ? curNormalWall : sr != null ? sr.wall_normal : wallPow) * (1 + wallDistK * RoomDist(new Vector2Int(ti, tj)));
         }
 
         public float WallHP(int i, int j, int di, int dj) => walls.TryGetValue(WallKey(i, j, di, dj), out var v) ? v : WallMax(i + di, j + dj);

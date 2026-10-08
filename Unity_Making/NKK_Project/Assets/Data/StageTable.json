@@ -8,6 +8,7 @@
    "cheese": 1.0,
    "wall_stairs": 52.33,
    "wall_normal": 52.33,
+   "wall_path": 85.44,
    "time_add": 0.0
   },
   {
@@ -18,6 +19,7 @@
    "cheese": 1.5,
    "wall_stairs": 39.76,
    "wall_normal": 39.76,
+   "wall_path": 79.53,
    "time_add": 0.0
   },
   {
@@ -28,6 +30,7 @@
    "cheese": 2.25,
    "wall_stairs": 44.97,
    "wall_normal": 44.97,
+   "wall_path": 81.2,
    "time_add": 0.0
   },
   {
@@ -38,6 +41,7 @@
    "cheese": 3.38,
    "wall_stairs": 25.74,
    "wall_normal": 12.87,
+   "wall_path": 51.49,
    "time_add": 0.0
   },
   {
@@ -48,6 +52,7 @@
    "cheese": 5.06,
    "wall_stairs": 3.07,
    "wall_normal": 1.53,
+   "wall_path": 18.26,
    "time_add": 0.0
   },
   {
@@ -58,6 +63,7 @@
    "cheese": 7.59,
    "wall_stairs": 8.71,
    "wall_normal": 2.9,
+   "wall_path": 17.42,
    "time_add": 0.0
   },
   {
@@ -68,6 +74,7 @@
    "cheese": 11.39,
    "wall_stairs": 10.9,
    "wall_normal": 3.63,
+   "wall_path": 15.52,
    "time_add": 0.0
   },
   {
@@ -78,6 +85,7 @@
    "cheese": 17.09,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 18.32,
    "time_add": 0.0
   },
   {
@@ -88,6 +96,7 @@
    "cheese": 25.63,
    "wall_stairs": 4.85,
    "wall_normal": 2.43,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -98,6 +107,7 @@
    "cheese": 38.44,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 10.59,
    "time_add": 0.0
   },
   {
@@ -108,6 +118,7 @@
    "cheese": 57.67,
    "wall_stairs": 1.48,
    "wall_normal": 0.8,
+   "wall_path": 12.22,
    "time_add": 0.0
   },
   {
@@ -118,6 +129,7 @@
    "cheese": 86.5,
    "wall_stairs": 6.11,
    "wall_normal": 3.05,
+   "wall_path": 18.32,
    "time_add": 0.0
   },
   {
@@ -128,6 +140,7 @@
    "cheese": 130.0,
    "wall_stairs": 16.68,
    "wall_normal": 5.56,
+   "wall_path": 12.22,
    "time_add": 0.0
   },
   {
@@ -138,6 +151,7 @@
    "cheese": 195.0,
    "wall_stairs": 9.54,
    "wall_normal": 3.18,
+   "wall_path": 19.09,
    "time_add": 0.0
   },
   {
@@ -148,6 +162,7 @@
    "cheese": 292.0,
    "wall_stairs": 1.84,
    "wall_normal": 0.8,
+   "wall_path": 16.54,
    "time_add": 0.0
   },
   {
@@ -158,6 +173,7 @@
    "cheese": 438.0,
    "wall_stairs": 76.36,
    "wall_normal": 76.36,
+   "wall_path": 19.09,
    "time_add": 0.0
   },
   {
@@ -168,6 +184,7 @@
    "cheese": 657.0,
    "wall_stairs": 4.86,
    "wall_normal": 1.62,
+   "wall_path": 23.67,
    "time_add": 0.0
   },
   {
@@ -178,6 +195,7 @@
    "cheese": 985.0,
    "wall_stairs": 11.83,
    "wall_normal": 3.94,
+   "wall_path": 28.21,
    "time_add": 0.0
   },
   {
@@ -188,6 +206,7 @@
    "cheese": 1480.0,
    "wall_stairs": 14.11,
    "wall_normal": 4.7,
+   "wall_path": 28.21,
    "time_add": 0.0
   },
   {
@@ -198,6 +217,7 @@
    "cheese": 2220.0,
    "wall_stairs": 16.23,
    "wall_normal": 5.41,
+   "wall_path": 32.24,
    "time_add": 0.0
   },
   {
@@ -208,6 +228,7 @@
    "cheese": 3330.0,
    "wall_stairs": 18.6,
    "wall_normal": 6.2,
+   "wall_path": 37.2,
    "time_add": 0.0
   },
   {
@@ -218,6 +239,7 @@
    "cheese": 4990.0,
    "wall_stairs": 43.63,
    "wall_normal": 14.54,
+   "wall_path": 37.46,
    "time_add": 0.0
   },
   {
@@ -228,6 +250,7 @@
    "cheese": 7480.0,
    "wall_stairs": 18.47,
    "wall_normal": 6.16,
+   "wall_path": 51.57,
    "time_add": 0.0
   },
   {
@@ -238,6 +261,7 @@
    "cheese": 11200.0,
    "wall_stairs": 31.02,
    "wall_normal": 10.34,
+   "wall_path": 51.57,
    "time_add": 0.0
   },
   {
@@ -248,6 +272,7 @@
    "cheese": 16800.0,
    "wall_stairs": 22.35,
    "wall_normal": 7.45,
+   "wall_path": 44.69,
    "time_add": 0.0
   },
   {
@@ -258,6 +283,7 @@
    "cheese": 25300.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 51.57,
    "time_add": 0.0
   },
   {
@@ -268,6 +294,7 @@
    "cheese": 37900.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 51.57,
    "time_add": 0.0
   },
   {
@@ -278,6 +305,7 @@
    "cheese": 56800.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -288,6 +316,7 @@
    "cheese": 85200.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -298,6 +327,7 @@
    "cheese": 128000.0,
    "wall_stairs": 6.88,
    "wall_normal": 2.29,
+   "wall_path": 13.76,
    "time_add": 0.0
   },
   {
@@ -308,6 +338,7 @@
    "cheese": 192000.0,
    "wall_stairs": 7.94,
    "wall_normal": 3.97,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -318,6 +349,7 @@
    "cheese": 288000.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -328,6 +360,7 @@
    "cheese": 431000.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -338,6 +371,7 @@
    "cheese": 647000.0,
    "wall_stairs": 7.94,
    "wall_normal": 3.97,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -348,6 +382,7 @@
    "cheese": 971000.0,
    "wall_stairs": 6.88,
    "wall_normal": 2.29,
+   "wall_path": 13.76,
    "time_add": 0.0
   },
   {
@@ -358,6 +393,7 @@
    "cheese": 1460000.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -368,6 +404,7 @@
    "cheese": 2180000.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -378,6 +415,7 @@
    "cheese": 3280000.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -388,6 +426,7 @@
    "cheese": 4910000.0,
    "wall_stairs": 7.94,
    "wall_normal": 3.97,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -398,6 +437,7 @@
    "cheese": 7370000.0,
    "wall_stairs": 6.88,
    "wall_normal": 2.29,
+   "wall_path": 13.76,
    "time_add": 0.0
   },
   {
@@ -408,6 +448,7 @@
    "cheese": 11100000.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -418,6 +459,7 @@
    "cheese": 16600000.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -428,6 +470,7 @@
    "cheese": 24900000.0,
    "wall_stairs": 7.94,
    "wall_normal": 3.97,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -438,6 +481,7 @@
    "cheese": 37300000.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -448,6 +492,7 @@
    "cheese": 56000000.0,
    "wall_stairs": 6.88,
    "wall_normal": 2.29,
+   "wall_path": 13.76,
    "time_add": 0.0
   },
   {
@@ -458,6 +503,7 @@
    "cheese": 84000000.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -468,6 +514,7 @@
    "cheese": 126000000.0,
    "wall_stairs": 7.94,
    "wall_normal": 2.65,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -478,6 +525,7 @@
    "cheese": 189000000.0,
    "wall_stairs": 7.94,
    "wall_normal": 3.97,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -488,6 +536,7 @@
    "cheese": 283000000.0,
    "wall_stairs": 7.94,
    "wall_normal": 3.97,
+   "wall_path": 15.88,
    "time_add": 0.0
   },
   {
@@ -498,6 +547,7 @@
    "cheese": 425000000.0,
    "wall_stairs": 6.88,
    "wall_normal": 2.29,
+   "wall_path": 13.76,
    "time_add": 0.0
   }
  ],

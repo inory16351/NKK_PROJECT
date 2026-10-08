@@ -110,6 +110,7 @@ namespace NKK.Data
         public int from_floor, to_floor, unlock_skill;      // 등장 층 · 사라지는 층 (0 = 계속) · 해금 스킬 노드 (0 = 없음)
         public string spill_color; public int drop_01, drop_02, drop_03, drop_04; public string asset;
         public bool IsFurniture => item_category == "Furniture";
+        public bool IsSpill => item_category == "Spill";        // 쏟아짐 전용 (큰 물건·가구가 부서질 때만 나옴, 평소 생성 안 됨)
         public IEnumerable<int> Drops() { foreach (var d in new[] { drop_01, drop_02, drop_03, drop_04 }) if (d != 0) yield return d; }
     }
 
@@ -173,7 +174,7 @@ namespace NKK.Data
     // 보스 공격별 수치 (스테이지 테이블 Atk_Type 시트)
     [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; }
     // 층 밸런스 (스테이지 테이블 Stage, Tools/gen_stage_table.py 로 생성)
-    [Serializable] public class StageRow { public int floor, rooms; public float pow_need, item_hp, cheese, wall_stairs, wall_normal, time_add; }
+    [Serializable] public class StageRow { public int floor, rooms; public float pow_need, item_hp, cheese, wall_stairs, wall_normal, wall_path, time_add; }     // wall_path = 계단까지 경로 벽 배율 합 (판마다 지형이 바뀌어 StageManager 가 경로에 나눔)
     // 업적 (업적 테이블 Achievement): 조건 타입 cond_type + 대상 target_id + 필요 횟수 need. 설명 {ult} = 대상 필살기 이름
     [Serializable] public class AchievementRow { public int achv_id; public string achv_name, achv_desc, cond_type; public int target_id, need; public string achv_icon; public int sort_order; }
     [Serializable] public class AchievementTableFile { public List<AchievementRow> Achievement; }
