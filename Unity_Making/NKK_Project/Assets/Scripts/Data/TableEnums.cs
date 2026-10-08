@@ -52,6 +52,6 @@ namespace NKK.Data
         Trick_Unlock, Trick_Chance, Trick_Cheese_Pct, Trick_Gauge_Pct, Trap_Single_Down, Trap_Multi_Down,
         // 해금·특수
         Stage_Skip, Wall_Hp_Down, Ult_Gauge_Pct, Ult_Power_Pct, Ult_Auto, Super_Jump_Pct,
-        Bite_Zap, Chain_Blast, Cheese_Meteor, Twin_Chance, Mutation_Chance, Birth_Frenzy, Furniture_Pct, Air_Cheese_Pct, Rush_Up, Cat_Hp_Down, Rush_CD, Ult_CD,
+        Bite_Zap, Chain_Blast, Cheese_Meteor, Twin_Chance, Mutation_Chance, Birth_Frenzy, Furniture_Pct, Air_Cheese_Pct, Rush_Up, Cat_Hp_Down, Rush_CD, Ult_CD, Rush_Range,
     }
 }

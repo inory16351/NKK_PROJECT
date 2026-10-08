@@ -60,7 +60,7 @@ MonoBehaviour:
     shoulder: {x: 0.582, y: 0.12}
     hip: {x: 0.489, y: 0.95}
     front: 0
-    headScale: 0.85
+    headScale: 0.775
   - codeId: boss_mad
     head: {fileID: 21300000, guid: 7a98e31d07ed7d040aa5db468fda70ba, type: 3}
     scared: {fileID: 21300000, guid: 089e143f6f74ff34185159c1306204c1, type: 3}

@@ -21,8 +21,8 @@ namespace NKK
         public UltimateManager Ults;
 
         [Header("연구자료 = round(기본 × 증가^(층-1)) × (보스 층 배율)")]
-        public float researchBase = 6;
-        public float researchGrow = 1.45f;
+        [Tooltip("2026-10-08 경제 개편: 훈장 하나에 그 층대 1훈장 약 2판 → 8훈장 약 6판 (Tools/gen_skill_tree.py RESEARCH 와 같이)")] public float researchBase = 8;
+        public float researchGrow = 1.25f;
         public float bossMul = 3;
         public int bossEvery = 5;
 

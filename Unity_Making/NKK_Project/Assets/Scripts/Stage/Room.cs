@@ -21,6 +21,13 @@ namespace NKK.Stage
         [Tooltip("벽 끝 단면 = 윗면 색 × 이 값")] public float endShade = 0.76f;
         [Tooltip("벽이 거의 부서졌을 때 색")] public Color crackedTint = new(0.85f, 0.55f, 0.45f);
         [Tooltip("맞을 때 흔들림 크기 (게임 단위)")] public float shakeAmount = 4;
+        [Header("금 자국 (벽 체력 75%·45%·20% 아래)")]
+        [Tooltip("금 자국 템플릿 (자식 SpriteRenderer, 꺼 둠). 벽마다 3개씩 복제")] public SpriteRenderer crackTemplate;
+        [Tooltip("금 자국 그림 1·2·3단계 (흰색, crackColor 로 칠함)")] public Sprite[] crackSprites;
+        [Tooltip("금 자국 색 (벽 위에 곱해 보이게 어둡게)")] public Color crackColor = new(0.25f, 0.22f, 0.24f, 0.75f);
+        [Tooltip("단계가 되는 남은 체력 비율")] public float[] crackAt = { 0.75f, 0.45f, 0.2f };
+        SpriteRenderer[,] cracks;
+        readonly int[] crackStage = new int[4];
 
         const int FloorOrder = -30000, SideOrder = -29500, EndOrder = -29400, TopOrder = -29000;
 
@@ -111,18 +118,51 @@ namespace NKK.Stage
                     if (k < 2) ps[k].transform.position = basePos[k]; else basePos[k] = ps[k].transform.position;
                 }
             for (int k = 0; k < 4; k++) shake[k] = 0;
+            // 벽이 사라졌으면(방이 열림) 금 자국도
+            if (cracks != null) for (int k = 0; k < 4; k++) if (!on[k]) { crackStage[k] = 0; for (int n = 0; n < 3; n++) if (cracks[k, n]) cracks[k, n].gameObject.SetActive(false); }
         }
 
         // 벽 피격: 흔들림 + 남은 체력만큼 붉어짐 (di,dj = 맞은 방향)
         public void ShakeWall(int di, int dj, float hpRatio)
         {
             int k = dj < 0 ? 0 : dj > 0 ? 1 : di < 0 ? 2 : 3;
+            SetCracks(k, hpRatio);
             shake[k] = Mathf.Min(1, shake[k] + 0.15f);
             var ps = Parts;
             if (baseCol == null) return;
             float t = Mathf.Clamp01(hpRatio);
             if (ps[k]) ps[k].color = Color.Lerp(crackedTint, baseCol[k], t);
             if (k >= 2 && ps[k + 2]) ps[k + 2].color = Color.Lerp(crackedTint * baseCol[k + 2], baseCol[k + 2], t);
+        }
+
+        // 벽 k (0 위 · 1 아래 · 2 왼 · 3 오른) 금 자국: 단계 1 = 가운데 작은 금, 2 = 중간 금 + 작은 금, 3 = 큰 금 + 중간 금 2개
+        void SetCracks(int k, float hpRatio)
+        {
+            if (!crackTemplate || crackSprites == null || crackSprites.Length < 3) return;
+            int st = 0; for (int s = 0; s < crackAt.Length; s++) if (hpRatio < crackAt[s]) st = s + 1;
+            if (st == crackStage[k]) return;
+            crackStage[k] = st;
+            if (cracks == null) { cracks = new SpriteRenderer[4, 3]; crackTemplate.gameObject.SetActive(false); }
+            var w = Parts[k];
+            int[][] pick = { new int[0], new[] { 0 }, new[] { 1, 0 }, new[] { 2, 1, 1 } };
+            float[] along = { 0, -0.27f, 0.27f };
+            for (int n = 0; n < 3; n++)
+            {
+                var c = cracks[k, n];
+                bool on = w && w.enabled && n < pick[st].Length;
+                if (!on) { if (c) c.gameObject.SetActive(false); continue; }
+                if (!c) { c = cracks[k, n] = Instantiate(crackTemplate, transform); c.name = $"Crack_{k}_{n}"; }
+                c.gameObject.SetActive(true);
+                c.sprite = crackSprites[pick[st][n]]; c.color = crackColor;
+                var b = w.bounds; bool side = k >= 2;
+                float len = side ? b.size.y : b.size.x, thick = side ? b.size.x : b.size.y;
+                var pos = b.center + (side ? new Vector3(0, along[n] * len, 0) : new Vector3(along[n] * len, 0, 0));
+                float size = Mathf.Min(thick * (side ? 3.2f : 1.5f), len * 0.4f) * (n == 0 ? 1 : 0.8f);
+                c.transform.position = pos;
+                c.transform.rotation = Quaternion.Euler(0, 0, side ? 90 : 0);
+                float sw = c.sprite.bounds.size.x; c.transform.localScale = Vector3.one * size / Mathf.Max(0.01f, sw);
+                c.sortingOrder = w.sortingOrder + 1;
+            }
         }
 
         void Update()

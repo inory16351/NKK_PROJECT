@@ -1,0 +1,18 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_wall.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing centered in its own cell with a wide magenta margin; drawings must NOT touch or cross cell borders.
+- STYLE: Untitled Goose Game flat look like the attached references: completely FLAT shapes, NO outlines, NO black linework, no gloss, no gradients, no glow, no drop shadows.
+- IMPORTANT COLOR RULE: everything is drawn in PURE WHITE and very light grey only (so the game can tint it to each wall color). Use only 2-3 tones: white, light grey (#d8d8d8), mid grey (#a8a8a8) for the darker inner side.
+
+Row 1 = CRACK OVERLAYS for a lab wall (to lay on top of the wall when it is damaged), each a wide rectangular area of cracks only (no wall drawn), cracks are thick flat light-grey zig-zag fissures with small chipped holes, on magenta:
+ 1) small damage: two or three short cracks
+ 2) medium damage: a branching crack network covering half the area, a couple of small holes
+ 3) heavy damage: big branching cracks everywhere, several chipped-out chunks and one large hole
+ 4) a ragged broken-wall edge: a jagged torn strip (like the edge left after a wall is smashed open), horizontal
+Row 2 = DEBRIS that flies when the wall breaks (each a single piece, white/light grey):
+ 5) a rectangular brick chunk seen at a 3/4 angle
+ 6) a broken concrete slab chunk, irregular
+ 7) a small cluster of three little rubble pebbles
+ 8) a fluffy flat dust cloud puff (white, soft rounded blobs)

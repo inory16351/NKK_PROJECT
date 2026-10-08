@@ -268,6 +268,19 @@ namespace NKK.Stage
             else BreakWall(i, j, di, dj);
         }
 
+        // 벽 무너짐 연출 (WallFx): 무너지는 벽 선 (게임 좌표) + 그 구간 벽 윗면 색
+        void BreakFx(int i, int j, int di, int dj, bool stairs)
+        {
+            if (!WallFx.I) return;
+            float L = i * World.RW, T = j * World.RH, x0, y0, x1, y1;
+            if (di != 0) { x0 = x1 = L + (di > 0 ? World.RW : 0); y0 = T; y1 = T + World.RH; }
+            else { y0 = y1 = T + (dj > 0 ? World.RH : 0); x0 = L; x1 = L + World.RW; }
+            Color col = Color.white;
+            var zone = GameDatabase.Instance.ZoneOf(Game.Floor);
+            if (zone != null && zoneLooks != null) foreach (var z in zoneLooks) if (z.zoneId == zone.zone_id) { col = z.wallCap; break; }
+            WallFx.I.Break(x0, y0, x1, y1, col, rooms.TryGetValue(new Vector2Int(i, j), out var r) ? r.wallHeight : 46, stairs, di, dj);      // 잔해는 새로 열리는 방 쪽으로
+        }
+
         public void DamageWall(int i, int j, int di, int dj, float dmg, Rat by = null)
         {
             if (by) wallBy = by;
@@ -285,6 +298,7 @@ namespace NKK.Stage
             walls.Remove(WallKey(i, j, di, dj));
             var t = new Vector2Int(i + di, j + dj);
             if (Open.Contains(t)) return;
+            BreakFx(i, j, di, dj, IsStairsRoom(t.x, t.y));
             Open.Add(t);
             if (wallBy) Rats.Ults?.Charge(wallBy, CondType.Destroy_Wall);      // 벽 붕괴 → 마지막으로 친 쥐 종 필살기 게이지
             foreach (var d in Dirs) if (Open.Contains(t + d)) walls.Remove(WallKey(t.x, t.y, d.x, d.y));

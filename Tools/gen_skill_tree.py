@@ -35,7 +35,7 @@ T[1] = dict(
     G1=('Start_Rat', 1, 1), G2=('Time_Add', 3), G3=('Breed_Chance', 0.05), G4=('Breed_Chance', 0.10, 10), G5=('Pop_Cap', 10), G6=('Time_Add', 4), G7=('Promote_Double', 0.03, 1), G8=('Breed_Chance', 0.05),
     L1=('Item_Count_Flat', 1), L2=('Cheese_Pct', 0.10), L3=('Item_Count_Flat', 1), L4=('Cheese_Pct', 0.15), L5=('Cheese_Pct', 0.30, 1), L6=('New_Item', 60011), L7=('Cheese_Pct', 0.30, 2), L8=('New_Item', 60025),
     K1=('Trick_Unlock', 1, 0.03), K2=('Trick_Cheese_Pct', 0.20), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 1, 0.02), K5=('Trap_Multi_Down', 0.10), K6=('Trick_Cheese_Pct', 0.40), K7=('Trick_Gauge_Pct', 0.25),
-    S1=('Stage_Skip', 1), S2=('Wall_Hp_Down', 0.05), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.1, 4), S5=('Rocket_CD', 5), S6=('Ult_Gauge_Pct', 0.10),
+    S1=('Stage_Skip', 2), S2=('Wall_Hp_Down', 0.05), S3=('Rush_Range', 0.15), S4=('Boss_Dmg_Pct', 0.1, 4), S5=('Rocket_CD', 5), S6=('Ult_Gauge_Pct', 0.10),
 )
 T[2] = dict(
     C1=('Atk_Flat', 2), C2=('Atk_Pct', 0.10), C3=('Crit_Chance', 0.03), C4=('Atk_Flat', 4, 2), C5=('Atk_Pct', 0.15, 2, 1), C6=('Wall_Dmg_Pct', 0.15), C7=('Crit_Dmg', 0.50), C8=('Dmg_Pct', 0.15),
@@ -49,7 +49,7 @@ T[3] = dict(
     G1=('Start_Rat', 1, 1), G2=('Time_Add', 6), G3=('Breed_Chance', 0.05), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 15), G6=('Time_Add', 6), G7=('Promote_Double', 0.03, 2), G8=('Promote_Double', 0.02, 1),
     L1=('Item_Count_Flat', 2), L2=('Cheese_Pct', 0.15), L3=('Item_Count_Pct', 0.15), L4=('Cheese_Pct', 0.40, 2), L5=('Cheese_Pct', 0.40, 1), L6=('New_Item', 60020), L7=('Furniture_Pct', 0.30, 0.30), L8=('New_Item', 60027),
     K1=('Trick_Unlock', 3, 0.015), K2=('Trick_Chance', 3, 0.015), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 2, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Cheese_Pct', 0.50), K7=('Trick_Gauge_Pct', 0.25),
-    S1=('Stage_Skip', 2), S2=('Bite_Zap', 0.05, 2, 0.5), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.15, 4), S5=('Chain_Blast', 30, 0.20), S6=('Wall_Hp_Down', 0.05),
+    S1=('Stage_Skip', 3), S2=('Bite_Zap', 0.05, 2, 0.5), S3=('Rush_Range', 0.15), S4=('Boss_Dmg_Pct', 0.15, 4), S5=('Chain_Blast', 30, 0.20), S6=('Wall_Hp_Down', 0.05),
 )
 T[4] = dict(
     C1=('Atk_Flat', 5), C2=('Atk_Pct', 0.20), C3=('Crit_Dmg', 0.50), C4=('Atk_Flat', 10, 4), C5=('Atk_Pct', 0.25, 4, 1), C6=('Wall_Dmg_Pct', 0.20), C7=('Boss_Dmg_Pct', 0.25), C8=('Dmg_Pct', 0.20),
@@ -63,7 +63,7 @@ T[5] = dict(
     G1=('Start_Rat', 1, 1), G2=('Time_Add', 8), G3=('Breed_Chance', 0.05), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 20), G6=('Time_Add', 8), G7=('Promote_Double', 0.03, 4), G8=('Mutation_Chance', 0.10),
     L1=('Item_Count_Pct', 0.20), L2=('Cheese_Pct', 0.20), L3=('Spawn_Rate_Pct', 0.20), L4=('Cheese_Pct', 0.60, 2), L5=('Cheese_Pct', 0.60, 1), L6=('New_Item', 60023), L7=('Gold_Item', 0.04), L8=('New_Item', 60029),
     K1=('Trick_Unlock', 5, 0.02), K2=('Trick_Cheese_Pct', 0.50), K3=('Trap_Single_Down', 0.05), K4=('Trick_Chance', 1, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Chance', 2, 0.02), K7=('Trick_Gauge_Pct', 0.30),
-    S1=('Stage_Skip', 2), S2=('Cheese_Meteor', 12, 0.30), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.2, 4), S5=('Cheese_Meteor', 0, 0.30), S6=('Rush_CD', 0.5),
+    S1=('Stage_Skip', 3), S2=('Cheese_Meteor', 12, 0.30), S3=('Rush_Range', 0.20), S4=('Boss_Dmg_Pct', 0.2, 4), S5=('Cheese_Meteor', 0, 0.30), S6=('Rush_CD', 0.5),
 )
 T[6] = dict(
     C1=('Atk_Flat', 12), C2=('Atk_Pct', 0.30), C3=('Crit_Dmg', 0.75), C4=('Atk_Flat', 22, 6), C5=('Atk_Pct', 0.30, 6, 1), C6=('Wall_Dmg_Pct', 0.25), C7=('Boss_Dmg_Pct', 0.30), C8=('Dmg_Pct', 0.30),
@@ -77,7 +77,7 @@ T[7] = dict(
     G1=('Start_Rat', 1, 1), G2=('Time_Add', 10), G3=('Breed_Chance', 0.05), G4=('Birth_Frenzy', 4, 200, 1.5), G5=('Pop_Cap', 25), G6=('Time_Add', 10), G7=('Promote_Double', 0.03, 0), G8=('Mutation_Chance', 0.15),
     L1=('Item_Count_Pct', 0.25), L2=('Cheese_Pct', 0.25), L3=('Spawn_Rate_Pct', 0.25), L4=('Cheese_Pct', 0.80, 2), L5=('Cheese_Pct', 0.80, 1), L6=('Gold_Item', 0.05), L7=('Air_Cheese_Pct', 0.50), L8=('New_Item', 60031),
     K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.70), K3=('Trick_Chance', 1, 0.02), K4=('Trick_Chance', 2, 0.02), K5=('Trick_Chance', 3, 0.02), K6=('Trick_Gauge_Pct', 0.40), K7=('Trick_Chance', 4, 0.02),
-    S1=('Stage_Skip', 2), S2=('Cat_Hp_Down', 0.30, 0.30), S3=('Stage_Skip', 2), S4=('Boss_Dmg_Pct', 0.25, 3), S5=('Ult_Power_Pct', 0.50), S6=('Rush_Up', 0.5, 0.5),
+    S1=('Stage_Skip', 4), S2=('Cat_Hp_Down', 0.30, 0.30), S3=('Rush_Range', 0.20), S4=('Boss_Dmg_Pct', 0.25, 3), S5=('Ult_Power_Pct', 0.50), S6=('Rush_Up', 0.5, 0.5),
 )
 T[8] = dict(
     C1=('Atk_Flat', 25), C2=('Atk_Pct', 0.40), C3=('Crit_Dmg', 1.00), C4=('Atk_Flat', 40, 6), C5=('Atk_Pct', 0.50, 6), C6=('Wall_Dmg_Pct', 0.30), C7=('Boss_Dmg_Pct', 0.50), C8=('Dmg_Pct', 0.40),
@@ -87,9 +87,19 @@ T[8] = dict(
     S1=('Stage_Skip', 3), S2=('Ult_CD', 4), S3=('Stage_Skip', 3), S4=('Boss_Dmg_Pct', 0.25, 3), S5=('Rush_CD', 0.5), S6=('Ult_Power_Pct', 0.50),
 )
 
-# 훈장별 비용 기본 (치즈 · 연구자료). 깊이(가운데에서 몇 칸)마다 늘어남
-CHEESE = {1: 40, 2: 500, 3: 6e3, 4: 7e4, 5: 8e5, 6: 9e6, 7: 1e8, 8: 1.1e9}
-RESEARCH = {1: 0, 2: 1, 3: 3, 4: 6, 5: 12, 6: 25, 7: 50, 8: 100}
+# 훈장별 비용 (2026-10-08 경제 개편, 측정 Tools/probe_results/round8_econ.csv)
+# 연구자료: 훈장 하나(트리 + 다음 승급)에 그 층대를 1훈장 약 2판 → 8훈장 약 6판 (사용자 2026-10-08, 성장 곡선은 나중에 다시) (층 연구자료 = Heist 8 × 1.25^(층-1), 보스 층 ×3). 깊이마다 1.3배
+# 치즈: 노드 치즈 = 노드 연구자료 × CHEESE_PER_RES[훈장] (= 그 층대 치즈÷연구자료 수입 × (트리+승급 연구자료)÷트리 연구자료)
+#   → 연구자료가 모자라 더 못 찍을 즈음 치즈도 바닥. 1훈장(연구자료 없음)은 트리 치즈 합 = T1_CHEESE_TOTAL (깊이마다 1.45배로 나눔)
+RESEARCH = {1: 0, 2: 0.72, 3: 3.07, 4: 7.71, 5: 13.21, 6: 32.36, 7: 102.98, 8: 858.71}
+CHEESE_PER_RES = {2: 2544, 3: 6354, 4: 20367, 5: 98242, 6: 387375, 7: 1914779, 8: 1594900}
+T1_CHEESE_TOTAL = 21300
+CHEESE = {1: 40}                     # 1훈장 깊이별 모양 (합을 T1_CHEESE_TOTAL 로 맞춤)
+
+
+def nice(v):
+    mag = 10 ** max(0, int(math.log10(max(v, 1))) - 1)
+    return math.ceil(v / mag) * mag
 KEYS = {'Trick_Unlock', 'Stage_Skip', 'New_Item', 'Ult_Auto'}
 FIRST_KEYS = {'Crit_Chance', 'Multi_Hit', 'Cheese_Meteor', 'Bite_Zap'}       # 그 효과가 처음 나오는 노드만 핵심
 
@@ -122,7 +132,7 @@ def name(e, v):
         'Chain_Blast': f'연쇄 폭발 범위 +{v1:g} · 피해 +{pct(v2)}', 'Cheese_Meteor': (f'치즈 운석 ({v1:g}초마다)' if v1 else f'치즈 운석 위력 +{pct(v2)}'),
         'Twin_Chance': f'쌍둥이 확률 +{pct(v1)}', 'Mutation_Chance': f'높은 등급 탄생 +{pct(v1)}', 'Birth_Frenzy': f'탄생 축제 {v1:g}초 (주변 쥐 광란)',
         'Furniture_Pct': f'가구 피해 +{pct(v1)} · 가구 치즈 +{pct(v2)}', 'Air_Cheese_Pct': f'공중 충돌 치즈 +{pct(v1)}',
-        'Rush_Up': f'총공격 시간 +{v1:g}초 · 위력 +{v2:g}', 'Rush_CD': f'총공격 쿨타임 -{v1:g}초', 'Ult_CD': f'필살기 쿨타임 -{v1:g}초', 'Cat_Hp_Down': f'고양이 체력 -{pct(v1)} · 겁 -{pct(v2)}',
+        'Rush_Up': f'총공격 시간 +{v1:g}초 · 위력 +{v2:g}', 'Rush_CD': f'총공격 쿨타임 -{v1:g}초', 'Rush_Range': f'총공격 범위 +{pct(v1)}', 'Ult_CD': f'필살기 쿨타임 -{v1:g}초', 'Cat_Hp_Down': f'고양이 체력 -{pct(v1)} · 겁 -{pct(v2)}',
     }[e]
 
 
@@ -132,7 +142,7 @@ ICON = {'Atk_Flat': 'teeth', 'Atk_Pct': 'gym', 'Dmg_Pct': 'dmg', 'Wall_Dmg_Pct':
         'Rocket_CD': 'truck', 'Gold_Item': 'goldx', 'Spawn_Rate_Pct': 'spawn', 'Combo_Time_Pct': 'combo', 'Trick_Cheese_Pct': 'trickcheese', 'Trick_Gauge_Pct': 'trickgauge',
         'Trap_Single_Down': 'shield', 'Trap_Multi_Down': 'trapmulti', 'Stage_Skip': 'skip', 'Wall_Hp_Down': 'wallcrack', 'Ult_Gauge_Pct': 'ultcd',
         'Ult_Power_Pct': 'ultcd', 'Ult_Auto': 'autoult', 'Super_Jump_Pct': 'sjump', 'Bite_Zap': 'zap', 'Chain_Blast': 'chainx', 'Cheese_Meteor': 'meteor',
-        'Twin_Chance': 'twins', 'Mutation_Chance': 'mutate', 'Birth_Frenzy': 'frenzy', 'Furniture_Pct': 'furnd', 'Air_Cheese_Pct': 'tumble', 'Rush_Up': 'rush', 'Rush_CD': 'rush', 'Ult_CD': 'ultcd', 'Cat_Hp_Down': 'catnip'}
+        'Twin_Chance': 'twins', 'Mutation_Chance': 'mutate', 'Birth_Frenzy': 'frenzy', 'Furniture_Pct': 'furnd', 'Air_Cheese_Pct': 'tumble', 'Rush_Up': 'rush', 'Rush_CD': 'rush', 'Rush_Range': 'rush', 'Ult_CD': 'ultcd', 'Cat_Hp_Down': 'catnip'}
 
 EFFECT_DOC = [
     ('None', '효과 없음 (훈장 시작점)', '-', '-', '-'),
@@ -181,6 +191,7 @@ EFFECT_DOC = [
     ('Air_Cheese_Pct', '공중에서 부딪힌 물건 치즈 ×(1 + 합)', '증가율', '-', '-'),
     ('Ult_CD', '필살기 하나가 끝난 뒤 다음 필살기까지 쿨타임 - 합 (초, 기본 UltimateManager.ultCooldown, 최소 ultCooldownMin)', '초', '-', '-'),
     ('Rush_CD', '클릭 총공격 쿨타임 - 합 (초, 최소 RatManager.rushCooldownMin)', '초', '-', '-'),
+    ('Rush_Range', '클릭 총공격에 모이는 범위: 화면 밖으로 화면 크기 × 합 만큼 더 (그 안의 쥐도 돌진)', '비율', '-', '-'),
     ('Rush_Up', '총공격 시간 + 밸류_01 합 · 배율 + 밸류_02 합', '초', '배율', '-'),
     ('Cat_Hp_Down', '고양이 체력 ×(1 - 밸류_01 합) · 쥐가 겁먹는 시간 ×(1 - 밸류_02 합)', '감소율', '감소율', '-'),
 ]
@@ -204,14 +215,16 @@ def build():
             key = e in KEYS or (e in FIRST_KEYS and e not in seen and all(e not in [s[0] for s in T[tt].values()] for tt in range(1, t)))
             seen.add(e)
             d = depth[k]
-            cheese = CHEESE[t] * 1.45 ** (d - 1) * (1.5 if key else 1)
-            mag = 10 ** max(0, int(math.log10(cheese)) - 1)
-            cheese = math.ceil(cheese / mag) * mag
             res = 0 if RESEARCH[t] == 0 else math.ceil(RESEARCH[t] * 1.3 ** (d - 1) * (2 if key else 1))
+            cheese = CHEESE[1] * 1.45 ** (d - 1) * (1.5 if key else 1) if t == 1 else res * CHEESE_PER_RES[t]
             icon = TRICK_ICON[int(v[0])] if e in ('Trick_Unlock', 'Trick_Chance') else {1: 'cheesecreature', 2: 'cheeseitem'}.get(int(v[1]), 'cheese') if e == 'Cheese_Pct' else ICON[e]
             rows.append(dict(skill_id=ids[k], tier=t, skill_name=name(e, v), branch=BRANCH[k[0]], is_key=1 if key else 0, pos_x=x, pos_y=y,
                              link_1=ids[p], link_2=0, cost_cheese=cheese, cost_research=res, effect_type=e, v=v[:3],
                              asset=f'SkillIcons/cs_{icon}', explain=''))
+    t1 = [r for r in rows if r['tier'] == 1 and r['cost_cheese'] > 0]
+    k1 = T1_CHEESE_TOTAL / max(1, sum(r['cost_cheese'] for r in t1))
+    for r in rows:
+        if r['cost_cheese'] > 0: r['cost_cheese'] = nice(r['cost_cheese'] * (k1 if r['tier'] == 1 else 1))
     return rows
 
 

@@ -486,12 +486,12 @@ namespace NKK.Rats
         {
             float rt = RushTime;
             RushPoint = p; rushLeft = rt;
-            // 화면에 보이는 쥐만 모임 (돌진 중엔 번식 금지)
-            var cam = Camera.main;
+            // 화면에 보이는 쥐 + 공용 스킬 총공격 범위만큼 화면 밖 쥐도 모임 (돌진 중엔 번식 금지)
+            var cam = Camera.main; float m = 0.02f + CommonSkill.RushRange;
             foreach (var r in Rats)
             {
                 var vp = cam.WorldToViewportPoint(r.transform.position);
-                if (vp.x < -0.02f || vp.x > 1.02f || vp.y < -0.02f || vp.y > 1.02f) continue;
+                if (vp.x < -m || vp.x > 1 + m || vp.y < -m || vp.y > 1 + m) continue;
                 r.rushT = rt; r.noBreed = rt + rushNoBreed; r.rushLock = 1;
             }
         }
