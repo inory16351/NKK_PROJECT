@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hearts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere, perfectly uniform, no noise. No text.
+- STYLE: match the attached reference (cozy flat cartoon game art, Untitled Goose Game mood): completely FLAT color, NO black outlines, no gradients, no glow. Each heart is ONE connected chunky rounded shape with a clean magenta margin; pieces never touch.
+- Exact 2 columns x 2 rows grid (each cell 512x512), each heart centered, filling about 75% of its cell.
+1) A plump cute heart, warm pink (#f27a9b) with one small cream-white (#fff1f4) highlight blob near the top left.
+2) The same heart in soft red (#e8505b) with a cream highlight blob, slightly tilted left.
+3) The same heart in light pink (#f9b3c6) with a white highlight blob, slightly tilted right.
+4) A small double heart: two overlapping hearts (pink and light pink) joined together as one shape.

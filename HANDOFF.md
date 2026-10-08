@@ -417,6 +417,14 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - **사람 안 나옴**: 측정(티어 4, 1~8층) 결과 층마다 평균 2~4명은 나옴. 높은 층은 층을 15~25초에 깨서 보충(18~30초)이 한 번도 안 돌아 시작 2명만 잠깐 보였음 → 걷거나 도망치는 사람이 최소 수(2 + 층÷6, 상한 이하)보다 적으면 2.5~4.5초 빠른 보충 (`ItemManager.humanMin*`, `humanQuickRefill`). BalanceProbe 층 줄에 `사람 등장 · 평균 · 최대`.
 - 측정 주의: 이번 측정은 사용자 요청으로 8층에서 중단 (Unity 점유). 높은 층(10층+) 사람 수는 아직 측정 안 함.
 
+### 9-14. 2026-10-08 — 훈장 조건 = 트리 전부 · 번식 하트 · 보스 필살 패턴 12종 · 층 길 스크롤
+- **훈장 승급 조건** (사용자): 스킬 개수 대신 **지금 훈장까지 공용 스킬 트리 노드 전부** (`Skill_Tree_Complete`, 티어 테이블 cond3, 값은 안 씀). `Progress.CondNeed` 가 트리에서 개수 자동 계산 → 찍찍!! 훈장 페이지·스킬 페이지 승급 칸 `{have}/{need}`. BalanceProbe 는 이 조건이면 트리 전부 찍고 측정.
+- **번식 하트** (Codex `UnityResources/Rats/FX_Heart/`): 번식할 때 화면 안이면 `FxManager.Hearts` 4개 (RatManager.birthHearts) — 통 튀어나와 흔들리며 솟고 뒤 절반에 사라짐. 크기·속도·수명은 FxManager 인스펙터 "하트".
+- **보스 필살 패턴** (사용자: 보스전 더 재밌게, 뇌절 컨셉): 스테이지 테이블 Boss 새 칸 `special1_type`(체력 70%) · `special2_type`(35%) · `special_chance`(둘 다 쓴 뒤 공격마다 확률), Atk_Type 12행 + 새 칸 `atk_name`(배너 이름), Boss_Line 상황 `Special` 대사. 발동 = 배너 + 대사 + 번쩍. 경고 원·낙하물·블랙홀은 CatManager 것을 같이 씀.
+  - 경비대장: 3단 공중 내려찍기 / 안전 고깔 폭격 · 수석 연구원: 약품 대방출 파티(나선 투척 14개) / 자가 실험 거대화(6초 1.6배·빨라짐·충격파) · 연구소장: 결재 서류 폭탄 / 긴급 이사회 소집(충격파 + 경비원 6) · 메인쿤: 새벽 3시 우다다(질주 5번) / 상자 들어가기(무적 → 폭발) · 마녀: 운석 소나기 / 개구리 저주(머리 위 개구리) · 우주 사령관: 궤도 레이저 포격 / 초거대 블랙홀.
+  - 소품 그림 Codex `UnityResources/Rats/BossProps/` (고깔·서류·상자·개구리·약병·화남 표시). Boss 인스펙터 "필살 패턴" (specialProp · markTemplate = 씬 루트 `BossSpecialProp` · `BossFrogMark`).
+- **작전 회의 층 길 스크롤** (사용자: 층 타일이 칸을 넘어 다른 UI 뒤로): `PlanCard/FloorPath` = ScrollRect(가로) + Viewport(RectMask2D) + Content(HorizontalLayoutGroup + ContentSizeFitter) + Scrollbar(ui_bar_bg/yellow). `RunPage.tileScroll`, 고른 층이 안 보이면 그쪽으로 옮김. 휠·끌기 됨.
+
 **남은 일 (순서 제안)**
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.
 2. 결과로 `gen_stage_table.py` 곡선(POW_GROW·HP_GROW·벽 배율·방 수)과 `gen_skill_tree.py` 값·비용(치즈 수입 대비 훈장 트리 1개 ≈ 판 3~5번), 보스 `hp_pow_sec`(지금 40), 티어 테이블 조건(연구자료·Skill_Node_Count 15/40/70/100/130/160/195) 조정 → 다시 생성·xlsx2json·측정.

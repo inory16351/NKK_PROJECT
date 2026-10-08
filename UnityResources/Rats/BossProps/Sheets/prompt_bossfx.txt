@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boss_special.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere, perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- STYLE: match the attached reference (cozy flat cartoon game art, Untitled Goose Game mood): completely FLAT colors, NO black outlines, no gradients, no glow. Each piece is ONE connected chunky shape with a clean magenta margin; pieces never touch.
+- Exact 3 columns x 2 rows grid (each cell 512x341), each piece centered, filling about 75% of its cell height.
+Row 1:
+1) An orange-and-white striped traffic safety cone on a small square base, front view, slightly comic.
+2) A tall messy stack of office documents / paper sheets with a red rubber "approved" stamp mark shape (no letters) on top, slightly leaning.
+3) A big open cardboard box (brown), seen from the front-top, flaps open, empty, sturdy.
+Row 2:
+4) A cute small green frog face (round, big eyes on top, wide smile), front view.
+5) A round purple potion flask with bubbles and a cork, glowing color but flat, comic.
+6) A cartoon red anger mark (the four curved vein cross symbol) chunky and bold.

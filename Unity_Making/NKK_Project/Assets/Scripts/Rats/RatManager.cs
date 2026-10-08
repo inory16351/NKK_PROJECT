@@ -58,6 +58,7 @@ namespace NKK.Rats
 
         [Header("번식 (웹게임 기준)")]
         [Tooltip("최대 인구 (둥지 확장 스킬로 늘어남)")] public int popCap = 30;
+        [Tooltip("번식할 때 솟아오르는 하트 수")] public int birthHearts = 4;
         public int PopCap => popCap + CommonSkill.MaxPopAdd;
         [Tooltip("번식 쿨타임 (초)")] public float breedCool = 4;
         [Tooltip("이 마리 수까지는 부딪히면 100% 탄생")] public int breedFree = 5;
@@ -447,6 +448,7 @@ namespace NKK.Rats
                 var row = RollSpecies(p.z);
                 if (row == null) continue;
                 var r = Spawn(row, p.x, p.y);
+                if (r && r.OnScreen()) FxManager.I?.Hearts(p.x, p.y, birthHearts);     // 번식 하트
                 if (r && (int)row.Grade >= 2) Game.ShowBanner($"{GameDatabase.Instance.GradeOf(row).grade_name} 탄생!", row.character_name);
                 // 쌍둥이: 한 마리 더 (최대 인구 안에서)
                 if (r && Random.value < CommonSkill.TwinChance && RealCount < PopCap)

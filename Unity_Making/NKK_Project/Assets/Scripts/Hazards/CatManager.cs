@@ -58,7 +58,7 @@ namespace NKK.Hazards
         [Tooltip("느낌표 크기 (게임 단위) · 높이 · 자국 남는 시간")] public float alertSize = 70, alertLift = 130, clawLife = 0.8f;
         float clawT; Vector2 clawPos; float clawSize;
         readonly List<(SpriteRenderer fill, SpriteRenderer rim)> warns = new();
-        class Strike { public SpriteRenderer r; public bool meteor, hit; public float x, y, rad, stun, t; public string name; }
+        class Strike { public SpriteRenderer r; public bool meteor, hit, boom = true, custom; public float x, y, rad, stun, t; public string name; }
         readonly List<Strike> strikes = new();
         float vortexK; Vector2 vortexPos; float vortexRad;
 
@@ -233,12 +233,14 @@ namespace NKK.Hazards
         public void ShowVortex(float x, float y, float rad, float k) { vortexPos = new Vector2(x, y); vortexRad = rad; vortexK = Mathf.Max(0.01f, k); }
 
         // 하늘 레이저 · 운석: 떨어지는 순간 범위 기절
-        public void AddStrike(bool meteor, float x, float y, float rad, float stun, string skillName)
+        // sprite = 떨어지는 그림 바꾸기 (보스 고깔·서류 등, 운석처럼 떨어짐), boom = 착지 폭발 (끄면 펑 연기)
+        public void AddStrike(bool meteor, float x, float y, float rad, float stun, string skillName, Sprite sprite = null, bool boom = true)
         {
             var tpl = meteor ? meteorTemplate : laserTemplate;
             if (!tpl) { int n = StunArea(x, y, rad, stun); HitFx(x, y, rad, skillName, n); return; }
             var r = Instantiate(tpl, tpl.transform.parent); r.gameObject.SetActive(true);
-            strikes.Add(new Strike { r = r, meteor = meteor, x = x, y = y, rad = rad, stun = stun, name = skillName });
+            if (sprite) r.sprite = sprite;
+            strikes.Add(new Strike { r = r, meteor = meteor, x = x, y = y, rad = rad, stun = stun, name = skillName, boom = boom, custom = sprite != null });
         }
 
         void UpdateStrikes(float dt)
@@ -249,13 +251,14 @@ namespace NKK.Hazards
                 var r = s.r; float sw = r.sprite ? r.sprite.bounds.size.x : 1, sh = r.sprite ? r.sprite.bounds.size.y : 1;
                 if (s.meteor)
                 {
-                    float k = Mathf.Clamp01(s.t / meteorFall), w = s.rad * 0.9f * World.U / sw;
-                    r.transform.position = World.ToUnity(s.x + (1 - k) * 420, s.y, (1 - k) * 1100);
+                    float k = Mathf.Clamp01(s.t / meteorFall), w = s.rad * (s.custom ? 1.1f : 0.9f) * World.U / sw;
+                    r.transform.position = World.ToUnity(s.x + (1 - k) * (s.custom ? 60 : 420), s.y, (1 - k) * 1100);
+                    if (s.custom) r.transform.rotation = Quaternion.Euler(0, 0, (1 - k) * 540);
                     r.transform.localScale = Vector3.one * w; r.sortingOrder = World.SortOrder(s.y) + 80;
                     if (k >= 1 && !s.hit)
                     {
                         s.hit = true; int n = StunArea(s.x, s.y, s.rad, s.stun); LaunchItems(s.x, s.y, s.rad, slamItemLaunch);
-                        HitFx(s.x, s.y, s.rad, s.name, n, 0.3f); FxManager.I?.Anim("explosion", s.x, s.y, 0, s.rad / 70); ShowClaw(s.x, s.y, s.rad, true);
+                        HitFx(s.x, s.y, s.rad, s.name, n, 0.3f); FxManager.I?.Anim(s.boom ? "explosion" : "poof", s.x, s.y, 0, s.rad / 70); if (s.boom) ShowClaw(s.x, s.y, s.rad, true);
                     }
                     if (s.hit) { Destroy(r.gameObject); strikes.RemoveAt(i); }
                 }

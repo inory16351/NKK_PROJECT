@@ -231,11 +231,16 @@ namespace NKK
             "Max_Floor" => maxFloor,
             "Shard_Level_Sum" => ShardLevelSum,
             "Skill_Node_Count" => SkillCountIn(tier),        // 지금 훈장 트리에서 찍은 노드 수
+            "Skill_Tree_Complete" => SkillCountUpTo(tier),   // 지금 훈장까지 트리에서 찍은 노드 수 (필요 = 전부)
             _ => 0,
         };
+        // 조건 필요값: Skill_Tree_Complete 는 테이블 값 대신 지금 훈장까지 트리 노드 전부
+        public float CondNeed(string type, float value) => type == "Skill_Tree_Complete" ? SkillTotalUpTo(tier) : value;
+        public int SkillCountUpTo(int t) { int n = 0; foreach (var s in GameDatabase.Instance.CommonSkills) if (s.tier <= t && !s.IsRoot && HasSkill(s)) n++; return n; }
+        public int SkillTotalUpTo(int t) { int n = 0; foreach (var s in GameDatabase.Instance.CommonSkills) if (s.tier <= t && !s.IsRoot) n++; return n; }
         public int ShardLevelSum { get { int n = 0; foreach (var e in rats.Values) n += e.level; return n; } }
         public TierRow NextTier => GameDatabase.Instance.Tiers.TryGetValue(tier + 1, out var t) ? t : null;
-        public bool CondOk(string type, float need) => string.IsNullOrEmpty(type) || type == "None" || CondValue(type) >= need;
+        public bool CondOk(string type, float need) => string.IsNullOrEmpty(type) || type == "None" || CondValue(type) >= CondNeed(type, need);
         public bool CanRankUp()
         {
             var t = NextTier; if (t == null) return false;

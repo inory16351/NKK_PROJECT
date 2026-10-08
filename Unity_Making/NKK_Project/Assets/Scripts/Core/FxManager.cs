@@ -39,6 +39,16 @@ namespace NKK
         [Tooltip("바닥 얼룩이 사라지는 시간 (초)")] public float spillLife = 40;
         public int spillMax = 160;
 
+        [Header("하트 (쥐 번식: 솟아오르며 흔들리다 짧게 사라짐)")]
+        [Tooltip("하트 틀 (꺼 둠, 복제해서 씀)")] public SpriteRenderer heartTemplate;
+        [Tooltip("하트 그림 (무작위)")] public Sprite[] heartSprites;
+        [Tooltip("크기 (게임 단위, 최소~최대) · 솟는 속도 · 퍼짐 · 수명 (초)")] public Vector2 heartSize = new(16, 26), heartRise = new(110, 190);
+        public float heartSpread = 22, heartLife = 0.75f;
+        [Tooltip("흔들림 폭 (게임 단위) · 빠르기 · 동시에 최대 개수")] public float heartWobble = 10, heartWobbleSpeed = 9;
+        public int heartMax = 120;
+        class HeartFx { public SpriteRenderer r; public float x, y, z, vz, size, life, max, ph, rot; }
+        readonly List<HeartFx> hearts = new(), heartPool = new();
+
         [Header("치즈 코인 (HUD 로 날아감)")]
         public RectTransform hudCanvas;
         public Image coinTemplate;
@@ -178,6 +188,43 @@ namespace NKK
             r.r.gameObject.SetActive(true);
             r.x = x; r.y = y; r.rad = rad; r.col = col; r.life = r.max = life;
             rings.Add(r);
+        }
+
+        // ── 하트 (번식): (x, y) 위로 n 개가 솟아오름 ──
+        public void Hearts(float x, float y, int n = 4, float z = 30)
+        {
+            if (!heartTemplate) return;
+            for (int i = 0; i < n && hearts.Count < heartMax; i++)
+            {
+                HeartFx h;
+                if (heartPool.Count > 0) { h = heartPool[^1]; heartPool.RemoveAt(heartPool.Count - 1); }
+                else h = new HeartFx { r = Instantiate(heartTemplate, heartTemplate.transform.parent) };
+                h.r.gameObject.SetActive(true);
+                if (heartSprites != null && heartSprites.Length > 0) h.r.sprite = heartSprites[Random.Range(0, heartSprites.Length)];
+                h.x = x + Random.Range(-heartSpread, heartSpread); h.y = y + Random.Range(-heartSpread, heartSpread) * 0.4f; h.z = z + Random.Range(0, 14f);
+                h.vz = Random.Range(heartRise.x, heartRise.y); h.size = Random.Range(heartSize.x, heartSize.y);
+                h.life = h.max = heartLife * Random.Range(0.8f, 1.15f) + i * 0.04f; h.ph = Random.Range(0, 6.3f); h.rot = Random.Range(-15f, 15f);
+                hearts.Add(h);
+            }
+        }
+
+        void UpdateHearts(float dt)
+        {
+            for (int i = hearts.Count - 1; i >= 0; i--)
+            {
+                var h = hearts[i];
+                h.life -= dt;
+                if (h.life <= 0) { h.r.gameObject.SetActive(false); heartPool.Add(h); hearts.RemoveAt(i); continue; }
+                float age = h.max - h.life, k = age / h.max;
+                h.z += h.vz * dt; h.vz *= 1 - dt * 1.6f;
+                float pop = Mathf.Clamp01(age / 0.12f), s = h.size * (pop < 1 ? 1.35f * pop : 1 + 0.35f * Mathf.Max(0, 1 - (age - 0.12f) / 0.15f)) * (1 - 0.3f * k);
+                float sw = h.r.sprite ? h.r.sprite.bounds.size.x : 1;
+                h.r.transform.position = W(h.x + Mathf.Sin(age * heartWobbleSpeed + h.ph) * heartWobble * k, h.y, h.z);
+                h.r.transform.localScale = Vector3.one * Mathf.Max(0.001f, s * World.U / sw);
+                h.r.transform.localRotation = Quaternion.Euler(0, 0, h.rot + Mathf.Sin(age * heartWobbleSpeed * 0.7f + h.ph) * 12);
+                h.r.sortingOrder = World.SortOrder(h.y) + 200;
+                var c = h.r.color; c.a = k < 0.5f ? 1 : Mathf.Clamp01((1 - k) / 0.5f); h.r.color = c;      // 뒤 절반 동안 짧게 사라짐
+            }
         }
 
         // ── 바닥 얼룩 (깨진 물건에서 쏟아짐, 천천히 옅어짐) ──
@@ -587,6 +634,7 @@ namespace NKK
                 p.t.rectTransform.localRotation = Quaternion.Euler(0, 0, p.rot * Mathf.Clamp01(age / popInTime));
                 var c = p.t.color; c.a = Mathf.Clamp01(p.life / p.max * 2.5f); p.t.color = c;
             }
+            UpdateHearts(dt);
             // 고리
             for (int i = rings.Count - 1; i >= 0; i--)
             {

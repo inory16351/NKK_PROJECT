@@ -568,7 +568,10 @@
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
-   "atk_cd_max": 4.5
+   "atk_cd_max": 4.5,
+   "special1_type": "Mega_Stomp",
+   "special2_type": "Cone_Rain",
+   "special_chance": 0.25
   },
   {
    "boss_id": 95002,
@@ -586,7 +589,10 @@
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
-   "atk_cd_max": 4.5
+   "atk_cd_max": 4.5,
+   "special1_type": "Potion_Party",
+   "special2_type": "Self_Experiment",
+   "special_chance": 0.25
   },
   {
    "boss_id": 95003,
@@ -604,7 +610,10 @@
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
-   "atk_cd_max": 4.5
+   "atk_cd_max": 4.5,
+   "special1_type": "Paper_Storm",
+   "special2_type": "Board_Meeting",
+   "special_chance": 0.25
   },
   {
    "boss_id": 95004,
@@ -622,7 +631,10 @@
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
-   "atk_cd_max": 4.5
+   "atk_cd_max": 4.5,
+   "special1_type": "Zoomies",
+   "special2_type": "Box_Fit",
+   "special_chance": 0.25
   },
   {
    "boss_id": 95005,
@@ -640,7 +652,10 @@
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
-   "atk_cd_max": 4.5
+   "atk_cd_max": 4.5,
+   "special1_type": "Meteor_Shower",
+   "special2_type": "Frog_Curse",
+   "special_chance": 0.25
   },
   {
    "boss_id": 95006,
@@ -658,7 +673,10 @@
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
-   "atk_cd_max": 4.5
+   "atk_cd_max": 4.5,
+   "special1_type": "Orbital_Laser",
+   "special2_type": "Black_Hole",
+   "special_chance": 0.25
   }
  ],
  "Boss_Line": [
@@ -985,6 +1003,114 @@
    "boss_id": 95006,
    "situation": "Down",
    "text": "냐아아아~!"
+  },
+  {
+   "line_id": 96056,
+   "boss_id": 95001,
+   "situation": "Special",
+   "text": "비상! 비상!! 전원 출동!!"
+  },
+  {
+   "line_id": 96057,
+   "boss_id": 95001,
+   "situation": "Special",
+   "text": "호루라기 삐이이익!!"
+  },
+  {
+   "line_id": 96058,
+   "boss_id": 95001,
+   "situation": "Special",
+   "text": "경비 30년의 내공을 보여주마!"
+  },
+  {
+   "line_id": 96059,
+   "boss_id": 95002,
+   "situation": "Special",
+   "text": "실험은 폭발이다아아!!"
+  },
+  {
+   "line_id": 96060,
+   "boss_id": 95002,
+   "situation": "Special",
+   "text": "이번엔 이걸 섞어볼까~?"
+  },
+  {
+   "line_id": 96061,
+   "boss_id": 95002,
+   "situation": "Special",
+   "text": "내 몸으로 직접 실험한다!!"
+  },
+  {
+   "line_id": 96062,
+   "boss_id": 95003,
+   "situation": "Special",
+   "text": "결재 올려!! 전부 다!!"
+  },
+  {
+   "line_id": 96063,
+   "boss_id": 95003,
+   "situation": "Special",
+   "text": "이사회 소집이다!!!"
+  },
+  {
+   "line_id": 96064,
+   "boss_id": 95003,
+   "situation": "Special",
+   "text": "예산은 너희들 몫이 아니다!"
+  },
+  {
+   "line_id": 96065,
+   "boss_id": 95004,
+   "situation": "Special",
+   "text": "냐아아아아앙!!!!"
+  },
+  {
+   "line_id": 96066,
+   "boss_id": 95004,
+   "situation": "Special",
+   "text": "(우다다다다다)"
+  },
+  {
+   "line_id": 96067,
+   "boss_id": 95004,
+   "situation": "Special",
+   "text": "상자다… 상자다…!!"
+  },
+  {
+   "line_id": 96068,
+   "boss_id": 95005,
+   "situation": "Special",
+   "text": "하늘이여 무너져라냥!"
+  },
+  {
+   "line_id": 96069,
+   "boss_id": 95005,
+   "situation": "Special",
+   "text": "개굴개굴해져라~!"
+  },
+  {
+   "line_id": 96070,
+   "boss_id": 95005,
+   "situation": "Special",
+   "text": "마법 학교 수석의 힘이다냥!"
+  },
+  {
+   "line_id": 96071,
+   "boss_id": 95006,
+   "situation": "Special",
+   "text": "궤도 포격 허가한다냥!"
+  },
+  {
+   "line_id": 96072,
+   "boss_id": 95006,
+   "situation": "Special",
+   "text": "블랙홀 생성 완료."
+  },
+  {
+   "line_id": 96073,
+   "boss_id": 95006,
+   "situation": "Special",
+   "text": "우주는 넓고 쥐는 작다냥."
   }
  ],
  "Atk_Type": [
@@ -994,7 +1120,8 @@
    "stun": 0.0,
    "count": 0,
    "windup": 0.0,
-   "dur": 0.0
+   "dur": 0.0,
+   "atk_name": "-"
   },
   {
    "atk_type": "Stomp",
@@ -1002,7 +1129,8 @@
    "stun": 2.0,
    "count": 0,
    "windup": 0.5,
-   "dur": 2.0
+   "dur": 2.0,
+   "atk_name": "내려찍기"
   },
   {
    "atk_type": "Pounce",
@@ -1010,7 +1138,8 @@
    "stun": 2.0,
    "count": 0,
    "windup": 0.6,
-   "dur": 2.0
+   "dur": 2.0,
+   "atk_name": "덮치기"
   },
   {
    "atk_type": "Flask",
@@ -1018,7 +1147,8 @@
    "stun": 2.5,
    "count": 3,
    "windup": 0.4,
-   "dur": 1.6
+   "dur": 1.6,
+   "atk_name": "플라스크 투척"
   },
   {
    "atk_type": "Hairball",
@@ -1026,7 +1156,8 @@
    "stun": 2.5,
    "count": 3,
    "windup": 0.4,
-   "dur": 1.6
+   "dur": 1.6,
+   "atk_name": "헤어볼"
   },
   {
    "atk_type": "Fireball",
@@ -1034,7 +1165,8 @@
    "stun": 2.5,
    "count": 5,
    "windup": 0.4,
-   "dur": 1.6
+   "dur": 1.6,
+   "atk_name": "불덩이"
   },
   {
    "atk_type": "Swing",
@@ -1042,7 +1174,8 @@
    "stun": 1.6,
    "count": 2,
    "windup": 0.45,
-   "dur": 1.2
+   "dur": 1.2,
+   "atk_name": "휘두르기"
   },
   {
    "atk_type": "Gravity",
@@ -1050,7 +1183,116 @@
    "stun": 2.0,
    "count": 0,
    "windup": 0.5,
-   "dur": 1.3
+   "dur": 1.3,
+   "atk_name": "무중력 파동"
+  },
+  {
+   "atk_type": "Mega_Stomp",
+   "radius": 240.0,
+   "stun": 1.8,
+   "count": 3,
+   "windup": 0.5,
+   "dur": 0.0,
+   "atk_name": "3단 공중 내려찍기"
+  },
+  {
+   "atk_type": "Cone_Rain",
+   "radius": 100.0,
+   "stun": 1.6,
+   "count": 10,
+   "windup": 0.8,
+   "dur": 1.8,
+   "atk_name": "안전 고깔 폭격"
+  },
+  {
+   "atk_type": "Potion_Party",
+   "radius": 110.0,
+   "stun": 2.0,
+   "count": 14,
+   "windup": 0.6,
+   "dur": 2.2,
+   "atk_name": "약품 대방출 파티"
+  },
+  {
+   "atk_type": "Self_Experiment",
+   "radius": 230.0,
+   "stun": 1.5,
+   "count": 6,
+   "windup": 0.8,
+   "dur": 6.0,
+   "atk_name": "자가 실험: 거대화!!"
+  },
+  {
+   "atk_type": "Paper_Storm",
+   "radius": 130.0,
+   "stun": 2.0,
+   "count": 7,
+   "windup": 0.8,
+   "dur": 1.8,
+   "atk_name": "결재 서류 폭탄"
+  },
+  {
+   "atk_type": "Board_Meeting",
+   "radius": 380.0,
+   "stun": 1.8,
+   "count": 6,
+   "windup": 0.9,
+   "dur": 1.4,
+   "atk_name": "긴급 이사회 소집"
+  },
+  {
+   "atk_type": "Zoomies",
+   "radius": 120.0,
+   "stun": 1.6,
+   "count": 5,
+   "windup": 0.5,
+   "dur": 4.0,
+   "atk_name": "새벽 3시 우다다"
+  },
+  {
+   "atk_type": "Box_Fit",
+   "radius": 400.0,
+   "stun": 2.4,
+   "count": 0,
+   "windup": 2.0,
+   "dur": 1.0,
+   "atk_name": "상자 들어가기"
+  },
+  {
+   "atk_type": "Meteor_Shower",
+   "radius": 150.0,
+   "stun": 2.0,
+   "count": 8,
+   "windup": 0.9,
+   "dur": 2.0,
+   "atk_name": "운석 소나기"
+  },
+  {
+   "atk_type": "Frog_Curse",
+   "radius": 340.0,
+   "stun": 3.0,
+   "count": 0,
+   "windup": 0.9,
+   "dur": 1.0,
+   "atk_name": "개구리 저주"
+  },
+  {
+   "atk_type": "Orbital_Laser",
+   "radius": 160.0,
+   "stun": 2.2,
+   "count": 6,
+   "windup": 0.7,
+   "dur": 2.4,
+   "atk_name": "궤도 레이저 포격"
+  },
+  {
+   "atk_type": "Black_Hole",
+   "radius": 450.0,
+   "stun": 2.5,
+   "count": 0,
+   "windup": 2.0,
+   "dur": 1.0,
+   "atk_name": "초거대 블랙홀"
   }
  ],
  "Situation_Type": [
@@ -1065,6 +1307,9 @@
   },
   {
    "situation": "Down"
+  },
+  {
+   "situation": "Special"
   }
  ]
 }

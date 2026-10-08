@@ -273,7 +273,7 @@ namespace NKK.Lobby
                 t.gameObject.SetActive(on); if (!on) continue;
                 var (type, need) = conds[i];
                 var w = type == "Max_Floor" ? cMaxFloor : type == "Shard_Level_Sum" ? cShard : cSkill;
-                float have = p.CondValue(type);
+                float have = p.CondValue(type); need = p.CondNeed(type, need);
                 t.text = F(w, ("have", Mathf.FloorToInt(have)), ("need", Mathf.RoundToInt(need)));
                 t.color = have >= need ? okColor : noColor;
             }

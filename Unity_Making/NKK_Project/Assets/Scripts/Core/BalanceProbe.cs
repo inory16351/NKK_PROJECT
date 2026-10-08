@@ -67,7 +67,7 @@ namespace NKK
             var db = GameDatabase.Instance;
             db.Tiers.TryGetValue(tier + 1, out var next);
             float Need(string type) => next == null ? 0 : next.cond1_type == type ? next.cond1_value : next.cond2_type == type ? next.cond2_value : next.cond3_type == type ? next.cond3_value : 0;
-            int cur = nodes >= 0 ? nodes : Mathf.RoundToInt(Need("Skill_Node_Count")), shardSum = shards >= 0 ? shards : Mathf.RoundToInt(Need("Shard_Level_Sum"));
+            int cur = nodes >= 0 ? nodes : next != null && (next.cond3_type == "Skill_Tree_Complete" || next.cond2_type == "Skill_Tree_Complete" || next.cond1_type == "Skill_Tree_Complete") ? 999 : Mathf.RoundToInt(Need("Skill_Node_Count")), shardSum = shards >= 0 ? shards : Mathf.RoundToInt(Need("Shard_Level_Sum"));
             foreach (var s in db.CommonSkills) if (s.tier < tier && !s.IsRoot) p.testSkills.Add(s.skill_id);
             for (int n = 0; n < cur; n++)
             {
