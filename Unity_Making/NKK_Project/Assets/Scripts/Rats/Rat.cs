@@ -363,7 +363,7 @@ namespace NKK.Rats
             MountTransform(ref scale, ref lift);          // 슈퍼 요리사 쥐: 요리사 등 위 (Rat.Mount.cs)
             ZombieTint();
             if (ghost || temp > 0) foreach (var sr in rig.GetComponentsInChildren<SpriteRenderer>()) { var c = sr.color; c.a = ghost ? 0.55f + 0.15f * Mathf.Sin(Time.time * 10) : Mathf.Clamp01(temp / 0.6f); sr.color = c; }
-            rig.Apply(MountPose(MakePose()), scale, face, sq, World.SortOrder(y), lift, trot, tsx, tsy, pivotH);
+            rig.Apply(MountPose(MakePose()), scale, face, sq, World.SortOrder(y), lift, trot, tsx, tsy, pivotH, Trick == TrickType.Windmill);
             StunStars();
             UltReadyMark();
             if (shadow)

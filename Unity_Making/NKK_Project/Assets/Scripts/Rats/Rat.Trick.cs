@@ -121,10 +121,8 @@ namespace NKK.Rats
                     else { float e = Mathf.Sin((k - 0.85f) / 0.15f * Mathf.PI); sx = 1 + e * 0.25f; sy = 1 - e * 0.2f; }
                     break;
                 }
-                // 윈드밀: 등을 바닥에 대고 몸 중심을 축으로 뱅글뱅글 (웹: 축 높이 0.6hh, 뒤집힌 몸의 발이 축 위 0.5hh → 몸 중심 ≈ 축)
-                // 뒤집힌 몸은 발에서 아래로 뻗으므로 발 위치를 축 위쪽(pivotH 음수)에 둠. 예전엔 축 아래 hh 에 둬서 몸이 큰 원을 그림(바퀴처럼)
-                case TrickType.Windmill: { float hh = pivotH; lift = hh * 1.1f; pivotH = -hh * 0.5f; rot = k * Mathf.PI * 2 * 4 * f; sy = -1; break; }
-                // 대포알: 몸을 말고 데굴데굴 (웹: 축 높이 0.8hh + 통통, 발은 축 아래 0.9hh × 0.72)
+                // 윈드밀: 등을 바닥에 대고 몸통 중심을 축으로 제자리 뱅글뱅글 (RatRig.Apply bodyPivot — Rat.LateUpdate 에서 켬)
+                case TrickType.Windmill: lift = 2; rot = k * Mathf.PI * 2 * 4 * f; sy = -1; break;
                 // 쳇바퀴 돌기: 뒤집힌 몸이 축에서 떨어져 큰 원을 그리며 돎 (예전 윈드밀 버그 모습을 살린 것)
                 case TrickType.Wheel: lift = pivotH * 0.1f; rot = k * Mathf.PI * 2 * 5 * f; sy = -1; break;
                 case TrickType.Cannon: { float hh = pivotH; pivotH = hh * 0.65f; lift = hh * 0.15f + Mathf.Abs(Mathf.Sin(trickT * 9)) * 10; rot = trickT * 22 * f; sx = 0.8f; sy = 0.72f; break; }

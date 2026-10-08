@@ -34,6 +34,14 @@ namespace NKK.Lobby
         public Sprite nodeOff, nodeOn, nodeLock, keyOff, keyOn;
         public Color lineOn = new(0.95f, 0.76f, 0.31f), lineOpen = new(0.85f, 0.75f, 0.6f), lineOff = new(0.55f, 0.47f, 0.4f, 0.6f);
 
+        [Header("노드 상태 구분 (획득 vs 미획득)")]
+        [Tooltip("획득 노드 뒤 금빛 고리 (템플릿 자식 Glow) 색")] public Color glowColor = new(1f, 0.82f, 0.3f, 0.95f);
+        [Tooltip("고리 도는 속도 (도/초) · 깜빡임 속도")] public float glowSpin = 40, glowPulse = 3;
+        [Tooltip("미획득(열림) 노드 판 색 · 아이콘 색")] public Color openNodeTint = new(0.86f, 0.83f, 0.8f), openIconTint = new(0.72f, 0.68f, 0.64f, 0.9f);
+        [Tooltip("잠김·훈장 부족 노드 판 색 · 아이콘 색")] public Color lockNodeTint = new(0.55f, 0.52f, 0.5f, 0.85f), lockIconTint = new(0.35f, 0.33f, 0.31f, 0.6f);
+        [Tooltip("노드 이름 글 색: 획득 · 미획득")] public Color nameOwned = new(0.29f, 0.2f, 0.1f), nameOff = new(0.5f, 0.45f, 0.4f);
+        readonly List<Image> glows = new();
+
         [Header("상세 카드")]
         public Image detailIcon;
         public TMP_Text detailName, detailState, detailExplain, detailReq;
@@ -137,7 +145,7 @@ namespace NKK.Lobby
         {
             CacheIcons();
             foreach (var g in spawned) Destroy(g);
-            spawned.Clear();
+            spawned.Clear(); glows.Clear();
             var p = Progress.I; var db = GameDatabase.Instance;
             // 탭
             if (tierTabs != null)
@@ -169,18 +177,22 @@ namespace NKK.Lobby
                 ((RectTransform)b.transform).anchoredPosition = At(s);
                 var img = b.GetComponent<Image>();
                 img.sprite = st == Progress.SkillState.TierLock ? nodeLock : st == Progress.SkillState.Owned ? (key ? keyOn : nodeOn) : (key ? keyOff : nodeOff);
-                img.color = st == Progress.SkillState.Locked ? new Color(1, 1, 1, 0.7f) : Color.white;
+                bool owned = st == Progress.SkillState.Owned;
+                img.color = owned ? Color.white : st == Progress.SkillState.Open ? openNodeTint : lockNodeTint;
                 var bc = BranchColor(s);
                 Child(b, "Icon", true, c =>
                 {
                     var i = c.GetComponent<Image>(); i.sprite = s.IsRoot ? RootIcon(s.tier) : Icon(s);
-                    i.color = st == Progress.SkillState.Owned ? Color.white : st == Progress.SkillState.Open ? new Color(1, 1, 1, 0.9f) : new Color(0.55f, 0.5f, 0.45f, 0.75f);
+                    i.color = owned ? Color.white : st == Progress.SkillState.Open ? openIconTint : lockIconTint;
                 });
+                // 획득 표시: 뒤 금빛 고리(돌며 깜빡) + 반짝이 배지
+                Child(b, "Glow", owned, c => { var i = c.GetComponent<Image>(); if (i) { i.color = glowColor; glows.Add(i); } });
+                Child(b, "Badge", owned && !s.IsRoot, null);
                 Child(b, "Q", false, null);
                 Child(b, "Lv", false, null);
                 Child(b, "Lock", st == Progress.SkillState.TierLock && s.IsRoot, null);
                 Child(b, "LockText", false, null);
-                Child(b, "Name", true, c => { var t = c.GetComponent<TMP_Text>(); t.text = s.IsRoot ? F(wRoot, ("tier", s.tier), ("name", TierName(s.tier))) : s.skill_name; });
+                Child(b, "Name", true, c => { var t = c.GetComponent<TMP_Text>(); t.text = s.IsRoot ? F(wRoot, ("tier", s.tier), ("name", TierName(s.tier))) : s.skill_name; t.color = owned || s.IsRoot ? nameOwned : nameOff; });
                 Child(b, "Cost", !s.IsRoot && st != Progress.SkillState.Owned, c =>
                 {
                     var t = c.GetComponent<TMP_Text>();
@@ -194,6 +206,19 @@ namespace NKK.Lobby
             }
             DrawDetail();
             DrawRank();
+        }
+
+        // 획득 노드 고리: 천천히 돌며 깜빡
+        void Update()
+        {
+            if (glows.Count == 0) return;
+            float t = Time.unscaledTime, a = glowColor.a * (0.65f + 0.35f * Mathf.Sin(t * glowPulse));
+            foreach (var g in glows)
+            {
+                if (!g) continue;
+                g.rectTransform.localRotation = Quaternion.Euler(0, 0, -t * glowSpin);
+                var c = glowColor; c.a = a; g.color = c;
+            }
         }
 
         static void Child(Button b, string name, bool on, System.Action<Transform> set)

@@ -378,6 +378,11 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - **새 공용 묘기 5 "쳇바퀴 돌기"** (사용자: 바퀴처럼 도는 게 웃겨서 전용으로): 예전 윈드밀 버그 모습(뒤집혀 큰 원, 5바퀴) + 진행 방향으로 굴러가며 0.12초마다 반경 50 · 공격력 0.6배 (`TrickType.Wheel`, 속도 `RatManager.wheelTrickSpeed` 260, 1.6초). 해금 = **5훈장 K1** `Trick_Unlock 5` (예전 모든 묘기 +1%), 확률 = 6훈장 K7 · 8훈장 K3 `Trick_Chance 5 +2%` (`gen_skill_tree.py` TRICK 5). 아이콘 `cs_wheelspin` (기존 그림 합성, 로비 SkillPage iconSprites 에 추가). 팝업 글 3종은 다른 묘기처럼 `Rat.Trick.cs Tricks` 표.
 - **테스트 패널 "저장값 초기화"** 버튼 (`HUD/TestPanel/ResetButton`, `UltTestPanel.resetButton`): `Progress.ResetAll()` 후 저장 없이 Lobby 로 (GameManager 를 꺼서 5초 저장 막음). Play 확인 완료.
 
+- 라운드 7 (`round7.csv`, 합친 판단 `round5_7_merged.csv`): 130번 중 70번 목표 범위. 11층 SPU 41 · 12층 13(편차 커서 직접) · 13층 4.76 · 15층 32.4 · 25층 3.08, 보스 hp_pow_sec 20층 56.1 · 25층 53.9. **층 측정은 사용자가 성장 곡선을 준 뒤 다시** (2026-10-08 사용자: 측정보다 수정 먼저).
+- **윈드밀 회전축 2차**: 높이 어림(pivotH)으로는 종마다 몸 비율이 달라 축이 어긋남 → `RatRig.Apply(..., bodyPivot)` = 몸통 스프라이트 중심을 축으로, 몸통 반 높이 + lift 2 에 놓음 (Rat.LateUpdate 가 윈드밀일 때 켬).
+- **다른 PC 클론 문제** (사용자: "멀티 플레이어로 열림"): Unity 6 템플릿 패키지 `com.unity.multiplayer.center` 가 처음 열 때 Multiplayer Center 창을 띄움 → manifest 에서 삭제. unity-mcp 는 `#main`(계속 바뀜) → `#v10.3.0` 태그로 고정 (Library 의 지문 da7b9ae… 은 커밋 해시가 아님, 그걸로 고정하면 패키지 해석 실패). `.gitattributes` (유니티 YAML LF 고정 · 바이너리). `Assets/Editor/OpenLobbyOnStart.cs` = 처음 켤 때 빈 씬/SampleScene 이면 Lobby 열기. 남은 템플릿 잔여물(TutorialInfo · Readme.asset · SampleScene)은 삭제 여부 사용자 답 대기.
+- **스킬 노드 획득/미획득 구분** (사용자: 구별이 힘듦): 획득 = 뒤 금빛 고리 `Glow`(돌며 깜빡) + 반짝이 배지 `Badge` + 원래 색 아이콘 + 진한 이름 / 열림 = 판·아이콘 흐리게 / 잠김 = 더 어둡게. 색·속도는 SkillPage 인스펙터 "노드 상태 구분". Glow·Badge 는 노드·핵심 노드 템플릿 자식 (씬).
+
 **남은 일 (순서 제안)**
 1. 중·후반 측정: 티어 T 마다 `Run(T, 그 티어 Max_Floor, 다음 티어 Max_Floor+1, 450, 20, 다음 티어 Skill_Node_Count, 다음 티어 Shard_Level_Sum)`. 목표: 다음 훈장 조건 층(티어 테이블 Max_Floor)은 제한시간의 60~80% 로 통과, 그 다음 층은 빠듯하거나 실패.
 2. 결과로 `gen_stage_table.py` 곡선(POW_GROW·HP_GROW·벽 배율·방 수)과 `gen_skill_tree.py` 값·비용(치즈 수입 대비 훈장 트리 1개 ≈ 판 3~5번), 보스 `hp_pow_sec`(지금 40), 티어 테이블 조건(연구자료·Skill_Node_Count 15/40/70/100/130/160/195) 조정 → 다시 생성·xlsx2json·측정.

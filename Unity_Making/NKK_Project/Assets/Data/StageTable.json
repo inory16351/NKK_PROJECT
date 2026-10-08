@@ -106,8 +106,8 @@
    "pow_need": 10000.0,
    "item_hp": 25.05,
    "cheese": 57.67,
-   "wall_stairs": 3.1,
-   "wall_normal": 1.03,
+   "wall_stairs": 1.48,
+   "wall_normal": 0.8,
    "time_add": 0.0
   },
   {
@@ -116,8 +116,8 @@
    "pow_need": 13800.0,
    "item_hp": 34.57,
    "cheese": 86.5,
-   "wall_stairs": 7.85,
-   "wall_normal": 3.92,
+   "wall_stairs": 6.11,
+   "wall_normal": 3.05,
    "time_add": 0.0
   },
   {
@@ -126,8 +126,8 @@
    "pow_need": 19100.0,
    "item_hp": 47.7,
    "cheese": 130.0,
-   "wall_stairs": 10.35,
-   "wall_normal": 3.45,
+   "wall_stairs": 16.68,
+   "wall_normal": 5.56,
    "time_add": 0.0
   },
   {
@@ -146,8 +146,8 @@
    "pow_need": 36300.0,
    "item_hp": 90.85,
    "cheese": 292.0,
-   "wall_stairs": 2.69,
-   "wall_normal": 0.9,
+   "wall_stairs": 1.84,
+   "wall_normal": 0.8,
    "time_add": 0.0
   },
   {
@@ -246,8 +246,8 @@
    "pow_need": 910000.0,
    "item_hp": 2280.0,
    "cheese": 16800.0,
-   "wall_stairs": 17.21,
-   "wall_normal": 5.74,
+   "wall_stairs": 22.35,
+   "wall_normal": 7.45,
    "time_add": 0.0
   },
   {
@@ -568,7 +568,7 @@
    "color": "#e39a5a",
    "scale": 3.4,
    "radius_mul": 3.4,
-   "hp_pow_sec": 47.3,
+   "hp_pow_sec": 56.1,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
@@ -586,7 +586,7 @@
    "color": "#cdb4db",
    "scale": 3.4,
    "radius_mul": 3.4,
-   "hp_pow_sec": 71.6,
+   "hp_pow_sec": 53.9,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,

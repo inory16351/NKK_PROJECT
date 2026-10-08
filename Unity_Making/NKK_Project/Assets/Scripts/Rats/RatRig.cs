@@ -88,14 +88,21 @@ namespace NKK.Rats
         public struct Pose { public float head, headX, tail, front, back, farFront, farBack, bob, tilt, sx, sy; }
 
         // lift·rot·tsx·tsy·pivotH = 묘기 중 몸 전체 변환 (게임 단위·라디안, pivotH = 회전 중심 높이)
-        public void Apply(in Pose p, float scale, int face, float sq, int sortOrder, float lift = 0, float rot = 0, float tsx = 1, float tsy = 1, float pivotH = 0)
+        // bodyPivot = 몸통 중심을 축으로 돎 (윈드밀: 뒤집혀도 제자리). 몸통 중심이 바닥 위 (몸통 반 높이 + lift) 에 옴
+        public void Apply(in Pose p, float scale, int face, float sq, int sortOrder, float lift = 0, float rot = 0, float tsx = 1, float tsy = 1, float pivotH = 0, bool bodyPivot = false)
         {
             if (group) group.sortingOrder = sortOrder;
             // 쥐 그림은 왼쪽을 봄: 오른쪽(face 1)으로 갈 땐 뒤집음
             visual.localScale = new Vector3(scale * Unit * (face > 0 ? -1 : 1) * p.sx * tsx, scale * Unit * p.sy * sq * tsy, 1);
             var q = Quaternion.Euler(0, 0, -rot * Mathf.Rad2Deg);
             visual.localRotation = q;
-            visual.localPosition = new Vector3(0, (lift + pivotH) * World.U, 0) + q * new Vector3(0, -pivotH * World.U, 0);
+            if (bodyPivot && !IsSingle && torso)
+            {
+                var c = Vector3.Scale(body.localPosition + torso.transform.localPosition, visual.localScale);     // 몸통 중심 (크기·뒤집기 적용)
+                float half = torso.sprite ? torso.sprite.rect.height / 200f * Mathf.Abs(visual.localScale.y) : Mathf.Abs(c.y);
+                visual.localPosition = new Vector3(0, lift * World.U + half, 0) - q * c;
+            }
+            else visual.localPosition = new Vector3(0, (lift + pivotH) * World.U, 0) + q * new Vector3(0, -pivotH * World.U, 0);
             if (IsSingle) return;
             float u = 1f / Mathf.Max(Unit, 1e-5f);
             body.localPosition = L(hipPx) + new Vector3(0, -p.bob * u / 100f, 0);
