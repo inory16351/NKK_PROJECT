@@ -35,7 +35,8 @@
 | `HANDOFF_LOG.md` | 날짜별 상세 기록 |
 
 유니티 안: `Assets/Art/`(게임 그림, `Rats/` 아래 분류별 · `UI_Kit` · `HUD_Gauge` · `FX_CatWarn` · `FX_Heart` · `Stage` …) · `Assets/Data/`(테이블 JSON + `RatArtLibrary`·`CatArtLibrary`·`HumanArtLibrary`) · `Assets/Fonts/`(Jua = 제목·팝업·버튼, Gowun Dodum = 긴 글, 이모지 없음 → 쓰지 말 것) · `Assets/Prefabs/` · `Assets/Scripts/`.
-에디터 메뉴 `NKK/`: Build Rat/Cat/Human Art Library · Bake Font (Jua) · Apply UI Kit Borders · Reimport Art Sprites.
+에디터 메뉴 `NKK/`: Build Rat/Cat/Human Art Library · Bake Font (Jua) · **Add Missing Chars (연결 유지)** · Apply UI Kit Borders · Reimport Art Sprites.
+- **폰트 글자 추가는 `NKK/Add Missing Chars (연결 유지)`** (charset_ko.txt 에 있는데 구운 SDF 에 없는 글자만 덧붙임). `Bake Font(s)` 는 에셋을 지우고 다시 만들어 씬·머티리얼 연결이 끊기니 쓰지 말 것. 구운 폰트에 없는 글자가 화면에 나오면 `Jua-Regular Dynamic SDF` 가 Play 중 글자를 만들어 파일이 바뀜 (그래서 git 에 뜸).
 `Assets/_Recovery/0 (1).unity` = 유니티 복구 씬 (필요 없음, 커밋 안 함).
 
 ---

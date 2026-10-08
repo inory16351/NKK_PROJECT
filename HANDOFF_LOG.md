@@ -477,3 +477,7 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - **멘트**: Atk_Type 새 칸 `line` (전용 멘트). 배너·스킬 이름 칸에 이름 대신 멘트 (사용자: 스킬 이름 말하지 말고 멘트를 이름 칸에) — 꽁꽁 얼어붙은 한강 위로 고양이가 걸어다닙니다 / 난 너희들보다 강하고, 똑똑하고, 더 낫다. 난 더 낫다고! / 중요한 건 꺾이지 않는 마음!!. 배너 글자 자동 크기(30~64).
 - **홈랜더 눈 레이저**: 모으고 쏘는 동안 머리를 빨간 눈 버전으로 (`RatRig.headReplace`, `Boss.laserHeadSprite`), 빔은 머리 그림의 눈 픽셀(`laserEyePx` 102,139)에서 정확히 나감, 목표 쪽을 봄, 굵은 빔 한 줄 + "얌념~". 눈에서 튀던 파편(깃털처럼 보임) 제거.
 - **기절 팝업** (사용자): 범위 공격마다 뜨던 "{스킬}!! N마리 기절" 묶음 팝업 제거 (CatManager.slamPopup 빈칸) → 새로 기절한 쥐마다 머리 위에 작은 "기절!!" (`Rat.Stun` → `RatManager.StunPopup`: 0.5초 이상 기절일 때만, 한 프레임 12개까지, 글·색·크기 인스펙터).
+
+### 9-20. 2026-10-08 — 폰트 빠진 글자
+- `Jua-Regular Dynamic SDF.asset` 이 Play 때마다 바뀌던 원인: charset_ko.txt 에 나중에 들어간 한글 자모(ㅋ 등)·기호가 구운 SDF 에 없어서 예비(Dynamic) 폰트가 그때그때 글자를 만듦 (로비 대사 "ㅋㅋㅋ 완전 놀람").
+- `FontBaker` 새 메뉴 **NKK/Add Missing Chars (연결 유지)**: 기존 에셋에 빠진 글자만 덧붙임 (GUID 그대로). 실행 결과 GowunDodum·IBMPlex Medium/Bold +109자, Jua +51자. Jua 폰트 파일 자체에 없는 기호(①♪▶—「」 전각 문장부호 등)는 못 넣음 → 쓰지 말 것.
