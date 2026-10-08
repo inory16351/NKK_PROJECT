@@ -527,15 +527,9 @@ namespace NKK.Hazards
         void LateUpdate()
         {
             if (State == BState.Off || State == BState.Dead || (!rig && !catRig)) return;
-            // 층 보스 대기: 계단 방이 화면에 그려질 때만 보임 (안 열린 방은 바닥이 안 그려져 보스만 허공에 떠 보였음)
-            //   계단 방 열림 = 원래 색 · 옆 방이 열려 어둡게 보임 = 실루엣 · 그 외 = 숨김
+            // 층 보스 대기: 계단 방은 처음부터 어둡게 그려짐 (StageManager.BossWaitRoom) → 보스는 그 안에 실루엣, 계단 방이 열리면 원래 색 + 전투
             int look = 2;
-            if (State == BState.Wait && !Test)
-            {
-                var sr = Stage.StairsRoom; bool peek = false;
-                foreach (var d in StageManager.Dirs) if (Stage.IsOpen(sr.x + d.x, sr.y + d.y)) peek = true;
-                look = Stage.IsOpen(sr.x, sr.y) ? 2 : peek ? 1 : 0;
-            }
+            if (State == BState.Wait && !Test) look = Stage.IsOpen(Stage.StairsRoom.x, Stage.StairsRoom.y) ? 2 : 1;
             SetVisible(look > 0);
             if (look == 0) return;
             float jx = jit > 0 ? Random.Range(-jit, jit) : 0;

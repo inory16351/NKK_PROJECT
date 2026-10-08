@@ -387,7 +387,7 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - **쏟아짐** (사용자: 큰 물건도 부서질 때 쏟아지게 + 물건에 맞는 새 물체, 금고 = 돈): 새 물건 16종 (60033~60048, 분류 **Spill** = 평소 생성 안 됨, `ItemRow.IsSpill`, 부술 수 있고 치즈 줌). 그림 Codex `UnityResources/Rats/Items_Spill/` (README 에 어디서 쏟아지는지 표). 큰 물건 8종 + 가구 전부에 drop_01~04 지정 (원본 백업 `Data_Table/_backup_20261008/`). `ItemManager.OnSmashed` 는 가구만이 아니라 drop 있는 물건 전부 쏟음. 물건 그림 = ItemManager 메뉴 Fill Item Sprites (Game 씬 반영함).
 
 - **인간형 보스 3종 몸통·팔·다리 옆모습으로 새로** (사용자: 리깅 이상 — 정면 몸통 + 옆모습 머리, 팔이 몸통에 묻힘): `UnityResources/Rats/Humans/Sheets/boss_v4/` (README). 목살을 머리 목 폭·피부색에 맞춤. `HumanArtLibrary.Entry.front`(정면 몸통이면 팔 양옆·다리 벌림·목 가운데) 코드는 남겨 둠 — pivots.json 에 "front": 1 일 때만 (지금은 전부 0).
-- **보스는 계단 방에만 보임** (사용자: 보스가 계단 방에 안 나옴 — 실제론 계단 방 좌표였지만 안 열린 방은 바닥이 안 그려져 허공에 떠 보였음): 대기 중 계단 방이 안 보이면 숨김, 옆 방이 열려 어둡게 보이면 실루엣(`Boss.waitDarkTint`), 계단 방이 열리면 원래 색 + 전투. 보스 층 계단은 보스를 잡아야 쓸 수 있음 (`Boss.Blocking`, 이미 있던 것).
+- **보스는 계단 방에서 대기** (2026-10-08 수정 2번째 — 사용자: 5층에서 보스가 안 나옴. 실제론 대기 중이었지만 멀리 있는 계단 방이 안 그려져 숨겨 둠): 보스 층은 계단 방을 처음부터 어둡게 그림(`StageManager.BossWaitRoom`) + 보스는 그 안에 실루엣(`Boss.waitDarkTint`) → 계단 방이 열리면 원래 색 + 전투. 보스를 잡아야 계단 사용(`Boss.Blocking`). 필살기는 버튼을 눌러야 발동 (자동 = 6훈장 Ult_Auto 노드 · 측정 ForceAuto 뿐, Play 로 확인).
 
 - **보스 v5**: 경비대장 머리 3종·보스 팔 3종 다시 (목 뒤 튀어나옴·팔 단면) — `Humans/Sheets/boss_v5/` README. 머리 크기 `head_scale`(pivots.json headScale → HumanRigMeta → HumanArtLibrary.Entry.headScale): 경비대장 0.775 · 연구원·연구소장 0.85.
 - **로켓 배송**: 상자가 막힌 벽 두께 안에 떨어지면 물건이 벽에 가려짐 → 착지 위치를 방 바닥 안쪽으로.
