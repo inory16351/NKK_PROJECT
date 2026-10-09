@@ -30,6 +30,7 @@ public static class UiKitBorders
                 "ui_topbar" => new Vector4(h, h * 0.4f, h, h * 0.4f),
                 "ui_bubble" => new Vector4(m * 0.32f, m * 0.32f, m * 0.32f, m * 0.32f),
                 "ui_ribbon" => new Vector4(h * 0.3f, h * 0.3f, h * 0.6f, h * 0.3f),
+                "ui_frame" => new Vector4(m * 0.2f, m * 0.2f, m * 0.2f, m * 0.2f),
                 _ => Vector4.zero,
             };
             b = new Vector4(Mathf.Round(b.x), Mathf.Round(b.y), Mathf.Round(b.z), Mathf.Round(b.w));

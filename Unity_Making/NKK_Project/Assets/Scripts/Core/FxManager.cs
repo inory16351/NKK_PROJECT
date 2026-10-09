@@ -12,6 +12,8 @@ namespace NKK
     {
         public static FxManager I { get; private set; }
         public static bool Paused;
+        // 멈춤 (포기 창 · 튜토리얼 대사): 게임 시간 0
+        public static bool Halt => Paused || NKK.Tutorial.TutorialManager.Pausing;
         public static bool UltFreeze;              // 필살기 컷인 중 화면 정지
         public static bool WorldFreeze;            // 슈퍼 점프 중 게임 세계 정지 (이펙트는 계속)
         public static float BaseTimeScale = 1;     // 밸런스 측정용 배속 (BalanceProbe)
@@ -618,7 +620,7 @@ namespace NKK
         {
             float dt = Time.unscaledDeltaTime;
             // 역경직
-            if (Paused || UltFreeze) Time.timeScale = 0;          // 포기 창 등으로 멈춤
+            if (Halt || UltFreeze) Time.timeScale = 0;          // 포기 창 등으로 멈춤
             else if (hitstopT > 0) { hitstopT -= dt; Time.timeScale = hitstopScale * BaseTimeScale; } else Time.timeScale = BaseTimeScale;
             // 팝업
             for (int i = popups.Count - 1; i >= 0; i--)

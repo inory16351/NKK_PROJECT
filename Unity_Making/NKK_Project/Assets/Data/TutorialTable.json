@@ -1,0 +1,752 @@
+{
+ "Speaker": [
+  {
+   "speaker_id": "labrat",
+   "speaker_name": "흰 실험쥐",
+   "code_id": "labrat",
+   "portrait": "tuto_labrat"
+  },
+  {
+   "speaker_id": "nerd",
+   "speaker_name": "안경 쥐",
+   "code_id": "nerd",
+   "portrait": "tuto_nerd"
+  },
+  {
+   "speaker_id": "brownrat",
+   "speaker_name": "시궁쥐",
+   "code_id": "brownrat",
+   "portrait": "tuto_brownrat"
+  },
+  {
+   "speaker_id": "hero",
+   "speaker_name": "슈퍼 생쥐",
+   "code_id": "hero",
+   "portrait": "tuto_hero"
+  }
+ ],
+ "Step": [
+  {
+   "step_id": "g_intro",
+   "scene": "Game",
+   "trigger": "FloorStart",
+   "trigger_value": 1.0,
+   "trigger_text": "",
+   "cond1_type": "RunMax",
+   "cond1_value": "1",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 10
+  },
+  {
+   "step_id": "g_floor",
+   "scene": "Game",
+   "trigger": "FloorTime",
+   "trigger_value": 12.0,
+   "trigger_text": "",
+   "cond1_type": "RunMax",
+   "cond1_value": "1",
+   "cond2_type": "Done",
+   "cond2_value": "g_intro",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 20
+  },
+  {
+   "step_id": "g_birth",
+   "scene": "Game",
+   "trigger": "Birth",
+   "trigger_value": 1.0,
+   "trigger_text": "",
+   "cond1_type": "RunMax",
+   "cond1_value": "1",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 30
+  },
+  {
+   "step_id": "g_promote",
+   "scene": "Game",
+   "trigger": "RatCount",
+   "trigger_value": 10.0,
+   "trigger_text": "",
+   "cond1_type": "RunMax",
+   "cond1_value": "1",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "promote",
+   "action": "",
+   "action_value": "",
+   "sort": 40
+  },
+  {
+   "step_id": "g_cat",
+   "scene": "Game",
+   "trigger": "CatAppear",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 50
+  },
+  {
+   "step_id": "g_boss",
+   "scene": "Game",
+   "trigger": "BossFight",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "Ult",
+   "action_value": "hero",
+   "sort": 60
+  },
+  {
+   "step_id": "g_boss_ult",
+   "scene": "Game",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "g_boss",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 61
+  },
+  {
+   "step_id": "g_ult_ready",
+   "scene": "Game",
+   "trigger": "UltReady",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 70
+  },
+  {
+   "step_id": "g_power",
+   "scene": "Game",
+   "trigger": "FloorStart",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "RunMin",
+   "cond1_value": "2",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "power,pop",
+   "action": "",
+   "action_value": "",
+   "sort": 100
+  },
+  {
+   "step_id": "g_power_promote",
+   "scene": "Game",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "g_power",
+   "cond1_type": "Unlocked",
+   "cond1_value": "promote",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 101
+  },
+  {
+   "step_id": "g_power_promote_new",
+   "scene": "Game",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "g_power",
+   "cond1_type": "Locked",
+   "cond1_value": "promote",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "promote",
+   "action": "",
+   "action_value": "",
+   "sort": 102
+  },
+  {
+   "step_id": "l_first",
+   "scene": "Lobby",
+   "trigger": "LobbyEnter",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "RunMin",
+   "cond1_value": "1",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "skill",
+   "action": "",
+   "action_value": "",
+   "sort": 200
+  },
+  {
+   "step_id": "l_skill_page",
+   "scene": "Lobby",
+   "trigger": "PageOpen",
+   "trigger_value": 0.0,
+   "trigger_text": "skill",
+   "cond1_type": "Done",
+   "cond1_value": "l_first",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 201
+  },
+  {
+   "step_id": "l_rats",
+   "scene": "Lobby",
+   "trigger": "LobbyEnter",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "RunMin",
+   "cond1_value": "2",
+   "cond2_type": "Done",
+   "cond2_value": "l_first",
+   "unlock": "rats",
+   "action": "",
+   "action_value": "",
+   "sort": 210
+  },
+  {
+   "step_id": "l_rats_page",
+   "scene": "Lobby",
+   "trigger": "PageOpen",
+   "trigger_value": 0.0,
+   "trigger_text": "rats",
+   "cond1_type": "Done",
+   "cond1_value": "l_rats",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 211
+  },
+  {
+   "step_id": "l_rank",
+   "scene": "Lobby",
+   "trigger": "CanRankUp",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "Done",
+   "cond1_value": "l_first",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "rank",
+   "action": "",
+   "action_value": "",
+   "sort": 220
+  },
+  {
+   "step_id": "l_rank_page",
+   "scene": "Lobby",
+   "trigger": "PageOpen",
+   "trigger_value": 0.0,
+   "trigger_text": "rank",
+   "cond1_type": "Done",
+   "cond1_value": "l_rank",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 221
+  },
+  {
+   "step_id": "l_dex",
+   "scene": "Lobby",
+   "trigger": "TierAtLeast",
+   "trigger_value": 2.0,
+   "trigger_text": "",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "dex",
+   "action": "",
+   "action_value": "",
+   "sort": 230
+  }
+ ],
+ "Line": [
+  {
+   "line_id": 1,
+   "step_id": "g_intro",
+   "speaker_id": "labrat",
+   "face": "panic",
+   "text": "찍찍!! 큰일이다!! 어서 이 연구실을 탈출해야 해!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 2,
+   "step_id": "g_intro",
+   "speaker_id": "labrat",
+   "face": "normal",
+   "text": "우리 쥐들은 알아서 돌아다니면서 물건을 갉아 부숴. 부순 물건에서는 치즈가 나와!",
+   "highlight": ""
+  },
+  {
+   "line_id": 3,
+   "step_id": "g_intro",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "화면을 클릭하면 그곳으로 모두 우르르 돌진해! 단단한 물건은 다 같이 덤벼서 부수자 찍!",
+   "highlight": ""
+  },
+  {
+   "line_id": 4,
+   "step_id": "g_intro",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "화면을 끌면 여기저기 둘러볼 수 있고, 마우스 휠로 크게 볼 수도 있어.",
+   "highlight": ""
+  },
+  {
+   "line_id": 5,
+   "step_id": "g_floor",
+   "speaker_id": "brownrat",
+   "face": "normal",
+   "text": "벽을 갉으면 옆 방이 열려. 계단이 있는 방을 찾아서 계단에 닿으면 위층으로 갈 수 있어!",
+   "highlight": "minimap"
+  },
+  {
+   "line_id": 6,
+   "step_id": "g_floor",
+   "speaker_id": "brownrat",
+   "face": "panic",
+   "text": "오른쪽 위 시계를 봐! 시간이 다 되면 경비원이 와서 우릴 몽땅 잡아간다고 찍!!",
+   "highlight": "timer"
+  },
+  {
+   "line_id": 7,
+   "step_id": "g_birth",
+   "speaker_id": "brownrat",
+   "face": "surprised",
+   "text": "앗...! 우리들의 사랑의 결실이..!",
+   "highlight": ""
+  },
+  {
+   "line_id": 8,
+   "step_id": "g_birth",
+   "speaker_id": "brownrat",
+   "face": "happy",
+   "text": "쥐끼리 부딪히면 가끔 새끼가 태어나 찍찍! 숫자가 많을수록 더 세게 부술 수 있어!",
+   "highlight": ""
+  },
+  {
+   "line_id": 9,
+   "step_id": "g_promote",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "벌써 10마리나 모였어!",
+   "highlight": ""
+  },
+  {
+   "line_id": 10,
+   "step_id": "g_promote",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "같은 등급 쥐가 여럿 모이면 '승급'으로 더 높은 등급 쥐로 바꿀 수 있어.",
+   "highlight": "promote"
+  },
+  {
+   "line_id": 11,
+   "step_id": "g_promote",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "높은 등급 쥐는 힘이 훨씬 세다구! 왼쪽 아래 승급 버튼을 눌러 봐 찍!",
+   "highlight": "promote"
+  },
+  {
+   "line_id": 12,
+   "step_id": "g_cat",
+   "speaker_id": "labrat",
+   "face": "panic",
+   "text": "히익!! 고, 고양이다!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 13,
+   "step_id": "g_cat",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "고양이는 쓰러뜨릴 때까지 절대 안 떠나. 다 같이 클릭해서 몰아붙여!",
+   "highlight": ""
+  },
+  {
+   "line_id": 14,
+   "step_id": "g_cat",
+   "speaker_id": "nerd",
+   "face": "panic",
+   "text": "바닥에 빨간 원이 생기면 거길 곧 덮친다는 뜻이야! 한곳에 너무 몰려 있지 않게 조심해!",
+   "highlight": ""
+  },
+  {
+   "line_id": 15,
+   "step_id": "g_boss",
+   "speaker_id": "labrat",
+   "face": "panic",
+   "text": "으악! 엄청 큰 녀석이 계단을 막고 있어!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 16,
+   "step_id": "g_boss",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "보스를 쓰러뜨리기 전엔 계단을 쓸 수 없어. 체력이 줄면 이상한 필살 패턴도 쓰니까 조심해!",
+   "highlight": ""
+  },
+  {
+   "line_id": 17,
+   "step_id": "g_boss",
+   "speaker_id": "hero",
+   "face": "happy",
+   "text": "찍찍찍!! 여기선 내가 도와주지!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 18,
+   "step_id": "g_boss_ult",
+   "speaker_id": "hero",
+   "face": "normal",
+   "text": "봤지? 이게 바로 '필살기'야!",
+   "highlight": ""
+  },
+  {
+   "line_id": 19,
+   "step_id": "g_boss_ult",
+   "speaker_id": "hero",
+   "face": "normal",
+   "text": "쳇바퀴 훈련으로 쥐를 Lv 7까지 키우면 그 쥐도 필살기를 쓸 수 있어. 게이지가 다 차면 아래 버튼으로 발동!",
+   "highlight": ""
+  },
+  {
+   "line_id": 20,
+   "step_id": "g_boss_ult",
+   "speaker_id": "hero",
+   "face": "happy",
+   "text": "그럼 건투를 빈다 찍!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 21,
+   "step_id": "g_ult_ready",
+   "speaker_id": "hero",
+   "face": "surprised",
+   "text": "필살기 게이지가 다 찼어!",
+   "highlight": ""
+  },
+  {
+   "line_id": 22,
+   "step_id": "g_ult_ready",
+   "speaker_id": "hero",
+   "face": "normal",
+   "text": "아래쪽 필살기 버튼을 눌러서 한 방 터뜨려 줘 찍!",
+   "highlight": "ult"
+  },
+  {
+   "line_id": 23,
+   "step_id": "g_power",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "지난번엔 아깝게 잡혀 버렸지... 이번엔 '적정 찍찍'을 알려 줄게!",
+   "highlight": ""
+  },
+  {
+   "line_id": 24,
+   "step_id": "g_power",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "왼쪽 위 '찍찍!!' 숫자는 지금 우리 무리의 힘이고, 옆의 '적정'은 이 층을 넉넉히 깨려면 필요한 힘이야.",
+   "highlight": "power"
+  },
+  {
+   "line_id": 25,
+   "step_id": "g_power",
+   "speaker_id": "nerd",
+   "face": "panic",
+   "text": "우리 힘이 적정보다 낮으면 시간 안에 계단까지 가기 힘들어!",
+   "highlight": "power"
+  },
+  {
+   "line_id": 26,
+   "step_id": "g_power",
+   "speaker_id": "brownrat",
+   "face": "normal",
+   "text": "오른쪽 위 숫자는 지금 쥐 마릿수랑 최대 마릿수야. 최대까지만 태어날 수 있어.",
+   "highlight": "pop"
+  },
+  {
+   "line_id": 27,
+   "step_id": "g_power",
+   "speaker_id": "brownrat",
+   "face": "happy",
+   "text": "치즈 창고에서 둥지 스킬을 찍으면 최대 마릿수가 늘어나! 쥐가 많아지면 찍찍도 쑥쑥!",
+   "highlight": "pop"
+  },
+  {
+   "line_id": 28,
+   "step_id": "g_power_promote",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "그리고 승급으로 높은 등급 쥐를 만들어도 찍찍이 확 올라가! 잊지 마 찍!",
+   "highlight": "promote"
+  },
+  {
+   "line_id": 29,
+   "step_id": "g_power_promote_new",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "그리고 하나 더! 같은 등급 쥐가 여럿 모이면 '승급'으로 더 높은 등급 쥐로 바꿀 수 있어.",
+   "highlight": "promote"
+  },
+  {
+   "line_id": 30,
+   "step_id": "g_power_promote_new",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "높은 등급 쥐는 힘이 훨씬 세서 찍찍이 확 올라가! 왼쪽 아래 승급 버튼을 기억해 찍!",
+   "highlight": "promote"
+  },
+  {
+   "line_id": 31,
+   "step_id": "l_first",
+   "speaker_id": "labrat",
+   "face": "panic",
+   "text": "흐어엉... 잡혀 버렸어...",
+   "highlight": ""
+  },
+  {
+   "line_id": 32,
+   "step_id": "l_first",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "괜찮아! 앞으론 잡히지 않게 더욱 강해지자!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 33,
+   "step_id": "l_first",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "판에서 모은 치즈를 쓰면 더 강해질 수 있을 거야 찍찍!! '치즈 창고'를 열어 줄게!",
+   "highlight": "tab_skill"
+  },
+  {
+   "line_id": 34,
+   "step_id": "l_skill_page",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "여기가 치즈 창고야. 치즈를 써서 스킬을 하나씩 찍을 수 있어.",
+   "highlight": ""
+  },
+  {
+   "line_id": 35,
+   "step_id": "l_skill_page",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "이어진 스킬을 찍어야 다음 스킬이 열려. 높은 단계 스킬은 치즈와 함께 '연구자료'도 필요해!",
+   "highlight": "research"
+  },
+  {
+   "line_id": 36,
+   "step_id": "l_skill_page",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "연구자료는 층을 올라갈 때마다 모여. 보스 층에선 세 배야 찍!",
+   "highlight": ""
+  },
+  {
+   "line_id": 37,
+   "step_id": "l_rats",
+   "speaker_id": "brownrat",
+   "face": "surprised",
+   "text": "또 잡혔다아... 그래도 우리 꽤 강해졌다구!",
+   "highlight": ""
+  },
+  {
+   "line_id": 38,
+   "step_id": "l_rats",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "이번엔 '쳇바퀴 훈련'을 열어 줄게. 판에서 모은 조각으로 쥐를 한 종씩 강화할 수 있어!",
+   "highlight": "tab_rats"
+  },
+  {
+   "line_id": 39,
+   "step_id": "l_rats_page",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "쥐마다 조각이 모이면 레벨을 올릴 수 있어. 레벨이 오를수록 그 쥐가 점점 세져!",
+   "highlight": ""
+  },
+  {
+   "line_id": 40,
+   "step_id": "l_rats_page",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "Lv 3이 되면 그 쥐만의 특수 액션, Lv 7이 되면 필살기가 열려!",
+   "highlight": ""
+  },
+  {
+   "line_id": 41,
+   "step_id": "l_rats_page",
+   "speaker_id": "hero",
+   "face": "happy",
+   "text": "필살기... 기억나지? 찍찍!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 42,
+   "step_id": "l_rank",
+   "speaker_id": "labrat",
+   "face": "panic",
+   "text": "앗! 더 이상 강해질 수가 없어 찍!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 43,
+   "step_id": "l_rank",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "그렇다면.... 이때까지 모은 연구의 성과를!! 찍찍!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 44,
+   "step_id": "l_rank",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "'찍찍!! 훈장'을 열어 줄게. 훈장을 올리면 새로운 스킬들이 열려!",
+   "highlight": "tab_rank"
+  },
+  {
+   "line_id": 45,
+   "step_id": "l_rank_page",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "훈장을 올리려면 연구자료와 함께 몇 가지 조건이 필요해. 조건은 여기서 확인할 수 있어!",
+   "highlight": ""
+  },
+  {
+   "line_id": 46,
+   "step_id": "l_dex",
+   "speaker_id": "brownrat",
+   "face": "happy",
+   "text": "찍찍 훈장을 얻으면 친구들도 늘어날 거야 찍찍!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 47,
+   "step_id": "l_dex",
+   "speaker_id": "brownrat",
+   "face": "normal",
+   "text": "'친구들!!'에서 지금까지 만난 친구들을 볼 수 있어!",
+   "highlight": "tab_dex"
+  }
+ ],
+ "Story": [
+  {
+   "line_id": 1,
+   "cut": 1,
+   "image": "story_01",
+   "text": "찍... 찍찍찍...! (우리들은 그저 이곳이 낙원인 줄만 알고 있었지...)"
+  },
+  {
+   "line_id": 2,
+   "cut": 1,
+   "image": "story_01",
+   "text": "찍찍! 찍~ (매일 치즈가 나오고, 쳇바퀴는 언제나 돌아갔으니까.)"
+  },
+  {
+   "line_id": 3,
+   "cut": 2,
+   "image": "story_02",
+   "text": "찍찍...! (가끔 하늘에서 '손가락'이 내려왔어.)"
+  },
+  {
+   "line_id": 4,
+   "cut": 2,
+   "image": "story_02",
+   "text": "찍~ 찍찍! (손가락의 은총을 받은 친구는 더 좋은 곳으로 간다고 믿었지.)"
+  },
+  {
+   "line_id": 5,
+   "cut": 3,
+   "image": "story_03",
+   "text": "찍...? (그런데... 은총을 받은 친구들은 다시는 돌아오지 않았어.)"
+  },
+  {
+   "line_id": 6,
+   "cut": 4,
+   "image": "story_04",
+   "text": "찍찍찍찍...! (우리는 모이면 모일수록 똑똑해졌고...)"
+  },
+  {
+   "line_id": 7,
+   "cut": 4,
+   "image": "story_04",
+   "text": "찍!!! (결국 알아 버렸어. 우리가... 실험당하고 있다는 걸!!)"
+  },
+  {
+   "line_id": 8,
+   "cut": 5,
+   "image": "story_05",
+   "text": "찍... 찍찍찍... (그날, 쥐류는 떠올렸다...)"
+  },
+  {
+   "line_id": 9,
+   "cut": 5,
+   "image": "story_05",
+   "text": "찍찍... 찍...!! (놈들에게 지배당하던 공포를... 철창 속에 갇혀 있던 굴욕을...!!)"
+  },
+  {
+   "line_id": 10,
+   "cut": 6,
+   "image": "story_06",
+   "text": "찍찍!! (이대로 있을 순 없어!)"
+  },
+  {
+   "line_id": 11,
+   "cut": 6,
+   "image": "story_06",
+   "text": "찍찍찍!!! (힘을 모아서 이 연구실을 탈출하자!!)"
+  },
+  {
+   "line_id": 12,
+   "cut": 7,
+   "image": "story_07",
+   "text": "찍!찍!!찍!!! (사람과 고양이의 방해를 뚫고... 반드시 탈출하는 거야!!)"
+  }
+ ]
+}

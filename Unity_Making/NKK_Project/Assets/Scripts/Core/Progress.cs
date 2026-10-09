@@ -28,7 +28,13 @@ namespace NKK
             public List<int> nodes = new();      // 활성화한 공용 스킬 노드 (훈장별 트리). skills 는 예전 레벨식 (안 씀)
             public List<int> achvOn = new();     // 업적 스위치: 달성한 업적 id (이 저장 파일 기준, 한 번 켜지면 계속 켜짐)
             public double cheese, research; public int tier = 1, maxFloor = 1, runs;
+            public int ver;                      // 0 = 튜토리얼 전 저장 (그대로 이어 하면 튜토리얼 끝난 것으로 침)
+            public List<string> tuto = new();    // 본 튜토리얼 단계 id
+            public List<string> unlocks = new(); // 해금한 기능 id (튜토리얼 테이블 Unlock_Id)
+            public bool tutoSkip;                // 튜토리얼 전 저장 → 모든 단계·기능을 연 것으로 침
+            public string savedAt;               // 마지막 저장 시각 (타이틀 슬롯 표시용)
         }
+        const int SaveVer = 1;
 
         // ── 재화 · 티어 · 기록 (판이 끝나도 남음) ──
         [Header("현재 값 (저장됨, 보기용)")]
@@ -40,6 +46,48 @@ namespace NKK
 
         // 로비 → 게임 씬으로 넘기는 시작 층 (0 = 게임 씬을 바로 켬 → GameManager 인스펙터 값)
         public static int PendingStartFloor;
+
+        // ── 저장 슬롯 (1~5) ── 슬롯 1 = 예전 저장 키 그대로, 2~5 = 키 뒤에 _s2 …
+        public const int SlotCount = 5;
+        const string SlotPref = "nkk_slot";
+        public static int Slot { get; private set; } = 1;
+        string KeyOf(int slot) => slot <= 1 ? saveKey : saveKey + "_s" + slot;
+        public bool SlotExists(int slot) => PlayerPrefs.HasKey(KeyOf(slot));
+        // 슬롯 요약 (타이틀 화면): 없으면 false
+        public bool SlotSummary(int slot, out int sTier, out int sMaxFloor, out int sRuns, out string sSavedAt)
+        {
+            sTier = sMaxFloor = 1; sRuns = 0; sSavedAt = "";
+            var s = PlayerPrefs.GetString(KeyOf(slot), ""); if (string.IsNullOrEmpty(s)) return false;
+            var d = JsonUtility.FromJson<SaveData>(s);
+            sTier = Mathf.Max(1, d.tier); sMaxFloor = Mathf.Max(1, d.maxFloor); sRuns = d.runs; sSavedAt = d.savedAt ?? "";
+            return true;
+        }
+        // 슬롯 고르기 (이어 하기) / 새로 시작 (그 슬롯을 지우고 처음부터)
+        public void UseSlot(int slot) { Slot = Mathf.Clamp(slot, 1, SlotCount); PlayerPrefs.SetInt(SlotPref, Slot); Load(); }
+        public void NewGame(int slot) { Slot = Mathf.Clamp(slot, 1, SlotCount); PlayerPrefs.SetInt(SlotPref, Slot); PlayerPrefs.DeleteKey(KeyOf(Slot)); Load(); Save(); }
+        public void DeleteSlot(int slot) { PlayerPrefs.DeleteKey(KeyOf(slot)); PlayerPrefs.Save(); }
+
+        // ── 튜토리얼 · 기능 해금 ──
+        readonly HashSet<string> tuto = new(), unlocks = new();
+        bool tutoSkip;
+        // 처음부터 열려 있는 기능 (작전 회의 · 낮잠 침대)
+        static readonly string[] OpenAtStart = { "run", "rec" };
+        // 해금이 바뀔 때마다 +1 (FeatureGate 가 다시 그림)
+        public int UnlockVersion { get; private set; }
+        public bool TutoSkipped => tutoSkip;
+        public void SkipTutorial() { tutoSkip = true; UnlockVersion++; Save(); }      // 밸런스 측정 등: 튜토리얼 안 띄우고 기능 전부 열림
+        public bool TutoDone(string stepId) => tutoSkip || tuto.Contains(stepId);
+        public void MarkTuto(string stepId) { if (tuto.Add(stepId)) Save(); }
+        public bool IsUnlocked(string feature) => string.IsNullOrEmpty(feature) || tutoSkip || unlocks.Contains(feature) || Array.IndexOf(OpenAtStart, feature) >= 0;
+        // 쉼표로 여러 개. 새로 열린 게 있으면 true
+        public bool Unlock(string features)
+        {
+            if (string.IsNullOrEmpty(features)) return false;
+            bool any = false;
+            foreach (var f in features.Split(',')) { var t = f.Trim(); if (t.Length > 0 && unlocks.Add(t)) any = true; }
+            if (any) { UnlockVersion++; Save(); }
+            return any;
+        }
         public bool SpendCheese(double v) { if (v < 0 || cheese < v) return false; cheese -= v; Save(); return true; }
         public void OnFloorReached(int f) { if (f > maxFloor) { maxFloor = f; Save(); } }
 
@@ -89,6 +137,7 @@ namespace NKK
         {
             if (I && I != this) { Destroy(gameObject); return; }
             I = this; DontDestroyOnLoad(gameObject);
+            Slot = Mathf.Clamp(PlayerPrefs.GetInt(SlotPref, 1), 1, SlotCount);
             Load();
         }
 
@@ -257,17 +306,19 @@ namespace NKK
 
         public void Save()
         {
-            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs }; d.rats.AddRange(rats.Values);
+            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
+            d.tuto.AddRange(tuto); d.unlocks.AddRange(unlocks);
             d.nodes.AddRange(skills);
             d.achvOn.AddRange(achvOn);
             foreach (var kv in achvs) d.achvs.Add(new AchvEntry { ult = kv.Key, count = kv.Value });     // 필살기 완주 횟수
-            PlayerPrefs.SetString(saveKey, JsonUtility.ToJson(d)); PlayerPrefs.Save();
+            PlayerPrefs.SetString(KeyOf(Slot), JsonUtility.ToJson(d)); PlayerPrefs.Save();
         }
 
         void Load()
         {
-            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0;
-            var s = PlayerPrefs.GetString(saveKey, "");
+            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0;
+            tuto.Clear(); unlocks.Clear(); tutoSkip = false; UnlockVersion++; SkillVersion++;
+            var s = PlayerPrefs.GetString(KeyOf(Slot), "");
             if (string.IsNullOrEmpty(s)) return;
             var d = JsonUtility.FromJson<SaveData>(s);
             cheese = d.cheese; research = d.research; tier = Mathf.Max(1, d.tier); maxFloor = Mathf.Max(1, d.maxFloor); runs = d.runs;
@@ -276,10 +327,13 @@ namespace NKK
             SkillVersion++;
             if (d.achvs != null) foreach (var e in d.achvs) achvs[e.ult] = e.count;
             if (d.achvOn != null) foreach (var id in d.achvOn) achvOn.Add(id);
+            if (d.tuto != null) foreach (var id in d.tuto) tuto.Add(id);
+            if (d.unlocks != null) foreach (var id in d.unlocks) unlocks.Add(id);
+            tutoSkip = d.tutoSkip || d.ver == 0;      // 튜토리얼이 생기기 전 저장 = 다 본 것으로
         }
 
         [ContextMenu("진행도 초기화")]
-        public void ResetAll() { rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0; SkillVersion++; PlayerPrefs.DeleteKey(saveKey); }
+        public void ResetAll() { PlayerPrefs.DeleteKey(KeyOf(Slot)); Load(); Save(); }
 
         // 시작 층 최대 = min(1 + 스테이지 스킵 노드 합, 최고 기록)
         public int StartFloorCap(int t = 0) => Mathf.Max(1, Mathf.Min(1 + CommonSkill.StageSkip, maxFloor));

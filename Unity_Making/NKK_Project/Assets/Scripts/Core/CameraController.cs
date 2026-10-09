@@ -37,6 +37,7 @@ namespace NKK
             transform.position -= lastShake;               // 지난 프레임 흔들림 빼고 계산
             var m = Mouse.current;
             if (UpdatePeek()) m = null;                    // 미리보기 중엔 끌기·제한 없이 카메라를 옮김
+            if (NKK.Tutorial.TutorialBox.Showing) m = null;  // 튜토리얼 대사 중엔 끌기·줌 없음
             if (m != null)
             {
                 float wheel = m.scroll.ReadValue().y;

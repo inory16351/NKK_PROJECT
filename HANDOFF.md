@@ -2,19 +2,19 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-14).
-마지막 갱신: 2026-10-08 저녁 (보스 스킬)
+마지막 갱신: 2026-10-09 밤 (튜토리얼 1차)
 
 ---
 
 ## 0. 꼭 지킬 규칙 (사용자 지시)
 
-- **설명은 항상 한국어** (코드 주석도). 게임 이름 **"찍!찍!!찍!!!"**. PC(Windows) · 기준 1920×1080. 씬 `Lobby.unity`(빌드 0) → `Game.unity`(빌드 1), `SampleScene` 에는 아무것도 넣지 말 것.
+- **설명은 항상 한국어** (코드 주석도). 게임 이름 **"찍!찍!!찍!!!"**. PC(Windows) · 기준 1920×1080. 씬 `Title.unity`(빌드 0, 2026-10-09 추가) → `Lobby.unity`(빌드 1) → `Game.unity`(빌드 2), `SampleScene` 에는 아무것도 넣지 말 것.
 - **결정할 게 생기면 바로 사용자에게 질문**하고 진행.
 - **수치는 엑셀 테이블**(`Data_Table/`, 3장 형식). 고친 뒤 `python Tools/xlsx2json.py`.
 - **모든 오브젝트는 하이라키에 직접**(MCP 로 씬에 생성, 인스펙터에서 값 조정). C# 빌더 스크립트로 씬을 만들지 말 것.
 - **UI 글자는 코드에 넣지 말 것**: 씬 TMP 글 또는 인스펙터 문자열, 바뀌는 값만 `{n}` `{floor}` 같은 자리표시를 코드가 채움. 내부 id 는 화면에 안 보이게.
 - **그림은 Codex CLI 로만 생성** (코드로 그리기 금지, 자르기·키잉은 됨). 한 장에 여러 개 그려 잘라 쓰기. 먼저 `UnityResources/Rats/` 에 쓸 만한 그림이 있는지 찾아 재사용. **실사 다람쥐 `rsp_*` 금지.**
-  - 실행: `bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C <폴더> -i <참고.png> < prompt.txt` (자홍 #FF00FF 배경 → `Tools/slice_rat_parts.py` 의 `key_magenta` 로 키잉)
+  - 실행 (codex.sh 는 이 PC 사용자 폴더에서 codex.exe 를 찾음): `bash Tools/codex.sh exec --skip-git-repo-check --ephemeral -s workspace-write -C <폴더> -i <참고.png> < prompt.txt` (자홍 #FF00FF 배경 → `Tools/slice_rat_parts.py` 의 `key_magenta` 로 키잉)
   - 화풍: 게임 안 = **Untitled Goose Game 식 플랫**(외곽선·광택·그라데이션 없음, 참고 `UnityResources/Rats/UI_Kit/_미리보기.png`), 로비 소품 = 로비 배경(`UI/lobby_bg.png`) 그림체.
   - 만든 그림은 `UnityResources/Rats/<분류>/` 에 PNG + `Sheets/`(원본·프롬프트·로그) + README 로 보관 후 `Assets/Art/...` 에 복사.
 - **Unity 테스트는 짧게, 끝나면 Play 바로 멈추기.** 몇 분 걸리는 BalanceProbe 측정은 사용자가 원할 때만, 미리 시간을 말하고 (2026-10-08 사용자: "유니티가 계속 돌아가고 있었음").
@@ -67,6 +67,7 @@
 | 공용 스킬 | Common_Skill (훈장 8 × 트리, `gen_skill_tree.py` 로 생성) · Branch · Common_Effect_Type |
 | 업적 | Achievement 33 · Achv_Cond_Type |
 | 스테이지 | Stage 1~50층 (`gen_stage_table.py` 생성: 방 수·적정 전투력·물건 체력·치즈·wall_path·추가 시간) |
+| **튜토리얼** | Speaker 4 (해설 쥐) · Step 18 (발동·조건·해금·행동) · Line 47 · Story 12 (오프닝 초안) · 설명 시트 Trigger_Type · Cond_Type · Unlock_Id · Action_Type |
 | **보스** | Boss 6 (공격·두 번째 공격·체력 hp_pow_sec·special1/2_type·special_chance·**skill_type·skill_cd·skill_first**) · Boss_Line (Intro/Attack/Hit/Down/Special/**Skill**) · Atk_Type 29 (반경·기절·개수·웅크림·길이·화면 이름) |
 
 새 테이블: `xlsx2json.py NAMES` 추가 → `Data/TableRows.cs` 행 클래스 → `Data/GameDatabase.cs` 로드.
@@ -114,9 +115,24 @@
 
 **HUD (Game 씬 `HUD`)**: 왼쪽 위 치즈·찍찍!!(전투력/적정)·테스트 패널 / 오른쪽 위 층·방 · 제한시간(초시계 + 나무 게이지) · 쥐 마릿수 / 가운데 위 보스 체력바(엠블럼·줄무늬·깎인 자국) / 아래 필살기 버튼 / 왼쪽 아래 승급 / **오른쪽 아래 미니맵**(열린 방·옆방·계단·보스·쥐 점·카메라 테두리).
 
-**로비**: 아지트(쥐 생활·소품 버튼) · 작전 회의(층 길 가로 스크롤 · 구역·방 · 출동 멤버·등급 확률 · 출발) · 찍찍!! 훈장(사다리·조건·친구·업적) · 쳇바퀴 훈련 · 치즈 창고(스킬 트리) · 탭: 친구들·낮잠 침대는 **아직 없음**.
+**로비**: 아지트(쥐 생활·소품 버튼) · 작전 회의(층 길 가로 스크롤 · 구역·방 · 출동 멤버·등급 확률 · 출발) · 찍찍!! 훈장(사다리·조건·친구·업적) · 쳇바퀴 훈련 · 치즈 창고(스킬 트리) · 친구들!!(도감) · 낮잠 침대(저장하고 타이틀로).
 
 **테스트 패널** (`HUD/TestPanel`, 출시 때 끄기): 필살기 고르기·발동 · 슈퍼 점프 · 층 클리어(보스 있으면 보스전 시작) · 게임 오버 · 저장값 초기화 · **◀ 보스 ▶ + 보스 소환 · ◀ 기술 ▶ + 보스 기술 발동** (일반·두 번째·스킬·발악 아무거나 강제).
+
+---
+
+## 5-1. 튜토리얼 (2026-10-09, 진행 중) — 기획 `듀토리얼 계획.md`
+
+- **사용자 결정**: 자동 저장 + 저장 슬롯 5개(낮잠 침대 = 저장하고 타이틀로) · 대사 중 게임 멈춤 + 클릭/스페이스로 넘김 · 해설 쥐 4마리(흰 실험쥐·안경 쥐·시궁쥐·슈퍼 생쥐) × 표정 4종 = Codex 새 그림 · 대사는 엑셀 `튜토리얼 테이블` · 오프닝 6~8컷(대본 초안 → 사용자 확인 → Codex) · 추가 안내: 고양이 첫 등장·계단/제한시간·첫 보스(슈퍼 생쥐가 "여기선 내가 도와주지!!" 하며 필살기 시연 → 필살기 설명)·필살기 처음 참 · 컷씬만 건너뛰기.
+- **스위치 방식**: 단계마다 한 번 발동하면 저장 파일(슬롯)에 기록 → 그 슬롯에선 다시 안 뜸 (`Progress.TutoDone/MarkTuto`, 발동 순간 기록). 해금 기능도 슬롯별 (`Progress.IsUnlocked/Unlock`, 처음부터 열림 = run·rec). **튜토리얼 이전 저장(ver 0)은 다 본 것으로** (`tutoSkip`). 테스트 패널 "저장값 초기화" 뒤엔 튜토리얼이 처음부터 나옴. BalanceProbe 는 `SkipTutorial()`.
+- **슬롯**: `Progress.Slot`(PlayerPrefs `nkk_slot`) · 슬롯 1 = 예전 키 `nkk_progress_v1`, 2~5 = `_s2`… · `UseSlot/NewGame/DeleteSlot/SlotSummary` (타이틀 화면용, 아직 타이틀 없음).
+- **코드** `Scripts/Tutorial/`: `TutorialManager`(씬마다 하나, Step 을 sort 순으로 확인 → unlock → 대사 → action → After 단계) · `TutorialBox`(대사창 UI, unscaled) · `TutorialTarget`(강조 id) · `FeatureGate`(잠금: 숨기기/자물쇠/버튼 막기). 대사 중 정지 = `FxManager.Halt`(= Paused ∥ TutorialManager.Pausing). `RatManager.Births`, `LobbyManager.OpenPage` 는 잠긴 기능이면 안 열림.
+- **씬**: Game `HUD/Tutorial`(Box·Highlight·Arrow) + 루트 `TutorialManager`(FeatureGate: promote·power·pop) · 강조 대상 promote/power/pop/timer/minimap/ult. Lobby `UI/Tutorial` + `TutorialManager` · 아지트 팻말·위 탭마다 자물쇠(`Lock`) + FeatureGate + 강조 `tab_<id>` · `research`.
+- **그림**: `UnityResources/Rats/TutoPortraits/`(`Tools/slice_tuto_portraits.py`) · `TutoUI/`(ui_frame·ui_arrow·ui_lock, `slice_tuto_ui.py`, 9-슬라이스 = Apply UI Kit Borders).
+- **확인함**: 첫 판 대사·HUD 숨김·시계 강조 · 로비 잠금·치즈 창고 해금·연구자료 강조 · 잠긴 페이지 안 열림 · 첫 보스 슈퍼 생쥐 필살기 → 설명.
+- **타이틀 · 오프닝 (끝)**: `Title.unity` = `UI/Menu`(이어 하기 · 처음부터 · 끝내기) · `UI/Slots`(기록 1~5, 글 자리표시 {slot} {tier} {tierName} {floor} {runs} {time}) · `UI/Confirm`(덮어쓰기) · `UI/Story`(`StoryPlayer`: 컷 두 장 겹쳐 바꾸기 + 천천히 확대 · 자막 · 건너뛰기) + `TitleManager`. 처음부터 = `NewGame` → 오프닝 → runs+1 → 바로 1층 / 이어 하기 = `UseSlot` → 로비 (runs 0 이면 오프닝부터). 컷 그림 `UnityResources/Rats/Story/`(Codex 7장) → `Assets/Art/Rats/Story/`. 낮잠 침대(`Page_rec`) = "저장하고 타이틀로" 버튼 (`LobbyManager.saveExitButton/SaveAndExit`).
+- **친구들 도감 (끝)**: Lobby `Page_dex` = 쳇바퀴 훈련 페이지 틀 복제 + `Lobby/DexPage.cs`. 쥐 79종 전부 (등급 순), 등급 칩 {n}/{total}. 만난 친구(`Progress.Seen`) = 그림·이름·등급·설명·쳇바퀴 Lv·특수 능력·특수 액션·필살기 / 못 만남 = 실루엣·'???' / 훈장 부족(unlock_rank) = 실루엣·'{tier}훈장부터'. 글 = `Page_dex/Words`. 첫 훈장 승급 뒤 튜토리얼 l_dex 로 해금.
+- **남음**: 잠긴 기능 눌렀을 때 반응(`LobbyManager.OnLocked`) · 사용자 플레이 피드백 (대사 · 타이밍).
 
 ---
 
@@ -141,7 +157,7 @@ NKK.BalanceProbe.RunQueue();   // 결과: NKK.BalanceProbe.Results / RowsCsv() �
 0. ~~보스 테이블 분리 + 두 번째 일반 공격 + 쿨타임 스킬(밈) 6종~~ → 끝 (LOG §9-17). 사용자가 직접 보스전을 해 보고 세기·연출 피드백.
 1. **사용자 플레이 피드백 반영**: 보스 필살 패턴 12종·쿨타임 스킬 6종·고양이 무리 스킬 10종의 화면 연출·세기 (데이터 발동은 확인, 화면은 일부만 봄). 보스 건너뜀이 또 생기면 Editor.log `[Boss]` 확인.
 2. **밸런스**: 사용자 성장 곡선 → `gen_stage_table.py`(POW_GROW·HP_GROW·벽)·`gen_skill_tree.py`(값·비용) 조정 → 측정 (§6). 보스전 시간(필살 패턴 포함)·고양이 방해 정도도 같이. 높은 층(10층+) 사람 수도 아직 안 잼.
-3. **로비 남은 페이지**: 친구들(도감, `RatPortrait` 재사용) · 낮잠 침대(기록·저장). 탭 아이콘·지도 등 로비 소품을 플랫으로 다시 만들지 사용자 결정.
+3. ~~로비 남은 페이지 (친구들 · 낮잠 침대)~~ → 끝 (§5-1). 탭 아이콘·지도 등 로비 소품을 플랫으로 다시 만들지 사용자 결정.
 4. 코드에 박힌 팝업 글(Rat.Action "찌릿!!", ItemManager.ZapChain, 고양이 "냥!" 등) → 테이블/인스펙터.
 5. 사운드 (웹은 WebAudio 합성 → WAV 로 뽑기).
 6. 템플릿 잔여물(TutorialInfo · Readme.asset · SampleScene) 삭제 여부 — 사용자 답 대기.

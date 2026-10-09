@@ -182,4 +182,14 @@ namespace NKK.Data
     [Serializable] public class BossTableFile { public List<BossRow> Boss; public List<BossLineRow> Boss_Line; public List<BossAtkRow> Atk_Type; }
     [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; public int front; public float head_scale = 1; }
     [Serializable] public class HumanRigMetaFile { public List<HumanRigMetaRow> items; }
+    // 튜토리얼 (튜토리얼 테이블): 해설 쥐 · 단계(발동 조건 → 대사 → 해금·행동) · 대사 · 오프닝 컷씬
+    [Serializable] public class TutoSpeakerRow { public string speaker_id, speaker_name, code_id, portrait; }
+    [Serializable] public class TutoStepRow
+    {
+        public string step_id, scene, trigger; public float trigger_value; public string trigger_text;
+        public string cond1_type, cond1_value, cond2_type, cond2_value, unlock, action, action_value; public int sort;
+    }
+    [Serializable] public class TutoLineRow { public int line_id; public string step_id, speaker_id, face, text, highlight; }
+    [Serializable] public class TutoStoryRow { public int line_id, cut; public string image, text; }
+    [Serializable] public class TutorialTableFile { public List<TutoSpeakerRow> Speaker; public List<TutoStepRow> Step; public List<TutoLineRow> Line; public List<TutoStoryRow> Story; }
 }

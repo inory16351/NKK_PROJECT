@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tuto_ui.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, background must be ONE solid flat pure magenta color #FF00FF everywhere (for chroma keying). No shadows on the background, no gradients.
+- NO text, NO letters, NO numbers, no logos.
+- STYLE: match the attached UI kit sheet exactly: cozy flat cartoon game UI (Untitled Goose Game mood), completely FLAT colors, NO black outlines, no gloss, no gradients, soft rounded shapes, warm palette (cream, wood brown, honey yellow).
+- Draw THREE separate UI pieces, well spaced, none touching each other or the image edges:
+  1. LEFT HALF: a large empty HOLLOW rounded-rectangle highlight frame (about 620x420 px), drawn as a thick (about 26 px) bright honey-yellow / gold border with a slightly darker yellow inner edge line, completely EMPTY inside (the inside must be magenta background). Perfectly even border thickness all around so it can be 9-sliced.
+  2. TOP RIGHT: a big chunky cartoon pointer ARROW pointing straight UP (about 220 px tall), honey-yellow with a slightly darker yellow lower side, rounded tips, like a friendly tutorial pointer.
+  3. BOTTOM RIGHT: a small cute flat PADLOCK icon (about 180 px tall), wood-brown / bronze body with a grey shackle, a small dark keyhole, same flat style.
+- Keep the magenta background perfectly uniform. Do not use magenta or purple on the pieces.

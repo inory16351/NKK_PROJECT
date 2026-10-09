@@ -51,7 +51,7 @@ namespace NKK
         public static void Run(int tier, int startFloor, int endFloor, float giveUp = 600, int simHz = 20, int nodes = -1, int shards = -1)
         {
             var p = Progress.I;
-            p.saveKey = "nkk_probe"; p.ResetAll(); p.autoUpgradeInRun = false; p.testSkills.Clear(); p.testSkillTier = 0;
+            p.saveKey = "nkk_probe"; p.ResetAll(); p.SkipTutorial(); p.autoUpgradeInRun = false; p.testSkills.Clear(); p.testSkillTier = 0;
             p.tier = tier; p.maxFloor = Mathf.Max(startFloor, 1);
             MakeMeta(p, tier, nodes, shards);
             Progress.PendingStartFloor = startFloor;

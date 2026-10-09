@@ -22,6 +22,7 @@ namespace NKK.Data
         public TextAsset stageTable;
         public TextAsset bossTable;
         public TextAsset achievementTable;
+        public TextAsset tutorialTable;
 
         public readonly Dictionary<int, RatCharacterRow> Rats = new();
         public readonly Dictionary<string, RatCharacterRow> RatsByCode = new();
@@ -51,6 +52,10 @@ namespace NKK.Data
         public readonly List<AchievementRow> Achievements = new();
         public readonly List<BossLineRow> BossLines = new();
         public readonly Dictionary<string, BossAtkRow> BossAtks = new();
+        public readonly Dictionary<string, TutoSpeakerRow> TutoSpeakers = new();
+        public readonly List<TutoStepRow> TutoSteps = new();
+        public readonly Dictionary<string, List<TutoLineRow>> TutoLines = new();
+        public readonly List<TutoStoryRow> Story = new();
 
         void Awake()
         {
@@ -64,7 +69,7 @@ namespace NKK.Data
         {
             Rats.Clear(); RatsByCode.Clear(); RatSkills.Clear(); Ultimates.Clear(); UltCaptions.Clear(); UltCharges.Clear(); Grades.Clear();
             GrowthNodes.Clear(); GrowthOrder.Clear(); ActionAwaken.Clear(); Cats.Clear(); CatSkills.Clear();
-            Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear(); Stages.Clear(); Bosses.Clear(); Achievements.Clear(); BossLines.Clear(); BossAtks.Clear();
+            Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear(); Stages.Clear(); Bosses.Clear(); Achievements.Clear(); BossLines.Clear(); BossAtks.Clear(); TutoSpeakers.Clear(); TutoSteps.Clear(); TutoLines.Clear(); Story.Clear();
             CommonSkills.Clear(); CommonSkillsById.Clear(); CommonSkillsByTier.Clear(); SkillBranches.Clear();
 
             if (ratTable)
@@ -115,6 +120,14 @@ namespace NKK.Data
             if (achievementTable) { var f = JsonUtility.FromJson<AchievementTableFile>(achievementTable.text); if (f.Achievement != null) { Achievements.AddRange(f.Achievement); Achievements.Sort((a, b) => a.sort_order.CompareTo(b.sort_order)); } }
             if (stageTable) { var f = JsonUtility.FromJson<StageTableFile>(stageTable.text); if (f.Stage != null) { Stages.AddRange(f.Stage); Stages.Sort((a, b) => a.floor.CompareTo(b.floor)); } }
             if (bossTable) { var f = JsonUtility.FromJson<BossTableFile>(bossTable.text); if (f.Boss != null) Bosses.AddRange(f.Boss); if (f.Boss_Line != null) BossLines.AddRange(f.Boss_Line); if (f.Atk_Type != null) foreach (var a in f.Atk_Type) BossAtks[a.atk_type] = a; Bosses.Sort((a, b) => a.floor.CompareTo(b.floor)); }
+            if (tutorialTable)
+            {
+                var f = JsonUtility.FromJson<TutorialTableFile>(tutorialTable.text);
+                if (f.Speaker != null) foreach (var r in f.Speaker) TutoSpeakers[r.speaker_id] = r;
+                if (f.Step != null) { TutoSteps.AddRange(f.Step); TutoSteps.Sort((a, b) => a.sort.CompareTo(b.sort)); }
+                if (f.Line != null) { f.Line.Sort((a, b) => a.line_id.CompareTo(b.line_id)); foreach (var r in f.Line) { if (!TutoLines.TryGetValue(r.step_id, out var l)) TutoLines[r.step_id] = l = new List<TutoLineRow>(); l.Add(r); } }
+                if (f.Story != null) { Story.AddRange(f.Story); Story.Sort((a, b) => a.line_id.CompareTo(b.line_id)); }
+            }
             Debug.Log($"[GameDatabase] 쥐 {Rats.Count} · 스킬 {RatSkills.Count} · 필살기 {Ultimates.Count} · 등급 {Grades.Count} · 성장 노드 {GrowthNodes.Count} · 고양이 {Cats.Count} · 물건 {Items.Count} · 티어 {Tiers.Count} · 사람 {Humans.Count} · 공용 스킬 {CommonSkills.Count}");
         }
 

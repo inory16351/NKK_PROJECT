@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: story_07.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 full-frame illustration for a story cutscene (no transparent background), NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere (any papers/screens show only simple shapes or rat silhouettes).
+- STYLE: match the attached game screenshot: cozy flat cartoon game art (Untitled Goose Game mood), completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted warm palette. The rats look exactly like the cute flat rats in the screenshot (white lab rats with red eyes, brown rats, grey mice; pink ears, pink noses, long pink tails). Humans look like the flat scientists in the attached human sheet (white lab coats).
+- Keep the main subject in the CENTER and UPPER part of the frame; the bottom 25% of the image will be covered by a subtitle box, so keep only floor/background there.
+- SCENE: THE GREAT ESCAPE. A wide shot of the laboratory floor: a big swarm of cute rats bursts out of the opened cage and runs across the tiled lab floor toward the viewer, full of energy, tails flying, a white lab rat leading in front shouting bravely. In the background, a surprised scientist in a lab coat throws his hands up and a grey cat crouches, glaring. Bright, exciting, adventurous mood.
