@@ -42,6 +42,11 @@ namespace NKK.Title
         [Tooltip("확인 글 (자리: {slot})")] public TMP_Text confirmText;
         public Button yesButton, noButton;
 
+        [Header("설정 (볼륨)")]
+        public Button settingsButton;
+        public GameObject settingsPanel;
+        public Button settingsClose;
+
         [Header("오프닝")]
         public StoryPlayer story;
         [Tooltip("화면 어두워지기 (선택)")] public CanvasGroup fade;
@@ -54,6 +59,9 @@ namespace NKK.Title
             if (newButton) newButton.onClick.AddListener(() => OpenSlots(true));
             if (quitButton) quitButton.onClick.AddListener(Quit);
             if (backButton) backButton.onClick.AddListener(CloseSlots);
+            if (settingsButton) settingsButton.onClick.AddListener(() => { if (settingsPanel) settingsPanel.SetActive(true); });
+            if (settingsClose) settingsClose.onClick.AddListener(() => { if (settingsPanel) settingsPanel.SetActive(false); });
+            if (settingsPanel) settingsPanel.SetActive(false);
             if (yesButton) yesButton.onClick.AddListener(() => { if (confirm) confirm.SetActive(false); StartNew(pendingSlot); });
             if (noButton) noButton.onClick.AddListener(() => { if (confirm) confirm.SetActive(false); });
             for (int i = 0; i < cards.Length; i++)
@@ -169,7 +177,8 @@ namespace NKK.Title
         {
             var k = Keyboard.current;
             if (k == null || !k.escapeKey.wasPressedThisFrame || (story && story.Playing)) return;
-            if (confirm && confirm.activeSelf) confirm.SetActive(false);
+            if (settingsPanel && settingsPanel.activeSelf) settingsPanel.SetActive(false);
+            else if (confirm && confirm.activeSelf) confirm.SetActive(false);
             else if (slotPanel && slotPanel.activeSelf) CloseSlots();
         }
     }
