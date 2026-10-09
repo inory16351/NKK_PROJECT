@@ -41183,7 +41183,16 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: aa2f947a7aa844c43b115cb3618fe114, type: 3}
   - fromFloor: 10
     clip: {fileID: 8300000, guid: c2949f2a4d9ef9b498aa7ff920a5aed1, type: 3}
+  - fromFloor: 15
+    clip: {fileID: 8300000, guid: 662080d0fbf090f49952b736001957e4, type: 3}
+  - fromFloor: 20
+    clip: {fileID: 8300000, guid: f55dbda198b91ad4bae0959790f1d2c9, type: 3}
   bossClip: {fileID: 8300000, guid: f7a5e5be69eb4d74783e9f2fe53c72bb, type: 3}
+  finalBossClip: {fileID: 0}
+  finalBossFloor: 30
+  Timer: {fileID: 706652775}
+  hurryClip: {fileID: 8300000, guid: 2304a348bf9e9844d92a4ad1e54bb1de, type: 3}
+  hurryAt: 30
 --- !u!4 &1638342848
 Transform:
   m_ObjectHideFlags: 0

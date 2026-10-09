@@ -134,9 +134,10 @@
 - **친구들 도감 (끝)**: Lobby `Page_dex` = 쳇바퀴 훈련 페이지 틀 복제 + `Lobby/DexPage.cs`. 쥐 79종 전부 (등급 순), 등급 칩 {n}/{total}. 만난 친구(`Progress.Seen`) = 그림·이름·등급·설명·쳇바퀴 Lv·특수 능력·특수 액션·필살기 / 못 만남 = 실루엣·'???' / 훈장 부족(unlock_rank) = 실루엣·'{tier}훈장부터'. 글 = `Page_dex/Words`. 첫 훈장 승급 뒤 튜토리얼 l_dex 로 해금.
 - **잠긴 기능 반응 (끝)**: Lobby `LockedFeedback`(Tutorial/LockedFeedback.cs) — `LobbyManager.OnLocked` → 그 기능 자물쇠 흔들림 + 아래쪽 말풍선 `UI/LockToast`("아직 잠겨 있어요, 찍!" + 기능별 힌트 = 인스펙터). 위쪽 탭은 버튼을 막지 않고 OpenPage 가 막음.
 - **문서**: 튜토리얼 기획서 pptx (정승운, 코어 루프 기획서 레이아웃) = `OneDrive/Desktop/문서용/20261009_프로젝트 NKK_튜토리얼 기획서_정승운.pptx` · 사운드 목록 초안 = `사운드 목록.md`.
-- **배경음악 (2026-10-10)**: Gemini Pro 음악 만들기(Lyria, 연주곡 · 표준 3분)로 7곡 = `UnityResources/Audio/BGM/`(README) → `Assets/Audio/BGM/`(스트리밍 · Vorbis). 재생 = `Core/MusicManager`(씬 넘어가도 하나, 겹쳐 바꾸기, 튜토리얼 대사 · 포기 창 중 볼륨 줄임, 볼륨 PlayerPrefs `nkk_bgm_vol`) + 씬마다 `SceneMusic`(Title = BGM_Title, 오프닝 컷씬 중 BGM_Story_Epic · Lobby = BGM_Lobby · Game = 1층 Lab · 5층 Breeding · 10층~ Pharma + 보스전 BGM_Boss). 15층 전산·관리동 · 20층 연구소장 층 곡은 Gemini 생성이 계속 멈춰 아직 없음. 효과음은 아직 없음.
+- **배경음악 (2026-10-10)**: Gemini Pro 음악 만들기(Lyria, 연주곡 · 표준 3분)로 10곡 = `UnityResources/Audio/BGM/`(README) → `Assets/Audio/BGM/`(스트리밍 · Vorbis). 재생 = `Core/MusicManager`(씬 넘어가도 하나, 겹쳐 바꾸기, 튜토리얼 대사 · 포기 창 중 볼륨 줄임, 볼륨 PlayerPrefs `nkk_bgm_vol`) + 씬마다 `SceneMusic`(Title = BGM_Title, 오프닝 컷씬 중 BGM_Story_Epic · Lobby = BGM_Lobby · Game = 1층 Lab · 5층 Breeding · 10층 Pharma · 15층 Admin · 20층~ Director + 보스전 BGM_Boss(최종 보스 곡 칸 finalBossClip 은 아직 비어 있음) + 남은 시간 30초 이하 BGM_Hurry).
   - Gemini 음악: 내장 브라우저에서 사용자 로그인 → 도구 '음악 만들기' · 모드 Pro · 길이 표준 · 보컬 연주곡. 다운로드는 '트랙 다운로드 → 오디오만(MP3)', 받은 파일이 Downloads 에 `.tmp` 로 생김 (사라지기도 함) → 크기가 멈추면 바로 복사. 긴 프롬프트·특정 프롬프트는 '생성 중'에서 멈출 때가 있음 → 중지 후 짧게 다시.
-- **남음**: 사용자 플레이 피드백 (대사 · 타이밍) · 15층 · 20층 구역 곡 · 효과음 제작 방식 결정.
+- **효과음 (2026-10-10)**: `Tools/gen_sfx.py` 코드 합성 81개 = `UnityResources/Audio/SFX/`(README) → `Assets/Audio/SFX/`. 재생 = `Core/SfxManager`(씬마다, 이름으로 `SfxManager.Play/PlayAt`, 이름별 볼륨·간격·동시 수, 화면 밖 무시, UI 버튼 클릭 자동, 볼륨 `nkk_sfx_vol`, 목록 = 컴포넌트 메뉴 Fill From Folder). 게임 곳곳 연결(물건 타격/박살 재질별 · 콤보 · 치즈 · 번식 · 총공격 · 보스 · 고양이 · 벽 폭파 · 층 클리어 · 게임 오버 · 튜토리얼 · 로비 구매 등). 목소리 계열은 합성이라 어색 → 나중에 같은 이름으로 교체.
+- **남음**: 사용자 플레이 피드백 (대사 · 타이밍 · 소리 크기) · 최종 보스 곡 · 볼륨 설정 화면 (MusicManager/SfxManager.SetVolume 있음).
 
 ---
 
