@@ -40574,10 +40574,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.SceneMusic
   clip: {fileID: 8300000, guid: e08be09be8960954ea1d9ed6c20ef9e9, type: 3}
+  story: {fileID: 0}
+  storyClip: {fileID: 0}
   Game: {fileID: 505505430}
   zones:
   - fromFloor: 1
     clip: {fileID: 8300000, guid: e08be09be8960954ea1d9ed6c20ef9e9, type: 3}
+  - fromFloor: 5
+    clip: {fileID: 8300000, guid: aa2f947a7aa844c43b115cb3618fe114, type: 3}
+  - fromFloor: 10
+    clip: {fileID: 8300000, guid: c2949f2a4d9ef9b498aa7ff920a5aed1, type: 3}
   bossClip: {fileID: 8300000, guid: f7a5e5be69eb4d74783e9f2fe53c72bb, type: 3}
 --- !u!4 &1638342848
 Transform:

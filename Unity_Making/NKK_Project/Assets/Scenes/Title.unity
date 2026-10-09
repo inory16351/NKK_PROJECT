@@ -6336,6 +6336,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.SceneMusic
   clip: {fileID: 8300000, guid: d84417353dc12d349ace938556fb3071, type: 3}
+  story: {fileID: 522362920}
+  storyClip: {fileID: 8300000, guid: 498d606b57441f24c9fb16ead543072e, type: 3}
   Game: {fileID: 0}
   zones: []
   bossClip: {fileID: 0}
