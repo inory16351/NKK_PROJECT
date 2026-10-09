@@ -132,7 +132,9 @@
 - **확인함**: 첫 판 대사·HUD 숨김·시계 강조 · 로비 잠금·치즈 창고 해금·연구자료 강조 · 잠긴 페이지 안 열림 · 첫 보스 슈퍼 생쥐 필살기 → 설명.
 - **타이틀 · 오프닝 (끝)**: `Title.unity` = `UI/Menu`(이어 하기 · 처음부터 · 끝내기) · `UI/Slots`(기록 1~5, 글 자리표시 {slot} {tier} {tierName} {floor} {runs} {time}) · `UI/Confirm`(덮어쓰기) · `UI/Story`(`StoryPlayer`: 컷 두 장 겹쳐 바꾸기 + 천천히 확대 · 자막 · 건너뛰기) + `TitleManager`. 처음부터 = `NewGame` → 오프닝 → runs+1 → 바로 1층 / 이어 하기 = `UseSlot` → 로비 (runs 0 이면 오프닝부터). 컷 그림 `UnityResources/Rats/Story/`(Codex 7장) → `Assets/Art/Rats/Story/`. 낮잠 침대(`Page_rec`) = "저장하고 타이틀로" 버튼 (`LobbyManager.saveExitButton/SaveAndExit`).
 - **친구들 도감 (끝)**: Lobby `Page_dex` = 쳇바퀴 훈련 페이지 틀 복제 + `Lobby/DexPage.cs`. 쥐 79종 전부 (등급 순), 등급 칩 {n}/{total}. 만난 친구(`Progress.Seen`) = 그림·이름·등급·설명·쳇바퀴 Lv·특수 능력·특수 액션·필살기 / 못 만남 = 실루엣·'???' / 훈장 부족(unlock_rank) = 실루엣·'{tier}훈장부터'. 글 = `Page_dex/Words`. 첫 훈장 승급 뒤 튜토리얼 l_dex 로 해금.
-- **남음**: 잠긴 기능 눌렀을 때 반응(`LobbyManager.OnLocked`) · 사용자 플레이 피드백 (대사 · 타이밍).
+- **잠긴 기능 반응 (끝)**: Lobby `LockedFeedback`(Tutorial/LockedFeedback.cs) — `LobbyManager.OnLocked` → 그 기능 자물쇠 흔들림 + 아래쪽 말풍선 `UI/LockToast`("아직 잠겨 있어요, 찍!" + 기능별 힌트 = 인스펙터). 위쪽 탭은 버튼을 막지 않고 OpenPage 가 막음.
+- **문서**: 튜토리얼 기획서 pptx (정승운, 코어 루프 기획서 레이아웃) = `OneDrive/Desktop/문서용/20261009_프로젝트 NKK_튜토리얼 기획서_정승운.pptx` · 사운드 목록 초안 = `사운드 목록.md`.
+- **남음**: 사용자 플레이 피드백 (대사 · 타이밍) · 사운드 제작 방식 결정.
 
 ---
 
@@ -159,7 +161,7 @@ NKK.BalanceProbe.RunQueue();   // 결과: NKK.BalanceProbe.Results / RowsCsv() �
 2. **밸런스**: 사용자 성장 곡선 → `gen_stage_table.py`(POW_GROW·HP_GROW·벽)·`gen_skill_tree.py`(값·비용) 조정 → 측정 (§6). 보스전 시간(필살 패턴 포함)·고양이 방해 정도도 같이. 높은 층(10층+) 사람 수도 아직 안 잼.
 3. ~~로비 남은 페이지 (친구들 · 낮잠 침대)~~ → 끝 (§5-1). 탭 아이콘·지도 등 로비 소품을 플랫으로 다시 만들지 사용자 결정.
 4. 코드에 박힌 팝업 글(Rat.Action "찌릿!!", ItemManager.ZapChain, 고양이 "냥!" 등) → 테이블/인스펙터.
-5. 사운드 (웹은 WebAudio 합성 → WAV 로 뽑기).
+5. 사운드: 목록 초안 `사운드 목록.md` (배경음악 · 징글 · 효과음, 우선순위). 제작 방식 결정 필요.
 6. 템플릿 잔여물(TutorialInfo · Readme.asset · SampleScene) 삭제 여부 — 사용자 답 대기.
 7. 안 쓰는 새 그림: `FX_CatWarn/cat_target`·`stun_stars`, `BossProps/boss_anger`, FX_New 일부(연기·불꽃·독가스·땀·Zzz·흙더미).
 8. 출시 준비: 테스트 패널 끄기 · PC 빌드 테스트.
