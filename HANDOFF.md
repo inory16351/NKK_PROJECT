@@ -134,7 +134,9 @@
 - **친구들 도감 (끝)**: Lobby `Page_dex` = 쳇바퀴 훈련 페이지 틀 복제 + `Lobby/DexPage.cs`. 쥐 79종 전부 (등급 순), 등급 칩 {n}/{total}. 만난 친구(`Progress.Seen`) = 그림·이름·등급·설명·쳇바퀴 Lv·특수 능력·특수 액션·필살기 / 못 만남 = 실루엣·'???' / 훈장 부족(unlock_rank) = 실루엣·'{tier}훈장부터'. 글 = `Page_dex/Words`. 첫 훈장 승급 뒤 튜토리얼 l_dex 로 해금.
 - **잠긴 기능 반응 (끝)**: Lobby `LockedFeedback`(Tutorial/LockedFeedback.cs) — `LobbyManager.OnLocked` → 그 기능 자물쇠 흔들림 + 아래쪽 말풍선 `UI/LockToast`("아직 잠겨 있어요, 찍!" + 기능별 힌트 = 인스펙터). 위쪽 탭은 버튼을 막지 않고 OpenPage 가 막음.
 - **문서**: 튜토리얼 기획서 pptx (정승운, 코어 루프 기획서 레이아웃) = `OneDrive/Desktop/문서용/20261009_프로젝트 NKK_튜토리얼 기획서_정승운.pptx` · 사운드 목록 초안 = `사운드 목록.md`.
-- **남음**: 사용자 플레이 피드백 (대사 · 타이밍) · 사운드 제작 방식 결정.
+- **배경음악 (2026-10-10)**: Gemini Pro 음악 만들기(Lyria, 연주곡 · 표준 3분)로 4곡 = `UnityResources/Audio/BGM/`(README) → `Assets/Audio/BGM/`(스트리밍 · Vorbis). 재생 = `Core/MusicManager`(씬 넘어가도 하나, 겹쳐 바꾸기, 튜토리얼 대사 · 포기 창 중 볼륨 줄임, 볼륨 PlayerPrefs `nkk_bgm_vol`) + 씬마다 `SceneMusic`(Title = BGM_Title · Lobby = BGM_Lobby · Game = 층 구역별 곡 + 보스전 BGM_Boss). 오프닝 곡(BGM_Story_Epic)은 Gemini 오류로 아직 없음. 효과음은 아직 없음.
+  - Gemini 음악: 내장 브라우저에서 사용자 로그인 → 도구 '음악 만들기' · 모드 Pro · 길이 표준 · 보컬 연주곡. 다운로드는 '트랙 다운로드 → 오디오만(MP3)', 받은 파일이 Downloads 에 `.tmp` 로 잠깐 생겼다 사라지니 크기가 멈추면 바로 복사.
+- **남음**: 사용자 플레이 피드백 (대사 · 타이밍) · 오프닝 곡 · 층 구역별 곡 · 효과음 제작 방식 결정.
 
 ---
 
