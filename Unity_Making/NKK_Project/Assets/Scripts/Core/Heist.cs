@@ -72,6 +72,7 @@ namespace NKK
         // 계단에 닿음 (StageManager.Climb) — move = 층 이동 시작
         public void Begin(Vector2 stairs, Action move)
         {
+            SfxManager.Play("jgl_floor_clear");
             if (Active) { move?.Invoke(); return; }
             Active = true; t = 0; moved = false; onMove = move;
             gained = Mathf.RoundToInt(ResearchFor(Game.Floor));

@@ -66,6 +66,7 @@ namespace NKK.Tutorial
             if (r.cut != curCut)
             {
                 curCut = r.cut;
+                if (idx > 0) SfxManager.Play("story_page", 0.6f);
                 aFront = !aFront;
                 var f = Front; if (f) { f.sprite = Find(r.image); f.transform.SetAsLastSibling(); f.color = new Color(1, 1, 1, 0); f.rectTransform.localScale = Vector3.one; }
                 if (captionPanel) captionPanel.SetAsLastSibling();

@@ -194,6 +194,8 @@ namespace NKK.Items
             float gain = it.value * (1 + 0.5f * Mathf.Min(it.Air, airMax)) * (it.Crit ? 2 : 1) * (it.By ? it.By.CheeseMult : 1) * (it.By && it.ByAction ? it.By.SkillKillCheeseMul : 1)
                 * (it.By && it.By.Trick != Rat.TrickType.None ? CommonSkill.TrickCheeseMul : 1);       // 묘기 중에 부숨 → 묘기 치즈
             Game.OnSmash(gain);
+            SfxManager.PlayAt(it.Data.IsFurniture || it.Data.is_paper == 1 ? "smash_wood" : it.Data.is_sturdy == 1 ? "smash_metal" : "smash_glass", it.x, it.y);
+            if (it.Crit) SfxManager.PlayAt("crit", it.x, it.y, 0.8f);
             if (it.By) { Rats.OnItemSmashedBy(it.By, it.x, it.y); Rats.Ults?.Charge(it.By, CondType.Destroy_Item); }
             Research.I?.OnSmashed(it);                                          // 가끔 연구자료 (가구 12% · 물건 1.2%)
             var fx = FxManager.I;
@@ -350,6 +352,7 @@ namespace NKK.Items
         // 하늘에서 낙하 (특수 액션 Meteor · 치즈 운석 · 필살기 운석 비). 연출은 ItemManager.Meteor.cs
         public void DropMeteor(Rat by, float tx, float ty, float rad, float dmg, Sprite spr, float size = 1, float fallTime = -1)
         {
+            SfxManager.PlayAt("meteor", tx, ty);
             var b = new Bomb { x = tx, y = ty, z = 900, rad = rad, dmg = dmg, by = by, meteor = true };
             SetupMeteor(b, spr, size, fallTime > 0 ? fallTime : meteorFallTime);
             bombs.Add(b);

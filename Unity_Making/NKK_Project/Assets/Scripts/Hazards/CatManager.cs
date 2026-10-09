@@ -110,6 +110,7 @@ namespace NKK.Hazards
             var c = Instantiate(catPrefab, catRoot ? catRoot : transform);
             c.Init(this, row, skill, art, x, y, CatHP(row) * CommonSkill.CatHpMul, 3 * Stage.CheeseK(Game.Floor) * valueMul * CommonSkill.CreatureCheeseMul);
             Current = c;
+            SfxManager.Play("cat_meow");
             var fx = FxManager.I; if (fx) fx.Dust(x, y, 10, 1.4f);
             bool special = row.Category == CatCategory.Special;
             Game.ShowBanner(special ? $"특별 고양이: {row.character_name}!" : $"{row.character_name} 출현!", (spawnSub ?? "").Replace("{skill}", skill?.skill_name ?? "").Replace("{crowd}", db.CatSkills.TryGetValue(row.crowd_skill, out var cs) ? cs.skill_name : ""));

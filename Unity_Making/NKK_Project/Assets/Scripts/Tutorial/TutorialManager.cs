@@ -130,7 +130,7 @@ namespace NKK.Tutorial
             running = s;
             if (log) Debug.Log($"[Tutorial] {s.step_id} ({s.trigger})");
             P.MarkTuto(s.step_id);             // 시작할 때 기록 (중간에 꺼도 다시 안 나옴)
-            P.Unlock(s.unlock);
+            if (P.Unlock(s.unlock)) SfxManager.Play("jgl_unlock");
             if (box) box.ClearLinger();
             List<TutoLineRow> lines = null;
             DB.TutoLines.TryGetValue(s.step_id, out lines);

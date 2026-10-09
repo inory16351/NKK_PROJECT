@@ -74,6 +74,7 @@ namespace NKK
                     if (before > w && Left <= w)
                     {
                         Game.ShowBanner((warnTitle ?? "").Replace("{n}", w.ToString()), warnSub);
+                        SfxManager.Play("jgl_time_warn");
                         if (Ults) Ults.Flash(warnColor, 0.15f);
                         FxManager.I?.Shake(0.08f);
                     }

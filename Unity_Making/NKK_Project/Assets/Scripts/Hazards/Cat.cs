@@ -71,7 +71,7 @@ namespace NKK.Hazards
         {
             if (!Alive) return false;
             hp -= dmg * CommonSkill.BossDmgMul; jit = 3;          // 보스 사냥꾼
-            if (hp <= 0) { if (by) mgr.Rats.Ults?.Charge(by, CondType.Defeat_Cat); Fling(ang); return true; }
+            if (hp <= 0) { if (by) mgr.Rats.Ults?.Charge(by, CondType.Defeat_Cat); Fling(ang); SfxManager.Play("cat_down"); return true; }
             if (Random.value < 0.25f) FxManager.I?.Popup(x, y, RandomOf("냥!", "캬악!", "냐?!", "하악!"), Color.white, 18, 0.6f, 60);
             return true;
         }
@@ -252,6 +252,7 @@ namespace NKK.Hazards
         {
             mgr.ShowAlert(this, false);
 #if UNITY_EDITOR
+            SfxManager.PlayAt("cat_warn", x, y);
             if (mgr.logCrowd) Debug.Log($"[Cat] {Data.character_name} · {Crowd.skill_name} 발동 (무리 {crowdN}마리, 노리는 곳 {targets.Count})");
 #endif
             var fx = FxManager.I;

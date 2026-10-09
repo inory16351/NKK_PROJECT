@@ -151,7 +151,7 @@ namespace NKK.Ults
                     if (t > 0.3f && !slam) { slam = true; fx?.Shake(0.25f); }
                     if (t >= tCut)
                     {
-                        Go(Phase.Charge); slam = false;
+                        Go(Phase.Charge); slam = false; SfxManager.Play("superjump_charge");
                         if (cutIn) cutIn.gameObject.SetActive(false);
                         DropCutRat();
                         if (!string.IsNullOrEmpty(shout)) fx?.Popup(r.x, r.y, shout, Cream, 26, 1.4f, 70);
@@ -291,7 +291,7 @@ namespace NKK.Ults
 
         void Boom()
         {
-            Go(Phase.Drop); boomT = Time.unscaledTime;
+            Go(Phase.Drop); boomT = Time.unscaledTime; SfxManager.Play("superjump_slam");
             FxManager.WorldFreeze = false;              // 날아간 물건·사람이 다시 움직이게
             float sjD = r.SkillDamage * damageK;
             int n = 0;

@@ -280,6 +280,7 @@ namespace NKK.Hazards
             if (!Test) Debug.Log($"[Boss] {Game.Floor}층 보스전 시작 (체력 {GameManager.Format(hpMax)})");
             fightStart = Time.time;
             State = BState.Fight; t = 0; skillCd = Data.skill_first;
+            SfxManager.Play("jgl_boss_warn");
             string intro = DB.BossLine("Intro", Data.boss_id);
             Game.ShowBanner(Data.boss_name, Fill(fightSub));
             Say(intro, 2.4f);
@@ -342,9 +343,10 @@ namespace NKK.Hazards
             dmg *= CommonSkill.BossDmgMul;
             if (unbrokenT > 0) dmg *= unbrokenDmgMul;          // 중꺾마
             hp -= dmg; hitT = 0.25f; jit = 3;
+            SfxManager.Play("boss_hit", 0.7f);
             // 필살 패턴: 체력 70% · 35% 아래로 처음 내려가면 다음 공격으로 바로
-            if (!sp1Done && hp < hpMax * 0.7f && Valid(Data.special1_type)) { sp1Done = true; pendingSpecial = Data.special1_type; atkCd = Mathf.Min(atkCd, 0.3f); }
-            else if (!sp2Done && hp < hpMax * 0.35f && Valid(Data.special2_type)) { sp2Done = true; pendingSpecial = Data.special2_type; atkCd = Mathf.Min(atkCd, 0.3f); }
+            if (!sp1Done && hp < hpMax * 0.7f && Valid(Data.special1_type)) { sp1Done = true; pendingSpecial = Data.special1_type; SfxManager.Play("jgl_desperation"); atkCd = Mathf.Min(atkCd, 0.3f); }
+            else if (!sp2Done && hp < hpMax * 0.35f && Valid(Data.special2_type)) { sp2Done = true; pendingSpecial = Data.special2_type; SfxManager.Play("jgl_desperation"); atkCd = Mathf.Min(atkCd, 0.3f); }
             if (unbrokenT <= 0) { vx += Mathf.Cos(ang) * 60; vy += Mathf.Sin(ang) * 60; }
             var fx = FxManager.I;
             bool vis = Ults && Ults.OnScreen(x, y, 0);
@@ -358,6 +360,7 @@ namespace NKK.Hazards
         void Down()
         {
             State = BState.Dying; t = 0; hp = 0; attacking = false; EndSpecialFx(); unbrokenT = 0;
+            SfxManager.Play("jgl_boss_down");
             if (!Test && bossFloor == Game.Floor) DefeatedThisFloor = true;
             Debug.Log($"[Boss] {Game.Floor}층 보스 격파{(Test ? " (테스트)" : "")} · 전투 {Time.time - fightStart:0}초");
             vx = Random.Range(-120f, 120f); vy = -40; vz = downV; vr = downSpin; ClearShots();

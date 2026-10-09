@@ -39,6 +39,8 @@ namespace NKK.Rats
         public Color stunPopupColor = new(1f, 0.6f, 0.45f);
         public float stunPopupSize = 15, stunPopupMin = 0.5f;
         public int stunPopupPerFrame = 12;
+        [Tooltip("쥐 울음 (찍) 간격 (초, 최소 ~ 최대) — 화면 안 쥐 하나가 가끔")] public float squeakMin = 1.5f, squeakMax = 4f;
+        float squeakT = 2;
         int stunPopFrame, stunPopN;
 
         [Header("시작 쥐")]
@@ -239,6 +241,7 @@ namespace NKK.Rats
         public Rat Promote(int g)
         {
             if (!CanPromote(g)) return null;
+            SfxManager.Play("rat_promote");
             int need = PromoteNeed(g);
             var pool = new List<Rat>();
             foreach (var r in Rats) if (r.temp <= 0 && !r.UltOn && (int)r.Data.Grade == g) pool.Add(r);
@@ -456,7 +459,7 @@ namespace NKK.Rats
                 var row = RollSpecies(p.z);
                 if (row == null) continue;
                 var r = Spawn(row, p.x, p.y);
-                if (r) Births++;
+                if (r) { Births++; SfxManager.PlayAt("rat_birth", p.x, p.y); }
                 if (r && r.OnScreen()) FxManager.I?.Hearts(p.x, p.y, birthHearts);     // 번식 하트
                 if (r && (int)row.Grade >= 2) Game.ShowBanner($"{GameDatabase.Instance.GradeOf(row).grade_name} 탄생!", row.character_name);
                 // 쌍둥이: 한 마리 더 (최대 인구 안에서)
@@ -497,6 +500,7 @@ namespace NKK.Rats
         {
             float rt = RushTime;
             RushPoint = p; rushLeft = rt;
+            SfxManager.Play("rat_rush_call");
             // 화면에 보이는 쥐 + 공용 스킬 총공격 범위만큼 화면 밖 쥐도 모임 (돌진 중엔 번식 금지)
             var cam = Camera.main; float m = 0.02f + CommonSkill.RushRange;
             foreach (var r in Rats)
@@ -528,6 +532,7 @@ namespace NKK.Rats
         {
             if (FxManager.WorldFreeze) return;
             HandleInput();
+            if ((squeakT -= Time.deltaTime) <= 0) { squeakT = Random.Range(squeakMin, squeakMax); if (Rats.Count > 0) { var sq = Rats[Random.Range(0, Rats.Count)]; SfxManager.PlayAt("rat_squeak", sq.x, sq.y, 0.5f); } }
             float dt = Mathf.Min(Time.deltaTime, 0.05f);
             rushLeft -= dt; rushCdLeft -= dt;
             for (int i = timers.Count - 1; i >= 0; i--) { var tm = timers[i]; tm.t -= dt; if (tm.t <= 0) { timers.RemoveAt(i); tm.a(); } else timers[i] = tm; }
@@ -558,6 +563,7 @@ namespace NKK.Rats
             if (stunPopFrame != Time.frameCount) { stunPopFrame = Time.frameCount; stunPopN = 0; }
             if (++stunPopN > stunPopupPerFrame) return;
             FxManager.I.Popup(r.x, r.y, stunPopup, stunPopupColor, stunPopupSize, 0.9f, r.z + 40);
+            SfxManager.PlayAt("rat_stun", r.x, r.y, 0.6f);
         }
     }
 }

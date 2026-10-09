@@ -36,6 +36,7 @@ namespace NKK
 
         void Show(AchievementRow a)
         {
+            SfxManager.Play("jgl_achievement");
             if (!panel) return;
             if (!xSet) { x0 = panel.anchoredPosition.x; xSet = true; }
             panel.gameObject.SetActive(true);

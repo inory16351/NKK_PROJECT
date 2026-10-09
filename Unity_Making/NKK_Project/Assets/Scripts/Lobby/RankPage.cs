@@ -194,7 +194,8 @@ namespace NKK.Lobby
         void RankUp()
         {
             var p = Progress.I;
-            if (!p.RankUp()) return;
+            if (!p.RankUp()) { SfxManager.Play("ui_deny"); return; }
+            SfxManager.Play("jgl_rank_up");
             selTier = Mathf.Min(MaxTier, p.tier + 1);
             Draw();
             if (manager && manager.home) manager.home.Refresh();

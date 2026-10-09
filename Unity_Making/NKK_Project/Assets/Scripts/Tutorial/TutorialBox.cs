@@ -44,6 +44,7 @@ namespace NKK.Tutorial
         int idx; float shown, inT, bumpT;
         string pointer; float pointerLeft;       // 대사가 끝난 뒤에도 잠깐 남는 강조
         Vector2 panelPos;
+        string blip; int lastVis;           // 글자 나올 때 '찍' 소리 (화자별)
         Canvas canvas;
 
         void Awake()
@@ -79,6 +80,7 @@ namespace NKK.Tutorial
             TutoSpeakerRow sp = null;
             if (db && !string.IsNullOrEmpty(l.speaker_id)) db.TutoSpeakers.TryGetValue(l.speaker_id, out sp);
             if (nameText) nameText.text = sp != null ? sp.speaker_name : noSpeakerName;
+            blip = sp != null ? "tuto_blip_" + sp.speaker_id : null; lastVis = 0;
             if (portrait)
             {
                 var spr = sp != null ? Find($"{sp.portrait}_{(string.IsNullOrEmpty(l.face) ? "normal" : l.face)}") ?? Find(sp.portrait + "_normal") : null;
@@ -118,6 +120,8 @@ namespace NKK.Tutorial
             {
                 shown += dt * charsPerSec;
                 bodyText.maxVisibleCharacters = Mathf.Min(TotalChars, Mathf.FloorToInt(shown));
+                int vis = bodyText.maxVisibleCharacters;
+                if (vis > lastVis) { if (vis / 3 != lastVis / 3) SfxManager.Play(blip, 0.5f); lastVis = vis; }
             }
             bool full = !bodyText || bodyText.maxVisibleCharacters >= TotalChars;
             if (nextMark) { nextMark.SetActive(full); if (full) nextMark.transform.localScale = Vector3.one * (1 + 0.08f * Mathf.Sin(Time.unscaledTime * 6)); }
@@ -139,6 +143,7 @@ namespace NKK.Tutorial
 
         void Next()
         {
+            SfxManager.Play("tuto_next");
             idx++;
             if (idx < lines.Count) { ShowLine(); return; }
             Hide();
@@ -163,6 +168,7 @@ namespace NKK.Tutorial
                 highlight.gameObject.SetActive(false); if (arrow) arrow.gameObject.SetActive(false);
                 return;
             }
+            if (!highlight.gameObject.activeSelf) SfxManager.Play("tuto_highlight", 0.6f);
             highlight.gameObject.SetActive(true);
             var cr = canvas.transform as RectTransform;
             var cam = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;

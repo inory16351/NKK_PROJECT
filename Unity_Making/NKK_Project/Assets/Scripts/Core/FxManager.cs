@@ -232,6 +232,7 @@ namespace NKK
         // ── 바닥 얼룩 (깨진 물건에서 쏟아짐, 천천히 옅어짐) ──
         public void Spill(float x, float y, float rad, Color col)
         {
+            SfxManager.PlayAt("spill", x, y, 0.7f);
             if (!spillTemplate) return;
             for (int i = 0; i < 4; i++)
             {
@@ -291,6 +292,7 @@ namespace NKK
         // ── 치즈 코인: 박살 난 자리에서 HUD 치즈 글자로 날아감 ──
         public void Coin(float x, float y, int n = 1)
         {
+            SfxManager.PlayAt("cheese", x, y, 0.6f);
             if (!coinTemplate || !hudCanvas) return;
             var c = Camera.main; if (!c) return;          // 밸런스 측정 중엔 카메라를 꺼서 없음
             for (int i = 0; i < n && coins.Count < coinMax; i++)

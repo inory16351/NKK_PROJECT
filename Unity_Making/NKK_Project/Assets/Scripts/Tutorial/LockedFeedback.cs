@@ -33,6 +33,7 @@ namespace NKK.Tutorial
 
         public void Show(string feature)
         {
+            SfxManager.Play("ui_locked");
             // 그 기능의 자물쇠 (아지트 팻말 · 위쪽 탭 둘 다)
             foreach (var g in FindObjectsByType<FeatureGate>(FindObjectsSortMode.None))
             {
