@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boss_meme_side.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere, perfectly uniform, no noise. No text, no letters, no numbers, no logos anywhere.
+- STYLE: match the attached references (cozy flat cartoon game art, Untitled Goose Game mood): completely FLAT colors, NO black outlines, no gradients, no glow. Each piece is ONE connected chunky shape with a clean magenta margin; pieces never touch.
+- Exact 2 columns x 1 row (each cell 768x1024), each piece centered, filling about 60% of its cell width.
+1) A cartoon blue shark HEAD in pure SIDE PROFILE facing RIGHT (like a costume mask head that replaces a small animal's head): pointed snout to the right, one eye, open grin with small white teeth, dorsal fin on top, cut off cleanly at the back (neck end on the left), goofy.
+2) A white cappuccino cup in pure SIDE VIEW facing RIGHT (cup body, handle on the LEFT side), with a little foam dome on top and a tiny brown latte-art heart visible on the foam, to be worn as a head. Simple and round.

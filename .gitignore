@@ -19,3 +19,7 @@ Unity_Making/NKK_Project/Assets/Screenshots.meta
 .DS_Store
 Thumbs.db
 ~$*
+/Captures/
+
+# Obsidian 메모 앱 설정 (개인)
+.obsidian/

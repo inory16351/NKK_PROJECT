@@ -95,6 +95,7 @@ namespace NKK
 
         public void Begin(Why reason)
         {
+            SfxManager.Play("guard_siren");
             if (Active) return;
             Active = true; why = reason; t = 0; shown = false; panelT = -1;
             if (Ults) Ults.CancelAll();
@@ -245,6 +246,7 @@ namespace NKK
 
         void ShowPanel()
         {
+            SfxManager.Play("jgl_game_over");
             panelT = -1;
             if (whyTime) whyTime.SetActive(why == Why.Time);
             if (whyBoss) whyBoss.SetActive(why == Why.Boss);

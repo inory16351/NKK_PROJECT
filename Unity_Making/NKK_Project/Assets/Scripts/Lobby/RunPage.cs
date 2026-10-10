@@ -15,6 +15,7 @@ namespace NKK.Lobby
 
         [Header("층 길")]
         public Transform tileRow;
+        [Tooltip("층 길 가로 스크롤 (타일이 많으면 넘침 → 스크롤바·휠·끌기). 고른 층이 안 보이면 그쪽으로 옮김")] public ScrollRect tileScroll;
         [Tooltip("층 타일 템플릿 (꺼져 있음): 자식 Num · Sub (TMP)")] public Button tileTemplate;
         public Sprite tileNormal, tileOn, tileLock;
         [Tooltip("최고 기록 너머로 잠긴 층을 몇 개 더 보여 줄지")] public int lockedPreview = 3;
@@ -54,6 +55,21 @@ namespace NKK.Lobby
             if (goButton) goButton.onClick.AddListener(() => manager.Go(startFloor));
         }
 
+        // 고른 층 타일이 스크롤 밖이면 가운데로
+        void KeepSelectedVisible()
+        {
+            if (!tileScroll || !tileScroll.content || !tileScroll.viewport) return;
+            Canvas.ForceUpdateCanvases();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(tileScroll.content);
+            float vw = tileScroll.viewport.rect.width, cw = tileScroll.content.rect.width;
+            if (cw <= vw) { tileScroll.horizontalNormalizedPosition = 0; return; }
+            int idx = startFloor - 1; if (idx < 0 || idx >= spawned.Count) return;
+            var t = (RectTransform)spawned[idx].transform;
+            float cx = t.anchoredPosition.x - (t.pivot.x - 0.5f) * t.rect.width, pos = -tileScroll.content.anchoredPosition.x;
+            if (cx - t.rect.width / 2 >= pos && cx + t.rect.width / 2 <= pos + vw) return;      // 이미 보임
+            tileScroll.horizontalNormalizedPosition = Mathf.Clamp01((cx - vw / 2) / (cw - vw));
+        }
+
         static string Word(Transform t, string child, string fallback) { var w = t.Find(child)?.GetComponent<TMP_Text>(); return w ? w.text : fallback; }
 
         int Rooms(int f) => Mathf.Min(roomMax, roomBase + Mathf.FloorToInt(f * roomPerFloor)) + (f % bossEvery == 0 ? 1 : 0);
@@ -61,7 +77,7 @@ namespace NKK.Lobby
         // LobbyManager 가 페이지를 열 때 (SendMessage)
         public void Render()
         {
-            foreach (var g in spawned) Destroy(g);
+            foreach (var g in spawned) { g.SetActive(false); Destroy(g); }      // 끄고 지움 (지움은 프레임 끝이라 그 전 레이아웃 계산에서 빠지게)
             spawned.Clear();
             var p = Progress.I; var db = GameDatabase.Instance;
             int cap = p ? p.StartFloorCap() : 1, best = p ? p.maxFloor : 1, tier = p ? p.tier : 1;
@@ -85,6 +101,8 @@ namespace NKK.Lobby
                 b.transform.localScale = Vector3.one * (on ? 1.1f : 1);
                 int ff = f; b.onClick.AddListener(() => { startFloor = ff; Render(); });
             }
+
+            KeepSelectedVisible();
 
             var zone = db.ZoneOf(startFloor);
             if (zoneText) zoneText.text = zone != null ? zone.zone_name : "";

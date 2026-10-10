@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.TextCore.LowLevel;
 
 // Assets/Fonts 의 TTF → TMP SDF 폰트 에셋 (정적 아틀라스, 글자 = charset_ko.txt). 메뉴 NKK/Bake Fonts
-// 주의: Bake Fonts 는 에셋을 지우고 새로 만듦 → 씬·프리팹의 폰트 연결이 끊김. 폰트 하나만 추가할 땐 Bake Font (하나) 메뉴 사용
+// 주의: Bake Fonts · Bake Font (Jua) 는 에셋을 지우고 새로 만듦 → 씬·프리팹의 폰트 연결이 끊김.
+// charset_ko.txt 에 글자를 추가했을 땐 "Add Missing Chars (연결 유지)" 메뉴로 기존 에셋에 덧붙일 것
 public static class FontBaker
 {
     const string Dir = "Assets/Fonts/";
@@ -21,6 +22,34 @@ public static class FontBaker
         string chars = File.ReadAllText(Dir + "charset_ko.txt");
         foreach (var name in Fonts) Bake(name, chars);
         AssetDatabase.SaveAssets();
+    }
+
+    // charset_ko.txt 에 있는데 구운 폰트에 없는 글자만 기존 에셋에 덧붙임 (에셋을 지우지 않아서 씬·머티리얼 연결이 그대로)
+    // 폰트 파일에 아예 없는 글자는 건너뜀 (로그에 표시)
+    [MenuItem("NKK/Add Missing Chars (연결 유지)")]
+    public static void AddMissingAll()
+    {
+        string chars = File.ReadAllText(Dir + "charset_ko.txt");
+        foreach (var name in Fonts) AddMissing(name, chars);
+        AssetDatabase.SaveAssets();
+    }
+
+    static void AddMissing(string name, string chars)
+    {
+        string path = Dir + name + " SDF.asset";
+        var fa = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>(path);
+        if (!fa) { Debug.LogWarning("[FontBaker] 에셋 없음: " + path); return; }
+        var need = new System.Text.StringBuilder();
+        foreach (var c in chars) if (!char.IsWhiteSpace(c) && !fa.HasCharacter(c, false, false)) need.Append(c);
+        if (need.Length == 0) { Debug.Log($"[FontBaker] {name}: 빠진 글자 없음"); return; }
+        int before = fa.characterTable.Count, atlases = fa.atlasTextures.Length;
+        fa.atlasPopulationMode = AtlasPopulationMode.Dynamic;
+        fa.TryAddCharacters(need.ToString(), out string missing);
+        fa.atlasPopulationMode = AtlasPopulationMode.Static;
+        // 아틀라스가 꽉 차서 새 장이 생겼으면 에셋 안에 넣음
+        for (int i = atlases; i < fa.atlasTextures.Length; i++) { var tex = fa.atlasTextures[i]; if (!tex) continue; tex.name = name + " Atlas " + i; AssetDatabase.AddObjectToAsset(tex, fa); }
+        EditorUtility.SetDirty(fa);
+        Debug.Log($"[FontBaker] {name}: {fa.characterTable.Count - before}자 추가 (아틀라스 {fa.atlasTextures.Length}장), 폰트에 없는 글자 {(string.IsNullOrEmpty(missing) ? "없음" : missing)}");
     }
 
     static void Bake(string name, string chars)

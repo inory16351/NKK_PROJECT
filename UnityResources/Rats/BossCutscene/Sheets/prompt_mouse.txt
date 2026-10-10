@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: stay_mouse.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 full-frame illustration (no transparent background), NO text, NO letters, NO numbers, no logos anywhere.
+- STYLE: match the attached game screenshot: cozy flat cartoon game art (Untitled Goose Game mood), completely FLAT colors, no black outlines, soft simple shapes. The rats look like the cute flat rats in the screenshot (pink ears, long pink tail).
+- SCENE (parody of the bookshelf / tesseract scene from the movie Interstellar): the whole frame is a dark navy-blue endless space made of glowing pale-gold lines forming an infinite grid of bookshelves stretching away in perspective (tesseract feeling). In the center there is a rectangular gap between books in a wooden bookshelf, like looking through a small window into a warm, cozy lit room on the other side.
+- CHARACTER: both characters in this scene are the game's "computer mouse rat" shown in the second attached reference image (ref_pcmouse): a beige/cream PC mouse with a grey scroll wheel and a grey cable as its tail. It has NO face (no eyes, no mouth) - keep it faceless exactly like the reference; show emotion only with body tilt, motion lines, sweat drops and little shaking marks.
+- FOREGROUND (our side, lower left, large): the computer mouse rat seen from behind / three-quarter back view, pressed against the books, tilting forward desperately, with big sweat drops, motion/shake lines and a few small exclamation-like burst shapes (no text) to show it is shouting.
+- THROUGH THE GAP (the past, smaller, warmly lit): the same computer mouse rat sitting happily on a kitchen counter (little bounce lines), holding the grey USB plug at the end of its own cable-tail and trying to push it into the bread slot of a shiny toaster, small warning spark shapes near the toaster slot.
+- The past mouse does not notice the shouting mouse. Keep the composition clear and readable, center gap well framed.

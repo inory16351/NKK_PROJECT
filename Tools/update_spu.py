@@ -10,7 +10,7 @@ import openpyxl
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GEN = os.path.join(ROOT, 'Tools', 'gen_stage_table.py')
-XLSX = os.path.join(ROOT, 'Data_Table', '스테이지 테이블.xlsx')
+XLSX = os.path.join(ROOT, 'Data_Table', '보스 테이블.xlsx')      # 보스 hp_pow_sec (Boss 시트)
 TARGET = 75.0
 LO, HI = 0.6, 1.6
 OK_LO, OK_HI = 60.0, 90.0       # 일반 층: 이 범위(%)면 괜찮음 → SPU 안 고침 (사용자 2026-10-08: 83~88% 정도는 괜찮음)

@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boss_skill.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere, perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- STYLE: match the attached reference (cozy flat cartoon game art, Untitled Goose Game mood): completely FLAT colors, NO black outlines, no gradients, no glow. Each piece is ONE connected chunky shape with a clean magenta margin; pieces never touch.
+- Exact 3 columns x 2 rows grid (each cell 512x341), each piece centered, filling about 75% of its cell height.
+Row 1:
+1) A black police riot baton (straight nightstick with a short side handle), lying diagonally, chunky and comic.
+2) A brown leather office briefcase with a metal clasp and a top handle, front view, slightly bulging with papers.
+3) A handheld kitchen blow torch (cooking torch) pointing right with a short bright orange-yellow flame shape coming out (flat shapes).
+Row 2:
+4) The "buttered cat" perpetual-motion meme: an orange tabby cat (side view, facing right, legs spread out as if falling) with a slice of toast strapped flat onto its back, the toast covered in red strawberry jam on its outer side (jam facing away from the cat). The cat and toast are one connected shape.
+5) A chubby black-and-white tuxedo cat (like the famous "Maxwell the cat" meme: black body, white muzzle and chest, round loaf-like body), side view facing right, calm face.
+6) A flat round sizzling grill-pan scorch mark seen from above: dark brown oval with darker parallel grill lines and a few small orange ember dots (floor decal).

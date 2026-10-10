@@ -273,7 +273,7 @@ namespace NKK.Lobby
                 t.gameObject.SetActive(on); if (!on) continue;
                 var (type, need) = conds[i];
                 var w = type == "Max_Floor" ? cMaxFloor : type == "Shard_Level_Sum" ? cShard : cSkill;
-                float have = p.CondValue(type);
+                float have = p.CondValue(type); need = p.CondNeed(type, need);
                 t.text = F(w, ("have", Mathf.FloorToInt(have)), ("need", Mathf.RoundToInt(need)));
                 t.color = have >= need ? okColor : noColor;
             }
@@ -286,7 +286,8 @@ namespace NKK.Lobby
         void Buy()
         {
             var p = Progress.I; var db = GameDatabase.Instance;
-            if (!db.CommonSkillsById.TryGetValue(sel, out var s) || !p.BuySkill(s)) return;
+            if (!db.CommonSkillsById.TryGetValue(sel, out var s) || !p.BuySkill(s)) { SfxManager.Play("ui_deny"); return; }
+            SfxManager.Play("ui_buy");
             Draw();
         }
 

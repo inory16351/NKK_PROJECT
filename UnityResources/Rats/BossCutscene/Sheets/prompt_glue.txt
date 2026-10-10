@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: stay_glue.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 full-frame illustration (no transparent background), NO text, NO letters, NO numbers, no logos anywhere.
+- STYLE: match the attached game screenshot: cozy flat cartoon game art (Untitled Goose Game mood), completely FLAT colors, no black outlines, soft simple shapes. The rats look like the cute flat rats in the screenshot (pink ears, long pink tail).
+- SCENE (parody of the bookshelf / tesseract scene from the movie Interstellar): the whole frame is a dark navy-blue endless space made of glowing pale-gold lines forming an infinite grid of bookshelves stretching away in perspective (tesseract feeling). In the center there is a rectangular gap between books in a wooden bookshelf, like looking through a small window into a warm, cozy lit room on the other side.
+- FOREGROUND (our side, lower left, large): a brown rat seen from behind / three-quarter back view, pressing both little paws against the books, mouth wide open shouting desperately, a few tear drops, dramatic and funny.
+- THROUGH THE GAP (the past, smaller, warmly lit): a happy little brown rat stepping onto a flat yellow sticky glue trap board with a cheese cube in the middle, one paw already stuck with stretchy glue strings.
+- The past rat does not notice the shouting rat. Keep the composition clear and readable, center gap well framed.

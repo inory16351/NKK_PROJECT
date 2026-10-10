@@ -100,7 +100,7 @@ namespace NKK.Ults
         // 테스트 버튼: 가장자리 쪽 쥐로 (카메라가 데려오는 걸 보이게)
         public bool Trigger(bool forced)
         {
-            if (Busy || (Ults && Ults.Busy) || FxManager.Paused || GameOver.Active) return false;
+            if (Busy || (Ults && Ults.Busy) || FxManager.Halt || GameOver.Active) return false;
             var vr = Ults ? Ults.ViewRect(0) : new Rect();
             var pool = new List<Rat>();
             foreach (var o in Rats.Rats) if (o.temp <= 0 && !o.UltOn && o.OnScreen(-0.05f)) pool.Add(o);
@@ -136,7 +136,7 @@ namespace NKK.Ults
             if (!Busy)
             {
                 UpdateUi(dt);
-                if (FxManager.Paused || (Ults && Ults.Busy) || GameOver.Active || Heist.Active) return;
+                if (FxManager.Halt || (Ults && Ults.Busy) || GameOver.Active || Heist.Active) return;
                 if ((coolT -= Time.deltaTime) <= 0 && Random.value < chancePerSec * CommonSkill.SuperJumpMul * Time.deltaTime) Trigger(false);
                 return;
             }
@@ -151,7 +151,7 @@ namespace NKK.Ults
                     if (t > 0.3f && !slam) { slam = true; fx?.Shake(0.25f); }
                     if (t >= tCut)
                     {
-                        Go(Phase.Charge); slam = false;
+                        Go(Phase.Charge); slam = false; SfxManager.Play("superjump_charge");
                         if (cutIn) cutIn.gameObject.SetActive(false);
                         DropCutRat();
                         if (!string.IsNullOrEmpty(shout)) fx?.Popup(r.x, r.y, shout, Cream, 26, 1.4f, 70);
@@ -291,7 +291,7 @@ namespace NKK.Ults
 
         void Boom()
         {
-            Go(Phase.Drop); boomT = Time.unscaledTime;
+            Go(Phase.Drop); boomT = Time.unscaledTime; SfxManager.Play("superjump_slam");
             FxManager.WorldFreeze = false;              // 날아간 물건·사람이 다시 움직이게
             float sjD = r.SkillDamage * damageK;
             int n = 0;

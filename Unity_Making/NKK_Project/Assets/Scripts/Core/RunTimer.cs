@@ -60,7 +60,7 @@ namespace NKK
         public void Refill() { Max = Left = FloorTime(Game.Floor); LastUsed = Used; Used = 0; }     // LastUsed = 지난 층에서 쓴 시간
 
         bool Stopped => testFreeze || Halted;
-        bool Halted => GameOver.Active || FxManager.WorldFreeze || FxManager.Paused || Stage.Climbing
+        bool Halted => GameOver.Active || FxManager.WorldFreeze || FxManager.Halt || Stage.Climbing
                         || (Ults && Ults.Busy) || (SuperJump && SuperJump.Busy);
 
         void Update()
@@ -74,6 +74,7 @@ namespace NKK
                     if (before > w && Left <= w)
                     {
                         Game.ShowBanner((warnTitle ?? "").Replace("{n}", w.ToString()), warnSub);
+                        SfxManager.Play("jgl_time_warn");
                         if (Ults) Ults.Flash(warnColor, 0.15f);
                         FxManager.I?.Shake(0.08f);
                     }

@@ -81,7 +81,7 @@ namespace NKK.Data
     public class CatCharacterRow
     {
         public int character_id; public string character_name, code_id, cat_category; public int spawn_floor;
-        public float hp_mul, life_time, size_mul; public int skill; public string character_desc, asset_folder;
+        public float hp_mul, life_time, size_mul; public int skill, crowd_skill; public string character_desc, asset_folder;
         public CatCategory Category => E.P<CatCategory>(cat_category);
     }
 
@@ -161,24 +161,35 @@ namespace NKK.Data
     [Serializable] public class CommonSkillTableFile { public List<CommonSkillRow> Common_Skill; public List<SkillBranchRow> Branch; }
 
     [Serializable] public class HumanTableFile { public List<HumanRow> Human; public List<HumanLineRow> Human_Line; }
-    // 보스 (스테이지 테이블 Boss · Boss_Line)
+    // 보스 (보스 테이블 Boss · Boss_Line)
     [Serializable]
     public class BossRow
     {
-        public int boss_id; public string boss_name, code_id, rig; public int floor; public string atk_type, atk2_type, color;
-        public float atk2_chance, scale, radius_mul, hp_pow_sec, cheese_mul, move_speed, atk_cd_min, atk_cd_max;
+        public int boss_id; public string boss_name, code_id, rig; public int floor; public string atk_type, atk2_type, color, special1_type, special2_type, skill_type;
+        public float skill_cd, skill_first, special_chance, atk2_chance, scale, radius_mul, hp_pow_sec, cheese_mul, move_speed, atk_cd_min, atk_cd_max;
         public bool IsCat => rig == "Cat";
         public Color Color => ColorUtility.TryParseHtmlString(color, out var c) ? c : Color.white;
     }
     [Serializable] public class BossLineRow { public int line_id, boss_id; public string situation, text; }
-    // 보스 공격별 수치 (스테이지 테이블 Atk_Type 시트)
-    [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; }
+    // 보스 공격별 수치 (보스 테이블 Atk_Type 시트)
+    [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; public string atk_name, line; }
     // 층 밸런스 (스테이지 테이블 Stage, Tools/gen_stage_table.py 로 생성)
     [Serializable] public class StageRow { public int floor, rooms; public float pow_need, item_hp, cheese, wall_stairs, wall_normal, wall_path, time_add; }     // wall_path = 계단까지 경로 벽 배율 합 (판마다 지형이 바뀌어 StageManager 가 경로에 나눔)
     // 업적 (업적 테이블 Achievement): 조건 타입 cond_type + 대상 target_id + 필요 횟수 need. 설명 {ult} = 대상 필살기 이름
     [Serializable] public class AchievementRow { public int achv_id; public string achv_name, achv_desc, cond_type; public int target_id, need; public string achv_icon; public int sort_order; }
     [Serializable] public class AchievementTableFile { public List<AchievementRow> Achievement; }
-    [Serializable] public class StageTableFile { public List<StageRow> Stage; public List<BossRow> Boss; public List<BossLineRow> Boss_Line; public List<BossAtkRow> Atk_Type; }
+    [Serializable] public class StageTableFile { public List<StageRow> Stage; }
+    [Serializable] public class BossTableFile { public List<BossRow> Boss; public List<BossLineRow> Boss_Line; public List<BossAtkRow> Atk_Type; }
     [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; public int front; public float head_scale = 1; }
     [Serializable] public class HumanRigMetaFile { public List<HumanRigMetaRow> items; }
+    // 튜토리얼 (튜토리얼 테이블): 해설 쥐 · 단계(발동 조건 → 대사 → 해금·행동) · 대사 · 오프닝 컷씬
+    [Serializable] public class TutoSpeakerRow { public string speaker_id, speaker_name, code_id, portrait; }
+    [Serializable] public class TutoStepRow
+    {
+        public string step_id, scene, trigger; public float trigger_value; public string trigger_text;
+        public string cond1_type, cond1_value, cond2_type, cond2_value, unlock, action, action_value; public int sort;
+    }
+    [Serializable] public class TutoLineRow { public int line_id; public string step_id, speaker_id, face, text, highlight; }
+    [Serializable] public class TutoStoryRow { public int line_id, cut; public string image, text; }
+    [Serializable] public class TutorialTableFile { public List<TutoSpeakerRow> Speaker; public List<TutoStepRow> Step; public List<TutoLineRow> Line; public List<TutoStoryRow> Story; }
 }

@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boss_meme2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere, perfectly uniform, no noise. No text, no letters, no numbers, no logos anywhere.
+- STYLE: match the attached references (cozy flat cartoon game art, Untitled Goose Game mood): completely FLAT colors, NO black outlines, no gradients, no glow. Each piece is ONE connected chunky shape with a clean magenta margin; pieces never touch.
+- 2 columns x 2 rows grid (each cell 768x512), each piece centered, filling about 85% of its cell width.
+Row 1 (the famous "coffin dance" pallbearers meme, side view facing RIGHT): four cheerful dark-skinned pallbearers in black suits, white shirts and sunglasses, standing in a line, carrying a dark brown wooden coffin together on their shoulders.
+1) Dance pose A: knees bent low, bodies leaning back, free hands up, coffin lowered.
+2) Dance pose B: legs stepping up high, bodies leaning forward, coffin raised high on shoulders, free hands pointing.
+Row 2:
+3) A flat light-blue frozen river ICE floor patch seen from above (wide oval, irregular edge), with white crack lines and a few pale highlight streaks, a little snow at the edges.
+4) leave this cell empty magenta.

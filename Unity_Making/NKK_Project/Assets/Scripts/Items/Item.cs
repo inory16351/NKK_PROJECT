@@ -54,6 +54,7 @@ namespace NKK.Items
             kp = by ? by.KnockPower : 1;
             if (Data.IsFurniture) dmg *= CommonSkill.FurnitureDmgMul;      // 이삿짐 센터
             hp -= dmg; wob = 1; sq = 1.25f; flashT = 0.08f; hpShowT = Time.time;
+            if (hp > 0) SfxManager.PlayAt(Data.IsFurniture || Data.is_paper == 1 ? "hit_wood" : Data.is_sturdy == 1 ? "hit_metal" : "hit_glass", x, y, 0.6f);
             if (hp > 0)
             {
                 // 체력이 남으면 맞은 방향으로 조금 밀림 (무거운 건 덜 밀림)

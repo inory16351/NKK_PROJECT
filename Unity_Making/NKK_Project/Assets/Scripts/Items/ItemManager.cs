@@ -70,6 +70,9 @@ namespace NKK.Items
         public int humanCapBase = 4;
         public float humanCapPerFloor = 0.4f;
         [Tooltip("사람 보충 주기 (초, 최소~최대)")] public Vector2 humanRefill = new(18, 30);
+        [Tooltip("최소 사람 수 = min(상한, 기본 + 층 ÷ 이 값). 걷거나 도망치는 사람이 이보다 적으면 빠른 보충 주기로 (층을 빨리 깨는 높은 층에서도 사람이 보이게)")] public int humanMinBase = 2;
+        public float humanMinPerFloors = 6;
+        [Tooltip("빠른 보충 주기 (초, 최소~최대)")] public Vector2 humanQuickRefill = new(2.5f, 4.5f);
         [Tooltip("층 시작 때 사람 수 (1층 / 그 위)")] public int humanStartFirst = 1, humanStartOther = 2;
 
         [Header("그림자")]
@@ -79,6 +82,7 @@ namespace NKK.Items
 
         readonly List<Item> items = new();
         public readonly List<Human> Humans = new();
+        [HideInInspector] public int HumanSpawned;          // 이번 층에 나온 사람 수 (측정용)
         readonly List<Item> flying = new();
         float spawnT, humanT = 20;
         Dictionary<string, Sprite> spriteMap;
@@ -190,6 +194,8 @@ namespace NKK.Items
             float gain = it.value * (1 + 0.5f * Mathf.Min(it.Air, airMax)) * (it.Crit ? 2 : 1) * (it.By ? it.By.CheeseMult : 1) * (it.By && it.ByAction ? it.By.SkillKillCheeseMul : 1)
                 * (it.By && it.By.Trick != Rat.TrickType.None ? CommonSkill.TrickCheeseMul : 1);       // 묘기 중에 부숨 → 묘기 치즈
             Game.OnSmash(gain);
+            SfxManager.PlayAt(it.Data.IsFurniture || it.Data.is_paper == 1 ? "smash_wood" : it.Data.is_sturdy == 1 ? "smash_metal" : "smash_glass", it.x, it.y);
+            if (it.Crit) SfxManager.PlayAt("crit", it.x, it.y, 0.8f);
             if (it.By) { Rats.OnItemSmashedBy(it.By, it.x, it.y); Rats.Ults?.Charge(it.By, CondType.Destroy_Item); }
             Research.I?.OnSmashed(it);                                          // 가끔 연구자료 (가구 12% · 물건 1.2%)
             var fx = FxManager.I;
@@ -346,6 +352,7 @@ namespace NKK.Items
         // 하늘에서 낙하 (특수 액션 Meteor · 치즈 운석 · 필살기 운석 비). 연출은 ItemManager.Meteor.cs
         public void DropMeteor(Rat by, float tx, float ty, float rad, float dmg, Sprite spr, float size = 1, float fallTime = -1)
         {
+            SfxManager.PlayAt("meteor", tx, ty);
             var b = new Bomb { x = tx, y = ty, z = 900, rad = rad, dmg = dmg, by = by, meteor = true };
             SetupMeteor(b, spr, size, fallTime > 0 ? fallTime : meteorFallTime);
             bombs.Add(b);
@@ -470,7 +477,7 @@ namespace NKK.Items
                 var art = humanArt.Get(row.code_id); if (art == null) continue;
                 var h = Instantiate(humanPrefab, humanRoot ? humanRoot : transform);
                 h.Init(this, row, art, (room.x + 0.5f) * World.RW + Random.Range(-World.RW * 0.35f, World.RW * 0.35f), (room.y + 0.5f) * World.RH + Random.Range(-World.RH * 0.25f, World.RH * 0.3f));
-                Humans.Add(h);
+                Humans.Add(h); HumanSpawned++;
             }
         }
 
@@ -487,11 +494,16 @@ namespace NKK.Items
         }
 
         // 층 시작 · 방이 열렸을 때 (StageManager 가 부름)
-        public void OnFloorStart() => SpawnHumans(Vector2Int.zero, Game.Floor == 1 ? humanStartFirst : humanStartOther);
+        public void OnFloorStart() { HumanSpawned = 0; OnFloorStartSpawn(); }
+        void OnFloorStartSpawn() => SpawnHumans(Vector2Int.zero, Game.Floor == 1 ? humanStartFirst : humanStartOther);
         public void OnRoomOpened(Vector2Int room) { if (!Stage.IsStairsRoom(room.x, room.y)) SpawnHumans(room, 1 + (Random.value < 0.5f ? 1 : 0)); }
+
+        int HumanMin => Mathf.Min(HumanCap, humanMinBase + Mathf.FloorToInt(Game.Floor / Mathf.Max(1, humanMinPerFloors)));
+        int HumansAround() { int n = 0; foreach (var h in Humans) if (h.State == Human.HState.Walk || h.State == Human.HState.Panic) n++; return n; }
 
         void UpdateHumans(float dt)
         {
+            if (humanT > humanQuickRefill.y && HumansAround() < HumanMin) humanT = Random.Range(humanQuickRefill.x, humanQuickRefill.y);
             humanT -= dt;
             if (humanT <= 0)
             {

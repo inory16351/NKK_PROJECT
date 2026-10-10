@@ -1,0 +1,5 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: head_laser.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit the attached reference image (a white cat astronaut head in a glass helmet, side view facing left, on a flat magenta background):
+- Keep EVERYTHING exactly the same: same framing, same size and position, same pose, same helmet, headphones, collar, colors, flat style, same flat MAGENTA (#FF00FF) background.
+- ONLY change the visible eye: make it glow bright RED like a superhero's heat-vision laser eyes about to fire - the eye becomes a glowing red-orange core with a soft red glow around it, and a slightly angry, intense brow. No beam, no text.

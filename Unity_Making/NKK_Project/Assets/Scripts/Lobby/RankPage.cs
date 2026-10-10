@@ -123,7 +123,7 @@ namespace NKK.Lobby
                 {
                     if (string.IsNullOrEmpty(type) || type == "None") continue;
                     var w = type == "Max_Floor" ? wReqFloor : type == "Shard_Level_Sum" ? wReqShard : wReqSkill;
-                    Req(T(w), p.CondValue(type), need);
+                    Req(T(w), p.CondValue(type), p.CondNeed(type, need));
                 }
                 if (rankButton) rankButton.interactable = p.CanRankUp();
                 if (rankLabel) rankLabel.text = F(rankLabel, ("n", LobbyManager.Fmt(sk.research_cost)));
@@ -194,7 +194,8 @@ namespace NKK.Lobby
         void RankUp()
         {
             var p = Progress.I;
-            if (!p.RankUp()) return;
+            if (!p.RankUp()) { SfxManager.Play("ui_deny"); return; }
+            SfxManager.Play("jgl_rank_up");
             selTier = Mathf.Min(MaxTier, p.tier + 1);
             Draw();
             if (manager && manager.home) manager.home.Refresh();

@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: meeting_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 full-frame illustration, NO text, NO letters, NO numbers, no logos, NO characters or people.
+- STYLE: flat cartoon game art, completely flat colors, no black outlines.
+- A dramatic "EMERGENCY MEETING" alert screen background in the spirit of a space crew party game: deep red and black radial speed lines bursting from the center, a big bright empty circular spotlight area in the center (where a face will be placed later), two red emergency siren lamps glowing at the top corners, a dark space-station metal floor strip at the bottom, small stars in the dark corners. Leave the center clean and empty.

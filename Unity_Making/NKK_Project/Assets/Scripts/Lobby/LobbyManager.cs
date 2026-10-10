@@ -25,6 +25,8 @@ namespace NKK.Lobby
         [Header("연결")]
         public LobbyHome home;
         [Tooltip("게임 씬 이름")] public string gameScene = "Game";
+        [Tooltip("타이틀 씬 이름 (낮잠 침대 → 저장하고 나가기)")] public string titleScene = "Title";
+        [Tooltip("낮잠 침대: 저장하고 타이틀로")] public Button saveExitButton;
 
         [Header("아지트 화면 UI")]
         public GameObject homeUI;
@@ -43,8 +45,9 @@ namespace NKK.Lobby
 
         void Awake()
         {
-            if (home) { home.manager = this; home.inputBlocked = () => PrepOpen; }
+            if (home) { home.manager = this; home.inputBlocked = () => PrepOpen || NKK.Tutorial.TutorialBox.Showing; }
             if (homeButton) homeButton.onClick.AddListener(CloseToHome);
+            if (saveExitButton) saveExitButton.onClick.AddListener(SaveAndExit);
             foreach (var p in pages) { var id = p.id; if (p.tab) p.tab.onClick.AddListener(() => OpenPage(id)); }
             if (prep) prep.SetActive(false);
         }
@@ -65,6 +68,7 @@ namespace NKK.Lobby
         public bool Alert(string id)
         {
             var p = Progress.I; if (!p || !GameDatabase.Instance) return false;
+            if (!p.IsUnlocked(id)) return false;          // 잠긴 기능엔 알림 점 없음
             if (id == "skill") foreach (var s in GameDatabase.Instance.CommonSkills) if (p.CanBuySkill(s)) return true;
             if (id == "rats") return p.UpgradableCount > 0;
             if (id == "rank") return p.CanRankUp();
@@ -72,9 +76,12 @@ namespace NKK.Lobby
         }
 
         public void OnHot(string id) => OpenPage(id);
+        // 잠긴 기능을 누름 (자물쇠 흔들기 등)
+        public event System.Action<string> OnLocked;
 
         public void OpenPage(string id)
         {
+            if (Progress.I && !Progress.I.IsUnlocked(id)) { OnLocked?.Invoke(id); return; }      // 튜토리얼로 아직 안 열린 기능
             CurrentPage = id;
             if (prep) prep.SetActive(true);
             if (homeUI) homeUI.SetActive(false);
@@ -106,6 +113,13 @@ namespace NKK.Lobby
             SceneManager.LoadScene(gameScene);
         }
 
+        // 낮잠 침대: 저장하고 타이틀로 (자동 저장이라 저장은 확인용)
+        public void SaveAndExit()
+        {
+            if (Progress.I) Progress.I.Save();
+            SceneManager.LoadScene(titleScene);
+        }
+
         public static string Fmt(double v) => GameManager.Format(v);
 
         void Update()
@@ -116,7 +130,7 @@ namespace NKK.Lobby
             if (prepCheese) prepCheese.text = c; if (prepResearch) prepResearch.text = r;
             // 탈출 준비실에서 ESC = 아지트로
             var k = Keyboard.current;
-            if (k != null && k.escapeKey.wasPressedThisFrame && PrepOpen)
+            if (k != null && k.escapeKey.wasPressedThisFrame && PrepOpen && !NKK.Tutorial.TutorialBox.Showing)
             {
                 if (RatTreePopup.Current && RatTreePopup.Current.IsOpen) RatTreePopup.Current.Close();     // 창이 떠 있으면 창부터 닫음
                 else CloseToHome();

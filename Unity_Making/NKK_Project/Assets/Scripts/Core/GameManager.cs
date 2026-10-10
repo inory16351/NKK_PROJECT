@@ -69,6 +69,7 @@ namespace NKK
         public void OnSmash(float baseGain, int comboAdd = 1)
         {
             Combo += comboAdd; comboT = comboTime * CommonSkill.ComboTimeMul;
+            if (Combo >= 2) SfxManager.Play("combo_" + Mathf.Min(Combo, 12).ToString("00"), 0.7f);
             Earn(baseGain * ComboMult);
         }
 

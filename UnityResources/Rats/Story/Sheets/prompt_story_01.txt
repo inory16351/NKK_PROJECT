@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: story_01.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 full-frame illustration for a story cutscene (no transparent background), NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere (any papers/screens show only simple shapes or rat silhouettes).
+- STYLE: match the attached game screenshot: cozy flat cartoon game art (Untitled Goose Game mood), completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted warm palette. The rats look exactly like the cute flat rats in the screenshot (white lab rats with red eyes, brown rats, grey mice; pink ears, pink noses, long pink tails). Humans look like the flat scientists in the attached human sheet (white lab coats).
+- Keep the main subject in the CENTER and UPPER part of the frame; the bottom 25% of the image will be covered by a subtitle box, so keep only floor/background there.
+- SCENE: PARADISE. Inside a cozy, warmly lit laboratory rat cage seen from the side: a big clean glass/wire cage with soft wood-shaving bedding, a running wheel with a happy white lab rat spinning in it, a water bottle, a little wooden house, and a big wedge of yellow cheese. Several cute rats (white, brown, grey) relax, eat cheese, cuddle and play happily. Peaceful, dreamy, soft golden light, a sense of innocent happiness.

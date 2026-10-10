@@ -1,0 +1,15 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tuto_hero.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1536 square image, background must be ONE solid flat pure magenta color #FF00FF everywhere (for chroma keying). No shadows on the background, no gradients, no floor.
+- NO text, NO letters, NO numbers, no speech bubbles, no logos.
+- The image is a 2x2 grid of FOUR separate character portraits of the SAME cute cartoon rat character (one portrait per quadrant, each centered in its quadrant with generous magenta margin around it, portraits must NOT touch each other or the image edges).
+- Each portrait: bust shot (head, shoulders and upper body with both little front paws visible), three-quarter view facing slightly to the RIGHT, big readable face. Same size and same framing in all four.
+- CHARACTER (keep identical in all four, match the attached body-part sheet of this character exactly in colors and accessories): a grey mouse with cream belly wearing a BLACK superhero eye mask around the eyes and a RED superhero cape tied at the neck, pink ears/nose/paws. Confident heroic.
+- STYLE: match the attached style sheet: cozy flat cartoon game art (Untitled Goose Game mood), completely FLAT colors, NO black outlines, no gloss, no gradients, soft simple shapes, pink ears, pink nose, small whiskers. Cute and expressive like a visual-novel / dialogue portrait.
+- EXPRESSIONS (quadrant order):
+  1. top-left: NORMAL — calm friendly smile, explaining something, one paw raised as if pointing.
+  2. top-right: HAPPY — eyes closed in joy (^ ^), big open smile, both paws up cheering.
+  3. bottom-left: SURPRISED — eyes wide round, small open "o" mouth, ears perked, paws near cheeks.
+  4. bottom-right: PANIC — eyes swirly or wide with tiny pupils, mouth wide open screaming, sweat drops, paws on head.
+- Keep the magenta background perfectly uniform so the characters can be cut out cleanly. Do not use magenta or pink-purple colors on the character other than the normal soft pink of ears/nose/paws.

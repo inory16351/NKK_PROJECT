@@ -1,0 +1,18 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hud_gauge.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings, perfectly uniform, no noise. No text, no letters, no numbers anywhere.
+- STYLE: match the attached UI kit reference exactly (cozy flat cartoon game UI, Untitled Goose Game mood): completely FLAT color shapes, NO black outlines, no gradients, no glossy highlights, no glow. Each piece has at most one slightly darker flat tone for a simple rim/shadow lip at the bottom.
+- Every piece is ONE single connected shape with a clean magenta margin around it. Pieces never touch each other.
+
+Layout (top to bottom):
+Band 1 (top, about 120 px tall, spanning almost the full width, centered): BOSS HEALTH BAR FRAME. A long horizontal capsule plate (rounded ends), dark charcoal-plum color (#3a2f36) with a thin muted brick-red rim and a darker bottom lip. Inside it, along its whole length, a recessed empty groove (a darker inset capsule, #241c22) where a fill bar will be placed. It must look the same all along its length (it will be 9-slice stretched), small round dull-gold rivet at each end only.
+Band 2 (about 70 px tall, almost full width): BOSS HEALTH FILL. A long horizontal capsule bar, flat WHITE (#ffffff) with evenly spaced soft light-gray diagonal stripes along its whole length and a light-gray flat bottom band. (It will be tinted by color in the game.)
+Band 3 (about 100 px tall, about 70% of the width, centered): TIME GAUGE FRAME. A long horizontal capsule plate made of warm light wood (#c9955f) with a darker brown bottom lip and a recessed empty groove inside (darker brown inset capsule, #6e4a33) along the whole length. Same look all along its length.
+Band 4 (about 56 px tall, about 70% of the width, centered): TIME GAUGE FILL. A long horizontal capsule bar, flat WHITE (#ffffff) with a light-gray flat bottom band, no stripes.
+Bottom row (the lower ~400 px), FIVE icons side by side, evenly spaced, each about 240 px:
+ 1) BOSS EMBLEM: a round badge with a thick muted brick-red rim and a cream face showing a simple angry cartoon face (two thick slanted dark eyebrows and a frowning toothy mouth), and two small rounded horns on top.
+ 2) STOPWATCH: a cute round stopwatch, cream face with a warm-brown rim, a small button on top, one dark hand pointing up-right, a soft red quarter wedge on the face.
+ 3) STAIRS map icon: a simple flat staircase of 4 steps going up to the right, warm wood color with darker step edges.
+ 4) BOSS map marker: a small round red-plum badge with the same angry horned face as icon 1 but simpler, chunky, readable at tiny size.
+ 5) VIEW FRAME: a hollow rounded-rectangle outline frame (about 1.6 times wider than tall), thick cream-white stroke with tiny darker corner brackets; the inside is completely empty magenta.

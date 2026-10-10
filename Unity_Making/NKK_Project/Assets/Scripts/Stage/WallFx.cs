@@ -59,6 +59,7 @@ namespace NKK.Stage
         // dirX, dirY = 새로 열리는 방 쪽 (0,0 이면 양쪽으로)
         public void Break(float x0, float y0, float x1, float y1, Color col, float h, bool stairs, float dirX, float dirY)
         {
+            SfxManager.PlayAt("wall_blast", (x0 + x1) / 2, (y0 + y1) / 2);
             if (!debrisTemplate || debrisSprites == null || debrisSprites.Length == 0) return;
             int n = Mathf.RoundToInt(debrisCount * (stairs ? stairsMul : 1));
             col = Color.Lerp(col, brickColor, brickMix);

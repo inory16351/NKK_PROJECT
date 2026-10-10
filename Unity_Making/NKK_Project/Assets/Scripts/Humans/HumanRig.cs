@@ -79,6 +79,15 @@ namespace NKK.Humans
             }
         }
 
+        // 가까운 손 위치 (월드) · 팔 방향 (어깨 → 손, 월드). Apply 뒤에 부름 (보스가 소품을 손에 쥘 때)
+        public Vector3 Hand(out Vector2 dir)
+        {
+            var t = armNear.transform; var b = armNear.sprite ? armNear.sprite.bounds : new Bounds(Vector3.zero, Vector3.one);
+            Vector3 top = t.TransformPoint(new Vector3(b.center.x, b.max.y, 0)), end = t.TransformPoint(new Vector3(b.center.x, b.min.y + b.size.y * 0.1f, 0));
+            dir = ((Vector2)(end - top)).normalized;
+            return end;
+        }
+
         public struct Pose { public float legN, legF, armN, armF, lean, head, bob, sx, sy; public bool scared, angry; }
 
         // scale = 크기 배율, rot = 날아갈 때 회전(라디안, 몸 가운데 기준), sq = 통통 튈 때 납작

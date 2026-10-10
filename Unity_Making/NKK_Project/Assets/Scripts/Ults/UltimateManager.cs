@@ -117,7 +117,7 @@ namespace NKK.Ults
             if (!DB.UltCharges.TryGetValue(c, out var g) || g <= 0) return;
             foreach (var r in Rats.Rats) if (r.temp <= 0) Add(r, g * CommonSkill.UltGaugeMul);
         }
-        void Add(Rat r, float v) { float n = Need(r); if (n <= 0) return; r.ultGauge = Mathf.Min(n, r.ultGauge + v); }
+        void Add(Rat r, float v) { float n = Need(r); if (n <= 0) return; bool was = r.ultGauge >= n; r.ultGauge = Mathf.Min(n, r.ultGauge + v); if (!was && r.ultGauge >= n) SfxManager.PlayAt("ult_ready", r.x, r.y); }
 
         // ── 사용 ──
         public void Request(Rat r)
@@ -164,6 +164,7 @@ namespace NKK.Ults
             r.ultGauge = 0;
             r.UltGrab(); r.z = 0; r.vz = 0;
             cur.Pre();
+            SfxManager.Play("jgl_ult_cutin");
             cutPhase = true; cutT = 0; actorT = 0.3f;
             FxManager.UltFreeze = true;
             if (Cam) { Cam.ultFollow = true; Cam.ultFocus = new Vector2(r.x, r.y); }
@@ -279,7 +280,7 @@ namespace NKK.Ults
             if (auto) foreach (var r in Rats.Rats) if (Full(r)) Request(r);
             // 대기열 → 하나씩
             if (cur == null) cdLeft -= dt;
-            if (cur == null && cdLeft <= 0 && !FxManager.Paused && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing))
+            if (cur == null && cdLeft <= 0 && !FxManager.Halt && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing))
                 while (queue.Count > 0) { var r = queue[0]; queue.RemoveAt(0); if (r && r.temp <= 0 && Full(r) && TryStart(r)) break; }
 
             if (cur != null && cutPhase) StepCut(udt);

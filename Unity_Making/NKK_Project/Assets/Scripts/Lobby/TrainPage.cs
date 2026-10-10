@@ -216,7 +216,8 @@ namespace NKK.Lobby
         void Train(string code)
         {
             if (string.IsNullOrEmpty(code) || !DB.RatsByCode.TryGetValue(code, out var r)) return;
-            if (!Progress.I.TryUpgrade(r)) return;
+            if (!Progress.I.TryUpgrade(r)) { SfxManager.Play("ui_deny"); return; }
+            SfxManager.Play("ui_buy");
             Progress.I.Save();
             sel = code;
             if (cards.TryGetValue(code, out var b)) Pop(b.transform);

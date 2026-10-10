@@ -310,7 +310,7 @@ namespace NKK.Stage
             Items.FillRoom(t, Mathf.CeilToInt(Items.RoomCap / 2f));
             if (IsStairsRoom(t.x, t.y))
             {
-                if (Boss && Boss.State == Boss.BState.Wait) Boss.StartFight();   // 보스 전투 시작
+                if (Boss && !Boss.FloorCleared(Game.Floor)) Boss.OnStairsOpened();   // 보스 전투 시작 (보스가 사라졌으면 다시 불러서)
                 else Game.ShowBanner("계단 발견!", $"계단에 닿으면 {Game.Floor + 1}층으로");
             }
             Items.OnRoomOpened(t);
@@ -414,19 +414,52 @@ namespace NKK.Stage
             foreach (var tp in traps) tp.Tick(dt, Rats, trapRadius, trapStun * CommonSkill.TrapStunMul, trapReload);   // 덫 해체 전문가
             UpdateCats(dt);
             // 계단: 계단 방이 열렸으면 쥐가 닿는 순간 위층으로 (보스·탈취 연출은 이후 단계)
-            if (climbing || !Open.Contains(StairsRoom) || (Boss && Boss.Blocking)) return;      // 보스가 살아 있으면 계단 못 씀
+            if (climbing || !Open.Contains(StairsRoom)) return;
+            if (Boss && (Boss.Blocking || !Boss.FloorCleared(Game.Floor))) { if (!Boss.Blocking) Boss.OnStairsOpened(); return; }    // 보스가 살아 있거나 이 층 보스를 안 잡았으면 계단 못 씀
             var sp = StairsPos;
             foreach (var r in Rats.Rats)
                 if (r.temp <= 0 && !r.UltOn && Mathf.Abs(r.x - sp.x) < stairsTouch.x && Mathf.Abs(r.y - sp.y) < stairsTouch.y) { Climb(); break; }
         }
 
         // 층 클리어: 탈취 연출 → (moveAt 초 뒤) 페이드 → 다음 층. 테스트 버튼도 이걸 부름
+        // 보스가 살아 있으면(대기·전투·쓰러지는 중) 어떤 경로로도 못 넘어감.
+        // 층 이동은 예약된 층(from + 1)에만 들어감 → 연출·페이드 콜백이 늦게 와도 한 층 더 넘어가지 않음 (4층 → 6층 건너뜀 버그)
         public void Climb()
         {
-            if (climbing || GameOver.Active) return;
+            if (climbing || GameOver.Active || (Boss && Boss.Blocking)) return;
+            if (Boss && !Boss.FloorCleared(Game.Floor)) { Debug.LogWarning($"[Boss] {Game.Floor}층 보스를 안 잡아서 계단 막음 (보스 {Boss.State})"); if (Open.Contains(StairsRoom)) Boss.OnStairsOpened(); return; }
             climbing = true;
-            if (Heist) Heist.Begin(StairsPos, () => Game.FadeThen(() => EnterFloor(Game.Floor + 1)));
-            else Game.FadeThen(() => EnterFloor(Game.Floor + 1));
+            int from = Game.Floor;
+            void Move() => Game.FadeThen(() => { if (Game.Floor == from) EnterFloor(from + 1); });
+            if (Heist) Heist.Begin(StairsPos, Move);
+            else Move();
+        }
+
+        // 테스트 패널 "층 클리어": 보스 층에서 보스가 기다리면 계단 방까지 벽을 다 열어 보스전 시작, 아니면 다음 층
+        public void TestClear()
+        {
+            if (Boss && (Boss.Blocking || !Boss.FloorCleared(Game.Floor)))
+            {
+                if (Boss.Blocking && (Boss.State != Boss.BState.Wait || Boss.Test)) return;
+                for (int guard = 0; guard < 50 && !Open.Contains(StairsRoom); guard++)
+                {
+                    // 열린 방 옆 칸 중 계단 방에 가장 가까운 칸부터 연다
+                    Vector2Int bestFrom = default, bestDir = default; int best = int.MaxValue;
+                    foreach (var k in Open)
+                        foreach (var d in Dirs)
+                        {
+                            var t = k + d;
+                            if (Open.Contains(t) || !Layout.Contains(t)) continue;
+                            int dist = Mathf.Abs(t.x - StairsRoom.x) + Mathf.Abs(t.y - StairsRoom.y);
+                            if (dist < best) { best = dist; bestFrom = k; bestDir = d; }
+                        }
+                    if (best == int.MaxValue) break;
+                    BreakWall(bestFrom.x, bestFrom.y, bestDir.x, bestDir.y);
+                }
+                if (Open.Contains(StairsRoom)) Boss.OnStairsOpened();
+                return;
+            }
+            Climb();
         }
     }
 

@@ -34,6 +34,14 @@ namespace NKK.Rats
         [Tooltip("별 크기 · 머리 위 높이 (게임 단위, 쥐 크기 배율이 곱해짐)")] public float stunStarSize = 11, stunStarHeight = 30;
 
         [Tooltip("좀비 상태 쥐 색 (좀비 아포칼립스 필살기)")] public Color zombieTint = new(0.72f, 0.92f, 0.62f);
+        [Tooltip("불판 위 쥐 색 (보스 이븐하게 익혀드릴게요)")] public Color burnTint = new(1f, 0.35f, 0.25f);
+        [Tooltip("새로 기절한 쥐 머리 위 팝업 (빈칸 = 안 띄움) · 색 · 크기 · 이 초 이상 기절할 때만 · 한 프레임 최대 개수")] public string stunPopup = "기절!!";
+        public Color stunPopupColor = new(1f, 0.6f, 0.45f);
+        public float stunPopupSize = 15, stunPopupMin = 0.5f;
+        public int stunPopupPerFrame = 12;
+        [Tooltip("쥐 울음 (찍) 간격 (초, 최소 ~ 최대) — 화면 안 쥐 하나가 가끔")] public float squeakMin = 1.5f, squeakMax = 4f;
+        float squeakT = 2;
+        int stunPopFrame, stunPopN;
 
         [Header("시작 쥐")]
         [Tooltip("테스트용: 시작할 때 만들 쥐 (코드 id). 비어 있으면 티어 테이블 시작 마릿수만큼 탄생 확률로 뽑음")] public List<string> startRats = new();
@@ -58,6 +66,7 @@ namespace NKK.Rats
 
         [Header("번식 (웹게임 기준)")]
         [Tooltip("최대 인구 (둥지 확장 스킬로 늘어남)")] public int popCap = 30;
+        [Tooltip("번식할 때 솟아오르는 하트 수")] public int birthHearts = 4;
         public int PopCap => popCap + CommonSkill.MaxPopAdd;
         [Tooltip("번식 쿨타임 (초)")] public float breedCool = 4;
         [Tooltip("이 마리 수까지는 부딪히면 100% 탄생")] public int breedFree = 5;
@@ -203,6 +212,8 @@ namespace NKK.Rats
         }
         public int TempCount { get { int n = 0; foreach (var r in Rats) if (r.temp > 0) n++; return n; } }
         public int RealCount => Rats.Count - TempCount;
+        // 이번 판 번식으로 태어난 마리 수 (튜토리얼)
+        public int Births { get; private set; }
         public void RemoveTemp(Rat r) { FxManager.I?.Dust(r.x, r.y, 6, 1); Rats.Remove(r); Destroy(r.gameObject); }
 
         // ── 승급: 같은 등급 N마리 희생 → 윗등급 무작위 1마리 (공용 스킬 확률로 2마리) ──
@@ -230,6 +241,7 @@ namespace NKK.Rats
         public Rat Promote(int g)
         {
             if (!CanPromote(g)) return null;
+            SfxManager.Play("rat_promote");
             int need = PromoteNeed(g);
             var pool = new List<Rat>();
             foreach (var r in Rats) if (r.temp <= 0 && !r.UltOn && (int)r.Data.Grade == g) pool.Add(r);
@@ -447,6 +459,8 @@ namespace NKK.Rats
                 var row = RollSpecies(p.z);
                 if (row == null) continue;
                 var r = Spawn(row, p.x, p.y);
+                if (r) { Births++; SfxManager.PlayAt("rat_birth", p.x, p.y); }
+                if (r && r.OnScreen()) FxManager.I?.Hearts(p.x, p.y, birthHearts);     // 번식 하트
                 if (r && (int)row.Grade >= 2) Game.ShowBanner($"{GameDatabase.Instance.GradeOf(row).grade_name} 탄생!", row.character_name);
                 // 쌍둥이: 한 마리 더 (최대 인구 안에서)
                 if (r && Random.value < CommonSkill.TwinChance && RealCount < PopCap)
@@ -486,6 +500,7 @@ namespace NKK.Rats
         {
             float rt = RushTime;
             RushPoint = p; rushLeft = rt;
+            SfxManager.Play("rat_rush_call");
             // 화면에 보이는 쥐 + 공용 스킬 총공격 범위만큼 화면 밖 쥐도 모임 (돌진 중엔 번식 금지)
             var cam = Camera.main; float m = 0.02f + CommonSkill.RushRange;
             foreach (var r in Rats)
@@ -517,6 +532,7 @@ namespace NKK.Rats
         {
             if (FxManager.WorldFreeze) return;
             HandleInput();
+            if ((squeakT -= Time.deltaTime) <= 0) { squeakT = Random.Range(squeakMin, squeakMax); if (Rats.Count > 0) { var sq = Rats[Random.Range(0, Rats.Count)]; SfxManager.PlayAt("rat_squeak", sq.x, sq.y, 0.5f); } }
             float dt = Mathf.Min(Time.deltaTime, 0.05f);
             rushLeft -= dt; rushCdLeft -= dt;
             for (int i = timers.Count - 1; i >= 0; i--) { var tm = timers[i]; tm.t -= dt; if (tm.t <= 0) { timers.RemoveAt(i); tm.a(); } else timers[i] = tm; }
@@ -538,6 +554,16 @@ namespace NKK.Rats
                     rushMarker.color = new Color(1, 1, 1, 0.5f + 0.3f * Mathf.Sin(Time.time * 12));
                 }
             }
+        }
+    
+        // 새로 기절한 쥐 머리 위 "기절!!" (한 프레임 stunPopupPerFrame 개까지)
+        public void StunPopup(Rat r)
+        {
+            if (string.IsNullOrEmpty(stunPopup) || !FxManager.I) return;
+            if (stunPopFrame != Time.frameCount) { stunPopFrame = Time.frameCount; stunPopN = 0; }
+            if (++stunPopN > stunPopupPerFrame) return;
+            FxManager.I.Popup(r.x, r.y, stunPopup, stunPopupColor, stunPopupSize, 0.9f, r.z + 40);
+            SfxManager.PlayAt("rat_stun", r.x, r.y, 0.6f);
         }
     }
 }

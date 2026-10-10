@@ -41,6 +41,7 @@ namespace NKK
             Run((int)a[0], (int)a[1], (int)a[2], a[3], (int)a[4], (int)a[5], (int)a[6]);
         }
 
+        float humanSum; int humanMax, humanSpawned;
         int floor, mask = ~0; float t0, maxPow, limit, promoT, logT, bossT0 = -1, bossDur; double cheese0, research0;
         readonly List<Camera> offCams = new();
         RunTimer timer;
@@ -50,7 +51,7 @@ namespace NKK
         public static void Run(int tier, int startFloor, int endFloor, float giveUp = 600, int simHz = 20, int nodes = -1, int shards = -1)
         {
             var p = Progress.I;
-            p.saveKey = "nkk_probe"; p.ResetAll(); p.autoUpgradeInRun = false; p.testSkills.Clear(); p.testSkillTier = 0;
+            p.saveKey = "nkk_probe"; p.ResetAll(); p.SkipTutorial(); p.autoUpgradeInRun = false; p.testSkills.Clear(); p.testSkillTier = 0;
             p.tier = tier; p.maxFloor = Mathf.Max(startFloor, 1);
             MakeMeta(p, tier, nodes, shards);
             Progress.PendingStartFloor = startFloor;
@@ -66,7 +67,7 @@ namespace NKK
             var db = GameDatabase.Instance;
             db.Tiers.TryGetValue(tier + 1, out var next);
             float Need(string type) => next == null ? 0 : next.cond1_type == type ? next.cond1_value : next.cond2_type == type ? next.cond2_value : next.cond3_type == type ? next.cond3_value : 0;
-            int cur = nodes >= 0 ? nodes : Mathf.RoundToInt(Need("Skill_Node_Count")), shardSum = shards >= 0 ? shards : Mathf.RoundToInt(Need("Shard_Level_Sum"));
+            int cur = nodes >= 0 ? nodes : next != null && (next.cond3_type == "Skill_Tree_Complete" || next.cond2_type == "Skill_Tree_Complete" || next.cond1_type == "Skill_Tree_Complete") ? 999 : Mathf.RoundToInt(Need("Skill_Node_Count")), shardSum = shards >= 0 ? shards : Mathf.RoundToInt(Need("Shard_Level_Sum"));
             foreach (var s in db.CommonSkills) if (s.tier < tier && !s.IsRoot) p.testSkills.Add(s.skill_id);
             for (int n = 0; n < cur; n++)
             {
@@ -107,6 +108,7 @@ namespace NKK
             if (bs && bs.CanHit && bossT0 < 0) bossT0 = timer ? timer.Used : Time.time - t0;
             if (bossT0 >= 0 && (!bs || !bs.CanHit) && bossDur <= 0) bossDur = Mathf.Max(0.01f, (timer ? timer.Used : Time.time - t0) - bossT0);
             float pow = Rats.TotalPower(); maxPow = Mathf.Max(maxPow, pow);
+            if (Game.Floor == floor) { humanSum += Stage.Items.Humans.Count * Time.deltaTime; humanMax = Mathf.Max(humanMax, Stage.Items.Humans.Count); humanSpawned = Stage.Items.HumanSpawned; }
             float dt = Time.time - t0, used = timer ? timer.Used : dt;      // used = 제한시간 기준 (필살기·연출 중엔 안 셈)
             if (limit <= 0 && timer) limit = timer.Max;
             if (pathD < 0 && Stage.Layout.Count > 0) { StageManager.PowOverride = Calib ? Mathf.Max(1, Rats.TotalPower()) : 0; (pathSum, pathD) = PathWalls(); pathRooms = Stage.Layout.Count; }
@@ -116,6 +118,8 @@ namespace NKK
                 if (timer) used = timer.LastUsed;      // 새 층으로 넘어오며 타이머가 이미 다시 채워짐
                 Add($"{floor}층 {used:0}초 / 제한 {limit:0}초 (전체 {dt:0}초) · 쥐 {Rats.RealCount} (승급 {Rats.PromoteTimes(0)}/{Rats.PromoteTimes(1)}/{Rats.PromoteTimes(2)}/{Rats.PromoteTimes(3)}/{Rats.PromoteTimes(4)}) · 전투력 {GameManager.Format(maxPow)} / 적정 {GameManager.Format(Stage.PowNeed(floor))} ({maxPow / Stage.PowNeed(floor):0.00}배) · 치즈 +{GameManager.Format(Game.Cheese - cheese0)} · 연구자료 +{Game.RunResearch - research0:0}");
                 if (bossDur > 0) Add($"   └ 보스전 {bossDur:0}초");
+                Add($"   └ 사람 등장 {humanSpawned}명 · 평균 {humanSum / Mathf.Max(0.01f, dt):0.0}명 · 최대 {humanMax}명");
+                humanSum = 0; humanMax = 0;
                 Add($"   └ 기준 {BaseLimit(floor):0}초의 {used / BaseLimit(floor) * 100:0}% · 계단 거리 {pathD} · 경로 벽 배율 합 {pathSum:0.0} · 방 {pathRooms}");
                 Rows.Add(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 1, bossDur, (float)(Game.Cheese - cheese0), (float)(Game.RunResearch - research0) });
                 floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; research0 = Game.RunResearch; limit = 0; bossT0 = -1; bossDur = 0; pathD = -1;
