@@ -396,6 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: pop
   pad: 8
+  zoom: 0
 --- !u!1 &20216166
 GameObject:
   m_ObjectHideFlags: 0
@@ -9428,6 +9429,7 @@ MonoBehaviour:
   wallDistK: 0
   wallGateStairs: 1.5
   wallGate: 0.5
+  firstRunWallMul: 0.3
   wallBarTemplate: {fileID: 95008337}
   wallBarLift: 14
   wallBarFixedSize: 1
@@ -11560,12 +11562,16 @@ MonoBehaviour:
   Cats: {fileID: 2118722514}
   Ults: {fileID: 1613850355}
   SuperJump: {fileID: 1613850357}
+  Cam: {fileID: 0}
   Lobby: {fileID: 0}
   startDelay: 3
   floorStartWindow: 6
   lingerTime: 4
   lobbyLingerTime: 20
   pauseGame: 1
+  worldFocusZoom: 1.7
+  birthTargetId: baby
+  birthHeartEvery: 1.1
   log: 1
 --- !u!4 &390131560
 Transform:
@@ -17034,6 +17040,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: power
   pad: 6
+  zoom: 0
 --- !u!1 &442566249
 GameObject:
   m_ObjectHideFlags: 0
@@ -19963,6 +19970,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: promote
   pad: 10
+  zoom: 0
 --- !u!1 &622500708
 GameObject:
   m_ObjectHideFlags: 0
@@ -20859,6 +20867,8 @@ MonoBehaviour:
     {keep}\uB9C8\uB9AC\uB294 \uB0A8\uACA8\uC694)"
   okColor: {r: 0.29, g: 0.22, b: 0.17, a: 1}
   dimColor: {r: 0.62, g: 0.5, b: 0.42, a: 1}
+  drawAbove:
+  - {fileID: 1361430263}
 --- !u!1 &672443607
 GameObject:
   m_ObjectHideFlags: 0
@@ -25401,6 +25411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: timer
   pad: 12
+  zoom: 0
 --- !u!1 &921791093
 GameObject:
   m_ObjectHideFlags: 0
@@ -27141,6 +27152,10 @@ MonoBehaviour:
   ultFollow: 0
   ultFocus: {x: 0, y: 0}
   ultFollowSpeed: 6
+  tutoFollow: 0
+  tutoFocus: {x: 0, y: 0, z: 0}
+  tutoZoomGoal: 1
+  tutoFollowSpeed: 5
   peekIn: 0.8
   peekHold: 1.4
   peekOut: 0.7
@@ -34167,6 +34182,12 @@ MonoBehaviour:
   highlightPulse: 8
   arrowBob: 12
   noSpeakerName: 
+  dodge: 1
+  dodgeTopMargin: 28
+  dodgePortraitMargin: 8
+  dodgeSpeed: 12
+  targetZoom: 1.25
+  targetZoomSpeed: 10
 --- !u!1 &1183368326
 GameObject:
   m_ObjectHideFlags: 0
@@ -36628,6 +36649,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: minimap
   pad: 8
+  zoom: 0
 --- !u!1 &1348956341
 GameObject:
   m_ObjectHideFlags: 0
@@ -42095,6 +42117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: ult
   pad: 10
+  zoom: 0
 --- !u!1 &1630272482
 GameObject:
   m_ObjectHideFlags: 0
@@ -52817,6 +52840,7 @@ MonoBehaviour:
   fireballTemplate: {fileID: 123009464}
   catRadius: 30
   catLength: 115
+  bodyHitShrink: 0.12
   fearRadius: 330
   fearTime: 1.3
   pounceRadius: 70
