@@ -654,7 +654,7 @@
    "step_id": "g_power_promote",
    "speaker_id": "nerd",
    "face": "happy",
-   "text": "그리고 승급으로 높은 등급 쥐를 만들어도 찍찍이 확 올라가! 잊지 마 찍!",
+   "text": "그리고 승급으로 높은 등급 쥐를 만들어도 찍찍이 확 올라가! 번식할 쥐만 남겨 두면 돼 찍!",
    "highlight": "promote"
   },
   {
@@ -846,7 +846,7 @@
    "step_id": "g_pop",
    "speaker_id": "nerd",
    "face": "happy",
-   "text": "승급으로 쥐를 합치면 자리가 다시 생겨! 남는 쥐는 아낌없이 승급시키자!",
+   "text": "승급으로 쥐를 합치면 자리가 다시 생겨! 번식할 쥐만 남기고 나머지는 승급시키자!",
    "highlight": "promote"
   },
   {
@@ -928,6 +928,46 @@
    "face": "normal",
    "text": "치즈가 남으면 선으로 이어진 다음 칸도 계속 찍어 봐. 이어진 칸만 열 수 있어!",
    "highlight": ""
+  },
+  {
+   "line_id": 63,
+   "step_id": "g_promote",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "아, 그런데 조심해! 승급에 쓴 쥐들은 하나로 합쳐져서 사라져.",
+   "highlight": ""
+  },
+  {
+   "line_id": 64,
+   "step_id": "g_promote",
+   "speaker_id": "brownrat",
+   "face": "panic",
+   "text": "쥐가 너무 적어지면 서로 부딪힐 일이 줄어서 새끼가 거의 안 태어나!! 번식할 쥐는 꼭 남겨 둬 찍!",
+   "highlight": ""
+  },
+  {
+   "line_id": 65,
+   "step_id": "g_promote",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "승급 창의 '일괄 승급'은 번식할 쥐를 알아서 남겨 줘. 헷갈리면 그걸 눌러!",
+   "highlight": "promote"
+  },
+  {
+   "line_id": 66,
+   "step_id": "g_power_promote_new",
+   "speaker_id": "brownrat",
+   "face": "panic",
+   "text": "그런데 너무 많이 합치면 쥐가 적어져서 번식이 거의 안 돼!! 번식할 쥐는 꼭 남겨 둬 찍!",
+   "highlight": ""
+  },
+  {
+   "line_id": 67,
+   "step_id": "g_power_promote_new",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "승급 창의 '일괄 승급'은 번식할 쥐를 알아서 남겨 줘. 헷갈리면 그걸 눌러!",
+   "highlight": "promote"
   }
  ],
  "Story": [
