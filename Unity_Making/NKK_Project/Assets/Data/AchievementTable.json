@@ -329,6 +329,16 @@
    "need": 1,
    "achv_icon": "AchvIcons/ach_40033",
    "sort_order": 33
+  },
+  {
+   "achv_id": 40035,
+   "achv_name": "Rat It Go!",
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "cond_type": "Ult_Use",
+   "target_id": 30035,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40035",
+   "sort_order": 35
   }
  ],
  "Achv_Cond_Type": [

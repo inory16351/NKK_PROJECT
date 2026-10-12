@@ -1027,6 +1027,45 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.325}
     legFront: 1
     legBack: 0.963
+  - codeId: bomber
+    head: {fileID: 21300000, guid: 97b5965d73b05184baa5addac6ba0454, type: 3}
+    torso: {fileID: 21300000, guid: 67cb20d068075eb41ae40a724a4a5fd4, type: 3}
+    tail: {fileID: 21300000, guid: b7c1ce088bc33a847a59d613ac0af310, type: 3}
+    front: {fileID: 21300000, guid: 44275919a7af6a54a8a5d418dc0db9dc, type: 3}
+    back: {fileID: 21300000, guid: 4a23439a1de50564e9b80cba7a06b411, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.395}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.238, y: 0.448}
+    hip: {x: 0.736, y: 0.325}
+    legFront: 1
+    legBack: 1.022
+  - codeId: mechanic
+    head: {fileID: 21300000, guid: cc22e46cf01a8fd47a6c5ba0aeb56bc6, type: 3}
+    torso: {fileID: 21300000, guid: 7723e2ca0610abf48823201744ca5086, type: 3}
+    tail: {fileID: 21300000, guid: 8abeda397847dab4485d9b3d1d7032c8, type: 3}
+    front: {fileID: 21300000, guid: c287b1c0fda9e804b92c7d3111e40dab, type: 3}
+    back: {fileID: 21300000, guid: 8ea4a078cb2ca7141af5ebb7bd1a5a4f, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.395}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.238, y: 0.448}
+    hip: {x: 0.736, y: 0.325}
+    legFront: 1
+    legBack: 0.959
+  - codeId: trooper
+    head: {fileID: 21300000, guid: c3eaa8f80b22603498142399d42d9769, type: 3}
+    torso: {fileID: 21300000, guid: be639698ae4f484478ef62bf472b1be9, type: 3}
+    tail: {fileID: 21300000, guid: d750a1a13b2324b4e848f60970405b9d, type: 3}
+    front: {fileID: 21300000, guid: 930ada3e10364c943b45f1ac386731c9, type: 3}
+    back: {fileID: 21300000, guid: 4e4a6a72b319d8a4d9279a0630385dd5, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.395}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.238, y: 0.448}
+    hip: {x: 0.736, y: 0.325}
+    legFront: 1
+    legBack: 0.887
   - codeId: pcmouse
     head: {fileID: 0}
     torso: {fileID: 0}
@@ -1040,3 +1079,68 @@ MonoBehaviour:
     hip: {x: 0, y: 0}
     legFront: 1
     legBack: 1
+  - codeId: bombrat
+    head: {fileID: 0}
+    torso: {fileID: 0}
+    tail: {fileID: 0}
+    front: {fileID: 0}
+    back: {fileID: 0}
+    single: {fileID: 21300000, guid: 475a0e690c929d54fa46d13b3e1890cc, type: 3}
+    neck: {x: 0, y: 0}
+    tailAnchor: {x: 0, y: 0}
+    shoulder: {x: 0, y: 0}
+    hip: {x: 0, y: 0}
+    legFront: 1
+    legBack: 1
+  - codeId: jwipo
+    head: {fileID: 0}
+    torso: {fileID: 0}
+    tail: {fileID: 0}
+    front: {fileID: 0}
+    back: {fileID: 0}
+    single: {fileID: 21300000, guid: f3183a1bb1978dd48a1346b7abea438a, type: 3}
+    neck: {x: 0, y: 0}
+    tailAnchor: {x: 0, y: 0}
+    shoulder: {x: 0, y: 0}
+    hip: {x: 0, y: 0}
+    legFront: 1
+    legBack: 1
+  - codeId: burger
+    head: {fileID: 0}
+    torso: {fileID: 0}
+    tail: {fileID: 0}
+    front: {fileID: 0}
+    back: {fileID: 0}
+    single: {fileID: 21300000, guid: 00b3fb47af8b9144f9978c1c4a4d93f5, type: 3}
+    neck: {x: 0, y: 0}
+    tailAnchor: {x: 0, y: 0}
+    shoulder: {x: 0, y: 0}
+    hip: {x: 0, y: 0}
+    legFront: 1
+    legBack: 1
+  - codeId: icequeen
+    head: {fileID: 21300000, guid: 8cb2d2a8c5ce7394fbc4b104715f4453, type: 3}
+    torso: {fileID: 21300000, guid: a22170ec3be1c6f4ab46dab391dc36d2, type: 3}
+    tail: {fileID: 21300000, guid: 3b11501365ce86c46b88ecd4de40a4a5, type: 3}
+    front: {fileID: 21300000, guid: f19a3caa4b4c57547a2689cfaa211a45, type: 3}
+    back: {fileID: 21300000, guid: 15ecedd43b59e734fa0d9c080c20b88a, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.068, y: 0.599}
+    tailAnchor: {x: 0.945, y: 0.405}
+    shoulder: {x: 0.24, y: 0.733}
+    hip: {x: 0.733, y: 0.553}
+    legFront: 1.034
+    legBack: 1
+  - codeId: fiveg
+    head: {fileID: 21300000, guid: 414fc2d595bf01c4894a193fcb7fc098, type: 3}
+    torso: {fileID: 21300000, guid: 6bc9f75bc9203864dbeb6c17885964b2, type: 3}
+    tail: {fileID: 21300000, guid: 3112b94dff669f0488f52a561b7f3d48, type: 3}
+    front: {fileID: 21300000, guid: f7fc2a6c7b5f18d41b892919439b7ef6, type: 3}
+    back: {fileID: 21300000, guid: afbd77c4257d9754ab6922b7ccbda9e0, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.541}
+    tailAnchor: {x: 0.947, y: 0.615}
+    shoulder: {x: 0.239, y: 0.594}
+    hip: {x: 0.734, y: 0.462}
+    legFront: 1
+    legBack: 0.992

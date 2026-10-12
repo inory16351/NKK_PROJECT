@@ -80,6 +80,7 @@ namespace NKK.Hazards
         public bool Damage(float dmg, float ang, Rat by = null)
         {
             if (!Alive) return false;
+            if (by) by.OnHitCreature(this, frost, x, y, 60);       // 빙결 (아이스 퀸 쥐) · 액션 목표
             hp -= dmg * CommonSkill.BossDmgMul; jit = 3;          // 보스 사냥꾼
             if (hp <= 0) { if (by) mgr.Rats.Ults?.Charge(by, CondType.Defeat_Cat); Fling(ang); SfxManager.Play("cat_down"); return true; }
             if (Random.value < 0.25f) FxManager.I?.Popup(x, y, RandomOf("냥!", "캬악!", "냐?!", "하악!"), Color.white, 18, 0.6f, 60);
@@ -88,6 +89,7 @@ namespace NKK.Hazards
 
         void Fling(float a)
         {
+            frost.Clear();
             mgr.HideWarns(); mgr.ShowAlert(this, false); quake.Clear();
             hp = 0; State = CState.Flung; vx = Mathf.Cos(a) * 560; vy = Mathf.Sin(a) * 560; vz = 760; bounces = 0; life = 4;
             foreach (var r in mgr.Rats.Rats) r.flee = 0;
@@ -98,8 +100,12 @@ namespace NKK.Hazards
         }
 
         // ── 매 프레임 ──
+        // 빙결 (아이스 퀸 쥐): 느려짐 · 꽁꽁
+        public readonly Frost frost = new();
+
         public void Tick(float dt)
         {
+            if (Alive) dt *= frost.Step(dt, x, y, 60);
             float px = x, py = y;
             UpdateQuake(dt);
             t += dt; life -= dt; cd -= dt; alpha = Mathf.Min(State == CState.Aim && crowdFx == CatEffectType.Crowd_Blink ? Mathf.Max(0.15f, 1 - aimT / CWind) : 1, alpha + dt * 3); jit = Mathf.Max(0, jit - dt * 12); castT = Mathf.Max(0, castT - dt);

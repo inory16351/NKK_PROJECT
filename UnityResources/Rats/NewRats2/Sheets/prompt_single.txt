@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: newrats2_single.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 3 columns x 2 rows (each cell 512x512). Each drawing centered in its own cell with a clear magenta margin; nothing touches cell borders.
+- These are single-image game characters drawn exactly like the attached reference (ref_pcmouse.png: a plain computer mouse that is a "rat" character in the game, seen from the side at a slight 3/4 angle, front pointing LEFT, cable/tail trailing to the RIGHT). Same style: Untitled Goose Game look, completely FLAT shapes, NO outlines, NO black linework, no gloss, no gradients, no glow, no drop shadows. Soft muted palette. Every drawing about 420 px wide, resting on an invisible ground line near the bottom of the cell.
+- NO faces, NO eyes, NO mouths, NO legs, NO arms on any drawing. They are just objects.
+
+Row 1 — the SAME plain round matte-black cartoon bomb three times (identical bomb size and position in every cell), with a short dark-grey metal cap on its RIGHT side and a braided brown fuse rope coming out of the cap and trailing to the RIGHT along the ground like a rat tail, ending in a small bright orange-yellow spark star:
+  cell 1: fuse LONG (about as long as the bomb is wide, gently curving), cell 2: fuse HALF as long, cell 3: fuse very SHORT stub (just a little bit out of the cap) with the spark right at the cap.
+Row 2 — a Korean dried filefish snack "jwipo": a flat, thin, roughly oval/fish-shaped sheet of translucent golden-amber dried fish jerky with a slightly wavy, rough torn edge, lying flat on the ground seen from the slight 3/4 side angle, its narrower tapered end pointing RIGHT like a little tail, a few tiny white sesame seeds:
+  cell 4: plain (light golden-amber), cell 5: the SAME jwipo grilled — deeper golden-brown with darker brown diagonal grill marks, edges slightly curled up and a little toasted dark at the rim, cell 6: leave EMPTY (only magenta).

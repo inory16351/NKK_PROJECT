@@ -1,0 +1,32 @@
+[하수구 소품 시트 프롬프트] 맨홀 뚜껑 · 사다리 · 팻말 · 랜턴
+- 크기: 1536 x 1024 (3:2), PNG, 배경 자홍색(#FF00FF) → 내가 잘라서 투명으로 바꿈
+- 참고 그림으로 같이 넣을 것: UnityResources/Rats/UI/lobby_bg.png (화풍) + UnityResources/Rats/Lobby_Market/lm_stall.png (소품 화풍)
+- 다 만들면 이 대화창에 그대로 주면 됨 (자르기 · 이름 붙이기 · Unity 적용은 내가 함)
+
+==================== 프롬프트 (복사해서 사용) ====================
+
+A sprite sheet of game props, 1536x1024 (3:2 landscape), on a solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+
+STYLE: exactly the soft hand-painted cozy storybook style of the attached references (lobby_bg.png rat hideout and lm_stall.png black-market stall) — same brushwork, soft shading, warm muted palette, gentle outlines. Same low side camera angle as lobby_bg.png. Mouse-sized objects in a rat world.
+
+LAYOUT — an exact grid: 4 columns x 2 rows, each cell 384x512. Each drawing centered in its own cell with a clear magenta margin; nothing touches the cell borders. The 4th column is ONE tall cell (384x1024) for the ladder.
+
+Row 1:
+ (1) CLOSED MANHOLE COVER lying flat on the floor, seen from the low side angle so it is a flat ellipse about 3.5 times wider than tall: dark cast-iron round cover with a cute embossed rat-paw print pattern, a few bolts, a small ring handle, slightly rusty rim. Only the cover, no floor around it.
+ (2) the SAME manhole, OPEN: same iron rim and same ellipse size, the lid slid half aside on top, showing a dark round hole with the top two rungs of an iron ladder and a faint green glow from deep below.
+ (3) a small wooden sign hanging from a short rope and a nail, painted with a big simple DOWNWARD arrow (no letters).
+Row 2:
+ (5) the same wooden sign style, painted with a big simple UPWARD arrow (no letters).
+ (6) a hanging lantern made from an old tin can with holes punched in it and a little candle inside, on a short wire hook, warm light inside the can only (no glow spilling onto the background).
+ (7) a small stack of two wooden crates with a jar of glowing green liquid on top (glow only inside the jar).
+Column 4 (one tall cell, full image height):
+ (4) a long slim rusty IRON LADDER standing straight up, seen exactly from the front, two side rails and evenly spaced rungs, the top end bent into two hooks. It must fill almost the whole height of the image, evenly repeated rungs so the middle part can be tiled vertically.
+
+Do NOT include: text, letters, numbers, characters, animals, humans, logos, watermarks, soft glows or semi-transparent light beams over the magenta, drop shadows on the magenta.
+
+==================== 메모 ====================
+- (1) 닫힘 · (2) 열림 = 아지트 바닥 맨홀 (지금 코드로 그린 임시 그림 lobby_manhole_closed/open 교체). 내려갈 때 (1)→(2) 로 바뀜.
+- (3) 아래 화살표 팻말 = 아지트 맨홀 옆 표시 · (5) 위 화살표 팻말 = 하수구 '올라가기' 버튼 그림.
+- (4) 사다리 = 하수구 천장 맨홀 구멍에서 통로까지 (중간 칸을 반복해서 길이 맞춤).
+- (6) 랜턴 · (7) 상자 = 하수구 꾸미기 (배경에 이미 있으면 안 써도 됨).
+- 유리·빛이 자홍색에 비치면 자르기 어려움 → 빛은 물건 안에만 있게 해 둠. 그래도 비치면 "no magenta tint inside glass" 덧붙여 다시 뽑기.

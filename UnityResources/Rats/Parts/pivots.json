@@ -6885,6 +6885,346 @@
     "front": 1,
     "back": 0.963
    }
+  },
+  "bomber": {
+   "parts": [
+    "Parts/bomber/head.png",
+    "Parts/bomber/torso.png",
+    "Parts/bomber/tail.png",
+    "Parts/bomber/front.png",
+    "Parts/bomber/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.716,
+     0.86
+    ],
+    "tail": [
+     0.043,
+     0.561
+    ],
+    "front": [
+     0.618,
+     0.061
+    ],
+    "back": [
+     0.623,
+     0.058
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.716,
+     0.14
+    ],
+    "tail": [
+     0.043,
+     0.439
+    ],
+    "front": [
+     0.618,
+     0.939
+    ],
+    "back": [
+     0.623,
+     0.942
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1.022
+   }
+  },
+  "mechanic": {
+   "parts": [
+    "Parts/mechanic/head.png",
+    "Parts/mechanic/torso.png",
+    "Parts/mechanic/tail.png",
+    "Parts/mechanic/front.png",
+    "Parts/mechanic/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.719,
+     0.86
+    ],
+    "tail": [
+     0.043,
+     0.602
+    ],
+    "front": [
+     0.583,
+     0.06
+    ],
+    "back": [
+     0.608,
+     0.057
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.719,
+     0.14
+    ],
+    "tail": [
+     0.043,
+     0.398
+    ],
+    "front": [
+     0.583,
+     0.94
+    ],
+    "back": [
+     0.608,
+     0.943
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.959
+   }
+  },
+  "trooper": {
+   "parts": [
+    "Parts/trooper/head.png",
+    "Parts/trooper/torso.png",
+    "Parts/trooper/tail.png",
+    "Parts/trooper/front.png",
+    "Parts/trooper/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.713,
+     0.86
+    ],
+    "tail": [
+     0.043,
+     0.314
+    ],
+    "front": [
+     0.797,
+     0.061
+    ],
+    "back": [
+     0.603,
+     0.056
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.713,
+     0.14
+    ],
+    "tail": [
+     0.043,
+     0.686
+    ],
+    "front": [
+     0.797,
+     0.939
+    ],
+    "back": [
+     0.603,
+     0.944
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.887
+   }
+  },
+  "burger": {
+   "parts": [
+    "Parts/burger/head.png",
+    "Parts/burger/torso.png",
+    "Parts/burger/tail.png",
+    "Parts/burger/front.png",
+    "Parts/burger/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.708,
+     0.86
+    ],
+    "tail": [
+     0.043,
+     0.191
+    ],
+    "front": [
+     0.564,
+     0.063
+    ],
+    "back": [
+     0.612,
+     0.057
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.708,
+     0.14
+    ],
+    "tail": [
+     0.043,
+     0.809
+    ],
+    "front": [
+     0.564,
+     0.937
+    ],
+    "back": [
+     0.612,
+     0.943
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.865
+   }
   }
  }
 }

@@ -61,6 +61,7 @@ namespace NKK.Humans
         {
             if (State == HState.Fly || State == HState.Splat || State == HState.Dead || appear < 1) return false;
             hitT = 0.25f; jit = 2;
+            if (by) by.OnHitCreature(this, frost, x, y, 50);       // 빙결 (아이스 퀸 쥐) · 액션 목표
             hp -= dmg; if (by) By = by;
             if (State == HState.Walk) Panic();
             if (hp > 0)
@@ -119,8 +120,12 @@ namespace NKK.Humans
             return ((noWeight ? 0 : hpMax * mgr.flyWeight) + force) * (1 + mgr.flyStyle * Mathf.Min(air, mgr.airMax));
         }
 
+        public readonly Frost frost = new();          // 빙결 (아이스 퀸 쥐)
+        public bool Alive => State == HState.Walk || State == HState.Panic;
+
         public void Tick(float dt)
         {
+            if (Alive) dt *= frost.Step(dt, x, y, 50); else frost.Clear();
             appear = Mathf.Min(1, appear + dt * 3); hitT = Mathf.Max(0, hitT - dt); jit = Mathf.Max(0, jit - dt * 12); sayCD -= dt;
             float px = x, py = y;
             switch (State)

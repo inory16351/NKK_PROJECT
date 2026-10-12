@@ -44,6 +44,7 @@ namespace NKK.Items
 
         void OnDestroy() { if (FxManager.I) FxManager.I.ReleaseHpBar(bar); }
 
+        [HideInInspector] public float tenderT, tenderMul = 1;          // 고소한 냄새 디버프 (끝나는 시각 · 받는 피해 배율)
         public void Damage(float dmg, Rat by, bool isCrit, float fromAng)
         {
             if (appear < 0.5f) return;
@@ -53,6 +54,7 @@ namespace NKK.Items
             if (by) { By = by; ByAction = by.Acting; }
             kp = by ? by.KnockPower : 1;
             if (Data.IsFurniture) dmg *= CommonSkill.FurnitureDmgMul;      // 이삿짐 센터
+            if (tenderT > Time.time) dmg *= tenderMul;                      // 쥐포 고소한 냄새: 받는 피해 증가
             hp -= dmg; wob = 1; sq = 1.25f; flashT = 0.08f; hpShowT = Time.time;
             if (hp > 0) SfxManager.PlayAt(Data.IsFurniture || Data.is_paper == 1 ? "hit_wood" : Data.is_sturdy == 1 ? "hit_metal" : "hit_glass", x, y, 0.6f);
             if (hp > 0)

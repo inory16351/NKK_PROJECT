@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-14).
-마지막 갱신: 2026-10-09 밤 (튜토리얼 1차)
+마지막 갱신: 2026-10-12 (새 쥐 6종 · 보스 기절 ×1.3 · 투명 망토 — 코드·테이블·그림 끝, **씬 연결 남음** §5-2)
 
 ---
 
@@ -94,7 +94,7 @@
 
 **판 흐름**: 로비 작전 회의에서 시작 층(1 + 스테이지 스킵 노드) → 층마다 판 시드 랜덤 지형(방 최대 9, 계단 = 거리 4 이내 가장 먼 방, 벽 체력은 경로 합 wall_path 를 나눔) → 벽을 갉아 방 확장 → 계단 방 열고 계단에 닿으면 탈취 연출(연구자료 = 8 × 1.25^(층-1), 보스 층 ×3) → 다음 층. 제한시간 180초(보스 층 +30, 노드로 늘어남), 0초면 게임 오버(경비원·고양이 습격 → 결과 창 → 로비).
 
-**보스** (5층마다, 30층 뒤 반복): 계단 방에서 대기(어두운 방에 실루엣 + 층 진입 때 카메라가 잠깐 비춤) → 계단 방이 열리면 전투. **보스를 잡기 전엔 어떤 경로로도 계단 못 씀** (`Boss.FloorCleared`, 보스가 사라졌으면 다시 불러 전투). 테스트 "층 클리어" 버튼도 보스가 있으면 보스전을 시작함. 체력 70%·35% 에서 필살 패턴, 그 뒤 25% 확률로 섞어 씀. 로그 `[Boss]` (Editor.log 검색).
+**보스** (5층마다, **30층이 마지막** — 2026-10-12 사용자: 30층 보스를 잡고 계단에 닿으면 탈취 연출 뒤 저장하고 로비로. `StageManager.lastFloor` · 작전 회의 층 길·시작 층도 30까지): 계단 방에서 대기(어두운 방에 실루엣 + 층 진입 때 카메라가 잠깐 비춤) → 계단 방이 열리면 전투. **보스를 잡기 전엔 어떤 경로로도 계단 못 씀** (`Boss.FloorCleared`, 보스가 사라졌으면 다시 불러 전투). 테스트 "층 클리어" 버튼도 보스가 있으면 보스전을 시작함. 체력 70%·35% 에서 필살 패턴, 그 뒤 25% 확률로 섞어 씀. 로그 `[Boss]` (Editor.log 검색).
 
 | 보스 | 일반 공격 (두 번째 40%) | 쿨타임 스킬 (12초, 밈) | 발악(필살) 1 · 2 (체력 70% · 35%, 밈) |
 |---|---|---|---|
@@ -102,7 +102,7 @@
 | 10 광기의 수석 연구원 | 플라스크 · 독가스 구름 | 이븐하게 익혀드릴게요 (불판) | 약품 대방출 파티 · 오히려 좋아 (거대화) |
 | 15 연구소장 | 휘두르기 + 경비원 · 서류 가방 | 중꺾마 (피해 감소) | 전액 현금 매입 · 긴급 비상 회의 |
 | 20 실험체 제로(메인쿤) | 덮치기 · 헤어볼 | 해피해피해피 (점프) | 한강 고양이 질주 · 바나나 고양이 |
-| 25 대마법사 마녀 고양이 | 불덩이 · 덮치기 | 무한동력 버터 고양이 | 트랄랄레로 (상어 머리) · 발레리나 카푸치나 (커피잔 머리) |
+| 25 대마법사 마녀 고양이 | 불덩이 · 덮치기 | 무한동력 버터 고양이 | 트랄랄레로 (상어 머리) · 투명 망토 (해리포터) |
 | 30 우주 고양이 사령관 | 무중력 · 덮치기 | 맥스웰 고양이 낙하 (착지 뒤 춤) | 홈랜더 눈 레이저 · STAY (블랙홀 → 컷씬 9종 랜덤) |
 
 **고양이** (2층부터 35~60초 뒤, 그 뒤 55~85초 간격, 한 번에 한 마리, 보스전 중엔 안 나옴): **체력 0 까지 안 떠남**. 품종 스킬(하악질 등) + **무리 스킬**: 쥐가 가장 많이 모인 곳 → 바닥 빨간 경고 원 + 머리 위 느낌표 → 고양이마다 다른 범위 기절 (코숏 대폭격 · 러시안 블루 연타 · 턱시도 급소 · 페르시안 뱃살 · 먼치킨 볼링 · 벵갈 순간이동 · 스핑크스 레이저 · 메인쿤 지진 · 마녀 운석 · 우주복 블랙홀). 공통 수치 = CatManager 인스펙터 "무리 스킬 공통", `logCrowd` 로 발동 기록.
@@ -117,7 +117,7 @@
 
 **로비**: 아지트(쥐 생활·소품 버튼) · 작전 회의(층 길 가로 스크롤 · 구역·방 · 출동 멤버·등급 확률 · 출발) · 찍찍!! 훈장(사다리·조건·친구·업적) · 쳇바퀴 훈련 · 치즈 창고(스킬 트리) · 친구들!!(도감) · 낮잠 침대(저장하고 타이틀로).
 
-**테스트 패널** (`HUD/TestPanel`, 출시 때 끄기): 필살기 고르기·발동 · 슈퍼 점프 · 층 클리어(보스 있으면 보스전 시작) · 게임 오버 · 저장값 초기화 · **◀ 보스 ▶ + 보스 소환 · ◀ 기술 ▶ + 보스 기술 발동** (일반·두 번째·스킬·발악 아무거나 강제).
+**테스트 패널** (`HUD/TestPanel`, 출시 때 끄기): 필살기 고르기·발동 · 슈퍼 점프 · 층 클리어(보스 있으면 보스전 시작) · 게임 오버 · 저장값 초기화 · **전부 해제** (지금 슬롯: 튜토리얼·기능 전부 열림 · 마지막 층까지 클리어 · 최고 훈장 · 공용 스킬 노드 전부 · 치즈·연구자료 무제한(1e15, 써도 다시 채움, 저장 `infinite`) → 로비로. `Progress.UnlockEverything`, "저장값 초기화"로 원래대로) · **◀ 보스 ▶ + 보스 소환 · ◀ 기술 ▶ + 보스 기술 발동** (일반·두 번째·스킬·발악 아무거나 강제).
 
 ---
 
@@ -137,6 +137,11 @@
 - **다른 PC에서 보스 안 나옴 수정 (2026-10-12)**: `HumanArtLibrary` 클래스가 `HumanRig.cs` 안에 있어 에셋의 m_Script 가 비어 있었음(이 PC 는 캐시로 동작, 새 PC 는 "[Boss] 그림 없음") → `Humans/HumanArtLibrary.cs` 로 분리 + 에셋 연결. **ScriptableObject·MonoBehaviour 는 파일 이름 = 클래스 이름으로 둘 것.**
 - **로비 간판 · 치즈 창고 따라 하기 (2026-10-12)**: 훈장 판자 오른쪽 1.2(제목 카드 피함) · 치즈 창고 팻말 0.2 아래(돈 표시줄 피함). 치즈 창고 = `l_skill_pick`(추천 스킬 = 열린 칸 중 가장 싼 것, 강조 `skill_next` 를 SkillPage 가 붙임) → `l_skill_buy`(SkillSelect, 강조 `skill_buy` = BuyButton) → `l_skill_done`(SkillBuy). 치즈 모자라면 `l_skill_poor` → 다음에 열 때 `l_skill_pick2`. `skill_` 강조는 다음 단계까지 유지(`holdPrefix`). Done·NotDone 쉼표 여러 개. 오프닝 컷씬 10초 자동 넘김(`StoryPlayer.autoNext`).
 - **승급 주의 대사 (2026-10-12)**: 승급을 너무 많이 하면 쥐가 적어져 번식이 거의 안 된다는 주의 + '일괄 승급'은 번식용 쥐를 남겨 준다는 안내. `g_promote` 끝(Line 63~65) · 두 번째 판에서 승급을 처음 배우는 `g_power_promote_new` 끝(Line 66~67). 같은 뜻으로 Line 28(승급 다시 알림)·52(인구 꽉 참) 문구도 "번식할 쥐만 남기고" 로 맞춤. 소환 쥐(Summon 스킬 11종 = 임시 쥐 `temp` 6초, 필살기용 임시 쥐 15초)는 승급·인구·번식·전투력에서 빠짐 (확인함). 개별 승급은 2마리까지 줄일 수 있음(`CanPromote`), 일괄 승급은 `PromoteKeepCount` 만큼 남김.
+- **25층 마녀 발악 2 → 해리포터 '투명 망토' (2026-10-12, 진행 중)**: 발악 두 개가 둘 다 머리 바꾸기(트랄랄레로 상어 머리 · 발레리나 카푸치나 커피잔)라 겹침 → 상어는 유지, `special2_type` 을 `Frog_Curse` → 새 `Invis_Cloak` 으로. 사용자 선택 (레비오우사는 30층 무중력과 겹쳐 뺌, 패트로눔·디멘터·폴리주스 분신 중 투명 망토).
+  - 흐름: 망토가 위에서 내려와 덮음(windup) → 사라짐(`Hidden`: 피해 안 받음) → 쥐 무리 쪽으로 몰래 이동(반짝임·발자국 먼지만 살짝) → 나타나기 `cloakWarn` 초 전 경고 원 → 경고 원 자리에 나타나며 덮침(`SpecialHit`) + 망토를 벗어 던짐 → `cloakRest` 쉼 → Atk_Type count 만큼 반복.
+  - **끝**: 그림 `UnityResources/Rats/BossProps/boss_cloak.png`(덮어쓰기) · `boss_cloak_fly.png`(벗어 던짐), 원본·프롬프트·로그 `BossProps/Sheets/invis_cloak/` → `Assets/Art/Rats/BossProps/` 복사. (Codex 가 저장을 못 해서 `~/.codex/generated_images/<세션>/` 에서 직접 복사함.) `Boss.cs`: 필드(cloakSprite·cloakFlySprite·cloakSize·cloakFlyTime·cloakAlpha·cloakSparkle·cloakMove·cloakWarn·cloakRest·cloakHidePopup·cloakShowPopup) · `Hidden` · `Damage` 에서 Hidden 이면 무시 · Spawn/EndSpecialFx 초기화 · BeginSpecial 에서 망토 표시 · UpdateSpecial `case "Invis_Cloak"`.
+  - **끝 (2026-10-12 오후)**: `Boss.LateUpdate` 숨으면 반투명(cloakA)·그림자 · `PlaceCloak`(덮어쓰기 내려옴 / 벗어 던짐 날아감) · `ShowProp` 색 되돌림 · `Rat` 숨은 보스는 안 쫓고 안 부딪힘 · 보스 테이블 `Invis_Cloak` 행 + 95005 special2 + 96107 문구.
+  - **남음**: 씬(§5-2 목록) · 테스트 패널로 마녀 '투명 망토' 확인 · `BossProps/README.md` 줄 추가.
 - **고양이 몸 전체 피격 (2026-10-12)**: `Cat.Body`(그림 범위 → 게임 좌표, `CatManager.bodyHitShrink`) + `Cat.BodyDist` — 쥐 박치기(발밑 원 = 밀어냄, 몸 = 튕기기만) · 날아온 물건 · BlastActors · 라이브 방송·역병 분사 · 고양이 몸 클릭 = 총공격 지점을 고양이로.
 - **친구들 도감 (끝)**: Lobby `Page_dex` = 쳇바퀴 훈련 페이지 틀 복제 + `Lobby/DexPage.cs`. 쥐 79종 전부 (등급 순), 등급 칩 {n}/{total}. 만난 친구(`Progress.Seen`) = 그림·이름·등급·설명·쳇바퀴 Lv·특수 능력·특수 액션·필살기 / 못 만남 = 실루엣·'???' / 훈장 부족(unlock_rank) = 실루엣·'{tier}훈장부터'. 글 = `Page_dex/Words`. 첫 훈장 승급 뒤 튜토리얼 l_dex 로 해금.
 - **잠긴 기능 반응 (끝)**: Lobby `LockedFeedback`(Tutorial/LockedFeedback.cs) — `LobbyManager.OnLocked` → 그 기능 자물쇠 흔들림 + 아래쪽 말풍선 `UI/LockToast`("아직 잠겨 있어요, 찍!" + 기능별 힌트 = 인스펙터). 위쪽 탭은 버튼을 막지 않고 OpenPage 가 막음.
@@ -146,6 +151,50 @@
 - **효과음 (2026-10-10)**: `Tools/gen_sfx.py` 코드 합성 81개 = `UnityResources/Audio/SFX/`(README) → `Assets/Audio/SFX/`. 재생 = `Core/SfxManager`(씬마다, 이름으로 `SfxManager.Play/PlayAt`, 이름별 볼륨·간격·동시 수, 화면 밖 무시, UI 버튼 클릭 자동, 볼륨 `nkk_sfx_vol`, 목록 = 컴포넌트 메뉴 Fill From Folder). 게임 곳곳 연결(물건 타격/박살 재질별 · 콤보 · 치즈 · 번식 · 총공격 · 보스 · 고양이 · 벽 폭파 · 층 클리어 · 게임 오버 · 튜토리얼 · 로비 구매 등). 목소리 계열은 합성이라 어색 → 나중에 같은 이름으로 교체.
 - **볼륨 설정 (2026-10-10)**: `Core/VolumeSettings`(배경음악 · 효과음 슬라이더, 숫자 글 {n}%, 효과음 움직이면 미리 듣기) = Game `HUD/QuitMenu/Panel/Card/Volume`(ESC 포기 창 아래) · Lobby 낮잠 침대 `Page_rec/Card/Volume` · Title '설정' 버튼 → `UI/Settings` 창 (`TitleManager.settingsButton/Panel/Close`).
 - **남음**: 사용자 플레이 피드백 (대사 · 타이밍 · 소리 크기).
+
+- **미니맵 점 가림 수정 (2026-10-12)**: 방이 새로 열려 나중에 복제된 방 칸이 쥐 점 위에 그려짐 (넓은 층일수록 잘 보임) → `Minimap.Get` 에서 새 칸은 칸 틀 바로 뒤에 끼움.
+
+## 5-2. 새 쥐 6종 · 보스 기절 ×1.3 (2026-10-12) — 그림 `UnityResources/Rats/NewRats2/README.md`
+
+- **사용자 결정**: 기획서 `캐릭터상세기획서모음.pptx` 중 게임에 없는 쥐 6종 추가 (그림은 참고만, 게임 그림체) · 폭탄마법사 쥐 → '폭탄마'(사용자 참고 그림: 안대·폭탄 조끼) · 폭탄 쥐 = 그냥 폭탄(얼굴 없음), 쥐포 = 다리 없는 쥐포 그대로 (둘 다 컴퓨터 마우스처럼 한 장짜리) · 새 6종만 웃긴 이름 · 폭탄마는 기획서대로(필살기 올인 + 반동 기절), 나머지 세부 수치는 임의 · 흰 갑주 필살기 없음 · 보스 기절 시간 전부 ×1.3 (보스 테이블 Atk_Type stun, 백업 `_backup_20261012`).
+- 쥐 (이름은 2026-10-12 사용자가 엑셀에서 바꿈): 10080 폭탄마 쥐(bomber, 신화 t6, 425) · 10081 쥐4(jwipo, 에픽 t1) · 10082 고쳐쓰쥐(mechanic, 일반 t2) · 10083 제국군 쥐(trooper, 유니크 t4) · 10084 폭탄이쥐(bombrat, 에픽 t4) · 10085 맘스땃쥐(burger, 에픽 t2). 공격력 = 등급×훈장 기존 공식 값.
+- 스킬 (쥐 테이블 Skill 20080~21085, Effect_Type 시트에 뜻): Ult_Power(필살기 ×2.5, 뒤 4초 기절) · Grill_Stack + Savory_Smell(물건 받는 피해 +30%, `Item.tenderT/tenderMul`) · Part_Collect + Tune_Up(가장 센 동료 공격력 +30% 15초) · Aim_Assist(70%, 빗나갈 때 +10%) + Blaster_Shot(3발, 다 맞으면 +50%) · Burning_Fuse(30초, 한 장짜리 그림 3단계) + Self_Destruct(쳇바퀴 훈련 없이, 막힌 벽으로 돌진해 폭발 후 사라짐 `RatManager.RemoveRat`) · Patty_Stack(5장, 두꺼워짐) + Patty_Slam.
+- 필살기 30034 익스플로전 `Ults/UltExplosion.cs` (게이지 480, 자막 c1~c5, 소품 magic_circle · explosion_big, 업적 '폭발은 예술이다!').
+- 코드: `Rats/Rat.NewRats.cs`(전부 여기) + 훅(Rat.Passive 공격력·부순 물건 · Rat.Tick · Rat.Action CanAct/Step/Pose/Begin · RatRig.tailLen · UltimateManager.UltDamage × UltPowerMul · RatManager 총알 align). EffectType 은 enum 끝에만 붙임. 유니티 없이 Roslyn 으로 컴파일 확인함 (에러 0).
+- **씬 작업 1~4 끝 (2026-10-12 저녁, MCP)**: 아트 라이브러리 85종 · Game 씬 RatManager 팝업 글·그림 · FxManager 스티커 smell/explosion_big · UltimateManager Fill Props/Icons · Boss 망토 그림·팝업 · Lobby IconBook Fill Icons. **남음 = 5 (플레이 확인)**.
+- (옛 목록)
+  1. 메뉴 NKK/Build Rat Art Library (bomber·mechanic·trooper·burger 파츠 + 한 장짜리 bombrat·jwipo, 빌더에 추가함).
+  2. Game 씬 RatManager '새 쥐 6종': 팝업 글(missPopup '빗나감!' · blasterAllHitPopup '전탄 명중!!' · tunePopup '튜닝 완료!' · pattyPopup '패티 +{n}' · pattySlamPopup '빅버거 박치기!!' · smellPopup '고소한 냄새~' · fusePopup '치익… 치익…' · selfDestructPopup '펑!!') · blasterBoltSprite = NewRats/blaster_bolt · pattySprite = patty · fuseSprites = bombrat_fuse1~3 · grilledSprite = jwipo_grilled.
+  3. UltimateManager: Fill Props · Fill Icons. IconBook(로비·게임) Fill Icons. FxManager 스티커에 `smell` · `explosion_big` 추가.
+  4. Boss 인스펙터 투명 망토 (§5-1).
+  5. 플레이 확인: 테스트 패널로 새 쥐 소환 수단이 없으면 BalanceProbe/코드로 스폰해서 각 스킬 화면 확인. 쥐한폭탄 자폭으로 인구가 줄어드는 것 = 의도.
+
+## 5-3. 허들 기획서 · 경제 · 상점 · 뽑기 (2026-10-12, 진행 중) — 기획서 `기획서/20261012_*_Ver02.pptx` 3개
+
+- **사용자 결정**: 보스는 5층마다 그대로 + 난이도는 허들 기획서대로 · 층 건너뛰기 상한은 기획서 표(최고 클리어 층 → 최대 시작 층, 최대 15), 올리는 건 지금처럼 스킬 노드 · 훈장 조건 층 기획서에 맞춰 재배치 (클리어 5·8·10·13·15·17·19층 → Max_Floor 6·9·11·14·16·18·20) · 측정(BalanceProbe)은 나중에 · 30층 보스 = 끝 (로비로) · 체력바 깎인 자국은 계속 맞아도 따라 줄어듦 · 로비 아래 '지하 하수구'(맨홀 뚜껑으로 들어감)에 암시장·유전자 추출기 · 뽑기 연출 = 믹서기 ("다들 들어가!!! 빨리!!" → 갈갈갈 → 조각) · 상점에 브로커 쥐 상인 (플랫 그림체) · 상점·뽑기 튜토리얼.
+- **난이도** `Tools/gen_stage_table.py` (기획서 수치): 층 유형(도입·쉬움·보통·어려움·허들) · 적정 찍찍 배율 (×1.25 / 5층 ×1.8 / 6~15 ×1.32 / 16 ×1.75 · 17 ×1.7 · 18 ×2.1 · 19 ×2.2 · 20 ×2.4, 21~30 = 16~20 반복) · 방 수 2→9 · 목표 돌파 108/135/162초 (보스 층은 그중 40% 가 보스전 → 보스 테이블 hp_pow_sec 비율로 줄임) · 제한 180초 통일 (RunTimer.bossExtra 0) · 새 칼럼 floor_type · target_sec · boss_sec · research(층 클리어 연구자료 = 8 × 난이도, Heist 가 읽음) · skip_cap · player_pow(기획서 기준 전투력, 측정 비교용).
+- **경제** `Tools/gen_economy.py` (새): 기획서 판 일정(판별 최고 층)대로 번 연구자료·치즈로 훈장 승급 비용(티어 테이블)과 스킬 트리 비용(`Tools/economy_params.json` → gen_skill_tree.py)을 정함. 16층~ 은 뽑기·상점과 나눠 쓰게 50%. 순서: `gen_stage_table → gen_economy → gen_skill_tree → xlsx2json`. **플레이어 힘(공격력 성장)은 손대지 않음 → 측정으로 맞춰야 함.**
+- **상점 입고 = 탈출 시간 15분** (사용자 2026-10-12: 실시간 30분 대신, RunTimer 가 판에서 보낸 시간만 셈 → `Progress.shop.playLeft`)
+- **상점 (쥐구멍 암시장)** `Core/BlackMarket.cs` + 상점 테이블 (Shop_Config · Shop_Slot · Shop_Goods · Shop_Floor) · **뽑기 (유전자 추출기)** `Core/GeneGacha.cs` + 뽑기 테이블 (Gacha_Config · Gacha_Grade). 저장 = Progress.shop / gacha. 해금 = `Progress.IsUnlocked`: alley·gacha 16층 클리어, market 17층 (Progress 인스펙터 testMarket 로 테스트).
+  - 아지트 맨홀 = `Home/Hots/Hot_alley` (2026-10-12, 아지트 바닥 **가운데** x 0). 그림 `lobby_manhole_closed/open.png` (LobbyPan.manhole 이 열림/닫힘 바꿈 + manholeOpenOffset). 팻말 TutorialTarget id = `alley_arrow` (튜토리얼 대사 69).
+  - 하수구 방 `Alley` 는 씬에서도 아지트 바로 아래 (0, -10.24). 배경 `lm_bg.png` = **야시장 v3** (메이플 리버스 시티 느낌, 천장 맨홀 구멍 가운데) · 사다리(가운데) · 상자 · 올라가기 버튼 팻말. (랜턴은 꺼 둠, 옛 배경 `Sheets/bg_v3_old`)
+  - **하수구 쥐**: `Alley/AlleyRats` = 두 번째 LobbyHome (fitCamera 끔, main = 아지트 Home, 자리(slot) 없음 → 걷기·수다·누르면 점프·끌어 던지기). 바닥 floorU 0.08~0.92 · floorV 0.655~0.69, 5마리, 대사는 인스펙터(야시장 대사). 물건 버튼은 어느 층이든 쥐를 먼저 누름 (`LobbyHome.AnyRatAt`).
+  - **야시장 꾸미기** `Alley/Decor` (2026-10-12): 우유곽 집 · 깡통 가게 · 찻잔 점집 · 분식 노점 · 젓가락 문(사다리 앞) · 거꾸로 매달린 집 · 등불 줄 · 깃발 · 고양이 포스터 · 장물 더미 · 금고 · 자루. 저울 · 치즈 네온은 꺼 둠. 그림 `UnityResources/Rats/Lobby_Market/NightMarket/` (nm_* = 야시장 시트, md_* = 암시장 소품 시트).
+  - **맘스땃쥐 새 그림** `UnityResources/Rats/NewRats2/Burger/` (윗빵=얼굴 · 치즈 · 양상추 · 토마토 · 패티 2종 · 아랫빵=발·꼬리 · 완성본). 쌓기 = 아래부터 아랫빵 · [고기 · 토마토 · 양상추 · 치즈] × (1 + 패티 수) · 윗빵, 미리보기 `_맘스땃쥐_쌓기_미리보기.png`. **게임 적용됨**: 한 장짜리 쥐 `Parody/rat_burger.png`(패티 0) + 미리 합친 `Art/Rats/NewRats/burger_stack0~5.png`(폭 같음·발끝 맞춤, 최대 크기 4096) → `RatManager.burgerStack`, `Rat.NewRatSprite` 가 패티 수로 바꿔 끼움 (박치기 → 0). 옛 파츠 `Parts/burger` 는 빌더가 건너뜀. 다시 합치기 = scratchpad 식 burger_stack.py (층 순서·겹침 값은 이 줄 참고).
+  - 쥐 활동 자리(카드 놀이·낚시 등)는 놀이 소품(`prompt_market_decor.txt` ②) 오면.
+  - **새 쥐 2종 (2026-10-12, `기획서/캐릭터상세기획서모음.pptx` 9·10쪽) — 로직만, 그림은 Codex 돌아오면**:
+    - 10086 아이스 퀸 쥐 `icequeen` (신화 t5, 378): 패시브 20086 서리 축적 `Frost_Stack` (생명체 칠 때마다 빙결 스택: 스택당 6% 느려짐, 10이면 2초 꽁꽁, 4초 안 맞으면 풀림) · 액션 21086 얼음 미사일 `Ice_Missile` (20초, 고드름 5개 유도 → 때리던 생명체 > 가까운 생명체 > 물건) · 필살기 30035 렛잇고 `UltRatItGo` (게이지 300 — 사용자 "수치는 알아서" 2026-10-12, 기획서 2000 은 다른 필살기(100~480)와 단위가 안 맞아 조정. 맵 생명체 전부 꽁꽁 + 물건 서리 충격) · 업적 40035 Rat It Go!
+    - 10087 5G `fiveg` (에픽 t5, 48 = 기획서 '낮음'): 패시브 20087 `Rush_Range_Up` (클릭 총공격 집결 범위 +0.3, 한 번만) · 액션 21087 데이터 전송 `Data_Boost` (주변 250에 5마리 이상, 15초마다 → 반경 쥐 공격력 +25% 8초)
+    - 빙결 = `Rats/Frost.cs`, Cat/Boss/Human 에 `frost` (Tick 의 dt 에 배율, 꽁꽁 = 0). 얼음 미사일 = `RatManager.FireIce/UpdateIce`, 목표 공용 `FoePos/FoeHit`. 팝업 글 = RatManager 인스펙터 freezePopup · iceMissilePopup · dataPopup (Game 씬).
+    - **임시 그림**: 아트 라이브러리 빌더가 icequeen ← angel, fiveg ← student 그림을 빌려 씀 (진짜 `Parts/icequeen`·`Parts/fiveg` 생기면 자동으로 그쪽). 필요한 그림: 두 쥐 파츠 · 얼음성(ice_castle, UltimateManager props) · 얼음 미사일(RatManager.iceMissileSprite) · 스킬 아이콘 rs_20086/21086/20087/21087 · 필살기 아이콘 ult_30035 · 업적 아이콘 ach_40035.
+    - 기획서 맘스땃쥐 쪽은 지금 구현과 다름 (기획서: 물건 10개마다 패티 · 액티브 20초마다 벽 박치기) → 사용자 확인 전 그대로.
+  - **예정 (2026-10-12 사용자)**: 유전자 뽑기 화면·연출(믹서기로 갈아 스무디)이 너무 잔인하다는 의견 → Codex 사용량이 돌아오면 **실험 느낌 컷씬**으로 바꿀 예정. 그때 새 그림 받아서 GachaShow 연출 교체.
+  - LobbyHome.FitCamera 는 카메라 x·크기만 (y 는 LobbyPan) — 예전엔 y 를 아지트로 되돌려서 하수구 클릭이 아지트 물건에 걸렸음.
+- **로비**: `Lobby/LobbyPan`(하수구로 카메라 이동, 맨홀 = 물건 버튼 id alley → LobbyManager.OnHot) · `MarketBroker` · `MarketPage`(Page_market) · `GachaPage`(Page_gacha) · `GachaShow`(UI/GachaShow 연출). 씬: Lobby `Alley`(방) · `Home/Hots/Alley`(Hot_market · Hot_gacha) · `LobbyPan` · `UI/ToHome`.
+- 튜토리얼 테이블: 화자 broker · 단계 l_alley · l_gacha_hot · l_gacha_page · l_market_lobby · l_market · l_market_page · l_wish (조건 WishOpen · 발동 AlleyEnter 추가).
+- **플레이 확인함 (2026-10-12, 슬롯 5에서)**: 뽑기 화면 · 무료 10회 · 믹서기 연출(쥐들 뛰어듦 → 갈갈갈 → 조각 → 결과 10칸) · 암시장 라인업 · 첫 방문 선물. UI 겹침 정리 (연출 막 불투명 — 선형 색공간이라 반투명 검정이 옅게 보임 · 결과 칸/버튼 자리 · 등급 띠 = ui_bubble · 채우기 Image 는 그림이 있어야 동작).
+- **주의**: 시험할 땐 `Progress.UseSlot(5)` 후 `PlayerPrefs nkk_slot` 을 1로 되돌릴 것. (2026-10-12 실수로 슬롯 1 에 테스트 값이 저장됨 → 튜토리얼 기록으로 훈장 1 · 최고 층 5 · tutoSkip false 로 되돌림, 치즈·연구자료는 원래 값을 몰라 0)
+- **남음**: ① Codex 한도(오후 6:34 이후) 풀리면 `UnityResources/Rats/Lobby_Market/Sheets/prompt_sewer.txt` · `prompt_manhole.txt` 다시 실행 → 하수구 배경(lm_bg 교체) · 맨홀(닫힘/열림) ② Lobby 씬: `Alley` 방을 아지트 아래(y -10.24)로 옮기고 노점·믹서기·브로커를 하수구 바닥(빈 자리 27% · 73%)에 · `Home/Hots` 에 Hot_alley(맨홀, id alley, FeatureGate alley, TutorialTarget alley_arrow) · LobbyPan.manhole/manholeClosed/manholeOpen 연결 ③ 튜토리얼 대사 l_alley · l_market_lobby 문구 '오른쪽 화살표' → '맨홀 뚜껑' 으로 ④ 밸런스 측정.
 
 ---
 

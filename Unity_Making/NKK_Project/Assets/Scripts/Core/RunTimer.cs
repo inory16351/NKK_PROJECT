@@ -21,7 +21,7 @@ namespace NKK
         [Header("제한시간 = 기본 + 방 수 × 방당 (+ 보스 층이면 추가) + 공용 스킬 초 (2026-10-07: 모든 층 180초 통일, 보스 층 +30)")]
         public float baseTime = 180;
         [Tooltip("0 = 방 수와 상관없이 같음")] public float perRoom = 0;
-        [Tooltip("보스 층 추가 (공용 스킬 '보스에게 주는 피해' 노드의 시간이 더해짐)")] public float bossExtra = 30;
+        [Tooltip("보스 층 추가 (공용 스킬 '보스에게 주는 피해' 노드의 시간이 더해짐). 2026-10-12 허들 기획서: 모든 층 180초 → 0")] public float bossExtra = 0;
 
         [Header("경고")]
         [Tooltip("남은 시간이 이 초를 지나는 순간 경고 배너")] public int[] warnAt = { 60, 30, 10 };
@@ -65,7 +65,7 @@ namespace NKK
 
         void Update()
         {
-            if (!Halted) Used += Time.deltaTime;
+            if (!Halted) { Used += Time.deltaTime; BlackMarket.OnRunTime(Time.deltaTime); }     // 암시장 입고 = 탈출에 쓴 시간
             if (!Stopped && Left > 0)
             {
                 float before = Left;

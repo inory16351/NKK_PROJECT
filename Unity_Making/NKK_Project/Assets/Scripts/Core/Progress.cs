@@ -33,6 +33,36 @@ namespace NKK
             public List<string> unlocks = new(); // 해금한 기능 id (튜토리얼 테이블 Unlock_Id)
             public bool tutoSkip;                // 튜토리얼 전 저장 → 모든 단계·기능을 연 것으로 침
             public string savedAt;               // 마지막 저장 시각 (타이틀 슬롯 표시용)
+            public ShopSave shop; public GachaSave gacha;       // 쥐구멍 암시장 · 유전자 뽑기 (2026-10-12)
+            public bool infinite;                // 테스트: 치즈·연구자료 무제한 (테스트 패널 "전부 해제")
+        }
+        // ── 쥐구멍 암시장 (상점 기획서 Shop_Save) · 유전자 뽑기 (뽑기 기획서 Gacha_Save) ──
+        [Serializable] public class ShopItem { public int slot, goods; public string code; public bool sold; }
+        [Serializable] public class ShopSave
+        {
+            public List<ShopItem> lineup = new();
+            public float playLeft = -1;                    // 다음 입고까지 남은 탈출 시간 (초, 판에서 보낸 시간만 줄어듦. -1 = 아직 없음)
+            public int rerollCount, freeLeft, lockedSlot, pity;     // 이번 주기 유료 리롤 횟수 · 남은 무료 리롤 · 고정 슬롯(0 = 없음) · 신화 없는 라인업 연속
+            public bool opened;                            // 첫 방문 선물 받음
+        }
+        [Serializable] public class GachaLog { public long at; public int maxFloor; public string code, grade, source; public int shards; public bool isNew; }
+        [Serializable] public class GachaSave
+        {
+            public int legendPity, mythicPity, total, freeTen = -1;     // 천장 누적 · 누적 뽑기 · 남은 무료 10회 (-1 = 아직 해금 안 됨)
+            public string wishLegend, wishMythic;           // 관심 종 (코드)
+            public List<GachaLog> log = new();               // 최근 기록
+            public List<GachaLog> pending = new();           // 연출 전 확정된 결과 (강제 종료 복구)
+        }
+        public ShopSave shop = new();
+        public GachaSave gacha = new();
+        // 클리어한 최고 층 (최고 도달 층 - 1)
+        public int ClearedFloor => Mathf.Max(0, maxFloor - 1);
+        // 조각 지급 (상점·뽑기). 처음 만난 종이면 도감 등록도. 반환 = 처음 만남
+        public bool AddShards(string code, int n)
+        {
+            bool isNew = !rats.ContainsKey(code);
+            Get(code).shard += Mathf.Max(0, n);
+            return isNew;
         }
         const int SaveVer = 1;
 
@@ -78,7 +108,14 @@ namespace NKK
         public void SkipTutorial() { tutoSkip = true; UnlockVersion++; Save(); }      // 밸런스 측정 등: 튜토리얼 안 띄우고 기능 전부 열림
         public bool TutoDone(string stepId) => tutoSkip || tuto.Contains(stepId);
         public void MarkTuto(string stepId) { if (tuto.Add(stepId)) Save(); }
-        public bool IsUnlocked(string feature) => string.IsNullOrEmpty(feature) || tutoSkip || unlocks.Contains(feature) || Array.IndexOf(OpenAtStart, feature) >= 0;
+        public bool IsUnlocked(string feature)
+        {
+            // 층으로 열리는 기능 (2026-10-12): 뒷골목·유전자 뽑기 = 16층 클리어 · 쥐구멍 암시장 = 17층 클리어 (튜토리얼 건너뛰기와 상관없음)
+            if (feature == "gacha" || feature == "alley") return GeneGacha.Unlocked;
+            if (feature == "market") return BlackMarket.Unlocked;
+            return string.IsNullOrEmpty(feature) || tutoSkip || unlocks.Contains(feature) || Array.IndexOf(OpenAtStart, feature) >= 0;
+        }
+        [Tooltip("테스트: 층과 상관없이 뒷골목·뽑기·암시장 열기")] public bool testMarket;
         // 쉼표로 여러 개. 새로 열린 게 있으면 true
         public bool Unlock(string features)
         {
@@ -235,6 +272,9 @@ namespace NKK
             // 인스펙터 테스트 값이 바뀌면 효과 다시 계산
             int h = testSkillTier * 7919; foreach (var id in testSkills) h = h * 31 + id;
             if (h != testHash) { testHash = h; SkillVersion++; }
+            if (BlackMarket.TestOpen != testMarket) { BlackMarket.TestOpen = GeneGacha.TestOpen = testMarket; UnlockVersion++; }
+            // 무제한: 써서 줄어든 치즈·연구자료를 다시 채움
+            if (Infinite) { if (cheese < InfiniteAmount) cheese = InfiniteAmount; if (research < InfiniteAmount) research = InfiniteAmount; }
         }
 
         // 활성화됨: 시작점은 그 훈장이면 자동, 나머지는 산 노드 (+ 테스트)
@@ -306,10 +346,11 @@ namespace NKK
 
         public void Save()
         {
-            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
+            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, infinite = Infinite, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
             d.tuto.AddRange(tuto); d.unlocks.AddRange(unlocks);
             d.nodes.AddRange(skills);
             d.achvOn.AddRange(achvOn);
+            d.shop = shop; d.gacha = gacha;
             foreach (var kv in achvs) d.achvs.Add(new AchvEntry { ult = kv.Key, count = kv.Value });     // 필살기 완주 횟수
             PlayerPrefs.SetString(KeyOf(Slot), JsonUtility.ToJson(d)); PlayerPrefs.Save();
         }
@@ -317,7 +358,7 @@ namespace NKK
         void Load()
         {
             rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0;
-            tuto.Clear(); unlocks.Clear(); tutoSkip = false; UnlockVersion++; SkillVersion++;
+            tuto.Clear(); unlocks.Clear(); tutoSkip = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new();
             var s = PlayerPrefs.GetString(KeyOf(Slot), "");
             if (string.IsNullOrEmpty(s)) return;
             var d = JsonUtility.FromJson<SaveData>(s);
@@ -330,12 +371,37 @@ namespace NKK
             if (d.tuto != null) foreach (var id in d.tuto) tuto.Add(id);
             if (d.unlocks != null) foreach (var id in d.unlocks) unlocks.Add(id);
             tutoSkip = d.tutoSkip || d.ver == 0;      // 튜토리얼이 생기기 전 저장 = 다 본 것으로
+            shop = d.shop ?? new(); gacha = d.gacha ?? new();
+            Infinite = d.infinite;
         }
 
         [ContextMenu("진행도 초기화")]
         public void ResetAll() { PlayerPrefs.DeleteKey(KeyOf(Slot)); Load(); Save(); }
 
-        // 시작 층 최대 = min(1 + 스테이지 스킵 노드 합, 최고 기록)
-        public int StartFloorCap(int t = 0) => Mathf.Max(1, Mathf.Min(1 + CommonSkill.StageSkip, maxFloor));
+        // ── 테스트: 지금 슬롯 전부 해제 ── 기능·튜토리얼 전부 열림 · 마지막 층까지 클리어 · 최고 훈장 · 공용 스킬 노드 전부 · 치즈·연구자료 무제한
+        public const double InfiniteAmount = 1e15;
+        public bool Infinite { get; private set; }
+        [ContextMenu("전부 해제 (테스트)")]
+        public void UnlockEverything()
+        {
+            var db = GameDatabase.Instance;
+            tutoSkip = true;
+            maxFloor = Mathf.Max(maxFloor, Mathf.Min(NKK.Stage.StageManager.LastFloor, 999) + 1);
+            if (db)
+            {
+                foreach (var t in db.Tiers.Keys) tier = Mathf.Max(tier, t);
+                foreach (var s in db.CommonSkills) if (!s.IsRoot) skills.Add(s.skill_id);
+            }
+            Infinite = true; cheese = research = InfiniteAmount;
+            treeCache.Clear(); UnlockVersion++; SkillVersion++;
+            Save();
+        }
+
+        // 시작 층 상한 = min(1 + 스테이지 스킵 노드 합, 기획서 건너뛰기 상한(최고 클리어 층 = maxFloor - 1), 마지막 층) — 사용자 2026-10-12: 상한은 기획서, 올리는 건 스킬 노드
+        public int StartFloorCap(int t = 0)
+        {
+            int doc = GameDatabase.Instance ? GameDatabase.Instance.SkipCapFor(maxFloor - 1) : maxFloor;
+            return Mathf.Max(1, Mathf.Min(Mathf.Min(1 + CommonSkill.StageSkip, Mathf.Min(maxFloor, doc)), NKK.Stage.StageManager.LastFloor));
+        }
     }
 }

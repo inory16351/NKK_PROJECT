@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: market_props.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 3 columns x 2 rows (each cell 512x512). Each drawing centered in its own cell with a clear magenta margin; nothing touches cell borders. Front view, slight 3/4, sitting on an invisible floor at the bottom of the drawing.
+- STYLE: exactly the soft painted cozy storybook style of the attached reference background (ref_lobby_bg.png) — same brushwork, soft shading, warm palette, gentle outlines like the reference. These objects will be placed on the wooden plank of that hideout, so they are sized for mice/rats (made from human junk).
+Row 1:
+ (1) A rat BLACK MARKET STALL ("rat-hole black market"): a counter made of an old wooden crate, a ragged purple cloth awning held by two pencils/chopsticks, a small hanging lantern, a little rack of glass test tubes and vials with colorful liquids, a tiny burlap sack, a few cheese wedges and a price-tag-like paper (blank, no writing). Shady but cute.
+ (2) A GENE EXTRACTOR made from a kitchen BLENDER: a chunky metal-and-mint-green blender base with a big red push button and a round dial, a tall clear glass blender jar on top (empty, transparent with soft highlights, measurement tick marks without numbers), rubber tubes going from the base into a small bubbling lab flask beside it, a little DNA double-helix sticker shape on the base. The jar has NO lid (open top).
+ (3) ONLY the matching blender LID by itself: a round black rubber lid with a small clear cap in the middle, seen from the same angle, sized to fit the jar in cell 2.
+Row 2:
+ (4) A single small glowing-free GENE SHARD: a chunky light-grey/white crystal shard with a tiny double-helix shape inside, soft painted (will be tinted per rarity color later).
+ (5) A splash of thick pinkish gene smoothie (blended liquid splat drops), soft painted.
+ (6) A small round glass gene capsule (like a gacha capsule) with a white cap and clear bottom half showing a tiny double helix.

@@ -1553,6 +1553,16 @@ MonoBehaviour:
   bossTable: {fileID: 4900000, guid: ed30fc240027f714dbe9a676d19664df, type: 3}
   achievementTable: {fileID: 4900000, guid: 57ddb5ec84e2bde49bd0cc7c6d39fb91, type: 3}
   tutorialTable: {fileID: 4900000, guid: 45fa91b1451a38a41b5a14b79f402b72, type: 3}
+  shopTable: {fileID: 4900000, guid: cf4ef8bb38b80f548a81b68f2474103b, type: 3}
+  gachaTable: {fileID: 4900000, guid: 38c825c0d4f6dc449af516556ea92b6f, type: 3}
+  Shop:
+    Shop_Config: []
+    Shop_Slot: []
+    Shop_Goods: []
+    Shop_Floor: []
+  Gacha:
+    Gacha_Config: []
+    Gacha_Grade: []
 --- !u!4 &330137497
 Transform:
   m_ObjectHideFlags: 0
@@ -2935,6 +2945,7 @@ MonoBehaviour:
   crossTime: 0.6
   zoomPerSec: 0.012
   fadeTime: 0.6
+  autoNext: 10
 --- !u!224 &522362921
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3390,11 +3401,30 @@ MonoBehaviour:
   saveKey: nkk_progress_v1
   testSkills: 
   testSkillTier: 0
+  shop:
+    lineup: []
+    nextRefresh: 0
+    lastSeen: 0
+    rerollCount: 0
+    freeLeft: 0
+    lockedSlot: 0
+    pity: 0
+    opened: 0
+  gacha:
+    legendPity: 0
+    mythicPity: 0
+    total: 0
+    freeTen: -1
+    wishLegend: 
+    wishMythic: 
+    log: []
+    pending: []
   cheese: 0
   research: 0
   tier: 1
   maxFloor: 1
   runs: 0
+  testMarket: 0
 --- !u!4 &641806392
 Transform:
   m_ObjectHideFlags: 0

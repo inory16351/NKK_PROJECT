@@ -65,7 +65,7 @@ namespace NKK.Rats
             RefreshGrowth();
         }
 
-        bool CanAct => ActLv > 0 && Action != null && !act.on && Trick == TrickType.None && temp <= 0 && actCD <= 0 && born >= 1 && OnScreen(-0.02f) && Manager.VisibleActs < Manager.maxVisibleActs;
+        bool CanAct => (ActLv > 0 || ActAlwaysOpen) && NewActReady && Action != null && !act.on && Trick == TrickType.None && temp <= 0 && actCD <= 0 && born >= 1 && OnScreen(-0.02f) && Manager.VisibleActs < Manager.maxVisibleActs;
 
         // 이벤트형 발동 (조건 타입이 같을 때만, 확률 × 해금 레벨 배율)
         public bool ActTrigger(CondType trig, Item it = null)
@@ -120,6 +120,7 @@ namespace NKK.Rats
             actCD = Action.cool_time;
             if (ActionType == EffectType.Rolling_Ball) { vx = Mathf.Cos(act.ang) * 620; vy = Mathf.Sin(act.ang) * 620; }
             if (ActionType == EffectType.Tornado) act.dir = Random.Range(0, Mathf.PI * 2);
+            NewActionBegin();
             var fx = FxManager.I;
             if (fx && ActionType == EffectType.Vortex)
             {
@@ -539,13 +540,15 @@ namespace NKK.Rats
                     break;
                 }
             }
-            if (act.t >= act.dur) EndAction();
+            if (ActionType >= EffectType.Savory_Smell) NewActionStep(dt, k, atk);       // 새 쥐 6종 (Rat.NewRats.cs)
+            if (act.on && act.t >= act.dur) EndAction();
         }
 
         // 액션 자세 (웹게임 actPose)
         void ActionPose(ref RatRig.Pose p)
         {
             float t = Time.time, k = act.t / act.dur;
+            if (ActionType >= EffectType.Savory_Smell) { NewActionPose(ref p, t, k); return; }
             switch (ActionType)
             {
                 case EffectType.Thunder: p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; p.front = 2.95f + Mathf.Sin(t * 50) * 0.05f; p.farFront = 2.8f + Mathf.Cos(t * 50) * 0.05f; p.head = -0.55f; p.tail = 1.4f + Mathf.Sin(t * 20) * 0.1f; break;

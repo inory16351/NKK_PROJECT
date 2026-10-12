@@ -227,11 +227,29 @@ MonoBehaviour:
   saveKey: nkk_progress_v1
   testSkills: 
   testSkillTier: 0
+  shop:
+    lineup: []
+    playLeft: -1
+    rerollCount: 0
+    freeLeft: 0
+    lockedSlot: 0
+    pity: 0
+    opened: 0
+  gacha:
+    legendPity: 0
+    mythicPity: 0
+    total: 0
+    freeTen: -1
+    wishLegend: 
+    wishMythic: 
+    log: []
+    pending: []
   cheese: 0
   research: 0
   tier: 1
   maxFloor: 1
   runs: 0
+  testMarket: 0
 --- !u!4 &14758970
 Transform:
   m_ObjectHideFlags: 0
@@ -7905,6 +7923,143 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &195271431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195271432}
+  - component: {fileID: 195271434}
+  - component: {fileID: 195271433}
+  m_Layer: 0
+  m_Name: Label
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &195271432
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195271431}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 605057745}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &195271433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195271431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "\uC804\uBD80 \uD574\uC81C (\uCE58\uC988\xB7\uC5F0\uAD6C \uBB34\uC81C\uD55C)"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
+  m_sharedMaterial: {fileID: 1680772034}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4292605439
+  m_fontColor: {r: 1, g: 0.96, b: 0.86, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 24
+  m_fontSizeBase: 24
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 0
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &195271434
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195271431}
+  m_CullTransparentMesh: 1
 --- !u!1 &200370561
 GameObject:
   m_ObjectHideFlags: 0
@@ -8056,6 +8211,17 @@ MonoBehaviour:
   laserSfx: "\uC58C\uB150~"
   laserHeadSprite: {fileID: 21300000, guid: eceb1112010e7114fbec52587f5624d0, type: 3}
   laserEyePx: {x: 102, y: 139}
+  cloakSprite: {fileID: 21300000, guid: 4df1a78f076f7cb49bd1d9677f103f1a, type: 3}
+  cloakFlySprite: {fileID: 21300000, guid: f7526081818903f49bc3b6ff3110f8dc, type: 3}
+  cloakSize: 460
+  cloakFlyTime: 0.7
+  cloakAlpha: 0.07
+  cloakSparkle: 4
+  cloakMove: 520
+  cloakWarn: 0.8
+  cloakRest: 0.7
+  cloakHidePopup: "\uC5B4\uB514 \uC788\uAC8C~ \uB0E5?"
+  cloakShowPopup: "\uC9E0!! \uC5EC\uAE30\uB2E4\uB0E5!"
   stayPull: 1100
   cutscene: {fileID: 772131324}
   headMarkFwd: 14
@@ -9408,6 +9574,8 @@ MonoBehaviour:
   Rats: {fileID: 287377833}
   Cats: {fileID: 2118722514}
   Heist: {fileID: 585742279}
+  lastFloor: 30
+  lobbyScene: Lobby
   Boss: {fileID: 200370562}
   roomBase: 3
   roomPerFloor: 0.6
@@ -10133,6 +10301,35 @@ MonoBehaviour:
   defaultMeteor: {fileID: 21300000, guid: 8eab424dd9ec27942a7bb296fc10bff8, type: 3}
   cheeseBulletSprite: {fileID: 0}
   cheeseBulletColor: {r: 0.98, g: 0.82, b: 0.36, a: 1}
+  missPopup: "\uBE57\uB098\uAC10!"
+  blasterAllHitPopup: "\uC804\uD0C4 \uBA85\uC911!!"
+  tunePopup: "\uD29C\uB2DD \uC644\uB8CC!"
+  pattyPopup: "\uD328\uD2F0 +{n}"
+  pattySlamPopup: "\uBE45\uBC84\uAC70 \uBC15\uCE58\uAE30!!"
+  smellPopup: "\uACE0\uC18C\uD55C \uB0C4\uC0C8~"
+  fusePopup: "\uCE58\uC775\u2026 \uCE58\uC775\u2026"
+  selfDestructPopup: "\uD391!!"
+  blasterBoltSprite: {fileID: 21300000, guid: 5d010450682d74641bad8424157caa06, type: 3}
+  blasterBoltColor: {r: 1, g: 0.35, b: 0.3, a: 1}
+  pattySprite: {fileID: 21300000, guid: d87621a2be86df84080a5789f051860a, type: 3}
+  fuseSprites:
+  - {fileID: 21300000, guid: 34c9dae8140f85040b966ea2e1aabfa5, type: 3}
+  - {fileID: 21300000, guid: 3f265f997c9f31b4f8e555369117356e, type: 3}
+  - {fileID: 21300000, guid: 6089817835b2295489532d80975399a1, type: 3}
+  grilledSprite: {fileID: 21300000, guid: 12af6a397bb135248a26d2b20b0fdef0, type: 3}
+  burgerStack:
+  - {fileID: 21300000, guid: f56b20c11e165904b8fcd9ab2344ccce, type: 3}
+  - {fileID: 21300000, guid: 3a7609576da481349b653431f663c654, type: 3}
+  - {fileID: 21300000, guid: 26fd73041a75be340bdc02e0366f0992, type: 3}
+  - {fileID: 21300000, guid: c09646ba174dc1942bf8ca927ddb900e, type: 3}
+  - {fileID: 21300000, guid: 4dc63e2cc832aee40afd07c736d10c84, type: 3}
+  - {fileID: 21300000, guid: e98d344b7b4d61a47b079e8d4b06171d, type: 3}
+  freezePopup: "\uAF41\uAF41!"
+  iceMissilePopup: "\uC5BC\uC74C \uBBF8\uC0AC\uC77C!"
+  dataPopup: "\uB370\uC774\uD130 \uC804\uC1A1 \uC644\uB8CC!"
+  iceMissileSprite: {fileID: 0}
+  iceMissileColor: {r: 0.7, g: 0.9, b: 1, a: 1}
+  iceHoming: 6
   promoteKeep: 6
   promoteKeepRatio: 0.5
   promotePopup: "\uC2B9\uAE09!"
@@ -11564,6 +11761,9 @@ MonoBehaviour:
   SuperJump: {fileID: 1613850357}
   Cam: {fileID: 0}
   Lobby: {fileID: 0}
+  Skills: {fileID: 0}
+  holdPrefix: skill_
+  holdTime: 600
   startDelay: 3
   floorStartWindow: 6
   lingerTime: 4
@@ -18243,6 +18443,10 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 9e5934ee28c77b943a8d66271fe79a5d, type: 3}
   - name: cheese_puddle
     sprite: {fileID: 21300000, guid: 56e55924c944d524f8c0d3d4824ab0f7, type: 3}
+  - name: smell
+    sprite: {fileID: 21300000, guid: 18ab2b0f0373c4e4d9f9ae66caf30e6e, type: 3}
+  - name: explosion_big
+    sprite: {fileID: 21300000, guid: 9fee6e824d8224a4f911bed9db200a10, type: 3}
   beamTemplate: {fileID: 1223890124}
   beamWidth: 0.3
   boltWidth: 0.18
@@ -19606,6 +19810,16 @@ MonoBehaviour:
   bossTable: {fileID: 4900000, guid: ed30fc240027f714dbe9a676d19664df, type: 3}
   achievementTable: {fileID: 4900000, guid: 57ddb5ec84e2bde49bd0cc7c6d39fb91, type: 3}
   tutorialTable: {fileID: 4900000, guid: 45fa91b1451a38a41b5a14b79f402b72, type: 3}
+  shopTable: {fileID: 4900000, guid: cf4ef8bb38b80f548a81b68f2474103b, type: 3}
+  gachaTable: {fileID: 4900000, guid: 38c825c0d4f6dc449af516556ea92b6f, type: 3}
+  Shop:
+    Shop_Config: []
+    Shop_Slot: []
+    Shop_Goods: []
+    Shop_Floor: []
+  Gacha:
+    Gacha_Config: []
+    Gacha_Grade: []
 --- !u!4 &602674878
 Transform:
   m_ObjectHideFlags: 0
@@ -19621,6 +19835,127 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &605057744
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 605057745}
+  - component: {fileID: 605057748}
+  - component: {fileID: 605057747}
+  - component: {fileID: 605057746}
+  m_Layer: 0
+  m_Name: UnlockAllButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &605057745
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605057744}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 195271432}
+  m_Father: {fileID: 1361430263}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -490}
+  m_SizeDelta: {x: 386, y: 54}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &605057746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605057744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 605057747}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &605057747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605057744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 45b959771262a4c4487ef3220f4ebde1, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &605057748
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605057744}
+  m_CullTransparentMesh: 1
 --- !u!1 &614480079
 GameObject:
   m_ObjectHideFlags: 0
@@ -21981,7 +22316,7 @@ MonoBehaviour:
   Over: {fileID: 1146373114}
   baseTime: 180
   perRoom: 0
-  bossExtra: 30
+  bossExtra: 0
   warnAt: 3c0000001e0000000a000000
   lowTime: 30
   tickTime: 10
@@ -37140,12 +37475,13 @@ RectTransform:
   - {fileID: 1360045872}
   - {fileID: 1610376499}
   - {fileID: 247794914}
+  - {fileID: 605057745}
   m_Father: {fileID: 730249102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 30, y: -140}
-  m_SizeDelta: {x: 420, y: 470}
+  m_SizeDelta: {x: 420, y: 534}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1361430264
 MonoBehaviour:
@@ -37188,6 +37524,7 @@ MonoBehaviour:
   pickIcon: {fileID: 924042428}
   resetButton: {fileID: 1425984279}
   lobbyScene: Lobby
+  unlockAllButton: {fileID: 605057746}
 --- !u!114 &1361430265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41391,6 +41728,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: e4d15c2e6c05ef74eb998f18e3f88007, type: 3}
   - name: ult_30033
     sprite: {fileID: 21300000, guid: 898fa6f0860e99d45895384a31896d17, type: 3}
+  - name: ult_30034
+    sprite: {fileID: 21300000, guid: 1ffd0367bb23ccc419253d1eeeb13ff5, type: 3}
   maxButtons: 8
   readyMark: {fileID: 21300000, guid: c813175b874b22f43b25bbeed37128f7, type: 3}
   readyMarkSize: 26
@@ -41645,6 +41984,10 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 29dd431aa7951f54c9d0d9a1714e8825, type: 3}
   - name: mount_cook_tired
     sprite: {fileID: 21300000, guid: a26433a05dad9594daffd8141a7eea77, type: 3}
+  - name: rat_bombrat
+    sprite: {fileID: 21300000, guid: 475a0e690c929d54fa46d13b3e1890cc, type: 3}
+  - name: rat_jwipo
+    sprite: {fileID: 21300000, guid: f3183a1bb1978dd48a1346b7abea438a, type: 3}
   - name: rat_pcmouse
     sprite: {fileID: 21300000, guid: 9d1762a7e9f0cd44789a0964f05a9c8e, type: 3}
   - name: ult_balloon
@@ -41657,16 +42000,42 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 8c218bcfe37cdcf4b851193e15114f35, type: 3}
   - name: ult_donation
     sprite: {fileID: 21300000, guid: c1cdc314568301a448686f28d3514c94, type: 3}
+  - name: blaster_bolt
+    sprite: {fileID: 21300000, guid: 5d010450682d74641bad8424157caa06, type: 3}
+  - name: bomber_bomb
+    sprite: {fileID: 21300000, guid: 8d26a3224c3c0f648b62b2710b5b0ad2, type: 3}
+  - name: bombrat_fuse1
+    sprite: {fileID: 21300000, guid: 34c9dae8140f85040b966ea2e1aabfa5, type: 3}
+  - name: bombrat_fuse2
+    sprite: {fileID: 21300000, guid: 3f265f997c9f31b4f8e555369117356e, type: 3}
+  - name: bombrat_fuse3
+    sprite: {fileID: 21300000, guid: 6089817835b2295489532d80975399a1, type: 3}
   - name: bowtie
     sprite: {fileID: 21300000, guid: b5b158a1390a63448873a7d682cbb266, type: 3}
   - name: cheese_bullet
     sprite: {fileID: 21300000, guid: e85f833b3252674499b304f9c3eb064f, type: 3}
   - name: cheese_puddle
     sprite: {fileID: 21300000, guid: 56e55924c944d524f8c0d3d4824ab0f7, type: 3}
+  - name: explosion_big
+    sprite: {fileID: 21300000, guid: 9fee6e824d8224a4f911bed9db200a10, type: 3}
+  - name: jwipo
+    sprite: {fileID: 21300000, guid: 52d8bd27da0a9e24e9359d43555fb9c8, type: 3}
+  - name: jwipo_grilled
+    sprite: {fileID: 21300000, guid: 12af6a397bb135248a26d2b20b0fdef0, type: 3}
+  - name: magic_circle
+    sprite: {fileID: 21300000, guid: a7b09baae3cc8424e83574ff0cc11e4d, type: 3}
   - name: magnifier
     sprite: {fileID: 21300000, guid: 8b144149c4d62c841b3503c6dff4dd3d, type: 3}
+  - name: mech_parts
+    sprite: {fileID: 21300000, guid: 90485fa8d6fd7ef4ba7b1325d0a49af0, type: 3}
+  - name: patty
+    sprite: {fileID: 21300000, guid: d87621a2be86df84080a5789f051860a, type: 3}
+  - name: smell
+    sprite: {fileID: 21300000, guid: 18ab2b0f0373c4e4d9f9ae66caf30e6e, type: 3}
   - name: soccer_ball
     sprite: {fileID: 21300000, guid: 7e620034f4b309e4fb9d842009e6447b, type: 3}
+  - name: wrench
+    sprite: {fileID: 21300000, guid: 9c9ca37759510f949a64ea4e77b9dee4, type: 3}
   - name: axe
     sprite: {fileID: 21300000, guid: 949c754d72cfc544394f89be64e8cb9a, type: 3}
   - name: dynamite
@@ -53382,6 +53751,7 @@ MonoBehaviour:
   headSwapFwd: 0.35
   headReplace: {fileID: 0}
   headOverride: {fileID: 0}
+  tailLen: 1
 --- !u!4 &2912012768104599232
 Transform:
   m_ObjectHideFlags: 0

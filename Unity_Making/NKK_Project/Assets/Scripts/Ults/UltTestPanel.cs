@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace NKK.Ults
 {
-    // 테스트용 (게임 화면 왼쪽 위): ◀ 필살기 고르기 ▶ · 필살기 발동 · 슈퍼 점프 발동 · 층 클리어 · 게임 오버 · 저장값 초기화
+    // 테스트용 (게임 화면 왼쪽 위): ◀ 필살기 고르기 ▶ · 필살기 발동 · 슈퍼 점프 발동 · 층 클리어 · 게임 오버 · 저장값 초기화 · 전부 해제
     // · ◀ 보스 고르기 ▶ + 보스 소환 · ◀ 보스 기술 고르기 ▶ + 기술 발동 (소환한 보스가 다음 공격으로 바로 씀). 출시 때는 이 오브젝트를 끄면 됨
     public class UltTestPanel : MonoBehaviour
     {
@@ -28,6 +28,7 @@ namespace NKK.Ults
         [Tooltip("아이콘 (선택)")] public Image pickIcon;
         [Tooltip("저장값 초기화: 진행도(조각·노드·치즈·연구자료·훈장·기록·업적) 전부 지우고 저장 없이 로비로")] public Button resetButton;
         [Tooltip("초기화 뒤 갈 씬")] public string lobbyScene = "Lobby";
+        [Tooltip("전부 해제: 지금 저장 파일의 기능·튜토리얼 전부 열림 · 마지막 층까지 클리어 · 최고 훈장 · 공용 스킬 전부 · 치즈·연구자료 무제한 → 로비로")] public Button unlockAllButton;
 
         readonly List<RatCharacterRow> list = new();
         int idx;
@@ -55,7 +56,18 @@ namespace NKK.Ults
             ShowBoss();
             if (gameOverButton) gameOverButton.onClick.AddListener(() => { if (Over && !Heist.Active) Over.Begin(GameOver.Why.Time); });
             if (resetButton) resetButton.onClick.AddListener(ResetSave);
+            if (unlockAllButton) unlockAllButton.onClick.AddListener(UnlockAll);
             Show();
+        }
+
+        // 전부 해제 → 판 기록(층)은 남기고 새 훈장·스킬로 다음 판을 시작하게 로비로
+        void UnlockAll()
+        {
+            if (!Progress.I || Heist.Active) return;
+            var g = FindAnyObjectByType<GameManager>(); if (g) { g.SaveProgress(); g.enabled = false; }
+            Progress.I.UnlockEverything();
+            FxManager.Paused = false; Time.timeScale = 1;
+            UnityEngine.SceneManagement.SceneManager.LoadScene(lobbyScene);
         }
 
         // 저장값 초기화 → 판 치즈가 다시 저장되지 않게 GameManager.SaveProgress 없이 바로 로비로

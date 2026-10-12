@@ -1,4 +1,5 @@
 using System;
+using NKK.Data;
 using NKK.Rats;
 using NKK.Ults;
 using TMPro;
@@ -52,7 +53,13 @@ namespace NKK
         RectTransform[] papers;
         Vector2 docsPos;
 
-        public float ResearchFor(int f) => Mathf.Round(researchBase * Mathf.Pow(researchGrow, f - 1)) * (f % bossEvery == 0 ? bossMul : 1);
+        // 층 클리어 연구자료 = 스테이지 테이블 research (2026-10-12 허들 기획서: 적정 찍찍에 비례, 보스 층 배율 없음). 표가 없으면 옛 식
+        public float ResearchFor(int f)
+        {
+            var r = GameDatabase.Instance ? GameDatabase.Instance.StageOf(f) : null;
+            if (r != null && r.research > 0) return Mathf.Max(1, Mathf.Round(r.research));
+            return Mathf.Round(researchBase * Mathf.Pow(researchGrow, f - 1)) * (f % bossEvery == 0 ? bossMul : 1);
+        }
 
         void Awake()
         {
@@ -77,7 +84,7 @@ namespace NKK
             Active = true; t = 0; moved = false; onMove = move;
             gained = Mathf.RoundToInt(ResearchFor(Game.Floor));
             var p = Progress.I;
-            if (p) p.OnFloorReached(Game.Floor + 1);
+            if (p) p.OnFloorReached(Mathf.Min(Game.Floor + 1, NKK.Stage.StageManager.LastFloor));     // 마지막 층 뒤로는 없음
             if (Research.I) Research.I.Earn(gained, stairs.x, stairs.y, false);
             else { if (p) { p.research += gained; p.Save(); } Game.RunResearch += gained; }
             if (amount) amount.text = (amountFormat ?? "+{n}").Replace("{n}", GameManager.Format(gained));

@@ -33,7 +33,7 @@ namespace NKK.Rats
         bool RollTrick() => Random.value < C1 * TrickChanceMult;      // 묘기 확률 × 재롱 본능
 
         // ── 상시 배율 (다른 코드가 물어봄) ──
-        public float PassiveDamageMult => 1 + buff + (Is(EffectType.Pack_Power) ? packN * PV(1) : 0);
+        public float PassiveDamageMult => 1 + buff + (Is(EffectType.Pack_Power) ? packN * PV(1) : 0) + NewRatDamageAdd;
         public float PassiveSpeedMult => 1 + buff;
         float DashSpeedMult => Is(EffectType.Dash_Boost) ? PV(1) : 1;
         float DashHitMult(float speed) =>
@@ -61,6 +61,7 @@ namespace NKK.Rats
         public void OnSmashedItem()
         {
             if (Is(EffectType.Clue_Collect) && temp <= 0) clues += PV(1);
+            NewRatOnSmash();
         }
         public bool CollectsClues => Is(EffectType.Clue_Collect);
         public int ClueBounces(float clues) => Is(EffectType.Clue_Collect) && PV(2) > 0 ? Mathf.Min(Mathf.RoundToInt(PV(3)), Mathf.FloorToInt(clues / PV(2))) : 0;
@@ -77,6 +78,7 @@ namespace NKK.Rats
                 case EffectType.Throw_Bomb:
                     if (RollChance()) Manager.Items.ThrowBomb(this, it.x + Random.Range(-20f, 20f), it.y + Random.Range(-20f, 20f), PV(2), dmg * PV(1));
                     break;
+                case EffectType.Grill_Stack: GrillOnHit(); break;
                 case EffectType.Hit_Shockwave:
                     Manager.Items.Aoe(x, y, PV(2), dmg * PV(1), this);
                     break;

@@ -174,11 +174,24 @@ namespace NKK.Data
     // 보스 공격별 수치 (보스 테이블 Atk_Type 시트)
     [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; public string atk_name, line; }
     // 층 밸런스 (스테이지 테이블 Stage, Tools/gen_stage_table.py 로 생성)
-    [Serializable] public class StageRow { public int floor, rooms; public float pow_need, item_hp, cheese, wall_stairs, wall_normal, wall_path, time_add; }     // wall_path = 계단까지 경로 벽 배율 합 (판마다 지형이 바뀌어 StageManager 가 경로에 나눔)
+    [Serializable] public class StageRow
+    {
+        public int floor, rooms; public float pow_need, item_hp, cheese, wall_stairs, wall_normal, wall_path, time_add;
+        // 층 별 허들 기획서 (2026-10-12): 층 유형 · 목표 돌파 초 · 보스전 목표 초 · 클리어 연구자료 · 건너뛰기 상한(이 층을 최고로 클리어했을 때) · 기준 전투력 지수
+        public string floor_type; public float target_sec, boss_sec, research; public int skip_cap; public float player_pow;
+    }     // wall_path = 계단까지 경로 벽 배율 합 (판마다 지형이 바뀌어 StageManager 가 경로에 나눔)
     // 업적 (업적 테이블 Achievement): 조건 타입 cond_type + 대상 target_id + 필요 횟수 need. 설명 {ult} = 대상 필살기 이름
     [Serializable] public class AchievementRow { public int achv_id; public string achv_name, achv_desc, cond_type; public int target_id, need; public string achv_icon; public int sort_order; }
     [Serializable] public class AchievementTableFile { public List<AchievementRow> Achievement; }
     [Serializable] public class StageTableFile { public List<StageRow> Stage; }
+    // 상점 테이블 (쥐구멍 암시장) · 뽑기 테이블 (유전자 뽑기) — 기획서 2026-10-12
+    [Serializable] public class KeyValueRow { public string key; public float value; }
+    [Serializable] public class ShopSlotRow { public int slot_id, unlock_floor; public float legend_rate, mythic_rate; }
+    [Serializable] public class ShopGoodsRow { public int goods_id; public string goods_name, grade; public int pack_size; public float spawn_weight, price_cheese_bc; public Grade Grade => E.P<Grade>(grade); }
+    [Serializable] public class ShopFloorRow { public int floor, free_reroll, slot_count; }
+    [Serializable] public class ShopTableFile { public List<KeyValueRow> Shop_Config; public List<ShopSlotRow> Shop_Slot; public List<ShopGoodsRow> Shop_Goods; public List<ShopFloorRow> Shop_Floor; }
+    [Serializable] public class GachaGradeRow { public string grade; public float rate; public int shard_count; public float guarantee_rate; public Grade Grade => E.P<Grade>(grade); }
+    [Serializable] public class GachaTableFile { public List<KeyValueRow> Gacha_Config; public List<GachaGradeRow> Gacha_Grade; }
     [Serializable] public class BossTableFile { public List<BossRow> Boss; public List<BossLineRow> Boss_Line; public List<BossAtkRow> Atk_Type; }
     [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; public int front; public float head_scale = 1; }
     [Serializable] public class HumanRigMetaFile { public List<HumanRigMetaRow> items; }

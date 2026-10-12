@@ -12,7 +12,7 @@
    "color": "#8fb3c7",
    "scale": 2.8,
    "radius_mul": 2.8,
-   "hp_pow_sec": 33.4,
+   "hp_pow_sec": 30.1,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
@@ -36,7 +36,7 @@
    "color": "#9dd5a8",
    "scale": 2.8,
    "radius_mul": 2.8,
-   "hp_pow_sec": 56.0,
+   "hp_pow_sec": 33.6,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
@@ -60,7 +60,7 @@
    "color": "#d9786a",
    "scale": 2.8,
    "radius_mul": 2.8,
-   "hp_pow_sec": 70.7,
+   "hp_pow_sec": 42.4,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
@@ -84,7 +84,7 @@
    "color": "#e39a5a",
    "scale": 3.4,
    "radius_mul": 3.4,
-   "hp_pow_sec": 56.1,
+   "hp_pow_sec": 50.5,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
@@ -108,13 +108,13 @@
    "color": "#cdb4db",
    "scale": 3.4,
    "radius_mul": 3.4,
-   "hp_pow_sec": 53.9,
+   "hp_pow_sec": 48.5,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
    "atk_cd_max": 4.5,
    "special1_type": "Meteor_Shower",
-   "special2_type": "Frog_Curse",
+   "special2_type": "Invis_Cloak",
    "special_chance": 0.25,
    "skill_type": "Buttered_Cat",
    "skill_cd": 12.0,
@@ -132,7 +132,7 @@
    "color": "#a9d3dc",
    "scale": 3.4,
    "radius_mul": 3.4,
-   "hp_pow_sec": 36.0,
+   "hp_pow_sec": 32.4,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
@@ -690,7 +690,7 @@
    "line_id": 96107,
    "boss_id": 95005,
    "situation": "Special",
-   "text": "발레리나 카푸치나~ 냥!"
+   "text": "상어 신발 신고 트랄랄라~ 냥!"
   },
   {
    "line_id": 96108,
@@ -731,7 +731,7 @@
   {
    "atk_type": "Stomp",
    "radius": 300.0,
-   "stun": 2.0,
+   "stun": 2.6,
    "count": 0,
    "windup": 0.5,
    "dur": 2.0,
@@ -741,7 +741,7 @@
   {
    "atk_type": "Pounce",
    "radius": 280.0,
-   "stun": 2.0,
+   "stun": 2.6,
    "count": 0,
    "windup": 0.6,
    "dur": 2.0,
@@ -751,7 +751,7 @@
   {
    "atk_type": "Flask",
    "radius": 110.0,
-   "stun": 2.5,
+   "stun": 3.2,
    "count": 3,
    "windup": 0.4,
    "dur": 1.6,
@@ -761,7 +761,7 @@
   {
    "atk_type": "Hairball",
    "radius": 110.0,
-   "stun": 2.5,
+   "stun": 3.2,
    "count": 3,
    "windup": 0.4,
    "dur": 1.6,
@@ -771,7 +771,7 @@
   {
    "atk_type": "Fireball",
    "radius": 110.0,
-   "stun": 2.5,
+   "stun": 3.2,
    "count": 5,
    "windup": 0.4,
    "dur": 1.6,
@@ -781,7 +781,7 @@
   {
    "atk_type": "Swing",
    "radius": 280.0,
-   "stun": 1.6,
+   "stun": 2.1,
    "count": 2,
    "windup": 0.45,
    "dur": 1.2,
@@ -791,7 +791,7 @@
   {
    "atk_type": "Gravity",
    "radius": 360.0,
-   "stun": 2.0,
+   "stun": 2.6,
    "count": 0,
    "windup": 0.5,
    "dur": 1.3,
@@ -801,7 +801,7 @@
   {
    "atk_type": "Mega_Stomp",
    "radius": 240.0,
-   "stun": 1.8,
+   "stun": 2.3,
    "count": 3,
    "windup": 0.5,
    "dur": 0.0,
@@ -811,7 +811,7 @@
   {
    "atk_type": "Cone_Rain",
    "radius": 130.0,
-   "stun": 1.6,
+   "stun": 2.1,
    "count": 4,
    "windup": 0.8,
    "dur": 1.8,
@@ -821,7 +821,7 @@
   {
    "atk_type": "Potion_Party",
    "radius": 110.0,
-   "stun": 2.0,
+   "stun": 2.6,
    "count": 14,
    "windup": 0.6,
    "dur": 2.2,
@@ -831,7 +831,7 @@
   {
    "atk_type": "Self_Experiment",
    "radius": 230.0,
-   "stun": 1.5,
+   "stun": 2.0,
    "count": 6,
    "windup": 0.8,
    "dur": 6.0,
@@ -841,7 +841,7 @@
   {
    "atk_type": "Paper_Storm",
    "radius": 130.0,
-   "stun": 2.0,
+   "stun": 2.6,
    "count": 7,
    "windup": 0.8,
    "dur": 1.8,
@@ -851,7 +851,7 @@
   {
    "atk_type": "Board_Meeting",
    "radius": 380.0,
-   "stun": 1.8,
+   "stun": 2.3,
    "count": 6,
    "windup": 0.9,
    "dur": 1.4,
@@ -861,7 +861,7 @@
   {
    "atk_type": "Zoomies",
    "radius": 120.0,
-   "stun": 1.6,
+   "stun": 2.1,
    "count": 5,
    "windup": 0.5,
    "dur": 4.0,
@@ -871,7 +871,7 @@
   {
    "atk_type": "Box_Fit",
    "radius": 150.0,
-   "stun": 2.0,
+   "stun": 2.6,
    "count": 4,
    "windup": 1.2,
    "dur": 4.0,
@@ -881,7 +881,7 @@
   {
    "atk_type": "Meteor_Shower",
    "radius": 150.0,
-   "stun": 2.0,
+   "stun": 2.6,
    "count": 8,
    "windup": 0.9,
    "dur": 2.0,
@@ -891,7 +891,7 @@
   {
    "atk_type": "Frog_Curse",
    "radius": 340.0,
-   "stun": 3.0,
+   "stun": 3.9,
    "count": 0,
    "windup": 0.9,
    "dur": 1.0,
@@ -901,7 +901,7 @@
   {
    "atk_type": "Orbital_Laser",
    "radius": 160.0,
-   "stun": 2.2,
+   "stun": 2.9,
    "count": 6,
    "windup": 0.7,
    "dur": 2.4,
@@ -911,7 +911,7 @@
   {
    "atk_type": "Black_Hole",
    "radius": 450.0,
-   "stun": 2.5,
+   "stun": 3.2,
    "count": 0,
    "windup": 3.0,
    "dur": 1.0,
@@ -921,7 +921,7 @@
   {
    "atk_type": "Baton",
    "radius": 260.0,
-   "stun": 1.6,
+   "stun": 2.1,
    "count": 0,
    "windup": 0.4,
    "dur": 1.0,
@@ -931,7 +931,7 @@
   {
    "atk_type": "Gas_Cloud",
    "radius": 140.0,
-   "stun": 1.5,
+   "stun": 2.0,
    "count": 2,
    "windup": 0.4,
    "dur": 5.0,
@@ -941,7 +941,7 @@
   {
    "atk_type": "Briefcase",
    "radius": 170.0,
-   "stun": 2.0,
+   "stun": 2.6,
    "count": 1,
    "windup": 0.45,
    "dur": 1.4,
@@ -951,7 +951,7 @@
   {
    "atk_type": "Tung_Sahur",
    "radius": 320.0,
-   "stun": 2.2,
+   "stun": 2.9,
    "count": 3,
    "windup": 0.5,
    "dur": 1.5,
@@ -961,7 +961,7 @@
   {
    "atk_type": "Even_Cook",
    "radius": 170.0,
-   "stun": 2.0,
+   "stun": 2.6,
    "count": 2,
    "windup": 0.7,
    "dur": 6.0,
@@ -971,7 +971,7 @@
   {
    "atk_type": "Unbroken",
    "radius": 220.0,
-   "stun": 0.8,
+   "stun": 1.0,
    "count": 0,
    "windup": 0.6,
    "dur": 6.0,
@@ -981,7 +981,7 @@
   {
    "atk_type": "Happy_Jump",
    "radius": 170.0,
-   "stun": 1.0,
+   "stun": 1.3,
    "count": 6,
    "windup": 0.4,
    "dur": 3.0,
@@ -991,7 +991,7 @@
   {
    "atk_type": "Buttered_Cat",
    "radius": 70.0,
-   "stun": 1.6,
+   "stun": 2.1,
    "count": 4,
    "windup": 0.8,
    "dur": 4.0,
@@ -1001,12 +1001,22 @@
   {
    "atk_type": "Maxwell_Drop",
    "radius": 120.0,
-   "stun": 1.8,
+   "stun": 2.3,
    "count": 6,
    "windup": 0.9,
    "dur": 2.0,
    "atk_name": "맥스웰 고양이 낙하",
    "line": ""
+  },
+  {
+   "atk_type": "Invis_Cloak",
+   "radius": 300.0,
+   "stun": 3.3,
+   "count": 2,
+   "windup": 0.9,
+   "dur": 5.0,
+   "atk_name": "투명 망토",
+   "line": "나는 나쁜 짓을 할 것을 엄숙히 맹세한다냥!"
   }
  ],
  "Situation_Type": [

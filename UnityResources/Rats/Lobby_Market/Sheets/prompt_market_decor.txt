@@ -1,0 +1,59 @@
+[암시장 꾸미기 프롬프트] 2장 + (선택) 배경 v3
+- 참고 그림 같이 넣기: lobby_bg.png (화풍) · lm_bg.png (지금 하수구 배경) · lm_stall.png (노점 화풍) · sewer_props.png (지난번 소품 시트, 크기·화풍 맞추기)
+- 다 만들면 이 대화창에 주면 됨 (자르기 · 배치는 내가 함)
+
+====================================================================
+① 암시장 소품 시트 (분위기 꾸미기)  →  market_decor.png
+====================================================================
+
+A sprite sheet of game props, 1536x1024 (3:2 landscape), on a solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+
+STYLE: exactly the soft hand-painted cozy storybook style of the attached references (lobby_bg.png, lm_stall.png, sewer_props.png) — same brushwork, soft shading, warm muted palette, gentle outlines, same scale (mouse-sized objects in a rat world). Theme: a shady but cute secret BLACK MARKET run by rats in a sewer — stolen human objects reused as rat furniture.
+
+LAYOUT — an exact grid of 4 columns x 2 rows, each cell 384x512. Each drawing centered in its own cell with a clear magenta margin; nothing touches the cell borders. Objects that stand on the floor sit at the bottom of the cell.
+
+Row 1:
+ (1) a pile of stolen loot on the floor: bottle caps, shiny coins, a lost earring, buttons, a key and a wristwatch, heaped together.
+ (2) an old brass balance scale (two pans) with a cheese wedge on one pan and coins on the other.
+ (3) a small open iron safe (made from a mint tin), door open, cheese and coins inside.
+ (4) a hanging cloth awning / patched purple tarp with a fringe, hung between two bent nails, seen from the front (wide and short).
+Row 2:
+ (5) a little display shelf made from a matchbox and popsicle sticks, holding three corked glass vials with colored liquid (red, blue, yellow) — the colors stay inside the glass.
+ (6) a string of small triangle pennant flags made from candy wrappers, hanging in a gentle curve (wide and short).
+ (7) a rolled-up rug and a sack tied with string with coins spilling out.
+ (8) a blank wooden "wanted"-style poster pinned with a tack, showing only a simple drawing of a cat face with a big red X over it (no letters).
+
+Do NOT include: text, letters, numbers, characters, rats, animals, humans, logos, watermarks, soft glows or light beams over the magenta, drop shadows on the magenta, magenta tint inside glass.
+
+====================================================================
+② 쥐 놀이 소품 시트 (하수구 쥐들이 갖고 노는 것)  →  market_play.png
+====================================================================
+
+A sprite sheet of small game props, 1536x1024 (3:2 landscape), on a solid flat MAGENTA background (#FF00FF). Same STYLE and rules as above (soft hand-painted storybook, warm muted palette, no text, no characters, no glow over the magenta).
+
+LAYOUT — exact grid of 4 columns x 2 rows, each cell 384x512, each drawing centered with a clear magenta margin.
+
+Row 1 (things a rat stands at or sits on, bottom of the cell = floor):
+ (1) a card-game table made from an upturned wooden crate, a few playing cards and two dice scattered on top (card faces simple, no letters or numbers — use simple suit shapes only).
+ (2) an upturned tin bucket used as a stool.
+ (3) a little fishing spot: a short wooden plank sticking out over the edge with a tiny tin can of worms next to it.
+ (4) a small wooden barrel with a cheese wheel on top.
+Row 2 (small items a rat holds in its paw, drawn large and simple, each on its own):
+ (5) a tiny fishing rod made from a twig, string and a bent pin, with a red-white bobber at the end of the string.
+ (6) a fan of three playing cards (simple suit shapes, no letters or numbers).
+ (7) a magnifying glass (for checking stolen goods).
+ (8) a small coin pouch tied with string.
+
+====================================================================
+③ (선택) 하수구 배경 v3 — 천장 맨홀 구멍을 가운데로  →  lm_bg.png
+====================================================================
+아지트 맨홀을 가운데로 옮겨서 지금 배경의 오른쪽 위 구멍과 안 맞음. 지금 배경 그림(lm_bg.png)을 참고로 넣고 아래만 바꿔 달라고 하면 됨:
+
+Use the attached lm_bg.png and keep EVERYTHING the same (style, colors, brick vault, walkway, water, lights, crates, rat hole, framing, size 1536x1024), with only these changes:
+- Move the round manhole opening in the ceiling (with its warm light from above) to the exact horizontal CENTER of the image (50% of the width), right under the wooden beam band.
+- Where the opening used to be on the right, paint plain brick vault and a string light instead.
+- Keep the center area below the opening clear (a ladder will be placed there later). No ladder, no text, no characters.
+
+==================== 메모 ====================
+- ① = 노점·추출기 주변 · 벽 · 천장 꾸미기. ② = 하수구 쥐 활동 자리 (카드 놀이 · 낚시 · 양동이 의자 · 술통) + 손에 드는 것.
+- ②가 오면 하수구에도 아지트처럼 쥐가 돌아다니고 (누르면 점프 · 끌어서 던지기) 카드 놀이 · 낚시 · 물건 감정 같은 활동을 하게 만들 예정.

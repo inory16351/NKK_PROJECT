@@ -104,6 +104,7 @@ namespace NKK
 
         void Update()
         {
+            if (Progress.I && Progress.I.Infinite && Cheese < Progress.InfiniteAmount) Cheese = Progress.InfiniteAmount;     // 테스트: 치즈 무제한
             if ((saveT -= Time.unscaledDeltaTime) <= 0) { saveT = saveInterval; SaveProgress(); }
             if (Combo > 0 && (comboT -= Time.deltaTime) <= 0) Combo = 0;
             if (cheeseText) cheeseText.text = $"치즈 {Format(Cheese)}";

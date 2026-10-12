@@ -23,10 +23,13 @@ public static class RatArtLibraryBuilder
         var meta = JsonUtility.FromJson<RatRigMetaFile>(File.ReadAllText(metaPath));
         Sprite S(string p) => AssetDatabase.LoadAssetAtPath<Sprite>(p);
         Vector2 V(float[] a) => a != null && a.Length >= 2 ? new Vector2(a[0], a[1]) : Vector2.zero;
+        // 파츠 없는 한 장짜리 (Parody/rat_<종>.png): 컴퓨터 마우스 · 쥐한폭탄 · 노릇노릇 쥐포 · 맘스땃쥐(햄버거 층 쌓기)
+        string[] singles = { "pcmouse", "bombrat", "jwipo", "burger" };
         foreach (var m in meta.items)
         {
             var d = $"{partsDir}{m.code_id}/";
             if (!S(d + "torso.png")) continue;       // 안 쓰는 종(이전 시도)은 건너뜀
+            if (rats && System.Array.IndexOf(singles, m.code_id) >= 0 && S($"Assets/Art/Rats/Parody/rat_{m.code_id}.png")) continue;     // 한 장짜리로 바꾼 종 (옛 파츠는 안 씀)
             lib.entries.Add(new RatArtLibrary.Entry
             {
                 codeId = m.code_id, head = S(d + "head.png"), torso = S(d + "torso.png"), tail = S(d + "tail.png"),
@@ -35,9 +38,25 @@ public static class RatArtLibraryBuilder
                 legFront = m.leg_front, legBack = m.leg_back,
             });
         }
-        // 파츠 없는 한 장짜리
-        var pc = rats ? S("Assets/Art/Rats/Parody/rat_pcmouse.png") : null;
-        if (pc) lib.entries.Add(new RatArtLibrary.Entry { codeId = "pcmouse", single = pc });
+        foreach (var id in singles)
+        {
+            var sp = rats ? S($"Assets/Art/Rats/Parody/rat_{id}.png") : null;
+            if (sp) lib.entries.Add(new RatArtLibrary.Entry { codeId = id, single = sp });
+        }
+        // 그림이 아직 없는 새 쥐: 다른 쥐 그림을 잠깐 빌려 씀 (로직 시험용, 진짜 파츠가 생기면 위에서 먼저 잡힘) — 2026-10-12 아이스 퀸 쥐 · 5G
+        if (rats)
+            foreach (var (id, from) in new[] { ("icequeen", "angel"), ("fiveg", "student") })
+            {
+                if (lib.entries.Exists(e => e.codeId == id)) continue;
+                var src = lib.entries.Find(e => e.codeId == from);
+                if (src == null) continue;
+                lib.entries.Add(new RatArtLibrary.Entry
+                {
+                    codeId = id, head = src.head, torso = src.torso, tail = src.tail, front = src.front, back = src.back, single = src.single,
+                    neck = src.neck, tailAnchor = src.tailAnchor, shoulder = src.shoulder, hip = src.hip, legFront = src.legFront, legBack = src.legBack,
+                });
+                Debug.Log($"[RatArtLibrary] {id}: 그림 없음 → {from} 그림 임시로 씀");
+            }
         EditorUtility.SetDirty(lib);
         AssetDatabase.SaveAssets();
         Debug.Log($"[{assetPath}] {lib.entries.Count}종");

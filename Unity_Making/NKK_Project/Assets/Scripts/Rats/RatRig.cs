@@ -95,6 +95,7 @@ namespace NKK.Rats
         }
 
         // 웹게임 ratPose 의 자세 값 (각도는 라디안, 캔버스 기준 → 유니티는 부호 반대)
+        [HideInInspector] public float tailLen = 1;       // 꼬리 길이 배율 (쥐한폭탄 심지)
         public struct Pose { public float head, headX, tail, front, back, farFront, farBack, bob, tilt, sx, sy; }
 
         // lift·rot·tsx·tsy·pivotH = 묘기 중 몸 전체 변환 (게임 단위·라디안, pivotH = 회전 중심 높이)
@@ -123,6 +124,7 @@ namespace NKK.Rats
             back.transform.localRotation = Quaternion.Euler(0, 0, -p.back * D);
             front.transform.localRotation = Quaternion.Euler(0, 0, -p.front * D);
             tail.transform.localRotation = Quaternion.Euler(0, 0, p.tail * D);
+            tail.transform.localScale = new Vector3(tailLen, 1, 1);
             head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D);
             Vector3 hp = L(neckPx) - L(hipPx);
             head.transform.localPosition = hp + new Vector3(p.headX * u / 100f, 0, 0);
