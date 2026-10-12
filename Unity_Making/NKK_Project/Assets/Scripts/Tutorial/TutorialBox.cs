@@ -38,12 +38,24 @@ namespace NKK.Tutorial
         [Tooltip("화살표 위아래 흔들림 (픽셀)")] public float arrowBob = 12;
         [Tooltip("화자가 없을 때 이름표에 쓸 글")] public string noSpeakerName = "";
 
+        [Header("가리키는 곳 보이게")]
+        [Tooltip("가리키는 곳이 대사 판·초상화에 가리면 대사창을 화면 위쪽으로 옮김")] public bool dodge = true;
+        [Tooltip("위로 옮긴 대사 판의 화면 위 여백 (픽셀)")] public float dodgeTopMargin = 28;
+        [Tooltip("위로 옮긴 초상화의 화면 위 여백 (픽셀)")] public float dodgePortraitMargin = 8;
+        [Tooltip("옮겨 가는 빠르기")] public float dodgeSpeed = 12;
+        [Tooltip("가리키는 UI 를 이만큼 키워서 보여 줌 (1 = 그대로, 대상마다 TutorialTarget.zoom 으로 따로 정할 수 있음)")] public float targetZoom = 1.25f;
+        [Tooltip("키우는 빠르기")] public float targetZoomSpeed = 10;
+
         readonly List<TutoLineRow> lines = new();
         Action done;
         bool busy;
         int idx; float shown, inT, bumpT;
         string pointer; float pointerLeft;       // 대사가 끝난 뒤에도 잠깐 남는 강조
-        Vector2 panelPos;
+        Vector2 panelPos, portraitPos;
+        float dodgeK, dodgeGoal;          // 0 = 아래(기본) · 1 = 위로 옮김
+        TutorialTarget zoomed;             // 지금 키워 둔 대상
+        // 지금 강조 중인 대상 (TutorialManager 가 월드 대상이면 카메라로 비춤)
+        public TutorialTarget CurrentTarget { get; private set; }
         string blip; int lastVis;           // 글자 나올 때 '찍' 소리 (화자별)
         Canvas canvas;
 
@@ -52,6 +64,7 @@ namespace NKK.Tutorial
             I = this;
             canvas = GetComponentInParent<Canvas>();
             if (panel) panelPos = panel.anchoredPosition;
+            if (portrait) portraitPos = portrait.rectTransform.anchoredPosition;
             Hide();
         }
         void OnDestroy() { if (I == this) I = null; }
@@ -66,6 +79,7 @@ namespace NKK.Tutorial
             if (group) { group.gameObject.SetActive(true); group.alpha = 0; group.blocksRaycasts = true; }
             if (blocker) blocker.raycastTarget = true;
             ShowLine();
+            dodgeGoal = DodgeGoal(lines[0].highlight); dodgeK = dodgeGoal;      // 첫 줄은 처음부터 그 자리에서
         }
 
         // 대사가 끝난 뒤에도 강조를 몇 초 더 (0 이하 = 끔)
@@ -109,7 +123,11 @@ namespace NKK.Tutorial
             inT = Mathf.Min(inTime, inT + dt);
             float k = inTime > 0 ? inT / inTime : 1, e = 1 - (1 - k) * (1 - k);
             if (group) group.alpha = e;
-            if (panel) panel.anchoredPosition = panelPos + new Vector2(0, -60 * (1 - e));
+            dodgeGoal = DodgeGoal(lines[idx].highlight);
+            dodgeK = Mathf.Lerp(dodgeK, dodgeGoal, Mathf.Min(1, dt * dodgeSpeed));
+            Offsets(out float panelUp, out float portraitUp);
+            if (panel) panel.anchoredPosition = panelPos + new Vector2(0, panelUp * dodgeK - 60 * (1 - e) * (dodgeK > 0.5f ? -1 : 1));
+            if (portrait) portrait.rectTransform.anchoredPosition = portraitPos + new Vector2(0, portraitUp * dodgeK);
             if (portrait)
             {
                 bumpT = Mathf.Max(0, bumpT - dt);
@@ -150,6 +168,60 @@ namespace NKK.Tutorial
             var d = done; done = null; d?.Invoke();
         }
 
+        // ── 대사창 피하기 ──
+        // 위로 옮길 때 대사 판·초상화가 올라가는 거리 (캔버스 단위)
+        void Offsets(out float panelUp, out float portraitUp)
+        {
+            panelUp = portraitUp = 0;
+            if (!canvas) return;
+            var top = (canvas.transform as RectTransform).rect.yMax;
+            if (panel) panelUp = top - dodgeTopMargin - BaseRect(panel, panelPos).yMax;
+            if (portrait) portraitUp = Mathf.Min(panelUp, top - dodgePortraitMargin - BaseRect(portrait.rectTransform, portraitPos).yMax);
+        }
+
+        // 기본(아래) 자리에 있을 때의 캔버스 안 사각형
+        Rect BaseRect(RectTransform rt, Vector2 basePos)
+        {
+            var cr = canvas.transform as RectTransform;
+            var c = new Vector3[4]; rt.GetWorldCorners(c);
+            Vector2 a = cr.InverseTransformPoint(c[0]), b = cr.InverseTransformPoint(c[2]);
+            var d = basePos - rt.anchoredPosition;
+            return Rect.MinMaxRect(Mathf.Min(a.x, b.x) + d.x, Mathf.Min(a.y, b.y) + d.y, Mathf.Max(a.x, b.x) + d.x, Mathf.Max(a.y, b.y) + d.y);
+        }
+
+        // 가리킬 곳이 아래 대사창에 가리면 1 (위쪽에서도 가리면 덜 가리는 쪽)
+        float DodgeGoal(string id)
+        {
+            if (!dodge || !canvas) return 0;
+            var t = TutorialTarget.Find(id);
+            if (!t || !t.GoalScreenRect(out var sr)) return 0;
+            if (t.IsWorld) return 0;          // 월드 대상은 카메라가 화면 가운데로 비춤
+            var cr = canvas.transform as RectTransform;
+            var cam = canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(cr, sr.min, cam, out var a);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(cr, sr.max, cam, out var b);
+            var tr = Rect.MinMaxRect(Mathf.Min(a.x, b.x), Mathf.Min(a.y, b.y), Mathf.Max(a.x, b.x), Mathf.Max(a.y, b.y));
+            Offsets(out float panelUp, out float portraitUp);
+            float down = Cover(tr, 0, 0), up = Cover(tr, panelUp, portraitUp);
+            if (down <= 0) return 0;
+            return up < down ? 1 : 0;
+        }
+
+        // 대사 판·초상화가 사각형 r 을 가리는 넓이
+        float Cover(Rect r, float panelUp, float portraitUp)
+        {
+            float s = 0;
+            if (panel) s += Overlap(r, BaseRect(panel, panelPos), panelUp);
+            if (portrait && portrait.enabled) s += Overlap(r, BaseRect(portrait.rectTransform, portraitPos), portraitUp);
+            return s;
+        }
+        static float Overlap(Rect a, Rect b, float up)
+        {
+            b.y += up;
+            float w = Mathf.Min(a.xMax, b.xMax) - Mathf.Max(a.xMin, b.xMin), h = Mathf.Min(a.yMax, b.yMax) - Mathf.Max(a.yMin, b.yMin);
+            return w > 0 && h > 0 ? w * h : 0;
+        }
+
         void Hide()
         {
             busy = false;
@@ -163,6 +235,13 @@ namespace NKK.Tutorial
         {
             if (!highlight) return;
             var t = TutorialTarget.Find(id);
+            if (zoomed != t)
+            {
+                if (zoomed) zoomed.SetZoom(1, targetZoomSpeed);
+                zoomed = t;
+                if (t) t.SetZoom(t.zoom > 0 ? t.zoom : targetZoom, targetZoomSpeed);
+            }
+            CurrentTarget = t;
             if (!t || !t.ScreenRect(out var r) || !canvas)
             {
                 highlight.gameObject.SetActive(false); if (arrow) arrow.gameObject.SetActive(false);

@@ -214,6 +214,8 @@ namespace NKK.Rats
         public int RealCount => Rats.Count - TempCount;
         // 이번 판 번식으로 태어난 마리 수 (튜토리얼)
         public int Births { get; private set; }
+        // 마지막으로 태어난 쥐 (튜토리얼이 비춤)
+        public Rat LastBorn { get; private set; }
         public void RemoveTemp(Rat r) { FxManager.I?.Dust(r.x, r.y, 6, 1); Rats.Remove(r); Destroy(r.gameObject); }
 
         // ── 승급: 같은 등급 N마리 희생 → 윗등급 무작위 1마리 (공용 스킬 확률로 2마리) ──
@@ -459,7 +461,7 @@ namespace NKK.Rats
                 var row = RollSpecies(p.z);
                 if (row == null) continue;
                 var r = Spawn(row, p.x, p.y);
-                if (r) { Births++; SfxManager.PlayAt("rat_birth", p.x, p.y); }
+                if (r) { Births++; LastBorn = r; SfxManager.PlayAt("rat_birth", p.x, p.y); }
                 if (r && r.OnScreen()) FxManager.I?.Hearts(p.x, p.y, birthHearts);     // 번식 하트
                 if (r && (int)row.Grade >= 2) Game.ShowBanner($"{GameDatabase.Instance.GradeOf(row).grade_name} 탄생!", row.character_name);
                 // 쌍둥이: 한 마리 더 (최대 인구 안에서)
@@ -492,6 +494,8 @@ namespace NKK.Rats
         public bool ClickRush(Vector2 p)
         {
             if (!RushReady || RushActive) return false;
+            var cat = Cats ? Cats.Current : null;
+            if (cat && cat.Alive && cat.BodyDist(p.x, p.y) <= 0) p = new Vector2(cat.x, cat.y);     // 고양이 몸을 누르면 고양이 발밑으로
             StartRush(p); rushCdLeft = RushTime + RushCooldown;
             return true;
         }

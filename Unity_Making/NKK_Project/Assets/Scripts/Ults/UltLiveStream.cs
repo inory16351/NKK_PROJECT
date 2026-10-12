@@ -373,7 +373,7 @@ namespace NKK.Ults
                 float ang = Mathf.Atan2(b.vy, b.vx); bool hit = false;
                 foreach (var h in ItemMgr.Humans)
                     if (h.z < 90 && Dist(h.x, h.y, b.x, b.y) < h.R + 6 && h.Damage(b.dmg * 2, R, ang)) { hit = true; break; }
-                if (!hit && cat && cat.Alive && Dist(cat.x, cat.y, b.x, b.y) < cat.R + 6 && cat.Damage(b.dmg, ang, R)) hit = true;
+                if (!hit && cat && cat.Alive && cat.BodyDist(b.x, b.y) < 6 && cat.Damage(b.dmg, ang, R)) hit = true;
                 if (!hit)
                     foreach (var it in ItemMgr.InRange(b.x, b.y, 80))
                         if (it.State == Item.ItemState.Rest && Dist(it.x, it.y, b.x, b.y) < it.R + 4)

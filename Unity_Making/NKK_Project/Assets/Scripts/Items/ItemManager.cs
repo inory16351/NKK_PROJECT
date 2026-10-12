@@ -251,7 +251,7 @@ namespace NKK.Items
             int n = 0;
             foreach (var h in Humans) if (Vector2.Distance(new Vector2(h.x, h.y), new Vector2(x, y)) < R + h.R && h.Blast(Mathf.Atan2(h.y - y, h.x - x) + Random.Range(-0.3f, 0.3f), spd, dmg, by)) n++;
             var c = Cats ? Cats.Current : null;
-            if (c && c.Alive && Vector2.Distance(new Vector2(c.x, c.y), new Vector2(x, y)) < R + c.R && c.Damage(dmg, Mathf.Atan2(c.y - y, c.x - x), by)) n++;
+            if (c && c.Alive && c.BodyDist(x, y) < R && c.Damage(dmg, Mathf.Atan2(c.y - y, c.x - x), by)) n++;
             var b = Boss.Current;                                               // 보스는 날아가지 않고 피해만
             if (b && b.CanHit && Vector2.Distance(new Vector2(b.x, b.y), new Vector2(x, y)) < R + b.R && b.Damage(dmg, by, Mathf.Atan2(b.y - y, b.x - x), false)) n++;
             return n;

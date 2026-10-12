@@ -25,6 +25,8 @@ namespace NKK.Tutorial
         public UltimateManager Ults;
         public SuperJumpManager SuperJump;
 
+        [Tooltip("비워 두면 메인 카메라에서 찾음")] public CameraController Cam;
+
         [Header("Lobby 씬")]
         public LobbyManager Lobby;
 
@@ -34,12 +36,16 @@ namespace NKK.Tutorial
         [Tooltip("대사가 끝난 뒤 마지막으로 가리킨 곳을 이 초 더 강조")] public float lingerTime = 4;
         [Tooltip("로비: 탭을 가리킨 채 끝나면 그 페이지를 열 때까지 강조 (최대 초)")] public float lobbyLingerTime = 20;
         [Tooltip("대사 중 게임을 멈춤")] public bool pauseGame = true;
+        [Tooltip("대사가 월드 대상(새끼 쥐 등)을 가리키면 카메라가 비추며 이만큼 확대")] public float worldFocusZoom = 1.7f;
+        [Tooltip("첫 탄생(Birth) 단계: 갓 태어난 쥐에 붙일 강조 id (대사 highlight 에 쓰기)")] public string birthTargetId = "baby";
+        [Tooltip("첫 탄생 대사 중 새끼 쥐 위로 하트를 이 초마다")] public float birthHeartEvery = 1.1f;
         [Tooltip("발동 기록을 콘솔에 남김")] public bool log = true;
 
         // 대사 중 게임 정지 (FxManager 가 timeScale 0)
         public static bool Pausing { get; private set; }
 
         float sceneT, floorT; int lastFloor = -1;
+        TutorialTarget tempTarget; float heartT;      // 첫 탄생: 새끼 쥐에 잠깐 붙이는 강조
         string lastDone;             // 방금 끝난 단계 (After 발동)
         TutoStepRow running;
         string actionPending, actionValue; float actionTry;
@@ -59,6 +65,7 @@ namespace NKK.Tutorial
                 if (!Pausing && !(Stage && Stage.Climbing)) floorT += Time.deltaTime;
             }
             UpdateAction(dt);
+            UpdateFocus(dt);
             if (running != null || !DB || !P || TutorialBox.Showing || sceneT < startDelay) return;
             if (P.TutoSkipped || Busy()) return;
             foreach (var s in DB.TutoSteps)
@@ -107,6 +114,9 @@ namespace NKK.Tutorial
                 case "FloorTime": return Game && floorT >= v;
                 case "Birth": return Rats && Rats.Births >= Mathf.Max(1, v);
                 case "RatCount": return Rats && Rats.RealCount >= v;
+                case "SuperJump": return SuperJump && SuperJump.Jumps >= Mathf.Max(1, v);      // 끝난 뒤 (Busy 가 기다림)
+                case "PopFull": return Rats && Rats.RealCount >= Rats.PopCap;
+                case "RoomOpen": return Stage && Stage.Open.Count >= 1 + Mathf.Max(1, v);
                 case "CatAppear": return Cats && Cats.Current;
                 case "BossFight": return Boss.Current && Boss.Current.State == Boss.BState.Fight;
                 case "UltReady":
@@ -114,7 +124,7 @@ namespace NKK.Tutorial
                     foreach (var r in Rats.Rats) if (Ults.Full(r)) return true;
                     return false;
                 // ── 둘 다 ──
-                case "After": return lastDone == s.trigger_text;
+                case "After": return lastDone != null && System.Array.IndexOf((s.trigger_text ?? "").Split(','), lastDone) >= 0;      // 쉼표로 여러 단계
                 // ── Lobby ──
                 case "LobbyEnter": return Lobby && !Lobby.PrepOpen;
                 case "PageOpen": return Lobby && Lobby.PrepOpen && Lobby.CurrentPage == s.trigger_text;
@@ -132,6 +142,14 @@ namespace NKK.Tutorial
             P.MarkTuto(s.step_id);             // 시작할 때 기록 (중간에 꺼도 다시 안 나옴)
             if (P.Unlock(s.unlock)) SfxManager.Play("jgl_unlock");
             if (box) box.ClearLinger();
+            if (tempTarget) Destroy(tempTarget);
+            if (s.trigger == "Birth" && Rats && Rats.LastBorn)
+            {
+                // 갓 태어난 쥐를 강조할 수 있게 (대사 highlight = birthTargetId)
+                tempTarget = Rats.LastBorn.gameObject.AddComponent<TutorialTarget>();
+                tempTarget.id = birthTargetId; tempTarget.pad = 16;
+                heartT = 0.35f;
+            }
             List<TutoLineRow> lines = null;
             DB.TutoLines.TryGetValue(s.step_id, out lines);
             if (scene == "Game" && pauseGame && lines != null && lines.Count > 0) Pausing = true;
@@ -148,6 +166,26 @@ namespace NKK.Tutorial
             if (box && !string.IsNullOrEmpty(last)) box.Linger(last, scene == "Lobby" && last.StartsWith("tab_") ? lobbyLingerTime : lingerTime);
             if (!string.IsNullOrEmpty(s.action)) { actionPending = s.action; actionValue = s.action_value; actionTry = 0; }
             lastDone = s.step_id;
+            if (tempTarget) Destroy(tempTarget, lingerTime + 0.5f);
+        }
+
+        // 대사가 월드 대상을 가리키는 동안 카메라가 그쪽으로 가서 확대 (+ 새끼 쥐면 하트)
+        void UpdateFocus(float dt)
+        {
+            if (scene != "Game") return;
+            if (!Cam && Camera.main) Cam = Camera.main.GetComponent<CameraController>();
+            if (!Cam) return;
+            var t = box && TutorialBox.Showing ? box.CurrentTarget : null;
+            bool world = t && t.IsWorld;
+            Cam.tutoFollow = world;
+            if (!world) return;
+            Cam.tutoFocus = t.transform.position;
+            Cam.tutoZoomGoal = worldFocusZoom;
+            if (t == tempTarget && t.TryGetComponent<Rat>(out var r) && (heartT -= dt) <= 0)
+            {
+                heartT = birthHeartEvery;
+                FxManager.I?.Hearts(r.x, r.y, Rats ? Rats.birthHearts : 4);
+            }
         }
 
         // 끝날 때 행동: 필살기 시연 등. 바로 안 되면 몇 초 동안 다시 시도

@@ -21,6 +21,12 @@ namespace NKK
         [HideInInspector] public bool ultFollow;            // 필살기 쓰는 쥐 따라가기
         [HideInInspector] public Vector2 ultFocus;
         [Tooltip("필살기 쥐 따라가는 빠르기")] public float ultFollowSpeed = 6;
+        // 튜토리얼이 비추는 곳 (TutorialManager 가 넣음, 유니티 좌표). 끝나면 그 자리에 남고 확대만 돌아옴
+        [HideInInspector] public bool tutoFollow;
+        [HideInInspector] public Vector3 tutoFocus;
+        [HideInInspector] public float tutoZoomGoal = 1;
+        [Tooltip("튜토리얼이 비출 때 가는 빠르기")] public float tutoFollowSpeed = 5;
+        float tutoZoom = 1;
         [Header("미리보기 (보스 층: 계단 방에서 기다리는 보스를 잠깐 비춤)")]
         [Tooltip("가는 시간 · 머무는 시간 · 돌아오는 시간 (초)")] public float peekIn = 0.8f, peekHold = 1.4f, peekOut = 0.7f;
         float peekT = -1, peekWait;
@@ -60,8 +66,15 @@ namespace NKK
                 float k = Mathf.Min(1, Time.unscaledDeltaTime * ultFollowSpeed);
                 transform.position = new Vector3(p.x + (f.x - p.x) * k, p.y + (f.y - p.y) * k, p.z);
             }
+            float tk = Mathf.Min(1, Time.unscaledDeltaTime * tutoFollowSpeed);
+            if (tutoFollow)
+            {
+                var p = transform.position;
+                transform.position = new Vector3(p.x + (tutoFocus.x - p.x) * tk, p.y + (tutoFocus.y - p.y) * tk, p.z);
+            }
+            tutoZoom += ((tutoFollow ? tutoZoomGoal : 1) - tutoZoom) * tk;
             // 가로 폭 viewWidth / zoom 이 화면에 꽉 차게
-            float w = viewWidth / (zoom * ultZoom) * World.U;
+            float w = viewWidth / (zoom * ultZoom * tutoZoom) * World.U;
             cam.orthographicSize = w / cam.aspect / 2;
             if (peekT < 0) Clamp();
             lastShake = shakeOffset;

@@ -25,6 +25,7 @@ namespace NKK.Hazards
         [Header("고양이 공통 (웹게임 기준)")]
         public float catRadius = 30;
         [Tooltip("몸길이 (게임 단위) × 고양이 테이블 크기 배율")] public float catLength = 115;
+        [Tooltip("몸 전체 피격 범위 = 그림 범위에서 가장자리를 이 비율만큼 깎음 (그림 여백·꼬리 끝)")] [Range(0, 0.4f)] public float bodyHitShrink = 0.12f;
         [Tooltip("쥐가 겁먹는 반경")] public float fearRadius = 330;
         [Tooltip("겁먹고 도망치는 시간 (초)")] public float fearTime = 1.3f;
         [Tooltip("기본 덮치기 범위 · 기절 시간")] public float pounceRadius = 70;
@@ -122,9 +123,11 @@ namespace NKK.Hazards
         {
             var c = Current; if (!c || !c.Alive) return;
             float dx = r.x - c.x, dy = r.y - c.y, d = Mathf.Sqrt(dx * dx + dy * dy), R = r.Radius + c.R;
-            if (d > R) return;
+            bool feet = d <= R;                                  // 발밑 원: 밀어냄
+            if (!feet && c.BodyDist(r.x, r.y) > r.Radius) return;   // 몸 그림에 닿음: 튕기기만
             float nx = dx / (d > 0 ? d : 1), ny = dy / (d > 0 ? d : 1);
-            r.x = c.x + nx * (R + 1); r.y = c.y + ny * (R + 1); r.vx = nx * 300; r.vy = ny * 300;
+            if (feet) { r.x = c.x + nx * (R + 1); r.y = c.y + ny * (R + 1); }
+            r.vx = nx * 300; r.vy = ny * 300;
             if (r.catCD > Time.time) return;
             r.catCD = Time.time + 0.25f;
             c.Damage(r.Damage * (rushing ? Rats.RushDamage * bumpRush : bumpNormal), Mathf.Atan2(-ny, -nx), r);
@@ -135,7 +138,7 @@ namespace NKK.Hazards
         public bool ItemHit(Item it, float dmg)
         {
             var c = Current; if (!c || !c.Alive) return false;
-            if (Vector2.Distance(new Vector2(it.x, it.y), new Vector2(c.x, c.y)) > it.R + c.R || it.z > 80) return false;
+            if (c.BodyDist(it.x, it.y) > it.R || it.z > 80) return false;
             c.Damage(dmg * 2, Mathf.Atan2(it.vy, it.vx), it.By);
             FxManager.I?.Popup(c.x, c.y, "퍽!", Color.white, 20, 0.5f, 60);
             return true;
