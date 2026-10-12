@@ -29,6 +29,9 @@ namespace NKK.Tutorial
 
         [Header("Lobby 씬")]
         public LobbyManager Lobby;
+        [Tooltip("비워 두면 씬에서 찾음")] public SkillPage Skills;
+        [Tooltip("이 접두어로 시작하는 강조는 다음 단계가 올 때까지 계속 (치즈 창고 따라 하기)")] public string holdPrefix = "skill_";
+        [Tooltip("holdPrefix 강조를 남겨 두는 최대 초")] public float holdTime = 600;
 
         [Header("연출")]
         [Tooltip("씬·층이 시작되고 이 초 뒤부터 튜토리얼 확인 (화면이 밝아진 뒤)")] public float startDelay = 1.2f;
@@ -96,9 +99,11 @@ namespace NKK.Tutorial
                 case "RunMax": return P.runs <= n;
                 case "Unlocked": return P.IsUnlocked(v);
                 case "Locked": return !P.IsUnlocked(v);
-                case "Done": return P.TutoDone(v);
-                case "NotDone": return !P.TutoDone(v);
+                case "Done": foreach (var id in v.Split(',')) if (P.TutoDone(id.Trim())) return true; return false;       // 쉼표 = 그중 하나라도
+                case "NotDone": foreach (var id in v.Split(',')) if (P.TutoDone(id.Trim())) return false; return true;
                 case "FloorMin": return Game && Game.Floor >= n;
+                case "SkillAffordable": { var r = SkillPage.Recommend(); return r != null && P.CanBuySkill(r); }
+                case "SkillPoor": { var r = SkillPage.Recommend(); return r == null || !P.CanBuySkill(r); }
             }
             Debug.LogWarning($"[Tutorial] 모르는 조건: {type}");
             return false;
@@ -130,6 +135,14 @@ namespace NKK.Tutorial
                 case "PageOpen": return Lobby && Lobby.PrepOpen && Lobby.CurrentPage == s.trigger_text;
                 case "CanRankUp": return Lobby && !Lobby.PrepOpen && P.CanRankUp();
                 case "TierAtLeast": return Lobby && !Lobby.PrepOpen && P.tier >= v;
+                case "SkillSelect":
+                    {
+                        if (!Lobby || !Lobby.PrepOpen || Lobby.CurrentPage != "skill") return false;
+                        if (!Skills) Skills = FindFirstObjectByType<SkillPage>(FindObjectsInactive.Include);
+                        var sk = Skills ? Skills.Selected : null;
+                        return sk != null && !sk.IsRoot && P.CanBuySkill(sk);
+                    }
+                case "SkillBuy": return SkillPage.Bought >= Mathf.Max(1, v);
             }
             Debug.LogWarning($"[Tutorial] 모르는 발동: {s.trigger}");
             return false;
@@ -163,7 +176,8 @@ namespace NKK.Tutorial
             running = null;
             // 마지막 대사가 가리킨 곳은 잠깐 더 강조 (로비 탭은 페이지를 열 때까지)
             string last = lines != null && lines.Count > 0 ? lines[lines.Count - 1].highlight : null;
-            if (box && !string.IsNullOrEmpty(last)) box.Linger(last, scene == "Lobby" && last.StartsWith("tab_") ? lobbyLingerTime : lingerTime);
+            if (box && !string.IsNullOrEmpty(last))
+                box.Linger(last, !string.IsNullOrEmpty(holdPrefix) && last.StartsWith(holdPrefix) ? holdTime : scene == "Lobby" && last.StartsWith("tab_") ? lobbyLingerTime : lingerTime);
             if (!string.IsNullOrEmpty(s.action)) { actionPending = s.action; actionValue = s.action_value; actionTry = 0; }
             lastDone = s.step_id;
             if (tempTarget) Destroy(tempTarget, lingerTime + 0.5f);

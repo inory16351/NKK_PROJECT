@@ -26,13 +26,14 @@ namespace NKK.Tutorial
         [Tooltip("컷이 바뀔 때 겹치는 시간 (초)")] public float crossTime = 0.6f;
         [Tooltip("컷 하나가 보이는 동안 천천히 확대 (배율/초)")] public float zoomPerSec = 0.012f;
         [Tooltip("처음 · 끝 검은 화면에서 밝아지는 / 어두워지는 시간 (초)")] public float fadeTime = 0.6f;
+        [Tooltip("클릭이 없으면 한 줄이 나오고 이 초 뒤 자동으로 다음 줄 (0 = 끔)")] public float autoNext = 10;
 
         public bool Playing { get; private set; }
 
         readonly List<TutoStoryRow> rows = new();
         Action done;
         int idx = -1, curCut = -1;
-        float shown, crossT, zoomT, fadeT;
+        float shown, crossT, zoomT, fadeT, lineT;
         bool ending, aFront;
 
         void Awake()
@@ -74,7 +75,7 @@ namespace NKK.Tutorial
                 crossT = 0; zoomT = 0;
             }
             if (captionText) { captionText.text = r.text; captionText.maxVisibleCharacters = 0; captionText.ForceMeshUpdate(); }
-            shown = 0;
+            shown = 0; lineT = 0;
             if (nextMark) nextMark.SetActive(false);
         }
 
@@ -113,9 +114,11 @@ namespace NKK.Tutorial
             if (captionText) { shown += dt * charsPerSec; captionText.maxVisibleCharacters = Mathf.Min(total, Mathf.FloorToInt(shown)); }
             bool full = !captionText || captionText.maxVisibleCharacters >= total;
             if (nextMark) { nextMark.SetActive(full); if (full) nextMark.transform.localScale = Vector3.one * (1 + 0.08f * Mathf.Sin(Time.unscaledTime * 6)); }
+            lineT += dt;
+            if (autoNext > 0 && lineT >= autoNext) { Next(); return; }      // 가만히 있어도 넘어감
             if (fadeT > fadeTime * 0.5f && Pressed())
             {
-                if (!full) { shown = total; if (captionText) captionText.maxVisibleCharacters = total; }
+                if (!full) { shown = total; lineT = 0; if (captionText) captionText.maxVisibleCharacters = total; }
                 else Next();
             }
         }

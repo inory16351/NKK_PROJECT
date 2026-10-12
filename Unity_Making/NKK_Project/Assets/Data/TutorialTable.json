@@ -355,6 +355,81 @@
    "action": "",
    "action_value": "",
    "sort": 75
+  },
+  {
+   "step_id": "l_skill_pick",
+   "scene": "Lobby",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "l_skill_page",
+   "cond1_type": "SkillAffordable",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 202
+  },
+  {
+   "step_id": "l_skill_poor",
+   "scene": "Lobby",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "l_skill_page",
+   "cond1_type": "SkillPoor",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 203
+  },
+  {
+   "step_id": "l_skill_pick2",
+   "scene": "Lobby",
+   "trigger": "PageOpen",
+   "trigger_value": 0.0,
+   "trigger_text": "skill",
+   "cond1_type": "Done",
+   "cond1_value": "l_skill_poor",
+   "cond2_type": "SkillAffordable",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 204
+  },
+  {
+   "step_id": "l_skill_buy",
+   "scene": "Lobby",
+   "trigger": "SkillSelect",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "Done",
+   "cond1_value": "l_skill_pick,l_skill_pick2",
+   "cond2_type": "NotDone",
+   "cond2_value": "l_skill_done",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 205
+  },
+  {
+   "step_id": "l_skill_done",
+   "scene": "Lobby",
+   "trigger": "SkillBuy",
+   "trigger_value": 1.0,
+   "trigger_text": "",
+   "cond1_type": "Done",
+   "cond1_value": "l_skill_pick,l_skill_pick2",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 206
   }
  ],
  "Line": [
@@ -804,6 +879,54 @@
    "speaker_id": "labrat",
    "face": "happy",
    "text": "언제 깨어날지는 아무도 몰라... 신비한 힘이니까! 찍!",
+   "highlight": ""
+  },
+  {
+   "line_id": 57,
+   "step_id": "l_skill_pick",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "치즈가 모였으니 바로 하나 찍어 보자! 반짝이는 이 칸을 눌러 봐!",
+   "highlight": "skill_next"
+  },
+  {
+   "line_id": 58,
+   "step_id": "l_skill_poor",
+   "speaker_id": "nerd",
+   "face": "panic",
+   "text": "어라, 지금 치즈로는 아직 못 찍겠네... 다음 판에서 치즈를 더 모아 오자!",
+   "highlight": ""
+  },
+  {
+   "line_id": 59,
+   "step_id": "l_skill_pick2",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "치즈가 모였네! 이제 반짝이는 이 칸을 눌러서 스킬을 찍어 보자!",
+   "highlight": "skill_next"
+  },
+  {
+   "line_id": 60,
+   "step_id": "l_skill_buy",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "좋아! 이제 이 '활성화' 버튼을 눌러! 치즈를 내면 스킬이 켜져.",
+   "highlight": "skill_buy"
+  },
+  {
+   "line_id": 61,
+   "step_id": "l_skill_done",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "해냈다! 다음 판부터 우리 쥐들이 더 강해질 거야!",
+   "highlight": ""
+  },
+  {
+   "line_id": 62,
+   "step_id": "l_skill_done",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "치즈가 남으면 선으로 이어진 다음 칸도 계속 찍어 봐. 이어진 칸만 열 수 있어!",
    "highlight": ""
   }
  ],
