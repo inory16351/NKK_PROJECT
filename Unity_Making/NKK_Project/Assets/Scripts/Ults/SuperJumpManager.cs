@@ -75,6 +75,8 @@ namespace NKK.Ults
         readonly List<Floater> fl = new();
         List<(int i, int j, int di, int dj)> walls = new();
         public bool Busy => ph != Phase.None;
+        // 이번 판 슈퍼 점프 횟수 (튜토리얼 발동)
+        public int Jumps { get; private set; }
 
         static readonly Color Cream = new(1, 0.953f, 0.749f), Gold = new(0.941f, 0.784f, 0.471f), Gold9 = new(0.941f, 0.784f, 0.471f, 0.9f), Gold95 = new(0.941f, 0.784f, 0.471f, 0.95f);
         static readonly Color[] Sparks = { Cream, Gold, Color.white };
@@ -112,7 +114,7 @@ namespace NKK.Ults
             foreach (var o in Rats.Rats) if (o.UltOn) o.UltRelease();
             r.UltGrab(); r.z = 0; x0 = r.x; y0 = r.y;
             fl.Clear(); walls.Clear();
-            coolT = cool; Go(Phase.Cut); lineT = -9;
+            coolT = cool; Go(Phase.Cut); lineT = -9; Jumps++;
             FxManager.WorldFreeze = true;
             if (Cam) { Cam.ultFollow = true; Cam.ultFocus = new Vector2(r.x, r.y); }
             if (cutIn) { cutIn.gameObject.SetActive(true); cutIn.alpha = 1; }

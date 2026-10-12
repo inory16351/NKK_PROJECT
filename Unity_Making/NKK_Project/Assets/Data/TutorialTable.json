@@ -156,7 +156,7 @@
    "cond1_value": "2",
    "cond2_type": "",
    "cond2_value": "",
-   "unlock": "power,pop",
+   "unlock": "power",
    "action": "",
    "action_value": "",
    "sort": 100
@@ -295,6 +295,141 @@
    "action": "",
    "action_value": "",
    "sort": 230
+  },
+  {
+   "step_id": "g_wall",
+   "scene": "Game",
+   "trigger": "RoomOpen",
+   "trigger_value": 1.0,
+   "trigger_text": "",
+   "cond1_type": "RunMax",
+   "cond1_value": "1",
+   "cond2_type": "Done",
+   "cond2_value": "g_floor",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 25
+  },
+  {
+   "step_id": "g_pop",
+   "scene": "Game",
+   "trigger": "PopFull",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "RunMax",
+   "cond1_value": "1",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "pop",
+   "action": "",
+   "action_value": "",
+   "sort": 45
+  },
+  {
+   "step_id": "g_power_pop",
+   "scene": "Game",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "g_power_promote,g_power_promote_new",
+   "cond1_type": "Locked",
+   "cond1_value": "pop",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "pop",
+   "action": "",
+   "action_value": "",
+   "sort": 103
+  },
+  {
+   "step_id": "g_superjump",
+   "scene": "Game",
+   "trigger": "SuperJump",
+   "trigger_value": 1.0,
+   "trigger_text": "",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 75
+  },
+  {
+   "step_id": "l_skill_pick",
+   "scene": "Lobby",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "l_skill_page",
+   "cond1_type": "SkillAffordable",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 202
+  },
+  {
+   "step_id": "l_skill_poor",
+   "scene": "Lobby",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "l_skill_page",
+   "cond1_type": "SkillPoor",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 203
+  },
+  {
+   "step_id": "l_skill_pick2",
+   "scene": "Lobby",
+   "trigger": "PageOpen",
+   "trigger_value": 0.0,
+   "trigger_text": "skill",
+   "cond1_type": "Done",
+   "cond1_value": "l_skill_poor",
+   "cond2_type": "SkillAffordable",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 204
+  },
+  {
+   "step_id": "l_skill_buy",
+   "scene": "Lobby",
+   "trigger": "SkillSelect",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "Done",
+   "cond1_value": "l_skill_pick,l_skill_pick2",
+   "cond2_type": "NotDone",
+   "cond2_value": "l_skill_done",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 205
+  },
+  {
+   "step_id": "l_skill_done",
+   "scene": "Lobby",
+   "trigger": "SkillBuy",
+   "trigger_value": 1.0,
+   "trigger_text": "",
+   "cond1_type": "Done",
+   "cond1_value": "l_skill_pick,l_skill_pick2",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 206
   }
  ],
  "Line": [
@@ -352,7 +487,7 @@
    "speaker_id": "brownrat",
    "face": "surprised",
    "text": "앗...! 우리들의 사랑의 결실이..!",
-   "highlight": ""
+   "highlight": "baby"
   },
   {
    "line_id": 8,
@@ -360,7 +495,7 @@
    "speaker_id": "brownrat",
    "face": "happy",
    "text": "쥐끼리 부딪히면 가끔 새끼가 태어나 찍찍! 숫자가 많을수록 더 세게 부술 수 있어!",
-   "highlight": ""
+   "highlight": "baby"
   },
   {
    "line_id": 9,
@@ -500,7 +635,7 @@
   },
   {
    "line_id": 26,
-   "step_id": "g_power",
+   "step_id": "g_power_pop",
    "speaker_id": "brownrat",
    "face": "normal",
    "text": "오른쪽 위 숫자는 지금 쥐 마릿수랑 최대 마릿수야. 최대까지만 태어날 수 있어.",
@@ -508,7 +643,7 @@
   },
   {
    "line_id": 27,
-   "step_id": "g_power",
+   "step_id": "g_power_pop",
    "speaker_id": "brownrat",
    "face": "happy",
    "text": "치즈 창고에서 둥지 스킬을 찍으면 최대 마릿수가 늘어나! 쥐가 많아지면 찍찍도 쑥쑥!",
@@ -519,7 +654,7 @@
    "step_id": "g_power_promote",
    "speaker_id": "nerd",
    "face": "happy",
-   "text": "그리고 승급으로 높은 등급 쥐를 만들어도 찍찍이 확 올라가! 잊지 마 찍!",
+   "text": "그리고 승급으로 높은 등급 쥐를 만들어도 찍찍이 확 올라가! 번식할 쥐만 남겨 두면 돼 찍!",
    "highlight": "promote"
   },
   {
@@ -673,6 +808,166 @@
    "face": "normal",
    "text": "'친구들!!'에서 지금까지 만난 친구들을 볼 수 있어!",
    "highlight": "tab_dex"
+  },
+  {
+   "line_id": 48,
+   "step_id": "g_wall",
+   "speaker_id": "labrat",
+   "face": "happy",
+   "text": "해냈다!! 어서 계단을 찾아서 다음 층으로 도망치자!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 49,
+   "step_id": "g_wall",
+   "speaker_id": "brownrat",
+   "face": "normal",
+   "text": "벽 너머로 길이 열렸어! 계속 부수다 보면 계단 방이 나올 거야. 지도도 같이 봐!",
+   "highlight": "minimap"
+  },
+  {
+   "line_id": 50,
+   "step_id": "g_pop",
+   "speaker_id": "brownrat",
+   "face": "surprised",
+   "text": "어라? 아무리 부딪혀도 새끼가 더 안 태어나잖아?!",
+   "highlight": ""
+  },
+  {
+   "line_id": 51,
+   "step_id": "g_pop",
+   "speaker_id": "brownrat",
+   "face": "normal",
+   "text": "오른쪽 위 숫자가 지금 쥐 수 / 최대 쥐 수야. 꽉 차면 더는 번식할 수 없어!",
+   "highlight": "pop"
+  },
+  {
+   "line_id": 52,
+   "step_id": "g_pop",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "승급으로 쥐를 합치면 자리가 다시 생겨! 번식할 쥐만 남기고 나머지는 승급시키자!",
+   "highlight": "promote"
+  },
+  {
+   "line_id": 53,
+   "step_id": "g_superjump",
+   "speaker_id": "labrat",
+   "face": "surprised",
+   "text": "바, 방금 뭐였어?! 쥐가 하늘 끝까지 날아올랐어!!",
+   "highlight": ""
+  },
+  {
+   "line_id": 54,
+   "step_id": "g_superjump",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "가끔 우리 몸속에 잠든 '신비한 힘'이 깨어날 때가 있어. 그게 바로 '슈퍼 점프'야!",
+   "highlight": ""
+  },
+  {
+   "line_id": 55,
+   "step_id": "g_superjump",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "하늘 끝까지 솟구쳤다가 내리꽂히면 화면 안의 물건이랑 벽까지 한꺼번에 박살 나!",
+   "highlight": ""
+  },
+  {
+   "line_id": 56,
+   "step_id": "g_superjump",
+   "speaker_id": "labrat",
+   "face": "happy",
+   "text": "언제 깨어날지는 아무도 몰라... 신비한 힘이니까! 찍!",
+   "highlight": ""
+  },
+  {
+   "line_id": 57,
+   "step_id": "l_skill_pick",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "치즈가 모였으니 바로 하나 찍어 보자! 반짝이는 이 칸을 눌러 봐!",
+   "highlight": "skill_next"
+  },
+  {
+   "line_id": 58,
+   "step_id": "l_skill_poor",
+   "speaker_id": "nerd",
+   "face": "panic",
+   "text": "어라, 지금 치즈로는 아직 못 찍겠네... 다음 판에서 치즈를 더 모아 오자!",
+   "highlight": ""
+  },
+  {
+   "line_id": 59,
+   "step_id": "l_skill_pick2",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "치즈가 모였네! 이제 반짝이는 이 칸을 눌러서 스킬을 찍어 보자!",
+   "highlight": "skill_next"
+  },
+  {
+   "line_id": 60,
+   "step_id": "l_skill_buy",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "좋아! 이제 이 '활성화' 버튼을 눌러! 치즈를 내면 스킬이 켜져.",
+   "highlight": "skill_buy"
+  },
+  {
+   "line_id": 61,
+   "step_id": "l_skill_done",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "해냈다! 다음 판부터 우리 쥐들이 더 강해질 거야!",
+   "highlight": ""
+  },
+  {
+   "line_id": 62,
+   "step_id": "l_skill_done",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "치즈가 남으면 선으로 이어진 다음 칸도 계속 찍어 봐. 이어진 칸만 열 수 있어!",
+   "highlight": ""
+  },
+  {
+   "line_id": 63,
+   "step_id": "g_promote",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "아, 그런데 조심해! 승급에 쓴 쥐들은 하나로 합쳐져서 사라져.",
+   "highlight": ""
+  },
+  {
+   "line_id": 64,
+   "step_id": "g_promote",
+   "speaker_id": "brownrat",
+   "face": "panic",
+   "text": "쥐가 너무 적어지면 서로 부딪힐 일이 줄어서 새끼가 거의 안 태어나!! 번식할 쥐는 꼭 남겨 둬 찍!",
+   "highlight": ""
+  },
+  {
+   "line_id": 65,
+   "step_id": "g_promote",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "승급 창의 '일괄 승급'은 번식할 쥐를 알아서 남겨 줘. 헷갈리면 그걸 눌러!",
+   "highlight": "promote"
+  },
+  {
+   "line_id": 66,
+   "step_id": "g_power_promote_new",
+   "speaker_id": "brownrat",
+   "face": "panic",
+   "text": "그런데 너무 많이 합치면 쥐가 적어져서 번식이 거의 안 돼!! 번식할 쥐는 꼭 남겨 둬 찍!",
+   "highlight": ""
+  },
+  {
+   "line_id": 67,
+   "step_id": "g_power_promote_new",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "승급 창의 '일괄 승급'은 번식할 쥐를 알아서 남겨 줘. 헷갈리면 그걸 눌러!",
+   "highlight": "promote"
   }
  ],
  "Story": [

@@ -47,7 +47,8 @@ namespace NKK.Stage
         public static uint RunSeed;
         public uint FloorSeed(int f) => randomLayout ? (uint)(RunSeed * 2654435761u + (uint)f * 7919u + 17u) : (uint)(f * 7919 + 17);
         public int StairsDist { get; private set; }
-        float curStairsWall = -1, curNormalWall = -1;     // 이 층 지형으로 계산한 벽 배율 (-1 = 테이블 wall_stairs·wall_normal)
+        float curStairsWall = -1, curNormalWall = -1;
+        bool hasEasyRoom; Vector2Int easyRoom;          // 첫 판 1층: 쉽게 부서지는 벽 너머 방     // 이 층 지형으로 계산한 벽 배율 (-1 = 테이블 wall_stairs·wall_normal)
 
         [Header("적정 전투력 (찍찍!!) = 기본 × 증가^(층-1) × 초반 보정")]
         public float powNeed0 = 2000;
@@ -60,6 +61,7 @@ namespace NKK.Stage
         [Tooltip("일반 벽 거리 가중: × (1 + 이 값 × 시작 방과의 거리). 스테이지 테이블이 층 지형에 맞춰 벽 배율을 정하므로 0")] public float wallDistK = 0;
         [Tooltip("전투력이 적정보다 낮으면 벽 피해 = (전투력÷적정)^지수")] public float wallGateStairs = 1.5f;
         public float wallGate = 0.5f;
+        [Tooltip("첫 판(탈출 시도 1회째) 1층: 시작 방 옆 벽 하나는 무조건 부술 수 있게 = 그 벽 체력 배율 (전투력 부족 감쇠도 없음). 0 = 끔")] public float firstRunWallMul = 0.3f;
 
         [Header("벽 체력바 (웹 drawWallBar)")]
         [Tooltip("월드 캔버스 안 템플릿 (꺼 둬도 됨). 부술 수 있는 막힌 벽마다 하나씩 복제")] public WallBar wallBarTemplate;
@@ -163,6 +165,7 @@ namespace NKK.Stage
             Game.Floor = Mathf.Max(1, f);
             GenLayout(Game.Floor);
             Open.Clear(); Open.Add(Vector2Int.zero); walls.Clear();
+            PickEasyRoom();
             foreach (var r in rooms.Values) if (r) Destroy(r.gameObject);
             rooms.Clear();
             foreach (var k in Layout) MakeRoom(k);
@@ -228,9 +231,26 @@ namespace NKK.Stage
         public static string WallKey(int i, int j, int di, int dj) => di != 0 ? $"v,{i + (di > 0 ? 1 : 0)},{j}" : $"h,{i},{j + (dj > 0 ? 1 : 0)}";
 
         float WallMax(int ti, int tj) => WallMaxBase(ti, tj) * CommonSkill.WallHpMul;     // 공용 스킬 벽 체력 감소
+        // 첫 판 1층: 시작 방 옆 방 중 계단 쪽으로 가까운 방 하나 (계단 방은 다른 방이 없을 때만)
+        void PickEasyRoom()
+        {
+            hasEasyRoom = false;
+            var p = Progress.I;
+            if (firstRunWallMul <= 0 || Game.Floor != 1 || !p || p.runs > 1) return;
+            int bestD = int.MaxValue;
+            foreach (var d in Dirs)
+            {
+                if (!Layout.Contains(d)) continue;
+                int dist = (IsStairsRoom(d.x, d.y) ? 1000 : 0) + Mathf.Abs(d.x - StairsRoom.x) + Mathf.Abs(d.y - StairsRoom.y);
+                if (dist < bestD) { bestD = dist; easyRoom = d; hasEasyRoom = true; }
+            }
+        }
+        bool IsEasyRoom(int ti, int tj) => hasEasyRoom && ti == easyRoom.x && tj == easyRoom.y;
+
         float WallMaxBase(int ti, int tj)
         {
             int f = Game.Floor;
+            if (IsEasyRoom(ti, tj)) return PowNeed(f) * firstRunWallMul;
             var sr = Row(f);
             if (IsStairsRoom(ti, tj)) return PowNeed(f) * (curStairsWall > 0 ? curStairsWall : sr != null ? sr.wall_stairs : Mathf.Min(wallPowStairs, 2 + 6 * (f - 1)));
             return PowNeed(f) * (curNormalWall > 0 ? curNormalWall : sr != null ? sr.wall_normal : wallPow) * (1 + wallDistK * RoomDist(new Vector2Int(ti, tj)));
@@ -241,6 +261,7 @@ namespace NKK.Stage
 
         float Gate(int ti, int tj)
         {
+            if (IsEasyRoom(ti, tj)) return 1;
             float k = Mathf.Clamp(Power / PowNeed(Game.Floor), 0.001f, 1);
             return Mathf.Pow(k, IsStairsRoom(ti, tj) ? wallGateStairs : wallGate);
         }

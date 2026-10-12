@@ -66,6 +66,24 @@ namespace NKK.Lobby
         [Tooltip("앞 훈장을 먼저 달아야 할 때 글 ({tier})")] public TMP_Text rankPrev;
         public Color okColor = new(0.29f, 0.55f, 0.3f), noColor = new(0.75f, 0.35f, 0.3f);
 
+        [Header("튜토리얼")]
+        [Tooltip("추천 스킬 노드(지금 훈장에서 열린 것 중 가장 싼 것)에 붙이는 강조 id")] public string guideTargetId = "skill_next";
+
+        // 튜토리얼이 보는 값: 고른 노드 · 이번 실행에서 활성화한 수
+        public CommonSkillRow Selected => GameDatabase.Instance && GameDatabase.Instance.CommonSkillsById.TryGetValue(sel, out var s) ? s : null;
+        public static int Bought { get; private set; }
+
+        // 지금 훈장 트리에서 열린(살 수 있는 자리) 노드 중 가장 싼 것 (같으면 id 작은 것)
+        public static CommonSkillRow Recommend()
+        {
+            var p = Progress.I; var db = GameDatabase.Instance;
+            if (!p || !db || !db.CommonSkillsByTier.TryGetValue(Mathf.Max(1, p.tier), out var l)) return null;
+            CommonSkillRow best = null;
+            foreach (var s in l)
+                if (!s.IsRoot && p.StateOf(s) == Progress.SkillState.Open && (best == null || s.cost_cheese < best.cost_cheese || (s.cost_cheese == best.cost_cheese && s.skill_id < best.skill_id))) best = s;
+            return best;
+        }
+
         int viewTier = 1, sel;
         float zoom = 1; bool dragging;
         readonly List<GameObject> spawned = new();
@@ -169,6 +187,7 @@ namespace NKK.Lobby
                     l.color = st == Progress.SkillState.Owned ? lineOn : st == Progress.SkillState.Open ? lineOpen : lineOff;
                 }
             // 노드
+            var rec = Recommend();
             foreach (var s in nodes)
             {
                 var st = p.StateOf(s);
@@ -201,6 +220,7 @@ namespace NKK.Lobby
                     t.color = st == Progress.SkillState.Open && p.CanAffordSkill(s) ? new Color(0.29f, 0.22f, 0.17f) : new Color(0.62f, 0.5f, 0.42f);
                 });
                 Child(b, "Sel", s.skill_id == sel, c => { var i = c.GetComponent<Image>(); if (i) i.color = bc; });
+                if (s == rec && !string.IsNullOrEmpty(guideTargetId)) { var tt = b.gameObject.AddComponent<NKK.Tutorial.TutorialTarget>(); tt.id = guideTargetId; tt.pad = 6; }
                 int id = s.skill_id;
                 b.onClick.AddListener(() => { if (dragging) return; if (sel == id) Buy(); else { sel = id; Draw(); } });
             }
@@ -288,6 +308,7 @@ namespace NKK.Lobby
             var p = Progress.I; var db = GameDatabase.Instance;
             if (!db.CommonSkillsById.TryGetValue(sel, out var s) || !p.BuySkill(s)) { SfxManager.Play("ui_deny"); return; }
             SfxManager.Play("ui_buy");
+            Bought++;
             Draw();
         }
 

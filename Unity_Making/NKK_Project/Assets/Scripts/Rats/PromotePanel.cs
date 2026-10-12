@@ -19,14 +19,16 @@ namespace NKK.Rats
         [Tooltip("등급 줄 (일반 → 레어 … 전설 → 신화 순서)")] public Row[] rows = new Row[5];
         [Tooltip("일괄 승급 결과 배너 ({n} 횟수) · 못 할 때 배너 ({keep} 남길 마리 수)")] public string allDone, allFail;
         public Color okColor = new(0.29f, 0.22f, 0.17f), dimColor = new(0.62f, 0.5f, 0.42f);
+        [Tooltip("패널이 열려 있는 동안 이것들보다 위에 그림 (같은 부모 안 형제, 예: 테스트 패널). 닫으면 원래 순서로")] public Transform[] drawAbove;
+        int homeIndex = -1;
 
         string[] fmt;
 
         void Awake()
         {
             if (panel) panel.SetActive(false);
-            if (openButton) openButton.onClick.AddListener(() => { if (panel) { panel.SetActive(!panel.activeSelf); Refresh(); } });
-            if (closeButton) closeButton.onClick.AddListener(() => panel.SetActive(false));
+            if (openButton) openButton.onClick.AddListener(() => { if (panel) { panel.SetActive(!panel.activeSelf); Order(); Refresh(); } });
+            if (closeButton) closeButton.onClick.AddListener(() => { panel.SetActive(false); Order(); });
             if (allButton) allButton.onClick.AddListener(PromoteAll);
             fmt = new string[rows.Length];
             for (int i = 0; i < rows.Length; i++)
@@ -68,6 +70,19 @@ namespace NKK.Rats
                 if (r.to) r.to.color = GradeColor(g + 1);
             }
             if (allButton) allButton.interactable = Rats.CanPromoteAny;
+        }
+
+        // 열리면 drawAbove 보다 위로, 닫히면 원래 자리로
+        void Order()
+        {
+            if (drawAbove == null || drawAbove.Length == 0) return;
+            if (panel && panel.activeSelf)
+            {
+                if (homeIndex < 0) homeIndex = transform.GetSiblingIndex();
+                foreach (var t in drawAbove)
+                    if (t && t.parent == transform.parent && t.GetSiblingIndex() > transform.GetSiblingIndex()) transform.SetSiblingIndex(t.GetSiblingIndex());
+            }
+            else if (homeIndex >= 0) { transform.SetSiblingIndex(homeIndex); homeIndex = -1; }
         }
 
         void PromoteAll()

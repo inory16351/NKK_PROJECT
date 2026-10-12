@@ -699,6 +699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_rec
   pad: 6
+  zoom: 0
 --- !u!1 &13602064
 GameObject:
   m_ObjectHideFlags: 0
@@ -8056,6 +8057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_run
   pad: 6
+  zoom: 0
 --- !u!1 &228487707
 GameObject:
   m_ObjectHideFlags: 0
@@ -16924,6 +16926,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_rats
   pad: 14
+  zoom: 0
 --- !u!1 &572516245
 GameObject:
   m_ObjectHideFlags: 0
@@ -21696,7 +21699,7 @@ Transform:
   m_GameObject: {fileID: 768400950}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.6912, z: 0}
+  m_LocalPosition: {x: 1.2, y: 0.69, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -21779,6 +21782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_rank
   pad: 14
+  zoom: 0
 --- !u!1 &771474848
 GameObject:
   m_ObjectHideFlags: 0
@@ -24696,6 +24700,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: research
   pad: 8
+  zoom: 0
 --- !u!1 &869185988
 GameObject:
   m_ObjectHideFlags: 0
@@ -24806,6 +24811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_run
   pad: 14
+  zoom: 0
 --- !u!1 &870174488
 GameObject:
   m_ObjectHideFlags: 0
@@ -26839,6 +26845,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_dex
   pad: 14
+  zoom: 0
 --- !u!1 &962470776
 GameObject:
   m_ObjectHideFlags: 0
@@ -27348,6 +27355,7 @@ GameObject:
   - component: {fileID: 987577625}
   - component: {fileID: 987577624}
   - component: {fileID: 987577623}
+  - component: {fileID: 987577626}
   m_Layer: 0
   m_Name: BuyButton
   m_TagString: Untagged
@@ -27457,6 +27465,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 987577621}
   m_CullTransparentMesh: 1
+--- !u!114 &987577626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 987577621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa739d05a7df3fc41952f19a6a13c133, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
+  id: skill_buy
+  pad: 10
+  zoom: 0
 --- !u!1 &988415566
 GameObject:
   m_ObjectHideFlags: 0
@@ -29203,6 +29226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_skill
   pad: 6
+  zoom: 0
 --- !u!1 &1052247806
 GameObject:
   m_ObjectHideFlags: 0
@@ -35233,6 +35257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_rats
   pad: 6
+  zoom: 0
 --- !u!1 &1256091395
 GameObject:
   m_ObjectHideFlags: 0
@@ -41982,6 +42007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_rec
   pad: 14
+  zoom: 0
 --- !u!1 &1492453324
 GameObject:
   m_ObjectHideFlags: 0
@@ -47338,6 +47364,7 @@ MonoBehaviour:
   rankPrev: {fileID: 236459683}
   okColor: {r: 0.29, g: 0.55, b: 0.3, a: 1}
   noColor: {r: 0.75, g: 0.35, b: 0.3, a: 1}
+  guideTargetId: skill_next
   iconSprites:
   - {fileID: 21300000, guid: c7be15c61f362cf47b08c13fe58372a4, type: 3}
   - {fileID: 21300000, guid: 47d65d74add3eef4d9f4dbbe7227199c, type: 3}
@@ -51238,6 +51265,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_skill
   pad: 14
+  zoom: 0
 --- !u!1 &1783970349
 GameObject:
   m_ObjectHideFlags: 0
@@ -55128,7 +55156,7 @@ Transform:
   m_GameObject: {fileID: 1908320660}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.084480286, y: 1.9967997, z: 0}
+  m_LocalPosition: {x: -0.08, y: 1.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -56307,6 +56335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_rank
   pad: 6
+  zoom: 0
 --- !u!1 &1953919350
 GameObject:
   m_ObjectHideFlags: 0
@@ -57111,12 +57140,19 @@ MonoBehaviour:
   Cats: {fileID: 0}
   Ults: {fileID: 0}
   SuperJump: {fileID: 0}
+  Cam: {fileID: 0}
   Lobby: {fileID: 850286159}
+  Skills: {fileID: 1655013307}
+  holdPrefix: skill_
+  holdTime: 600
   startDelay: 1
   floorStartWindow: 6
   lingerTime: 4
   lobbyLingerTime: 20
   pauseGame: 1
+  worldFocusZoom: 1.7
+  birthTargetId: baby
+  birthHeartEvery: 1.1
   log: 1
 --- !u!4 &1970749473
 Transform:
@@ -57303,6 +57339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.TutorialTarget
   id: tab_dex
   pad: 6
+  zoom: 0
 --- !u!1 &1982329152
 GameObject:
   m_ObjectHideFlags: 0
@@ -59104,6 +59141,12 @@ MonoBehaviour:
   highlightPulse: 8
   arrowBob: 12
   noSpeakerName: 
+  dodge: 1
+  dodgeTopMargin: 28
+  dodgePortraitMargin: 8
+  dodgeSpeed: 12
+  targetZoom: 1.25
+  targetZoomSpeed: 10
 --- !u!1 &2023341300
 GameObject:
   m_ObjectHideFlags: 0

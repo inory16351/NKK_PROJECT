@@ -26,6 +26,16 @@ namespace NKK.Hazards
         public bool Gone => State == CState.Leave && life <= 0;
         public bool Alive => State != CState.Flung && State != CState.Leave && alpha >= 0.8f;
         public float R => mgr.catRadius;
+        // 몸 전체 피격 범위 (게임 좌표, 바닥 높이로 내린 그림 범위). LateUpdate 에서 갱신
+        public Rect Body { get; private set; }
+        // 점에서 몸까지 거리 (몸 그림 안 또는 발밑 원 안 = 0)
+        public float BodyDist(float px, float py)
+        {
+            float feet = Mathf.Max(0, Mathf.Sqrt((px - x) * (px - x) + (py - y) * (py - y)) - R);
+            var b = Body; if (b.width <= 0) return feet;
+            float dx = Mathf.Max(b.xMin - px, 0, px - b.xMax), dy = Mathf.Max(b.yMin - py, 0, py - b.yMax);
+            return Mathf.Min(feet, Mathf.Sqrt(dx * dx + dy * dy));
+        }
 
         CatManager mgr;
         int face = 1, bounces;
@@ -427,7 +437,22 @@ namespace NKK.Hazards
             transform.position = World.ToUnity(x + jx, y, z);
             transform.rotation = Quaternion.Euler(0, 0, -rot * Mathf.Rad2Deg);
             rig.Apply(MakePose(), 1, face, 1, World.SortOrder(y));
-            foreach (var sr in GetComponentsInChildren<SpriteRenderer>()) { var c = sr.color; c.a = alpha; sr.color = c; }
+            bool has = false; Bounds bd = default;
+            foreach (var sr in GetComponentsInChildren<SpriteRenderer>())
+            {
+                var c = sr.color; c.a = alpha; sr.color = c;
+                if (sr == shadow || !sr.enabled || !sr.sprite) continue;
+                if (!has) { bd = sr.bounds; has = true; } else bd.Encapsulate(sr.bounds);
+            }
+            if (has)
+            {
+                // 그림 범위 → 게임 좌표 (공중이면 바닥 높이로 내림), 가장자리 조금 깎기
+                float zu = z * World.U, k = mgr.bodyHitShrink * 0.5f;
+                float x0 = bd.min.x / World.U, x1 = bd.max.x / World.U;
+                float y0 = -(bd.max.y - zu) / World.U / World.TILT, y1 = -(bd.min.y - zu) / World.U / World.TILT;
+                float w = x1 - x0, h = y1 - y0;
+                Body = Rect.MinMaxRect(x0 + w * k, y0 + h * k, x1 - w * k, y1 - h * k);
+            }
             if (shadow)
             {
                 float w = R * 1.6f * (1 - Mathf.Min(0.7f, z / 500)), sw = shadow.sprite ? shadow.sprite.bounds.size.x : 1;

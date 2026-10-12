@@ -9,10 +9,52 @@ namespace NKK.Tutorial
     {
         [Tooltip("강조 id (예: promote · power · pop · timer · minimap · ult · tab_skill · research)")] public string id;
         [Tooltip("강조 테두리 여백 (화면 픽셀)")] public float pad = 10;
+        [Tooltip("가리킬 때 키우는 배율 (0 = 대사창 설정값, 1 = 안 키움). UI 만")] public float zoom = 0;
 
         static readonly List<TutorialTarget> all = new();
         void OnEnable() { all.Add(this); }
-        void OnDisable() { all.Remove(this); }
+        void OnDisable() { all.Remove(this); RestoreScale(); }
+
+        // UI 가 아니면 월드 오브젝트 (카메라가 비춤)
+        public bool IsWorld => !(transform is RectTransform);
+
+        // ── 가리키는 동안 키우기 (UI) ──
+        float zoomCur = 1, zoomGoal = 1, zoomSpeed = 10;
+        Vector3 baseScale; bool scaled;
+        public float ZoomGoal => zoomGoal;
+        public void SetZoom(float goal, float speed)
+        {
+            if (IsWorld) return;
+            zoomGoal = Mathf.Max(0.01f, goal); zoomSpeed = speed;
+        }
+        void LateUpdate()
+        {
+            if (!scaled && zoomGoal == 1) return;
+            if (!scaled) { baseScale = transform.localScale; scaled = true; }
+            zoomCur = Mathf.Lerp(zoomCur, zoomGoal, Mathf.Min(1, Time.unscaledDeltaTime * zoomSpeed));
+            if (zoomGoal == 1 && Mathf.Abs(zoomCur - 1) < 0.002f) { RestoreScale(); return; }
+            transform.localScale = baseScale * zoomCur;
+        }
+        void RestoreScale()
+        {
+            if (scaled) transform.localScale = baseScale;
+            scaled = false; zoomCur = 1; zoomGoal = 1;
+        }
+
+        // 다 커졌을 때의 화면 사각형 (대사창 피하기 계산용, 피벗 기준으로 늘림)
+        public bool GoalScreenRect(out Rect r)
+        {
+            if (!ScreenRect(out r)) return false;
+            var rt = transform as RectTransform;
+            if (!rt || Mathf.Approximately(zoomCur, zoomGoal)) return true;
+            var cv = rt.GetComponentInParent<Canvas>();
+            var cam = cv && cv.renderMode != RenderMode.ScreenSpaceOverlay ? cv.worldCamera : null;
+            Vector2 pv = RectTransformUtility.WorldToScreenPoint(cam, rt.position);
+            float k = zoomGoal / Mathf.Max(0.01f, zoomCur);
+            Vector2 a = pv + (r.min - pv) * k, b = pv + (r.max - pv) * k;
+            r = Rect.MinMaxRect(a.x, a.y, b.x, b.y);
+            return true;
+        }
 
         // 켜져 있는 것 중 첫 번째
         public static TutorialTarget Find(string id)
