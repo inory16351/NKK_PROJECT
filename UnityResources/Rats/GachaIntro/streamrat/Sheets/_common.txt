@@ -1,0 +1,4 @@
+- 1536x1024 full-frame cutscene illustration (no transparency, no panels, no borders).
+- STYLE: exactly the style of the attached ref_style (cozy flat cartoon storybook game art, Untitled Goose Game mood): completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted palette, soft lighting.
+- CHARACTER: "Streamer Rat": a brown rat wearing round GLASSES, a green HOODIE with the hood up, big headset headphones with a mic and a tiny webcam on top of the head. The character must look exactly like the attached ref_parts (its head, body and outfit parts from the game), with the same proportions as the game rats (big head, small body), pink ears, pink nose, black bead eyes, long pink tail (unless stated otherwise).
+- NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere. Only this one character.

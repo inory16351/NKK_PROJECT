@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lab_shaft.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1536 PORTRAIT, one single continuous full-frame illustration (no transparency, no panels, no borders). NO text, NO letters, NO numbers, no logos, NO characters (no rats, no people).
+- STYLE: exactly the style of the attached cutscene paintings (ref_c5 pipe wall, ref_c6 sewer outlet, ref_story): cozy storybook game art, soft shading, warm muted palette, warm lamp light, teal accents.
+- It is ONE CONTINUOUS VERTICAL CROSS-SECTION seen from the side, used as a long camera scroll from top to bottom. The SAME thick copper pipe runs continuously from the very top to the bottom of the picture, slightly left of center at first, with no breaks:
+  * TOP 18%: the underside of a secret rat laboratory building in an underground city: the rounded bottom of a big glass flask with teal-green liquid, the bottom of a dusty-teal tin-can building and its wooden floor beams; the copper pipe leaves the flask bottom and goes straight down.
+  * 18% to 45%: the pipe goes down through the ground: layers of dark earth, roots, small stones, an old buried teaspoon and a bottle cap, pipe clamps.
+  * 45% to 70%: the pipe enters an old red-brown brick sewer wall, running down along it with metal clamps, a couple of thin side pipes, small warm lantern on a hook, a trickle of water.
+  * BOTTOM 30%: a deep cozy sewer chamber. At the bottom the copper pipe bends TOWARD THE VIEWER and ends in a BIG ROUND HATCH OPENING seen straight from the FRONT: a round riveted copper/iron frame around an EMPTY DARK circular hole (no lid; a lid will be added later). The round opening is centered horizontally, its center at about 84% of the image height, its diameter about 45% of the image width. Stone floor with a thin water channel and puddles below it.
+- Everything must connect seamlessly as one picture: the pipe is clearly the same pipe from top to bottom.

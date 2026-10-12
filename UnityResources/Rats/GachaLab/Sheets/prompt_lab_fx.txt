@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lab_fx.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames. Avoid magenta or pink-purple colors inside the drawings.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing centered in its own cell with a clear magenta margin; nothing touches cell borders. No shadows.
+Cells:
+Row 1: (1) a round iron sewer HATCH LID seen straight from the FRONT (perfect circle), dark grey-brown metal with rivets around the rim, a simple cross-hatch grip pattern and a small hinge on its RIGHT side. (2) the SAME lid swung OPEN, seen edge-on as a thin tall ellipse (as if rotated 75 degrees on its right hinge). (3) a small cartoon housefly seen from the top, dark grey body, two pale wings. (4) a single big round teal-green liquid DROP, slightly pointed at the top.
+Row 2: (5) a fan of soft WHITE light rays (about 9 straight rays spreading upward from a point at the bottom center, flat white with slightly transparent look done with pale grey-white, no gradients). (6) a big round WHITE starburst / burst flash shape with many sharp spikes (flat white). (7) a big teal-green cartoon EXPLOSION cloud puff with a few round bubbles (flat). (8) a pair of big round green-tinted rat-sized SCIENCE GOGGLES with a brown strap.
+
+- STYLE: match the attached story cutscene (ref_story) and game screenshot (ref_game): cozy flat cartoon game art (Untitled Goose Game mood), completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted palette. Rats look exactly like the cute flat rats in those references (white lab rats with red eyes, brown rats, grey mice; pink ears, pink noses, long pink tails).
+- Setting: a SECRET RAT LABORATORY hidden in the walls: rat-sized lab made of human junk, warm brown wood, copper pipes, glass flasks, dim teal-green and warm lamp light.
+- NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere.

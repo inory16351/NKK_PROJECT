@@ -7225,6 +7225,176 @@
     "front": 1,
     "back": 0.865
    }
+  },
+  "icequeen": {
+   "parts": [
+    "Parts/icequeen/head.png",
+    "Parts/icequeen/torso.png",
+    "Parts/icequeen/tail.png",
+    "Parts/icequeen/front.png",
+    "Parts/icequeen/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.599,
+     0.86
+    ],
+    "tail": [
+     0.042,
+     0.277
+    ],
+    "front": [
+     0.566,
+     0.063
+    ],
+    "back": [
+     0.617,
+     0.059
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.599,
+     0.14
+    ],
+    "tail": [
+     0.042,
+     0.723
+    ],
+    "front": [
+     0.566,
+     0.937
+    ],
+    "back": [
+     0.617,
+     0.941
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.927
+   }
+  },
+  "fiveg": {
+   "parts": [
+    "Parts/fiveg/head.png",
+    "Parts/fiveg/torso.png",
+    "Parts/fiveg/tail.png",
+    "Parts/fiveg/front.png",
+    "Parts/fiveg/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.644,
+     0.86
+    ],
+    "tail": [
+     0.042,
+     0.31
+    ],
+    "front": [
+     0.542,
+     0.062
+    ],
+    "back": [
+     0.591,
+     0.058
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.644,
+     0.14
+    ],
+    "tail": [
+     0.042,
+     0.69
+    ],
+    "front": [
+     0.542,
+     0.938
+    ],
+    "back": [
+     0.591,
+     0.942
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.934
+   }
   }
  }
 }

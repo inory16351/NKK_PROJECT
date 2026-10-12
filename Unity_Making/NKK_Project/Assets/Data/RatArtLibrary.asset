@@ -26,6 +26,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.322}
     legFront: 0.941
     legBack: 0.797
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: labrat
     head: {fileID: 21300000, guid: 2e384229bf22fab428de3ac1d9b5ed5e, type: 3}
     torso: {fileID: 21300000, guid: ac7fe5a71e453c546bdd1fe4e5342d94, type: 3}
@@ -39,6 +47,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.322}
     legFront: 1
     legBack: 0.884
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: buff
     head: {fileID: 21300000, guid: 663288f0393eb3441a9dc45dcaf15e54, type: 3}
     torso: {fileID: 21300000, guid: b7016c156e5f7244baef4d6e078590db, type: 3}
@@ -52,6 +68,14 @@ MonoBehaviour:
     hip: {x: 0.734, y: 0.515}
     legFront: 1
     legBack: 0.787
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: builder
     head: {fileID: 21300000, guid: 8df01af177109dd4fb66880cc291ea04, type: 3}
     torso: {fileID: 21300000, guid: 63e2badde4d8d0b4d8cacb90d2abbcd3, type: 3}
@@ -65,6 +89,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.298}
     legFront: 1
     legBack: 0.844
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: chef
     head: {fileID: 21300000, guid: eb3349ab872544042bd3174d5341db9e, type: 3}
     torso: {fileID: 21300000, guid: 636330ae2296f4f478ab18cf4894c979, type: 3}
@@ -78,6 +110,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.319}
     legFront: 0.893
     legBack: 0.806
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: courier
     head: {fileID: 21300000, guid: 697df07232e69af4e9054782a3bae6ef, type: 3}
     torso: {fileID: 21300000, guid: 1e0d421acfbd1ec45a2b0fab16233cbe, type: 3}
@@ -91,6 +131,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.298}
     legFront: 1
     legBack: 0.723
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: fieldmouse
     head: {fileID: 21300000, guid: 0ca00a765daefcc47957da8d991c0cd7, type: 3}
     torso: {fileID: 21300000, guid: bbd75cfa7043b6b4f8ea8dd013a1befb, type: 3}
@@ -104,6 +152,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.305}
     legFront: 0.92
     legBack: 0.808
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: glowy
     head: {fileID: 21300000, guid: 92649472796039647a4e697ca7edf006, type: 3}
     torso: {fileID: 21300000, guid: 94548f81b9d5f964ab953741ff237780, type: 3}
@@ -117,6 +173,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.308}
     legFront: 1
     legBack: 0.958
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: hamster
     head: {fileID: 21300000, guid: ecd776489ec86ad4b8973cc61ee685ee, type: 3}
     torso: {fileID: 21300000, guid: a6ae9f0e43bcf194a86500b7872f21bb, type: 3}
@@ -130,6 +194,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.295}
     legFront: 1
     legBack: 0.861
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: hooded
     head: {fileID: 21300000, guid: 077549db30745834a9f27ecd86ac7dba, type: 3}
     torso: {fileID: 21300000, guid: 88d973cbc607cb04ea852513ac195da4, type: 3}
@@ -143,6 +215,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.321}
     legFront: 0.882
     legBack: 0.815
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: mailman
     head: {fileID: 21300000, guid: 5e2a60c6698f2954293dca6c77c0d387, type: 3}
     torso: {fileID: 21300000, guid: 78eaa78945347b04dbf6bbb4d59513c6, type: 3}
@@ -156,6 +236,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.324}
     legFront: 1
     legBack: 0.855
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: mouse
     head: {fileID: 21300000, guid: cc855ee4fa414454c9ddbb61a4bead08, type: 3}
     torso: {fileID: 21300000, guid: bd9b15dff09345741bb016bcddfef87f, type: 3}
@@ -169,6 +257,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.322}
     legFront: 0.858
     legBack: 0.785
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: mutant
     head: {fileID: 21300000, guid: edc5a2d6192a0cd4dac2197b94973681, type: 3}
     torso: {fileID: 21300000, guid: 9d8a1cc931e1c8a43b9bf5470b939214, type: 3}
@@ -182,6 +278,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.316}
     legFront: 0.934
     legBack: 0.959
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: nerd
     head: {fileID: 21300000, guid: 70031a00b9fdbfd4eac4ae932b0a4a57, type: 3}
     torso: {fileID: 21300000, guid: c4f4896fcf3fffb4fb0757b1e7eb5534, type: 3}
@@ -195,6 +299,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.326}
     legFront: 0.838
     legBack: 0.744
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: party
     head: {fileID: 21300000, guid: 0224c786c866bb9479993c879e43e66c, type: 3}
     torso: {fileID: 21300000, guid: a5b60c148d98a454c955ffc95b7d17b7, type: 3}
@@ -208,6 +320,14 @@ MonoBehaviour:
     hip: {x: 0.734, y: 0.325}
     legFront: 1
     legBack: 0.955
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: scientist
     head: {fileID: 21300000, guid: 087e1f15224156f46837f68aa94b1d50, type: 3}
     torso: {fileID: 21300000, guid: 66e121342c5103c459965f36d71e08e3, type: 3}
@@ -221,6 +341,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.301}
     legFront: 1
     legBack: 0.906
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: traveler
     head: {fileID: 21300000, guid: 5beea794d847a8e41b3a816915f97187, type: 3}
     torso: {fileID: 21300000, guid: 8bab61eff0e6dee4eb8edfefc626808f, type: 3}
@@ -234,6 +362,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.416}
     legFront: 0.95
     legBack: 0.981
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: cowboy
     head: {fileID: 21300000, guid: 470d0cc5e6ae2944189fe84723f7d936, type: 3}
     torso: {fileID: 21300000, guid: fa6d4174434754f48b154a28638f7504, type: 3}
@@ -247,6 +383,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.454}
     legFront: 0.955
     legBack: 0.697
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: cyborg
     head: {fileID: 21300000, guid: e13f3c20542c5fe4a889bf21756764af, type: 3}
     torso: {fileID: 21300000, guid: 7b1ff67c5a0531742aece0ddcad2432f, type: 3}
@@ -260,6 +404,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.316}
     legFront: 0.905
     legBack: 0.847
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: firefighter
     head: {fileID: 21300000, guid: b5761d730e23a1243b6fcbb5a11961ee, type: 3}
     torso: {fileID: 21300000, guid: ac6a95df15ba19548be88238a201443d, type: 3}
@@ -273,6 +425,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.326}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: idol
     head: {fileID: 21300000, guid: a145a7d3d1eada44f97d2ff5241a688f, type: 3}
     torso: {fileID: 21300000, guid: 88d72e14d05a832418e90fcd022a40a6, type: 3}
@@ -286,6 +446,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.372}
     legFront: 1
     legBack: 0.793
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: miner
     head: {fileID: 21300000, guid: 11d5e8334d32e8448aedc4a803e26ddf, type: 3}
     torso: {fileID: 21300000, guid: 69ba7f6e5ccb36d4ca8db8147bc72851, type: 3}
@@ -299,6 +467,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.358}
     legFront: 1
     legBack: 0.805
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: ninja
     head: {fileID: 21300000, guid: 5463a7c992e0d3d48975823e39fcd299, type: 3}
     torso: {fileID: 21300000, guid: b934bdd060851074995162cd0bfd8676, type: 3}
@@ -312,6 +488,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.237}
     legFront: 0.929
     legBack: 0.813
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: nurse
     head: {fileID: 21300000, guid: 30e418ac804477445845eb40556482f7, type: 3}
     torso: {fileID: 21300000, guid: 4abd127adfe8f0844904a08be05695ff, type: 3}
@@ -325,6 +509,14 @@ MonoBehaviour:
     hip: {x: 0.734, y: 0.29}
     legFront: 0.993
     legBack: 0.871
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: pandahamster
     head: {fileID: 21300000, guid: c7b303f6601cf8842a6916d6bb35ca57, type: 3}
     torso: {fileID: 21300000, guid: c32732880e129bc4088f5b3b56f61bd8, type: 3}
@@ -338,6 +530,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.325}
     legFront: 0.759
     legBack: 0.878
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: pirate
     head: {fileID: 21300000, guid: 97db18d42f0c2b14da2c35f49738dc9c, type: 3}
     torso: {fileID: 21300000, guid: b83beaa9c9758b5449bb80c4acd2f454, type: 3}
@@ -351,6 +551,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.373}
     legFront: 0.9
     legBack: 0.806
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: police
     head: {fileID: 21300000, guid: aa8d8f2b9804d1146a521f3ab4d711ef, type: 3}
     torso: {fileID: 21300000, guid: b84edd9342399ec49acdb2ac398d3700, type: 3}
@@ -364,6 +572,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.319}
     legFront: 0.868
     legBack: 0.749
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: skater
     head: {fileID: 21300000, guid: a7302e1c41ce5eb45a9f4fc8ab717f6a, type: 3}
     torso: {fileID: 21300000, guid: e4a0f751a56523646b022ef07eaaf52a, type: 3}
@@ -377,6 +593,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.314}
     legFront: 0.67
     legBack: 0.751
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: sleepy
     head: {fileID: 21300000, guid: 0234fbad91f856942908191baa3136a9, type: 3}
     torso: {fileID: 21300000, guid: bb329d6a02269264593817c2d1b0258c, type: 3}
@@ -390,6 +614,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.309}
     legFront: 0.838
     legBack: 0.773
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: soldier
     head: {fileID: 21300000, guid: 56a6d3c1a2f525440a9a1e64db398d57, type: 3}
     torso: {fileID: 21300000, guid: 97172dbf16c1be540bc424229ec9a867, type: 3}
@@ -403,6 +635,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.354}
     legFront: 0.903
     legBack: 0.789
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: alien
     head: {fileID: 21300000, guid: 4aecc41a426b4374ba4f705fd68888e4, type: 3}
     torso: {fileID: 21300000, guid: ff87aed32e1e901499076f436211a720, type: 3}
@@ -416,6 +656,14 @@ MonoBehaviour:
     hip: {x: 0.734, y: 0.301}
     legFront: 0.848
     legBack: 0.783
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: angel
     head: {fileID: 21300000, guid: 8cb2d2a8c5ce7394fbc4b104715f4453, type: 3}
     torso: {fileID: 21300000, guid: a22170ec3be1c6f4ab46dab391dc36d2, type: 3}
@@ -429,6 +677,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.553}
     legFront: 1.034
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: astro
     head: {fileID: 21300000, guid: 234a511eb46d04a4c9f3cef4839d8f14, type: 3}
     torso: {fileID: 21300000, guid: 94065f8df9d06494aa0a766825ce1001, type: 3}
@@ -442,6 +698,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.327}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: ballerina
     head: {fileID: 21300000, guid: 931a943bed5fa144da11b62cb17e20ff, type: 3}
     torso: {fileID: 21300000, guid: 5ca7122b297c9a6429c47739c66d7f1a, type: 3}
@@ -455,6 +719,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.324}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: cosmic
     head: {fileID: 21300000, guid: 36d1c63b288ab7d459bca7be8c8ba0f9, type: 3}
     torso: {fileID: 21300000, guid: 3336c09069c4559469e482ed894262eb, type: 3}
@@ -468,6 +740,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.306}
     legFront: 1
     legBack: 0.975
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: detective
     head: {fileID: 21300000, guid: e7eb979befd446746be4c7356d8d3bb9, type: 3}
     torso: {fileID: 21300000, guid: 1f0708fbf4a7bac4b807fdbcdf7361f8, type: 3}
@@ -481,6 +761,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.325}
     legFront: 1
     legBack: 0.817
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: dino
     head: {fileID: 21300000, guid: 098165711928e824f873d4297eeb82bc, type: 3}
     torso: {fileID: 21300000, guid: f2b169dec96b1ae4993fbaff647af64a, type: 3}
@@ -494,6 +782,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.473}
     legFront: 1
     legBack: 0.845
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: dragon
     head: {fileID: 21300000, guid: a675c67eddcccaf469125c7a6fe5da6e, type: 3}
     torso: {fileID: 21300000, guid: efb1735d9866b6e438bcefe8fd606a78, type: 3}
@@ -507,6 +803,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.437}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: emperor
     head: {fileID: 21300000, guid: a74163d3533db8a499332792de41db32, type: 3}
     torso: {fileID: 21300000, guid: 51daec12d172c8d4da2dbbbf75be3ed8, type: 3}
@@ -520,6 +824,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.294}
     legFront: 0.903
     legBack: 0.895
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: ghost
     head: {fileID: 21300000, guid: 3c9f916f669d9584e9bd9cceae5af3d3, type: 3}
     torso: {fileID: 21300000, guid: c550c2b488d2d5547886168189270843, type: 3}
@@ -533,6 +845,14 @@ MonoBehaviour:
     hip: {x: 0.739, y: 0.401}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: hero
     head: {fileID: 21300000, guid: 6a1044f29fb855c499d213ac61751458, type: 3}
     torso: {fileID: 21300000, guid: 35e436b7326c0714397c58606264d606, type: 3}
@@ -546,6 +866,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.387}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: knight
     head: {fileID: 21300000, guid: 2fc58d16cad0537439be739af927f4eb, type: 3}
     torso: {fileID: 21300000, guid: b81a354188a654a4e8f651eae31da79d, type: 3}
@@ -559,6 +887,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.302}
     legFront: 0.818
     legBack: 0.882
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: pharaoh
     head: {fileID: 21300000, guid: d938e2f97607fe34b904305c3426c5c5, type: 3}
     torso: {fileID: 21300000, guid: bafb166dff60e694ba2812f0de22cc3b, type: 3}
@@ -572,6 +908,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.323}
     legFront: 0.96
     legBack: 0.929
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: ratking
     head: {fileID: 21300000, guid: 6c56574d228f9424284fe65a6ca90917, type: 3}
     torso: {fileID: 21300000, guid: 9aad19e706f8e42428134b8ebe56e793, type: 3}
@@ -585,6 +929,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.306}
     legFront: 1
     legBack: 0.938
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: ratqueen
     head: {fileID: 21300000, guid: ceee0069e0870be429d1c3b388f1ad8b, type: 3}
     torso: {fileID: 21300000, guid: 6a01aa0bea4801b4cba10e7c4ecbd006, type: 3}
@@ -598,6 +950,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.387}
     legFront: 1
     legBack: 0.9
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: robot
     head: {fileID: 21300000, guid: a291f2bb5a5195b4aa9933a15247b771, type: 3}
     torso: {fileID: 21300000, guid: 09dc09f99c6cd6a40a0eec0093858788, type: 3}
@@ -611,6 +971,14 @@ MonoBehaviour:
     hip: {x: 0.734, y: 0.304}
     legFront: 0.844
     legBack: 0.757
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: rocker
     head: {fileID: 21300000, guid: 1b5706cf3529ef144b4459e80634190f, type: 3}
     torso: {fileID: 21300000, guid: 012b4746c5809c94f8eeed06e50f9ea1, type: 3}
@@ -624,6 +992,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.341}
     legFront: 0.727
     legBack: 0.772
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: samurai
     head: {fileID: 21300000, guid: 750297137d852b84c968864f715e778f, type: 3}
     torso: {fileID: 21300000, guid: 11040b8d42c1bab439b078ed170cbcbb, type: 3}
@@ -637,6 +1013,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.306}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: santa
     head: {fileID: 21300000, guid: 7f45852b90a85e949a8885d2596d9a10, type: 3}
     torso: {fileID: 21300000, guid: 2c25a8d5919f52a4eabe38f11ebb647d, type: 3}
@@ -650,6 +1034,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.582}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: sultan
     head: {fileID: 21300000, guid: 7ec83dac5c7f26e4da545375f17f8c5a, type: 3}
     torso: {fileID: 21300000, guid: d8ad94ad44d97cf4785fc0190dd99b2d, type: 3}
@@ -663,6 +1055,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.382}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: vampire
     head: {fileID: 21300000, guid: c68006456fcdfae4abd21cfb3605b54c, type: 3}
     torso: {fileID: 21300000, guid: fd0fe033d3febad41bac5d77ed24f6f4, type: 3}
@@ -676,6 +1076,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.46}
     legFront: 1
     legBack: 0.771
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: viking
     head: {fileID: 21300000, guid: ad2ca7e417d64c843a70d251cfd07c9e, type: 3}
     torso: {fileID: 21300000, guid: 23a0ba0816c2d2c40bd67e1c760189c7, type: 3}
@@ -689,6 +1097,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.352}
     legFront: 0.83
     legBack: 0.931
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: wizard
     head: {fileID: 21300000, guid: f00d474fd3626d44f83a64693c391f3d, type: 3}
     torso: {fileID: 21300000, guid: ceaaaed8e78074c4c8f33d96e443e29d, type: 3}
@@ -702,6 +1118,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.297}
     legFront: 0.993
     legBack: 0.784
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: zombie
     head: {fileID: 21300000, guid: b26c320dd1b915a4aaee3a2471c80950, type: 3}
     torso: {fileID: 21300000, guid: ac3712880fc627746a780a2bbdc4a76d, type: 3}
@@ -715,6 +1139,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.347}
     legFront: 1
     legBack: 0.731
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: parkrat
     head: {fileID: 21300000, guid: cb666083af7e13b40add530f4b9ed6fc, type: 3}
     torso: {fileID: 21300000, guid: df8a7428fcbec2348afcfcc1b602b36c, type: 3}
@@ -728,6 +1160,14 @@ MonoBehaviour:
     hip: {x: 0.734, y: 0.337}
     legFront: 0.634
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: plaguerat
     head: {fileID: 21300000, guid: 522c8db961e481a4a8ed37b714a832bd, type: 3}
     torso: {fileID: 21300000, guid: c01c027cb3880344e9513e89a1a74cdc, type: 3}
@@ -741,6 +1181,14 @@ MonoBehaviour:
     hip: {x: 0.732, y: 0.388}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: zapham
     head: {fileID: 21300000, guid: 097c1a9d950dc0e4cb77d7b523316124, type: 3}
     torso: {fileID: 21300000, guid: de3d21c1fd91cdc4488dcbe23cba90e1, type: 3}
@@ -754,6 +1202,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.296}
     legFront: 1
     legBack: 0.985
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: streamrat
     head: {fileID: 21300000, guid: aa681df1efdca78469cbd6c14950c1ad, type: 3}
     torso: {fileID: 21300000, guid: 53dafbf24af84db41a140123adbdf80e, type: 3}
@@ -767,6 +1223,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.467}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: starchef
     head: {fileID: 21300000, guid: 794861c78dffa9142ba9b927310f5efe, type: 3}
     torso: {fileID: 21300000, guid: ae87779fb5ce12c459c10726385800a5, type: 3}
@@ -780,6 +1244,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.312}
     legFront: 0.969
     legBack: 0.809
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: ramjui
     head: {fileID: 21300000, guid: 3c23b11c981268242a176d3064527772, type: 3}
     torso: {fileID: 21300000, guid: d1bb734a4471a724f8d3f3152a15e142, type: 3}
@@ -793,6 +1265,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.416}
     legFront: 1
     legBack: 0.887
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: jwerry
     head: {fileID: 21300000, guid: ab1275c6adb5d7640ae8597e26d0bbdb, type: 3}
     torso: {fileID: 21300000, guid: a6c983722ddb8cc4e86d0593e2f3a59b, type: 3}
@@ -806,6 +1286,14 @@ MonoBehaviour:
     hip: {x: 0.734, y: 0.279}
     legFront: 0.679
     legBack: 0.731
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: blackrat
     head: {fileID: 21300000, guid: fa435ab600f988c459b31360c31029da, type: 3}
     torso: {fileID: 21300000, guid: 99ce723a65122d747bbd2ba1d2b7ed13, type: 3}
@@ -819,6 +1307,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.308}
     legFront: 0.997
     legBack: 0.996
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: boxer
     head: {fileID: 21300000, guid: e265d5a2d3213b1498c03d4522baaf98, type: 3}
     torso: {fileID: 21300000, guid: 99fcbc7b1bfcad04398f36cf637d71e6, type: 3}
@@ -832,6 +1328,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.323}
     legFront: 0.885
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: dumbo
     head: {fileID: 21300000, guid: a02533846a8e3ec45be2ff8241c5b768, type: 3}
     torso: {fileID: 21300000, guid: fdf74c431d6efcf4096801f9beab0022, type: 3}
@@ -845,6 +1349,14 @@ MonoBehaviour:
     hip: {x: 0.732, y: 0.325}
     legFront: 1
     legBack: 0.837
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: dwarfham
     head: {fileID: 21300000, guid: fb34ee4272d477f45a9e1f7097d2b5ba, type: 3}
     torso: {fileID: 21300000, guid: 33c734ba6c777ed409e8d88c15d73299, type: 3}
@@ -858,6 +1370,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.352}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: farmer
     head: {fileID: 21300000, guid: 430febe11cba9774485ac56b1455db6a, type: 3}
     torso: {fileID: 21300000, guid: e2db579f55d7aa44abe0841766d0cc21, type: 3}
@@ -871,6 +1391,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.416}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: gerbilc
     head: {fileID: 21300000, guid: 5f060693193ecf942a0524564e3b424a, type: 3}
     torso: {fileID: 21300000, guid: c307a419672548548b2d84b0bbd96c13, type: 3}
@@ -884,6 +1412,14 @@ MonoBehaviour:
     hip: {x: 0.733, y: 0.372}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: painter
     head: {fileID: 21300000, guid: fb10e1a71ffcb854abd085c8550330fd, type: 3}
     torso: {fileID: 21300000, guid: 62de6cfdfd07faf44bda777f012bd86e, type: 3}
@@ -897,6 +1433,14 @@ MonoBehaviour:
     hip: {x: 0.731, y: 0.363}
     legFront: 0.805
     legBack: 0.805
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: student
     head: {fileID: 21300000, guid: 414fc2d595bf01c4894a193fcb7fc098, type: 3}
     torso: {fileID: 21300000, guid: 6bc9f75bc9203864dbeb6c17885964b2, type: 3}
@@ -910,6 +1454,14 @@ MonoBehaviour:
     hip: {x: 0.734, y: 0.462}
     legFront: 1
     legBack: 0.992
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: barista
     head: {fileID: 21300000, guid: 0ad860bea0f772343b161c08e570db02, type: 3}
     torso: {fileID: 21300000, guid: 2a50c0e9687c40f4090e66bae7cbf498, type: 3}
@@ -923,6 +1475,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.355}
     legFront: 1
     legBack: 0.869
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: gardener
     head: {fileID: 21300000, guid: e9520f487f50cc948b113b07730339e5, type: 3}
     torso: {fileID: 21300000, guid: 19b679d170babc14d9d8cc3e85e92a16, type: 3}
@@ -936,6 +1496,14 @@ MonoBehaviour:
     hip: {x: 0.738, y: 0.32}
     legFront: 0.708
     legBack: 0.857
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: hairless
     head: {fileID: 21300000, guid: 834403efd19f2d948b354868670125e5, type: 3}
     torso: {fileID: 21300000, guid: ddde436bc79d7af4997edc3b1c7cf7aa, type: 3}
@@ -949,6 +1517,14 @@ MonoBehaviour:
     hip: {x: 0.732, y: 0.332}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: harvest
     head: {fileID: 21300000, guid: 90fd951c907299a44a53e9bb64ecdf17, type: 3}
     torso: {fileID: 21300000, guid: bc2f77dfa190d164e84dcf59072a0e9b, type: 3}
@@ -962,6 +1538,14 @@ MonoBehaviour:
     hip: {x: 0.73, y: 0.312}
     legFront: 0.97
     legBack: 0.817
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: janitorat
     head: {fileID: 21300000, guid: e793b07b35ecba74898dc720afe464dc, type: 3}
     torso: {fileID: 21300000, guid: 5dafa092b0bf92f40a96cad022d52ee2, type: 3}
@@ -975,6 +1559,14 @@ MonoBehaviour:
     hip: {x: 0.735, y: 0.334}
     legFront: 0.631
     legBack: 0.947
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: jerboa
     head: {fileID: 21300000, guid: 0f2cea8e4f37ea848aa9f22156e9f08a, type: 3}
     torso: {fileID: 21300000, guid: 4460c799046629a49a2d133804b4df13, type: 3}
@@ -988,6 +1580,14 @@ MonoBehaviour:
     hip: {x: 0.737, y: 0.32}
     legFront: 1
     legBack: 0.641
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: spiny
     head: {fileID: 21300000, guid: 6f076001e05bfdc439c17d64a99ffc38, type: 3}
     torso: {fileID: 21300000, guid: aa073dc2bdd39084e8f86ad65f3b2e37, type: 3}
@@ -1001,6 +1601,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.483}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: jjdetective
     head: {fileID: 21300000, guid: 3344c5c358c61124c96933594805b011, type: 3}
     torso: {fileID: 21300000, guid: 3e0623e9a5e606a4e96eb85d8a379a44, type: 3}
@@ -1014,6 +1622,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.325}
     legFront: 1
     legBack: 0.963
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: fondue
     head: {fileID: 21300000, guid: 678a95abdcd021047a9ca61e1b9b47fb, type: 3}
     torso: {fileID: 21300000, guid: 6086c76fd214ba142bfca9303d891189, type: 3}
@@ -1027,6 +1643,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.325}
     legFront: 1
     legBack: 0.963
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: bomber
     head: {fileID: 21300000, guid: 97b5965d73b05184baa5addac6ba0454, type: 3}
     torso: {fileID: 21300000, guid: 67cb20d068075eb41ae40a724a4a5fd4, type: 3}
@@ -1040,6 +1664,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.325}
     legFront: 1
     legBack: 1.022
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: mechanic
     head: {fileID: 21300000, guid: cc22e46cf01a8fd47a6c5ba0aeb56bc6, type: 3}
     torso: {fileID: 21300000, guid: 7723e2ca0610abf48823201744ca5086, type: 3}
@@ -1053,6 +1685,14 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.325}
     legFront: 1
     legBack: 0.959
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: trooper
     head: {fileID: 21300000, guid: c3eaa8f80b22603498142399d42d9769, type: 3}
     torso: {fileID: 21300000, guid: be639698ae4f484478ef62bf472b1be9, type: 3}
@@ -1066,6 +1706,56 @@ MonoBehaviour:
     hip: {x: 0.736, y: 0.325}
     legFront: 1
     legBack: 0.887
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: icequeen
+    head: {fileID: 21300000, guid: 061e158e147afad4ca10280ed31a9165, type: 3}
+    torso: {fileID: 21300000, guid: 630e8e0ebeff10c4aadf5e53bc535be9, type: 3}
+    tail: {fileID: 21300000, guid: 7ddaeb074e796c140b89ca14aeb1119f, type: 3}
+    front: {fileID: 21300000, guid: 25687a7737a95c441be32b2bda59c4b7, type: 3}
+    back: {fileID: 21300000, guid: 2d829e090042f684684c68feaeb9f3e4, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.395}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.238, y: 0.448}
+    hip: {x: 0.736, y: 0.325}
+    legFront: 1
+    legBack: 0.927
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: fiveg
+    head: {fileID: 21300000, guid: 579311afe8aba7a49a95eb034e66ccdc, type: 3}
+    torso: {fileID: 21300000, guid: b93400609cb187542be4b624ec3c351f, type: 3}
+    tail: {fileID: 21300000, guid: b7117ec9cee02894994457aad3dbb568, type: 3}
+    front: {fileID: 21300000, guid: bfd0c024d7b7c9b44be080889d815329, type: 3}
+    back: {fileID: 21300000, guid: 1addfa3c9a781244196280d2442e3cc1, type: 3}
+    single: {fileID: 21300000, guid: 67b80232879fee64fbb27df30d84f178, type: 3}
+    neck: {x: 0.069, y: 0.395}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.238, y: 0.448}
+    hip: {x: 0.736, y: 0.325}
+    legFront: 1
+    legBack: 0.934
+    screen: 1
+    screenRect:
+      serializedVersion: 2
+      x: 0.0721
+      y: 0.1123
+      width: 0.8559
+      height: 0.7536
+    screenBg: {fileID: 21300000, guid: d1738440607c73c4f97052aba0bbccb0, type: 3}
   - codeId: pcmouse
     head: {fileID: 0}
     torso: {fileID: 0}
@@ -1079,6 +1769,14 @@ MonoBehaviour:
     hip: {x: 0, y: 0}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: bombrat
     head: {fileID: 0}
     torso: {fileID: 0}
@@ -1092,6 +1790,14 @@ MonoBehaviour:
     hip: {x: 0, y: 0}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: jwipo
     head: {fileID: 0}
     torso: {fileID: 0}
@@ -1105,6 +1811,14 @@ MonoBehaviour:
     hip: {x: 0, y: 0}
     legFront: 1
     legBack: 1
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: burger
     head: {fileID: 0}
     torso: {fileID: 0}
@@ -1118,29 +1832,11 @@ MonoBehaviour:
     hip: {x: 0, y: 0}
     legFront: 1
     legBack: 1
-  - codeId: icequeen
-    head: {fileID: 21300000, guid: 8cb2d2a8c5ce7394fbc4b104715f4453, type: 3}
-    torso: {fileID: 21300000, guid: a22170ec3be1c6f4ab46dab391dc36d2, type: 3}
-    tail: {fileID: 21300000, guid: 3b11501365ce86c46b88ecd4de40a4a5, type: 3}
-    front: {fileID: 21300000, guid: f19a3caa4b4c57547a2689cfaa211a45, type: 3}
-    back: {fileID: 21300000, guid: 15ecedd43b59e734fa0d9c080c20b88a, type: 3}
-    single: {fileID: 0}
-    neck: {x: 0.068, y: 0.599}
-    tailAnchor: {x: 0.945, y: 0.405}
-    shoulder: {x: 0.24, y: 0.733}
-    hip: {x: 0.733, y: 0.553}
-    legFront: 1.034
-    legBack: 1
-  - codeId: fiveg
-    head: {fileID: 21300000, guid: 414fc2d595bf01c4894a193fcb7fc098, type: 3}
-    torso: {fileID: 21300000, guid: 6bc9f75bc9203864dbeb6c17885964b2, type: 3}
-    tail: {fileID: 21300000, guid: 3112b94dff669f0488f52a561b7f3d48, type: 3}
-    front: {fileID: 21300000, guid: f7fc2a6c7b5f18d41b892919439b7ef6, type: 3}
-    back: {fileID: 21300000, guid: afbd77c4257d9754ab6922b7ccbda9e0, type: 3}
-    single: {fileID: 0}
-    neck: {x: 0.069, y: 0.541}
-    tailAnchor: {x: 0.947, y: 0.615}
-    shoulder: {x: 0.239, y: 0.594}
-    hip: {x: 0.734, y: 0.462}
-    legFront: 1
-    legBack: 0.992
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}

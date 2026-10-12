@@ -1,0 +1,15 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: city_props.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames. Avoid magenta or pink-purple colors inside the drawings.
+- An exact grid of 3 columns x 2 rows (each cell 512x512). Each drawing centered in its own cell, standing on the bottom of its cell area with a clear magenta margin; nothing touches cell borders. No ground shadows, no floor under them.
+- STYLE IS THE MOST IMPORTANT RULE: paint every object EXACTLY like the objects in the attached crop of the lobby (ref_lobby_objects: the blue tin can, the matchbox bed, the books, the cheese shelf, the desk lamp). That means: SIMPLE large soft shapes, MATTE surfaces, very gentle soft shading only (one soft darker tone on the shadow side, a soft lighter tone on top), NO fine texture, NO rust, NO dirt, NO scratches, NO stains, NO wood grain detail, NO rivets or bolts, NO glossy highlights, NO hard specular, NO thin dark outlines, NO tiny details. Muted warm palette: dusty blue, brick red, mustard, cream, warm brown, soft teal. Clean and readable at small size, a little bit flat, like a cozy picture book. Simple front/side view, not dramatic 3D perspective.
+- Objects for a hidden underground rat city, rat-sized (made from human junk).
+
+Cells:
+1) BLACK MARKET STALL: a small rat-sized market stall built from a wooden crate counter, a dark plum-purple patched cloth awning on two thin wooden poles, a little hanging warm lantern, on the counter a rack of four small colorful test tubes, a cheese wedge and a burlap sack. Readable silhouette.
+2) SECRET LAB BENCH (gene extractor machine): a small wooden lab table; on it a BIG round-bottom glass flask filled halfway with luminous-looking teal-green liquid (flat colors, no glow), held by a metal clamp stand; above the flask a big glass DROPPER (pipette with red rubber bulb) hanging on a mechanical arm pointing down into the flask mouth; a copper pipe comes out of the bottom of the flask, goes down through the table and ends at the bottom edge of the drawing. A few small test tubes and a little tag with a DNA double-helix symbol on the table side.
+3) a wooden LADDER, tall and narrow (about 3 times taller than wide), slightly worn.
+4) a pile of two wooden crates and one small tin barrel.
+5) a blank small wooden signboard on a post with an arrow shape pointing UP (no letters).
+6) a street lamp made from a bent spoon and a small glass jar lamp with a warm light inside (flat).

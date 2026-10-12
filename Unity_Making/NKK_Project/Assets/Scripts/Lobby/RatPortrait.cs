@@ -15,6 +15,10 @@ namespace NKK.Lobby
         [Tooltip("머리 폭 상한 = 몸통 폭 × 이 값")] public float headWidthRatio = 0.62f;
         [Tooltip("칸 안 여백 비율")] public float padding = 0.08f;
         [Tooltip("오른쪽을 보게 (원본 그림은 왼쪽을 봄)")] public bool faceRight;
+        [Tooltip("화면 속 쥐 (5G 휴대폰): 화면 칸 안쪽 여백 비율")] public float screenRatPadding = 0.12f;
+        [HideInInspector] public bool asScreen;            // 이 그림이 휴대폰 화면 속 쥐 (파츠로 조립)
+        RatPortrait screenRat;                              // 휴대폰 화면 안 쥐 (처음 필요할 때 이 칸을 복제해 single 아래에 둠)
+        Image screenBgImg;
 
         static Vector2 PivotTL(Sprite s) => new(s.pivot.x / s.rect.width, 1 - s.pivot.y / s.rect.height);
         static Vector2 L(Vector2 px) => new(px.x, -px.y);       // 리그 픽셀(y 아래 +) → UI (y 위 +)
@@ -27,11 +31,14 @@ namespace NKK.Lobby
         {
             shown = e != null;
             if (tint == default) tint = Color.white;
-            bool isSingle = e != null && e.torso == null && e.single != null;
+            bool isSingle = e != null && !asScreen && e.IsSingle;
+            bool scr = isSingle && e.screen && e.torso && single;
+            if (screenRat) screenRat.gameObject.SetActive(scr);
+            if (screenBgImg) screenBgImg.enabled = scr && e.screenBg;
             foreach (var r in new[] { farBack, farFront, tail, torso, back, front, head }) if (r) r.enabled = e != null && !isSingle;
             if (single) single.enabled = isSingle;
             if (e == null) return;
-            if (isSingle) { Put(single, e.single, Vector2.zero, 1, tint); Fit(); return; }
+            if (isSingle) { Put(single, e.single, Vector2.zero, 1, tint); Fit(); if (scr) ShowScreen(e, tint); return; }
 
             float tw = e.torso.rect.width, th = e.torso.rect.height;
             float legLenF = e.front ? e.front.rect.height * (1 - PivotTL(e.front).y) * e.legFront : 0;
@@ -48,6 +55,40 @@ namespace NKK.Lobby
             Put(front, e.front, L(shoulder), e.legFront, tint);
             Put(head, e.head, L(neck), headScale, tint);
             Fit();
+        }
+
+        // 휴대폰 화면 칸에 배경 + 파츠 쥐 (화면 칸에 꽉 맞춰 가운데)
+        void ShowScreen(RatArtLibrary.Entry e, Color tint)
+        {
+            var sr = single.rectTransform;
+            Vector2 a = e.screenRect.min, b = e.screenRect.max;
+            // 화면 쥐를 먼저 복제 (배경 자식이 생기기 전에, 복제본에 배경이 딸려 가지 않게)
+            if (!screenRat)
+            {
+                screenRat = Instantiate(this, sr);
+                screenRat.name = "ScreenRat"; screenRat.asScreen = true; screenRat.faceRight = false;
+                foreach (var g in screenRat.GetComponentsInChildren<Graphic>(true)) g.raycastTarget = false;
+            }
+            if (!screenBgImg)
+            {
+                var go = new GameObject("ScreenBg", typeof(RectTransform), typeof(Image));
+                go.transform.SetParent(sr, false);
+                screenBgImg = go.GetComponent<Image>(); screenBgImg.raycastTarget = false;
+            }
+            Stretch(screenBgImg.rectTransform, a, b);
+            screenBgImg.sprite = e.screenBg; screenBgImg.enabled = e.screenBg; screenBgImg.color = tint;
+            screenBgImg.transform.SetAsFirstSibling();
+            screenRat.transform.SetAsLastSibling();
+            float pad = screenRatPadding;
+            Stretch((RectTransform)screenRat.transform, a + new Vector2(e.screenRect.width, e.screenRect.height) * pad, b - new Vector2(e.screenRect.width, e.screenRect.height) * pad);
+            screenRat.gameObject.SetActive(true);
+            screenRat.Show(e, tint);
+        }
+
+        static void Stretch(RectTransform rt, Vector2 a, Vector2 b)
+        {
+            rt.anchorMin = a; rt.anchorMax = b; rt.offsetMin = rt.offsetMax = Vector2.zero;
+            rt.pivot = new Vector2(0.5f, 0.5f); rt.localScale = Vector3.one; rt.localRotation = Quaternion.identity;
         }
 
         // center = true 면 스프라이트 가운데를 pos 에 (몸통), 아니면 스프라이트 피벗(관절)을 pos 에

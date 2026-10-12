@@ -1579,6 +1579,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 6c30f495dca6abf4cbcc1e8daa13e64d, type: 3}
   - {fileID: 21300000, guid: ae1cae0c890e72f43841389631739562, type: 3}
   - {fileID: 21300000, guid: 204c003aff04d094792a166d7206bbfa, type: 3}
+  - {fileID: 21300000, guid: ee69c6424f2bd274d9cae97edc304c8a, type: 3}
 --- !u!1 &95008336
 GameObject:
   m_ObjectHideFlags: 0
@@ -10327,7 +10328,7 @@ MonoBehaviour:
   freezePopup: "\uAF41\uAF41!"
   iceMissilePopup: "\uC5BC\uC74C \uBBF8\uC0AC\uC77C!"
   dataPopup: "\uB370\uC774\uD130 \uC804\uC1A1 \uC644\uB8CC!"
-  iceMissileSprite: {fileID: 0}
+  iceMissileSprite: {fileID: 21300000, guid: 3195dad2e09d05b4e845b53f3f6ffdbc, type: 3}
   iceMissileColor: {r: 0.7, g: 0.9, b: 1, a: 1}
   iceHoming: 6
   promoteKeep: 6
@@ -41730,6 +41731,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 898fa6f0860e99d45895384a31896d17, type: 3}
   - name: ult_30034
     sprite: {fileID: 21300000, guid: 1ffd0367bb23ccc419253d1eeeb13ff5, type: 3}
+  - name: ult_30035
+    sprite: {fileID: 21300000, guid: c3ecccd7e83d8434d87c3b36329b3b11, type: 3}
   maxButtons: 8
   readyMark: {fileID: 21300000, guid: c813175b874b22f43b25bbeed37128f7, type: 3}
   readyMarkSize: 26
@@ -41986,6 +41989,12 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: a26433a05dad9594daffd8141a7eea77, type: 3}
   - name: rat_bombrat
     sprite: {fileID: 21300000, guid: 475a0e690c929d54fa46d13b3e1890cc, type: 3}
+  - name: rat_burger
+    sprite: {fileID: 21300000, guid: 00b3fb47af8b9144f9978c1c4a4d93f5, type: 3}
+  - name: rat_fiveg
+    sprite: {fileID: 21300000, guid: 67b80232879fee64fbb27df30d84f178, type: 3}
+  - name: rat_fiveg_screen
+    sprite: {fileID: 21300000, guid: d1738440607c73c4f97052aba0bbccb0, type: 3}
   - name: rat_jwipo
     sprite: {fileID: 21300000, guid: f3183a1bb1978dd48a1346b7abea438a, type: 3}
   - name: rat_pcmouse
@@ -42012,12 +42021,36 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 6089817835b2295489532d80975399a1, type: 3}
   - name: bowtie
     sprite: {fileID: 21300000, guid: b5b158a1390a63448873a7d682cbb266, type: 3}
+  - name: burger_stack0
+    sprite: {fileID: 21300000, guid: f56b20c11e165904b8fcd9ab2344ccce, type: 3}
+  - name: burger_stack1
+    sprite: {fileID: 21300000, guid: 3a7609576da481349b653431f663c654, type: 3}
+  - name: burger_stack2
+    sprite: {fileID: 21300000, guid: 26fd73041a75be340bdc02e0366f0992, type: 3}
+  - name: burger_stack3
+    sprite: {fileID: 21300000, guid: c09646ba174dc1942bf8ca927ddb900e, type: 3}
+  - name: burger_stack4
+    sprite: {fileID: 21300000, guid: 4dc63e2cc832aee40afd07c736d10c84, type: 3}
+  - name: burger_stack5
+    sprite: {fileID: 21300000, guid: e98d344b7b4d61a47b079e8d4b06171d, type: 3}
   - name: cheese_bullet
     sprite: {fileID: 21300000, guid: e85f833b3252674499b304f9c3eb064f, type: 3}
   - name: cheese_puddle
     sprite: {fileID: 21300000, guid: 56e55924c944d524f8c0d3d4824ab0f7, type: 3}
+  - name: data_chip
+    sprite: {fileID: 21300000, guid: f77258bd6de6baa4885471b06fe23ca7, type: 3}
   - name: explosion_big
     sprite: {fileID: 21300000, guid: 9fee6e824d8224a4f911bed9db200a10, type: 3}
+  - name: frost_crystal
+    sprite: {fileID: 21300000, guid: 9709d6655fb90674cb48a32f51188efd, type: 3}
+  - name: ice_block
+    sprite: {fileID: 21300000, guid: deb4334e59db00a40b5e6a82b20facd9, type: 3}
+  - name: ice_castle
+    sprite: {fileID: 21300000, guid: 879e06d79c35ea44eb588ea37f333c1a, type: 3}
+  - name: ice_missile
+    sprite: {fileID: 21300000, guid: 3195dad2e09d05b4e845b53f3f6ffdbc, type: 3}
+  - name: ice_tiara
+    sprite: {fileID: 21300000, guid: 6fb3254a9ae651245a1d8b4039341a00, type: 3}
   - name: jwipo
     sprite: {fileID: 21300000, guid: 52d8bd27da0a9e24e9359d43555fb9c8, type: 3}
   - name: jwipo_grilled
@@ -42030,8 +42063,14 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 90485fa8d6fd7ef4ba7b1325d0a49af0, type: 3}
   - name: patty
     sprite: {fileID: 21300000, guid: d87621a2be86df84080a5789f051860a, type: 3}
+  - name: signal_bars
+    sprite: {fileID: 21300000, guid: 178cf179e7e56e741a7d0435c7d52660, type: 3}
+  - name: signal_wave
+    sprite: {fileID: 21300000, guid: 99deb24a603e5624a99bd71bcc30a4c8, type: 3}
   - name: smell
     sprite: {fileID: 21300000, guid: 18ab2b0f0373c4e4d9f9ae66caf30e6e, type: 3}
+  - name: snowflake
+    sprite: {fileID: 21300000, guid: e64d3120916e5cd4f9bf92cbb65fbfbd, type: 3}
   - name: soccer_ball
     sprite: {fileID: 21300000, guid: 7e620034f4b309e4fb9d842009e6447b, type: 3}
   - name: wrench
@@ -42612,6 +42651,8 @@ MonoBehaviour:
   Timer: {fileID: 706652775}
   hurryClip: {fileID: 8300000, guid: 2304a348bf9e9844d92a4ad1e54bb1de, type: 3}
   hurryAt: 30
+  alleyClip: {fileID: 0}
+  gachaClip: {fileID: 0}
 --- !u!4 &1638342848
 Transform:
   m_ObjectHideFlags: 0
@@ -53747,6 +53788,16 @@ MonoBehaviour:
   farLegColor: {r: 0.8, g: 0.78, b: 0.79, a: 1}
   farGap: 0.07
   headWidthRatio: 0.62
+  screenBg: {fileID: 0}
+  screenRig: {fileID: 0}
+  screenRatLen: 0.45
+  screenFloor: 0.1
+  screenPace: 0.35
+  screenStep: 9
+  bumpSpeed: 3
+  bumpDist: 2.5
+  bumpTime: 1.2
+  asScreen: 0
   headSwapScale: 1.15
   headSwapFwd: 0.35
   headReplace: {fileID: 0}

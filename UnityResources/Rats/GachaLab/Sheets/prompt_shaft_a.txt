@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: shaft_a.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1536 PORTRAIT, one full-frame illustration (no transparency, no panels, no borders). NO text, NO letters, NO numbers, no logos, NO characters (no rats, no people, no animals).
+- STYLE: exactly the style of the attached painting ref_shaft (cozy storybook game art, soft shading, warm muted palette, warm lamp light, teal accents). Same scale of details as ref_shaft.
+- This picture is ONE SEGMENT of a very long vertical side cross-section that a camera scrolls down through. It will be stacked vertically with other segments, so:
+  * ONE thick vertical COPPER PIPE with grey metal clamps runs straight down through the WHOLE picture, from the very top edge to the very bottom edge (unless this segment says it ends). Its CENTER is exactly at the horizontal middle of the image (x = 512 px) and its width is exactly about 120 px. It never moves sideways, never bends, never gets thicker or thinner (except where this segment says it ends).
+  * The left and right sides are background layers (earth, stones, bricks) that continue at the top and bottom edges.
+
+SEGMENT 1 of 3 (the top):
+- TOP 22%: the underside of a secret rat laboratory building in an underground rat city: the rounded bottom of a big glass flask with teal-green liquid in the center (the copper pipe starts from the bottom of this flask), the bottom of a dusty-teal tin-can building, wooden floor beams and planks, a couple of glass bottles and a lantern on the floor above.
+- BELOW (22% to 100%): the copper pipe goes straight down through the ground under the city: layers of dark brown earth with tangled roots, pebbles and stones, a buried old teaspoon, a bottle cap, a few small glowing mushrooms. The earth continues all the way to the bottom edge.

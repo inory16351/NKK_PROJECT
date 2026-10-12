@@ -72,7 +72,7 @@ namespace NKK.Lobby
             bool unlocked = !Progress.I || Progress.I.IsUnlocked("alley");
             bool prep = manager && manager.PrepOpen;
             if (toRoom) toRoom.gameObject.SetActive(unlocked && !AtRoom && k < 0.01f && !prep);
-            if (toHome) toHome.gameObject.SetActive(AtRoom && k > 0.99f && !prep);
+            if (toHome) toHome.gameObject.SetActive(AtRoom && k > 0.99f && !prep && !GachaShow.Busy);      // 뽑기 연출 중엔 숨김
             if (hideInRoom != null) foreach (var g in hideInRoom) if (g) g.SetActive(k < 0.5f);
         }
     }

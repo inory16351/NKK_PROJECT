@@ -1,0 +1,3 @@
+- STYLE: match the attached story cutscene (ref_story) and game screenshot (ref_game): cozy flat cartoon game art (Untitled Goose Game mood), completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted palette. Rats look exactly like the cute flat rats in those references (white lab rats with red eyes, brown rats, grey mice; pink ears, pink noses, long pink tails).
+- Setting: a SECRET RAT LABORATORY hidden in the walls: rat-sized lab made of human junk, warm brown wood, copper pipes, glass flasks, dim teal-green and warm lamp light.
+- NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere.

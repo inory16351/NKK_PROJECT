@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lab_c6.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 full-frame cutscene illustration (no transparency).
+- SCENE (front view): in a calm underground sewer tunnel, the copper pipe from above comes down the brick wall and bends toward the camera, ending in a big ROUND DARK OPENING (a circular pipe mouth, like a round hatch frame with rivets) in the CENTER of the picture, facing the viewer. The opening is EMPTY and dark inside (no lid; a lid will be placed later). Brick wall around it, a thin water channel on the floor below, small puddles, a few small drops. Warm dim light from the side. The round opening is about 40% of the image height, centered.
+
+- STYLE: match the attached story cutscene (ref_story) and game screenshot (ref_game): cozy flat cartoon game art (Untitled Goose Game mood), completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted palette. Rats look exactly like the cute flat rats in those references (white lab rats with red eyes, brown rats, grey mice; pink ears, pink noses, long pink tails).
+- Setting: a SECRET RAT LABORATORY hidden in the walls: rat-sized lab made of human junk, warm brown wood, copper pipes, glass flasks, dim teal-green and warm lamp light.
+- NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere.

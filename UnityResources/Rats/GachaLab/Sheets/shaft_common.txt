@@ -1,0 +1,5 @@
+- 1024x1536 PORTRAIT, one full-frame illustration (no transparency, no panels, no borders). NO text, NO letters, NO numbers, no logos, NO characters (no rats, no people, no animals).
+- STYLE: exactly the style of the attached painting ref_shaft (cozy storybook game art, soft shading, warm muted palette, warm lamp light, teal accents). Same scale of details as ref_shaft.
+- This picture is ONE SEGMENT of a very long vertical side cross-section that a camera scrolls down through. It will be stacked vertically with other segments, so:
+  * ONE thick vertical COPPER PIPE with grey metal clamps runs straight down through the WHOLE picture, from the very top edge to the very bottom edge (unless this segment says it ends). Its CENTER is exactly at the horizontal middle of the image (x = 512 px) and its width is exactly about 120 px. It never moves sideways, never bends, never gets thicker or thinner (except where this segment says it ends).
+  * The left and right sides are background layers (earth, stones, bricks) that continue at the top and bottom edges.

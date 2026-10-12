@@ -45,7 +45,7 @@ namespace NKK.Lobby
 
         void Awake()
         {
-            if (home) { home.manager = this; home.inputBlocked = () => PrepOpen || NKK.Tutorial.TutorialBox.Showing; }
+            if (home) { home.manager = this; home.inputBlocked = () => PrepOpen || NKK.Tutorial.TutorialBox.Showing || GachaShow.Busy; }   // 뽑기 연출 중(지하 장면에선 Prep 를 숨김)에도 막음
             if (homeButton) homeButton.onClick.AddListener(CloseToHome);
             if (saveExitButton) saveExitButton.onClick.AddListener(SaveAndExit);
             foreach (var p in pages) { var id = p.id; if (p.tab) p.tab.onClick.AddListener(() => OpenPage(id)); }
