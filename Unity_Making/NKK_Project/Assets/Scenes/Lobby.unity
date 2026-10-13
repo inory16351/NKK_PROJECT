@@ -60927,8 +60927,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB04C\uC5B4\uC11C \uB458\uB7EC\uBCF4\uAE30 \xB7 \uD720\uB85C \uD655\uB300
-    \xB7 \uCC0D\uC73C\uBA74 \uC606 \uB178\uB4DC\uAC00 \uB4DC\uB7EC\uB098\uC694"
+  m_text: "\uC2A4\uD0AC\uC744 \uCC0D\uC73C\uBA74 \uC774\uC5B4\uC9C4 \uCE78\uC774
+    \uB4DC\uB7EC\uB098\uC694"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 965a6c77b8b4ddb458812a8b42debfc7, type: 2}
   m_sharedMaterial: {fileID: -1766114753170248595, guid: 965a6c77b8b4ddb458812a8b42debfc7, type: 2}
@@ -72938,6 +72938,8 @@ MonoBehaviour:
   step: 190
   zoomRange: {x: 0.32, y: 1.5}
   zoomStep: 1.12
+  allowPan: 0
+  allowZoom: 0
   tierTabs:
   - {fileID: 2100922818}
   - {fileID: 273317573}

@@ -23,6 +23,8 @@ namespace NKK.Lobby
         [Tooltip("칸 간격 (픽셀)")] public float step = 190;
         public Vector2 zoomRange = new(0.45f, 1.5f);
         [Tooltip("휠 한 칸 확대 배율")] public float zoomStep = 1.12f;
+        [Tooltip("끌어서 지도 옮기기 (끄면 트리 전체가 보이게 고정, 사용자 2026-10-13)")] public bool allowPan;
+        [Tooltip("휠로 확대·축소 (끄면 고정)")] public bool allowZoom;
 
         [Header("훈장 탭 (1~8훈장 순서, 자식 Lock = 못 단 훈장 자물쇠 · Sel = 고른 탭)")]
         public Button[] tierTabs;
@@ -325,17 +327,17 @@ namespace NKK.Lobby
         }
 
         // ── 지도 끌기 · 휠 확대 ──
-        public void OnBeginDrag(PointerEventData e) { dragging = true; }
+        public void OnBeginDrag(PointerEventData e) { if (allowPan) dragging = true; }
         public void OnDrag(PointerEventData e)
         {
             var cv = GetComponentInParent<Canvas>();
-            if (content) content.anchoredPosition += e.delta / (cv ? cv.scaleFactor : 1);
+            if (allowPan && content) content.anchoredPosition += e.delta / (cv ? cv.scaleFactor : 1);
         }
         public void OnEndDrag(PointerEventData e) { Invoke(nameof(EndDrag), 0); }
         void EndDrag() => dragging = false;
         public void OnScroll(PointerEventData e)
         {
-            if (!content || !viewport) return;
+            if (!allowZoom || !content || !viewport) return;
             float z0 = zoom; zoom = Mathf.Clamp(zoom * (e.scrollDelta.y > 0 ? zoomStep : 1 / zoomStep), zoomRange.x, zoomRange.y);
             RectTransformUtility.ScreenPointToLocalPointInRectangle(viewport, e.position, e.pressEventCamera, out var m);
             content.anchoredPosition = m - (m - content.anchoredPosition) * (zoom / z0);
