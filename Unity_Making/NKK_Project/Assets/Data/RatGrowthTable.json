@@ -3,6 +3,7 @@
   {
    "node_id": 1,
    "node_name": "갉기 훈련",
+   "node_name_sk": 1900001,
    "code_id": "dmg",
    "max_level": 25,
    "req_node": 0,
@@ -13,12 +14,14 @@
    "value_03": 0.0,
    "node_icon": "SkillIcons/cs_teeth",
    "node_desc": "이 종의 갉는 힘 ×{v1} (레벨마다 곱해짐)",
+   "node_desc_sk": 2000001,
    "pos_x": 1,
    "pos_y": 0
   },
   {
    "node_id": 2,
    "node_name": "뒷발 근육",
+   "node_name_sk": 1900002,
    "code_id": "legs",
    "max_level": 10,
    "req_node": 1,
@@ -29,12 +32,14 @@
    "value_03": 0.0,
    "node_icon": "SkillIcons/cs_speed",
    "node_desc": "돌진 속도 +{p1}% (레벨마다)",
+   "node_desc_sk": 2000002,
    "pos_x": 0,
    "pos_y": 1
   },
   {
    "node_id": 3,
    "node_name": "특수 액션",
+   "node_name_sk": 1900003,
    "code_id": "act",
    "max_level": 5,
    "req_node": 1,
@@ -45,12 +50,14 @@
    "value_03": 0.0,
    "node_icon": "@action",
    "node_desc": "특수 액션 해금. 2레벨부터 발동 확률·빈도 +{p1}%씩",
+   "node_desc_sk": 2000003,
    "pos_x": 2,
    "pos_y": 1
   },
   {
    "node_id": 4,
    "node_name": "재롱 본능",
+   "node_name_sk": 1900004,
    "code_id": "show",
    "max_level": 5,
    "req_node": 1,
@@ -61,12 +68,14 @@
    "value_03": 0.0,
    "node_icon": "SkillIcons/cs_flip",
    "node_desc": "묘기 확률 +{p1}% (레벨마다)",
+   "node_desc_sk": 2000004,
    "pos_x": 3,
    "pos_y": 1
   },
   {
    "node_id": 5,
    "node_name": "급소 갉기",
+   "node_name_sk": 1900005,
    "code_id": "crit",
    "max_level": 5,
    "req_node": 2,
@@ -77,12 +86,14 @@
    "value_03": 0.0,
    "node_icon": "SkillIcons/cs_critc",
    "node_desc": "크리티컬 확률 +{p1}% (레벨마다)",
+   "node_desc_sk": 2000005,
    "pos_x": 0,
    "pos_y": 2
   },
   {
    "node_id": 6,
    "node_name": "액션 위력",
+   "node_name_sk": 1900006,
    "code_id": "actPow",
    "max_level": 10,
    "req_node": 3,
@@ -93,12 +104,14 @@
    "value_03": 0.0,
    "node_icon": "@action",
    "node_desc": "특수 액션 위력 +{p1}% (레벨마다)",
+   "node_desc_sk": 2000006,
    "pos_x": 2,
    "pos_y": 2
   },
   {
    "node_id": 7,
    "node_name": "특수 강화",
+   "node_name_sk": 1900007,
    "code_id": "special",
    "max_level": 5,
    "req_node": 4,
@@ -109,12 +122,14 @@
    "value_03": 0.0,
    "node_icon": "@passive",
    "node_desc": "특수 능력 세기 +{p1}% (레벨마다)",
+   "node_desc_sk": 2000007,
    "pos_x": 3,
    "pos_y": 2
   },
   {
    "node_id": 8,
    "node_name": "액션 각성",
+   "node_name_sk": 1900008,
    "code_id": "actX",
    "max_level": 1,
    "req_node": 6,
@@ -125,12 +140,14 @@
    "value_03": 0.0,
    "node_icon": "@action",
    "node_desc": "특수 액션 각성: 액션이 한 단계 더 화려하고 강해짐",
+   "node_desc_sk": 2000008,
    "pos_x": 2,
    "pos_y": 3
   },
   {
    "node_id": 9,
    "node_name": "각성",
+   "node_name_sk": 1900009,
    "code_id": "ult",
    "max_level": 1,
    "req_node": 7,
@@ -141,12 +158,14 @@
    "value_03": 1.5,
    "node_icon": "SkillIcons/cs_core",
    "node_desc": "각성: 갉는 힘 ×{v1} · 특수 능력 ×{v2} · 특수 액션 ×{v3}, 몸에서 빛이 남",
+   "node_desc_sk": 2000009,
    "pos_x": 3,
    "pos_y": 3
   },
   {
    "node_id": 10,
    "node_name": "필살기 해금",
+   "node_name_sk": 1900010,
    "code_id": "ultUnlock",
    "max_level": 1,
    "req_node": 0,
@@ -157,6 +176,7 @@
    "value_03": 0.0,
    "node_icon": "@ult",
    "node_desc": "필살기 해금: 필살기 게이지가 차기 시작",
+   "node_desc_sk": 2000010,
    "pos_x": 1,
    "pos_y": 1
   }

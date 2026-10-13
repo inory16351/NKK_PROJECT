@@ -12,7 +12,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, 'Data_Table', '스테이지 테이블.xlsx')
 
 FLOORS = 50
-POW0 = 400                          # 1층 적정 전투력 (기획서 지수 100 = 400)
+POW0 = 400                          # 적정 전투력 기준 (기획서 지수 100 = 400)
+# 층별로 따로 정한 적정 (사용자 2026-10-13: 1층만 300, 2층부터는 400 기준 그대로. 측정 round8 — 400 이면 첫 판 2층에서, 전체 260 이면 너무 쉬움)
+POW_FIX = {1: 300}
+def pow_need(f): return POW_FIX.get(f, POW0 * diff(f))
 BOSS_EVERY = 5                      # 보스 층 (5층마다, 사용자 2026-10-12 유지)
 
 # ── 층 별 허들 기획서 Ver02 (박도원, 2026-10-12) — 사용자 2026-10-12: 난이도·방 수·목표 시간은 기획서대로, 보스는 5층마다 그대로 ──
@@ -148,7 +151,7 @@ def main():
         for r, v in enumerate((h, k, t), 1): ws.cell(r, c, v)._style = copy.copy(st[r - 1])
     for f in range(1, FLOORS + 1):
         D = diff(f)
-        row = [f, rooms(f), nice(POW0 * D), nice(D), nice(D ** CHEESE_EXP),
+        row = [f, rooms(f), nice(pow_need(f)), nice(D), nice(D ** CHEESE_EXP),
                *walls(f), wall_path(f), 0, ftype(f), target_sec(f), round(fight_sec(f), 1), nice(RESEARCH0 * D), skip_cap(f), nice(player_pow(f)),
                ('보스 층 · ' if is_boss(f) else '') + ftype(f)]
         for c, v in enumerate(row, 1): ws.cell(3 + f, c, v)._style = copy.copy(st[3])
@@ -171,7 +174,7 @@ def main():
         r = cd.max_row + 1
         for c, v in enumerate((k, d), 1): cd.cell(r, c, v)._style = copy.copy(cd.cell(r - 1, c)._style)
     wb.save(PATH)
-    print('Stage', FLOORS, '층 · 1층', POW0, '· 10층', nice(POW0 * diff(10)), '· 20층', nice(POW0 * diff(20)), '· 30층', nice(POW0 * diff(30)))
+    print('Stage', FLOORS, '층 · 1층', pow_need(1), '· 2층', nice(pow_need(2)), '· 10층', nice(POW0 * diff(10)), '· 20층', nice(POW0 * diff(20)), '· 30층', nice(POW0 * diff(30)))
 
 
 if __name__ == '__main__':

@@ -3,6 +3,7 @@
   {
    "boss_id": 95001,
    "boss_name": "경비대장 강철수",
+   "boss_name_sk": 2995001,
    "code_id": "boss_chief",
    "rig": "Human",
    "floor": 5,
@@ -27,6 +28,7 @@
   {
    "boss_id": 95002,
    "boss_name": "광기의 수석 연구원",
+   "boss_name_sk": 2995002,
    "code_id": "boss_mad",
    "rig": "Human",
    "floor": 10,
@@ -51,6 +53,7 @@
   {
    "boss_id": 95003,
    "boss_name": "연구소장",
+   "boss_name_sk": 2995003,
    "code_id": "boss_director",
    "rig": "Human",
    "floor": 15,
@@ -75,6 +78,7 @@
   {
    "boss_id": 95004,
    "boss_name": "실험체 제로 (거대 메인쿤)",
+   "boss_name_sk": 2995004,
    "code_id": "boss_zero",
    "rig": "Cat",
    "floor": 20,
@@ -99,6 +103,7 @@
   {
    "boss_id": 95005,
    "boss_name": "대마법사 마녀 고양이",
+   "boss_name_sk": 2995005,
    "code_id": "boss_witch",
    "rig": "Cat",
    "floor": 25,
@@ -123,6 +128,7 @@
   {
    "boss_id": 95006,
    "boss_name": "우주 고양이 사령관",
+   "boss_name_sk": 2995006,
    "code_id": "boss_commander",
    "rig": "Cat",
    "floor": 30,
@@ -150,571 +156,666 @@
    "line_id": 96001,
    "boss_id": 95001,
    "situation": "Intro",
-   "text": "쥐는 한 마리도 못 지나간다!"
+   "text": "쥐는 한 마리도 못 지나간다!",
+   "text_sk": 3096001
   },
   {
    "line_id": 96002,
    "boss_id": 95001,
    "situation": "Attack",
-   "text": "흐으읍!"
+   "text": "흐으읍!",
+   "text_sk": 3096002
   },
   {
    "line_id": 96003,
    "boss_id": 95001,
    "situation": "Attack",
-   "text": "짓밟아 주마!"
+   "text": "짓밟아 주마!",
+   "text_sk": 3096003
   },
   {
    "line_id": 96004,
    "boss_id": 95001,
    "situation": "Hit",
-   "text": "아야!"
+   "text": "아야!",
+   "text_sk": 3096004
   },
   {
    "line_id": 96005,
    "boss_id": 95001,
    "situation": "Hit",
-   "text": "이 녀석들이!"
+   "text": "이 녀석들이!",
+   "text_sk": 3096005
   },
   {
    "line_id": 96006,
    "boss_id": 95001,
    "situation": "Hit",
-   "text": "끄악!"
+   "text": "끄악!",
+   "text_sk": 3096006
   },
   {
    "line_id": 96007,
    "boss_id": 95001,
    "situation": "Hit",
-   "text": "비켜!"
+   "text": "비켜!",
+   "text_sk": 3096007
   },
   {
    "line_id": 96008,
    "boss_id": 95001,
    "situation": "Down",
-   "text": "기억해 두겠다아아~!"
+   "text": "기억해 두겠다아아~!",
+   "text_sk": 3096008
   },
   {
    "line_id": 96009,
    "boss_id": 95001,
    "situation": "Down",
-   "text": "퇴직금은?!"
+   "text": "퇴직금은?!",
+   "text_sk": 3096009
   },
   {
    "line_id": 96010,
    "boss_id": 95001,
    "situation": "Down",
-   "text": "으아아아~!"
+   "text": "으아아아~!",
+   "text_sk": 3096010
   },
   {
    "line_id": 96011,
    "boss_id": 95002,
    "situation": "Intro",
-   "text": "내 실험체들이 탈출해?!"
+   "text": "내 실험체들이 탈출해?!",
+   "text_sk": 3096011
   },
   {
    "line_id": 96012,
    "boss_id": 95002,
    "situation": "Attack",
-   "text": "실험체는 실험실로!"
+   "text": "실험체는 실험실로!",
+   "text_sk": 3096012
   },
   {
    "line_id": 96013,
    "boss_id": 95002,
    "situation": "Attack",
-   "text": "이거나 먹어라!"
+   "text": "이거나 먹어라!",
+   "text_sk": 3096013
   },
   {
    "line_id": 96014,
    "boss_id": 95002,
    "situation": "Hit",
-   "text": "내 연구가!"
+   "text": "내 연구가!",
+   "text_sk": 3096014
   },
   {
    "line_id": 96015,
    "boss_id": 95002,
    "situation": "Hit",
-   "text": "으윽, 시약이!"
+   "text": "으윽, 시약이!",
+   "text_sk": 3096015
   },
   {
    "line_id": 96016,
    "boss_id": 95002,
    "situation": "Hit",
-   "text": "감히!"
+   "text": "감히!",
+   "text_sk": 3096016
   },
   {
    "line_id": 96017,
    "boss_id": 95002,
    "situation": "Down",
-   "text": "내 논문이이이~!"
+   "text": "내 논문이이이~!",
+   "text_sk": 3096017
   },
   {
    "line_id": 96018,
    "boss_id": 95002,
    "situation": "Down",
-   "text": "실험 실패다아~!"
+   "text": "실험 실패다아~!",
+   "text_sk": 3096018
   },
   {
    "line_id": 96019,
    "boss_id": 95003,
    "situation": "Intro",
-   "text": "예산 삭감이다!!"
+   "text": "예산 삭감이다!!",
+   "text_sk": 3096019
   },
   {
    "line_id": 96020,
    "boss_id": 95003,
    "situation": "Attack",
-   "text": "예산 삭감!"
+   "text": "예산 삭감!",
+   "text_sk": 3096020
   },
   {
    "line_id": 96021,
    "boss_id": 95003,
    "situation": "Attack",
-   "text": "해고다!!"
+   "text": "해고다!!",
+   "text_sk": 3096021
   },
   {
    "line_id": 96023,
    "boss_id": 95003,
    "situation": "Hit",
-   "text": "내 양복이!"
+   "text": "내 양복이!",
+   "text_sk": 3096023
   },
   {
    "line_id": 96024,
    "boss_id": 95003,
    "situation": "Hit",
-   "text": "이건 감사 대상이야!"
+   "text": "이건 감사 대상이야!",
+   "text_sk": 3096024
   },
   {
    "line_id": 96025,
    "boss_id": 95003,
    "situation": "Hit",
-   "text": "아얏!"
+   "text": "아얏!",
+   "text_sk": 3096025
   },
   {
    "line_id": 96026,
    "boss_id": 95003,
    "situation": "Down",
-   "text": "퇴직금은?!"
+   "text": "퇴직금은?!",
+   "text_sk": 3096009
   },
   {
    "line_id": 96027,
    "boss_id": 95003,
    "situation": "Down",
-   "text": "기억해 두겠다아아~!"
+   "text": "기억해 두겠다아아~!",
+   "text_sk": 3096008
   },
   {
    "line_id": 96028,
    "boss_id": 95004,
    "situation": "Intro",
-   "text": "냐아아아옹!!!"
+   "text": "냐아아아옹!!!",
+   "text_sk": 3096028
   },
   {
    "line_id": 96029,
    "boss_id": 95004,
    "situation": "Attack",
-   "text": "냐아앙!!"
+   "text": "냐아앙!!",
+   "text_sk": 3096029
   },
   {
    "line_id": 96030,
    "boss_id": 95004,
    "situation": "Attack",
-   "text": "크르르…"
+   "text": "크르르…",
+   "text_sk": 3096030
   },
   {
    "line_id": 96031,
    "boss_id": 95004,
    "situation": "Attack",
-   "text": "캑… 캑캑…"
+   "text": "캑… 캑캑…",
+   "text_sk": 3096031
   },
   {
    "line_id": 96032,
    "boss_id": 95004,
    "situation": "Attack",
-   "text": "우웨엑(헤어볼)!"
+   "text": "우웨엑(헤어볼)!",
+   "text_sk": 3096032
   },
   {
    "line_id": 96033,
    "boss_id": 95004,
    "situation": "Hit",
-   "text": "캬악!"
+   "text": "캬악!",
+   "text_sk": 3096033
   },
   {
    "line_id": 96034,
    "boss_id": 95004,
    "situation": "Hit",
-   "text": "냐앙?!"
+   "text": "냐앙?!",
+   "text_sk": 3096034
   },
   {
    "line_id": 96035,
    "boss_id": 95004,
    "situation": "Hit",
-   "text": "하악!"
+   "text": "하악!",
+   "text_sk": 3096035
   },
   {
    "line_id": 96036,
    "boss_id": 95004,
    "situation": "Down",
-   "text": "냐아아아~!"
+   "text": "냐아아아~!",
+   "text_sk": 3096036
   },
   {
    "line_id": 96037,
    "boss_id": 95004,
    "situation": "Down",
-   "text": "냐옹…(기절)"
+   "text": "냐옹…(기절)",
+   "text_sk": 3096037
   },
   {
    "line_id": 96038,
    "boss_id": 95005,
    "situation": "Intro",
-   "text": "냐브라카다브라!!"
+   "text": "냐브라카다브라!!",
+   "text_sk": 3096038
   },
   {
    "line_id": 96039,
    "boss_id": 95005,
    "situation": "Attack",
-   "text": "냐브라카다브라!"
+   "text": "냐브라카다브라!",
+   "text_sk": 3096039
   },
   {
    "line_id": 96040,
    "boss_id": 95005,
    "situation": "Attack",
-   "text": "불타라 냥!"
+   "text": "불타라 냥!",
+   "text_sk": 3096040
   },
   {
    "line_id": 96041,
    "boss_id": 95005,
    "situation": "Attack",
-   "text": "냐아앙!!"
+   "text": "냐아앙!!",
+   "text_sk": 3096029
   },
   {
    "line_id": 96042,
    "boss_id": 95005,
    "situation": "Hit",
-   "text": "내 모자가!"
+   "text": "내 모자가!",
+   "text_sk": 3096042
   },
   {
    "line_id": 96043,
    "boss_id": 95005,
    "situation": "Hit",
-   "text": "캬악!"
+   "text": "캬악!",
+   "text_sk": 3096033
   },
   {
    "line_id": 96044,
    "boss_id": 95005,
    "situation": "Hit",
-   "text": "주문이 꼬였다냥!"
+   "text": "주문이 꼬였다냥!",
+   "text_sk": 3096044
   },
   {
    "line_id": 96045,
    "boss_id": 95005,
    "situation": "Down",
-   "text": "마법이 풀렸다냐아~!"
+   "text": "마법이 풀렸다냐아~!",
+   "text_sk": 3096045
   },
   {
    "line_id": 96046,
    "boss_id": 95005,
    "situation": "Down",
-   "text": "냐아아아~!"
+   "text": "냐아아아~!",
+   "text_sk": 3096036
   },
   {
    "line_id": 96047,
    "boss_id": 95006,
    "situation": "Intro",
-   "text": "이 연구소는 우주 냥국이 접수한다!"
+   "text": "이 연구소는 우주 냥국이 접수한다!",
+   "text_sk": 3096047
   },
   {
    "line_id": 96048,
    "boss_id": 95006,
    "situation": "Attack",
-   "text": "중력 해제 냥!"
+   "text": "중력 해제 냥!",
+   "text_sk": 3096048
   },
   {
    "line_id": 96049,
    "boss_id": 95006,
    "situation": "Attack",
-   "text": "둥실둥실 냥~"
+   "text": "둥실둥실 냥~",
+   "text_sk": 3096049
   },
   {
    "line_id": 96050,
    "boss_id": 95006,
    "situation": "Attack",
-   "text": "냐아앙!!"
+   "text": "냐아앙!!",
+   "text_sk": 3096029
   },
   {
    "line_id": 96051,
    "boss_id": 95006,
    "situation": "Hit",
-   "text": "헬멧에 금이!"
+   "text": "헬멧에 금이!",
+   "text_sk": 3096051
   },
   {
    "line_id": 96052,
    "boss_id": 95006,
    "situation": "Hit",
-   "text": "캬악!"
+   "text": "캬악!",
+   "text_sk": 3096033
   },
   {
    "line_id": 96053,
    "boss_id": 95006,
    "situation": "Hit",
-   "text": "지구 쥐 주제에!"
+   "text": "지구 쥐 주제에!",
+   "text_sk": 3096053
   },
   {
    "line_id": 96054,
    "boss_id": 95006,
    "situation": "Down",
-   "text": "우주로 돌아간다냐아~!"
+   "text": "우주로 돌아간다냐아~!",
+   "text_sk": 3096054
   },
   {
    "line_id": 96055,
    "boss_id": 95006,
    "situation": "Down",
-   "text": "냐아아아~!"
+   "text": "냐아아아~!",
+   "text_sk": 3096036
   },
   {
    "line_id": 96059,
    "boss_id": 95002,
    "situation": "Special",
-   "text": "실험은 폭발이다아아!!"
+   "text": "실험은 폭발이다아아!!",
+   "text_sk": 3096059
   },
   {
    "line_id": 96060,
    "boss_id": 95002,
    "situation": "Special",
-   "text": "이번엔 이걸 섞어볼까~?"
+   "text": "이번엔 이걸 섞어볼까~?",
+   "text_sk": 3096060
   },
   {
    "line_id": 96061,
    "boss_id": 95002,
    "situation": "Special",
-   "text": "내 몸으로 직접 실험한다!!"
+   "text": "내 몸으로 직접 실험한다!!",
+   "text_sk": 3096061
   },
   {
    "line_id": 96074,
    "boss_id": 95001,
    "situation": "Skill",
-   "text": "퉁! 퉁! 퉁! 사후르!!"
+   "text": "퉁! 퉁! 퉁! 사후르!!",
+   "text_sk": 3096074
   },
   {
    "line_id": 96075,
    "boss_id": 95001,
    "situation": "Skill",
-   "text": "사후르 시간이다!!"
+   "text": "사후르 시간이다!!",
+   "text_sk": 3096075
   },
   {
    "line_id": 96076,
    "boss_id": 95001,
    "situation": "Skill",
-   "text": "퉁퉁퉁퉁퉁퉁퉁퉁퉁 사후르!"
+   "text": "퉁퉁퉁퉁퉁퉁퉁퉁퉁 사후르!",
+   "text_sk": 3096076
   },
   {
    "line_id": 96077,
    "boss_id": 95001,
    "situation": "Attack",
-   "text": "진압봉 맛 좀 봐라!"
+   "text": "진압봉 맛 좀 봐라!",
+   "text_sk": 3096077
   },
   {
    "line_id": 96078,
    "boss_id": 95002,
    "situation": "Skill",
-   "text": "이븐하게 익혀 드릴게요~"
+   "text": "이븐하게 익혀 드릴게요~",
+   "text_sk": 3096078
   },
   {
    "line_id": 96079,
    "boss_id": 95002,
    "situation": "Skill",
-   "text": "익힘 정도가 아주 이븐하네요!"
+   "text": "익힘 정도가 아주 이븐하네요!",
+   "text_sk": 3096079
   },
   {
    "line_id": 96080,
    "boss_id": 95002,
    "situation": "Skill",
-   "text": "쥐 요리는 굽기가 생명이지!"
+   "text": "쥐 요리는 굽기가 생명이지!",
+   "text_sk": 3096080
   },
   {
    "line_id": 96081,
    "boss_id": 95002,
    "situation": "Attack",
-   "text": "숨 참아 봐~ 독가스다!"
+   "text": "숨 참아 봐~ 독가스다!",
+   "text_sk": 3096081
   },
   {
    "line_id": 96082,
    "boss_id": 95003,
    "situation": "Skill",
-   "text": "중요한 건 꺾이지 않는 마음!!"
+   "text": "중요한 건 꺾이지 않는 마음!!",
+   "text_sk": 3096082
   },
   {
    "line_id": 96083,
    "boss_id": 95003,
    "situation": "Skill",
-   "text": "중꺾마다!!"
+   "text": "중꺾마다!!",
+   "text_sk": 3096083
   },
   {
    "line_id": 96084,
    "boss_id": 95003,
    "situation": "Skill",
-   "text": "이 정도로 꺾일 소장이 아니다!"
+   "text": "이 정도로 꺾일 소장이 아니다!",
+   "text_sk": 3096084
   },
   {
    "line_id": 96085,
    "boss_id": 95003,
    "situation": "Attack",
-   "text": "서류는 던지라고 있는 거야!"
+   "text": "서류는 던지라고 있는 거야!",
+   "text_sk": 3096085
   },
   {
    "line_id": 96086,
    "boss_id": 95004,
    "situation": "Skill",
-   "text": "해피해피해피~!"
+   "text": "해피해피해피~!",
+   "text_sk": 3096086
   },
   {
    "line_id": 96087,
    "boss_id": 95004,
    "situation": "Skill",
-   "text": "(통 통 통)"
+   "text": "(통 통 통)",
+   "text_sk": 3096087
   },
   {
    "line_id": 96088,
    "boss_id": 95004,
    "situation": "Skill",
-   "text": "냥피냥피냥피!"
+   "text": "냥피냥피냥피!",
+   "text_sk": 3096088
   },
   {
    "line_id": 96089,
    "boss_id": 95005,
    "situation": "Skill",
-   "text": "무한동력이다냥!"
+   "text": "무한동력이다냥!",
+   "text_sk": 3096089
   },
   {
    "line_id": 96090,
    "boss_id": 95005,
    "situation": "Skill",
-   "text": "식빵이 먼저냐, 고양이가 먼저냐!"
+   "text": "식빵이 먼저냐, 고양이가 먼저냐!",
+   "text_sk": 3096090
   },
   {
    "line_id": 96091,
    "boss_id": 95005,
    "situation": "Skill",
-   "text": "버터 바른 고양이 출동~!"
+   "text": "버터 바른 고양이 출동~!",
+   "text_sk": 3096091
   },
   {
    "line_id": 96092,
    "boss_id": 95006,
    "situation": "Skill",
-   "text": "맥스웰 부대, 강하."
+   "text": "맥스웰 부대, 강하.",
+   "text_sk": 3096092
   },
   {
    "line_id": 96093,
    "boss_id": 95006,
    "situation": "Skill",
-   "text": "빙글빙글 맥스웰 투하!"
+   "text": "빙글빙글 맥스웰 투하!",
+   "text_sk": 3096093
   },
   {
    "line_id": 96094,
    "boss_id": 95006,
    "situation": "Skill",
-   "text": "(맥스웰 테마 흥얼흥얼)"
+   "text": "(맥스웰 테마 흥얼흥얼)",
+   "text_sk": 3096094
   },
   {
    "line_id": 96095,
    "boss_id": 95001,
    "situation": "Special",
-   "text": "무야호~!!!"
+   "text": "무야호~!!!",
+   "text_sk": 3096095
   },
   {
    "line_id": 96096,
    "boss_id": 95001,
    "situation": "Special",
-   "text": "그만큼 신나신다는 거지!!"
+   "text": "그만큼 신나신다는 거지!!",
+   "text_sk": 3096096
   },
   {
    "line_id": 96097,
    "boss_id": 95001,
    "situation": "Special",
-   "text": "관짝 들어갑니다~ (빠밤 빠밤)"
+   "text": "관짝 들어갑니다~ (빠밤 빠밤)",
+   "text_sk": 3096097
   },
   {
    "line_id": 96098,
    "boss_id": 95002,
    "situation": "Special",
-   "text": "펑?! ...오히려 좋아!!"
+   "text": "펑?! ...오히려 좋아!!",
+   "text_sk": 3096098
   },
   {
    "line_id": 96099,
    "boss_id": 95002,
    "situation": "Special",
-   "text": "실험 실패? 오히려 좋아!!"
+   "text": "실험 실패? 오히려 좋아!!",
+   "text_sk": 3096099
   },
   {
    "line_id": 96100,
    "boss_id": 95003,
    "situation": "Special",
-   "text": "이 층, 전액 현금 매입이다!!"
+   "text": "이 층, 전액 현금 매입이다!!",
+   "text_sk": 3096100
   },
   {
    "line_id": 96101,
    "boss_id": 95003,
    "situation": "Special",
-   "text": "긴급 회의!! 누가 임포스터지?"
+   "text": "긴급 회의!! 누가 임포스터지?",
+   "text_sk": 3096101
   },
   {
    "line_id": 96102,
    "boss_id": 95003,
    "situation": "Special",
-   "text": "쥐가 임포스터다!! 투표해!!"
+   "text": "쥐가 임포스터다!! 투표해!!",
+   "text_sk": 3096102
   },
   {
    "line_id": 96103,
    "boss_id": 95004,
    "situation": "Special",
-   "text": "(한강 위를 걷는 고양이)"
+   "text": "(한강 위를 걷는 고양이)",
+   "text_sk": 3096103
   },
   {
    "line_id": 96104,
    "boss_id": 95004,
    "situation": "Special",
-   "text": "꽁냥꽁냥~!!"
+   "text": "꽁냥꽁냥~!!",
+   "text_sk": 3096104
   },
   {
    "line_id": 96105,
    "boss_id": 95004,
    "situation": "Special",
-   "text": "(엉엉엉엉) 바나나..."
+   "text": "(엉엉엉엉) 바나나...",
+   "text_sk": 3096105
   },
   {
    "line_id": 96106,
    "boss_id": 95005,
    "situation": "Special",
-   "text": "트랄랄레로 트랄랄라~!"
+   "text": "트랄랄레로 트랄랄라~!",
+   "text_sk": 3096106
   },
   {
    "line_id": 96107,
    "boss_id": 95005,
    "situation": "Special",
-   "text": "상어 신발 신고 트랄랄라~ 냥!"
+   "text": "상어 신발 신고 트랄랄라~ 냥!",
+   "text_sk": 3096107
   },
   {
    "line_id": 96108,
    "boss_id": 95005,
    "situation": "Special",
-   "text": "머리를 바꿔 주겠다냥!"
+   "text": "머리를 바꿔 주겠다냥!",
+   "text_sk": 3096108
   },
   {
    "line_id": 96109,
    "boss_id": 95006,
    "situation": "Special",
-   "text": "우리는 답을 찾을 것이다. 늘 그랬듯이."
+   "text": "우리는 답을 찾을 것이다. 늘 그랬듯이.",
+   "text_sk": 3096109
   },
   {
    "line_id": 96110,
    "boss_id": 95006,
    "situation": "Special",
-   "text": "No... it's necessary."
+   "text": "No... it's necessary.",
+   "text_sk": 3096110
   },
   {
    "line_id": 96111,
    "boss_id": 95006,
    "situation": "Special",
-   "text": "눈에서 레이저 나간다냥."
+   "text": "눈에서 레이저 나간다냥.",
+   "text_sk": 3096111
   }
  ],
  "Atk_Type": [
@@ -726,7 +827,9 @@
    "windup": 0.0,
    "dur": 0.0,
    "atk_name": "-",
-   "line": ""
+   "atk_name_sk": 0,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Stomp",
@@ -736,7 +839,9 @@
    "windup": 0.5,
    "dur": 2.0,
    "atk_name": "내려찍기",
-   "line": ""
+   "atk_name_sk": 3100001,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Pounce",
@@ -746,7 +851,9 @@
    "windup": 0.6,
    "dur": 2.0,
    "atk_name": "덮치기",
-   "line": ""
+   "atk_name_sk": 3100002,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Flask",
@@ -756,7 +863,9 @@
    "windup": 0.4,
    "dur": 1.6,
    "atk_name": "플라스크 투척",
-   "line": ""
+   "atk_name_sk": 3100003,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Hairball",
@@ -766,7 +875,9 @@
    "windup": 0.4,
    "dur": 1.6,
    "atk_name": "헤어볼",
-   "line": ""
+   "atk_name_sk": 3100004,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Fireball",
@@ -776,7 +887,9 @@
    "windup": 0.4,
    "dur": 1.6,
    "atk_name": "불덩이",
-   "line": ""
+   "atk_name_sk": 3100005,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Swing",
@@ -786,7 +899,9 @@
    "windup": 0.45,
    "dur": 1.2,
    "atk_name": "휘두르기",
-   "line": ""
+   "atk_name_sk": 3100006,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Gravity",
@@ -796,7 +911,9 @@
    "windup": 0.5,
    "dur": 1.3,
    "atk_name": "무중력 파동",
-   "line": ""
+   "atk_name_sk": 3100007,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Mega_Stomp",
@@ -806,7 +923,9 @@
    "windup": 0.5,
    "dur": 0.0,
    "atk_name": "무야호~!! 3단 점프",
-   "line": ""
+   "atk_name_sk": 3100008,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Cone_Rain",
@@ -816,7 +935,9 @@
    "windup": 0.8,
    "dur": 1.8,
    "atk_name": "관짝소년단",
-   "line": ""
+   "atk_name_sk": 3100009,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Potion_Party",
@@ -826,7 +947,9 @@
    "windup": 0.6,
    "dur": 2.2,
    "atk_name": "약품 대방출 파티",
-   "line": ""
+   "atk_name_sk": 3100010,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Self_Experiment",
@@ -836,7 +959,9 @@
    "windup": 0.8,
    "dur": 6.0,
    "atk_name": "오히려 좋아!!",
-   "line": ""
+   "atk_name_sk": 3100011,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Paper_Storm",
@@ -846,7 +971,9 @@
    "windup": 0.8,
    "dur": 1.8,
    "atk_name": "전액 현금 매입",
-   "line": ""
+   "atk_name_sk": 3100012,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Board_Meeting",
@@ -856,7 +983,9 @@
    "windup": 0.9,
    "dur": 1.4,
    "atk_name": "긴급 비상 회의!!",
-   "line": ""
+   "atk_name_sk": 3100013,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Zoomies",
@@ -866,7 +995,9 @@
    "windup": 0.5,
    "dur": 4.0,
    "atk_name": "꽁꽁 얼어붙은 한강",
-   "line": "꽁꽁 얼어붙은 한강 위로 고양이가 걸어다닙니다"
+   "atk_name_sk": 3100014,
+   "line": "꽁꽁 얼어붙은 한강 위로 고양이가 걸어다닙니다",
+   "line_sk": 3200001
   },
   {
    "atk_type": "Box_Fit",
@@ -876,7 +1007,9 @@
    "windup": 1.2,
    "dur": 4.0,
    "atk_name": "바나나 고양이 소환",
-   "line": ""
+   "atk_name_sk": 3100015,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Meteor_Shower",
@@ -886,7 +1019,9 @@
    "windup": 0.9,
    "dur": 2.0,
    "atk_name": "트랄랄레로 트랄랄라",
-   "line": ""
+   "atk_name_sk": 3100016,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Frog_Curse",
@@ -896,7 +1031,9 @@
    "windup": 0.9,
    "dur": 1.0,
    "atk_name": "발레리나 카푸치나",
-   "line": ""
+   "atk_name_sk": 3100017,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Orbital_Laser",
@@ -906,7 +1043,9 @@
    "windup": 0.7,
    "dur": 2.4,
    "atk_name": "홈랜더 눈 레이저",
-   "line": "난 너희들보다 강하고, 똑똑하고, 더 낫다. 난 더 낫다고!"
+   "atk_name_sk": 3100018,
+   "line": "난 너희들보다 강하고, 똑똑하고, 더 낫다. 난 더 낫다고!",
+   "line_sk": 3200002
   },
   {
    "atk_type": "Black_Hole",
@@ -916,7 +1055,9 @@
    "windup": 3.0,
    "dur": 1.0,
    "atk_name": "STAY",
-   "line": ""
+   "atk_name_sk": 3100029,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Baton",
@@ -926,7 +1067,9 @@
    "windup": 0.4,
    "dur": 1.0,
    "atk_name": "진압봉 휘두르기",
-   "line": ""
+   "atk_name_sk": 3100019,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Gas_Cloud",
@@ -936,7 +1079,9 @@
    "windup": 0.4,
    "dur": 5.0,
    "atk_name": "독가스 구름",
-   "line": ""
+   "atk_name_sk": 3100020,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Briefcase",
@@ -946,7 +1091,9 @@
    "windup": 0.45,
    "dur": 1.4,
    "atk_name": "서류 가방 던지기",
-   "line": ""
+   "atk_name_sk": 3100021,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Tung_Sahur",
@@ -956,7 +1103,9 @@
    "windup": 0.5,
    "dur": 1.5,
    "atk_name": "퉁퉁퉁 사후르",
-   "line": ""
+   "atk_name_sk": 3100022,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Even_Cook",
@@ -966,7 +1115,9 @@
    "windup": 0.7,
    "dur": 6.0,
    "atk_name": "이븐하게 익혀드릴게요",
-   "line": ""
+   "atk_name_sk": 3100023,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Unbroken",
@@ -976,7 +1127,9 @@
    "windup": 0.6,
    "dur": 6.0,
    "atk_name": "중요한 건 꺾이지 않는 마음",
-   "line": "중요한 건 꺾이지 않는 마음!!"
+   "atk_name_sk": 3100024,
+   "line": "중요한 건 꺾이지 않는 마음!!",
+   "line_sk": 3200003
   },
   {
    "atk_type": "Happy_Jump",
@@ -986,7 +1139,9 @@
    "windup": 0.4,
    "dur": 3.0,
    "atk_name": "해피해피해피",
-   "line": ""
+   "atk_name_sk": 3100025,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Buttered_Cat",
@@ -996,7 +1151,9 @@
    "windup": 0.8,
    "dur": 4.0,
    "atk_name": "무한동력 버터 고양이",
-   "line": ""
+   "atk_name_sk": 3100026,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Maxwell_Drop",
@@ -1006,7 +1163,9 @@
    "windup": 0.9,
    "dur": 2.0,
    "atk_name": "맥스웰 고양이 낙하",
-   "line": ""
+   "atk_name_sk": 3100027,
+   "line": "",
+   "line_sk": 0
   },
   {
    "atk_type": "Invis_Cloak",
@@ -1016,7 +1175,9 @@
    "windup": 0.9,
    "dur": 5.0,
    "atk_name": "투명 망토",
-   "line": "나는 나쁜 짓을 할 것을 엄숙히 맹세한다냥!"
+   "atk_name_sk": 3100028,
+   "line": "나는 나쁜 짓을 할 것을 엄숙히 맹세한다냥!",
+   "line_sk": 3200004
   }
  ],
  "Situation_Type": [

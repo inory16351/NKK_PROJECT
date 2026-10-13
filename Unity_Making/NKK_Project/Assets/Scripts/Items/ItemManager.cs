@@ -64,6 +64,7 @@ namespace NKK.Items
         public Transform humanRoot;
         public float humanRadius = 26;
         [Tooltip("사람 키 (게임 단위)")] public float humanHeight = 150;
+        [Tooltip("사람 몸 전체 피격 범위 = 그림 범위에서 가장자리를 이 비율만큼 깎음 (그림 여백·팔 끝)")] [Range(0, 0.4f)] public float humanBodyShrink = 0.12f;
         [Tooltip("사람 체력 = 12 × 체력 배율 × 물건 성장^(층-1) × 이 값")] public float humanHpMul = 3;
         [Tooltip("사람 치즈 = 3 × 치즈 배율 × 치즈 성장^(층-1) × 이 값")] public float humanValueMul = 2;
         [Tooltip("사람 상한 = min(최대, 기본 + 층 × 증가)")] public int humanCapMax = 12;
@@ -249,7 +250,7 @@ namespace NKK.Items
         public int BlastActors(float x, float y, float R, float spd, float dmg, Rat by)
         {
             int n = 0;
-            foreach (var h in Humans) if (Vector2.Distance(new Vector2(h.x, h.y), new Vector2(x, y)) < R + h.R && h.Blast(Mathf.Atan2(h.y - y, h.x - x) + Random.Range(-0.3f, 0.3f), spd, dmg, by)) n++;
+            foreach (var h in Humans) if (h.BodyDist(x, y) < R && h.Blast(Mathf.Atan2(h.y - y, h.x - x) + Random.Range(-0.3f, 0.3f), spd, dmg, by)) n++;
             var c = Cats ? Cats.Current : null;
             if (c && c.Alive && c.BodyDist(x, y) < R && c.Damage(dmg, Mathf.Atan2(c.y - y, c.x - x), by)) n++;
             var b = Boss.Current;                                               // 보스는 날아가지 않고 피해만
@@ -263,7 +264,7 @@ namespace NKK.Items
                 if (o.State == Item.ItemState.Rest && Vector2.Distance(new Vector2(o.x, o.y), new Vector2(x, y)) < rad + o.R)
                     o.Damage(dmg, by, false, Mathf.Atan2(o.y - y, o.x - x));
             foreach (var h in Humans)
-                if (h.State != Human.HState.Fly && h.State != Human.HState.Dead && Vector2.Distance(new Vector2(h.x, h.y), new Vector2(x, y)) < rad + h.R)
+                if (h.State != Human.HState.Fly && h.State != Human.HState.Dead && h.BodyDist(x, y) < rad)
                     h.Damage(dmg, by, Mathf.Atan2(h.y - y, h.x - x));
             var b = Boss.Current;
             if (b && b.CanHit && b.z < 100 && Vector2.Distance(new Vector2(b.x, b.y), new Vector2(x, y)) < rad + b.R) b.Damage(dmg, by, Mathf.Atan2(b.y - y, b.x - x), false);

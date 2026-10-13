@@ -168,7 +168,7 @@ namespace NKK.Items
             foreach (var h in mgr.Humans)
             {
                 if (hitSet.Contains(h) || h.State == Human.HState.Fly || h.State == Human.HState.Splat || h.State == Human.HState.Dead) continue;
-                if (Vector2.Distance(new Vector2(h.x, h.y), new Vector2(x, y)) > R + h.R || z > mgr.humanHeight) continue;
+                if (h.BodyDist(x, y) > R || z > mgr.humanHeight) continue;      // 몸 그림 전체
                 hitSet.Add(h);
                 h.HitByItem(FlyDamage() * 2, By, Mathf.Atan2(vy, vx));
                 vx *= -0.3f; vy *= -0.3f;

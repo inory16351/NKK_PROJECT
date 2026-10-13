@@ -24,6 +24,7 @@ namespace NKK.Data
         public TextAsset achievementTable;
         public TextAsset tutorialTable;
         [Tooltip("상점 테이블 (쥐구멍 암시장) · 뽑기 테이블 (유전자 뽑기)")] public TextAsset shopTable, gachaTable;
+        [Tooltip("스트링 테이블 (언어, Loc)")] public TextAsset stringTable;
 
         public readonly Dictionary<int, RatCharacterRow> Rats = new();
         public readonly Dictionary<string, RatCharacterRow> RatsByCode = new();
@@ -135,6 +136,7 @@ namespace NKK.Data
             }
             shopCfg.Clear(); gachaCfg.Clear();
             if (shopTable) { Shop = JsonUtility.FromJson<ShopTableFile>(shopTable.text) ?? new(); if (Shop.Shop_Config != null) foreach (var r in Shop.Shop_Config) shopCfg[r.key] = r.value; }
+            Loc.Load(stringTable);
             if (gachaTable) { Gacha = JsonUtility.FromJson<GachaTableFile>(gachaTable.text) ?? new(); if (Gacha.Gacha_Config != null) foreach (var r in Gacha.Gacha_Config) gachaCfg[r.key] = r.value; }
             Debug.Log($"[GameDatabase] 쥐 {Rats.Count} · 스킬 {RatSkills.Count} · 필살기 {Ultimates.Count} · 등급 {Grades.Count} · 성장 노드 {GrowthNodes.Count} · 고양이 {Cats.Count} · 물건 {Items.Count} · 티어 {Tiers.Count} · 사람 {Humans.Count} · 공용 스킬 {CommonSkills.Count}");
         }

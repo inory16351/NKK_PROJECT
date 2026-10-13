@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-14).
-마지막 갱신: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
+마지막 갱신: 2026-10-13 (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
 
 ---
 
@@ -142,6 +142,7 @@
   - **끝**: 그림 `UnityResources/Rats/BossProps/boss_cloak.png`(덮어쓰기) · `boss_cloak_fly.png`(벗어 던짐), 원본·프롬프트·로그 `BossProps/Sheets/invis_cloak/` → `Assets/Art/Rats/BossProps/` 복사. (Codex 가 저장을 못 해서 `~/.codex/generated_images/<세션>/` 에서 직접 복사함.) `Boss.cs`: 필드(cloakSprite·cloakFlySprite·cloakSize·cloakFlyTime·cloakAlpha·cloakSparkle·cloakMove·cloakWarn·cloakRest·cloakHidePopup·cloakShowPopup) · `Hidden` · `Damage` 에서 Hidden 이면 무시 · Spawn/EndSpecialFx 초기화 · BeginSpecial 에서 망토 표시 · UpdateSpecial `case "Invis_Cloak"`.
   - **끝 (2026-10-12 오후)**: `Boss.LateUpdate` 숨으면 반투명(cloakA)·그림자 · `PlaceCloak`(덮어쓰기 내려옴 / 벗어 던짐 날아감) · `ShowProp` 색 되돌림 · `Rat` 숨은 보스는 안 쫓고 안 부딪힘 · 보스 테이블 `Invis_Cloak` 행 + 95005 special2 + 96107 문구.
   - **남음**: 씬(§5-2 목록) · 테스트 패널로 마녀 '투명 망토' 확인 · `BossProps/README.md` 줄 추가.
+- **사람 몸 전체 피격 (2026-10-13)**: 예전엔 발밑 원(반지름 26)만 맞음 (키 150) → 고양이와 같은 방식 `Human.Body` · `Human.BodyDist` (그림 범위, `ItemManager.humanBodyShrink` 0.12). 적용: 쥐 박치기(발밑 = 밀어냄, 몸 = 튕기기만, bite 쿨타임 그대로) · 날아온 물건 · 폭발(BlastActors·범위 피해) · 라이브 방송 총알 · 역병 분사 · 사람 몸 클릭 = 총공격 지점을 사람 발밑으로. Play 로 확인 (머리 쪽 점: 예전 112~146 떨어짐 → 0).
 - **고양이 몸 전체 피격 (2026-10-12)**: `Cat.Body`(그림 범위 → 게임 좌표, `CatManager.bodyHitShrink`) + `Cat.BodyDist` — 쥐 박치기(발밑 원 = 밀어냄, 몸 = 튕기기만) · 날아온 물건 · BlastActors · 라이브 방송·역병 분사 · 고양이 몸 클릭 = 총공격 지점을 고양이로.
 - **친구들 도감 (끝)**: Lobby `Page_dex` = 쳇바퀴 훈련 페이지 틀 복제 + `Lobby/DexPage.cs`. 쥐 79종 전부 (등급 순), 등급 칩 {n}/{total}. 만난 친구(`Progress.Seen`) = 그림·이름·등급·설명·쳇바퀴 Lv·특수 능력·특수 액션·필살기 / 못 만남 = 실루엣·'???' / 훈장 부족(unlock_rank) = 실루엣·'{tier}훈장부터'. 글 = `Page_dex/Words`. 첫 훈장 승급 뒤 튜토리얼 l_dex 로 해금.
 - **잠긴 기능 반응 (끝)**: Lobby `LockedFeedback`(Tutorial/LockedFeedback.cs) — `LobbyManager.OnLocked` → 그 기능 자물쇠 흔들림 + 아래쪽 말풍선 `UI/LockToast`("아직 잠겨 있어요, 찍!" + 기능별 힌트 = 인스펙터). 위쪽 탭은 버튼을 막지 않고 OpenPage 가 막음.
@@ -226,6 +227,24 @@
 - 참고: 이 세션에서 MCP 서버는 Claude 백그라운드로 띄운 것이라 세션이 끝나면 꺼짐 → 유니티 허브를 완전히 껐다 켜면 유니티가 직접 띄움 (§5-4 'UnityMCP 가 안 붙을 때').
 
 ---
+
+## 5-5. 스트링 테이블 · 영어 번역 (2026-10-13)
+
+- **`Data_Table/스트링 테이블.xlsx`** (String 시트: string_key · ko · en · 출처 · 상태 · 번역 메모 / Glossary 시트 = 용어집) → `StringTable.json`. **2,102개 전부 영어 번역 끝** (자리표시 `{n}` · `<color>` 태그 · 대화 구분 `|` 검사 통과).
+- **사용자 결정**: 다른 테이블의 한글은 그대로 두고(사람이 읽는 용), 글 칸 옆에 `<칸>_sk` int 키 칸을 둠 (관리·코드용) · 플레이어가 보는 글만 (desc·dev 메모·테스트 패널 제외) · 밈은 영어권 말장난으로 현지화 · 이번엔 테이블+영어만, **게임 안 언어 전환 코드는 다음 단계**.
+- 키 = 칸 번호 × 100000 + 행 id (예: 쥐 스킬 이름 12 → 1220086). 10~41 = 테이블 칸 (`Tools/gen_string_table.py` 의 COLS), **80xxxxx = 씬 글** (Title·Lobby·Game 의 TMP m_text + 인스펙터 문자열, 같은 한글은 키 하나), **90xxxxx = 코드에 박힌 글** (팝업·배너·로비 쥐 수다 등, 자리표시 이름 정리함: `{Format(power)}` → `{power}`). 
+- 도구: `python Tools/gen_string_table.py` (키 칸 채우기·한글 바뀌면 상태 '한글 바뀜'·새 글 '번역 필요'·사라지면 '안 쓰임', 여러 번 돌려도 키 그대로) · `python Tools/import_scene_strings.py` (씬 저장 후, 새 씬 글 추가). **순서: gen_stage_table → gen_economy → gen_skill_tree → gen_string_table → xlsx2json** (gen_skill_tree 가 공용 스킬 시트를 다시 만들어 _sk 칸이 지워져도 같은 한글이면 같은 키로 다시 채움).
+- 용어 (사용자 확정): 게임 제목 Squeak! Squeak!! Squeak!!! · 찍 = Squeak · 찍찍!!(힘) = SQUEAK!! · 적정 = Rec. · 훈장 = Rank · 조각 = Shard · 연구자료 = Research · 친구 = Buddy/Buddies!! · 탈출 = Escape · 맘스땃쥐 = McSqueak's · 쥐4 = Rat Jerky · 줴리 = Jerreh · 흐에~ 스트리머 = 영어권 방송 밈 (쥐커드 = Squeak Shuffle) · 근육 쥐 = Mouscle · 5G = Mi-Fi. 나머지는 Glossary 시트.
+- 한국어 아재개그(줴리 필살기 자막 쥐포·킹콩 등)는 영어 말장난으로 바꿈 (Hide and squeak 등).
+- **언어 설정 (2026-10-13)**: 타이틀 `UI/Settings/Card/Language` (한국어 · English 버튼, `LanguageSettings`). 코드 = `Core/Loc.cs` (PlayerPrefs `nkk_lang`, `Loc.Get(키, 원래 글)`, `Loc.Changed`) · `Core/LocText.cs` (씬 TMP 에 키, template 켜면 코드가 `LocText.Tpl` 로 틀만 가져감) · GameDatabase.stringTable. **타이틀 씬만 연결 끝** (메뉴·저장 칸·확인 창·설정·오프닝 자막 Story text_sk·훈장 이름 tier_name_sk). Play 로 영어 확인 (로고 자동 크기, 저장 칸 설명 자동 크기). 로비·게임 씬은 아직 (GameDatabase.stringTable 도 로비·게임 씬엔 아직 안 넣음).
+- **남음**: ① 로비·게임 씬 글 연결 (씬 TMP 에 LocText + 테이블 글 _sk 로 Loc.Get + 코드 글 90xxxxx 를 키로) ② 영어 글이 길어서 칸 넘침 확인 ③ 튜토리얼 대사 70·74 · 하수구 대사 '믹서기' 는 지금 뽑기(비밀 실험실)와 안 맞음 → 한글부터 고칠지 사용자 확인 ④ 확률 정보 '조각 {s}개' 는 이제 늘 1개.
+
+## 5-6. 초반 적정 찍찍 (2026-10-13)
+
+- 기획서 배율(1~4층 ×1.25 · 5층 ×1.8 · 6~15층 ×1.32 · 16~20층 …)·방 수·목표 시간은 기획서와 같음 (지수 × 400).
+- 측정 round8 (`Tools/probe_results/round8_fresh_f1-5.txt`, 새 저장 · 1훈장 · 스킬 0 · 총공격 O · 승급 1): 1층 5~14초 통과, **2층 4판 모두 실패** (30마리 꽉 차도 힘 300~380 = 적정 500 의 0.6~0.7배, 벽 0~1개). 전체 기준 260 으로 낮춘 측정(round8b): 2·3층 통과 · 4층 0.9배 근처 → 사용자 "너무 쉬움".
+- **사용자 결정: 1층만 300, 2층부터는 예전(400 기준) 그대로** → `gen_stage_table.py` `POW_FIX = {1: 300}`. 2층 이후는 이전 값과 같음 (확인함).
+- 참고: 측정상 새 저장 첫 판은 여전히 2층이 첫 벽 (1층 값은 2층 난이도에 영향 거의 없음).
 
 ## 6. 밸런스 측정 (BalanceProbe)
 

@@ -591,6 +591,7 @@ namespace NKK.Rats
             if (!RushReady || RushActive) return false;
             var cat = Cats ? Cats.Current : null;
             if (cat && cat.Alive && cat.BodyDist(p.x, p.y) <= 0) p = new Vector2(cat.x, cat.y);     // 고양이 몸을 누르면 고양이 발밑으로
+            else if (Items) foreach (var h in Items.Humans) if (h && h.Alive && h.BodyDist(p.x, p.y) <= 0) { p = new Vector2(h.x, h.y); break; }      // 사람 몸을 누르면 사람 발밑으로
             StartRush(p); rushCdLeft = RushTime + RushCooldown;
             return true;
         }

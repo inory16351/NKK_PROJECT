@@ -3,6 +3,7 @@
   {
    "grade": "Common",
    "grade_name": "일반",
+   "grade_name_sk": 1800001,
    "color": "#a8a29a",
    "size": 1.0,
    "move_speed": 1.0,
@@ -18,6 +19,7 @@
   {
    "grade": "Rare",
    "grade_name": "레어",
+   "grade_name_sk": 1800002,
    "color": "#7fa8bf",
    "size": 1.12,
    "move_speed": 1.05,
@@ -33,6 +35,7 @@
   {
    "grade": "Epic",
    "grade_name": "에픽",
+   "grade_name_sk": 1800003,
    "color": "#a58bb8",
    "size": 1.25,
    "move_speed": 1.1,
@@ -48,6 +51,7 @@
   {
    "grade": "Unique",
    "grade_name": "유니크",
+   "grade_name_sk": 1800004,
    "color": "#c9846e",
    "size": 1.4,
    "move_speed": 1.15,
@@ -63,6 +67,7 @@
   {
    "grade": "Legendary",
    "grade_name": "전설",
+   "grade_name_sk": 1800005,
    "color": "#d9a441",
    "size": 1.6,
    "move_speed": 1.1,
@@ -78,6 +83,7 @@
   {
    "grade": "Mythic",
    "grade_name": "신화",
+   "grade_name_sk": 1800006,
    "color": "#d9786a",
    "size": 1.85,
    "move_speed": 1.2,

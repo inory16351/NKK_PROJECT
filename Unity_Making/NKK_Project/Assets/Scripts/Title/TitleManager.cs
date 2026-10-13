@@ -34,6 +34,7 @@ namespace NKK.Title
         public GameObject slotPanel;
         [Tooltip("슬롯 창 제목")] public TMP_Text slotTitle;
         [Tooltip("이어 하기 때 제목 · 처음부터 때 제목")] public string continueTitle, newTitle;
+        [Tooltip("위 두 글의 스트링 키 (영어 등)")] public int continueTitleKey, newTitleKey;
         public Button backButton;
         public SlotCard[] cards = new SlotCard[Progress.SlotCount];
 
@@ -76,6 +77,12 @@ namespace NKK.Title
             if (menu) menu.SetActive(true);
         }
 
+        void OnEnable() => Loc.Changed += OnLang;
+        void OnDisable() => Loc.Changed -= OnLang;
+        // 언어를 바꾸면 코드가 채운 글도 다시 채움
+        void OnLang() { if (slotPanel && slotPanel.activeSelf) { if (slotTitle) slotTitle.text = SlotTitle(); Refresh(); } }
+        string SlotTitle() => newMode ? Loc.Get(newTitleKey, newTitle) : Loc.Get(continueTitleKey, continueTitle);
+
         void Start()
         {
             var p = Progress.I;
@@ -87,7 +94,7 @@ namespace NKK.Title
         void OpenSlots(bool forNew)
         {
             newMode = forNew;
-            if (slotTitle) slotTitle.text = forNew ? newTitle : continueTitle;
+            if (slotTitle) slotTitle.text = SlotTitle();
             Refresh();
             if (slotPanel) slotPanel.SetActive(true);
             if (menu) menu.SetActive(false);
@@ -108,12 +115,12 @@ namespace NKK.Title
                 var c = cards[i]; if (c == null) continue; int slot = i + 1;
                 int tier = 1, floor = 1, runs = 0; string time = "";
                 bool has = p && p.SlotSummary(slot, out tier, out floor, out runs, out time);
-                string tierName = db && db.Tiers.TryGetValue(tier, out var tr) ? tr.tier_name : "";
-                if (c.title) c.title.text = c.titleTpl.Replace("{slot}", slot.ToString());
+                string tierName = db && db.Tiers.TryGetValue(tier, out var tr) ? Loc.Get(tr.tier_name_sk, tr.tier_name) : "";
+                if (c.title) c.title.text = LocText.Tpl(c.title, c.titleTpl).Replace("{slot}", slot.ToString());
                 if (c.info)
                 {
                     c.info.gameObject.SetActive(has);
-                    c.info.text = c.infoTpl.Replace("{tier}", tier.ToString()).Replace("{tierName}", tierName).Replace("{floor}", floor.ToString())
+                    c.info.text = LocText.Tpl(c.info, c.infoTpl).Replace("{tier}", tier.ToString()).Replace("{tierName}", tierName).Replace("{floor}", floor.ToString())
                                            .Replace("{runs}", runs.ToString()).Replace("{time}", time);
                 }
                 if (c.emptyMark) c.emptyMark.SetActive(!has);
@@ -129,7 +136,7 @@ namespace NKK.Title
                 if (p.SlotExists(slot))
                 {
                     pendingSlot = slot;
-                    if (confirmText) confirmText.text = confirmTpl.Replace("{slot}", slot.ToString());
+                    if (confirmText) confirmText.text = LocText.Tpl(confirmText, confirmTpl).Replace("{slot}", slot.ToString());
                     if (confirm) confirm.SetActive(true);
                     return;
                 }

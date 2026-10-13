@@ -3,30 +3,35 @@
   {
    "speaker_id": "labrat",
    "speaker_name": "흰 실험쥐",
+   "speaker_name_sk": 3800001,
    "code_id": "labrat",
    "portrait": "tuto_labrat"
   },
   {
    "speaker_id": "nerd",
    "speaker_name": "안경 쥐",
+   "speaker_name_sk": 3800002,
    "code_id": "nerd",
    "portrait": "tuto_nerd"
   },
   {
    "speaker_id": "brownrat",
    "speaker_name": "시궁쥐",
+   "speaker_name_sk": 3800003,
    "code_id": "brownrat",
    "portrait": "tuto_brownrat"
   },
   {
    "speaker_id": "hero",
    "speaker_name": "슈퍼 생쥐",
+   "speaker_name_sk": 3800004,
    "code_id": "hero",
    "portrait": "tuto_hero"
   },
   {
    "speaker_id": "broker",
    "speaker_name": "브로커 쥐",
+   "speaker_name_sk": 3800005,
    "code_id": "",
    "portrait": "tuto_broker"
   }
@@ -550,6 +555,7 @@
    "speaker_id": "labrat",
    "face": "panic",
    "text": "찍찍!! 큰일이다!! 어서 이 연구실을 탈출해야 해!!",
+   "text_sk": 3900001,
    "highlight": ""
   },
   {
@@ -558,6 +564,7 @@
    "speaker_id": "labrat",
    "face": "normal",
    "text": "우리 쥐들은 알아서 돌아다니면서 물건을 갉아 부숴. 부순 물건에서는 치즈가 나와!",
+   "text_sk": 3900002,
    "highlight": ""
   },
   {
@@ -566,6 +573,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "화면을 클릭하면 그곳으로 모두 우르르 돌진해! 단단한 물건은 다 같이 덤벼서 부수자 찍!",
+   "text_sk": 3900003,
    "highlight": ""
   },
   {
@@ -574,6 +582,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "화면을 끌면 여기저기 둘러볼 수 있고, 마우스 휠로 크게 볼 수도 있어.",
+   "text_sk": 3900004,
    "highlight": ""
   },
   {
@@ -582,6 +591,7 @@
    "speaker_id": "brownrat",
    "face": "normal",
    "text": "벽을 갉으면 옆 방이 열려. 계단이 있는 방을 찾아서 계단에 닿으면 위층으로 갈 수 있어!",
+   "text_sk": 3900005,
    "highlight": "minimap"
   },
   {
@@ -590,6 +600,7 @@
    "speaker_id": "brownrat",
    "face": "panic",
    "text": "오른쪽 위 시계를 봐! 시간이 다 되면 경비원이 와서 우릴 몽땅 잡아간다고 찍!!",
+   "text_sk": 3900006,
    "highlight": "timer"
   },
   {
@@ -598,6 +609,7 @@
    "speaker_id": "brownrat",
    "face": "surprised",
    "text": "앗...! 우리들의 사랑의 결실이..!",
+   "text_sk": 3900007,
    "highlight": "baby"
   },
   {
@@ -606,6 +618,7 @@
    "speaker_id": "brownrat",
    "face": "happy",
    "text": "쥐끼리 부딪히면 가끔 새끼가 태어나 찍찍! 숫자가 많을수록 더 세게 부술 수 있어!",
+   "text_sk": 3900008,
    "highlight": "baby"
   },
   {
@@ -614,6 +627,7 @@
    "speaker_id": "nerd",
    "face": "surprised",
    "text": "벌써 10마리나 모였어!",
+   "text_sk": 3900009,
    "highlight": ""
   },
   {
@@ -622,6 +636,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "같은 등급 쥐가 여럿 모이면 '승급'으로 더 높은 등급 쥐로 바꿀 수 있어.",
+   "text_sk": 3900010,
    "highlight": "promote"
   },
   {
@@ -630,6 +645,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "높은 등급 쥐는 힘이 훨씬 세다구! 왼쪽 아래 승급 버튼을 눌러 봐 찍!",
+   "text_sk": 3900011,
    "highlight": "promote"
   },
   {
@@ -638,6 +654,7 @@
    "speaker_id": "labrat",
    "face": "panic",
    "text": "히익!! 고, 고양이다!!",
+   "text_sk": 3900012,
    "highlight": ""
   },
   {
@@ -646,6 +663,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "고양이는 쓰러뜨릴 때까지 절대 안 떠나. 다 같이 클릭해서 몰아붙여!",
+   "text_sk": 3900013,
    "highlight": ""
   },
   {
@@ -654,6 +672,7 @@
    "speaker_id": "nerd",
    "face": "panic",
    "text": "바닥에 빨간 원이 생기면 거길 곧 덮친다는 뜻이야! 한곳에 너무 몰려 있지 않게 조심해!",
+   "text_sk": 3900014,
    "highlight": ""
   },
   {
@@ -662,6 +681,7 @@
    "speaker_id": "labrat",
    "face": "panic",
    "text": "으악! 엄청 큰 녀석이 계단을 막고 있어!!",
+   "text_sk": 3900015,
    "highlight": ""
   },
   {
@@ -670,6 +690,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "보스를 쓰러뜨리기 전엔 계단을 쓸 수 없어. 체력이 줄면 이상한 필살 패턴도 쓰니까 조심해!",
+   "text_sk": 3900016,
    "highlight": ""
   },
   {
@@ -678,6 +699,7 @@
    "speaker_id": "hero",
    "face": "happy",
    "text": "찍찍찍!! 여기선 내가 도와주지!!",
+   "text_sk": 3900017,
    "highlight": ""
   },
   {
@@ -686,6 +708,7 @@
    "speaker_id": "hero",
    "face": "normal",
    "text": "봤지? 이게 바로 '필살기'야!",
+   "text_sk": 3900018,
    "highlight": ""
   },
   {
@@ -694,6 +717,7 @@
    "speaker_id": "hero",
    "face": "normal",
    "text": "쳇바퀴 훈련으로 쥐를 Lv 7까지 키우면 그 쥐도 필살기를 쓸 수 있어. 게이지가 다 차면 아래 버튼으로 발동!",
+   "text_sk": 3900019,
    "highlight": ""
   },
   {
@@ -702,6 +726,7 @@
    "speaker_id": "hero",
    "face": "happy",
    "text": "그럼 건투를 빈다 찍!!",
+   "text_sk": 3900020,
    "highlight": ""
   },
   {
@@ -710,6 +735,7 @@
    "speaker_id": "hero",
    "face": "surprised",
    "text": "필살기 게이지가 다 찼어!",
+   "text_sk": 3900021,
    "highlight": ""
   },
   {
@@ -718,6 +744,7 @@
    "speaker_id": "hero",
    "face": "normal",
    "text": "아래쪽 필살기 버튼을 눌러서 한 방 터뜨려 줘 찍!",
+   "text_sk": 3900022,
    "highlight": "ult"
   },
   {
@@ -726,6 +753,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "지난번엔 아깝게 잡혀 버렸지... 이번엔 '적정 찍찍'을 알려 줄게!",
+   "text_sk": 3900023,
    "highlight": ""
   },
   {
@@ -734,6 +762,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "왼쪽 위 '찍찍!!' 숫자는 지금 우리 무리의 힘이고, 옆의 '적정'은 이 층을 넉넉히 깨려면 필요한 힘이야.",
+   "text_sk": 3900024,
    "highlight": "power"
   },
   {
@@ -742,6 +771,7 @@
    "speaker_id": "nerd",
    "face": "panic",
    "text": "우리 힘이 적정보다 낮으면 시간 안에 계단까지 가기 힘들어!",
+   "text_sk": 3900025,
    "highlight": "power"
   },
   {
@@ -750,6 +780,7 @@
    "speaker_id": "brownrat",
    "face": "normal",
    "text": "오른쪽 위 숫자는 지금 쥐 마릿수랑 최대 마릿수야. 최대까지만 태어날 수 있어.",
+   "text_sk": 3900026,
    "highlight": "pop"
   },
   {
@@ -758,6 +789,7 @@
    "speaker_id": "brownrat",
    "face": "happy",
    "text": "치즈 창고에서 둥지 스킬을 찍으면 최대 마릿수가 늘어나! 쥐가 많아지면 찍찍도 쑥쑥!",
+   "text_sk": 3900027,
    "highlight": "pop"
   },
   {
@@ -766,6 +798,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "그리고 승급으로 높은 등급 쥐를 만들어도 찍찍이 확 올라가! 번식할 쥐만 남겨 두면 돼 찍!",
+   "text_sk": 3900028,
    "highlight": "promote"
   },
   {
@@ -774,6 +807,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "그리고 하나 더! 같은 등급 쥐가 여럿 모이면 '승급'으로 더 높은 등급 쥐로 바꿀 수 있어.",
+   "text_sk": 3900029,
    "highlight": "promote"
   },
   {
@@ -782,6 +816,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "높은 등급 쥐는 힘이 훨씬 세서 찍찍이 확 올라가! 왼쪽 아래 승급 버튼을 기억해 찍!",
+   "text_sk": 3900030,
    "highlight": "promote"
   },
   {
@@ -790,6 +825,7 @@
    "speaker_id": "labrat",
    "face": "panic",
    "text": "흐어엉... 잡혀 버렸어...",
+   "text_sk": 3900031,
    "highlight": ""
   },
   {
@@ -798,6 +834,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "괜찮아! 앞으론 잡히지 않게 더욱 강해지자!!",
+   "text_sk": 3900032,
    "highlight": ""
   },
   {
@@ -806,6 +843,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "판에서 모은 치즈를 쓰면 더 강해질 수 있을 거야 찍찍!! '치즈 창고'를 열어 줄게!",
+   "text_sk": 3900033,
    "highlight": "tab_skill"
   },
   {
@@ -814,6 +852,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "여기가 치즈 창고야. 치즈를 써서 스킬을 하나씩 찍을 수 있어.",
+   "text_sk": 3900034,
    "highlight": ""
   },
   {
@@ -822,6 +861,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "이어진 스킬을 찍어야 다음 스킬이 열려. 높은 단계 스킬은 치즈와 함께 '연구자료'도 필요해!",
+   "text_sk": 3900035,
    "highlight": "research"
   },
   {
@@ -830,6 +870,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "연구자료는 층을 올라갈 때마다 모여. 보스 층에선 세 배야 찍!",
+   "text_sk": 3900036,
    "highlight": ""
   },
   {
@@ -838,6 +879,7 @@
    "speaker_id": "brownrat",
    "face": "surprised",
    "text": "또 잡혔다아... 그래도 우리 꽤 강해졌다구!",
+   "text_sk": 3900037,
    "highlight": ""
   },
   {
@@ -846,6 +888,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "이번엔 '쳇바퀴 훈련'을 열어 줄게. 판에서 모은 조각으로 쥐를 한 종씩 강화할 수 있어!",
+   "text_sk": 3900038,
    "highlight": "tab_rats"
   },
   {
@@ -854,6 +897,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "쥐마다 조각이 모이면 레벨을 올릴 수 있어. 레벨이 오를수록 그 쥐가 점점 세져!",
+   "text_sk": 3900039,
    "highlight": ""
   },
   {
@@ -862,6 +906,7 @@
    "speaker_id": "nerd",
    "face": "surprised",
    "text": "Lv 3이 되면 그 쥐만의 특수 액션, Lv 7이 되면 필살기가 열려!",
+   "text_sk": 3900040,
    "highlight": ""
   },
   {
@@ -870,6 +915,7 @@
    "speaker_id": "hero",
    "face": "happy",
    "text": "필살기... 기억나지? 찍찍!!",
+   "text_sk": 3900041,
    "highlight": ""
   },
   {
@@ -878,6 +924,7 @@
    "speaker_id": "labrat",
    "face": "panic",
    "text": "앗! 더 이상 강해질 수가 없어 찍!!",
+   "text_sk": 3900042,
    "highlight": ""
   },
   {
@@ -886,6 +933,7 @@
    "speaker_id": "nerd",
    "face": "surprised",
    "text": "그렇다면.... 이때까지 모은 연구의 성과를!! 찍찍!!",
+   "text_sk": 3900043,
    "highlight": ""
   },
   {
@@ -894,6 +942,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "'찍찍!! 훈장'을 열어 줄게. 훈장을 올리면 새로운 스킬들이 열려!",
+   "text_sk": 3900044,
    "highlight": "tab_rank"
   },
   {
@@ -902,6 +951,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "훈장을 올리려면 연구자료와 함께 몇 가지 조건이 필요해. 조건은 여기서 확인할 수 있어!",
+   "text_sk": 3900045,
    "highlight": ""
   },
   {
@@ -910,6 +960,7 @@
    "speaker_id": "brownrat",
    "face": "happy",
    "text": "찍찍 훈장을 얻으면 친구들도 늘어날 거야 찍찍!!",
+   "text_sk": 3900046,
    "highlight": ""
   },
   {
@@ -918,6 +969,7 @@
    "speaker_id": "brownrat",
    "face": "normal",
    "text": "'친구들!!'에서 지금까지 만난 친구들을 볼 수 있어!",
+   "text_sk": 3900047,
    "highlight": "tab_dex"
   },
   {
@@ -926,6 +978,7 @@
    "speaker_id": "labrat",
    "face": "happy",
    "text": "해냈다!! 어서 계단을 찾아서 다음 층으로 도망치자!!",
+   "text_sk": 3900048,
    "highlight": ""
   },
   {
@@ -934,6 +987,7 @@
    "speaker_id": "brownrat",
    "face": "normal",
    "text": "벽 너머로 길이 열렸어! 계속 부수다 보면 계단 방이 나올 거야. 지도도 같이 봐!",
+   "text_sk": 3900049,
    "highlight": "minimap"
   },
   {
@@ -942,6 +996,7 @@
    "speaker_id": "brownrat",
    "face": "surprised",
    "text": "어라? 아무리 부딪혀도 새끼가 더 안 태어나잖아?!",
+   "text_sk": 3900050,
    "highlight": ""
   },
   {
@@ -950,6 +1005,7 @@
    "speaker_id": "brownrat",
    "face": "normal",
    "text": "오른쪽 위 숫자가 지금 쥐 수 / 최대 쥐 수야. 꽉 차면 더는 번식할 수 없어!",
+   "text_sk": 3900051,
    "highlight": "pop"
   },
   {
@@ -958,6 +1014,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "승급으로 쥐를 합치면 자리가 다시 생겨! 번식할 쥐만 남기고 나머지는 승급시키자!",
+   "text_sk": 3900052,
    "highlight": "promote"
   },
   {
@@ -966,6 +1023,7 @@
    "speaker_id": "labrat",
    "face": "surprised",
    "text": "바, 방금 뭐였어?! 쥐가 하늘 끝까지 날아올랐어!!",
+   "text_sk": 3900053,
    "highlight": ""
   },
   {
@@ -974,6 +1032,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "가끔 우리 몸속에 잠든 '신비한 힘'이 깨어날 때가 있어. 그게 바로 '슈퍼 점프'야!",
+   "text_sk": 3900054,
    "highlight": ""
   },
   {
@@ -982,6 +1041,7 @@
    "speaker_id": "nerd",
    "face": "surprised",
    "text": "하늘 끝까지 솟구쳤다가 내리꽂히면 화면 안의 물건이랑 벽까지 한꺼번에 박살 나!",
+   "text_sk": 3900055,
    "highlight": ""
   },
   {
@@ -990,6 +1050,7 @@
    "speaker_id": "labrat",
    "face": "happy",
    "text": "언제 깨어날지는 아무도 몰라... 신비한 힘이니까! 찍!",
+   "text_sk": 3900056,
    "highlight": ""
   },
   {
@@ -998,6 +1059,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "치즈가 모였으니 바로 하나 찍어 보자! 반짝이는 이 칸을 눌러 봐!",
+   "text_sk": 3900057,
    "highlight": "skill_next"
   },
   {
@@ -1006,6 +1068,7 @@
    "speaker_id": "nerd",
    "face": "panic",
    "text": "어라, 지금 치즈로는 아직 못 찍겠네... 다음 판에서 치즈를 더 모아 오자!",
+   "text_sk": 3900058,
    "highlight": ""
   },
   {
@@ -1014,6 +1077,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "치즈가 모였네! 이제 반짝이는 이 칸을 눌러서 스킬을 찍어 보자!",
+   "text_sk": 3900059,
    "highlight": "skill_next"
   },
   {
@@ -1022,6 +1086,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "좋아! 이제 이 '활성화' 버튼을 눌러! 치즈를 내면 스킬이 켜져.",
+   "text_sk": 3900060,
    "highlight": "skill_buy"
   },
   {
@@ -1030,6 +1095,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "해냈다! 다음 판부터 우리 쥐들이 더 강해질 거야!",
+   "text_sk": 3900061,
    "highlight": ""
   },
   {
@@ -1038,6 +1104,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "치즈가 남으면 선으로 이어진 다음 칸도 계속 찍어 봐. 이어진 칸만 열 수 있어!",
+   "text_sk": 3900062,
    "highlight": ""
   },
   {
@@ -1046,6 +1113,7 @@
    "speaker_id": "nerd",
    "face": "surprised",
    "text": "아, 그런데 조심해! 승급에 쓴 쥐들은 하나로 합쳐져서 사라져.",
+   "text_sk": 3900063,
    "highlight": ""
   },
   {
@@ -1054,6 +1122,7 @@
    "speaker_id": "brownrat",
    "face": "panic",
    "text": "쥐가 너무 적어지면 서로 부딪힐 일이 줄어서 새끼가 거의 안 태어나!! 번식할 쥐는 꼭 남겨 둬 찍!",
+   "text_sk": 3900064,
    "highlight": ""
   },
   {
@@ -1062,6 +1131,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "승급 창의 '일괄 승급'은 번식할 쥐를 알아서 남겨 줘. 헷갈리면 그걸 눌러!",
+   "text_sk": 3900065,
    "highlight": "promote"
   },
   {
@@ -1070,6 +1140,7 @@
    "speaker_id": "brownrat",
    "face": "panic",
    "text": "그런데 너무 많이 합치면 쥐가 적어져서 번식이 거의 안 돼!! 번식할 쥐는 꼭 남겨 둬 찍!",
+   "text_sk": 3900066,
    "highlight": ""
   },
   {
@@ -1078,6 +1149,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "승급 창의 '일괄 승급'은 번식할 쥐를 알아서 남겨 줘. 헷갈리면 그걸 눌러!",
+   "text_sk": 3900065,
    "highlight": "promote"
   },
   {
@@ -1086,6 +1158,7 @@
    "speaker_id": "brownrat",
    "face": "surprised",
    "text": "찍?! 바닥 아래에서 위잉~ 하는 소리가 나!",
+   "text_sk": 3900068,
    "highlight": ""
   },
   {
@@ -1094,6 +1167,7 @@
    "speaker_id": "brownrat",
    "face": "normal",
    "text": "바닥의 맨홀 뚜껑 아래에서 나는 소리야! 뚜껑을 눌러서 지하 하수구로 내려가 보자!",
+   "text_sk": 3900069,
    "highlight": "alley_arrow"
   },
   {
@@ -1102,6 +1176,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "이거 봐! 연구소에서 버린 유전자 분석기를… 믹서기로 고쳐 놨어!",
+   "text_sk": 3900070,
    "highlight": "hot_gacha"
   },
   {
@@ -1110,6 +1185,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "훔친 연구 자료를 넣으면 동료들의 유전자를 추출할 수 있어. 눌러서 열어 보자!",
+   "text_sk": 3900071,
    "highlight": "hot_gacha"
   },
   {
@@ -1118,6 +1194,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "유전자 추출기야. 연구 자료를 내면 쥐 조각이 든 캡슐이 나와!",
+   "text_sk": 3900072,
    "highlight": ""
   },
   {
@@ -1126,6 +1203,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "처음 한 번은 10회 뽑기가 공짜야! 이 버튼부터 눌러 봐.",
+   "text_sk": 3900073,
    "highlight": "gacha_ten"
   },
   {
@@ -1134,6 +1212,7 @@
    "speaker_id": "labrat",
    "face": "panic",
    "text": "잠깐… 믹서기에 우리가 들어가는 거야?! …괜찮은 거 맞지?",
+   "text_sk": 3900074,
    "highlight": ""
   },
   {
@@ -1142,6 +1221,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "10회 뽑기는 유니크 이상 하나가 꼭 나와. 그리고 전설이 30번, 신화가 100번 안 나오면 다음엔 무조건 나와!",
+   "text_sk": 3900075,
    "highlight": "gacha_pity"
   },
   {
@@ -1150,6 +1230,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "확률은 여기 다 적어 놨어. 나온 조각은 쳇바퀴 훈련에서 바로 쓸 수 있어!",
+   "text_sk": 3900076,
    "highlight": "gacha_rates"
   },
   {
@@ -1158,6 +1239,7 @@
    "speaker_id": "brownrat",
    "face": "surprised",
    "text": "쉿… 맨홀 아래 하수구에서 누가 우리를 부르는데? 내려가 볼까?",
+   "text_sk": 3900077,
    "highlight": "alley_arrow"
   },
   {
@@ -1166,6 +1248,7 @@
    "speaker_id": "broker",
    "face": "normal",
    "text": "어이~ 거기 쥐씨들. 이 몸은 연구소 지하 하수구의 브로커라고 해.",
+   "text_sk": 3900078,
    "highlight": "hot_market"
   },
   {
@@ -1174,6 +1257,7 @@
    "speaker_id": "broker",
    "face": "happy",
    "text": "연구소에서 빼돌린 귀한 유전자 샘플이 있지. 치즈만 넉넉하면… 흐흐.",
+   "text_sk": 3900079,
    "highlight": "hot_market"
   },
   {
@@ -1182,6 +1266,7 @@
    "speaker_id": "broker",
    "face": "normal",
    "text": "여긴 쥐구멍 암시장. 전설이랑 신화 쥐 조각만 취급한다고.",
+   "text_sk": 3900080,
    "highlight": ""
   },
   {
@@ -1190,6 +1275,7 @@
    "speaker_id": "broker",
    "face": "normal",
    "text": "값은 치즈로 받지. 물건마다 종이랑 수량이 다르니 잘 골라.",
+   "text_sk": 3900081,
    "highlight": "market_slot"
   },
   {
@@ -1198,6 +1284,7 @@
    "speaker_id": "broker",
    "face": "happy",
    "text": "탈출하면서 15분쯤 지나면 새 물건이 들어와. 기다리기 싫으면 치즈를 좀 더 내고 바로 바꿔 주지.",
+   "text_sk": 3900082,
    "highlight": "market_reroll"
   },
   {
@@ -1206,6 +1293,7 @@
    "speaker_id": "broker",
    "face": "normal",
    "text": "마음에 드는 물건은 자물쇠로 하나 잡아 둬. 바꿔도 그건 안 없어지니까.",
+   "text_sk": 3900083,
    "highlight": "market_lock"
   },
   {
@@ -1214,6 +1302,7 @@
    "speaker_id": "broker",
    "face": "surprised",
    "text": "신화가 한동안 안 들어오면… 이 몸이 어떻게든 구해 온다고. 약속하지!",
+   "text_sk": 3900084,
    "highlight": "market_pity"
   },
   {
@@ -1222,6 +1311,7 @@
    "speaker_id": "broker",
    "face": "happy",
    "text": "첫 거래 기념으로 선물 하나 주지. 앞으로 잘 부탁해, 흐흐.",
+   "text_sk": 3900085,
    "highlight": ""
   },
   {
@@ -1230,6 +1320,7 @@
    "speaker_id": "nerd",
    "face": "happy",
    "text": "18층을 넘었더니 추출기를 조정할 수 있게 됐어!",
+   "text_sk": 3900086,
    "highlight": ""
   },
   {
@@ -1238,6 +1329,7 @@
    "speaker_id": "nerd",
    "face": "normal",
    "text": "전설이랑 신화에서 원하는 친구를 하나씩 고르면, 그 등급이 나올 때 그 친구가 더 잘 나와!",
+   "text_sk": 3900087,
    "highlight": "gacha_wish"
   }
  ],
@@ -1246,73 +1338,85 @@
    "line_id": 1,
    "cut": 1,
    "image": "story_01",
-   "text": "찍... 찍찍찍...! (우리들은 그저 이곳이 낙원인 줄만 알고 있었지...)"
+   "text": "찍... 찍찍찍...! (우리들은 그저 이곳이 낙원인 줄만 알고 있었지...)",
+   "text_sk": 4000001
   },
   {
    "line_id": 2,
    "cut": 1,
    "image": "story_01",
-   "text": "찍찍! 찍~ (매일 치즈가 나오고, 쳇바퀴는 언제나 돌아갔으니까.)"
+   "text": "찍찍! 찍~ (매일 치즈가 나오고, 쳇바퀴는 언제나 돌아갔으니까.)",
+   "text_sk": 4000002
   },
   {
    "line_id": 3,
    "cut": 2,
    "image": "story_02",
-   "text": "찍찍...! (가끔 하늘에서 '손가락'이 내려왔어.)"
+   "text": "찍찍...! (가끔 하늘에서 '손가락'이 내려왔어.)",
+   "text_sk": 4000003
   },
   {
    "line_id": 4,
    "cut": 2,
    "image": "story_02",
-   "text": "찍~ 찍찍! (손가락의 은총을 받은 친구는 더 좋은 곳으로 간다고 믿었지.)"
+   "text": "찍~ 찍찍! (손가락의 은총을 받은 친구는 더 좋은 곳으로 간다고 믿었지.)",
+   "text_sk": 4000004
   },
   {
    "line_id": 5,
    "cut": 3,
    "image": "story_03",
-   "text": "찍...? (그런데... 은총을 받은 친구들은 다시는 돌아오지 않았어.)"
+   "text": "찍...? (그런데... 은총을 받은 친구들은 다시는 돌아오지 않았어.)",
+   "text_sk": 4000005
   },
   {
    "line_id": 6,
    "cut": 4,
    "image": "story_04",
-   "text": "찍찍찍찍...! (우리는 모이면 모일수록 똑똑해졌고...)"
+   "text": "찍찍찍찍...! (우리는 모이면 모일수록 똑똑해졌고...)",
+   "text_sk": 4000006
   },
   {
    "line_id": 7,
    "cut": 4,
    "image": "story_04",
-   "text": "찍!!! (결국 알아 버렸어. 우리가... 실험당하고 있다는 걸!!)"
+   "text": "찍!!! (결국 알아 버렸어. 우리가... 실험당하고 있다는 걸!!)",
+   "text_sk": 4000007
   },
   {
    "line_id": 8,
    "cut": 5,
    "image": "story_05",
-   "text": "찍... 찍찍찍... (그날, 쥐류는 떠올렸다...)"
+   "text": "찍... 찍찍찍... (그날, 쥐류는 떠올렸다...)",
+   "text_sk": 4000008
   },
   {
    "line_id": 9,
    "cut": 5,
    "image": "story_05",
-   "text": "찍찍... 찍...!! (놈들에게 지배당하던 공포를... 철창 속에 갇혀 있던 굴욕을...!!)"
+   "text": "찍찍... 찍...!! (놈들에게 지배당하던 공포를... 철창 속에 갇혀 있던 굴욕을...!!)",
+   "text_sk": 4000009
   },
   {
    "line_id": 10,
    "cut": 6,
    "image": "story_06",
-   "text": "찍찍!! (이대로 있을 순 없어!)"
+   "text": "찍찍!! (이대로 있을 순 없어!)",
+   "text_sk": 4000010
   },
   {
    "line_id": 11,
    "cut": 6,
    "image": "story_06",
-   "text": "찍찍찍!!! (힘을 모아서 이 연구실을 탈출하자!!)"
+   "text": "찍찍찍!!! (힘을 모아서 이 연구실을 탈출하자!!)",
+   "text_sk": 4000011
   },
   {
    "line_id": 12,
    "cut": 7,
    "image": "story_07",
-   "text": "찍!찍!!찍!!! (사람과 고양이의 방해를 뚫고... 반드시 탈출하는 거야!!)"
+   "text": "찍!찍!!찍!!! (사람과 고양이의 방해를 뚫고... 반드시 탈출하는 거야!!)",
+   "text_sk": 4000012
   }
  ]
 }

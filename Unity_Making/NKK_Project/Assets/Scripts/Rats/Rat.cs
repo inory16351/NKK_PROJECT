@@ -285,9 +285,10 @@ namespace NKK.Rats
             {
                 if (h.State == Human.HState.Fly || h.State == Human.HState.Splat || h.State == Human.HState.Dead || h.z > 40) continue;
                 float dx = x - h.x, dy = y - h.y, d = Mathf.Sqrt(dx * dx + dy * dy), R = rad + h.R;
-                if (d > R) continue;
+                bool feet = d <= R;                                  // 발밑 원: 밀어냄
+                if (!feet && h.BodyDist(x, y) > rad) continue;       // 몸 그림에 닿음: 튕기기만 (고양이와 같음)
                 float nx = dx / (d > 0 ? d : 1), ny = dy / (d > 0 ? d : 1);
-                x = h.x + nx * (R + 1); y = h.y + ny * (R + 1);
+                if (feet) { x = h.x + nx * (R + 1); y = h.y + ny * (R + 1); }
                 float dot = vx * nx + vy * ny; if (dot < 0) { vx -= 2 * dot * nx; vy -= 2 * dot * ny; }
                 biteCD = 0.22f; bite = 1; sq = 1.25f;
                 if (!rushing) StopDash(0.1f, 0.35f);

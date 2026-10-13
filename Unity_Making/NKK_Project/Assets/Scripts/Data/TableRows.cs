@@ -132,7 +132,7 @@ namespace NKK.Data
     [Serializable]
     public class TierRow
     {
-        public int tier; public string tier_name, icon; public int research_cost;
+        public int tier; public string tier_name, icon; public int research_cost, tier_name_sk;
         public string cond1_type; public float cond1_value; public string cond2_type; public float cond2_value; public string cond3_type; public float cond3_value;
         public float birth_grade_k; public int start_rat_count, start_floor_cap; public string badge_asset; public float rat_atk_mul;
     }
@@ -203,6 +203,6 @@ namespace NKK.Data
         public string cond1_type, cond1_value, cond2_type, cond2_value, unlock, action, action_value; public int sort;
     }
     [Serializable] public class TutoLineRow { public int line_id; public string step_id, speaker_id, face, text, highlight; }
-    [Serializable] public class TutoStoryRow { public int line_id, cut; public string image, text; }
+    [Serializable] public class TutoStoryRow { public int line_id, cut; public string image, text; public int text_sk; }
     [Serializable] public class TutorialTableFile { public List<TutoSpeakerRow> Speaker; public List<TutoStepRow> Step; public List<TutoLineRow> Line; public List<TutoStoryRow> Story; }
 }

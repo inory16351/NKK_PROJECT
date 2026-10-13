@@ -3,6 +3,7 @@
   {
    "character_id": 40001,
    "character_name": "코리안 숏헤어",
+   "character_name_sk": 2140001,
    "code_id": "cheese",
    "cat_category": "Normal",
    "spawn_floor": 2,
@@ -17,6 +18,7 @@
   {
    "character_id": 40002,
    "character_name": "러시안 블루",
+   "character_name_sk": 2140002,
    "code_id": "mackerel",
    "cat_category": "Normal",
    "spawn_floor": 2,
@@ -31,6 +33,7 @@
   {
    "character_id": 40003,
    "character_name": "턱시도",
+   "character_name_sk": 2140003,
    "code_id": "tuxedo",
    "cat_category": "Normal",
    "spawn_floor": 2,
@@ -45,6 +48,7 @@
   {
    "character_id": 40004,
    "character_name": "페르시안",
+   "character_name_sk": 2140004,
    "code_id": "chonk",
    "cat_category": "Normal",
    "spawn_floor": 2,
@@ -59,6 +63,7 @@
   {
    "character_id": 40005,
    "character_name": "먼치킨",
+   "character_name_sk": 2140005,
    "code_id": "loaf",
    "cat_category": "Normal",
    "spawn_floor": 2,
@@ -73,6 +78,7 @@
   {
    "character_id": 40006,
    "character_name": "벵갈",
+   "character_name_sk": 2140006,
    "code_id": "ninja",
    "cat_category": "Normal",
    "spawn_floor": 2,
@@ -87,6 +93,7 @@
   {
    "character_id": 40007,
    "character_name": "스핑크스",
+   "character_name_sk": 2140007,
    "code_id": "laser",
    "cat_category": "Normal",
    "spawn_floor": 2,
@@ -101,6 +108,7 @@
   {
    "character_id": 40008,
    "character_name": "메인쿤",
+   "character_name_sk": 2140008,
    "code_id": "gym",
    "cat_category": "Normal",
    "spawn_floor": 2,
@@ -115,6 +123,7 @@
   {
    "character_id": 40009,
    "character_name": "마녀 모자 고양이",
+   "character_name_sk": 2140009,
    "code_id": "fire",
    "cat_category": "Special",
    "spawn_floor": 25,
@@ -129,6 +138,7 @@
   {
    "character_id": 40010,
    "character_name": "우주복 고양이",
+   "character_name_sk": 2140010,
    "code_id": "space",
    "cat_category": "Special",
    "spawn_floor": 25,
@@ -145,6 +155,7 @@
   {
    "skill_id": 50001,
    "skill_name": "하악질",
+   "skill_name_sk": 2250001,
    "cond1_type": "Interval",
    "cond1_value_01": 4.0,
    "cond1_value_02": 6.0,
@@ -166,6 +177,7 @@
   {
    "skill_id": 50002,
    "skill_name": "더블 냥펀치",
+   "skill_name_sk": 2250002,
    "cond1_type": "Interval",
    "cond1_value_01": 4.0,
    "cond1_value_02": 6.0,
@@ -187,6 +199,7 @@
   {
    "skill_id": 50003,
    "skill_name": "신사의 일격",
+   "skill_name_sk": 2250003,
    "cond1_type": "Interval",
    "cond1_value_01": 4.0,
    "cond1_value_02": 6.0,
@@ -208,6 +221,7 @@
   {
    "skill_id": 50004,
    "skill_name": "털뭉치 프레스",
+   "skill_name_sk": 2250004,
    "cond1_type": "Interval",
    "cond1_value_01": 4.0,
    "cond1_value_02": 6.0,
@@ -229,6 +243,7 @@
   {
    "skill_id": 50005,
    "skill_name": "식빵 굴리기",
+   "skill_name_sk": 2250005,
    "cond1_type": "Interval",
    "cond1_value_01": 4.0,
    "cond1_value_02": 6.0,
@@ -250,6 +265,7 @@
   {
    "skill_id": 50006,
    "skill_name": "그림자 순간이동",
+   "skill_name_sk": 2250006,
    "cond1_type": "Interval",
    "cond1_value_01": 4.0,
    "cond1_value_02": 6.0,
@@ -271,6 +287,7 @@
   {
    "skill_id": 50007,
    "skill_name": "레이저 눈빛",
+   "skill_name_sk": 2250007,
    "cond1_type": "Interval",
    "cond1_value_01": 4.0,
    "cond1_value_02": 6.0,
@@ -292,6 +309,7 @@
   {
    "skill_id": 50008,
    "skill_name": "근육 과시",
+   "skill_name_sk": 2250008,
    "cond1_type": "Interval",
    "cond1_value_01": 4.0,
    "cond1_value_02": 6.0,
@@ -313,6 +331,7 @@
   {
    "skill_id": 50009,
    "skill_name": "불덩이 마법",
+   "skill_name_sk": 2250009,
    "cond1_type": "Interval",
    "cond1_value_01": 4.0,
    "cond1_value_02": 6.0,
@@ -334,6 +353,7 @@
   {
    "skill_id": 50010,
    "skill_name": "무중력 파동",
+   "skill_name_sk": 2250010,
    "cond1_type": "Interval",
    "cond1_value_01": 4.0,
    "cond1_value_02": 6.0,
@@ -355,6 +375,7 @@
   {
    "skill_id": 50011,
    "skill_name": "냥냥 대폭격",
+   "skill_name_sk": 2250011,
    "cond1_type": "Interval",
    "cond1_value_01": 2.5,
    "cond1_value_02": 3.5,
@@ -376,6 +397,7 @@
   {
    "skill_id": 50012,
    "skill_name": "냥펀치 연타",
+   "skill_name_sk": 2250012,
    "cond1_type": "Interval",
    "cond1_value_01": 3.0,
    "cond1_value_02": 4.0,
@@ -397,6 +419,7 @@
   {
    "skill_id": 50013,
    "skill_name": "급소 찌르기",
+   "skill_name_sk": 2250013,
    "cond1_type": "Interval",
    "cond1_value_01": 2.0,
    "cond1_value_02": 3.0,
@@ -418,6 +441,7 @@
   {
    "skill_id": 50014,
    "skill_name": "뱃살 프레스",
+   "skill_name_sk": 2250014,
    "cond1_type": "Interval",
    "cond1_value_01": 3.5,
    "cond1_value_02": 4.5,
@@ -439,6 +463,7 @@
   {
    "skill_id": 50015,
    "skill_name": "식빵 볼링",
+   "skill_name_sk": 2250015,
    "cond1_type": "Interval",
    "cond1_value_01": 3.0,
    "cond1_value_02": 4.0,
@@ -460,6 +485,7 @@
   {
    "skill_id": 50016,
    "skill_name": "그림자 습격",
+   "skill_name_sk": 2250016,
    "cond1_type": "Interval",
    "cond1_value_01": 2.5,
    "cond1_value_02": 3.5,
@@ -481,6 +507,7 @@
   {
    "skill_id": 50017,
    "skill_name": "레이저 폭격",
+   "skill_name_sk": 2250017,
    "cond1_type": "Interval",
    "cond1_value_01": 3.0,
    "cond1_value_02": 4.0,
@@ -502,6 +529,7 @@
   {
    "skill_id": 50018,
    "skill_name": "지진 내려찍기",
+   "skill_name_sk": 2250018,
    "cond1_type": "Interval",
    "cond1_value_01": 3.0,
    "cond1_value_02": 4.0,
@@ -523,6 +551,7 @@
   {
    "skill_id": 50019,
    "skill_name": "운석 마법",
+   "skill_name_sk": 2250019,
    "cond1_type": "Interval",
    "cond1_value_01": 3.0,
    "cond1_value_02": 4.0,
@@ -544,6 +573,7 @@
   {
    "skill_id": 50020,
    "skill_name": "블랙홀",
+   "skill_name_sk": 2250020,
    "cond1_type": "Interval",
    "cond1_value_01": 3.5,
    "cond1_value_02": 4.5,

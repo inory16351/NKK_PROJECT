@@ -4,6 +4,7 @@
    "skill_id": 92100,
    "tier": 1,
    "skill_name": "1훈장 트리",
+   "skill_name_sk": 2492100,
    "branch": "Core",
    "is_key": 1,
    "pos_x": 0,
@@ -17,12 +18,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "Rogue/rk_1",
-   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점"
+   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점",
+   "skill_explain_sk": 2592100
   },
   {
    "skill_id": 92101,
    "tier": 1,
    "skill_name": "모든 쥐 공격력 +1",
+   "skill_name_sk": 2492101,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -1,
@@ -36,12 +39,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92102,
    "tier": 1,
    "skill_name": "모든 쥐 피해량 +10%",
+   "skill_name_sk": 2492102,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -55,12 +60,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92103,
    "tier": 1,
    "skill_name": "모든 쥐 공격력 +2",
+   "skill_name_sk": 2492103,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -74,12 +81,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92104,
    "tier": 1,
    "skill_name": "일반 쥐 공격력 +2",
+   "skill_name_sk": 2492104,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -93,12 +102,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92105,
    "tier": 1,
    "skill_name": "레어 이상 쥐 공격력 +3",
+   "skill_name_sk": 2492105,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -112,12 +123,14 @@
    "value_02": 2.0,
    "value_03": 1.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92106,
    "tier": 1,
    "skill_name": "벽에 주는 피해 +10%",
+   "skill_name_sk": 2492106,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -131,12 +144,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dig",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92107,
    "tier": 1,
    "skill_name": "벽에 주는 피해 +15%",
+   "skill_name_sk": 2492107,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -150,12 +165,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dig",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92108,
    "tier": 1,
    "skill_name": "모든 쥐 피해량 +15%",
+   "skill_name_sk": 2492108,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -4,
@@ -169,12 +186,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92109,
    "tier": 1,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -188,12 +207,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92110,
    "tier": 1,
    "skill_name": "층 제한시간 +3초",
+   "skill_name_sk": 2492110,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -207,12 +228,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92111,
    "tier": 1,
    "skill_name": "번식 확률 +5%",
+   "skill_name_sk": 2492111,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -226,12 +249,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92112,
    "tier": 1,
    "skill_name": "쥐 10마리 미만일 때 번식 확률 +10%",
+   "skill_name_sk": 2492112,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": -1,
@@ -245,12 +270,14 @@
    "value_02": 10.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92113,
    "tier": 1,
    "skill_name": "쥐 최대 마리 수 +10",
+   "skill_name_sk": 2492113,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -264,12 +291,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_nest",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92114,
    "tier": 1,
    "skill_name": "층 제한시간 +4초",
+   "skill_name_sk": 2492114,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -283,12 +312,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92115,
    "tier": 1,
    "skill_name": "일반→레어 승급 때 3% 확률로 2마리",
+   "skill_name_sk": 2492115,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 2,
@@ -302,12 +333,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_promote",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92116,
    "tier": 1,
    "skill_name": "번식 확률 +5%",
+   "skill_name_sk": 2492111,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -321,12 +354,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92117,
    "tier": 1,
    "skill_name": "방마다 물건 +1개",
+   "skill_name_sk": 2492117,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 1,
@@ -340,12 +375,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92118,
    "tier": 1,
    "skill_name": "치즈 획득량 +10%",
+   "skill_name_sk": 2492118,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -359,12 +396,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92119,
    "tier": 1,
    "skill_name": "방마다 물건 +1개",
+   "skill_name_sk": 2492117,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -378,12 +417,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92120,
    "tier": 1,
    "skill_name": "치즈 획득량 +15%",
+   "skill_name_sk": 2492120,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -397,12 +438,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92121,
    "tier": 1,
    "skill_name": "생명체 처치 치즈 +30%",
+   "skill_name_sk": 2492121,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -416,12 +459,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheesecreature",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92122,
    "tier": 1,
    "skill_name": "신규 물건 출현: 표본 병",
+   "skill_name_sk": 2492122,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 3,
@@ -435,12 +480,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92123,
    "tier": 1,
    "skill_name": "물건 파괴 치즈 +30%",
+   "skill_name_sk": 2492123,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 4,
@@ -454,12 +501,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheeseitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92124,
    "tier": 1,
    "skill_name": "신규 물건 출현: 치즈 금고",
+   "skill_name_sk": 2492124,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 4,
@@ -473,12 +522,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92125,
    "tier": 1,
    "skill_name": "묘기 해금: 백덤블링",
+   "skill_name_sk": 2492125,
    "branch": "Trick",
    "is_key": 1,
    "pos_x": 0,
@@ -492,12 +543,14 @@
    "value_02": 0.03,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_flip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92126,
    "tier": 1,
    "skill_name": "묘기로 얻는 치즈 +20%",
+   "skill_name_sk": 2492126,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -511,12 +564,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickcheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92127,
    "tier": 1,
    "skill_name": "쥐덫 등장 확률 -5%",
+   "skill_name_sk": 2492127,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -530,12 +585,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_shield",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92128,
    "tier": 1,
    "skill_name": "백덤블링 확률 +2%",
+   "skill_name_sk": 2492128,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -549,12 +606,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_flip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92129,
    "tier": 1,
    "skill_name": "쥐덫 2개 등장 확률 -10%",
+   "skill_name_sk": 2492129,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -568,12 +627,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trapmulti",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92130,
    "tier": 1,
    "skill_name": "묘기로 얻는 치즈 +40%",
+   "skill_name_sk": 2492130,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -587,12 +648,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickcheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92131,
    "tier": 1,
    "skill_name": "묘기 성공 시 필살기 게이지 +25%",
+   "skill_name_sk": 2492131,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -606,12 +669,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickgauge",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92132,
    "tier": 1,
    "skill_name": "스테이지 스킵 +2층",
+   "skill_name_sk": 2492132,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 1,
@@ -625,12 +690,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92133,
    "tier": 1,
    "skill_name": "벽 체력 -5%",
+   "skill_name_sk": 2492133,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -644,12 +711,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_wallcrack",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92134,
    "tier": 1,
    "skill_name": "총공격 범위 +15%",
+   "skill_name_sk": 2492134,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -663,12 +732,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_rush",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92135,
    "tier": 1,
    "skill_name": "보스에게 주는 피해 +10% · 보스 층 시간 +4초",
+   "skill_name_sk": 2492135,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 1,
@@ -682,12 +753,14 @@
    "value_02": 4.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92136,
    "tier": 1,
    "skill_name": "로켓배송 쿨타임 -5초",
+   "skill_name_sk": 2492136,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -701,12 +774,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_truck",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92137,
    "tier": 1,
    "skill_name": "필살기 게이지 충전 +10%",
+   "skill_name_sk": 2492137,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -720,12 +795,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_ultcd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92200,
    "tier": 2,
    "skill_name": "2훈장 트리",
+   "skill_name_sk": 2492200,
    "branch": "Core",
    "is_key": 1,
    "pos_x": 0,
@@ -739,12 +816,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "Rogue/rk_2",
-   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점"
+   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점",
+   "skill_explain_sk": 2592100
   },
   {
    "skill_id": 92201,
    "tier": 2,
    "skill_name": "모든 쥐 공격력 +2",
+   "skill_name_sk": 2492103,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -1,
@@ -758,12 +837,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92202,
    "tier": 2,
    "skill_name": "모든 쥐 공격력 +10%",
+   "skill_name_sk": 2492202,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -777,12 +858,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92203,
    "tier": 2,
    "skill_name": "치명타 확률 +3%",
+   "skill_name_sk": 2492203,
    "branch": "Combat",
    "is_key": 1,
    "pos_x": -3,
@@ -796,12 +879,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_critc",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92204,
    "tier": 2,
    "skill_name": "레어 쥐 공격력 +4",
+   "skill_name_sk": 2492204,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -815,12 +900,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92205,
    "tier": 2,
    "skill_name": "레어 이상 쥐 공격력 +15%",
+   "skill_name_sk": 2492205,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -834,12 +921,14 @@
    "value_02": 2.0,
    "value_03": 1.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92206,
    "tier": 2,
    "skill_name": "벽에 주는 피해 +15%",
+   "skill_name_sk": 2492107,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -853,12 +942,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dig",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92207,
    "tier": 2,
    "skill_name": "치명타 피해 +50%",
+   "skill_name_sk": 2492207,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -872,12 +963,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_critdmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92208,
    "tier": 2,
    "skill_name": "모든 쥐 피해량 +15%",
+   "skill_name_sk": 2492108,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -4,
@@ -891,12 +984,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92209,
    "tier": 2,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -910,12 +1005,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92210,
    "tier": 2,
    "skill_name": "층 제한시간 +5초",
+   "skill_name_sk": 2492210,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -929,12 +1026,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92211,
    "tier": 2,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -948,12 +1047,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92212,
    "tier": 2,
    "skill_name": "번식 확률 +5%",
+   "skill_name_sk": 2492111,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": -1,
@@ -967,12 +1068,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92213,
    "tier": 2,
    "skill_name": "쥐 최대 마리 수 +10",
+   "skill_name_sk": 2492113,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -986,12 +1089,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_nest",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92214,
    "tier": 2,
    "skill_name": "층 제한시간 +5초",
+   "skill_name_sk": 2492210,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -1005,12 +1110,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92215,
    "tier": 2,
    "skill_name": "일반→레어 승급 때 3% 확률로 2마리",
+   "skill_name_sk": 2492115,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 2,
@@ -1024,12 +1131,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_promote",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92216,
    "tier": 2,
    "skill_name": "번식 확률 +5%",
+   "skill_name_sk": 2492111,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -1043,12 +1152,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92217,
    "tier": 2,
    "skill_name": "방마다 물건 +1개",
+   "skill_name_sk": 2492117,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 1,
@@ -1062,12 +1173,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92218,
    "tier": 2,
    "skill_name": "치즈 획득량 +15%",
+   "skill_name_sk": 2492120,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -1081,12 +1194,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92219,
    "tier": 2,
    "skill_name": "나오는 물건 +10%",
+   "skill_name_sk": 2492219,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -1100,12 +1215,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92220,
    "tier": 2,
    "skill_name": "물건 파괴 치즈 +35%",
+   "skill_name_sk": 2492220,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -1119,12 +1236,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheeseitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92221,
    "tier": 2,
    "skill_name": "생명체 처치 치즈 +35%",
+   "skill_name_sk": 2492221,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -1138,12 +1257,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheesecreature",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92222,
    "tier": 2,
    "skill_name": "신규 물건 출현: 현미경",
+   "skill_name_sk": 2492222,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 3,
@@ -1157,12 +1278,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92223,
    "tier": 2,
    "skill_name": "나오는 물건 +15%",
+   "skill_name_sk": 2492223,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 4,
@@ -1176,12 +1299,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92224,
    "tier": 2,
    "skill_name": "신규 물건 출현: 황금 치즈 트로피",
+   "skill_name_sk": 2492224,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 4,
@@ -1195,12 +1320,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92225,
    "tier": 2,
    "skill_name": "묘기 해금: 윈드밀",
+   "skill_name_sk": 2492225,
    "branch": "Trick",
    "is_key": 1,
    "pos_x": 0,
@@ -1214,12 +1341,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_windmill",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92226,
    "tier": 2,
    "skill_name": "윈드밀 확률 +2%",
+   "skill_name_sk": 2492226,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -1233,12 +1362,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_windmill",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92227,
    "tier": 2,
    "skill_name": "쥐덫 등장 확률 -5%",
+   "skill_name_sk": 2492127,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -1252,12 +1383,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_shield",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92228,
    "tier": 2,
    "skill_name": "백덤블링 확률 +2%",
+   "skill_name_sk": 2492128,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -1271,12 +1404,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_flip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92229,
    "tier": 2,
    "skill_name": "쥐덫 2개 등장 확률 -10%",
+   "skill_name_sk": 2492129,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -1290,12 +1425,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trapmulti",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92230,
    "tier": 2,
    "skill_name": "묘기로 얻는 치즈 +40%",
+   "skill_name_sk": 2492130,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -1309,12 +1446,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickcheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92231,
    "tier": 2,
    "skill_name": "묘기 성공 시 필살기 게이지 +25%",
+   "skill_name_sk": 2492131,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -1328,12 +1467,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickgauge",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92232,
    "tier": 2,
    "skill_name": "스테이지 스킵 +1층",
+   "skill_name_sk": 2492232,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 1,
@@ -1347,12 +1488,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92233,
    "tier": 2,
    "skill_name": "벽 체력 -5%",
+   "skill_name_sk": 2492133,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -1366,12 +1509,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_wallcrack",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92234,
    "tier": 2,
    "skill_name": "스테이지 스킵 +1층",
+   "skill_name_sk": 2492232,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 3,
@@ -1385,12 +1530,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92235,
    "tier": 2,
    "skill_name": "보스에게 주는 피해 +10% · 보스 층 시간 +4초",
+   "skill_name_sk": 2492135,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 1,
@@ -1404,12 +1551,14 @@
    "value_02": 4.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92236,
    "tier": 2,
    "skill_name": "필살기 게이지 충전 +15%",
+   "skill_name_sk": 2492236,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -1423,12 +1572,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_ultcd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92237,
    "tier": 2,
    "skill_name": "총공격 쿨타임 -0.5초",
+   "skill_name_sk": 2492237,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -1442,12 +1593,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_rush",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92300,
    "tier": 3,
    "skill_name": "3훈장 트리",
+   "skill_name_sk": 2492300,
    "branch": "Core",
    "is_key": 1,
    "pos_x": 0,
@@ -1461,12 +1614,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "Rogue/rk_3",
-   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점"
+   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점",
+   "skill_explain_sk": 2592100
   },
   {
    "skill_id": 92301,
    "tier": 3,
    "skill_name": "모든 쥐 공격력 +3",
+   "skill_name_sk": 2492301,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -1,
@@ -1480,12 +1635,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92302,
    "tier": 3,
    "skill_name": "모든 쥐 공격력 +15%",
+   "skill_name_sk": 2492302,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -1499,12 +1656,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92303,
    "tier": 3,
    "skill_name": "5% 확률로 2번 공격",
+   "skill_name_sk": 2492303,
    "branch": "Combat",
    "is_key": 1,
    "pos_x": -3,
@@ -1518,12 +1677,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_multihit",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92304,
    "tier": 3,
    "skill_name": "에픽 쥐 공격력 +6",
+   "skill_name_sk": 2492304,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -1537,12 +1698,14 @@
    "value_02": 3.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92305,
    "tier": 3,
    "skill_name": "에픽 이상 쥐 공격력 +20%",
+   "skill_name_sk": 2492305,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -1556,12 +1719,14 @@
    "value_02": 3.0,
    "value_03": 1.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92306,
    "tier": 3,
    "skill_name": "벽에 주는 피해 +20%",
+   "skill_name_sk": 2492306,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -1575,12 +1740,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dig",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92307,
    "tier": 3,
    "skill_name": "치명타 확률 +3%",
+   "skill_name_sk": 2492203,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -1594,12 +1761,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_critc",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92308,
    "tier": 3,
    "skill_name": "모든 쥐 피해량 +20%",
+   "skill_name_sk": 2492308,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -4,
@@ -1613,12 +1782,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92309,
    "tier": 3,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -1632,12 +1803,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92310,
    "tier": 3,
    "skill_name": "층 제한시간 +6초",
+   "skill_name_sk": 2492310,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -1651,12 +1824,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92311,
    "tier": 3,
    "skill_name": "번식 확률 +5%",
+   "skill_name_sk": 2492111,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -1670,12 +1845,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92312,
    "tier": 3,
    "skill_name": "번식 쿨타임 -15%",
+   "skill_name_sk": 2492312,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": -1,
@@ -1689,12 +1866,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92313,
    "tier": 3,
    "skill_name": "쥐 최대 마리 수 +15",
+   "skill_name_sk": 2492313,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -1708,12 +1887,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_nest",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92314,
    "tier": 3,
    "skill_name": "층 제한시간 +6초",
+   "skill_name_sk": 2492310,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -1727,12 +1908,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92315,
    "tier": 3,
    "skill_name": "레어→에픽 승급 때 3% 확률로 2마리",
+   "skill_name_sk": 2492315,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 2,
@@ -1746,12 +1929,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_promote",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92316,
    "tier": 3,
    "skill_name": "일반→레어 승급 때 2% 확률로 2마리",
+   "skill_name_sk": 2492316,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -1765,12 +1950,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_promote",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92317,
    "tier": 3,
    "skill_name": "방마다 물건 +2개",
+   "skill_name_sk": 2492317,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 1,
@@ -1784,12 +1971,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92318,
    "tier": 3,
    "skill_name": "치즈 획득량 +15%",
+   "skill_name_sk": 2492120,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -1803,12 +1992,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92319,
    "tier": 3,
    "skill_name": "나오는 물건 +15%",
+   "skill_name_sk": 2492223,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -1822,12 +2013,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92320,
    "tier": 3,
    "skill_name": "물건 파괴 치즈 +40%",
+   "skill_name_sk": 2492320,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -1841,12 +2034,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheeseitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92321,
    "tier": 3,
    "skill_name": "생명체 처치 치즈 +40%",
+   "skill_name_sk": 2492321,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -1860,12 +2055,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheesecreature",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92322,
    "tier": 3,
    "skill_name": "신규 물건 출현: 원심분리기",
+   "skill_name_sk": 2492322,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 3,
@@ -1879,12 +2076,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92323,
    "tier": 3,
    "skill_name": "가구 피해 +30% · 가구 치즈 +30%",
+   "skill_name_sk": 2492323,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 4,
@@ -1898,12 +2097,14 @@
    "value_02": 0.3,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_furnd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92324,
    "tier": 3,
    "skill_name": "신규 물건 출현: 실험용 로봇 팔",
+   "skill_name_sk": 2492324,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 4,
@@ -1917,12 +2118,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92325,
    "tier": 3,
    "skill_name": "묘기 해금: 트리플 악셀",
+   "skill_name_sk": 2492325,
    "branch": "Trick",
    "is_key": 1,
    "pos_x": 0,
@@ -1936,12 +2139,14 @@
    "value_02": 0.015,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_axel",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92326,
    "tier": 3,
    "skill_name": "트리플 악셀 확률 +1.5%",
+   "skill_name_sk": 2492326,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -1955,12 +2160,14 @@
    "value_02": 0.015,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_axel",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92327,
    "tier": 3,
    "skill_name": "쥐덫 등장 확률 -5%",
+   "skill_name_sk": 2492127,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -1974,12 +2181,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_shield",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92328,
    "tier": 3,
    "skill_name": "윈드밀 확률 +2%",
+   "skill_name_sk": 2492226,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -1993,12 +2202,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_windmill",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92329,
    "tier": 3,
    "skill_name": "쥐덫 2개 등장 확률 -5%",
+   "skill_name_sk": 2492329,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -2012,12 +2223,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trapmulti",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92330,
    "tier": 3,
    "skill_name": "묘기로 얻는 치즈 +50%",
+   "skill_name_sk": 2492330,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -2031,12 +2244,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickcheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92331,
    "tier": 3,
    "skill_name": "묘기 성공 시 필살기 게이지 +25%",
+   "skill_name_sk": 2492131,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -2050,12 +2265,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickgauge",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92332,
    "tier": 3,
    "skill_name": "스테이지 스킵 +3층",
+   "skill_name_sk": 2492332,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 1,
@@ -2069,12 +2286,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92333,
    "tier": 3,
    "skill_name": "전기 이빨: 5% 확률로 2개 감전",
+   "skill_name_sk": 2492333,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 2,
@@ -2088,12 +2307,14 @@
    "value_02": 2.0,
    "value_03": 0.5,
    "skill_asset": "SkillIcons/cs_zap",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92334,
    "tier": 3,
    "skill_name": "총공격 범위 +15%",
+   "skill_name_sk": 2492134,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -2107,12 +2328,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_rush",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92335,
    "tier": 3,
    "skill_name": "보스에게 주는 피해 +15% · 보스 층 시간 +4초",
+   "skill_name_sk": 2492335,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 1,
@@ -2126,12 +2349,14 @@
    "value_02": 4.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92336,
    "tier": 3,
    "skill_name": "연쇄 폭발 범위 +30 · 피해 +20%",
+   "skill_name_sk": 2492336,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -2145,12 +2370,14 @@
    "value_02": 0.2,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_chainx",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92337,
    "tier": 3,
    "skill_name": "벽 체력 -5%",
+   "skill_name_sk": 2492133,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -2164,12 +2391,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_wallcrack",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92400,
    "tier": 4,
    "skill_name": "4훈장 트리",
+   "skill_name_sk": 2492400,
    "branch": "Core",
    "is_key": 1,
    "pos_x": 0,
@@ -2183,12 +2412,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "Rogue/rk_4",
-   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점"
+   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점",
+   "skill_explain_sk": 2592100
   },
   {
    "skill_id": 92401,
    "tier": 4,
    "skill_name": "모든 쥐 공격력 +5",
+   "skill_name_sk": 2492401,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -1,
@@ -2202,12 +2433,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92402,
    "tier": 4,
    "skill_name": "모든 쥐 공격력 +20%",
+   "skill_name_sk": 2492402,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -2221,12 +2454,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92403,
    "tier": 4,
    "skill_name": "치명타 피해 +50%",
+   "skill_name_sk": 2492207,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -2240,12 +2475,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_critdmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92404,
    "tier": 4,
    "skill_name": "유니크 쥐 공격력 +10",
+   "skill_name_sk": 2492404,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -2259,12 +2496,14 @@
    "value_02": 4.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92405,
    "tier": 4,
    "skill_name": "유니크 이상 쥐 공격력 +25%",
+   "skill_name_sk": 2492405,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -2278,12 +2517,14 @@
    "value_02": 4.0,
    "value_03": 1.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92406,
    "tier": 4,
    "skill_name": "벽에 주는 피해 +20%",
+   "skill_name_sk": 2492306,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -2297,12 +2538,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dig",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92407,
    "tier": 4,
    "skill_name": "보스에게 주는 피해 +25%",
+   "skill_name_sk": 2492407,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -2316,12 +2559,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92408,
    "tier": 4,
    "skill_name": "모든 쥐 피해량 +20%",
+   "skill_name_sk": 2492308,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -4,
@@ -2335,12 +2580,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92409,
    "tier": 4,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -2354,12 +2601,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92410,
    "tier": 4,
    "skill_name": "층 제한시간 +7초",
+   "skill_name_sk": 2492410,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -2373,12 +2622,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92411,
    "tier": 4,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -2392,12 +2643,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92412,
    "tier": 4,
    "skill_name": "번식 확률 +5%",
+   "skill_name_sk": 2492111,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": -1,
@@ -2411,12 +2664,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92413,
    "tier": 4,
    "skill_name": "쥐 최대 마리 수 +15",
+   "skill_name_sk": 2492313,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -2430,12 +2685,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_nest",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92414,
    "tier": 4,
    "skill_name": "층 제한시간 +7초",
+   "skill_name_sk": 2492410,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -2449,12 +2706,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92415,
    "tier": 4,
    "skill_name": "에픽→유니크 승급 때 3% 확률로 2마리",
+   "skill_name_sk": 2492415,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 2,
@@ -2468,12 +2727,14 @@
    "value_02": 3.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_promote",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92416,
    "tier": 4,
    "skill_name": "번식 확률 +5%",
+   "skill_name_sk": 2492111,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -2487,12 +2748,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92417,
    "tier": 4,
    "skill_name": "나오는 물건 +15%",
+   "skill_name_sk": 2492223,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 1,
@@ -2506,12 +2769,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92418,
    "tier": 4,
    "skill_name": "치즈 획득량 +20%",
+   "skill_name_sk": 2492418,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -2525,12 +2790,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92419,
    "tier": 4,
    "skill_name": "물건 보충 속도 +20%",
+   "skill_name_sk": 2492419,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -2544,12 +2811,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_spawn",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92420,
    "tier": 4,
    "skill_name": "물건 파괴 치즈 +50%",
+   "skill_name_sk": 2492420,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -2563,12 +2832,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheeseitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92421,
    "tier": 4,
    "skill_name": "생명체 처치 치즈 +50%",
+   "skill_name_sk": 2492421,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -2582,12 +2853,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheesecreature",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92422,
    "tier": 4,
    "skill_name": "신규 물건 출현: 가스통",
+   "skill_name_sk": 2492422,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 3,
@@ -2601,12 +2874,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92423,
    "tier": 4,
    "skill_name": "황금 물건 확률 +3%",
+   "skill_name_sk": 2492423,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 4,
@@ -2620,12 +2895,14 @@
    "value_02": 5.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_goldx",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92424,
    "tier": 4,
    "skill_name": "신규 물건 출현: 냉동 수면 캡슐",
+   "skill_name_sk": 2492424,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 4,
@@ -2639,12 +2916,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92425,
    "tier": 4,
    "skill_name": "묘기 해금: 쥐 대포알",
+   "skill_name_sk": 2492425,
    "branch": "Trick",
    "is_key": 1,
    "pos_x": 0,
@@ -2658,12 +2937,14 @@
    "value_02": 0.015,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cannon",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92426,
    "tier": 4,
    "skill_name": "쥐 대포알 확률 +1.5%",
+   "skill_name_sk": 2492426,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -2677,12 +2958,14 @@
    "value_02": 0.015,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cannon",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92427,
    "tier": 4,
    "skill_name": "모든 묘기 확률 +1%",
+   "skill_name_sk": 2492427,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -2696,12 +2979,14 @@
    "value_02": 0.01,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_flip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92428,
    "tier": 4,
    "skill_name": "트리플 악셀 확률 +1.5%",
+   "skill_name_sk": 2492326,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -2715,12 +3000,14 @@
    "value_02": 0.015,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_axel",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92429,
    "tier": 4,
    "skill_name": "쥐덫 등장 확률 -5%",
+   "skill_name_sk": 2492127,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -2734,12 +3021,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_shield",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92430,
    "tier": 4,
    "skill_name": "묘기로 얻는 치즈 +50%",
+   "skill_name_sk": 2492330,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -2753,12 +3042,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickcheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92431,
    "tier": 4,
    "skill_name": "묘기 성공 시 필살기 게이지 +30%",
+   "skill_name_sk": 2492431,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -2772,12 +3063,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickgauge",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92432,
    "tier": 4,
    "skill_name": "스테이지 스킵 +2층",
+   "skill_name_sk": 2492132,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 1,
@@ -2791,12 +3084,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92433,
    "tier": 4,
    "skill_name": "필살기 쿨타임 -3초",
+   "skill_name_sk": 2492433,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -2810,12 +3105,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_ultcd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92434,
    "tier": 4,
    "skill_name": "스테이지 스킵 +1층",
+   "skill_name_sk": 2492232,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 3,
@@ -2829,12 +3126,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92435,
    "tier": 4,
    "skill_name": "보스에게 주는 피해 +15% · 보스 층 시간 +4초",
+   "skill_name_sk": 2492335,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 1,
@@ -2848,12 +3147,14 @@
    "value_02": 4.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92436,
    "tier": 4,
    "skill_name": "필살기 위력 +30%",
+   "skill_name_sk": 2492436,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -2867,12 +3168,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_ultcd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92437,
    "tier": 4,
    "skill_name": "총공격 시간 +0.5초 · 위력 +0.5",
+   "skill_name_sk": 2492437,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -2886,12 +3189,14 @@
    "value_02": 0.5,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_rush",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92500,
    "tier": 5,
    "skill_name": "5훈장 트리",
+   "skill_name_sk": 2492500,
    "branch": "Core",
    "is_key": 1,
    "pos_x": 0,
@@ -2905,12 +3210,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "Rogue/rk_5",
-   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점"
+   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점",
+   "skill_explain_sk": 2592100
   },
   {
    "skill_id": 92501,
    "tier": 5,
    "skill_name": "모든 쥐 공격력 +8",
+   "skill_name_sk": 2492501,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -1,
@@ -2924,12 +3231,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92502,
    "tier": 5,
    "skill_name": "모든 쥐 공격력 +25%",
+   "skill_name_sk": 2492502,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -2943,12 +3252,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92503,
    "tier": 5,
    "skill_name": "5% 확률로 3번 공격",
+   "skill_name_sk": 2492503,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -2962,12 +3273,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_multihit",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92504,
    "tier": 5,
    "skill_name": "전설 쥐 공격력 +15",
+   "skill_name_sk": 2492504,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -2981,12 +3294,14 @@
    "value_02": 5.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92505,
    "tier": 5,
    "skill_name": "전설 이상 쥐 공격력 +30%",
+   "skill_name_sk": 2492505,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -3000,12 +3315,14 @@
    "value_02": 5.0,
    "value_03": 1.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92506,
    "tier": 5,
    "skill_name": "벽에 주는 피해 +25%",
+   "skill_name_sk": 2492506,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -3019,12 +3336,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dig",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92507,
    "tier": 5,
    "skill_name": "치명타 확률 +4%",
+   "skill_name_sk": 2492507,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -3038,12 +3357,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_critc",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92508,
    "tier": 5,
    "skill_name": "모든 쥐 피해량 +25%",
+   "skill_name_sk": 2492508,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -4,
@@ -3057,12 +3378,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92509,
    "tier": 5,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3076,12 +3399,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92510,
    "tier": 5,
    "skill_name": "층 제한시간 +8초",
+   "skill_name_sk": 2492510,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3095,12 +3420,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92511,
    "tier": 5,
    "skill_name": "번식 확률 +5%",
+   "skill_name_sk": 2492111,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3114,12 +3441,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92512,
    "tier": 5,
    "skill_name": "쌍둥이 확률 +5%",
+   "skill_name_sk": 2492512,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": -1,
@@ -3133,12 +3462,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_twins",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92513,
    "tier": 5,
    "skill_name": "쥐 최대 마리 수 +20",
+   "skill_name_sk": 2492513,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -3152,12 +3483,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_nest",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92514,
    "tier": 5,
    "skill_name": "층 제한시간 +8초",
+   "skill_name_sk": 2492510,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -3171,12 +3504,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92515,
    "tier": 5,
    "skill_name": "유니크→전설 승급 때 3% 확률로 2마리",
+   "skill_name_sk": 2492515,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 2,
@@ -3190,12 +3525,14 @@
    "value_02": 4.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_promote",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92516,
    "tier": 5,
    "skill_name": "높은 등급 탄생 +10%",
+   "skill_name_sk": 2492516,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3209,12 +3546,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_mutate",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92517,
    "tier": 5,
    "skill_name": "나오는 물건 +20%",
+   "skill_name_sk": 2492517,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 1,
@@ -3228,12 +3567,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92518,
    "tier": 5,
    "skill_name": "치즈 획득량 +20%",
+   "skill_name_sk": 2492418,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -3247,12 +3588,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92519,
    "tier": 5,
    "skill_name": "물건 보충 속도 +20%",
+   "skill_name_sk": 2492419,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -3266,12 +3609,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_spawn",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92520,
    "tier": 5,
    "skill_name": "물건 파괴 치즈 +60%",
+   "skill_name_sk": 2492520,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -3285,12 +3630,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheeseitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92521,
    "tier": 5,
    "skill_name": "생명체 처치 치즈 +60%",
+   "skill_name_sk": 2492521,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -3304,12 +3651,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheesecreature",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92522,
    "tier": 5,
    "skill_name": "신규 물건 출현: 약품 드럼",
+   "skill_name_sk": 2492522,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 3,
@@ -3323,12 +3672,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92523,
    "tier": 5,
    "skill_name": "황금 물건 확률 +4%",
+   "skill_name_sk": 2492523,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 4,
@@ -3342,12 +3693,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_goldx",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92524,
    "tier": 5,
    "skill_name": "신규 물건 출현: 거대 치즈 바퀴",
+   "skill_name_sk": 2492524,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 4,
@@ -3361,12 +3714,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92525,
    "tier": 5,
    "skill_name": "묘기 해금: 쳇바퀴 돌기",
+   "skill_name_sk": 2492525,
    "branch": "Trick",
    "is_key": 1,
    "pos_x": 0,
@@ -3380,12 +3735,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_wheelspin",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92526,
    "tier": 5,
    "skill_name": "묘기로 얻는 치즈 +50%",
+   "skill_name_sk": 2492330,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -3399,12 +3756,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickcheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92527,
    "tier": 5,
    "skill_name": "쥐덫 등장 확률 -5%",
+   "skill_name_sk": 2492127,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -3418,12 +3777,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_shield",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92528,
    "tier": 5,
    "skill_name": "백덤블링 확률 +2%",
+   "skill_name_sk": 2492128,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -3437,12 +3798,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_flip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92529,
    "tier": 5,
    "skill_name": "쥐덫 2개 등장 확률 -5%",
+   "skill_name_sk": 2492329,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -3456,12 +3819,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trapmulti",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92530,
    "tier": 5,
    "skill_name": "윈드밀 확률 +2%",
+   "skill_name_sk": 2492226,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -3475,12 +3840,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_windmill",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92531,
    "tier": 5,
    "skill_name": "묘기 성공 시 필살기 게이지 +30%",
+   "skill_name_sk": 2492431,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -3494,12 +3861,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickgauge",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92532,
    "tier": 5,
    "skill_name": "스테이지 스킵 +3층",
+   "skill_name_sk": 2492332,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 1,
@@ -3513,12 +3882,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92533,
    "tier": 5,
    "skill_name": "치즈 운석 (12초마다)",
+   "skill_name_sk": 2492533,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 2,
@@ -3532,12 +3903,14 @@
    "value_02": 0.3,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_meteor",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92534,
    "tier": 5,
    "skill_name": "총공격 범위 +20%",
+   "skill_name_sk": 2492534,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -3551,12 +3924,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_rush",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92535,
    "tier": 5,
    "skill_name": "보스에게 주는 피해 +20% · 보스 층 시간 +4초",
+   "skill_name_sk": 2492535,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 1,
@@ -3570,12 +3945,14 @@
    "value_02": 4.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92536,
    "tier": 5,
    "skill_name": "치즈 운석 위력 +30%",
+   "skill_name_sk": 2492536,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -3589,12 +3966,14 @@
    "value_02": 0.3,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_meteor",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92537,
    "tier": 5,
    "skill_name": "총공격 쿨타임 -0.5초",
+   "skill_name_sk": 2492237,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -3608,12 +3987,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_rush",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92600,
    "tier": 6,
    "skill_name": "6훈장 트리",
+   "skill_name_sk": 2492600,
    "branch": "Core",
    "is_key": 1,
    "pos_x": 0,
@@ -3627,12 +4008,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "Rogue/rk_6",
-   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점"
+   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점",
+   "skill_explain_sk": 2592100
   },
   {
    "skill_id": 92601,
    "tier": 6,
    "skill_name": "모든 쥐 공격력 +12",
+   "skill_name_sk": 2492601,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -1,
@@ -3646,12 +4029,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92602,
    "tier": 6,
    "skill_name": "모든 쥐 공격력 +30%",
+   "skill_name_sk": 2492602,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -3665,12 +4050,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92603,
    "tier": 6,
    "skill_name": "치명타 피해 +75%",
+   "skill_name_sk": 2492603,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -3684,12 +4071,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_critdmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92604,
    "tier": 6,
    "skill_name": "신화 쥐 공격력 +22",
+   "skill_name_sk": 2492604,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -3703,12 +4092,14 @@
    "value_02": 6.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92605,
    "tier": 6,
    "skill_name": "신화 이상 쥐 공격력 +30%",
+   "skill_name_sk": 2492605,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -3722,12 +4113,14 @@
    "value_02": 6.0,
    "value_03": 1.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92606,
    "tier": 6,
    "skill_name": "벽에 주는 피해 +25%",
+   "skill_name_sk": 2492506,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -3741,12 +4134,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dig",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92607,
    "tier": 6,
    "skill_name": "보스에게 주는 피해 +30%",
+   "skill_name_sk": 2492607,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -3760,12 +4155,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92608,
    "tier": 6,
    "skill_name": "모든 쥐 피해량 +30%",
+   "skill_name_sk": 2492608,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -4,
@@ -3779,12 +4176,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92609,
    "tier": 6,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3798,12 +4197,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92610,
    "tier": 6,
    "skill_name": "층 제한시간 +9초",
+   "skill_name_sk": 2492610,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3817,12 +4218,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92611,
    "tier": 6,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3836,12 +4239,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92612,
    "tier": 6,
    "skill_name": "번식 쿨타임 -15%",
+   "skill_name_sk": 2492312,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": -1,
@@ -3855,12 +4260,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92613,
    "tier": 6,
    "skill_name": "쥐 최대 마리 수 +20",
+   "skill_name_sk": 2492513,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -3874,12 +4281,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_nest",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92614,
    "tier": 6,
    "skill_name": "층 제한시간 +9초",
+   "skill_name_sk": 2492610,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -3893,12 +4302,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92615,
    "tier": 6,
    "skill_name": "전설→신화 승급 때 3% 확률로 2마리",
+   "skill_name_sk": 2492615,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 2,
@@ -3912,12 +4323,14 @@
    "value_02": 5.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_promote",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92616,
    "tier": 6,
    "skill_name": "번식 확률 +5%",
+   "skill_name_sk": 2492111,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -3931,12 +4344,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92617,
    "tier": 6,
    "skill_name": "나오는 물건 +20%",
+   "skill_name_sk": 2492517,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 1,
@@ -3950,12 +4365,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92618,
    "tier": 6,
    "skill_name": "치즈 획득량 +25%",
+   "skill_name_sk": 2492618,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -3969,12 +4386,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92619,
    "tier": 6,
    "skill_name": "물건 보충 속도 +25%",
+   "skill_name_sk": 2492619,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -3988,12 +4407,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_spawn",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92620,
    "tier": 6,
    "skill_name": "물건 파괴 치즈 +70%",
+   "skill_name_sk": 2492620,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -4007,12 +4428,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheeseitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92621,
    "tier": 6,
    "skill_name": "생명체 처치 치즈 +70%",
+   "skill_name_sk": 2492621,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -4026,12 +4449,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheesecreature",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92622,
    "tier": 6,
    "skill_name": "신규 물건 출현: 서버 랙",
+   "skill_name_sk": 2492622,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 3,
@@ -4045,12 +4470,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92623,
    "tier": 6,
    "skill_name": "황금 물건 확률 +4%",
+   "skill_name_sk": 2492523,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 4,
@@ -4064,12 +4491,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_goldx",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92624,
    "tier": 6,
    "skill_name": "신규 물건 출현: 금괴 상자",
+   "skill_name_sk": 2492624,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 4,
@@ -4083,12 +4512,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92625,
    "tier": 6,
    "skill_name": "모든 묘기 확률 +1%",
+   "skill_name_sk": 2492427,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": 0,
@@ -4102,12 +4533,14 @@
    "value_02": 0.01,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_flip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92626,
    "tier": 6,
    "skill_name": "묘기로 얻는 치즈 +60%",
+   "skill_name_sk": 2492626,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -4121,12 +4554,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickcheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92627,
    "tier": 6,
    "skill_name": "트리플 악셀 확률 +2%",
+   "skill_name_sk": 2492627,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -4140,12 +4575,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_axel",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92628,
    "tier": 6,
    "skill_name": "쥐 대포알 확률 +2%",
+   "skill_name_sk": 2492628,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -4159,12 +4596,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cannon",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92629,
    "tier": 6,
    "skill_name": "쥐덫 2개 등장 확률 -5%",
+   "skill_name_sk": 2492329,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -4178,12 +4617,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trapmulti",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92630,
    "tier": 6,
    "skill_name": "묘기 성공 시 필살기 게이지 +30%",
+   "skill_name_sk": 2492431,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -4197,12 +4638,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickgauge",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92631,
    "tier": 6,
    "skill_name": "쳇바퀴 돌기 확률 +2%",
+   "skill_name_sk": 2492631,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -4216,12 +4659,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_wheelspin",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92632,
    "tier": 6,
    "skill_name": "스테이지 스킵 +2층",
+   "skill_name_sk": 2492132,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 1,
@@ -4235,12 +4680,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92633,
    "tier": 6,
    "skill_name": "필살기 자동 사용",
+   "skill_name_sk": 2492633,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 2,
@@ -4254,12 +4701,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_autoult",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92634,
    "tier": 6,
    "skill_name": "스테이지 스킵 +2층",
+   "skill_name_sk": 2492132,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 3,
@@ -4273,12 +4722,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92635,
    "tier": 6,
    "skill_name": "보스에게 주는 피해 +20% · 보스 층 시간 +4초",
+   "skill_name_sk": 2492535,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 1,
@@ -4292,12 +4743,14 @@
    "value_02": 4.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92636,
    "tier": 6,
    "skill_name": "슈퍼 점프 확률 +50%",
+   "skill_name_sk": 2492636,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -4311,12 +4764,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_sjump",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92637,
    "tier": 6,
    "skill_name": "필살기 쿨타임 -3초",
+   "skill_name_sk": 2492433,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -4330,12 +4785,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_ultcd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92700,
    "tier": 7,
    "skill_name": "7훈장 트리",
+   "skill_name_sk": 2492700,
    "branch": "Core",
    "is_key": 1,
    "pos_x": 0,
@@ -4349,12 +4806,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "Rogue/rk_7",
-   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점"
+   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점",
+   "skill_explain_sk": 2592100
   },
   {
    "skill_id": 92701,
    "tier": 7,
    "skill_name": "모든 쥐 공격력 +18",
+   "skill_name_sk": 2492701,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -1,
@@ -4368,12 +4827,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92702,
    "tier": 7,
    "skill_name": "모든 쥐 공격력 +30%",
+   "skill_name_sk": 2492602,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -4387,12 +4848,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92703,
    "tier": 7,
    "skill_name": "5% 확률로 3번 공격",
+   "skill_name_sk": 2492503,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -4406,12 +4869,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_multihit",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92704,
    "tier": 7,
    "skill_name": "전설 이상 쥐 공격력 +30",
+   "skill_name_sk": 2492704,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -4425,12 +4890,14 @@
    "value_02": 5.0,
    "value_03": 1.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92705,
    "tier": 7,
    "skill_name": "유니크 이상 쥐 공격력 +35%",
+   "skill_name_sk": 2492705,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -4444,12 +4911,14 @@
    "value_02": 4.0,
    "value_03": 1.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92706,
    "tier": 7,
    "skill_name": "벽에 주는 피해 +30%",
+   "skill_name_sk": 2492706,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -4463,12 +4932,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dig",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92707,
    "tier": 7,
    "skill_name": "치명타 확률 +4%",
+   "skill_name_sk": 2492507,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -4482,12 +4953,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_critc",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92708,
    "tier": 7,
    "skill_name": "모든 쥐 피해량 +30%",
+   "skill_name_sk": 2492608,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -4,
@@ -4501,12 +4974,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92709,
    "tier": 7,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -4520,12 +4995,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92710,
    "tier": 7,
    "skill_name": "층 제한시간 +10초",
+   "skill_name_sk": 2492710,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -4539,12 +5016,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92711,
    "tier": 7,
    "skill_name": "번식 확률 +5%",
+   "skill_name_sk": 2492111,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -4558,12 +5037,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_breed",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92712,
    "tier": 7,
    "skill_name": "탄생 축제 4초 (주변 쥐 광란)",
+   "skill_name_sk": 2492712,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": -1,
@@ -4577,12 +5058,14 @@
    "value_02": 200.0,
    "value_03": 1.5,
    "skill_asset": "SkillIcons/cs_frenzy",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92713,
    "tier": 7,
    "skill_name": "쥐 최대 마리 수 +25",
+   "skill_name_sk": 2492713,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -4596,12 +5079,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_nest",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92714,
    "tier": 7,
    "skill_name": "층 제한시간 +10초",
+   "skill_name_sk": 2492710,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -4615,12 +5100,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92715,
    "tier": 7,
    "skill_name": "승급 때 3% 확률로 2마리",
+   "skill_name_sk": 2492715,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 2,
@@ -4634,12 +5121,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_promote",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92716,
    "tier": 7,
    "skill_name": "높은 등급 탄생 +15%",
+   "skill_name_sk": 2492716,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -4653,12 +5142,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_mutate",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92717,
    "tier": 7,
    "skill_name": "나오는 물건 +25%",
+   "skill_name_sk": 2492717,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 1,
@@ -4672,12 +5163,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92718,
    "tier": 7,
    "skill_name": "치즈 획득량 +25%",
+   "skill_name_sk": 2492618,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -4691,12 +5184,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92719,
    "tier": 7,
    "skill_name": "물건 보충 속도 +25%",
+   "skill_name_sk": 2492619,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -4710,12 +5205,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_spawn",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92720,
    "tier": 7,
    "skill_name": "물건 파괴 치즈 +80%",
+   "skill_name_sk": 2492720,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -4729,12 +5226,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheeseitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92721,
    "tier": 7,
    "skill_name": "생명체 처치 치즈 +80%",
+   "skill_name_sk": 2492721,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -4748,12 +5247,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheesecreature",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92722,
    "tier": 7,
    "skill_name": "황금 물건 확률 +5%",
+   "skill_name_sk": 2492722,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -4767,12 +5268,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_goldx",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92723,
    "tier": 7,
    "skill_name": "공중 충돌 치즈 +50%",
+   "skill_name_sk": 2492723,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 4,
@@ -4786,12 +5289,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_tumble",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92724,
    "tier": 7,
    "skill_name": "신규 물건 출현: 데이터 코어",
+   "skill_name_sk": 2492724,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 4,
@@ -4805,12 +5310,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92725,
    "tier": 7,
    "skill_name": "모든 묘기 확률 +1%",
+   "skill_name_sk": 2492427,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": 0,
@@ -4824,12 +5331,14 @@
    "value_02": 0.01,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_flip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92726,
    "tier": 7,
    "skill_name": "묘기로 얻는 치즈 +70%",
+   "skill_name_sk": 2492726,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -4843,12 +5352,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickcheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92727,
    "tier": 7,
    "skill_name": "백덤블링 확률 +2%",
+   "skill_name_sk": 2492128,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -4862,12 +5373,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_flip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92728,
    "tier": 7,
    "skill_name": "윈드밀 확률 +2%",
+   "skill_name_sk": 2492226,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -4881,12 +5394,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_windmill",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92729,
    "tier": 7,
    "skill_name": "트리플 악셀 확률 +2%",
+   "skill_name_sk": 2492627,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -4900,12 +5415,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_axel",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92730,
    "tier": 7,
    "skill_name": "묘기 성공 시 필살기 게이지 +40%",
+   "skill_name_sk": 2492730,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -4919,12 +5436,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickgauge",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92731,
    "tier": 7,
    "skill_name": "쥐 대포알 확률 +2%",
+   "skill_name_sk": 2492628,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -4938,12 +5457,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cannon",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92732,
    "tier": 7,
    "skill_name": "스테이지 스킵 +4층",
+   "skill_name_sk": 2492732,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 1,
@@ -4957,12 +5478,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92733,
    "tier": 7,
    "skill_name": "고양이 체력 -30% · 겁 -30%",
+   "skill_name_sk": 2492733,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -4976,12 +5499,14 @@
    "value_02": 0.3,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_catnip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92734,
    "tier": 7,
    "skill_name": "총공격 범위 +20%",
+   "skill_name_sk": 2492534,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -4995,12 +5520,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_rush",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92735,
    "tier": 7,
    "skill_name": "보스에게 주는 피해 +25% · 보스 층 시간 +3초",
+   "skill_name_sk": 2492735,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 1,
@@ -5014,12 +5541,14 @@
    "value_02": 3.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92736,
    "tier": 7,
    "skill_name": "필살기 위력 +50%",
+   "skill_name_sk": 2492736,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -5033,12 +5562,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_ultcd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92737,
    "tier": 7,
    "skill_name": "총공격 시간 +0.5초 · 위력 +0.5",
+   "skill_name_sk": 2492437,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -5052,12 +5583,14 @@
    "value_02": 0.5,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_rush",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92800,
    "tier": 8,
    "skill_name": "8훈장 트리",
+   "skill_name_sk": 2492800,
    "branch": "Core",
    "is_key": 1,
    "pos_x": 0,
@@ -5071,12 +5604,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "Rogue/rk_8",
-   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점"
+   "skill_explain": "찍찍!! 훈장을 달면 열리는 트리의 시작점",
+   "skill_explain_sk": 2592100
   },
   {
    "skill_id": 92801,
    "tier": 8,
    "skill_name": "모든 쥐 공격력 +25",
+   "skill_name_sk": 2492801,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -1,
@@ -5090,12 +5625,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92802,
    "tier": 8,
    "skill_name": "모든 쥐 공격력 +40%",
+   "skill_name_sk": 2492802,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -5109,12 +5646,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92803,
    "tier": 8,
    "skill_name": "치명타 피해 +100%",
+   "skill_name_sk": 2492803,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -5128,12 +5667,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_critdmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92804,
    "tier": 8,
    "skill_name": "신화 쥐 공격력 +40",
+   "skill_name_sk": 2492804,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -5147,12 +5688,14 @@
    "value_02": 6.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_teeth",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92805,
    "tier": 8,
    "skill_name": "신화 쥐 공격력 +50%",
+   "skill_name_sk": 2492805,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -5166,12 +5709,14 @@
    "value_02": 6.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_gym",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92806,
    "tier": 8,
    "skill_name": "벽에 주는 피해 +30%",
+   "skill_name_sk": 2492706,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -2,
@@ -5185,12 +5730,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dig",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92807,
    "tier": 8,
    "skill_name": "보스에게 주는 피해 +50%",
+   "skill_name_sk": 2492807,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -3,
@@ -5204,12 +5751,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92808,
    "tier": 8,
    "skill_name": "모든 쥐 피해량 +40%",
+   "skill_name_sk": 2492808,
    "branch": "Combat",
    "is_key": 0,
    "pos_x": -4,
@@ -5223,12 +5772,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_dmg",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92809,
    "tier": 8,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -5242,12 +5793,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92810,
    "tier": 8,
    "skill_name": "층 제한시간 +11초",
+   "skill_name_sk": 2492810,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -5261,12 +5814,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92811,
    "tier": 8,
    "skill_name": "시작 쥐 +1마리 (등급은 훈장 확률)",
+   "skill_name_sk": 2492109,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -5280,12 +5835,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_startrat",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92812,
    "tier": 8,
    "skill_name": "쌍둥이 확률 +5%",
+   "skill_name_sk": 2492512,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": -1,
@@ -5299,12 +5856,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_twins",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92813,
    "tier": 8,
    "skill_name": "쥐 최대 마리 수 +30",
+   "skill_name_sk": 2492813,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -5318,12 +5877,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_nest",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92814,
    "tier": 8,
    "skill_name": "층 제한시간 +12초",
+   "skill_name_sk": 2492814,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 1,
@@ -5337,12 +5898,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_clock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92815,
    "tier": 8,
    "skill_name": "승급 때 4% 확률로 2마리",
+   "skill_name_sk": 2492815,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 2,
@@ -5356,12 +5919,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_promote",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92816,
    "tier": 8,
    "skill_name": "높은 등급 탄생 +15%",
+   "skill_name_sk": 2492716,
    "branch": "Growth",
    "is_key": 0,
    "pos_x": 0,
@@ -5375,12 +5940,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_mutate",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92817,
    "tier": 8,
    "skill_name": "나오는 물건 +30%",
+   "skill_name_sk": 2492817,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 1,
@@ -5394,12 +5961,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_stock",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92818,
    "tier": 8,
    "skill_name": "치즈 획득량 +30%",
+   "skill_name_sk": 2492818,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -5413,12 +5982,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92819,
    "tier": 8,
    "skill_name": "물건 보충 속도 +30%",
+   "skill_name_sk": 2492819,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -5432,12 +6003,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_spawn",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92820,
    "tier": 8,
    "skill_name": "물건 파괴 치즈 +100%",
+   "skill_name_sk": 2492820,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 2,
@@ -5451,12 +6024,14 @@
    "value_02": 2.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheeseitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92821,
    "tier": 8,
    "skill_name": "생명체 처치 치즈 +100%",
+   "skill_name_sk": 2492821,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -5470,12 +6045,14 @@
    "value_02": 1.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_cheesecreature",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92822,
    "tier": 8,
    "skill_name": "황금 물건 확률 +5%",
+   "skill_name_sk": 2492722,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 3,
@@ -5489,12 +6066,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_goldx",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92823,
    "tier": 8,
    "skill_name": "콤보 유지 시간 +30%",
+   "skill_name_sk": 2492823,
    "branch": "Loot",
    "is_key": 0,
    "pos_x": 4,
@@ -5508,12 +6087,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_combo",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92824,
    "tier": 8,
    "skill_name": "신규 물건 출현: 다이아몬드 치즈",
+   "skill_name_sk": 2492824,
    "branch": "Loot",
    "is_key": 1,
    "pos_x": 4,
@@ -5527,12 +6108,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_newitem",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92825,
    "tier": 8,
    "skill_name": "모든 묘기 확률 +2%",
+   "skill_name_sk": 2492825,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": 0,
@@ -5546,12 +6129,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_flip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92826,
    "tier": 8,
    "skill_name": "묘기로 얻는 치즈 +100%",
+   "skill_name_sk": 2492826,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -5565,12 +6150,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickcheese",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92827,
    "tier": 8,
    "skill_name": "쳇바퀴 돌기 확률 +2%",
+   "skill_name_sk": 2492631,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -5584,12 +6171,14 @@
    "value_02": 0.02,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_wheelspin",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92828,
    "tier": 8,
    "skill_name": "묘기 성공 시 필살기 게이지 +50%",
+   "skill_name_sk": 2492828,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -1,
@@ -5603,12 +6192,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trickgauge",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92829,
    "tier": 8,
    "skill_name": "쥐덫 등장 확률 -5%",
+   "skill_name_sk": 2492127,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -2,
@@ -5622,12 +6213,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_shield",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92830,
    "tier": 8,
    "skill_name": "쥐덫 2개 등장 확률 -5%",
+   "skill_name_sk": 2492329,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -5641,12 +6234,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_trapmulti",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92831,
    "tier": 8,
    "skill_name": "모든 묘기 확률 +1%",
+   "skill_name_sk": 2492427,
    "branch": "Trick",
    "is_key": 0,
    "pos_x": -3,
@@ -5660,12 +6255,14 @@
    "value_02": 0.01,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_flip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92832,
    "tier": 8,
    "skill_name": "스테이지 스킵 +3층",
+   "skill_name_sk": 2492332,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 1,
@@ -5679,12 +6276,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92833,
    "tier": 8,
    "skill_name": "필살기 쿨타임 -4초",
+   "skill_name_sk": 2492833,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -5698,12 +6297,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_ultcd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92834,
    "tier": 8,
    "skill_name": "스테이지 스킵 +3층",
+   "skill_name_sk": 2492332,
    "branch": "Special",
    "is_key": 1,
    "pos_x": 3,
@@ -5717,12 +6318,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_skip",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92835,
    "tier": 8,
    "skill_name": "보스에게 주는 피해 +25% · 보스 층 시간 +3초",
+   "skill_name_sk": 2492735,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 1,
@@ -5736,12 +6339,14 @@
    "value_02": 3.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_bossd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92836,
    "tier": 8,
    "skill_name": "총공격 쿨타임 -0.5초",
+   "skill_name_sk": 2492237,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 3,
@@ -5755,12 +6360,14 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_rush",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   },
   {
    "skill_id": 92837,
    "tier": 8,
    "skill_name": "필살기 위력 +50%",
+   "skill_name_sk": 2492736,
    "branch": "Special",
    "is_key": 0,
    "pos_x": 2,
@@ -5774,38 +6381,45 @@
    "value_02": 0.0,
    "value_03": 0.0,
    "skill_asset": "SkillIcons/cs_ultcd",
-   "skill_explain": ""
+   "skill_explain": "",
+   "skill_explain_sk": 0
   }
  ],
  "Branch": [
   {
    "branch": "Core",
    "branch_name": "훈장",
+   "branch_name_sk": 2600001,
    "color": "#f0c878"
   },
   {
    "branch": "Combat",
    "branch_name": "전투",
+   "branch_name_sk": 2600002,
    "color": "#e8786a"
   },
   {
    "branch": "Growth",
    "branch_name": "승급·시간·시작 쥐",
+   "branch_name_sk": 2600003,
    "color": "#6fb3e8"
   },
   {
    "branch": "Loot",
    "branch_name": "자원 파밍",
+   "branch_name_sk": 2600004,
    "color": "#7cc88a"
   },
   {
    "branch": "Trick",
    "branch_name": "묘기",
+   "branch_name_sk": 2600005,
    "color": "#a58bd8"
   },
   {
    "branch": "Special",
    "branch_name": "해금·특수",
+   "branch_name_sk": 2600006,
    "color": "#f0a05a"
   }
  ],
