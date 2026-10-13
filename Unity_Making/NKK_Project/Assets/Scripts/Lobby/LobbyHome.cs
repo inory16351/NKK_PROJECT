@@ -79,6 +79,7 @@ namespace NKK.Lobby
         public enum FxKind { Dust, Z, Crumb, Sweat }
 
         public readonly List<LobbyRat> actors = new();
+        [HideInInspector] public bool suspended;          // 연출이 쥐들을 직접 움직이는 동안 (뽑기 비밀 실험실 폭발) 걷기·그리기 멈춤
         readonly List<LobbySlot> slots = new();
         readonly List<LobbyHot> hots = new();
         class Bubble { public LobbyRat a; public SpriteRenderer bg; public TMP_Text text; public float t, dur; }
@@ -157,7 +158,7 @@ namespace NKK.Lobby
         }
 
         public List<LobbySlot> FreeSlots() { var l = new List<LobbySlot>(); foreach (var s in slots) if (!s.user) l.Add(s); return l; }
-        public string RandomLine(string[] lines) => lines != null && lines.Length > 0 ? lines[Random.Range(0, lines.Length)] : "찍";
+        public string RandomLine(string[] lines) => lines != null && lines.Length > 0 ? lines[Random.Range(0, lines.Length)] : Loc.T(9000091);
 
         // 티어·훈장·소품·팻말 다시 표시 (페이지에서 돌아올 때)
         public void Refresh()
@@ -216,6 +217,7 @@ namespace NKK.Lobby
         void Update()
         {
             float dt = Mathf.Min(Time.deltaTime, 0.05f); t += dt;
+            if (suspended) return;
             if (fitCamera) FitCamera();
             HandleInput();
             foreach (var a in actors) a.Tick(dt, t);

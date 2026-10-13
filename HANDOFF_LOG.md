@@ -481,3 +481,9 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 ### 9-20. 2026-10-08 — 폰트 빠진 글자
 - `Jua-Regular Dynamic SDF.asset` 이 Play 때마다 바뀌던 원인: charset_ko.txt 에 나중에 들어간 한글 자모(ㅋ 등)·기호가 구운 SDF 에 없어서 예비(Dynamic) 폰트가 그때그때 글자를 만듦 (로비 대사 "ㅋㅋㅋ 완전 놀람").
 - `FontBaker` 새 메뉴 **NKK/Add Missing Chars (연결 유지)**: 기존 에셋에 빠진 글자만 덧붙임 (GUID 그대로). 실행 결과 GowunDodum·IBMPlex Medium/Bold +109자, Jua +51자. Jua 폰트 파일 자체에 없는 기호(①♪▶—「」 전각 문장부호 등)는 못 넣음 → 쓰지 말 것.
+
+### 9-21. 2026-10-12 밤 — 아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 비밀 실험실 컷씬 · 지하/뽑기 배경음악
+- 요약·지금 상태·이어서 할 일은 HANDOFF §5-4. 그림 README: `UnityResources/Rats/NewRats3/` · `Lobby_Market/` · `GachaLab/`, 음악 `UnityResources/Audio/BGM/README.md`.
+- 사용자 피드백 순서: 기획서 그림은 참고만, 게임 그림체로 → 5G 는 휴대폰 화면 속 쥐(휴대폰 = 컴퓨터 마우스처럼, 다리·꼬리 뗌) + 돌진 뒤 멈추면 얼굴 쿵 → 5G 너무 작음(화면 속 쥐 = 다른 쥐 크기) → 지하 건물 그림체가 로비와 안 맞음(질감 많음 → 단순·무광으로 다시) → 뽑기 기물 = 비밀 실험실 건물, 폭발 때 지하 쥐 전부 빨려 듦(지하도시 화면에서 직접) → 벡터풍 빛 효과 별로(그린 이미지로) · 덜컹덜컹 뒤 클릭해야 열림 · 하수구 컷 연결 안 됨(세로 한 장) → 빛을 원래 그림체로 · 하수구 더 길게(여러 장 이어 붙이기, 진행 중) · 비밀 실험실이 물 위에 뜸(고침) · 뽑기 곡 결과 때 페이드 아웃.
+- 도구: `Tools/slice_grid_all.py`(자홍 격자, 조각 전부 남김) · `Tools/slice_glow_grid.py`(검은 배경 빛 효과 → 밝기 = 투명도) · `Tools/stitch_vertical.py`(세로 그림 겹쳐 이어 붙이기).
+- UnityMCP: 허브가 uv 설치 전에 켜져 있어 uvx 를 못 찾음 → 직접 서버 띄움. 세션 MCP 가 안 붙을 땐 scratchpad 의 HTTP 직접 호출 스크립트(umcp.py: initialize → tools/call)로 작업함.

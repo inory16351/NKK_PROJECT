@@ -45,11 +45,11 @@ namespace NKK.Hazards
                 var fx = FxManager.I;
                 if (Random.value < CommonSkill.TrapCheeseChance)        // 덫 해체 전문가: 치즈만 쏙 빼 먹고 빠져나감
                 {
-                    if (fx) { fx.Popup(x, y, "치즈만 쏙!", new Color(1, 0.95f, 0.75f), 20, 0.9f, 40); fx.Ring(x, y, 40, Color.white, 0.2f); }
+                    if (fx) { fx.Popup(x, y, Loc.T(9000030), new Color(1, 0.95f, 0.75f), 20, 0.9f, 40); fx.Ring(x, y, 40, Color.white, 0.2f); }
                     break;
                 }
                 victim = r; r.Stun(stunTime); r.Held = true; r.vx = r.vy = 0;
-                if (fx) { fx.Popup(x, y, "딸깍!!", Color.white, 22, 0.9f, 40); fx.Ring(x, y, 40, Color.white, 0.2f); fx.Shake(0.08f); }
+                if (fx) { fx.Popup(x, y, Loc.T(9000031), Color.white, 22, 0.9f, 40); fx.Ring(x, y, 40, Color.white, 0.2f); fx.Shake(0.08f); }
                 break;
             }
         }

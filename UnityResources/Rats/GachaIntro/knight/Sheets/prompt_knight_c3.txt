@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: knight_c3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- SCENE: heroic CLOSE-UP facing the viewer: the rat with visor up charges forward holding a long LANCE with a red pennant, determined grin, speed lines of light behind, a big shield emblem of a cheese wedge glowing as a halo. Simple sky-blue-to-white radial background.
+
+- 1536x1024 full-frame cutscene illustration (no transparency, no panels, no borders).
+- STYLE: exactly the style of the attached ref_style (cozy flat cartoon storybook game art, Untitled Goose Game mood): completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted palette, soft lighting.
+- CHARACTER: "Knight Rat": a grey rat in heavy silver PLATE ARMOR with a knight helmet with visor and a big red plume, a brown leather belt. The character must look exactly like the attached ref_parts (its head, body and outfit parts from the game), with the same proportions as the game rats (big head, small body), pink ears, pink nose, black bead eyes, long pink tail (unless stated otherwise).
+- NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere. Only this one character.

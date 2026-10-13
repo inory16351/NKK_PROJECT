@@ -79,7 +79,7 @@ namespace NKK.Ults
                 foreach (var it in ItemsIn(b.x, b.y, 18))
                     if (b.hit.Add(it)) { it.Damage(UltD * 0.12f, R, false, b.a); if (OnScreen(it.x, it.y)) Fx?.Burst(it.x, it.y, 16, 3, LIME, GREEN, 60, 180, 2, 5); }
                 foreach (var h in ItemMgr.Humans)
-                    if (h.State != Human.HState.Fly && h.State != Human.HState.Dead && h.State != Human.HState.Splat && !b.hit.Contains(h) && Dist(h.x, h.y, b.x, b.y) < h.R + 8)
+                    if (h.State != Human.HState.Fly && h.State != Human.HState.Dead && h.State != Human.HState.Splat && !b.hit.Contains(h) && h.BodyDist(b.x, b.y) < 8)
                     { b.hit.Add(h); h.Damage(h.hpMax * 0.3f, R, b.a); Fx?.Anim("hit", h.x, h.y, 40, 0.8f); b.t = 0; }
                 if (cat && cat.Alive && !b.hit.Contains(cat) && cat.BodyDist(b.x, b.y) < 8)
                 { b.hit.Add(cat); cat.Damage(UltD * 0.14f, b.a, R); b.t = 0; }

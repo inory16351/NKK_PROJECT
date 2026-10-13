@@ -8,6 +8,8 @@ using UnityEngine;
 public static class RatArtLibraryBuilder
 {
     const string AssetPath = "Assets/Data/RatArtLibrary.asset";
+    // 5G 휴대폰 그림(rat_fiveg.png)의 화면 칸 (Tools 에서 잘라 낼 때 잰 값, UnityResources/Rats/NewRats3/README.md)
+    static readonly Rect ScreenRectFiveG = new(0.0721f, 0.1123f, 0.8559f, 0.7536f);
 
     [MenuItem("NKK/Build Cat Art Library")]
     public static void BuildCats() => BuildFrom("Assets/Data/CatRigMeta.json", "Assets/Art/Rats/Cats/Parts/", "Assets/Data/CatArtLibrary.asset", false);
@@ -43,6 +45,17 @@ public static class RatArtLibraryBuilder
             var sp = rats ? S($"Assets/Art/Rats/Parody/rat_{id}.png") : null;
             if (sp) lib.entries.Add(new RatArtLibrary.Entry { codeId = id, single = sp });
         }
+        // 화면 속 쥐 (2026-10-12 사용자: 5G = 휴대폰 화면 속 쥐): 겉은 휴대폰 한 장짜리 Parody/rat_<종>.png 가 컴퓨터 마우스처럼 움직이고,
+        // 파츠 쥐(Parts/<종>)는 화면 칸 안에서 걷고 행동함. 화면 칸 = 휴대폰 그림에서 비어 있던(자홍) 자리, 좌하단 기준 0~1
+        if (rats)
+            foreach (var (id, rect) in new[] { ("fiveg", ScreenRectFiveG) })
+            {
+                var en = lib.entries.Find(x => x.codeId == id);
+                var phone = S($"Assets/Art/Rats/Parody/rat_{id}.png");
+                if (en == null || !phone) continue;
+                en.single = phone; en.screen = true; en.screenRect = rect;
+                en.screenBg = S($"Assets/Art/Rats/Parody/rat_{id}_screen.png");
+            }
         // 그림이 아직 없는 새 쥐: 다른 쥐 그림을 잠깐 빌려 씀 (로직 시험용, 진짜 파츠가 생기면 위에서 먼저 잡힘) — 2026-10-12 아이스 퀸 쥐 · 5G
         if (rats)
             foreach (var (id, from) in new[] { ("icequeen", "angel"), ("fiveg", "student") })

@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-14).
-마지막 갱신: 2026-10-12 (새 쥐 6종 · 보스 기절 ×1.3 · 투명 망토 — 코드·테이블·그림 끝, **씬 연결 남음** §5-2)
+마지막 갱신: 2026-10-13 (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
 
 ---
 
@@ -142,6 +142,7 @@
   - **끝**: 그림 `UnityResources/Rats/BossProps/boss_cloak.png`(덮어쓰기) · `boss_cloak_fly.png`(벗어 던짐), 원본·프롬프트·로그 `BossProps/Sheets/invis_cloak/` → `Assets/Art/Rats/BossProps/` 복사. (Codex 가 저장을 못 해서 `~/.codex/generated_images/<세션>/` 에서 직접 복사함.) `Boss.cs`: 필드(cloakSprite·cloakFlySprite·cloakSize·cloakFlyTime·cloakAlpha·cloakSparkle·cloakMove·cloakWarn·cloakRest·cloakHidePopup·cloakShowPopup) · `Hidden` · `Damage` 에서 Hidden 이면 무시 · Spawn/EndSpecialFx 초기화 · BeginSpecial 에서 망토 표시 · UpdateSpecial `case "Invis_Cloak"`.
   - **끝 (2026-10-12 오후)**: `Boss.LateUpdate` 숨으면 반투명(cloakA)·그림자 · `PlaceCloak`(덮어쓰기 내려옴 / 벗어 던짐 날아감) · `ShowProp` 색 되돌림 · `Rat` 숨은 보스는 안 쫓고 안 부딪힘 · 보스 테이블 `Invis_Cloak` 행 + 95005 special2 + 96107 문구.
   - **남음**: 씬(§5-2 목록) · 테스트 패널로 마녀 '투명 망토' 확인 · `BossProps/README.md` 줄 추가.
+- **사람 몸 전체 피격 (2026-10-13)**: 예전엔 발밑 원(반지름 26)만 맞음 (키 150) → 고양이와 같은 방식 `Human.Body` · `Human.BodyDist` (그림 범위, `ItemManager.humanBodyShrink` 0.12). 적용: 쥐 박치기(발밑 = 밀어냄, 몸 = 튕기기만, bite 쿨타임 그대로) · 날아온 물건 · 폭발(BlastActors·범위 피해) · 라이브 방송 총알 · 역병 분사 · 사람 몸 클릭 = 총공격 지점을 사람 발밑으로. Play 로 확인 (머리 쪽 점: 예전 112~146 떨어짐 → 0).
 - **고양이 몸 전체 피격 (2026-10-12)**: `Cat.Body`(그림 범위 → 게임 좌표, `CatManager.bodyHitShrink`) + `Cat.BodyDist` — 쥐 박치기(발밑 원 = 밀어냄, 몸 = 튕기기만) · 날아온 물건 · BlastActors · 라이브 방송·역병 분사 · 고양이 몸 클릭 = 총공격 지점을 고양이로.
 - **친구들 도감 (끝)**: Lobby `Page_dex` = 쳇바퀴 훈련 페이지 틀 복제 + `Lobby/DexPage.cs`. 쥐 79종 전부 (등급 순), 등급 칩 {n}/{total}. 만난 친구(`Progress.Seen`) = 그림·이름·등급·설명·쳇바퀴 Lv·특수 능력·특수 액션·필살기 / 못 만남 = 실루엣·'???' / 훈장 부족(unlock_rank) = 실루엣·'{tier}훈장부터'. 글 = `Page_dex/Words`. 첫 훈장 승급 뒤 튜토리얼 l_dex 로 해금.
 - **잠긴 기능 반응 (끝)**: Lobby `LockedFeedback`(Tutorial/LockedFeedback.cs) — `LobbyManager.OnLocked` → 그 기능 자물쇠 흔들림 + 아래쪽 말풍선 `UI/LockToast`("아직 잠겨 있어요, 찍!" + 기능별 힌트 = 인스펙터). 위쪽 탭은 버튼을 막지 않고 OpenPage 가 막음.
@@ -186,17 +187,71 @@
     - 10086 아이스 퀸 쥐 `icequeen` (신화 t5, 378): 패시브 20086 서리 축적 `Frost_Stack` (생명체 칠 때마다 빙결 스택: 스택당 6% 느려짐, 10이면 2초 꽁꽁, 4초 안 맞으면 풀림) · 액션 21086 얼음 미사일 `Ice_Missile` (20초, 고드름 5개 유도 → 때리던 생명체 > 가까운 생명체 > 물건) · 필살기 30035 렛잇고 `UltRatItGo` (게이지 300 — 사용자 "수치는 알아서" 2026-10-12, 기획서 2000 은 다른 필살기(100~480)와 단위가 안 맞아 조정. 맵 생명체 전부 꽁꽁 + 물건 서리 충격) · 업적 40035 Rat It Go!
     - 10087 5G `fiveg` (에픽 t5, 48 = 기획서 '낮음'): 패시브 20087 `Rush_Range_Up` (클릭 총공격 집결 범위 +0.3, 한 번만) · 액션 21087 데이터 전송 `Data_Boost` (주변 250에 5마리 이상, 15초마다 → 반경 쥐 공격력 +25% 8초)
     - 빙결 = `Rats/Frost.cs`, Cat/Boss/Human 에 `frost` (Tick 의 dt 에 배율, 꽁꽁 = 0). 얼음 미사일 = `RatManager.FireIce/UpdateIce`, 목표 공용 `FoePos/FoeHit`. 팝업 글 = RatManager 인스펙터 freezePopup · iceMissilePopup · dataPopup (Game 씬).
-    - **임시 그림**: 아트 라이브러리 빌더가 icequeen ← angel, fiveg ← student 그림을 빌려 씀 (진짜 `Parts/icequeen`·`Parts/fiveg` 생기면 자동으로 그쪽). 필요한 그림: 두 쥐 파츠 · 얼음성(ice_castle, UltimateManager props) · 얼음 미사일(RatManager.iceMissileSprite) · 스킬 아이콘 rs_20086/21086/20087/21087 · 필살기 아이콘 ult_30035 · 업적 아이콘 ach_40035.
+    - ~~임시 그림~~ → **그림 끝 (2026-10-12 밤, §5-4)**. 빌더의 빌려 쓰기 코드는 진짜 파츠가 있으면 건너뜀.
     - 기획서 맘스땃쥐 쪽은 지금 구현과 다름 (기획서: 물건 10개마다 패티 · 액티브 20초마다 벽 박치기) → 사용자 확인 전 그대로.
-  - **예정 (2026-10-12 사용자)**: 유전자 뽑기 화면·연출(믹서기로 갈아 스무디)이 너무 잔인하다는 의견 → Codex 사용량이 돌아오면 **실험 느낌 컷씬**으로 바꿀 예정. 그때 새 그림 받아서 GachaShow 연출 교체.
+  - ~~믹서기 연출~~ → **비밀 실험실 컷씬으로 바꿈 (2026-10-12 밤, §5-4)**.
   - LobbyHome.FitCamera 는 카메라 x·크기만 (y 는 LobbyPan) — 예전엔 y 를 아지트로 되돌려서 하수구 클릭이 아지트 물건에 걸렸음.
 - **로비**: `Lobby/LobbyPan`(하수구로 카메라 이동, 맨홀 = 물건 버튼 id alley → LobbyManager.OnHot) · `MarketBroker` · `MarketPage`(Page_market) · `GachaPage`(Page_gacha) · `GachaShow`(UI/GachaShow 연출). 씬: Lobby `Alley`(방) · `Home/Hots/Alley`(Hot_market · Hot_gacha) · `LobbyPan` · `UI/ToHome`.
 - 튜토리얼 테이블: 화자 broker · 단계 l_alley · l_gacha_hot · l_gacha_page · l_market_lobby · l_market · l_market_page · l_wish (조건 WishOpen · 발동 AlleyEnter 추가).
 - **플레이 확인함 (2026-10-12, 슬롯 5에서)**: 뽑기 화면 · 무료 10회 · 믹서기 연출(쥐들 뛰어듦 → 갈갈갈 → 조각 → 결과 10칸) · 암시장 라인업 · 첫 방문 선물. UI 겹침 정리 (연출 막 불투명 — 선형 색공간이라 반투명 검정이 옅게 보임 · 결과 칸/버튼 자리 · 등급 띠 = ui_bubble · 채우기 Image 는 그림이 있어야 동작).
 - **주의**: 시험할 땐 `Progress.UseSlot(5)` 후 `PlayerPrefs nkk_slot` 을 1로 되돌릴 것. (2026-10-12 실수로 슬롯 1 에 테스트 값이 저장됨 → 튜토리얼 기록으로 훈장 1 · 최고 층 5 · tutoSkip false 로 되돌림, 치즈·연구자료는 원래 값을 몰라 0)
-- **남음**: ① Codex 한도(오후 6:34 이후) 풀리면 `UnityResources/Rats/Lobby_Market/Sheets/prompt_sewer.txt` · `prompt_manhole.txt` 다시 실행 → 하수구 배경(lm_bg 교체) · 맨홀(닫힘/열림) ② Lobby 씬: `Alley` 방을 아지트 아래(y -10.24)로 옮기고 노점·믹서기·브로커를 하수구 바닥(빈 자리 27% · 73%)에 · `Home/Hots` 에 Hot_alley(맨홀, id alley, FeatureGate alley, TutorialTarget alley_arrow) · LobbyPan.manhole/manholeClosed/manholeOpen 연결 ③ 튜토리얼 대사 l_alley · l_market_lobby 문구 '오른쪽 화살표' → '맨홀 뚜껑' 으로 ④ 밸런스 측정.
+- **남음 (옛 목록, ①② 는 §5-4 에서 끝)**: ① Codex 한도(오후 6:34 이후) 풀리면 `UnityResources/Rats/Lobby_Market/Sheets/prompt_sewer.txt` · `prompt_manhole.txt` 다시 실행 → 하수구 배경(lm_bg 교체) · 맨홀(닫힘/열림) ② Lobby 씬: `Alley` 방을 아지트 아래(y -10.24)로 옮기고 노점·믹서기·브로커를 하수구 바닥(빈 자리 27% · 73%)에 · `Home/Hots` 에 Hot_alley(맨홀, id alley, FeatureGate alley, TutorialTarget alley_arrow) · LobbyPan.manhole/manholeClosed/manholeOpen 연결 ③ 튜토리얼 대사 l_alley · l_market_lobby 문구 '오른쪽 화살표' → '맨홀 뚜껑' 으로 ④ 밸런스 측정.
+
+## 5-4. 아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 비밀 실험실 컷씬 (2026-10-12 밤)
+
+- **아이스 퀸 쥐 · 5G 그림** (`UnityResources/Rats/NewRats3/README.md`): 기획서 그림은 참고만, 게임 쥐 플랫 그림체 (사용자). 파츠 `Parts/icequeen` · `Parts/fiveg`, 아이콘 rs_20086/21086/20087/21087 · ult_30035 · ach_40035, 소품 ice_castle · ice_missile 등 → `Art/Rats/NewRats/`. 아트 라이브러리 다시 만듦.
+  - 씬 연결 끝: RatManager.iceMissileSprite = NewRats/ice_missile · UltimateManager Fill Props/Icons · AchievementToast Fill Icons (Game) · IconBook Fill Icons (Lobby).
+- **5G = 휴대폰 속 쥐** (사용자): 겉 = 휴대폰 한 장짜리 `Parody/rat_fiveg.png` (다리·꼬리 없음, 컴퓨터 마우스 쥐처럼 움직임) · 화면 = `rat_fiveg_screen.png` + 화면 속 파란 5G 쥐 리그. `RatArtLibrary.Entry.screen/screenRect/screenBg` (빌더 `ScreenRectFiveG`) · `RatRig.screenRig/screenBg` (Rat·LobbyRat 프리팹 Single 아래 `ScreenBg` · `ScreenRat`) · UI 는 `RatPortrait` 가 화면 칸에 배경 + 쥐 복제본을 넣음.
+  - 화면 속 쥐는 겉 자세(걷기·공격·행동·기절)를 따라 하고, 가만히 있으면 화면 안을 서성임. **멀리서 빠르게 달리다 멈추면 화면에 얼굴 쿵** (미끄러짐 → 납작 → 벌러덩 → 어질어질, `RatRig.bumpSpeed/bumpDist/bumpTime`, 효과음 hit_glass).
+  - 크기 (사용자): 화면 속 쥐가 다른 쥐와 같은 길이가 되게 휴대폰을 키움 (`RatRig.Build` single 분기, 길이 = 화면 폭 × screenRatLen).
+- **지하 도시 v4** (`UnityResources/Rats/Lobby_Market/README.md`): 로비 그림체 고정 (단순·무광, 질감 없음 — 사용자: 처음 뽑은 건물들은 로비와 안 맞음). 배경·기물·장식 새로, 같은 이름으로 덮어써 씬 연결 유지. 배치 = 보도 바닥 기준. 뽑기 기물 = **비밀 실험실 건물** `Alley/SecretLab` (팻말 '비밀 실험실', 뽑기 화면 제목은 그대로). 옛 Gate·매달린 집·금고·자루는 꺼 둠.
+- **뽑기 연출 = 비밀 실험실 컷씬** (`UnityResources/Rats/GachaLab/README.md`, `Lobby/GachaShow.cs` 다시 씀, 씬 `UI/GachaShow/Root` 다시 구성): 로우앵글 고글 쥐들 → 스포이드 물방울 반짝 → 낙하 줌 블러 → **지하도시 화면에서** 비밀 실험실 폭발 + 돌아다니는 지하 쥐들·고글 쥐 3마리가 전부 건물로 빨려 듦 (사용자, `LobbyHome.suspended` 로 걷기 멈춤, 끝나면 `RestoreWorld` 로 원래대로) → 배관 타고 아래로 (가속 + 잔상) → 하수구 뚜껑 덜컹덜컹 → 최고 등급 유니크 이상 = 등급 색 빛 · 에픽 이하 = 파리 → **전부 한 마리씩 강조** (하수구 장면 뒤, 클릭/스페이스 = 다음, 건너뛰기 = 결과) → 결과 칸.
+  - **2차 다듬기 (사용자 피드백)**: 빛·반짝·강조 효과를 벡터풍 → **Codex 로 그린 빛 효과** (`GachaLab/glow_*`, 검은 배경 → `Tools/slice_glow_grid.py`) · 배관~출구를 **세로로 긴 한 장 `lab_shaft`** 로 이어 붙여 연결 (뚜껑·빛은 그 그림의 자식) · 덜컹덜컹 뒤 **"눌러서 열기!" 클릭해야 열림** · 공개 = 실루엣 → 번쩍 → 색 + 등급 폭발(전설 금빛·신화 무지개) · 빛기둥 · 반짝이 · 결과 칸이 뜨면 뽑기 곡 2.5초 페이드 아웃 (`MusicManager.Play(clip, fade)`, `SceneMusic.gachaFadeOut`, `GachaShow.Cutscene`).
+  - 건물이 화면에 없으면(지하 밖에서 열림) 실험대 컷 `lab_c4` 에서 결과 쥐들이 빨려 드는 것으로 대신. 연출 중 LobbyPan '올라가기' 버튼 숨김 (`GachaShow.Busy`).
+  - 확인함: Play 에서 가짜 결과 6개로 처음부터 끝까지 (지하 폭발·빨려 듦·배관·뚜껑·강조·결과 칸), 콘솔 에러 없음. 실제 뽑기(저장값 사용)로는 아직 안 돌림.
+- **배경음악** (Gemini 음악 만들기, 연주곡 · 표준): `BGM_Alley` (지하 도시, SceneMusic.alleyClip — LobbyPan.AtRoom 일 때) · `BGM_Gacha` (뽑기 연출, SceneMusic.gachaClip — GachaShow.Busy 일 때).
+- **UnityMCP 가 안 붙을 때**: 유니티 허브가 uv 설치 전에 켜져 있으면 PATH 에 uvx 가 없어 서버를 못 띄움 → 허브를 완전히 껐다 켜거나, 터미널에서 `uvx --from "mcpforunityserver==10.3.0" mcp-for-unity --transport http --http-url http://127.0.0.1:8080 --project-scoped-tools` 로 직접 띄운 뒤 유니티 MCP 창에서 Start Session.
+
+### 5-4 이어서 할 일 (2026-10-12 밤, 세션 넘김 시점)
+
+사용자 요청: ① 빛 효과를 원래 그림체(동화풍 칠)로 → **끝** (`GachaLab/Sheets/lab_glow2.png` → `glow_*`·`boom_teal`·`burst_*` 같은 이름으로 교체, 옛 사진풍은 `GachaLab/_glow_v1/`, 씬 Image 는 preserveAspect) ② 비밀 실험실이 물 위에 떠 있음 → **끝** (임포터가 피벗을 가운데로 덮어써서 바닥 기준으로 다시 놓음, 터진 그림 바꿀 때 바닥선 유지 코드) ③ **하수구를 더 긴 세로 그림으로 + 블러 속도감 → 끝 (2026-10-12 밤, Play 확인함)**:
+- 세로 3장 `Sheets/shaft_a~c.png` (각 1024×1536, 다음 장은 앞 장 아래 400px `ref_prev_bottom.png` 를 보고 이어 그림) → `python Tools/stitch_vertical.py <출력> auto a b c` (auto = 겹침 자리 자동 찾기, 둘 다 400px) → `lab_shaft.png` 1024×3808 (같은 이름으로 덮어써 씬 연결 유지, 옛 짧은 그림은 `Sheets/lab_shaft.png`). 텍스처 Max Size 4096.
+- 씬 (유니티 꺼진 상태에서 YAML 직접): `PipeImage` 1920×7140 · 자식 HoleGlow·Pillar·Lid·FlyTemplate (x -9, y -2694) · Rays (-9, -2734) · GachaShow `pipeTime` 3.2 · `pipeBlur` 0.025 (긴 그림이라 잔상 간격 줄임).
+- **쥐 고유 컷씬 (전설 이상)**: `UnityResources/Rats/GachaIntro/README.md` (만드는 법 4단계 · 쥐별 입자). **신화 15종 끝 (2026-10-12 밤)**: 아이스 퀸 + 14종 Codex 42장, 씬 `Intros/` 15개 · `GachaShow.intros` 15. Play 로 다람쥐·관광쥐·폭탄마 연속 공개 확인. 전설 11종은 사용자 결정 대기. `Lobby/GachaIntro.cs`(틀) · `GachaIntroCuts.cs`(컷 + `trans` 전환 값 + `snow` 입자) · `GachaShow.intros`/`introFrom`. 씬 `UI/GachaShow/Root/Intros/<이름>` = `Tools/gen_gacha_intro_scene.py` 가 만든 코드를 MCP execute_code 로.
+- **컷 전환 통일 (사용자: 벡터풍 눈보라 · 줌 인 · 플래시 전환, 다른 컷도 비슷하게 이어지게)**: `Lobby/CutFx.cs` = `PushOut`(컷 끝 줌 인 + 하얗게) · `PunchIn`(하얀 화면에서 크게 시작해 자리 잡음) · `Blizzard`(흰 원을 속도 방향으로 늘린 벡터풍 입자, 씬 템플릿 Image 복제) · `CutTransition`(전환 시간·배율). 하드코딩 정리 (사용자): 전환 값 = GachaShow `labCut`·`dropCut`·`fallCut`·`benchCut`·`worldCut`·`pipeCut`·`introCut` · `introSfx` · `introRevealFlash` · `resultFlash*`, 배관 속도선 = `pipeLines`(템플릿 `Stage/CutPipe/SpeedDot`) · `speedDots/Mul/Base`, 지하 고글 = `Alley/GogglesTemplate` (전엔 new GameObject). 뽑기 연출 전 구간에 적용: 실험실 → 스포이드 → 낙하 → 지하(시작·끝 플래시) / 실험대 컷 → 배관(펀치 인 + 위로 스치는 속도선 `speedDot` = `Art/Generated/circle.png`) → 하수구 → 공개 → (고유 컷씬) → 결과 칸 살짝 번쩍.
+- **확인함 (2026-10-12 밤)**: Play 에서 가짜 결과(흰 실험쥐 + 아이스 퀸 NEW)로 처음부터 결과 칸까지, 12프레임마다 캡처해 전환·눈보라·속도선 확인, 콘솔 에러 없음. 테스트 = `scratchpad` 식: Play → `LobbyPan.AtRoom` true → `GachaShow.Play` + `EditorApplication.update` 로 캡처·뚜껑 자동 누름.
+- **남음**: 사용자 눈으로 확인 (전환 속도 · 눈보라 양 · 컷씬 길이 약 3.5초) → 커밋 (이번 작업 전체 아직 커밋 안 함).
+- **뽑기 수정 (2026-10-12 밤, 사용자)**: ① 뚜껑이 뽑을 때마다 옆으로 밀림 → 처음 자리를 한 번만 기억 (`lidHome0`) ② 빨려 드는 장면(지하, Prep 숨김)에서 지하 클릭됨 → `LobbyManager` inputBlocked 에 `GachaShow.Busy` ③ 건너뛰기 2단계: 뚜껑 앞까지는 1번째 = 뚜껑 열기 전으로 (`JumpToSewer`), 그 뒤 = 결과. 처음 얻은 신화(`mustIntroFrom`)는 건너뛰어도 고유 컷씬을 보여 주고 결과 (그동안 건너뛰기 버튼 숨김·입력 무시). Play 자동 테스트로 확인.
+- **뒷골목 숨김 · 조각 1개 (2026-10-13, 사용자)**: ① 하수구 뒷골목(맨홀)은 16층 클리어 전엔 **아예 안 보임**, 열릴 때 튜토리얼 `l_alley` 가 시작되는 순간 통 튀어나옴. `Progress.IsUnlocked("alley")` = 16층 클리어 **+ `Progress.alleyRevealStep`(l_alley) 시작함**, `MarkTuto` 가 UnlockVersion 을 올려 FeatureGate 가 다시 그림. 튜토리얼 테이블 l_alley 조건 = `Unlocked gacha` (alley 로 두면 서로 기다림). `FeatureGate` 에 `disableWhenLocked`(콜라이더 끄기) · `revealTime/revealOvershoot/revealSfx`(보는 중 열리면 튀어나옴), `LobbyHot.Contains` 는 콜라이더 꺼져 있으면 false. 씬 연결 끝: Lobby `Home/Hots/Hot_alley` FeatureGate → hideWhenLocked = Manhole · Highlight · Tag, disableWhenLocked = BoxCollider2D, revealSfx = jgl_unlock. Play 확인 (잠김 = 맨홀·팻말 숨김·클릭 안 됨 → 열림 = 튀어나옴, 콘솔 에러 없음). 실제 16층 첫 클리어 흐름으로는 아직 안 봄. 커밋 안 함. ② 뽑기 조각 = 등급 상관없이 캡슐당 **1개** (뽑기 테이블 Gacha_Grade shard_count 전부 1, 백업 `_backup_20261013`). 상점 묶음 수량(Shop_Goods pack_size)은 그대로.
+- **MCP**: 세션 시작 때 유니티가 꺼져 있으면 Claude 쪽 UnityMCP 가 '실패'로 남음 → `/mcp` 에서 Reconnect. 안 하면 서버(127.0.0.1:8080/mcp)에 HTTP 로 직접 붙어도 됨 (initialize → tools/call).
+- 참고: 이 세션에서 MCP 서버는 Claude 백그라운드로 띄운 것이라 세션이 끝나면 꺼짐 → 유니티 허브를 완전히 껐다 켜면 유니티가 직접 띄움 (§5-4 'UnityMCP 가 안 붙을 때').
 
 ---
+
+## 5-5. 스트링 테이블 · 영어 번역 (2026-10-13)
+
+- **`Data_Table/스트링 테이블.xlsx`** (String 시트: string_key · ko · en · 출처 · 상태 · 번역 메모 / Glossary 시트 = 용어집) → `StringTable.json`. **2,102개 전부 영어 번역 끝** (자리표시 `{n}` · `<color>` 태그 · 대화 구분 `|` 검사 통과).
+- **사용자 결정**: 다른 테이블의 한글은 그대로 두고(사람이 읽는 용), 글 칸 옆에 `<칸>_sk` int 키 칸을 둠 (관리·코드용) · 플레이어가 보는 글만 (desc·dev 메모·테스트 패널 제외) · 밈은 영어권 말장난으로 현지화 · 이번엔 테이블+영어만, **게임 안 언어 전환 코드는 다음 단계**.
+- 키 = 칸 번호 × 100000 + 행 id (예: 쥐 스킬 이름 12 → 1220086). 10~41 = 테이블 칸 (`Tools/gen_string_table.py` 의 COLS), **80xxxxx = 씬 글** (Title·Lobby·Game 의 TMP m_text + 인스펙터 문자열, 같은 한글은 키 하나), **90xxxxx = 코드에 박힌 글** (팝업·배너·로비 쥐 수다 등, 자리표시 이름 정리함: `{Format(power)}` → `{power}`). 
+- 도구: `python Tools/gen_string_table.py` (키 칸 채우기·한글 바뀌면 상태 '한글 바뀜'·새 글 '번역 필요'·사라지면 '안 쓰임', 여러 번 돌려도 키 그대로) · `python Tools/import_scene_strings.py` (씬 저장 후, 새 씬 글 추가). **순서: gen_stage_table → gen_economy → gen_skill_tree → gen_string_table → xlsx2json** (gen_skill_tree 가 공용 스킬 시트를 다시 만들어 _sk 칸이 지워져도 같은 한글이면 같은 키로 다시 채움).
+- 용어 (사용자 확정): 게임 제목 Squeak! Squeak!! Squeak!!! · 찍 = Squeak · 찍찍!!(힘) = SQUEAK!! · 적정 = Rec. · 훈장 = Rank · 조각 = Shard · 연구자료 = Research · 친구 = Buddy/Buddies!! · 탈출 = Escape · 맘스땃쥐 = McSqueak's · 쥐4 = Rat Jerky · 줴리 = Jerreh · 흐에~ 스트리머 = 영어권 방송 밈 (쥐커드 = Squeak Shuffle) · 근육 쥐 = Mouscle · 5G = Mi-Fi. 나머지는 Glossary 시트.
+- 한국어 아재개그(줴리 필살기 자막 쥐포·킹콩 등)는 영어 말장난으로 바꿈 (Hide and squeak 등).
+- **언어 설정 (2026-10-13)**: 타이틀 `UI/Settings/Card/Language` (한국어 · English 버튼, `LanguageSettings`). 코드 = `Core/Loc.cs` (PlayerPrefs `nkk_lang`, `Loc.Get(키, 원래 글)`, `Loc.Changed`) · `Core/LocText.cs` (씬 TMP 에 키, template 켜면 코드가 `LocText.Tpl` 로 틀만 가져감) · GameDatabase.stringTable. **타이틀 씬만 연결 끝** (메뉴·저장 칸·확인 창·설정·오프닝 자막 Story text_sk·훈장 이름 tier_name_sk). Play 로 영어 확인 (로고 자동 크기, 저장 칸 설명 자동 크기). 로비·게임 씬은 아직 (GameDatabase.stringTable 도 로비·게임 씬엔 아직 안 넣음).
+- **로비·게임 연결 (2026-10-13)**: ① 테이블 글 = 행 클래스에 `<칸>_sk` int 필드 + `GameDatabase.Load` 끝에서 `Loc.ApplyAll` (string 칸 X 옆 X_sk 가 있으면 지금 언어로 바꿔 끼움, 언어 바꾸면 Load 다시) ② 씬 글 = 루트 `Localization` 오브젝트의 `LocScene` (실행 순서 -10000, 씬 열 때 제일 먼저): 씬의 LocText 전부(Lobby 222 · Game 54, 전부 template) + 인스펙터 문자열 `fields`(컴포넌트+경로+키, Lobby 102 · Game 100). 테스트 패널은 뺌 ③ 코드 글 = `Loc.T(키)` · `Loc.Pick(키…)` (한국어도 테이블 ko 칸에서, 코드에 원문으로 찾지 않음 — 사용자), 자리표시는 .Replace. 남은 한국어 리터럴 = 씬 값이 덮어쓰는 인스펙터 기본값·디버그 로그뿐. ④ 영어일 때 LocText 글은 칸을 넘치면 자동 크기 (최소 55%, `LocText.Fit`). 번역이 없으면 한국어 대신 `[Loc] … 글 없음` 경고. 영어로 로비 페이지들·게임 HUD Play 확인. 씬 다시 연결 = scratchpad 식 hook 코드 (TMP ko → 80 키, SerializedObject 문자열 → fields).
+- **튜토리얼 (2026-10-13)**: 최대 마릿수 = g_pop (닿으면, 몇 번째 판이든) 또는 g_pop_f5 (4층까지 한 번도 안 닿았으면 5층 시작) — 둘 중 하나 보면 끝 (서로 NotDone + g_power_pop). 치즈 창고: SkillSelect = 강조된 추천 칸을 골랐을 때만, SkillBuy = 그 칸을 활성화했을 때만 (`SkillPage.BoughtGuided`, 로비 들어올 때 0). 강조 테두리는 글자(TMP)면 실제 글자 범위 (`TutorialTarget.fitText`) — 적정 찍찍 강조가 칸 전체로 커지던 것.
+- **남음**: ① ~~로비·게임 연결~~ 끝 (위) ② 영어 글이 길어서 칸 넘침 확인 ③ 튜토리얼 대사 70·74 · 하수구 대사 '믹서기' 는 지금 뽑기(비밀 실험실)와 안 맞음 → 한글부터 고칠지 사용자 확인 ④ 확률 정보 '조각 {s}개' 는 이제 늘 1개.
+
+## 5-6. 초반 적정 찍찍 (2026-10-13)
+
+- 기획서 배율(1~4층 ×1.25 · 5층 ×1.8 · 6~15층 ×1.32 · 16~20층 …)·방 수·목표 시간은 기획서와 같음 (지수 × 400).
+- 측정 round8 (`Tools/probe_results/round8_fresh_f1-5.txt`, 새 저장 · 1훈장 · 스킬 0 · 총공격 O · 승급 1): 1층 5~14초 통과, **2층 4판 모두 실패** (30마리 꽉 차도 힘 300~380 = 적정 500 의 0.6~0.7배, 벽 0~1개). 전체 기준 260 으로 낮춘 측정(round8b): 2·3층 통과 · 4층 0.9배 근처 → 사용자 "너무 쉬움".
+- **사용자 결정: 1층만 300, 2층부터는 예전(400 기준) 그대로** → `gen_stage_table.py` `POW_FIX = {1: 300}`. 2층 이후는 이전 값과 같음 (확인함).
+- 참고: 측정상 새 저장 첫 판은 여전히 2층이 첫 벽 (1층 값은 2층 난이도에 영향 거의 없음).
+
+## 5-7. 서버 (계획만, 2026-10-13)
+
+- `서버 계획.md`: 목적 = 랭킹 · 기록 · 내부 지표 (저장은 로컬 그대로) · Firebase · itch.io 윈도우 + WebGL → Unity SDK 대신 **REST (UnityWebRequest)** · 익명 로그인 · Firestore `players` / `runs` · 닉네임 + 로비 랭킹. Firebase 프로젝트는 사용자가 만들 예정 (아직 없음). 구현 전에 정할 것 = 문서 9장.
+- 해적 쥐 영어 이름 = **Pirat** (사용자).
 
 ## 6. 밸런스 측정 (BalanceProbe)
 

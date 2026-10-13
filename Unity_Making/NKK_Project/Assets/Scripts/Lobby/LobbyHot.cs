@@ -34,6 +34,7 @@ namespace NKK.Lobby
 
         public bool Contains(Vector2 p)
         {
+            if (box && !box.enabled) return false;          // 아직 안 드러난 물건 (FeatureGate.disableWhenLocked)
             if (box && box.OverlapPoint(p)) return true;
             return plank && plank.bounds.Contains(new Vector3(p.x, p.y, plank.bounds.center.z));
         }

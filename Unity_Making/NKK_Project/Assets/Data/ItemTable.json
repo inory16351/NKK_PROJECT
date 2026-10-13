@@ -3,6 +3,7 @@
   {
    "item_id": 60001,
    "item_name": "플라스크",
+   "item_name_sk": 2760001,
    "code_id": "flask",
    "item_category": "Item",
    "radius": 14.0,
@@ -26,6 +27,7 @@
   {
    "item_id": 60002,
    "item_name": "삼각 플라스크",
+   "item_name_sk": 2760002,
    "code_id": "erlen",
    "item_category": "Item",
    "radius": 14.0,
@@ -49,6 +51,7 @@
   {
    "item_id": 60003,
    "item_name": "비커",
+   "item_name_sk": 2760003,
    "code_id": "beaker",
    "item_category": "Item",
    "radius": 14.0,
@@ -72,6 +75,7 @@
   {
    "item_id": 60004,
    "item_name": "시험관 꽂이",
+   "item_name_sk": 2760004,
    "code_id": "tuberack",
    "item_category": "Item",
    "radius": 16.0,
@@ -95,6 +99,7 @@
   {
    "item_id": 60005,
    "item_name": "페트리 접시",
+   "item_name_sk": 2760005,
    "code_id": "petri",
    "item_category": "Item",
    "radius": 13.0,
@@ -118,6 +123,7 @@
   {
    "item_id": 60006,
    "item_name": "약병",
+   "item_name_sk": 2760006,
    "code_id": "pillbottle",
    "item_category": "Item",
    "radius": 12.0,
@@ -141,6 +147,7 @@
   {
    "item_id": 60007,
    "item_name": "주사기",
+   "item_name_sk": 2760007,
    "code_id": "syringe",
    "item_category": "Item",
    "radius": 14.0,
@@ -164,6 +171,7 @@
   {
    "item_id": 60008,
    "item_name": "클립보드",
+   "item_name_sk": 2760008,
    "code_id": "clipboard",
    "item_category": "Item",
    "radius": 14.0,
@@ -187,6 +195,7 @@
   {
    "item_id": 60009,
    "item_name": "머그컵",
+   "item_name_sk": 2760009,
    "code_id": "mug",
    "item_category": "Item",
    "radius": 13.0,
@@ -210,6 +219,7 @@
   {
    "item_id": 60010,
    "item_name": "보안경",
+   "item_name_sk": 2760010,
    "code_id": "goggles",
    "item_category": "Item",
    "radius": 15.0,
@@ -233,6 +243,7 @@
   {
    "item_id": 60011,
    "item_name": "표본 병",
+   "item_name_sk": 2760011,
    "code_id": "specimen",
    "item_category": "Item",
    "radius": 15.0,
@@ -256,6 +267,7 @@
   {
    "item_id": 60012,
    "item_name": "케이지",
+   "item_name_sk": 2760012,
    "code_id": "cage",
    "item_category": "Item",
    "radius": 24.0,
@@ -279,6 +291,7 @@
   {
    "item_id": 60013,
    "item_name": "의자",
+   "item_name_sk": 2760013,
    "code_id": "stool",
    "item_category": "Item",
    "radius": 17.0,
@@ -302,6 +315,7 @@
   {
    "item_id": 60014,
    "item_name": "소화기",
+   "item_name_sk": 2760014,
    "code_id": "extinguisher",
    "item_category": "Item",
    "radius": 14.0,
@@ -325,6 +339,7 @@
   {
    "item_id": 60015,
    "item_name": "정수기",
+   "item_name_sk": 2760015,
    "code_id": "watercooler",
    "item_category": "Item",
    "radius": 18.0,
@@ -348,6 +363,7 @@
   {
    "item_id": 60016,
    "item_name": "구급상자",
+   "item_name_sk": 2760016,
    "code_id": "firstaid",
    "item_category": "Item",
    "radius": 17.0,
@@ -371,6 +387,7 @@
   {
    "item_id": 60017,
    "item_name": "현미경",
+   "item_name_sk": 2760017,
    "code_id": "microscope",
    "item_category": "Item",
    "radius": 18.0,
@@ -394,6 +411,7 @@
   {
    "item_id": 60018,
    "item_name": "의료 폐기물통",
+   "item_name_sk": 2760018,
    "code_id": "biobin",
    "item_category": "Item",
    "radius": 18.0,
@@ -417,6 +435,7 @@
   {
    "item_id": 60019,
    "item_name": "모니터",
+   "item_name_sk": 2760019,
    "code_id": "monitor",
    "item_category": "Item",
    "radius": 22.0,
@@ -440,6 +459,7 @@
   {
    "item_id": 60020,
    "item_name": "원심분리기",
+   "item_name_sk": 2760020,
    "code_id": "centrifuge",
    "item_category": "Item",
    "radius": 22.0,
@@ -463,6 +483,7 @@
   {
    "item_id": 60021,
    "item_name": "실험 카트",
+   "item_name_sk": 2760021,
    "code_id": "cart",
    "item_category": "Item",
    "radius": 26.0,
@@ -486,6 +507,7 @@
   {
    "item_id": 60022,
    "item_name": "가스통",
+   "item_name_sk": 2760022,
    "code_id": "gastank",
    "item_category": "Item",
    "radius": 16.0,
@@ -509,6 +531,7 @@
   {
    "item_id": 60023,
    "item_name": "약품 드럼",
+   "item_name_sk": 2760023,
    "code_id": "drum",
    "item_category": "Item",
    "radius": 28.0,
@@ -532,6 +555,7 @@
   {
    "item_id": 60024,
    "item_name": "서버 랙",
+   "item_name_sk": 2760024,
    "code_id": "server",
    "item_category": "Item",
    "radius": 30.0,
@@ -555,6 +579,7 @@
   {
    "item_id": 61001,
    "item_name": "선반",
+   "item_name_sk": 2761001,
    "code_id": "furn_shelf",
    "item_category": "Furniture",
    "radius": 40.0,
@@ -578,6 +603,7 @@
   {
    "item_id": 61002,
    "item_name": "책장",
+   "item_name_sk": 2761002,
    "code_id": "furn_bookshelf",
    "item_category": "Furniture",
    "radius": 40.0,
@@ -601,6 +627,7 @@
   {
    "item_id": 61003,
    "item_name": "간이침대",
+   "item_name_sk": 2761003,
    "code_id": "furn_cot",
    "item_category": "Furniture",
    "radius": 44.0,
@@ -624,6 +651,7 @@
   {
    "item_id": 61004,
    "item_name": "탁자",
+   "item_name_sk": 2761004,
    "code_id": "furn_table",
    "item_category": "Furniture",
    "radius": 46.0,
@@ -647,6 +675,7 @@
   {
    "item_id": 61005,
    "item_name": "의자(가구)",
+   "item_name_sk": 2761005,
    "code_id": "furn_chair",
    "item_category": "Furniture",
    "radius": 20.0,
@@ -670,6 +699,7 @@
   {
    "item_id": 61006,
    "item_name": "책상",
+   "item_name_sk": 2761006,
    "code_id": "furn_desk",
    "item_category": "Furniture",
    "radius": 44.0,
@@ -693,6 +723,7 @@
   {
    "item_id": 61007,
    "item_name": "사물함",
+   "item_name_sk": 2761007,
    "code_id": "furn_locker",
    "item_category": "Furniture",
    "radius": 32.0,
@@ -716,6 +747,7 @@
   {
    "item_id": 61008,
    "item_name": "서류함",
+   "item_name_sk": 2761008,
    "code_id": "furn_cabinet",
    "item_category": "Furniture",
    "radius": 26.0,
@@ -739,6 +771,7 @@
   {
    "item_id": 61009,
    "item_name": "소파",
+   "item_name_sk": 2761009,
    "code_id": "furn_sofa",
    "item_category": "Furniture",
    "radius": 42.0,
@@ -762,6 +795,7 @@
   {
    "item_id": 61010,
    "item_name": "냉장고",
+   "item_name_sk": 2761010,
    "code_id": "furn_fridge",
    "item_category": "Furniture",
    "radius": 30.0,
@@ -785,6 +819,7 @@
   {
    "item_id": 61011,
    "item_name": "자판기",
+   "item_name_sk": 2761011,
    "code_id": "furn_vending",
    "item_category": "Furniture",
    "radius": 34.0,
@@ -808,6 +843,7 @@
   {
    "item_id": 61012,
    "item_name": "화분",
+   "item_name_sk": 2761012,
    "code_id": "furn_plant",
    "item_category": "Furniture",
    "radius": 22.0,
@@ -831,6 +867,7 @@
   {
    "item_id": 60025,
    "item_name": "치즈 금고",
+   "item_name_sk": 2760025,
    "code_id": "cheesesafe",
    "item_category": "Item",
    "radius": 24.0,
@@ -854,6 +891,7 @@
   {
    "item_id": 60026,
    "item_name": "황금 치즈 트로피",
+   "item_name_sk": 2760026,
    "code_id": "trophy",
    "item_category": "Item",
    "radius": 18.0,
@@ -877,6 +915,7 @@
   {
    "item_id": 60027,
    "item_name": "실험용 로봇 팔",
+   "item_name_sk": 2760027,
    "code_id": "robotarm",
    "item_category": "Item",
    "radius": 26.0,
@@ -900,6 +939,7 @@
   {
    "item_id": 60028,
    "item_name": "냉동 수면 캡슐",
+   "item_name_sk": 2760028,
    "code_id": "cryopod",
    "item_category": "Item",
    "radius": 28.0,
@@ -923,6 +963,7 @@
   {
    "item_id": 60029,
    "item_name": "거대 치즈 바퀴",
+   "item_name_sk": 2760029,
    "code_id": "cheesewheel",
    "item_category": "Item",
    "radius": 30.0,
@@ -946,6 +987,7 @@
   {
    "item_id": 60030,
    "item_name": "금괴 상자",
+   "item_name_sk": 2760030,
    "code_id": "goldcrate",
    "item_category": "Item",
    "radius": 28.0,
@@ -969,6 +1011,7 @@
   {
    "item_id": 60031,
    "item_name": "데이터 코어",
+   "item_name_sk": 2760031,
    "code_id": "datacore",
    "item_category": "Item",
    "radius": 24.0,
@@ -992,6 +1035,7 @@
   {
    "item_id": 60032,
    "item_name": "다이아몬드 치즈",
+   "item_name_sk": 2760032,
    "code_id": "cheesegem",
    "item_category": "Item",
    "radius": 20.0,
@@ -1015,6 +1059,7 @@
   {
    "item_id": 60033,
    "item_name": "지폐 다발",
+   "item_name_sk": 2760033,
    "code_id": "cash",
    "item_category": "Spill",
    "radius": 14.0,
@@ -1038,6 +1083,7 @@
   {
    "item_id": 60034,
    "item_name": "동전 자루",
+   "item_name_sk": 2760034,
    "code_id": "coinbag",
    "item_category": "Spill",
    "radius": 14.0,
@@ -1061,6 +1107,7 @@
   {
    "item_id": 60035,
    "item_name": "금괴",
+   "item_name_sk": 2760035,
    "code_id": "goldbar",
    "item_category": "Spill",
    "radius": 13.0,
@@ -1084,6 +1131,7 @@
   {
    "item_id": 60036,
    "item_name": "치즈 조각",
+   "item_name_sk": 2760036,
    "code_id": "cheesewedge",
    "item_category": "Spill",
    "radius": 13.0,
@@ -1107,6 +1155,7 @@
   {
    "item_id": 60037,
    "item_name": "하드디스크",
+   "item_name_sk": 2760037,
    "code_id": "harddisk",
    "item_category": "Spill",
    "radius": 14.0,
@@ -1130,6 +1179,7 @@
   {
    "item_id": 60038,
    "item_name": "회로 기판",
+   "item_name_sk": 2760038,
    "code_id": "circuit",
    "item_category": "Spill",
    "radius": 13.0,
@@ -1153,6 +1203,7 @@
   {
    "item_id": 60039,
    "item_name": "약품 캔",
+   "item_name_sk": 2760039,
    "code_id": "chemcan",
    "item_category": "Spill",
    "radius": 13.0,
@@ -1176,6 +1227,7 @@
   {
    "item_id": 60040,
    "item_name": "얼음 덩어리",
+   "item_name_sk": 2760040,
    "code_id": "ice",
    "item_category": "Spill",
    "radius": 14.0,
@@ -1199,6 +1251,7 @@
   {
    "item_id": 60041,
    "item_name": "톱니바퀴",
+   "item_name_sk": 2760041,
    "code_id": "gear",
    "item_category": "Spill",
    "radius": 13.0,
@@ -1222,6 +1275,7 @@
   {
    "item_id": 60042,
    "item_name": "두꺼운 책",
+   "item_name_sk": 2760042,
    "code_id": "book",
    "item_category": "Spill",
    "radius": 13.0,
@@ -1245,6 +1299,7 @@
   {
    "item_id": 60043,
    "item_name": "서류 뭉치",
+   "item_name_sk": 2760043,
    "code_id": "papers",
    "item_category": "Spill",
    "radius": 14.0,
@@ -1268,6 +1323,7 @@
   {
    "item_id": 60044,
    "item_name": "연필꽂이",
+   "item_name_sk": 2760044,
    "code_id": "pencilcup",
    "item_category": "Spill",
    "radius": 12.0,
@@ -1291,6 +1347,7 @@
   {
    "item_id": 60045,
    "item_name": "베개",
+   "item_name_sk": 2760045,
    "code_id": "pillow",
    "item_category": "Spill",
    "radius": 15.0,
@@ -1314,6 +1371,7 @@
   {
    "item_id": 60046,
    "item_name": "실험복",
+   "item_name_sk": 2760046,
    "code_id": "labcoat",
    "item_category": "Spill",
    "radius": 15.0,
@@ -1337,6 +1395,7 @@
   {
    "item_id": 60047,
    "item_name": "새싹 화분",
+   "item_name_sk": 2760047,
    "code_id": "sprout",
    "item_category": "Spill",
    "radius": 12.0,
@@ -1360,6 +1419,7 @@
   {
    "item_id": 60048,
    "item_name": "캔 음료",
+   "item_name_sk": 2760048,
    "code_id": "soda",
    "item_category": "Spill",
    "radius": 11.0,
@@ -1385,6 +1445,7 @@
   {
    "zone_id": 70001,
    "zone_name": "지하 비밀 실험실",
+   "zone_name_sk": 2870001,
    "from_floor": 1,
    "floor_type": "Lab",
    "tint": ""
@@ -1392,6 +1453,7 @@
   {
    "zone_id": 70002,
    "zone_name": "실험동물 사육동",
+   "zone_name_sk": 2870002,
    "from_floor": 5,
    "floor_type": "Corridor",
    "tint": ""
@@ -1399,6 +1461,7 @@
   {
    "zone_id": 70003,
    "zone_name": "약품 연구동",
+   "zone_name_sk": 2870003,
    "from_floor": 10,
    "floor_type": "Lab",
    "tint": "rgba(157,213,168,.16)"
@@ -1406,6 +1469,7 @@
   {
    "zone_id": 70004,
    "zone_name": "전산·관리동",
+   "zone_name_sk": 2870004,
    "from_floor": 15,
    "floor_type": "Corridor",
    "tint": "rgba(143,179,199,.2)"
@@ -1413,6 +1477,7 @@
   {
    "zone_id": 70005,
    "zone_name": "연구소장 층",
+   "zone_name_sk": 2870005,
    "from_floor": 20,
    "floor_type": "Lab",
    "tint": "rgba(227,196,106,.18)"

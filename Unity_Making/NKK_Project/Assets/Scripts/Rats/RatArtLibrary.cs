@@ -17,6 +17,11 @@ namespace NKK.Rats
             [Tooltip("파츠가 없는 한 장짜리 그림 (컴퓨터 마우스 쥐)")] public Sprite single;
             [Tooltip("몸통 이미지 좌상단 기준 0~1")] public Vector2 neck, tailAnchor, shoulder, hip;
             public float legFront = 1, legBack = 1;
+            [Tooltip("화면 속 쥐 (5G 휴대폰): 겉은 single 한 장짜리로 움직이고, 파츠 쥐는 single 그림의 화면 칸 안에서 걷고 행동함")] public bool screen;
+            [Tooltip("single 그림 안 화면 칸 (좌하단 기준 0~1)")] public Rect screenRect = new(0.15f, 0.2f, 0.7f, 0.6f);
+            [Tooltip("화면 배경 그림 (화면 칸에 맞춰 늘림)")] public Sprite screenBg;
+            // 겉모습이 한 장짜리인지 (파츠가 없거나, 화면 속 쥐)
+            public bool IsSingle => single && (torso == null || screen);
         }
 
         public List<Entry> entries = new();

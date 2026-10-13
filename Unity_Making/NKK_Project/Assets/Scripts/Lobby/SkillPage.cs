@@ -72,6 +72,8 @@ namespace NKK.Lobby
         // 튜토리얼이 보는 값: 고른 노드 · 이번 실행에서 활성화한 수
         public CommonSkillRow Selected => GameDatabase.Instance && GameDatabase.Instance.CommonSkillsById.TryGetValue(sel, out var s) ? s : null;
         public static int Bought { get; private set; }
+        // 튜토리얼이 가리키는 추천 칸(Recommend)을 활성화한 횟수 — 다른 칸을 찍으면 튜토리얼이 안 넘어가게 (사용자 2026-10-13)
+        public static int BoughtGuided { get; private set; }
 
         // 지금 훈장 트리에서 열린(살 수 있는 자리) 노드 중 가장 싼 것 (같으면 id 작은 것)
         public static CommonSkillRow Recommend()
@@ -96,6 +98,7 @@ namespace NKK.Lobby
 
         void Awake()
         {
+            Bought = 0; BoughtGuided = 0;      // 튜토리얼 SkillBuy = 로비에 들어온 뒤 센 것
             foreach (var t in new Component[] { nodeTemplate, keyTemplate, lineTemplate }) if (t) t.gameObject.SetActive(false);
             if (buyButton) buyButton.onClick.AddListener(Buy);
             if (rankButton) rankButton.onClick.AddListener(RankUp);
@@ -306,9 +309,11 @@ namespace NKK.Lobby
         void Buy()
         {
             var p = Progress.I; var db = GameDatabase.Instance;
+            var guide = Recommend();
             if (!db.CommonSkillsById.TryGetValue(sel, out var s) || !p.BuySkill(s)) { SfxManager.Play("ui_deny"); return; }
             SfxManager.Play("ui_buy");
             Bought++;
+            if (guide != null && guide.skill_id == s.skill_id) BoughtGuided++;
             Draw();
         }
 

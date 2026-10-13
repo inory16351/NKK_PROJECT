@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: pharaoh_c3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- SCENE: heroic CLOSE-UP facing the viewer: the pharaoh holds a crook and flail crossed over the chest, eyes half-closed with a royal smug smile, a big golden SUN DISK with rays glowing behind like a halo. Simple turquoise-to-gold radial background.
+
+- 1536x1024 full-frame cutscene illustration (no transparency, no panels, no borders).
+- STYLE: exactly the style of the attached ref_style (cozy flat cartoon storybook game art, Untitled Goose Game mood): completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted palette, soft lighting.
+- CHARACTER: "Pharaoh Mouse": a light grey-brown mouse wearing a blue and gold striped pharaoh NEMES headdress with a golden cobra on the forehead. The character must look exactly like the attached ref_parts (its head, body and outfit parts from the game), with the same proportions as the game rats (big head, small body), pink ears, pink nose, black bead eyes, long pink tail (unless stated otherwise).
+- NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere. Small background rats are allowed only where the scene asks.

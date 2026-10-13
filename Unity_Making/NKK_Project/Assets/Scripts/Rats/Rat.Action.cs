@@ -234,7 +234,7 @@ namespace NKK.Rats
                                 fx?.BoltLine(t.x, t.y, 16, o.x, o.y, 16, zc, 0.2f, 4, 6, 14); fx?.Spark(o.x, o.y, 16, zc, 50, 0.15f);   // 옆 물건으로 튀는 번개
                             }
                         }
-                        if (act.n == 1 || Random.value < 0.3f) fx?.Popup(bx, by, Random.value < 0.5f ? "찌릿!!" : "콰릉!", new Color(0.75f, 0.91f, 1f), 18, 0.6f, 50);
+                        if (act.n == 1 || Random.value < 0.3f) fx?.Popup(bx, by, Random.value < 0.5f ? Loc.T(9000094) : Loc.T(9000095), new Color(0.75f, 0.91f, 1f), 18, 0.6f, 50);
                     }
                     break;
                 }
@@ -511,7 +511,7 @@ namespace NKK.Rats
                         {
                             act.hitT = act.x ? AW(1) : AV(2); bite = 1;
                             t.Damage(atk * AV(1), this, false, a + Mathf.PI);
-                            if (act.n++ % 4 == 0) fx?.Popup(t.x + Random.Range(-14f, 14f), t.y, Random.value < 0.5f ? "냠!" : "다닥!", Color.white, 15, 0.5f, 36);
+                            if (act.n++ % 4 == 0) fx?.Popup(t.x + Random.Range(-14f, 14f), t.y, Random.value < 0.5f ? Loc.T(9000096) : Loc.T(9000097), Color.white, 15, 0.5f, 36);
                         }
                     }
                     vx = vy = 0;

@@ -35,22 +35,23 @@ namespace NKK
 
         public void SetVolume(float v) { volume = Mathf.Clamp01(v); PlayerPrefs.SetFloat(VolPref, volume); }
 
-        // 같은 곡이면 그대로 (씬이 바뀌어도 이어서). null = 조용히 끔
-        public void Play(AudioClip clip)
+        // 같은 곡이면 그대로 (씬이 바뀌어도 이어서). null = 조용히 끔. fade > 0 이면 이번 바뀜만 그 시간으로 겹침 (뽑기 곡 페이드 아웃 등)
+        public void Play(AudioClip clip, float fade = -1)
         {
             if (a.clip == clip && (clip == null || a.isPlaying)) return;
             (a, b) = (b, a);           // 지금 곡은 b 로 → 줄어듦
             a.clip = clip; a.volume = 0;
             if (clip) a.Play(); else a.Stop();
-            k = 0;
+            k = 0; fadeNow = fade > 0 ? fade : crossTime;
         }
+        float fadeNow = 1.2f;
 
         void Update()
         {
             float dt = Time.unscaledDeltaTime;
             bool ducked = Tutorial.TutorialBox.Showing || FxManager.Paused;
             duckK = Mathf.MoveTowards(duckK, ducked ? duck : 1, dt * 2);
-            k = Mathf.Min(1, k + (crossTime > 0 ? dt / crossTime : 1));
+            k = Mathf.Min(1, k + (fadeNow > 0 ? dt / fadeNow : 1));
             float v = volume * duckK;
             a.volume = v * k;
             b.volume = v * (1 - k);

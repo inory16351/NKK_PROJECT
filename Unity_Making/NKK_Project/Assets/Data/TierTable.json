@@ -3,6 +3,7 @@
   {
    "tier": 1,
    "tier_name": "실험체",
+   "tier_name_sk": 4100001,
    "icon": "🐭",
    "research_cost": 0,
    "cond1_type": "None",
@@ -20,6 +21,7 @@
   {
    "tier": 2,
    "tier_name": "치즈 도둑",
+   "tier_name_sk": 4100002,
    "icon": "🧀",
    "research_cost": 170,
    "cond1_type": "Max_Floor",
@@ -37,6 +39,7 @@
   {
    "tier": 3,
    "tier_name": "하수구 정찰병",
+   "tier_name_sk": 4100003,
    "icon": "🔦",
    "research_cost": 160,
    "cond1_type": "Max_Floor",
@@ -54,6 +57,7 @@
   {
    "tier": 4,
    "tier_name": "탈출 설계자",
+   "tier_name_sk": 4100004,
    "icon": "🗝️",
    "research_cost": 200,
    "cond1_type": "Max_Floor",
@@ -71,6 +75,7 @@
   {
    "tier": 5,
    "tier_name": "연구소 브로커",
+   "tier_name_sk": 4100005,
    "icon": "📋",
    "research_cost": 430,
    "cond1_type": "Max_Floor",
@@ -88,6 +93,7 @@
   {
    "tier": 6,
    "tier_name": "반란 지휘관",
+   "tier_name_sk": 4100006,
    "icon": "🎖️",
    "research_cost": 860,
    "cond1_type": "Max_Floor",
@@ -105,6 +111,7 @@
   {
    "tier": 7,
    "tier_name": "쥐들의 왕",
+   "tier_name_sk": 4100007,
    "icon": "👑",
    "research_cost": 2690,
    "cond1_type": "Max_Floor",
@@ -122,6 +129,7 @@
   {
    "tier": 8,
    "tier_name": "전설의 탈옥왕",
+   "tier_name_sk": 4100008,
    "icon": "🌌",
    "research_cost": 11020,
    "cond1_type": "Max_Floor",

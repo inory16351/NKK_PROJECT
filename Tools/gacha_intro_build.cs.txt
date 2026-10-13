@@ -1,0 +1,57 @@
+// Unity MCP execute_code (CodeDom C# 6) 로 실행: 쥐 고유 컷씬 오브젝트 만들기 — Tools/gen_gacha_intro_scene.py 가 DATA 줄을 채움
+// UI/GachaShow/Root/Intros/<Name> (꺼 둠): Cut(Image 1920×1280) · Fx(Dot · Flake 템플릿, 꺼 둠) · Flash(흰 Image) + GachaIntroCuts → GachaShow.intros 에 등록
+// 두 번 실행돼도 괜찮게: 같은 이름이 있으면 지우고 다시 만듦
+var gs = UnityEngine.Object.FindObjectOfType<NKK.Lobby.GachaShow>(true);
+var root = gs.root.transform;
+var dotSprite = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Sprite>("Assets/Art/Generated/circle.png");
+System.Func<string, UnityEngine.Transform, UnityEngine.Vector2, UnityEngine.RectTransform> Make = (n, parent, size) => {
+  var go = new UnityEngine.GameObject(n, typeof(UnityEngine.RectTransform));
+  go.layer = root.gameObject.layer;
+  var rt = (UnityEngine.RectTransform)go.transform; rt.SetParent(parent, false);
+  rt.anchorMin = rt.anchorMax = rt.pivot = new UnityEngine.Vector2(0.5f, 0.5f); rt.sizeDelta = size; rt.anchoredPosition = UnityEngine.Vector2.zero;
+  return rt;
+};
+System.Func<UnityEngine.Transform, string, UnityEngine.Sprite, UnityEngine.UI.Image> Tpl = (parent, n, sp) => {
+  var im = Make(n, parent, new UnityEngine.Vector2(16, 16)).gameObject.AddComponent<UnityEngine.UI.Image>();
+  im.sprite = sp; im.raycastTarget = false; im.gameObject.SetActive(false); return im;
+};
+var intros = root.Find("Intros");
+if (intros == null) intros = Make("Intros", root, new UnityEngine.Vector2(1920, 1080));
+intros.SetSiblingIndex(gs.reveal.transform.GetSiblingIndex());
+var list = new System.Collections.Generic.List<NKK.Lobby.GachaIntro>();
+if (gs.intros != null) foreach (var x in gs.intros) if (x != null) list.Add(x);
+var made = new System.Text.StringBuilder();
+
+// name, code, flakeSprite(경로 또는 ""), wind, color, palette(없으면 null), dotSize, flakeSize, streak, sway, flakeChance, steps(sprite 경로, time, zoomFrom, zoomTo, panFrom, panTo, shake, sfx, fx, gust)
+System.Action<string, string, string, UnityEngine.Vector2, UnityEngine.Color, UnityEngine.Color[], UnityEngine.Vector2, UnityEngine.Vector2, float, float, float, NKK.Lobby.GachaIntroCuts.Step[]> Build =
+ (name, code, flakePath, wind, color, palette, dotSize, flakeSize, streak, sway, flakeChance, steps) => {
+  var old = intros.Find(name); if (old != null) { list.RemoveAll(i => i == null || i.code == code); UnityEngine.Object.DestroyImmediate(old.gameObject); }
+  var go = Make(name, intros, new UnityEngine.Vector2(1920, 1080));
+  var cut = Make("Cut", go, new UnityEngine.Vector2(1920, 1280)).gameObject.AddComponent<UnityEngine.UI.Image>(); cut.raycastTarget = false;
+  var fx = Make("Fx", go, new UnityEngine.Vector2(1920, 1080));
+  var dot = Tpl(fx, "Dot", dotSprite);
+  var flake = flakePath != "" ? Tpl(fx, "Flake", UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Sprite>(flakePath)) : null;
+  var fl = Make("Flash", go, new UnityEngine.Vector2(2400, 1400)).gameObject.AddComponent<UnityEngine.UI.Image>();
+  fl.raycastTarget = false; fl.color = new UnityEngine.Color(1, 1, 1, 0);
+  var c = go.gameObject.AddComponent<NKK.Lobby.GachaIntroCuts>();
+  c.code = code; c.firstOnly = true; c.cut = cut; c.flash = fl;
+  c.trans = new NKK.Lobby.CutTransition { pushTime = 0.16f, pushZoom = 1.22f, punchTime = 0.22f, punchFrom = 1.18f };
+  c.snow = new NKK.Lobby.Blizzard { layer = fx, dot = dot, flake = flake, wind = wind, color = color, palette = palette, dotSize = dotSize, flakeSize = flakeSize, farAlpha = 0.35f, streak = streak, sway = sway, flakeChance = flakeChance, gustDecay = 2.8f };
+  c.steps = steps;
+  go.gameObject.SetActive(false);
+  list.Add(c);
+  made.Append(name + "(" + steps.Length + "컷, 그림 " + System.Array.FindAll(steps, s => s.sprite != null).Length + ") ");
+};
+System.Func<string, float, float, float, UnityEngine.Vector2, UnityEngine.Vector2, float, string, int, float, NKK.Lobby.GachaIntroCuts.Step> St =
+ (path, time, zf, zt, pf, pt, shake, sfx, fx, gust) => new NKK.Lobby.GachaIntroCuts.Step {
+   sprite = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Sprite>(path), time = time, zoomFrom = zf, zoomTo = zt, panFrom = pf, panTo = pt,
+   shake = shake, shakeTime = 0.3f, sfx = sfx, fx = fx, gust = gust, endGust = 0.6f };
+
+//DATA
+
+UnityEditor.Undo.RecordObject(gs, "intros");
+gs.intros = list.ToArray();
+UnityEditor.EditorUtility.SetDirty(gs);
+UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(gs.gameObject.scene);
+UnityEditor.SceneManagement.EditorSceneManager.SaveScene(gs.gameObject.scene);
+return "made " + made + "| intros=" + gs.intros.Length;

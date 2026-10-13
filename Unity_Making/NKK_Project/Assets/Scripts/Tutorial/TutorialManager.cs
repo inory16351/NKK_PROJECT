@@ -142,9 +142,10 @@ namespace NKK.Tutorial
                         if (!Lobby || !Lobby.PrepOpen || Lobby.CurrentPage != "skill") return false;
                         if (!Skills) Skills = FindFirstObjectByType<SkillPage>(FindObjectsInactive.Include);
                         var sk = Skills ? Skills.Selected : null;
-                        return sk != null && !sk.IsRoot && P.CanBuySkill(sk);
+                        var guide = SkillPage.Recommend();      // 강조된 추천 칸을 골랐을 때만 (다른 칸은 안 넘어감)
+                        return sk != null && !sk.IsRoot && guide != null && sk.skill_id == guide.skill_id && P.CanBuySkill(sk);
                     }
-                case "SkillBuy": return SkillPage.Bought >= Mathf.Max(1, v);
+                case "SkillBuy": return SkillPage.BoughtGuided >= Mathf.Max(1, v);      // 강조된 추천 칸을 활성화했을 때만
             }
             Debug.LogWarning($"[Tutorial] 모르는 발동: {s.trigger}");
             return false;

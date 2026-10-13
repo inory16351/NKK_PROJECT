@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: iq_c3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- SCENE (heroic CLOSE-UP, facing the viewer, centered): the Ice Queen Rat strikes a confident pose looking straight at the camera with a smug little smile and ONE eye winking, one paw on her hip and the other paw holding up a small glowing snowflake. Her ice crown sparkles. Behind her a HUGE glowing six-pointed SNOWFLAKE fills the background like a halo, with radiating cold light rays and ice sparkles. Her cape spreads wide behind her. Head and crown in the upper-middle of the picture, body down to the waist visible. Simple background (deep blue to pale blue radial glow) so she pops out.
+
+- 1536x1024 full-frame cutscene illustration (no transparency, no panels, no borders).
+- STYLE: exactly the style of the attached ref_style (cozy flat cartoon storybook game art, Untitled Goose Game mood): completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted palette, soft lighting.
+- CHARACTER "Ice Queen Rat": a cute flat cartoon MOUSE exactly like the attached ref_icequeen_parts (top row): blue-grey fur, big pink round ears, pink nose, black bead eyes, small white snowflake mark on the cheek, a sparkling pale-blue ICE CRYSTAL CROWN (tiara of ice shards), a long flowing WHITE and pale-blue CAPE with a snowflake clasp, pale-blue legs, long pink tail. Same proportions as the game rats (big head, small body). She is elegant, confident and a little smug. ref_concept is only for mood, keep the game design.
+- Palette: icy whites, pale blues, teal, a touch of lilac; cold glow.
+- NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere. Only ONE character (the Ice Queen Rat).

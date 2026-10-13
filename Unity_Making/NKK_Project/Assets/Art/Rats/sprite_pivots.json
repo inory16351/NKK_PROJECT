@@ -1701,6 +1701,46 @@
 "y": 0.943
 },
 {
+"path": "Assets/Art/Rats/Parts/icequeen/head.png",
+"x": 0.599,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/icequeen/tail.png",
+"x": 0.042,
+"y": 0.723
+},
+{
+"path": "Assets/Art/Rats/Parts/icequeen/front.png",
+"x": 0.566,
+"y": 0.937
+},
+{
+"path": "Assets/Art/Rats/Parts/icequeen/back.png",
+"x": 0.617,
+"y": 0.941
+},
+{
+"path": "Assets/Art/Rats/Parts/fiveg/head.png",
+"x": 0.644,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/fiveg/tail.png",
+"x": 0.042,
+"y": 0.69
+},
+{
+"path": "Assets/Art/Rats/Parts/fiveg/front.png",
+"x": 0.542,
+"y": 0.938
+},
+{
+"path": "Assets/Art/Rats/Parts/fiveg/back.png",
+"x": 0.591,
+"y": 0.942
+},
+{
 "path": "Assets/Art/Rats/Cats/Parts/cheese/head.png",
 "x": 0.653,
 "y": 0.117

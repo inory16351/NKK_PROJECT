@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: shaft_c.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1536 PORTRAIT, one full-frame illustration (no transparency, no panels, no borders). NO text, NO letters, NO numbers, no logos, NO characters (no rats, no people, no animals).
+- STYLE: exactly the style of the attached painting ref_shaft (cozy storybook game art, soft shading, warm muted palette, warm lamp light, teal accents). Same scale of details as ref_shaft.
+- This picture is ONE SEGMENT of a very long vertical side cross-section that a camera scrolls down through. It will be stacked vertically with other segments, so:
+  * ONE thick vertical COPPER PIPE with grey metal clamps runs straight down through the WHOLE picture, from the very top edge to the very bottom edge (unless this segment says it ends). Its CENTER is exactly at the horizontal middle of the image (x = 512 px) and its width is exactly about 120 px. It never moves sideways, never bends, never gets thicker or thinner (except where this segment says it ends).
+  * The left and right sides are background layers (earth, stones, bricks) that continue at the top and bottom edges.
+
+SEGMENT 3 of 3 (the bottom). CONTINUITY IS CRITICAL:
+- The attached image ref_prev_bottom is the BOTTOM STRIP of the segment directly ABOVE this one. The TOP 20% of your picture must continue it seamlessly: same stone/earth colors and texture, same lighting, same copper pipe at exactly the same horizontal position and width with the same clamp style, so the two pictures can be stacked with no visible seam.
+- Content going down: the stone foundation becomes an old red-brown BRICK sewer wall, with two small warm lanterns on hooks, a couple of thin side pipes joining, ivy, a trickle of water.
+- BOTTOM 35%: a deep cozy sewer chamber (like the attached ref_shaft bottom). The copper pipe bends TOWARD THE VIEWER and ends in a BIG ROUND HATCH OPENING seen straight from the FRONT: a round riveted copper frame around an EMPTY DARK circular hole (no lid). The opening is centered horizontally, its center at about 80% of the image height, its dark hole diameter about 30% of the image width (frame about 40%). Stone floor with a thin water channel and puddles below it, arched side tunnels.

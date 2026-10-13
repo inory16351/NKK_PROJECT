@@ -64,6 +64,7 @@ namespace NKK.Items
         public Transform humanRoot;
         public float humanRadius = 26;
         [Tooltip("사람 키 (게임 단위)")] public float humanHeight = 150;
+        [Tooltip("사람 몸 전체 피격 범위 = 그림 범위에서 가장자리를 이 비율만큼 깎음 (그림 여백·팔 끝)")] [Range(0, 0.4f)] public float humanBodyShrink = 0.12f;
         [Tooltip("사람 체력 = 12 × 체력 배율 × 물건 성장^(층-1) × 이 값")] public float humanHpMul = 3;
         [Tooltip("사람 치즈 = 3 × 치즈 배율 × 치즈 성장^(층-1) × 이 값")] public float humanValueMul = 2;
         [Tooltip("사람 상한 = min(최대, 기본 + 층 × 증가)")] public int humanCapMax = 12;
@@ -216,7 +217,7 @@ namespace NKK.Items
                 fx.Shake(0.02f + bigK * 0.02f);
                 if (it.Data.IsFurniture) { fx.Shake(0.25f); fx.Dust(it.x, it.y, 10, 1.6f); fx.Popup(it.x, it.y, furnitureWords[Random.Range(0, furnitureWords.Length)], Color.white, 26, 0.9f, 80); }
                 else if (Random.value < smashWordChance) fx.Popup(it.x, it.y, smashWords[Random.Range(0, smashWords.Length)], Color.white, 20, 0.7f, 40);
-                if (it.Air >= 2) fx.Popup(it.x, it.y, $"AIR x{it.Air} 보너스!", new Color(0.61f, 0.96f, 1f), 20, 0.9f, 60);
+                if (it.Air >= 2) fx.Popup(it.x, it.y, Loc.T(9000049).Replace("{n}", it.Air.ToString()), new Color(0.61f, 0.96f, 1f), 20, 0.9f, 60);
             }
             // 가구·큰 물건: 안에 든 작은 물건들이 우르르 쏟아져서 날아감 (물건 테이블 drop_01~04, 쏟아짐 전용 물건 = 분류 Spill)
             foreach (var d in it.Data.Drops())
@@ -249,7 +250,7 @@ namespace NKK.Items
         public int BlastActors(float x, float y, float R, float spd, float dmg, Rat by)
         {
             int n = 0;
-            foreach (var h in Humans) if (Vector2.Distance(new Vector2(h.x, h.y), new Vector2(x, y)) < R + h.R && h.Blast(Mathf.Atan2(h.y - y, h.x - x) + Random.Range(-0.3f, 0.3f), spd, dmg, by)) n++;
+            foreach (var h in Humans) if (h.BodyDist(x, y) < R && h.Blast(Mathf.Atan2(h.y - y, h.x - x) + Random.Range(-0.3f, 0.3f), spd, dmg, by)) n++;
             var c = Cats ? Cats.Current : null;
             if (c && c.Alive && c.BodyDist(x, y) < R && c.Damage(dmg, Mathf.Atan2(c.y - y, c.x - x), by)) n++;
             var b = Boss.Current;                                               // 보스는 날아가지 않고 피해만
@@ -263,7 +264,7 @@ namespace NKK.Items
                 if (o.State == Item.ItemState.Rest && Vector2.Distance(new Vector2(o.x, o.y), new Vector2(x, y)) < rad + o.R)
                     o.Damage(dmg, by, false, Mathf.Atan2(o.y - y, o.x - x));
             foreach (var h in Humans)
-                if (h.State != Human.HState.Fly && h.State != Human.HState.Dead && Vector2.Distance(new Vector2(h.x, h.y), new Vector2(x, y)) < rad + h.R)
+                if (h.State != Human.HState.Fly && h.State != Human.HState.Dead && h.BodyDist(x, y) < rad)
                     h.Damage(dmg, by, Mathf.Atan2(h.y - y, h.x - x));
             var b = Boss.Current;
             if (b && b.CanHit && b.z < 100 && Vector2.Distance(new Vector2(b.x, b.y), new Vector2(x, y)) < rad + b.R) b.Damage(dmg, by, Mathf.Atan2(b.y - y, b.x - x), false);
@@ -293,7 +294,7 @@ namespace NKK.Items
                 fx?.Spark(from.x, from.y, 20, col, 40, 0.12f); fx?.Spark(o.x, o.y, 16, col, 55, 0.16f); fx?.Anim("zap", o.x, o.y, 0, 0.6f);
                 o.Damage(dmg, by, false, Mathf.Atan2(o.y - from.y, o.x - from.x));
             }
-            if (near.Count > 0) fx?.Popup(from.x, from.y, "찌릿!", col, 18, 0.6f, 50);
+            if (near.Count > 0) fx?.Popup(from.x, from.y, Loc.T(9000050), col, 18, 0.6f, 50);
         }
 
         public Item RandomRestInRange(float x, float y, float r)
@@ -438,7 +439,7 @@ namespace NKK.Items
                         if (DropParcel(Random.Range(vr.xMin, vr.xMax), Random.Range(vr.yMin, vr.yMax), 900 + m * 40 + Random.Range(0f, 200f))) { got++; break; }
                 parcelSay = got > 0;
                 foreach (var r in Rats.Rats) r.OnParcelWave();
-                if (got > 0) Game.ShowBanner("로켓배송!", $"택배 왔습니다!! ×{got}");
+                if (got > 0) Game.ShowBanner(Loc.T(9000051), Loc.T(9000052).Replace("{n}", got.ToString()));
             }
             for (int i = parcels.Count - 1; i >= 0; i--)
             {
@@ -454,8 +455,8 @@ namespace NKK.Items
                 {
                     fx.Burst(p.x, p.y, 20, 8, new Color(0.83f, 0.64f, 0.45f), new Color(0.95f, 0.86f, 0.65f), 120, 320);
                     fx.Dust(p.x, p.y, 4, 0.8f); fx.Ring(p.x, p.y, 40, Color.white, 0.2f); fx.Shake(0.03f);
-                    if (parcelSay) { parcelSay = false; fx.Popup(p.x, p.y, "택배 왔습니다!!", new Color(1, 0.95f, 0.75f), 22, 1.2f, 70); }
-                    else if (Random.value < 0.12f) fx.Popup(p.x, p.y, Random.value < 0.5f ? "쿵!" : "문 앞 배송 완료", Color.white, 16, 0.7f, 50);
+                    if (parcelSay) { parcelSay = false; fx.Popup(p.x, p.y, Loc.T(9000053), new Color(1, 0.95f, 0.75f), 22, 1.2f, 70); }
+                    else if (Random.value < 0.12f) fx.Popup(p.x, p.y, Random.value < 0.5f ? Loc.T(9000054) : Loc.T(9000055), Color.white, 16, 0.7f, 50);
                 }
                 if (p.r) Destroy(p.r.gameObject);
                 parcels.RemoveAt(i);

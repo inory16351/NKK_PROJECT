@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fiveg_phone.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no logos, no labels, no grid lines, no frames.
+- An exact grid of 2 columns x 2 rows (each cell 768x512). Each drawing centered in its own cell with a clear magenta margin; nothing touches cell borders. No shadows.
+- STYLE IS THE MOST IMPORTANT RULE: the same flat game-prop style as the attached computer-mouse character (ref_pcmouse) and prop sheet (ref_prop_style): Untitled Goose Game look, completely FLAT shapes, NO outlines, NO black linework, no gloss, no gradients, no glow, no reflections, no drop shadows. Soft muted palette. The attached concept (ref_fiveg_concept) is ONLY an idea reference (a rat living inside a phone screen); do not copy its realistic rendering.
+
+Cell 1 (top-left): a SMARTPHONE standing upright on its long bottom edge in LANDSCAPE orientation, seen straight from the FRONT, like a cute character: a soft slate-blue rounded phone body (thick rounded bezel), a small camera dot on the left bezel, two tiny side buttons on the top edge. The whole SCREEN AREA inside the bezel must be filled with PURE FLAT MAGENTA (#FF00FF) exactly like the background (it will be cut out later), a clean rounded rectangle. At the bottom of the phone, two short stubby pink rat feet peeking out under the phone body, and a thin pink rat tail coming out of the RIGHT side of the phone (like a charging cable tail). No face on the phone.
+Cell 2 (top-right): the SCREEN WALLPAPER only: one rounded rectangle with the same shape and proportions as the screen of cell 1, filled with flat pale sky-blue, with a few very faint thin lighter circuit-line patterns and a flat light ground strip along the bottom 15%. Nothing else.
+Cell 3 (bottom-left): a small light-cyan flat signal icon: three rising bars (no letters).
+Cell 4 (bottom-right): leave empty magenta.

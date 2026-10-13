@@ -3,7 +3,7 @@
   {
    "floor": 1,
    "rooms": 2,
-   "pow_need": 400.0,
+   "pow_need": 300.0,
    "item_hp": 1.0,
    "cheese": 1.0,
    "wall_stairs": 83.72,

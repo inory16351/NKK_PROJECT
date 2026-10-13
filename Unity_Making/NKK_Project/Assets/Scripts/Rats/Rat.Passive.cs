@@ -168,7 +168,7 @@ namespace NKK.Rats
             if (!HasExtraParcel || !OnScreen()) return;
             int k = Mathf.RoundToInt(PV(1));
             for (int q = 0; q < k; q++) Manager.Items.DropParcelNear(x, y, PV(2), 420 + Random.Range(0f, 200f));
-            string line = codeId == "santa" ? "메리 쥐스마스!" : codeId == "streamrat" ? "흐에~ 후원 감사합니다~!" : "배달 왔습니다~";
+            string line = codeId == "santa" ? Loc.T(9000098) : codeId == "streamrat" ? Loc.T(9000099) : Loc.T(9000100);
             FxManager.I?.Popup(x, y, line, new Color(0.94f, 0.78f, 0.47f), 17, 1.2f, 50);
         }
 

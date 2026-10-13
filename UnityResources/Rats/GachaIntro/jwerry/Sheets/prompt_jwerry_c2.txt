@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: jwerry_c2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- SCENE: chaos: the mouse runs off carrying a big cheese wedge while the grey cat behind it has slipped on the floor with a frying pan stuck on its face, cups and plates flying, the mouse laughing.
+
+- 1536x1024 full-frame cutscene illustration (no transparency, no panels, no borders).
+- STYLE: exactly the style of the attached ref_style (cozy flat cartoon storybook game art, Untitled Goose Game mood): completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted palette, soft lighting.
+- CHARACTER: "Jwerry": a round chubby orange-brown MOUSE with a cream face and belly, big round pink ears and a mischievous grin (classic cartoon cat-and-mouse style mouse). The character must look exactly like the attached ref_parts (its head, body and outfit parts from the game), with the same proportions as the game rats (big head, small body), pink ears, pink nose, black bead eyes, long pink tail (unless stated otherwise).
+- NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere. A big grey CAT is allowed only where the scene asks.

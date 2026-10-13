@@ -394,7 +394,7 @@ namespace NKK.Rats
             var spr = PropSprite(by) ?? ThrowSprite(by);
             if (pickupTemplate) { r = Instantiate(pickupTemplate, pickupTemplate.transform.parent); r.gameObject.SetActive(true); if (spr) r.sprite = spr; }
             pickups.Add(new Pickup { x = x, y = y, life = by.PropLife, code = by.codeId, r = r });
-            FxManager.I?.Popup(x, y, "소품이 떨어졌다!", new Color(1, 0.95f, 0.75f), 16, 0.9f, 40);
+            FxManager.I?.Popup(x, y, Loc.T(9000118), new Color(1, 0.95f, 0.75f), 16, 0.9f, 40);
         }
         Sprite PropSprite(Rat r) { foreach (var c in propSprites) if (c.codeId == r.codeId) return c.sprite; return null; }
         public float? PickupAim(Rat r)
@@ -457,8 +457,8 @@ namespace NKK.Rats
                 if (fx && rat.OnScreen())
                 {
                     if (isNew) fx.Popup(x, y, "NEW! " + row.character_name, Color.white, 20, 1.3f, 50);
-                    else fx.Popup(x, y, "조각 +1", new Color(0.95f, 0.76f, 0.31f), 15, 0.9f, 60);
-                    if (Progress.I.Level(row.code_id) > lv0) fx.Popup(x, y, $"{row.character_name} 강화! Lv {Progress.I.Level(row.code_id)}", new Color(0.95f, 0.76f, 0.31f), 20, 1.4f, 80);
+                    else fx.Popup(x, y, Loc.T(9000119), new Color(0.95f, 0.76f, 0.31f), 15, 0.9f, 60);
+                    if (Progress.I.Level(row.code_id) > lv0) fx.Popup(x, y, Loc.T(9000120).Replace("{name}", row.character_name).Replace("{lv}", Progress.I.Level(row.code_id).ToString()), new Color(0.95f, 0.76f, 0.31f), 20, 1.4f, 80);
                 }
                 if (Progress.I.Level(row.code_id) > lv0) foreach (var o in Rats) if (o.codeId == row.code_id) o.RefreshGrowth();
             }
@@ -558,12 +558,12 @@ namespace NKK.Rats
                 var r = Spawn(row, p.x, p.y);
                 if (r) { Births++; LastBorn = r; SfxManager.PlayAt("rat_birth", p.x, p.y); }
                 if (r && r.OnScreen()) FxManager.I?.Hearts(p.x, p.y, birthHearts);     // 번식 하트
-                if (r && (int)row.Grade >= 2) Game.ShowBanner($"{GameDatabase.Instance.GradeOf(row).grade_name} 탄생!", row.character_name);
+                if (r && (int)row.Grade >= 2) Game.ShowBanner(Loc.T(9000121).Replace("{grade}", GameDatabase.Instance.GradeOf(row).grade_name), row.character_name);
                 // 쌍둥이: 한 마리 더 (최대 인구 안에서)
                 if (r && Random.value < CommonSkill.TwinChance && RealCount < PopCap)
                 {
                     var row2 = RollSpecies(p.z);
-                    if (row2 != null && Spawn(row2, p.x + Random.Range(-14f, 14f), p.y + Random.Range(-10f, 10f)) && r.OnScreen()) FxManager.I?.Popup(p.x, p.y, "쌍둥이!", new Color(1, 0.75f, 0.85f), 18, 1, 60);
+                    if (row2 != null && Spawn(row2, p.x + Random.Range(-14f, 14f), p.y + Random.Range(-10f, 10f)) && r.OnScreen()) FxManager.I?.Popup(p.x, p.y, Loc.T(9000122), new Color(1, 0.75f, 0.85f), 18, 1, 60);
                 }
                 // 탄생 축제: 주변 쥐 광란
                 float ft = CommonSkill.FrenzyTime;
@@ -591,6 +591,7 @@ namespace NKK.Rats
             if (!RushReady || RushActive) return false;
             var cat = Cats ? Cats.Current : null;
             if (cat && cat.Alive && cat.BodyDist(p.x, p.y) <= 0) p = new Vector2(cat.x, cat.y);     // 고양이 몸을 누르면 고양이 발밑으로
+            else if (Items) foreach (var h in Items.Humans) if (h && h.Alive && h.BodyDist(p.x, p.y) <= 0) { p = new Vector2(h.x, h.y); break; }      // 사람 몸을 누르면 사람 발밑으로
             StartRush(p); rushCdLeft = RushTime + RushCooldown;
             return true;
         }
@@ -624,7 +625,7 @@ namespace NKK.Rats
             if (!t) return;
             Rat by = null; foreach (var r in Rats) if (r.temp <= 0) { by = r; if (Random.value < 0.3f) break; }
             Items.DropMeteor(by, t.x, t.y, meteorRadius, TotalPower() / n * CommonSkill.MeteorPowerK, cheeseMeteorSprite ? cheeseMeteorSprite : defaultMeteor);
-            FxManager.I?.Popup(t.x, t.y, "치즈 운석!", new Color(0.95f, 0.76f, 0.31f), 22, 1, 120);
+            FxManager.I?.Popup(t.x, t.y, Loc.T(9000123), new Color(0.95f, 0.76f, 0.31f), 22, 1, 120);
         }
 
         void Update()

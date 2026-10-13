@@ -372,7 +372,7 @@ namespace NKK.Ults
                 if (vis) Fx?.Beam(px - b.vx * dt, py - b.vy * dt, b.z, b.x, b.y, b.z, CREAM, dt * 1.5f);
                 float ang = Mathf.Atan2(b.vy, b.vx); bool hit = false;
                 foreach (var h in ItemMgr.Humans)
-                    if (h.z < 90 && Dist(h.x, h.y, b.x, b.y) < h.R + 6 && h.Damage(b.dmg * 2, R, ang)) { hit = true; break; }
+                    if (h.z < 90 && h.BodyDist(b.x, b.y) < 6 && h.Damage(b.dmg * 2, R, ang)) { hit = true; break; }
                 if (!hit && cat && cat.Alive && cat.BodyDist(b.x, b.y) < 6 && cat.Damage(b.dmg, ang, R)) hit = true;
                 if (!hit)
                     foreach (var it in ItemMgr.InRange(b.x, b.y, 80))

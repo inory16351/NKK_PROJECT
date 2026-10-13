@@ -24,6 +24,7 @@ namespace NKK.Data
         public TextAsset achievementTable;
         public TextAsset tutorialTable;
         [Tooltip("상점 테이블 (쥐구멍 암시장) · 뽑기 테이블 (유전자 뽑기)")] public TextAsset shopTable, gachaTable;
+        [Tooltip("스트링 테이블 (언어, Loc)")] public TextAsset stringTable;
 
         public readonly Dictionary<int, RatCharacterRow> Rats = new();
         public readonly Dictionary<string, RatCharacterRow> RatsByCode = new();
@@ -68,7 +69,9 @@ namespace NKK.Data
             Instance = this;
             DontDestroyOnLoad(gameObject);
             Load();
+            Loc.Changed += Load;
         }
+        void OnDestroy() { if (Instance == this) Loc.Changed -= Load; }
 
         public void Load()
         {
@@ -76,6 +79,7 @@ namespace NKK.Data
             GrowthNodes.Clear(); GrowthOrder.Clear(); ActionAwaken.Clear(); Cats.Clear(); CatSkills.Clear();
             Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear(); Stages.Clear(); Bosses.Clear(); Achievements.Clear(); BossLines.Clear(); BossAtks.Clear(); TutoSpeakers.Clear(); TutoSteps.Clear(); TutoLines.Clear(); Story.Clear();
             CommonSkills.Clear(); CommonSkillsById.Clear(); CommonSkillsByTier.Clear(); SkillBranches.Clear();
+            Loc.Load(stringTable);
 
             if (ratTable)
             {
@@ -136,6 +140,16 @@ namespace NKK.Data
             shopCfg.Clear(); gachaCfg.Clear();
             if (shopTable) { Shop = JsonUtility.FromJson<ShopTableFile>(shopTable.text) ?? new(); if (Shop.Shop_Config != null) foreach (var r in Shop.Shop_Config) shopCfg[r.key] = r.value; }
             if (gachaTable) { Gacha = JsonUtility.FromJson<GachaTableFile>(gachaTable.text) ?? new(); if (Gacha.Gacha_Config != null) foreach (var r in Gacha.Gacha_Config) gachaCfg[r.key] = r.value; }
+            // 글 칸을 지금 언어로 (<칸>_sk 키, 한국어면 그대로). 언어를 바꾸면 Load 를 다시 함 (Awake 에서 Loc.Changed 구독)
+            if (!Loc.IsKorean)
+            {
+                Loc.ApplyAll(Rats.Values); Loc.ApplyAll(RatSkills.Values); Loc.ApplyAll(Ultimates.Values); Loc.ApplyAll(UltCaptions.Values); Loc.ApplyAll(Grades.Values);
+                Loc.ApplyAll(GrowthNodes); Loc.ApplyAll(Cats.Values); Loc.ApplyAll(CatSkills.Values); Loc.ApplyAll(Items.Values); Loc.ApplyAll(Zones); Loc.ApplyAll(Tiers.Values);
+                Loc.ApplyAll(Humans); Loc.ApplyAll(HumanLines); Loc.ApplyAll(CommonSkills); Loc.ApplyAll(SkillBranches.Values); Loc.ApplyAll(Achievements);
+                Loc.ApplyAll(Bosses); Loc.ApplyAll(BossLines); Loc.ApplyAll(BossAtks.Values); Loc.ApplyAll(TutoSpeakers.Values); Loc.ApplyAll(Story);
+                foreach (var l in TutoLines.Values) Loc.ApplyAll(l);
+                if (Shop?.Shop_Goods != null) Loc.ApplyAll(Shop.Shop_Goods);
+            }
             Debug.Log($"[GameDatabase] 쥐 {Rats.Count} · 스킬 {RatSkills.Count} · 필살기 {Ultimates.Count} · 등급 {Grades.Count} · 성장 노드 {GrowthNodes.Count} · 고양이 {Cats.Count} · 물건 {Items.Count} · 티어 {Tiers.Count} · 사람 {Humans.Count} · 공용 스킬 {CommonSkills.Count}");
         }
 

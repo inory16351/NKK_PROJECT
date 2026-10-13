@@ -74,7 +74,7 @@ namespace NKK.Tutorial
                 if (skipButton) skipButton.transform.SetAsLastSibling();      // 자막 · 건너뛰기는 늘 컷 그림 위
                 crossT = 0; zoomT = 0;
             }
-            if (captionText) { captionText.text = r.text; captionText.maxVisibleCharacters = 0; captionText.ForceMeshUpdate(); }
+            if (captionText) { captionText.text = Loc.Get(r.text_sk, r.text); captionText.maxVisibleCharacters = 0; captionText.ForceMeshUpdate(); }
             shown = 0; lineT = 0;
             if (nextMark) nextMark.SetActive(false);
         }

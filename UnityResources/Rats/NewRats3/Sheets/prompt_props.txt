@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: newrats3_props.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing centered in its own single cell with a clear magenta margin; nothing touches cell borders.
+- Style: copy the attached reference sheet (ref_prop_style, cut-out game props). Untitled Goose Game look: completely FLAT shapes, NO outlines, NO black linework, no gloss, no gradients, no glow, no drop shadows. Soft muted palette. Game props for a cartoon rat game, seen from the side. Avoid magenta or pink-purple colors in the drawings.
+
+Row 1: (1) a big pale-blue and white ICE CASTLE (frozen fairy-tale castle) with pointy crystal towers made of flat light-blue shapes, standing on a small icy base. (2) one sharp pale-blue ICICLE missile lying horizontal, pointing RIGHT, with a small flat white frost puff at its back end. (3) a light-cyan radio SIGNAL burst: three concentric flat arcs opening to the right from a small dot. (4) a big flat white-and-pale-blue SNOWFLAKE.
+Row 2: (5) a pale-blue ICE BLOCK (cube of ice) seen from the side with a slightly lighter top face. (6) a small cluster of pale-blue frost crystals on the ground. (7) a small light-cyan floating data chip: a little square with a three-bar signal symbol (no letters). (8) a small light-blue ice crystal tiara.
