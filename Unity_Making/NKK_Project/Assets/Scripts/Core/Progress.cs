@@ -28,6 +28,7 @@ namespace NKK
             public List<int> nodes = new();      // 활성화한 공용 스킬 노드 (훈장별 트리). skills 는 예전 레벨식 (안 씀)
             public List<int> achvOn = new();     // 업적 스위치: 달성한 업적 id (이 저장 파일 기준, 한 번 켜지면 계속 켜짐)
             public double cheese, research; public int tier = 1, maxFloor = 1, runs;
+            public double playSec; public int rankRuns;     // 누적 플레이 시간(초) · 마지막 훈장을 달았을 때의 탈출 시도 횟수 (서버 기록용, 2026-10-13)
             public int ver;                      // 0 = 튜토리얼 전 저장 (그대로 이어 하면 튜토리얼 끝난 것으로 침)
             public List<string> tuto = new();    // 본 튜토리얼 단계 id
             public List<string> unlocks = new(); // 해금한 기능 id (튜토리얼 테이블 Unlock_Id)
@@ -74,6 +75,10 @@ namespace NKK
         [Tooltip("티어 (훈장)")] public int tier = 1;
         [Tooltip("최고 층 기록")] public int maxFloor = 1;
         [Tooltip("탈출 시도 횟수")] public int runs;
+        [Tooltip("누적 플레이 시간 (초, 타이틀·일시정지·창 비활성 제외)")] public double playSec;
+        [Tooltip("마지막 훈장을 달았을 때의 탈출 시도 횟수")] public int rankRuns;
+        // 방금 단 훈장까지 걸린 시도 횟수 (이전 훈장 이후, RankUp 직후 값)
+        public int RunsSinceLastRank { get; private set; }
 
         // 로비 → 게임 씬으로 넘기는 시작 층 (0 = 게임 씬을 바로 켬 → GameManager 인스펙터 값)
         public static int PendingStartFloor;
@@ -277,6 +282,8 @@ namespace NKK
             int h = testSkillTier * 7919; foreach (var id in testSkills) h = h * 31 + id;
             if (h != testHash) { testHash = h; SkillVersion++; }
             if (BlackMarket.TestOpen != testMarket) { BlackMarket.TestOpen = GeneGacha.TestOpen = testMarket; UnlockVersion++; }
+            // 누적 플레이 시간: 타이틀·일시정지·창 비활성 제외
+            if (Application.isFocused && !FxManager.Paused && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Title") playSec += Time.unscaledDeltaTime;
             // 무제한: 써서 줄어든 치즈·연구자료를 다시 채움
             if (Infinite) { if (cheese < InfiniteAmount) cheese = InfiniteAmount; if (research < InfiniteAmount) research = InfiniteAmount; }
         }
@@ -344,13 +351,14 @@ namespace NKK
         {
             if (!CanRankUp()) return false;
             research -= NextTier.research_cost; tier++; SkillVersion++;
+            RunsSinceLastRank = runs - rankRuns; rankRuns = runs;
             Save(); RankedUp?.Invoke(tier);
             return true;
         }
 
         public void Save()
         {
-            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, infinite = Infinite, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
+            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, playSec = playSec, rankRuns = rankRuns, ver = SaveVer, tutoSkip = tutoSkip, infinite = Infinite, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
             d.tuto.AddRange(tuto); d.unlocks.AddRange(unlocks);
             d.nodes.AddRange(skills);
             d.achvOn.AddRange(achvOn);
@@ -361,12 +369,12 @@ namespace NKK
 
         void Load()
         {
-            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0;
+            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0; playSec = 0; rankRuns = 0;
             tuto.Clear(); unlocks.Clear(); tutoSkip = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new();
             var s = PlayerPrefs.GetString(KeyOf(Slot), "");
             if (string.IsNullOrEmpty(s)) return;
             var d = JsonUtility.FromJson<SaveData>(s);
-            cheese = d.cheese; research = d.research; tier = Mathf.Max(1, d.tier); maxFloor = Mathf.Max(1, d.maxFloor); runs = d.runs;
+            cheese = d.cheese; research = d.research; tier = Mathf.Max(1, d.tier); maxFloor = Mathf.Max(1, d.maxFloor); runs = d.runs; playSec = d.playSec; rankRuns = d.rankRuns;
             foreach (var e in d.rats) rats[e.code] = e;
             if (d.nodes != null) foreach (var id in d.nodes) skills.Add(id);
             SkillVersion++;
