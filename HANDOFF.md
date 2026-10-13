@@ -277,6 +277,7 @@
 - **5·6단계 코드·씬 끝 (2026-10-13 오후)**: 랭킹 탭 · 닉네임 창 · 낮잠 침대 통계 토글/닉네임 (자세한 건 서버 계획.md 10장). 
 - players 규칙 게시 (오후 1:32 버전) · 색인 players (bestFloor ↓ · runs ↑ · __name__) 만듦 · 에디터 쓰기 확인 (`players/Z6x5jYiwOaVUcnnVWT2sg3v9YlW2`, 닉네임 '에디터시험' — 시험 문서, 콘솔에서 지울 것. 이 PC PlayerPrefs `nkk_nick`·`nkk_lb_sent` 도 시험값).
 - 색인 '사용 설정됨' → 에디터 조회 확인 (상위 목록 1명 = 시험 문서, 내 순위 1). 규칙 확인: 최고 층 낮추기 · 남의 uid 문서 쓰기 둘 다 거절됨. sendInEditor 다시 false.
+- **튜토리얼 UI 안 보임 수정 (main-game c57aaef, mvp 에 합침)**: 다른 PC(처음 하는 저장)에서 대사는 나오는데 가리키는 UI 가 안 보이던 것 — FeatureGate 튀어나오기(크기 0→1) 중에 TutorialTarget 이 0 부근 크기를 원래 크기로 기억. 고침: 튀어나오는 중엔 확대 미룸 · 크기 0 은 원래 크기로 안 씀 · 중간에 꺼지면 크기 되돌림.
 - **바로 다음 할 일**: ⑤ 7단계 Google Cloud 콘솔에서 API 키 HTTP 리퍼러를 itch.io 도메인(html-classic.itch.zone 등)으로 제한 · WebGL 빌드 itch.io 시험.
 - 커밋 안 한 것: `ProjectSettings/QualitySettings.asset` · `UnityConnectSettings.asset` (유니티가 바꾼 것, 출처 모름 — 확인 후 판단).
 
