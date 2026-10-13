@@ -130,6 +130,7 @@ namespace NKK.Lobby
 
         void Awake()
         {
+            if (lid && !lidHomeSet) { lidHome0 = lid.rectTransform.anchoredPosition; lidSize = lid.rectTransform.sizeDelta; lidHomeSet = true; }     // 씬에 놓인 닫힌 뚜껑 자리·크기 (CloseLid 가 되돌릴 곳)
             if (root) root.SetActive(false);
             foreach (var t in new Component[] { runnerTemplate, sparkleTemplate, flyTemplate }) if (t) t.gameObject.SetActive(false);
             if (cardTemplate) cardTemplate.SetActive(false);
@@ -558,6 +559,7 @@ namespace NKK.Lobby
         IEnumerator Pipe()
         {
             Cut(cutPipe); SfxManager.Play("human_fly"); PunchIn(pipeCut);
+            CloseLid();                                            // 내려가는 동안 출구 뚜껑이 이미 붙어 있게 (잔상 사본도 닫힌 뚜껑으로)
             if (!pipeImage) yield break;
             var rt = pipeImage.rectTransform;
             rt.localScale = Vector3.one;
@@ -599,10 +601,8 @@ namespace NKK.Lobby
             bool glow = best >= glowFrom;
             var col = GlowColor(best);
             var lidRt = lid ? lid.rectTransform : null;
-            if (lidRt && !lidHomeSet) { lidHome0 = lidRt.anchoredPosition; lidHomeSet = true; }
+            CloseLid();
             Vector2 lidHome = lidHome0;
-            if (lidSize == Vector2.zero && lidRt) lidSize = lidRt.sizeDelta;          // 씬에서 정한 닫힌 뚜껑 크기
-            if (lid) { if (lidClosedSprite) lid.sprite = lidClosedSprite; lidRt.sizeDelta = lidSize; lidRt.localScale = Vector3.one; lidRt.localRotation = Quaternion.identity; lidRt.anchoredPosition = lidHome; }
             foreach (var g in new[] { holeGlow, rays, pillar }) if (g) { g.gameObject.SetActive(glow); g.color = A(col, 0); }
 
             // 출구로 당겨 옴 (긴 그림 안의 뚜껑이 화면 가운데 조금 아래로)
@@ -684,6 +684,19 @@ namespace NKK.Lobby
             // 열린 뚜껑·빛은 강조 장면 뒤에 그대로 둠 (다음 연출 시작 때 닫힌 그림으로 되돌림)
         }
         Vector2 lidSize, lidHome0; bool lidHomeSet;
+
+        // 닫힌 뚜껑을 구멍 제자리에 (지난 뽑기에서 열린 채 남아 있던 것) — 배관을 내려가기 전부터 붙어 있게 (사용자 2026-10-13)
+        void CloseLid()
+        {
+            if (!lid) return;
+            var lidRt = lid.rectTransform;
+            if (!lidHomeSet) { lidHome0 = lidRt.anchoredPosition; lidHomeSet = true; }
+            if (lidSize == Vector2.zero) lidSize = lidRt.sizeDelta;          // 씬에서 정한 닫힌 뚜껑 크기
+            lid.gameObject.SetActive(true);
+            if (lidClosedSprite) lid.sprite = lidClosedSprite;
+            lidRt.sizeDelta = lidSize; lidRt.localScale = Vector3.one; lidRt.localRotation = Quaternion.identity; lidRt.anchoredPosition = lidHome0;
+            foreach (var g in new[] { holeGlow, rays, pillar }) if (g) g.gameObject.SetActive(false);     // 틈 빛은 하수구 장면에서 켬
+        }
         bool tapped, waitTap;
         float cardBase;
 
@@ -872,7 +885,7 @@ namespace NKK.Lobby
             foreach (var c in new[] { captionLab, captionSuck, captionRattle }) if (c) c.gameObject.SetActive(false);
             if (explosion) explosion.gameObject.SetActive(false);
             if (dim) dim.alpha = 1;
-            Cut(cutPipe);
+            Cut(cutPipe); CloseLid();
             if (pipeImage)
             {
                 var rt = pipeImage.rectTransform; rt.localScale = Vector3.one;
