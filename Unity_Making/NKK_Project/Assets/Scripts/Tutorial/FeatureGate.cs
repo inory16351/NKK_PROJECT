@@ -21,10 +21,17 @@ namespace NKK.Tutorial
 
         int ver = -1;
         bool wasLocked, applied;
+        Transform[] revTr; Vector3[] revScale;      // 튀어나오는 중인 대상 · 원래 크기
+
+        // 튀어나오는 중 (크기가 0 부근에서 커지는 중) — TutorialTarget 이 이때 크기를 '원래 크기'로 잡으면 안 됨
+        static readonly System.Collections.Generic.HashSet<Transform> revealing = new();
+        public static bool IsRevealing(Transform t) => t && revealing.Contains(t);
 
         public bool Locked => Progress.I && !Progress.I.IsUnlocked(feature);
 
         void OnEnable() { ver = -1; applied = false; Apply(); }
+        // 튀어나오는 중에 꺼지면 (씬 이동 등) 크기를 원래대로 — 작은 크기로 굳지 않게
+        void OnDisable() => EndReveal();
         void Update() { if (Progress.I && Progress.I.UnlockVersion != ver) Apply(); }
 
         void Apply()
@@ -39,7 +46,7 @@ namespace NKK.Tutorial
             // 화면을 보고 있는 중에 열림 → 통 튀어나옴 (씬 시작 때 이미 열려 있으면 그냥 켬)
             if (applied && wasLocked && !locked && revealTime > 0 && hideWhenLocked != null && hideWhenLocked.Length > 0)
             {
-                StopAllCoroutines(); StartCoroutine(Reveal());
+                StopAllCoroutines(); EndReveal(); StartCoroutine(Reveal());
                 if (!string.IsNullOrEmpty(revealSfx)) SfxManager.Play(revealSfx);
             }
             wasLocked = locked; applied = true;
@@ -47,16 +54,23 @@ namespace NKK.Tutorial
 
         System.Collections.IEnumerator Reveal()
         {
-            var tr = new Transform[hideWhenLocked.Length]; var s0 = new Vector3[tr.Length];
-            for (int i = 0; i < tr.Length; i++) if (hideWhenLocked[i]) { tr[i] = hideWhenLocked[i].transform; s0[i] = tr[i].localScale; }
+            revTr = new Transform[hideWhenLocked.Length]; revScale = new Vector3[revTr.Length];
+            for (int i = 0; i < revTr.Length; i++) if (hideWhenLocked[i]) { revTr[i] = hideWhenLocked[i].transform; revScale[i] = revTr[i].localScale; revealing.Add(revTr[i]); }
             for (float t = 0; t < revealTime; t += Time.unscaledDeltaTime)
             {
                 // 뒤로 넘치는 이징 (0 → 1 을 살짝 넘었다 돌아옴)
                 float x = t / revealTime - 1, k = 1 + (revealOvershoot + 1) * x * x * x + revealOvershoot * x * x;
-                for (int i = 0; i < tr.Length; i++) if (tr[i]) tr[i].localScale = s0[i] * k;
+                for (int i = 0; i < revTr.Length; i++) if (revTr[i]) revTr[i].localScale = revScale[i] * k;
                 yield return null;
             }
-            for (int i = 0; i < tr.Length; i++) if (tr[i]) tr[i].localScale = s0[i];
+            EndReveal();
+        }
+
+        void EndReveal()
+        {
+            if (revTr == null) return;
+            for (int i = 0; i < revTr.Length; i++) if (revTr[i]) { revTr[i].localScale = revScale[i]; revealing.Remove(revTr[i]); }
+            revTr = null; revScale = null;
         }
     }
 }

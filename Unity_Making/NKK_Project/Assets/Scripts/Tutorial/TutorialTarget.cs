@@ -31,7 +31,14 @@ namespace NKK.Tutorial
         void LateUpdate()
         {
             if (!scaled && zoomGoal == 1) return;
-            if (!scaled) { baseScale = transform.localScale; scaled = true; }
+            // 기능이 막 열려 튀어나오는 중(FeatureGate)이면 끝날 때까지 기다림 — 그 사이 크기(0 부근)를 원래 크기로 잡으면 UI 가 계속 안 보임
+            if (FeatureGate.IsRevealing(transform)) return;
+            if (!scaled)
+            {
+                var s0 = transform.localScale;
+                if (Mathf.Abs(s0.x) < 0.01f || Mathf.Abs(s0.y) < 0.01f) return;      // 크기 0 인 순간은 원래 크기로 안 씀
+                baseScale = s0; scaled = true;
+            }
             zoomCur = Mathf.Lerp(zoomCur, zoomGoal, Mathf.Min(1, Time.unscaledDeltaTime * zoomSpeed));
             if (zoomGoal == 1 && Mathf.Abs(zoomCur - 1) < 0.002f) { RestoreScale(); return; }
             transform.localScale = baseScale * zoomCur;
