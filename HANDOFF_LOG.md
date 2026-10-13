@@ -487,3 +487,14 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - 사용자 피드백 순서: 기획서 그림은 참고만, 게임 그림체로 → 5G 는 휴대폰 화면 속 쥐(휴대폰 = 컴퓨터 마우스처럼, 다리·꼬리 뗌) + 돌진 뒤 멈추면 얼굴 쿵 → 5G 너무 작음(화면 속 쥐 = 다른 쥐 크기) → 지하 건물 그림체가 로비와 안 맞음(질감 많음 → 단순·무광으로 다시) → 뽑기 기물 = 비밀 실험실 건물, 폭발 때 지하 쥐 전부 빨려 듦(지하도시 화면에서 직접) → 벡터풍 빛 효과 별로(그린 이미지로) · 덜컹덜컹 뒤 클릭해야 열림 · 하수구 컷 연결 안 됨(세로 한 장) → 빛을 원래 그림체로 · 하수구 더 길게(여러 장 이어 붙이기, 진행 중) · 비밀 실험실이 물 위에 뜸(고침) · 뽑기 곡 결과 때 페이드 아웃.
 - 도구: `Tools/slice_grid_all.py`(자홍 격자, 조각 전부 남김) · `Tools/slice_glow_grid.py`(검은 배경 빛 효과 → 밝기 = 투명도) · `Tools/stitch_vertical.py`(세로 그림 겹쳐 이어 붙이기).
 - UnityMCP: 허브가 uv 설치 전에 켜져 있어 uvx 를 못 찾음 → 직접 서버 띄움. 세션 MCP 가 안 붙을 땐 scratchpad 의 HTTP 직접 호출 스크립트(umcp.py: initialize → tools/call)로 작업함.
+
+### 9-22. 2026-10-13 오후~저녁 — MVP 서버 4~7단계 · 튜토리얼 UI 크기 0 수정 · 브랜치 푸시
+- 요약·지금 상태는 HANDOFF §5-8, 단계별 기록은 `서버 계획.md` 10장.
+- 4단계: rankups 규칙 보강(skillNodes·shardSum·gachaPulls 정수·범위, playSec 상한) 후 게시 (오후 1:14) → 에디터에서 `Telemetry.OnRank(2)` 직접 불러 전송 확인.
+- 5·6단계: 사용자 결정 = 랭킹 기준 최고 층 → 적은 시도 · 닉네임 중복 허용 · 시즌 없음 · 랭킹 = 상단 탭 · 통계/닉네임 설정 = 낮잠 침대. 탭 7개라 탭 너비 188 → 172 (랭킹 150), 간격 6, 탭줄 x -53, 탭 글자 줄바꿈 끔 + 자동 크기. 랭킹 아이콘 Codex (`UnityResources/Rats/Lobby_Rank/`, 골무 트로피 + 치즈). 새 글 25개 → 스트링 테이블 + 영어 (랭킹 = Leaderboard, 훈장 칸 = Rank), LocText 32개 · LocScene pages[8].label. TMP 글 Ellipsis 는 높이가 모자라면 글 전체가 사라짐 → 한 줄 글은 Overflow 로.
+- players 규칙 게시 (오후 1:32) · 색인은 조회 오류의 링크로 만듦 (생성 약 8분). 시험: 쓰기 → 조회 → 화면, 최고 층 낮추기·남의 문서 쓰기 거절 확인.
+- 튜토리얼 버그: 사용자 "다른 PC 에서 대사는 나오는데 UI 안 나옴" → 코드로 원인 찾음 (위 §5-8). worktree 로 main-game 에 커밋 후 mvp 에 merge (HANDOFF.md 충돌은 mvp 쪽 유지). 재현: Play 에서 Reveal 코루틴 + SetZoom 같이 → 1.25 → 1 로 돌아옴 확인.
+- 푸시: main-game (새 원격 브랜치) · mvp · main (34c0e0a) — 세 브랜치 원격과 같음.
+- 7단계: API 키 2개 (사용자 결정). 콘솔 복사 버튼·Ctrl+C 는 클립보드에 안 들어감 → 화면 확대로 읽고 키 검사 통과 확인 후 에셋에. 출시용 키는 referer 없으면 "Requests from referer <empty> are blocked", itch.zone referer 면 통과 (curl 확인). 에디터 개발용 키 로그인 성공.
+- 유니티 MCP: 프로젝트 `.mcp.json` 의 HTTP 8080 `UnityMCP` 는 연결 실패가 정상 (유니티가 stdio 모드) — 실제로는 사용자 설정의 stdio `unityMCP` (포트 6400) 로 동작.
+

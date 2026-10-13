@@ -1,8 +1,8 @@
 # 찍!찍!!찍!!! — 유니티 이식 인수인계 (요약본)
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
-날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-14).
-마지막 갱신: 2026-10-13 밤 — **§5-8 (브랜치 · MVP 서버) 부터 읽을 것** / (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
+날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-22).
+마지막 갱신: 2026-10-13 저녁 — **§5-8 (브랜치 역할 · MVP 서버 · 다음 = WebGL 빌드) 부터 읽을 것** / (튜토리얼 UI 크기 0 수정 §5-8 · 뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 §5-4
 
 ---
 
@@ -263,24 +263,32 @@
 
 - **로비 말풍선 프리팹 (2026-10-13)**: `Assets/Prefabs/LobbyBubble.prefab` (배경 · 꼬리 · 글자를 SortingGroup 으로 한 덩어리, 묶음 안 배경·꼬리 0 · 글자 1). 씬 `Home/Fx/BubbleTemplate` = 이 프리팹 인스턴스 (아지트 Home · 지하 AlleyRats 둘 다 씀). 말풍선마다 순서 `bubbleOrder` + 순번 → 겹치면 새 말풍선이 배경째로 위 (예전엔 전부 9000/9001 이라 뒤 글자가 앞 말풍선 위로 비침).
 
-## 5-8. 브랜치 · MVP 서버 (Firebase) — 2026-10-13 세션 넘김 시점 ★ 여기부터 이어서
+## 5-8. 브랜치 · MVP 서버 (Firebase) — 2026-10-13 저녁 세션 넘김 시점 ★ 여기부터 이어서
 
-**브랜치** (사용자 결정): `main-game` = 앞으로 메인 개발 · `mvp` = Firebase + itch.io 웹 빌드(WebGL) 전용 · `main` = 원격 기본, 그대로 둠 (팀원 `pdw` 브랜치 있음, 푸시는 아직 안 함). 흐름 = 게임 수정은 `main-game` 에서 → `git merge main-game` 으로 `mvp` 에 합침. MVP 전용 작업은 `mvp` 에만. **브랜치를 바꾸면 열린 씬이 바깥에서 바뀌어 유니티에 "다시 불러올까요?" 팝업이 떠서 MCP 가 멈춤 → 사용자에게 Reload 눌러 달라고 할 것.**
+**브랜치** (사용자 결정, 세 브랜치 모두 원격에 푸시됨 · 저장소는 비공개·팀원만):
+- `main-game` = **메인 개발**. 게임 수정은 여기서 커밋 → `mvp` 에서 `git merge main-game`.
+- `mvp` = **itch.io 출시용** (Firebase 랭킹·기록 · WebGL · 테스트 패널 없음). MVP 전용 작업만 여기서.
+- `main` = **기본 틀** (원격 기본 브랜치, 건드리지 않음). 팀원 `pdw` 브랜치도 원격에 있음.
+- 팁: `main-game` 을 고칠 땐 브랜치를 바꾸지 말고 `git worktree add ../NKK_maingame_wt main-game` 에서 고치고 커밋 → `git worktree remove` → mvp 에서 merge (유니티 "씬 다시 불러올까요?" 팝업 안 뜸, 스크립트만 다시 컴파일). 브랜치를 직접 바꾸면 팝업 → 사용자에게 Reload 요청.
+- 합칠 때 주의: mvp 가 공용 파일도 고침 (`Progress.cs` · `LobbyManager.cs` · Title/Lobby/Game 씬). 특히 **Lobby 씬 상단 탭줄 · 낮잠 침대 창**을 main-game 에서 고치면 씬 충돌 가능 → 합칠 때 확인.
 
-**MVP 진행** (자세한 건 루트 `서버 계획.md`, 진행 기록 10장):
-- 1단계 끝: MVP 에서 테스트 패널(HUD/TestPanel · UltTestPanel.cs) 삭제, 예전 저장의 무제한(infinite) 무시.
-- 2단계 끝: `Progress.playSec`(누적 플레이 시간) · `rankRuns` · `RunsSinceLastRank`.
-- 3단계 끝: `Scripts/Net/ServerConfig.cs` + `Assets/Data/ServerConfig.asset` (projectId **nkk-mvp**, 웹 API 키 들어 있음, `sendInEditor` 끔 = 에디터 Play 는 안 보냄) · `Scripts/Net/FirebaseClient.cs` (익명 로그인 REST · Firestore `:commit` Create/Set, 서버 시각, 같은 id 재전송 409 = 성공). 세 씬 `Server` 오브젝트. 에디터 시험: 익명 로그인 성공, 쓰기는 규칙 때문에 403 (정상).
-- Firebase 콘솔 (사용자 계정 caddman771144@gmail.com, 옆 브라우저 창에서 같이 함): 프로젝트 `nkk-mvp` · 익명 로그인 켬 · Firestore (default) Standard · asia-northeast3 서울 · 프로덕션 모드 · 웹 앱 `nkk-web`.
-- **4단계 (진행 중, 이 커밋에 코드 있음)**: `Scripts/Net/Telemetry.cs` — 훈장 달 때(`Progress.RankedUp`) 기록 1개를 고유 id 로 큐(PlayerPrefs `nkk_tele_queue`)에 넣고 `rankups` 컬렉션에 전송, 실패 시 씬 바뀔 때·다음 실행 때 재전송. `Telemetry.Enabled` (PlayerPrefs `nkk_stats_off`) = 나중 설정 "익명 통계 보내기". 세 씬 Server 에 붙임, 컴파일 OK, **아직 실제 전송 시험 안 함**.
-- **4단계 끝 (2026-10-13 오후)**: 보안 규칙 콘솔 게시 완료 · 에디터에서 기록 1개 전송 확인 (`rankups/874VR4LEOsQNTwZUkUtg`, build "editor" — 지워도 됨) · sendInEditor 다시 false. (유니티 MCP: 프로젝트 `.mcp.json` 의 HTTP 8080 항목은 안 쓰임 — 실제 연결은 사용자 설정의 stdio `unityMCP`, 포트 6400.)
-- **5·6단계 코드·씬 끝 (2026-10-13 오후)**: 랭킹 탭 · 닉네임 창 · 낮잠 침대 통계 토글/닉네임 (자세한 건 서버 계획.md 10장). 
-- players 규칙 게시 (오후 1:32 버전) · 색인 players (bestFloor ↓ · runs ↑ · __name__) 만듦 · 에디터 쓰기 확인 (`players/Z6x5jYiwOaVUcnnVWT2sg3v9YlW2`, 닉네임 '에디터시험' — 시험 문서, 콘솔에서 지울 것. 이 PC PlayerPrefs `nkk_nick`·`nkk_lb_sent` 도 시험값).
-- 색인 '사용 설정됨' → 에디터 조회 확인 (상위 목록 1명 = 시험 문서, 내 순위 1). 규칙 확인: 최고 층 낮추기 · 남의 uid 문서 쓰기 둘 다 거절됨. sendInEditor 다시 false.
-- **튜토리얼 UI 안 보임 수정 (main-game c57aaef, mvp 에 합침)**: 다른 PC(처음 하는 저장)에서 대사는 나오는데 가리키는 UI 가 안 보이던 것 — FeatureGate 튀어나오기(크기 0→1) 중에 TutorialTarget 이 0 부근 크기를 원래 크기로 기억. 고침: 튀어나오는 중엔 확대 미룸 · 크기 0 은 원래 크기로 안 씀 · 중간에 꺼지면 크기 되돌림.
-- **7단계 일부 끝**: API 키 2개 (출시용 Browser key = itch.io 주소만 · 개발용 nkk-dev = API 3개만, `ServerConfig.devApiKey`) · WebGL 설정 Gzip+fallback. 자세한 건 서버 계획.md 10장.
-- **바로 다음 할 일**: ⑤ WebGL 빌드 (사용자가 원할 때 — 플랫폼 전환·빌드 수십 분) → zip → 사용자가 itch.io 비공개 페이지에 올림 → 랭킹·기록·한글 닉네임 입력(WebGL IME) 확인.
-- 커밋 안 한 것: `ProjectSettings/QualitySettings.asset` · `UnityConnectSettings.asset` (유니티가 바꾼 것, 출처 모름 — 확인 후 판단).
+**MVP 서버 지금 상태** (단계별 자세한 기록 = 루트 `서버 계획.md` 10장 · HANDOFF_LOG §9-22):
+- Firebase 프로젝트 `nkk-mvp` (사용자 계정 caddman771144@gmail.com, 작업은 Claude in Chrome 탭에서) · 익명 로그인 · Firestore 서울 · 웹 앱 `nkk-web`.
+- 코드 `Scripts/Net/`: `ServerConfig`(에셋 `Assets/Data/ServerConfig.asset`, `sendInEditor` 기본 끔) · `FirebaseClient`(익명 로그인·토큰 갱신·Create/Set·runQuery) · `Telemetry`(훈장 달 때 `rankups` 기록, 오프라인 큐) · `Leaderboard`(`players/{uid}`, 상위 100 · 5분 캐시, 닉네임 2~12자 + `Assets/Data/NickBanned.txt`). 세 씬 `Server` 오브젝트에 다 붙어 있음 (타이틀 것이 끝까지 살아남음).
+- 로비: 상단 **랭킹 탭** (`Tab_lb`, 아이콘 `lb_rank_board.png`) · `Page_lb`(`LeaderboardPage`) · `UI/NickPopup` · 낮잠 침대 `ServerRows`(`ServerSettings`: 익명 통계 보내기 토글 · 닉네임 바꾸기). 랭킹 = 최고 층 ↓ → 그 층에 처음 닿았을 때 시도 횟수 ↑ (`Progress.floorRuns`), 시즌 없음, 닉네임 중복 허용.
+- 보안 규칙 `Firebase/firestore.rules` 게시됨 (rankups 만들기만 · players 본인만, 최고 층·훈장 감소 불가, 목록 100). 색인 players (bestFloor ↓ · runs ↑). 거절 시험 통과.
+- **API 키 2개**: 출시용 `Browser key` (= `apiKey`, WebGL 에서만) = itch.io·itch.zone 주소로만 · 개발용 `nkk-dev (editor/win)` (= `devApiKey`, 에디터·윈도우) = Identity Toolkit·Token Service·Firestore API 만. `ServerConfig.Key` 가 골라 씀.
+- WebGL 설정: Gzip + decompression fallback · 데이터 캐시 · 기본 창 1280×720. **플랫폼은 아직 Windows** (빌드 안 함).
+- 에디터에서 서버 시험할 때: Play 중 `ServerConfig.sendInEditor = true` (메모리) → 끝나면 **false 로 다시 저장** (Play 중 ScriptableObject 변경은 남음).
+
+**바로 다음 할 일**
+1. **WebGL 빌드** (사용자가 원할 때 — 플랫폼 전환 + 빌드 수십 분, 그동안 에디터 못 씀. 미리 시간 말하기) → 폴더 zip → **사용자가 itch.io 비공개(초안) 페이지에 직접 업로드** (Claude 는 zip 까지).
+2. itch.io 에서 확인: 익명 로그인 · 훈장 기록 · 랭킹 쓰기/조회 · **한글 닉네임 입력** (WebGL 의 TMP 입력 칸은 한글 조합(IME)이 안 될 가능성 큼 → 안 되면 WebGL 입력 플러그인 검토) · 저장(브라우저 저장소) · 소리 · 화면 크기.
+3. 남은 정할 것: 개인정보 안내 문구 (익명 ID 만 씀, itch.io 페이지 설명).
+- 서버 시험 문서 2개(`players/Z6x5…` '에디터시험' · `rankups/874V…`)는 사용자가 콘솔에서 지우기로 함 (Claude 는 영구 삭제 못 함). 이 PC PlayerPrefs 시험값은 지움.
+- 커밋 안 한 것 (예전부터): `ProjectSettings/QualitySettings.asset` · `UnityConnectSettings.asset` 변경 여부 확인 필요 · `Unity_Making/NKK_Project/Captures/` (MCP 스크린샷, 커밋 안 함).
+
+**튜토리얼 수정 (2026-10-13, main-game `c57aaef` → mvp)**: 다른 PC(처음 하는 저장)에서 "대사는 나오는데 UI 가 안 보임" — 기능이 열리며 튀어나오는 UI(`FeatureGate.Reveal`, 크기 0→1) 를 대사가 가리키면 `TutorialTarget` 이 0 부근 크기를 원래 크기로 기억해 굳음 (찍찍!! 수치·마릿수·승급 버튼·맨홀 팻말). 고침: 튀어나오는 중엔 확대를 미룸 · 크기 0 은 원래 크기로 안 씀 · 튀어나오다 꺼지면 원래 크기로. 다른 PC 에서 처음부터 하는 흐름으로는 아직 직접 확인 안 함.
 
 ## 6. 밸런스 측정 (BalanceProbe)
 
