@@ -50,7 +50,7 @@ namespace NKK.Net
             if (!string.IsNullOrEmpty(refresh))
             {
                 var form = "grant_type=refresh_token&refresh_token=" + UnityWebRequest.EscapeURL(refresh);
-                using var rq = Post("https://securetoken.googleapis.com/v1/token?key=" + config.apiKey, form, "application/x-www-form-urlencoded");
+                using var rq = Post("https://securetoken.googleapis.com/v1/token?key=" + config.Key, form, "application/x-www-form-urlencoded");
                 yield return rq.SendWebRequest();
                 if (rq.result == UnityWebRequest.Result.Success)
                 {
@@ -61,7 +61,7 @@ namespace NKK.Net
             }
             if (!ok)
             {
-                using var rq = Post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + config.apiKey, "{\"returnSecureToken\":true}", "application/json");
+                using var rq = Post("https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + config.Key, "{\"returnSecureToken\":true}", "application/json");
                 yield return rq.SendWebRequest();
                 if (rq.result == UnityWebRequest.Result.Success)
                 {

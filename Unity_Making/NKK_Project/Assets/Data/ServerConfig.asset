@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Net.ServerConfig
   enabled: 1
   apiKey: AIzaSyCGriE3SFG6GDSFJyY-azZj1uQXGa5wB_s
+  devApiKey: AIzaSyCuedRaV9oAxTqff8XTeq9KE8FRJ8DJS6U
   projectId: nkk-mvp
   sendInEditor: 0
   timeout: 10
