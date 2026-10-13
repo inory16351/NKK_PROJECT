@@ -375,7 +375,7 @@ namespace NKK
             if (d.unlocks != null) foreach (var id in d.unlocks) unlocks.Add(id);
             tutoSkip = d.tutoSkip || d.ver == 0;      // 튜토리얼이 생기기 전 저장 = 다 본 것으로
             shop = d.shop ?? new(); gacha = d.gacha ?? new();
-            Infinite = d.infinite;
+            Infinite = false;      // MVP 빌드: 테스트 패널 없음 → 예전 저장의 '전부 해제'(무제한)도 무시 (랭킹·기록 오염 방지)
         }
 
         [ContextMenu("진행도 초기화")]
