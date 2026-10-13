@@ -1,0 +1,35 @@
+rules_version = '2';
+// 찍!찍!!찍!!! MVP — Firestore 보안 규칙 (Firebase 콘솔 → Firestore → 규칙 에 붙여 넣고 게시). 서버 계획.md 5장.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // 훈장 기록: 로그인한 사람이 자기 uid 로 새로 쓰기만 (읽기·수정·삭제 불가 — 팀은 콘솔에서 봄)
+    match /rankups/{id} {
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['uid', 'tier', 'runsTotal', 'runsSinceLast', 'maxFloor', 'playSec',
+                                                 'skillNodes', 'shardSum', 'gachaPulls', 'ver', 'build', 'lang', 'at'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.tier is int && request.resource.data.tier >= 2 && request.resource.data.tier <= 8
+        && request.resource.data.runsTotal is int && request.resource.data.runsTotal >= 0 && request.resource.data.runsTotal <= 100000
+        && request.resource.data.runsSinceLast is int && request.resource.data.runsSinceLast >= 0 && request.resource.data.runsSinceLast <= 100000
+        && request.resource.data.maxFloor is int && request.resource.data.maxFloor >= 1 && request.resource.data.maxFloor <= 1000
+        && request.resource.data.playSec is int && request.resource.data.playSec >= 0
+        && request.resource.data.ver is string && request.resource.data.ver.size() <= 32
+        && request.resource.data.build is string && request.resource.data.build.size() <= 16
+        && request.resource.data.lang is string && request.resource.data.lang.size() <= 8
+        && request.resource.data.at == request.time;
+      allow read, update, delete: if false;
+    }
+
+    // 랭킹 (5단계에서 쓰기 규칙 추가 예정): 지금은 읽기만
+    match /players/{uid} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // 그 밖 전부 막음
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

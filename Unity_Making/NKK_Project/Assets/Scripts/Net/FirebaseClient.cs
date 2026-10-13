@@ -86,9 +86,11 @@ namespace NKK.Net
         // ── Firestore 쓰기 ──
         string DocBase => $"projects/{config.projectId}/databases/(default)/documents";
 
-        // 새 문서 (collection 아래 무작위 id). timeField 는 서버 시각으로 채움 (비우면 안 씀)
-        public void Create(string collection, Dictionary<string, object> fields, string timeField, Action<bool> done = null)
-            => StartCoroutine(Commit($"{DocBase}/{collection}/{NewId()}", fields, timeField, true, done));
+        // 새 문서 (collection 아래 id, 비우면 무작위). timeField 는 서버 시각으로 채움 (비우면 안 씀)
+        // 같은 id 가 이미 있으면 (다시 보낸 것) 성공으로 침 → 기록이 두 번 쌓이지 않음
+        public void Create(string collection, Dictionary<string, object> fields, string timeField, Action<bool> done = null, string id = null)
+            => StartCoroutine(Commit($"{DocBase}/{collection}/{(string.IsNullOrEmpty(id) ? NewId() : id)}", fields, timeField, true, done));
+        public static string NewDocId() => NewId();
 
         // 문서 덮어쓰기 (path 예: players/{uid})
         public void Set(string path, Dictionary<string, object> fields, string timeField, Action<bool> done = null)
@@ -107,7 +109,8 @@ namespace NKK.Net
             rq.SetRequestHeader("Authorization", "Bearer " + idToken);
             yield return rq.SendWebRequest();
             bool success = rq.result == UnityWebRequest.Result.Success;
-            if (!success) Log("쓰기 실패 " + name, rq);
+            if (!success && mustBeNew && rq.responseCode == 409) { success = true; if (log) Debug.Log($"[Server] 이미 있음 (다시 보냄): {name}"); }
+            else if (!success) Log("쓰기 실패 " + name, rq);
             else if (log) Debug.Log($"[Server] 씀: {name}");
             done?.Invoke(success);
         }

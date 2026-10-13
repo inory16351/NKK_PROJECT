@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-14).
-마지막 갱신: 2026-10-13 (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
+마지막 갱신: 2026-10-13 밤 — **§5-8 (브랜치 · MVP 서버) 부터 읽을 것** / (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
 
 ---
 
@@ -262,6 +262,19 @@
 - **뽑기 하수구 뚜껑 (2026-10-13)**: 지난 뽑기에서 열린 채 남은 뚜껑을 하수구 장면 시작 때야 닫던 것 → 배관을 내려가기 전부터 닫힌 뚜껑을 출구에 붙임 (`GachaShow.CloseLid`, Pipe · JumpToSewer · Sewer, 원래 자리는 Awake 에서 기억). Play 로 두 번 연속 뽑기 확인. 참고: 지하 도시 빨려 듦 장면은 지하에서 뽑기를 열 때만 (아지트에서 열면 실험대 컷으로 대신, 원래 설계).
 
 - **로비 말풍선 프리팹 (2026-10-13)**: `Assets/Prefabs/LobbyBubble.prefab` (배경 · 꼬리 · 글자를 SortingGroup 으로 한 덩어리, 묶음 안 배경·꼬리 0 · 글자 1). 씬 `Home/Fx/BubbleTemplate` = 이 프리팹 인스턴스 (아지트 Home · 지하 AlleyRats 둘 다 씀). 말풍선마다 순서 `bubbleOrder` + 순번 → 겹치면 새 말풍선이 배경째로 위 (예전엔 전부 9000/9001 이라 뒤 글자가 앞 말풍선 위로 비침).
+
+## 5-8. 브랜치 · MVP 서버 (Firebase) — 2026-10-13 세션 넘김 시점 ★ 여기부터 이어서
+
+**브랜치** (사용자 결정): `main-game` = 앞으로 메인 개발 · `mvp` = Firebase + itch.io 웹 빌드(WebGL) 전용 · `main` = 원격 기본, 그대로 둠 (팀원 `pdw` 브랜치 있음, 푸시는 아직 안 함). 흐름 = 게임 수정은 `main-game` 에서 → `git merge main-game` 으로 `mvp` 에 합침. MVP 전용 작업은 `mvp` 에만. **브랜치를 바꾸면 열린 씬이 바깥에서 바뀌어 유니티에 "다시 불러올까요?" 팝업이 떠서 MCP 가 멈춤 → 사용자에게 Reload 눌러 달라고 할 것.**
+
+**MVP 진행** (자세한 건 루트 `서버 계획.md`, 진행 기록 10장):
+- 1단계 끝: MVP 에서 테스트 패널(HUD/TestPanel · UltTestPanel.cs) 삭제, 예전 저장의 무제한(infinite) 무시.
+- 2단계 끝: `Progress.playSec`(누적 플레이 시간) · `rankRuns` · `RunsSinceLastRank`.
+- 3단계 끝: `Scripts/Net/ServerConfig.cs` + `Assets/Data/ServerConfig.asset` (projectId **nkk-mvp**, 웹 API 키 들어 있음, `sendInEditor` 끔 = 에디터 Play 는 안 보냄) · `Scripts/Net/FirebaseClient.cs` (익명 로그인 REST · Firestore `:commit` Create/Set, 서버 시각, 같은 id 재전송 409 = 성공). 세 씬 `Server` 오브젝트. 에디터 시험: 익명 로그인 성공, 쓰기는 규칙 때문에 403 (정상).
+- Firebase 콘솔 (사용자 계정 caddman771144@gmail.com, 옆 브라우저 창에서 같이 함): 프로젝트 `nkk-mvp` · 익명 로그인 켬 · Firestore (default) Standard · asia-northeast3 서울 · 프로덕션 모드 · 웹 앱 `nkk-web`.
+- **4단계 (진행 중, 이 커밋에 코드 있음)**: `Scripts/Net/Telemetry.cs` — 훈장 달 때(`Progress.RankedUp`) 기록 1개를 고유 id 로 큐(PlayerPrefs `nkk_tele_queue`)에 넣고 `rankups` 컬렉션에 전송, 실패 시 씬 바뀔 때·다음 실행 때 재전송. `Telemetry.Enabled` (PlayerPrefs `nkk_stats_off`) = 나중 설정 "익명 통계 보내기". 세 씬 Server 에 붙임, 컴파일 OK, **아직 실제 전송 시험 안 함**.
+- **바로 다음 할 일**: ① 보안 규칙 `Firebase/firestore.rules` (rankups = 로그인한 본인 uid 로 create 만 · 칸·범위 검사 · at == request.time / players 읽기만 / 나머지 막음) 를 콘솔 Firestore → 규칙 → "규칙 수정" 편집기에 붙여 넣고 **게시** (사용자 확인 받고). 편집기는 CodeMirror 6 — `document.querySelector('.cm-content').cmView.view.dispatch({changes:{from:0,to:len,insert:text}})` 로 넣을 수 있음 (확인함). ② 에디터에서 `ServerConfig.sendInEditor` 를 **메모리에서만** 켜고 Telemetry 로 기록 1개 보내 콘솔 데이터 탭에서 확인 (build = "editor", 확인 뒤 콘솔에서 지워도 됨) → Play 끝나면 에셋의 sendInEditor 다시 false 저장 (Play 중 ScriptableObject 변경은 남음!). ③ 5단계 랭킹 (players 문서 · 닉네임 창 · 로비 랭킹 페이지, 규칙에 players 쓰기 추가) ④ 6단계 설정 "익명 통계 보내기" ⑤ 7단계 Google Cloud 콘솔에서 API 키 HTTP 리퍼러를 itch.io 도메인(html-classic.itch.zone 등)으로 제한 · WebGL 빌드 itch.io 시험.
+- 커밋 안 한 것: `ProjectSettings/QualitySettings.asset` · `UnityConnectSettings.asset` (유니티가 바꾼 것, 출처 모름 — 확인 후 판단).
 
 ## 6. 밸런스 측정 (BalanceProbe)
 
