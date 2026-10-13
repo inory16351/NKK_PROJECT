@@ -58,7 +58,8 @@ namespace NKK.Lobby
         [Tooltip("티어 3 부터 탁자 위 찻잔")] public SpriteRenderer propCup;
 
         [Header("말풍선 · 효과 (템플릿, 꺼져 있음)")]
-        public SpriteRenderer bubbleTemplate;
+        [Tooltip("말풍선 프리팹 (Prefabs/LobbyBubble: 배경 + 꼬리 + 글자를 SortingGroup 으로 한 덩어리) — 씬에 꺼 둔 인스턴스")] public SpriteRenderer bubbleTemplate;
+        [Tooltip("말풍선 그리는 순서 시작값 (새 말풍선일수록 위)")] public int bubbleOrder = 9000;
         public SpriteRenderer fxTemplate;
         public Sprite fxDust, fxZ, fxCrumb, fxSweat;
         [Tooltip("말풍선 좌우·위아래 여백 (월드 유닛)")] public Vector2 bubblePad = new(0.22f, 0.14f);
@@ -82,7 +83,8 @@ namespace NKK.Lobby
         [HideInInspector] public bool suspended;          // 연출이 쥐들을 직접 움직이는 동안 (뽑기 비밀 실험실 폭발) 걷기·그리기 멈춤
         readonly List<LobbySlot> slots = new();
         readonly List<LobbyHot> hots = new();
-        class Bubble { public LobbyRat a; public SpriteRenderer bg; public TMP_Text text; public float t, dur; }
+        class Bubble { public LobbyRat a; public SpriteRenderer bg; public TMP_Text text; public UnityEngine.Rendering.SortingGroup group; public float t, dur; }
+        int bubbleSeq;          // 말풍선마다 다른 순서 (겹치면 새것이 배경·글자째로 위)
         class FxP { public SpriteRenderer r; public FxKind kind; public float u, v, du, t, dur; }
         readonly List<Bubble> bubbles = new(), bubblePool = new();
         readonly List<FxP> fx = new(), fxPool = new();
@@ -177,7 +179,16 @@ namespace NKK.Lobby
             for (int i = bubbles.Count - 1; i >= 0; i--) if (bubbles[i].a == a) { Recycle(bubbles[i]); bubbles.RemoveAt(i); }
             Bubble b;
             if (bubblePool.Count > 0) { b = bubblePool[^1]; bubblePool.RemoveAt(bubblePool.Count - 1); }
-            else { var r = Instantiate(bubbleTemplate, bubbleTemplate.transform.parent); b = new Bubble { bg = r, text = r.GetComponentInChildren<TMP_Text>(true) }; }
+            else
+            {
+                var r = Instantiate(bubbleTemplate, bubbleTemplate.transform.parent);
+                b = new Bubble { bg = r, text = r.GetComponentInChildren<TMP_Text>(true), group = r.GetComponent<UnityEngine.Rendering.SortingGroup>() };
+                if (!b.group) { b.group = r.gameObject.AddComponent<UnityEngine.Rendering.SortingGroup>(); b.group.sortingLayerID = r.sortingLayerID; }
+                // 묶음 안: 배경·꼬리 0, 글자 1
+                foreach (var sr in r.GetComponentsInChildren<SpriteRenderer>(true)) sr.sortingOrder = 0;
+                var tr = b.text ? b.text.GetComponent<MeshRenderer>() : null; if (tr) tr.sortingOrder = 1;
+            }
+            b.group.sortingOrder = bubbleOrder + (bubbleSeq = (bubbleSeq + 1) % 1000);
             b.bg.gameObject.SetActive(true);
             b.a = a; b.t = 0; b.dur = dur; b.text.text = text; b.text.ForceMeshUpdate();
             float w = b.text.preferredWidth * b.text.transform.lossyScale.x, h = b.text.preferredHeight * b.text.transform.lossyScale.y;
@@ -293,8 +304,7 @@ namespace NKK.Lobby
                 float k = Mathf.Min(1, b.t / 0.15f) * Mathf.Min(1, (b.dur - b.t) / 0.25f);
                 var p = b.a.BodyPos + Vector3.up * (b.a.Len * 0.95f + b.bg.size.y * 0.5f);
                 b.bg.transform.position = p + Vector3.up * 0.12f; b.bg.color = new Color(1, 1, 1, k); b.text.alpha = k;
-                b.bg.sortingOrder = 9000; var tr = b.text.GetComponent<MeshRenderer>(); if (tr) tr.sortingOrder = 9001;
-                var tl = b.bg.transform.Find("Tail"); if (tl) { var ts = tl.GetComponent<SpriteRenderer>(); ts.color = b.bg.color; ts.sortingOrder = 9000; }
+                var tl = b.bg.transform.Find("Tail"); if (tl) { var ts = tl.GetComponent<SpriteRenderer>(); ts.color = b.bg.color; }
             }
             // 효과
             float fs = Width * 0.012f;
