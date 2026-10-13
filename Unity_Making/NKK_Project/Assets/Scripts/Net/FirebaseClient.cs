@@ -115,7 +115,25 @@ namespace NKK.Net
             done?.Invoke(success);
         }
 
+        // ── Firestore 읽기 ──
+        // runQuery: structuredQuery JSON (예 {"from":[{"collectionId":"players"}],"orderBy":[…],"limit":100}) → 응답 글 그대로 (실패 = null)
+        public void Query(string structuredQuery, Action<string> done)
+            => StartCoroutine(RunQuery(structuredQuery, done));
+
+        IEnumerator RunQuery(string q, Action<string> done)
+        {
+            bool authed = false;
+            yield return EnsureAuth(ok => authed = ok);
+            if (!authed) { done?.Invoke(null); yield break; }
+            using var rq = Post($"https://firestore.googleapis.com/v1/{DocBase}:runQuery", "{\"structuredQuery\":" + q + "}", "application/json");
+            rq.SetRequestHeader("Authorization", "Bearer " + idToken);
+            yield return rq.SendWebRequest();
+            if (rq.result != UnityWebRequest.Result.Success) { Log("조회 실패", rq); done?.Invoke(null); yield break; }
+            done?.Invoke(rq.downloadHandler.text);
+        }
+
         // ── 도우미 ──
+        public static string Json(string s) => Str(s);
         UnityWebRequest Post(string url, string body, string type)
         {
             var rq = new UnityWebRequest(url, "POST") { uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(body)), downloadHandler = new DownloadHandlerBuffer(), timeout = config ? config.timeout : 10 };

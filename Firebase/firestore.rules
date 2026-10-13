@@ -13,7 +13,10 @@ service cloud.firestore {
         && request.resource.data.runsTotal is int && request.resource.data.runsTotal >= 0 && request.resource.data.runsTotal <= 100000
         && request.resource.data.runsSinceLast is int && request.resource.data.runsSinceLast >= 0 && request.resource.data.runsSinceLast <= 100000
         && request.resource.data.maxFloor is int && request.resource.data.maxFloor >= 1 && request.resource.data.maxFloor <= 1000
-        && request.resource.data.playSec is int && request.resource.data.playSec >= 0
+        && request.resource.data.playSec is int && request.resource.data.playSec >= 0 && request.resource.data.playSec <= 100000000
+        && request.resource.data.skillNodes is int && request.resource.data.skillNodes >= 0 && request.resource.data.skillNodes <= 10000
+        && request.resource.data.shardSum is int && request.resource.data.shardSum >= 0 && request.resource.data.shardSum <= 100000
+        && request.resource.data.gachaPulls is int && request.resource.data.gachaPulls >= 0 && request.resource.data.gachaPulls <= 1000000
         && request.resource.data.ver is string && request.resource.data.ver.size() <= 32
         && request.resource.data.build is string && request.resource.data.build.size() <= 16
         && request.resource.data.lang is string && request.resource.data.lang.size() <= 8
@@ -21,10 +24,20 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
-    // 랭킹 (5단계에서 쓰기 규칙 추가 예정): 지금은 읽기만
+    // 랭킹: 누구나 읽기 (목록은 100개까지) · 본인 문서만 만들기/덮어쓰기 · 최고 층·훈장은 줄어들 수 없음 · 삭제 불가
     match /players/{uid} {
-      allow read: if true;
-      allow write: if false;
+      allow get: if true;
+      allow list: if request.query.limit <= 100;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['nickname', 'bestFloor', 'bestTier', 'runs', 'updatedAt'])
+        && request.resource.data.nickname is string && request.resource.data.nickname.size() >= 2 && request.resource.data.nickname.size() <= 12
+        && request.resource.data.bestFloor is int && request.resource.data.bestFloor >= 1 && request.resource.data.bestFloor <= 1000
+        && request.resource.data.bestTier is int && request.resource.data.bestTier >= 1 && request.resource.data.bestTier <= 8
+        && request.resource.data.runs is int && request.resource.data.runs >= 0 && request.resource.data.runs <= 100000
+        && request.resource.data.updatedAt == request.time
+        && (resource == null || (request.resource.data.bestFloor >= resource.data.bestFloor
+                                 && request.resource.data.bestTier >= resource.data.bestTier));
+      allow delete: if false;
     }
 
     // 그 밖 전부 막음

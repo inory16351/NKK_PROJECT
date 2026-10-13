@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rank_icon.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid pure magenta background (#FF00FF) everywhere around the object. No text, no letters, no numbers, no labels.
+- ONE small icon object, centered, filling about 80% of the canvas: a tiny handmade TROPHY CUP that a rat would make from junk — a metal sewing thimble turned into a cup on a bottle-cap base, two little bent paper-clip handles, and a small wedge of yellow cheese sitting on top like the prize. A tiny red ribbon tied to one handle.
+- Viewed from the front, slightly from above, readable at 48x48 pixels: simple bold silhouette.
+- STYLE IS THE MOST IMPORTANT RULE: exactly match the three attached icons (same painted lobby style, same soft muted colors, same line/brush treatment, same lighting). It must look like it belongs in the same set as those icons.

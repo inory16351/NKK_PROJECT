@@ -273,7 +273,11 @@
 - 3단계 끝: `Scripts/Net/ServerConfig.cs` + `Assets/Data/ServerConfig.asset` (projectId **nkk-mvp**, 웹 API 키 들어 있음, `sendInEditor` 끔 = 에디터 Play 는 안 보냄) · `Scripts/Net/FirebaseClient.cs` (익명 로그인 REST · Firestore `:commit` Create/Set, 서버 시각, 같은 id 재전송 409 = 성공). 세 씬 `Server` 오브젝트. 에디터 시험: 익명 로그인 성공, 쓰기는 규칙 때문에 403 (정상).
 - Firebase 콘솔 (사용자 계정 caddman771144@gmail.com, 옆 브라우저 창에서 같이 함): 프로젝트 `nkk-mvp` · 익명 로그인 켬 · Firestore (default) Standard · asia-northeast3 서울 · 프로덕션 모드 · 웹 앱 `nkk-web`.
 - **4단계 (진행 중, 이 커밋에 코드 있음)**: `Scripts/Net/Telemetry.cs` — 훈장 달 때(`Progress.RankedUp`) 기록 1개를 고유 id 로 큐(PlayerPrefs `nkk_tele_queue`)에 넣고 `rankups` 컬렉션에 전송, 실패 시 씬 바뀔 때·다음 실행 때 재전송. `Telemetry.Enabled` (PlayerPrefs `nkk_stats_off`) = 나중 설정 "익명 통계 보내기". 세 씬 Server 에 붙임, 컴파일 OK, **아직 실제 전송 시험 안 함**.
-- **바로 다음 할 일**: ① 보안 규칙 `Firebase/firestore.rules` (rankups = 로그인한 본인 uid 로 create 만 · 칸·범위 검사 · at == request.time / players 읽기만 / 나머지 막음) 를 콘솔 Firestore → 규칙 → "규칙 수정" 편집기에 붙여 넣고 **게시** (사용자 확인 받고). 편집기는 CodeMirror 6 — `document.querySelector('.cm-content').cmView.view.dispatch({changes:{from:0,to:len,insert:text}})` 로 넣을 수 있음 (확인함). ② 에디터에서 `ServerConfig.sendInEditor` 를 **메모리에서만** 켜고 Telemetry 로 기록 1개 보내 콘솔 데이터 탭에서 확인 (build = "editor", 확인 뒤 콘솔에서 지워도 됨) → Play 끝나면 에셋의 sendInEditor 다시 false 저장 (Play 중 ScriptableObject 변경은 남음!). ③ 5단계 랭킹 (players 문서 · 닉네임 창 · 로비 랭킹 페이지, 규칙에 players 쓰기 추가) ④ 6단계 설정 "익명 통계 보내기" ⑤ 7단계 Google Cloud 콘솔에서 API 키 HTTP 리퍼러를 itch.io 도메인(html-classic.itch.zone 등)으로 제한 · WebGL 빌드 itch.io 시험.
+- **4단계 끝 (2026-10-13 오후)**: 보안 규칙 콘솔 게시 완료 · 에디터에서 기록 1개 전송 확인 (`rankups/874VR4LEOsQNTwZUkUtg`, build "editor" — 지워도 됨) · sendInEditor 다시 false. (유니티 MCP: 프로젝트 `.mcp.json` 의 HTTP 8080 항목은 안 쓰임 — 실제 연결은 사용자 설정의 stdio `unityMCP`, 포트 6400.)
+- **5·6단계 코드·씬 끝 (2026-10-13 오후)**: 랭킹 탭 · 닉네임 창 · 낮잠 침대 통계 토글/닉네임 (자세한 건 서버 계획.md 10장). 
+- players 규칙 게시 (오후 1:32 버전) · 색인 players (bestFloor ↓ · runs ↑ · __name__) 만듦 · 에디터 쓰기 확인 (`players/Z6x5jYiwOaVUcnnVWT2sg3v9YlW2`, 닉네임 '에디터시험' — 시험 문서, 콘솔에서 지울 것. 이 PC PlayerPrefs `nkk_nick`·`nkk_lb_sent` 도 시험값).
+- 색인 '사용 설정됨' → 에디터 조회 확인 (상위 목록 1명 = 시험 문서, 내 순위 1). 규칙 확인: 최고 층 낮추기 · 남의 uid 문서 쓰기 둘 다 거절됨. sendInEditor 다시 false.
+- **바로 다음 할 일**: ⑤ 7단계 Google Cloud 콘솔에서 API 키 HTTP 리퍼러를 itch.io 도메인(html-classic.itch.zone 등)으로 제한 · WebGL 빌드 itch.io 시험.
 - 커밋 안 한 것: `ProjectSettings/QualitySettings.asset` · `UnityConnectSettings.asset` (유니티가 바꾼 것, 출처 모름 — 확인 후 판단).
 
 ## 6. 밸런스 측정 (BalanceProbe)

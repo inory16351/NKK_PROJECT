@@ -252,6 +252,7 @@ MonoBehaviour:
   runs: 0
   playSec: 0
   rankRuns: 0
+  floorRuns: 0
   testMarket: 0
   alleyRevealStep: l_alley
 --- !u!4 &14758970
@@ -34399,6 +34400,7 @@ GameObject:
   - component: {fileID: 1276744953}
   - component: {fileID: 1276744952}
   - component: {fileID: 1276744954}
+  - component: {fileID: 1276744955}
   m_Layer: 0
   m_Name: Server
   m_TagString: Untagged
@@ -34449,6 +34451,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Net.Telemetry
   collection: rankups
   maxQueue: 50
+--- !u!114 &1276744955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1276744951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a8d659d9e765e47b7fb1fbf23b497e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.Net.Leaderboard
+  collection: players
+  top: 100
+  cacheSec: 300
+  nickMin: 2
+  nickMax: 12
+  bannedWords: {fileID: 4900000, guid: 4df78732f8d8f684bb04dc36a65c9378, type: 3}
 --- !u!1 &1286632534
 GameObject:
   m_ObjectHideFlags: 0

@@ -144,7 +144,8 @@ namespace NKK.Lobby
             var k = Keyboard.current;
             if (k != null && k.escapeKey.wasPressedThisFrame && PrepOpen && !NKK.Tutorial.TutorialBox.Showing && !GachaShow.Busy)
             {
-                if (RatTreePopup.Current && RatTreePopup.Current.IsOpen) RatTreePopup.Current.Close();     // 창이 떠 있으면 창부터 닫음
+                if (NickPopup.I && NickPopup.I.IsOpen) NickPopup.I.Close(false);
+                else if (RatTreePopup.Current && RatTreePopup.Current.IsOpen) RatTreePopup.Current.Close();     // 창이 떠 있으면 창부터 닫음
                 else CloseToHome();
             }
         }
