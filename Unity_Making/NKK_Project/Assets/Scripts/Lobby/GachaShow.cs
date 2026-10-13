@@ -296,7 +296,9 @@ namespace NKK.Lobby
             var s = Instantiate(sparkleTemplate, drop.transform.parent); s.gameObject.SetActive(true); spawned.Add(s.gameObject);
             var rt = s.rectTransform; var c = s.color;
             Vector2 off = i == 0 ? new Vector2(-0.18f, 0.22f) : (Random.insideUnitCircle * 0.45f);
-            rt.anchoredPosition = drop.rectTransform.anchoredPosition + off * drop.rectTransform.rect.width;
+            var dr = drop.rectTransform;      // 물방울 가운데 (기준점이 꼭지(위)여도)
+            Vector2 mid = dr.anchoredPosition + new Vector2((0.5f - dr.pivot.x) * dr.rect.width, (0.5f - dr.pivot.y) * dr.rect.height);
+            rt.anchoredPosition = mid + off * dr.rect.width;
             yield return Wait(i * 0.09f);
             float life = 0.55f, size = i == 0 ? 1.2f : Random.Range(0.45f, 0.8f);
             for (float x = 0; x < life && rt; x += Time.unscaledDeltaTime)

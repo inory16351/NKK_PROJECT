@@ -21,3 +21,8 @@
 유니티 사본 `Assets/Art/Rats/GachaLab/`. 배경음악 = `Audio/BGM/BGM_Gacha.mp3` (SceneMusic.gachaClip, 결과 칸 전까지 = `GachaShow.Cutscene`, 결과가 뜨면 `gachaFadeOut` 2.5초 동안 줄며 지하 곡으로).
 
 **컷 전환 (2026-10-12)**: 모든 컷 사이 = 줌 인 + 흰 플래시 → 다음 컷 펀치 인 (`Lobby/CutFx.cs`), 배관은 위로 스치는 흰 속도선. 전설 이상 쥐 고유 컷씬은 `../GachaIntro/README.md` (시범 = 아이스 퀸).
+
+## lab_c2 다시 뽑음 (2026-10-13)
+
+- 예전 `lab_c2` 는 스포이드 끝에 숟가락 모양 물방울이 그려져 있어서 연출용 물방울(`lab_drop`)과 겹쳐 어색함 (사용자) → 같은 구도로 물방울만 뺀 그림을 Codex 로 다시 뽑음 (`Sheets/prompt_lab_c2_v2.txt` · `log_lab_c2_v2.txt`, 참고 = 옛 그림). 옛 그림 = `Sheets/lab_c2_old_drop.png`.
+- 스포이드 끝 = 그림 (765, 683) → 씬 `UI/GachaShow/Root/Stage/CutDrop/Drop` 기준점 위(0.5, 1) · 위치 (-4, -206): 꼭지가 끝에 붙어 아래로 맺힘. 반짝이는 물방울 가운데 기준 (`GachaShow.Sparkle`).

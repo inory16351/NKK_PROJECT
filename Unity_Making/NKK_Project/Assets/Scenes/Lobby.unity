@@ -764,6 +764,7 @@ MonoBehaviour:
   id: tab_rec
   pad: 6
   zoom: 0
+  fitText: 1
 --- !u!1 &13409109
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,6 +1020,7 @@ MonoBehaviour:
   id: hot_market
   pad: 14
   zoom: 0
+  fitText: 1
 --- !u!212 &15002962
 SpriteRenderer:
   serializedVersion: 2
@@ -6489,6 +6491,7 @@ MonoBehaviour:
   id: gacha_ten
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!114 &106683078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12450,6 +12453,7 @@ MonoBehaviour:
   id: tab_run
   pad: 6
   zoom: 0
+  fitText: 1
 --- !u!1 &228487707
 GameObject:
   m_ObjectHideFlags: 0
@@ -15054,6 +15058,7 @@ MonoBehaviour:
   id: gacha_ten
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!114 &284347214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23666,9 +23671,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -10, y: -235}
+  m_AnchoredPosition: {x: -4, y: -206}
   m_SizeDelta: {x: 110, y: 135}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &496146452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23762,6 +23767,7 @@ MonoBehaviour:
   id: gacha_wish
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!114 &499495516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24844,6 +24850,7 @@ MonoBehaviour:
   id: alley_arrow
   pad: 14
   zoom: 0
+  fitText: 1
 --- !u!212 &529104400
 SpriteRenderer:
   serializedVersion: 2
@@ -26581,6 +26588,7 @@ MonoBehaviour:
   id: tab_rats
   pad: 14
   zoom: 0
+  fitText: 1
 --- !u!1 &567621886
 GameObject:
   m_ObjectHideFlags: 0
@@ -31299,6 +31307,7 @@ MonoBehaviour:
   id: market_timer
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!114 &706464814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34078,6 +34087,7 @@ MonoBehaviour:
   id: tab_rank
   pad: 14
   zoom: 0
+  fitText: 1
 --- !u!1 &771474848
 GameObject:
   m_ObjectHideFlags: 0
@@ -37327,6 +37337,7 @@ MonoBehaviour:
   id: hot_gacha
   pad: 14
   zoom: 0
+  fitText: 1
 --- !u!212 &845257887
 SpriteRenderer:
   serializedVersion: 2
@@ -38435,6 +38446,7 @@ MonoBehaviour:
   id: market_slot
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!114 &867580391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38641,6 +38653,7 @@ MonoBehaviour:
   id: research
   pad: 8
   zoom: 0
+  fitText: 1
 --- !u!1 &869185988
 GameObject:
   m_ObjectHideFlags: 0
@@ -38752,6 +38765,7 @@ MonoBehaviour:
   id: tab_run
   pad: 14
   zoom: 0
+  fitText: 1
 --- !u!1 &870174488
 GameObject:
   m_ObjectHideFlags: 0
@@ -41718,6 +41732,7 @@ MonoBehaviour:
   id: market_pity
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!114 &955275818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42095,6 +42110,7 @@ MonoBehaviour:
   id: tab_dex
   pad: 14
   zoom: 0
+  fitText: 1
 --- !u!1 &962470776
 GameObject:
   m_ObjectHideFlags: 0
@@ -43010,6 +43026,7 @@ MonoBehaviour:
   id: skill_buy
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!1 &988415566
 GameObject:
   m_ObjectHideFlags: 0
@@ -46151,6 +46168,7 @@ MonoBehaviour:
   id: tab_skill
   pad: 6
   zoom: 0
+  fitText: 1
 --- !u!1 &1052247806
 GameObject:
   m_ObjectHideFlags: 0
@@ -49469,6 +49487,7 @@ MonoBehaviour:
   id: market_reroll
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!114 &1118435813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54280,6 +54299,7 @@ MonoBehaviour:
   id: market_lock
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!114 &1224297267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55395,6 +55415,7 @@ MonoBehaviour:
   id: tab_rats
   pad: 6
   zoom: 0
+  fitText: 1
 --- !u!1 &1256091395
 GameObject:
   m_ObjectHideFlags: 0
@@ -65553,6 +65574,7 @@ MonoBehaviour:
   id: tab_rec
   pad: 14
   zoom: 0
+  fitText: 1
 --- !u!1 &1492453324
 GameObject:
   m_ObjectHideFlags: 0
@@ -77146,6 +77168,7 @@ MonoBehaviour:
   id: gacha_pity
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!114 &1750101910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78531,6 +78554,7 @@ MonoBehaviour:
   id: tab_skill
   pad: 14
   zoom: 0
+  fitText: 1
 --- !u!1 &1783970349
 GameObject:
   m_ObjectHideFlags: 0
@@ -86199,6 +86223,7 @@ MonoBehaviour:
   id: tab_rank
   pad: 6
   zoom: 0
+  fitText: 1
 --- !u!1 &1953919350
 GameObject:
   m_ObjectHideFlags: 0
@@ -88287,6 +88312,7 @@ MonoBehaviour:
   id: tab_dex
   pad: 6
   zoom: 0
+  fitText: 1
 --- !u!1 &1982329152
 GameObject:
   m_ObjectHideFlags: 0
@@ -95351,6 +95377,7 @@ MonoBehaviour:
   id: gacha_rates
   pad: 10
   zoom: 0
+  fitText: 1
 --- !u!114 &2117336547
 MonoBehaviour:
   m_ObjectHideFlags: 0
