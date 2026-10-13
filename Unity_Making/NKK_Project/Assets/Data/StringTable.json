@@ -8857,8 +8857,8 @@
   },
   {
    "string_key": 8000201,
-   "ko": "끌어서 둘러보기 · 휠로 확대 · 찍으면 옆 노드가 드러나요",
-   "en": "Drag to look around · Wheel to zoom · Unlocking reveals neighboring nodes"
+   "ko": "스킬을 찍으면 이어진 칸이 드러나요",
+   "en": "Unlock a skill to reveal the connected nodes"
   },
   {
    "string_key": 8000202,
