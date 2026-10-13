@@ -57,37 +57,37 @@
   {
    "grade": "Common",
    "rate": 0.5,
-   "shard_count": 10,
+   "shard_count": 1,
    "guarantee_rate": 0.0
   },
   {
    "grade": "Rare",
    "rate": 0.27,
-   "shard_count": 7,
+   "shard_count": 1,
    "guarantee_rate": 0.0
   },
   {
    "grade": "Epic",
    "rate": 0.13,
-   "shard_count": 5,
+   "shard_count": 1,
    "guarantee_rate": 0.0
   },
   {
    "grade": "Unique",
    "rate": 0.06,
-   "shard_count": 4,
+   "shard_count": 1,
    "guarantee_rate": 0.6
   },
   {
    "grade": "Legendary",
    "rate": 0.03,
-   "shard_count": 3,
+   "shard_count": 1,
    "guarantee_rate": 0.3
   },
   {
    "grade": "Mythic",
    "rate": 0.01,
-   "shard_count": 2,
+   "shard_count": 1,
    "guarantee_rate": 0.1
   }
  ]

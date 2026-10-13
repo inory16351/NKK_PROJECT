@@ -107,15 +107,18 @@ namespace NKK
         public bool TutoSkipped => tutoSkip;
         public void SkipTutorial() { tutoSkip = true; UnlockVersion++; Save(); }      // 밸런스 측정 등: 튜토리얼 안 띄우고 기능 전부 열림
         public bool TutoDone(string stepId) => tutoSkip || tuto.Contains(stepId);
-        public void MarkTuto(string stepId) { if (tuto.Add(stepId)) Save(); }
+        public void MarkTuto(string stepId) { if (tuto.Add(stepId)) { UnlockVersion++; Save(); } }      // 튜토리얼로 드러나는 기능(뒷골목)이 있어서 FeatureGate 도 다시 그림
         public bool IsUnlocked(string feature)
         {
             // 층으로 열리는 기능 (2026-10-12): 뒷골목·유전자 뽑기 = 16층 클리어 · 쥐구멍 암시장 = 17층 클리어 (튜토리얼 건너뛰기와 상관없음)
-            if (feature == "gacha" || feature == "alley") return GeneGacha.Unlocked;
+            if (feature == "gacha") return GeneGacha.Unlocked;
+            // 뒷골목(맨홀)은 16층 클리어 뒤에도 그 튜토리얼이 시작될 때까지 아예 안 보임 (사용자 2026-10-13: 열릴 때 튜토리얼이랑 같이 등장)
+            if (feature == "alley") return GeneGacha.Unlocked && (string.IsNullOrEmpty(alleyRevealStep) || TutoDone(alleyRevealStep));
             if (feature == "market") return BlackMarket.Unlocked;
             return string.IsNullOrEmpty(feature) || tutoSkip || unlocks.Contains(feature) || Array.IndexOf(OpenAtStart, feature) >= 0;
         }
         [Tooltip("테스트: 층과 상관없이 뒷골목·뽑기·암시장 열기")] public bool testMarket;
+        [Tooltip("뒷골목(맨홀)이 드러나는 튜토리얼 단계 id — 이 단계가 시작돼야 보임 (비우면 16층 클리어만으로)")] public string alleyRevealStep = "l_alley";
         // 쉼표로 여러 개. 새로 열린 게 있으면 true
         public bool Unlock(string features)
         {

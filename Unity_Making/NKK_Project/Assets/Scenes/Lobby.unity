@@ -730,6 +730,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!114 &9584153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -799,6 +803,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!114 &13409112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1316,6 +1324,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!1 &19987658
 GameObject:
   m_ObjectHideFlags: 0
@@ -12014,6 +12026,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!114 &227840037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27821,6 +27837,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!1 &628674821
 GameObject:
   m_ObjectHideFlags: 0
@@ -32460,6 +32480,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!1 &763595003
 GameObject:
   m_ObjectHideFlags: 0
@@ -34373,11 +34397,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Tutorial.FeatureGate
   feature: alley
-  hideWhenLocked: []
+  hideWhenLocked:
+  - {fileID: 1009751270}
+  - {fileID: 1663583119}
+  - {fileID: 931474020}
   lockMark: {fileID: 1800460387}
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked:
+  - {fileID: 816710619}
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: jgl_unlock
 --- !u!114 &816710618
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42279,6 +42311,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!1 &1007095246
 GameObject:
   m_ObjectHideFlags: 0
@@ -42389,9 +42425,9 @@ RectTransform:
   - {fileID: 888348617}
   m_Father: {fileID: 1846494738}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 400, y: -33}
   m_SizeDelta: {x: 240, y: 66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1008890216
@@ -44333,6 +44369,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!114 &1051152191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47632,9 +47672,9 @@ RectTransform:
   - {fileID: 1855097380}
   m_Father: {fileID: 1846494738}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 133, y: -33}
   m_SizeDelta: {x: 240, y: 66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1118727343
@@ -53213,6 +53253,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!114 &1250471399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53505,6 +53549,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!1 &1262688066
 GameObject:
   m_ObjectHideFlags: 0
@@ -61876,6 +61924,7 @@ MonoBehaviour:
   - {fileID: 1279895661}
   - {fileID: 126611990}
   introFrom: 4
+  mustIntroFrom: 5
   flash: {fileID: 1014497130}
   cardTemplate: {fileID: 2047847121}
   grid: {fileID: 653870035}
@@ -76931,6 +76980,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!114 &1813398199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78202,6 +78255,7 @@ MonoBehaviour:
   maxFloor: 1
   runs: 0
   testMarket: 0
+  alleyRevealStep: l_alley
 --- !u!4 &1843214943
 Transform:
   m_ObjectHideFlags: 0
@@ -82848,6 +82902,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!114 &1951127151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84872,6 +84930,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!114 &1980191099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88857,6 +88919,10 @@ MonoBehaviour:
   buttons: []
   dim: {fileID: 0}
   lockedAlpha: 0.6
+  disableWhenLocked: []
+  revealTime: 0.45
+  revealOvershoot: 1.6
+  revealSfx: 
 --- !u!1 &2060840406
 GameObject:
   m_ObjectHideFlags: 0
