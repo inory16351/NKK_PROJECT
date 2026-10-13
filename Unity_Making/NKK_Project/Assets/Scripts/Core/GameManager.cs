@@ -86,8 +86,8 @@ namespace NKK
 
         public void SetStageInfo(float power, float need, int open, int total)
         {
-            if (powerText) powerText.text = $"찍찍!! {Format(power)} / 적정 {Format(need)}";
-            if (floorText) floorText.text = $"{Floor}층 · 방 {open}/{total}";
+            if (powerText) powerText.text = Loc.T(9000001).Replace("{power}", Format(power)).Replace("{need}", Format(need));
+            if (floorText) floorText.text = Loc.T(9000002).Replace("{floor}", Floor.ToString()).Replace("{open}", open.ToString()).Replace("{total}", total.ToString());
         }
 
         // 까맣게 → action → 밝아짐
@@ -107,8 +107,8 @@ namespace NKK
             if (Progress.I && Progress.I.Infinite && Cheese < Progress.InfiniteAmount) Cheese = Progress.InfiniteAmount;     // 테스트: 치즈 무제한
             if ((saveT -= Time.unscaledDeltaTime) <= 0) { saveT = saveInterval; SaveProgress(); }
             if (Combo > 0 && (comboT -= Time.deltaTime) <= 0) Combo = 0;
-            if (cheeseText) cheeseText.text = $"치즈 {Format(Cheese)}";
-            if (comboText) comboText.text = Combo >= 2 ? $"{Combo} 콤보!" : "";
+            if (cheeseText) cheeseText.text = Loc.T(9000003).Replace("{cheese}", Format(Cheese));
+            if (comboText) comboText.text = Combo >= 2 ? Loc.T(9000004).Replace("{combo}", Combo.ToString()) : "";
             if (bannerT > 0)
             {
                 bannerT -= Time.deltaTime;

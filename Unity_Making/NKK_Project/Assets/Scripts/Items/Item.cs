@@ -82,7 +82,7 @@ namespace NKK.Items
             fx.Hitstop(Data.is_big == 1 ? 0.07f : 0.02f);
             fx.Anim("hit", x, y, 20, isCrit ? 1.1f : 0.6f);
             fx.Stars(x, y, 20, isCrit ? 8 : 4, Color.white, isCrit ? new Color(0.95f, 0.76f, 0.31f) : new Color(1, 0.95f, 0.75f), 150, 380);
-            if (isCrit) fx.Popup(x, y, "크리티컬!", new Color(0.95f, 0.76f, 0.31f), 22, 0.8f, 50);
+            if (isCrit) fx.Popup(x, y, Loc.T(9000038), new Color(0.95f, 0.76f, 0.31f), 22, 0.8f, 50);
         }
 
         // 공중에 뜬 물건을 또 치면: 저글링 (더 높이, 보너스 치즈)
@@ -112,7 +112,7 @@ namespace NKK.Items
         {
             if (Gold) return;
             Gold = true; value *= valueMul; hpMax *= hpMul; hp *= hpMul;
-            var fx = FxManager.I; if (fx) { fx.Stars(x, y, 20, 10, new Color(0.95f, 0.76f, 0.31f), new Color(1, 0.95f, 0.75f)); fx.Popup(x, y, "황금!", new Color(0.95f, 0.76f, 0.31f), 18, 0.8f, 40); }
+            var fx = FxManager.I; if (fx) { fx.Stars(x, y, 20, 10, new Color(0.95f, 0.76f, 0.31f), new Color(1, 0.95f, 0.75f)); fx.Popup(x, y, Loc.T(9000039), new Color(0.95f, 0.76f, 0.31f), 18, 0.8f, 40); }
         }
         public float FlyDamage(bool noWeight = false) => ((noWeight ? 0 : hpMax * mgr.flyWeight) + Force()) * Style();
 
@@ -226,7 +226,7 @@ namespace NKK.Items
             float tvx = vx, tvy = vy; vx = b.vx * 0.9f; vy = b.vy * 0.9f; b.vx = tvx * 0.9f; b.vy = tvy * 0.9f;
             vz += 160; b.vz += 160; air++; b.air++;
             mgr.Game.Earn((value + b.value) * 0.5f * CommonSkill.AirCollideCheeseMul);     // 묵직한 한 방
-            FxManager.I?.Popup((x + b.x) / 2, (y + b.y) / 2, "쾅!", new Color(1, 0.95f, 0.75f), 22, 0.6f, z + 30);
+            FxManager.I?.Popup((x + b.x) / 2, (y + b.y) / 2, Loc.T(9000040), new Color(1, 0.95f, 0.75f), 22, 0.6f, z + 30);
             FxManager.I?.Stars((x + b.x) / 2, (y + b.y) / 2, z, 6, Color.white, new Color(1, 0.89f, 0.6f));
             return true;
         }

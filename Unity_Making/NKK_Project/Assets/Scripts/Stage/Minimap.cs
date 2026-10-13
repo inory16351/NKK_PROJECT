@@ -92,7 +92,7 @@ namespace NKK.Stage
             Layout();
             int f = Game ? Game.Floor : 1;
             var zone = GameDatabase.Instance ? GameDatabase.Instance.ZoneOf(f) : null;
-            if (title) title.text = (titleFormat ?? "{floor}층 · {zone}").Replace("{floor}", f.ToString()).Replace("{zone}", zone?.zone_name ?? "");
+            if (title) title.text = (string.IsNullOrEmpty(titleFormat) ? Loc.T(9000124) : titleFormat).Replace("{floor}", f.ToString()).Replace("{zone}", zone?.zone_name ?? "");
             int zi = 0;
             if (zone != null && GameDatabase.Instance) zi = Mathf.Max(0, GameDatabase.Instance.Zones.IndexOf(zone));
             Color openCol = zoneColors.Length > 0 ? zoneColors[zi % zoneColors.Length] : Color.white;

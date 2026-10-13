@@ -10,13 +10,13 @@ namespace NKK.Rats
     {
         public enum TrickType { None, Flip, Axel, Windmill, Cannon, Wheel }
 
-        static readonly Dictionary<TrickType, (float dur, int pts, string[] text)> Tricks = new()
+        static readonly Dictionary<TrickType, (float dur, int pts, int[] text)> Tricks = new()
         {
-            [TrickType.Flip] = (0.62f, 1, new[] { "백덤블링!", "공중제비!", "찍-공중회전!" }),
-            [TrickType.Axel] = (1.05f, 2, new[] { "트리플 악셀!!", "3회전 성공!", "심사위원 전원 10점!" }),
-            [TrickType.Windmill] = (1.15f, 2, new[] { "윈드밀!!", "브레이크 댄스!", "빙글빙글 파괴!" }),
-            [TrickType.Cannon] = (1.3f, 2, new[] { "쥐 대포알!", "데굴데굴!", "핀볼 모드!" }),
-            [TrickType.Wheel] = (1.6f, 2, new[] { "쳇바퀴 돌기!!", "빙글빙글~", "어지러워!!" }),
+            [TrickType.Flip] = (0.62f, 1, new[] { 9000101, 9000102, 9000103 }),
+            [TrickType.Axel] = (1.05f, 2, new[] { 9000104, 9000105, 9000106 }),
+            [TrickType.Windmill] = (1.15f, 2, new[] { 9000107, 9000108, 9000109 }),
+            [TrickType.Cannon] = (1.3f, 2, new[] { 9000110, 9000111, 9000112 }),
+            [TrickType.Wheel] = (1.6f, 2, new[] { 9000113, 9000114, 9000115 }),
         };
 
         public TrickType Trick { get; private set; }
@@ -50,7 +50,7 @@ namespace NKK.Rats
             else if (type == TrickType.Wheel) { float s = Manager.wheelTrickSpeed * DashSpeedMult; vx = Mathf.Cos(ang) * s; vy = Mathf.Sin(ang) * s; face = vx >= 0 ? 1 : -1; }
             else { vx = vy = 0; }
             var fx = FxManager.I;
-            if (fx) { fx.Dust(x, y, 4, 0.8f); var tx = Tricks[type].text; fx.Popup(x, y, tx[Random.Range(0, tx.Length)], new Color(1, 0.95f, 0.75f), 19, 0.9f, 50); }
+            if (fx) { fx.Dust(x, y, 4, 0.8f); var tx = Tricks[type].text; fx.Popup(x, y, Loc.Pick(tx), new Color(1, 0.95f, 0.75f), 19, 0.9f, 50); }
             return true;
         }
 
@@ -73,7 +73,7 @@ namespace NKK.Rats
                         trickLanded = true;
                         for (int i = 0; i < 3; i++) { int n = i; Manager.Later(n * 0.1f, () => Manager.Items.Aoe(x, y, 80 * (0.7f + n * 0.2f), dmg * 3, this)); }
                         Manager.Game.AddCombo(5);
-                        fx?.Popup(x, y, "짠! 10.0 · 10.0 · 10.0", new Color(0.94f, 0.78f, 0.47f), 20, 1.1f, 70); fx?.Shake(0.1f);
+                        fx?.Popup(x, y, Loc.T(9000116), new Color(0.94f, 0.78f, 0.47f), 20, 1.1f, 70); fx?.Shake(0.1f);
                     }
                     break;
                 case TrickType.Windmill:

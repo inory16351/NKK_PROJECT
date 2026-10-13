@@ -114,7 +114,7 @@ namespace NKK.Hazards
             SfxManager.Play("cat_meow");
             var fx = FxManager.I; if (fx) fx.Dust(x, y, 10, 1.4f);
             bool special = row.Category == CatCategory.Special;
-            Game.ShowBanner(special ? $"특별 고양이: {row.character_name}!" : $"{row.character_name} 출현!", (spawnSub ?? "").Replace("{skill}", skill?.skill_name ?? "").Replace("{crowd}", db.CatSkills.TryGetValue(row.crowd_skill, out var cs) ? cs.skill_name : ""));
+            Game.ShowBanner((special ? Loc.T(9000027) : Loc.T(9000028)).Replace("{name}", row.character_name), (spawnSub ?? "").Replace("{skill}", skill?.skill_name ?? "").Replace("{crowd}", db.CatSkills.TryGetValue(row.crowd_skill, out var cs) ? cs.skill_name : ""));
             return true;
         }
 
@@ -140,7 +140,7 @@ namespace NKK.Hazards
             var c = Current; if (!c || !c.Alive) return false;
             if (c.BodyDist(it.x, it.y) > it.R || it.z > 80) return false;
             c.Damage(dmg * 2, Mathf.Atan2(it.vy, it.vx), it.By);
-            FxManager.I?.Popup(c.x, c.y, "퍽!", Color.white, 20, 0.5f, 60);
+            FxManager.I?.Popup(c.x, c.y, Loc.T(9000029), Color.white, 20, 0.5f, 60);
             return true;
         }
 

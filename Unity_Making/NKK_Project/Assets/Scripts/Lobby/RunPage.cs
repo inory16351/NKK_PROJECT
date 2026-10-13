@@ -96,7 +96,7 @@ namespace NKK.Lobby
                 if (sub)        // 타일 아래 글: 구역 이름 끝말 (보스 층·잠긴 층은 템플릿의 BossWord·LockWord 자식 글)
                 {
                     var z = db.ZoneOf(f); var parts = z != null ? z.zone_name.Split(' ') : new[] { "" };
-                    sub.text = boss ? Word(tileTemplate.transform, "BossWord", "보스") : can ? parts[^1] : Word(tileTemplate.transform, "LockWord", "잠김");
+                    sub.text = boss ? Word(tileTemplate.transform, "BossWord", Loc.T(9000092)) : can ? parts[^1] : Word(tileTemplate.transform, "LockWord", Loc.T(9000093));
                 }
                 b.transform.localScale = Vector3.one * (on ? 1.1f : 1);
                 int ff = f; b.onClick.AddListener(() => { startFloor = ff; Render(); });
@@ -121,7 +121,7 @@ namespace NKK.Lobby
                 var name = row.Find("Name")?.GetComponent<TMP_Text>(); if (name) name.text = gr.grade_name;
                 var fill = row.Find("Fill")?.GetComponent<Image>();
                 if (fill) { fill.fillAmount = open ? Mathf.Max(0.015f, pr) : 0; if (ColorUtility.TryParseHtmlString(gr.color, out var c)) fill.color = c; }
-                var pct = row.Find("Pct")?.GetComponent<TMP_Text>(); if (pct) pct.text = !open ? "잠김" : pr >= 0.1f ? $"{pr * 100:0}%" : pr >= 0.01f ? $"{pr * 100:0.0}%" : $"{pr * 100:0.00}%";
+                var pct = row.Find("Pct")?.GetComponent<TMP_Text>(); if (pct) pct.text = !open ? Loc.T(9000093) : pr >= 0.1f ? $"{pr * 100:0}%" : pr >= 0.01f ? $"{pr * 100:0.0}%" : $"{pr * 100:0.00}%";
                 row.SetSiblingIndex(oddsTemplate.GetSiblingIndex() + 1 + g);
             }
             SetT(bestText, ("n", best));

@@ -100,7 +100,7 @@ namespace NKK.Humans
         public void HitByItem(float dmg, Rat by, float ang)
         {
             if (!Damage(dmg, by, ang) || State != HState.Fly) { vx += Mathf.Cos(ang) * 260; vy += Mathf.Sin(ang) * 260; vz = Mathf.Max(vz, 220); jit = 4; }
-            FxManager.I?.Popup(x, y, RandomOf("퍽!", "아야!!", "뿅!", "(맞음)"), Color.white, 20, 0.6f, mgr.humanHeight * 0.8f);
+            FxManager.I?.Popup(x, y, Loc.Pick(9000029, 9000032, 9000033, 9000034), Color.white, 20, 0.6f, mgr.humanHeight * 0.8f);
             Say("Item_Hit");
         }
 
@@ -220,7 +220,7 @@ namespace NKK.Humans
                     if (o == this || hitSet.Contains(o) || o.State == HState.Fly || o.State == HState.Dead || Vector2.Distance(new Vector2(o.x, o.y), new Vector2(x, y)) > o.R + R || Mathf.Abs(o.z - z) > 90) continue;
                     hitSet.Add(o);
                     o.hp = 0; o.By = By; o.Launch(Mathf.Atan2(o.y - y, o.x - x), 480);
-                    FxManager.I?.Popup(o.x, o.y, "스트라이크!!", new Color(0.95f, 0.76f, 0.31f), 24, 0.9f, 120);
+                    FxManager.I?.Popup(o.x, o.y, Loc.T(9000035), new Color(0.95f, 0.76f, 0.31f), 24, 0.9f, 120);
                 }
             }
             // 쥐가 헤딩으로 받아침 → 더 높이 (사람 저글링)
@@ -261,8 +261,8 @@ namespace NKK.Humans
             fx.Anim("poof", x, y, 30, 1.6f);
             fx.Burst(x, y, 60, 18, new Color(1, 0.95f, 0.75f), new Color(0.91f, 0.64f, 0.63f), 120, 360);
             fx.Stars(x, y, 60, 10, Color.white, new Color(1, 0.89f, 0.6f));
-            fx.Popup(x, y, GameDatabase.Instance.HumanLine("Poof", 0) ?? "펑!!", new Color(1, 0.95f, 0.75f), 30, 0.9f, 130);
-            fx.Popup(x, y, "치즈+" + GameManager.Format(gain * mgr.Game.ComboMult), new Color(0.94f, 0.78f, 0.47f), 28, 1.2f, 80);
+            fx.Popup(x, y, GameDatabase.Instance.HumanLine("Poof", 0) ?? Loc.T(9000036), new Color(1, 0.95f, 0.75f), 30, 0.9f, 130);
+            fx.Popup(x, y, Loc.T(9000037) + GameManager.Format(gain * mgr.Game.ComboMult), new Color(0.94f, 0.78f, 0.47f), 28, 1.2f, 80);
             fx.Coin(x, y, 4); fx.Shake(0.12f);
         }
 

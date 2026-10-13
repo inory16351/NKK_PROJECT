@@ -10,6 +10,7 @@ namespace NKK.Tutorial
         [Tooltip("강조 id (예: promote · power · pop · timer · minimap · ult · tab_skill · research)")] public string id;
         [Tooltip("강조 테두리 여백 (화면 픽셀)")] public float pad = 10;
         [Tooltip("가리킬 때 키우는 배율 (0 = 대사창 설정값, 1 = 안 키움). UI 만")] public float zoom = 0;
+        [Tooltip("글자(TMP)면 글 칸 전체가 아니라 실제 글자 범위를 감쌈 (칸이 글보다 훨씬 클 때 강조가 엉뚱하게 커지는 것 막음)")] public bool fitText = true;
 
         static readonly List<TutorialTarget> all = new();
         void OnEnable() { all.Add(this); }
@@ -72,6 +73,12 @@ namespace NKK.Tutorial
             if (rt && rt.GetComponentInParent<Canvas>() is Canvas cv)
             {
                 var c = new Vector3[4]; rt.GetWorldCorners(c);
+                var tmp = fitText ? GetComponent<TMPro.TMP_Text>() : null;
+                if (tmp && tmp.textInfo != null && tmp.textInfo.characterCount > 0)
+                {
+                    var tb = tmp.textBounds;      // 그려진 글자 범위 (로컬)
+                    if (tb.size.x > 0 && tb.size.y > 0) { c[0] = rt.TransformPoint(tb.min); c[2] = rt.TransformPoint(tb.max); }
+                }
                 var cam = cv.renderMode == RenderMode.ScreenSpaceOverlay ? null : cv.worldCamera;
                 Vector2 a = RectTransformUtility.WorldToScreenPoint(cam, c[0]), b = RectTransformUtility.WorldToScreenPoint(cam, c[2]);
                 r = Rect.MinMaxRect(Mathf.Min(a.x, b.x) - pad, Mathf.Min(a.y, b.y) - pad, Mathf.Max(a.x, b.x) + pad, Mathf.Max(a.y, b.y) + pad);

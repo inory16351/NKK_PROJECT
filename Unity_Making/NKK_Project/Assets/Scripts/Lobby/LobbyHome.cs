@@ -158,7 +158,7 @@ namespace NKK.Lobby
         }
 
         public List<LobbySlot> FreeSlots() { var l = new List<LobbySlot>(); foreach (var s in slots) if (!s.user) l.Add(s); return l; }
-        public string RandomLine(string[] lines) => lines != null && lines.Length > 0 ? lines[Random.Range(0, lines.Length)] : "찍";
+        public string RandomLine(string[] lines) => lines != null && lines.Length > 0 ? lines[Random.Range(0, lines.Length)] : Loc.T(9000091);
 
         // 티어·훈장·소품·팻말 다시 표시 (페이지에서 돌아올 때)
         public void Refresh()

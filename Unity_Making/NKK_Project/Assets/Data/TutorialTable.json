@@ -328,8 +328,8 @@
    "trigger": "PopFull",
    "trigger_value": 0.0,
    "trigger_text": "",
-   "cond1_type": "RunMax",
-   "cond1_value": "1",
+   "cond1_type": "NotDone",
+   "cond1_value": "g_pop_f5,g_power_pop",
    "cond2_type": "",
    "cond2_value": "",
    "unlock": "pop",
@@ -546,6 +546,21 @@
    "action": "",
    "action_value": "",
    "sort": 320
+  },
+  {
+   "step_id": "g_pop_f5",
+   "scene": "Game",
+   "trigger": "FloorStart",
+   "trigger_value": 5.0,
+   "trigger_text": "",
+   "cond1_type": "NotDone",
+   "cond1_value": "g_pop,g_power_pop",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "pop",
+   "action": "",
+   "action_value": "",
+   "sort": 46
   }
  ],
  "Line": [
@@ -1331,6 +1346,33 @@
    "text": "전설이랑 신화에서 원하는 친구를 하나씩 고르면, 그 등급이 나올 때 그 친구가 더 잘 나와!",
    "text_sk": 3900087,
    "highlight": "gacha_wish"
+  },
+  {
+   "line_id": 88,
+   "step_id": "g_pop_f5",
+   "speaker_id": "brownrat",
+   "face": "surprised",
+   "text": "벌써 5층이야! 그런데 쥐는 끝없이 늘어나는 게 아니래.",
+   "text_sk": 3900088,
+   "highlight": ""
+  },
+  {
+   "line_id": 89,
+   "step_id": "g_pop_f5",
+   "speaker_id": "brownrat",
+   "face": "normal",
+   "text": "오른쪽 위 숫자가 지금 쥐 수 / 최대 쥐 수야. 꽉 차면 더는 번식할 수 없어!",
+   "text_sk": 3900051,
+   "highlight": "pop"
+  },
+  {
+   "line_id": 90,
+   "step_id": "g_pop_f5",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "꽉 찼을 땐 승급으로 쥐를 합치면 자리가 다시 생겨! 번식할 쥐만 남기고 나머지는 승급시키자!",
+   "text_sk": 3900090,
+   "highlight": "promote"
   }
  ],
  "Story": [

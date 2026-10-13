@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 namespace NKK
@@ -26,6 +27,7 @@ namespace NKK
             get { if (lang == null) lang = PlayerPrefs.GetString(Pref, Korean); return lang; }
         }
         public static bool IsKorean => Lang == Korean;
+        public static bool Loaded => map.Count > 0;
 
         public static void Load(TextAsset t)
         {
@@ -42,12 +44,59 @@ namespace NKK
             Changed?.Invoke();
         }
 
-        // 키의 지금 언어 글. 한국어이거나 번역이 없으면 fallback (씬·테이블에 적힌 원래 글)
+        // 테이블 행의 글 칸을 지금 언어로 바꿈: string 칸 X 옆에 int 칸 X_sk 가 있으면 X = Get(X_sk, X)
+        static readonly Dictionary<Type, (FieldInfo text, FieldInfo key)[]> pairs = new();
+        public static void ApplyAll<T>(IEnumerable<T> rows)
+        {
+            if (rows == null || IsKorean) return;
+            foreach (var r in rows) Apply(r);
+        }
+        public static void Apply(object row)
+        {
+            if (row == null || IsKorean) return;
+            var t = row.GetType();
+            if (!pairs.TryGetValue(t, out var ps))
+            {
+                var l = new List<(FieldInfo, FieldInfo)>();
+                foreach (var f in t.GetFields(BindingFlags.Public | BindingFlags.Instance))
+                {
+                    if (f.FieldType != typeof(string)) continue;
+                    var k = t.GetField(f.Name + "_sk", BindingFlags.Public | BindingFlags.Instance);
+                    if (k != null && k.FieldType == typeof(int)) l.Add((f, k));
+                }
+                pairs[t] = ps = l.ToArray();
+            }
+            foreach (var (text, key) in ps) text.SetValue(row, Get((int)key.GetValue(row), (string)text.GetValue(row)));
+        }
+
+        // 키의 지금 언어 글 (테이블·씬 글: 한국어면 원래 글 그대로). 다른 언어인데 번역이 없으면 경고 (스트링 테이블 상태 '번역 필요' 를 채울 것)
         public static string Get(int key, string fallback)
         {
-            if (IsKorean || key <= 0 || !map.TryGetValue(key, out var r)) return fallback;
-            string s = Lang == English ? r.en : null;
-            return string.IsNullOrEmpty(s) ? fallback : s;
+            if (IsKorean || key <= 0) return fallback;
+            if (map.TryGetValue(key, out var r))
+            {
+                string s = Lang == English ? r.en : null;
+                if (!string.IsNullOrEmpty(s)) return s;
+            }
+            Missing(key);
+            return fallback;
         }
+
+        // 코드 글 (90xxxxx 등): 키만으로 지금 언어 글. 한국어도 테이블 ko 칸에서 (코드에 원문을 두지 않음)
+        public static string T(int key)
+        {
+            if (map.TryGetValue(key, out var r))
+            {
+                string s = IsKorean ? r.ko : Lang == English ? r.en : null;
+                if (!string.IsNullOrEmpty(s)) return s;
+            }
+            Missing(key);
+            return "#" + key;
+        }
+        // 무작위 하나 (팝업 글 묶음)
+        public static string Pick(params int[] keys) => keys == null || keys.Length == 0 ? "" : T(keys[UnityEngine.Random.Range(0, keys.Length)]);
+
+        static readonly HashSet<int> warned = new();
+        static void Missing(int key) { if (warned.Add(key)) Debug.LogWarning($"[Loc] {Lang} 글 없음: 키 {key} (스트링 테이블 확인)"); }
     }
 }

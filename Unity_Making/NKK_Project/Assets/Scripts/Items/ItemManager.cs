@@ -217,7 +217,7 @@ namespace NKK.Items
                 fx.Shake(0.02f + bigK * 0.02f);
                 if (it.Data.IsFurniture) { fx.Shake(0.25f); fx.Dust(it.x, it.y, 10, 1.6f); fx.Popup(it.x, it.y, furnitureWords[Random.Range(0, furnitureWords.Length)], Color.white, 26, 0.9f, 80); }
                 else if (Random.value < smashWordChance) fx.Popup(it.x, it.y, smashWords[Random.Range(0, smashWords.Length)], Color.white, 20, 0.7f, 40);
-                if (it.Air >= 2) fx.Popup(it.x, it.y, $"AIR x{it.Air} 보너스!", new Color(0.61f, 0.96f, 1f), 20, 0.9f, 60);
+                if (it.Air >= 2) fx.Popup(it.x, it.y, Loc.T(9000049).Replace("{n}", it.Air.ToString()), new Color(0.61f, 0.96f, 1f), 20, 0.9f, 60);
             }
             // 가구·큰 물건: 안에 든 작은 물건들이 우르르 쏟아져서 날아감 (물건 테이블 drop_01~04, 쏟아짐 전용 물건 = 분류 Spill)
             foreach (var d in it.Data.Drops())
@@ -294,7 +294,7 @@ namespace NKK.Items
                 fx?.Spark(from.x, from.y, 20, col, 40, 0.12f); fx?.Spark(o.x, o.y, 16, col, 55, 0.16f); fx?.Anim("zap", o.x, o.y, 0, 0.6f);
                 o.Damage(dmg, by, false, Mathf.Atan2(o.y - from.y, o.x - from.x));
             }
-            if (near.Count > 0) fx?.Popup(from.x, from.y, "찌릿!", col, 18, 0.6f, 50);
+            if (near.Count > 0) fx?.Popup(from.x, from.y, Loc.T(9000050), col, 18, 0.6f, 50);
         }
 
         public Item RandomRestInRange(float x, float y, float r)
@@ -439,7 +439,7 @@ namespace NKK.Items
                         if (DropParcel(Random.Range(vr.xMin, vr.xMax), Random.Range(vr.yMin, vr.yMax), 900 + m * 40 + Random.Range(0f, 200f))) { got++; break; }
                 parcelSay = got > 0;
                 foreach (var r in Rats.Rats) r.OnParcelWave();
-                if (got > 0) Game.ShowBanner("로켓배송!", $"택배 왔습니다!! ×{got}");
+                if (got > 0) Game.ShowBanner(Loc.T(9000051), Loc.T(9000052).Replace("{n}", got.ToString()));
             }
             for (int i = parcels.Count - 1; i >= 0; i--)
             {
@@ -455,8 +455,8 @@ namespace NKK.Items
                 {
                     fx.Burst(p.x, p.y, 20, 8, new Color(0.83f, 0.64f, 0.45f), new Color(0.95f, 0.86f, 0.65f), 120, 320);
                     fx.Dust(p.x, p.y, 4, 0.8f); fx.Ring(p.x, p.y, 40, Color.white, 0.2f); fx.Shake(0.03f);
-                    if (parcelSay) { parcelSay = false; fx.Popup(p.x, p.y, "택배 왔습니다!!", new Color(1, 0.95f, 0.75f), 22, 1.2f, 70); }
-                    else if (Random.value < 0.12f) fx.Popup(p.x, p.y, Random.value < 0.5f ? "쿵!" : "문 앞 배송 완료", Color.white, 16, 0.7f, 50);
+                    if (parcelSay) { parcelSay = false; fx.Popup(p.x, p.y, Loc.T(9000053), new Color(1, 0.95f, 0.75f), 22, 1.2f, 70); }
+                    else if (Random.value < 0.12f) fx.Popup(p.x, p.y, Random.value < 0.5f ? Loc.T(9000054) : Loc.T(9000055), Color.white, 16, 0.7f, 50);
                 }
                 if (p.r) Destroy(p.r.gameObject);
                 parcels.RemoveAt(i);

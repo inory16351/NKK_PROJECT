@@ -7746,6 +7746,16 @@
    "en": "Pick one buddy you want from Legendary and one from Mythic, and they'll show up more often when that grade drops!"
   },
   {
+   "string_key": 3900088,
+   "ko": "벌써 5층이야! 그런데 쥐는 끝없이 늘어나는 게 아니래.",
+   "en": "Floor 5 already! But hey, rats can't multiply forever, you know."
+  },
+  {
+   "string_key": 3900090,
+   "ko": "꽉 찼을 땐 승급으로 쥐를 합치면 자리가 다시 생겨! 번식할 쥐만 남기고 나머지는 승급시키자!",
+   "en": "When it's full, merge rats with Promote to free up space! Keep the breeders and Promote the rest!"
+  },
+  {
    "string_key": 4000001,
    "ko": "찍... 찍찍찍...! (우리들은 그저 이곳이 낙원인 줄만 알고 있었지...)",
    "en": "Squeak... squeak squeak squeak...! (We truly believed this place was paradise...)"
@@ -8753,7 +8763,7 @@
   {
    "string_key": 8000182,
    "ko": "쳇바퀴 훈련 <size=60%><color=#7a6a5a>같은 친구를 또 만나면 조각 +1</color></size>",
-   "en": "Wheel Training <size=60%><color=#7a6a5a>Meet the same buddy again for Shard +1</color></size>"
+   "en": "Wheel Training <size=60%><color=#7a6a5a>Same buddy again = Shard +1</color></size>"
   },
   {
    "string_key": 8000183,
@@ -8858,7 +8868,7 @@
   {
    "string_key": 8000203,
    "ko": "쳇바퀴 훈련 Lv {lv}",
-   "en": "Wheel Training Lv {lv}"
+   "en": "Training Lv {lv}"
   },
   {
    "string_key": 8000204,

@@ -83,7 +83,7 @@ namespace NKK.Hazards
             if (by) by.OnHitCreature(this, frost, x, y, 60);       // 빙결 (아이스 퀸 쥐) · 액션 목표
             hp -= dmg * CommonSkill.BossDmgMul; jit = 3;          // 보스 사냥꾼
             if (hp <= 0) { if (by) mgr.Rats.Ults?.Charge(by, CondType.Defeat_Cat); Fling(ang); SfxManager.Play("cat_down"); return true; }
-            if (Random.value < 0.25f) FxManager.I?.Popup(x, y, RandomOf("냥!", "캬악!", "냐?!", "하악!"), Color.white, 18, 0.6f, 60);
+            if (Random.value < 0.25f) FxManager.I?.Popup(x, y, Loc.Pick(9000008, 9000009, 9000010, 9000011), Color.white, 18, 0.6f, 60);
             return true;
         }
 
@@ -96,7 +96,7 @@ namespace NKK.Hazards
             mgr.Game.OnSmash(value, 3);
             var fx = FxManager.I;
             if (fx) { fx.Stars(x, y, 40, 12, Color.white, new Color(0.94f, 0.78f, 0.47f)); fx.Coin(x, y, 5); fx.Shake(0.2f); }
-            mgr.Game.ShowBanner("고양이 날려버림!", $"{Data.character_name} 퇴치 · 쥐의 힘을 보여줬다");
+            mgr.Game.ShowBanner(Loc.T(9000012), Loc.T(9000013).Replace("{name}", Data.character_name));
         }
 
         // ── 매 프레임 ──
@@ -120,7 +120,7 @@ namespace NKK.Hazards
                     {
                         z = 0; FxManager.I?.Dust(x, y, 6, 1.2f);
                         if (++bounces <= 2) { vz = 420; vx *= 0.6f; vy *= 0.6f; }
-                        else { State = CState.Leave; life = 1.6f; rot = 0; float a = Random.Range(0, Mathf.PI * 2); vx = Mathf.Cos(a) * 420; vy = Mathf.Sin(a) * 420; FxManager.I?.Popup(x, y, "(삐짐)", Color.white, 16, 1, 60); }
+                        else { State = CState.Leave; life = 1.6f; rot = 0; float a = Random.Range(0, Mathf.PI * 2); vx = Mathf.Cos(a) * 420; vy = Mathf.Sin(a) * 420; FxManager.I?.Popup(x, y, Loc.T(9000014), Color.white, 16, 1, 60); }
                     }
                     return;
                 }
@@ -199,8 +199,8 @@ namespace NKK.Hazards
                         {
                             bool crit = critNext; critNext = false;
                             int n = PounceHit(crit ? V(1) : mgr.pounceRadius, crit ? V(2) : mgr.pounceStun);
-                            if (n > 0) { FxManager.I?.Popup(x, y, crit ? "신사의 일격!! 크리티컬!" : "냥냥펀치!!", crit ? new Color(0.95f, 0.76f, 0.31f) : new Color(0.89f, 0.6f, 0.35f), crit ? 28 : 24, 0.8f, 70); FxManager.I?.Shake(crit ? 0.25f : 0.12f); }
-                            if (doubleNext && r) { doubleNext = false; float dx = r.x - x, dy = r.y - y, d = Mathf.Max(1, Mathf.Sqrt(dx * dx + dy * dy)); pounceT = 0.3f; vx = dx / d * V(2); vy = dy / d * V(2); vz = 240; FxManager.I?.Popup(x, y, "한 번 더!!", new Color(0.66f, 0.83f, 0.86f), 22, 0.6f, 90); }
+                            if (n > 0) { FxManager.I?.Popup(x, y, crit ? Loc.T(9000015) : Loc.T(9000016), crit ? new Color(0.95f, 0.76f, 0.31f) : new Color(0.89f, 0.6f, 0.35f), crit ? 28 : 24, 0.8f, 70); FxManager.I?.Shake(crit ? 0.25f : 0.12f); }
+                            if (doubleNext && r) { doubleNext = false; float dx = r.x - x, dy = r.y - y, d = Mathf.Max(1, Mathf.Sqrt(dx * dx + dy * dy)); pounceT = 0.3f; vx = dx / d * V(2); vy = dy / d * V(2); vz = 240; FxManager.I?.Popup(x, y, Loc.T(9000017), new Color(0.66f, 0.83f, 0.86f), 22, 0.6f, 90); }
                             else { State = CState.Prowl; cd = Random.Range(0.9f, 1.6f); vx *= 0.2f; vy *= 0.2f; }
                         }
                     }
@@ -217,7 +217,7 @@ namespace NKK.Hazards
                     // 겁먹은 쥐들 (하악질 중엔 범위 넓어짐)
                     float fear = mgr.fearRadius * (hissUntil > Time.time ? V(1) : 1);
                     foreach (var o in mgr.Rats.Rats) if (Dist(o.x, o.y) < fear) o.Scare(x, y, mgr.fearTime * CommonSkill.CatFearMul);
-                    if (Random.value < dt * 0.5f) FxManager.I?.Popup(x, y, RandomOf("냐옹~", "냥?", "크르릉…"), Color.white, 16, 0.8f, 80);
+                    if (Random.value < dt * 0.5f) FxManager.I?.Popup(x, y, Loc.Pick(9000018, 9000019, 9000020), Color.white, 16, 0.8f, 80);
                     break;
                 }
             }
@@ -410,7 +410,7 @@ namespace NKK.Hazards
                     float R0 = V(1);
                     foreach (var o in mgr.Rats.Rats) if (Dist(o.x, o.y) < R0) o.Ragdoll(Mathf.Atan2(o.y - y, o.x - x), V(2), 420, 1.2f);
                     foreach (var it in mgr.Items.InRange(x, y, R0 + 40)) if (it.State == Items.Item.ItemState.Rest && Dist(it.x, it.y) < R0) it.Launch(Mathf.Atan2(it.y - y, it.x - x), V(3), false);
-                    if (fx) { fx.Ring(x, y, R0, new Color(0.89f, 0.6f, 0.35f), 0.5f); fx.Ring(x, y, R0 * 0.6f, Color.white, 0.35f); fx.Shake(0.3f); fx.Popup(x, y, "크아아앙!!", Color.white, 30, 0.8f, 110); }
+                    if (fx) { fx.Ring(x, y, R0, new Color(0.89f, 0.6f, 0.35f), 0.5f); fx.Ring(x, y, R0 * 0.6f, Color.white, 0.35f); fx.Shake(0.3f); fx.Popup(x, y, Loc.T(9000021), Color.white, 30, 0.8f, 110); }
                     break;
                 }
                 case CatEffectType.Fireball:

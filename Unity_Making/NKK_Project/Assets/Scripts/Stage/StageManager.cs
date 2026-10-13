@@ -184,7 +184,7 @@ namespace NKK.Stage
             Items.OnFloorStart();
             Rats.PlaceAll(World.RW / 2, World.RH / 2);
             if (Game.cam) Game.cam.CenterOn(World.RW / 2, World.RH / 2);
-            Game.ShowBanner($"{Game.Floor}층 · {GameDatabase.Instance.ZoneOf(Game.Floor)?.zone_name}", "계단 방 벽을 부숴라!");
+            Game.ShowBanner(Loc.T(9000124).Replace("{floor}", Game.Floor.ToString()).Replace("{zone}", GameDatabase.Instance.ZoneOf(Game.Floor)?.zone_name ?? ""), Loc.T(9000125));
             if (Boss) { Boss.OnFloorEnter(); RefreshWalls(); }                // 보스 층: 계단 방에 보스 대기 + 배너 부제 (계단 방 어둡게 다시 그림)
             climbing = false;
             FloorEntered?.Invoke();
@@ -329,13 +329,13 @@ namespace NKK.Stage
             if (wallBy) Rats.Ults?.Charge(wallBy, CondType.Destroy_Wall);      // 벽 붕괴 → 마지막으로 친 쥐 종 필살기 게이지
             foreach (var d in Dirs) if (Open.Contains(t + d)) walls.Remove(WallKey(t.x, t.y, d.x, d.y));
             RefreshWalls();
-            Game.ShowBanner("벽 붕괴! 방 확장", $"{Game.Floor}층 · 방 {Open.Count}/{Layout.Count}");
+            Game.ShowBanner(Loc.T(9000126), Loc.T(9000002).Replace("{floor}", Game.Floor.ToString()).Replace("{open}", Open.Count.ToString()).Replace("{total}", Layout.Count.ToString()));
             if (!IsStairsRoom(t.x, t.y)) Items.FurnishRoom(t);
             Items.FillRoom(t, Mathf.CeilToInt(Items.RoomCap / 2f));
             if (IsStairsRoom(t.x, t.y))
             {
                 if (Boss && !Boss.FloorCleared(Game.Floor)) Boss.OnStairsOpened();   // 보스 전투 시작 (보스가 사라졌으면 다시 불러서)
-                else Game.ShowBanner("계단 발견!", $"계단에 닿으면 {Game.Floor + 1}층으로");
+                else Game.ShowBanner(Loc.T(9000127), Loc.T(9000128).Replace("{next}", (Game.Floor + 1).ToString()));
             }
             Items.OnRoomOpened(t);
             // 쥐덫: 공용 스킬로 등장 확률(기본 100%)·2개 확률을 줄임
