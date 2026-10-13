@@ -74,7 +74,7 @@ namespace NKK.Lobby
         [Tooltip("'눌러서 다음' 안내 (선택)")] public GameObject revealHint;
         [Tooltip("쥐 고유 컷씬 (전설 이상 — 있으면 실루엣 단계 대신 재생, 없으면 보통 공개). GachaIntro 참고")] public GachaIntro[] intros;
         [Tooltip("고유 컷씬을 쓰는 최소 등급")] public Grade introFrom = Grade.Legendary;
-        [Tooltip("건너뛰기 해도 꼭 보여 줄 고유 컷씬: 이 등급 이상 + 처음 획득 (사용자 2026-10-12)")] public Grade mustIntroFrom = Grade.Mythic;
+        [Tooltip("이 등급 이상은 이미 가진 쥐여도 고유 컷씬을 항상 보여 줌 (건너뛰기 중이어도). 처음 보는 컷씬은 못 넘기고, 한 번 본 컷씬은 클릭 한 번으로 넘김 (사용자 2026-10-13)")] public Grade mustIntroFrom = Grade.Mythic;
 
         [Header("결과")]
         [Tooltip("최고 등급 번쩍 (흰 화면)")] public Image flash;
@@ -122,7 +122,7 @@ namespace NKK.Lobby
         public bool Skipping => skipping; // 고유 컷씬(GachaIntro)이 건너뛰기를 볼 때
         bool skipping, next;
         // 건너뛰기 2단계 (사용자 2026-10-12): 뚜껑 앞까지는 1번째 = 뚜껑 열기 전으로, 그 뒤 = 결과로. 꼭 보여 줄 컷씬 중엔 안 받음
-        bool beforeSewer, toSewer, lockSkip;
+        bool beforeSewer, toSewer, lockSkip, introTapSkip;      // introTapSkip = 지금 도는 고유 컷씬을 클릭으로 넘길 수 있음 (본 적 있음)
         readonly HashSet<GeneGacha.Result> introShown = new();
         GachaPage page; int lastN;
         string againTpl, revealCountTpl;
@@ -845,19 +845,24 @@ namespace NKK.Lobby
             reveal.SetActive(false);
         }
 
-        bool Must(GeneGacha.Result r) => r.isNew && r.grade >= mustIntroFrom;
+        bool Must(GeneGacha.Result r) => r.grade >= mustIntroFrom;
+        static bool Seen(string code) => Progress.I && Progress.I.gacha.introSeen.Contains(code);
 
         // 고유 컷씬 한 번 (꼭 보여 줄 컷씬이면 그동안 건너뛰기 안 받고, 건너뛰는 중이었어도 끝까지 보여 줌)
         IEnumerator PlayIntro(GachaIntro intro, GeneGacha.Result r)
         {
             bool must = Must(r), wasSkip = skipping;
             if (must) { lockSkip = true; skipping = false; if (skip) skip.gameObject.SetActive(false); }
+            introTapSkip = Seen(r.code);                           // 본 적 있는 컷씬 = 화면 클릭 한 번으로 넘김
             if (flash) flash.gameObject.SetActive(false);          // Root/Flash 는 컷씬보다 위 → 컷씬 자기 흰 화면으로
             intro.gameObject.SetActive(true);
             yield return intro.Play(this, r);
             intro.gameObject.SetActive(false);
             introShown.Add(r);
+            if (!introTapSkip && Progress.I) { Progress.I.gacha.introSeen.Add(r.code); Progress.I.Save(); }     // 끝까지 봄 → 다음부터 넘길 수 있음
+            introTapSkip = false;
             if (must) { lockSkip = false; skipping = wasSkip; if (skip) skip.gameObject.SetActive(!skipping); }
+            else if (skipping && !wasSkip) skipping = false;       // 클릭으로 컷씬만 넘김 → 다음 공개는 그대로
         }
 
         // 1번째 건너뛰기: 지금 장면을 정리하고 배관 맨 아래(뚜껑 앞)로 — 하얀 화면에서 걷히며
@@ -882,7 +887,7 @@ namespace NKK.Lobby
         GachaIntro Intro(GeneGacha.Result r)
         {
             if (intros == null || r.grade < introFrom) return null;
-            foreach (var i in intros) if (i && i.code == r.code && (r.isNew || !i.firstOnly)) return i;
+            foreach (var i in intros) if (i && i.code == r.code && (r.isNew || !i.firstOnly || r.grade >= mustIntroFrom)) return i;      // 신화(이상)는 중복이어도
             return null;
         }
 
@@ -953,6 +958,7 @@ namespace NKK.Lobby
             var k = UnityEngine.InputSystem.Keyboard.current; var m = UnityEngine.InputSystem.Mouse.current;
             if (k != null && k.escapeKey.wasPressedThisFrame) { if (ok && ok.gameObject.activeSelf) Close(); else OnSkip(); }
             bool press = (k != null && (k.spaceKey.wasPressedThisFrame || k.enterKey.wasPressedThisFrame)) || (m != null && m.leftButton.wasPressedThisFrame);
+            if (introTapSkip && !skipping && (press || (k != null && k.escapeKey.wasPressedThisFrame))) skipping = true;      // 본 컷씬 넘기기 (이 컷씬만)
             if (press && reveal && reveal.activeSelf) next = true;
             if (press && waitTap) tapped = true;
         }
