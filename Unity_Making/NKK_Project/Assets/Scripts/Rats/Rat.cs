@@ -71,6 +71,7 @@ namespace NKK.Rats
             if (UltOn) { UltTick(dt); return; }          // 필살기가 붙잡은 쥐: 위치·자세는 필살기 코드가 정함
             biteCD -= dt; wallCD -= dt; breedCD -= dt; noBreed -= dt; rushT -= dt; flee -= dt; tumbleT -= dt; frenzy -= dt; zombie -= dt;
             if (temp > 0 && (temp -= dt) <= 0) { Manager.RemoveTemp(this); return; }
+            NewRatTick(dt);
             bite = Mathf.Max(0, bite - dt * 5); sq += (1 - sq) * Mathf.Min(1, dt * 10);
             if (z > 0 || vz > 0) { vz -= 1600 * dt; z = Mathf.Max(0, z + vz * dt); if (z <= 0) vz = 0; }
 
@@ -130,7 +131,7 @@ namespace NKK.Rats
                 if (sides.Count > 0) { var d = sides[Random.Range(0, sides.Count)]; a = Mathf.Atan2(d.y, d.x) + Random.Range(-0.7f, 0.7f); }
             }
             var boss = Boss.Current;
-            if (boss && boss.CanHit && Random.value < 0.45f && Manager.Ults && Manager.Ults.OnScreen(boss.x, boss.y, 0)) a = Mathf.Atan2(boss.y - y, boss.x - x) + Random.Range(-0.3f, 0.3f);   // 보스한테 우르르
+            if (boss && boss.CanHit && !boss.Hidden && Random.value < 0.45f && Manager.Ults && Manager.Ults.OnScreen(boss.x, boss.y, 0)) a = Mathf.Atan2(boss.y - y, boss.x - x) + Random.Range(-0.3f, 0.3f);   // 보스한테 우르르
             else if (st.Open.Contains(st.StairsRoom) && !(boss && boss.Blocking) && Random.value < 0.12f) { var s = st.StairsPos; a = Mathf.Atan2(s.y - y, s.x - x) + Random.Range(-0.3f, 0.3f); }
             // 쥐덫의 치즈 미끼에 홀려서 (가끔)
             var bait = Random.value < 0.1f ? st.NearestArmedTrap(x, y, 320) : null;
@@ -262,7 +263,7 @@ namespace NKK.Rats
         bool BumpBoss(bool rushing)
         {
             var b = Boss.Current;
-            if (!b || !b.CanHit || b.z > 40) return false;
+            if (!b || !b.CanHit || b.Hidden || b.z > 40) return false;     // 투명 망토로 숨으면 그냥 지나감
             float dx = x - b.x, dy = y - b.y, d = Mathf.Sqrt(dx * dx + dy * dy), R = Radius + b.R;
             if (d > R) return false;
             float nx = dx / (d > 0 ? d : 1), ny = dy / (d > 0 ? d : 1);
@@ -398,9 +399,12 @@ namespace NKK.Rats
             ActionTransform(ref trot, ref tsx, ref tsy, ref lift);
             UltTransform(ref trot, ref tsx, ref tsy, ref lift);
             MountTransform(ref scale, ref lift);          // 슈퍼 요리사 쥐: 요리사 등 위 (Rat.Mount.cs)
+            NewRatTransform(ref scale, ref tsy);          // 맘스땃쥐 패티 (Rat.NewRats.cs)
             ZombieTint(); BossEffects(Time.deltaTime);
             if (ghost || temp > 0) foreach (var sr in rig.GetComponentsInChildren<SpriteRenderer>()) { var c = sr.color; c.a = ghost ? 0.55f + 0.15f * Mathf.Sin(Time.time * 10) : Mathf.Clamp01(temp / 0.6f); sr.color = c; }
+            rig.tailLen = FuseLeft;                       // 쥐한폭탄: 타들어가는 심지(꼬리)
             rig.Apply(MountPose(MakePose()), scale, face, sq, World.SortOrder(y), lift, trot, tsx, tsy, pivotH, Trick == TrickType.Windmill);
+            NewRatSprite();                               // 한 장짜리 쥐 그림 바꾸기 (Rat.NewRats.cs)
             StunStars();
             UltReadyMark();
             if (shadow)

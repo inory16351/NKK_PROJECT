@@ -1,0 +1,84 @@
+[하수구 야시장 프롬프트] 메이플 리버스 시티 느낌 · 쥐들의 지하 야시장
+- ① 배경 v3 · ② 야시장 건물/노점 시트 · ③ 맘스땃쥐 새 그림 (햄버거 자체가 쥐 + 패티 따로)
+- 다 만들면 이 대화창에 주면 됨 (자르기 · 배치 · 코드는 내가 함)
+
+====================================================================
+① 하수구 야시장 배경 v3  →  lm_bg.png
+   참고 그림: lobby_bg.png (화풍) + 지금 lm_bg.png (구도 · 통로 높이)
+====================================================================
+
+A side-view 2D game background illustration, 1536x1024 (3:2 landscape): a hidden UNDERGROUND RAT NIGHT MARKET town built inside an old sewer, directly below the cozy rat hideout of the first reference (lobby_bg.png).
+
+STYLE: the same soft hand-painted storybook style as lobby_bg.png (soft brushwork, gentle shading, no hard black outlines, no photo realism), but the MOOD is a night city like MapleStory's "Reverse City": deep indigo / violet night shadows, teal and magenta-pink neon accents, many warm glowing windows and lanterns, a little mysterious and upside-down, cute not scary.
+
+COMPOSITION (keep these heights, use the second reference lm_bg.png for the layout):
+- TOP BAND (0%~15%): the underside of the hideout floor — wooden beams, rusty pipes, insulation fluff, exactly like the bottom of lobby_bg.png so the images connect when stacked.
+- CEILING (15%~25%): a brick sewer vault. Exactly at the horizontal CENTER (50% width) a round MANHOLE OPENING with soft warm light falling from above. No ladder.
+- BACK LAYER (25%~65%): a dense little rat TOWN stacked against the tunnel wall — tiny shack houses and shops made from tin cans, milk cartons, matchboxes, old radios and bottle crates, piled two or three storeys high, with small round windows glowing warm yellow, crooked chimneys, little stairs and rope bridges between them, glowing neon tube shapes (simple hearts, cheese wedges, stars, arrows — NO letters), paper lanterns and string lights criss-crossing in the air. Some houses hang UPSIDE-DOWN from the ceiling vault (Reverse City feel). Keep this back layer slightly darker and softer so props in front stay readable.
+- WALKWAY (top surface at 65%~70% of the height, front face down to 78%): a flat old stone walkway across the full width, same height as the floor in lm_bg.png.
+- WATER (78%~100%): calm dark sewer water reflecting the neon and lanterns as colorful soft streaks, a few floating leaves and a tiny paper boat.
+
+EMPTY AREAS (only the darker background town behind, nothing standing on the walkway):
+- 15%~45% of the width and 45%~68% of the height (broker rat + market stall)
+- 55%~78% of the width and 45%~68% of the height (gene extractor)
+- 44%~56% of the width from the ceiling opening down to the walkway (ladder)
+
+Do NOT include: any text, letters, numbers, real brand logos, characters, rats, animals, humans, ladder, UI, borders, watermarks.
+
+====================================================================
+② 야시장 건물 · 노점 시트 (앞에 세우는 것)  →  nightmarket_props.png
+   참고 그림: lobby_bg.png · lm_stall.png · sewer_props.png · market_decor.png
+====================================================================
+
+A sprite sheet of game props, 1536x1024 (3:2 landscape), on a solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+
+STYLE: the same soft hand-painted storybook style as the references (lm_stall.png, sewer_props.png, market_decor.png), mouse-sized objects in a rat world, NIGHT-MARKET mood (warm lit windows, little lanterns, neon accents in teal and pink) — but any glow stays INSIDE the object (no glow or light beams over the magenta).
+
+LAYOUT — exact grid of 4 columns x 2 rows, each cell 384x512. Each drawing centered in its own cell with a clear magenta margin; nothing touches the cell borders. Buildings stand on the bottom of the cell.
+
+Row 1 (small rat buildings, front view, about as tall as the cell):
+ (1) a two-storey rat shop house made from a big tin can with a round door, a glowing round window and a striped cloth awning.
+ (2) a tall narrow rat house made from a milk carton, a crooked chimney, two glowing windows, a little balcony with a potted sprout.
+ (3) a noodle / snack food stall made from a matchbox with a red cloth curtain, a tiny steaming pot and hanging paper lanterns.
+ (4) a fortune-teller tent made from a teacup turned upside down with a purple cloth, a small crystal-ball marble glowing inside.
+Row 2:
+ (5) an arched gateway for a night market made from two chopsticks and a bent spoon, hung with paper lanterns (wide, front view, like a market entrance).
+ (6) a neon-style sign board shaped like a big cheese wedge (glowing tubes, NO letters).
+ (7) a string of round paper lanterns in pink, teal and yellow, hanging in a gentle curve (wide and short).
+ (8) an UPSIDE-DOWN little rat house hanging from a chain (roof at the bottom, chain at the top), windows glowing — for hanging from the ceiling.
+
+Do NOT include: text, letters, numbers, real logos, characters, rats, animals, humans, glows or drop shadows over the magenta, magenta tint inside glass.
+
+====================================================================
+③ 맘스땃쥐 새 그림 — 햄버거 자체가 쥐 (패티 따로)  →  burger_rat.png
+   참고 그림: UnityResources/Rats/Parts/burger/torso.png (지금 햄버거 그림체)
+             UnityResources/Rats/Parody/rat_bombrat.png · rat_pcmouse.png (한 장짜리 쥐 그림체)
+             UnityResources/Rats/Sheets 의 쥐 파츠 시트 아무거나 (플랫 그림체)
+====================================================================
+
+A sprite sheet, 1536x1024 (3:2 landscape), on a solid flat MAGENTA background (#FF00FF). No text, no letters, no numbers, no labels, no grid lines, no frames.
+
+STYLE IS THE MOST IMPORTANT RULE: copy the attached flat game references exactly — Untitled Goose Game look: completely FLAT simple shapes, NO outlines, NO black linework, no gloss, no gradients, no glow, no drop shadows, soft muted palette, same burger colors as torso.png.
+
+CHARACTER: "Mom's Burger Rat" — the whole character IS a cheeseburger seen from the SIDE that has become a rat: two round pink rat ears on top of the top bun, two small simple black dot eyes and a little pink rat nose with a few thin whiskers on the LEFT front of the top bun, a happy greedy little smile, tiny pink rat feet under the bottom bun and a thin pink rat tail coming out of the back (right). It FACES LEFT. No separate rat head — the bun is the head.
+
+LAYOUT — every layer drawn SEPARATELY so they can be stacked in the game. All layers have EXACTLY THE SAME WIDTH (about 600 px) and are drawn perfectly level, side view, facing left, each centered in its own area with a clear magenta gap (at least 40 px) between them. Arrange them in two columns:
+
+Left column, top to bottom:
+ (1) TOP BUN = the face: sesame-seed golden top bun with the two pink rat ears on top, dot eyes, pink nose, whiskers and smile at the left end. Flat bottom edge.
+ (2) LETTUCE: one wavy green lettuce leaf layer, thin.
+ (3) CHEESE: one yellow cheese slice layer with corners drooping down a little.
+ (4) TOMATO: one thin red tomato slice layer.
+ (5) BOTTOM BUN: the golden bottom bun with two tiny pink rat feet under it (front feet on the left, back feet on the right) and the thin pink rat tail attached at the right end curling up a little.
+
+Right column, top to bottom:
+ (6) PATTY: ONE thick dark-brown beef patty layer with flat grill marks, flat top and bottom edges (this one is repeated many times in the game to make the burger taller).
+ (7) the SAME patty again, slightly different grill marks (variation).
+ (8) the FULL assembled burger rat with exactly ONE patty (top bun, lettuce, cheese, patty, tomato, bottom bun stacked tightly with no gaps) — for the icon and preview.
+
+Do NOT include: text, letters, numbers, a separate rat head, human hands, outlines, shading gradients, drop shadows on the magenta.
+
+==================== 메모 ====================
+- ① 배경: 천장 맨홀 구멍 가운데(사다리 자리) · 뒤쪽은 깡통·우유곽 집들이 쌓인 쥐 마을 + 네온 · 거꾸로 매달린 집 (리버스 시티). 빈 자리 3곳은 지금 노점·추출기·사다리 위치 그대로.
+- ② 건물·노점: 배경 앞에 세워서 야시장 깊이감. 지난번 market_decor 소품(장물 더미·저울·금고·천막·약병·깃발·자루·고양이 포스터)도 같이 씀.
+- ③ 맘스땃쥐: 지금은 "쥐 머리 + 햄버거 몸통" → "햄버거에 쥐 귀·눈". 패티를 부술 때마다 패티 층이 하나씩 끼워져서 버거가 높아지게 코드도 바꿀 예정 (윗빵·양상추·치즈 / 패티 × n / 토마토·아랫빵 순서로 쌓기).

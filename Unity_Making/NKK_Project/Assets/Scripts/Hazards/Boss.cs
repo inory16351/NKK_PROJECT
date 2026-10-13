@@ -26,6 +26,7 @@ namespace NKK.Hazards
     {
         public static Boss Current { get; private set; }
         public enum BState { Off, Wait, Fight, Dying, Dead }
+        public readonly Frost frost = new();          // 빙결 (아이스 퀸 쥐)
 
         [Header("연결")]
         public GameManager Game;
@@ -112,6 +113,14 @@ namespace NKK.Hazards
         [Tooltip("홈랜더 눈 레이저: 소리 팝업 · 눈이 빨갛게 빛나는 머리 그림 (원래 머리와 같은 크기, 모으고 쏘는 동안 바꿈) · 눈 위치 (머리 그림 픽셀, 왼쪽 위 기준)")] public string laserSfx;
         public Sprite laserHeadSprite;
         public Vector2 laserEyePx = new(100, 140);
+        [Tooltip("투명 망토: 뒤집어쓰는 망토 · 벗어 던지는 망토 그림")] public Sprite cloakSprite, cloakFlySprite;
+        [Tooltip("투명 망토: 망토 크기 (게임 단위) · 벗어 던진 망토가 날아가는 시간 (초)")] public float cloakSize = 460, cloakFlyTime = 0.7f;
+        [Tooltip("투명 망토: 숨어 있을 때 보스 투명도 (0 = 완전히 안 보임) · 반짝임 (초당) · 숨어서 움직이는 속도 · 나타나기 몇 초 전에 경고 원 · 나타난 뒤 쉬는 시간")]
+        public float cloakAlpha = 0.07f, cloakSparkle = 4, cloakMove = 520, cloakWarn = 0.8f, cloakRest = 0.7f;
+        [Tooltip("투명 망토: 사라질 때 · 나타날 때 팝업")] public string cloakHidePopup, cloakShowPopup;
+        float cloakA = 1, cloakDrop, cloakFly, shadowA = -1;
+        // 투명 망토로 숨어 있음: 피해 안 받음 · 쥐가 들이받지 못하고 보스를 쫓지도 않음
+        public bool Hidden { get; private set; }
         [Tooltip("STAY 블랙홀: 모든 쥐를 빨아들이는 속도 · 컷씬 (없으면 바로 튕겨 나옴)")] public float stayPull = 1100;
         public BossCutscene cutscene;
         bool stayCut, stayDone;
@@ -177,7 +186,7 @@ namespace NKK.Hazards
         class Shot { public float x, y, z, vx, vy, vz, rot; public string type; public SpriteRenderer r; }
         readonly System.Collections.Generic.List<Shot> flying = new();
         bool Cat => Data != null && Data.IsCat;
-        float Height => Cat ? (Cats ? Cats.catLength : 115) * Data.scale * catSayLift : rig.height;
+        public float Height => Cat ? (Cats ? Cats.catLength : 115) * Data.scale * catSayLift : rig.height;
         string nameFormat;
         BossRow stash;          // 테스트 보스를 부를 때 이 층 진짜 보스 (끝나면 되돌림)
         int testN = -1;
@@ -214,6 +223,7 @@ namespace NKK.Hazards
             value = 3 * Stage.CheeseK(test ? Game.Floor : Mathf.Max(Game.Floor, row.floor)) * row.cheese_mul * CommonSkill.CreatureCheeseMul;
             shots = swings = 0; atkType = null; atk = null;
             sp1Done = sp2Done = boxed = false; pendingSpecial = null; growT = 0; growK = 1; ClearMarks();
+            Hidden = false; cloakA = 1; cloakFly = 0;
             skillCd = row.skill_first; unbrokenT = 0; forced = null;
             if (row.IsCat)
             {
@@ -339,7 +349,8 @@ namespace NKK.Hazards
         // ── 피해 (쥐 들이받기·폭발) ──
         public bool Damage(float dmg, Rat by, float ang, bool crit)
         {
-            if (!CanHit || boxed) return false;
+            if (!CanHit || boxed || Hidden) return false;
+            if (by) by.OnHitCreature(this, frost, x, y, Height * 0.6f);       // 빙결 (아이스 퀸 쥐) · 액션 목표
             dmg *= CommonSkill.BossDmgMul;
             if (unbrokenT > 0) dmg *= unbrokenDmgMul;          // 중꺾마
             hp -= dmg; hitT = 0.25f; jit = 3;
@@ -386,6 +397,7 @@ namespace NKK.Hazards
             UpdateBar(udt);
             if (FxManager.WorldFreeze || GameOver.Active) return;
             float dt = Mathf.Min(Time.deltaTime, 0.05f);
+            if (State == BState.Fight) dt *= frost.Step(dt, x, y, Height * 0.6f); else frost.Clear();     // 빙결: 느려짐 · 꽁꽁
             t += dt; sayCD -= dt; hitT = Mathf.Max(0, hitT - dt); jit = Mathf.Max(0, jit - dt * 12);
             sq += (1 - sq) * Mathf.Min(1, dt * 8);
             if (State == BState.Wait) { vx = vy = 0; face = 1; walk = 0; return; }
@@ -538,6 +550,7 @@ namespace NKK.Hazards
                     if (cutscene && !BalanceProbe.Active && !Cat) { var art = Items.humanArt ? Items.humanArt.Get(Data.code_id) : null; cutscene.PlayMeeting(art != null ? (art.angry ? art.angry : art.head) : null, null); }
                     break;
                 case "Zoomies": AddIce(x, y, iceRadius, atk.windup + atk.dur + 2.5f); break;       // 꽁꽁 얼어붙은 한강
+                case "Invis_Cloak": cloakDrop = 0; ShowProp(cloakSprite, cloakSize, false); break;   // 투명 망토: 위에서 망토가 내려옴
             }
         }
 
@@ -709,6 +722,55 @@ namespace NKK.Hazards
                         attacking = false;
                     }
                     break;
+                case "Invis_Cloak":
+                {
+                    // 투명 망토: 망토를 뒤집어씀 → 사라져서 쥐 무리 쪽으로 몰래 이동 (피해 안 받음) → 경고 원 → 나타나며 덮침. 개수만큼 반복
+                    // released = 단계 (0 덮어쓰기 · 1 숨어서 이동 · 2 나타난 뒤 쉼), seqI = 덮친 횟수, atkHit = 경고 원 자리 정함
+                    int n = Mathf.Max(1, atk.count);
+                    float hideT = Mathf.Max(cloakWarn + 0.2f, atk.dur / n);
+                    phaseT += dt;
+                    if (released == 0)
+                    {
+                        jit = 1.5f; cloakDrop = Mathf.Clamp01(phaseT / wind);
+                        if (phaseT < wind) break;
+                        released = 1; phaseT = 0; atkHit = false; Hidden = true; HideProp();
+                        seqTargets.Clear(); PickTargets(1);
+                        fx?.Dust(x, y, 16, 2); fx?.Stars(x, y, Height * 0.5f, 24, Color.white, new Color(0.78f, 0.86f, 0.95f), 120, 420);
+                        if (!string.IsNullOrEmpty(cloakHidePopup)) fx?.Popup(x, y, cloakHidePopup, Data.Color, 30, 1, Height);
+                        break;
+                    }
+                    if (released == 1)
+                    {
+                        var tg = seqTargets.Count > 0 ? seqTargets[0] : new Vector2(x, y);
+                        if (!atkHit && phaseT >= hideT - cloakWarn)
+                        {
+                            // 경고 원 자리 = 지금 쥐가 가장 많이 모인 곳 (거기서 나타남)
+                            atkHit = true; seqTargets.Clear(); PickTargets(1); tg = seqTargets.Count > 0 ? seqTargets[0] : tg;
+                            SfxManager.PlayAt("cat_warn", tg.x, tg.y);
+                        }
+                        float dx = tg.x - x, dy = tg.y - y, d = Mathf.Sqrt(dx * dx + dy * dy);
+                        if (d > 8) { float s = Mathf.Min(cloakMove, d / Mathf.Max(0.05f, hideT - phaseT) * 1.5f); vx = dx / d * s; vy = dy / d * s; if (Mathf.Abs(dx) > 8) face = dx > 0 ? 1 : -1; }
+                        else vx = vy = 0;
+                        if (Random.value < dt * cloakSparkle) fx?.Stars(x + Random.Range(-R, R), y, Height * Random.Range(0.2f, 0.7f), 1, Color.white, new Color(0.78f, 0.86f, 0.95f), 30, 90);   // 반짝 (자세히 보면 보임)
+                        if (Mathf.Repeat(phaseT, 0.3f) < dt) fx?.Dust(x, y, 1, 0.5f);                                                                                                  // 발자국 먼지
+                        if (atkHit) Cats?.ShowWarn(0, tg.x, tg.y, atk.radius, Mathf.Clamp01((phaseT - (hideT - cloakWarn)) / cloakWarn));
+                        if (phaseT < hideT) break;
+                        // 짠! 나타나며 덮침 (보이지 않으니 경고 원 자리로 바로)
+                        Cats?.HideWarns();
+                        x = tg.x; y = tg.y; vx = vy = 0; Hidden = false; cloakA = 1; sq = 0.7f;
+                        SpecialHit(x, y, atk.radius, atk.stun, true);
+                        SfxManager.PlayAt("cat_pounce", x, y); SfxManager.PlayAt("boss_slam", x, y);
+                        if (!string.IsNullOrEmpty(cloakShowPopup)) fx?.Popup(x, y, cloakShowPopup, Data.Color, 36, 1.1f, Height);
+                        fx?.Stars(x, y, Height * 0.5f, 30, Color.white, new Color(0.78f, 0.86f, 0.95f), 200, 600); fx?.Shake(0.4f);
+                        if (cloakFlySprite) { ShowProp(cloakFlySprite, cloakSize * 0.8f, false); cloakFly = cloakFlyTime; }
+                        seqI++; released = 2; phaseT = 0;
+                        break;
+                    }
+                    if (phaseT < cloakRest) break;
+                    if (seqI >= n) { attacking = false; break; }
+                    released = 0; phaseT = 0; cloakDrop = 0; ShowProp(cloakSprite, cloakSize, false);
+                    break;
+                }
                 case "Black_Hole":
                 {
                     // STAY: 모든 쥐를 빨아들임 → 컷씬 (책장 너머 과거의 자신) → 사방으로 튕겨 나옴
@@ -1221,6 +1283,7 @@ namespace NKK.Hazards
             specialProp.transform.localRotation = Quaternion.identity;
             float w = size * World.U / Mathf.Max(0.001f, sp.bounds.size.x);
             specialProp.transform.localScale = Vector3.one * w;
+            specialProp.color = Color.white;        // 투명 망토가 알파를 바꿔 두니 되돌림
             propAbove = aboveHead; propHeld = false;
         }
         // 손에 쥐는 소품 (사람 보스: 진압봉 · 토치 · 서류 가방). 고양이 보스면 머리 위
@@ -1258,6 +1321,27 @@ namespace NKK.Hazards
         }
         void HideProp() { if (specialProp) specialProp.gameObject.SetActive(false); }
 
+        // 투명 망토 놓기: 뒤집어쓰기 = 머리 위에서 내려오며 진해짐 · 벗어 던짐 = 뒤쪽 위로 빙글 날아가며 흐려짐
+        void PlaceCloak()
+        {
+            var tr = specialProp.transform;
+            var s = tr.localScale; s.x = Mathf.Abs(s.x) * face; tr.localScale = s;
+            specialProp.sortingOrder = World.SortOrder(y) + 30;
+            if (specialProp.sprite == cloakSprite)
+            {
+                tr.rotation = Quaternion.identity;
+                tr.position = World.ToUnity(x, y, Height * (0.45f + (1 - cloakDrop) * 1.2f));
+                specialProp.color = new Color(1, 1, 1, cloakDrop);
+                return;
+            }
+            cloakFly -= Time.deltaTime;
+            if (cloakFly <= 0) { HideProp(); return; }
+            float f = 1 - cloakFly / Mathf.Max(0.05f, cloakFlyTime);
+            tr.rotation = Quaternion.Euler(0, 0, -face * f * 220);
+            tr.position = World.ToUnity(x - face * f * 260, y, Height * (0.6f + f * 0.9f) - f * f * Height * 0.4f);
+            specialProp.color = new Color(1, 1, 1, 1 - f * f);
+        }
+
         // 쥐 머리 위 표시 (개구리 · 커피잔 · 상어 머리). head = 머리 자리에 씌움 (머리를 바꾼 것처럼)
         void AddMark(Rat r, float life, Sprite sp = null, bool head = false)
         {
@@ -1282,7 +1366,7 @@ namespace NKK.Hazards
             }
         }
         void ClearMarks() { foreach (var m in marks) if (m.r) Destroy(m.r.gameObject); marks.Clear(); }
-        void EndSpecialFx() { boxed = false; growT = 0; HideProp(); ClearMarks(); ClearSkillFx(); if (Cats) Cats.HideWarns(); }
+        void EndSpecialFx() { boxed = false; Hidden = false; cloakFly = 0; growT = 0; HideProp(); ClearMarks(); ClearSkillFx(); if (Cats) Cats.HideWarns(); }
 
         // 내려찍기 착지 (웹 bossStompLand)
         void Land()
@@ -1440,7 +1524,7 @@ namespace NKK.Hazards
             if (!bar || !bar.activeSelf) return;
             if (State == BState.Dying && t > 1) { bar.SetActive(false); return; }
             float k = Mathf.Clamp01(hp / Mathf.Max(1, hpMax));
-            if (hitT > 0.2f) trailWait = trailDelay;
+            if (hitT > 0.2f && trailWait <= 0 && trailK - k < 0.01f) trailWait = trailDelay;     // 처음 깎일 때만 잠깐 기다림 (계속 맞아도 자국이 따라옴)
             if ((trailWait -= udt) <= 0) trailK = Mathf.MoveTowards(trailK, k, udt * trailSpeed * Mathf.Max(0.05f, trailK - k));
             if (trailK < k || State == BState.Wait) trailK = k;
             if (barTrail) barTrail.anchorMax = new Vector2(trailK, barTrail.anchorMax.y);
@@ -1526,6 +1610,7 @@ namespace NKK.Hazards
             else rig.Apply(MakePose(), growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), 1);
             UpdateMarks(Time.deltaTime);
             if (specialProp && specialProp.gameObject.activeSelf && propHeld) PlaceHeld();
+            else if (specialProp && specialProp.gameObject.activeSelf && specialProp.sprite && (specialProp.sprite == cloakSprite || specialProp.sprite == cloakFlySprite)) PlaceCloak();
             else if (specialProp && specialProp.gameObject.activeSelf)
             {
                 specialProp.transform.position = World.ToUnity(x + (propAbove ? face * 30 : 0), y, propAbove ? Height * 0.75f + Mathf.Sin(Time.time * 10) * 6 : boxSize * 0.38f);
@@ -1533,9 +1618,13 @@ namespace NKK.Hazards
             }
             // 실루엣 색 (사람 리그는 Apply 가 매번 색을 되돌림, 고양이 리그는 원래 색으로 되돌림)
             var k = look == 1 ? waitDarkTint : unbrokenT > 0 ? Color.Lerp(Color.white, unbrokenColor, 0.35f + 0.2f * Mathf.Sin(Time.time * 8)) : Color.white;     // 중꺾마 = 금빛
-            if (Cat || look == 1 || unbrokenT > 0) foreach (var (r, c) in baseColors) if (r) r.color = new Color(c.r * k.r, c.g * k.g, c.b * k.b, c.a);
+            // 투명 망토: 숨어 있으면 거의 안 보이게 (부드럽게)
+            cloakA = Mathf.MoveTowards(cloakA, Hidden ? cloakAlpha : 1, Time.deltaTime * 4);
+            if (Cat || look == 1 || unbrokenT > 0 || cloakA < 0.999f) foreach (var (r, c) in baseColors) if (r) r.color = new Color(c.r * k.r, c.g * k.g, c.b * k.b, c.a * cloakA);
             if (shadow)
             {
+                if (shadowA < 0) shadowA = shadow.color.a;
+                var sc = shadow.color; sc.a = shadowA * cloakA; shadow.color = sc;
                 float w = R * 1.4f * (1 - Mathf.Min(0.7f, z / 900)), sw = shadow.sprite ? shadow.sprite.bounds.size.x : 1;
                 shadow.enabled = State != BState.Dying;
                 shadow.transform.position = World.ToUnity(x, y);

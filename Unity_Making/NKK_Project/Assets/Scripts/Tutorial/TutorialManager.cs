@@ -104,6 +104,7 @@ namespace NKK.Tutorial
                 case "FloorMin": return Game && Game.Floor >= n;
                 case "SkillAffordable": { var r = SkillPage.Recommend(); return r != null && P.CanBuySkill(r); }
                 case "SkillPoor": { var r = SkillPage.Recommend(); return r == null || !P.CanBuySkill(r); }
+                case "WishOpen": return GeneGacha.WishUnlocked;        // 관심 종 (18층 클리어)
             }
             Debug.LogWarning($"[Tutorial] 모르는 조건: {type}");
             return false;
@@ -132,6 +133,7 @@ namespace NKK.Tutorial
                 case "After": return lastDone != null && System.Array.IndexOf((s.trigger_text ?? "").Split(','), lastDone) >= 0;      // 쉼표로 여러 단계
                 // ── Lobby ──
                 case "LobbyEnter": return Lobby && !Lobby.PrepOpen;
+                case "AlleyEnter": return Lobby && !Lobby.PrepOpen && NKK.Lobby.LobbyPan.I && NKK.Lobby.LobbyPan.I.AtRoom;      // 뒷골목에 도착
                 case "PageOpen": return Lobby && Lobby.PrepOpen && Lobby.CurrentPage == s.trigger_text;
                 case "CanRankUp": return Lobby && !Lobby.PrepOpen && P.CanRankUp();
                 case "TierAtLeast": return Lobby && !Lobby.PrepOpen && P.tier >= v;

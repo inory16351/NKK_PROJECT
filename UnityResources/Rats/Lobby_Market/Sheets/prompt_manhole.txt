@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: manhole.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers.
+- An exact grid of 3 columns x 1 row (each cell 512x1024, drawings in the vertical middle). Each drawing centered with a clear magenta margin.
+- STYLE: exactly the soft painted cozy storybook style of the attached reference (ref_lobby_bg.png) — same brushwork, soft shading, warm palette, gentle outlines.
+- A small round iron MANHOLE / DRAIN COVER for mice, lying flat on a wooden plank floor, seen from the same low side angle as the reference (so it looks like a flat ellipse, much wider than tall, about 3.5 : 1):
+ (1) closed: dark iron cover with a cute embossed rat-paw print pattern and a little ring handle, a few bolts, slightly rusty rim.
+ (2) the same cover OPEN: the lid slid half aside, showing a dark round hole with the top of an iron ladder and a faint green glow from below.
+ (3) a small hanging wooden sign on a nail (blank, no writing) with a downward arrow painted on it.

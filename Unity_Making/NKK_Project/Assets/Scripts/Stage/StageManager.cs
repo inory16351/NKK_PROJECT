@@ -31,6 +31,9 @@ namespace NKK.Stage
         public RatManager Rats;
         public CatManager Cats;
         [Tooltip("층 클리어 연출 (연구 자료를 훔쳤다!!!). 비우면 바로 다음 층")] public Heist Heist;
+        [Tooltip("마지막 층: 이 층 보스를 잡고 계단에 닿으면 판을 끝내고 로비로 (사용자 2026-10-12: 30층 보스 = 끝)")] public int lastFloor = 30;
+        [Tooltip("마지막 층을 넘으면 돌아갈 씬")] public string lobbyScene = "Lobby";
+        public static int LastFloor { get; private set; } = 30;
         [Tooltip("층 보스 (스테이지 테이블 Boss). 보스 층이면 계단 방에서 대기, 살아 있는 동안 계단 못 씀")] public Boss Boss;
 
         [Header("방 배치")]
@@ -451,7 +454,13 @@ namespace NKK.Stage
             if (Boss && !Boss.FloorCleared(Game.Floor)) { Debug.LogWarning($"[Boss] {Game.Floor}층 보스를 안 잡아서 계단 막음 (보스 {Boss.State})"); if (Open.Contains(StairsRoom)) Boss.OnStairsOpened(); return; }
             climbing = true;
             int from = Game.Floor;
-            void Move() => Game.FadeThen(() => { if (Game.Floor == from) EnterFloor(from + 1); });
+            LastFloor = lastFloor > 0 ? lastFloor : int.MaxValue;
+            void Move()
+            {
+                // 마지막 층 클리어 → 저장하고 로비로 (더 위 층은 없음)
+                if (lastFloor > 0 && from >= lastFloor) Game.FadeThen(() => { Game.SaveProgress(); UnityEngine.SceneManagement.SceneManager.LoadScene(lobbyScene); });
+                else Game.FadeThen(() => { if (Game.Floor == from) EnterFloor(from + 1); });
+            }
             if (Heist) Heist.Begin(StairsPos, Move);
             else Move();
         }

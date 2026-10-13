@@ -4,7 +4,7 @@
 효과 값은 같은 효과끼리 '더함' (공격력 % 는 곱하지 않음 → 과하게 커지지 않게). 식은 Common_Effect_Type 시트.
 비용: 치즈 = 훈장 기본 × 1.45^(깊이-1) (핵심 ×1.5) · 연구자료 = 2훈장부터 훈장 기본 × 1.3^(깊이-1) (핵심 ×2)
 사용: python Tools/gen_skill_tree.py && python Tools/xlsx2json.py"""
-import io, os, copy, math
+import io, os, copy, math, json
 import openpyxl
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -95,6 +95,13 @@ RESEARCH = {1: 0, 2: 0.72, 3: 3.07, 4: 7.71, 5: 13.21, 6: 32.36, 7: 102.98, 8: 8
 CHEESE_PER_RES = {2: 2544, 3: 6354, 4: 20367, 5: 98242, 6: 387375, 7: 1914779, 8: 1594900}
 T1_CHEESE_TOTAL = 21300
 CHEESE = {1: 40}                     # 1훈장 깊이별 모양 (합을 T1_CHEESE_TOTAL 로 맞춤)
+# 2026-10-12: Tools/gen_economy.py 가 허들 기획서 판 일정으로 계산한 값이 있으면 그걸 씀 (위 숫자는 옛 값)
+_EP = os.path.join(ROOT, 'Tools', 'economy_params.json')
+if os.path.exists(_EP):
+    _p = json.load(io.open(_EP, encoding='utf-8'))
+    RESEARCH = {int(k): v for k, v in _p['RESEARCH'].items()}
+    CHEESE_PER_RES = {int(k): v for k, v in _p['CHEESE_PER_RES'].items()}
+    T1_CHEESE_TOTAL = _p['T1_CHEESE_TOTAL']
 
 
 def nice(v):

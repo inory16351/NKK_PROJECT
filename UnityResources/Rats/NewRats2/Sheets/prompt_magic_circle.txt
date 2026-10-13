@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: magic_circle.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) around the drawing. No text, no letters, no numbers.
+- One big flat crimson-red fantasy MAGIC CIRCLE seen from straight above, perfectly round, filling about 90% of the image, centered.
+- Design: three thin concentric rings; between the outer rings a band of simple abstract rune-like marks (small triangles, dots, short bars — NOT letters of any real alphabet); inside, a FIVE-pointed star made of straight lines inscribed in the inner ring is NOT allowed and a six-pointed star is NOT allowed either; instead use two overlapping squares rotated 45 degrees (an eight-pointed octagram) with a small flame-like explosion emblem in the very center. Hollow between the lines (the magenta shows through the gaps).
+- Style: Untitled Goose Game flat look, completely FLAT, no outlines, no gradients, no glow, no shadows. Colours: crimson red lines with a few darker red accents and a little warm orange in the center emblem.

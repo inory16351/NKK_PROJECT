@@ -1,0 +1,17 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: market_broker.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing centered in its own cell with a clear magenta margin; nothing touches cell borders.
+- STYLE: exactly the soft painted cozy storybook style of the attached references (ref_lobby_bg.png hideout background and ref_stall.png black-market stall) — same brushwork, soft shading, warm palette, gentle outlines.
+- CHARACTER (the SAME character in every cell): "the Broker", a shady but cute black-market RAT merchant who sells stolen gene samples. Grey-brown rat with a long pink tail, wearing a too-big dark trench coat with the collar up, a crooked brown fedora hat, small round dark sunglasses, one shiny gold tooth, a sly grin. Standing upright on two legs (like a shopkeeper), front 3/4 view facing slightly LEFT.
+Row 1 (full body, standing, feet at the bottom of the cell):
+ (1) idle: hands behind back, sly grin.
+ (2) talking: one paw raised, mouth open mid-sentence, leaning forward.
+ (3) offering: opening one side of the trench coat to reveal glowing-free colorful gene vials hanging inside, wink.
+ (4) counting cheese: holding a cheese wedge happily, gold tooth showing.
+Row 2:
+ (5) BUST portrait (head and shoulders) for a dialog box, sly grin, looking at the viewer.
+ (6) BUST portrait, laughing (eyes closed, mouth open).
+ (7) BUST portrait, surprised (sunglasses slipping down, eyes wide).
+ (8) leave EMPTY (only magenta).

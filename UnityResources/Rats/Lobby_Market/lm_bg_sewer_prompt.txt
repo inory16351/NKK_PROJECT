@@ -1,0 +1,33 @@
+[하수구 뒷골목 배경 프롬프트 v2] lm_bg 교체용 — 아지트(lobby_bg) 바로 아래 방
+- 크기: 1536 x 1024 (3:2), PNG
+- 참고 그림 2장 같이 넣기: lobby_bg.png (화풍) + lm_bg.png (구도 · 통로 높이)
+- v1 과 달라진 점: 사다리는 소품 시트에서 따로 그리므로 배경엔 천장 맨홀 구멍만. 위치를 % 로 적음 (그림 도구가 픽셀보다 % 를 잘 지킴)
+
+==================== 프롬프트 (복사해서 사용) ====================
+
+A side-view 2D game background illustration, 1536x1024 (3:2 landscape): the secret UNDERGROUND SEWER directly BELOW the cozy rat hideout shown in the first reference (lobby_bg.png). Rats use it as a hidden black market.
+
+STYLE (most important): copy EXACTLY the painting style of lobby_bg.png — soft hand-painted storybook illustration, warm muted colors, gentle painterly shading, soft edges, no hard black outlines, no gloss, no photo realism. Same camera angle, same scale, same softness. It must look like the same artist painted both images.
+
+COMPOSITION — use the second reference (lm_bg.png) for the layout; keep the same heights:
+- TOP BAND (top 0% to 15%): the underside of the hideout floor — thick wooden beams, rusty red and blue-grey pipes, pink-grey insulation fluff, exactly like the bottom part of lobby_bg.png, so the two images connect seamlessly when stacked vertically.
+- CEILING (15% to 25%): below that band, a curved red-brown brick vault arching across the whole width. In the ceiling, centered at about 86% of the width, a round MANHOLE OPENING (about 8% of the width) with soft warm light coming down from the hideout above. NO ladder (it will be added later), just the hole.
+- BACK WALL (25% to 65%): old damp red-brown brick wall with soft moss patches, water stains and two or three small rusty drain pipes sticking out. Mostly calm and plain.
+- WALKWAY (top surface at 65% to 70% of the height, front edge face down to 78%): a flat old stone walkway running the full width, exactly the same height as the wooden plank floor in lm_bg.png.
+- WATER (78% to 100%): the sewer water channel at the very bottom — slow murky green-blue water with soft warm reflections of the lights, a couple of floating leaves.
+- LIGHTS: warm string lights hanging along the brick vault like in lobby_bg.png, and two small hanging tin-can lanterns.
+- SMALL DECOR only at the far left and far right edges (inside 0%~10% and 92%~100% of the width): a rat-sized hole in the bricks on the far left, a few wooden crates and a jar on the far right.
+
+EMPTY AREAS (must stay clear, only plain brick wall behind them, nothing standing on the walkway there):
+- from 15% to 45% of the width, between 35% and 70% of the height
+- from 55% to 78% of the width, between 35% and 70% of the height
+- under the manhole opening from 80% to 92% of the width, from the ceiling down to the walkway (a ladder will be placed here later)
+
+MOOD: hidden and a little shady but cute, cozy and safe — warm orange lantern light against cool dark teal-green sewer shadows. Not scary, not dirty or gross.
+
+Do NOT include: any text, letters, numbers or symbols, any characters, animals or humans, a ladder, logos, watermarks, borders, UI.
+
+==================== 메모 ====================
+- 빈 자리: 15~45% = 브로커 쥐 + 암시장 노점 · 55~78% = 유전자 추출기 · 80~92% = 사다리 (소품 시트 (4) 를 맨홀 구멍 아래에 세움).
+- 맨홀 구멍 86% = 아지트 바닥 맨홀 x 위치와 같음 (그림 오면 둘을 정확히 맞춤).
+- 결과가 너무 어두우면 "slightly brighter, keep warm lantern glow" 만 덧붙여 다시 뽑기. 위 띠(나무 바닥 밑면)가 빠지면 "keep the top band identical to the bottom of lobby_bg.png" 강조.

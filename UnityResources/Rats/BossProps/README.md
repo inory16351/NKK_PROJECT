@@ -21,3 +21,5 @@
 - `Sheets/boss_meme2.png` (prompt_bossmeme2.txt): boss_pallbearer_a/b 관짝소년단 운구단 두 포즈 (오른쪽을 봄, 번갈아 춤) · boss_ice 꽁꽁 얼어붙은 한강 얼음 바닥
 - `Sheets/meeting_bg.png` (prompt_meeting.txt) → `../BossCutscene/meeting_bg.png` 긴급 회의 컷씬 배경 (가운데 빈 원에 연구소장 얼굴)
 - boss_commander_head_laser.png: 우주 사령관 머리 (눈만 빨갛게 빛남, `Sheets/laser_eye/` 프롬프트·로그·참고). 원래 머리와 같은 크기·위치로 맞춰 `Assets/Art/Rats/Cats/Parts/boss_commander/head_laser.png` (피벗은 sprite_pivots.json 에 원래 머리와 같게). 홈랜더 눈 레이저를 모으고 쏘는 동안 이 머리로 바뀜
+
+- `boss_cloak.png` · `boss_cloak_fly.png` (2026-10-12): 25층 마녀 발악 2 **투명 망토** — 뒤집어쓰는 망토 · 벗어 던지는 망토. 원본·프롬프트 `Sheets/invis_cloak/`

@@ -23,6 +23,7 @@ namespace NKK.Data
         public TextAsset bossTable;
         public TextAsset achievementTable;
         public TextAsset tutorialTable;
+        [Tooltip("상점 테이블 (쥐구멍 암시장) · 뽑기 테이블 (유전자 뽑기)")] public TextAsset shopTable, gachaTable;
 
         public readonly Dictionary<int, RatCharacterRow> Rats = new();
         public readonly Dictionary<string, RatCharacterRow> RatsByCode = new();
@@ -48,6 +49,10 @@ namespace NKK.Data
         public readonly Dictionary<int, List<CommonSkillRow>> CommonSkillsByTier = new();
         public readonly Dictionary<SkillBranch, SkillBranchRow> SkillBranches = new();
         public readonly List<StageRow> Stages = new();
+        public ShopTableFile Shop = new(); public GachaTableFile Gacha = new();
+        readonly Dictionary<string, float> shopCfg = new(), gachaCfg = new();
+        public float ShopCfg(string key, float def = 0) => shopCfg.TryGetValue(key, out var v) ? v : def;
+        public float GachaCfg(string key, float def = 0) => gachaCfg.TryGetValue(key, out var v) ? v : def;
         public readonly List<BossRow> Bosses = new();
         public readonly List<AchievementRow> Achievements = new();
         public readonly List<BossLineRow> BossLines = new();
@@ -128,6 +133,9 @@ namespace NKK.Data
                 if (f.Line != null) { f.Line.Sort((a, b) => a.line_id.CompareTo(b.line_id)); foreach (var r in f.Line) { if (!TutoLines.TryGetValue(r.step_id, out var l)) TutoLines[r.step_id] = l = new List<TutoLineRow>(); l.Add(r); } }
                 if (f.Story != null) { Story.AddRange(f.Story); Story.Sort((a, b) => a.line_id.CompareTo(b.line_id)); }
             }
+            shopCfg.Clear(); gachaCfg.Clear();
+            if (shopTable) { Shop = JsonUtility.FromJson<ShopTableFile>(shopTable.text) ?? new(); if (Shop.Shop_Config != null) foreach (var r in Shop.Shop_Config) shopCfg[r.key] = r.value; }
+            if (gachaTable) { Gacha = JsonUtility.FromJson<GachaTableFile>(gachaTable.text) ?? new(); if (Gacha.Gacha_Config != null) foreach (var r in Gacha.Gacha_Config) gachaCfg[r.key] = r.value; }
             Debug.Log($"[GameDatabase] 쥐 {Rats.Count} · 스킬 {RatSkills.Count} · 필살기 {Ultimates.Count} · 등급 {Grades.Count} · 성장 노드 {GrowthNodes.Count} · 고양이 {Cats.Count} · 물건 {Items.Count} · 티어 {Tiers.Count} · 사람 {Humans.Count} · 공용 스킬 {CommonSkills.Count}");
         }
 
@@ -143,6 +151,8 @@ namespace NKK.Data
         }
 
         // 층 밸런스: 표에 있으면 그 행, 마지막 층을 넘으면 마지막 두 층 비율로 이어서 계산한 행
+        // 층 건너뛰기 상한: 최고 클리어 층 c 에서 고를 수 있는 가장 높은 시작 층 (스테이지 테이블 skip_cap, 기획서 26장)
+        public int SkipCapFor(int cleared) { if (cleared < 1) return 1; var r = StageOf(cleared); return r != null && r.skip_cap > 0 ? r.skip_cap : 1; }
         public StageRow StageOf(int floor)
         {
             if (Stages.Count == 0) return null;
@@ -154,6 +164,7 @@ namespace NKK.Data
             return new StageRow
             {
                 floor = floor, rooms = last.rooms, wall_stairs = last.wall_stairs, wall_normal = last.wall_normal, time_add = last.time_add,
+                floor_type = last.floor_type, target_sec = last.target_sec, skip_cap = last.skip_cap, research = last.research * G(last.research, prev.research),
                 pow_need = last.pow_need * G(last.pow_need, prev.pow_need), item_hp = last.item_hp * G(last.item_hp, prev.item_hp), cheese = last.cheese * G(last.cheese, prev.cheese),
             };
         }

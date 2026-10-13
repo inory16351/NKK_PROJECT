@@ -174,13 +174,13 @@ namespace NKK.Rats
         public Color cheeseBulletColor = new(0.98f, 0.82f, 0.36f);
         readonly List<Bullet> bullets = new();
         // skill = 특수 액션 탄환 (치즈 추가 패시브 판정), spr·tint = 그림 바꾸기
-        public void FireBullet(Rat by, float x, float y, float ang, float speed, float dmg, float life = 0.4f, bool skill = false, Sprite spr = null, Color? tint = null)
+        public void FireBullet(Rat by, float x, float y, float ang, float speed, float dmg, float life = 0.4f, bool skill = false, Sprite spr = null, Color? tint = null, bool align = false)
         {
             SpriteRenderer r = null;
             if (bulletTemplate)
             {
                 r = Instantiate(bulletTemplate, bulletTemplate.transform.parent); r.gameObject.SetActive(true); r.transform.rotation = Quaternion.Euler(0, 0, -ang * Mathf.Rad2Deg);
-                if (spr) { r.sprite = spr; r.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f)); }
+                if (spr) { r.sprite = spr; if (!align) r.transform.rotation = Quaternion.Euler(0, 0, Random.Range(0, 360f)); }
                 if (tint.HasValue) r.color = tint.Value;
             }
             bullets.Add(new Bullet { x = x, y = y, vx = Mathf.Cos(ang) * speed, vy = Mathf.Sin(ang) * speed, life = life, dmg = dmg, skill = skill, by = by, r = r });
@@ -217,6 +217,101 @@ namespace NKK.Rats
         // 마지막으로 태어난 쥐 (튜토리얼이 비춤)
         public Rat LastBorn { get; private set; }
         public void RemoveTemp(Rat r) { FxManager.I?.Dust(r.x, r.y, 6, 1); Rats.Remove(r); Destroy(r.gameObject); }
+        // 쥐가 사라짐 (쥐한폭탄 자폭): 무리에서 빠짐
+        public void RemoveRat(Rat r) { Rats.Remove(r); Destroy(r.gameObject); }
+
+        [Header("새 쥐 6종 (2026-10-12)")]
+        [Tooltip("팝업 글 (빈칸 = 안 띄움): 스톰쥐퍼 블래스터 빗나감 · 세 발 다 맞음 / 고쳐쓰쥐 튜닝 받은 쥐 / 맘스땃쥐 패티 쌓임({n} = 장 수) · 빅버거 박치기 / 쥐포 고소한 냄새 / 쥐한폭탄 심지 5초 남음 · 자폭")]
+        public string missPopup, blasterAllHitPopup, tunePopup, pattyPopup, pattySlamPopup, smellPopup, fusePopup, selfDestructPopup;
+        [Tooltip("블래스터 탄 그림 (없으면 기본 탄 + 색) · 탄 색")] public Sprite blasterBoltSprite;
+        public Color blasterBoltColor = new(1f, 0.35f, 0.3f);
+        [Tooltip("빅버거 박치기 패티 그림")] public Sprite pattySprite;
+        [Tooltip("쥐한폭탄 (한 장짜리): 심지 긴 것 → 짧은 것 순서. 남은 심지에 따라 바꿔 끼움")] public Sprite[] fuseSprites;
+        [Tooltip("노릇노릇 쥐포 (한 장짜리): 많이 구워졌을 때 그림 (노릇노릇 절반 이상)")] public Sprite grilledSprite;
+        [Tooltip("맘스땃쥐 (한 장짜리): 패티 0장 → 최대 장 순서. 패티 수에 따라 바꿔 끼움 (폭 같고 발끝 맞춤, 한 장마다 치즈·양상추·토마토·고기 한 벌)")] public Sprite[] burgerStack;
+
+        [Header("아이스 퀸 쥐 · 5G (2026-10-12)")]
+        [Tooltip("팝업 글 (빈칸 = 안 띄움): 생명체 꽁꽁 / 얼음 미사일 발사 / 5G 데이터 전송 (버프 받은 쥐)")]
+        public string freezePopup, iceMissilePopup, dataPopup;
+        [Tooltip("얼음 미사일 그림 (없으면 기본 탄 + 색) · 탄 색")] public Sprite iceMissileSprite;
+        public Color iceMissileColor = new(0.7f, 0.9f, 1f);
+        [Tooltip("얼음 미사일 유도 세기 (클수록 빨리 꺾임)")] public float iceHoming = 6;
+
+        // 얼음 미사일: 쥐 주위에 생긴 고드름이 잠깐 떠 있다가 목표(고양이 · 보스 · 사람 · 물건)로 유도
+        class IceShot { public float x, y, vx, vy, delay, life, dmg, speed; public Rat by; public object tgt; public SpriteRenderer r; }
+        readonly List<IceShot> iceShots = new();
+        public void FireIce(Rat by, float x, float y, object tgt, float dmg, float speed, float delay)
+        {
+            SpriteRenderer r = null;
+            if (bulletTemplate)
+            {
+                r = Instantiate(bulletTemplate, bulletTemplate.transform.parent); r.gameObject.SetActive(true);
+                if (iceMissileSprite) r.sprite = iceMissileSprite; else r.color = iceMissileColor;
+            }
+            float a = Random.Range(0, Mathf.PI * 2);
+            iceShots.Add(new IceShot { x = x, y = y, vx = Mathf.Cos(a) * 60, vy = Mathf.Sin(a) * 60, delay = delay, life = 3, dmg = dmg, speed = speed, by = by, tgt = tgt, r = r });
+        }
+        void UpdateIce(float dt)
+        {
+            for (int i = iceShots.Count - 1; i >= 0; i--)
+            {
+                var b = iceShots[i];
+                bool has = FoePos(b.tgt, out var tp, out float tr);
+                if (b.delay > 0)
+                {
+                    b.delay -= dt; b.x += b.vx * dt; b.y += b.vy * dt; b.vx *= 0.9f; b.vy *= 0.9f;      // 고드름이 쥐 옆에 떠 있음
+                }
+                else
+                {
+                    b.life -= dt;
+                    float a = has ? Mathf.Atan2(tp.y - b.y, tp.x - b.x) : Mathf.Atan2(b.vy, b.vx);
+                    float k = Mathf.Min(1, iceHoming * dt);
+                    b.vx = Mathf.Lerp(b.vx, Mathf.Cos(a) * b.speed, k); b.vy = Mathf.Lerp(b.vy, Mathf.Sin(a) * b.speed, k);
+                    b.x += b.vx * dt; b.y += b.vy * dt;
+                    if (FxManager.I && Random.value < dt * 30) FxManager.I.Burst(b.x, b.y, 18, 1, Frost.IceLight, Frost.Ice, 5, 20, 2, 4);
+                    if (has && Vector2.Distance(tp, new Vector2(b.x, b.y)) < tr + 8)
+                    {
+                        FoeHit(b.tgt, b.dmg, b.by, Mathf.Atan2(b.vy, b.vx));
+                        FxManager.I?.Burst(b.x, b.y, 20, 6, Frost.Ice, Frost.IceLight, 60, 200, 3, 7);
+                        b.life = 0;
+                    }
+                    if (!has && !Stage.Open.Contains(StageManager.RoomOf(b.x, b.y))) b.life = 0;
+                }
+                if (b.r)
+                {
+                    b.r.transform.position = World.ToUnity(b.x, b.y, 18); b.r.sortingOrder = World.SortOrder(b.y) + 4;
+                    b.r.transform.rotation = Quaternion.Euler(0, 0, -Mathf.Atan2(b.vy, b.vx) * Mathf.Rad2Deg);
+                }
+                if (b.life <= 0) { if (b.r) Destroy(b.r.gameObject); iceShots.RemoveAt(i); }
+            }
+        }
+
+        // 액션 목표 (고양이 · 보스 · 사람 · 물건) 위치 · 반지름. 없어졌으면 false
+        public static bool FoePos(object o, out Vector2 p, out float r)
+        {
+            p = default; r = 0;
+            switch (o)
+            {
+                case NKK.Hazards.Cat c when c && c.Alive: p = new Vector2(c.x, c.y); r = 24; return true;
+                case NKK.Hazards.Boss b when b && b.CanHit && !b.Hidden: p = new Vector2(b.x, b.y); r = b.R; return true;
+                case NKK.Humans.Human h when h && h.Alive: p = new Vector2(h.x, h.y); r = h.R; return true;
+                case NKK.Items.Item it when it && it.State == NKK.Items.Item.ItemState.Rest: p = new Vector2(it.x, it.y); r = it.R; return true;
+            }
+            return false;
+        }
+        public static void FoeHit(object o, float dmg, Rat by, float ang)
+        {
+            switch (o)
+            {
+                case NKK.Hazards.Cat c: c.Damage(dmg, ang, by); break;
+                case NKK.Hazards.Boss b: b.Damage(dmg, by, ang, false); break;
+                case NKK.Humans.Human h: h.Damage(dmg, by, ang); break;
+                case NKK.Items.Item it: it.Damage(dmg, by, false, ang); it.ByAction = true; break;
+            }
+        }
+
+        // 5G '신속한 통신': 총공격(집결) 범위 + (5G 가 여러 마리여도 한 번만)
+        float RushRangeAdd { get { float m = 0; foreach (var r in Rats) if (r.temp <= 0) m = Mathf.Max(m, r.RushRangeAdd); return m; } }
 
         // ── 승급: 같은 등급 N마리 희생 → 윗등급 무작위 1마리 (공용 스킬 확률로 2마리) ──
         // N = 올림(등급 테이블 promote_base × promote_grow^k), k = 이번 판에 그 등급을 승급한 횟수 (판마다 0부터)
@@ -506,7 +601,7 @@ namespace NKK.Rats
             RushPoint = p; rushLeft = rt;
             SfxManager.Play("rat_rush_call");
             // 화면에 보이는 쥐 + 공용 스킬 총공격 범위만큼 화면 밖 쥐도 모임 (돌진 중엔 번식 금지)
-            var cam = Camera.main; float m = 0.02f + CommonSkill.RushRange;
+            var cam = Camera.main; float m = 0.02f + CommonSkill.RushRange + RushRangeAdd;
             foreach (var r in Rats)
             {
                 var vp = cam.WorldToViewportPoint(r.transform.position);
@@ -541,7 +636,7 @@ namespace NKK.Rats
             rushLeft -= dt; rushCdLeft -= dt;
             for (int i = timers.Count - 1; i >= 0; i--) { var tm = timers[i]; tm.t -= dt; if (tm.t <= 0) { timers.RemoveAt(i); tm.a(); } else timers[i] = tm; }
             UpdateAuras();
-            UpdateBullets(dt);
+            UpdateBullets(dt); UpdateIce(dt);
             UpdatePickups(dt);
             for (int i = 0; i < Rats.Count; i++) Rats[i].Tick(dt);
             Breed();

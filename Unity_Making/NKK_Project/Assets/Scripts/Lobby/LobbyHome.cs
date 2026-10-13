@@ -23,6 +23,8 @@ namespace NKK.Lobby
         [Tooltip("활동 자리 (자식 LobbySlot)")] public Transform slotRoot;
         [Tooltip("물건 버튼 (자식 LobbyHot)")] public Transform hotRoot;
         public LobbyManager manager;
+        [Tooltip("카메라를 이 배경판에 맞춤 (아지트만. 하수구처럼 아래층 쥐 무리는 끔)")] public bool fitCamera = true;
+        [Tooltip("아래층 쥐 무리면 아지트 LobbyHome (탈출 준비실이 열리면 같이 입력 막음)")] public LobbyHome main;
 
         [Header("바닥·쥐 (배경판 비율)")]
         [Tooltip("쥐가 걸어 다니는 판자 가로 범위")] public Vector2 floorU = new(0.17f, 0.86f);
@@ -104,7 +106,13 @@ namespace NKK.Lobby
             if (fxTemplate) fxTemplate.gameObject.SetActive(false);
         }
 
-        void Start() { FitCamera(); MakeActors(); Refresh(); }
+        // 아지트 · 하수구 쥐 무리 전부 (물건 버튼을 누를 때 어느 층이든 쥐가 먼저)
+        static readonly List<LobbyHome> all = new();
+        void OnEnable() => all.Add(this);
+        void OnDisable() => all.Remove(this);
+        static bool AnyRatAt(Vector2 w) { foreach (var h in all) if (h.HitRat(w)) return true; return false; }
+
+        void Start() { if (fitCamera) FitCamera(); MakeActors(); Refresh(); }
 
         // 배경판으로 화면을 꽉 채움 (cover)
         void FitCamera()
@@ -112,7 +120,9 @@ namespace NKK.Lobby
             if (!cam || !background) return;
             float a = (float)Screen.width / Mathf.Max(1, Screen.height);
             cam.orthographicSize = Mathf.Min(Height / 2, Width / 2 / a);
-            var c = background.bounds.center; cam.transform.position = new Vector3(c.x, c.y, cam.transform.position.z);
+            // 세로 위치는 LobbyPan 이 정함 (하수구로 내려가 있을 때 여기서 아지트로 되돌리면 마우스 위치가 아지트 기준으로 계산돼 위층 물건이 눌림)
+            var c = background.bounds.center; float y = LobbyPan.I ? cam.transform.position.y : c.y;
+            cam.transform.position = new Vector3(c.x, y, cam.transform.position.z);
         }
 
         // ── 쥐 고르기: 만난 쥐 중 다양하게, 제일 높은 등급 한 마리는 꼭 ──
@@ -206,7 +216,7 @@ namespace NKK.Lobby
         void Update()
         {
             float dt = Mathf.Min(Time.deltaTime, 0.05f); t += dt;
-            FitCamera();
+            if (fitCamera) FitCamera();
             HandleInput();
             foreach (var a in actors) a.Tick(dt, t);
             // 가끔: 바닥의 두 쥐가 가까우면 마주보고 수다 · 쥐구멍 빼꼼
@@ -317,16 +327,17 @@ namespace NKK.Lobby
         void HandleInput()
         {
             var m = Mouse.current; if (m == null || !cam) return;
-            bool blocked = inputBlocked != null && inputBlocked();
+            var blockedBy = main ? main.inputBlocked : inputBlocked;
+            bool blocked = blockedBy != null && blockedBy();
             Vector2 w = cam.ScreenToWorldPoint(m.position.ReadValue());
-            if (!blocked && !drag) { var over = HitRat(w) ? null : hots.Find(h => h.Contains(w)); foreach (var h in hots) h.hover = h == over; }
+            if (!blocked && !drag) { var over = AnyRatAt(w) ? null : hots.Find(h => h.Contains(w)); foreach (var h in hots) h.hover = h == over; }
             else foreach (var h in hots) h.hover = false;
             if (blocked) { drag = null; pressedHot = null; return; }
             if (m.leftButton.wasPressedThisFrame)
             {
                 var a = HitRat(w);
                 if (a) { drag = a; dragMoved = false; dragStart = w; dragHist.Clear(); dragHist.Add((w, Time.time)); }
-                else pressedHot = hots.Find(h => h.Contains(w));
+                else if (!AnyRatAt(w)) pressedHot = hots.Find(h => h.Contains(w));
             }
             if (drag && m.leftButton.isPressed)
             {

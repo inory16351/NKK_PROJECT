@@ -84,7 +84,7 @@ namespace NKK.Lobby
             startFloor = Mathf.Clamp(startFloor, 1, cap);
 
             // 층 길: 1 ~ max(cap, min(cap + 3, 최고 + 2))
-            int n = Mathf.Max(cap, Mathf.Min(cap + lockedPreview, best + 2));
+            int n = Mathf.Min(NKK.Stage.StageManager.LastFloor, Mathf.Max(cap, Mathf.Min(cap + lockedPreview, best + 2)));     // 마지막 층(30)까지만
             for (int f = 1; f <= n; f++)
             {
                 var b = Instantiate(tileTemplate, tileRow); b.gameObject.SetActive(true); spawned.Add(b.gameObject);

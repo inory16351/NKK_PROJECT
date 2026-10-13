@@ -72,10 +72,22 @@ namespace NKK.Lobby
             if (id == "skill") foreach (var s in GameDatabase.Instance.CommonSkills) if (p.CanBuySkill(s)) return true;
             if (id == "rats") return p.UpgradableCount > 0;
             if (id == "rank") return p.CanRankUp();
+            if (id == "gacha") return GeneGacha.FreeTen > 0 || GeneGacha.CanPull(10);       // 무료 10회 · 10회 뽑을 연구자료
+            if (id == "market") return p.shop.lineup.Count == 0 || p.shop.freeLeft > 0 || BlackMarket.SecondsToRefresh <= 0;
+            if (id == "alley") return Alert("gacha") || Alert("market");
             return false;
         }
 
-        public void OnHot(string id) => OpenPage(id);
+        public void OnHot(string id)
+        {
+            if (id == "alley")         // 아지트 맨홀 뚜껑 → 지하 하수구 (LobbyPan)
+            {
+                if (Progress.I && !Progress.I.IsUnlocked(id)) { OnLocked?.Invoke(id); return; }
+                if (LobbyPan.I) LobbyPan.I.Go(true);
+                return;
+            }
+            OpenPage(id);
+        }
         // 잠긴 기능을 누름 (자물쇠 흔들기 등)
         public event System.Action<string> OnLocked;
 
@@ -130,7 +142,7 @@ namespace NKK.Lobby
             if (prepCheese) prepCheese.text = c; if (prepResearch) prepResearch.text = r;
             // 탈출 준비실에서 ESC = 아지트로
             var k = Keyboard.current;
-            if (k != null && k.escapeKey.wasPressedThisFrame && PrepOpen && !NKK.Tutorial.TutorialBox.Showing)
+            if (k != null && k.escapeKey.wasPressedThisFrame && PrepOpen && !NKK.Tutorial.TutorialBox.Showing && !GachaShow.Busy)
             {
                 if (RatTreePopup.Current && RatTreePopup.Current.IsOpen) RatTreePopup.Current.Close();     // 창이 떠 있으면 창부터 닫음
                 else CloseToHome();

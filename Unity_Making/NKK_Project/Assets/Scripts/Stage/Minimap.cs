@@ -71,7 +71,13 @@ namespace NKK.Stage
 
         Image Get(List<Image> pool, Image tpl, int n)
         {
-            while (pool.Count <= n) pool.Add(Instantiate(tpl, area));
+            while (pool.Count <= n)
+            {
+                var c = Instantiate(tpl, area);
+                // 방이 새로 열려 나중에 만든 칸이 쥐 점 위에 그려지지 않게: 칸은 칸 틀 바로 뒤(점들보다 아래)에 끼움
+                if (tpl == cellTemplate) c.transform.SetSiblingIndex(tpl.transform.GetSiblingIndex() + 1 + pool.Count);
+                pool.Add(c);
+            }
             var im = pool[n]; if (!im.gameObject.activeSelf) im.gameObject.SetActive(true);
             return im;
         }

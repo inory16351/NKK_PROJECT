@@ -24,6 +24,12 @@ namespace NKK.Data
         // 특수 액션
         Thunder, Gun_Kata, Jump_Slam, Dash_Slash, Barrage, Sonic_Wave, Spin_Beam, Breath, Rolling_Ball, Summon, Vortex,
         Meteor, Midas, Tornado, Dig_Strike, Cheer, Feast, Throw_Item, Truth_Point, Cheese_Fountain,
+        // 새 쥐 6종 (2026-10-12, 뒤에만 붙임: 이미 저장된 값이 밀리지 않게) — 액션 · 패시브
+        Savory_Smell, Tune_Up, Blaster_Shot, Self_Destruct, Patty_Slam,
+        Ult_Power, Grill_Stack, Part_Collect, Aim_Assist, Burning_Fuse, Patty_Stack,
+        // 아이스 퀸 쥐 · 5G (2026-10-12) — 액션 · 패시브
+        Ice_Missile, Data_Boost,
+        Frost_Stack, Rush_Range_Up,
     }
 
     public enum GrowthEffectType

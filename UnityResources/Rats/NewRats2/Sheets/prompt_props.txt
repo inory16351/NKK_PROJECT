@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: newrats2_props.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing centered in its own cell with a clear magenta margin; nothing touches cell borders.
+- Style: copy the attached reference sheet (cut-out game props). Untitled Goose Game look: completely FLAT shapes, NO outlines, NO black linework, no gloss, no gradients, no glow, no drop shadows. Soft muted palette. Game props for a cartoon rat game, seen from the side.
+
+Row 1: (1) a classic round black cartoon bomb with a short braided brown fuse and a small orange spark star at the tip. (2) a single glowing-free flat RED laser blaster bolt: a long thin rounded red capsule with a white core stripe, horizontal. (3) one thick juicy beef burger patty seen from the side, dark brown with lighter flat grill marks. (4) a small silver machine part bundle: a grey gear cog with a bolt and a spring.
+Row 2: (5) a silver wrench, diagonal. (6) a big flat crimson-red MAGIC CIRCLE seen from straight above: concentric rings with a hexagram star and simple rune-like dots (no letters), drawn in one red colour with darker red accents, perfectly round, filling the cell width. (7) three soft wavy beige-white smell wisp curls rising upward (savoury grill smell). (8) a big orange-yellow-red explosion cloud puff (flat cartoon blast shape with a few round smoke puffs), no outlines.

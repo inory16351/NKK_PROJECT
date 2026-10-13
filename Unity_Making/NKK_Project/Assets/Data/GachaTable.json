@@ -1,0 +1,94 @@
+{
+ "Gacha_Config": [
+  {
+   "key": "unlock_floor",
+   "value": 16.0
+  },
+  {
+   "key": "cost_single_br",
+   "value": 0.2
+  },
+  {
+   "key": "ten_pull_cost_mul",
+   "value": 9.0
+  },
+  {
+   "key": "ten_guarantee_grade",
+   "value": 3.0
+  },
+  {
+   "key": "legend_pity_count",
+   "value": 30.0
+  },
+  {
+   "key": "mythic_pity_count",
+   "value": 100.0
+  },
+  {
+   "key": "wish_unlock_floor",
+   "value": 18.0
+  },
+  {
+   "key": "wish_rate",
+   "value": 0.5
+  },
+  {
+   "key": "wish_rate_up_floor",
+   "value": 20.0
+  },
+  {
+   "key": "wish_rate_up",
+   "value": 0.75
+  },
+  {
+   "key": "shard_base",
+   "value": 5.0
+  },
+  {
+   "key": "first_free_ten",
+   "value": 1.0
+  },
+  {
+   "key": "log_keep",
+   "value": 100.0
+  }
+ ],
+ "Gacha_Grade": [
+  {
+   "grade": "Common",
+   "rate": 0.5,
+   "shard_count": 10,
+   "guarantee_rate": 0.0
+  },
+  {
+   "grade": "Rare",
+   "rate": 0.27,
+   "shard_count": 7,
+   "guarantee_rate": 0.0
+  },
+  {
+   "grade": "Epic",
+   "rate": 0.13,
+   "shard_count": 5,
+   "guarantee_rate": 0.0
+  },
+  {
+   "grade": "Unique",
+   "rate": 0.06,
+   "shard_count": 4,
+   "guarantee_rate": 0.6
+  },
+  {
+   "grade": "Legendary",
+   "rate": 0.03,
+   "shard_count": 3,
+   "guarantee_rate": 0.3
+  },
+  {
+   "grade": "Mythic",
+   "rate": 0.01,
+   "shard_count": 2,
+   "guarantee_rate": 0.1
+  }
+ ]
+}

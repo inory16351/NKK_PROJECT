@@ -227,8 +227,8 @@ namespace NKK.Ults
             }
         }
 
-        public float UltDamage(Rat r) => r.SkillDamage * ultDamageK * CommonSkill.UltPowerMul;
-        public float UltItemDamage(Rat r) => r.SkillDamage * ultItemK * CommonSkill.UltPowerMul;
+        public float UltDamage(Rat r) => r.SkillDamage * ultDamageK * CommonSkill.UltPowerMul * r.UltPowerMul;
+        public float UltItemDamage(Rat r) => r.SkillDamage * ultItemK * CommonSkill.UltPowerMul * r.UltPowerMul;
 
         // ── 글자 ──
         public string CaptionText(int ultId, string key, object n = null)
