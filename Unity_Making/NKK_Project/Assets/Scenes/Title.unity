@@ -3813,11 +3813,14 @@ MonoBehaviour:
     wishMythic: 
     log: []
     pending: []
+    introSeen: []
   cheese: 0
   research: 0
   tier: 1
   maxFloor: 1
   runs: 0
+  playSec: 0
+  rankRuns: 0
   testMarket: 0
   alleyRevealStep: l_alley
 --- !u!4 &641806392
@@ -10040,6 +10043,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891527325}
   m_CullTransparentMesh: 1
+--- !u!1 &1905023645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1905023647}
+  - component: {fileID: 1905023646}
+  m_Layer: 0
+  m_Name: Server
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1905023646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905023645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446f6ef1738219c41837b7e5e775bab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.Net.FirebaseClient
+  config: {fileID: 11400000, guid: 8a2663521e77de74a844170d473de5bb, type: 2}
+  log: 1
+--- !u!4 &1905023647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1905023645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1935566275
 GameObject:
   m_ObjectHideFlags: 0
@@ -11081,3 +11130,4 @@ SceneRoots:
   - {fileID: 1019017885}
   - {fileID: 1977314581}
   - {fileID: 395574068}
+  - {fileID: 1905023647}
