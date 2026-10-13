@@ -52,6 +52,7 @@ namespace NKK
             public string wishLegend, wishMythic;           // 관심 종 (코드)
             public List<GachaLog> log = new();               // 최근 기록
             public List<GachaLog> pending = new();           // 연출 전 확정된 결과 (강제 종료 복구)
+            public List<string> introSeen = new();           // 고유 컷씬을 끝까지 본 쥐 (코드) — 본 컷씬은 클릭 한 번으로 건너뛰기 (사용자 2026-10-13)
         }
         public ShopSave shop = new();
         public GachaSave gacha = new();
