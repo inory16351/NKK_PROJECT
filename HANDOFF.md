@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-22).
-마지막 갱신: 2026-10-15 새벽 — **§5-9 (itch.io 페이지·크롬 작업 남음)** · 2026-10-13 저녁 — **§5-8 (브랜치 역할 · MVP 서버 · 다음 = WebGL 빌드) 부터 읽을 것** / (튜토리얼 UI 크기 0 수정 §5-8 · 뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 §5-4
+마지막 갱신: 2026-10-15 새벽 3시 — **§5-9 (itch.io 페이지 꾸미기·업로드 끝)** · 2026-10-13 저녁 — **§5-8 (브랜치 역할 · MVP 서버 · 다음 = WebGL 빌드) 부터 읽을 것** / (튜토리얼 UI 크기 0 수정 §5-8 · 뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 §5-4
 
 ---
 
@@ -299,7 +299,7 @@ itch.io 프로젝트 = **Squeak!Squeak!!Squeak!!!** (`parksongho.itch.io/squeak-
 **한 것**
 - 화면 비율: 예전 빌드는 Default 템플릿이라 캔버스가 1280×720 **고정** → 640×360 칸에서 잘렸음. 새 WebGL 템플릿 `Assets/WebGLTemplates/Fit/index.html` = 창(게임 칸) 크기에 맞춰 16:9 유지하며 꽉 채움(남는 쪽 검은 띠), 푸터·유니티 로고 없음. `PlayerSettings.WebGL.template = PROJECT:Fit`.
 - itch.io 임베드 설정 저장됨: **960×540 · 전체화면 버튼 켬** (모바일·자동 시작·스크롤바·SharedArrayBuffer 끔).
-- **butler** (itch 공식 업로드 도구) 설치 `%USERPROFILE%\tools\butler\butler.exe`, 로그인 완료(키 `~/.config/itch/butler_creds`). 업로드: `butler push "C:/Dev/NKK_PROJECT/Unity_Making/NKK_Project/Builds/WebGL" parksongho/squeak-squeak:html5 --ignore capture.html` · 상태 `butler status parksongho/squeak-squeak`. 140MB 올리는 데 10분 이상 걸림.
+- **butler** (itch 공식 업로드 도구) 설치 `%USERPROFILE%\tools\butler\butler.exe`, 로그인 완료(키 `~/.config/itch/butler_creds`). 업로드: `butler push "C:/Dev/NKK_PROJECT/Unity_Making/NKK_Project/Builds/WebGL" parksongho/squeak-squeak:html5 --ignore capture.html --ignore capture_hd.html --ignore gif.html` (촬영용 페이지 3개는 올리지 말 것) · 상태 `butler status parksongho/squeak-squeak`. 140MB 올리는 데 10분 이상 걸림.
 - **버그 고침** `Scripts/Core/LocText.cs` `Fit()`: 영어일 때 자동 크기 최소값을 무조건 8 로 잡아서, 크기 1.5~2.7 인 **월드 TextMeshPro(로비 간판)가 3~5배로 커져 겹침** → 최소 8 은 UGUI 글에만, 원래 크기보다 커지지 않게. 고친 빌드로 로비 정상 확인함.
 - 스크린샷 (1920×1080 JPG, 영어): `Builds/ItchShots/itch_01_title_en.jpg` · `itch_02_story.jpg` · `itch_04_promote.jpg` · `itch_05_swarm.jpg` · `itch_07_hideout.jpg` (원본 PNG 같은 폴더). 캡처 방법: `Builds/WebGL/capture.html`(preserveDrawingBuffer + 1920 렌더) 을 로컬 서버(스크래치 `shotserver.py`, 포트 8765, POST `/save?name=` 로 PNG 저장)로 열고 `canvas.toDataURL`.
 
@@ -310,7 +310,27 @@ itch.io 프로젝트 = **Squeak!Squeak!!Squeak!!!** (`parksongho.itch.io/squeak-
 4. 실제 페이지에서 Run game → 960×540 칸에 잘림 없이 맞는지 · 전체화면 버튼 확인.
 5. (선택) 표지 이미지(cover, 630×500) 없음 · 커스텀 테마는 이미 있음.
 
-**커밋 안 한 것 (mvp 브랜치, 지금 체크아웃 상태)**: `Assets/WebGLTemplates/` (+ .meta) · `LocText.cs` · `ProjectSettings.asset`(템플릿 = Fit) · 폰트 SDF 2개(Play 중 글자 추가로 바뀐 것). `LocText.cs` 수정은 main-game 에도 필요 → main-game 에서 고치고 merge 하거나 cherry-pick.
+**끝 (2026-10-15 새벽 3시, 크롬)** — 남은 일 1~4 다 함.
+- butler html5 = **버전 2** (빌드 #2127233, LocText 고친 빌드). 실제 페이지에서 Run game → 960×540 잘림 없음 · 전체화면 버튼 확인.
+- Uploads: 새 html5 = 브라우저 실행 체크 · 옛 `WebGL.zip`(upload 19755173) = 브라우저 실행 끔 + **"Hide this file" 켬** (지우지 않음, 지울지는 사용자 결정). 브라우저 실행을 끄기만 하면 다운로드 파일(137MB)로 페이지에 뜨니 주의.
+- 스크린샷 5장 올림 (타이틀 → 스웜 → 승급 → 아지트 → 스토리). **테마 Layout → Screenshots 가 'Auto (hidden)' 이라 안 보였음** (임베드 960 이면 자동 숨김) → **Sidebar** 로 바꾸고 테마 저장.
+- Custom noun = `game` (버튼이 'Run incremental' 로 나오던 것 → 'Run game').
+- **설명 칸 새로 꾸밈**: Codex 그림 8장 (`UnityResources/Rats/Itch/`, README) — 맨 위 달리는 쥐 장식 줄 → 한 줄 소개(영·한) → How it plays · 플레이 방법 (기능 5개 = 그림 + 제목 '영어 · 한글' + 영어 한 줄 + 한글 한 줄, 가운데 정렬) → 치즈 장식 줄 → Controls · 조작법 → 자는 쥐 장식 + 데모 안내. 한글은 단어 중간에서 끊겨서 문장마다 `<br>`. 편집기는 Redactor 2 → `$('textarea[name="game[description]"]').redactor('code.set', html)`. 예전 설명(영어 전부 → 한글 전부, 그림 없음)은 이 글로 바뀜.
+- 크롬 연결 안 되던 원인: 크롬 활성 프로필(Default)이 다른 계정이었고 앱도 3일째 켜져 있었음 → 확장 계정을 앱 계정으로 + 확장 껐다 켜기 + **Claude 앱 재시작** 후 연결됨.
+- 파일 올리기 요령: itch 의 'Add screenshots' · 설명 'Add image → Pick image' 는 파일 칸을 즉석에서 만들고 `.click()` 함 → `HTMLInputElement.prototype.click` 을 덮어써 그 input 을 붙잡아 화면(모달 안)에 붙이고 `file_upload`. 설명 이미지는 한 번에 한 장(Add image 버튼은 JS click 안 되고 실제 클릭 필요).
+- 남음: Draft → Restricted/Public 전환 (사용자) · 옛 WebGL.zip 삭제 여부 · 표지(315×250, 로고 그림 있음)는 그대로.
+
+**2차 꾸미기 (2026-10-15 새벽 4시, 사용자: 인게임 연출은 GIF, 스크린샷은 컷씬·스킬 트리처럼 한눈에 보이는 것만, 배경색·폰트도 어울리게, 다른 페이지 참고)**
+- 참고한 페이지: Sprout Valley(600×338 GIF 를 짧은 문단 사이에 · 게임 색 글자 · Lilita One) · Shleep/Die in the Dungeon(게임 색 본문 배경 · 전용 폰트) · Backpack Hero(사이드바 스크린샷) · Kenney(짧은 섹션 제목).
+- **테마**: 본문 폰트 Gowun Dodum · 제목 폰트 Jua (게임 폰트와 같음, 구글 폰트 고르기 = 폰트 select 에 `_select_google_font` → 검색창 → 이름 버튼) · BG2 #fff7e8 · 글자 #4b3527 · 제목 #8a4520 · 링크 #d2662a · 버튼 #de7a2e. 바깥 배경 패턴·배너는 그대로.
+- **스크린샷 7장 (사이드바)**: 컷씬 4 (낙원 · 실험당하고 있었다 · 진격의 거인 패러디 · 철창 탈출) · 아지트 · 스킬 트리 · 훈장 = `Builds/ItchShots/shot_1~7_*.jpg` (1920, 로비 2장은 테스트 재화 '1.00aa' 가 보이는 위 탭 줄 80px 잘라냄). 예전 인게임 스크린샷 5장은 지움.
+- **GIF 5장 (설명 칸)** = `Builds/ItchShots/gifs/`: 부수고 탈출(1층 폭발·벽·RUN!!!) · EXPLOSION(폭탄마 쥐) · Pharaoh's Pyramid · Let It Go(아이스 퀸) · 보스 블랙홀 STAY(우주 고양이 사령관). 480×270 · 12fps · 약 4초 · 각 2~2.8MB (itch 설명 이미지 한 장 3MB 제한). 설명 = 장식 줄 → 소개 → Smash·Breed·Escape(GIF) → Ultimates(GIF 3 + 이름 영·한) → Bosses(GIF) → 치즈 장식 → 성장 → 조작법 → 자는 쥐 + 데모 안내. Codex 기능 그림 5장(feat_*.jpg)은 페이지에서 뺌 (파일은 남김).
+- **촬영 방법**: `Builds/WebGL/gif.html`(캔버스를 960 으로 12fps JPEG 연속 저장 `rec(이름, 초, fps, 폭)`) · `capture_hd.html`(1920 고해상도 `shot(이름)`) — 둘 다 **Firebase·Google API 요청을 막음** (시험 기록이 서버에 안 남게). 로컬 서버 = 스크래치 `shotserver.py` (POST /save). 웹에서 `unityInstance.SendMessage` 로 테스트 함수 호출: `Progress.UnlockEverything` · `StageManager.EnterFloor(층)` · `UltimateManager.TestUlt('bomber')` · `Boss.TestSpawn(번호)` · `Boss.ForceAttack('Black_Hole')` · `RatManager.PromoteAll`. GIF 만들기 = imageio-ffmpeg(pip 설치함) palettegen/paletteuse, 디더 없음 128색.
+- **게임 칸 배경 (Embed BG)**: Run game 버튼 뒤 회색 칸 → Codex 키 아트 `UnityResources/Rats/Itch/embed_bg_960.jpg` (960×540 으로 올려야 칸에 맞음, 큰 그림은 잘림). 테마 편집 Images → Embed BG.
+- 실행 확인: 새 테마·배경으로 Run game → 타이틀 정상. 촬영용 로컬 서버는 끔.
+- 촬영 메모: 전부 해제 상태는 낮은 층 보스가 바로 죽고 쥐가 금방 175마리가 돼 화면이 복잡함 → 필살기는 새 판 1층 초반(쥐 24마리), 보스는 28층으로 옮겨 TestSpawn. 오프닝 저장이 로컬 크롬 프로필에만 남음.
+
+**커밋 안 한 것 (mvp 브랜치)**: `UnityResources/Rats/Itch/` (새 그림) · 이 문서 · 폰트 SDF 2개(Play 중 글자 추가로 바뀐 것) · `ProjectSettings.asset`(preloadedAssets 에서 `InputSystem_Actions` 가 빠짐 — 빌드 중 유니티가 바꾼 것으로 보임, 되돌릴지 확인 필요). WebGL 템플릿·LocText 는 `b8348fc` 에 커밋됨. `LocText.cs` 수정은 main-game 에도 필요 → main-game 에서 고치고 merge 하거나 cherry-pick.
 
 ## 6. 밸런스 측정 (BalanceProbe)
 

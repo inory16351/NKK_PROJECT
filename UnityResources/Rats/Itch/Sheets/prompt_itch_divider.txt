@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: itch_divider.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. If the tool saves somewhere else, copy the generated file to itch_divider.png here. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image on a SOLID flat pure magenta background (#FF00FF) everywhere (it will be keyed out), NO text, NO letters, NO numbers.
+- STYLE: match the attached references: cozy flat cartoon game art, FLAT colors, NO black outlines, no gloss, no shadows on the background, no magenta or pink-purple tones inside the subjects except the rats' light pink ears/noses/tails.
+- CONTENT: THREE separate horizontal decorative strips stacked vertically with large magenta gaps between them, each strip spanning almost the full width and about 150 px tall:
+  1) a single file line of 7 cute small rats running left to right, each holding the tail of the one in front, the middle one carrying a cheese wedge;
+  2) a row of scattered cheese wedges, cheese crumbs and little paw prints forming a playful line;
+  3) one chubby white lab rat sleeping curled up in the center with a small cheese wedge beside it, and a long pink tail stretching out horizontally to both sides like a divider line.
+- Each element must be fully separated from the others by magenta; nothing touches the image edges.

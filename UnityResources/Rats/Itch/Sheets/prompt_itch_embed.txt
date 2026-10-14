@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: itch_embed.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. If the tool saves somewhere else, copy the generated file to itch_embed.png here. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 landscape key art that will be cropped to 16:9 (keep everything important inside the middle 1536x864 band). NO text, NO letters, NO numbers, no logos, no UI.
+- STYLE: match the attached story illustration and hideout reference: cozy soft flat cartoon art, warm lamp light, no black outlines, gentle shading only.
+- SCENE: the secret rat hideout under the lab floorboards at night, warm and inviting. In the CENTER leave a calm, slightly darker empty wooden floor area (a play button will be placed there). Around the edges: a crowd of cute rats peeking in excitedly from the left and right sides and from a hole in the floorboards at the top, one white lab rat holding a big cheese wedge, a hamster wheel, string lights, stacked cheese, a stolen research folder with papers. Cozy, mischievous, "ready to break out" mood.
