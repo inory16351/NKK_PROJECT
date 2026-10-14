@@ -24,6 +24,7 @@ namespace NKK.Lobby
         public TMP_Text zoneText;
         public TMP_Text roomsText;
         public TMP_Text bossText;
+        [Tooltip("스테이지 스킵 스킬이 건너뛰기 상한(클리어한 층, 스테이지 테이블 skip_cap)에 막혔을 때 안내 ({floor} = 클리어할 층, {n} = 그때 출발 가능한 층). 안 막히면 꺼짐")] public TMP_Text skipHint;
         [Tooltip("방 수 = min(최대, 기본 + 층 × 증가) (+ 보스 층 1) — StageManager 와 같은 값")] public int roomBase = 3;
         public float roomPerFloor = 0.6f;
         public int roomMax = 9;
@@ -108,6 +109,20 @@ namespace NKK.Lobby
             if (zoneText) zoneText.text = zone != null ? zone.zone_name : "";
             SetT(roomsText, ("n", Rooms(startFloor)));
             if (bossText) bossText.gameObject.SetActive(startFloor % bossEvery == 0);
+
+            // 스킵 스킬로 더 위에서 출발할 수 있는데 상한에 막혀 있으면: 몇 층을 클리어하면 몇 층부터 되는지
+            if (skipHint)
+            {
+                int last = NKK.Stage.StageManager.LastFloor, want = Mathf.Min(1 + CommonSkill.StageSkip, last), at = 0, next = 0;
+                if (p && want > cap)
+                    for (int c = Mathf.Max(1, best); c <= last; c++)      // c = 앞으로 클리어할 층 (지금 클리어 = 최고 층 - 1) → 그때 상한 = min(스킬, c + 1, skip_cap(c))
+                    {
+                        int can = Mathf.Min(want, Mathf.Min(c + 1, db.SkipCapFor(c)));
+                        if (can > cap) { at = c; next = can; break; }
+                    }
+                skipHint.gameObject.SetActive(next > 0);
+                if (next > 0) SetT(skipHint, ("floor", at), ("n", next));
+            }
 
             // 출동 멤버: 티어 시작 마릿수 + 등급 확률
             int crew = (db.Tiers.TryGetValue(tier, out var tr) ? tr.start_rat_count : 6) + CommonSkill.StartRatAdd;

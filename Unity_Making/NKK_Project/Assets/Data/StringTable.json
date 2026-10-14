@@ -10001,6 +10001,11 @@
    "en": "That name contains a word we can't use"
   },
   {
+   "string_key": 8000430,
+   "ko": "스테이지 스킵: {floor}층을 클리어하면 {n}층부터 출발할 수 있어요",
+   "en": "Floor Skip: Clear Floor {floor} to start from Floor {n}"
+  },
+  {
    "string_key": 9000001,
    "ko": "찍찍!! {power} / 적정 {need}",
    "en": "SQUEAK!! {power} / Rec. {need}"
