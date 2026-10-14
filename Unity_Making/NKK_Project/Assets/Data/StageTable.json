@@ -354,7 +354,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 26100.0,
-   "skip_cap": 15,
+   "skip_cap": 16,
    "player_pow": 150000.0
   },
   {
@@ -371,7 +371,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 44300.0,
-   "skip_cap": 15,
+   "skip_cap": 17,
    "player_pow": 277000.0
   },
   {
@@ -388,7 +388,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 93100.0,
-   "skip_cap": 15,
+   "skip_cap": 18,
    "player_pow": 513000.0
   },
   {
@@ -405,7 +405,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 205000.0,
-   "skip_cap": 15,
+   "skip_cap": 19,
    "player_pow": 949000.0
   },
   {
@@ -422,7 +422,7 @@
    "target_sec": 162.0,
    "boss_sec": 64.8,
    "research": 491000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 1760000.0
   },
   {
@@ -439,7 +439,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 860000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 3250000.0
   },
   {
@@ -456,7 +456,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 1460000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 6010000.0
   },
   {
@@ -473,7 +473,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 3070000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 11100000.0
   },
   {
@@ -490,7 +490,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 6760000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 20600000.0
   },
   {
@@ -507,7 +507,7 @@
    "target_sec": 162.0,
    "boss_sec": 64.8,
    "research": 16200000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 38100000.0
   },
   {
@@ -524,7 +524,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 28400000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 70400000.0
   },
   {
@@ -541,7 +541,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 48200000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 130000000.0
   },
   {
@@ -558,7 +558,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 101000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 241000000.0
   },
   {
@@ -575,7 +575,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 223000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 446000000.0
   },
   {
@@ -592,7 +592,7 @@
    "target_sec": 162.0,
    "boss_sec": 64.8,
    "research": 535000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 825000000.0
   },
   {
@@ -609,7 +609,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 936000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 1530000000.0
   },
   {
@@ -626,7 +626,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 1590000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 2820000000.0
   },
   {
@@ -643,7 +643,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 3340000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 5220000000.0
   },
   {
@@ -660,7 +660,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 7350000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 9660000000.0
   },
   {
@@ -677,7 +677,7 @@
    "target_sec": 162.0,
    "boss_sec": 64.8,
    "research": 17600000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 17900000000.0
   },
   {
@@ -694,7 +694,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 30900000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 33100000000.0
   },
   {
@@ -711,7 +711,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 52500000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 61200000000.0
   },
   {
@@ -728,7 +728,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 110000000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 113000000000.0
   },
   {
@@ -745,7 +745,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 242000000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 209000000000.0
   },
   {
@@ -762,7 +762,7 @@
    "target_sec": 162.0,
    "boss_sec": 64.8,
    "research": 582000000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 387000000000.0
   },
   {
@@ -779,7 +779,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 1020000000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 716000000000.0
   },
   {
@@ -796,7 +796,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 1730000000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 1330000000000.0
   },
   {
@@ -813,7 +813,7 @@
    "target_sec": 162.0,
    "boss_sec": 0.0,
    "research": 3640000000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 2450000000000.0
   },
   {
@@ -830,7 +830,7 @@
    "target_sec": 135.0,
    "boss_sec": 0.0,
    "research": 8000000000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 4540000000000.0
   },
   {
@@ -847,7 +847,7 @@
    "target_sec": 162.0,
    "boss_sec": 64.8,
    "research": 19200000000000.0,
-   "skip_cap": 15,
+   "skip_cap": 20,
    "player_pow": 8390000000000.0
   }
  ]
