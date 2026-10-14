@@ -3,7 +3,8 @@
 
 쓰는 법:  python Tools/pv/make_pv2.py [--draft] [--from 초] [--to 초] [--still 초 ...]
   --draft  = 960×540 · 30fps 미리보기          --from/--to = 그 구간만 (빠른 확인)
-  --still  = 그 시각들의 한 장면만 png 로 (PV/out/still_<초>.png)
+  --still  = 그 시각들의 한 장면만 png 로 (PV/_local/out/still_<초>.png)
+  최종본(전체 · 초안 아님)만 PV/out/PV_v3.mp4, 초안·부분·스틸은 PV/_local/out (git 무시, 로컬 전용)
 
 자료: 그림 = UnityResources/Rats/PV/Sheets/v3 (Codex), 인게임 = PV/clips/<이름>.mp4 (Recorder). 없으면 회색 판.
 음악 BGM_PV.mp3: 곡 61.03초(마지막 쾅) = 영상 37.0초(윙크) → 곡 24.03초부터. 120 BPM → 컷 경계 0.5초 단위.
@@ -1146,9 +1147,9 @@ def main():
     S, FPS = (0.5, 30) if draft else (1.0, 60)
     t_from = float(args[args.index('--from') + 1]) if '--from' in args else 0.0
     t_to = float(args[args.index('--to') + 1]) if '--to' in args else DUR
-    os.makedirs(K.P('PV/out'), exist_ok=True)
+    os.makedirs(K.P('PV/out'), exist_ok=True); os.makedirs(K.P('PV/_local/out'), exist_ok=True)
     if '--remix' in args:                    # 영상은 그대로 두고 소리만 다시 (PV_v3.mp4 의 영상 + 음악·효과음)
-        src = K.P('PV/out/PV_v3.mp4'); tmp = src.replace('.mp4', '_video.mp4')
+        src = K.P('PV/out/PV_v3.mp4'); tmp = K.P('PV/_local/out/PV_v3_video.mp4')
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-an', '-c:v', 'copy', tmp], check=True)
         mix_audio(tmp, src, 0.0, DUR)
         os.remove(tmp); print('소리 다시:', src); return
@@ -1156,12 +1157,13 @@ def main():
         for v in args[args.index('--still') + 1:]:
             if v.startswith('--'): break
             fr = render_frame(float(v), S)
-            Image.frombytes('RGB', (fr.W, fr.H), fr.finish()).save(K.P(f'PV/out/still_{v}.png'))
+            Image.frombytes('RGB', (fr.W, fr.H), fr.finish()).save(K.P(f'PV/_local/out/still_{v}.png'))
             print('still', v)
         return
     W, H = int(1920 * S), int(1080 * S)
-    out = K.P('PV/out/PV_v3' + ('_draft' if draft else '') + ('' if (t_from, t_to) == (0.0, DUR) else f'_{t_from:g}-{t_to:g}') + '.mp4')
-    silent = out.replace('.mp4', '_noaudio.mp4')
+    final = not draft and (t_from, t_to) == (0.0, DUR)
+    out = K.P('PV/out/PV_v3.mp4') if final else K.P('PV/_local/out/PV_v3' + ('_draft' if draft else '') + ('' if (t_from, t_to) == (0.0, DUR) else f'_{t_from:g}-{t_to:g}') + '.mp4')
+    silent = K.P('PV/_local/out/PV_v3_noaudio.mp4')
     enc = subprocess.Popen(['ffmpeg', '-v', 'error', '-y', '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-s', f'{W}x{H}', '-r', str(FPS), '-i', '-',
                             '-c:v', 'libx264', '-preset', 'veryfast' if draft else 'medium', '-crf', '20' if draft else '16', '-pix_fmt', 'yuv420p', silent],
                            stdin=subprocess.PIPE)

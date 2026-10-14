@@ -27,6 +27,10 @@
 - 뺀 것(코드는 남아 있음): o_front(정면 달리기) · s_steal · s_cat8(Codex 고양이 쥐 장면) · s_run_veo. 이전 타임라인 백업 = 세션 스크래치(make_pv2_v5_backup.py, 임시).
 - **유니티 건드리지 말 것** (사용자 2026-10-14: 다른 작업 중). 인게임 컷은 이미 찍은 `PV/clips/take_*` 만 씀.
 
+## 로컬 전용 폴더 `PV/_local/` (git 무시)
+- `takes/` = 유니티 촬영 원본 `take_*.mp4` (약 370MB) · `out/` = 초안·부분 렌더·스틸 (렌더 스크립트가 여기로 씀). 최종본만 `PV/out/PV_v3.mp4` (커밋됨).
+- 브랜치를 바꿔도 남음 (`.gitignore` + `.git/info/exclude`). PV·썸네일은 **main-game 에만** 올림, mvp 에는 안 올림 (사용자 2026-10-14).
+
 ## 3. 남은 일 (순서)
 0. 최종본 `PV/out/PV_v3.mp4` (2026-10-14, 1080p60) → 사용자 확인 중.
 1. **사용자 확인**: 초안 `PV/out/PV_v3_draft.mp4` → 수정. 확인 대기: 람쥐 썬더(risky 쥐) 넣을지, 사무라이 칼 컷의 대사 팝업(애니 패러디) 괜찮은지, 번식 컷.
@@ -49,6 +53,6 @@
   - **유니티 창이 뒤에 있으면 느림** → PowerShell `SetForegroundWindow` (keybd_event ALT 먼저) 로 앞으로.
   - **끝나면 Play 멈추고 nkk_slot=1, nkk_lang="ko" 로 되돌리기** (이 세션 끝에 되돌려 둠).
   - risky: zapham parkrat jwerry jjdetective streamrat ramjui fondue bomber icequeen rocker plaguerat trooper burger robot
-  - 테이크 (`PV/clips`): `take_smash`(smash_1~5: 2.0/5.5/6.2/7.0/7.8초) · `take_breed5`(탄생 0.433/1.683/2.967/4.217초, 화면 위치 = `BREED_AT`) · `take_ult_<code>` 14개(vampire dino alien viking emperor wizard cosmic samurai dragon santa pharaoh knight ratking ramjui; ult_1 = pharaoh 0.33~1.43 통째 · ult_2 = dino 배너 0.33(0.27초)+3.2~ · ult_3 = ramjui 배너 0.33+2.7~ (ffmpeg trim+concat)) · `take_boss_0~5`(0 경비대장 1 연구원 2 소장 3 메인쿤 4 마녀 5 우주; boss_1~3 = 3번 0.4~2.0 · 4번 0.2~1.3 · 5번 1.2~2.8) · `take_skill`(skill_1 = 0.3초부터 4배속, crop 1600×900+0+150).
+  - 테이크 (촬영 원본, **`PV/_local/takes`** — git 무시 · 로컬 전용, 2026-10-14 옮김): `take_smash`(smash_1~5: 2.0/5.5/6.2/7.0/7.8초) · `take_breed5`(탄생 0.433/1.683/2.967/4.217초, 화면 위치 = `BREED_AT`) · `take_ult_<code>` 14개(vampire dino alien viking emperor wizard cosmic samurai dragon santa pharaoh knight ratking ramjui; ult_1 = pharaoh 0.33~1.43 통째 · ult_2 = dino 배너 0.33(0.27초)+3.2~ · ult_3 = ramjui 배너 0.33+2.7~ (ffmpeg trim+concat)) · `take_boss_0~5`(0 경비대장 1 연구원 2 소장 3 메인쿤 4 마녀 5 우주; boss_1~3 = 3번 0.4~2.0 · 4번 0.2~1.3 · 5번 1.2~2.8) · `take_skill`(skill_1 = 0.3초부터 4배속, crop 1600×900+0+150).
 - 그림 보관: Codex 그림 `UnityResources/Rats/PV/Sheets/v3/`(프롬프트 p_*.txt, 로그) · Gemini 그림 `…/v3/gem/` · Gemini 동영상 `…/v3/veo/`. README(`UnityResources/Rats/PV/README.md`)에 v3 내용은 아직 안 적음.
 - 계획 문서 `PV/PV 계획.md` 는 v3 초안 시점 (지금 콘티는 이 문서 §2 가 최신).
