@@ -21,6 +21,7 @@ namespace NKK.Stage
         [Tooltip("벽 끝 단면 = 윗면 색 × 이 값")] public float endShade = 0.76f;
         [Tooltip("벽이 거의 부서졌을 때 색")] public Color crackedTint = new(0.85f, 0.55f, 0.45f);
         [Tooltip("맞을 때 흔들림 크기 (게임 단위)")] public float shakeAmount = 4;
+        [Tooltip("바닥을 방 경계 밖으로 이만큼 더 깔아 옆 방 바닥과 겹침 (게임 단위, 한쪽) — 경계가 소수점 픽셀에 걸릴 때 벌어진 틈으로 배경색 검은 줄이 보이는 것 막음 (특히 WebGL · 화면 흔들림)")] public float floorBleed = 1f;
         [Header("금 자국 (벽 체력 75%·45%·20% 아래)")]
         [Tooltip("금 자국 템플릿 (자식 SpriteRenderer, 꺼 둠). 벽마다 3개씩 복제")] public SpriteRenderer crackTemplate;
         [Tooltip("금 자국 그림 1·2·3단계 (흰색, crackColor 로 칠함)")] public Sprite[] crackSprites;
@@ -91,7 +92,7 @@ namespace NKK.Stage
         {
             var c = World.ToUnity(Left + World.RW / 2, Top + World.RH / 2);
             float w = World.RW * World.U, h = World.RH * World.TILT * World.U;
-            if (floor) { floor.transform.position = c; floor.size = new Vector2(w, h); floor.sortingOrder = FloorOrder; }
+            if (floor) { floor.transform.position = c; floor.size = new Vector2(w + floorBleed * 2 * World.U, h + floorBleed * 2 * World.U); floor.sortingOrder = FloorOrder; }
             if (lockedMark) lockedMark.transform.position = c;
             PlaceFace(wallTop, Center.x, Top, w, TopOrder);
             PlaceFace(wallBottom, Center.x, Top + World.RH, w, World.SortOrder(Top + World.RH + 1));
