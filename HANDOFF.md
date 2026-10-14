@@ -277,12 +277,13 @@
 - 코드 `Scripts/Net/`: `ServerConfig`(에셋 `Assets/Data/ServerConfig.asset`, `sendInEditor` 기본 끔) · `FirebaseClient`(익명 로그인·토큰 갱신·Create/Set·runQuery) · `Telemetry`(훈장 달 때 `rankups` 기록, 오프라인 큐) · `Leaderboard`(`players/{uid}`, 상위 100 · 5분 캐시, 닉네임 2~12자 + `Assets/Data/NickBanned.txt`). 세 씬 `Server` 오브젝트에 다 붙어 있음 (타이틀 것이 끝까지 살아남음).
 - 로비: 상단 **랭킹 탭** (`Tab_lb`, 아이콘 `lb_rank_board.png`) · `Page_lb`(`LeaderboardPage`) · `UI/NickPopup` · 낮잠 침대 `ServerRows`(`ServerSettings`: 익명 통계 보내기 토글 · 닉네임 바꾸기). 랭킹 = 최고 층 ↓ → 그 층에 처음 닿았을 때 시도 횟수 ↑ (`Progress.floorRuns`), 시즌 없음, 닉네임 중복 허용.
 - 보안 규칙 `Firebase/firestore.rules` 게시됨 (rankups 만들기만 · players 본인만, 최고 층·훈장 감소 불가, 목록 100). 색인 players (bestFloor ↓ · runs ↑). 거절 시험 통과.
-- **API 키 2개**: 출시용 `Browser key` (= `apiKey`, WebGL 에서만) = itch.io·itch.zone 주소로만 · 개발용 `nkk-dev (editor/win)` (= `devApiKey`, 에디터·윈도우) = Identity Toolkit·Token Service·Firestore API 만. `ServerConfig.Key` 가 골라 씀.
-- WebGL 설정: Gzip + decompression fallback · 데이터 캐시 · 기본 창 1280×720. **플랫폼은 아직 Windows** (빌드 안 함).
+- **API 키 2개** (2026-10-14 바꿈): `ServerConfig.Key` 가 **페이지 주소로** 고름 — itch.io(`itch.zone`)에서 연 WebGL = 출시용 `Browser key` (= `apiKey`, itch.io·itch.zone 주소로만) · 그 밖(에디터·윈도우·사무실 localhost 에서 연 WebGL) = 개발용 `nkk-dev (editor/win)` (= `devApiKey`, Identity Toolkit·Token Service·Firestore API 만). 빌드 하나로 itch.io 와 사무실 둘 다 됨. 윈도우 빌드는 출시 안 함 (itch.io = 웹만). 개발용 키를 **사무실 공인 IP `59.9.223.133` 으로 제한하기로 함 — 콘솔 설정은 아직** (사용자). 팀원은 같은 사무실·같은 공유기.
+- WebGL 설정: Gzip + decompression fallback · 데이터 캐시 · 기본 창 1280×720. **에디터 플랫폼 = WebGL** (2026-10-14 전환). Development Build 는 압축이 안 돼 itch.io 파일 하나 200MB 제한에 걸림 → 항상 일반 빌드.
+- **웹 아틀라스** (2026-10-14, main-game `50aec23` → mvp): 가로·세로가 4의 배수가 아닌 스프라이트는 DXT 압축이 안 돼 무압축으로 들어감 (.data 224MB) → `Editor/WebAtlasBuilder.cs` 가 그런 스프라이트만 폴더별 아틀라스(`Assets/Art/_WebAtlas`, 133개, DXT5)로 묶음. 원본 PNG·크기·피벗 그대로. 그림 넣거나 지우면 자동으로 다시 맞춤 (메뉴 `NKK/Rebuild Web Atlases`, 설정 초기화 `NKK/Reset Web Atlas Settings`). Sprite Packer = Sprite Atlas V2. 압축 빌드 .data 132MB · zip 144MB. (투명 픽셀 덧붙이기는 `sprite.bounds` 로 크기 맞추는 코드 때문에 최대 9% 작아 보여서 안 씀.)
 - 에디터에서 서버 시험할 때: Play 중 `ServerConfig.sendInEditor = true` (메모리) → 끝나면 **false 로 다시 저장** (Play 중 ScriptableObject 변경은 남음).
 
 **바로 다음 할 일**
-1. **WebGL 빌드** (사용자가 원할 때 — 플랫폼 전환 + 빌드 수십 분, 그동안 에디터 못 씀. 미리 시간 말하기) → 폴더 zip → **사용자가 itch.io 비공개(초안) 페이지에 직접 업로드** (Claude 는 zip 까지).
+1. **WebGL 빌드 끝** (2026-10-14, 빌드 약 5분): `Unity_Making/NKK_Project/Builds/WebGL.zip` (Builds 는 git 제외) → **사용자가 itch.io Restricted 페이지에 직접 업로드**, 팀원 공유 (비밀번호 또는 관리자 추가). 로컬 확인: 타이틀·저장 칸·인트로·게임 화면 그림 정상. 다시 빌드 = BuildPipeline WebGL, BuildOptions.None, 출력 `Builds/WebGL`.
 2. itch.io 에서 확인: 익명 로그인 · 훈장 기록 · 랭킹 쓰기/조회 · **한글 닉네임 입력** (WebGL 의 TMP 입력 칸은 한글 조합(IME)이 안 될 가능성 큼 → 안 되면 WebGL 입력 플러그인 검토) · 저장(브라우저 저장소) · 소리 · 화면 크기.
 3. 남은 정할 것: 개인정보 안내 문구 (익명 ID 만 씀, itch.io 페이지 설명).
 - 서버 시험 문서 2개(`players/Z6x5…` '에디터시험' · `rankups/874V…`)는 사용자가 콘솔에서 지우기로 함 (Claude 는 영구 삭제 못 함). 이 PC PlayerPrefs 시험값은 지움.
