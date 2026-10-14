@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-22).
-마지막 갱신: 2026-10-13 저녁 — **§5-8 (브랜치 역할 · MVP 서버 · 다음 = WebGL 빌드) 부터 읽을 것** / (튜토리얼 UI 크기 0 수정 §5-8 · 뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 §5-4
+마지막 갱신: 2026-10-15 새벽 — **§5-9 (itch.io 페이지·크롬 작업 남음)** · 2026-10-13 저녁 — **§5-8 (브랜치 역할 · MVP 서버 · 다음 = WebGL 빌드) 부터 읽을 것** / (튜토리얼 UI 크기 0 수정 §5-8 · 뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 §5-4
 
 ---
 
@@ -291,6 +291,26 @@
 - 커밋 안 한 것 (예전부터): `ProjectSettings/QualitySettings.asset` · `UnityConnectSettings.asset` 변경 여부 확인 필요 · `Unity_Making/NKK_Project/Captures/` (MCP 스크린샷, 커밋 안 함).
 
 **튜토리얼 수정 (2026-10-13, main-game `c57aaef` → mvp)**: 다른 PC(처음 하는 저장)에서 "대사는 나오는데 UI 가 안 보임" — 기능이 열리며 튀어나오는 UI(`FeatureGate.Reveal`, 크기 0→1) 를 대사가 가리키면 `TutorialTarget` 이 0 부근 크기를 원래 크기로 기억해 굳음 (찍찍!! 수치·마릿수·승급 버튼·맨홀 팻말). 고침: 튀어나오는 중엔 확대를 미룸 · 크기 0 은 원래 크기로 안 씀 · 튀어나오다 꺼지면 원래 크기로. 다른 PC 에서 처음부터 하는 흐름으로는 아직 직접 확인 안 함.
+
+## 5-9. itch.io 페이지 · 화면 비율 · butler 업로드 (2026-10-15 새벽) ★ 크롬 작업 여기서 이어서
+
+itch.io 프로젝트 = **Squeak!Squeak!!Squeak!!!** (`parksongho.itch.io/squeak-squeak`, 편집 `itch.io/game/edit/5148827`, DRAFT, 계정 INORYW82-1). 크롬(Claude in Chrome)이 중간에 끊겨서 브라우저 작업이 남음.
+
+**한 것**
+- 화면 비율: 예전 빌드는 Default 템플릿이라 캔버스가 1280×720 **고정** → 640×360 칸에서 잘렸음. 새 WebGL 템플릿 `Assets/WebGLTemplates/Fit/index.html` = 창(게임 칸) 크기에 맞춰 16:9 유지하며 꽉 채움(남는 쪽 검은 띠), 푸터·유니티 로고 없음. `PlayerSettings.WebGL.template = PROJECT:Fit`.
+- itch.io 임베드 설정 저장됨: **960×540 · 전체화면 버튼 켬** (모바일·자동 시작·스크롤바·SharedArrayBuffer 끔).
+- **butler** (itch 공식 업로드 도구) 설치 `%USERPROFILE%\tools\butler\butler.exe`, 로그인 완료(키 `~/.config/itch/butler_creds`). 업로드: `butler push "C:/Dev/NKK_PROJECT/Unity_Making/NKK_Project/Builds/WebGL" parksongho/squeak-squeak:html5 --ignore capture.html` · 상태 `butler status parksongho/squeak-squeak`. 140MB 올리는 데 10분 이상 걸림.
+- **버그 고침** `Scripts/Core/LocText.cs` `Fit()`: 영어일 때 자동 크기 최소값을 무조건 8 로 잡아서, 크기 1.5~2.7 인 **월드 TextMeshPro(로비 간판)가 3~5배로 커져 겹침** → 최소 8 은 UGUI 글에만, 원래 크기보다 커지지 않게. 고친 빌드로 로비 정상 확인함.
+- 스크린샷 (1920×1080 JPG, 영어): `Builds/ItchShots/itch_01_title_en.jpg` · `itch_02_story.jpg` · `itch_04_promote.jpg` · `itch_05_swarm.jpg` · `itch_07_hideout.jpg` (원본 PNG 같은 폴더). 캡처 방법: `Builds/WebGL/capture.html`(preserveDrawingBuffer + 1920 렌더) 을 로컬 서버(스크래치 `shotserver.py`, 포트 8765, POST `/save?name=` 로 PNG 저장)로 열고 `canvas.toDataURL`.
+
+**남은 일 (크롬에서)**
+1. butler 업로드 확인: html5 채널이 버전 2(고친 빌드)가 됐는지 `butler status` 로 확인 (세션 넘길 때 버전 2 업로드 진행 중).
+2. 편집 페이지 Uploads: 새 html5 업로드에 **"This file will be played in the browser"** 체크, 옛 수동 업로드 `WebGL.zip`(2026-10-14) 은 체크 해제 또는 삭제 (사용자 확인 후). 저장.
+3. 스크린샷 5장 업로드 (편집 페이지 Screenshots → Add screenshots, 파일 인풋에 `file_upload`. 한 번에 10MB 제한이라 각 300KB 는 문제없음). 순서: 타이틀 → 스웜 → 승급 → 아지트 → 스토리.
+4. 실제 페이지에서 Run game → 960×540 칸에 잘림 없이 맞는지 · 전체화면 버튼 확인.
+5. (선택) 표지 이미지(cover, 630×500) 없음 · 커스텀 테마는 이미 있음.
+
+**커밋 안 한 것 (mvp 브랜치, 지금 체크아웃 상태)**: `Assets/WebGLTemplates/` (+ .meta) · `LocText.cs` · `ProjectSettings.asset`(템플릿 = Fit) · 폰트 SDF 2개(Play 중 글자 추가로 바뀐 것). `LocText.cs` 수정은 main-game 에도 필요 → main-game 에서 고치고 merge 하거나 cherry-pick.
 
 ## 6. 밸런스 측정 (BalanceProbe)
 

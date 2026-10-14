@@ -29,8 +29,11 @@ namespace NKK
         public const float MinScale = 0.55f;
         void Fit()
         {
-            if (Loc.IsKorean || !t || t.enableAutoSizing) return;
-            t.fontSizeMax = t.fontSize; t.fontSizeMin = Mathf.Max(8, t.fontSize * MinScale); t.enableAutoSizing = true;
+            if (Loc.IsKorean || !t || t.enableAutoSizing || t.fontSize <= 0) return;
+            // 최소 8 은 UI 글에만 — 월드 글(로비 간판 등)은 크기가 1~3 이라 8 로 올리면 오히려 커짐
+            float min = t.fontSize * MinScale;
+            if (t is TextMeshProUGUI) min = Mathf.Min(t.fontSize, Mathf.Max(8, min));
+            t.fontSizeMax = t.fontSize; t.fontSizeMin = min; t.enableAutoSizing = true;
         }
 
         // 글에 LocText 가 있으면 지금 언어 틀, 없으면 cached (예전처럼 씬 글)
