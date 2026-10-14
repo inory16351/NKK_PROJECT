@@ -1,0 +1,4 @@
+Edit the attached cat_silhouette.png and save the result as cat_silhouette_noeyes.png (1920x1080, PNG).
+Keep EVERYTHING pixel-identical: same giant cat silhouette shape, same position and size, same ears, same fur edge and rim light, same lab ceiling, lights and shelves, same colors and lighting, same framing.
+The ONLY change: the cat has NO visible eyes — the two glowing yellow-green eyes are gone and that area is the same solid dark navy-black silhouette as the rest of the head (as if the eyes are closed in total darkness). No eye outlines, no slits, no glow, nothing on the face.
+Use your built-in image generation tool (never write code to draw). After saving, reply only with the file name.

@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: logo_en.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1920x1080 image. Background must be ONE flat solid pure magenta color #FF00FF everywhere outside the logo (no gradient, no shadow on the background, no vignette, no other objects). The logo will be cut out by color keying, so do not use magenta or pink-purple inside the logo except the mouse's pink ears/nose/tail which must stay soft light pink (#F4A6B0 range), clearly different from the magenta background.
+- SUBJECT: recreate ONLY the game title logo from the attached reference image (ref_title_page.png), as a clean standalone logo, centered, filling about 85% of the width.
+- TEXT (spell it EXACTLY, letter by letter, three words on three staggered lines going down-right like the reference):
+  line 1: "Squeak!"
+  line 2: "Squeak!!"
+  line 3: "Squeak!!!"
+  Capital S on each line, lowercase "queak", then 1, 2, 3 exclamation marks. No other text anywhere.
+- LETTER STYLE: same as reference: chunky rounded bubbly letters, warm cheese-yellow to orange fill with small cheese holes, thick dark-brown outline, slight 3D bottom edge, playful tilt.
+- DECORATION (same as reference): the cute brown mouse peeking over the top of the first "Squeak!" holding the letters with its little paws, and the long pink mouse tail curling out from the end of the last line. Nothing else (no background room, no other rats, no cheese pieces, no exit sign).
+- Keep a clear margin of magenta around everything.

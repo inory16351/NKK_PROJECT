@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: endcard_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1920x1080 (16:9) full-frame illustration, NO text, NO letters, NO logo, NO numbers anywhere (the exit sign shows only the running-man pictogram and an arrow).
+- Recreate the attached reference image (ref_title_page.png) as closely as possible in the SAME art style, colors and layout, but WITHOUT the big "Squeak! Squeak!! Squeak!!!" title logo, without the peeking mouse on the logo and without the big pink tail that comes out of the logo. The upper-middle area where the logo was must be clean empty wall (soft cream wall with the gentle light beam), so a logo can be placed there later.
+- Keep: the cream lab hallway, tipped-over cages on the left, the green exit sign top-right, the tiled floor, and the big crowd of cute flat cartoon rats running to the right along the bottom third (white, brown, grey rats, one holding up a big cheese, one white mouse with a red cape). Replace the rat in the brown trench coat and hat with a plain grey rat carrying a small suitcase (no hat, no trench coat, no eyepatch).
+- Style: clean flat cartoon, soft shading like the reference, bright and cheerful.

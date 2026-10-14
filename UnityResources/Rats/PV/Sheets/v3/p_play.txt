@@ -1,0 +1,9 @@
+Create 2 images.
+STYLE (very important): match the attached title illustration ref_title.png exactly: clean bright FLAT cartoon, soft simple shapes, soft cel shading, cute rats with pink round ears, pink noses, long pink tails, big shiny expressive eyes (white lab rats with red eyes, brown rats, grey mice). NO text, NO letters, NO numbers, NO logos anywhere.
+MAGENTA RULE: for images "on magenta" the whole background is ONE flat solid pure magenta #FF00FF (no floor, no cast shadow on the background, no gradient), the subject fully inside the frame with a wide margin, and NO magenta/purple inside the subject.
+Use your built-in image generation tool for every image (never write code to draw). Save each as PNG in the current working directory with EXACTLY the given file name. After saving all, reply only with the file names.
+1) play_bg.png — 1920x1080. A cozy rat playground on the cream lab floor (like ref_title.png): a small cardboard box house, a spool used as a table, a few scattered toys (a small ball, a thimble, a little book), a cheese crumb, soft warm light. Empty floor in the middle (no animals). Camera slightly low.
+2) play_sheet.png — 3200x2400 on magenta: a 4 columns x 3 rows grid of separate full-body rats with wide magenta gaps, all the same scale, side or 3/4 view.
+Row 1 (peaceful): a white rat pushing a ball, a grey mouse reading a tiny book, a brown rat napping curled up, a white rat happily eating cheese.
+Row 2 (panic): the same four rats now running away to the LEFT in total panic, eyes popping, sweat drops, legs a blur.
+Row 3 (the clumsy one, the same white rat from row 1 with the cheese): looking left in panic, looking right in panic, throwing its cheese wedge high over its shoulder, running away to the LEFT with arms flailing.

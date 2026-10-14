@@ -1,0 +1,7 @@
+Create 1 image: fx_sheet.png — 2400x1800 on magenta. A clean sprite sheet of separate comic effect elements in a 4x3 grid with wide magenta gaps, flat colors, thick dark-brown (#4A2812) outlines allowed on this sheet, NO text inside any element:
+1 big white jagged shout balloon  2 big yellow star-shaped BOOM burst  3 red-orange impact star  4 a ring of white radial speed lines with an open center
+5 four-pointed white sparkle star  6 five light-blue sweat drops  7 twelve white elongated sharp vector shards/streaks  8 a white dust cloud puff
+9 a big pink heart with a white shine  10 six yellow cheese-wedge confetti pieces  11 three small white motion "whoosh" curves  12 a cartoon black-and-yellow danger exclamation mark sign (just a shape, no letters)
+STYLE (very important): match the attached title illustration ref_title.png exactly: clean bright FLAT cartoon, soft simple shapes, soft cel shading, cute rats with pink round ears, pink noses, long pink tails, big shiny expressive eyes (white lab rats with red eyes, brown rats, grey mice). NO text, NO letters, NO numbers, NO logos anywhere.
+MAGENTA RULE: for images "on magenta" the whole background is ONE flat solid pure magenta #FF00FF (no floor, no cast shadow on the background, no gradient), the subject fully inside the frame with a wide margin, and NO magenta/purple inside the subject.
+Use your built-in image generation tool for every image (never write code to draw). Save each as PNG in the current working directory with EXACTLY the given file name. After saving all, reply only with the file names.

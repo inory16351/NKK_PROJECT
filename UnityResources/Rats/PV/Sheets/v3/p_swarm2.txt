@@ -1,0 +1,7 @@
+Create 3 images.
+STYLE (very important): match the attached title illustration ref_title.png exactly: clean bright FLAT cartoon, soft simple shapes, soft cel shading, cute rats with pink round ears, pink noses, long pink tails, big shiny expressive eyes (white lab rats with red eyes, brown rats, grey mice). NO text, NO letters, NO numbers, NO logos anywhere (unless text is explicitly requested).
+MAGENTA RULE: for images "on magenta" the whole background is ONE flat solid pure magenta #FF00FF (no floor, no cast shadow on the background, no gradient), the subject fully inside the frame with a wide margin, and NO magenta/purple inside the subject.
+Use your built-in image generation tool for every image (never write code to draw). Save each as PNG in the current working directory with EXACTLY the given file name. After saving all, reply only with the file names.
+1) leap_L.png — 1400x1600 on magenta. A white lab rat leaping UP and to the RIGHT (seen from the front, slightly from below), arms stretched out toward the upper right as if about to hug someone, cheeky wink, happy open mouth, legs trailing below, tail whipping.
+2) leap_R.png — 1400x1600 on magenta. A brown rat leaping UP and to the LEFT, mirror pose of the first: arms stretched toward the upper left to hug, cheeky wink, happy open mouth.
+3) hug_rats.png — 1800x1600 on magenta. The SAME white lab rat and brown rat hugging each other tightly in mid-air, cheeks pressed together, both winking at the viewer with big grins, little pink hearts bursting around them, legs dangling.

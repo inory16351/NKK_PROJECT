@@ -1,0 +1,7 @@
+Create 3 images, each 1920x1080 full-bleed comic backgrounds, no characters.
+STYLE (very important): match the attached title illustration ref_title.png exactly: clean bright FLAT cartoon, soft simple shapes, soft cel shading, cute rats with pink round ears, pink noses, long pink tails, big shiny expressive eyes (white lab rats with red eyes, brown rats, grey mice). NO text, NO letters, NO numbers, NO logos anywhere.
+MAGENTA RULE: for images "on magenta" the whole background is ONE flat solid pure magenta #FF00FF (no floor, no cast shadow on the background, no gradient), the subject fully inside the frame with a wide margin, and NO magenta/purple inside the subject.
+Use your built-in image generation tool for every image (never write code to draw). Save each as PNG in the current working directory with EXACTLY the given file name. After saving all, reply only with the file names.
+1) bg_yellow.png — a bright warm yellow and orange comic sunburst (radial rays from the center) with a faint cheese-hole dot pattern.
+2) bg_pink.png — a soft pink comic sunburst with scattered small hearts.
+3) bg_blue.png — an energetic sky-blue comic sunburst with white speed streaks.

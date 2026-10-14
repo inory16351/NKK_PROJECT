@@ -1,0 +1,205 @@
+{
+ "size": [
+  1920,
+  1080
+ ],
+ "fps": 60,
+ "font": "Unity_Making/NKK_Project/Assets/Fonts/Jua-Regular.ttf",
+ "music": "UnityResources/Audio/BGM/BGM_PV.mp3",
+ "music_start": 33.03,
+ "music_fade": 0.5,
+ "out": "PV/out/PV_30s_EN_1080p.mp4",
+ "cuts": [
+  {
+   "name": "story_04",
+   "src": "UnityResources/Rats/Story/story_04.png",
+   "dur": 1.5,
+   "zoom": [
+    1.0,
+    1.08
+   ]
+  },
+  {
+   "name": "story_06",
+   "src": "UnityResources/Rats/Story/story_06.png",
+   "dur": 1.5,
+   "zoom": [
+    1.04,
+    1.14
+   ],
+   "flash": true
+  },
+  {
+   "name": "story_07",
+   "src": "UnityResources/Rats/Story/story_07.png",
+   "dur": 2.0,
+   "zoom": [
+    1.0,
+    1.1
+   ],
+   "flash": true
+  },
+  {
+   "name": "breed (번식 하트 → 화면 가득)",
+   "src": "PV/clips/breed.mp4",
+   "dur": 1.5,
+   "flash": true
+  },
+  {
+   "name": "swarm (클릭 총공격)",
+   "src": "PV/clips/swarm.mp4",
+   "dur": 1.5
+  },
+  {
+   "name": "smash (물건 박살 · 벽 폭파)",
+   "src": "PV/clips/smash.mp4",
+   "dur": 2.0
+  },
+  {
+   "name": "ult_vampire (블러드 문)",
+   "src": "PV/clips/ult_vampire.mp4",
+   "dur": 1,
+   "flash": true
+  },
+  {
+   "name": "ult_dino (대멸종)",
+   "src": "PV/clips/ult_dino.mp4",
+   "dur": 1,
+   "flash": true
+  },
+  {
+   "name": "ult_alien (UFO 대납치)",
+   "src": "PV/clips/ult_alien.mp4",
+   "dur": 1,
+   "flash": true
+  },
+  {
+   "name": "cat (고양이 습격 · 경고 원)",
+   "src": "PV/clips/cat.mp4",
+   "dur": 3,
+   "flash": true
+  },
+  {
+   "name": "boss_05 경비대장",
+   "src": "PV/clips/boss_05.mp4",
+   "dur": 1,
+   "flash": true
+  },
+  {
+   "name": "boss_10 수석 연구원",
+   "src": "PV/clips/boss_10.mp4",
+   "dur": 1,
+   "flash": true
+  },
+  {
+   "name": "boss_15 연구소장",
+   "src": "PV/clips/boss_15.mp4",
+   "dur": 1,
+   "flash": true
+  },
+  {
+   "name": "boss_20 실험체 제로",
+   "src": "PV/clips/boss_20.mp4",
+   "dur": 1,
+   "flash": true
+  },
+  {
+   "name": "boss_25 마녀 고양이",
+   "src": "PV/clips/boss_25.mp4",
+   "dur": 1.5,
+   "flash": true
+  },
+  {
+   "name": "boss_30 우주 고양이 사령관",
+   "src": "PV/clips/boss_30.mp4",
+   "dur": 1.5,
+   "flash": true
+  },
+  {
+   "name": "gacha (기사 쥐 고유 컷씬)",
+   "src": "PV/clips/gacha.mp4",
+   "dur": 3,
+   "flash": true
+  },
+  {
+   "name": "heist (계단 탈취)",
+   "src": "PV/clips/heist.mp4",
+   "dur": 1.5,
+   "flash": true
+  },
+  {
+   "name": "logo",
+   "src": "UnityResources/Rats/PV/endcard_bg.png",
+   "dur": 2.5,
+   "zoom": [
+    1.04,
+    1.0
+   ],
+   "flash": true,
+   "overlay": {
+    "src": "UnityResources/Rats/PV/logo_en.png",
+    "t": 0.0,
+    "w": 0.56,
+    "y": 0.33
+   },
+   "captions": [
+    {
+     "text": "Play Now",
+     "t": 0.5,
+     "d": 2.0,
+     "size": 100,
+     "y": 0.64
+    }
+   ]
+  }
+ ],
+ "captions": [
+  {
+   "text": "They experimented on us.",
+   "t": 0.1,
+   "d": 2.9
+  },
+  {
+   "text": "Now we break out.",
+   "t": 3.1,
+   "d": 1.9
+  },
+  {
+   "text": "Breed.",
+   "t": 5.05,
+   "d": 1.45
+  },
+  {
+   "text": "Swarm.",
+   "t": 6.5,
+   "d": 1.5
+  },
+  {
+   "text": "Smash!",
+   "t": 8.0,
+   "d": 2.0
+  },
+  {
+   "text": "Unleash 30+ ultimates",
+   "t": 10.0,
+   "d": 3.0
+  },
+  {
+   "text": "Dodge the cats.",
+   "t": 13.2,
+   "d": 2.8
+  },
+  {
+   "text": "6 bosses. 30 floors.",
+   "t": 16.0,
+   "d": 7.0
+  },
+  {
+   "text": "Collect 87 rats.",
+   "t": 23.3,
+   "d": 2.7
+  }
+ ],
+ "music_note": "곡 61.03초 = 마지막 쾅 → 영상 28.0초 (로고 화면 Play Now)",
+ "beat_note": "음악 120 BPM, 박 = 0.5초마다 (영상 기준). 컷 길이는 0.5 단위로"
+}

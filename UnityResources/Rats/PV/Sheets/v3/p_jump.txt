@@ -1,0 +1,5 @@
+Create 1 image: jump_rat.png — 1600x1600 on magenta.
+STYLE (very important): match the attached title illustration ref_title.png exactly: clean bright FLAT cartoon, soft simple shapes, soft cel shading, cute rats with pink round ears, pink noses, long pink tails, big shiny expressive eyes (white lab rats with red eyes, brown rats, grey mice). NO text, NO letters, NO numbers, NO logos anywhere.
+MAGENTA RULE: for images "on magenta" the whole background is ONE flat solid pure magenta #FF00FF (no floor, no cast shadow on the background, no gradient), the subject fully inside the frame with a wide margin, and NO magenta/purple inside the subject.
+Use your built-in image generation tool for every image (never write code to draw). Save each as PNG in the current working directory with EXACTLY the given file name. After saving all, reply only with the file names.
+ONE white lab rat leaping straight UP toward the viewer with huge energy: both arms thrown up high, legs kicked out below, tail whipping, mouth wide open in a happy shout, eyes sparkling. Full body, dynamic.

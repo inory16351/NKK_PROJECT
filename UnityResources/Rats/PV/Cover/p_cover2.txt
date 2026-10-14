@@ -1,0 +1,11 @@
+Create 1 image: cover_art2.png — 1260x1000 (landscape, aspect 1.26:1), a full illustrated game cover scene. It is the thumbnail of a cute comedy game where lab rats break out of a laboratory.
+STYLE (very important): match the attached ref_banner.png exactly — clean bright FLAT 2D cartoon vector-like illustration, soft simple shapes, soft cel shading, warm cream lab colors, cute rats with pink round ears, pink noses, long pink tails, big shiny eyes (white lab rats with red eyes, brown rats, grey mice), small yellow cheese bits. Same character design as the banner.
+COMPOSITION: follow the attached rough sketch ref_sketch.png, but seen from a dramatic LOW ANGLE (camera on the floor looking UP, strong perspective, the pile looms large toward the top):
+- The lab WALL behind has been SMASHED open: a big jagged cracked hole in the middle of the wall with chunks of plaster flying, bright warm light and light rays bursting out from behind the hole (like the radiating lines in the sketch).
+- In the CENTER, on top of a big heap of cheering rats, a white lab rat hero stands triumphantly holding a huge yellow cheese wedge high above its head with both arms, big happy grin.
+- The heap below is made of many happy cheering rats (brown, grey, white) piled up, some with arms raised, one holding a small potion flask, cheese crumbs everywhere.
+- On the LEFT a toppled broken metal rat cage with its bent door hanging open; on the RIGHT another smashed cage / broken crate with a rat climbing out of it.
+- Rubble, cheese crumbs and plaster chunks in the foreground.
+- Keep the TOP ~45% of the image completely clear (only bright light rays and the upper wall, NO characters, NO cheese, NO debris there) — a very big title logo spanning almost the full width will be placed there later. So the whole scene (heap, hero rat and the cheese it holds up) sits in the LOWER 55% of the image; the cheese held up must stay below the 45% line. Keep the whole wall hole, the hero and the heap fully visible.
+NO text, NO letters, NO logos, NO signs with text anywhere.
+Use your built-in image generation tool (never write code to draw). Save as PNG in the current working directory with EXACTLY the given file name. After saving, reply only with the file name.

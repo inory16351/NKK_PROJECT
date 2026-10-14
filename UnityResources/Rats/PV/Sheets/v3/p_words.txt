@@ -1,0 +1,6 @@
+Use your built-in image generation tool (never write code to draw). Create 3 images, each 1800x700, background ONE flat solid pure magenta #FF00FF (no shadow, no gradient). Save as PNG in the current working directory with exactly these names, then reply only with the file names.
+Recreate the lettering of the attached logo ref_logo.png EXACTLY (same chunky rounded bubbly letters, cheese-yellow to orange fill with small cheese holes, thick dark-brown outline, slight 3D bottom edge), but each word alone, centered, horizontal (no tilt), no mouse, no tail, nothing else:
+1) word_1.png — text exactly: Squeak!
+2) word_2.png — text exactly: Squeak!!
+3) word_3.png — text exactly: Squeak!!!
+Spell exactly: capital S, lowercase "queak", then 1, 2 or 3 exclamation marks. All three words at the same letter height.

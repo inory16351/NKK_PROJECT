@@ -21,3 +21,6 @@
 - Gemini 는 한 대화에서 여러 곡을 뽑으면 '생성 중'에서 멈출 때가 많음 → 새 대화에서 짧은 프롬프트로
 - 모든 파일에 SynthID 워터마크(들리지 않음). 상업 사용 가능 여부는 협약 기업 확인 필요
 - 받은 파일(.tmp)은 Downloads 에서 몇 초 만에 사라짐 (2026-10-12 확인) → 다운로드 누르기 전에 복사 감시를 먼저 걸어 둘 것 (크기가 1MB 넘으면 바로 복사)
+- `BGM_PV.mp3` (2026-10-13) — itch.io 홍보 영상용. Gemini 음악 만들기 (Pro · 길이 짧게 · 연주곡), 1:05. 프롬프트: "30-second game trailer music for a cute comedy heist game where lab rats escape. Playful pizzicato strings and bouncy tuba, a sneaky start that builds with faster and faster drums, big brass hits, ending on one loud final hit. Upbeat, cartoonish, energetic." 마지막 쾅 = 61.03초 (PV 는 33.03초부터 30초).
+
+- `BGM_PV2.mp3` (2026-10-14, 사용자가 준 곡 `Operation_Cheddar.mp3`) — PV v6 용. 1:02 · 120 BPM · 31.5초 정적 · 55.04초 마지막 쾅. PV 에는 9.05~34.10초 + 46.50~58초를 이어 붙여 씀 (`PV/music_v6.wav`, 명령 = `Tools/pv/make_pv2.py` MUSIC_CMD).

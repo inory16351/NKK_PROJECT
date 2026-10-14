@@ -1,0 +1,10 @@
+Create 2 images.
+STYLE (very important): match the attached title illustration ref_title.png exactly: clean bright FLAT cartoon, soft simple shapes, soft cel shading, cute rats with pink round ears, pink noses, long pink tails, big shiny expressive eyes (white lab rats with red eyes, brown rats, grey mice). NO text, NO letters, NO numbers, NO logos anywhere (unless text is explicitly requested).
+MAGENTA RULE: for images "on magenta" the whole background is ONE flat solid pure magenta #FF00FF (no floor, no cast shadow on the background, no gradient), the subject fully inside the frame with a wide margin, and NO magenta/purple inside the subject.
+Use your built-in image generation tool for every image (never write code to draw). Save each as PNG in the current working directory with EXACTLY the given file name. After saving all, reply only with the file names.
+1) end_logo.png — 2400x1200 on magenta. A NEW game title logo, different from the reference logo: the text is exactly three lines stacked and slightly tilted:
+   line 1: Squeak!
+   line 2: Squeak!!
+   line 3: Squeak!!!
+   (capital S, lowercase "queak", then 1, 2, 3 exclamation marks — spell exactly). The letters are carved out of chunky yellow cheese blocks with holes, some letters with little bite marks, a thick dark-brown outline, a white lab rat sitting on top of the first line hugging the S, a grey mouse peeking from behind the last exclamation mark, small cheese crumbs. This is the ONLY image with text.
+2) end_bg.png — 1920x1080 full-bleed (no magenta). A festive celebration background for the final screen: the lab exit at the end of the escape, bright sunny sky through a giant broken window, confetti made of cheese bits, a big crowd of happy rats cheering along the bottom edge and the sides, some rats throwing their lab cards in the air, balloons tied to test tubes. Keep the CENTER (middle 60% width, from 15% to 80% height) mostly clear soft sky so a logo and a button can be placed there.
