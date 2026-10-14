@@ -24,6 +24,23 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
+    // 기능 해금 기록 (초반 유저 흐름, 지금: 쳇바퀴 훈련 rats): 로그인한 사람이 자기 uid 로 새로 쓰기만
+    match /milestones/{id} {
+      allow create: if request.auth != null
+        && request.resource.data.keys().hasOnly(['uid', 'feature', 'tier', 'runsTotal', 'maxFloor', 'playSec', 'ver', 'build', 'lang', 'at'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.feature in ['rats']
+        && request.resource.data.tier is int && request.resource.data.tier >= 1 && request.resource.data.tier <= 8
+        && request.resource.data.runsTotal is int && request.resource.data.runsTotal >= 0 && request.resource.data.runsTotal <= 100000
+        && request.resource.data.maxFloor is int && request.resource.data.maxFloor >= 1 && request.resource.data.maxFloor <= 1000
+        && request.resource.data.playSec is int && request.resource.data.playSec >= 0 && request.resource.data.playSec <= 100000000
+        && request.resource.data.ver is string && request.resource.data.ver.size() <= 32
+        && request.resource.data.build is string && request.resource.data.build.size() <= 16
+        && request.resource.data.lang is string && request.resource.data.lang.size() <= 8
+        && request.resource.data.at == request.time;
+      allow read, update, delete: if false;
+    }
+
     // 랭킹: 누구나 읽기 (목록은 100개까지) · 본인 문서만 만들기/덮어쓰기 · 최고 층·훈장은 줄어들 수 없음 · 삭제 불가
     match /players/{uid} {
       allow get: if true;

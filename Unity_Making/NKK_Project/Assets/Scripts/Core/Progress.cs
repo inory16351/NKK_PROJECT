@@ -129,14 +129,18 @@ namespace NKK
         }
         [Tooltip("테스트: 층과 상관없이 뒷골목·뽑기·암시장 열기")] public bool testMarket;
         [Tooltip("뒷골목(맨홀)이 드러나는 튜토리얼 단계 id — 이 단계가 시작돼야 보임 (비우면 16층 클리어만으로)")] public string alleyRevealStep = "l_alley";
+        // 기능이 새로 열릴 때 (기능 id) — 서버 기록용 (Telemetry)
+        public event Action<string> FeatureUnlocked;
         // 쉼표로 여러 개. 새로 열린 게 있으면 true
         public bool Unlock(string features)
         {
             if (string.IsNullOrEmpty(features)) return false;
-            bool any = false;
-            foreach (var f in features.Split(',')) { var t = f.Trim(); if (t.Length > 0 && unlocks.Add(t)) any = true; }
-            if (any) { UnlockVersion++; Save(); }
-            return any;
+            var added = new List<string>();
+            foreach (var f in features.Split(',')) { var t = f.Trim(); if (t.Length > 0 && unlocks.Add(t)) added.Add(t); }
+            if (added.Count == 0) return false;
+            UnlockVersion++; Save();
+            foreach (var t in added) FeatureUnlocked?.Invoke(t);
+            return true;
         }
         public bool SpendCheese(double v) { if (v < 0 || cheese < v) return false; cheese -= v; Save(); return true; }
         public void OnFloorReached(int f) { if (f > maxFloor) { maxFloor = f; floorRuns = runs; Save(); FloorRecord?.Invoke(f); } }
