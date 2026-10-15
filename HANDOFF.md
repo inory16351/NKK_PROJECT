@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-22).
-마지막 갱신: 2026-10-15 새벽 3시 — **§5-9 (itch.io 페이지 꾸미기·업로드 끝)** · 2026-10-13 저녁 — **§5-8 (브랜치 역할 · MVP 서버 · 다음 = WebGL 빌드) 부터 읽을 것** / (튜토리얼 UI 크기 0 수정 §5-8 · 뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 §5-4
+마지막 갱신: 2026-10-15 — **§5-10 튜토리얼 라운드(1·2층) · 씹힘 방지 · 로비 슬로우 모션 · 치즈 창고 훈장 버튼 · 벽 체력 숫자 숨김 (main-game 에서 가져옴)** · 2026-10-15 새벽 3시 — **§5-9 (itch.io 페이지 꾸미기·업로드 끝)** · 2026-10-13 저녁 — **§5-8 (브랜치 역할 · MVP 서버 · 다음 = WebGL 빌드) 부터 읽을 것** / (튜토리얼 UI 크기 0 수정 §5-8 · 뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 §5-4
 
 ---
 
@@ -331,6 +331,30 @@ itch.io 프로젝트 = **Squeak!Squeak!!Squeak!!!** (`parksongho.itch.io/squeak-
 - 촬영 메모: 전부 해제 상태는 낮은 층 보스가 바로 죽고 쥐가 금방 175마리가 돼 화면이 복잡함 → 필살기는 새 판 1층 초반(쥐 24마리), 보스는 28층으로 옮겨 TestSpawn. 오프닝 저장이 로컬 크롬 프로필에만 남음.
 
 **커밋 안 한 것 (mvp 브랜치)**: `UnityResources/Rats/Itch/` (새 그림) · 이 문서 · 폰트 SDF 2개(Play 중 글자 추가로 바뀐 것) · `ProjectSettings.asset`(preloadedAssets 에서 `InputSystem_Actions` 가 빠짐 — 빌드 중 유니티가 바꾼 것으로 보임, 되돌릴지 확인 필요). WebGL 템플릿·LocText 는 `b8348fc` 에 커밋됨. `LocText.cs` 수정은 main-game 에도 필요 → main-game 에서 고치고 merge 하거나 cherry-pick.
+
+## 5-10. 튜토리얼 라운드 1·2층 (2026-10-15) ★
+
+사용자 표(CBT 변경)대로 첫 안내들을 1·2층에 고정. **'튜토리얼 라운드'** = `Progress.TutoRoundSteps` (g_intro · g_wall · g_birth · g_promote · g_cat · g_floor) 를 다 볼 때까지 (`Progress.InTutoRound`, 예전 흐름으로 l_first 를 본 저장은 끝난 것으로). 판이 끝나도(게임 오버 · ESC 포기) 본 단계만 기록되고 라운드는 다음 판으로 이어짐 → **라운드를 다 봐야 로비 l_first(치즈 창고)가 나옴** (조건 `RoundDone`).
+
+| 안내 | 지금 |
+|---|---|
+| 조작(g_intro) | 라운드 1층 시작 (조건 InRound) |
+| 벽 파괴 + 맵(g_wall) | 1층 첫 벽 붕괴. 예전 g_floor 의 맵 대사(Line 5)를 여기로 옮김 → 대사 48 → 49(맵, 옛 5) → 91(옛 49) |
+| 제한시간(g_floor) | 2층부터 새 발동 `Hurry`: 남은 시간 30초 이하 **또는** 계단 방 벽(가장 깎인 것) 30% 이하·계단 방 열림 (`StageManager.StairsWallRatio`) 중 먼저, 한 번만 |
+| 번식(g_birth) | 라운드 동안 1층 번식 없음 (`RatManager.Breed`) → 2층 첫 번식 |
+| 승급(g_promote) | 2층부터 10마리 (FloorMin 2) |
+| 고양이(g_cat) | 안내 전엔 1층 고양이 없음 · 2층부터 층 들어오고 30초(`StageManager.tutoCatDelay`, 게임 시간) 뒤 반드시 등장, 못 보고 넘기면 다음 층에서 또 30초 |
+| 슈퍼 점프 | 첫 판 · 라운드 동안 저절로 안 나옴 (`SuperJumpManager`, 테스트 버튼은 됨) |
+| 쉬운 벽 | 1층 시작 방 옆 쉬운 벽(`firstRunWallMul`)은 첫 판 + 라운드 동안 유지 |
+| 인구(g_pop · g_pop_f5) | 그대로 |
+
+- 그 뒤 흐름: l_first(로비, 치즈 창고) → 다음 판 시작 g_power (조건 RunMin 2 → `Done l_first`) → 그 다음 로비 l_rats (조건 `Done g_power`).
+- **씹힘 방지**: ① `TutorialBox` 연타 막기 — 줄이 뜨고 `clickGuard` 0.35초 클릭 무시 · 글이 다 나오고 `nextDelay` 0.45초 · 한 줄 최소 `minLineTime` 1초 (그때 '계속' 표시). ② FloorStart 창(6초)은 다른 연출·대사로 막혀 있던 시간을 안 셈 (`TutorialManager.freeT`). ③ 판 조건(RunMax 1) 대신 상태 조건이라 놓친 안내는 다음 판에 다시 기회.
+- **치즈 창고 훈장 버튼**: 바로 훈장을 달지 않고 찍찍!! 훈장 페이지로 (`SkillPage.RankUp`). 훈장 기능이 잠겨 있으면 아지트로 나감 → l_rank(CanRankUp) 대사 → 끝나면 행동 `OpenPage rank`. 버튼 글 "찍찍!! 훈장 보러 가기!" / "Go to SQUEAK!! Rank!" (스트링 8000175).
+- **로비 슬로우 모션**: `Time.timeScale` 이 씬을 넘어 남아서 역경직(0.05배)·필살기 정지 중에 로비로 가면 로비가 느려짐 → `FxManager` 가 씬이 바뀔 때마다 timeScale 1 · Paused/UltFreeze/WorldFreeze 끔.
+- **벽 체력바**: 숫자 글 숨김 · 크림색 판 끔 · 빨간 막대만 (`WallBar.showLabel` · `hpColors` 둘 다 꺼 둠, 사용자: 벽은 빨강으로 구별).
+- 테이블: 튜토리얼 테이블 Step(g_intro · g_wall · g_floor · g_birth · g_promote · g_cat · g_power · l_first · l_rats · l_rank) · Line(5·49) · Trigger_Type(Hurry) · Cond_Type(RoundDone · InRound), 스트링 테이블 8000175. 백업 `Data_Table/_backup_20261015`.
+- **확인함 (Play, 테스트 슬롯 4)**: 1층 조작 안내 → 첫 벽 붕괴 안내(맵 포함) · 1층 번식·고양이 없음 → 2층 첫 번식 안내 → 10마리 승급 → 2층 30초 고양이 → 남은 30초 타이머 안내 → 라운드 끝(InTutoRound false) · 계단 벽 25% 일 때 StairsWallRatio 0.25 · 로비로 갈 때 timeScale 0.05 → 1 · 훈장 버튼 → 훈장 페이지. **안 본 것**: 계단 벽 30% 로 실제 대사가 뜨는 장면 · 훈장 잠김 상태에서 버튼 → l_rank → 훈장 페이지 · 라운드 중 게임 오버 뒤 로비(치즈 창고 안 열림) · 실제 마우스 연타.
 
 ## 6. 밸런스 측정 (BalanceProbe)
 
