@@ -85,6 +85,9 @@ namespace NKK.Stage
         [Tooltip("다음 등장까지 (초, 최소~최대)")] public Vector2 catInterval = new(55, 85);
         [Tooltip("이 층부터 특별 복장 고양이(마녀·우주복)가 가끔")] public int specialCatFromFloor = 25;
         [Tooltip("특별 고양이가 나올 확률")] public float specialCatChance = 0.25f;
+        [Tooltip("고양이 안내(g_cat)를 아직 안 봤으면: 1층엔 고양이 없음 · 2층부터 층에 들어온 뒤 이 초에 반드시 등장 (못 보고 층을 넘기면 다음 층에서 다시)")] public float tutoCatDelay = 30;
+        [Tooltip("고양이 안내 단계 id")] public string tutoCatStep = "g_cat";
+        bool TutoCatPending => Progress.I && !Progress.I.TutoDone(tutoCatStep);
 
         [Header("계단")]
         [Tooltip("계단 위치 = 방 위쪽에서 이만큼 아래")] public float stairsY = 190;
@@ -178,7 +181,7 @@ namespace NKK.Stage
             foreach (var tp in traps) if (tp) Destroy(tp.gameObject);
             traps.Clear();
             if (Cats) Cats.Clear();
-            catT = UnityEngine.Random.Range(catFirstDelay.x, catFirstDelay.y);
+            catT = TutoCatPending ? tutoCatDelay : UnityEngine.Random.Range(catFirstDelay.x, catFirstDelay.y);
             Items.FurnishRoom(Vector2Int.zero);
             Items.FillRoom(Vector2Int.zero, Items.RoomCap);
             Items.OnFloorStart();
@@ -239,7 +242,7 @@ namespace NKK.Stage
         {
             hasEasyRoom = false;
             var p = Progress.I;
-            if (firstRunWallMul <= 0 || Game.Floor != 1 || !p || p.runs > 1) return;
+            if (firstRunWallMul <= 0 || Game.Floor != 1 || !p || (p.runs > 1 && !p.InTutoRound)) return;      // 첫 판 + 튜토리얼 라운드 동안
             int bestD = int.MaxValue;
             foreach (var d in Dirs)
             {
@@ -261,6 +264,16 @@ namespace NKK.Stage
 
         public float WallHP(int i, int j, int di, int dj) => walls.TryGetValue(WallKey(i, j, di, dj), out var v) ? v : WallMax(i + di, j + dj);
         public float WallHPMax(int i, int j, int di, int dj) => WallMax(i + di, j + dj);
+        // 계단 방으로 들어가는 막힌 벽 중 가장 많이 깎인 벽의 남은 체력 비율 (1 = 안 깎임·닿은 벽 없음 · 0 = 계단 방이 열림) — 튜토리얼 제한시간 안내
+        public float StairsWallRatio()
+        {
+            float m = 1;
+            if (Open.Contains(StairsRoom)) return 0;
+            foreach (var k in Open)
+                foreach (var d in Dirs)
+                    if (k + d == StairsRoom) m = Mathf.Min(m, WallHP(k.x, k.y, d.x, d.y) / Mathf.Max(0.001f, WallMax(StairsRoom.x, StairsRoom.y)));
+            return m;
+        }
 
         float Gate(int ti, int tj)
         {
@@ -367,8 +380,9 @@ namespace NKK.Stage
         void UpdateCats(float dt)
         {
             if (!Cats || Game.Floor < catFromFloor || Cats.Current || (Boss && Boss.CanHit)) return;     // 보스전 중엔 고양이 없음
+            if (TutoCatPending && Game.Floor < 2) return;      // 튜토리얼: 1층엔 고양이 없음
             if ((catT -= dt) > 0) return;
-            catT = UnityEngine.Random.Range(catInterval.x, catInterval.y);
+            catT = TutoCatPending ? tutoCatDelay : UnityEngine.Random.Range(catInterval.x, catInterval.y);     // 안내 전에 사라졌으면 금방 다시
             var normal = new List<CatCharacterRow>(); var special = new List<CatCharacterRow>();
             foreach (var c in GameDatabase.Instance.Cats.Values) (c.Category == CatCategory.Special ? special : normal).Add(c);
             bool sp = Game.Floor >= specialCatFromFloor && special.Count > 0 && UnityEngine.Random.value < specialCatChance;

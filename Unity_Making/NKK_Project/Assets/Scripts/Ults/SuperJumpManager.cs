@@ -139,6 +139,8 @@ namespace NKK.Ults
             {
                 UpdateUi(dt);
                 if (FxManager.Halt || (Ults && Ults.Busy) || GameOver.Active || Heist.Active) return;
+                var pg = Progress.I;
+                if (pg && !pg.TutoSkipped && (pg.runs <= 1 || pg.InTutoRound)) return;     // 첫 판 · 튜토리얼 라운드엔 저절로 안 나옴 (2번째 판부터, 사용자 2026-10-15)
                 if ((coolT -= Time.deltaTime) <= 0 && Random.value < chancePerSec * CommonSkill.SuperJumpMul * Time.deltaTime) Trigger(false);
                 return;
             }

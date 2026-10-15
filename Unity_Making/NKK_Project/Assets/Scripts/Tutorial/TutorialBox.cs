@@ -38,6 +38,11 @@ namespace NKK.Tutorial
         [Tooltip("화살표 위아래 흔들림 (픽셀)")] public float arrowBob = 12;
         [Tooltip("화자가 없을 때 이름표에 쓸 글")] public string noSpeakerName = "";
 
+        [Header("씹힘 방지 (게임 중 연타 클릭으로 대사가 그냥 넘어가지 않게)")]
+        [Tooltip("줄이 나오고 이 초 동안은 클릭을 무시 (글자 한 번에 보이기도 안 됨)")] public float clickGuard = 0.35f;
+        [Tooltip("글이 다 나온 뒤 이 초가 지나야 다음 줄로 넘어감 ('계속' 표시도 그때 나옴)")] public float nextDelay = 0.45f;
+        [Tooltip("한 줄을 최소 이 초는 보여 줌")] public float minLineTime = 1.0f;
+
         [Header("가리키는 곳 보이게")]
         [Tooltip("가리키는 곳이 대사 판·초상화에 가리면 대사창을 화면 위쪽으로 옮김")] public bool dodge = true;
         [Tooltip("위로 옮긴 대사 판의 화면 위 여백 (픽셀)")] public float dodgeTopMargin = 28;
@@ -49,7 +54,7 @@ namespace NKK.Tutorial
         readonly List<TutoLineRow> lines = new();
         Action done;
         bool busy;
-        int idx; float shown, inT, bumpT;
+        int idx; float shown, inT, bumpT, lineT, fullT;
         string pointer; float pointerLeft;       // 대사가 끝난 뒤에도 잠깐 남는 강조
         Vector2 panelPos, portraitPos;
         float dodgeK, dodgeGoal;          // 0 = 아래(기본) · 1 = 위로 옮김
@@ -103,7 +108,7 @@ namespace NKK.Tutorial
                 if (changed) bumpT = 0.25f;
             }
             if (bodyText) { bodyText.text = l.text; bodyText.maxVisibleCharacters = 0; bodyText.ForceMeshUpdate(); }
-            shown = 0;
+            shown = 0; lineT = 0; fullT = 0;
             if (nextMark) nextMark.SetActive(false);
         }
 
@@ -142,13 +147,15 @@ namespace NKK.Tutorial
                 if (vis > lastVis) { if (vis / 3 != lastVis / 3) SfxManager.Play(blip, 0.5f); lastVis = vis; }
             }
             bool full = !bodyText || bodyText.maxVisibleCharacters >= TotalChars;
-            if (nextMark) { nextMark.SetActive(full); if (full) nextMark.transform.localScale = Vector3.one * (1 + 0.08f * Mathf.Sin(Time.unscaledTime * 6)); }
+            lineT += dt; if (full) fullT += dt;
+            bool canNext = full && fullT >= nextDelay && lineT >= minLineTime;
+            if (nextMark) { nextMark.SetActive(canNext); if (canNext) nextMark.transform.localScale = Vector3.one * (1 + 0.08f * Mathf.Sin(Time.unscaledTime * 6)); }
             SetHighlight(lines[idx].highlight);
 
-            if (inT >= inTime && Pressed())
+            if (inT >= inTime && lineT >= clickGuard && Pressed())
             {
                 if (!full) { shown = TotalChars; if (bodyText) bodyText.maxVisibleCharacters = TotalChars; }
-                else Next();
+                else if (canNext) Next();
             }
         }
 

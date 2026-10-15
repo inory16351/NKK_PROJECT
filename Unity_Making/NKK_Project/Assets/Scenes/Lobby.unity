@@ -50598,7 +50598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCC0D\uCC0D!! \uD6C8\uC7A5 \uB2EC\uAE30!"
+  m_text: "\uCC0D\uCC0D!! \uD6C8\uC7A5 \uBCF4\uB7EC \uAC00\uAE30!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: d6e664104e165ff498ede20d9194f326, type: 2}
@@ -87369,6 +87369,7 @@ MonoBehaviour:
   Cats: {fileID: 0}
   Ults: {fileID: 0}
   SuperJump: {fileID: 0}
+  Timer: {fileID: 0}
   Cam: {fileID: 0}
   Lobby: {fileID: 850286159}
   Skills: {fileID: 1655013307}
@@ -90276,6 +90277,9 @@ MonoBehaviour:
   highlightPulse: 8
   arrowBob: 12
   noSpeakerName: 
+  clickGuard: 0.35
+  nextDelay: 0.45
+  minLineTime: 1
   dodge: 1
   dodgeTopMargin: 28
   dodgePortraitMargin: 8
