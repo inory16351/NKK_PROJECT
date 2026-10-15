@@ -319,11 +319,15 @@ namespace NKK.Lobby
             Draw();
         }
 
+        // 훈장 버튼: 여기서 바로 달지 않고 찍찍!! 훈장 페이지로 (사용자 2026-10-15).
+        // 훈장 기능이 아직 잠겨 있으면 아지트로 나감 → 해금 튜토리얼(l_rank, 아지트에서 CanRankUp)이 나오고 끝나면 훈장 페이지가 열림 (행동 OpenPage rank)
         void RankUp()
         {
             var p = Progress.I;
-            if (!p.RankUp()) return;
-            ShowTier(p.tier);
+            if (!manager) manager = FindFirstObjectByType<LobbyManager>();
+            if (!p || !manager) return;
+            if (p.IsUnlocked("rank")) manager.OpenPage("rank");
+            else manager.CloseToHome();
         }
 
         // ── 지도 끌기 · 휠 확대 ──

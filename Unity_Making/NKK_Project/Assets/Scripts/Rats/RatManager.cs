@@ -515,6 +515,7 @@ namespace NKK.Rats
 
         void Breed()
         {
+            if (Game && Game.Floor < 2 && Progress.I && Progress.I.InTutoRound) return;      // 튜토리얼 라운드: 1층은 번식 없음 (2층에서 첫 번식 + 번식 안내)
             int pop = RealCount;
             var born = new List<Vector3>();      // x, y, 윗등급 보정
             var parents = new List<(Rat a, Rat b)>();

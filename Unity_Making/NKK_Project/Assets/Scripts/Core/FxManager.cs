@@ -18,6 +18,21 @@ namespace NKK
         public static bool WorldFreeze;            // 슈퍼 점프 중 게임 세계 정지 (이펙트는 계속)
         public static float BaseTimeScale = 1;     // 밸런스 측정용 배속 (BalanceProbe)
 
+        // 씬이 바뀌면 시간·멈춤을 원래대로. Time.timeScale 은 씬을 넘어 남아서, 역경직(0.05배)·필살기 정지 중에 로비로 가면
+        // 로비(FxManager 없음)가 계속 슬로우 모션이던 버그 (2026-10-15)
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+        static void HookSceneReset()
+        {
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded -= ResetTime;
+            UnityEngine.SceneManagement.SceneManager.sceneLoaded += ResetTime;
+            ResetTime(default, default);
+        }
+        static void ResetTime(UnityEngine.SceneManagement.Scene s, UnityEngine.SceneManagement.LoadSceneMode m)
+        {
+            Paused = false; UltFreeze = false; WorldFreeze = false;
+            Time.timeScale = 1;
+        }
+
         [Header("파티클 (하이라키 자식)")]
         public ParticleSystem shards;     // 깨진 조각
         public ParticleSystem dust;       // 먼지 뭉게

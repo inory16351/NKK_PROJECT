@@ -24,6 +24,7 @@ namespace NKK.Tutorial
         public CatManager Cats;
         public UltimateManager Ults;
         public SuperJumpManager SuperJump;
+        [Tooltip("비워 두면 씬에서 찾음 (Hurry 발동: 남은 제한시간)")] public RunTimer Timer;
 
         [Tooltip("비워 두면 메인 카메라에서 찾음")] public CameraController Cam;
 
@@ -35,7 +36,7 @@ namespace NKK.Tutorial
 
         [Header("연출")]
         [Tooltip("씬·층이 시작되고 이 초 뒤부터 튜토리얼 확인 (화면이 밝아진 뒤)")] public float startDelay = 1.2f;
-        [Tooltip("FloorStart 단계는 층 시작 뒤 이 초 안에만 발동")] public float floorStartWindow = 6;
+        [Tooltip("FloorStart 단계는 층 시작 뒤 이 초 안에만 발동 (다른 연출·대사로 막혀 있던 시간은 안 셈 → 씹히지 않음)")] public float floorStartWindow = 6;
         [Tooltip("대사가 끝난 뒤 마지막으로 가리킨 곳을 이 초 더 강조")] public float lingerTime = 4;
         [Tooltip("로비: 탭을 가리킨 채 끝나면 그 페이지를 열 때까지 강조 (최대 초)")] public float lobbyLingerTime = 20;
         [Tooltip("대사 중 게임을 멈춤")] public bool pauseGame = true;
@@ -47,7 +48,7 @@ namespace NKK.Tutorial
         // 대사 중 게임 정지 (FxManager 가 timeScale 0)
         public static bool Pausing { get; private set; }
 
-        float sceneT, floorT; int lastFloor = -1;
+        float sceneT, floorT, freeT; int lastFloor = -1;      // freeT = 이번 층에서 튜토리얼을 띄울 수 있었던 시간 (FloorStart 창)
         TutorialTarget tempTarget; float heartT;      // 첫 탄생: 새끼 쥐에 잠깐 붙이는 강조
         string lastDone;             // 방금 끝난 단계 (After 발동)
         TutoStepRow running;
@@ -64,13 +65,14 @@ namespace NKK.Tutorial
             sceneT += dt;
             if (scene == "Game" && Game)
             {
-                if (Game.Floor != lastFloor) { lastFloor = Game.Floor; floorT = 0; }
+                if (Game.Floor != lastFloor) { lastFloor = Game.Floor; floorT = 0; freeT = 0; }
                 if (!Pausing && !(Stage && Stage.Climbing)) floorT += Time.deltaTime;
             }
             UpdateAction(dt);
             UpdateFocus(dt);
             if (running != null || !DB || !P || TutorialBox.Showing || sceneT < startDelay) return;
             if (P.TutoSkipped || Busy()) return;
+            if (scene == "Game") freeT += Time.deltaTime;
             foreach (var s in DB.TutoSteps)
             {
                 if (s.scene != scene || P.TutoDone(s.step_id)) continue;
@@ -102,6 +104,8 @@ namespace NKK.Tutorial
                 case "Done": foreach (var id in v.Split(',')) if (P.TutoDone(id.Trim())) return true; return false;       // 쉼표 = 그중 하나라도
                 case "NotDone": foreach (var id in v.Split(',')) if (P.TutoDone(id.Trim())) return false; return true;
                 case "FloorMin": return Game && Game.Floor >= n;
+                case "RoundDone": return !P.InTutoRound;          // 튜토리얼 라운드(1·2층 안내)를 다 봄
+                case "InRound": return P.InTutoRound;
                 case "SkillAffordable": { var r = SkillPage.Recommend(); return r != null && P.CanBuySkill(r); }
                 case "SkillPoor": { var r = SkillPage.Recommend(); return r == null || !P.CanBuySkill(r); }
                 case "WishOpen": return GeneGacha.WishUnlocked;        // 관심 종 (18층 클리어)
@@ -116,7 +120,7 @@ namespace NKK.Tutorial
             switch (s.trigger)
             {
                 // ── Game ──
-                case "FloorStart": return Game && (v <= 0 || Game.Floor == (int)v) && floorT >= startDelay && floorT < startDelay + floorStartWindow;
+                case "FloorStart": return Game && (v <= 0 || Game.Floor == (int)v) && freeT >= startDelay && freeT < startDelay + floorStartWindow;
                 case "FloorTime": return Game && floorT >= v;
                 case "Birth": return Rats && Rats.Births >= Mathf.Max(1, v);
                 case "RatCount": return Rats && Rats.RealCount >= v;
@@ -124,6 +128,13 @@ namespace NKK.Tutorial
                 case "PopFull": return Rats && Rats.RealCount >= Rats.PopCap;
                 case "RoomOpen": return Stage && Stage.Open.Count >= 1 + Mathf.Max(1, v);
                 case "CatAppear": return Cats && Cats.Current;
+                case "Hurry":       // 남은 제한시간이 발동 값 초 이하 · 또는 계단 방 벽이 발동 글 값 비율 이하로 깎임 (계단 방이 열려도)
+                    {
+                        if (!Timer) Timer = FindFirstObjectByType<RunTimer>();
+                        if (Timer && Timer.Left > 0 && Timer.Left <= v) return true;
+                        float k = float.TryParse(s.trigger_text, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var kk) ? kk : 0.3f;
+                        return Stage && Stage.StairsWallRatio() <= k;
+                    }
                 case "BossFight": return Boss.Current && Boss.Current.State == Boss.BState.Fight;
                 case "UltReady":
                     if (!Rats || !Ults) return false;
