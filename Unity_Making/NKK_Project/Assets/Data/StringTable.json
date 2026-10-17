@@ -10161,6 +10161,71 @@
    "en": "※ Coronation billed to the Lab's company card"
   },
   {
+   "string_key": 8000440,
+   "ko": "※ 다람쥐 헌 쳇바퀴에 타고파~",
+   "en": "※ Squirrel wants a spin on the old wheel~"
+  },
+  {
+   "string_key": 8000441,
+   "ko": "{n}명",
+   "en": "{n} subs"
+  },
+  {
+   "string_key": 8000442,
+   "ko": "※ 앵콜 요청은 마음속으로만",
+   "en": "※ Please keep encore requests in your heart"
+  },
+  {
+   "string_key": 8000443,
+   "ko": "※ 소원 추가 요청은 반려되었습니다",
+   "en": "※ Request for more wishes: DENIED"
+  },
+  {
+   "string_key": 8000444,
+   "ko": "※ 얼어 죽어도 아이스 아메리카노",
+   "en": "※ Iced Americano, even if I freeze"
+  },
+  {
+   "string_key": 8000445,
+   "ko": "※ 쭈욱~ 늘어나는 건 국룰",
+   "en": "※ The cheese pull is mandatory"
+  },
+  {
+   "string_key": 8000446,
+   "ko": "※ 범인은 이 안에 있다!",
+   "en": "※ The culprit is among us!"
+  },
+  {
+   "string_key": 8000447,
+   "ko": "※ 구독 · 좋아요 · 알림 설정까지!",
+   "en": "※ Like, subscribe and hit the bell!"
+  },
+  {
+   "string_key": 8000448,
+   "ko": "※ 자외선 지수: 매우 위험",
+   "en": "※ UV index: EXTREME"
+  },
+  {
+   "string_key": 8000449,
+   "ko": "※ 소는 촬영 후 무사히 돌려보냈습니다",
+   "en": "※ The cow was safely returned after filming"
+  },
+  {
+   "string_key": 8000450,
+   "ko": "※ 익힘 정도: 완벽하게 이븐함",
+   "en": "※ Doneness: perfectly even"
+  },
+  {
+   "string_key": 8000451,
+   "ko": "※ 시전 후 MP 0 · 이동 불가",
+   "en": "※ After casting: MP 0 · cannot move"
+  },
+  {
+   "string_key": 8000452,
+   "ko": "※ 원탁이라 상석 다툼 없음 (아마도)",
+   "en": "※ Round table, so no fighting over seats (probably)"
+  },
+  {
    "string_key": 9000001,
    "ko": "찍찍!! {power} / 적정 {need}",
    "en": "SQUEAK!! {power} / Rec. {need}"
