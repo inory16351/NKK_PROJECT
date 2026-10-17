@@ -1,0 +1,216 @@
+00:45:28 parkrat fx
+00:47:09 pharaoh pano_a
+00:47:14 parkrat pose_intro
+00:47:31 parkrat pose_act
+00:47:40 emperor pose_intro
+00:47:43 parkrat pose_finish
+00:47:43 emperor fx
+00:47:43 parkrat props
+00:47:52 parkrat face_close
+00:49:11 emperor pose_act
+00:49:15 emperor pano_a
+00:49:18 knight pano_a
+00:49:25 parkrat pano_a
+00:49:33 pharaoh pose_intro
+00:49:44 emperor face_close
+00:49:44 pharaoh fx
+00:49:56 pharaoh pose_act
+00:49:56 emperor props
+00:50:51 emperor pose_finish
+00:50:54 pharaoh pose_finish
+00:51:34 pharaoh face_close
+00:51:34 knight fx
+00:51:35 knight pose_act
+00:51:47 pharaoh props
+00:51:48 knight pose_intro
+00:51:48 emperor pano_b
+00:52:50 pharaoh pano_b
+00:53:24 knight props
+00:53:45 sultan pose_act
+00:53:45 sultan fx
+00:54:02 sultan pose_finish
+00:54:22 knight pose_finish
+00:55:53 alien pose_intro
+00:56:09 sultan props
+00:56:40 alien pose_act
+00:56:40 alien fx
+00:56:50 knight face_close
+00:57:54 sultan pose_intro
+00:58:15 alien pose_finish
+00:58:22 alien props
+00:58:37 streamrat pose_intro
+00:58:37 streamrat fx
+00:59:11 alien face_close
+00:59:44 sultan face_close
+01:00:02 streamrat pose_finish
+01:00:15 streamrat pose_act
+01:00:41 streamrat face_close
+01:00:59 ramjui pose_intro
+01:01:02 parkrat pano_b
+01:01:07 streamrat props
+01:01:11   다시 ramjui props
+01:01:12   다시 parkrat pano_c
+01:01:19   다시 ramjui props
+01:01:19   실패 ramjui props
+01:01:20   다시 ramjui pose_act
+01:01:20   다시 parkrat pano_c
+01:01:20   실패 parkrat pano_c
+01:01:25   다시 jwerry pose_intro
+01:01:29   다시 ramjui pose_act
+01:01:29   실패 ramjui pose_act
+01:01:29   다시 sultan pano_a
+01:01:31   다시 jwerry pose_intro
+01:01:31   실패 jwerry pose_intro
+01:01:36   다시 jwerry pose_act
+01:01:36   다시 jwerry face_close
+01:01:39   다시 sultan pano_a
+01:01:39   실패 sultan pano_a
+01:01:41   다시 jwerry pose_act
+01:01:41   실패 jwerry pose_act
+01:01:43   다시 pharaoh pano_c
+01:01:44   다시 jwerry pose_finish
+01:01:44   다시 jwerry face_close
+01:01:44   실패 jwerry face_close
+01:01:45   다시 alien pano_a
+01:01:48   다시 jwerry fx
+01:01:51   다시 jwerry pose_finish
+01:01:51   실패 jwerry pose_finish
+01:01:52   다시 alien pano_a
+01:01:52   실패 alien pano_a
+01:01:54   다시 pharaoh pano_c
+01:01:54   실패 pharaoh pano_c
+01:01:56   다시 jwerry props
+01:01:57   다시 starchef pose_intro
+01:01:58   다시 streamrat pano_a
+01:02:03   다시 ramjui pano_a
+01:02:03   다시 jwerry props
+01:02:03   실패 jwerry props
+01:02:04   다시 streamrat pano_a
+01:02:04   실패 streamrat pano_a
+01:02:06   다시 starchef pose_intro
+01:02:06   실패 starchef pose_intro
+01:02:09   다시 starchef pose_act
+01:02:10   다시 jwerry pano_a
+01:02:13   다시 starchef pose_finish
+01:02:15   다시 jwerry fx
+01:02:15   실패 jwerry fx
+01:02:16   다시 jwerry pano_a
+01:02:16   실패 jwerry pano_a
+01:02:17   다시 starchef pose_act
+01:02:17   실패 starchef pose_act
+01:02:18   다시 ramjui pano_a
+01:02:18   실패 ramjui pano_a
+01:02:21   다시 starchef pano_a
+01:02:22   다시 starchef pose_finish
+01:02:22   실패 starchef pose_finish
+01:02:24   다시 starchef face_close
+01:02:25   다시 starchef fx
+01:02:26   다시 starchef props
+01:02:27   다시 jjdetective pano_a
+01:02:31   다시 starchef pano_a
+01:02:31   실패 starchef pano_a
+01:02:31   다시 starchef face_close
+01:02:31   실패 starchef face_close
+01:02:32   다시 starchef props
+01:02:32   실패 starchef props
+01:02:33   다시 jjdetective pano_a
+01:02:33   실패 jjdetective pano_a
+01:02:34   다시 starchef fx
+01:02:34   실패 starchef fx
+01:02:36   다시 jjdetective pose_intro
+01:02:37   다시 ramjui fx
+01:02:38   다시 fondue pano_a
+01:02:40   다시 jjdetective pose_act
+01:02:41   다시 bomber pano_a
+01:02:41   다시 jjdetective pose_finish
+01:02:41   다시 ramjui fx
+01:02:41   실패 ramjui fx
+01:02:44   다시 jjdetective pose_intro
+01:02:44   실패 jjdetective pose_intro
+01:02:44   다시 fondue pano_a
+01:02:44   실패 fondue pano_a
+01:02:46   다시 jjdetective pose_act
+01:02:46   실패 jjdetective pose_act
+01:02:48   다시 jjdetective face_close
+01:02:48   다시 jjdetective pose_finish
+01:02:48   실패 jjdetective pose_finish
+01:02:50   다시 icequeen pano_a
+01:02:50   다시 bomber pano_a
+01:02:50   실패 bomber pano_a
+01:02:52   다시 jjdetective fx
+01:02:54   다시 jjdetective props
+01:02:54   다시 fondue pose_intro
+01:02:55   다시 icequeen pano_a
+01:02:55   실패 icequeen pano_a
+01:02:55   다시 jjdetective face_close
+01:02:55   실패 jjdetective face_close
+01:02:57   다시 jjdetective fx
+01:02:57   실패 jjdetective fx
+01:03:05   다시 jjdetective props
+01:03:05   실패 jjdetective props
+01:03:07   다시 fondue pose_intro
+01:03:07   실패 fondue pose_intro
+01:03:07   다시 fondue pose_act
+01:03:09   다시 fondue pose_finish
+01:03:16   다시 fondue face_close
+01:03:19   다시 fondue pose_act
+01:03:19   실패 fondue pose_act
+01:03:19   다시 fondue fx
+01:03:21   다시 fondue pose_finish
+01:03:21   실패 fondue pose_finish
+01:03:23   다시 fondue face_close
+01:03:23   실패 fondue face_close
+01:03:24   다시 fondue props
+01:03:25   다시 fondue fx
+01:03:25   실패 fondue fx
+01:03:26   다시 bomber pose_intro
+01:03:29   다시 bomber pose_finish
+01:03:31   다시 bomber pose_intro
+01:03:31   실패 bomber pose_intro
+01:03:31   다시 fondue props
+01:03:31   실패 fondue props
+01:03:33   다시 bomber pose_finish
+01:03:33   실패 bomber pose_finish
+01:03:34   다시 bomber pose_act
+01:03:36   다시 bomber fx
+01:03:37   다시 bomber face_close
+01:03:39   다시 bomber props
+01:03:39   다시 bomber pose_act
+01:03:39   실패 bomber pose_act
+01:03:41   다시 bomber fx
+01:03:41   실패 bomber fx
+01:03:43   다시 icequeen pose_intro
+01:03:43   다시 bomber face_close
+01:03:43   실패 bomber face_close
+01:03:45   다시 bomber props
+01:03:45   실패 bomber props
+01:03:47   다시 icequeen pose_finish
+01:03:48   다시 icequeen pose_act
+01:03:52   다시 icequeen pose_intro
+01:03:52   실패 icequeen pose_intro
+01:03:52   다시 icequeen face_close
+01:03:53   다시 icequeen pose_act
+01:03:53   실패 icequeen pose_act
+01:03:55   다시 icequeen pose_finish
+01:03:55   실패 icequeen pose_finish
+01:03:58   다시 icequeen props
+01:03:58   다시 icequeen face_close
+01:03:58   실패 icequeen face_close
+01:04:04   다시 icequeen props
+01:04:04   실패 icequeen props
+01:04:06   다시 icequeen fx
+01:04:12   다시 icequeen fx
+01:04:12   실패 icequeen fx
+01:04:43   다시 emperor pano_c
+01:04:48   다시 emperor pano_c
+01:04:48   실패 emperor pano_c
+01:04:49   다시 knight pano_b
+01:04:53   다시 knight pano_b
+01:04:53   실패 knight pano_b
+01:04:56   다시 ramjui face_close
+01:04:58   다시 ramjui face_close
+01:04:58   실패 ramjui face_close
+01:05:53   다시 ramjui pose_finish
+01:05:55   다시 ramjui pose_finish
+01:05:55   실패 ramjui pose_finish
+01:05:55 끝

@@ -79,6 +79,7 @@ namespace NKK.Ults
         float capBigT = -9, capSmallT = -9;
 
         public bool Busy => cur != null;
+        public bool CutPhase => cur != null && cutPhase;      // 컷인 중 (월드 정지)
         public float Cooldown => Mathf.Max(ultCooldownMin, ultCooldown - CommonSkill.UltCdLess);
         public float CooldownLeft => cdLeft;
         float cdLeft;
@@ -215,6 +216,7 @@ namespace NKK.Ults
                     if (n > 0 && !string.IsNullOrEmpty(blastPopup) && OnScreen(r.x, r.y)) FxManager.I?.Popup(r.x, r.y, blastPopup.Replace("{n}", n.ToString()), new Color(1, 0.95f, 0.75f), 22, 1.1f, 120);
                 }
                 if (Progress.I) Progress.I.OnUltUsed(s.U.ultimate_id);       // 업적 알림은 업적 테이블 기준 (AchievementToast)
+                if (r && r.temp <= 0) SuperUltManager.I?.OnUltDone(r);        // 초필살기 스택 (신화 · 끝까지 쓴 것만)
             }
             s.Cleanup();
             s.ReleaseAll();
@@ -280,7 +282,7 @@ namespace NKK.Ults
             if (auto) foreach (var r in Rats.Rats) if (Full(r)) Request(r);
             // 대기열 → 하나씩
             if (cur == null) cdLeft -= dt;
-            if (cur == null && cdLeft <= 0 && !FxManager.Halt && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing))
+            if (cur == null && cdLeft <= 0 && !FxManager.Halt && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing) && !(SuperUltManager.I && SuperUltManager.I.Busy))      // 초필살기 컷신 중엔 기다림
                 while (queue.Count > 0) { var r = queue[0]; queue.RemoveAt(0); if (r && r.temp <= 0 && Full(r) && TryStart(r)) break; }
 
             if (cur != null && cutPhase) StepCut(udt);
@@ -350,7 +352,7 @@ namespace NKK.Ults
                     if (r.temp > 0 || buttons.ContainsKey(r) || !Full(r)) continue;
                     var b = Instantiate(buttonTemplate, bar); b.gameObject.SetActive(true); b.name = "Ult_" + r.codeId;
                     var rr = r;
-                    b.Setup(Icon(DB.UltOf(r.Data)), r.Data.character_name, () => Request(rr));
+                    b.Setup(UltIcon(DB.UltOf(r.Data)), r.Data.character_name, () => Request(rr));
                     buttons[r] = b; buttonOrder.Add(r);
                 }
                 foreach (var r in buttonOrder)
@@ -380,7 +382,7 @@ namespace NKK.Ults
             txt.alpha = a; txt.transform.localScale = Vector3.one * sc;
         }
 
-        Sprite Icon(RatUltimateRow u)
+        public Sprite UltIcon(RatUltimateRow u)
         {
             if (u == null) return null;
             string n = string.IsNullOrEmpty(u.ult_icon) ? "" : u.ult_icon.Substring(u.ult_icon.LastIndexOf('/') + 1);

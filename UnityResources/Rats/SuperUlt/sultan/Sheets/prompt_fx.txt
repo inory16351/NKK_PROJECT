@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image on a PURE BLACK #000000 background (for additive blending), 3 columns x 2 rows grid of SEPARATE glowing effects, each well inside its own cell, none touching. Bright cores, soft painted glow, no outlines.
+  1. a cascade of GOLD COINS falling straight DOWN (vertical stream)
+  2. a round purple-gold magic SMOKE burst
+  3. a ring of purple magic smoke and gems
+  4. a horizontal trail of magic sparkles and smoke
+  5. a big gold-purple starburst
+  6. a circle of glittering gems and stars around an empty center
+- NO text, NO letters, NO numbers.

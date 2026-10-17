@@ -1,0 +1,4 @@
+Use your built-in image generation tool to EDIT the attached image and save it as PNG to: pano_a_alt.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+EDIT the attached image pano_a.png. Keep EXACTLY the same composition, camera, size (1536x1024) and painted style. Change: the same picture but COMPLETELY FROZEN SOLID: everything covered in thick ice and frost, giant ice crystals, icicles, a white-blue blizzard. NO text, NO letters, no characters.

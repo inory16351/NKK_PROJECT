@@ -561,6 +561,36 @@
    "action": "",
    "action_value": "",
    "sort": 46
+  },
+  {
+   "step_id": "l_rats_ult",
+   "scene": "Lobby",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "l_rats_page",
+   "cond1_type": "Done",
+   "cond1_value": "g_boss_ult",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 212
+  },
+  {
+   "step_id": "g_super",
+   "scene": "Game",
+   "trigger": "SuperReady",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 72
   }
  ],
  "Line": [
@@ -926,7 +956,7 @@
   },
   {
    "line_id": 41,
-   "step_id": "l_rats_page",
+   "step_id": "l_rats_ult",
    "speaker_id": "hero",
    "face": "happy",
    "text": "필살기... 기억나지? 찍찍!!",
@@ -1373,6 +1403,24 @@
    "text": "꽉 찼을 땐 승급으로 쥐를 합치면 자리가 다시 생겨! 번식할 쥐만 남기고 나머지는 승급시키자!",
    "text_sk": 3900090,
    "highlight": "promote"
+  },
+  {
+   "line_id": 92,
+   "step_id": "g_super",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "우와! 신화 친구가 필살기를 다섯 번이나 써서 힘이 넘쳐흘러!",
+   "text_sk": 3900092,
+   "highlight": ""
+  },
+  {
+   "line_id": 93,
+   "step_id": "g_super",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "아래 반짝이는 '초필살기' 버튼을 눌러 봐! 종마다 한 판에 한 번뿐이야 찍!!",
+   "text_sk": 3900093,
+   "highlight": "super"
   }
  ],
  "Story": [

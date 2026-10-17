@@ -9279,5 +9279,218 @@
   {
    "effect_type": "Rush_Range_Up"
   }
+ ],
+ "Super_Ult": [
+  {
+   "super_id": 31001,
+   "code_id": "zapham",
+   "super_name": "도시 대정전",
+   "super_name_sk": 4231001,
+   "super_line": "찌릿… 도시 전체를 충전 중!",
+   "super_line_sk": 4331001,
+   "finish_line": "번개가 하늘을 가른다!!",
+   "finish_line_sk": 4431001,
+   "motif": "Blackout_Bolt"
+  },
+  {
+   "super_id": 31002,
+   "code_id": "parkrat",
+   "super_name": "쥐랜드 불꽃 퍼레이드",
+   "super_name_sk": 4231002,
+   "super_line": "퍼레이드 수레 출발~!",
+   "super_line_sk": 4331002,
+   "finish_line": "피날레 폭죽 발사!!",
+   "finish_line_sk": 4431002,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31003,
+   "code_id": "emperor",
+   "super_name": "천하통일 대관식",
+   "super_name_sk": 4231003,
+   "super_line": "짐의 대관식이니라!",
+   "super_line_sk": 4331003,
+   "finish_line": "온 하늘에 축포를 올려라!!",
+   "finish_line_sk": 4431003,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31004,
+   "code_id": "pharaoh",
+   "super_name": "태양신의 심판",
+   "super_name_sk": 4231004,
+   "super_line": "태양 원반이 떠오른다…",
+   "super_line_sk": 4331004,
+   "finish_line": "모든 것이 하얗게 타오른다!!",
+   "finish_line_sk": 4431004,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31005,
+   "code_id": "knight",
+   "super_name": "원탁의 기사단",
+   "super_name_sk": 4231005,
+   "super_line": "원탁의 기사들이여, 돌격!",
+   "super_line_sk": 4331005,
+   "finish_line": "성검 일격!!",
+   "finish_line_sk": 4431005,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31006,
+   "code_id": "sultan",
+   "super_name": "소원 세 개",
+   "super_name_sk": 4231006,
+   "super_line": "첫째 소원, 둘째 소원…",
+   "super_line_sk": 4331006,
+   "finish_line": "마지막 소원! 전부 날려 줘!!",
+   "finish_line_sk": 4431006,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31007,
+   "code_id": "alien",
+   "super_name": "모선 강림",
+   "super_name_sk": 4231007,
+   "super_line": "하늘이… 그림자로 덮인다",
+   "super_line_sk": 4331007,
+   "finish_line": "모선 주포 발사!!",
+   "finish_line_sk": 4431007,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31008,
+   "code_id": "streamrat",
+   "super_name": "구독자 100만 기념 방송",
+   "super_name_sk": 4231008,
+   "super_line": "채팅창 폭주! 후원 폭주!",
+   "super_line_sk": 4331008,
+   "finish_line": "구독자 100만 달성!!",
+   "finish_line_sk": 4431008,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31009,
+   "code_id": "ramjui",
+   "super_name": "람쥐썬더 최종장",
+   "super_name_sk": 4231009,
+   "super_line": "도토리 천둥이 쏟아진다!",
+   "super_line_sk": 4331009,
+   "finish_line": "람쥐썬더!!",
+   "finish_line_sk": 4431009,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31010,
+   "code_id": "jwerry",
+   "super_name": "줴리 감사합니다 (앵콜)",
+   "super_name_sk": 4231010,
+   "super_line": "커튼이 오른다… 앵콜!",
+   "super_line_sk": 4331010,
+   "finish_line": "줴리 감사합니다!!",
+   "finish_line_sk": 4431010,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31011,
+   "code_id": "starchef",
+   "super_name": "3스타 풀코스",
+   "super_name_sk": 4231011,
+   "super_line": "전채, 수프… 다음은?",
+   "super_line_sk": 4331011,
+   "finish_line": "메인 디시 나왔습니다!!",
+   "finish_line_sk": 4431011,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31012,
+   "code_id": "jjdetective",
+   "super_name": "사건 종결",
+   "super_name_sk": 4231012,
+   "super_line": "범인은… 바로 너다!",
+   "super_line_sk": 4331012,
+   "finish_line": "사건 종결!!",
+   "finish_line_sk": 4431012,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31013,
+   "code_id": "fondue",
+   "super_name": "치즈 대홍수",
+   "super_name_sk": 4231013,
+   "super_line": "치즈가 차오른다…!",
+   "super_line_sk": 4331013,
+   "finish_line": "치즈 대홍수!!",
+   "finish_line_sk": 4431013,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31014,
+   "code_id": "bomber",
+   "super_name": "익스플로전 · 극",
+   "super_name_sk": 4231014,
+   "super_line": "마법진 전개… 겹겹이!",
+   "super_line_sk": 4331014,
+   "finish_line": "익스플로전!!!",
+   "finish_line_sk": 4431014,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31015,
+   "code_id": "icequeen",
+   "super_name": "영원한 겨울",
+   "super_name_sk": 4231015,
+   "super_line": "세상이 얼어붙는다…",
+   "super_line_sk": 4331015,
+   "finish_line": "산산조각!!",
+   "finish_line_sk": 4431015,
+   "motif": "Default"
+  }
+ ],
+ "Super_Config": [
+  {
+   "key": "unlock_level",
+   "value": 10.0
+  },
+  {
+   "key": "stack_need",
+   "value": 5.0
+  },
+  {
+   "key": "hit_count",
+   "value": 10.0
+  },
+  {
+   "key": "hit_mul",
+   "value": 4.0
+  },
+  {
+   "key": "finish_mul",
+   "value": 20.0
+  },
+  {
+   "key": "boss_cap",
+   "value": 0.35
+  },
+  {
+   "key": "t_enter",
+   "value": 0.4
+  },
+  {
+   "key": "t_cutin",
+   "value": 1.9
+  },
+  {
+   "key": "t_act",
+   "value": 3.9
+  },
+  {
+   "key": "t_finish",
+   "value": 4.6
+  },
+  {
+   "key": "t_end",
+   "value": 5.0
+  }
  ]
 }

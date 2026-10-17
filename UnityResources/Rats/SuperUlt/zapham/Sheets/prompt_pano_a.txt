@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: pano_a.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, one full-frame painting (no transparency, no panels, no borders). NO text, NO letters, NO numbers, no logos, NO characters (no animals, no people).
+- STYLE: exactly the painted style, palette and detail scale of the attached ref_city (night city, warm glowing windows, deep blue-purple night, soft painted storybook look).
+- This picture is ONE SEGMENT of a very TALL vertical panorama that a camera tilts down through: SKY (top) -> CITY (middle) -> ROOFTOP (bottom). Segments are stacked vertically, so the left/right composition must keep continuing at the top and bottom edges.
+- SEGMENT 1 of 3 (TOP): a dramatic STORMY NIGHT SKY: huge swirling thunderclouds lit from inside, several branching lightning bolts in the clouds, a big glowing full moon partly behind clouds, stars. In the BOTTOM 30% the tops of the tallest city spires, a big research-lab DOME tower top and the top of electric pylons begin to rise into the picture from the bottom edge, with warm lit windows.

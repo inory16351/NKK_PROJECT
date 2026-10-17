@@ -48,6 +48,14 @@ namespace NKK.Data
     // 필살기 자막 (Ult_Caption): 필살기 코드가 키(c1, c2…)로 부름. {n} 같은 자리는 코드가 채움
     [Serializable] public class UltCaptionRow { public int ultimate_id, text_sk; public string cap_key, text; public float size; public string color; }
     // 필살기 게이지가 차는 조건 (Ult_Charge): 그 종의 쥐가 cond_type 을 하면 gauge 만큼
+    // 초필살기 (신화 15종, 2026-10-17): 이름 · 본 연출 자막 · 피니시 자막 · 연출 방식(motif, SuperUltManager 가 읽음). 수치는 Super_Config
+    [Serializable]
+    public class SuperUltRow
+    {
+        public int super_id; public string code_id, super_name, super_line, finish_line, motif;
+        public int super_name_sk, super_line_sk, finish_line_sk;
+    }
+
     [Serializable] public class UltChargeRow { public string cond_type; public float gauge; public CondType Cond => E.P<CondType>(cond_type); }
 
     [Serializable]
@@ -98,7 +106,7 @@ namespace NKK.Data
     }
 
     // 워크북 단위 래퍼 (JSON 최상위 키 = 시트 이름)
-    [Serializable] public class RatTableFile { public List<RatCharacterRow> Character; public List<RatSkillRow> Skill; public List<RatUltimateRow> Ultimate; public List<UltCaptionRow> Ult_Caption; public List<UltChargeRow> Ult_Charge; }
+    [Serializable] public class RatTableFile { public List<RatCharacterRow> Character; public List<RatSkillRow> Skill; public List<RatUltimateRow> Ultimate; public List<UltCaptionRow> Ult_Caption; public List<UltChargeRow> Ult_Charge; public List<SuperUltRow> Super_Ult; public List<KeyValueRow> Super_Config; }
     [Serializable] public class RatGradeTableFile { public List<RatGradeRow> Grade; }
     [Serializable] public class RatGrowthTableFile { public List<GrowthNodeRow> Growth_Node; public List<GrowthOrderRow> Growth_Order; public List<ActionAwakenRow> Action_Awaken; }
     [Serializable] public class CatTableFile { public List<CatCharacterRow> Character; public List<CatSkillRow> Skill; }

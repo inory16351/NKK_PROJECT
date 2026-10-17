@@ -7756,6 +7756,16 @@
    "en": "When it's full, merge rats with Promote to free up space! Keep the breeders and Promote the rest!"
   },
   {
+   "string_key": 3900092,
+   "ko": "우와! 신화 친구가 필살기를 다섯 번이나 써서 힘이 넘쳐흘러!",
+   "en": "Whoa! Our Mythic buddy used its Ultimate five times and it's overflowing with power!"
+  },
+  {
+   "string_key": 3900093,
+   "ko": "아래 반짝이는 '초필살기' 버튼을 눌러 봐! 종마다 한 판에 한 번뿐이야 찍!!",
+   "en": "Press the shiny 'Super Ultimate' button below! Each kind can use it only once per run, squeak!!"
+  },
+  {
    "string_key": 4000001,
    "ko": "찍... 찍찍찍...! (우리들은 그저 이곳이 낙원인 줄만 알고 있었지...)",
    "en": "Squeak... squeak squeak squeak...! (We truly believed this place was paradise...)"
@@ -7854,6 +7864,231 @@
    "string_key": 4100008,
    "ko": "전설의 탈옥왕",
    "en": "Legendary Jailbreak King"
+  },
+  {
+   "string_key": 4231001,
+   "ko": "도시 대정전",
+   "en": "Citywide Blackout"
+  },
+  {
+   "string_key": 4231002,
+   "ko": "쥐랜드 불꽃 퍼레이드",
+   "en": "Ratland Fireworks Parade"
+  },
+  {
+   "string_key": 4231003,
+   "ko": "천하통일 대관식",
+   "en": "Coronation of the Realm"
+  },
+  {
+   "string_key": 4231004,
+   "ko": "태양신의 심판",
+   "en": "Judgment of the Sun God"
+  },
+  {
+   "string_key": 4231005,
+   "ko": "원탁의 기사단",
+   "en": "Knights of the Round Table"
+  },
+  {
+   "string_key": 4231006,
+   "ko": "소원 세 개",
+   "en": "Three Wishes"
+  },
+  {
+   "string_key": 4231007,
+   "ko": "모선 강림",
+   "en": "Mothership Descends"
+  },
+  {
+   "string_key": 4231008,
+   "ko": "구독자 100만 기념 방송",
+   "en": "1 Million Subs Special Stream"
+  },
+  {
+   "string_key": 4231009,
+   "ko": "람쥐썬더 최종장",
+   "en": "Squirrel Thunder: Final Chapter"
+  },
+  {
+   "string_key": 4231010,
+   "ko": "줴리 감사합니다 (앵콜)",
+   "en": "Thank You, Jerreh (Encore)"
+  },
+  {
+   "string_key": 4231011,
+   "ko": "3스타 풀코스",
+   "en": "Three-Star Full Course"
+  },
+  {
+   "string_key": 4231012,
+   "ko": "사건 종결",
+   "en": "Case Closed"
+  },
+  {
+   "string_key": 4231013,
+   "ko": "치즈 대홍수",
+   "en": "The Great Cheese Flood"
+  },
+  {
+   "string_key": 4231014,
+   "ko": "익스플로전 · 극",
+   "en": "EXPLOSION: Ultima"
+  },
+  {
+   "string_key": 4231015,
+   "ko": "영원한 겨울",
+   "en": "Eternal Winter"
+  },
+  {
+   "string_key": 4331001,
+   "ko": "찌릿… 도시 전체를 충전 중!",
+   "en": "Bzzt... charging the whole city!"
+  },
+  {
+   "string_key": 4331002,
+   "ko": "퍼레이드 수레 출발~!",
+   "en": "The parade floats roll out~!"
+  },
+  {
+   "string_key": 4331003,
+   "ko": "짐의 대관식이니라!",
+   "en": "Behold, Our coronation!"
+  },
+  {
+   "string_key": 4331004,
+   "ko": "태양 원반이 떠오른다…",
+   "en": "The sun disk rises..."
+  },
+  {
+   "string_key": 4331005,
+   "ko": "원탁의 기사들이여, 돌격!",
+   "en": "Knights of the Round, charge!"
+  },
+  {
+   "string_key": 4331006,
+   "ko": "첫째 소원, 둘째 소원…",
+   "en": "First wish, second wish..."
+  },
+  {
+   "string_key": 4331007,
+   "ko": "하늘이… 그림자로 덮인다",
+   "en": "The sky... goes dark"
+  },
+  {
+   "string_key": 4331008,
+   "ko": "채팅창 폭주! 후원 폭주!",
+   "en": "Chat is exploding! Donos are flooding!"
+  },
+  {
+   "string_key": 4331009,
+   "ko": "도토리 천둥이 쏟아진다!",
+   "en": "Acorn thunder rains down!"
+  },
+  {
+   "string_key": 4331010,
+   "ko": "커튼이 오른다… 앵콜!",
+   "en": "The curtain rises... Encore!"
+  },
+  {
+   "string_key": 4331011,
+   "ko": "전채, 수프… 다음은?",
+   "en": "Appetizer, soup... and next?"
+  },
+  {
+   "string_key": 4331012,
+   "ko": "범인은… 바로 너다!",
+   "en": "The culprit is... YOU!"
+  },
+  {
+   "string_key": 4331013,
+   "ko": "치즈가 차오른다…!",
+   "en": "The cheese is rising...!"
+  },
+  {
+   "string_key": 4331014,
+   "ko": "마법진 전개… 겹겹이!",
+   "en": "Magic circles, layer upon layer!"
+  },
+  {
+   "string_key": 4331015,
+   "ko": "세상이 얼어붙는다…",
+   "en": "The world freezes over..."
+  },
+  {
+   "string_key": 4431001,
+   "ko": "번개가 하늘을 가른다!!",
+   "en": "Lightning splits the sky!!"
+  },
+  {
+   "string_key": 4431002,
+   "ko": "피날레 폭죽 발사!!",
+   "en": "Grand finale fireworks!!"
+  },
+  {
+   "string_key": 4431003,
+   "ko": "온 하늘에 축포를 올려라!!",
+   "en": "Fill the skies with cannon fire!!"
+  },
+  {
+   "string_key": 4431004,
+   "ko": "모든 것이 하얗게 타오른다!!",
+   "en": "Everything burns white!!"
+  },
+  {
+   "string_key": 4431005,
+   "ko": "성검 일격!!",
+   "en": "Holy Sword Strike!!"
+  },
+  {
+   "string_key": 4431006,
+   "ko": "마지막 소원! 전부 날려 줘!!",
+   "en": "Final wish! Blow them all away!!"
+  },
+  {
+   "string_key": 4431007,
+   "ko": "모선 주포 발사!!",
+   "en": "Main cannon, fire!!"
+  },
+  {
+   "string_key": 4431008,
+   "ko": "구독자 100만 달성!!",
+   "en": "ONE MILLION SUBS!!"
+  },
+  {
+   "string_key": 4431009,
+   "ko": "람쥐썬더!!",
+   "en": "Squirrel Thunder!!"
+  },
+  {
+   "string_key": 4431010,
+   "ko": "줴리 감사합니다!!",
+   "en": "Thank you, Jerreh!!"
+  },
+  {
+   "string_key": 4431011,
+   "ko": "메인 디시 나왔습니다!!",
+   "en": "Main dish is served!!"
+  },
+  {
+   "string_key": 4431012,
+   "ko": "사건 종결!!",
+   "en": "Case closed!!"
+  },
+  {
+   "string_key": 4431013,
+   "ko": "치즈 대홍수!!",
+   "en": "Cheese Flood!!"
+  },
+  {
+   "string_key": 4431014,
+   "ko": "익스플로전!!!",
+   "en": "EXPLOSION!!!"
+  },
+  {
+   "string_key": 4431015,
+   "ko": "산산조각!!",
+   "en": "Shatter!!"
   },
   {
    "string_key": 8000001,
@@ -9879,6 +10114,51 @@
    "string_key": 8000430,
    "ko": "스테이지 스킵: {floor}층을 클리어하면 {n}층부터 출발할 수 있어요",
    "en": "Floor Skip: Clear Floor {floor} to start from Floor {n}"
+  },
+  {
+   "string_key": 8000431,
+   "ko": "필살기를 {n}번 끝까지 쓰면 버튼이 떠요 · 종마다 한 판에 한 번",
+   "en": "Use its Ultimate {n} times to unlock the button · once per kind per run"
+  },
+  {
+   "string_key": 8000432,
+   "ko": " + 초필살기",
+   "en": " + Super Ultimate"
+  },
+  {
+   "string_key": 8000433,
+   "ko": "초필살기 · {name}",
+   "en": "Super Ultimate · {name}"
+  },
+  {
+   "string_key": 8000434,
+   "ko": "※ 줄 서기 3시간, 퍼레이드 3초",
+   "en": "※ 3 hours in line, 3 seconds of parade"
+  },
+  {
+   "string_key": 8000435,
+   "ko": "초필살기!!",
+   "en": "SUPER!!"
+  },
+  {
+   "string_key": 8000436,
+   "ko": "초필살기 이름",
+   "en": "Super Ultimate"
+  },
+  {
+   "string_key": 8000437,
+   "ko": "※ 이번 달 전기세는 연구소가 냅니다",
+   "en": "※ This month's power bill goes to the Lab"
+  },
+  {
+   "string_key": 8000438,
+   "ko": "{name}의 초필살기",
+   "en": "{name}'s Super Ultimate"
+  },
+  {
+   "string_key": 8000439,
+   "ko": "※ 대관식 비용은 연구소 법인카드로",
+   "en": "※ Coronation billed to the Lab's company card"
   },
   {
    "string_key": 9000001,

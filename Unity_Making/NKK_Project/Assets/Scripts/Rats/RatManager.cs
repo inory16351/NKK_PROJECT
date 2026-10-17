@@ -318,7 +318,7 @@ namespace NKK.Rats
         //   N 이 promote_soft 에 닿은 뒤로는 promote_soft × promote_grow2^(넘은 횟수) 로 완만하게 (이어지게)
         [Header("승급")]
         [Tooltip("일괄 승급 때 남겨 둘 마리 수 (번식용, 최소)")] public int promoteKeep = 6;
-        [Tooltip("일괄 승급 때 최대 마리 수의 이 비율만큼은 남김")] [Range(0, 1)] public float promoteKeepRatio = 0.5f;
+        [Tooltip("일괄 승급 때 최대 마리 수의 이 비율만큼은 남김 (0 = promoteKeep 마리만, 2026-10-17 사용자: 6마리만 남김)")] [Range(0, 1)] public float promoteKeepRatio = 0f;
         public int PromoteKeepCount => Mathf.Max(promoteKeep, Mathf.CeilToInt(PopCap * promoteKeepRatio));
         [Tooltip("승급한 쥐 위 팝업 글")] public string promotePopup;
         [Tooltip("공용 스킬로 2마리가 나왔을 때 팝업 글")] public string promoteDoublePopup;
@@ -367,20 +367,27 @@ namespace NKK.Rats
             Ults?.Flash(nc, 0.15f);
             return nr;
         }
-        // 일괄 승급: 낮은 등급부터 되는 만큼 (번식용 PromoteKeepCount 마리는 남김). 승급 횟수
+        // 일괄 승급: 낮은 등급부터 되는 만큼 (승급 뒤에도 번식용 PromoteKeepCount 마리는 남김). 승급 횟수
         public int PromoteAll()
         {
             int n = 0;
             for (int guard = 0; guard < 500; guard++)
             {
-                int g = -1; for (int k = 0; k < 5; k++) if (CanPromote(k)) { g = k; break; }
-                if (g < 0 || RealCount - PromoteNeed(g) + 1 < PromoteKeepCount) break;
-                if (!Promote(g)) break;
+                int g = NextBulkGrade();
+                if (g < 0 || !Promote(g)) break;
                 n++;
             }
             return n;
         }
+        // 일괄 승급으로 지금 올릴 수 있는 가장 낮은 등급 (없으면 -1). 낮은 등급이 남길 수를 넘으면 필요 수가 적은 윗등급을 봄
+        int NextBulkGrade()
+        {
+            int keep = PromoteKeepCount;
+            for (int k = 0; k < 5; k++) if (CanPromote(k) && RealCount - PromoteNeed(k) + 1 >= keep) return k;
+            return -1;
+        }
         public bool CanPromoteAny { get { for (int k = 0; k < 5; k++) if (CanPromote(k)) return true; return false; } }
+        public bool CanPromoteAll => NextBulkGrade() >= 0;
 
         // 드랍 소품 (조건 Drop_Prop): 같은 종이 닿으면 줍고 바로 액션
         class Pickup { public float x, y, t, life; public string code; public SpriteRenderer r; }

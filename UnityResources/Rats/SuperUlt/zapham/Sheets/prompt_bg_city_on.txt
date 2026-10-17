@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: bg_city_on.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 full-frame background painting, no characters.
+- STYLE: a spectacular MapleStory-style 'origin skill' cut-in illustration, very dynamic and cool, BUT drawn in the soft painted storybook style of the attached ref_style / ref_zapham pictures (simple soft shapes, gentle painted shading, no black outlines, no gloss).
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- Subject: a wide panoramic NIGHT CITY seen from a high rooftop: many cozy toy-like buildings, towers and a big research lab building with a dome in the distance, hundreds of warm glowing yellow windows, street lamps, glowing billboards without text, power lines and electric pylons crossing the scene, a few stormy clouds and a big moon. Leave the lower 25% of the image as dark rooftops so a character layer can stand there. Deep blue-purple sky.

@@ -88,7 +88,7 @@ namespace NKK.Tutorial
         {
             if (scene != "Game") return Lobby && RatTreePopup.Current && RatTreePopup.Current.IsOpen;
             return GameOver.Active || Heist.Active || FxManager.WorldFreeze || FxManager.Paused || (Stage && Stage.Climbing)
-                || (Ults && Ults.Busy) || (SuperJump && SuperJump.Busy) || actionPending != null;
+                || (Ults && Ults.Busy) || (NKK.Ults.SuperUltManager.I && NKK.Ults.SuperUltManager.I.Busy) || (SuperJump && SuperJump.Busy) || actionPending != null;
         }
 
         bool Cond(string type, string v)
@@ -136,6 +136,7 @@ namespace NKK.Tutorial
                         return Stage && Stage.StairsWallRatio() <= k;
                     }
                 case "BossFight": return Boss.Current && Boss.Current.State == Boss.BState.Fight;
+                case "SuperReady": return NKK.Ults.SuperUltManager.I && NKK.Ults.SuperUltManager.I.AnyReady;      // 초필살기 버튼이 처음 뜸
                 case "UltReady":
                     if (!Rats || !Ults) return false;
                     foreach (var r in Rats.Rats) if (Ults.Full(r)) return true;

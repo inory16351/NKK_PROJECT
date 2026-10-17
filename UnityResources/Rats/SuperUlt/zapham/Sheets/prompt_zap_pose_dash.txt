@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: zap_pose_dash.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1536 portrait image, ONE character pose.
+- STYLE: a spectacular MapleStory-style 'origin skill' cut-in illustration, very dynamic and cool, BUT drawn in the soft painted storybook style of the attached ref_style / ref_zapham pictures (simple soft shapes, gentle painted shading, no black outlines, no gloss).
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- CHARACTER "Zap Hamster": a chubby golden hamster wearing a yellow electric-mouse COSPLAY HOOD with long pointed ears with brown tips, red round cheek marks, and a big AA BATTERY strapped on its back with a red cable. Must look exactly like the attached ref_zapham / ref_parts (big head, small body, pink ears, pink nose, black bead eyes).
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow on the background, no gradient. Do not use magenta or purple on the subject. Keep the subject fully inside the frame with margin.
+- POSE: a joyful, energetic flying jump toward the viewer like a superhero taking off: both small paws stretched forward glowing with soft yellow sparks, big happy open-mouth smile, hood ears and the red cable fluttering behind, body slightly tilted, cute and playful (not scary). Full body.

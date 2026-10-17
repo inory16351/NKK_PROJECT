@@ -54,6 +54,9 @@ namespace NKK.Data
         readonly Dictionary<string, float> shopCfg = new(), gachaCfg = new();
         public float ShopCfg(string key, float def = 0) => shopCfg.TryGetValue(key, out var v) ? v : def;
         public float GachaCfg(string key, float def = 0) => gachaCfg.TryGetValue(key, out var v) ? v : def;
+        public readonly Dictionary<string, SuperUltRow> SuperUlts = new();          // 초필살기 (쥐 code → 행)
+        readonly Dictionary<string, float> superCfg = new();
+        public float SuperCfg(string key, float def = 0) => superCfg.TryGetValue(key, out var v) ? v : def;
         public readonly List<BossRow> Bosses = new();
         public readonly List<AchievementRow> Achievements = new();
         public readonly List<BossLineRow> BossLines = new();
@@ -75,7 +78,7 @@ namespace NKK.Data
 
         public void Load()
         {
-            Rats.Clear(); RatsByCode.Clear(); RatSkills.Clear(); Ultimates.Clear(); UltCaptions.Clear(); UltCharges.Clear(); Grades.Clear();
+            Rats.Clear(); RatsByCode.Clear(); RatSkills.Clear(); Ultimates.Clear(); UltCaptions.Clear(); UltCharges.Clear(); Grades.Clear(); SuperUlts.Clear(); superCfg.Clear();
             GrowthNodes.Clear(); GrowthOrder.Clear(); ActionAwaken.Clear(); Cats.Clear(); CatSkills.Clear();
             Items.Clear(); ItemsByCode.Clear(); Zones.Clear(); FurnitureLayouts.Clear(); Tiers.Clear(); Humans.Clear(); HumanLines.Clear(); Stages.Clear(); Bosses.Clear(); Achievements.Clear(); BossLines.Clear(); BossAtks.Clear(); TutoSpeakers.Clear(); TutoSteps.Clear(); TutoLines.Clear(); Story.Clear();
             CommonSkills.Clear(); CommonSkillsById.Clear(); CommonSkillsByTier.Clear(); SkillBranches.Clear();
@@ -89,6 +92,8 @@ namespace NKK.Data
                 foreach (var u in f.Ultimate) Ultimates[u.ultimate_id] = u;
                 if (f.Ult_Caption != null) foreach (var c in f.Ult_Caption) UltCaptions[(c.ultimate_id, c.cap_key)] = c;
                 if (f.Ult_Charge != null) foreach (var c in f.Ult_Charge) UltCharges[c.Cond] = c.gauge;
+                if (f.Super_Ult != null) foreach (var s in f.Super_Ult) SuperUlts[s.code_id] = s;
+                if (f.Super_Config != null) foreach (var c in f.Super_Config) superCfg[c.key] = c.value;
             }
             if (ratGradeTable)
                 foreach (var g in JsonUtility.FromJson<RatGradeTableFile>(ratGradeTable.text).Grade) Grades[g.Grade] = g;
@@ -143,7 +148,7 @@ namespace NKK.Data
             // 글 칸을 지금 언어로 (<칸>_sk 키, 한국어면 그대로). 언어를 바꾸면 Load 를 다시 함 (Awake 에서 Loc.Changed 구독)
             if (!Loc.IsKorean)
             {
-                Loc.ApplyAll(Rats.Values); Loc.ApplyAll(RatSkills.Values); Loc.ApplyAll(Ultimates.Values); Loc.ApplyAll(UltCaptions.Values); Loc.ApplyAll(Grades.Values);
+                Loc.ApplyAll(Rats.Values); Loc.ApplyAll(RatSkills.Values); Loc.ApplyAll(Ultimates.Values); Loc.ApplyAll(UltCaptions.Values); Loc.ApplyAll(Grades.Values); Loc.ApplyAll(SuperUlts.Values);
                 Loc.ApplyAll(GrowthNodes); Loc.ApplyAll(Cats.Values); Loc.ApplyAll(CatSkills.Values); Loc.ApplyAll(Items.Values); Loc.ApplyAll(Zones); Loc.ApplyAll(Tiers.Values);
                 Loc.ApplyAll(Humans); Loc.ApplyAll(HumanLines); Loc.ApplyAll(CommonSkills); Loc.ApplyAll(SkillBranches.Values); Loc.ApplyAll(Achievements);
                 Loc.ApplyAll(Bosses); Loc.ApplyAll(BossLines); Loc.ApplyAll(BossAtks.Values); Loc.ApplyAll(TutoSpeakers.Values); Loc.ApplyAll(Story);

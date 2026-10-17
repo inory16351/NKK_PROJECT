@@ -1,0 +1,6 @@
+Use your built-in image generation tool to EDIT the attached image pano_a.png and save the result as PNG to: pano_a_off.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EXACTLY the same composition, buildings, camera, size (1536x1024) and painted style as the attached pano_a.png.
+- Change only the lighting: a total CITY BLACKOUT. Every window, street lamp, lantern and billboard is OFF (dark), the city is in deep blue-navy shadow lit only by the moon and stormy clouds, a few faint cold blue reflections. No warm yellow light anywhere. Keep the moon.
+- NO text, NO letters, NO numbers, no characters.

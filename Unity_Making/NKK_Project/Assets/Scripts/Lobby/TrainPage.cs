@@ -46,6 +46,10 @@ namespace NKK.Lobby
         public Image pIcon, aIcon, uIcon;
         [Tooltip("필살기가 없는 종일 때 보이는 것")] public GameObject noUlt;
         [Tooltip("해금 전 카드 투명도")] public float lockedAlpha = 0.55f;
+        [Header("초필살기 카드 (신화만, 쥐 캐릭터 테이블 Super_Ult)")]
+        public CanvasGroup superCard;
+        [Tooltip("이름 ({name}) · 설명 ({n} = 필살기 몇 번) · Lv {lv}에 해금 (해금 전에만)")] public TMP_Text sName, sDesc, sLock;
+        [Tooltip("성장 길에서 초필살기가 열리는 레벨 칩 이름 뒤에 붙일 글 (예: ' + 초필살기')")] public string superPathTag;
         public Button trainButton;
         [Tooltip("훈련 버튼 글 ({have} {need}) / 만렙 글")] public TMP_Text trainLabel, wTrainMax;
         [Header("스킬 트리 창")]
@@ -188,6 +192,16 @@ namespace NKK.Lobby
                 SetIcon(uIcon, Icons ? Icons.Ult(u) : null);
             }
 
+            // 초필살기 (신화 · 쳇바퀴 훈련 unlock_level)
+            var su = db.SuperUlts.TryGetValue(r.code_id, out var srow) ? srow : null;
+            int superLv = (int)db.SuperCfg("unlock_level", 10); bool superOn = L >= superLv;
+            if (superCard) { superCard.gameObject.SetActive(su != null); superCard.alpha = superOn ? 1 : lockedAlpha; }
+            if (su != null)
+            {
+                SetT(sName, F(sName, ("name", su.super_name))); SetT(sDesc, F(sDesc, ("n", (int)db.SuperCfg("stack_need", 5))));
+                if (sLock) { sLock.gameObject.SetActive(!superOn); sLock.text = F(sLock, ("lv", superLv)); }
+            }
+
             // 성장 길: 다음 레벨들에 찍히는 노드 (해금 노드는 강조, 필살기 없는 종의 필살기 해금은 흐리게)
             foreach (var g in pathChips) Destroy(g);
             pathChips.Clear();
@@ -202,6 +216,7 @@ namespace NKK.Lobby
                     var e = n.Effect;
                     bool key = e == GrowthEffectType.Ult_Unlock || e == GrowthEffectType.Action_Awaken || e == GrowthEffectType.Awaken || (e == GrowthEffectType.Action_Unlock && lv == actLv);
                     bool dim = (e == GrowthEffectType.Ult_Unlock && u == null) || (e == GrowthEffectType.Action_Unlock && acs == null);
+                    if (su != null && lv == superLv) { key = true; dim = false; if (tn) tn.text += superPathTag; }      // 초필살기 열리는 레벨
                     var img = c.GetComponent<Image>(); if (img) img.color = dim ? pathDim : key ? pathKey : pathNormal;
                 }
 

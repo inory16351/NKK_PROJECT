@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: props.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE object per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): match EXACTLY the attached ref_zap_props picture (approved game props): a FLAT cartoon storybook look in the Untitled Goose Game mood — simple soft flat shapes, flat colors with only gentle soft shading, very little texture, minimal fur detail (NO individual fur strands), small simple black bead eyes with one tiny white highlight (NOT big sparkly anime eyes), no black outlines, no gloss, no realistic rendering, NOT a Disney/Pixar/3D look. An energetic dynamic pose is welcome, but keep the drawing as simple as the references.
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no gradient. Do not use magenta or purple on the subject. Keep the subject fully inside the frame with margin.
+  1. a big crumpled theme-park TICKET with a heart stamp and scribble lines instead of words
+  2. a single colorful BALLOON
+  3. a round-ears souvenir HEADBAND
+  4. a parade float shaped like a giant cake on wheels
+  5. a little marching-band rat drummer (tiny side character)
+  6. a strip of colorful bunting flags hanging in a curve

@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68fe4b2845443b095652dcfbdf390ce, type: 3}
+  m_Name: CursorSkin
+  m_EditorClassIdentifier: 
+  normal: {fileID: 2800000, guid: 1a1d9964396542f3a7303f1fb34f2ae5, type: 3}
+  pressed: {fileID: 2800000, guid: f08d0910090a473d8d760b9601e57279, type: 3}
+  hotspot: {x: 1, y: 1}
+  forceSoftware: 0

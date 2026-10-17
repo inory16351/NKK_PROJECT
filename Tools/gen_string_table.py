@@ -51,6 +51,9 @@ COLS = [
     ('튜토리얼 테이블', 'Line', 'line_id', 'text', 39),
     ('튜토리얼 테이블', 'Story', 'line_id', 'text', 40),
     ('티어 테이블', 'Tier', 'tier', 'tier_name', 41),
+    ('쥐 캐릭터 테이블', 'Super_Ult', 'super_id', 'super_name', 42),
+    ('쥐 캐릭터 테이블', 'Super_Ult', 'super_id', 'super_line', 43),
+    ('쥐 캐릭터 테이블', 'Super_Ult', 'super_id', 'finish_line', 44),
 ]
 
 HEAD = (['스트링 키', '한국어', '영어', '출처', '상태', '번역 메모'],

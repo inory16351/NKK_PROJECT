@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image on a PURE BLACK #000000 background (for additive blending), 3 columns x 2 rows grid of SEPARATE glowing effects, each well inside its own cell, none touching. Bright cores, soft painted glow, no outlines.
+  1. a blazing SOCCER BALL slamming straight DOWN with fire trail (vertical)
+  2. a round impact burst with cracks and dust
+  3. a ring of magnifying-glass light rays
+  4. a horizontal speed trail of the ball
+  5. a big white flash starburst
+  6. a circle of question-mark-like curls (no real letters) around an empty center
+- NO text, NO letters, NO numbers.

@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-14).
-마지막 갱신: 2026-10-15 — **§5-10 튜토리얼 라운드(1·2층) · 씹힘 방지 · 로비 슬로우 모션 · 치즈 창고 훈장 버튼 · 벽 체력 숫자 숨김** / 2026-10-13 밤 — **PV(홍보 영상) 작업은 `PV/HANDOFF_PV.md`** / **§5-8 브랜치 안내 먼저** / (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
+마지막 갱신: 2026-10-17 — **§5-11 일괄 승급 6마리 · 마우스 포인터 · 쳇바퀴 훈련 필살기 대사 · 초필살기 계획** / 2026-10-15 — **§5-10 튜토리얼 라운드(1·2층) · 씹힘 방지 · 로비 슬로우 모션 · 치즈 창고 훈장 버튼 · 벽 체력 숫자 숨김** / 2026-10-13 밤 — **PV(홍보 영상) 작업은 `PV/HANDOFF_PV.md`** / **§5-8 브랜치 안내 먼저** / (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
 
 ---
 
@@ -109,7 +109,7 @@
 
 **사람** (`ItemManager`): 층 시작 1~2명 · 방이 열릴 때 1~2명 · 18~30초마다 보충, 돌아다니는 사람이 최소 수(2 + 층÷6)보다 적으면 2.5~4.5초 빠른 보충. 상한 min(12, 4 + 층×0.4).
 
-**쥐**: 번식(확률 = 마리 수/최대 비율 곡선, 번식 때 하트) · 클릭 총공격(쿨 3초, 같은 대상 연타 감쇠) · 승급(필요 = 올림(1.5 × 1.3^k), 일괄 승급은 최대의 절반 남김) · 필살기(쥐 개체별 게이지, Lv 7 해금, 하나 끝난 뒤 쿨 25초) · 슈퍼 점프(초당 1/480 확률) · 묘기 5종(공용 스킬로 해금). 최대 마리 = 30 + 둥지 노드(최대 175).
+**쥐**: 번식(확률 = 마리 수/최대 비율 곡선, 번식 때 하트) · 클릭 총공격(쿨 3초, 같은 대상 연타 감쇠) · 승급(필요 = 올림(1.5 × 1.3^k), 일괄 승급은 승급 뒤 6마리 남김 — 2026-10-17) · 필살기(쥐 개체별 게이지, Lv 7 해금, 하나 끝난 뒤 쿨 25초) · 슈퍼 점프(초당 1/480 확률) · 묘기 5종(공용 스킬로 해금). 최대 마리 = 30 + 둥지 노드(최대 175).
 
 **성장·경제**: 치즈(판에서 벌고 저장) · 연구자료 · 조각(쳇바퀴 훈련 Lv). 공용 스킬 = 훈장마다 트리 하나(치즈 + 연구자료). **훈장 승급 = 연구자료 + 최고 층 + 조각 합 + 지금 훈장까지 스킬 트리 전부**.
 
@@ -291,6 +291,21 @@
 - **벽 체력바**: 숫자 글 숨김 · 크림색 판 끔 · 빨간 막대만 (`WallBar.showLabel` · `hpColors` 둘 다 꺼 둠, 사용자: 벽은 빨강으로 구별).
 - 테이블: 튜토리얼 테이블 Step(g_intro · g_wall · g_floor · g_birth · g_promote · g_cat · g_power · l_first · l_rats · l_rank) · Line(5·49) · Trigger_Type(Hurry) · Cond_Type(RoundDone · InRound), 스트링 테이블 8000175. 백업 `Data_Table/_backup_20261015`.
 - **확인함 (Play, 테스트 슬롯 4)**: 1층 조작 안내 → 첫 벽 붕괴 안내(맵 포함) · 1층 번식·고양이 없음 → 2층 첫 번식 안내 → 10마리 승급 → 2층 30초 고양이 → 남은 30초 타이머 안내 → 라운드 끝(InTutoRound false) · 계단 벽 25% 일 때 StairsWallRatio 0.25 · 로비로 갈 때 timeScale 0.05 → 1 · 훈장 버튼 → 훈장 페이지. **안 본 것**: 계단 벽 30% 로 실제 대사가 뜨는 장면 · 훈장 잠김 상태에서 버튼 → l_rank → 훈장 페이지 · 라운드 중 게임 오버 뒤 로비(치즈 창고 안 열림) · 실제 마우스 연타.
+
+## 5-11. 일괄 승급 · 마우스 포인터 · 대사 · 초필살기 계획 (2026-10-17)
+
+- **일괄 승급** (사용자: 6마리만 남김): 예전엔 max(6, 최대 마릿수 × 0.5) 를 남겨 최대 30 이면 15마리였고, 실패 배너는 '6마리'로 잘못 표시 → `promoteKeepRatio` 0 (코드 기본값 · Game 씬), 배너 `{keep}` = 실제 남길 수(`PromoteKeepCount`). 낮은 등급이 남길 수를 넘으면 필요 수가 적은 윗등급을 봄 (`NextBulkGrade`). **일괄 승급 버튼은 남길 수를 지키며 할 수 있을 때만 켜짐** (`RatManager.CanPromoteAll`, 예전엔 개별 승급 가능 여부로 켜져서 눌러도 실패).
+- **쳇바퀴 훈련 대사**: "필살기... 기억나지?"(대사 41)를 새 단계 `l_rats_ult`(After l_rats_page, 조건 Done g_boss_ult)로 → 첫 보스 필살기 시연을 못 본 플레이어에겐 안 나옴. 백업 `Data_Table/_backup_20261017`.
+- **마우스 포인터** (`UnityResources/Rats/Cursor/README.md`): 쥐 머리 화살표 평소/누름 2장 (Codex) → `Tools/slice_cursor.py` → `Assets/Art/Cursor/` (텍스처 형식 Cursor, 48px). 설정 `Assets/Resources/CursorSkin.asset` · 코드 `Core/CursorSkin.cs` (게임 시작 때 저절로 붙음, 모든 씬, 왼쪽/오른쪽 버튼 누르는 동안 누름 그림). 유니티 꺼진 상태에서 meta 를 직접 써서 넣음 → **유니티 열어 임포트·Play 확인 필요**.
+- **초필살기 1단계 (사용자: 계획서 제안대로)**: 테이블 쥐 캐릭터 `Super_Ult`(15종 이름·자막·motif) · `Super_Config`(unlock_level 10 · stack_need 5 · hit 10×4 · finish 20 · boss_cap 0.35 · 타임라인 0.4/1.9/3.9/4.6/5.0초), 스트링 42~44xxxxx(영어 번역 끝). 코드 `Ults/SuperUltManager`(스택 = UltimateManager.Stop 에서 · 종별 판당 1회 · 수동 · 화면 범위 피해 벽 제외 · 보스 상한 · 컷신 중 일반 필살기 대기 · 프레임당 0.05초 제한) · `SuperUltStyle`(쥐별 그림·색·입자·소리) · `SuperUltLayer`(레이어 키프레임). 씬 Game `HUD/SuperUlt`(SuperBar · Cut · Styles) + 루트 `SuperUltManager` + 테스트 패널 '고른 쥐 초필살기'. 튜토리얼 발동 `SuperReady` 코드만(단계·대사 아직).
+  - **햄찌 예시 = 레이어 컷신** (사용자: 뽑기 컷 재활용 말고 메이플 오리진처럼 배경·움직이는 물체 따로 + 밈): 그림 `UnityResources/Rats/SuperUlt/` (README), 씬 `Cut/Frame/Scenes/ZapHam` (Intro · Act(띠 Mask) · Finish). 미리보기 GIF `SuperUlt/preview/zapham_super_v3_camera.gif` (v3 = 큰 세로 파노라마 + 가상 카메라 Rig/Track · 충격 kicks · 얼굴 클로즈업, 씬 코드 scratchpad 식 build3.cs). Style `titleOut` = 제목 띠 빠지는 시각. 사용자 확인 대기 → 나머지 14종 · 튜토리얼 · 쳇바퀴 표시 · 씬 새 글 스트링 등록(`import_scene_strings.py`).
+  - **15종 진행 (2026-10-18, 유니티 꺼진 동안 코드·그림)**: 연출 틀 = `초필살기 구현 계획.md` §4. 그림 `UnityResources/Rats/SuperUlt/<code>/` (14종 Codex 일괄, `_run_log.txt`). 코드: TrainPage 초필살기 카드(superCard · sName · sDesc · sLock · superPathTag) · 튜토리얼 `g_super`(대사 92·93, 강조 id `super`).
+    **2026-10-18 새벽 진행**: 사용자 — 그림체는 게임의 플랫한(언타이틀드 구스 게임) 그림체 유지(햄찌·뽑기 컷씬 수준, 1차 관광쥐 등 디즈니풍 → `Sheets/_old_v1`), 셀 애니식 합성 · 그림체만 통일 · **카메라 · 액션 · 이펙트는 쥐마다 개별**. → 프롬프트에 햄찌 승인 그림(`ref_zap_style/props/pano_style.png`) 첨부 · 가로 파노라마 7종(parkrat · knight · sultan · streamrat · jwerry · starchef · jjdetective) · 쥐별 연출 = `Tools/superult_story.py`(패턴: rain · rise · sweep · shower · spiral · bounce · burst_ring · stomp · converge · pops · trail, 얼굴 컷 full/slide/zoom/tilt). Codex 한도(02:48 풀림) → `_run_log3.txt` 로 자동 재개. 시험 적용: parkrat · emperor(임시 파노라마 a+b). 햄찌 ③ 땅 번개 · SuperBar 강조 id `super` · 쳇바퀴 초필살기 카드 · 번역 연결(`Tools/hook_superult_strings.py`) 끝.
+    적용 = scratchpad 식 `apply.sh <code...>`(자르기 → 새로고침 → gen_superult_scene → MCP) · 확인 = `cap.sh <code...>`(Play 캡처).
+    **유니티 열면 할 일 (순서)**: ① `python Tools/slice_superult.py <code>` 전부 → ② 새로고침 → ③ `python Tools/gen_superult_scene.py out.cs zapham <14종>` → MCP execute_code (Game 씬) → ④ SuperBar 에 TutorialTarget id `super` → ⑤ Lobby 쳇바퀴 훈련 카드 복제해 superCard 연결 · 글 → ⑥ 새 씬 글(밈 · {n}명 · 초필살기!! · 카드) `import_scene_strings.py` + 영어 → ⑦ 15종 Play 캡처 확인.
+  - 테스트: 슬롯 5 + `SkipTutorial`, 유니티 창을 앞으로(뒤에 있으면 게임 시간이 거의 안 흐름), 캡처 = EditorApplication.update + ScreenCapture (컷신 시간 cur.t 를 파일 이름에).
+- 참고: 유니티 없이 컴파일 확인 = Assembly-CSharp.csproj 를 복사해 Compile 을 `Assets/Scripts/**/*.cs` 로 바꾸고 출력 경로를 scratchpad 로 → `dotnet build` (오류 0 확인함).
+- 이 수정은 `main-game` 브랜치만 (사용자: mvp 는 더 이상 업데이트 안 함).
 
 ## 6. 밸런스 측정 (BalanceProbe)
 

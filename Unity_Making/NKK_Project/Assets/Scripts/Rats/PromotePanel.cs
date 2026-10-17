@@ -69,7 +69,7 @@ namespace NKK.Rats
                 if (r.from) r.from.color = GradeColor(g);
                 if (r.to) r.to.color = GradeColor(g + 1);
             }
-            if (allButton) allButton.interactable = Rats.CanPromoteAny;
+            if (allButton) allButton.interactable = Rats.CanPromoteAll;      // 번식용 남길 수를 지키며 할 수 있을 때만
         }
 
         // 열리면 drawAbove 보다 위로, 닫히면 원래 자리로
@@ -89,7 +89,7 @@ namespace NKK.Rats
         {
             int n = Rats.PromoteAll();
             var game = Rats.Game;
-            if (game) game.ShowBanner(((n > 0 ? allDone : allFail) ?? "").Replace("{n}", n.ToString()).Replace("{keep}", Rats.promoteKeep.ToString()));
+            if (game) game.ShowBanner(((n > 0 ? allDone : allFail) ?? "").Replace("{n}", n.ToString()).Replace("{keep}", Rats.PromoteKeepCount.ToString()));
             Refresh();
         }
     }

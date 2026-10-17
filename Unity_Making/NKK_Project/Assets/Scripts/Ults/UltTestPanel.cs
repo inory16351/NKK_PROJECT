@@ -13,6 +13,8 @@ namespace NKK.Ults
         public UltimateManager Ults;
         public SuperJumpManager SuperJump;
         public Button prev, next, ultButton, superJumpButton;
+        [Tooltip("고른 쥐의 초필살기 바로 발동 (신화만, 조건 무시)")] public Button superUltButton;
+        public SuperUltManager SuperUlt;
         [Tooltip("층 클리어 연출 바로 보기 (계단 닿은 것처럼)")] public Button clearButton;
         [Tooltip("게임 오버 연출 바로 보기 (시간 초과)")] public Button gameOverButton;
         public NKK.Stage.StageManager Stage;
@@ -45,6 +47,7 @@ namespace NKK.Ults
             if (prev) prev.onClick.AddListener(() => Move(-1));
             if (next) next.onClick.AddListener(() => Move(1));
             if (ultButton) ultButton.onClick.AddListener(() => { if (list.Count > 0) Ults.TestUlt(list[idx].code_id); });
+            if (superUltButton) superUltButton.onClick.AddListener(() => { if (SuperUlt && list.Count > 0 && !SuperJump.Busy) SuperUlt.TestSuper(list[idx].code_id); });
             if (superJumpButton) superJumpButton.onClick.AddListener(() => SuperJump.Trigger(true));
             if (clearButton) clearButton.onClick.AddListener(() => { if (Stage && !Ults.Busy && !SuperJump.Busy) Stage.TestClear(); });
             if (bossButton) bossButton.onClick.AddListener(() => { if (Boss && !Ults.Busy && !SuperJump.Busy && !GameOver.Active) Boss.TestSpawn(bossIdx); });

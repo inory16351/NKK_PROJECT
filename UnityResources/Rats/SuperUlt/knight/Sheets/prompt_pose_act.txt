@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: pose_act.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1536 portrait image, ONE character pose, full body.
+- STYLE (MOST IMPORTANT): match EXACTLY the attached ref_zap_style pictures (approved game art) and ref_char: a FLAT cartoon storybook look in the Untitled Goose Game mood — simple soft flat shapes, flat colors with only gentle soft shading, very little texture, minimal fur detail (NO individual fur strands), small simple black bead eyes with one tiny white highlight (NOT big sparkly anime eyes), no black outlines, no gloss, no realistic rendering, NOT a Disney/Pixar/3D look. An energetic dynamic pose is welcome, but keep the drawing as simple as the references.
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- CHARACTER "Knight Rat": a grey rat in heavy silver PLATE ARMOR with a knight helmet with visor and a big red plume, a brown leather belt. Must look exactly like the attached ref_char / ref_parts (big head, small body, same outfit and colors).
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no gradient. Do not use magenta or purple on the subject. Keep the subject fully inside the frame with margin.
+- POSE: charging forward riding on a glowing blue GHOST HORSE, lance pointed forward, plume streaming. Cute and lively, not scary.

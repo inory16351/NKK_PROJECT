@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cursor_sheet.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, background must be ONE solid flat pure magenta color #FF00FF everywhere (for chroma keying). No shadows on the background, no gradients.
+- NO text, NO letters, NO numbers, no logos.
+- STYLE: match the attached UI kit sheet: cozy flat cartoon game UI (Untitled Goose Game mood), completely FLAT colors, no gloss, no gradients, soft rounded shapes. The rat look (cream-white fur, pink ears and pink nose, small dark eye) follows the attached white lab rat picture, but drawn much simpler and flatter.
+- Subject: a MOUSE POINTER (computer cursor) that is a cute white lab RAT HEAD shaped like a classic arrow cursor.
+  The rat head is seen from the side/top and points diagonally to the UPPER-LEFT, exactly like a normal computer arrow cursor: the pointed snout with a small pink nose is the sharp arrow TIP at the very top-left corner, the head widens toward the lower-right, with two round pink ears at the back (lower-right side) and a tiny dark eye. Silhouette must read clearly as an arrow pointer at small size (32-48 px).
+  Give the whole silhouette a thick, even, FLAT dark wood-brown rim (#4a3426, about 6% of the size) so it is visible on both light and dark backgrounds (flat color band, not a sketchy black line).
+- Draw TWO versions side by side, same size (each about 420x420 px), well spaced, none touching each other or the image edges:
+  1. LEFT: normal pointer, eye open, happy.
+  2. RIGHT: "clicking" pointer: exactly the same pose and same tip position, but eye squeezed shut (happy ^ shape) and the head slightly squashed, ears slightly flattened back.
+- Keep the magenta background perfectly uniform. Do not use magenta or purple on the pieces.

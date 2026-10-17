@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_bolts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image on a PURE BLACK #000000 background (for additive blending), 3 columns x 2 rows grid of SEPARATE glowing electric effects, each well inside its cell, none touching.
+- STYLE: a spectacular MapleStory-style 'origin skill' cut-in illustration, very dynamic and cool, BUT drawn in the soft painted storybook style of the attached ref_style / ref_zapham pictures (simple soft shapes, gentle painted shading, no black outlines, no gloss).
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- Effects (bright yellow-white core, golden yellow glow, soft painted, no outlines):
+  1. one HUGE thick vertical lightning bolt filling the cell top to bottom
+  2. a branching jagged lightning bolt with many forks
+  3. a circular electric SHOCKWAVE ring with crackling edges
+  4. a long horizontal energy streak / beam of sparks (like electricity flowing)
+  5. a big round starburst flash with sharp rays
+  6. a spiky electric AURA burst (a ring of zigzag sparks around an empty center)

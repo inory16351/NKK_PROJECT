@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: props.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, several separate objects well spaced, none touching each other or the edges.
+- STYLE: a spectacular MapleStory-style 'origin skill' cut-in illustration, very dynamic and cool, BUT drawn in the soft painted storybook style of the attached ref_style / ref_zapham pictures (simple soft shapes, gentle painted shading, no black outlines, no gloss).
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow on the background, no gradient. Do not use magenta or purple on the subject. Keep the subject fully inside the frame with margin.
+- Objects (game props, same painted style):
+  1. a big flying ELECTRICITY BILL paper, slightly crumpled, with a yellow lightning icon and a big round red stamp shape and scribble lines instead of words
+  2. a cute empty SMARTPHONE BATTERY ICON frame (rounded rectangle outline with a small knob on the right, thick white-cream border, EMPTY inside so it can be filled)
+  3. a wall POWER SOCKET with a plug pulled out and sparks
+  4. a cracked LIGHT BULB with tiny sparks, popping
+  5. a dark ROOFTOP EDGE silhouette strip for the foreground: a wide flat roof ledge with an antenna, a satellite dish and a water tank (dark navy blue colors), spanning most of the image width at the bottom

@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image on a PURE BLACK #000000 background (for additive blending), 3 columns x 2 rows grid of SEPARATE glowing effects, each well inside its own cell, none touching. Bright cores, soft painted glow, no outlines.
+  1. a flaming FRYING PAN falling straight DOWN with fire trail (vertical)
+  2. a round burst of steam and sauce splash with sparkles
+  3. a spinning ring of plates and sparkles
+  4. a horizontal FIRE flambe streak
+  5. a big golden three-star starburst
+  6. a circle of floating spices and herbs around an empty center
+- NO text, NO letters, NO numbers.
