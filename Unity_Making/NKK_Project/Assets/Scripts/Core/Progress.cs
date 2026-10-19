@@ -324,6 +324,8 @@ namespace NKK
             "Shard_Level_Sum" => ShardLevelSum,
             "Skill_Node_Count" => SkillCountIn(tier),        // 지금 훈장 트리에서 찍은 노드 수
             "Skill_Tree_Complete" => SkillCountUpTo(tier),   // 지금 훈장까지 트리에서 찍은 노드 수 (필요 = 전부)
+            "Dex_Count" => rats.Count,                       // 도감에서 만난 친구 수 (2026-10-19, 11훈장~)
+            "Boss_Clear" => ClearedFloor,                    // 이 층(보스 층)까지 클리어 (16훈장 = 100층 보스)
             _ => 0,
         };
         // 조건 필요값: Skill_Tree_Complete 는 테이블 값 대신 지금 훈장까지 트리 노드 전부
@@ -336,7 +338,7 @@ namespace NKK
         public bool CanRankUp()
         {
             var t = NextTier; if (t == null) return false;
-            return research >= t.research_cost && CondOk(t.cond1_type, t.cond1_value) && CondOk(t.cond2_type, t.cond2_value) && CondOk(t.cond3_type, t.cond3_value);
+            return research >= t.research_cost && CondOk(t.cond1_type, t.cond1_value) && CondOk(t.cond2_type, t.cond2_value) && CondOk(t.cond3_type, t.cond3_value) && CondOk(t.cond4_type, t.cond4_value);
         }
         public event Action<int> RankedUp;
         public bool RankUp()

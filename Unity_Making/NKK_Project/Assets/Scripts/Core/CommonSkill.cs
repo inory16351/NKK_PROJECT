@@ -52,6 +52,9 @@ namespace NKK
         public static int StartRatAdd => Mathf.RoundToInt(Sum(CommonEffectType.Start_Rat));
         // 승급할 때 윗등급 쥐가 2마리 나올 확률 (gradeIndex = 승급하는 쪽 0 일반 → 레어 ..., 밸류_02 = 그 등급 1~5, 0 = 모든 승급)
         public static float PromoteDouble(int gradeIndex) { float s = 0; foreach (var r in Of(CommonEffectType.Promote_Double)) { int g = Mathf.RoundToInt(r.value_02); if (g == 0 || g == gradeIndex + 1) s += r.value_01; } return s; }
+        public static bool PromoteAuto => Has(CommonEffectType.Promote_Auto);                       // 일괄 승급을 몇 초마다 자동 (승급 패널 토글로 끔)
+        public static float PromoteAutoEvery => Max(CommonEffectType.Promote_Auto, 1, 5);           // 자동 승급 간격 (초, 밸류_01)
+        public static int PromoteNeedDown => Mathf.RoundToInt(Sum(CommonEffectType.Promote_Need_Down));   // 승급 필요 수 - 합 (최소 2)
         public static int MaxPopAdd => Mathf.RoundToInt(Sum(CommonEffectType.Pop_Cap));
         public static float TimeAdd => Sum(CommonEffectType.Time_Add);
         public static float BreedChanceAdd(int pop) { float s = 0; foreach (var r in Of(CommonEffectType.Breed_Chance)) if (r.value_02 <= 0 || pop < r.value_02) s += r.value_01; return s; }

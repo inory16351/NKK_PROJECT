@@ -1,0 +1,29 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: mp2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- An exact grid of 6 columns x 3 rows (each cell 256x341). Each prop is one separate object centered in its cell with a wide magenta margin, about 200px big, not touching cell borders.
+- These are cartoon effect props for meme boss attacks in a funny rat game. Copy the attached reference props exactly for flat style and scale feel (coffin, maxwell cat, shark with shoes, money, banana cat, torch).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+
+Row 1:
+ 1) a shiny round soap bubble
+ 2) a big curling blue ocean wave
+ 3) a big silver mackerel fish
+ 4) a heavy iron ship anchor
+ 5) a flat black ink splat puddle seen from above (oval)
+ 6) a cute small yellow baby shark swimming, facing left
+Row 2:
+ 7) a grey shark dorsal fin sticking out of a small water ripple
+ 8) a grey tornado funnel with small sharks inside
+ 9) a brass artillery shell standing up
+ 10) a wooden supply crate under a white parachute
+ 11) a yellow pencil
+ 12) a square metal floor vent grate seen at an angle
+Row 3:
+ 13) a red "SUS" style alarm badge: a red circle with a white exclamation mark
+ 14) a big silver wrench
+ 15) a big pale grey full moon with craters
+ 16) a yellow safety helmet with a thumbs-up sticker
+ 17) a pair of sunglasses (deal with it pixel style but flat)
+ 18) a bright red stop hand sign on a stick

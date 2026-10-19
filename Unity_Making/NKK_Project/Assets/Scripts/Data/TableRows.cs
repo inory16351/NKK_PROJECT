@@ -119,6 +119,7 @@ namespace NKK.Data
     public class ZoneRow
     {
         public int zone_id, zone_name_sk; public string zone_name; public int from_floor; public string floor_type, tint;
+        public string themes;          // 이 구간 방 가구 테마 (Furniture_Layout room_theme, 쉼표). 비면 테마 전부 (2026-10-19)
         public int item_01, item_02, item_03, item_04, item_05, item_06, item_07, item_08, item_09, item_10, item_11, item_12, item_13;
         public IEnumerable<int> Items() { foreach (var d in new[] { item_01, item_02, item_03, item_04, item_05, item_06, item_07, item_08, item_09, item_10, item_11, item_12, item_13 }) if (d != 0) yield return d; }
     }
@@ -133,13 +134,14 @@ namespace NKK.Data
     [Serializable]
     public class TierRow
     {
-        public int tier; public string tier_name, icon; public int research_cost, tier_name_sk;
+        public int tier; public string tier_name, icon; public double research_cost; public int tier_name_sk;
         public string cond1_type; public float cond1_value; public string cond2_type; public float cond2_value; public string cond3_type; public float cond3_value;
+        public string cond4_type; public float cond4_value;        // 4번째 조건 (2026-10-19, 9훈장~)
         public float birth_grade_k; public int start_rat_count, start_floor_cap; public string badge_asset; public float rat_atk_mul;
     }
     [Serializable] public class TierTableFile { public List<TierRow> Tier; }
 
-    [Serializable] public class HumanRow { public int human_id, human_name_sk; public string human_name, code_id; public float hp_mul, value_mul, speed_mul; public int from_floor; public string asset_folder; }
+    [Serializable] public class HumanRow { public int human_id, human_name_sk; public string human_name, code_id; public float hp_mul, value_mul, speed_mul; public int from_floor, to_floor; public string asset_folder; }
     [Serializable] public class HumanLineRow { public int line_id, human_id, text_sk; public string situation, text; }
     // 공용 스킬 노드 (공용 스킬 테이블 Common_Skill, Tools/gen_skill_tree.py 로 생성).
     // 찍찍!! 훈장(tier)마다 트리 하나, 노드는 한 번만 활성화. link_1/link_2 중 하나라도 활성화되면 열림. 시작점(effect None, 링크 없음)은 그 훈장이면 자동 활성화
@@ -173,7 +175,9 @@ namespace NKK.Data
     }
     [Serializable] public class BossLineRow { public int line_id, boss_id, text_sk; public string situation, text; }
     // 보스 공격별 수치 (보스 테이블 Atk_Type 시트)
-    [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; public string atk_name, line; public int atk_name_sk, line_sk; }
+    // 밈 기술 (2026-10-19): pattern 이 있으면 Boss.Meme.cs 가 테이블 값만으로 처리 (sprite = Boss.memeSprites 이름, size = 그림 크기, p1·p2 = 패턴별 값)
+    [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; public string atk_name, line; public int atk_name_sk, line_sk;
+        public string pattern, sprite, color, popup; public float size, p1, p2; public int popup_sk; }
     // 층 밸런스 (스테이지 테이블 Stage, Tools/gen_stage_table.py 로 생성)
     [Serializable] public class StageRow
     {

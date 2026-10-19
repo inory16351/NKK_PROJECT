@@ -58,7 +58,7 @@ namespace NKK
         {
             var r = GameDatabase.Instance ? GameDatabase.Instance.StageOf(f) : null;
             if (r != null && r.research > 0) return Mathf.Max(1, Mathf.Round(r.research));
-            return Mathf.Round(researchBase * Mathf.Pow(researchGrow, f - 1)) * (f % bossEvery == 0 ? bossMul : 1);
+            return Mathf.Round(researchBase * Mathf.Pow(researchGrow, f - 1)) * (NKK.Data.GameDatabase.Instance && NKK.Data.GameDatabase.Instance.BossOf(f) != null ? bossMul : 1);
         }
 
         void Awake()
@@ -84,7 +84,7 @@ namespace NKK
             Active = true; t = 0; moved = false; onMove = move;
             gained = Mathf.RoundToInt(ResearchFor(Game.Floor));
             var p = Progress.I;
-            if (p) p.OnFloorReached(Mathf.Min(Game.Floor + 1, NKK.Stage.StageManager.LastFloor));     // 마지막 층 뒤로는 없음
+            if (p) p.OnFloorReached(Mathf.Min(Game.Floor + 1, NKK.Stage.StageManager.LastFloor + 1));     // 마지막 층을 깨면 +1 (훈장 조건 Boss_Clear = 클리어 층)
             if (Research.I) Research.I.Earn(gained, stairs.x, stairs.y, false);
             else { if (p) { p.research += gained; p.Save(); } Game.RunResearch += gained; }
             if (amount) amount.text = (amountFormat ?? "+{n}").Replace("{n}", GameManager.Format(gained));

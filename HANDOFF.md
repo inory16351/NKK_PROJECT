@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-14).
-마지막 갱신: 2026-10-13 (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
+마지막 갱신: 2026-10-19 (**100층 확장: 데이터·코드·그림·유니티 연결·Play 확인** §5-8) / 이전: 2026-10-13 (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
 
 ---
 
@@ -256,6 +256,17 @@
 - **뽑기 스포이드 컷 (2026-10-13)**: `lab_c2` 물방울 없는 그림으로 다시 뽑음 + 연출 물방울을 스포이드 끝에 매달림 (GachaLab README).
 
 - **치즈 창고 지도 고정 (2026-10-13)**: 끌기·휠 확대 끔 (`SkillPage.allowPan` · `allowZoom`, 트리 전체가 보이게 맞춘 상태 그대로). 안내 글 = "스킬을 찍으면 이어진 칸이 드러나요" (8000201).
+
+## 5-8. 100층 확장 (2026-10-19) — 상세 기록 `기획서/100층 확장 구현 기록.md`
+
+- **사용자 결정**: 16~30층 고양이 연구소로 교체 (25 해피 고양이 · 30 팝 고양이, 마녀·우주 사령관 floor 0) · 초월 승급 안 함 (새 친구 55종도 이번엔 없음) · 91~100 보스 = 94·97·100층 · 보스마다 새 밈 기술 (수정하기 쉽게 테이블 + 기록) · 훈장·스킬 임의 배분 · 밸런스 임의 · 그림 전부 Codex 시트.
+- **데이터·코드**: 스테이지 100층 (31층~ ×1.12) · 구간 6 (70005 고양이 연구소 ~ 70010 우주 연구소, Zone `themes` 가구 테마) · 물건 108 (62xxx · 가구 63xxx) · 사람 24 (Human `to_floor`) · 보스 17 (95007~95023) · 밈 기술 54 (`Hazards/Boss.Meme.cs` 범용 패턴 17종, Atk_Type `pattern` 칸) · 훈장 9~16 (조건 4칸, Dex_Count · Boss_Clear) · 공용 스킬 9~16훈장 (자동 승급 · 승급 필요 수 감소) · 영어 채움. 내용 원본 = `Tools/expansion_content.py` → `gen_expansion_data.py`.
+- **그림 (Codex 23장, 실패 0)**: `UnityResources/Rats/Expansion100/` (Sheets = 프롬프트·원본·로그, Items · Memes · Rank · Stage) + Humans/Cats Parts. 순서 `gen_expansion_prompts → run_expansion_codex.sh 4 → slice_expansion → gen_sprite_pivots`. 손본 것: 공룡탈 알바 팔(옆 칸 조각 섞임 → 다시 자름) · 포탑 고양이 (`CAT_DILATE=4` 로 잘라야 5조각).
+- **유니티 연결 끝**: 사람/고양이 아트 라이브러리 (사람 37 · 고양이 24) · Game: ItemManager 그림 168 · Boss `memeSprites` 36 · StageManager `lastFloor` 100 · `zoneLooks` 70005~70010 · 승급 패널 자동 승급 토글 (`HUD/Promote/Panel/AutoToggle`, 패널 +70) · SceneMusic `finalBossFloor` 100 (Title·Lobby·Game) · Lobby: 훈장 그림 16 · 스킬 탭 16개 + 훈장 사다리 = 가로 스크롤 (`TabsView` · `LadderView`) · 조건 4줄 (`RankPanel/Cond4`) · 새 조건 라벨 (ReqDex/ReqBoss · CDex/CBoss) · 새 씬 글 스트링 키.
+- **Play 확인 (2026-10-19, 슬롯 5 · 튜토리얼 건너뜀)**: 테스트 패널 방식으로 새 보스 17마리 × 두 번째 공격·스킬·발악 1·2 강제 발동 = 오류 0 · 16/31/46/61/76/91층 들어가기 = 구간·가구 테마·바닥/벽·물건·사람 정상. 캡처로 해피·팝·원시인·공룡탈·빨간 우주복·그럼피 · 46·91층 확인.
+- **이 PC 에서 유니티 MCP**: HTTP 세션 대신 stdio 서버(`uvx --from mcpforunityserver==10.3.0 mcp-for-unity --transport stdio`)가 유니티 브리지 6400 에 붙음. `execute_code` 는 `manage_tools activate scripting_ext` 뒤 `action: execute`. 파이썬: 기본 python 에 scipy 없음 → 스크래치 venv (uv) 로 자르기.
+- **로비 Play 확인 (2026-10-19, 슬롯 5 를 10훈장으로)**: 훈장 사다리·치즈 창고 탭이 고른 훈장으로 자동 스크롤 (`Lobby/ScrollTo.cs`, RankPage · SkillPage) · 훈장 조건 5줄(연구자료 + 4) 겹침 → ReqTemplate 높이 50→42 · 치즈 창고 승급 창 높이 +30, 승급 창 훈장 그림이 씬 고정(치즈) → 고른 훈장 그림으로 (`SkillPage.DrawRank`).
+- **남음**: ① 사용자 플레이 피드백 (밈 기술 세기·연출) ② 밸런스 측정 (40층대부터 막힐 가능성 큼) ③ 새 구간 배경음악 (지금 16층~ 은 20층 곡) ④ 커밋.
 
 ## 6. 밸런스 측정 (BalanceProbe)
 

@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hb1.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- Exact layout: 3 rows x 6 columns (each cell 256x341). Each ROW is one BOSS person (bigger, bulkier, more imposing than normal people). Columns: 1) NORMAL HEAD side view facing LEFT with a short narrow neck stump cut flat; 2) ANGRY SHOUTING head; 3) SCARED head (screaming, sweat drops); 4) TORSO side view, no head/arms/legs; 5) ONE ARM hanging down (rounded sleeve shoulder cap, no cut section); 6) ONE LEG standing, top cut flat. Separate islands, nothing crosses cells.
+- Copy the attached references exactly for style and part layout (flat paper-doll human parts).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+- Strict SIDE VIEW, the character FACES LEFT.
+
+Rows:
+Row 1: a CAVEMAN boss: wild brown hair and beard, bone hair pin, leopard-pattern fur tunic, bare arms and legs, bare feet
+Row 2: a RAPTOR KEEPER boss: short brown hair, rugged face, dark brown leather vest over a grey henley shirt, khaki cargo pants, boots
+Row 3: a PART-TIMER in an INFLATABLE T-REX COSTUME boss: the head is a big green inflatable T-rex head with the person face visible through a mesh window in the neck; torso = round inflated green dinosaur belly; arm = tiny short green dinosaur arm; leg = thick green inflatable dino leg

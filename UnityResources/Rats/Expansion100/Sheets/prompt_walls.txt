@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: walls.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- 6 horizontal wall strips stacked from top to bottom, each strip FULL WIDTH (1536 wide) and about 150px tall, separated by magenta gaps of about 20px. Each strip is a flat front-view wall face like the attached reference strip (top light edge, repeating wall pattern, bottom darker baseboard). Repeating horizontally, no objects, no doors.
+- Copy the attached reference wall strip exactly for style and proportion.
+
+Strip 1: cat lab wall: white tiles with a pastel pink band and tiny paw print pattern
+Strip 2: museum wall: beige stone wall with a dark wood baseboard
+Strip 3: construction wall: plywood boards with a yellow-black hazard stripe band
+Strip 4: underwater lab wall: steel wall with round porthole windows showing blue water
+Strip 5: war museum wall: olive painted wall with a dark green wainscot
+Strip 6: space center wall: white panels with a navy stripe and small blinking light dots

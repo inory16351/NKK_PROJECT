@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: h4_ocean.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- Exact layout: 4 rows x 5 columns (each cell 307x256). Each ROW is one person. Columns left to right: 1) NORMAL HEAD in strict side view facing LEFT, ending in a short narrow neck stump cut flat at the bottom; 2) SCARED HEAD (same person, mouth open screaming, eyebrows up, sweat drops); 3) TORSO seen from the side, no head, no arms, no legs, neck stump on top; 4) ONE ARM hanging straight down, top is a rounded shoulder cap of the sleeve fabric; 5) ONE LEG standing, top cut flat, shoe at the bottom. Every part is a separate island with clear magenta space; nothing crosses into other cells.
+- Copy the attached reference parts sheet exactly for part shapes, proportions, layout, side view and flat paper-doll style (researcher, guard, janitor). Same head size and same body proportions.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+
+Rows:
+Row 1: a marine biologist in a blue research windbreaker with a lanyard
+Row 2: a scuba diver in a black wetsuit with a diving mask pushed up on the forehead
+Row 3: a fish market auctioneer with a white towel headband, green rubber apron and tall boots
+Row 4: a sushi restaurant owner with slick black hair, sunglasses, white tight t-shirt (salt bae vibe)

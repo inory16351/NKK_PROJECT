@@ -38,7 +38,7 @@ def main():
     for c in (0, 2): rgb[..., c] = np.where(fix, np.minimum(rgb[..., c], rgb[..., 1] + 20), rgb[..., c])
     arr0 = np.dstack([rgb.astype(np.uint8), a.astype(np.uint8)])
     alpha = arr0[..., 3] > 20
-    lab, n = ndimage.label(ndimage.binary_dilation(alpha, iterations=8))     # 작은 장식(부적 등)도 같은 덩어리로
+    lab, n = ndimage.label(ndimage.binary_dilation(alpha, iterations=int(os.environ.get('CAT_DILATE', 8))))     # 작은 장식(부적 등)도 같은 덩어리로 (붙어 버리면 CAT_DILATE 를 줄임)
     H = im.height; ch = H / rows
     for r, cid in enumerate(ids):
         if cid == '-': continue

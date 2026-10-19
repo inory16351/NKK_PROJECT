@@ -78,12 +78,14 @@ def main():
     json.dump(params, io.open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     # 티어 테이블: 승급 연구자료 · 조건 최고 층 (Max_Floor = 도달 층 = 클리어 + 1)
     wb = openpyxl.load_workbook(TIER); ws = wb['Tier']
+    K = [c.value for c in ws[2]]          # 칸 이름으로 찾음 (2026-10-19: 숫자 위치로 쓰다가 _sk 칸이 생긴 뒤 아이콘 칸을 덮어썼음)
+    rc = K.index('research_cost')
     for row in ws.iter_rows(min_row=4):
         t = row[0].value
-        if not isinstance(t, int) or t < 2: continue
-        row[3].value = int(round(promo[t], -1 if promo[t] > 100 else 0))
-        for ci in (4, 6, 8):
-            if row[ci].value == 'Max_Floor': row[ci + 1].value = TIER_CLEAR[t] + 1
+        if not isinstance(t, int) or t < 2 or t > 8: continue          # 9훈장~ = Tools/gen_expansion_data.py (100층 확장)
+        row[rc].value = int(round(promo[t], -1 if promo[t] > 100 else 0))
+        for i in range(1, 5):
+            if f'cond{i}_type' in K and row[K.index(f'cond{i}_type')].value == 'Max_Floor': row[K.index(f'cond{i}_value')].value = TIER_CLEAR[t] + 1
     wb.save(TIER)
     print(f'치즈 K = {ka:.0f} × {kb:.3f}^(층-1)')
     print('판별 최고 층', RUNS)

@@ -1,0 +1,23 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: badges.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- An exact grid of 4 columns x 3 rows (each cell 384x341). Each badge/icon centered in its cell, about 280px, not touching cell borders.
+- Copy the attached reference rank badges exactly for style (flat medals, shields and ribbons). Row 1-2 are 8 NEW higher rank badges (9 to 16), each more glorious than the last. Row 3 are 4 round skill icons in a matching flat style (simple round medallion with a symbol).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+
+Row 1:
+ 1) an underground empire governor badge: a dark stone shield with a golden manhole cover emblem and small gold wings
+ 2) a transcended subject badge: a purple hexagon medal with a glowing-free white rat silhouette and a DNA helix
+ 3) a lab occupier badge: a red banner shield with a golden flag planted on a beaker
+ 4) a city shadow badge: a navy round medal with a silver city skyline and a rat silhouette on a rooftop
+Row 2:
+ 5) a rat republic chairman badge: a green laurel round medal with a golden gavel and a cheese
+ 6) a planet escaper badge: an orange round medal with a small rocket leaving a planet
+ 7) a galaxy wanderer badge: a dark violet star-shaped medal with a spiral galaxy
+ 8) a mythic squeak badge: a big radiant golden crown medal with rainbow gems and a rat crest, the most glorious one
+Row 3:
+ 9) a skill icon: two rats with circular arrows (auto promote)
+ 10) a skill icon: a rat silhouette with a down arrow and minus (fewer needed)
+ 11) a skill icon: two identical rats sparkling (double promote)
+ 12) a skill icon: a staircase with a fast-forward arrow (stage skip)

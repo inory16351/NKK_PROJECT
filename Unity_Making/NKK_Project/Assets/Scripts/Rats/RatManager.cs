@@ -331,8 +331,13 @@ namespace NKK.Rats
             float kSoft = gr.promote_soft > gr.promote_base ? Mathf.Log(gr.promote_soft / gr.promote_base) / Mathf.Log(grow) : float.MaxValue;
             if (k <= kSoft) n = gr.promote_base * Mathf.Pow(grow, k);
             else n = gr.promote_soft * Mathf.Pow(Mathf.Max(1, gr.promote_grow2), k - kSoft);
-            return Mathf.Max(1, Mathf.CeilToInt(n - 0.0001f));
+            int need = Mathf.Max(1, Mathf.CeilToInt(n - 0.0001f));
+            int down = CommonSkill.PromoteNeedDown;          // 12훈장 노드 (최소 2마리)
+            return down > 0 ? Mathf.Max(2, need - down) : need;
         }
+        // 자동 승급 (9훈장 노드 Promote_Auto): 켜져 있으면 일괄 승급을 PromoteAutoEvery 초마다. 끄기 = 승급 패널 토글 (PlayerPrefs nkk_auto_promote)
+        public static bool AutoPromoteOn { get => PlayerPrefs.GetInt("nkk_auto_promote", 1) == 1; set => PlayerPrefs.SetInt("nkk_auto_promote", value ? 1 : 0); }
+        float autoPromoteT = 5;
         public int CountGrade(int g) { int n = 0; foreach (var r in Rats) if (r.temp <= 0 && !r.UltOn && (int)r.Data.Grade == g) n++; return n; }
         public bool CanPromote(int g) => g >= 0 && g < 5 && GradeOpen(g + 1, Game.Tier) && CountGrade(g) >= PromoteNeed(g) && RealCount - PromoteNeed(g) + 1 >= 2 && !GameOver.Active;
         public Rat Promote(int g)
@@ -637,6 +642,7 @@ namespace NKK.Rats
             rushLeft -= dt; rushCdLeft -= dt;
             for (int i = timers.Count - 1; i >= 0; i--) { var tm = timers[i]; tm.t -= dt; if (tm.t <= 0) { timers.RemoveAt(i); tm.a(); } else timers[i] = tm; }
             UpdateAuras();
+            if (CommonSkill.PromoteAuto && AutoPromoteOn && (autoPromoteT -= dt) <= 0) { autoPromoteT = CommonSkill.PromoteAutoEvery; if (CanPromoteAny) PromoteAll(); }
             UpdateBullets(dt); UpdateIce(dt);
             UpdatePickups(dt);
             for (int i = 0; i < Rats.Count; i++) Rats[i].Tick(dt);

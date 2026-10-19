@@ -35,6 +35,7 @@ namespace NKK.Lobby
         public GameObject reqRoot;
         [Tooltip("조건 줄 템플릿 (꺼져 있음): 자식 Label · Value({have} / {need}) · Fill(Image Filled) · Ok")] public RectTransform reqTemplate;
         [Tooltip("조건 이름 (씬 Words): 연구자료 · 최고 층 · 조각 강화 합 · 스킬 노드")] public TMP_Text wReqResearch, wReqFloor, wReqShard, wReqSkill;
+        [Tooltip("조건 이름 (2026-10-19): 도감 친구 수 · 보스 처치 층 (비면 스킬 노드 글)")] public TMP_Text wReqDex, wReqBoss;
         public Button rankButton;
         [Tooltip("훈장 달기 (연구자료 {n})")] public TMP_Text rankLabel;
         [Tooltip("앞 훈장을 먼저 / 이미 단 훈장 글")] public TMP_Text sideNote;
@@ -88,7 +89,8 @@ namespace NKK.Lobby
             spawned.Clear();
             var p = Progress.I; var db = DB; int r = p.tier;
 
-            // 사다리
+            // 사다리 (16칸 = 가로 스크롤, 고른 칸을 가운데로)
+            Transform selCell = null;
             for (int t = 1; t <= MaxTier; t++)
             {
                 if (!db.Tiers.TryGetValue(t, out var tr)) continue;
@@ -98,7 +100,9 @@ namespace NKK.Lobby
                 var nm = Txt(b.transform, "Name"); if (nm) nm.text = tr.tier_name;
                 Show(b.transform, "Sel", t == selTier); Show(b.transform, "Cur", t == r); Show(b.transform, "Lock", t > r);
                 int tt = t; b.onClick.AddListener(() => { selTier = tt; Draw(); });
+                if (t == selTier) selCell = b.transform;
             }
+            ScrollTo.Center(selCell);
 
             if (!db.Tiers.TryGetValue(selTier, out var sk)) return;
             if (bigBadge) { bigBadge.sprite = Badge(selTier); bigBadge.color = selTier <= r ? rankDone : rankNext; }
@@ -118,11 +122,11 @@ namespace NKK.Lobby
             if (sideNote) { sideNote.gameObject.SetActive(!next); sideNote.text = selTier <= r ? T(wAlready) : F(wNeedPrev, ("prev", selTier - 1)); }
             if (next)
             {
-                Req(T(wReqResearch), (float)p.research, sk.research_cost);
-                foreach (var (type, need) in new[] { (sk.cond1_type, sk.cond1_value), (sk.cond2_type, sk.cond2_value), (sk.cond3_type, sk.cond3_value) })
+                Req(T(wReqResearch), (float)p.research, (float)sk.research_cost);
+                foreach (var (type, need) in new[] { (sk.cond1_type, sk.cond1_value), (sk.cond2_type, sk.cond2_value), (sk.cond3_type, sk.cond3_value), (sk.cond4_type, sk.cond4_value) })
                 {
                     if (string.IsNullOrEmpty(type) || type == "None") continue;
-                    var w = type == "Max_Floor" ? wReqFloor : type == "Shard_Level_Sum" ? wReqShard : wReqSkill;
+                    var w = type == "Max_Floor" ? wReqFloor : type == "Shard_Level_Sum" ? wReqShard : type == "Dex_Count" && wReqDex ? wReqDex : type == "Boss_Clear" && wReqBoss ? wReqBoss : type == "Boss_Clear" ? wReqFloor : wReqSkill;
                     Req(T(w), p.CondValue(type), p.CondNeed(type, need));
                 }
                 if (rankButton) rankButton.interactable = p.CanRankUp();

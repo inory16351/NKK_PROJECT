@@ -1,0 +1,31 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: z3_construction.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- An exact grid of 6 columns x 3 rows (each cell 256x341). Each object centered in its own cell, standing on the bottom third of the cell, with a clear magenta margin; objects must NOT touch or cross cell borders. Fill each cell well (objects about 220px tall), furniture cells may be wider but still inside the cell.
+- Soft 3/4 front view of a standing object, same scale feel as the reference lab objects (server rack, cage, desk, fridge). Each must read clearly at small size.
+- Funny meme objects must be drawn as plain cartoon objects (no real people, no real logos, no written words unless described as a simple symbol).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+- Theme: objects found in a LAB EXPANSION CONSTRUCTION SITE (Korean construction site mood). Cells 1-10 small breakable objects, 11-13 valuable shiny treasures, 14-18 furniture (bigger, sturdy).
+
+Row 1:
+ 1) a yellow safety helmet with a simple thumbs-up sticker
+ 2) an orange traffic cone with white stripes
+ 3) a paper cement sack, grey, slumped
+ 4) a dented yellow aluminum pot (Korean yangeun pot)
+ 5) a one-wheeled construction wheelbarrow
+ 6) a pair of white cotton work gloves with red rubber palms
+Row 2:
+ 7) a bundle of steel rebar tied with wire
+ 8) a box of instant coffee mix sticks (yellow box, no text)
+ 9) a small A-frame safety sign showing a big zero symbol and a hard hat pictogram (no letters)
+ 10) a safety poster on a stand showing a muscular shiba dog next to a droopy small shiba dog (no text)
+ 11) a golden ceremonial shovel with a red ribbon (valuable)
+ 12) a golden rat statue ornament (valuable)
+Row 3:
+ 13) a thick yellow pay envelope stuffed with money (valuable)
+ 14) a site office desk whose corner is on fire with small flat flames while a coffee mug sits calmly on it
+ 15) a metal scaffolding frame section with planks (big furniture)
+ 16) a wooden pallet stacked with bricks and bags
+ 17) a small yellow mini excavator (big furniture, compact)
+ 18) a canteen cart with a huge tower of stacked metal meal trays

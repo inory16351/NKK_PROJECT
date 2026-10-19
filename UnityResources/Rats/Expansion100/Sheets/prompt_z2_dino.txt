@@ -1,0 +1,31 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: z2_dino.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- An exact grid of 6 columns x 3 rows (each cell 256x341). Each object centered in its own cell, standing on the bottom third of the cell, with a clear magenta margin; objects must NOT touch or cross cell borders. Fill each cell well (objects about 220px tall), furniture cells may be wider but still inside the cell.
+- Soft 3/4 front view of a standing object, same scale feel as the reference lab objects (server rack, cage, desk, fridge). Each must read clearly at small size.
+- Funny meme objects must be drawn as plain cartoon objects (no real people, no real logos, no written words unless described as a simple symbol).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+- Theme: objects found in a NATURAL HISTORY / DINOSAUR earth-science laboratory (Jurassic Park mood). Cells 1-10 small breakable objects, 11-13 valuable shiny treasures, 14-18 furniture (bigger, sturdy).
+
+Row 1:
+ 1) a spiral ammonite fossil stone
+ 2) a trilobite fossil plate
+ 3) a plaster cast of a big three-toed dinosaur footprint
+ 4) a flat disc-shaped globe (flat earth model) on a small stand
+ 5) an excavation pickaxe leaning on a small brush
+ 6) a drop of amber with a mosquito inside on a small wooden stand
+Row 2:
+ 7) a speckled dinosaur egg in a nest of straw
+ 8) a small computer monitor showing a pixel-art grey dinosaur on a white screen
+ 9) a plate with three big dinosaur-shaped chicken nuggets
+ 10) a dinosaur skull fossil (raptor skull) on a block
+ 11) a golden dinosaur egg on a cushion (valuable)
+ 12) a huge chunk of amber with gold bars trapped inside (valuable)
+Row 3:
+ 13) a glowing-free burning meteorite rock with small flat orange flames (valuable)
+ 14) a T-rex skeleton display on a low platform (big furniture, side view, compact)
+ 15) a glass museum display case with small fossils inside
+ 16) a wooden excavation work table with tools and a sieve
+ 17) a researcher desk with a lamp and papers
+ 18) a small museum snack counter with a register (no text)

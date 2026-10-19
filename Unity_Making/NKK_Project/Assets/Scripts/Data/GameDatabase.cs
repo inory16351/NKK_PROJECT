@@ -187,9 +187,12 @@ namespace NKK.Data
         // 보스: 그 층 보스. 표에 없는 보스 층(5층마다)은 표의 보스를 층 순서대로 반복 (웹 bossOf)
         public BossRow BossOf(int floor)
         {
-            foreach (var b in Bosses) if (b.floor == floor) return b;
-            if (Bosses.Count == 0 || floor % 5 != 0 || floor < Bosses[0].floor) return null;
-            return Bosses[(floor / 5 - 1) % Bosses.Count];
+            // 2026-10-19 100층 확장: 보스 층은 표의 floor 그대로 (91~100 구간은 94·97·100층). 표의 마지막 보스 층을 넘을 때만 5층마다 반복
+            int last = 0;
+            foreach (var b in Bosses) { if (b.floor == floor) return b; last = Mathf.Max(last, b.floor); }
+            if (Bosses.Count == 0 || floor <= last || floor % 5 != 0) return null;
+            var live = Bosses.FindAll(b => b.floor > 0);
+            return live.Count > 0 ? live[(floor / 5 - 1) % live.Count] : null;
         }
         public BossAtkRow BossAtk(string type) => !string.IsNullOrEmpty(type) && BossAtks.TryGetValue(type, out var a) ? a : null;
         public string BossLine(string situation, int bossId)

@@ -1,0 +1,31 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: z4_ocean.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- An exact grid of 6 columns x 3 rows (each cell 256x341). Each object centered in its own cell, standing on the bottom third of the cell, with a clear magenta margin; objects must NOT touch or cross cell borders. Fill each cell well (objects about 220px tall), furniture cells may be wider but still inside the cell.
+- Soft 3/4 front view of a standing object, same scale feel as the reference lab objects (server rack, cage, desk, fridge). Each must read clearly at small size.
+- Funny meme objects must be drawn as plain cartoon objects (no real people, no real logos, no written words unless described as a simple symbol).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+- Theme: objects found in an UNDERWATER MARINE research lab mixed with a FISH MARKET. Cells 1-10 small breakable objects, 11-13 valuable shiny treasures, 14-18 furniture (bigger, sturdy).
+
+Row 1:
+ 1) a branch of pink coral
+ 2) an orange starfish
+ 3) a spiral conch shell
+ 4) a clay octopus pot with a tentacle peeking out
+ 5) a white styrofoam box with a flatfish on ice
+ 6) a red rubber basin with water and a fish tail
+Row 2:
+ 7) a small chalkboard price sign with only a fish drawing and a question mark (no letters)
+ 8) a singing fish trophy plaque on a wooden board, fish with mouth open
+ 9) a red crab raising both claws up in a dance pose
+ 10) a glass specimen jar with a droopy pink blobfish inside
+ 11) a giant open clam with a big pearl (valuable)
+ 12) a whole golden tuna on a small display stand (valuable)
+Row 3:
+ 13) a king crab with sparkling diamond gems on its shell (valuable)
+ 14) a large aquarium tank with water, seaweed and fish (big furniture)
+ 15) a fish market stall with ice and fish on a slanted counter
+ 16) a tall specimen shelf with jars
+ 17) a seafood chest freezer with a sliding glass lid
+ 18) a coral culture tank with tubes and colorful corals

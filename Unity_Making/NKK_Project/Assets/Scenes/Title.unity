@@ -10417,7 +10417,7 @@ MonoBehaviour:
   zones: []
   bossClip: {fileID: 0}
   finalBossClip: {fileID: 0}
-  finalBossFloor: 30
+  finalBossFloor: 100
   Timer: {fileID: 0}
   hurryClip: {fileID: 0}
   hurryAt: 30
