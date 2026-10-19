@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using NKK.Data;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace NKK.Ults
@@ -32,6 +33,11 @@ namespace NKK.Ults
         [Tooltip("초기화 뒤 갈 씬")] public string lobbyScene = "Lobby";
         [Tooltip("전부 해제: 지금 저장 파일의 기능·튜토리얼 전부 열림 · 마지막 층까지 클리어 · 최고 훈장 · 공용 스킬 전부 · 치즈·연구자료 무제한 → 로비로")] public Button unlockAllButton;
 
+        [Header("보이기 · 숨기기 (2026-10-19)")]
+        [Tooltip("이 키로 패널을 숨기고/보이게 (숨김 상태는 저장돼 다음 판에도 유지)")] public Key toggleKey = Key.Backquote;
+        [Tooltip("패널 전체 (숨길 때 투명 · 클릭 안 됨). 이 오브젝트의 CanvasGroup")] public CanvasGroup group;
+        const string HiddenPref = "nkk_test_panel_hidden";
+
         readonly List<RatCharacterRow> list = new();
         int idx;
         string fmt;
@@ -61,6 +67,20 @@ namespace NKK.Ults
             if (resetButton) resetButton.onClick.AddListener(ResetSave);
             if (unlockAllButton) unlockAllButton.onClick.AddListener(UnlockAll);
             Show();
+            SetVisible(PlayerPrefs.GetInt(HiddenPref, 0) == 0);
+        }
+
+        void Update()
+        {
+            var k = Keyboard.current;
+            if (k != null && toggleKey != Key.None && k[toggleKey].wasPressedThisFrame) SetVisible(group && group.alpha < 0.5f);
+        }
+
+        void SetVisible(bool on)
+        {
+            if (!group) return;
+            group.alpha = on ? 1 : 0; group.interactable = on; group.blocksRaycasts = on;
+            PlayerPrefs.SetInt(HiddenPref, on ? 0 : 1);
         }
 
         // 전부 해제 → 판 기록(층)은 남기고 새 훈장·스킬로 다음 판을 시작하게 로비로

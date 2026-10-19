@@ -131096,6 +131096,7 @@ GameObject:
   - component: {fileID: 1361430266}
   - component: {fileID: 1361430265}
   - component: {fileID: 1361430264}
+  - component: {fileID: 1361430267}
   m_Layer: 0
   m_Name: TestPanel
   m_TagString: Untagged
@@ -131186,6 +131187,8 @@ MonoBehaviour:
   resetButton: {fileID: 1425984279}
   lobbyScene: Lobby
   unlockAllButton: {fileID: 605057746}
+  toggleKey: 4
+  group: {fileID: 1361430267}
 --- !u!114 &1361430265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131224,6 +131227,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361430262}
   m_CullTransparentMesh: 1
+--- !u!225 &1361430267
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1361430262}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1362455164
 GameObject:
   m_ObjectHideFlags: 0
