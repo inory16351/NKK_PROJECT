@@ -218,4 +218,22 @@ namespace NKK.Data
     [Serializable] public class TutoLineRow { public int line_id, text_sk; public string step_id, speaker_id, face, text, highlight; }
     [Serializable] public class TutoStoryRow { public int line_id, cut; public string image, text; public int text_sk; }
     [Serializable] public class TutorialTableFile { public List<TutoSpeakerRow> Speaker; public List<TutoStepRow> Step; public List<TutoLineRow> Line; public List<TutoStoryRow> Story; }
+
+    // 증강 (증강 테이블, 2026-10-19): 효과 = 공용 스킬 효과 타입 두 개 (CommonSkill 이 공용 스킬 노드처럼 더함). 설명 자리표시 {1} {1b} {1c} {2} {2b} {2c}, 뒤에 % = ×100
+    [Serializable]
+    public class AugmentRow
+    {
+        public int augment_id, grade, aug_name_sk, aug_desc_sk, enabled; public string aug_name, aug_desc, effect1, effect2, icon;
+        public float e1_v1, e1_v2, e1_v3, e2_v1, e2_v2, e2_v3;
+        public CommonEffectType Effect1 => E.P<CommonEffectType>(effect1);
+        public CommonEffectType Effect2 => E.P<CommonEffectType>(effect2);
+        public float V(int effect, int i) => effect == 1 ? (i == 1 ? e1_v1 : i == 2 ? e1_v2 : e1_v3) : (i == 1 ? e2_v1 : i == 2 ? e2_v2 : e2_v3);
+    }
+    [Serializable] public class AugGradeRow { public int grade, grade_name_sk, synth_need; public string grade_name, color; public float synth_up, synth_same, synth_down; public Color Color => ColorUtility.TryParseHtmlString(color, out var c) ? c : Color.white; }
+    [Serializable] public class AugOfferRow { public int from_floor; public float w1, w2, w3, w4; public float W(int g) => g switch { 1 => w1, 2 => w2, 3 => w3, 4 => w4, _ => 0 }; }
+    // 증강 특수 효과 (증강 특수 효과 테이블, 칼바람식): 증강 effect1 = Special · e1_v1 = special_id. p1~p5 뜻은 타입별 (Special_Type 시트)
+    [Serializable] public class AugSpecialRow { public int special_id, up_param; public string type; public float p1, p2, p3, p4, p5; public float P(int i) => i switch { 1 => p1, 2 => p2, 3 => p3, 4 => p4, 5 => p5, _ => 0 }; }
+    [Serializable] public class AugSpecialTableFile { public List<AugSpecialRow> Special; }
+    [Serializable] public class AugNoScaleRow { public string effect; public int index; }
+    [Serializable] public class AugmentTableFile { public List<AugmentRow> Augment; public List<AugGradeRow> Grade; public List<AugOfferRow> Offer; public List<KeyValueRow> Aug_Config; public List<AugNoScaleRow> No_Scale; }
 }

@@ -1,0 +1,24 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_icons_c.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the icons. No text, no letters, no numbers, no labels, no grid lines, no frames, no cards, no badges or circles behind the icons. Avoid magenta or pink-purple colors inside the icons.
+- A sheet of 16 game icons in an exact 4 columns x 4 rows grid (equal cells). Each icon is ONE simple object (or a tight small group) centered in its cell, filling about 65% of the cell, with a wide empty margin; icons must NOT touch or cross cell borders. All icons the same size and the same slight 3/4 front view.
+- STYLE IS THE MOST IMPORTANT RULE: the icons must look like they were painted by the SAME artist in the SAME batch as the attached reference icons (ref_skill_style: boss target, nest, cheese meteor, party popper, etc.). Copy that rendering exactly: soft hand-painted picture-book look with gentle soft shading and a very subtle paper/gouache texture, rounded chunky shapes, NO outlines or dark contour lines, NO crisp vector look, NO glossy highlights, NO glow, NO hard drop shadows. Same muted warm palette (cream, warm gray, soft coral red, muted brown, sage green, dusty blue, mustard yellow), low saturation. Same object proportions and size inside the cell as the reference. Rats, when shown, are small cream-white lab rats with pink ears and pink tails, drawn like the reference rats.
+
+Cells (left to right, top to bottom):
+1) a small boxy toy robot with a coral button on its chest
+2) a pyramid crowd of many tiny cream rat heads
+3) a golden crown on top of a big rat incisor
+4) a round bank vault door half open with cheese inside
+5) a stopwatch frozen in a block of pale-blue ice
+6) a giant cheese moon with small meteors and a burst
+7) a coral-red overheating battery with steam puffs
+8) a closed warm-gray mystery capsule with a swirl pattern, no symbols
+9) a huge muscular cream rat flexing next to a tiny normal rat
+10) a big snowball rolling with a small cream rat riding on top
+11) three cheese-wedge blades spinning in a circle like a pinwheel
+12) a dusty-blue storm cloud shooting a mustard lightning bolt down
+13) a white computer mouse cursor arrow with a small orange explosion at its tip
+14) one cream rat splitting into two rats like cell division
+15) a round clock with a big curved arrow going backwards (counterclockwise)
+16) a coral megaphone with echo rings and a small star

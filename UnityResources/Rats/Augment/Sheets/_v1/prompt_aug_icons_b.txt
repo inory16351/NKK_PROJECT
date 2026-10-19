@@ -1,0 +1,24 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_icons_b.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the icons. No text, no letters, no numbers, no labels, no grid lines, no frames, no badges or circles behind the icons. Avoid magenta or pink-purple colors inside the icons.
+- A sheet of 16 game POWER-UP ICONS in an exact 4 columns x 4 rows grid (equal cells). Each icon is ONE simple object (or a tight small group) centered in its cell, filling about 65% of the cell, with a wide empty margin; icons must NOT touch or cross cell borders. All icons the same size and the same slight 3/4 front view.
+- STYLE IS THE MOST IMPORTANT RULE. Match the attached reference icons exactly (ref_icon_style, ref_skill_icons): the art style of Untitled Goose Game. Completely FLAT vector shapes, NO outlines or strokes of any kind, NO dark contour lines, NO black linework, no glossy highlights, no gradients, no shine, no glow, no motion lines, no drop shadows. A few flat color areas with at most one slightly darker flat tone. Soft muted pastel palette (cream, warm gray, soft pink, muted brown, sage green, dusty blue, mustard yellow), low saturation, children's picture book feel. Simple readable silhouettes at 64px. Rats, when shown, are small cream-white lab rats with pink ears.
+
+Cells (left to right, top to bottom):
+1) a brass bugle horn with a small red flag hanging from it
+2) a golden (mustard-yellow) shiny-free rat tooth on a cushion
+3) a long curved sharp fang with a small red droplet shape
+4) a stack of stolen papers tied with string and a cheese stamp
+5) a brick wall section with big cracks and loose bricks falling
+6) a protein shaker bottle (soft pink) with a cheese logo shape
+7) a big wall clock with a small overtime moon shape
+8) a flaming cheese meteor (orange and mustard flat flames) falling diagonally
+9) a flat orange-red explosion burst with a small cardboard box flying out
+10) a party popper with confetti shapes and a tiny baby rat face
+11) an hourglass with cheese-colored sand and a small rat paw on top
+12) a tall stacked apartment building made of matchboxes with tiny windows
+13) a cartoon cat skull (cute, not scary) with a crossed bone
+14) three rat fists in a row, overlapping, like a rapid punch
+15) two small cream rats standing on one gold medal step together
+16) a big mustard-yellow lightning bolt crackling around a rat tooth

@@ -9,7 +9,7 @@ namespace NKK
     // 게임 쪽은 여기 값만 곱하거나 더하면 됨 (아무것도 안 찍었으면 배율 1 · 가산 0).
     public static class CommonSkill
     {
-        static int ver = -1;
+        static int ver = -1, augVer = -1;
         static GameDatabase dbRef;
         static readonly Dictionary<CommonEffectType, List<CommonSkillRow>> owned = new();
         static readonly List<CommonSkillRow> none = new();
@@ -18,12 +18,19 @@ namespace NKK
         {
             var p = Progress.I; var db = GameDatabase.Instance;
             int v = p ? p.SkillVersion : -2;
-            if (v == ver && db == dbRef) return;
-            ver = v; dbRef = db; owned.Clear();
+            if (v == ver && db == dbRef && Augments.Version == augVer) return;
+            ver = v; dbRef = db; augVer = Augments.Version; owned.Clear();
             if (!p || !db) return;
             foreach (var s in db.CommonSkills)
             {
                 if (s.Effect == CommonEffectType.None || !p.HasSkill(s)) continue;
+                if (!owned.TryGetValue(s.Effect, out var l)) owned[s.Effect] = l = new List<CommonSkillRow>();
+                l.Add(s);
+            }
+            // 판 안에서 장착한 증강 (2026-10-19): 공용 스킬 노드처럼 같이 더함
+            foreach (var s in Augments.Rows)
+            {
+                if (s.Effect == CommonEffectType.None) continue;
                 if (!owned.TryGetValue(s.Effect, out var l)) owned[s.Effect] = l = new List<CommonSkillRow>();
                 l.Add(s);
             }
@@ -127,6 +134,9 @@ namespace NKK
         public static float RushCdLess => Sum(CommonEffectType.Rush_CD);          // 총공격 쿨타임 감소 (초)
         public static float RushRange => Sum(CommonEffectType.Rush_Range);        // 총공격 범위: 화면 밖으로 화면 크기 × 이 비율까지
         public static float CatHpMul => Mathf.Max(0.1f, 1 - Sum(CommonEffectType.Cat_Hp_Down));
+        // ── 증강 (2026-10-19) ──
+        public static int AugSlotAdd => Mathf.RoundToInt(Sum(CommonEffectType.Aug_Slot));         // 증강 슬롯 + (공용 스킬 노드)
+        public static float ResearchMul => 1 + Sum(CommonEffectType.Research_Pct);                 // 층 클리어 연구자료 ×
         public static float CatFearMul => Mathf.Max(0.1f, 1 - Sum(CommonEffectType.Cat_Hp_Down, 2));
     }
 }

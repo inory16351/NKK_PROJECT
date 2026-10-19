@@ -42,11 +42,19 @@
   },
   {
    "key": "bc_base",
-   "value": 3.0
+   "value": 6.76
   },
   {
    "key": "mythic_confirm_ratio",
    "value": 0.5
+  },
+  {
+   "key": "bc_floor_grow",
+   "value": 1.2213
+  },
+  {
+   "key": "bc_floor_cap",
+   "value": 30.0
   }
  ],
  "Shop_Slot": [
@@ -93,7 +101,7 @@
    "goods_name": "전설 조각 (소)",
    "goods_name_sk": 3590001,
    "grade": "Legendary",
-   "pack_size": 3,
+   "pack_size": 30,
    "spawn_weight": 50.0,
    "price_cheese_bc": 360.0
   },
@@ -102,7 +110,7 @@
    "goods_name": "전설 조각 (중)",
    "goods_name_sk": 3590002,
    "grade": "Legendary",
-   "pack_size": 6,
+   "pack_size": 60,
    "spawn_weight": 35.0,
    "price_cheese_bc": 650.0
   },
@@ -111,7 +119,7 @@
    "goods_name": "전설 조각 (대)",
    "goods_name_sk": 3590003,
    "grade": "Legendary",
-   "pack_size": 10,
+   "pack_size": 100,
    "spawn_weight": 15.0,
    "price_cheese_bc": 1000.0
   },
@@ -120,7 +128,7 @@
    "goods_name": "신화 조각 (소)",
    "goods_name_sk": 3590011,
    "grade": "Mythic",
-   "pack_size": 2,
+   "pack_size": 20,
    "spawn_weight": 60.0,
    "price_cheese_bc": 720.0
   },
@@ -129,7 +137,7 @@
    "goods_name": "신화 조각 (중)",
    "goods_name_sk": 3590012,
    "grade": "Mythic",
-   "pack_size": 4,
+   "pack_size": 40,
    "spawn_weight": 30.0,
    "price_cheese_bc": 1320.0
   },
@@ -138,7 +146,7 @@
    "goods_name": "신화 조각 (대)",
    "goods_name_sk": 3590013,
    "grade": "Mythic",
-   "pack_size": 6,
+   "pack_size": 60,
    "spawn_weight": 10.0,
    "price_cheese_bc": 1800.0
   }

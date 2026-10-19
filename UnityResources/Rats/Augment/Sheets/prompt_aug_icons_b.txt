@@ -1,0 +1,24 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_icons_b.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the icons. No text, no letters, no numbers, no labels, no grid lines, no frames, no cards, no badges or circles behind the icons. Avoid magenta or pink-purple colors inside the icons.
+- A sheet of 16 game icons in an exact 4 columns x 4 rows grid (equal cells). Each icon is ONE simple object (or a tight small group) centered in its cell, filling about 65% of the cell, with a wide empty margin; icons must NOT touch or cross cell borders. All icons the same size and the same slight 3/4 front view.
+- STYLE IS THE MOST IMPORTANT RULE: the icons must look like they were painted by the SAME artist in the SAME batch as the attached reference icons (ref_skill_style: boss target, nest, cheese meteor, party popper, etc.). Copy that rendering exactly: soft hand-painted picture-book look with gentle soft shading and a very subtle paper/gouache texture, rounded chunky shapes, NO outlines or dark contour lines, NO crisp vector look, NO glossy highlights, NO glow, NO hard drop shadows. Same muted warm palette (cream, warm gray, soft coral red, muted brown, sage green, dusty blue, mustard yellow), low saturation. Same object proportions and size inside the cell as the reference. Rats, when shown, are small cream-white lab rats with pink ears and pink tails, drawn like the reference rats.
+
+Cells (left to right, top to bottom):
+1) a brass bugle horn with a small coral flag hanging from it
+2) a mustard-gold rat tooth on a dusty-blue cushion
+3) a long curved sharp fang with a small coral droplet
+4) a stack of papers tied with string and a cheese stamp
+5) a brick wall section with cracks and loose bricks falling
+6) a soft pink protein shaker bottle with a cheese logo
+7) a wall clock with a small mustard crescent moon
+8) a flaming cheese meteor falling diagonally
+9) an orange explosion burst with a small cardboard box flying out
+10) a party popper with confetti and a tiny cream rat peeking out
+11) an hourglass with cheese-colored sand and a rat paw on top
+12) a tall apartment building made of stacked matchboxes
+13) a cute cartoon cat skull with a crossed bone
+14) three cream rat fists in a row overlapping, rapid punch
+15) two cream rats standing together on one gold podium
+16) a big mustard lightning bolt around a rat tooth

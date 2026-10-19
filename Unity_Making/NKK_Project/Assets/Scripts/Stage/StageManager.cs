@@ -264,6 +264,14 @@ namespace NKK.Stage
 
         public float WallHP(int i, int j, int di, int dj) => walls.TryGetValue(WallKey(i, j, di, dj), out var v) ? v : WallMax(i + di, j + dj);
         public float WallHPMax(int i, int j, int di, int dj) => WallMax(i + di, j + dj);
+        // 벽 체력을 최대 체력의 frac 만큼 깎음 (증강 '연쇄 붕괴', 이걸로는 무너지지 않고 1 남음)
+        public void ChipWall(int i, int j, int di, int dj, float frac)
+        {
+            if (Open.Contains(new Vector2Int(i + di, j + dj))) return;
+            float max = WallHPMax(i, j, di, dj);
+            walls[WallKey(i, j, di, dj)] = Mathf.Max(1, WallHP(i, j, di, dj) - max * frac);
+            ShakeWall(i, j, di, dj);
+        }
         // 계단 방으로 들어가는 막힌 벽 중 가장 많이 깎인 벽의 남은 체력 비율 (1 = 안 깎임·닿은 벽 없음 · 0 = 계단 방이 열림) — 튜토리얼 제한시간 안내
         public float StairsWallRatio()
         {
@@ -355,6 +363,7 @@ namespace NKK.Stage
             if (!IsStairsRoom(t.x, t.y) && Game.Floor >= trapFromFloor && UnityEngine.Random.value < CommonSkill.TrapSingleChance)
                 SpawnTraps(t, UnityEngine.Random.value < trapTwoChance - CommonSkill.TrapMultiDown ? 2 : 1);
             RoomOpened?.Invoke(t);
+            AugmentSpecials.OnWallBroken();      // 증강 특수 효과: 연쇄 붕괴
         }
 
         // ── 쥐덫 ──

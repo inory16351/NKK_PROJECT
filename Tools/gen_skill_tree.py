@@ -56,7 +56,7 @@ T[4] = dict(
     G1=('Start_Rat', 1, 1), G2=('Time_Add', 7), G3=('Start_Rat', 1, 1), G4=('Breed_Chance', 0.05), G5=('Pop_Cap', 15), G6=('Time_Add', 7), G7=('Promote_Double', 0.03, 3), G8=('Breed_Chance', 0.05),
     L1=('Item_Count_Pct', 0.15), L2=('Cheese_Pct', 0.20), L3=('Spawn_Rate_Pct', 0.20), L4=('Cheese_Pct', 0.50, 2), L5=('Cheese_Pct', 0.50, 1), L6=('New_Item', 60022), L7=('Gold_Item', 0.03, 5), L8=('New_Item', 60028),
     K1=('Trick_Unlock', 4, 0.015), K2=('Trick_Chance', 4, 0.015), K3=('Trick_Chance', 0, 0.01), K4=('Trick_Chance', 3, 0.015), K5=('Trap_Single_Down', 0.05), K6=('Trick_Cheese_Pct', 0.50), K7=('Trick_Gauge_Pct', 0.30),
-    S1=('Stage_Skip', 2), S2=('Ult_CD', 3), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.15, 4), S5=('Ult_Power_Pct', 0.30), S6=('Rush_Up', 0.5, 0.5),
+    S1=('Stage_Skip', 2), S2=('Ult_Gauge_Pct', 0.15), S3=('Stage_Skip', 1), S4=('Boss_Dmg_Pct', 0.15, 4), S5=('Ult_Power_Pct', 0.30), S6=('Rush_Up', 0.5, 0.5),
 )
 T[5] = dict(
     C1=('Atk_Flat', 8), C2=('Atk_Pct', 0.25), C3=('Multi_Hit', 0.05, 2), C4=('Atk_Flat', 15, 5), C5=('Atk_Pct', 0.30, 5, 1), C6=('Wall_Dmg_Pct', 0.25), C7=('Crit_Chance', 0.04), C8=('Dmg_Pct', 0.25),
@@ -70,7 +70,7 @@ T[6] = dict(
     G1=('Start_Rat', 1, 1), G2=('Time_Add', 9), G3=('Start_Rat', 1, 1), G4=('Breed_Cool_Pct', 0.15), G5=('Pop_Cap', 20), G6=('Time_Add', 9), G7=('Promote_Double', 0.03, 5), G8=('Breed_Chance', 0.05),
     L1=('Item_Count_Pct', 0.20), L2=('Cheese_Pct', 0.25), L3=('Spawn_Rate_Pct', 0.25), L4=('Cheese_Pct', 0.70, 2), L5=('Cheese_Pct', 0.70, 1), L6=('New_Item', 60024), L7=('Gold_Item', 0.04), L8=('New_Item', 60030),
     K1=('Trick_Chance', 0, 0.01), K2=('Trick_Cheese_Pct', 0.60), K3=('Trick_Chance', 3, 0.02), K4=('Trick_Chance', 4, 0.02), K5=('Trap_Multi_Down', 0.05), K6=('Trick_Gauge_Pct', 0.30), K7=('Trick_Chance', 5, 0.02),
-    S1=('Stage_Skip', 2), S2=('Ult_Auto', 1), S3=('Stage_Skip', 2), S4=('Boss_Dmg_Pct', 0.2, 4), S5=('Super_Jump_Pct', 0.50), S6=('Ult_CD', 3),
+    S1=('Stage_Skip', 2), S2=('Ult_Auto', 1), S3=('Stage_Skip', 2), S4=('Boss_Dmg_Pct', 0.2, 4), S5=('Super_Jump_Pct', 0.50), S6=('Ult_Gauge_Pct', 0.20),
 )
 T[7] = dict(
     C1=('Atk_Flat', 18), C2=('Atk_Pct', 0.30), C3=('Multi_Hit', 0.05, 2), C4=('Atk_Flat', 30, 5, 1), C5=('Atk_Pct', 0.35, 4, 1), C6=('Wall_Dmg_Pct', 0.30), C7=('Crit_Chance', 0.04), C8=('Dmg_Pct', 0.30),
@@ -84,7 +84,7 @@ T[8] = dict(
     G1=('Start_Rat', 1, 1), G2=('Time_Add', 11), G3=('Start_Rat', 1, 1), G4=('Twin_Chance', 0.05), G5=('Pop_Cap', 30), G6=('Time_Add', 12), G7=('Promote_Double', 0.04, 0), G8=('Mutation_Chance', 0.15),
     L1=('Item_Count_Pct', 0.30), L2=('Cheese_Pct', 0.30), L3=('Spawn_Rate_Pct', 0.30), L4=('Cheese_Pct', 1.00, 2), L5=('Cheese_Pct', 1.00, 1), L6=('Gold_Item', 0.05), L7=('Combo_Time_Pct', 0.30), L8=('New_Item', 60032),
     K1=('Trick_Chance', 0, 0.02), K2=('Trick_Cheese_Pct', 1.00), K3=('Trick_Chance', 5, 0.02), K4=('Trick_Gauge_Pct', 0.50), K5=('Trap_Single_Down', 0.05), K6=('Trap_Multi_Down', 0.05), K7=('Trick_Chance', 0, 0.01),
-    S1=('Stage_Skip', 3), S2=('Ult_CD', 4), S3=('Stage_Skip', 3), S4=('Boss_Dmg_Pct', 0.25, 3), S5=('Rush_CD', 0.5), S6=('Ult_Power_Pct', 0.50),
+    S1=('Stage_Skip', 3), S2=('Ult_Gauge_Pct', 0.20), S3=('Stage_Skip', 3), S4=('Boss_Dmg_Pct', 0.25, 3), S5=('Rush_CD', 0.5), S6=('Ult_Power_Pct', 0.50),
 )
 
 
@@ -102,12 +102,14 @@ ROT = {
     'L8': [('Cheese_Pct', 1.2), ('Item_Count_Pct', 0.35), ('Cheese_Pct', 1.4, 1), ('Item_Count_Flat', 3), ('Cheese_Pct', 1.6, 2), ('Item_Count_Pct', 0.4), ('Cheese_Pct', 1.8), ('Cheese_Pct', 2.0)],
     'K1': [('Trick_Chance', 0, 0.02), ('Trick_Chance', 1, 0.03), ('Trick_Chance', 2, 0.03), ('Trick_Chance', 3, 0.03), ('Trick_Chance', 4, 0.03), ('Trick_Chance', 5, 0.03), ('Trick_Chance', 0, 0.03), ('Trick_Chance', 0, 0.04)],
     'K3': [('Trap_Single_Down', 0.05), ('Trick_Gauge_Pct', 0.5), ('Trap_Multi_Down', 0.05), ('Trick_Cheese_Pct', 1.2), ('Trap_Single_Down', 0.05), ('Trick_Gauge_Pct', 0.6), ('Trick_Cheese_Pct', 1.5), ('Trap_Multi_Down', 0.05)],
-    'S2': [('Ult_CD', 4), ('Cat_Hp_Down', 0.3, 0.3), ('Wall_Hp_Down', 0.05), ('Super_Jump_Pct', 0.6), ('Cheese_Meteor', 0, 0.4), ('Bite_Zap', 0.06, 3, 0.6), ('Chain_Blast', 40, 0.3), ('Ult_Gauge_Pct', 0.25)],
+    'S2': [('Ult_Gauge_Pct', 0.2), ('Aug_Slot', 1), ('Wall_Hp_Down', 0.05), ('Super_Jump_Pct', 0.6), ('Cheese_Meteor', 0, 0.4), ('Bite_Zap', 0.06, 3, 0.6), ('Chain_Blast', 40, 0.3), ('Ult_Gauge_Pct', 0.25)],
     'S4': [('Boss_Dmg_Pct', 0.3, 3), ('Boss_Dmg_Pct', 0.3, 3), ('Boss_Dmg_Pct', 0.35, 3), ('Boss_Dmg_Pct', 0.35, 3), ('Boss_Dmg_Pct', 0.4, 3), ('Boss_Dmg_Pct', 0.4, 3), ('Boss_Dmg_Pct', 0.45, 3), ('Boss_Dmg_Pct', 0.5, 3)],
     'S5': [('Rush_CD', 0.5), ('Ult_Power_Pct', 0.6), ('Rush_Range', 0.25), ('Rush_Up', 0.5, 0.5), ('Ult_Power_Pct', 0.7), ('Rocket_CD', 5), ('Ult_Power_Pct', 0.8), ('Rush_Up', 1, 0.5)],
-    'S6': [('Ult_Power_Pct', 0.5), ('Ult_Gauge_Pct', 0.2), ('Super_Jump_Pct', 0.5), ('Ult_CD', 4), ('Cat_Hp_Down', 0.3, 0.3), ('Ult_Gauge_Pct', 0.25), ('Chain_Blast', 50, 0.4), ('Ult_CD', 5)],
+    'S6': [('Ult_Power_Pct', 0.5), ('Ult_Gauge_Pct', 0.2), ('Super_Jump_Pct', 0.5), ('Aug_Slot', 1), ('Cat_Hp_Down', 0.3, 0.3), ('Ult_Gauge_Pct', 0.25), ('Chain_Blast', 50, 0.4), ('Aug_Slot', 1)],     # 증강 슬롯 +1: 10 · 12 · 16훈장 (2026-10-19)
 }
-SKIP = {9: (3, 2), 10: (3, 2), 11: (3, 3), 12: (3, 3), 13: (5, 5), 14: (3, 3), 15: (7, 7), 16: (3, 2)}
+# 스테이지 스킵 (2026-10-19 사용자: 31층~ 시작 층 = 최고 클리어 - 4, 넘은 허들 아래로는 안 감 → 판 ~25분): 훈장 t 트리 전부 = 시작 최대 = 그 훈장 허들 다음 층
+#   누적 8훈장 27 → 9훈장 40 · 10훈장 50 · … · 15훈장 100 (실제 시작 층 = min(1 + 누적, 스테이지 테이블 skip_cap))
+SKIP = {9: (7, 6), 10: (5, 5), 11: (5, 5), 12: (5, 5), 13: (5, 5), 14: (5, 5), 15: (5, 5), 16: (5, 5)}
 GROW_FLAT = 1.6          # 훈장마다 공격력 + 값 배율
 for _t in range(9, 17):
     _k = _t - 8
@@ -115,7 +117,8 @@ for _t in range(9, 17):
     d['C1'] = ('Atk_Flat', round(25 * GROW_FLAT ** _k)); d['C4'] = ('Atk_Flat', round(40 * GROW_FLAT ** _k), 6)
     d['C2'] = ('Atk_Pct', round(0.4 + 0.05 * _k, 2)); d['C5'] = ('Atk_Pct', round(0.5 + 0.05 * _k, 2), 6); d['C8'] = ('Dmg_Pct', round(0.4 + 0.05 * _k, 2))
     d['C6'] = ('Wall_Dmg_Pct', round(0.3 + 0.03 * _k, 2))
-    d['G2'] = ('Time_Add', 11 + _k); d['G6'] = ('Time_Add', 12 + _k); d['G5'] = ('Pop_Cap', 30 + 5 * _k); d['G7'] = ('Promote_Double', 0.04, 0)
+    d['G2'] = ('Cheese_Pct', round(0.5 + 0.1 * _k, 2), 1); d['G6'] = ('Gold_Item', 0.03);   # 예전 제한시간 + (2026-10-19 사용자: 9~16훈장 제한시간 노드는 다른 효과로)
+    d['G5'] = ('Pop_Cap', 30 + 5 * _k); d['G7'] = ('Promote_Double', 0.04, 0)
     d['G1'] = ('Promote_Auto', 5) if _t == 9 else ('Start_Rat', 1, 1)
     d['L1'] = ('Item_Count_Pct', round(0.3 + 0.03 * _k, 2)); d['L2'] = ('Cheese_Pct', round(0.3 + 0.05 * _k, 2)); d['L3'] = ('Spawn_Rate_Pct', round(0.3 + 0.03 * _k, 2))
     d['L4'] = ('Cheese_Pct', round(1.0 + 0.15 * _k, 2), 2); d['L5'] = ('Cheese_Pct', round(1.0 + 0.15 * _k, 2), 1)
@@ -127,6 +130,11 @@ for _t in range(9, 17):
     if _t == 12:
         for slot in ('G4', 'G6', 'G8'): d[slot] = ('Promote_Need_Down', 1)
     T[_t] = d
+# 제한시간 줄임 (2026-10-19 사용자: 기본 제한시간 180 → 120초, 제한시간 + 노드도 전체적으로 줄임): 1~8훈장 Time_Add 절반 (8훈장까지 합 +120 → +60초)
+TIME_ADD_SCALE = 0.5
+for _t in range(1, 9):
+    for _k, _v in list(T[_t].items()):
+        if _v and _v[0] == 'Time_Add': T[_t][_k] = ('Time_Add', max(2, round(_v[1] * TIME_ADD_SCALE)))
 TIERS = range(1, 17)
 
 # 훈장별 비용 (2026-10-08 경제 개편, 측정 Tools/probe_results/round8_econ.csv)
@@ -155,13 +163,42 @@ _TC = _tier_costs()
 for _t in range(9, 17):
     _next = _TC.get(_t + 1, _TC.get(16, 1e11) * 2.5)
     RESEARCH[_t] = round(_next / 75, 1)
-    CHEESE_PER_RES[_t] = round(CHEESE_PER_RES[8] * 1.25 ** (_t - 8))
+# 치즈 (2026-10-19 전체 밸런스): 7훈장부터 치즈가 트리 값의 10~45배 남았음 (balance_sim) → 노드 치즈 = 노드 연구자료 × 그 훈장 층대의
+#   (층 치즈 수입 ÷ 층 연구자료) × CHEESE_FIT × (트리 + 승급 연구자료)/트리. 치즈 수입 = gen_economy.fit_k 곡선 (K 는 30층까지만 늘림, balance_sim 과 같게)
+#   → 연구자료가 모자랄 즈음 치즈도 바닥 (사용자 2026-10-08). 나머지 치즈 = 상점 · 증강 강화
+CHEESE_FIT = 0.85
+CHEESE_RATIO_FROM = 7
+def _cheese_ratio():
+    try:
+        import gen_economy
+        ka, kb = gen_economy.fit_k()
+        st = openpyxl.load_workbook(os.path.join(ROOT, 'Data_Table', '스테이지 테이블.xlsx'), data_only=True)['Stage']
+        K = [c.value for c in st[2]]
+        rows = {r[0]: dict(zip(K, r)) for r in st.iter_rows(min_row=4, values_only=True) if isinstance(r[0], int)}
+        ws = openpyxl.load_workbook(os.path.join(ROOT, 'Data_Table', '티어 테이블.xlsx'), data_only=True)['Tier']
+        TK = [c.value for c in ws[2]]
+        cond = {}
+        for r in ws.iter_rows(min_row=4, values_only=True):
+            if not isinstance(r[0], int): continue
+            d = dict(zip(TK, r)); cond[r[0]] = next((d[f'cond{i}_value'] for i in range(1, 5) if d.get(f'cond{i}_type') in ('Max_Floor', 'Boss_Clear')), 1)
+        out = {}
+        for t in range(CHEESE_RATIO_FROM, 17):
+            f0 = int(cond.get(t, 1)); f1 = int(cond.get(t + 1, 101)) - 1
+            fl = [f for f in range(max(1, f0), min(100, f1) + 1) if f in rows] or [min(100, f0)]
+            c = sum(ka * kb ** (min(f, 30) - 1) * rows[f]['cheese'] * rows[f]['rooms'] for f in fl)
+            r = sum(rows[f]['research'] for f in fl)
+            out[t] = c / max(1e-9, r)
+        return out
+    except Exception as ex:
+        print('치즈 비율 계산 실패 (예전 값 씀):', ex); return {}
+for _t, _ratio in _cheese_ratio().items():
+    CHEESE_PER_RES[_t] = round(_ratio * CHEESE_FIT * 2)
 
 
 def nice(v):
     mag = 10 ** max(0, int(math.log10(max(v, 1))) - 1)
     return math.ceil(v / mag) * mag
-KEYS = {'Trick_Unlock', 'Stage_Skip', 'New_Item', 'Ult_Auto', 'Promote_Auto', 'Promote_Need_Down'}
+KEYS = {'Trick_Unlock', 'Stage_Skip', 'New_Item', 'Ult_Auto', 'Promote_Auto', 'Promote_Need_Down', 'Aug_Slot'}
 FIRST_KEYS = {'Crit_Chance', 'Multi_Hit', 'Cheese_Meteor', 'Bite_Zap'}       # 그 효과가 처음 나오는 노드만 핵심
 
 
@@ -188,7 +225,7 @@ def name(e, v):
         'Trick_Cheese_Pct': f'묘기로 얻는 치즈 +{pct(v1)}', 'Trick_Gauge_Pct': f'묘기 성공 시 필살기 게이지 +{pct(v1)}',
         'Trap_Single_Down': f'쥐덫 등장 확률 -{pct(v1)}', 'Trap_Multi_Down': f'쥐덫 2개 등장 확률 -{pct(v1)}',
         'Stage_Skip': f'스테이지 스킵 +{int(v1)}층', 'Wall_Hp_Down': f'벽 체력 -{pct(v1)}',
-        'Ult_Gauge_Pct': f'필살기 게이지 충전 +{pct(v1)}', 'Ult_Power_Pct': f'필살기 위력 +{pct(v1)}', 'Ult_Auto': '필살기 자동 사용',
+        'Ult_Gauge_Pct': f'필살기 게이지 충전 +{pct(v1)}', 'Aug_Slot': f'증강 슬롯 +{v1:g}', 'Ult_Power_Pct': f'필살기 위력 +{pct(v1)}', 'Ult_Auto': '필살기 자동 사용',
         'Super_Jump_Pct': f'슈퍼 점프 확률 +{pct(v1)}', 'Bite_Zap': f'전기 이빨: {pct(v1)} 확률로 {int(v2)}개 감전',
         'Chain_Blast': f'연쇄 폭발 범위 +{v1:g} · 피해 +{pct(v2)}', 'Cheese_Meteor': (f'치즈 운석 ({v1:g}초마다)' if v1 else f'치즈 운석 위력 +{pct(v2)}'),
         'Twin_Chance': f'쌍둥이 확률 +{pct(v1)}', 'Mutation_Chance': f'높은 등급 탄생 +{pct(v1)}', 'Birth_Frenzy': f'탄생 축제 {v1:g}초 (주변 쥐 광란)',
@@ -202,7 +239,7 @@ ICON = {'Atk_Flat': 'teeth', 'Atk_Pct': 'gym', 'Dmg_Pct': 'dmg', 'Wall_Dmg_Pct':
         'Boss_Dmg_Pct': 'bossd', 'Start_Rat': 'startrat', 'Promote_Double': 'promote', 'Pop_Cap': 'nest', 'Time_Add': 'clock', 'Breed_Chance': 'breed',
         'Move_Speed_Pct': 'speed', 'Breed_Cool_Pct': 'breed', 'Item_Count_Flat': 'stock', 'Item_Count_Pct': 'stock', 'Cheese_Pct': 'cheese', 'New_Item': 'newitem',
         'Rocket_CD': 'truck', 'Gold_Item': 'goldx', 'Spawn_Rate_Pct': 'spawn', 'Combo_Time_Pct': 'combo', 'Trick_Cheese_Pct': 'trickcheese', 'Trick_Gauge_Pct': 'trickgauge',
-        'Trap_Single_Down': 'shield', 'Trap_Multi_Down': 'trapmulti', 'Stage_Skip': 'skip', 'Wall_Hp_Down': 'wallcrack', 'Ult_Gauge_Pct': 'ultcd',
+        'Trap_Single_Down': 'shield', 'Trap_Multi_Down': 'trapmulti', 'Stage_Skip': 'skip', 'Wall_Hp_Down': 'wallcrack', 'Ult_Gauge_Pct': 'ultcd', 'Aug_Slot': 'stock',
         'Ult_Power_Pct': 'ultcd', 'Ult_Auto': 'autoult', 'Super_Jump_Pct': 'sjump', 'Bite_Zap': 'zap', 'Chain_Blast': 'chainx', 'Cheese_Meteor': 'meteor',
         'Twin_Chance': 'twins', 'Mutation_Chance': 'mutate', 'Birth_Frenzy': 'frenzy', 'Furniture_Pct': 'furnd', 'Air_Cheese_Pct': 'tumble', 'Rush_Up': 'rush', 'Rush_CD': 'rush', 'Rush_Range': 'rush', 'Ult_CD': 'ultcd', 'Cat_Hp_Down': 'catnip', 'Promote_Auto': 'autopromote', 'Promote_Need_Down': 'needdown'}
 
@@ -240,6 +277,8 @@ EFFECT_DOC = [
     ('Stage_Skip', '로비에서 고를 수 있는 시작 층 + 합 (최고 기록을 넘지 못함)', '층', '-', '-'),
     ('Wall_Hp_Down', '벽 체력 ×(1 - 합) (최소 0.5)', '감소율', '-', '-'),
     ('Ult_Gauge_Pct', '필살기 게이지 충전 ×(1 + 합)', '증가율', '-', '-'),
+    ('Aug_Slot', '증강 장착 슬롯 + 합 (기본 = 증강 테이블 Aug_Config slot_base 5)', '칸 수', '-', '-'),
+    ('Research_Pct', '층 클리어 연구자료 ×(1 + 합) (증강용)', '증가율', '-', '-'),
     ('Ult_Power_Pct', '필살기 피해 ×(1 + 합)', '증가율', '-', '-'),
     ('Ult_Auto', '필살기 자동 사용', '-', '-', '-'),
     ('Super_Jump_Pct', '슈퍼 점프 확률 ×(1 + 합)', '증가율', '-', '-'),

@@ -1,0 +1,24 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_icons_a.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the icons. No text, no letters, no numbers, no labels, no grid lines, no frames, no cards, no badges or circles behind the icons. Avoid magenta or pink-purple colors inside the icons.
+- A sheet of 16 game icons in an exact 4 columns x 4 rows grid (equal cells). Each icon is ONE simple object (or a tight small group) centered in its cell, filling about 65% of the cell, with a wide empty margin; icons must NOT touch or cross cell borders. All icons the same size and the same slight 3/4 front view.
+- STYLE IS THE MOST IMPORTANT RULE: the icons must look like they were painted by the SAME artist in the SAME batch as the attached reference icons (ref_skill_style: boss target, nest, cheese meteor, party popper, etc.). Copy that rendering exactly: soft hand-painted picture-book look with gentle soft shading and a very subtle paper/gouache texture, rounded chunky shapes, NO outlines or dark contour lines, NO crisp vector look, NO glossy highlights, NO glow, NO hard drop shadows. Same muted warm palette (cream, warm gray, soft coral red, muted brown, sage green, dusty blue, mustard yellow), low saturation. Same object proportions and size inside the cell as the reference. Rats, when shown, are small cream-white lab rats with pink ears and pink tails, drawn like the reference rats.
+
+Cells (left to right, top to bottom):
+1) a big cream rat front tooth / incisor with a tiny sparkle
+2) a cheese wedge with a small pink rat nose sniffing at it
+3) a round mustard-yellow alarm clock with a small gold coin beside it
+4) a coral-pink heart resting in a small twig nest
+5) a pale-gray stone brick with a rat tooth biting into its corner
+6) a coral-red and cream target with a rat tooth stuck in the center
+7) a navy guard cap with a big coral-red slash shape across it
+8) a small dusty-blue energy drink can with a mustard lightning shape
+9) a cozy cardboard box house with a round door and a tiny chimney
+10) an open notebook with a pencil and a cheese doodle
+11) a gray cat paw print with a big coral sneeze puff
+12) a pair of small pink rat feet with short speed dashes behind
+13) two small cream rat fists punching side by side
+14) a rat tooth with a mustard-yellow zigzag spark around it
+15) two tiny cream baby rats curled together in a nest
+16) a round sage-green orb with a mustard star

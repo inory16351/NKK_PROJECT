@@ -175,6 +175,9 @@ def bosses():
     print('보스', len(C.BOSSES), '· 밈 기술', len(C.MEMES))
 
 
+LATE_COST_SCALE = 1.95       # 9~16훈장 승급 비용 배율 (2026-10-19, balance_sim 으로 맞춤 · 트리 비용은 gen_skill_tree 가 다음 승급 비용에서 따라감)
+
+
 def tiers():
     st = openpyxl.load_workbook(os.path.join(DT, '스테이지 테이블.xlsx'), data_only=True)['Stage']
     keys = [c.value for c in st[2]]
@@ -186,7 +189,7 @@ def tiers():
     t.col('cond4_type', '조건4 타입', 'enum'); t.col('cond4_value', '조건4 값', 'float')
     for (tier, name, icon, conds, bk, start, atk) in C.TIERS:
         floor = next((v for k, v in conds if k in ('Max_Floor', 'Boss_Clear')), 30)
-        cost = round(research.get(min(floor, 100), 0) * 4, -3)
+        cost = round(research.get(min(floor, 100), 0) * 4 * LATE_COST_SCALE, -3)
         d = dict(tier_name=ko(name), icon=icon, research_cost=cost, birth_grade_k=bk, start_rat_count=start, start_floor_cap=0, badge_asset=f'Rogue/rk_{tier}', rat_atk_mul=atk)
         for i in range(4):
             k, v = conds[i] if i < len(conds) else ('None', 0)

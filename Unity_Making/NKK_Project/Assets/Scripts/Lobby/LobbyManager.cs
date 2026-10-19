@@ -74,7 +74,8 @@ namespace NKK.Lobby
             if (id == "rank") return p.CanRankUp();
             if (id == "gacha") return GeneGacha.FreeTen > 0 || GeneGacha.CanPull(10);       // 무료 10회 · 10회 뽑을 연구자료
             if (id == "market") return p.shop.lineup.Count == 0 || p.shop.freeLeft > 0 || BlackMarket.SecondsToRefresh <= 0;
-            if (id == "alley") return Alert("gacha") || Alert("market");
+            if (id == "aug") { foreach (var it in Augments.Items) if (it.isNew || Augments.CanUpgrade(it)) return true; return false; }     // 증강 연구소: 새 증강 · 강화 가능
+            if (id == "alley") return Alert("gacha") || Alert("market") || Alert("aug");
             return false;
         }
 

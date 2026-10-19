@@ -28,7 +28,7 @@ namespace NKK
         public static bool UseRush = true;
         public static bool Calib;                   // 적정 고정: 적정 전투력 = 지금 무리 전투력 (전투력 = 적정일 때 몇 초 걸리나 재기)          // 플레이어처럼 클릭 총공격 (쿨타임마다: 보스 → 계단 방 벽 → 가장 약한 벽)           // 필살기가 차면 바로 씀 (플레이어처럼, Ults.UltimateManager.ForceAuto)
         public static readonly List<string> Results = new();
-        public static float BaseTime = 180, BossBaseTime = 30;      // 목표 비교 기준 (노드 추가 시간 빼고): 일반 180초 · 보스 층 +30
+        public static float BaseTime = 120, BossBaseTime = 30;      // 목표 비교 기준 (노드 추가 시간 빼고): 일반 120초 (2026-10-19, 예전 180) · 보스 층 +30
         // 층마다 한 줄 (적정 고정 분석용): 층, 제한시간 기준 사용 초, 기준 초, 계단 거리, 경로 벽 배율 합, 방 수, 성공 여부
         public static readonly List<float[]> Rows = new();
         // 이어서 돌릴 측정 (Run 인자: 티어, 시작 층, 끝 층, 포기 초, simHz, 노드 수, 조각 합[, 승급 방식]). 하나 끝나면 다음 것 자동 시작

@@ -32,8 +32,10 @@ namespace NKK
             public List<string> tuto = new();    // 본 튜토리얼 단계 id
             public List<string> unlocks = new(); // 해금한 기능 id (튜토리얼 테이블 Unlock_Id)
             public bool tutoSkip;                // 튜토리얼 전 저장 → 모든 단계·기능을 연 것으로 침
+            public bool tutoQuiet;               // 새 게임에서 '튜토리얼 안 함' (2026-10-19) → 대사 없이 단계만 조용히 지나감 (기능은 원래 조건대로 열림)
             public string savedAt;               // 마지막 저장 시각 (타이틀 슬롯 표시용)
             public ShopSave shop; public GachaSave gacha;       // 쥐구멍 암시장 · 유전자 뽑기 (2026-10-12)
+            public AugSave aug;                  // 증강 보관함 (2026-10-19)
             public bool infinite;                // 테스트: 치즈·연구자료 무제한 (테스트 패널 "전부 해제")
         }
         // ── 쥐구멍 암시장 (상점 기획서 Shop_Save) · 유전자 뽑기 (뽑기 기획서 Gacha_Save) ──
@@ -54,6 +56,16 @@ namespace NKK
             public List<GachaLog> pending = new();           // 연출 전 확정된 결과 (강제 종료 복구)
             public List<string> introSeen = new();           // 고유 컷씬을 끝까지 본 쥐 (코드) — 본 컷씬은 클릭 한 번으로 건너뛰기 (사용자 2026-10-13)
         }
+        // ── 증강 (2026-10-19): 얻으면 바로 보관함(증강 연구소)에 쌓임. 하나하나 강화 레벨·포인트가 따로 (합성 재료로 쓰면 같이 사라짐) ──
+        [Serializable] public class AugItem { public int uid, id, lv, pts; public bool isNew; }
+        [Serializable] public class AugSave
+        {
+            public List<AugItem> items = new();
+            public List<int> seen = new();       // 한 번이라도 얻은 증강 id (도감: 나머지는 ???)
+            public int nextUid = 1;
+            public int carry;                    // 들고 갈 증강 uid (41층 해금, 0 = 없음)
+        }
+        public AugSave aug = new();
         public ShopSave shop = new();
         public GachaSave gacha = new();
         // 클리어한 최고 층 (최고 도달 층 - 1)
@@ -100,12 +112,15 @@ namespace NKK
 
         // ── 튜토리얼 · 기능 해금 ──
         readonly HashSet<string> tuto = new(), unlocks = new();
-        bool tutoSkip;
+        bool tutoSkip, tutoQuiet;
         // 처음부터 열려 있는 기능 (작전 회의 · 낮잠 침대)
         static readonly string[] OpenAtStart = { "run", "rec" };
         // 해금이 바뀔 때마다 +1 (FeatureGate 가 다시 그림)
         public int UnlockVersion { get; private set; }
         public bool TutoSkipped => tutoSkip;
+        // 튜토리얼 안 함 (타이틀 '처음부터' 뒤 묻는 창, 사용자 2026-10-19): 대사·연출·튜토리얼 라운드 제한 없이, 단계의 해금만 원래 조건에서 일어남
+        public bool TutoQuiet => tutoQuiet;
+        public void SetTutoQuiet(bool on) { tutoQuiet = on; UnlockVersion++; Save(); }
         public void SkipTutorial() { tutoSkip = true; UnlockVersion++; Save(); }      // 밸런스 측정 등: 튜토리얼 안 띄우고 기능 전부 열림
         public bool TutoDone(string stepId) => tutoSkip || tuto.Contains(stepId);
         public void MarkTuto(string stepId) { if (tuto.Add(stepId)) { UnlockVersion++; Save(); } }      // 튜토리얼로 드러나는 기능(뒷골목)이 있어서 FeatureGate 도 다시 그림
@@ -119,7 +134,7 @@ namespace NKK
         {
             get
             {
-                if (tutoSkip || tuto.Contains(TutoRoundAfter)) return false;
+                if (tutoSkip || tutoQuiet || tuto.Contains(TutoRoundAfter)) return false;
                 foreach (var s in TutoRoundSteps) if (!tuto.Contains(s)) return true;
                 return false;
             }
@@ -131,6 +146,8 @@ namespace NKK
             // 뒷골목(맨홀)은 16층 클리어 뒤에도 그 튜토리얼이 시작될 때까지 아예 안 보임 (사용자 2026-10-13: 열릴 때 튜토리얼이랑 같이 등장)
             if (feature == "alley") return GeneGacha.Unlocked && (string.IsNullOrEmpty(alleyRevealStep) || TutoDone(alleyRevealStep));
             if (feature == "market") return BlackMarket.Unlocked;
+            if (feature == "aug") return Augments.Unlocked;              // 증강: 31층 도달 (2026-10-19)
+            if (feature == "aug_carry") return Augments.CarryUnlocked;   // 증강 1개 들고 가기: 41층 도달
             return string.IsNullOrEmpty(feature) || tutoSkip || unlocks.Contains(feature) || Array.IndexOf(OpenAtStart, feature) >= 0;
         }
         [Tooltip("테스트: 층과 상관없이 뒷골목·뽑기·암시장 열기")] public bool testMarket;
@@ -367,11 +384,11 @@ namespace NKK
 
         public void Save()
         {
-            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, infinite = Infinite, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
+            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, tutoQuiet = tutoQuiet, infinite = Infinite, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
             d.tuto.AddRange(tuto); d.unlocks.AddRange(unlocks);
             d.nodes.AddRange(skills);
             d.achvOn.AddRange(achvOn);
-            d.shop = shop; d.gacha = gacha;
+            d.shop = shop; d.gacha = gacha; d.aug = aug;
             foreach (var kv in achvs) d.achvs.Add(new AchvEntry { ult = kv.Key, count = kv.Value });     // 필살기 완주 횟수
             PlayerPrefs.SetString(KeyOf(Slot), JsonUtility.ToJson(d)); PlayerPrefs.Save();
         }
@@ -379,7 +396,7 @@ namespace NKK
         void Load()
         {
             rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0;
-            tuto.Clear(); unlocks.Clear(); tutoSkip = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new();
+            tuto.Clear(); unlocks.Clear(); tutoSkip = tutoQuiet = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new(); aug = new();
             var s = PlayerPrefs.GetString(KeyOf(Slot), "");
             if (string.IsNullOrEmpty(s)) return;
             var d = JsonUtility.FromJson<SaveData>(s);
@@ -392,7 +409,8 @@ namespace NKK
             if (d.tuto != null) foreach (var id in d.tuto) tuto.Add(id);
             if (d.unlocks != null) foreach (var id in d.unlocks) unlocks.Add(id);
             tutoSkip = d.tutoSkip || d.ver == 0;      // 튜토리얼이 생기기 전 저장 = 다 본 것으로
-            shop = d.shop ?? new(); gacha = d.gacha ?? new();
+            tutoQuiet = d.tutoQuiet;
+            shop = d.shop ?? new(); gacha = d.gacha ?? new(); aug = d.aug ?? new();
             Infinite = d.infinite;
         }
 

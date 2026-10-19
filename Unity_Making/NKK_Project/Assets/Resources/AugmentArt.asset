@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37121f0937ad76a4f94739bc6d900c5a, type: 3}
+  m_Name: AugmentArt
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.AugmentArt
+  icons:
+  - name: aug_apart
+    sprite: {fileID: 21300000, guid: 28a06474223e8864a8936de6ae090fe4, type: 3}
+  - name: aug_blades
+    sprite: {fileID: 21300000, guid: 07ccf9701323a7d44a9597c768f3b27d, type: 3}
+  - name: aug_blast
+    sprite: {fileID: 21300000, guid: 750e4d9bfca544f4da2411bffa7b94b8, type: 3}
+  - name: aug_boss
+    sprite: {fileID: 21300000, guid: 1890003c8155eba45922b458d5467900, type: 3}
+  - name: aug_bugle
+    sprite: {fileID: 21300000, guid: ab4c0d102aa435849b67b16c6b604ff8, type: 3}
+  - name: aug_cat
+    sprite: {fileID: 21300000, guid: 50cf63f331709f141ac5a0e6fb1e86a1, type: 3}
+  - name: aug_cheese
+    sprite: {fileID: 21300000, guid: f6a37702ce66b914dab3757f0a94e46c, type: 3}
+  - name: aug_click
+    sprite: {fileID: 21300000, guid: 1920fcfcc165fce47b860f6d0c9a153b, type: 3}
+  - name: aug_clock
+    sprite: {fileID: 21300000, guid: f8e6c81971e47894ab56ab5b45f9de98, type: 3}
+  - name: aug_clock2
+    sprite: {fileID: 21300000, guid: 3ae680b8dd7ce6b4d81af5f6256b8942, type: 3}
+  - name: aug_combo
+    sprite: {fileID: 21300000, guid: d3cf43008436fde4f9e3eec35ae453be, type: 3}
+  - name: aug_crack
+    sprite: {fileID: 21300000, guid: d7635116ab4970949876645c287a65a5, type: 3}
+  - name: aug_crit
+    sprite: {fileID: 21300000, guid: eca6a14dc36053c428848bc2010eb4b2, type: 3}
+  - name: aug_crown
+    sprite: {fileID: 21300000, guid: f05a849acdb285b42a430adcbb9670d9, type: 3}
+  - name: aug_domino
+    sprite: {fileID: 21300000, guid: 5447e0ba0ddc59f4ab27b294c7a3ba99, type: 3}
+  - name: aug_doom
+    sprite: {fileID: 21300000, guid: d8b436572c461a140b5ec6b5a9f2a012, type: 3}
+  - name: aug_double
+    sprite: {fileID: 21300000, guid: ec7ede638ba3ac249a3eff1602219454, type: 3}
+  - name: aug_drink
+    sprite: {fileID: 21300000, guid: 1a439318c9b09204ca58d7af8024ff01, type: 3}
+  - name: aug_echo
+    sprite: {fileID: 21300000, guid: 02d7709cc6df5774a9f623171ce05c8a, type: 3}
+  - name: aug_fang
+    sprite: {fileID: 21300000, guid: 5cb95325323912a419fbf0092511d180, type: 3}
+  - name: aug_feet
+    sprite: {fileID: 21300000, guid: 0e6e0b66f9930144a8d2b850b4281784, type: 3}
+  - name: aug_giant
+    sprite: {fileID: 21300000, guid: 09f748641760d2c42869f88299aa0951, type: 3}
+  - name: aug_gold
+    sprite: {fileID: 21300000, guid: 3e192055caa2abb4c9ea0b1bca0004cd, type: 3}
+  - name: aug_heart
+    sprite: {fileID: 21300000, guid: 7256c378a64c4384da38aed731f03185, type: 3}
+  - name: aug_hourglass
+    sprite: {fileID: 21300000, guid: 76413995ce0981b469e41cffb190ea4c, type: 3}
+  - name: aug_jackpot
+    sprite: {fileID: 21300000, guid: f5a3de71b79091944b088e9eb5fefade, type: 3}
+  - name: aug_legion
+    sprite: {fileID: 21300000, guid: c1b8027f905e6c9448b7892fe6f9c6e7, type: 3}
+  - name: aug_meteor
+    sprite: {fileID: 21300000, guid: 86b4c7cd3280f3f47ae4da685cef3514, type: 3}
+  - name: aug_mitosis
+    sprite: {fileID: 21300000, guid: 285c95e5f7218c24c89a1517b7927425, type: 3}
+  - name: aug_nest
+    sprite: {fileID: 21300000, guid: bd3dea23d422e9f4a97acd30c38195b0, type: 3}
+  - name: aug_note
+    sprite: {fileID: 21300000, guid: 87232f9b614c72b4c965b90da70b0a69, type: 3}
+  - name: aug_overdrive
+    sprite: {fileID: 21300000, guid: 4ca8ba8617976884885c56251a63a8ef, type: 3}
+  - name: aug_papers
+    sprite: {fileID: 21300000, guid: 0835fd7f605413b41acb329d0d9454bf, type: 3}
+  - name: aug_party
+    sprite: {fileID: 21300000, guid: c9e5453abd67b784baff5c02adfac300, type: 3}
+  - name: aug_protein
+    sprite: {fileID: 21300000, guid: e875c889ee3f86f478ac498df67586ce, type: 3}
+  - name: aug_rankboom
+    sprite: {fileID: 21300000, guid: fb1a98a0dba688447a154044303f18fa, type: 3}
+  - name: aug_rapid
+    sprite: {fileID: 21300000, guid: f01593a943602e549a69203409fee949, type: 3}
+  - name: aug_rewind
+    sprite: {fileID: 21300000, guid: 5e0062b239e1a6c4d848948ad65c7539, type: 3}
+  - name: aug_robot
+    sprite: {fileID: 21300000, guid: 5e8d8229c0ea4e542a3da7ca4754db8b, type: 3}
+  - name: aug_skull
+    sprite: {fileID: 21300000, guid: 293ebf51bc21bff4fa53ee6f423f6a52, type: 3}
+  - name: aug_snowball
+    sprite: {fileID: 21300000, guid: 2bb4a1f1b2002ed4aa3192ac156a0696, type: 3}
+  - name: aug_stop
+    sprite: {fileID: 21300000, guid: 9c2d8a34f983adf408301c3725b0fe05, type: 3}
+  - name: aug_storm
+    sprite: {fileID: 21300000, guid: 42c5f57c1bd9f2843b664299c32979eb, type: 3}
+  - name: aug_thunder
+    sprite: {fileID: 21300000, guid: df10c7ad150eaa64f89e56fef146d403, type: 3}
+  - name: aug_tooth
+    sprite: {fileID: 21300000, guid: 94fd1ddd8de055d4cb4f79c6e419968d, type: 3}
+  - name: aug_tornado
+    sprite: {fileID: 21300000, guid: 6735655b223d9924da86e65cc89a601a, type: 3}
+  - name: aug_twin
+    sprite: {fileID: 21300000, guid: 89f4a0fd986dd5b4a924dc3c1cda775f, type: 3}
+  - name: aug_ult
+    sprite: {fileID: 21300000, guid: 2828dbcd097971f4c8c7871e1aae7baf, type: 3}
+  - name: aug_vault
+    sprite: {fileID: 21300000, guid: 7132f385f364d4e4cb9e8bd1bb33f86e, type: 3}
+  - name: aug_wall
+    sprite: {fileID: 21300000, guid: 3c1131282f7de204b99c2d9d7062b75c, type: 3}
+  - name: aug_zap
+    sprite: {fileID: 21300000, guid: 482fb86338ac2354e8eb78cf0a333e9f, type: 3}
+  unknown: {fileID: 21300000, guid: cf07e811f5eb46f4e910308b495a1278, type: 3}
+  gradeFrames:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

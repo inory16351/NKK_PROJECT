@@ -37,8 +37,10 @@ namespace NKK
         {
             get
             {
-                var st = Db ? Db.StageOf(P ? P.maxFloor : 1) : null;
-                return Cfg("bc_base", 3) * (st != null ? st.cheese : 1);
+                int f = P ? P.maxFloor : 1;
+                var st = Db ? Db.StageOf(f) : null;
+                // 2026-10-19 전체 밸런스: 실제 층 치즈 수입엔 치즈 노드·콤보 등으로 층마다 bc_floor_grow 배(bc_floor_cap 층까지)가 더 붙음 → 가격도 같이 (Tools/gen_economy fit_k)
+                return Cfg("bc_base", 3) * (st != null ? st.cheese : 1) * Math.Pow(Cfg("bc_floor_grow", 1), Mathf.Min(f, (int)Cfg("bc_floor_cap", 30)) - 1);
             }
         }
         public static double Price(ShopGoodsRow g) => g == null ? 0 : Math.Round(g.price_cheese_bc * BC);

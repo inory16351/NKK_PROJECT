@@ -62,5 +62,7 @@ namespace NKK.Data
         Bite_Zap, Chain_Blast, Cheese_Meteor, Twin_Chance, Mutation_Chance, Birth_Frenzy, Furniture_Pct, Air_Cheese_Pct, Rush_Up, Cat_Hp_Down, Rush_CD, Ult_CD, Rush_Range,
         // 100층 확장 (2026-10-19): 자동 승급 (9훈장) · 승급 필요 수 감소 (12훈장)
         Promote_Auto, Promote_Need_Down,
+        // 증강 (2026-10-19): 층 클리어 연구자료 % · 증강 슬롯 + (공용 스킬 노드)
+        Research_Pct, Aug_Slot,
     }
 }

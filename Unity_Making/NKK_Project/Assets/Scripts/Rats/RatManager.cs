@@ -361,6 +361,7 @@ namespace NKK.Rats
             var nr = row != null ? Spawn(row, cx, cy) : null;
             bool twice = Random.value < CommonSkill.PromoteDouble(g);
             if (twice) { var row2 = SpeciesOfGrade(g + 1); if (row2 != null) Spawn(row2, cx + Random.Range(-40f, 40f), cy + Random.Range(-30f, 30f)); }
+            if (nr) AugmentSpecials.OnPromoted(nr);       // 증강 특수 효과: 승급 폭죽
             var nc = GameDatabase.Instance.Grades.TryGetValue((Grade)(g + 1), out var ng) && ColorUtility.TryParseHtmlString(ng.color, out var c1) ? c1 : Color.white;
             if (fx)
             {
@@ -606,6 +607,7 @@ namespace NKK.Rats
             if (cat && cat.Alive && cat.BodyDist(p.x, p.y) <= 0) p = new Vector2(cat.x, cat.y);     // 고양이 몸을 누르면 고양이 발밑으로
             else if (Items) foreach (var h in Items.Humans) if (h && h.Alive && h.BodyDist(p.x, p.y) <= 0) { p = new Vector2(h.x, h.y); break; }      // 사람 몸을 누르면 사람 발밑으로
             StartRush(p); rushCdLeft = RushTime + RushCooldown;
+            AugmentSpecials.OnRush(p);          // 증강 특수 효과: 클릭 폭격
             return true;
         }
 

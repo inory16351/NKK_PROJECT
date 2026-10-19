@@ -4901,6 +4901,11 @@
    "en": "Black Hole"
   },
   {
+   "string_key": 2400001,
+   "ko": "층 제한시간 +2초",
+   "en": "Floor time limit +2s"
+  },
+  {
    "string_key": 2492100,
    "ko": "1훈장 트리",
    "en": "Rank 1 Tree"
@@ -5966,6 +5971,11 @@
    "en": "Ultimate gauge +55% on a successful Trick"
   },
   {
+   "string_key": 2492934,
+   "ko": "스테이지 스킵 +6층",
+   "en": "Floor Skip +6"
+  },
+  {
    "string_key": 2492935,
    "ko": "보스에게 주는 피해 +30% · 보스 층 시간 +3초",
    "en": "Boss damage +30% · Boss floor time +3s"
@@ -6079,6 +6089,11 @@
    "string_key": 2493028,
    "ko": "묘기 성공 시 필살기 게이지 +60%",
    "en": "Ultimate gauge +60% on a successful Trick"
+  },
+  {
+   "string_key": 2493033,
+   "ko": "증강 슬롯 +1",
+   "en": "Augment slot +1"
   },
   {
    "string_key": 2493036,
@@ -6254,6 +6269,11 @@
    "string_key": 2493208,
    "ko": "모든 쥐 피해량 +60%",
    "en": "All rats' damage +60%"
+  },
+  {
+   "string_key": 2493210,
+   "ko": "생명체 처치 치즈 +90%",
+   "en": "Cheese from defeating creatures +90%"
   },
   {
    "string_key": 2493212,
@@ -6496,6 +6516,11 @@
    "en": "All rats' damage +70%"
   },
   {
+   "string_key": 2493410,
+   "ko": "생명체 처치 치즈 +110%",
+   "en": "Cheese from defeating creatures +110%"
+  },
+  {
    "string_key": 2493413,
    "ko": "쥐 최대 마리 수 +60",
    "en": "Max rats +60"
@@ -6614,6 +6639,11 @@
    "string_key": 2493508,
    "ko": "모든 쥐 피해량 +75%",
    "en": "All rats' damage +75%"
+  },
+  {
+   "string_key": 2493510,
+   "ko": "생명체 처치 치즈 +120%",
+   "en": "Cheese from defeating creatures +120%"
   },
   {
    "string_key": 2493512,
@@ -10696,6 +10726,46 @@
    "en": "Press the shiny 'Super Ultimate' button below! Each kind can use it only once per run, squeak!!"
   },
   {
+   "string_key": 3900094,
+   "ko": "여기서부턴 층을 넘을 때마다 '증강'을 하나 고를 수 있지! 마음에 드는 걸 골라라!",
+   "en": "From here on, you get to pick an 'Augment' every time you clear a floor! Choose wisely!"
+  },
+  {
+   "string_key": 3900095,
+   "ko": "고른 증강은 이번 판 동안 슬롯에 끼워져서 바로 효과가 나! 슬롯은 5칸이야.",
+   "en": "Picked Augments slot in for this run and work right away! You have 5 slots."
+  },
+  {
+   "string_key": 3900096,
+   "ko": "얻은 증강은 전부 지하 '증강 연구소'에 쌓여! 판 중에도 Tab 을 누르면 보관함이랑 바꿔 낄 수 있어.",
+   "en": "Every Augment you get is stored in the underground 'Augment Workshop'! Press Tab mid-run to swap with your storage."
+  },
+  {
+   "string_key": 3900097,
+   "ko": "어이, 지하에 새 가게가 들어섰다구. 이름하여 '증강 연구소'!",
+   "en": "Hey, a new shop opened down here. Behold, the 'Augment Workshop'!"
+  },
+  {
+   "string_key": 3900098,
+   "ko": "모은 증강을 구경하고, 같은 등급끼리 합성해서 더 좋은 놈을 노려 봐. 대신 꽝이 나올 수도 있다구?",
+   "en": "Browse your Augments and fuse same-rank ones for something better. Might be a dud though, heh?"
+  },
+  {
+   "string_key": 3900099,
+   "ko": "판에서 끼고 층을 넘은 증강엔 강화 포인트가 쌓여. 포인트랑 치즈를 내면 효과가 조금씩 세진다구.",
+   "en": "Augments equipped while clearing floors earn upgrade points. Spend points and cheese to power them up a bit."
+  },
+  {
+   "string_key": 3900100,
+   "ko": "합성 재료로 쓴 증강은 강화도 같이 사라지니까 아끼는 놈은 조심하라구!",
+   "en": "Augments used as fusion material lose their upgrades too, so careful with your favorites!"
+  },
+  {
+   "string_key": 3900101,
+   "ko": "41층까지 왔다고? 이제 연구소에서 증강 하나를 '들고 가기'로 정하면 1층부터 끼고 출발할 수 있다구!",
+   "en": "Made it to floor 41? Now set one Augment to 'Carry' at the Workshop and start with it from floor 1!"
+  },
+  {
    "string_key": 4000001,
    "ko": "찍... 찍찍찍...! (우리들은 그저 이곳이 낙원인 줄만 알고 있었지...)",
    "en": "Squeak... squeak squeak squeak...! (We truly believed this place was paradise...)"
@@ -11329,6 +11399,511 @@
    "string_key": 4500054,
    "ko": "달이다!!",
    "en": "The moon!!"
+  },
+  {
+   "string_key": 4681101,
+   "ko": "날카로운 앞니",
+   "en": "Sharp Incisors"
+  },
+  {
+   "string_key": 4681102,
+   "ko": "치즈 킁킁",
+   "en": "Cheese Sniffer"
+  },
+  {
+   "string_key": 4681103,
+   "ko": "야근 수당",
+   "en": "Overtime Pay"
+  },
+  {
+   "string_key": 4681104,
+   "ko": "사랑의 둥지",
+   "en": "Love Nest"
+  },
+  {
+   "string_key": 4681105,
+   "ko": "강철 앞니",
+   "en": "Steel Teeth"
+  },
+  {
+   "string_key": 4681106,
+   "ko": "급소 찾기",
+   "en": "Weak Spot"
+  },
+  {
+   "string_key": 4681107,
+   "ko": "보스 사냥 면허",
+   "en": "Boss Hunting License"
+  },
+  {
+   "string_key": 4681108,
+   "ko": "에너지 드링크",
+   "en": "Energy Drink"
+  },
+  {
+   "string_key": 4681109,
+   "ko": "단칸방 확장",
+   "en": "Room Expansion"
+  },
+  {
+   "string_key": 4681110,
+   "ko": "연구 노트",
+   "en": "Research Notes"
+  },
+  {
+   "string_key": 4681111,
+   "ko": "개박하 알레르기",
+   "en": "Catnip Allergy"
+  },
+  {
+   "string_key": 4681112,
+   "ko": "날쌘 발",
+   "en": "Quick Feet"
+  },
+  {
+   "string_key": 4681201,
+   "ko": "연타의 달인",
+   "en": "Combo Master"
+  },
+  {
+   "string_key": 4681202,
+   "ko": "찌릿찌릿 이빨",
+   "en": "Zappy Teeth"
+  },
+  {
+   "string_key": 4681203,
+   "ko": "쌍둥이 유전자",
+   "en": "Twin Genes"
+  },
+  {
+   "string_key": 4681204,
+   "ko": "필살 수련",
+   "en": "Ult Training"
+  },
+  {
+   "string_key": 4681205,
+   "ko": "돌격 나팔",
+   "en": "Charge Bugle"
+  },
+  {
+   "string_key": 4681206,
+   "ko": "미다스의 앞니",
+   "en": "Midas Bite"
+  },
+  {
+   "string_key": 4681207,
+   "ko": "치명적 앞니",
+   "en": "Deadly Fang"
+  },
+  {
+   "string_key": 4681208,
+   "ko": "서류 도둑",
+   "en": "Paper Thief"
+  },
+  {
+   "string_key": 4681209,
+   "ko": "부실 공사",
+   "en": "Shoddy Walls"
+  },
+  {
+   "string_key": 4681210,
+   "ko": "프로틴 셰이크",
+   "en": "Protein Shake"
+  },
+  {
+   "string_key": 4681211,
+   "ko": "연장 근무",
+   "en": "Extended Shift"
+  },
+  {
+   "string_key": 4681212,
+   "ko": "클릭 폭격",
+   "en": "Click Barrage"
+  },
+  {
+   "string_key": 4681213,
+   "ko": "잭팟",
+   "en": "Jackpot"
+  },
+  {
+   "string_key": 4681301,
+   "ko": "치즈 운석우",
+   "en": "Cheese Meteor Shower"
+  },
+  {
+   "string_key": 4681302,
+   "ko": "연쇄 폭발",
+   "en": "Chain Reaction"
+  },
+  {
+   "string_key": 4681303,
+   "ko": "탄생 축제",
+   "en": "Birth Party"
+  },
+  {
+   "string_key": 4681304,
+   "ko": "시간 도둑",
+   "en": "Time Thief"
+  },
+  {
+   "string_key": 4681305,
+   "ko": "쥐 아파트",
+   "en": "Rat Apartment"
+  },
+  {
+   "string_key": 4681306,
+   "ko": "보스 킬러",
+   "en": "Boss Killer"
+  },
+  {
+   "string_key": 4681307,
+   "ko": "다다다다",
+   "en": "Rat-a-tat"
+  },
+  {
+   "string_key": 4681308,
+   "ko": "두 배 승급",
+   "en": "Double Promotion"
+  },
+  {
+   "string_key": 4681309,
+   "ko": "번개 앞니",
+   "en": "Thunder Fang"
+  },
+  {
+   "string_key": 4681310,
+   "ko": "눈덩이 굴리기",
+   "en": "Snowball"
+  },
+  {
+   "string_key": 4681311,
+   "ko": "천둥 번개",
+   "en": "Thunderstorm"
+  },
+  {
+   "string_key": 4681312,
+   "ko": "세포 분열",
+   "en": "Mitosis"
+  },
+  {
+   "string_key": 4681313,
+   "ko": "연쇄 붕괴",
+   "en": "Domino Walls"
+  },
+  {
+   "string_key": 4681314,
+   "ko": "승급 폭죽",
+   "en": "Promotion Fireworks"
+  },
+  {
+   "string_key": 4681401,
+   "ko": "자동 필살 장치",
+   "en": "Auto-Ult Device"
+  },
+  {
+   "string_key": 4681402,
+   "ko": "쥐 떼 군단",
+   "en": "Rat Legion"
+  },
+  {
+   "string_key": 4681403,
+   "ko": "전설의 앞니",
+   "en": "Legendary Incisors"
+  },
+  {
+   "string_key": 4681404,
+   "ko": "연구소 털이",
+   "en": "Lab Heist"
+  },
+  {
+   "string_key": 4681405,
+   "ko": "시간 정지",
+   "en": "Time Stop"
+  },
+  {
+   "string_key": 4681406,
+   "ko": "치즈 종말",
+   "en": "Cheesepocalypse"
+  },
+  {
+   "string_key": 4681407,
+   "ko": "필살기 폭주",
+   "en": "Ult Overdrive"
+  },
+  {
+   "string_key": 4681408,
+   "ko": "거대 쥐 출현",
+   "en": "Rise of the Giants"
+  },
+  {
+   "string_key": 4681409,
+   "ko": "회전 치즈 칼날",
+   "en": "Spinning Cheese Blades"
+  },
+  {
+   "string_key": 4681410,
+   "ko": "시간 역행",
+   "en": "Time Rewind"
+  },
+  {
+   "string_key": 4681411,
+   "ko": "필살기 메아리",
+   "en": "Ultimate Echo"
+  },
+  {
+   "string_key": 4681412,
+   "ko": "쥐 토네이도",
+   "en": "Rat Tornado"
+  },
+  {
+   "string_key": 4781101,
+   "ko": "쥐 공격력 +{1%}%",
+   "en": "Rat attack +{1%}%"
+  },
+  {
+   "string_key": 4781102,
+   "ko": "치즈 +{1%}%",
+   "en": "Cheese +{1%}%"
+  },
+  {
+   "string_key": 4781103,
+   "ko": "층 제한시간 +{1}초",
+   "en": "Floor time limit +{1}s"
+  },
+  {
+   "string_key": 4781104,
+   "ko": "번식 확률 +{1%}%",
+   "en": "Breeding chance +{1%}%"
+  },
+  {
+   "string_key": 4781105,
+   "ko": "벽 피해 +{1%}%",
+   "en": "Wall damage +{1%}%"
+  },
+  {
+   "string_key": 4781106,
+   "ko": "치명타 확률 +{1%}%",
+   "en": "Critical chance +{1%}%"
+  },
+  {
+   "string_key": 4781107,
+   "ko": "보스 피해 +{1%}%",
+   "en": "Boss damage +{1%}%"
+  },
+  {
+   "string_key": 4781108,
+   "ko": "필살기 게이지 충전 +{1%}%",
+   "en": "Ultimate charge +{1%}%"
+  },
+  {
+   "string_key": 4781109,
+   "ko": "최대 마리 수 +{1}",
+   "en": "Max rats +{1}"
+  },
+  {
+   "string_key": 4781110,
+   "ko": "층 클리어 연구자료 +{1%}%",
+   "en": "Floor clear Research +{1%}%"
+  },
+  {
+   "string_key": 4781111,
+   "ko": "고양이 체력 -{1%}% · 겁먹는 시간 -{1b%}%",
+   "en": "Cat HP -{1%}% · Fear time -{1b%}%"
+  },
+  {
+   "string_key": 4781112,
+   "ko": "이동 속도 +{1%}%",
+   "en": "Move speed +{1%}%"
+  },
+  {
+   "string_key": 4781201,
+   "ko": "부딪힐 때 {1%}% 확률로 {1b}번 더 공격",
+   "en": "{1%}% chance to hit {1b} more times"
+  },
+  {
+   "string_key": 4781202,
+   "ko": "물 때 {1%}% 확률로 주변 물건 {1b}개 감전",
+   "en": "{1%}% chance on bite to zap {1b} nearby items"
+  },
+  {
+   "string_key": 4781203,
+   "ko": "쌍둥이 확률 +{1%}%",
+   "en": "Twin chance +{1%}%"
+  },
+  {
+   "string_key": 4781204,
+   "ko": "필살기 피해 +{1%}%",
+   "en": "Ultimate damage +{1%}%"
+  },
+  {
+   "string_key": 4781205,
+   "ko": "총공격 시간 +{1}초 · 위력 +{1b} · 쿨타임 -{2}초",
+   "en": "Rush time +{1}s · power +{1b} · cooldown -{2}s"
+  },
+  {
+   "string_key": 4781206,
+   "ko": "황금 물건 확률 +{1%}%",
+   "en": "Golden item chance +{1%}%"
+  },
+  {
+   "string_key": 4781207,
+   "ko": "치명타 확률 +{1%}% · 치명타 피해 +{2%}%",
+   "en": "Crit chance +{1%}% · Crit damage +{2%}%"
+  },
+  {
+   "string_key": 4781209,
+   "ko": "벽 체력 -{1%}%",
+   "en": "Wall HP -{1%}%"
+  },
+  {
+   "string_key": 4781212,
+   "ko": "클릭 총공격 때 누른 곳에 작은 폭발 {s1}번 (공격력 ×{s3})",
+   "en": "Rush clicks set off {s1} small blasts (attack ×{s3})"
+  },
+  {
+   "string_key": 4781213,
+   "ko": "층 클리어 때 {s1%}% 확률로 연구자료 ×{s2}",
+   "en": "{s1%}% chance for ×{s2} Research on floor clear"
+  },
+  {
+   "string_key": 4781301,
+   "ko": "{1}초마다 치즈 운석 (위력 +{1b%}%)",
+   "en": "Cheese meteor every {1}s (power +{1b%}%)"
+  },
+  {
+   "string_key": 4781302,
+   "ko": "물건이 터질 때 연쇄 폭발 범위 +{1} · 피해 +{1b%}%",
+   "en": "Item chain blast range +{1} · damage +{1b%}%"
+  },
+  {
+   "string_key": 4781303,
+   "ko": "새끼가 태어나면 주변 쥐 {1}초 광란",
+   "en": "Births send nearby rats into a {1}s frenzy"
+  },
+  {
+   "string_key": 4781304,
+   "ko": "층 제한시간 +{1}초 · 쥐 공격력 +{2%}%",
+   "en": "Time limit +{1}s · Rat attack +{2%}%"
+  },
+  {
+   "string_key": 4781305,
+   "ko": "최대 마리 수 +{1} · 번식 확률 +{2%}%",
+   "en": "Max rats +{1} · Breeding chance +{2%}%"
+  },
+  {
+   "string_key": 4781306,
+   "ko": "보스 피해 +{1%}% · 필살기 게이지 +{2%}%",
+   "en": "Boss damage +{1%}% · Ult charge +{2%}%"
+  },
+  {
+   "string_key": 4781308,
+   "ko": "승급할 때 {1%}% 확률로 2마리",
+   "en": "{1%}% chance to get 2 rats on promotion"
+  },
+  {
+   "string_key": 4781310,
+   "ko": "이번 층에서 물건을 부술 때마다 공격력 +{s1%}% (최대 {s2%}%)",
+   "en": "Each item smashed this floor: attack +{s1%}% (max {s2%}%)"
+  },
+  {
+   "string_key": 4781311,
+   "ko": "{s1}초마다 대상 {s2}곳에 번개 (공격력 ×{s3})",
+   "en": "Lightning hits {s2} targets every {s1}s (attack ×{s3})"
+  },
+  {
+   "string_key": 4781312,
+   "ko": "물건을 부수면 {s1%}% 확률로 임시 쥐 ({s2}초)",
+   "en": "{s1%}% chance to spawn a temp rat ({s2}s) on smash"
+  },
+  {
+   "string_key": 4781313,
+   "ko": "벽 하나가 무너지면 남은 벽 체력 -{s1%}%",
+   "en": "When a wall falls, other walls lose {s1%}% HP"
+  },
+  {
+   "string_key": 4781314,
+   "ko": "승급할 때 새 쥐 자리에서 폭발 (공격력 ×{s2})",
+   "en": "Promotions explode around the new rat (attack ×{s2})"
+  },
+  {
+   "string_key": 4781401,
+   "ko": "필살기 자동 사용 · 필살기 게이지 +{2%}%",
+   "en": "Ultimates fire automatically · Ult charge +{2%}%"
+  },
+  {
+   "string_key": 4781402,
+   "ko": "최대 마리 수 +{1} · 쌍둥이 확률 +{2%}%",
+   "en": "Max rats +{1} · Twin chance +{2%}%"
+  },
+  {
+   "string_key": 4781403,
+   "ko": "쥐 공격력 +{1%}% · 모든 피해 +{2%}%",
+   "en": "Rat attack +{1%}% · All damage +{2%}%"
+  },
+  {
+   "string_key": 4781404,
+   "ko": "층 클리어 연구자료 +{1%}% · 치즈 +{2%}%",
+   "en": "Floor clear Research +{1%}% · Cheese +{2%}%"
+  },
+  {
+   "string_key": 4781405,
+   "ko": "층 제한시간 +{1}초 · 벽 체력 -{2%}%",
+   "en": "Time limit +{1}s · Wall HP -{2%}%"
+  },
+  {
+   "string_key": 4781406,
+   "ko": "{1}초마다 치즈 운석 (위력 +{1b%}%) · 연쇄 폭발 범위 +{2}",
+   "en": "Cheese meteor every {1}s (power +{1b%}%) · Chain blast +{2}"
+  },
+  {
+   "string_key": 4781407,
+   "ko": "필살기 피해 +{1%}% · 필살기 게이지 +{2%}%",
+   "en": "Ultimate damage +{1%}% · Ult charge +{2%}%"
+  },
+  {
+   "string_key": 4781408,
+   "ko": "{s1}초마다 쥐 {s2}마리가 {s5}초 동안 거대화 (공격력 ×{s4})",
+   "en": "Every {s1}s, {s2} rats turn giant for {s5}s (attack ×{s4})"
+  },
+  {
+   "string_key": 4781409,
+   "ko": "쥐 무리 둘레를 치즈 칼날 {s1}개가 돌며 공격 (공격력 ×{s3})",
+   "en": "{s1} cheese blades orbit your swarm (attack ×{s3})"
+  },
+  {
+   "string_key": 4781410,
+   "ko": "제한시간이 0 이 되면 {s1}초를 되돌림 (판당 {s2}번)",
+   "en": "When time runs out, rewind {s1}s (×{s2} per run)"
+  },
+  {
+   "string_key": 4781411,
+   "ko": "필살기가 끝나면 {s1%}% 확률로 다른 쥐의 필살기가 한 번 더",
+   "en": "{s1%}% chance another rat fires its ultimate after one ends"
+  },
+  {
+   "string_key": 4781412,
+   "ko": "{s1}초마다 토네이도가 {s2}초 동안 방을 휩씀 (초당 공격력 ×{s4})",
+   "en": "Every {s1}s a tornado sweeps the room for {s2}s (attack ×{s4}/s)"
+  },
+  {
+   "string_key": 4800001,
+   "ko": "브론즈",
+   "en": "Bronze"
+  },
+  {
+   "string_key": 4800002,
+   "ko": "실버",
+   "en": "Silver"
+  },
+  {
+   "string_key": 4800003,
+   "ko": "골드",
+   "en": "Gold"
+  },
+  {
+   "string_key": 4800004,
+   "ko": "프리즘",
+   "en": "Prism"
   },
   {
    "string_key": 8000001,
@@ -13559,6 +14134,196 @@
    "string_key": 8000471,
    "ko": "자동 승급 (5초마다)",
    "en": "Auto Promote (every 5s)"
+  },
+  {
+   "string_key": 8000472,
+   "ko": "튜토리얼을 진행하시겠습니까?",
+   "en": "Do you want to play the tutorial?"
+  },
+  {
+   "string_key": 8000473,
+   "ko": "찍! (네!)",
+   "en": "Squeak! (Yes!)"
+  },
+  {
+   "string_key": 8000474,
+   "ko": "증강 보관 · 합성 · 강화",
+   "en": "Store · Fuse · Upgrade"
+  },
+  {
+   "string_key": 8000475,
+   "ko": "들고 감",
+   "en": "Carried"
+  },
+  {
+   "string_key": 8000476,
+   "ko": "아직 얻은 증강이 없어요. 31층부터 층을 넘을 때마다 하나씩!",
+   "en": "No Augments yet. Get one every floor from floor 31!"
+  },
+  {
+   "string_key": 8000477,
+   "ko": "증강 이름",
+   "en": "Augment Name"
+  },
+  {
+   "string_key": 8000478,
+   "ko": "도감",
+   "en": "Collection"
+  },
+  {
+   "string_key": 8000479,
+   "ko": "증강 연구소",
+   "en": "Augment Workshop"
+  },
+  {
+   "string_key": 8000480,
+   "ko": "강화 ({pts}/{need}P · 치즈 {cheese})",
+   "en": "Upgrade ({pts}/{need}P · Cheese {cheese})"
+  },
+  {
+   "string_key": 8000481,
+   "ko": "보관 중인 증강 {n}개",
+   "en": "Stored Augments: {n}"
+  },
+  {
+   "string_key": 8000482,
+   "ko": "합성 모드",
+   "en": "Fusion Mode"
+  },
+  {
+   "string_key": 8000483,
+   "ko": "최대 강화!",
+   "en": "Max Upgrade!"
+  },
+  {
+   "string_key": 8000484,
+   "ko": "들고 가기",
+   "en": "Carry"
+  },
+  {
+   "string_key": 8000485,
+   "ko": "{floor}층에 도달하면 증강 1개를 들고 출발할 수 있어요",
+   "en": "Reach floor {floor} to start a run carrying 1 Augment"
+  },
+  {
+   "string_key": 8000486,
+   "ko": "같은 등급 증강을 골라요",
+   "en": "Pick Augments of the same rank"
+  },
+  {
+   "string_key": 8000487,
+   "ko": "{grade} {name} 획득!!",
+   "en": "Got {grade} {name}!!"
+  },
+  {
+   "string_key": 8000488,
+   "ko": "모은 증강 {n} / {total}",
+   "en": "Collected {n} / {total}"
+  },
+  {
+   "string_key": 8000489,
+   "ko": "강화 포인트 {pts}",
+   "en": "Upgrade Points {pts}"
+  },
+  {
+   "string_key": 8000490,
+   "ko": "들고 가는 중",
+   "en": "Carrying"
+  },
+  {
+   "string_key": 8000491,
+   "ko": "증강 연구소 <size=60%><color=#7a6a5a>보관 · 합성 · 강화</color></size>",
+   "en": "Augment Workshop <size=60%><color=#7a6a5a>Store · Fuse · Upgrade</color></size>"
+  },
+  {
+   "string_key": 8000492,
+   "ko": "상승 {up}% · 유지 {same}% · 하락 {down}%",
+   "en": "Up {up}% · Same {same}% · Down {down}%"
+  },
+  {
+   "string_key": 8000493,
+   "ko": "보관함",
+   "en": "Storage"
+  },
+  {
+   "string_key": 8000494,
+   "ko": "합성하기 {n}/{need}",
+   "en": "Fuse {n}/{need}"
+  },
+  {
+   "string_key": 8000495,
+   "ko": "장착",
+   "en": "Equip"
+  },
+  {
+   "string_key": 8000496,
+   "ko": "슬롯이 꽉 찼어요! 고른 증강은 보관함으로 가요 (Tab 에서 교체)",
+   "en": "Slots full! Your pick goes to storage (swap with Tab)"
+  },
+  {
+   "string_key": 8000497,
+   "ko": "{name} 획득!!",
+   "en": "Got {name}!!"
+  },
+  {
+   "string_key": 8000498,
+   "ko": "교체할 슬롯 고르기",
+   "en": "Pick a slot to replace"
+  },
+  {
+   "string_key": 8000499,
+   "ko": "빼기",
+   "en": "Unequip"
+  },
+  {
+   "string_key": 8000500,
+   "ko": "바꿀 슬롯을 누르세요",
+   "en": "Click the slot to swap"
+  },
+  {
+   "string_key": 8000501,
+   "ko": "거대화!!",
+   "en": "GIANT!!"
+  },
+  {
+   "string_key": 8000502,
+   "ko": "시간 역행!!",
+   "en": "TIME REWIND!!"
+  },
+  {
+   "string_key": 8000503,
+   "ko": "+{n}초",
+   "en": "+{n}s"
+  },
+  {
+   "string_key": 8000504,
+   "ko": "잭팟!! 연구자료 ×{n}",
+   "en": "JACKPOT!! Research ×{n}"
+  },
+  {
+   "string_key": 8000505,
+   "ko": "메아리!!",
+   "en": "ECHO!!"
+  },
+  {
+   "string_key": 8000506,
+   "ko": "{floor}층 돌파!! 증강을 하나 골라요, 찍!",
+   "en": "Floor {floor} cleared!! Pick an Augment, squeak!"
+  },
+  {
+   "string_key": 8000507,
+   "ko": "증강 (Tab)",
+   "en": "Augments (Tab)"
+  },
+  {
+   "string_key": 8000508,
+   "ko": "장착 {n}/{max}",
+   "en": "Equipped {n}/{max}"
+  },
+  {
+   "string_key": 8000509,
+   "ko": "증강 관리",
+   "en": "Augments"
   },
   {
    "string_key": 9000001,

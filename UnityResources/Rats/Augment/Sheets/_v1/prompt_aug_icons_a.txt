@@ -1,0 +1,24 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_icons_a.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the icons. No text, no letters, no numbers, no labels, no grid lines, no frames, no badges or circles behind the icons. Avoid magenta or pink-purple colors inside the icons.
+- A sheet of 16 game POWER-UP ICONS in an exact 4 columns x 4 rows grid (equal cells). Each icon is ONE simple object (or a tight small group) centered in its cell, filling about 65% of the cell, with a wide empty margin; icons must NOT touch or cross cell borders. All icons the same size and the same slight 3/4 front view.
+- STYLE IS THE MOST IMPORTANT RULE. Match the attached reference icons exactly (ref_icon_style, ref_skill_icons): the art style of Untitled Goose Game. Completely FLAT vector shapes, NO outlines or strokes of any kind, NO dark contour lines, NO black linework, no glossy highlights, no gradients, no shine, no glow, no motion lines, no drop shadows. A few flat color areas with at most one slightly darker flat tone. Soft muted pastel palette (cream, warm gray, soft pink, muted brown, sage green, dusty blue, mustard yellow), low saturation, children's picture book feel. Simple readable silhouettes at 64px. Rats, when shown, are small cream-white lab rats with pink ears.
+
+Cells (left to right, top to bottom):
+1) a big cream rat front tooth / incisor, sharp, with a tiny sparkle shape
+2) a cheese wedge with a small pink rat nose sniffing at it
+3) a round mustard-yellow alarm clock with a small coin beside it
+4) a pink heart resting in a small twig nest
+5) a pale-gray brick with a big rat tooth biting into its corner
+6) a red-and-cream target with a small rat tooth stuck in the bullseye
+7) a navy guard cap with a big red cross-out slash shape over it
+8) a small energy drink can (dusty blue) with a lightning shape on it
+9) a cozy small cardboard box house with a round door and a tiny chimney
+10) an open notebook with a pencil and a cheese doodle shape
+11) a cat paw print with a big red sneeze puff shape
+12) a pair of small pink rat feet with three short speed dashes behind
+13) two small rat fists punching side by side
+14) a rat tooth with a mustard-yellow zigzag electric spark around it
+15) two tiny cream baby rats curled together in a nest
+16) a glowing round orb badge (flat, sage green) with a star shape

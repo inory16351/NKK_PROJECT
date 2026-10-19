@@ -591,6 +591,81 @@
    "action": "",
    "action_value": "",
    "sort": 72
+  },
+  {
+   "step_id": "g_aug",
+   "scene": "Game",
+   "trigger": "AugPick",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 74
+  },
+  {
+   "step_id": "g_aug_manage",
+   "scene": "Game",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "g_aug",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 75
+  },
+  {
+   "step_id": "l_aug",
+   "scene": "Lobby",
+   "trigger": "LobbyEnter",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "Unlocked",
+   "cond1_value": "aug",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "aug",
+   "action": "",
+   "action_value": "",
+   "sort": 240
+  },
+  {
+   "step_id": "l_aug_page",
+   "scene": "Lobby",
+   "trigger": "PageOpen",
+   "trigger_value": 0.0,
+   "trigger_text": "aug",
+   "cond1_type": "Done",
+   "cond1_value": "l_aug",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 241
+  },
+  {
+   "step_id": "l_aug_carry",
+   "scene": "Lobby",
+   "trigger": "LobbyEnter",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "Unlocked",
+   "cond1_value": "aug_carry",
+   "cond2_type": "Done",
+   "cond2_value": "l_aug",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 242
   }
  ],
  "Line": [
@@ -1421,6 +1496,78 @@
    "text": "아래 반짝이는 '초필살기' 버튼을 눌러 봐! 종마다 한 판에 한 번뿐이야 찍!!",
    "text_sk": 3900093,
    "highlight": "super"
+  },
+  {
+   "line_id": 94,
+   "step_id": "g_aug",
+   "speaker_id": "hero",
+   "face": "happy",
+   "text": "여기서부턴 층을 넘을 때마다 '증강'을 하나 고를 수 있지! 마음에 드는 걸 골라라!",
+   "text_sk": 3900094,
+   "highlight": "augpick"
+  },
+  {
+   "line_id": 95,
+   "step_id": "g_aug_manage",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "고른 증강은 이번 판 동안 슬롯에 끼워져서 바로 효과가 나! 슬롯은 5칸이야.",
+   "text_sk": 3900095,
+   "highlight": "augbar"
+  },
+  {
+   "line_id": 96,
+   "step_id": "g_aug_manage",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "얻은 증강은 전부 지하 '증강 연구소'에 쌓여! 판 중에도 Tab 을 누르면 보관함이랑 바꿔 낄 수 있어.",
+   "text_sk": 3900096,
+   "highlight": "augbar"
+  },
+  {
+   "line_id": 97,
+   "step_id": "l_aug",
+   "speaker_id": "broker",
+   "face": "happy",
+   "text": "어이, 지하에 새 가게가 들어섰다구. 이름하여 '증강 연구소'!",
+   "text_sk": 3900097,
+   "highlight": "aug"
+  },
+  {
+   "line_id": 98,
+   "step_id": "l_aug",
+   "speaker_id": "broker",
+   "face": "happy",
+   "text": "모은 증강을 구경하고, 같은 등급끼리 합성해서 더 좋은 놈을 노려 봐. 대신 꽝이 나올 수도 있다구?",
+   "text_sk": 3900098,
+   "highlight": "aug"
+  },
+  {
+   "line_id": 99,
+   "step_id": "l_aug_page",
+   "speaker_id": "broker",
+   "face": "happy",
+   "text": "판에서 끼고 층을 넘은 증강엔 강화 포인트가 쌓여. 포인트랑 치즈를 내면 효과가 조금씩 세진다구.",
+   "text_sk": 3900099,
+   "highlight": ""
+  },
+  {
+   "line_id": 100,
+   "step_id": "l_aug_page",
+   "speaker_id": "broker",
+   "face": "surprised",
+   "text": "합성 재료로 쓴 증강은 강화도 같이 사라지니까 아끼는 놈은 조심하라구!",
+   "text_sk": 3900100,
+   "highlight": ""
+  },
+  {
+   "line_id": 101,
+   "step_id": "l_aug_carry",
+   "speaker_id": "broker",
+   "face": "happy",
+   "text": "41층까지 왔다고? 이제 연구소에서 증강 하나를 '들고 가기'로 정하면 1층부터 끼고 출발할 수 있다구!",
+   "text_sk": 3900101,
+   "highlight": "aug"
   }
  ],
  "Story": [

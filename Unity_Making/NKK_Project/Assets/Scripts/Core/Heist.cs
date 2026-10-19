@@ -82,7 +82,9 @@ namespace NKK
             SfxManager.Play("jgl_floor_clear");
             if (Active) { move?.Invoke(); return; }
             Active = true; t = 0; moved = false; onMove = move;
-            gained = Mathf.RoundToInt(ResearchFor(Game.Floor));
+            gained = Mathf.RoundToInt(ResearchFor(Game.Floor) * CommonSkill.ResearchMul * AugmentSpecials.JackpotMul(stairs.x, stairs.y));      // 증강 연구자료 % (2026-10-19)
+            NKK.Augments.GivePoints(Game.Floor);                                               // 장착한 증강마다 강화 포인트
+            if (AugmentManager.I) AugmentManager.I.OnFloorCleared(Game.Floor);                 // 31층 이상 → 다음 층 시작 때 증강 고르기
             var p = Progress.I;
             if (p) p.OnFloorReached(Mathf.Min(Game.Floor + 1, NKK.Stage.StageManager.LastFloor + 1));     // 마지막 층을 깨면 +1 (훈장 조건 Boss_Clear = 클리어 층)
             if (Research.I) Research.I.Earn(gained, stairs.x, stairs.y, false);

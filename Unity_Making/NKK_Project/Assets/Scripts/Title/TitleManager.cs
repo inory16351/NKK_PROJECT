@@ -48,6 +48,11 @@ namespace NKK.Title
         public GameObject settingsPanel;
         public Button settingsClose;
 
+        [Header("튜토리얼 여부 (처음부터 → 오프닝 뒤 1층 직전, 사용자 2026-10-19)")]
+        [Tooltip("'튜토리얼을 진행하시겠습니까?' 창 (비우면 묻지 않고 튜토리얼 진행)")] public GameObject tutoAsk;
+        [Tooltip("찍!(네) = 튜토리얼 진행")] public Button tutoYes;
+        [Tooltip("찍찍!!(아니오) = 튜토리얼 대사 없이 (기능은 원래 조건대로 열림)")] public Button tutoNo;
+
         [Header("오프닝")]
         public StoryPlayer story;
         [Tooltip("화면 어두워지기 (선택)")] public CanvasGroup fade;
@@ -71,6 +76,9 @@ namespace NKK.Title
                 c.titleTpl = c.title ? c.title.text : ""; c.infoTpl = c.info ? c.info.text : "";
                 if (c.button) c.button.onClick.AddListener(() => Pick(slot));
             }
+            if (tutoYes) tutoYes.onClick.AddListener(() => AnswerTuto(true));
+            if (tutoNo) tutoNo.onClick.AddListener(() => AnswerTuto(false));
+            if (tutoAsk) tutoAsk.SetActive(false);
             confirmTpl = confirmText ? confirmText.text : "";
             if (slotPanel) slotPanel.SetActive(false);
             if (confirm) confirm.SetActive(false);
@@ -159,7 +167,21 @@ namespace NKK.Title
         {
             if (slotPanel) slotPanel.SetActive(false);
             if (menu) menu.SetActive(false);
-            if (story) story.Play(GoFirstFloor); else GoFirstFloor();
+            if (story) story.Play(AskTuto); else AskTuto();
+        }
+
+        // 오프닝이 끝나면 튜토리얼 여부를 묻고 1층으로 (이미 대사를 본 적 있는 슬롯이면 묻지 않음)
+        void AskTuto()
+        {
+            var p = Progress.I;
+            if (!tutoAsk || !p || p.TutoSkipped || p.TutoQuiet || p.TutoDone(Progress.TutoRoundSteps[0])) { GoFirstFloor(); return; }
+            tutoAsk.SetActive(true);
+        }
+        void AnswerTuto(bool yes)
+        {
+            if (tutoAsk) tutoAsk.SetActive(false);
+            if (!yes && Progress.I) Progress.I.SetTutoQuiet(true);
+            GoFirstFloor();
         }
 
         // 오프닝 뒤 바로 1층 (첫 출발)
@@ -183,7 +205,7 @@ namespace NKK.Title
         void Update()
         {
             var k = Keyboard.current;
-            if (k == null || !k.escapeKey.wasPressedThisFrame || (story && story.Playing)) return;
+            if (k == null || !k.escapeKey.wasPressedThisFrame || (story && story.Playing) || (tutoAsk && tutoAsk.activeSelf)) return;
             if (settingsPanel && settingsPanel.activeSelf) settingsPanel.SetActive(false);
             else if (confirm && confirm.activeSelf) confirm.SetActive(false);
             else if (slotPanel && slotPanel.activeSelf) CloseSlots();

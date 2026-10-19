@@ -25,6 +25,7 @@ namespace NKK.Data
         public TextAsset tutorialTable;
         [Tooltip("상점 테이블 (쥐구멍 암시장) · 뽑기 테이블 (유전자 뽑기)")] public TextAsset shopTable, gachaTable;
         [Tooltip("스트링 테이블 (언어, Loc)")] public TextAsset stringTable;
+        [Tooltip("증강 테이블 · 증강 특수 효과 테이블 (2026-10-19)")] public TextAsset augmentTable, augmentSpecialTable;
 
         public readonly Dictionary<int, RatCharacterRow> Rats = new();
         public readonly Dictionary<string, RatCharacterRow> RatsByCode = new();
@@ -57,6 +58,15 @@ namespace NKK.Data
         public readonly Dictionary<string, SuperUltRow> SuperUlts = new();          // 초필살기 (쥐 code → 행)
         readonly Dictionary<string, float> superCfg = new();
         public float SuperCfg(string key, float def = 0) => superCfg.TryGetValue(key, out var v) ? v : def;
+        // 증강 (증강 테이블)
+        public readonly List<AugmentRow> Augments = new();
+        public readonly Dictionary<int, AugmentRow> AugmentsById = new();
+        public readonly Dictionary<int, AugGradeRow> AugGrades = new();
+        public readonly List<AugOfferRow> AugOffers = new();
+        public readonly HashSet<(CommonEffectType, int)> AugNoScale = new();
+        public readonly Dictionary<int, AugSpecialRow> AugSpecials = new();
+        readonly Dictionary<string, float> augCfg = new();
+        public float AugCfg(string key, float def = 0) => augCfg.TryGetValue(key, out var v) ? v : def;
         public readonly List<BossRow> Bosses = new();
         public readonly List<AchievementRow> Achievements = new();
         public readonly List<BossLineRow> BossLines = new();
@@ -142,6 +152,18 @@ namespace NKK.Data
                 if (f.Line != null) { f.Line.Sort((a, b) => a.line_id.CompareTo(b.line_id)); foreach (var r in f.Line) { if (!TutoLines.TryGetValue(r.step_id, out var l)) TutoLines[r.step_id] = l = new List<TutoLineRow>(); l.Add(r); } }
                 if (f.Story != null) { Story.AddRange(f.Story); Story.Sort((a, b) => a.line_id.CompareTo(b.line_id)); }
             }
+            AugSpecials.Clear();
+            if (augmentSpecialTable) { var f = JsonUtility.FromJson<AugSpecialTableFile>(augmentSpecialTable.text); if (f.Special != null) foreach (var s in f.Special) AugSpecials[s.special_id] = s; }
+            Augments.Clear(); AugmentsById.Clear(); AugGrades.Clear(); AugOffers.Clear(); AugNoScale.Clear(); augCfg.Clear();
+            if (augmentTable)
+            {
+                var f = JsonUtility.FromJson<AugmentTableFile>(augmentTable.text);
+                if (f.Augment != null) foreach (var a in f.Augment) { Augments.Add(a); AugmentsById[a.augment_id] = a; }
+                if (f.Grade != null) foreach (var g in f.Grade) AugGrades[g.grade] = g;
+                if (f.Offer != null) { AugOffers.AddRange(f.Offer); AugOffers.Sort((a, b) => a.from_floor.CompareTo(b.from_floor)); }
+                if (f.Aug_Config != null) foreach (var c in f.Aug_Config) augCfg[c.key] = c.value;
+                if (f.No_Scale != null) foreach (var n in f.No_Scale) AugNoScale.Add((E.P<CommonEffectType>(n.effect), n.index));
+            }
             shopCfg.Clear(); gachaCfg.Clear();
             if (shopTable) { Shop = JsonUtility.FromJson<ShopTableFile>(shopTable.text) ?? new(); if (Shop.Shop_Config != null) foreach (var r in Shop.Shop_Config) shopCfg[r.key] = r.value; }
             if (gachaTable) { Gacha = JsonUtility.FromJson<GachaTableFile>(gachaTable.text) ?? new(); if (Gacha.Gacha_Config != null) foreach (var r in Gacha.Gacha_Config) gachaCfg[r.key] = r.value; }
@@ -154,6 +176,7 @@ namespace NKK.Data
                 Loc.ApplyAll(Bosses); Loc.ApplyAll(BossLines); Loc.ApplyAll(BossAtks.Values); Loc.ApplyAll(TutoSpeakers.Values); Loc.ApplyAll(Story);
                 foreach (var l in TutoLines.Values) Loc.ApplyAll(l);
                 if (Shop?.Shop_Goods != null) Loc.ApplyAll(Shop.Shop_Goods);
+                Loc.ApplyAll(Augments); Loc.ApplyAll(AugGrades.Values);
             }
             Debug.Log($"[GameDatabase] 쥐 {Rats.Count} · 스킬 {RatSkills.Count} · 필살기 {Ultimates.Count} · 등급 {Grades.Count} · 성장 노드 {GrowthNodes.Count} · 고양이 {Cats.Count} · 물건 {Items.Count} · 티어 {Tiers.Count} · 사람 {Humans.Count} · 공용 스킬 {CommonSkills.Count}");
         }

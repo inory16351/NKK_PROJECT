@@ -196,6 +196,7 @@ namespace NKK.Items
 
         public void OnSmashed(Item it)
         {
+            AugmentSpecials.OnItemSmashed(it);       // 증강 특수 효과: 눈덩이 · 세포 분열
             float gain = it.value * (1 + 0.5f * Mathf.Min(it.Air, airMax)) * (it.Crit ? 2 : 1) * (it.By ? it.By.CheeseMult : 1) * (it.By && it.ByAction ? it.By.SkillKillCheeseMul : 1)
                 * (it.By && it.By.Trick != Rat.TrickType.None ? CommonSkill.TrickCheeseMul : 1);       // 묘기 중에 부숨 → 묘기 치즈
             Game.OnSmash(gain);

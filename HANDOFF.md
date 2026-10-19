@@ -2,7 +2,7 @@
 
 웹게임 `Proto_Game/rat-uprising.html`(약 1만 줄 JS)을 유니티로 옮기는 작업. 이 문서는 **지금 상태와 다음 할 일**만 정리한 요약본입니다.
 날짜별 상세 기록(측정 결과·결정 경위·옛 수치)은 `HANDOFF_LOG.md` (§9-1 ~ 9-14).
-마지막 갱신: 2026-10-19 (**100층 확장: 데이터·코드·그림·유니티 연결·Play 확인** §5-12) / 2026-10-17 — **§5-11 일괄 승급 6마리 · 마우스 포인터 · 쳇바퀴 훈련 필살기 대사 · 초필살기 계획** / 2026-10-15 — **§5-10 튜토리얼 라운드(1·2층) · 씹힘 방지 · 로비 슬로우 모션 · 치즈 창고 훈장 버튼 · 벽 체력 숫자 숨김** / 2026-10-13 밤 — **PV(홍보 영상) 작업은 `PV/HANDOFF_PV.md`** / **§5-8 브랜치 안내 먼저** / (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
+마지막 갱신: 2026-10-19 (**§5-13 증강 · 튜토리얼 여부 창 · 필살기 쿨 제거 · 밸런스 곡선 재설계 · 제한시간 120초 · 엑셀 시뮬레이터** / **100층 확장: 데이터·코드·그림·유니티 연결·Play 확인** §5-12) / 2026-10-17 — **§5-11 일괄 승급 6마리 · 마우스 포인터 · 쳇바퀴 훈련 필살기 대사 · 초필살기 계획** / 2026-10-15 — **§5-10 튜토리얼 라운드(1·2층) · 씹힘 방지 · 로비 슬로우 모션 · 치즈 창고 훈장 버튼 · 벽 체력 숫자 숨김** / 2026-10-13 밤 — **PV(홍보 영상) 작업은 `PV/HANDOFF_PV.md`** / **§5-8 브랜치 안내 먼저** / (뒷골목 숨김·조각 1개 · **스트링 테이블 + 영어 번역** §5-5) / 이전: 2026-10-12 밤 (아이스 퀸·5G 그림 · 5G 휴대폰 속 쥐 · 지하 도시 v4 · 뽑기 = 비밀 실험실 컷씬 · 지하/뽑기 배경음악 · **하수구 긴 세로 그림 · 아이스 퀸 고유 컷씬 · 컷 전환 통일(줌 인·플래시·벡터 눈보라)** §5-4 — 사용자 확인 · 커밋 남음)
 
 ---
 
@@ -319,6 +319,30 @@
 - **main-game 으로 옮김 (2026-10-19)**: 처음엔 이 PC 가 `main` 만 받아서 거기서 작업 → `expansion-100` 브랜치에 커밋 후 `main-game` 에 머지. 엑셀·JSON·씬은 main-game 것 + 생성기·연결 스크립트 다시 실행 (스트링 접두사: 초필살기 42~44 → 밈 팝업은 **45**). 건너뛰기 상한은 main-game 엑셀 값(20~25층 15→20) 유지하게 gen_stage_table 에 넣음. 자동 승급은 `CanPromoteAll`(번식용 6마리 남김) 기준.
 - **마우스 포인터 고침 (§5-11)**: `RatSpriteImporter` 가 Art 아래 PNG 를 전부 Sprite·압축으로 바꿔서 커서가 안 바뀌었음 (로그 "Failed to set the cursor … not CPU accessible" · "Invalid texture used for cursor") → `Assets/Art/Cursor/` 는 Cursor 형식 · 읽기 가능 · 비압축 · 밉맵 없음. Play 에서 오류 사라짐 확인.
 - **남음**: ① 사용자 플레이 피드백 (밈 기술 세기·연출) ② 밸런스 측정 (40층대부터 막힐 가능성 큼) ③ 새 구간 배경음악 (지금 16층~ 은 20층 곡) ④ 커밋.
+
+## 5-13. 증강 · 튜토리얼 여부 창 · 필살기 쿨 제거 · 밸런스 측정 (2026-10-19)
+
+- **사용자 결정** (메모리 `nkk-augment-balance-decisions`): 클리어 10~15시간(클릭 적극 10h / 거의 안 함 15h) · 허들(누적) 16층 2h · 30층 4h · 31층 증강 4h · 50층 6.5h · 70층 9h · 100층 12.5h · 측정 = 시뮬레이터 + 대표 층.
+- **필살기 사이 쿨타임 없앰**: `UltimateManager.ultCooldown/ultCooldownMin` 0 (코드 기본값 + Game 씬). 쓸모없어진 공용 스킬 `Ult_CD` 노드는 `Ult_Gauge_Pct` 로 (gen_skill_tree).
+- **튜토리얼 여부 창**: 타이틀 '처음부터' → 오프닝 끝 → `UI/TutoAsk` "튜토리얼을 진행하시겠습니까? 찍! (네!) / 찍찍!! (아니오)" (`TitleManager.tutoAsk/tutoYes/tutoNo`). 아니오 = `Progress.SetTutoQuiet` → 대사·행동·튜토리얼 라운드 제한 없이 단계만 조용히 지나감(해금은 원래 조건에서). 스트링 8000472~473.
+- **증강** — 테이블 `증강 테이블.xlsx`(Augment 51 · Grade 4 · Offer · Aug_Config · No_Scale, 생성기 `Tools/gen_augment_table.py`) + **`증강 특수 효과 테이블.xlsx`**(Special 12 · Special_Type, `Tools/gen_augment_special.py`). 스트링 접두사 46(이름) · 47(설명) · 48(등급).
+  - 등급 = 브론즈 · 실버 · 골드 · 프리즘 (등급마다 풀이 다름). 효과 = 공용 스킬 효과 타입 그대로(장착하면 `CommonSkill` 이 노드처럼 더함) + `Special`(칼바람식: 거대 쥐 · 눈덩이 · 회전 치즈 칼날 · 천둥 번개 · 클릭 폭격 · 세포 분열 · 시간 역행 · 필살기 메아리 · 토네이도 · 연쇄 붕괴 · 승급 폭죽 · 잭팟, 높은 등급 위주). 새 효과 타입 `Research_Pct` · `Aug_Slot`.
+  - 흐름: 31층 도달 해금 → 31층 이상 클리어 때 다음 층 시작에 3장 중 1장 (게임 멈춤) → 바로 보관함(`Progress.aug`)에 쌓임 → 슬롯(기본 5 + `Aug_Slot` 노드 10·12·16훈장)이 비면 장착, 꽉 차면 보관함 → 판 중 Tab/HUD 버튼 = 관리 창(교체·빼기·합성, 판 안 합성 재료는 보관함에서도 사라짐) → 층 클리어 때 장착한 증강마다 강화 포인트(클리어 층 × pt_per_floor) → 로비 지하 '증강 연구소'에서 포인트 + 치즈로 강화(Lv 5, 레벨당 +10%) · 합성(같은 등급 N개 → 상승/유지/하락) · 도감(못 얻은 건 ???) · 41층 도달 시 '들고 가기' 1개.
+  - 코드: `Core/Augments.cs`(공통) · `Augment/AugmentManager.cs`(판 안 UI) · `AugmentSpecials.cs`(특수 효과, 훅 = ItemManager.OnSmashed · RatManager.ClickRush/Promote · StageManager.BreakWall/ChipWall · RunTimer 0초 · UltimateManager.Stop · Heist · Rat.Damage/LateUpdate) · `AugmentCard.cs` · `AugmentArt.cs`(Resources/AugmentArt.asset, Fill Icons) · `Lobby/AugmentPage.cs`. `FeatureGate.showWhenLocked` 추가.
+  - 씬: Game `HUD/Augment`(Bar · Pick · Manage) + `AugmentManager`(+AugmentSpecials) · Lobby `Alley/AugLab`(건물, x 5.9 — 해금 전엔 찻주전자·우유곽 장식이 그 자리) · `Home/Hots/Alley/Hot_aug`(id aug) · `UI/Prep/Body/Page_aug`. GameDatabase 3씬 모두 augmentTable · augmentSpecialTable 연결. FxManager 스티커 `cheese_blade`.
+  - 그림 (Codex, 기존 공용 스킬 아이콘·비밀 실험실 그림체에 맞춤): `UnityResources/Rats/Augment/`(아이콘 51 + ??? + 건물 + 칼날, Sheets = 프롬프트·원본, `_v1` = 처음 뽑은 벡터풍) → `Assets/Art/Augment/` · `Art/Rats/Lobby_Market/aug_lab.png` · `Art/FX/fx_cheese_blade.png`.
+  - 튜토리얼: `g_aug`(발동 AugPick) · `g_aug_manage` · `l_aug`(해금 aug) · `l_aug_page` · `l_aug_carry`, 대사 94~101, 강조 id augpick · augbar · aug.
+  - Play 확인 (슬롯 5): 고르기 창 · 특수 효과(칼날·거대화·토네이도·번개) · 관리 창 교체 · 로비 지하 건물 · 페이지 강화/들고 가기/합성/도감. **실제 31층 첫 클리어 흐름·튜토리얼 대사·영어 화면은 아직 안 봄.**
+- **밸런스 — 곡선·비용 재설계 (2026-10-19 오후, 시뮬레이터 기준 · 유니티 측정은 아직)** — 상세 `HANDOFF_LOG.md §9-22`. 측정 원본 round9 (`Tools/probe_results/round9_summary.md`).
+  - **사용자 결정**: 기준 = 클릭 적극 10h / 거의 안 함 15h · **콘텐츠 해금 직전 허들 → 해금 뒤 성장 체감** · 31층~ 시작 층 = 최고 클리어 −4 (넘은 허들 아래로는 안 감) · 9~16훈장 '제한시간 +' 노드는 다른 효과로 · **기본 제한시간 180 → 120초** + 제한시간 노드 전체 축소 · 9훈장 자동 승급은 그대로.
+  - 곡선 (`gen_stage_table.py`): 1~19층 기획서 그대로. 20층~ = 허들 층(30·40·…·90·100 = 다음 훈장 조건 층 −1, 증강·들고 가기·새 훈장 직전) 은 추세 × 1.6, 넘은 다음 층부터 추세로 내려와 전투력/적정 ≈ 1.3배. 추세 앵커 = 훈장 끝 전투력(`probe_results/power_by_tier.json`) × 증강 배율. 허들 층 목표 초 = 그 훈장 끝 제한시간의 70%. 적정: 30층 40만 · 50층 311만 · 70층 1,810만 · 100층 7,140만 (예전 8.1억 · 7.2B · 64B · 1.7T).
+  - 제한시간: Game 씬 `RunTimer.baseTime` 120 (코드 기본값·BalanceProbe.BaseTime 도). 1~8훈장 Time_Add 절반(8훈장 합 +60초), 9~16훈장 Time_Add → 생명체 치즈 % · 황금 물건 %. 층 목표 초도 120초 기준 (72·90·108초).
+  - 비용: `gen_economy.COST_SCALE` 2~5훈장 ×1.3 · 6~8훈장 ×0.9 · `gen_expansion_data.LATE_COST_SCALE` 9~16훈장 ×1.95. 스킵 노드 9~16훈장 (7,6)·(5,5)… (누적 9훈장 40 → 15훈장 100).
+  - **경제 전체 (사용자 "전부 다")**: ① 치즈 — 7훈장~ 치즈가 트리 값의 10~45배 남았음 → `gen_skill_tree` 7훈장~ 노드 치즈 = 노드 연구자료 × 그 훈장 층대 (치즈 수입÷연구자료 수입) × 0.85 × 2 → 승급 때 남는 치즈 0.2~0.7배. ② 상점 — 가격이 층 수입의 0.1% 수준이었음 → `BlackMarket.BC` 에 층 수입 배율 `bc_floor_grow`^(min(층,30)-1) (상점 테이블, gen_economy 가 씀: bc_base 6.76 · grow 1.2213 = 6칸 전부 ≈ 층 수입 3배). ③ 증강 강화 치즈 — 같은 배율(`up_cheese_floor_grow`) + up_cheese_base = 층 수입 0.15배 (`gen_augment_table`). ④ **조각** — 출생마다 +1 이라 조각 합이 훈장 조건의 ~4배 (쥐 성장 '갉기'는 레벨마다 공격 ×1.25 → 측정보다 훨씬 셈) → 사용자 결정 '레벨업 조각 비용 올림': `Tools/gen_shards.py` shard_k ×10 (일반 20 … 신화 5), 뽑기 조각 ×10, 암시장 묶음 ×10 → 승급 때 조각 합 ≈ 조건 1.1~1.4배. ⑤ 보스 — `Tools/gen_boss_hp.py` hp_pow_sec = 예전 값 × (새 보스전 목표 ÷ 예전 목표): 5층 20 · 10층 22 · 20층 28 · 허들 보스 41~65.
+  - 생성 순서 (전부): `gen_stage_table → gen_economy → python -c "import gen_expansion_data as g; g.tiers()" → gen_skill_tree → gen_augment_table → gen_boss_hp → gen_shards → gen_string_table → fill_en_by_pattern → xlsx2json` → `balance_sim_xlsx`.
+  - 시뮬 결과 (최종): **클릭 10.8h / 미클릭 14.5h** · 클릭 16층 1.8h · 30층 4.2h · 50층 6.4h · 70층 8.4h / 미클릭 2.4 · 6.4 · 9.2 · 11.7h · 후반 허들마다 2~3판 (미클릭 30층 5판) · 판 끝 병목이 치즈·연구자료·조각으로 고루 나뉨.
+  - **엑셀 시뮬레이터** `Data_Table/밸런스 시뮬레이터.xlsx` (`python Tools/balance_sim_xlsx.py`): 설정(노란 칸) 고치고 저장 → 실행 → 요약·판 시트. 층별 시트 = 훈장 끝 상태 층별 초 (엑셀 수식, 실패 빨강). 유니티 안 씀.
+  - **남음**: ① 유니티 대표 층 측정(31·41·51·71·100층, 120초 기준 벽이 2/3 로 얇아짐) → power_by_tier.json · 시간 모델(TIME_C 등) 보정 ② 가정값 — '거의 안 함' 배율(PASSIVE_SLOW 1.35) · 층당 출생 ≈ 최대 마릿수(BIRTH_PER_POP 1) · 1~9훈장 최대 마릿수 일부 · 30층 뒤 치즈 수입 배율 고정 → 측정 필요 (엑셀 설정에서 바꿔 보기) ③ 16층 뽑기 허들 2판 이상 원하면 6~8훈장 비용 조정 ④ rat_atk_mul(티어 테이블) 은 코드에서 안 쓰임 (훈장 전투력은 트리·돌연변이 배율로만) ⑤ 커밋.
 
 ## 6. 밸런스 측정 (BalanceProbe)
 

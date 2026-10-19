@@ -136,6 +136,7 @@ namespace NKK.Tutorial
                         return Stage && Stage.StairsWallRatio() <= k;
                     }
                 case "BossFight": return Boss.Current && Boss.Current.State == Boss.BState.Fight;
+                case "AugPick": return AugmentManager.I && AugmentManager.I.PickShowing;      // 증강 고르기 창이 떠 있음 (2026-10-19)
                 case "SuperReady": return NKK.Ults.SuperUltManager.I && NKK.Ults.SuperUltManager.I.AnyReady;      // 초필살기 버튼이 처음 뜸
                 case "UltReady":
                     if (!Rats || !Ults) return false;
@@ -169,6 +170,12 @@ namespace NKK.Tutorial
             if (log) Debug.Log($"[Tutorial] {s.step_id} ({s.trigger})");
             P.MarkTuto(s.step_id);             // 시작할 때 기록 (중간에 꺼도 다시 안 나옴)
             if (P.Unlock(s.unlock)) SfxManager.Play("jgl_unlock");
+            if (P.TutoQuiet)
+            {
+                // 튜토리얼 안 함: 대사·행동 없이 기록 + 해금만 → After 로 이어진 단계도 차례로 지나감
+                running = null; lastDone = s.step_id;
+                return;
+            }
             if (box) box.ClearLinger();
             if (tempTarget) Destroy(tempTarget);
             if (s.trigger == "Birth" && Rats && Rats.LastBorn)

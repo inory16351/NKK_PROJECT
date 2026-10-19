@@ -26,13 +26,47 @@ DOC_MUL = {2: 1.25, 3: 1.25, 4: 1.25, 5: 1.8, **{f: 1.32 for f in range(6, 16)},
 DOC_TYPE = {1: '도입', 2: '쉬움', 3: '쉬움', 4: '쉬움', 5: '허들', **{f: '보통' for f in range(6, 16)}, 16: '허들', 17: '어려움', 18: '허들', 19: '어려움', 20: '허들'}
 for _f in range(21, FLOORS + 1):
     _s = 16 + (_f - 21) % 5
-    DOC_MUL[_f] = DOC_MUL[_s]; DOC_TYPE[_f] = DOC_TYPE[_s]
-# 31층~ (2026-10-19, 100층 확장 기획서 10장): 1~30층은 그대로, 31층부터 층마다 약 ×1.12 (유형별로 흔들되 5층 합 ≈ 1.12^5)
-LATE_MUL = {16: 1.12, 17: 1.08, 18: 1.14, 19: 1.08, 20: 1.16}
-for _f in range(31, FLOORS + 1):
-    DOC_MUL[_f] = LATE_MUL[16 + (_f - 21) % 5]
+    DOC_TYPE[_f] = DOC_TYPE[_s]
+# 20층~ (2026-10-19 재설계, 측정 round9): 예전 21~30층 = 16~20층 배율 반복(30층 적정 811M) · 31층~ ×1.12 는 훈장 끝 전투력(8훈장 ~40만 · 16훈장 ~6천만)과 수천 배 차이.
+# 사용자 2026-10-19: 콘텐츠 해금 시기에 맞춰 허들 → 성장 체감으로 플레이 동기. 해금 = 31층 증강·9훈장 · 41층 증강 들고 가기·10훈장 · 51~91층 새 훈장 · 100층 엔딩
+# → 허들 층(해금 직전 = 다음 훈장 조건 층 - 1: 30·40·…·90·100) = 추세 × HURDLE_SPIKE. 훈장 t 끝 상태(트리 전부)로 HURDLE_R 배에서 겨우 넘음 → 트리 덜 찍으면 2~3판 막힘.
+#   넘은 다음 층부터는 추세선으로 내려옴 → 새 훈장·증강으로 전투력/적정 ≈ HURDLE_R × SPIKE ÷ 층 배율 ≈ 1.3배 (숨 돌림 · 성장 체감) → 다음 허들까지 추세가 따라 올라감.
+#   그 밖 보스 층(20·25·35·…·94·97) = 추세 × MID_SPIKE. 추세는 허들 사이 기하 보간 (1~19층은 기획서 그대로, 19층 = 7훈장 허들).
+#   훈장 끝 전투력 = Tools/probe_results/power_by_tier.json (BalanceProbe 측정 → 다시 재면 고치고 이 스크립트 다시)
+HURDLE_R = 1.0                       # 훈장 끝 상태(트리 전부)로 허들 층을 이 배(전투력÷적정)에서 넘게 → 걸리는 시간 = 허들 목표 초
+HURDLE_TIME_FRAC = 0.7               # 허들 층(30·40·…·100) 목표 초 = 그 훈장 끝 제한시간(기본 + 제한시간 노드 + 보스 층 시간)의 이 비율
+                                     #   클릭 적극 70% → 거의 안 함(시뮬레이터 1.35배) ≈ 95% 아슬아슬. 90% 로 하면 거의 안 함 플레이어가 못 넘음 (balance_sim)
+HURDLE_SPIKE = 1.6                   # 허들 층 = 추세 × 이 값
+MID_SPIKE = 1.15                     # 허들이 아닌 보스 층
+AUG_PER_SLOT = 0.08                  # 증강 1칸당 전투력 + (31층~, Tools/balance_sim.py 와 같게)
+AUG_SLOTS = {9: 5, 10: 6, 11: 6, 12: 7, 13: 7, 14: 7, 15: 7, 16: 8}      # 그 훈장 끝 증강 슬롯 (기본 5 + Aug_Slot 노드 10·12·16훈장)
+HURDLE = {8: 30, 9: 40, 10: 50, 11: 60, 12: 70, 13: 80, 14: 90, 15: 100}  # 훈장 t 끝 상태가 넘어야 하는 층 = 다음 훈장 조건 층 - 1 (16훈장 = 100층 보스 클리어 보상)
+HURDLE_FLOORS = set(HURDLE.values())
+def _pow_raw(f):                     # 1~19층 = 기획서 배율 그대로
+    d = 1.0
+    for g in range(2, f + 1): d *= DOC_MUL[g]
+    return POW0 * d
+def _late_curve():
+    import json
+    pw = json.load(open(os.path.join(ROOT, 'Tools', 'probe_results', 'power_by_tier.json'), encoding='utf-8'))
+    aug = lambda t: 1 + AUG_PER_SLOT * AUG_SLOTS.get(t, 0)
+    trend = {19: _pow_raw(19) / HURDLE_SPIKE, **{f: pw[str(t)]['end'] * aug(t) / (HURDLE_R * HURDLE_SPIKE) for t, f in HURDLE.items()}}
+    ks = sorted(trend); out = {19: _pow_raw(19)}
+    for a, b in zip(ks, ks[1:]):
+        g = (trend[b] / trend[a]) ** (1 / (b - a))
+        for f in range(a + 1, b + 1):
+            sp = HURDLE_SPIKE if f in HURDLE_FLOORS else MID_SPIKE if f in BOSS_FLOORS else 1
+            out[f] = trend[a] * g ** (f - a) * sp
+    return out
+_LATE = _late_curve()
+for _f in range(20, FLOORS + 1):
+    DOC_MUL[_f] = _LATE[_f] / _LATE[_f - 1]
+    _h = min((h for h in HURDLE_FLOORS if h >= _f), default=100)
+    DOC_TYPE[_f] = ('허들' if _f in HURDLE_FLOORS else '어려움' if _f in BOSS_FLOORS or _f == _h - 1
+                    else '쉬움' if _f - 1 in HURDLE_FLOORS or _f - 2 in HURDLE_FLOORS else '보통')
 DOC_ROOMS = [2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9]          # 1~15층, 16층~ 9개
-TYPE_SEC = {'도입': 108, '쉬움': 108, '보통': 108, '어려움': 135, '허들': 162}   # 적정 찍찍일 때 목표 돌파 (제한 180초의 60 · 75 · 90%)
+BASE_TIME = 120                      # 기본 제한시간 (RunTimer.baseTime, 2026-10-19 사용자: 180 → 120)
+TYPE_SEC = {k: v * BASE_TIME / 180 for k, v in {'도입': 108, '쉬움': 108, '보통': 108, '어려움': 135, '허들': 162}.items()}   # 적정 찍찍일 때 목표 돌파 (기본 제한시간의 60 · 75 · 90%)
 BOSS_FIGHT_SHARE = 0.4               # 보스 층: 목표 시간 중 보스전 몫 (나머지 = 길 뚫기). 보스 테이블 hp_pow_sec 를 이 시간에 맞춤
 # 플레이어 기준 전투력 (기획서 23장, 1층 = 100). 21층~ 은 층당 ×1.85 로 이어감 (기획서: 후반 층당 기준 성장 ×1.55 → ×1.90)
 DOC_PLAYER = [100, 127, 161, 205, 273, 402, 601, 836, 1120, 1501, 2011, 2694, 3611, 4838, 6483, 9343, 14855, 24852, 43749, 81034]
@@ -50,15 +84,24 @@ def diff(f):                         # 난이도 지수 (1층 = 1)
 
 def ftype(f): return DOC_TYPE.get(f, '허들')
 def is_boss(f): return f in BOSS_FLOORS
-def target_sec(f): return TYPE_SEC[ftype(f)]
+def _tier_limit(t, boss):          # 훈장 t 트리까지 다 찍었을 때 제한시간 (gen_skill_tree 노드 값)
+    import gen_skill_tree as sk
+    ta = sum(v[1] for tt in range(1, t + 1) for v in sk.T[tt].values() if v and v[0] == 'Time_Add')
+    bt = sum(v[2] for tt in range(1, t + 1) for v in sk.T[tt].values() if v and v[0] == 'Boss_Dmg_Pct' and len(v) > 2) if boss else 0
+    return BASE_TIME + ta + bt
+_HURDLE_TIER = {f: t for t, f in HURDLE.items()}
+def target_sec(f):
+    if f in _HURDLE_TIER: return round(HURDLE_TIME_FRAC * _tier_limit(_HURDLE_TIER[f], is_boss(f)), 1)
+    return TYPE_SEC[ftype(f)]
 def player_pow(f):
     if f <= len(DOC_PLAYER): return DOC_PLAYER[f - 1]
     v = DOC_PLAYER[-1] * 1.85 ** (min(f, 30) - len(DOC_PLAYER))
     return v * diff(f) / diff(30) if f > 30 else v          # 31층~ 은 적정 찍찍과 같은 비율 (2026-10-19)
 def skip_cap(f):                     # 19층까지 기획서 · 20~30층 = 엑셀에서 고친 값 (main-game 5f60c6e: 20층 15 → 25층부터 20) · 31층~ 최고 클리어 층의 80% (5층 단위, 20~80 — 100층 확장 기획서 14장)
     if f < 20: return DOC_SKIP.get(f, 1)
-    if f <= 30: return min(20, 15 + max(0, f - 20))
-    return max(20, min(80, int(f * 0.8) // 5 * 5))
+    if f < 30: return min(20, 15 + max(0, f - 20))
+    # 30층~ (2026-10-19 사용자): 최고 클리어 - 4, 단 이미 넘은 허들 다음 층보다 아래로는 안 감 (판 ~25분 · 허들에서 2~3판 막힘). 스테이지 스킵 노드 누적이 따라옴
+    return min(FLOORS, max(max(h for h in HURDLE_FLOORS if h <= f) + 1, f - 4))
 
 
 def rooms(f):

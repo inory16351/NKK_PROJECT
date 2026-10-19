@@ -9,6 +9,7 @@ namespace NKK.Tutorial
     {
         [Tooltip("기능 id: promote · power · pop · run · rec · skill · rats · rank · dex")] public string feature;
         [Tooltip("잠겨 있으면 꺼 둘 오브젝트 (예: 게임 HUD 승급 버튼)")] public GameObject[] hideWhenLocked;
+        [Tooltip("잠겨 있을 때만 켜 둘 오브젝트 (열리면 꺼짐 — 예: 증강 연구소 자리에 있던 장식)")] public GameObject[] showWhenLocked;
         [Tooltip("잠겨 있으면 켤 자물쇠 표시")] public GameObject lockMark;
         [Tooltip("잠겨 있으면 못 누르게 할 버튼")] public Button[] buttons;
         [Tooltip("잠겨 있으면 이 투명도 (CanvasGroup 이 있을 때)")] public CanvasGroup dim;
@@ -39,6 +40,7 @@ namespace NKK.Tutorial
             ver = Progress.I ? Progress.I.UnlockVersion : 0;
             bool locked = Locked;
             if (hideWhenLocked != null) foreach (var g in hideWhenLocked) if (g) g.SetActive(!locked);
+            if (showWhenLocked != null) foreach (var g in showWhenLocked) if (g) g.SetActive(locked);
             if (lockMark) lockMark.SetActive(locked);
             if (buttons != null) foreach (var b in buttons) if (b) b.interactable = !locked;
             if (disableWhenLocked != null) foreach (var b in disableWhenLocked) if (b) b.enabled = !locked;

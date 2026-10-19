@@ -1,0 +1,870 @@
+Reading prompt from stdin...
+OpenAI Codex v0.162.0-alpha.17.2
+--------
+workdir: C:\Project\NKK_PROJECT\UnityResources\Rats\Augment\Sheets
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a15237-cb5b-7462-a6a7-be12554ee720
+--------
+user
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_lab.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawing. No text, no letters, no numbers, no labels, no grid lines, no frames. Avoid magenta or pink-purple colors inside the drawing.
+- ONE building centered, standing on the bottom of the image area with a clear magenta margin; nothing touches the borders. No ground shadow.
+- STYLE IS THE MOST IMPORTANT RULE: paint it EXACTLY like the attached crop of the lobby (ref_lobby_objects: the blue tin can, the matchbox bed, the books, the cheese shelf, the desk lamp), the attached props sheet (ref_city_props) and the attached secret lab building (ref_city_lab). SIMPLE large soft shapes, MATTE surfaces, very gentle soft shading only, NO fine texture, NO rust, NO dirt, NO rivets, NO wood grain detail, NO glossy highlights, NO thin dark outlines, NO tiny details. Muted warm palette with soft purple-lilac and mustard accents (different from the teal secret lab). Cozy picture-book look, simple front view.
+
+The building: an AUGMENT WORKSHOP for a hidden underground rat city, rat-sized, made from human junk: the main body is an old wooden jewelry box / music box standing upright, painted soft lilac, with a slightly open lid on top like a roof; big round shop window showing a few glowing power-up orbs on shelves (flat soft colors: bronze, silver, gold, lilac); a small brass gear wheel on the side; a little crank handle like a music box; a small arched wooden door at the bottom center; a hanging blank wooden signboard (no text) shaped like a gear. Height about 1.25 times its width. It must read as a cozy workshop where power-ups are stored and fused.
+
+codex
+I’ll use the imagegen skill to create the workshop in the reference style and save it as `aug_lab.png`.
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-Content -LiteralPath 'C:/Users/user/.codex/skills/.system/imagegen/SKILL.md'" in C:\Project\NKK_PROJECT\UnityResources\Rats\Augment\Sheets
+ succeeded in 393ms:
+---
+name: "imagegen"
+description: "Generate or edit raster images when the task benefits from AI-created bitmap visuals such as photos, illustrations, textures, sprites, mockups, or transparent-background cutouts. Use when Codex should create a brand-new image, transform an existing image, or derive visual variants from references, and the output should be a bitmap asset rather than repo-native code or vector. Do not use when the task is better handled by editing existing SVG/vector/code-native assets, extending an established icon or logo system, or building the visual directly in HTML/CSS/canvas."
+---
+
+# Image Generation Skill
+
+Generates or edits images for the current project (for example website assets, game assets, UI mockups, product mockups, wireframes, logo design, photorealistic images, or infographics).
+
+## Top-level modes and rules
+
+This skill has exactly two top-level modes:
+
+- **Default built-in tool mode (preferred):** built-in `image_gen` tool for image generation, editing, and transparent-image requests. Does not require `OPENAI_API_KEY`.
+- **Fallback CLI mode:** `scripts/image_gen.py` CLI. Use when the user explicitly asks for or confirms the CLI/API/model path. Requires `OPENAI_API_KEY`.
+
+Within CLI fallback, the CLI exposes three subcommands:
+
+- `generate`
+- `edit`
+- `generate-batch`
+
+Rules:
+- Use the built-in `image_gen` tool by default for normal image generation and editing requests.
+- Do not switch to CLI fallback for ordinary quality, size, or file-path control.
+- For transparent images, ask built-in `image_gen` for a transparent background and preserve the generated alpha.
+- Never silently switch from built-in `image_gen` or CLI `gpt-image-2` to CLI `gpt-image-1.5`; ask the user first unless they explicitly requested `gpt-image-1.5`.
+- The word `batch` by itself does not mean CLI fallback. If the user asks for many assets or says to batch-generate assets without explicitly asking for CLI/API/model controls, stay on the built-in path and issue one built-in call per requested asset or variant.
+- If the built-in tool fails or is unavailable, tell the user the CLI fallback exists and that it requires `OPENAI_API_KEY`. Proceed only if the user explicitly asks for that fallback.
+- If the user explicitly asks for CLI mode, use the bundled `scripts/image_gen.py` workflow. Do not create one-off SDK runners.
+- Never modify `scripts/image_gen.py`. If something is missing, ask the user before doing anything else.
+
+Built-in save-path policy:
+- In built-in tool mode, Codex saves generated images under `$CODEX_HOME/*` by default.
+- Do not describe or rely on OS temp as the default built-in destination.
+- Do not describe or rely on a destination-path argument (if any) on the built-in `image_gen` tool. If a specific location is needed, generate first and then move or copy the selected output from `$CODEX_HOME/generated_images/...`.
+- Save-path precedence in built-in mode:
+  1. If the user names a destination, move or copy the selected output there.
+  2. If the image is meant for the current project, move or copy the final selected image into the workspace before finishing.
+  3. If the image is only for preview or brainstorming, render it inline; the underlying file can remain at the default `$CODEX_HOME/*` path.
+- Never leave a project-referenced asset only at the default `$CODEX_HOME/*` path.
+- Do not overwrite an existing asset unless the user explicitly asked for replacement; otherwise create a sibling versioned filename such as `hero-v2.png` or `item-icon-edited.png`.
+
+Shared prompt guidance for both modes lives in `references/prompting.md` and `references/sample-prompts.md`.
+
+Fallback-only docs/resources for CLI mode:
+- `references/cli.md`
+- `references/image-api.md`
+- `references/codex-network.md`
+- `scripts/image_gen.py`
+
+## When to use
+- Generate a new image (concept art, product shot, cover, website hero)
+- Generate a new image using one or more reference images for style, composition, or mood
+- Edit an existing image (inpainting, lighting or weather transformations, background replacement, object removal, compositing, transparent background)
+- Produce many assets or variants for one task
+
+## When not to use
+- Extending or matching an existing SVG/vector icon set, logo system, or illustration library inside the repo
+- Creating simple shapes, diagrams, wireframes, or icons that are better produced directly in SVG, HTML/CSS, or canvas
+- Making a small project-local asset edit when the source file already exists in an editable native format
+- Any task where the user clearly wants deterministic code-native output instead of a generated bitmap
+
+## Decision tree
+
+Think about two separate questions:
+
+1. **Intent:** is this a new image or an edit of an existing image?
+2. **Execution strategy:** is this one asset or many assets/variants?
+
+Intent:
+- If the user wants to modify an existing image while preserving parts of it, treat the request as **edit**.
+- If the user provides images only as references for style, composition, mood, or subject guidance, treat the request as **generate**.
+- If the user provides no images, treat the request as **generate**.
+
+Built-in edit semantics:
+- Built-in edit mode is for images already visible in the conversation context, such as attached images or images generated earlier in the thread.
+- If the user wants to edit a local image file with the built-in tool, first load it with built-in `view_image` tool so the image is visible in the conversation context, then proceed with the built-in edit flow.
+- Do not promise arbitrary filesystem-path editing through the built-in tool.
+- If a local file still needs direct file-path control, masks, or other explicit CLI-only parameters, use the explicit CLI fallback only when the user asks for it.
+- For edits, preserve invariants aggressively and save non-destructively by default.
+
+Execution strategy:
+- In the built-in default path, produce many assets or variants by issuing one `image_gen` call per requested asset or variant.
+- In the CLI fallback path, use the CLI `generate-batch` subcommand only when the user explicitly chose CLI mode and needs many prompts/assets.
+- For many distinct assets, do not use `n` as a substitute for separate prompts. `n` is for variants of one prompt; distinct assets need distinct built-in calls or distinct CLI `generate-batch` jobs.
+
+Assume the user wants a new image unless they clearly ask to change an existing one.
+
+## Workflow
+1. Decide the top-level mode: built-in by default, including transparent-output requests; fallback CLI only if explicitly requested or confirmed.
+2. Decide the intent: `generate` or `edit`.
+3. Decide whether the output is preview-only or meant to be consumed by the current project.
+4. Decide the execution strategy: single asset vs repeated built-in calls vs CLI `generate-batch`.
+5. Collect inputs up front: prompt(s), exact text (verbatim), constraints/avoid list, and any input images.
+6. For every input image, label its role explicitly:
+   - reference image
+   - edit target
+   - supporting insert/style/compositing input
+7. If the edit target is only on the local filesystem and you are staying on the built-in path, inspect it with `view_image` first so the image is available in conversation context.
+8. If the user asked for a photo, illustration, sprite, product image, banner, or other explicitly raster-style asset, use `image_gen` rather than substituting SVG/HTML/CSS placeholders. If the request is for an icon, logo, or UI graphic that should match existing repo-native SVG/vector/code assets, prefer editing those directly instead.
+9. Augment the prompt based on specificity:
+   - If the user's prompt is already specific and detailed, normalize it into a clear spec without adding creative requirements.
+   - If the user's prompt is generic, add tasteful augmentation only when it materially improves output quality.
+10. Use the built-in `image_gen` tool by default.
+11. For transparent-output requests, ask built-in `image_gen` for a transparent background and preserve the generated alpha channel.
+12. Inspect outputs and validate: subject, style, composition, text accuracy, and invariants/avoid items.
+13. Iterate with a single targeted change, then re-check.
+14. For preview-only work, render the image inline; the underlying file may remain at the default `$CODEX_HOME/generated_images/...` path.
+15. For project-bound work, move or copy the selected artifact into the workspace and update any consuming code or references. Never leave a project-referenced asset only at the default `$CODEX_HOME/generated_images/...` path.
+16. For batches or multi-asset requests, persist every requested deliverable final in the workspace unless the user explicitly asked to keep outputs preview-only. Discarded variants do not need to be kept unless requested.
+17. If the user explicitly chooses or confirms the CLI fallback, then use the fallback-only docs for model, quality, size, `input_fidelity`, masks, output format, output paths, and network setup.
+18. Always report the final saved path(s) for any workspace-bound asset(s), plus the final prompt or prompt set and whether the built-in tool or fallback CLI mode was used.
+
+## Transparent image requests
+
+Ask built-in `image_gen` for a genuinely transparent background and preserve its alpha.
+
+## Prompt augmentation
+
+Reformat user prompts into a structured, production-oriented spec. Make the user's goal clearer and more actionable, but do not blindly add detail.
+
+Treat this as prompt-shaping guidance, not a closed schema. Use only the lines that help, and add a short extra labeled line when it materially improves clarity.
+
+### Specificity policy
+
+Use the user's prompt specificity to decide how much augmentation is appropriate:
+
+- If the prompt is already specific and detailed, preserve that specificity and only normalize/structure it.
+- If the prompt is generic, you may add tasteful augmentation when it will materially improve the result.
+
+Allowed augmentations:
+- composition or framing hints
+- polish level or intended-use hints
+- practical layout guidance
+- reasonable scene concreteness that supports the stated request
+
+Not allowed augmentations:
+- extra characters or objects that are not implied by the request
+- brand names, slogans, palettes, or narrative beats that are not implied
+- arbitrary side-specific placement unless the surrounding layout supports it
+
+## Use-case taxonomy (exact slugs)
+
+Classify each request into one of these buckets and keep the slug consistent across prompts and references.
+
+Generate:
+- photorealistic-natural ??candid/editorial lifestyle scenes with real texture and natural lighting.
+- product-mockup ??product/packaging shots, catalog imagery, merch concepts.
+- ui-mockup ??app/web interface mockups and wireframes; specify the desired fidelity.
+- infographic-diagram ??diagrams/infographics with structured layout and text.
+- scientific-educational ??classroom explainers, scientific diagrams, and learning visuals with required labels and accuracy constraints.
+- ads-marketing ??campaign concepts and ad creatives with audience, brand position, scene, and exact tagline/copy.
+- productivity-visual ??slide, chart, workflow, and data-heavy business visuals.
+- logo-brand ??logo/mark exploration, vector-friendly.
+- illustration-story ??comics, children?셲 book art, narrative scenes.
+- stylized-concept ??style-driven concept art, 3D/stylized renders.
+- historical-scene ??period-accurate/world-knowledge scenes.
+
+Edit:
+- text-localization ??translate/replace in-image text, preserve layout.
+- identity-preserve ??try-on, person-in-scene; lock face/body/pose.
+- precise-object-edit ??remove/replace a specific element (including interior swaps).
+- lighting-weather ??time-of-day/season/atmosphere changes only.
+- background-extraction ??transparent background / clean cutout. Ask built-in `image_gen` for actual transparency.
+- style-transfer ??apply reference style while changing subject/scene.
+- compositing ??multi-image insert/merge with matched lighting/perspective.
+- sketch-to-render ??drawing/line art to photoreal render.
+
+## Shared prompt schema
+
+Use the following labeled spec as shared prompt scaffolding for both top-level modes:
+
+```text
+Use case: <taxonomy slug>
+Asset type: <where the asset will be used>
+Primary request: <user's main prompt>
+Input images: <Image 1: role; Image 2: role> (optional)
+Scene/backdrop: <environment>
+Subject: <main subject>
+Style/medium: <photo/illustration/3D/etc>
+Composition/framing: <wide/close/top-down; placement>
+Lighting/mood: <lighting + mood>
+Color palette: <palette notes>
+Materials/textures: <surface details>
+Text (verbatim): "<exact text>"
+Constraints: <must keep/must avoid>
+Avoid: <negative constraints>
+```
+
+Notes:
+- `Asset type` and `Input images` are prompt scaffolding, not dedicated CLI flags.
+- `Scene/backdrop` refers to the visual setting. It is not the same as the fallback CLI `background` parameter, which controls output transparency behavior.
+- Fallback-only execution notes such as `Quality:`, `Input fidelity:`, masks, output format, and output paths belong in the CLI path only. Do not treat them as built-in `image_gen` tool arguments.
+
+Augmentation rules:
+- Keep it short.
+- Add only the details needed to improve the prompt materially.
+- For edits, explicitly list invariants (`change only X; keep Y unchanged`).
+- If any critical detail is missing and blocks success, ask a question; otherwise proceed.
+
+## Examples
+
+### Generation example (hero image)
+```text
+Use case: product-mockup
+Asset type: landing page hero
+Primary request: a minimal hero image of a ceramic coffee mug
+Style/medium: clean product photography
+Composition/framing: wide composition with usable negative space for page copy if needed
+Lighting/mood: soft studio lighting
+Constraints: no logos, no text, no watermark
+```
+
+### Edit example (invariants)
+```text
+Use case: precise-object-edit
+Asset type: product photo background replacement
+Primary request: replace only the background with a warm sunset gradient
+Constraints: change only the background; keep the product and its edges unchanged; no text; no watermark
+```
+
+## Prompting best practices
+- Structure prompt as scene/backdrop -> subject -> details -> constraints.
+- Include intended use (ad, UI mock, infographic) to set the mode and polish level.
+- Use camera/composition language for photorealism.
+- Only use SVG/vector stand-ins when the user explicitly asked for vector output or a non-image placeholder.
+- Quote exact text and specify typography + placement.
+- For tricky words, spell them letter-by-letter and require verbatim rendering.
+- For multi-image inputs, reference images by index and describe how they should be used.
+- For edits, repeat invariants every iteration to reduce drift.
+- Iterate with single-change follow-ups.
+- If the prompt is generic, add only the extra detail that will materially help.
+- If the prompt is already detailed, normalize it instead of expanding it.
+- For CLI fallback only, see `references/cli.md` and `references/image-api.md` for model, `quality`, `input_fidelity`, masks, output format, and output-path guidance.
+- For transparent images, ask built-in `image_gen` for actual transparency and preserve its alpha.
+
+More principles shared by both modes: `references/prompting.md`.
+Copy/paste specs shared by both modes: `references/sample-prompts.md`.
+
+## Guidance by asset type
+Asset-type templates (website assets, game assets, wireframes, logo) are consolidated in `references/sample-prompts.md`.
+
+## gpt-image-2 guidance for CLI fallback
+
+The fallback CLI defaults to `gpt-image-2`.
+
+- Use `gpt-image-2` for new CLI/API workflows unless the user confirms a different model.
+- CLI `gpt-image-2` does not support `background=transparent`; ask before using `gpt-image-1.5` unless the user explicitly requested that model.
+- `gpt-image-2` always uses high fidelity for image inputs; do not set `input_fidelity` with this model.
+- `gpt-image-2` supports `quality` values `low`, `medium`, `high`, and `auto`.
+- Use `quality low` for fast drafts, thumbnails, and quick iterations. Use `medium`, `high`, or `auto` for final assets, dense text, diagrams, identity-sensitive edits, or high-resolution outputs.
+- Square images are typically fastest to generate. Use `1024x1024` for fast square drafts.
+- If the user asks for 4K-style output, use `3840x2160` for landscape or `2160x3840` for portrait.
+- `gpt-image-2` size may be `auto` or `WIDTHxHEIGHT` if all constraints hold: max edge `<= 3840px`, both edges multiples of `16px`, long-to-short ratio `<= 3:1`, total pixels between `655,360` and `8,294,400`.
+
+Popular `gpt-image-2` sizes:
+- `1024x1024` square
+- `1536x1024` landscape
+- `1024x1536` portrait
+- `2048x2048` 2K square
+- `2048x1152` 2K landscape
+- `3840x2160` 4K landscape
+- `2160x3840` 4K portrait
+- `auto`
+
+## Fallback CLI mode only
+
+### Temp and output conventions
+These conventions apply only to the CLI fallback. They do not describe built-in `image_gen` output behavior.
+- Use `tmp/imagegen/` for intermediate files (for example JSONL batches); delete them when done.
+- Write final artifacts under `output/imagegen/`.
+- Use `--out` or `--out-dir` to control output paths; keep filenames stable and descriptive.
+
+### Dependencies
+Prefer `uv` for dependency management in this repo.
+
+Required Python package:
+```bash
+uv pip install openai
+```
+
+Optional for image inspection and downscaling:
+```bash
+uv pip install pillow
+```
+
+Portability note:
+- If you are using the installed skill outside this repo, install dependencies into that environment with its package manager.
+- In uv-managed environments, `uv pip install ...` remains the preferred path.
+
+### Environment
+- `OPENAI_API_KEY` must be set for live API calls.
+- Do not ask the user for `OPENAI_API_KEY` when using the built-in `image_gen` tool.
+- Never ask the user to paste the full key in chat. Ask them to set it locally and confirm when ready.
+
+If the key is missing, give the user these steps:
+1. Create an API key in the OpenAI platform UI: https://platform.openai.com/api-keys
+2. Set `OPENAI_API_KEY` as an environment variable in their system.
+3. Offer to guide them through setting the environment variable for their OS/shell if needed.
+
+If installation is not possible in this environment, tell the user which dependency is missing and how to install it into their active environment.
+
+### Script-mode notes
+- CLI commands + examples: `references/cli.md`
+- API parameter quick reference: `references/image-api.md`
+- Network approvals / sandbox settings for CLI mode: `references/codex-network.md`
+
+## Reference map
+- `references/prompting.md`: shared prompting principles for both modes.
+- `references/sample-prompts.md`: shared copy/paste prompt recipes for both modes.
+- `references/cli.md`: fallback-only CLI usage via `scripts/image_gen.py`.
+- `references/image-api.md`: fallback-only API/CLI parameter reference.
+- `references/codex-network.md`: fallback-only network/sandbox troubleshooting for CLI mode.
+- `scripts/image_gen.py`: fallback-only CLI implementation. Use only when the user explicitly chooses or confirms CLI mode.
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Get-ChildItem -Name; Get-ChildItem -LiteralPath 'C:/Users/user/.codex/generated_images' -ErrorAction SilentlyContinue | Select-Object Name,LastWriteTime" in C:\Project\NKK_PROJECT\UnityResources\Rats\Augment\Sheets
+ succeeded in 368ms:
+log_aug_icons_a.txt
+log_aug_icons_b.txt
+log_aug_icons_c.txt
+log_aug_lab.txt
+prompt_aug_icons_a.txt
+prompt_aug_icons_b.txt
+prompt_aug_icons_c.txt
+prompt_aug_lab.txt
+ref_city_lab.png
+ref_city_props.png
+ref_icon_style.png
+ref_lobby_objects.png
+ref_skill_icons.png
+
+Name                                 LastWriteTime         
+----                                 -------------         
+019ffdc6-14d5-7e51-ab38-b2807d28305e 2026-08-14 오전 10:12:39
+019ffec9-05f7-7c93-a200-636252de6046 2026-08-26 오후 2:58:01 
+01a0179c-7271-7d51-ba96-d49aeec3c881 2026-08-19 오전 10:24:32
+01a03248-4c24-76c2-853c-ee1bf4e3a5a9 2026-08-24 오후 3:25:00 
+01a03820-5239-7d81-9b5e-65d49f559461 2026-08-25 오후 5:59:19 
+01a03c2d-7ae2-7941-a58d-07f2e5eb9474 2026-08-26 오후 1:02:02 
+01a03c41-6e09-7202-8ec7-7dbed55beabd 2026-08-26 오후 1:26:38 
+01a03d29-f163-78d1-910f-53b888c448df 2026-08-26 오후 5:34:17 
+01a03d35-6d21-7e32-b71f-0e2ccb7eb1ab 2026-08-26 오후 5:38:25 
+01a041ba-38b8-7c22-bda4-5499a76b923a 2026-08-27 오후 2:45:39 
+01a0469a-2b69-7792-b0d7-0c84c91b0f0b 2026-08-28 오후 1:37:36 
+01a0469e-6875-7d70-9491-7fcbf4f9ad03 2026-08-28 오후 1:34:59 
+01a04723-7b94-7530-bfab-d3d49986fadd 2026-08-28 오후 5:08:29 
+01a0560a-77cc-7d23-a70b-12089ac5a8db 2026-08-31 오후 2:48:55 
+01a0566d-a994-7131-823c-f5654fcdd89c 2026-08-31 오후 3:24:53 
+01a05bd0-c8f3-72a0-beb2-91845a98ad60 2026-09-01 오후 4:19:24 
+01a05bd6-96be-7000-b160-1762b2d6916c 2026-09-01 오후 4:22:11 
+01a05bd9-7464-7e23-b2bc-cf3d32266a62 2026-09-01 오후 4:33:22 
+01a05bec-75c3-7850-86b3-3d42864699dc 2026-09-02 오후 12:56:45
+01a07af2-1831-79c3-a0cd-aaf626b304ff 2026-09-07 오후 5:22:51 
+01a08f2c-a1ac-7062-897b-b156252ea28c 2026-09-11 오후 4:31:38 
+01a09e58-da98-7613-b4dc-1df4e1b499b3 2026-09-14 오후 3:02:16 
+01a09ef6-8365-7933-bce9-520562b659d6 2026-09-16 오전 10:34:15
+01a0a8fe-8287-7b82-b4fa-e5fb92b667e0 2026-09-17 오후 8:00:17 
+01a0e6f6-b6e8-72a0-9f71-56d98e84b1d8 2026-09-28 오후 4:44:39 
+01a0e704-d401-73a2-ae50-354233166fe5 2026-09-28 오후 4:58:15 
+01a0e71a-b82d-7a00-b97c-dd6ea3ab5d69 2026-09-28 오후 5:23:03 
+01a0eb75-41f5-7c43-bc1f-f59dc0f83a57 2026-09-29 오후 1:48:18 
+01a0eb7e-4130-7863-9a30-ae33a2439ed5 2026-09-29 오후 1:53:01 
+01a0ebaa-ce7b-7a53-9057-081d7ed84707 2026-09-29 오후 2:49:08 
+01a0ebaa-ce85-7010-9a01-1652220221cf 2026-09-29 오후 2:45:40 
+01a0ebb0-e173-7e51-a1ab-55f3d4b3d95e 2026-09-29 오후 2:55:46 
+01a0ebbb-3047-7ce2-b101-017f1a21684d 2026-09-29 오후 2:56:17 
+01a0efbd-c277-7ba0-8eb1-20e1e325b080 2026-09-30 오전 9:37:30 
+01a0efd6-5154-7dc1-b144-88d13c1a5da4 2026-09-30 오전 10:04:36
+01a0efd6-5155-7662-89cd-8cf5b8e580f7 2026-09-30 오전 10:04:19
+01a0efd6-5160-7030-bc7a-7d99a4791288 2026-09-30 오전 10:04:15
+01a0efd7-b0ee-7f90-9fb4-26e399274e76 2026-09-30 오전 10:05:56
+01a0efd7-b0ef-79e3-8aed-0b6c22e2c26f 2026-09-30 오전 10:06:21
+01a0f013-e980-7f73-a40b-003f0decace1 2026-09-30 오전 11:11:35
+01a0f018-8f4b-7b51-9bc0-7ad3ebd20999 2026-09-30 오전 11:17:10
+01a0f01f-b719-71a1-8698-58a1c05aa09f 2026-09-30 오전 11:24:50
+01a0f032-4731-7de0-b90c-2b648dac8fd4 2026-09-30 오전 11:44:59
+01a0f07a-9e6c-7492-83fc-3129435ceaae 2026-09-30 오후 1:03:47 
+01a0f08d-3780-7922-866b-40dc7aa42890 2026-09-30 오후 1:24:27 
+01a0f0d3-9679-7340-867f-81d1157074ca 2026-09-30 오후 2:41:26 
+01a0f0e7-8d35-76c0-9d83-482702662803 2026-09-30 오후 3:02:47 
+01a0f10b-42bf-7091-bf65-c338fb4191c8 2026-09-30 오후 3:41:58 
+01a0f111-d9a8-7fc1-bdd0-e177d130ad33 2026-09-30 오후 3:49:10 
+01a0f11c-b1da-7c32-9659-afa7628b1570 2026-09-30 오후 4:01:28 
+01a0f12b-cd17-7e31-b3c4-21b1e2a1d6c1 2026-09-30 오후 4:18:15 
+01a0f134-1832-7110-87cd-3d16de606f0f 2026-09-30 오후 4:26:37 
+01a0f13a-1808-7053-95d5-3b4cec2769e5 2026-09-30 오후 4:33:17 
+01a0f13d-c24e-7db0-8787-0c94a3505881 2026-09-30 오후 4:37:15 
+01a0f140-3fb1-7033-854d-41dd2afa4d1a 2026-09-30 오후 4:40:08 
+01a0f15a-6390-76f2-befe-db7bf3612ea4 2026-09-30 오후 5:09:28 
+01a0f160-a28f-7a21-94d1-c8655b3eb1fc 2026-09-30 오후 5:16:17 
+01a0f164-edd7-7983-9089-54438fb4cf7b 2026-09-30 오후 5:20:25 
+01a0f172-905f-7851-9ae3-f39ecb7df1b4 2026-09-30 오후 5:35:10 
+01a0f17e-a764-7000-928e-1687f274d10f 2026-09-30 오후 5:48:07 
+01a0f181-5c5e-7740-99a9-939c99aa9b13 2026-09-30 오후 5:50:36 
+01a0f197-d4ba-7123-b0d0-32394388155d 2026-09-30 오후 6:15:55 
+01a0fadb-3a3e-7392-bde0-cb9129c10d71 2026-10-02 오후 1:25:52 
+01a0fadb-3a72-7eb0-857c-54d3daa81bdc 2026-10-02 오후 1:25:41 
+01a0fadb-3ab2-71f3-917e-0dc4ac0d0aef 2026-10-02 오후 1:30:02 
+01a0fadb-3b04-70c2-8462-60135fe359b6 2026-10-02 오후 1:25:40 
+01a0fadb-3b12-7591-8e5a-d88111e91871 2026-10-02 오후 1:25:38 
+01a0fadc-8925-79a0-b755-5ba6877bb87b 2026-10-02 오후 1:27:14 
+01a0fadc-931e-7b01-9c23-eae34fe9040d 2026-10-02 오후 1:27:11 
+01a0fafc-ca58-74a2-838e-7efeabc1d787 2026-10-02 오후 2:02:28 
+01a0fafc-d515-7913-bb76-4bb81ea2c6ff 2026-10-02 오후 2:02:12 
+01a0fb05-14fa-7871-a902-50c5aa61c02b 2026-10-02 오후 2:11:24 
+01a0fb12-8586-74f1-bc33-f0b07f9f72df 2026-10-02 오후 2:26:17 
+01a0fb12-9147-7d21-be91-7ee7d01b3118 2026-10-02 오후 2:26:08 
+01a10f51-4207-76f0-b1a7-38383076b93c 2026-10-06 오후 12:46:22
+01a10f90-07e2-7130-9043-82c43c4a1c67 2026-10-06 오후 1:55:18 
+01a10f91-6a6e-7bb2-a202-10066dd24d9c 2026-10-06 오후 1:57:02 
+01a10f91-6a92-7ec1-8863-67a5da2ed528 2026-10-06 오후 1:57:13 
+01a10fa4-5041-7250-90a7-a2bddb13f261 2026-10-06 오후 2:17:26 
+01a10fa4-5056-71a2-907c-1dcf2124d476 2026-10-06 오후 2:17:33 
+01a10fad-4113-7f72-91b7-351f06464b10 2026-10-06 오후 2:27:28 
+01a10fad-411f-71f2-8a53-817ea49c3fa3 2026-10-06 오후 2:27:18 
+01a10fca-6ee2-7081-adeb-712770b50323 2026-10-06 오후 2:59:20 
+01a10fca-6efa-7ea1-aa2f-87d71f641c00 2026-10-06 오후 2:59:07 
+01a10fce-7739-7502-9acd-d2228ed159b5 2026-10-06 오후 3:03:38 
+01a10fce-7752-7802-bf1f-38bc7c79c0f5 2026-10-06 오후 3:03:42 
+01a10fd8-6e4f-7b31-b6b9-d28d9fde8eef 2026-10-06 오후 3:14:39 
+01a10fdf-b3d0-7040-8a8d-41ab222b6354 2026-10-06 오후 3:22:22 
+01a10feb-a1ae-7d52-8807-492640a94b4c 2026-10-06 오후 3:36:24 
+01a10feb-a1bd-75c2-9e8e-520740c7a1fa 2026-10-06 오후 3:35:51 
+01a10feb-a1eb-7be3-b81a-8aab25396f34 2026-10-06 오후 3:35:48 
+01a10feb-a215-7c02-9fdb-10b21f5e75be 2026-10-06 오후 3:36:05 
+01a10fee-58bf-7373-9191-26611a64a15f 2026-10-06 오후 3:39:21 
+01a10fee-58d8-79e3-b019-b3212efe7955 2026-10-06 오후 3:39:09 
+01a10fee-5901-7940-bdc7-5bf7dcfbd69f 2026-10-06 오후 3:38:52 
+01a1102a-bddd-7b62-8914-fd0704f92c69 2026-10-06 오후 4:44:36 
+01a1102a-be0a-7f70-aa9f-59a95363eb27 2026-10-06 오후 4:45:16 
+01a1102e-aa4f-7f71-97b4-5fe643f7d5ff 2026-10-06 오후 4:49:42 
+01a11041-88e1-77d3-bcbb-db5e6eb1ee94 2026-10-06 오후 5:09:39 
+01a1104c-63b6-7690-83a1-bf302a8d605b 2026-10-06 오후 5:21:01 
+01a11056-aa3e-7893-af08-447e7efd90eb 2026-10-06 오후 5:33:26 
+01a11068-6cd4-71a2-ad84-5d4742d46b25 2026-10-06 오후 5:52:05 
+01a11069-c165-7341-a02e-4f24713d1c2d 2026-10-06 오후 5:53:19 
+01a1106a-2154-7400-a7e3-84a733ccc70a 2026-10-06 오후 5:53:33 
+01a1106a-6016-76c2-8e64-fd1502e67e7f 2026-10-06 오후 5:54:52 
+01a1106b-0e47-7352-8127-de28cc9bcaea 2026-10-06 오후 5:54:18 
+01a1106b-60c6-7f01-9132-3f5f4ee85c37 2026-10-06 오후 5:54:53 
+01a1106b-edc7-7ac0-8028-6d6ba4bac8de 2026-10-06 오후 5:56:02 
+01a11078-a6e6-7473-a8de-cf771af8e507 2026-10-06 오후 6:11:23 
+01a11078-a6f8-7503-8203-f848d4776275 2026-10-06 오후 6:10:53 
+01a1107d-e47d-7661-b5f2-178454f5d49e 2026-10-06 오후 6:14:57 
+01a113aa-5d83-7cc2-b9d5-3b3f1eac315f 2026-10-07 오전 9:03:06 
+01a113b0-6827-7e60-bd20-0e90dc81d87a 2026-10-07 오전 9:08:57 
+01a113c6-bfb2-75c1-b8e4-d551e134a0b0 2026-10-07 오전 9:33:26 
+01a113c6-e942-7922-a9c9-3183997c301e 2026-10-07 오전 9:34:26 
+01a113ca-8316-7cd0-86f4-917d69535a66 2026-10-07 오전 9:39:40 
+01a113f6-1ba5-7d62-8ea3-6a7743e3c426 2026-10-07 오전 10:25:53
+01a11488-d9ed-7dd0-a5f0-9e2ae8d2be5e 2026-10-07 오후 1:05:40 
+01a11496-ce0a-7810-bd2a-88b451dae388 2026-10-07 오후 1:21:06 
+01a1149b-72b7-7c02-82aa-9bf4b703acc6 2026-10-07 오후 1:26:28 
+01a11544-ba46-7833-b079-80b50b453bd4 2026-10-07 오후 4:31:02 
+01a11544-ba46-7993-b5af-ddadb8dee589 2026-10-07 오후 4:30:38 
+01a11544-ba46-7d73-953a-7a77f7eb2e5f 2026-10-07 오후 4:31:07 
+01a118d6-c38d-7603-ba08-8ac26ba16dd8 2026-10-08 오전 9:09:20 
+01a118d9-6728-7fb3-94e6-cbd31745ad76 2026-10-08 오전 9:12:22 
+01a118e9-e401-71f2-91d8-1974856a6f21 2026-10-08 오전 9:30:13 
+01a118e9-e41a-76b3-9f1c-d93476d9b8c8 2026-10-08 오전 9:29:55 
+01a118ff-80f7-7012-ab20-f9f1c2830c42 2026-10-08 오전 9:54:03 
+01a119a9-998e-7150-afc4-a4228487d750 2026-10-08 오후 12:59:45
+01a119a9-ca34-7fc1-8a3d-818b3417bf58 2026-10-08 오후 1:01:18 
+01a119b0-7dfd-7b20-b8d2-c3f65e927f0a 2026-10-08 오후 1:07:35 
+01a119c8-08ef-73d3-9be5-b47d0ddf81f9 2026-10-08 오후 1:32:48 
+01a119d3-0c1f-76a0-81f6-43dd9216dcea 2026-10-08 오후 1:44:59 
+01a11a0b-44b9-7040-8b69-4a9135be271f 2026-10-08 오후 2:46:53 
+01a11a0b-44b9-7222-8bb3-4f211d14a20f 2026-10-08 오후 2:46:42 
+01a11a0b-44b9-72a3-bb68-d3c7e345137f 2026-10-08 오후 2:46:06 
+01a11a0b-44b9-7542-911f-0fe86d6a3c77 2026-10-08 오후 2:46:14 
+01a11a0b-44b9-7eb1-a27a-719ef74cebe4 2026-10-08 오후 2:46:27 
+01a11a17-5172-7613-9063-1db1dbec5e4d 2026-10-08 오후 2:59:48 
+01a11a2e-be0c-7fa2-9c09-0a3d6d7a653f 2026-10-08 오후 3:24:56 
+01a11a34-b71b-7243-8290-22498cd289ad 2026-10-08 오후 3:31:36 
+01a11a5a-5621-7ef3-881f-cccfd55876ca 2026-10-08 오후 4:12:22 
+01a11a5b-ea61-7e63-b7be-febe41b0e9df 2026-10-08 오후 4:14:11 
+01a11ac6-200a-7d43-9ee2-d5e39d33a005 2026-10-08 오후 6:10:18 
+01a11ac6-a14b-75a0-8bdd-6fcc422c59d0 2026-10-08 오후 6:10:51 
+01a11ae5-a818-7a40-a5c8-bcc8481bb6ee 2026-10-08 오후 6:44:53 
+01a11ae5-a822-7d23-8294-0dd5257eebae 2026-10-08 오후 6:44:50 
+01a11ae5-a822-7f90-b260-01a09ee60144 2026-10-08 오후 6:44:57 
+01a11ae5-a836-7b10-b3ee-584a4e9728b8 2026-10-08 오후 6:45:09 
+01a11ae5-a85b-7320-8a9a-a682002e2684 2026-10-08 오후 6:44:56 
+01a11aeb-75a9-7af2-ae11-3641d5f3621a 2026-10-08 오후 6:51:11 
+01a11aeb-75ae-7c33-886c-421e762d3eca 2026-10-08 오후 6:51:33 
+01a11aeb-75bf-7c11-ae9f-390ac6b1647c 2026-10-08 오후 6:51:40 
+01a11aeb-75cd-7d80-aaea-a98e20137640 2026-10-08 오후 6:51:05 
+01a11aed-db30-7213-b767-177890fc0fe6 2026-10-08 오후 6:53:56 
+01a11aee-0116-7643-93fc-d47116b8f457 2026-10-08 오후 6:54:21 
+01a11aef-8637-7ed1-9085-ebfbee8e81d0 2026-10-08 오후 6:55:23 
+01a11af0-b9a0-7af0-a1fa-b223ed29cc37 2026-10-08 오후 6:57:21 
+01a11af1-f102-7bf1-80b3-45a4c132a8b7 2026-10-08 오후 6:58:18 
+01a11afc-ae45-7003-9ba3-b5369218cdd5 2026-10-08 오후 7:09:44 
+01a11afc-ae45-76f2-a9f2-d425c543ed4f 2026-10-08 오후 7:10:05 
+01a11b06-7af5-7aa3-9a62-e17e8dfa23a2 2026-10-08 오후 7:20:19 
+01a12db2-81c3-7492-a4ae-e09d458317f9 2026-10-12 오전 10:21:39
+01a12db5-cb7f-7383-a514-462bb270c160 2026-10-12 오전 10:25:30
+01a12dbd-f97d-7080-857f-9c0da4291592 2026-10-12 오전 10:34:23
+01a12dbd-f997-70c1-873c-c052ae787ca3 2026-10-12 오전 10:34:19
+01a12dc2-9217-7a70-9fac-969fcf7aa43e 2026-10-12 오전 10:39:07
+01a12dc2-93ad-78f2-83ad-f6cfad5ee1ec 2026-10-12 오전 10:40:03
+01a12dc4-24a1-76d2-9894-8915bb2d7c5f 2026-10-12 오전 10:41:19
+01a12dcf-21e6-70d3-9ded-df1975496233 2026-10-12 오전 10:52:56
+01a12dcf-2513-7f00-8dc6-7cd085ce1740 2026-10-12 오전 10:53:00
+01a12dcf-285b-73c2-9468-f96806a19dc6 2026-10-12 오전 10:53:17
+01a12dcf-2ba7-79c0-94a5-b0b31336f9ea 2026-10-12 오전 10:53:13
+01a12dcf-2edb-7a71-87d3-dc81043043cb 2026-10-12 오전 10:52:54
+01a12dcf-3227-76f1-9b79-f7f8ee0c9bbb 2026-10-12 오전 10:53:09
+01a12dcf-355b-7571-b8c4-951862150cc5 2026-10-12 오전 10:53:22
+01a12dd6-9bf7-7792-ba85-cd4a7f47a058 2026-10-12 오전 11:01:19
+01a12dd6-9f2a-71b0-995a-5654254d8f9d 2026-10-12 오전 11:01:26
+01a12dde-425c-70d3-8abd-1cfec10aaf1f 2026-10-12 오전 11:09:38
+01a12de0-6ff7-75b1-afd4-6385767648c9 2026-10-12 오전 11:11:44
+01a12de0-734b-7f72-815d-26405c4a7ad5 2026-10-12 오전 11:11:40
+01a12df5-6ac8-7cb2-8f82-17866bd616e3 2026-10-12 오전 11:34:46
+01a12df5-6ace-7c61-9c20-8a0c7cab245f 2026-10-12 오전 11:34:38
+01a12df8-51c0-7330-ba60-5563aefa19a0 2026-10-12 오전 11:37:40
+01a12e01-efb8-7083-add7-7a1aaafe05ea 2026-10-12 오전 11:48:17
+01a12e04-1058-78c0-9377-66f85c8b5ecc 2026-10-12 오전 11:50:34
+01a12e18-2816-7843-8249-3e853a1dff9b 2026-10-12 오후 12:12:36
+01a12e19-e342-7e61-827d-2eda9a52c446 2026-10-12 오후 12:14:41
+01a12e19-e349-7961-8fac-2c82ab850092 2026-10-12 오후 12:14:46
+01a12e19-e34b-7ba1-966c-993a29482fde 2026-10-12 오후 12:14:21
+01a12e19-e361-7190-bfba-3d840e2ba14d 2026-10-12 오후 12:14:39
+01a12e4e-22cd-7bb0-8fe1-88e72a00420c 2026-10-12 오후 1:11:31 
+01a12e4e-22cd-7be3-9b85-88ce117c0526 2026-10-12 오후 1:11:34 
+01a12e4f-9bb0-7bb3-a73a-8acf932c3f95 2026-10-12 오후 1:13:16 
+01a12e4f-9bb2-7872-9673-1c45e4225c06 2026-10-12 오후 1:13:10 
+01a12e4f-9bb4-7df2-ae98-74eed44eb99c 2026-10-12 오후 1:13:28 
+01a12e4f-9bb7-7cc2-977f-9df691f187c3 2026-10-12 오후 1:13:13 
+01a12e4f-a05d-7771-b3b8-4724a63b0341 2026-10-12 오후 1:13:19 
+01a12e4f-a069-7571-8a11-b28417ebaa61 2026-10-12 오후 1:13:28 
+01a12e50-8cde-7770-8565-bd31871149cd 2026-10-12 오후 1:14:21 
+01a12e50-a114-7ba3-acb8-6ef08056821f 2026-10-12 오후 1:14:24 
+01a12e50-a5d8-79c3-9b4f-8942fcc25ca3 2026-10-12 오후 1:14:29 
+01a12e50-cf42-7ff2-954e-e495f55dcce1 2026-10-12 오후 1:14:44 
+01a12e50-d77a-77d0-a6c5-d3b8825e8a1d 2026-10-12 오후 1:14:33 
+01a12e51-a6ea-7463-9693-d3a06262b1bc 2026-10-12 오후 1:16:06 
+01a12e51-b5d3-7bb3-ab68-52232587a209 2026-10-12 오후 1:15:24 
+01a12e51-c508-7f60-aa9d-c23e9c1a2eb5 2026-10-12 오후 1:15:43 
+01a12e51-de13-7842-92e9-68adc7e4ddd4 2026-10-12 오후 1:15:30 
+01a12e51-fe19-7401-b07e-c010a3ee373c 2026-10-12 오후 1:15:56 
+01a12e52-9a28-7421-86f0-c385d7d02ab4 2026-10-12 오후 1:16:20 
+01a12e53-14ce-72b0-8be6-ee5902e7e457 2026-10-12 오후 1:16:53 
+01a12e53-540c-72f3-87c6-c14b6a970ff9 2026-10-12 오후 1:17:11 
+01a12e53-7372-7730-9084-5496514fea5a 2026-10-12 오후 1:17:35 
+01a12e53-e342-7ab2-87e1-3aed6694ed91 2026-10-12 오후 1:18:48 
+01a12e53-f3c0-72b3-bcf1-12134be8fc54 2026-10-12 오후 1:17:46 
+01a12e53-f645-7712-a87b-9e9565b34be9 2026-10-12 오후 1:18:11 
+01a12e54-425c-7cc3-bb41-f22ba4455e2f 2026-10-12 오후 1:18:10 
+01a12e54-a50e-79b1-a060-d07696b02bfb 2026-10-12 오후 1:18:44 
+01a12e5a-d6ce-7851-af5b-155b518c4bc8 2026-10-12 오후 1:25:20 
+01a12e5a-d6db-7211-b148-fde31de63c14 2026-10-12 오후 1:25:19 
+01a12e5c-071f-7962-88c7-20203347a248 2026-10-12 오후 1:26:34 
+01a12e5c-0743-7150-8f1a-4db4e052a8be 2026-10-12 오후 1:26:43 
+01a12e63-f133-7d60-8ca3-0e818a5dbd67 2026-10-12 오후 1:35:18 
+01a12e65-0faf-7e13-a1e7-35a3d36c0439 2026-10-12 오후 1:36:47 
+01a12e65-0fb1-7270-8663-65b50ae011ef 2026-10-12 오후 1:36:48 
+01a12e65-0fb2-70c3-9c76-cf86ccb02ff8 2026-10-12 오후 1:36:58 
+01a12e65-0fb7-70d0-906e-61498b895d32 2026-10-12 오후 1:36:38 
+01a12e65-0fb8-71e3-9ed4-2b5ff3a20a2e 2026-10-12 오후 1:37:05 
+01a12e65-0fba-72c3-8859-195a2b80583f 2026-10-12 오후 1:36:51 
+01a12e65-0fbd-78e3-aeab-0f151f835d1f 2026-10-12 오후 1:36:52 
+01a12e65-152b-7fc3-8935-df1d92b0b28b 2026-10-12 오후 1:36:52 
+01a12e6a-4896-7f11-b156-110e2ce0e6cd 2026-10-12 오후 1:42:13 
+01a12e6b-cf28-7e73-b722-b6e9116b3eb5 2026-10-12 오후 1:43:52 
+01a12e89-a0ba-70a2-8732-4ea971596726 2026-10-12 오후 2:16:57 
+01a12e89-a0cb-7b43-898a-db763596bb08 2026-10-12 오후 2:16:45 
+01a12e89-a0d5-74a0-b62b-efae8e324724 2026-10-12 오후 2:16:22 
+01a12e8f-9fef-7050-acf8-14306c026d02 2026-10-12 오후 2:25:22 
+01a12e8f-9fff-7863-93e0-65446dc41b25 2026-10-12 오후 2:23:01 
+01a12e91-2e2f-7b03-af16-64a2ba78b755 2026-10-12 오후 2:24:45 
+01a12e91-d0a1-7503-aa74-0955447d3ef9 2026-10-12 오후 2:25:21 
+01a12e93-553d-7061-9953-a5f1d8e13489 2026-10-12 오후 2:26:56 
+01a12eb0-4947-75f2-9ddf-dc64159e9728 2026-10-12 오후 2:59:23 
+01a12eb0-495d-75d2-8fe3-ec83031c076a 2026-10-12 오후 2:59:05 
+01a12eb3-9b8f-70f1-92d8-24a2c53e269b 2026-10-12 오후 3:02:36 
+01a12eb9-6372-74f2-88e1-89e9f20d1166 2026-10-12 오후 3:09:18 
+01a1331e-1e98-7290-b2e4-03b6b9ecc8d6 2026-10-13 오전 11:37:14
+01a1337f-4d64-7c20-b6ee-7bcfd93882a9 2026-10-13 오후 1:23:13 
+01a133e5-ceac-7340-aa7b-8e8da9cbfa63 2026-10-13 오후 3:15:38 
+01a133ea-ccff-7442-95ed-f12712335ed9 2026-10-13 오후 3:21:16 
+01a13407-2770-7463-9552-e0a8c0981025 2026-10-13 오후 3:52:42 
+01a13407-277b-7692-9688-18863d6ff8c9 2026-10-13 오후 3:53:05 
+01a13407-278f-79d1-9d89-f95ef37f78b6 2026-10-13 오후 3:52:38 
+01a13409-96ed-7720-b0fd-d62cb532dc76 2026-10-13 오후 3:55:57 
+01a13409-9b07-77a2-8955-4b48ba480c09 2026-10-13 오후 3:55:47 
+01a13409-de26-7c83-a083-b0f8361fe228 2026-10-13 오후 3:56:16 
+01a1340a-564b-7d82-9710-2bdd477c881b 2026-10-13 오후 3:56:15 
+01a1340c-985a-7251-bd19-d9546b25d1d4 2026-10-13 오후 3:58:46 
+01a1340c-99d8-79e2-8cae-60d531af418e 2026-10-13 오후 4:00:14 
+01a1340c-d58a-7780-ae77-46cc5a86696a 2026-10-13 오후 3:58:32 
+01a13420-a06c-7ba2-bcdf-cc968de14dcb 2026-10-13 오후 4:21:42 
+01a13420-a079-7590-aca8-9a74023b1cf6 2026-10-13 오후 4:24:36 
+01a13420-a08e-7ba0-9277-24730ce79c8f 2026-10-13 오후 4:22:04 
+01a137bf-2cfe-72f0-b96f-9d38c8fe8eda 2026-10-14 오전 9:14:46 
+01a137f5-2ec1-7a20-b9f6-c4df94b57422 2026-10-14 오전 10:19:36
+01a13831-d6a3-7dc1-a740-feee0ff64077 2026-10-14 오전 11:18:32
+01a1383e-ee4f-7c40-af4a-166fe4e3d351 2026-10-14 오전 11:30:57
+01a1395e-6a41-7600-b01b-bee227068bb0 2026-10-14 오후 4:45:47 
+01a13966-102b-7bc2-bc31-a912ed538783 2026-10-14 오후 4:55:00 
+01a13e09-1dc9-79d3-b3f9-03955cf41522 2026-10-15 오후 2:31:16 
+01a13e09-1dea-7d31-b06e-0b5fe9206a6e 2026-10-15 오후 2:31:09 
+01a13e09-1deb-7012-95c7-56ae6cd0baef 2026-10-15 오후 2:30:39 
+01a13e09-1df7-7493-ae74-88749ddea535 2026-10-15 오후 2:31:20 
+01a13e09-1df9-7490-87cc-99c8dea751c3 2026-10-15 오후 2:30:59 
+01a13e0b-7006-7711-85e2-fb1873fc81a5 2026-10-15 오후 2:33:23 
+01a13e0b-7009-7d93-ab41-b3831605dfed 2026-10-15 오후 2:33:22 
+01a13e0f-636c-7d11-b45a-51d776c94fdc 2026-10-15 오후 2:37:19 
+01a13e11-53e6-7942-b592-4182c72434ae 2026-10-15 오후 2:40:13 
+01a13e11-53e6-79d2-a3b8-ef814790b74a 2026-10-15 오후 2:40:15 
+01a13e11-53e7-7c82-96cb-ccc3cef304f6 2026-10-15 오후 2:40:09 
+01a13e11-53e9-7752-b2b6-24860920b3ac 2026-10-15 오후 2:39:49 
+01a13e11-5405-77f0-bb92-ecab819e2f8f 2026-10-15 오후 2:40:02 
+01a13e13-8e0f-7233-b7ca-1f415c834e8f 2026-10-15 오후 2:42:32 
+01a13e13-8e0f-7862-b82b-3d9204f86167 2026-10-15 오후 2:43:08 
+01a13e17-c715-7e03-9156-79d2282ff934 2026-10-15 오후 2:47:16 
+01a13e1d-4f00-7a32-b870-7815112e00f5 2026-10-15 오후 2:52:27 
+01a13e23-68ae-71d2-9fcb-cfbacc5bf7c3 2026-10-15 오후 2:59:37 
+01a13e25-3e91-71b0-862a-aacf367c4aa8 2026-10-15 오후 3:01:44 
+01a13e25-3e91-7c43-9bd1-6ab05e3c95dc 2026-10-15 오후 3:01:33 
+01a13e2e-41c1-7362-b2b1-66662b6ec744 2026-10-15 오후 3:13:45 
+01a13e33-8580-7281-b31d-032d13866133 2026-10-15 오후 3:17:39 
+01a13e33-8587-7993-9e7a-b959458176ab 2026-10-15 오후 3:18:01 
+01a13e33-8588-7bc1-b6e0-3ea9be890334 2026-10-15 오후 3:17:35 
+01a13e33-858a-71b2-abb9-51205a220bd4 2026-10-15 오후 3:19:45 
+01a13e33-858c-7d80-b15a-b59e134762f4 2026-10-15 오후 3:17:43 
+01a13e3b-d090-7b33-9784-882cbbd7827b 2026-10-15 오후 3:27:10 
+01a13e3b-d093-7451-b72e-280e8860b97e 2026-10-15 오후 3:26:45 
+01a13e3b-d0c7-7e72-bccb-8427ae114034 2026-10-15 오후 3:26:48 
+01a13e3b-d0c8-75f2-85fb-c092ef5b3320 2026-10-15 오후 3:26:47 
+01a13e3b-d0c8-7b31-8494-c7094e91e20e 2026-10-15 오후 3:26:30 
+01a13e3d-fcc9-7073-94b3-05c7c9263035 2026-10-15 오후 3:29:35 
+01a13e3e-3746-72f2-93f8-79688b621b65 2026-10-15 오후 3:29:31 
+01a13e3e-45d3-7223-b246-6c43e1f3c350 2026-10-15 오후 3:29:44 
+01a13e3e-563f-71c1-916f-00561abb187f 2026-10-15 오후 3:31:49 
+01a13e3e-8ebd-7531-b37c-0fc6997ae8d6 2026-10-15 오후 3:30:10 
+01a13e40-cf7b-7d03-9575-e6fa4ae09f66 2026-10-15 오후 3:32:04 
+01a13e40-da55-7190-a47e-5b4a857f83ea 2026-10-15 오후 3:32:00 
+01a13e40-ea72-7631-aacb-ec6a4b75a440 2026-10-15 오후 3:32:19 
+01a13e63-d83f-76e1-b471-8939019e408b 2026-10-15 오후 4:10:44 
+01a13e63-d83f-7862-8118-ca831b194d22 2026-10-15 오후 4:10:38 
+01a13e63-d849-7710-bb68-dfe578e2ff78 2026-10-15 오후 4:10:43 
+01a13e63-d85c-7672-af29-f8355746aa19 2026-10-15 오후 4:11:21 
+01a13f3c-f50d-7081-904b-10fc44284fc2 2026-10-15 오후 8:06:38 
+01a13f43-b651-7061-85c8-99539e9ffc6f 2026-10-15 오후 8:13:39 
+01a13f43-b651-7581-993c-7434a50ac188 2026-10-15 오후 8:14:45 
+01a13f46-7f54-7203-9921-ec430992c698 2026-10-15 오후 8:17:41 
+01a13f46-7f5b-7b62-b3b5-a224dc47026c 2026-10-15 오후 8:18:08 
+01a13f46-7f5c-7260-906f-08b9c2002cf5 2026-10-15 오후 8:18:11 
+01a13f4a-0e96-7ab1-8711-d12bdba201ba 2026-10-15 오후 8:21:49 
+01a13f4a-0e99-77f3-a50d-109528eb1001 2026-10-15 오후 8:21:00 
+01a13f4a-0ea4-7963-8ee7-3ae39b6fbe47 2026-10-15 오후 8:21:11 
+01a13f4b-5705-74e1-adf2-9177b6a2443a 2026-10-15 오후 8:22:57 
+01a13f4b-8b01-7873-b6f8-4fc8e229aa34 2026-10-15 오후 8:23:35 
+01a13f4c-188e-7b51-8ef7-87890e75038e 2026-10-15 오후 8:23:58 
+01a13f4d-24d7-7d01-a9e4-1fe896eaa7f8 2026-10-15 오후 8:25:11 
+01a13f4d-bc3e-7e30-af34-a517e3fef9ea 2026-10-15 오후 8:25:42 
+01a13f4e-1a86-70b0-a489-75662337d72b 2026-10-15 오후 8:26:01 
+01a13f4f-34ad-7991-b39b-380b9f50320a 2026-10-15 오후 8:27:30 
+01a13f4f-bfd1-7ac3-a989-3101d2bbfb2f 2026-10-15 오후 8:27:36 
+01a13f4f-f3d9-7ce3-b319-7b53972d13ba 2026-10-15 오후 8:27:55 
+01a13f51-5222-7cb2-98ac-32e868d02523 2026-10-15 오후 8:29:24 
+01a13f51-6caa-74b1-8014-11c7c73bd56c 2026-10-15 오후 8:29:43 
+01a13f51-b92b-71d1-a217-d39fd9a637db 2026-10-15 오후 8:29:47 
+01a13f53-152d-7703-a9fb-2f42010eb6a2 2026-10-15 오후 8:31:17 
+01a13f53-593f-7a30-b779-8f6815b29573 2026-10-15 오후 8:31:00 
+01a13f53-6ee5-7021-a219-74e0e2428c22 2026-10-15 오후 8:32:04 
+01a13f54-92d1-72d0-a67f-97e8b97906e6 2026-10-15 오후 8:33:27 
+01a13f54-cc62-7900-8ddd-de60fe4d0710 2026-10-15 오후 8:32:55 
+01a13f55-8814-7d81-949b-15796a65c059 2026-10-15 오후 8:33:04 
+01a13f56-4853-78b1-81d2-a416b3b4f1cd 2026-10-15 오후 8:33:57 
+01a13f56-6e0f-7cf3-8759-4e6b1101882e 2026-10-15 오후 8:33:54 
+01a13f56-c388-7d70-b4dc-63ede0c3bacc 2026-10-15 오후 8:34:20 
+01a13f57-3039-7d52-a0ee-2b2f20e5e524 2026-10-15 오후 8:34:54 
+01a13f61-62d3-74c3-8722-9865d4cdc172 2026-10-15 오후 8:46:48 
+01a13f61-62dc-7540-923c-304eaf1a8b12 2026-10-15 오후 8:47:40 
+01a13f62-fc42-7422-94f2-af0e66fee2a2 2026-10-15 오후 8:48:43 
+01a13f66-96b5-71b2-98b6-4cc6805846a2 2026-10-15 오후 8:52:49 
+01a13f66-96b8-7f90-bf1c-c577f2210d49 2026-10-15 오후 8:53:21 
+01a13f68-7bae-78f1-ad6b-86b7d831674f 2026-10-15 오후 8:55:33 
+01a13f68-fcd6-7df3-86d6-a5791f894809 2026-10-15 오후 8:56:13 
+01a13f6b-10e9-7820-9063-b36c37a9d925 2026-10-15 오후 8:58:11 
+01a13f6b-9c17-7a21-aacc-0753a182280f 2026-10-15 오후 8:58:26 
+01a13f6d-6b2d-7362-9188-1baf56a0a808 2026-10-15 오후 9:00:15 
+01a13f6d-a956-76c1-b630-e883ff69adde 2026-10-15 오후 9:00:25 
+01a13f6e-f716-7fa1-b402-495ae0267ebc 2026-10-15 오후 9:01:04 
+01a13f6e-f717-7453-b836-f32636a66b05 2026-10-15 오후 9:01:00 
+01a13f6f-4fe1-7302-a6f6-79b0913e8588 2026-10-15 오후 9:02:00 
+01a13f6f-73d6-75e1-8345-7aafefb24b8e 2026-10-15 오후 9:01:52 
+01a13f6f-fb4d-7e70-8be5-537a220ad64f 2026-10-15 오후 9:03:21 
+01a13f70-16cd-7d42-ac04-6ccc3e7afa00 2026-10-15 오후 9:03:38 
+01a13f70-cd14-7602-9bec-3a9f2812df1d 2026-10-15 오후 9:03:06 
+01a13f70-eaca-72c2-83b0-09753dc44ed3 2026-10-15 오후 9:03:07 
+01a13f72-2de2-77d0-b867-1ee473b1184e 2026-10-15 오후 9:04:21 
+01a13f72-6e83-7822-acc7-aaa4017ccecd 2026-10-15 오후 9:04:49 
+01a13f73-1a9e-7c20-bc15-769ecb4f09be 2026-10-15 오후 9:05:21 
+01a13f73-55e7-70b1-a90e-190d3497fff0 2026-10-15 오후 9:06:00 
+01a13f73-55f7-7462-a441-bc9acd73ace1 2026-10-15 오후 9:06:07 
+01a13f75-d51d-7112-9ea2-7c895f58f453 2026-10-15 오후 9:09:39 
+01a13f75-d531-78b1-b0c0-8ab704a979dd 2026-10-15 오후 9:09:10 
+01a13f8c-06af-7622-8a6a-b536e531e2bd 2026-10-15 오후 9:33:26 
+01a13f8c-06af-7c40-88fd-6fa80717086a 2026-10-15 오후 9:33:30 
+01a13f95-4b94-77a3-ad72-687a14689f58 2026-10-15 오후 9:43:14 
+01a13f95-4b94-7e71-bb01-d1452d532297 2026-10-15 오후 9:43:29 
+01a1420b-e04e-7d40-8810-f2d37c5bbc35 2026-10-16 오전 9:12:28 
+01a14239-783b-7bb1-ad99-8d27e353ffc1 2026-10-16 오전 10:01:54
+01a14252-a1ee-7311-a038-5c96ca944bbe 2026-10-16 오전 10:30:03
+01a14261-f573-7931-964a-258b94ff07ae 2026-10-16 오전 10:45:38
+01a14271-059b-7243-ad00-908696c50a54 2026-10-16 오전 11:02:37
+01a1427b-ad29-72b0-974e-5571480bfad9 2026-10-16 오전 11:14:24
+01a14299-e794-7d52-bbb7-bf89cac756d4 2026-10-16 오전 11:47:01
+01a1429a-8e73-7f61-93b6-73d46bd0a67b 2026-10-16 오전 11:48:31
+01a1429f-f503-7581-85f4-1efd973fa789 2026-10-16 오전 11:53:54
+01a142a1-57c7-7821-8d1b-c24746c2a7a4 2026-10-16 오전 11:55:21
+01a142a5-9452-7903-b9f1-f907619ff789 2026-10-16 오후 12:00:27
+01a142aa-9d31-7322-a1cd-1e426b3241f7 2026-10-16 오후 12:05:02
+01a142b0-65a7-7fe1-a28b-a17e7988ccea 2026-10-16 오후 12:11:18
+01a14305-3849-7141-9c47-1dfc5eb13973 2026-10-16 오후 1:44:50 
+01a1430a-430d-7801-94f9-38d844a1fb9b 2026-10-16 오후 1:50:06 
+01a14319-d55c-7531-adf8-7ca83c935555 2026-10-16 오후 2:06:42 
+01a1431f-32d4-7092-874d-298555d4fe37 2026-10-16 오후 2:13:32 
+01a1431f-32d4-7823-b2c6-fe880aab86cc 2026-10-16 오후 2:13:04 
+01a14325-9124-77b2-8d61-d5924307c826 2026-10-16 오후 2:20:24 
+01a14325-9136-7671-9098-23fa9f5b5b4b 2026-10-16 오후 2:19:57 
+01a1432a-70ee-7c90-8424-ecd1038f7e1b 2026-10-16 오후 2:25:12 
+01a1432d-3ef4-7a90-adf0-0aca301bbb4b 2026-10-16 오후 2:28:45 
+01a1432d-3ef5-77a0-925d-887f5df9ac3a 2026-10-16 오후 2:29:08 
+01a1432d-3f02-76a1-92ec-8924e0b98c95 2026-10-16 오후 2:28:51 
+01a14330-14ef-7f42-980a-ff79c199429c 2026-10-16 오후 2:31:20 
+01a14332-cb66-7ec3-8089-777c249c8360 2026-10-16 오후 2:34:32 
+01a14347-b891-71d2-b448-ba865513e6e2 2026-10-16 오후 2:56:57 
+01a1434a-edcf-79f2-972f-5eccbe70faf8 2026-10-16 오후 3:01:12 
+01a1434a-eddc-7592-9526-32c8770556f5 2026-10-16 오후 3:01:04 
+01a1434a-eddc-7643-9c5c-2dc19dbc55a9 2026-10-16 오후 3:00:33 
+01a1434b-c1ca-70d0-9faf-6fa2f824d193 2026-10-16 오후 3:01:56 
+01a1434b-c1cb-7640-98a5-4a4ef7d90b13 2026-10-16 오후 3:02:00 
+01a1434b-c1cd-7df0-85b8-0f7f06e4916b 2026-10-16 오후 3:01:46 
+01a1434f-37eb-73a0-ba33-6b1b1cd8886e 2026-10-16 오후 3:05:36 
+01a1435c-4b31-78a0-a3b7-d344430c7852 2026-10-16 오후 3:19:29 
+01a1435c-4b37-7290-abdc-06d00e45de8c 2026-10-16 오후 3:19:40 
+01a1435c-4b37-7682-8113-1d3331d27a8a 2026-10-16 오후 3:19:44 
+01a14364-ff43-7ad2-aa75-32f0b1536557 2026-10-16 오후 3:29:24 
+01a14369-6cd6-7073-a900-7998b2d87eb6 2026-10-16 오후 3:34:25 
+01a1436c-2621-77c0-9076-71b292286578 2026-10-16 오후 3:37:11 
+01a1436c-2623-79b1-b24a-6cac731949b2 2026-10-16 오후 3:37:18 
+01a1436c-40da-7433-8233-473c2b8e35d0 2026-10-16 오후 3:37:20 
+01a1436c-40e3-7683-b997-9699cf1904f8 2026-10-16 오후 3:38:08 
+01a1436f-59af-7da3-b60a-da939142fcaa 2026-10-16 오후 3:40:51 
+01a1436f-59b4-7470-b247-32de36fef47f 2026-10-16 오후 3:41:01 
+01a1436f-59b5-7e10-94ce-a95acfe71c2b 2026-10-16 오후 3:41:17 
+01a14371-646c-7dd2-a1dd-0adaf8332af6 2026-10-16 오후 3:42:41 
+01a14385-4912-79c2-9fef-255612ddac14 2026-10-16 오후 4:04:47 
+01a14385-4913-73a0-bf72-84061fcb8a2e 2026-10-16 오후 4:04:28 
+01a14386-ec59-79d0-bbe8-20a62caf98d4 2026-10-16 오후 4:06:30 
+01a1438d-0040-7682-9cbc-d043df358f90 2026-10-16 오후 4:13:08 
+01a1438d-0040-7e53-85e0-514f7b097794 2026-10-16 오후 4:12:43 
+01a1438d-005b-7263-ac75-0150ebd902f5 2026-10-16 오후 4:12:59 
+01a1438e-6b0c-7fa3-a0fb-0bd5e7b10571 2026-10-16 오후 4:14:39 
+01a1438e-b86f-79d0-9a51-88d564153c42 2026-10-16 오후 4:14:49 
+01a1438e-f89a-7332-a67f-0e27043c8b7b 2026-10-16 오후 4:15:06 
+01a14390-38eb-7f51-b257-2c83b0d869cc 2026-10-16 오후 4:16:28 
+01a14390-6565-7ef0-a4d0-d2f8201b809e 2026-10-16 오후 4:16:40 
+01a14392-f823-7f81-9605-f23d992839cf 2026-10-16 오후 4:19:11 
+01a14394-5584-7751-891d-bcd9d4414256 2026-10-16 오후 4:20:24 
+01a14394-55a1-7500-ad91-821757d7499c 2026-10-16 오후 4:20:44 
+01a14395-7012-7ee2-a788-18e60b728300 2026-10-16 오후 4:21:52 
+01a14395-a201-7e73-a70a-6f0078e84101 2026-10-16 오후 4:22:07 
+01a14395-ac13-7fb3-a201-56e399f1cb72 2026-10-16 오후 4:22:55 
+01a1439b-2805-7310-8e7d-47ba8072f7e0 2026-10-16 오후 4:28:05 
+01a143a0-0766-75c0-bf35-ae0ad3104d46 2026-10-16 오후 4:33:27 
+01a143aa-21bd-7b03-af6e-481739d506ab 2026-10-16 오후 4:44:06 
+01a143aa-25bc-7af1-9b21-6643878c37f8 2026-10-16 오후 4:44:56 
+01a143ab-2090-7cf0-bb64-7604de75c0f1 2026-10-16 오후 4:45:42 
+01a143ab-3b60-7202-b66f-b4627c70d8d9 2026-10-16 오후 4:45:37 
+01a143ab-a185-7c12-8e1f-6f342dd655a8 2026-10-16 오후 4:46:04 
+01a143ab-f29f-7f23-8777-bd64099eca23 2026-10-16 오후 4:46:42 
+01a143b7-2098-71b2-a801-b00b43d33fa1 2026-10-16 오후 4:58:46 
+01a143b8-c6fa-71f0-a891-3ff1282931c6 2026-10-16 오후 5:00:36 
+01a143b8-cb14-7470-a4af-8ae3c9a6a852 2026-10-16 오후 5:00:39 
+01a143b8-cf11-7452-b1e1-81fc8bef574f 2026-10-16 오후 5:00:46 
+01a143ba-44e6-7330-9871-3e6dca9b9ed8 2026-10-16 오후 5:01:52 
+01a143ba-577b-79e0-9231-f2a5493aabff 2026-10-16 오후 5:02:39 
+01a143ba-66e9-7662-933d-24beb5b24bd4 2026-10-16 오후 5:02:18 
+01a143bb-6916-7dd2-b81d-4085a3448f77 2026-10-16 오후 5:03:29 
+01a143bb-d1d0-7260-9653-015f74ccce26 2026-10-16 오후 5:03:52 
+01a143bc-2163-70e0-bfd9-36a75aad8840 2026-10-16 오후 5:04:25 
+01a143bc-e366-7461-852e-bbc395a4474a 2026-10-16 오후 5:04:45 
+01a143bd-3886-79b1-b395-3162662589f1 2026-10-16 오후 5:05:34 
+01a143bd-bb83-79d3-b1ec-2b1de409ccc2 2026-10-16 오후 5:05:54 
+01a143be-0d15-76e2-bbdb-3e8d8ebee729 2026-10-16 오후 5:06:35 
+01a143be-cb83-7091-b277-4ca8b8140fdc 2026-10-16 오후 5:07:22 
+01a143bf-155f-70b3-8a7d-e6f5f047c322 2026-10-16 오후 5:07:37 
+01a143bf-bac6-74e2-8bb9-b86bf55d3da6 2026-10-16 오후 5:08:14 
+01a143c0-6e86-7122-b7d5-bd4d56a834f3 2026-10-16 오후 5:09:10 
+01a143c0-b365-7081-ab4a-f069950b34ef 2026-10-16 오후 5:09:03 
+01a143c0-d5a5-7933-b364-de9e8326437d 2026-10-16 오후 5:09:55 
+01a143c1-3f54-7552-9e1c-df05fcdb5756 2026-10-16 오후 5:10:02 
+01a143c1-f733-7ca0-bb17-2bb7e3619dee 2026-10-16 오후 5:10:34 
+01a143c2-1cde-7473-bd47-ccf82f3e390e 2026-10-16 오후 5:10:50 
+01a143c2-e27a-7203-b397-2962bfa03503 2026-10-16 오후 5:11:42 
+01a143c3-5cdb-76b3-afe4-fedcee08be11 2026-10-16 오후 5:12:09 
+01a143c3-9a21-7711-9846-42c903f1a20b 2026-10-16 오후 5:12:27 
+01a143c4-768d-7310-8b8c-c9099cacd250 2026-10-16 오후 5:13:27 
+01a143c4-d4f3-7130-9185-b3acd04c58ea 2026-10-16 오후 5:13:40 
+01a143c5-1996-7b31-930d-ac01162b2b45 2026-10-16 오후 5:14:09 
+01a143c6-0354-7811-a08c-596a003edb75 2026-10-16 오후 5:15:01 
+01a143c6-3883-7e00-ab51-dbed17e5c502 2026-10-16 오후 5:15:14 
+01a143c6-ad71-7dd3-aa87-9946bca2c88d 2026-10-16 오후 5:15:50 
+01a14499-0860-7701-85a4-8a76e248c2fc 2026-10-16 오후 9:04:56 
+01a14499-675f-7251-be9a-d48ba2b7e7e0 2026-10-16 오후 9:05:10 
+01a1449a-291b-7953-abcf-3c0f23992910 2026-10-16 오후 9:07:00 
+01a1449b-d0e8-7113-a7aa-80066315f9b0 2026-10-16 오후 9:08:19 
+01a1449d-2266-7f80-8594-6d36d6bc2400 2026-10-16 오후 9:10:02 
+01a1449e-9cdc-7f81-9e7a-d16242d8261a 2026-10-16 오후 9:12:30 
+01a144a5-a984-7f40-99d7-39d59780ade1 2026-10-16 오후 9:18:44 
+01a144aa-c939-7453-99a8-b024b367b70d 2026-10-16 오후 9:24:43 
+
+
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command "Copy-Item -LiteralPath 'C:\\Users\\user\\.codex\\generated_images\\01a15237-cb5b-7462-a6a7-be12554ee720\\exec-bda346bb-e6b5-4694-95ba-246758a307c7.png' -Destination 'C:\\Project\\NKK_PROJECT\\UnityResources\\Rats\\Augment\\Sheets\\aug_lab.png'; Add-Type -AssemblyName System.Drawing; "'$assetImage = [System.Drawing.Image]::FromFile('"'C:\\Project\\NKK_PROJECT\\UnityResources\\Rats\\Augment\\Sheets\\aug_lab.png'); Write-Output \""'$($assetImage.Width)x$($assetImage.Height)"; $assetImage.Dispose()' in C:\Project\NKK_PROJECT\UnityResources\Rats\Augment\Sheets
+ succeeded in 270ms:
+1254x1254
+
+exec
+"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -Command 'Add-Type -AssemblyName System.Drawing; $assetSource = [System.Drawing.Image]::FromFile('"'C:\\Users\\user\\.codex\\generated_images\\01a15237-cb5b-7462-a6a7-be12554ee720\\exec-bda346bb-e6b5-4694-95ba-246758a307c7.png'); "'$assetOutput = New-Object System.Drawing.Bitmap 1024,1024; $assetGraphics = [System.Drawing.Graphics]::FromImage($assetOutput); $assetGraphics.InterpolationMode = [System.Drawing.Drawing2D.InterpolationMode]::HighQualityBicubic; $assetGraphics.DrawImage($assetSource,0,0,1024,1024); $assetGraphics.Dispose(); $assetSource.Dispose(); $assetOutput.Save('"'C:\\Project\\NKK_PROJECT\\UnityResources\\Rats\\Augment\\Sheets\\aug_lab.png',[System.Drawing.Imaging.ImageFormat]::Png); "'$assetOutput.Dispose(); Get-Item -LiteralPath '"'aug_lab.png' | Select-Object Name,Length" in C:\Project\NKK_PROJECT\UnityResources\Rats\Augment\Sheets
+ succeeded in 371ms:
+
+Name         Length
+----         ------
+aug_lab.png 1714298
+
+
+
+codex
+aug_lab.png
+tokens used
+50,636
+aug_lab.png

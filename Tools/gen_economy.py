@@ -6,7 +6,7 @@
 층 연구자료 = 스테이지 테이블 research (적정 찍찍 비례). 층 치즈 수입 = K(층) × 치즈 배율 × 방 수 (K = 측정 round8_econ 에서 맞춘 지수 곡선).
 16층부터는 뽑기(연구자료)·17층부터는 상점(치즈)도 써야 하니 훈장 몫을 LATE_SHARE 로 줄임.
 사용: python Tools/gen_stage_table.py && python Tools/gen_economy.py && python Tools/gen_skill_tree.py && python Tools/xlsx2json.py"""
-import csv, io, json, math, os
+import copy, csv, io, json, math, os
 import openpyxl
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,6 +25,10 @@ T8_TREE_END = 23                     # 8훈장 트리는 이 층을 깰 때까�
 PROMO_FRAC = {2: 0.34, 3: 0.35, 4: 0.42, 5: 0.47, 6: 0.49, 7: 0.535}   # 그 구간 연구자료 중 다음 승급 몫 (나머지 = 트리). 예전 비율 유지
 CHEESE_SHARE = 0.85                  # 치즈 수입 중 트리에 쓰는 몫 (나머지 여유)
 LATE_SHARE = 0.5                     # 뽑기·상점이 열린 뒤(16층~) 훈장에 쓰는 몫
+# 비용 배율 (2026-10-19, Tools/balance_sim.py 로 맞춤: 기본 제한시간 120초 · 클릭 적극 ~10h / 거의 안 함 ~15h · 허들 시간표). 훈장 t 의 승급 연구자료와 t 트리 비용에 곱함
+COST_SCALE = {2: 1.3, 3: 1.3, 4: 1.3, 5: 1.3, 6: 0.9, 7: 0.9, 8: 0.9}   # 2차 (치즈·조각 넣은 뒤) 6~8 ×0.9
+SHOP_FLOORS = 3                      # 상점 한 번 새로 고침(6칸) 전부 사는 값 ≈ 층 치즈 수입의 이 배
+SHOP_REFRESH_BC = 4800               # 6칸 평균 가격 합 (BC 단위, 상점 테이블 price_cheese_bc)
 TREE_UNIT = {2: 108.33, 3: 85.02, 4: 81.06, 5: 79.71, 6: 79.54, 7: 72.97, 8: 74.95}   # gen_skill_tree: 트리 연구자료 합 ÷ RESEARCH[t]
 
 
@@ -72,7 +76,7 @@ def main():
         pf = PROMO_FRAC.get(t, 0)
         tree_r = R * (1 - pf)
         if t < 8: promo[t + 1] = R * pf
-        params['RESEARCH'][t] = round(tree_r / TREE_UNIT[t], 3)
+        params['RESEARCH'][t] = round(tree_r * COST_SCALE[t] / TREE_UNIT[t], 3)
         params['CHEESE_PER_RES'][t] = round(C / max(1, tree_r))
         report.append(f'훈장 {t}: 판 {a + 1}~{b} · 연구자료 {R:,.0f} (트리 {tree_r:,.0f}' + (f' · {t + 1}훈장 승급 {R * pf:,.0f})' if t < 8 else ')') + f' · 치즈 {C:,.0f}')
     json.dump(params, io.open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
@@ -83,10 +87,25 @@ def main():
     for row in ws.iter_rows(min_row=4):
         t = row[0].value
         if not isinstance(t, int) or t < 2 or t > 8: continue          # 9훈장~ = Tools/gen_expansion_data.py (100층 확장)
-        row[rc].value = int(round(promo[t], -1 if promo[t] > 100 else 0))
+        v = promo[t] * COST_SCALE[t]
+        row[rc].value = int(round(v, -1 if v > 100 else 0))
         for i in range(1, 5):
             if f'cond{i}_type' in K and row[K.index(f'cond{i}_type')].value == 'Max_Floor': row[K.index(f'cond{i}_value')].value = TIER_CLEAR[t] + 1
     wb.save(TIER)
+    # 상점 가격 (2026-10-19 전체 밸런스): BC = bc_base × 치즈 배율 × kb^(min(층,30)-1) (BlackMarket.BC). 한 번 새로 고침 상품 전부 ≈ 층 수입 SHOP_FLOORS 배
+    sp = os.path.join(ROOT, 'Data_Table', '상점 테이블.xlsx'); swb = openpyxl.load_workbook(sp); sc = swb['Shop_Config']
+    rows = {sc.cell(r, 1).value: r for r in range(4, sc.max_row + 1) if sc.cell(r, 1).value}
+    vals = {'bc_base': round(ka * 9 * SHOP_FLOORS / SHOP_REFRESH_BC, 2), 'bc_floor_grow': round(kb, 4), 'bc_floor_cap': 30}
+    for k, v in vals.items():
+        r = rows.get(k)
+        if r is None:
+            r = sc.max_row + 1
+            for c in range(1, sc.max_column + 1): sc.cell(r, c)._style = copy.copy(sc.cell(r - 1, c)._style)
+            sc.cell(r, 1, k)
+            if sc.max_column >= 3: sc.cell(r, 3, {'bc_floor_grow': '층 치즈 수입 배율 (gen_economy fit_k) — BC 에 곱함', 'bc_floor_cap': '층 수입 배율을 이 층까지만'}.get(k, ''))
+        sc.cell(r, 2, v)
+    swb.save(sp)
+    print('상점', vals)
     print(f'치즈 K = {ka:.0f} × {kb:.3f}^(층-1)')
     print('판별 최고 층', RUNS)
     for s in report: print(s)

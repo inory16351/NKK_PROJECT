@@ -19,7 +19,7 @@ namespace NKK
         public GameOver Over;
 
         [Header("제한시간 = 기본 + 방 수 × 방당 (+ 보스 층이면 추가) + 공용 스킬 초 (2026-10-07: 모든 층 180초 통일, 보스 층 +30)")]
-        public float baseTime = 180;
+        public float baseTime = 120;                 // 2026-10-19 사용자: 180 → 120 (Tools/gen_stage_table.py BASE_TIME 과 같게)
         [Tooltip("0 = 방 수와 상관없이 같음")] public float perRoom = 0;
         [Tooltip("보스 층 추가 (공용 스킬 '보스에게 주는 피해' 노드의 시간이 더해짐). 2026-10-12 허들 기획서: 모든 층 180초 → 0")] public float bossExtra = 0;
 
@@ -79,7 +79,7 @@ namespace NKK
                         FxManager.I?.Shake(0.08f);
                     }
                 if (Left < tickTime && Mathf.Floor(before) != Mathf.Floor(Left)) pulse = 1;
-                if (Left <= 0) { Left = 0; if (Over) Over.Begin(GameOver.Why.Time); }
+                if (Left <= 0 && !AugmentSpecials.TryRewind(this)) { Left = 0; if (Over) Over.Begin(GameOver.Why.Time); }     // 증강 '시간 역행'이면 되돌림
             }
             UpdateHud();
         }

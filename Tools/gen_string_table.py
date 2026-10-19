@@ -55,6 +55,9 @@ COLS = [
     ('쥐 캐릭터 테이블', 'Super_Ult', 'super_id', 'super_line', 43),
     ('쥐 캐릭터 테이블', 'Super_Ult', 'super_id', 'finish_line', 44),
     ('보스 테이블', 'Atk_Type', None, 'popup', 45),          # 밈 기술 팝업 (2026-10-19, 100층 확장)
+    ('증강 테이블', 'Augment', 'augment_id', 'aug_name', 46),   # 증강 (2026-10-19)
+    ('증강 테이블', 'Augment', 'augment_id', 'aug_desc', 47),
+    ('증강 테이블', 'Grade', None, 'grade_name', 48),
 ]
 
 HEAD = (['스트링 키', '한국어', '영어', '출처', '상태', '번역 메모'],

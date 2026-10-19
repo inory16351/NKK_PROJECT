@@ -65,8 +65,8 @@ namespace NKK.Ults
         [Tooltip("필살기 반경 (끝날 때 휘말림)")] public float ultRadius = 560;
         [Tooltip("필살기 피해 = 공격력 × 이 값 (ultD)")] public float ultDamageK = 13;
         [Tooltip("물건 하나 피해 = 공격력 × 이 값 (ultItemD)")] public float ultItemK = 4.5f;
-        [Tooltip("필살기 하나가 끝나고 다음 필살기까지 기다리는 시간 (초, 공용 스킬로 줄어듦). 게이지는 계속 참")] public float ultCooldown = 25;
-        [Tooltip("공용 스킬로 줄어도 최소 (초)")] public float ultCooldownMin = 8;
+        [Tooltip("필살기 하나가 끝나고 다음 필살기까지 기다리는 시간 (초). 2026-10-19 사용자: 필살기 사이 쿨타임 없앰 → 0")] public float ultCooldown = 0;
+        [Tooltip("공용 스킬로 줄어도 최소 (초)")] public float ultCooldownMin = 0;
         [Tooltip("상황극 중 주변 사람·고양이 휘말림 반경 · 속도 (0.3초마다)")] public float actorRadius = 220, actorSpeed = 620;
         [Tooltip("테스트: 시작부터 모든 게이지를 채움")] public bool testFullGauge;
 
@@ -217,6 +217,7 @@ namespace NKK.Ults
                 }
                 if (Progress.I) Progress.I.OnUltUsed(s.U.ultimate_id);       // 업적 알림은 업적 테이블 기준 (AchievementToast)
                 if (r && r.temp <= 0) SuperUltManager.I?.OnUltDone(r);        // 초필살기 스택 (신화 · 끝까지 쓴 것만)
+                AugmentSpecials.OnUltDone(r);                                   // 증강 특수 효과: 필살기 메아리
             }
             s.Cleanup();
             s.ReleaseAll();

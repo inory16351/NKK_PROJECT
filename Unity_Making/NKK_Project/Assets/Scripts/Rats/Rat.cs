@@ -61,7 +61,7 @@ namespace NKK.Rats
 
         // 공격력 = 테이블 × 특수 능력 × 종별 성장 × 공용 스킬 (반란의 시작·이빨 강화·쥐 헬스장) × 광란
         // 공용 스킬: 공격력 + 고정값(등급별) → ×(1 + 공격력 % 합) ×(1 + 피해량 % 합)
-        public float Damage => (Data.atk + CommonSkill.AtkFlat((int)Data.Grade)) * PassiveDamageMult * GrowthAtkMult * CommonSkill.AtkMul((int)Data.Grade) * (frenzy > 0 ? 1.5f : 1) * (zombie > 0 ? 2 : 1);
+        public float Damage => (Data.atk + CommonSkill.AtkFlat((int)Data.Grade)) * PassiveDamageMult * GrowthAtkMult * CommonSkill.AtkMul((int)Data.Grade) * (frenzy > 0 ? 1.5f : 1) * (zombie > 0 ? 2 : 1) * AugmentSpecials.RatDamageMul(this);      // 증강: 눈덩이 · 거대화
         float RunSpeed => Manager.baseSpeed * GradeData.move_speed * PassiveSpeedMult * CommonSkill.MoveSpeedMul * (frenzy > 0 ? 1.5f : 1);
         float RushHit(object target) => Rushing ? Manager.RushDamage * Manager.RushStack(target) : 1;     // 총공격 배율 × 중첩 제한
 
@@ -395,7 +395,7 @@ namespace NKK.Rats
 #if UNITY_EDITOR
             WallEscapeCheck();
 #endif
-            float scale = Manager.ratScale * GradeData.size * EaseOutBack(born);
+            float scale = Manager.ratScale * GradeData.size * EaseOutBack(born) * AugmentSpecials.RatScale(this);      // 증강 '거대 쥐 출현'
             TrickTransform(out float lift, out float trot, out float tsx, out float tsy, out float pivotH);
             ActionTransform(ref trot, ref tsx, ref tsy, ref lift);
             UltTransform(ref trot, ref tsx, ref tsy, ref lift);
