@@ -15,6 +15,7 @@ namespace NKK.Rats
         [Tooltip("승급할 수 있을 때 켜지는 알림 점")] public GameObject badge;
         public GameObject panel;
         public Button closeButton, allButton;
+        [Tooltip("자동 승급 켜기/끄기 (9훈장 노드를 찍었을 때만 보임)")] public Toggle autoToggle;
         [System.Serializable] public class Row { public TMP_Text text; public Button button; public Image from, to; }
         [Tooltip("등급 줄 (일반 → 레어 … 전설 → 신화 순서)")] public Row[] rows = new Row[5];
         [Tooltip("일괄 승급 결과 배너 ({n} 횟수) · 못 할 때 배너 ({keep} 남길 마리 수)")] public string allDone, allFail;
@@ -30,6 +31,7 @@ namespace NKK.Rats
             if (openButton) openButton.onClick.AddListener(() => { if (panel) { panel.SetActive(!panel.activeSelf); Order(); Refresh(); } });
             if (closeButton) closeButton.onClick.AddListener(() => { panel.SetActive(false); Order(); });
             if (allButton) allButton.onClick.AddListener(PromoteAll);
+            if (autoToggle) { autoToggle.SetIsOnWithoutNotify(RatManager.AutoPromoteOn); autoToggle.onValueChanged.AddListener(v => RatManager.AutoPromoteOn = v); }
             fmt = new string[rows.Length];
             for (int i = 0; i < rows.Length; i++)
             {
@@ -70,6 +72,7 @@ namespace NKK.Rats
                 if (r.to) r.to.color = GradeColor(g + 1);
             }
             if (allButton) allButton.interactable = Rats.CanPromoteAll;      // 번식용 남길 수를 지키며 할 수 있을 때만
+            if (autoToggle) autoToggle.gameObject.SetActive(CommonSkill.PromoteAuto);
         }
 
         // 열리면 drawAbove 보다 위로, 닫히면 원래 자리로

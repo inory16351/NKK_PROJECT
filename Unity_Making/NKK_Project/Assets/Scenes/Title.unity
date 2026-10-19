@@ -3813,6 +3813,7 @@ MonoBehaviour:
     wishMythic: 
     log: []
     pending: []
+    introSeen: []
   cheese: 0
   research: 0
   tier: 1
@@ -10417,7 +10418,7 @@ MonoBehaviour:
   zones: []
   bossClip: {fileID: 0}
   finalBossClip: {fileID: 0}
-  finalBossFloor: 30
+  finalBossFloor: 100
   Timer: {fileID: 0}
   hurryClip: {fileID: 0}
   hurryAt: 30

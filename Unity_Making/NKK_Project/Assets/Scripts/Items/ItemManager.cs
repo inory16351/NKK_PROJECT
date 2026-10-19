@@ -163,10 +163,14 @@ namespace NKK.Items
         {
             var db = GameDatabase.Instance;
             var themes = new List<string>();
-            foreach (var l in db.FurnitureLayouts) if (!themes.Contains(l.room_theme)) themes.Add(l.room_theme);
+            // 구간 테마 (물건 테이블 Zone themes, 2026-10-19): 있으면 그 테마들만, 시작 방 = 첫 테마. 없으면 전부 · 시작 방 Lab
+            var zone = db.ZoneOf(Game.Floor);
+            if (zone != null && !string.IsNullOrEmpty(zone.themes) && zone.themes != "-")
+                foreach (var t in zone.themes.Split(',')) { var tt = t.Trim(); if (tt.Length > 0 && !themes.Contains(tt)) themes.Add(tt); }
+            if (themes.Count == 0) foreach (var l in db.FurnitureLayouts) if (!themes.Contains(l.room_theme)) themes.Add(l.room_theme);
             if (themes.Count == 0) return;
             var rnd = new SeededRandom(Stage.FloorSeed(Game.Floor) * 131u + (uint)(room.x * 17 + room.y * 71 + 5));
-            string theme = room == Vector2Int.zero ? "Lab" : themes[Mathf.FloorToInt(rnd.Next() * themes.Count)];
+            string theme = room == Vector2Int.zero ? (zone != null && !string.IsNullOrEmpty(zone.themes) && zone.themes != "-" ? themes[0] : "Lab") : themes[Mathf.FloorToInt(rnd.Next() * themes.Count)];
             float x0 = room.x * World.RW + World.WM + 60, y0 = room.y * World.RH + World.WM + 60, w = World.RW - 2 * (World.WM + 60), h = World.RH - 2 * (World.WM + 60) - 20;
             foreach (var l in db.FurnitureLayouts)
             {
@@ -470,7 +474,7 @@ namespace NKK.Items
         {
             var db = GameDatabase.Instance;
             var pool = new List<HumanRow>();
-            foreach (var h in db.Humans) if (Game.Floor >= h.from_floor) pool.Add(h);
+            foreach (var h in db.Humans) if (Game.Floor >= h.from_floor && (h.to_floor <= 0 || Game.Floor <= h.to_floor)) pool.Add(h);      // 사라지는 층 (2026-10-19 구간별 사람)
             if (pool.Count == 0 || !humanPrefab || !humanArt) return;
             for (int m = 0; m < n && Humans.Count < HumanCap; m++)
             {

@@ -31,9 +31,9 @@ namespace NKK.Stage
         public RatManager Rats;
         public CatManager Cats;
         [Tooltip("층 클리어 연출 (연구 자료를 훔쳤다!!!). 비우면 바로 다음 층")] public Heist Heist;
-        [Tooltip("마지막 층: 이 층 보스를 잡고 계단에 닿으면 판을 끝내고 로비로 (사용자 2026-10-12: 30층 보스 = 끝)")] public int lastFloor = 30;
+        [Tooltip("마지막 층: 이 층 보스를 잡고 계단에 닿으면 판을 끝내고 로비로 (사용자 2026-10-12: 30층 보스 = 끝)")] public int lastFloor = 100;
         [Tooltip("마지막 층을 넘으면 돌아갈 씬")] public string lobbyScene = "Lobby";
-        public static int LastFloor { get; private set; } = 30;
+        public static int LastFloor { get; private set; } = 100;
         [Tooltip("층 보스 (스테이지 테이블 Boss). 보스 층이면 계단 방에서 대기, 살아 있는 동안 계단 못 씀")] public Boss Boss;
 
         [Header("방 배치")]
@@ -116,7 +116,7 @@ namespace NKK.Stage
         public static Vector2Int RoomOf(float x, float y) => new(Mathf.FloorToInt(x / World.RW), Mathf.FloorToInt(y / World.RH));
         public static int RoomDist(Vector2Int r) => Mathf.Abs(r.x) + Mathf.Abs(r.y);
         public bool IsStairsRoom(int i, int j) => i == StairsRoom.x && j == StairsRoom.y;
-        public bool IsBossFloor(int f) => f % bossEvery == 0;
+        public bool IsBossFloor(int f) => GameDatabase.Instance ? GameDatabase.Instance.BossOf(f) != null : f % bossEvery == 0;      // 보스 테이블 floor (91~100 구간은 94·97·100층)
         // 보스가 대기 중인 계단 방 (보스 층): 멀리 있어도 어둡게 그려서 보스가 어디 있는지 보이게
         public bool BossWaitRoom(Vector2Int k) => k == StairsRoom && Boss && Boss.State == Boss.BState.Wait && !Boss.Test;
         public Vector2 StairsPos => new((StairsRoom.x + 0.5f) * World.RW, StairsRoom.y * World.RH + stairsY);

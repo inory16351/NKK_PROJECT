@@ -26,6 +26,14 @@ MonoBehaviour:
     hip: {x: 0.7916667, y: 0.7480851}
     legFront: 0.938
     legBack: 0.922
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: chonk
     head: {fileID: 21300000, guid: 80b714f0de40c1346ab6021d3d83be8c, type: 3}
     torso: {fileID: 21300000, guid: 6924df4eb858a9c4aa58503719269b72, type: 3}
@@ -39,6 +47,14 @@ MonoBehaviour:
     hip: {x: 0.7916667, y: 0.73505616}
     legFront: 0.558
     legBack: 0.509
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: fire
     head: {fileID: 21300000, guid: 07bff7da3798c764f8e91fbc1a1b6dee, type: 3}
     torso: {fileID: 21300000, guid: 68c4b64c50a0698459e22e8422777513, type: 3}
@@ -52,6 +68,14 @@ MonoBehaviour:
     hip: {x: 0.7894737, y: 0.7553086}
     legFront: 0.752
     legBack: 0.712
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: gym
     head: {fileID: 21300000, guid: 8c1246b6c191cb142b9aa366b12a427c, type: 3}
     torso: {fileID: 21300000, guid: e64ebc4788e79e34fb7d113bce810c1f, type: 3}
@@ -65,6 +89,14 @@ MonoBehaviour:
     hip: {x: 0.7935484, y: 0.7484211}
     legFront: 0.984
     legBack: 0.874
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: laser
     head: {fileID: 21300000, guid: a830274366a4dad4e8104d3817db0ea1, type: 3}
     torso: {fileID: 21300000, guid: ec6895ae8149b3d49b48b862b2e5ff55, type: 3}
@@ -78,6 +110,14 @@ MonoBehaviour:
     hip: {x: 0.79041916, y: 0.74551725}
     legFront: 0.821
     legBack: 0.766
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: loaf
     head: {fileID: 21300000, guid: 1d99498104e0b6041845982fb7c28b45, type: 3}
     torso: {fileID: 21300000, guid: 3f83b0d56df32744db5bec123c39f5fa, type: 3}
@@ -91,6 +131,14 @@ MonoBehaviour:
     hip: {x: 0.7887324, y: 0.70857143}
     legFront: 1.147
     legBack: 1.111
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: mackerel
     head: {fileID: 21300000, guid: 338c01ed04f03da4fbcef86a8e41442f, type: 3}
     torso: {fileID: 21300000, guid: ca146811c355b734187e7b56e1567636, type: 3}
@@ -104,6 +152,14 @@ MonoBehaviour:
     hip: {x: 0.7887324, y: 0.7671795}
     legFront: 0.747
     legBack: 0.699
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: ninja
     head: {fileID: 21300000, guid: f0af8041a59d4704dabc8cc6b7d59e37, type: 3}
     torso: {fileID: 21300000, guid: 0e2d4096eb9007148bb7d89cb4b47a0c, type: 3}
@@ -117,6 +173,14 @@ MonoBehaviour:
     hip: {x: 0.79041916, y: 0.768764}
     legFront: 0.817
     legBack: 0.796
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: space
     head: {fileID: 21300000, guid: 1eb86285b6b2a6d43bace41c4deaac34, type: 3}
     torso: {fileID: 21300000, guid: 13c7656cc8e5bf94289be2e2921d161f, type: 3}
@@ -130,6 +194,14 @@ MonoBehaviour:
     hip: {x: 0.79096043, y: 0.7683721}
     legFront: 0.815
     legBack: 0.764
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: tuxedo
     head: {fileID: 21300000, guid: 4467189323fc1a44ebc84e7457b92c07, type: 3}
     torso: {fileID: 21300000, guid: e1f3663706e0aa546aa6d945bd5b879d, type: 3}
@@ -143,6 +215,14 @@ MonoBehaviour:
     hip: {x: 0.79532164, y: 0.7675}
     legFront: 0.75
     legBack: 0.711
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: boss_zero
     head: {fileID: 21300000, guid: 2ed6db2f359836348b443d06f9efea2a, type: 3}
     torso: {fileID: 21300000, guid: 5e3d19cba909d3a4b8ca6750043f95fb, type: 3}
@@ -153,9 +233,17 @@ MonoBehaviour:
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
     shoulder: {x: 0.197, y: 0.45}
-    hip: {x: 0.791, y: 0.5}
+    hip: {x: 0.792, y: 0.5}
     legFront: 1.104
     legBack: 1.056
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: boss_witch
     head: {fileID: 21300000, guid: b7732f6b595391a44bd30041775ae086, type: 3}
     torso: {fileID: 21300000, guid: 8103b183af1786d4ca6a2a00c371fc4f, type: 3}
@@ -166,9 +254,17 @@ MonoBehaviour:
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
     shoulder: {x: 0.197, y: 0.45}
-    hip: {x: 0.791, y: 0.5}
+    hip: {x: 0.792, y: 0.5}
     legFront: 1.018
     legBack: 0.97
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: boss_commander
     head: {fileID: 21300000, guid: eabe6312f6f606b4a8f7fdd28db566a4, type: 3}
     torso: {fileID: 21300000, guid: 13b200b9f56448946bd4b55e187e78e1, type: 3}
@@ -179,6 +275,245 @@ MonoBehaviour:
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
     shoulder: {x: 0.197, y: 0.45}
-    hip: {x: 0.791, y: 0.5}
+    hip: {x: 0.792, y: 0.5}
     legFront: 1.046
     legBack: 0.997
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_happy
+    head: {fileID: 21300000, guid: 95d0782c94425534e9a1110ffb251854, type: 3}
+    torso: {fileID: 21300000, guid: a3cf65556363ffa44bf4abc20f4e0274, type: 3}
+    tail: {fileID: 21300000, guid: ce874cd45019b9c45a16677b73363526, type: 3}
+    front: {fileID: 21300000, guid: 81bfea3a60af4874e8ec382b9c880692, type: 3}
+    back: {fileID: 21300000, guid: 50803a74f3720e14e8e3b3ced885d5e5, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.146
+    legBack: 1.068
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_pop
+    head: {fileID: 21300000, guid: 02d1601290d531440af89f67c0578717, type: 3}
+    torso: {fileID: 21300000, guid: 0d435db53d9600646a75baa9fd512345, type: 3}
+    tail: {fileID: 21300000, guid: 4865e3dbd80ff494f823dbf2e9f38536, type: 3}
+    front: {fileID: 21300000, guid: ab80eafdda10fe94caf2eaab0d706ab3, type: 3}
+    back: {fileID: 21300000, guid: 031157f711780c24bb6b0d4c56ec277e, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.185
+    legBack: 1.112
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_union
+    head: {fileID: 21300000, guid: 7cb8e9b9ed6b6cf4eaa54a8522f84783, type: 3}
+    torso: {fileID: 21300000, guid: be3a56f05986ca148861334159141e2d, type: 3}
+    tail: {fileID: 21300000, guid: 7c8ffec4c7a83214f89babdf95e2c739, type: 3}
+    front: {fileID: 21300000, guid: fd315f996b3ffcd4b9e0dcddbdaa85cd, type: 3}
+    back: {fileID: 21300000, guid: fae8e534be39e554ab6aa4acae9b8ee9, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.212
+    legBack: 1.138
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_mermaid
+    head: {fileID: 21300000, guid: 53b57006682f4ac42aec6926c56a84f7, type: 3}
+    torso: {fileID: 21300000, guid: 188f1b669626a5b40b89d9081735adfd, type: 3}
+    tail: {fileID: 21300000, guid: 263e409bf2d6d7e4b88acf3d29526af8, type: 3}
+    front: {fileID: 21300000, guid: 209b3de1381716d42b0641acd1ed48bd, type: 3}
+    back: {fileID: 21300000, guid: 60850f9151feada4b8ba65bd2c23aceb, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.091
+    legBack: 1.047
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_diver
+    head: {fileID: 21300000, guid: ac69f2a2448184b48ba45863f27f5551, type: 3}
+    torso: {fileID: 21300000, guid: 0cdd60441a09d47418e5d1b2548f8438, type: 3}
+    tail: {fileID: 21300000, guid: b49afb572ff8f544480eeed68eabfd95, type: 3}
+    front: {fileID: 21300000, guid: 2e134291d812fce44a951c71660b6f58, type: 3}
+    back: {fileID: 21300000, guid: f9db75981fb179542857c4f413c02a14, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.093
+    legBack: 1.042
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_shark
+    head: {fileID: 21300000, guid: cabdb88599e52ae459d4502c03491803, type: 3}
+    torso: {fileID: 21300000, guid: 4fc741281a26c314099ca53c19f0cf52, type: 3}
+    tail: {fileID: 21300000, guid: aff434cb0c7f7f2438c873a85906d972, type: 3}
+    front: {fileID: 21300000, guid: 73dc1cf9b9c516949873adb9f379320a, type: 3}
+    back: {fileID: 21300000, guid: 9f0968e18b56ee145b212a88cb25958b, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.306
+    legBack: 1.245
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_lasercat
+    head: {fileID: 21300000, guid: 2873f70d4f6e4e649909fccb7f35762d, type: 3}
+    torso: {fileID: 21300000, guid: b27d665796b8cf94083fce4d09cab984, type: 3}
+    tail: {fileID: 21300000, guid: b05d1f5bbddac39408792424b4d5d585, type: 3}
+    front: {fileID: 21300000, guid: df5d49ea1a54b6547b4ae983d55b48e7, type: 3}
+    back: {fileID: 21300000, guid: 0a478375bc6ed4645825b847597c4e46, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.122
+    legBack: 1.073
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_grumpy
+    head: {fileID: 21300000, guid: a52996361107bb141a0b66f04e649eb7, type: 3}
+    torso: {fileID: 21300000, guid: 38689d05fcad86d4a815886392642d80, type: 3}
+    tail: {fileID: 21300000, guid: 98253f7b4ccdfec48a08072bd8ad85a7, type: 3}
+    front: {fileID: 21300000, guid: f596f48ccb2dc2548867c7fe87d4463a, type: 3}
+    back: {fileID: 21300000, guid: 8731994b94e0d0b4e83946f2af919471, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.061
+    legBack: 1.011
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_turret
+    head: {fileID: 21300000, guid: 2b0e2fa150385c049b78ee0c894630c1, type: 3}
+    torso: {fileID: 21300000, guid: 71598fd6fd2a8854098e5de9a62f08de, type: 3}
+    tail: {fileID: 21300000, guid: 62be3dc3ca4964c4f9e848673cb16357, type: 3}
+    front: {fileID: 21300000, guid: e8e10f6af4667984bbefe1819d8d0fe4, type: 3}
+    back: {fileID: 21300000, guid: 5b976619b7e217648acf77333fc15c1e, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.195
+    legBack: 1.143
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_ryan
+    head: {fileID: 21300000, guid: eeb50d09960c5bc429e85b0826608e6a, type: 3}
+    torso: {fileID: 21300000, guid: 412c6e179ed07d0478eb75d39ce15b52, type: 3}
+    tail: {fileID: 21300000, guid: c772b27a87da41f4c8b2d0fb0afa6c27, type: 3}
+    front: {fileID: 21300000, guid: 60f40cf3bd87d0847a232283eafec40a, type: 3}
+    back: {fileID: 21300000, guid: bbaea8bab3c011c40b7c9d14bffbf759, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.053
+    legBack: 1.003
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_fuhrer
+    head: {fileID: 21300000, guid: 73ac9711c3931d74fb0e07eb2894da77, type: 3}
+    torso: {fileID: 21300000, guid: 63a587ccc3e8eeb439e778a621601d0e, type: 3}
+    tail: {fileID: 21300000, guid: 113cd66cd927d534ba1171737bdedad4, type: 3}
+    front: {fileID: 21300000, guid: a6cb6a0f3db043c46a30089a3a1c12b7, type: 3}
+    back: {fileID: 21300000, guid: c83bbaad634a5a141a1283f42e897bd0, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.105
+    legBack: 1.057
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}

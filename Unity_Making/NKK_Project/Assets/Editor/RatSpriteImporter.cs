@@ -31,10 +31,23 @@ public class RatSpriteImporter : AssetPostprocessor
         }
     }
 
+    // 마우스 포인터 (Core/CursorSkin): Cursor.SetCursor 는 읽기 가능 · RGBA32(비압축) · 밉맵 없음이어야 함 → Sprite 로 바꾸지 않음 (2026-10-19)
+    const string CursorRoot = "Assets/Art/Cursor/";
+
     void OnPreprocessTexture()
     {
         if (!assetPath.StartsWith(ArtRoot) || !assetPath.EndsWith(".png")) return;
         var ti = (TextureImporter)assetImporter;
+        if (assetPath.StartsWith(CursorRoot))
+        {
+            ti.textureType = TextureImporterType.Cursor;
+            ti.isReadable = true;
+            ti.mipmapEnabled = false;
+            ti.alphaIsTransparency = true;
+            ti.npotScale = TextureImporterNPOTScale.None;
+            ti.textureCompression = TextureImporterCompression.Uncompressed;
+            return;
+        }
         ti.textureType = TextureImporterType.Sprite;
         ti.spriteImportMode = SpriteImportMode.Single;
         ti.spritePixelsPerUnit = assetPath.StartsWith(StageRoot) ? StagePixelsPerUnit : PixelsPerUnit;

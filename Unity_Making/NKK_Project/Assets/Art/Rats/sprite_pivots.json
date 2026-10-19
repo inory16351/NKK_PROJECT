@@ -2001,6 +2001,226 @@
 "y": 0.945
 },
 {
+"path": "Assets/Art/Rats/Cats/Parts/boss_happy/head.png",
+"x": 0.569,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_happy/tail.png",
+"x": 0.044,
+"y": 0.321
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_happy/front.png",
+"x": 0.499,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_happy/back.png",
+"x": 0.306,
+"y": 0.946
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_pop/head.png",
+"x": 0.545,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_pop/tail.png",
+"x": 0.045,
+"y": 0.301
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_pop/front.png",
+"x": 0.486,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_pop/back.png",
+"x": 0.305,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_union/head.png",
+"x": 0.518,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_union/tail.png",
+"x": 0.044,
+"y": 0.282
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_union/front.png",
+"x": 0.483,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_union/back.png",
+"x": 0.299,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_mermaid/head.png",
+"x": 0.527,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_mermaid/tail.png",
+"x": 0.043,
+"y": 0.367
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_mermaid/front.png",
+"x": 0.508,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_mermaid/back.png",
+"x": 0.397,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_diver/head.png",
+"x": 0.488,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_diver/tail.png",
+"x": 0.045,
+"y": 0.389
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_diver/front.png",
+"x": 0.602,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_diver/back.png",
+"x": 0.383,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_shark/head.png",
+"x": 0.426,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_shark/tail.png",
+"x": 0.043,
+"y": 0.34
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_shark/front.png",
+"x": 0.44,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_shark/back.png",
+"x": 0.412,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_lasercat/head.png",
+"x": 0.421,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_lasercat/tail.png",
+"x": 0.044,
+"y": 0.55
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_lasercat/front.png",
+"x": 0.512,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_lasercat/back.png",
+"x": 0.448,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_grumpy/head.png",
+"x": 0.471,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_grumpy/tail.png",
+"x": 0.044,
+"y": 0.471
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_grumpy/front.png",
+"x": 0.553,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_grumpy/back.png",
+"x": 0.399,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_turret/head.png",
+"x": 0.431,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_turret/tail.png",
+"x": 0.044,
+"y": 0.465
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_turret/front.png",
+"x": 0.469,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_turret/back.png",
+"x": 0.405,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_ryan/head.png",
+"x": 0.37,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_ryan/tail.png",
+"x": 0.044,
+"y": 0.365
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_ryan/front.png",
+"x": 0.591,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_ryan/back.png",
+"x": 0.392,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_fuhrer/head.png",
+"x": 0.42,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_fuhrer/tail.png",
+"x": 0.044,
+"y": 0.43
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_fuhrer/front.png",
+"x": 0.591,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_fuhrer/back.png",
+"x": 0.414,
+"y": 0.945
+},
+{
 "path": "Assets/Art/Rats/Humans/Parts/researcher/head.png",
 "x": 0.589,
 "y": 0.03
@@ -2153,6 +2373,636 @@
 {
 "path": "Assets/Art/Rats/Humans/Parts/cook/leg.png",
 "x": 0.655,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/catres/head.png",
+"x": 0.463,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/catres/scared.png",
+"x": 0.399,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/catres/arm.png",
+"x": 0.617,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/catres/leg.png",
+"x": 0.522,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/vet/head.png",
+"x": 0.467,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/vet/scared.png",
+"x": 0.427,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/vet/arm.png",
+"x": 0.436,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/vet/leg.png",
+"x": 0.588,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/feeder/head.png",
+"x": 0.612,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/feeder/scared.png",
+"x": 0.516,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/feeder/arm.png",
+"x": 0.452,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/feeder/leg.png",
+"x": 0.603,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/allergy/head.png",
+"x": 0.577,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/allergy/scared.png",
+"x": 0.5,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/allergy/arm.png",
+"x": 0.423,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/allergy/leg.png",
+"x": 0.621,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/paleo/head.png",
+"x": 0.541,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/paleo/scared.png",
+"x": 0.493,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/paleo/arm.png",
+"x": 0.446,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/paleo/leg.png",
+"x": 0.623,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/trainer/head.png",
+"x": 0.54,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/trainer/scared.png",
+"x": 0.489,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/trainer/arm.png",
+"x": 0.446,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/trainer/leg.png",
+"x": 0.615,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/kid/head.png",
+"x": 0.631,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/kid/scared.png",
+"x": 0.454,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/kid/arm.png",
+"x": 0.452,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/kid/leg.png",
+"x": 0.61,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/nedry/head.png",
+"x": 0.62,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/nedry/scared.png",
+"x": 0.519,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/nedry/arm.png",
+"x": 0.447,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/nedry/leg.png",
+"x": 0.582,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/harold/head.png",
+"x": 0.622,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/harold/scared.png",
+"x": 0.499,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/harold/arm.png",
+"x": 0.458,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/harold/leg.png",
+"x": 0.645,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/flagger/head.png",
+"x": 0.575,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/flagger/scared.png",
+"x": 0.476,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/flagger/arm.png",
+"x": 0.451,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/flagger/leg.png",
+"x": 0.656,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/coffeeman/head.png",
+"x": 0.597,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/coffeeman/scared.png",
+"x": 0.481,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/coffeeman/arm.png",
+"x": 0.463,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/coffeeman/leg.png",
+"x": 0.645,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/rebar/head.png",
+"x": 0.614,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/rebar/scared.png",
+"x": 0.492,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/rebar/arm.png",
+"x": 0.456,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/rebar/leg.png",
+"x": 0.666,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/oceanog/head.png",
+"x": 0.557,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/oceanog/scared.png",
+"x": 0.496,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/oceanog/arm.png",
+"x": 0.456,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/oceanog/leg.png",
+"x": 0.624,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/diver/head.png",
+"x": 0.557,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/diver/scared.png",
+"x": 0.465,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/diver/arm.png",
+"x": 0.465,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/diver/leg.png",
+"x": 0.636,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/auctioneer/head.png",
+"x": 0.53,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/auctioneer/scared.png",
+"x": 0.478,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/auctioneer/arm.png",
+"x": 0.442,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/auctioneer/leg.png",
+"x": 0.645,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/saltbae/head.png",
+"x": 0.585,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/saltbae/scared.png",
+"x": 0.495,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/saltbae/arm.png",
+"x": 0.443,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/saltbae/leg.png",
+"x": 0.644,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/veteran/head.png",
+"x": 0.598,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/veteran/scared.png",
+"x": 0.486,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/veteran/arm.png",
+"x": 0.479,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/veteran/leg.png",
+"x": 0.655,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/reenactor/head.png",
+"x": 0.587,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/reenactor/scared.png",
+"x": 0.494,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/reenactor/arm.png",
+"x": 0.496,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/reenactor/leg.png",
+"x": 0.635,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/student/head.png",
+"x": 0.583,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/student/scared.png",
+"x": 0.488,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/student/arm.png",
+"x": 0.505,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/student/leg.png",
+"x": 0.634,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/radioman/head.png",
+"x": 0.558,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/radioman/scared.png",
+"x": 0.469,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/radioman/arm.png",
+"x": 0.498,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/radioman/leg.png",
+"x": 0.621,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/controller/head.png",
+"x": 0.624,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/controller/scared.png",
+"x": 0.456,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/controller/arm.png",
+"x": 0.462,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/controller/leg.png",
+"x": 0.649,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/astro_banana/head.png",
+"x": 0.602,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/astro_banana/scared.png",
+"x": 0.508,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/astro_banana/arm.png",
+"x": 0.454,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/astro_banana/leg.png",
+"x": 0.631,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/astro_set/head.png",
+"x": 0.598,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/astro_set/scared.png",
+"x": 0.499,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/astro_set/arm.png",
+"x": 0.46,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/astro_set/leg.png",
+"x": 0.632,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/flightdir/head.png",
+"x": 0.611,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/flightdir/scared.png",
+"x": 0.503,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/flightdir/arm.png",
+"x": 0.46,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/flightdir/leg.png",
+"x": 0.62,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_caveman/head.png",
+"x": 0.469,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_caveman/angry.png",
+"x": 0.423,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_caveman/scared.png",
+"x": 0.544,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_caveman/arm.png",
+"x": 0.467,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_caveman/leg.png",
+"x": 0.586,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_keeper/head.png",
+"x": 0.661,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_keeper/angry.png",
+"x": 0.725,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_keeper/scared.png",
+"x": 0.699,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_keeper/arm.png",
+"x": 0.441,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_keeper/leg.png",
+"x": 0.609,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_dino/head.png",
+"x": 0.688,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_dino/angry.png",
+"x": 0.712,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_dino/scared.png",
+"x": 0.705,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_dino/arm.png",
+"x": 0.635,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_dino/leg.png",
+"x": 0.551,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_kim/head.png",
+"x": 0.613,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_kim/angry.png",
+"x": 0.616,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_kim/scared.png",
+"x": 0.626,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_kim/arm.png",
+"x": 0.495,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_kim/leg.png",
+"x": 0.585,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_hamba/head.png",
+"x": 0.508,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_hamba/angry.png",
+"x": 0.538,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_hamba/scared.png",
+"x": 0.52,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_hamba/arm.png",
+"x": 0.431,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_hamba/leg.png",
+"x": 0.572,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_red/head.png",
+"x": 0.409,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_red/angry.png",
+"x": 0.44,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_red/scared.png",
+"x": 0.385,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_red/arm.png",
+"x": 0.442,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_red/leg.png",
+"x": 0.583,
 "y": 0.96
 },
 {

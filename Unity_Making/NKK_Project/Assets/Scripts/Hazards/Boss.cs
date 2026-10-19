@@ -22,7 +22,7 @@ namespace NKK.Hazards
     // · 쥐가 들이받으면 피해 (Rat.BumpBoss), 필살기·슈퍼 점프 폭발도 (ItemManager.BlastActors). 체력 0 → 빙글빙글 하늘로 (Dying) → 격파 배너·치즈
     // · 살아 있는 동안 계단을 못 씀 (Blocking). 테스트 버튼은 화면 가운데에 불러 바로 싸움 (층 기록 없음)
     // 씬 오브젝트 하나 (사람 리그를 그대로 씀). 그림 = 사람 그림 모음(HumanArtLibrary)의 code_id
-    public class Boss : MonoBehaviour
+    public partial class Boss : MonoBehaviour
     {
         public static Boss Current { get; private set; }
         public enum BState { Off, Wait, Fight, Dying, Dead }
@@ -157,7 +157,7 @@ namespace NKK.Hazards
         readonly System.Collections.Generic.List<Puff> puffs = new();
         readonly System.Collections.Generic.List<Maxwell> maxwells = new();
         float skillCd, unbrokenT;
-        class Zone { public float x, y, rad, life, life0, stun, expose; public bool gas, ice; public SpriteRenderer r; public readonly System.Collections.Generic.Dictionary<Rat, float> stay = new(); }
+        class Zone { public float x, y, rad, life, life0, stun, expose; public bool gas, ice, meme; public Color color; public string popup; public SpriteRenderer r; public readonly System.Collections.Generic.Dictionary<Rat, float> stay = new(); }
         readonly System.Collections.Generic.List<Zone> zones = new();
         class Butter { public float x, y, vx, vy, t, life; public SpriteRenderer r; }
         readonly System.Collections.Generic.List<Butter> butters = new();
@@ -353,6 +353,7 @@ namespace NKK.Hazards
             if (by) by.OnHitCreature(this, frost, x, y, Height * 0.6f);       // 빙결 (아이스 퀸 쥐) · 액션 목표
             dmg *= CommonSkill.BossDmgMul;
             if (unbrokenT > 0) dmg *= unbrokenDmgMul;          // 중꺾마
+            dmg *= MemeDmgMul;                                 // 밈 버프 (Buff)
             hp -= dmg; hitT = 0.25f; jit = 3;
             SfxManager.Play("boss_hit", 0.7f);
             // 필살 패턴: 체력 70% · 35% 아래로 처음 내려가면 다음 공격으로 바로
@@ -408,7 +409,7 @@ namespace NKK.Hazards
                 return;
             }
             float px = x, py = y;
-            UpdateShots(dt); UpdateGrow(dt); UpdateZones(dt); UpdateButters(dt); UpdateMaxwells(dt);
+            UpdateShots(dt); UpdateGrow(dt); UpdateZones(dt); UpdateButters(dt); UpdateMaxwells(dt); UpdateMemeFx(dt);
             if (unbrokenT > 0 && (unbrokenT -= dt) > 0 && Random.value < dt * 6) FxManager.I?.Stars(x, y, Height * 0.5f, 2, unbrokenColor, Color.white, 60, 160);
             // 착지 판정은 내려찍기·덮치기만 (3단 점프는 UpdateSpecial 이 직접 셈, 여기서 air 를 끄면 같은 점프를 무한 반복)
             if (z > 0 || vz > 0) { vz -= gravity * dt; z = Mathf.Max(0, z + vz * dt); if (z <= 0) { vz = 0; if (air && (atkType == "Stomp" || atkType == "Pounce")) Land(); } }
@@ -432,6 +433,7 @@ namespace NKK.Hazards
                     if (IsSpecial(atkType)) BeginSpecial();
                     else if (IsSkill(atkType)) BeginSkill();
                     else BeginAttack();
+                    if (IsMeme(atkType)) BeginMeme();          // 밈 기술 (Atk_Type pattern, Boss.Meme.cs)
                 }
             }
             else if (atk == null) attacking = false;
@@ -511,7 +513,8 @@ namespace NKK.Hazards
                         if (atkT > atk.dur) attacking = false;
                         break;
                     default:
-                        if (IsSpecial(atkType) || IsSkill(atkType)) UpdateSpecial(dt); else attacking = false;
+                        if (IsMeme(atkType)) UpdateMeme(dt);
+                        else if (IsSpecial(atkType) || IsSkill(atkType)) UpdateSpecial(dt); else attacking = false;
                         break;
                 }
                 if (!attacking && propHeld) { HideProp(); propHeld = false; }      // 손에 쥔 소품은 공격이 끝날 때 내려놓음
@@ -1016,7 +1019,7 @@ namespace NKK.Hazards
                         var c = Color.white; c.a = fade * (z0.ice ? 0.92f : 1); z0.r.color = c;
                     }
                 }
-                if (!z0.gas && !z0.ice && fx && fade > 0.5f)
+                if (!z0.gas && !z0.ice && !z0.meme && fx && fade > 0.5f)
                 {
                     // 불판: 활활 타는 불꽃 + 피어오르는 연기 + 불똥
                     float n = dt * grillFxRate * (z0.rad / 120);
@@ -1043,14 +1046,14 @@ namespace NKK.Hazards
                         }
                         continue;
                     }
-                    if (inside && !z0.gas) o.Burn(0.25f);        // 불판 위 = 빨갛게
+                    if (inside && !z0.gas && !z0.meme) o.Burn(0.25f);        // 불판 위 = 빨갛게
                     if (!inside || o.stun > 0) { z0.stay.Remove(o); continue; }
                     z0.stay.TryGetValue(o, out float st); st += dt;
                     if (st < z0.expose) { z0.stay[o] = st; continue; }
                     z0.stay.Remove(o);
                     o.Stun(z0.stun); o.vz = Mathf.Max(o.vz, z0.gas ? 120 : 280);
-                    string pop = z0.gas ? gasPopup : grillPopup;
-                    if (fx && !string.IsNullOrEmpty(pop) && Random.value < 0.35f) fx.Popup(o.x, o.y, pop, z0.gas ? gasColor : grillColor, 16, 0.8f, 40);
+                    string pop = z0.meme ? z0.popup : z0.gas ? gasPopup : grillPopup;
+                    if (fx && !string.IsNullOrEmpty(pop) && Random.value < 0.35f) fx.Popup(o.x, o.y, pop, z0.meme ? z0.color : z0.gas ? gasColor : grillColor, 16, 0.8f, 40);
                 }
             }
             UpdatePuffs(dt);
@@ -1253,6 +1256,7 @@ namespace NKK.Hazards
             zones.Clear();
             foreach (var b in butters) if (b.r) Destroy(b.r.gameObject);
             butters.Clear();
+            ClearMemeFx();
         }
 
         // 범위 기절 + 물건 날림 + 연출
@@ -1442,10 +1446,11 @@ namespace NKK.Hazards
         void Throw(float tx, float ty, string type)
         {
             if (!shotTemplate) return;
-            var sp = type == "Hairball" ? hairballSprite : type == "Fireball" ? fireballSprite : type == "Briefcase" ? briefcaseSprite : flaskSprite;
+            var ma = IsMeme(type) ? DB.BossAtk(type) : null;
+            var sp = ma != null && MemeSprite(ma.sprite) ? MemeSprite(ma.sprite) : type == "Hairball" ? hairballSprite : type == "Fireball" ? fireballSprite : type == "Briefcase" ? briefcaseSprite : flaskSprite;
             var r = Instantiate(shotTemplate, shotTemplate.transform.parent);
             r.sprite = sp; r.gameObject.SetActive(true); r.enabled = true;
-            float k = sp ? (type == "Briefcase" ? briefcaseSize : shotSize) * World.U / Mathf.Max(0.001f, sp.bounds.size.x) : 1;
+            float k = sp ? (type == "Briefcase" ? briefcaseSize : ma != null && ma.size > 0 ? ma.size : shotSize) * World.U / Mathf.Max(0.001f, sp.bounds.size.x) : 1;
             r.transform.localScale = Vector3.one * k;
             flying.Add(new Shot { x = x, y = y, z = type == "Hairball" ? 120 : 200, vx = (tx - x) / shotTime, vy = (ty - y) / shotTime, vz = shotUp, type = type, r = r });
         }
@@ -1496,9 +1501,12 @@ namespace NKK.Hazards
             var fx = FxManager.I;
             if (!fx || !(Ults && Ults.OnScreen(s.x, s.y, 0))) return;
             Color c0 = s.type == "Fireball" ? new Color(0.94f, 0.78f, 0.47f) : s.type == "Hairball" ? new Color(0.78f, 0.64f, 0.48f) : new Color(0.62f, 0.84f, 0.66f);
+            bool meme = IsMeme(s.type);
+            if (meme && a != null && ColorUtility.TryParseHtmlString(a.color, out var mc)) c0 = mc;
             fx.Ring(s.x, s.y, R0, c0, 0.5f);
             fx.Burst(s.x, s.y, 10, 18, c0, Color.white, 150, 420);
-            fx.Spill(s.x, s.y, R0 * 0.8f, s.type == "Fireball" ? fireSpill : s.type == "Hairball" ? hairSpill : flaskSpill);
+            if (!meme) fx.Spill(s.x, s.y, R0 * 0.8f, s.type == "Fireball" ? fireSpill : s.type == "Hairball" ? hairSpill : flaskSpill);
+            else if (!string.IsNullOrEmpty(a.popup) && a.popup != "-") fx.Popup(s.x, s.y, a.popup, c0, 20, 0.7f, 40);
             fx.Anim(s.type == "Fireball" ? "explosion" : "poof", s.x, s.y, 0, s.type == "Fireball" ? 1.2f : 1);
             fx.Shake(0.12f);
             if (s.type == "Hairball" && !string.IsNullOrEmpty(hairPopup)) fx.Popup(s.x, s.y, hairPopup, Color.white, 18, 0.7f, 30);

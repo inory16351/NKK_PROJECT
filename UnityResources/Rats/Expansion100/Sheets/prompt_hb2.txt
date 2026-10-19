@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hb2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- Exact layout: 3 rows x 6 columns (each cell 256x341). Each ROW is one BOSS person (bigger, bulkier, more imposing than normal people). Columns: 1) NORMAL HEAD side view facing LEFT with a short narrow neck stump cut flat; 2) ANGRY SHOUTING head; 3) SCARED head (screaming, sweat drops); 4) TORSO side view, no head/arms/legs; 5) ONE ARM hanging down (rounded sleeve shoulder cap, no cut section); 6) ONE LEG standing, top cut flat. Separate islands, nothing crosses cells.
+- Copy the attached references exactly for style and part layout (flat paper-doll human parts).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+- Strict SIDE VIEW, the character FACES LEFT.
+
+Rows:
+Row 1: a KOREAN CONSTRUCTION WORKER boss "Mr. Kim": yellow safety helmet, tanned face, thick eyebrows, towel around neck, navy work jacket with reflective stripes, work boots
+Row 2: a KOREAN CANTEEN AUNTIE boss: short curly permed hair, red headscarf, pink apron over a floral shirt, rubber gloves, black slippers
+Row 3: a RED SPACESUIT CREWMATE boss: head = round red helmet with a wide pale blue visor (no face visible), torso = puffy red spacesuit with a small backpack, arm = puffy red sleeve, leg = short puffy red leg

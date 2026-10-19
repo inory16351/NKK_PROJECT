@@ -1,0 +1,31 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: z6_space.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- An exact grid of 6 columns x 3 rows (each cell 256x341). Each object centered in its own cell, standing on the bottom third of the cell, with a clear magenta margin; objects must NOT touch or cross cell borders. Fill each cell well (objects about 220px tall), furniture cells may be wider but still inside the cell.
+- Soft 3/4 front view of a standing object, same scale feel as the reference lab objects (server rack, cage, desk, fridge). Each must read clearly at small size.
+- Funny meme objects must be drawn as plain cartoon objects (no real people, no real logos, no written words unless described as a simple symbol).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+- Theme: objects found in a NASA-like SPACE research center. Cells 1-10 small breakable objects, 11-13 valuable shiny treasures, 14-18 furniture (bigger, sturdy).
+
+Row 1:
+ 1) a white fuel canister with a hazard stripe
+ 2) a small rocket model on a stand
+ 3) a small planet model with rings on a stand
+ 4) freeze-dried space food pouches
+ 5) a cone-shaped hat folded from tinfoil
+ 6) a small telescope on a tripod
+Row 2:
+ 7) a small satellite dish antenna
+ 8) a white astronaut helmet with gold visor
+ 9) a red telephone with a curly cord
+ 10) a control monitor showing a green line graph shooting steeply upward
+ 11) a glowing-free moon rock in a glass case (valuable)
+ 12) a golden record disc (valuable)
+Row 3:
+ 13) a tall black rectangular monolith slab with a faint light edge (valuable)
+ 14) a mission control console with many buttons and screens (big furniture)
+ 15) a small rocket launch pad with a gantry (big furniture, compact)
+ 16) a white zero-gravity training capsule
+ 17) a planetarium star projector ball on a stand
+ 18) a bookshelf with a few books sticking out unevenly

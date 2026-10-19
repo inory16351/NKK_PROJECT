@@ -1,0 +1,15 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: floors.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- An exact grid of 3 columns x 2 rows (each cell 512x512). Each cell is completely FILLED edge to edge by one flat top-down floor texture (no magenta inside the cells, thin magenta gutters of 8px between cells are fine). Seen straight from above, tile-able look, low detail, soft muted colors.
+- Copy the attached reference floor textures exactly for style, tile size and calmness (they are backgrounds; keep contrast low so characters stay readable).
+
+Row 1:
+ 1) a cat research lab floor: pale mint linoleum tiles with a few faint paw print marks
+ 2) a natural history museum floor: warm sandstone tiles with faint fossil imprints
+ 3) a construction site floor: grey concrete with a few cracks and faint yellow chalk marks
+Row 2:
+ 4) an underwater lab floor: blue-teal wet tiles with small sand patches and faint bubbles
+ 5) a war museum floor: dark wooden plank floor
+ 6) a space center floor: pale grey metal panels with rivets and faint grid lines

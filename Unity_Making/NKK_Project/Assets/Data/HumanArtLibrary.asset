@@ -97,3 +97,363 @@ MonoBehaviour:
     hip: {x: 0.394, y: 0.95}
     front: 0
     headScale: 1
+  - codeId: catres
+    head: {fileID: 21300000, guid: 27dd5907370fb7f4a988f3a4660a8d1e, type: 3}
+    scared: {fileID: 21300000, guid: 6550ff612fd0fa340b4e8af7b997cd34, type: 3}
+    torso: {fileID: 21300000, guid: fa317acec0ac853478917736e1a8c6b7, type: 3}
+    arm: {fileID: 21300000, guid: 34abdbfb6e1c59d4cbab1d78be1e15fc, type: 3}
+    leg: {fileID: 21300000, guid: 9d3561d68d0a8b54aa49561571fbb98f, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.504, y: 0.03}
+    shoulder: {x: 0.504, y: 0.12}
+    hip: {x: 0.499, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: vet
+    head: {fileID: 21300000, guid: 8813cf64121f2a14cb767ed97981f2aa, type: 3}
+    scared: {fileID: 21300000, guid: 94159a24fb71c06479c0ade06608d8ac, type: 3}
+    torso: {fileID: 21300000, guid: cce10c5ea96afda479ad08c96bad6a36, type: 3}
+    arm: {fileID: 21300000, guid: c05ba2554f5109e4e91f2ef3baca2b41, type: 3}
+    leg: {fileID: 21300000, guid: 0cdfd8f9461fe914aa3a35926edd1eda, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.494, y: 0.03}
+    shoulder: {x: 0.494, y: 0.12}
+    hip: {x: 0.471, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: feeder
+    head: {fileID: 21300000, guid: 5cc7e055fb21e154e9549f28dc2f44be, type: 3}
+    scared: {fileID: 21300000, guid: 1b049afd94234d84880ba16dc3068a96, type: 3}
+    torso: {fileID: 21300000, guid: b20e40bf48adcb54f8e07b532c94dd6f, type: 3}
+    arm: {fileID: 21300000, guid: 9a3d86f30cefafb4ba8256cc38f30ad7, type: 3}
+    leg: {fileID: 21300000, guid: 3aa89ade1c9c47d4fbcb5a5e6914dfb9, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.506, y: 0.03}
+    shoulder: {x: 0.506, y: 0.12}
+    hip: {x: 0.486, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: allergy
+    head: {fileID: 21300000, guid: 3d501512a6fb5734f85a311f05919192, type: 3}
+    scared: {fileID: 21300000, guid: 1d4283ea524364749bce6d71ba18f0e4, type: 3}
+    torso: {fileID: 21300000, guid: 08e25dc14ded52d41a345b6a1db15629, type: 3}
+    arm: {fileID: 21300000, guid: cbc69db896a11814fab99562264de0a3, type: 3}
+    leg: {fileID: 21300000, guid: 1222127dda5d07c44be5258d51f85edd, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.505, y: 0.03}
+    shoulder: {x: 0.505, y: 0.12}
+    hip: {x: 0.498, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: paleo
+    head: {fileID: 21300000, guid: b66848e74b5fbf64c81cc504dd75adef, type: 3}
+    scared: {fileID: 21300000, guid: a2c47abaa6b8a5f45b4ca5f201b33bda, type: 3}
+    torso: {fileID: 21300000, guid: c50a3c5203725d74ea4225161d2773e4, type: 3}
+    arm: {fileID: 21300000, guid: da784761da89df04d8f5b0eebadc1614, type: 3}
+    leg: {fileID: 21300000, guid: b01645ec66c433c4f9c25e3bb3829b44, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.471, y: 0.03}
+    shoulder: {x: 0.471, y: 0.12}
+    hip: {x: 0.485, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: trainer
+    head: {fileID: 21300000, guid: f20a1c8949024044bb804ca05ab238ca, type: 3}
+    scared: {fileID: 21300000, guid: b410531d63eb37440bf5bf9ade0e7af3, type: 3}
+    torso: {fileID: 21300000, guid: 01354fee023c8254e8fa7e20dcb72618, type: 3}
+    arm: {fileID: 21300000, guid: 10b84245908cf6e449ef8217968b249f, type: 3}
+    leg: {fileID: 21300000, guid: 1d62953a3d76ed148a9fa4de639399e1, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.476, y: 0.03}
+    shoulder: {x: 0.476, y: 0.12}
+    hip: {x: 0.49, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: kid
+    head: {fileID: 21300000, guid: b7a64f414ce3d6e4a80b82214baee552, type: 3}
+    scared: {fileID: 21300000, guid: d349682d063c99e499e7aaa860c3f8c3, type: 3}
+    torso: {fileID: 21300000, guid: 919190e3e06d2c14a887e0dd18c32dbe, type: 3}
+    arm: {fileID: 21300000, guid: 7f8ffd01547f3884bbd8e9e099814fda, type: 3}
+    leg: {fileID: 21300000, guid: c87f42d74acdba046a049a34ef34f74f, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.433, y: 0.03}
+    shoulder: {x: 0.433, y: 0.12}
+    hip: {x: 0.438, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: nedry
+    head: {fileID: 21300000, guid: a8a5347ba15f1314a9e95e490a87a681, type: 3}
+    scared: {fileID: 21300000, guid: 27ba4714c604866479ce4f1f57093800, type: 3}
+    torso: {fileID: 21300000, guid: 9354d200e380bb7419a58a986a65ee81, type: 3}
+    arm: {fileID: 21300000, guid: 332d483739cbd3c45a280aaf1763be09, type: 3}
+    leg: {fileID: 21300000, guid: 206f9428bf62318478f635d55f7ac9a5, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.465, y: 0.03}
+    shoulder: {x: 0.465, y: 0.12}
+    hip: {x: 0.495, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: harold
+    head: {fileID: 21300000, guid: 385c9a7028f444343bb10ef7d32d9925, type: 3}
+    scared: {fileID: 21300000, guid: 86a531bd9a7825a42b8134b4f7188899, type: 3}
+    torso: {fileID: 21300000, guid: 5a4b7260077f41247a987124303bbfda, type: 3}
+    arm: {fileID: 21300000, guid: d9c518dfa6983e6408430e0677c74232, type: 3}
+    leg: {fileID: 21300000, guid: 7b3bfad3051b8cb4baf0b3d3cd2df09e, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.472, y: 0.03}
+    shoulder: {x: 0.472, y: 0.12}
+    hip: {x: 0.507, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: flagger
+    head: {fileID: 21300000, guid: 4d0681a8914ca4c4fbf7443d7cdddc70, type: 3}
+    scared: {fileID: 21300000, guid: b89a7fffb9e8dea44b51c3f1c4fded63, type: 3}
+    torso: {fileID: 21300000, guid: 32f08e82596c8ff4595394066164c2ad, type: 3}
+    arm: {fileID: 21300000, guid: 144e153e392032b4880cd21a322cb277, type: 3}
+    leg: {fileID: 21300000, guid: 24c4440911f9de94e8d1189bd90fae96, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.468, y: 0.03}
+    shoulder: {x: 0.468, y: 0.12}
+    hip: {x: 0.503, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: coffeeman
+    head: {fileID: 21300000, guid: 4f7568a9090709f4fa2654c07fb1ca24, type: 3}
+    scared: {fileID: 21300000, guid: 8e0c3c74c2e3f744b97c104060ae8fd1, type: 3}
+    torso: {fileID: 21300000, guid: 079825d2f4b0ccb479dcad3591e94fee, type: 3}
+    arm: {fileID: 21300000, guid: 122bb6b5422360f4bb11875008be5999, type: 3}
+    leg: {fileID: 21300000, guid: a3530013860bc444fb18850b160918d0, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.483, y: 0.03}
+    shoulder: {x: 0.483, y: 0.12}
+    hip: {x: 0.507, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: rebar
+    head: {fileID: 21300000, guid: 4d8464df9caacf14b8bc83f8dfd07aae, type: 3}
+    scared: {fileID: 21300000, guid: f477299532a570145901d31fb80c5b5f, type: 3}
+    torso: {fileID: 21300000, guid: 2155b18b5fd18664497654537838ef26, type: 3}
+    arm: {fileID: 21300000, guid: 38bf7cbca40f01543b472f1ee1c384eb, type: 3}
+    leg: {fileID: 21300000, guid: 9748a9ad7003ffd40ac57df395fe28bf, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.469, y: 0.03}
+    shoulder: {x: 0.469, y: 0.12}
+    hip: {x: 0.5, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: oceanog
+    head: {fileID: 21300000, guid: e45b0da42811bff49a371fc6319bdf8d, type: 3}
+    scared: {fileID: 21300000, guid: a21a5f1966d9cd1459724e84587ef6a3, type: 3}
+    torso: {fileID: 21300000, guid: a54278677b557dc4ca3b3204ff519358, type: 3}
+    arm: {fileID: 21300000, guid: 5df1daa2b7028ad4c9fc49fa54f870b4, type: 3}
+    leg: {fileID: 21300000, guid: cb2533dfa007d5d49a749aa13d9e2b5c, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.513, y: 0.03}
+    shoulder: {x: 0.513, y: 0.12}
+    hip: {x: 0.496, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: diver
+    head: {fileID: 21300000, guid: e30149526a750a047af2900aae81cd13, type: 3}
+    scared: {fileID: 21300000, guid: 9337f5ea66b312449aed5a332245f5fd, type: 3}
+    torso: {fileID: 21300000, guid: 4f0265c10b6753043b98aa3a928a4a9a, type: 3}
+    arm: {fileID: 21300000, guid: 31806fdc79ca992499813ceb4a6f3c72, type: 3}
+    leg: {fileID: 21300000, guid: d33d3d7413e98654ebc3c0cfc9b17b36, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.429, y: 0.03}
+    shoulder: {x: 0.429, y: 0.12}
+    hip: {x: 0.501, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: auctioneer
+    head: {fileID: 21300000, guid: 385b6a5338adc9c49bd7b841eacb5c40, type: 3}
+    scared: {fileID: 21300000, guid: 6ee5b51ace800d84c970f84c0fdb1c77, type: 3}
+    torso: {fileID: 21300000, guid: 3cdbb6fb750911f48886d245a158d26f, type: 3}
+    arm: {fileID: 21300000, guid: d21f00567f8056c499ae5f761d9f796b, type: 3}
+    leg: {fileID: 21300000, guid: abcab3d4674771f409d1197dc9521026, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.452, y: 0.03}
+    shoulder: {x: 0.452, y: 0.12}
+    hip: {x: 0.5, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: saltbae
+    head: {fileID: 21300000, guid: 9cd3beb5cdda4424285ec81e429e152f, type: 3}
+    scared: {fileID: 21300000, guid: d4c2c48cedd093a478f9e83a4fc1386a, type: 3}
+    torso: {fileID: 21300000, guid: 7c65ab6e6b4e0cc49a2a1bb3530c80f5, type: 3}
+    arm: {fileID: 21300000, guid: 27f62fc373f9a9b45854aedc56b4f6b5, type: 3}
+    leg: {fileID: 21300000, guid: b2f5afec99e3c8a40a01430f9ba862cb, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.46, y: 0.03}
+    shoulder: {x: 0.46, y: 0.12}
+    hip: {x: 0.42, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: veteran
+    head: {fileID: 21300000, guid: 991be9d45bcf76c4ab1f02dbafaecb1e, type: 3}
+    scared: {fileID: 21300000, guid: 996a34d9a8fcea449b313776e64dc75a, type: 3}
+    torso: {fileID: 21300000, guid: 5dec43a3925b2b44596cdf98ad394857, type: 3}
+    arm: {fileID: 21300000, guid: 35d5fc05540753644a8f30267b3e0ab6, type: 3}
+    leg: {fileID: 21300000, guid: 66dd5c954d7af1a46a5bc7b5ff171618, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.465, y: 0.03}
+    shoulder: {x: 0.465, y: 0.12}
+    hip: {x: 0.496, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: reenactor
+    head: {fileID: 21300000, guid: 6e0b94829a667ea44926339b514b3606, type: 3}
+    scared: {fileID: 21300000, guid: ffce459b10fae9847b26e8264c406866, type: 3}
+    torso: {fileID: 21300000, guid: 70c9a19ec94ecf44a828afc85d793f72, type: 3}
+    arm: {fileID: 21300000, guid: 7e015fb25d4c133479cd40feaf99925f, type: 3}
+    leg: {fileID: 21300000, guid: 5f77d3bfb651f6e4a9c60022073fa0f3, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.51, y: 0.03}
+    shoulder: {x: 0.51, y: 0.12}
+    hip: {x: 0.507, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: student
+    head: {fileID: 21300000, guid: 765c6a4e439875c49be83e4ff14d3d26, type: 3}
+    scared: {fileID: 21300000, guid: 9c87d2c7895441b4e9986c656830912f, type: 3}
+    torso: {fileID: 21300000, guid: a35ca0ee21de3b2498b74f81a7b92784, type: 3}
+    arm: {fileID: 21300000, guid: d1f56c777fefca649a64e7e9831559d5, type: 3}
+    leg: {fileID: 21300000, guid: 56ce5003f3af8e44a83f5a68c501eab4, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.468, y: 0.03}
+    shoulder: {x: 0.468, y: 0.12}
+    hip: {x: 0.499, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: radioman
+    head: {fileID: 21300000, guid: 3c97ed569ea9ce148a6c30c147c7793f, type: 3}
+    scared: {fileID: 21300000, guid: a7dd1ca4c4d0d604fb5ef78951831933, type: 3}
+    torso: {fileID: 21300000, guid: c7e33a1b514863742874d7c7ac734921, type: 3}
+    arm: {fileID: 21300000, guid: 6a5e870fb8df4cb4397d2b93bbf8f372, type: 3}
+    leg: {fileID: 21300000, guid: 9b006be471d53754f95008c39ac04505, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.525, y: 0.03}
+    shoulder: {x: 0.525, y: 0.12}
+    hip: {x: 0.528, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: controller
+    head: {fileID: 21300000, guid: 2777e8c34abf2ed46a08ca901b1f4b4a, type: 3}
+    scared: {fileID: 21300000, guid: 64c80a9b4cc5a3f4cbb0bdd006f3b619, type: 3}
+    torso: {fileID: 21300000, guid: b62587e063bccf74ba080fd67f5707bd, type: 3}
+    arm: {fileID: 21300000, guid: 99d056977b47ff744b9098847c699c1c, type: 3}
+    leg: {fileID: 21300000, guid: 537b4677bdd56d14dbbe9849a633c7b5, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.468, y: 0.03}
+    shoulder: {x: 0.468, y: 0.12}
+    hip: {x: 0.498, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: astro_banana
+    head: {fileID: 21300000, guid: e9913838e74284948a712354cc3915b5, type: 3}
+    scared: {fileID: 21300000, guid: 9229a7793225fc543977df931628b734, type: 3}
+    torso: {fileID: 21300000, guid: f924f791a0ca8c34b9b8c41372f09b3c, type: 3}
+    arm: {fileID: 21300000, guid: 6ae86fdb0bed519459e6e4bf4ca40301, type: 3}
+    leg: {fileID: 21300000, guid: ff66c5eac6916a946bd5f6193103f464, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.439, y: 0.03}
+    shoulder: {x: 0.439, y: 0.12}
+    hip: {x: 0.451, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: astro_set
+    head: {fileID: 21300000, guid: c5c3b48522976a8488fc188235a25a17, type: 3}
+    scared: {fileID: 21300000, guid: 87e1a2790315cfe40ae26bd94974a4a8, type: 3}
+    torso: {fileID: 21300000, guid: d9fec13738526f446ae7eeab9316f210, type: 3}
+    arm: {fileID: 21300000, guid: 49530b2924047124ab0bd61bacacd846, type: 3}
+    leg: {fileID: 21300000, guid: f169a193514f17d429eaa138727f97e3, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.438, y: 0.03}
+    shoulder: {x: 0.438, y: 0.12}
+    hip: {x: 0.451, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: flightdir
+    head: {fileID: 21300000, guid: f57b25d283ee3304eb5e8830dfa98104, type: 3}
+    scared: {fileID: 21300000, guid: 02e458ec4a91c334bb1a6d4caafca081, type: 3}
+    torso: {fileID: 21300000, guid: f38cd1270743ea84b8ce381ffb8edb20, type: 3}
+    arm: {fileID: 21300000, guid: dd1a02f1a11a6904ca326bca47493ff8, type: 3}
+    leg: {fileID: 21300000, guid: 1b857293b2a79ba4688a0413155b7f51, type: 3}
+    angry: {fileID: 0}
+    neck: {x: 0.47, y: 0.03}
+    shoulder: {x: 0.47, y: 0.12}
+    hip: {x: 0.502, y: 0.95}
+    front: 0
+    headScale: 1
+  - codeId: boss_caveman
+    head: {fileID: 21300000, guid: 9becf9ecf4d2c9b48b3818048ab8915d, type: 3}
+    scared: {fileID: 21300000, guid: 0842a577889cf214592e11c89b1a3409, type: 3}
+    torso: {fileID: 21300000, guid: 8c6bb03f60995bc43b7c9db0c14f4eb0, type: 3}
+    arm: {fileID: 21300000, guid: 8fe50b7cf2381f246a60c086274d1469, type: 3}
+    leg: {fileID: 21300000, guid: 8eac5786f03eff64489710190f82bf1a, type: 3}
+    angry: {fileID: 21300000, guid: 55f75ba7be6389c418c7aa1b4756f25e, type: 3}
+    neck: {x: 0.556, y: 0.03}
+    shoulder: {x: 0.556, y: 0.12}
+    hip: {x: 0.557, y: 0.95}
+    front: 0
+    headScale: 0.8
+  - codeId: boss_keeper
+    head: {fileID: 21300000, guid: 79a3068975be7584da9185eb6ee47c75, type: 3}
+    scared: {fileID: 21300000, guid: 6089dd00bf73e8443a2a7f9290afe570, type: 3}
+    torso: {fileID: 21300000, guid: a661056c5ef916943be2612a1c3fb4be, type: 3}
+    arm: {fileID: 21300000, guid: ad2cc5bc47d539c40a41ea3e119ff0a6, type: 3}
+    leg: {fileID: 21300000, guid: 364a0009f8995f041aee6c27c43692ca, type: 3}
+    angry: {fileID: 21300000, guid: 95641cd180a3c8b4d84e703f151ac8fc, type: 3}
+    neck: {x: 0.599, y: 0.03}
+    shoulder: {x: 0.599, y: 0.12}
+    hip: {x: 0.579, y: 0.95}
+    front: 0
+    headScale: 0.8
+  - codeId: boss_dino
+    head: {fileID: 21300000, guid: 021a42442f7e33c4d846b300a9b3c763, type: 3}
+    scared: {fileID: 21300000, guid: 2f7ffa61d084b2444925620f2768ad24, type: 3}
+    torso: {fileID: 21300000, guid: e60ebb212cf8f4f4c87eea78e9e7986b, type: 3}
+    arm: {fileID: 21300000, guid: 8f72442df3947af45a3382d87b14f569, type: 3}
+    leg: {fileID: 21300000, guid: 9880c6a95a903234aacc25916b43ed93, type: 3}
+    angry: {fileID: 21300000, guid: ff94e3e4ddad24b4083571b0e467cd9e, type: 3}
+    neck: {x: 0.565, y: 0.03}
+    shoulder: {x: 0.565, y: 0.12}
+    hip: {x: 0.572, y: 0.95}
+    front: 0
+    headScale: 0.8
+  - codeId: boss_kim
+    head: {fileID: 21300000, guid: 56539ded36ce93d4b8100eb42a7d5e61, type: 3}
+    scared: {fileID: 21300000, guid: c25bd9d83939d83458b0fa2213286226, type: 3}
+    torso: {fileID: 21300000, guid: 0137b53ed57fa5443a041fd5a87bb484, type: 3}
+    arm: {fileID: 21300000, guid: 22692514cf3fe424bb0c740d9cf80c86, type: 3}
+    leg: {fileID: 21300000, guid: 5643a216289944b4f9593493fbf01177, type: 3}
+    angry: {fileID: 21300000, guid: fe05721b6fb571e49bd020ab2b3217a1, type: 3}
+    neck: {x: 0.489, y: 0.03}
+    shoulder: {x: 0.489, y: 0.12}
+    hip: {x: 0.457, y: 0.95}
+    front: 0
+    headScale: 0.8
+  - codeId: boss_hamba
+    head: {fileID: 21300000, guid: aade1ca34e090814b942a2fe4dd2d41c, type: 3}
+    scared: {fileID: 21300000, guid: 52d1250f3171e75469ee48e7cd3a06ae, type: 3}
+    torso: {fileID: 21300000, guid: af88d922597218644859bdf08342eccb, type: 3}
+    arm: {fileID: 21300000, guid: ba452ae3d726a2446b5c928c76484251, type: 3}
+    leg: {fileID: 21300000, guid: d949b3bde32754e4cb45349fc8240215, type: 3}
+    angry: {fileID: 21300000, guid: f349ae0e8677b4a40aa7e61ec38e7f28, type: 3}
+    neck: {x: 0.511, y: 0.03}
+    shoulder: {x: 0.511, y: 0.12}
+    hip: {x: 0.449, y: 0.95}
+    front: 0
+    headScale: 0.8
+  - codeId: boss_red
+    head: {fileID: 21300000, guid: ad5502c19dc2d5e42a6644c0527b9696, type: 3}
+    scared: {fileID: 21300000, guid: 766dabe8dadddc24dae49aecd07d62bd, type: 3}
+    torso: {fileID: 21300000, guid: ab0ac5c415d548a41af6307cc7df41a7, type: 3}
+    arm: {fileID: 21300000, guid: 1ca8ee4e96868614a955e466b8218dfc, type: 3}
+    leg: {fileID: 21300000, guid: ea6b2709470cef548bde17cac7e25279, type: 3}
+    angry: {fileID: 21300000, guid: 9193c4fde927ad84b980c25d28608736, type: 3}
+    neck: {x: 0.475, y: 0.03}
+    shoulder: {x: 0.475, y: 0.12}
+    hip: {x: 0.459, y: 0.95}
+    front: 0
+    headScale: 0.8

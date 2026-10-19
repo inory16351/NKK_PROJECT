@@ -73,7 +73,8 @@ namespace NKK.Lobby
 
         static string Word(Transform t, string child, string fallback) { var w = t.Find(child)?.GetComponent<TMP_Text>(); return w ? w.text : fallback; }
 
-        int Rooms(int f) => Mathf.Min(roomMax, roomBase + Mathf.FloorToInt(f * roomPerFloor)) + (f % bossEvery == 0 ? 1 : 0);
+        int Rooms(int f) => Mathf.Min(roomMax, roomBase + Mathf.FloorToInt(f * roomPerFloor)) + (IsBoss(f) ? 1 : 0);
+        static bool IsBoss(int f) => GameDatabase.Instance && GameDatabase.Instance.BossOf(f) != null;      // 보스 테이블 floor
 
         // LobbyManager 가 페이지를 열 때 (SendMessage)
         public void Render()
@@ -89,7 +90,7 @@ namespace NKK.Lobby
             for (int f = 1; f <= n; f++)
             {
                 var b = Instantiate(tileTemplate, tileRow); b.gameObject.SetActive(true); spawned.Add(b.gameObject);
-                bool can = f <= cap, on = f == startFloor, boss = f % bossEvery == 0;
+                bool can = f <= cap, on = f == startFloor, boss = IsBoss(f);
                 var img = b.GetComponent<Image>(); img.sprite = !can ? tileLock : on ? tileOn : tileNormal;
                 b.interactable = can;
                 var num = b.transform.Find("Num")?.GetComponent<TMP_Text>(); if (num) num.text = f.ToString();
@@ -108,7 +109,7 @@ namespace NKK.Lobby
             var zone = db.ZoneOf(startFloor);
             if (zoneText) zoneText.text = zone != null ? zone.zone_name : "";
             SetT(roomsText, ("n", Rooms(startFloor)));
-            if (bossText) bossText.gameObject.SetActive(startFloor % bossEvery == 0);
+            if (bossText) bossText.gameObject.SetActive(IsBoss(startFloor));
 
             // 스킵 스킬로 더 위에서 출발할 수 있는데 상한에 막혀 있으면: 몇 층을 클리어하면 몇 층부터 되는지
             if (skipHint)

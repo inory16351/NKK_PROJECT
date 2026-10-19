@@ -1,0 +1,29 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: mp1.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- An exact grid of 6 columns x 3 rows (each cell 256x341). Each prop is one separate object centered in its cell with a wide magenta margin, about 200px big, not touching cell borders.
+- These are cartoon effect props for meme boss attacks in a funny rat game. Copy the attached reference props exactly for flat style and scale feel (coffin, maxwell cat, shark with shoes, money, banana cat, torch).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+
+Row 1:
+ 1) a pair of black music notes
+ 2) a small white happy cat jumping with its tongue out
+ 3) a round pale-blue sound wave shockwave ring (flat, two concentric arcs)
+ 4) a big white cartoon mouse-pointer hand cursor clicking (pointing finger)
+ 5) a grey round rock
+ 6) a wooden torch with a flat orange flame
+Row 2:
+ 7) a small brown monkey walking on all fours
+ 8) a huge flaming meteor rock falling diagonally (flat flames)
+ 9) a small green velociraptor running, side view facing left
+ 10) a tranquilizer dart with a red fluffy tail
+ 11) a yellow excavator bucket scoop, teeth pointing down
+ 12) a flat grey wet concrete puddle seen from above (oval)
+Row 3:
+ 13) a protest picket sign on a wooden stick (blank sign with a big red fist pictogram)
+ 14) a red and white megaphone
+ 15) a sleepy cloud with big Z Z Z shapes
+ 16) a Korean steel rice bowl with a lid
+ 17) a gigantic heaping mountain of white rice in a steel bowl
+ 18) a big soup ladle

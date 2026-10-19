@@ -64,6 +64,7 @@ namespace NKK.Lobby
         [Tooltip("조건 줄 3개 + 연구자료 줄 (자리 {have} {need}). 조건 이름 글은 씬 Words")] public TMP_Text[] rankConds;
         public TMP_Text rankResearch;
         [Tooltip("조건 이름 글: 최고 층 · 조각 강화 합 · 스킬 노드 수 ({have} {need})")] public TMP_Text cMaxFloor, cShard, cSkill;
+        [Tooltip("조건 이름 글 (2026-10-19): 도감 친구 수 · 보스 처치 층 (비면 스킬 노드 · 최고 층 글)")] public TMP_Text cDex, cBoss;
         public Button rankButton;
         [Tooltip("앞 훈장을 먼저 달아야 할 때 글 ({tier})")] public TMP_Text rankPrev;
         public Color okColor = new(0.29f, 0.55f, 0.3f), noColor = new(0.75f, 0.35f, 0.3f);
@@ -178,6 +179,7 @@ namespace NKK.Lobby
                     var lk = b.transform.Find("Lock"); if (lk) lk.gameObject.SetActive(p.tier < i + 1);
                     var se = b.transform.Find("Sel"); if (se) se.gameObject.SetActive(viewTier == i + 1);
                 }
+            if (tierTabs != null && viewTier >= 1 && viewTier <= tierTabs.Length && tierTabs[viewTier - 1]) ScrollTo.Center(tierTabs[viewTier - 1].transform);      // 16개 = 가로 스크롤
             if (!db.CommonSkillsByTier.TryGetValue(viewTier, out var nodes)) nodes = new List<CommonSkillRow>();
             // 끈: 여는 노드 → 이 노드
             foreach (var s in nodes)
@@ -289,15 +291,16 @@ namespace NKK.Lobby
             if (rankPanel) rankPanel.SetActive(show);
             if (!show || !db.Tiers.TryGetValue(viewTier, out var tr)) return;
             SetT(rankTitle, ("tier", viewTier), ("name", tr.tier_name));
+            var bd = rankPanel.transform.Find("Badge")?.GetComponent<Image>(); if (bd && RootIcon(viewTier)) bd.sprite = RootIcon(viewTier);      // 이 훈장 그림 (예전엔 씬에 고정)
             bool next = viewTier == p.tier + 1;
-            var conds = new[] { (tr.cond1_type, tr.cond1_value), (tr.cond2_type, tr.cond2_value), (tr.cond3_type, tr.cond3_value) };
+            var conds = new[] { (tr.cond1_type, tr.cond1_value), (tr.cond2_type, tr.cond2_value), (tr.cond3_type, tr.cond3_value), (tr.cond4_type, tr.cond4_value) };
             for (int i = 0; rankConds != null && i < rankConds.Length; i++)
             {
                 var t = rankConds[i]; if (!t) continue;
                 bool on = i < conds.Length && !string.IsNullOrEmpty(conds[i].Item1) && conds[i].Item1 != "None";
                 t.gameObject.SetActive(on); if (!on) continue;
                 var (type, need) = conds[i];
-                var w = type == "Max_Floor" ? cMaxFloor : type == "Shard_Level_Sum" ? cShard : cSkill;
+                var w = type == "Max_Floor" ? cMaxFloor : type == "Shard_Level_Sum" ? cShard : type == "Dex_Count" && cDex ? cDex : type == "Boss_Clear" ? (cBoss ? cBoss : cMaxFloor) : cSkill;
                 float have = p.CondValue(type); need = p.CondNeed(type, need);
                 t.text = F(w, ("have", Mathf.FloorToInt(have)), ("need", Mathf.RoundToInt(need)));
                 t.color = have >= need ? okColor : noColor;

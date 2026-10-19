@@ -11,12 +11,14 @@ import openpyxl
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, 'Data_Table', '스테이지 테이블.xlsx')
 
-FLOORS = 50
+FLOORS = 100                        # 2026-10-19 100층 확장 (기획서 Ver.01 박송호)
 POW0 = 400                          # 적정 전투력 기준 (기획서 지수 100 = 400)
 # 층별로 따로 정한 적정 (사용자 2026-10-13: 1층만 300, 2층부터는 400 기준 그대로. 측정 round8 — 400 이면 첫 판 2층에서, 전체 260 이면 너무 쉬움)
 POW_FIX = {1: 300}
 def pow_need(f): return POW_FIX.get(f, POW0 * diff(f))
 BOSS_EVERY = 5                      # 보스 층 (5층마다, 사용자 2026-10-12 유지)
+# 보스 층 (보스 테이블 floor 와 같게): 5층마다 90층까지 + 91~100 구간은 94·97·100층 (사용자 2026-10-19)
+BOSS_FLOORS = set(range(5, 91, 5)) | {94, 97, 100}
 
 # ── 층 별 허들 기획서 Ver02 (박도원, 2026-10-12) — 사용자 2026-10-12: 난이도·방 수·목표 시간은 기획서대로, 보스는 5층마다 그대로 ──
 # 층 유형 · 이전 층 대비 적정 찍찍 배율. 21~30층 = 16~20층 배율 두 번 반복 (기획서 21장), 31층~ 도 같은 반복
@@ -25,6 +27,10 @@ DOC_TYPE = {1: '도입', 2: '쉬움', 3: '쉬움', 4: '쉬움', 5: '허들', **{
 for _f in range(21, FLOORS + 1):
     _s = 16 + (_f - 21) % 5
     DOC_MUL[_f] = DOC_MUL[_s]; DOC_TYPE[_f] = DOC_TYPE[_s]
+# 31층~ (2026-10-19, 100층 확장 기획서 10장): 1~30층은 그대로, 31층부터 층마다 약 ×1.12 (유형별로 흔들되 5층 합 ≈ 1.12^5)
+LATE_MUL = {16: 1.12, 17: 1.08, 18: 1.14, 19: 1.08, 20: 1.16}
+for _f in range(31, FLOORS + 1):
+    DOC_MUL[_f] = LATE_MUL[16 + (_f - 21) % 5]
 DOC_ROOMS = [2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9]          # 1~15층, 16층~ 9개
 TYPE_SEC = {'도입': 108, '쉬움': 108, '보통': 108, '어려움': 135, '허들': 162}   # 적정 찍찍일 때 목표 돌파 (제한 180초의 60 · 75 · 90%)
 BOSS_FIGHT_SHARE = 0.4               # 보스 층: 목표 시간 중 보스전 몫 (나머지 = 길 뚫기). 보스 테이블 hp_pow_sec 를 이 시간에 맞춤
@@ -43,11 +49,16 @@ def diff(f):                         # 난이도 지수 (1층 = 1)
 
 
 def ftype(f): return DOC_TYPE.get(f, '허들')
-def is_boss(f): return f % BOSS_EVERY == 0
+def is_boss(f): return f in BOSS_FLOORS
 def target_sec(f): return TYPE_SEC[ftype(f)]
 def player_pow(f):
-    return DOC_PLAYER[f - 1] if f <= len(DOC_PLAYER) else DOC_PLAYER[-1] * 1.85 ** (f - len(DOC_PLAYER))
-def skip_cap(f): return 15 if f >= 20 else DOC_SKIP.get(f, 1)
+    if f <= len(DOC_PLAYER): return DOC_PLAYER[f - 1]
+    v = DOC_PLAYER[-1] * 1.85 ** (min(f, 30) - len(DOC_PLAYER))
+    return v * diff(f) / diff(30) if f > 30 else v          # 31층~ 은 적정 찍찍과 같은 비율 (2026-10-19)
+def skip_cap(f):                     # 19층까지 기획서 · 20~30층 = 엑셀에서 고친 값 (main-game 5f60c6e: 20층 15 → 25층부터 20) · 31층~ 최고 클리어 층의 80% (5층 단위, 20~80 — 100층 확장 기획서 14장)
+    if f < 20: return DOC_SKIP.get(f, 1)
+    if f <= 30: return min(20, 15 + max(0, f - 20))
+    return max(20, min(80, int(f * 0.8) // 5 * 5))
 
 
 def rooms(f):
