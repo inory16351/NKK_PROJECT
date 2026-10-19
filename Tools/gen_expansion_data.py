@@ -187,9 +187,11 @@ def tiers():
     rc = t.keys.index('research_cost') + 1
     t.ws.cell(3, rc, 'float')
     t.col('cond4_type', '조건4 타입', 'enum'); t.col('cond4_value', '조건4 값', 'float')
+    import tier_gates as TG       # 2026-10-19 재밸런싱: 조건 층 · 조각 조건 · 승급 비용 배율 = Tools/tier_gates.py (16훈장 = 85층 도달, 예전 100층 클리어)
     for (tier, name, icon, conds, bk, start, atk) in C.TIERS:
-        floor = next((v for k, v in conds if k in ('Max_Floor', 'Boss_Clear')), 30)
-        cost = round(research.get(min(floor, 100), 0) * 4 * LATE_COST_SCALE, -3)
+        conds = [(('Max_Floor', TG.GATE[tier]) if k in ('Max_Floor', 'Boss_Clear') else ('Shard_Level_Sum', TG.SHARD[tier]) if k == 'Shard_Level_Sum' else (k, v)) for k, v in conds]
+        floor = TG.GATE[tier]
+        cost = round(research.get(min(floor, 100), 0) * TG.RANK_K, -3)
         d = dict(tier_name=ko(name), icon=icon, research_cost=cost, birth_grade_k=bk, start_rat_count=start, start_floor_cap=0, badge_asset=f'Rogue/rk_{tier}', rat_atk_mul=atk)
         for i in range(4):
             k, v = conds[i] if i < len(conds) else ('None', 0)

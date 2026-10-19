@@ -20,7 +20,8 @@ RUNS = [4, 4, 5, 7, 9, 11, 13, 15, 15, 16, 16, 17, 17, 17, 18, 18, 18, 19, 19, 1
 for f, n in zip(range(21, 31), [2, 2, 3, 3, 3, 2, 2, 3, 3, 3]):
     RUNS += [f - 1] * (n - 1) + [f]
 # 훈장 t 를 받는 클리어 층 (사용자 2026-10-12: 기획서 훈장 5·10·15·19층에 맞춰 재배치)
-TIER_CLEAR = {2: 5, 3: 8, 4: 10, 5: 13, 6: 15, 7: 17, 8: 19}
+import tier_gates as TG           # 2026-10-19 재밸런싱: 훈장 조건 층 · 승급 비용 배율 = Tools/tier_gates.py
+TIER_CLEAR = {t: TG.GATE[t] - 1 for t in range(2, 9)}   # 예전 {2: 5, 3: 8, 4: 10, 5: 13, 6: 15, 7: 17, 8: 20}      # 8훈장 = 20층 보스 클리어(21층 도달) (2026-10-19: 허들을 19층 → 20층 보스로, 9훈장~ 31·41층과 같은 규칙)
 T8_TREE_END = 23                     # 8훈장 트리는 이 층을 깰 때까지 (21~30층 엔드게임) 다 찍게
 PROMO_FRAC = {2: 0.34, 3: 0.35, 4: 0.42, 5: 0.47, 6: 0.49, 7: 0.535}   # 그 구간 연구자료 중 다음 승급 몫 (나머지 = 트리). 예전 비율 유지
 CHEESE_SHARE = 0.85                  # 치즈 수입 중 트리에 쓰는 몫 (나머지 여유)
@@ -57,28 +58,14 @@ def main():
     st = load_stage(); ka, kb = fit_k()
     res = lambda f: float(st[f]['research'])
     chz = lambda f: ka * kb ** (f - 1) * float(st[f]['cheese']) * int(st[f]['rooms'])
-    run_res = [sum(res(f) for f in range(1, b + 1)) for b in RUNS]
     run_chz = [sum(chz(f) for f in range(1, b + 1)) for b in RUNS]
     def run_of(clear): return next(i for i, b in enumerate(RUNS) if b >= clear)      # 그 층을 처음 깬 판 (0부터)
-    att = {1: -1, **{t: run_of(c) for t, c in TIER_CLEAR.items()}}
-    span = {t: (att[t] + 1, (att[t + 1] if t < 8 else run_of(T8_TREE_END)) + 1) for t in range(1, 9)}   # 훈장 t 동안의 판 [a, b)
-    params = {'RESEARCH': {1: 0}, 'CHEESE_PER_RES': {}, 'T1_CHEESE_TOTAL': 0}
-    promo = {}
-    report = []
-    for t in range(1, 9):
-        a, b = span[t]
-        late = LATE_SHARE if t >= 6 else 1          # 6훈장 구간(16층~)부터 뽑기·상점과 나눠 씀
-        R = sum(run_res[a:b]) * late; C = sum(run_chz[a:b]) * CHEESE_SHARE * late
-        if t == 1:
-            promo[2] = R; params['T1_CHEESE_TOTAL'] = round(C, -2)
-            report.append(f'훈장 1: 판 {a + 1}~{b} · 연구자료 {R:,.0f} → 2훈장 승급 · 치즈 {C:,.0f} → 1트리')
-            continue
-        pf = PROMO_FRAC.get(t, 0)
-        tree_r = R * (1 - pf)
-        if t < 8: promo[t + 1] = R * pf
-        params['RESEARCH'][t] = round(tree_r * COST_SCALE[t] / TREE_UNIT[t], 3)
-        params['CHEESE_PER_RES'][t] = round(C / max(1, tree_r))
-        report.append(f'훈장 {t}: 판 {a + 1}~{b} · 연구자료 {R:,.0f} (트리 {tree_r:,.0f}' + (f' · {t + 1}훈장 승급 {R * pf:,.0f})' if t < 8 else ')') + f' · 치즈 {C:,.0f}')
+    # 1훈장 트리 치즈 = 2훈장 조건 층을 처음 깰 때까지 판들의 치즈 × CHEESE_SHARE (기획서 판 일정)
+    params = {'RESEARCH': {1: 0}, 'CHEESE_PER_RES': {}, 'T1_CHEESE_TOTAL': round(sum(run_chz[:run_of(TIER_CLEAR[2]) + 1]) * CHEESE_SHARE, -2)}
+    # 2~8훈장 승급 연구자료 = 조건 층 연구자료 × TG.RANK_K (2026-10-19: 9~16훈장과 같은 식. 예전 판 일정 방식은 30층까지만 있어 조건 층을 30층 위로 못 옮김)
+    #   트리 연구자료(RESEARCH)·노드 치즈(CHEESE_PER_RES) 는 gen_skill_tree 가 승급 비용 · 층대 치즈 수입 비율로 정함
+    promo = {t: res(TG.GATE[t]) * TG.RANK_K for t in range(2, 9)}
+    report = [f'1훈장 트리 치즈 {params["T1_CHEESE_TOTAL"]:,.0f}']
     json.dump(params, io.open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     # 티어 테이블: 승급 연구자료 · 조건 최고 층 (Max_Floor = 도달 층 = 클리어 + 1)
     wb = openpyxl.load_workbook(TIER); ws = wb['Tier']
@@ -87,10 +74,11 @@ def main():
     for row in ws.iter_rows(min_row=4):
         t = row[0].value
         if not isinstance(t, int) or t < 2 or t > 8: continue          # 9훈장~ = Tools/gen_expansion_data.py (100층 확장)
-        v = promo[t] * COST_SCALE[t]
+        v = promo[t]
         row[rc].value = int(round(v, -1 if v > 100 else 0))
         for i in range(1, 5):
-            if f'cond{i}_type' in K and row[K.index(f'cond{i}_type')].value == 'Max_Floor': row[K.index(f'cond{i}_value')].value = TIER_CLEAR[t] + 1
+            if f'cond{i}_type' in K and row[K.index(f'cond{i}_type')].value == 'Max_Floor': row[K.index(f'cond{i}_value')].value = TG.GATE[t]
+            if f'cond{i}_type' in K and row[K.index(f'cond{i}_type')].value == 'Shard_Level_Sum': row[K.index(f'cond{i}_value')].value = TG.SHARD[t]
     wb.save(TIER)
     # 상점 가격 (2026-10-19 전체 밸런스): BC = bc_base × 치즈 배율 × kb^(min(층,30)-1) (BlackMarket.BC). 한 번 새로 고침 상품 전부 ≈ 층 수입 SHOP_FLOORS 배
     sp = os.path.join(ROOT, 'Data_Table', '상점 테이블.xlsx'); swb = openpyxl.load_workbook(sp); sc = swb['Shop_Config']

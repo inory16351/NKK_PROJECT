@@ -124,6 +124,25 @@ namespace NKK.Stage
         // 층 밸런스 = 스테이지 테이블 Stage (없으면 인스펙터 옛 수식)
         StageRow Row(int f) => GameDatabase.Instance ? GameDatabase.Instance.StageOf(f) : null;
         public static float PowOverride;      // 밸런스 측정 '적정 고정' 모드: > 0 이면 적정 전투력을 이 값으로 (무리 전투력과 같게)
+        // HUD 찍찍!! 에 보이는 적정 (표시만, 벽 감산·보스·고양이 체력은 테이블 적정 그대로).
+        // 2026-10-19: 고정 0.8배는 층마다 '깰 수 있는 선'(5층 0.8배 ~ 제한시간 노드 쌓인 후반 0.47배)과 안 맞아 후반엔 늘 부족해 보였음
+        // → 이 층 제한시간 · 목표 초(target_sec)로 계산: 찍찍!! = 표시 적정이면 제한시간의 needShowTimeFrac 를 쓰고 깨는 전투력.
+        //   층 시간 = target_sec × C × r^-지수 (r = 전투력 ÷ 테이블 적정, Tools/balance_sim.py time_mul 과 같은 식 · round9 실측 맞춤)
+        [Tooltip("비워 두면 씬에서 찾음 (표시 적정: 이 층 제한시간)")] public RunTimer Timer;
+        [Tooltip("찍찍!! = 표시 적정일 때 쓰는 제한시간 비율 (사용자 2026-10-19: 85%)")] public float needShowTimeFrac = 0.85f;
+        [Tooltip("층 시간 모델: 전투력 = 테이블 적정일 때 목표 초의 몇 배 (balance_sim TIME_C)")] public float needShowTimeC = 0.8f;
+        [Tooltip("층 시간 모델: 적정보다 약할 때 / 셀 때 지수 (balance_sim TIME_LO · TIME_HI)")] public float needShowPowLo = 1.5f, needShowPowHi = 0.5f;
+        [Tooltip("목표 초가 없을 때(테이블 없음) 표시 적정 = 테이블 적정 × 이 값")] public float needShowK = 0.8f;
+        public float PowNeedShown(int f)
+        {
+            float need = PowNeed(f);
+            if (PowOverride > 0) return need;
+            var r = Row(f);
+            if (!Timer) Timer = FindFirstObjectByType<RunTimer>();
+            if (r == null || r.target_sec <= 0 || !Timer) return need * needShowK;
+            float k = Timer.FloorTime(f) * needShowTimeFrac / (r.target_sec * needShowTimeC);     // 시간 배율 h(r) = k 가 되는 r
+            return need * Mathf.Pow(k, k >= 1 ? -1 / needShowPowLo : -1 / needShowPowHi);
+        }
         public float PowNeed(int f) { if (PowOverride > 0) return PowOverride; var r = Row(f); return r != null ? r.pow_need : powNeed0 * Mathf.Pow(powNeedGrow, f - 1) * (f - 1 < powEarly.Length ? powEarly[f - 1] : 1); }
         public float ItemHpK(int f) { var r = Row(f); return r != null ? r.item_hp : Mathf.Pow(3.6f, f - 1); }
         public float CheeseK(int f) { var r = Row(f); return r != null ? r.cheese : Mathf.Pow(1.8f, f - 1); }
@@ -453,7 +472,7 @@ namespace NKK.Stage
         void Update()
         {
             if ((powT -= Time.deltaTime) <= 0) { powT = 0.5f; Power = Rats.TotalPower(); }
-            Game.SetStageInfo(Power, PowNeed(Game.Floor), Open.Count, Layout.Count);
+            Game.SetStageInfo(Power, PowNeedShown(Game.Floor), Open.Count, Layout.Count);
             if (stairs) stairs.enabled = Open.Contains(StairsRoom);          // 계단 방이 열리기 전엔 계단 안 보임
             if (FxManager.WorldFreeze) return;
             float dt = Mathf.Min(Time.deltaTime, 0.05f);
