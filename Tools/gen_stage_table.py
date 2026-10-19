@@ -20,77 +20,41 @@ BOSS_EVERY = 5                      # 보스 층 (5층마다, 사용자 2026-10-
 # 보스 층 (보스 테이블 floor 와 같게): 5층마다 90층까지 + 91~100 구간은 94·97·100층 (사용자 2026-10-19)
 BOSS_FLOORS = set(range(5, 91, 5)) | {94, 97, 100}
 
-# ── 층 별 허들 기획서 Ver02 (박도원, 2026-10-12) — 사용자 2026-10-12: 난이도·방 수·목표 시간은 기획서대로, 보스는 5층마다 그대로 ──
-# 층 유형 · 이전 층 대비 적정 찍찍 배율. 21~30층 = 16~20층 배율 두 번 반복 (기획서 21장), 31층~ 도 같은 반복
-DOC_MUL = {2: 1.25, 3: 1.25, 4: 1.25, 5: 1.8, **{f: 1.32 for f in range(6, 16)}, 16: 1.75, 17: 1.7, 18: 2.1, 19: 2.2, 20: 2.4}   # 옛 값 (참고) — 아래 _early 가 덮어씀
+# ── 2026-10-19 재밸런싱 (사용자): 보스 = 가벼운 허들 · 훈장 해금 = 큰 허들(성장 체감) · 훈장 해금 시기를 플레이 시간에 고르게 (Tools/tier_gates.py) ──
+# 적정 = 추세 × (훈장 허들 HURDLE_SPIKE · 보스 BOSS_SPIKE · 그 밖 1). 추세 = 허들 층 사이 기하 보간, 허들 층 추세 = 그 훈장 끝 전투력(power_by_tier.json) × 증강 ÷ (HURDLE_R × HURDLE_SPIKE)
+#   훈장 t 끝 상태(트리 다)로 허들 층을 겨우 넘음 → 트리 덜 찍으면 막힘 → 승급하면 다음 층부터 전투력/적정 ≈ 1.5배 (숨 돌림 · 성장 체감)
+#   예전 구조(보스 층 5·10·15·20·30·…·100 = 큰 허들, 2~8훈장이 6~21층에 몰림, 16훈장 = 100층 클리어 보상)는 git 기록 참고
+import tier_gates as TG
+DOC_MUL = {}
 DOC_TYPE = {}
-# 1~29층 (2026-10-19 사용자: 7~15층에서 판마다 1층씩 막힘 · 18·19층 연속 허들 → 고쳐 줘, 시뮬레이터 balance_sim 으로 맞춤)
-#   기본선 = 2~4층 ×1.25 · 6~16층 ×EARLY_G · 17~29층은 30층 추세까지 기하 보간. 허들 = 해금 직전 층만 EARLY_HURDLE 배 (다음 층에 안 남음 → 넘으면 시원하게 뚫림)
-#   허들 = 보스 층 5 · 10 · 15 · 20 (다음 훈장 = 그 보스를 깨고 다음 층 도달: 6 · 11 · 16 · 21층, 9훈장~ 31 · 41 … 과 같은 규칙). 16·18층은 훈장 조건 층과 겹쳐 도달하자마자 승급 → 허들이 안 먹어서 뺌
-#   (2026-10-19 사용자: 19층 적정 이상함 — 예전 19층 ×3.5 는 일반 층인데 18층의 4.4배 · 20~24층보다 높았음 → 8훈장 조건 21층 · 허들 20층 보스로 옮김, 허들은 앞 층의 2.5배 안쪽)
-#   그 밖 보스 층(25) MID_SPIKE. 결과(balance_sim): 막히는 곳 = 허들 층만 1판(10층 3판), 클릭 100층 8.9h · 미클릭 11.6h
-EARLY_G = 1.26
-EARLY_HURDLE = {5: 1.8, 10: 1.8, 15: 2.0, 20: 2.0}
-EARLY_LAST = 29
-# 20층~ (2026-10-19 재설계, 측정 round9): 예전 21~30층 = 16~20층 배율 반복(30층 적정 811M) · 31층~ ×1.12 는 훈장 끝 전투력(8훈장 ~40만 · 16훈장 ~6천만)과 수천 배 차이.
-# 사용자 2026-10-19: 콘텐츠 해금 시기에 맞춰 허들 → 성장 체감으로 플레이 동기. 해금 = 31층 증강·9훈장 · 41층 증강 들고 가기·10훈장 · 51~91층 새 훈장 · 100층 엔딩
-# → 허들 층(해금 직전 = 다음 훈장 조건 층 - 1: 30·40·…·90·100) = 추세 × HURDLE_SPIKE. 훈장 t 끝 상태(트리 전부)로 HURDLE_R 배에서 겨우 넘음 → 트리 덜 찍으면 2~3판 막힘.
-#   넘은 다음 층부터는 추세선으로 내려옴 → 새 훈장·증강으로 전투력/적정 ≈ HURDLE_R × SPIKE ÷ 층 배율 ≈ 1.3배 (숨 돌림 · 성장 체감) → 다음 허들까지 추세가 따라 올라감.
-#   그 밖 보스 층(20·25·35·…·94·97) = 추세 × MID_SPIKE. 추세는 허들 사이 기하 보간 (1~19층은 기획서 그대로, 19층 = 7훈장 허들).
-#   훈장 끝 전투력 = Tools/probe_results/power_by_tier.json (BalanceProbe 측정 → 다시 재면 고치고 이 스크립트 다시)
-HURDLE_R = 1.0                       # 훈장 끝 상태(트리 전부)로 허들 층을 이 배(전투력÷적정)에서 넘게 → 걸리는 시간 = 허들 목표 초
-HURDLE_TIME_FRAC = 0.7               # 허들 층(30·40·…·100) 목표 초 = 그 훈장 끝 제한시간(기본 + 제한시간 노드 + 보스 층 시간)의 이 비율
-                                     #   클릭 적극 70% → 거의 안 함(시뮬레이터 1.35배) ≈ 95% 아슬아슬. 90% 로 하면 거의 안 함 플레이어가 못 넘음 (balance_sim)
-HURDLE_SPIKE = 1.6                   # 허들 층 = 추세 × 이 값
-MID_SPIKE = 1.15                     # 허들이 아닌 보스 층
+HURDLE_R = 1.0                       # 훈장 허들 층 적정 = 그 훈장 끝 전투력 ÷ 이 값 (후반 훈장 전투력 차가 ×1.4~1.5 뿐이라 여유를 두면 이전 훈장으로 넘어 버림)
+HURDLE_TIME_FRAC = 0.7               # 훈장 허들 층 목표 초 = 그 훈장 끝 제한시간(기본 + 제한시간 노드 + 보스 층 시간)의 이 비율
+HURDLE_SPIKE = 1.3                   # 훈장 허들 층 = 추세 × 이 값 (넘은 뒤 적정이 이만큼만 내려감 — 예전 1.6 이면 이전 훈장으로 6~13층 더 뚫어 승급 체감이 흐려짐)
+BOSS_SPIKE = 1.15                    # 보스 층 (훈장 허들 아닌) = 가벼운 허들
 AUG_PER_SLOT = 0.08                  # 증강 1칸당 전투력 + (31층~, Tools/balance_sim.py 와 같게)
+AUG_FROM = 31                        # 증강 해금 층
 AUG_SLOTS = {9: 5, 10: 6, 11: 6, 12: 7, 13: 7, 14: 7, 15: 7, 16: 8}      # 그 훈장 끝 증강 슬롯 (기본 5 + Aug_Slot 노드 10·12·16훈장)
-HURDLE = {8: 30, 9: 40, 10: 50, 11: 60, 12: 70, 13: 80, 14: 90, 15: 100}  # 훈장 t 끝 상태가 넘어야 하는 층 = 다음 훈장 조건 층 - 1 (16훈장 = 100층 보스 클리어 보상)
+HURDLE = TG.hurdles()                # 훈장 t 끝 상태가 넘어야 하는 층 = 다음 훈장 조건 층 - 1 (16훈장 = 100층)
 HURDLE_FLOORS = set(HURDLE.values())
-def _trend30():
+def _curve():
     import json
     pw = json.load(open(os.path.join(ROOT, 'Tools', 'probe_results', 'power_by_tier.json'), encoding='utf-8'))
-    aug = lambda t: 1 + AUG_PER_SLOT * AUG_SLOTS.get(t, 0)
-    return pw, aug, {f: pw[str(t)]['end'] * aug(t) / (HURDLE_R * HURDLE_SPIKE) for t, f in HURDLE.items()}
-def _early(trend):
-    """1~EARLY_LAST 층 적정 · 유형 (2층 500 · 1층은 POW_FIX)"""
-    def chain(g2):
-        need, typ, base = {1: POW0, 2: 500.0}, {1: '도입', 2: '쉬움'}, 500.0
-        bases = {2: base}
-        for f in range(3, EARLY_LAST + 1):
-            if f <= 4: base *= 1.25
-            elif f == 5: pass
-            elif f <= 16: base *= EARLY_G
-            else: base *= g2
-            bases[f] = base
-            sp, t = 1, ('쉬움' if f <= 4 else '보통')
-            if f in BOSS_FLOORS and f not in EARLY_HURDLE and f > 10: sp, t = MID_SPIKE, '어려움'
-            if f == EARLY_LAST: t = '어려움'
-            if f in EARLY_HURDLE: sp, t = EARLY_HURDLE[f], '허들'
-            if f - 1 in EARLY_HURDLE and f > 5: t = '쉬움'
-            need[f] = base * sp; typ[f] = t
-        return need, typ, bases
-    _, _, b = chain(1)
-    g2 = (trend[min(trend)] / b[16]) ** (1 / (min(trend) - 16))          # 16층 기본선 → 30층 추세
-    return chain(g2)
-def _late_curve():
-    pw, aug, tr = _trend30()
-    need, typ, bases = _early(tr)
-    trend = {EARLY_LAST: bases[EARLY_LAST], **tr}
-    ks = sorted(trend); out = dict(need)
+    aug = lambda t, f: 1 + AUG_PER_SLOT * AUG_SLOTS.get(t, 5) if f >= AUG_FROM else 1
+    trend = {2: 500.0, **{f: pw[str(t)]['end'] * aug(t, f) / ((TG.T16_R if f == TG.T16_FULL else HURDLE_R) * HURDLE_SPIKE) for t, f in HURDLE.items()}}
+    last = max(trend)
+    for f in range(last + 1, FLOORS + 1): trend[f] = trend[last] * TG.POST_G ** (f - last)     # 16훈장 트리 다 찍은 뒤 마무리 구간
+    ks = sorted(trend); out = {1: float(POW0), 2: 500.0}
     for a, b in zip(ks, ks[1:]):
         g = (trend[b] / trend[a]) ** (1 / (b - a))
         for f in range(a + 1, b + 1):
-            sp = HURDLE_SPIKE if f in HURDLE_FLOORS else MID_SPIKE if f in BOSS_FLOORS else 1
+            sp = HURDLE_SPIKE if f in HURDLE_FLOORS else TG.FINAL_SPIKE if f == FLOORS else BOSS_SPIKE if f in BOSS_FLOORS else 1
             out[f] = trend[a] * g ** (f - a) * sp
-    return out, typ
-_LATE, _ETYPE = _late_curve()
+    return out
+_NEED = _curve()
 for _f in range(2, FLOORS + 1):
-    DOC_MUL[_f] = _LATE[_f] / _LATE[_f - 1]
-    if _f <= EARLY_LAST: DOC_TYPE[_f] = _ETYPE[_f]; continue
-    _h = min((h for h in HURDLE_FLOORS if h >= _f), default=100)
-    DOC_TYPE[_f] = ('허들' if _f in HURDLE_FLOORS else '어려움' if _f in BOSS_FLOORS or _f == _h - 1
-                    else '쉬움' if _f - 1 in HURDLE_FLOORS or _f - 2 in HURDLE_FLOORS else '보통')
+    DOC_MUL[_f] = _NEED[_f] / _NEED[_f - 1]
+    DOC_TYPE[_f] = ('허들' if _f in HURDLE_FLOORS else '어려움' if _f in BOSS_FLOORS
+                    else '쉬움' if _f - 1 in HURDLE_FLOORS else '보통')
 DOC_TYPE[1] = '도입'
 DOC_ROOMS = [2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9]          # 1~15층, 16층~ 9개
 BASE_TIME = 120                      # 기본 제한시간 (RunTimer.baseTime, 2026-10-19 사용자: 180 → 120)

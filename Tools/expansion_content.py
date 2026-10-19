@@ -249,7 +249,7 @@ TIERS = [
     (13, ('쥐 공화국 의장', 'Rat Republic Chair'), '⚖️', [('Max_Floor', 71), ('Shard_Level_Sum', 450), ('Dex_Count', 78), ('Skill_Tree_Complete', 0)], 3.5, 15, 4.0),
     (14, ('행성 탈출자', 'Planet Escapee'), '🚀', [('Max_Floor', 81), ('Shard_Level_Sum', 510), ('Dex_Count', 81), ('Skill_Tree_Complete', 0)], 3.65, 15, 4.25),
     (15, ('은하 방랑자', 'Galaxy Wanderer'), '🌌', [('Max_Floor', 91), ('Shard_Level_Sum', 600), ('Dex_Count', 84), ('Skill_Tree_Complete', 0)], 3.8, 16, 4.5),
-    (16, ('찍찍!! 신화', 'SQUEAK!! Myth'), '👑', [('Boss_Clear', 100), ('Shard_Level_Sum', 690), ('Dex_Count', 87), ('Skill_Tree_Complete', 0)], 3.95, 16, 4.75),
+    (16, ('찍찍!! 신화', 'SQUEAK!! Myth'), '👑', [('Max_Floor', 85), ('Shard_Level_Sum', 690), ('Dex_Count', 87), ('Skill_Tree_Complete', 0)], 3.95, 16, 4.75),
 ]
 COND_DOC = [('Dex_Count', '도감에서 만난 친구(쥐 종) 수 (2026-10-19)', '필요한 종 수'),
             ('Boss_Clear', '이 층까지 클리어 (마지막 보스 처치 = 100)', '클리어해야 하는 층')]
