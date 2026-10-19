@@ -22,11 +22,15 @@ BOSS_FLOORS = set(range(5, 91, 5)) | {94, 97, 100}
 
 # ── 층 별 허들 기획서 Ver02 (박도원, 2026-10-12) — 사용자 2026-10-12: 난이도·방 수·목표 시간은 기획서대로, 보스는 5층마다 그대로 ──
 # 층 유형 · 이전 층 대비 적정 찍찍 배율. 21~30층 = 16~20층 배율 두 번 반복 (기획서 21장), 31층~ 도 같은 반복
-DOC_MUL = {2: 1.25, 3: 1.25, 4: 1.25, 5: 1.8, **{f: 1.32 for f in range(6, 16)}, 16: 1.75, 17: 1.7, 18: 2.1, 19: 2.2, 20: 2.4}
-DOC_TYPE = {1: '도입', 2: '쉬움', 3: '쉬움', 4: '쉬움', 5: '허들', **{f: '보통' for f in range(6, 16)}, 16: '허들', 17: '어려움', 18: '허들', 19: '어려움', 20: '허들'}
-for _f in range(21, FLOORS + 1):
-    _s = 16 + (_f - 21) % 5
-    DOC_TYPE[_f] = DOC_TYPE[_s]
+DOC_MUL = {2: 1.25, 3: 1.25, 4: 1.25, 5: 1.8, **{f: 1.32 for f in range(6, 16)}, 16: 1.75, 17: 1.7, 18: 2.1, 19: 2.2, 20: 2.4}   # 옛 값 (참고) — 아래 _early 가 덮어씀
+DOC_TYPE = {}
+# 1~29층 (2026-10-19 사용자: 7~15층에서 판마다 1층씩 막힘 · 18·19층 연속 허들 → 고쳐 줘, 시뮬레이터 balance_sim 으로 맞춤)
+#   기본선 = 2~4층 ×1.25 · 6~16층 ×EARLY_G · 17~29층은 30층 추세까지 기하 보간. 허들 = 해금 직전 층만 EARLY_HURDLE 배 (다음 층에 안 남음 → 넘으면 시원하게 뚫림)
+#   5층(첫 보스) · 10층(보스) · 15층(16층 도달 = 6훈장 · 16층 클리어 = 뽑기 직전) · 19층(20층 도달 = 8훈장 직전). 16·18층은 훈장 조건 층과 겹쳐 도달하자마자 승급 → 허들이 안 먹어서 뺌
+#   그 밖 보스 층(15·20·25) MID_SPIKE. 결과(balance_sim): 막히는 곳 = 허들 층만 1~2판, 클릭 100층 9.8h · 미클릭 11.9h (예전 10.8h · 14.5h)
+EARLY_G = 1.26
+EARLY_HURDLE = {5: 1.8, 10: 1.8, 15: 3.0, 19: 3.5}
+EARLY_LAST = 29
 # 20층~ (2026-10-19 재설계, 측정 round9): 예전 21~30층 = 16~20층 배율 반복(30층 적정 811M) · 31층~ ×1.12 는 훈장 끝 전투력(8훈장 ~40만 · 16훈장 ~6천만)과 수천 배 차이.
 # 사용자 2026-10-19: 콘텐츠 해금 시기에 맞춰 허들 → 성장 체감으로 플레이 동기. 해금 = 31층 증강·9훈장 · 41층 증강 들고 가기·10훈장 · 51~91층 새 훈장 · 100층 엔딩
 # → 허들 층(해금 직전 = 다음 훈장 조건 층 - 1: 30·40·…·90·100) = 추세 × HURDLE_SPIKE. 훈장 t 끝 상태(트리 전부)로 HURDLE_R 배에서 겨우 넘음 → 트리 덜 찍으면 2~3판 막힘.
@@ -42,28 +46,51 @@ AUG_PER_SLOT = 0.08                  # 증강 1칸당 전투력 + (31층~, Tools
 AUG_SLOTS = {9: 5, 10: 6, 11: 6, 12: 7, 13: 7, 14: 7, 15: 7, 16: 8}      # 그 훈장 끝 증강 슬롯 (기본 5 + Aug_Slot 노드 10·12·16훈장)
 HURDLE = {8: 30, 9: 40, 10: 50, 11: 60, 12: 70, 13: 80, 14: 90, 15: 100}  # 훈장 t 끝 상태가 넘어야 하는 층 = 다음 훈장 조건 층 - 1 (16훈장 = 100층 보스 클리어 보상)
 HURDLE_FLOORS = set(HURDLE.values())
-def _pow_raw(f):                     # 1~19층 = 기획서 배율 그대로
-    d = 1.0
-    for g in range(2, f + 1): d *= DOC_MUL[g]
-    return POW0 * d
-def _late_curve():
+def _trend30():
     import json
     pw = json.load(open(os.path.join(ROOT, 'Tools', 'probe_results', 'power_by_tier.json'), encoding='utf-8'))
     aug = lambda t: 1 + AUG_PER_SLOT * AUG_SLOTS.get(t, 0)
-    trend = {19: _pow_raw(19) / HURDLE_SPIKE, **{f: pw[str(t)]['end'] * aug(t) / (HURDLE_R * HURDLE_SPIKE) for t, f in HURDLE.items()}}
-    ks = sorted(trend); out = {19: _pow_raw(19)}
+    return pw, aug, {f: pw[str(t)]['end'] * aug(t) / (HURDLE_R * HURDLE_SPIKE) for t, f in HURDLE.items()}
+def _early(trend):
+    """1~EARLY_LAST 층 적정 · 유형 (2층 500 · 1층은 POW_FIX)"""
+    def chain(g2):
+        need, typ, base = {1: POW0, 2: 500.0}, {1: '도입', 2: '쉬움'}, 500.0
+        bases = {2: base}
+        for f in range(3, EARLY_LAST + 1):
+            if f <= 4: base *= 1.25
+            elif f == 5: pass
+            elif f <= 16: base *= EARLY_G
+            else: base *= g2
+            bases[f] = base
+            sp, t = 1, ('쉬움' if f <= 4 else '보통')
+            if f in BOSS_FLOORS and f not in EARLY_HURDLE and f > 10: sp, t = MID_SPIKE, '어려움'
+            if f == EARLY_LAST: t = '어려움'
+            if f in EARLY_HURDLE: sp, t = EARLY_HURDLE[f], '허들'
+            if f - 1 in EARLY_HURDLE and f > 5: t = '쉬움'
+            need[f] = base * sp; typ[f] = t
+        return need, typ, bases
+    _, _, b = chain(1)
+    g2 = (trend[min(trend)] / b[16]) ** (1 / (min(trend) - 16))          # 16층 기본선 → 30층 추세
+    return chain(g2)
+def _late_curve():
+    pw, aug, tr = _trend30()
+    need, typ, bases = _early(tr)
+    trend = {EARLY_LAST: bases[EARLY_LAST], **tr}
+    ks = sorted(trend); out = dict(need)
     for a, b in zip(ks, ks[1:]):
         g = (trend[b] / trend[a]) ** (1 / (b - a))
         for f in range(a + 1, b + 1):
             sp = HURDLE_SPIKE if f in HURDLE_FLOORS else MID_SPIKE if f in BOSS_FLOORS else 1
             out[f] = trend[a] * g ** (f - a) * sp
-    return out
-_LATE = _late_curve()
-for _f in range(20, FLOORS + 1):
+    return out, typ
+_LATE, _ETYPE = _late_curve()
+for _f in range(2, FLOORS + 1):
     DOC_MUL[_f] = _LATE[_f] / _LATE[_f - 1]
+    if _f <= EARLY_LAST: DOC_TYPE[_f] = _ETYPE[_f]; continue
     _h = min((h for h in HURDLE_FLOORS if h >= _f), default=100)
     DOC_TYPE[_f] = ('허들' if _f in HURDLE_FLOORS else '어려움' if _f in BOSS_FLOORS or _f == _h - 1
                     else '쉬움' if _f - 1 in HURDLE_FLOORS or _f - 2 in HURDLE_FLOORS else '보통')
+DOC_TYPE[1] = '도입'
 DOC_ROOMS = [2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9]          # 1~15층, 16층~ 9개
 BASE_TIME = 120                      # 기본 제한시간 (RunTimer.baseTime, 2026-10-19 사용자: 180 → 120)
 TYPE_SEC = {k: v * BASE_TIME / 180 for k, v in {'도입': 108, '쉬움': 108, '보통': 108, '어려움': 135, '허들': 162}.items()}   # 적정 찍찍일 때 목표 돌파 (기본 제한시간의 60 · 75 · 90%)

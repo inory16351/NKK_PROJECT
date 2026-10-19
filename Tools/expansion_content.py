@@ -240,15 +240,16 @@ BOSS_LINES = {
 # ── 찍찍!! 훈장 9~16 (티어 테이블 Tier) ──
 # (tier, (이름 ko,en), 아이콘, 조건 [(type, value)] (최대 4), 탄생 배율, 시작 쥐, 쥐 공격력 배율)
 #   연구자료 비용 = gen_expansion_data 가 스테이지 테이블 research(조건 층) × 4 로 계산 (기획서 8장)
+# 조각 레벨 합 (2026-10-19 저녁): 시뮬레이터(balance_sim)에서 조건 층에 닿을 때 조각 합(클릭·미클릭 중 작은 값)의 약 95% — 예전 240·690 은 10·15훈장 승급을 1시간 넘게 막아 49·50층, 100층 연속 벽이 생겼음
 TIERS = [
-    (9, ('지하 제국 총독', 'Underground Governor'), '🏰', [('Max_Floor', 31), ('Shard_Level_Sum', 180), ('Skill_Tree_Complete', 0)], 2.9, 13, 3.0),
-    (10, ('초월 실험체', 'Transcendent Subject'), '🧬', [('Max_Floor', 41), ('Shard_Level_Sum', 240), ('Skill_Tree_Complete', 0)], 3.05, 13, 3.25),
+    (9, ('지하 제국 총독', 'Underground Governor'), '🏰', [('Max_Floor', 31), ('Shard_Level_Sum', 170), ('Skill_Tree_Complete', 0)], 2.9, 13, 3.0),
+    (10, ('초월 실험체', 'Transcendent Subject'), '🧬', [('Max_Floor', 41), ('Shard_Level_Sum', 200), ('Skill_Tree_Complete', 0)], 3.05, 13, 3.25),
     (11, ('연구소 점령자', 'Lab Occupier'), '🚩', [('Max_Floor', 51), ('Shard_Level_Sum', 310), ('Dex_Count', 72), ('Skill_Tree_Complete', 0)], 3.2, 14, 3.5),
-    (12, ('도시의 그림자', 'Shadow of the City'), '🌃', [('Max_Floor', 61), ('Shard_Level_Sum', 390), ('Dex_Count', 75), ('Skill_Tree_Complete', 0)], 3.35, 14, 3.75),
-    (13, ('쥐 공화국 의장', 'Rat Republic Chair'), '⚖️', [('Max_Floor', 71), ('Shard_Level_Sum', 480), ('Dex_Count', 78), ('Skill_Tree_Complete', 0)], 3.5, 15, 4.0),
-    (14, ('행성 탈출자', 'Planet Escapee'), '🚀', [('Max_Floor', 81), ('Shard_Level_Sum', 580), ('Dex_Count', 81), ('Skill_Tree_Complete', 0)], 3.65, 15, 4.25),
-    (15, ('은하 방랑자', 'Galaxy Wanderer'), '🌌', [('Max_Floor', 91), ('Shard_Level_Sum', 690), ('Dex_Count', 84), ('Skill_Tree_Complete', 0)], 3.8, 16, 4.5),
-    (16, ('찍찍!! 신화', 'SQUEAK!! Myth'), '👑', [('Boss_Clear', 100), ('Shard_Level_Sum', 810), ('Dex_Count', 87), ('Skill_Tree_Complete', 0)], 3.95, 16, 4.75),
+    (12, ('도시의 그림자', 'Shadow of the City'), '🌃', [('Max_Floor', 61), ('Shard_Level_Sum', 370), ('Dex_Count', 75), ('Skill_Tree_Complete', 0)], 3.35, 14, 3.75),
+    (13, ('쥐 공화국 의장', 'Rat Republic Chair'), '⚖️', [('Max_Floor', 71), ('Shard_Level_Sum', 450), ('Dex_Count', 78), ('Skill_Tree_Complete', 0)], 3.5, 15, 4.0),
+    (14, ('행성 탈출자', 'Planet Escapee'), '🚀', [('Max_Floor', 81), ('Shard_Level_Sum', 510), ('Dex_Count', 81), ('Skill_Tree_Complete', 0)], 3.65, 15, 4.25),
+    (15, ('은하 방랑자', 'Galaxy Wanderer'), '🌌', [('Max_Floor', 91), ('Shard_Level_Sum', 600), ('Dex_Count', 84), ('Skill_Tree_Complete', 0)], 3.8, 16, 4.5),
+    (16, ('찍찍!! 신화', 'SQUEAK!! Myth'), '👑', [('Boss_Clear', 100), ('Shard_Level_Sum', 690), ('Dex_Count', 87), ('Skill_Tree_Complete', 0)], 3.95, 16, 4.75),
 ]
 COND_DOC = [('Dex_Count', '도감에서 만난 친구(쥐 종) 수 (2026-10-19)', '필요한 종 수'),
             ('Boss_Clear', '이 층까지 클리어 (마지막 보스 처치 = 100)', '클리어해야 하는 층')]

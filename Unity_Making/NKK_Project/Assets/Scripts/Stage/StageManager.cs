@@ -124,6 +124,8 @@ namespace NKK.Stage
         // 층 밸런스 = 스테이지 테이블 Stage (없으면 인스펙터 옛 수식)
         StageRow Row(int f) => GameDatabase.Instance ? GameDatabase.Instance.StageOf(f) : null;
         public static float PowOverride;      // 밸런스 측정 '적정 고정' 모드: > 0 이면 적정 전투력을 이 값으로 (무리 전투력과 같게)
+        [Tooltip("HUD 찍찍!! 에 보이는 적정 = 테이블 적정 × 이 값 (표시만, 벽 감산·보스·고양이 체력은 테이블 값). 2026-10-19 시뮬레이터: 새 층을 적정의 약 0.8배에서 깸 → 표시 1.0배 ≈ 깰 수 있는 선")]
+        public float needShowK = 0.8f;
         public float PowNeed(int f) { if (PowOverride > 0) return PowOverride; var r = Row(f); return r != null ? r.pow_need : powNeed0 * Mathf.Pow(powNeedGrow, f - 1) * (f - 1 < powEarly.Length ? powEarly[f - 1] : 1); }
         public float ItemHpK(int f) { var r = Row(f); return r != null ? r.item_hp : Mathf.Pow(3.6f, f - 1); }
         public float CheeseK(int f) { var r = Row(f); return r != null ? r.cheese : Mathf.Pow(1.8f, f - 1); }
@@ -453,7 +455,7 @@ namespace NKK.Stage
         void Update()
         {
             if ((powT -= Time.deltaTime) <= 0) { powT = 0.5f; Power = Rats.TotalPower(); }
-            Game.SetStageInfo(Power, PowNeed(Game.Floor), Open.Count, Layout.Count);
+            Game.SetStageInfo(Power, PowNeed(Game.Floor) * (PowOverride > 0 ? 1 : needShowK), Open.Count, Layout.Count);
             if (stairs) stairs.enabled = Open.Contains(StairsRoom);          // 계단 방이 열리기 전엔 계단 안 보임
             if (FxManager.WorldFreeze) return;
             float dt = Mathf.Min(Time.deltaTime, 0.05f);
