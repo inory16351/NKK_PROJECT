@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: castle.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 landscape. ONE object: the ICE CASTLE exactly like the one in the attached ref_castle (same design: pale-blue crystal towers with pointed spires, a big central arched gate, frozen waterfall stripes), drawn as a SEPARATE OBJECT that can drop from the sky: the whole castle on its own icy rock base (a chunky floating ice platform under it, flat bottom), filling about 85% of the width.
+- STYLE: FLAT 2D game art exactly like ref_castle and ref_flat_bg: flat fills with at most one soft shade step, clean simple shapes, NO black outlines, NO glow, NO gradients, NO texture.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no snow, no sky. Do not use magenta, pink or purple on the castle. Keep it fully inside the frame with margin.
+- NO text, NO letters, NO characters.

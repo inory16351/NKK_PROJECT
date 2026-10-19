@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_wave.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image with 3 ROWS, ONE element per row, each element a LONG HORIZONTAL shape spanning almost the full image width, centered, none touching.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_knight_fx and ref_flat_fx (approved flat effects of this game): flat shapes, at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO black outlines. Palette: holy gold, cream white, pale blue.
+- Background: ONE solid flat pure magenta #FF00FF everywhere, no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+  1. (top row) a HUGE SWORD-SLASH ENERGY WAVE: a long thick horizontal band of energy, bright cream-white core with gold and pale-blue flame-like ragged edges flaring up and down, tapered sharp at both ends
+  2. (middle row) a SHOCKWAVE RIPPLE: two or three long thin parallel curved gold lines with small breaks, like a pressure wave front, tapered at both ends
+  3. (bottom row) a long horizontal row of flat broken ENERGY SHARDS and sparks scattered along a line, gold and cream

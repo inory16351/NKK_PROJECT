@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rear_knight.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1536 portrait image, ONE character, full body.
+- STYLE (MOST IMPORTANT): match EXACTLY the attached ref_knight_front and ref_knight_big (approved frames of this same knight): FLAT cartoon game art in the Untitled Goose Game mood, flat fills with at most one soft shade step, NO black outlines, NO gloss, NO fur strands, small black bead eyes, NOT 3D. No stars anywhere.
+- CHARACTER: EXACTLY the same "Knight Rat" (cute grey mouse in silver plate armor, helmet with open visor and big RED PLUME, red cape, pink tail) with the same ENORMOUS greatsword (broad silver blade with blue rune marks, gold crossguard with a blue gem).
+- POSE: FRONT VIEW facing the viewer (3/4 front), the moment right AFTER a huge DIAGONAL downward slash: the enormous greatsword has been swung down at a SLANT and now points DIAGONALLY DOWN to the lower RIGHT at about 45 degrees, its tip almost touching the ground beside his right foot, both paws still gripping the hilt near his left hip, body twisted into the follow-through, low wide powerful stance with knees bent, cape blown wide by the shockwave, plume blown back, fierce determined face. The blade must clearly be at a diagonal angle, NOT vertical.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), NO ground, NO shadow, NO effects. Do not use magenta or purple on the character. Keep him fully inside the frame with margin.
+- NO text.

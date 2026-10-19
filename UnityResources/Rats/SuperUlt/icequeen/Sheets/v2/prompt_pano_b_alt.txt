@@ -1,0 +1,4 @@
+Use your built-in image generation tool to EDIT the attached image and save it as PNG to: pano_b_alt.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+EDIT the attached image pano_b.png. Keep EXACTLY the same composition, camera, size (1536x1024) and the same FLAT simple style (flat fills, no outlines, no painterly texture). Change: the whole scene is now FROZEN SOLID — thicker flat white frost caps on every shape, big simple flat ice crystals, flat icicles hanging, the sky turns paler icy blue with flat diagonal snow streaks. NO text, NO characters.

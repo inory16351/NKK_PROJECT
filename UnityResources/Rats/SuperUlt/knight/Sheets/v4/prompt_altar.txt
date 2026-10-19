@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: altar.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 1 row: ONE object per column, centered, well inside it, none touching.
+- STYLE (MOST IMPORTANT): FLAT 2D game art exactly like the attached ref_flat_bg and ref_flat_fx: big simple flat shapes, flat fills with at most one soft shade step, clean edges, NO outlines, NO texture, NO glow.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no ground, no scenery. Do not use magenta or purple on the subject. Keep everything fully inside the frame with margin.
+  1. an ancient grey STONE ALTAR: a chunky rock pedestal with two worn steps and a simple carved round-table emblem, a narrow SLOT on top where a blade was (EMPTY, no sword), a little moss
+  2. the a GIANT GREATSWORD ENORMOUS and very BROAD: a broad straight silver blade with a gold crossguard, a long gold-wrapped grip, a round blue gem in the guard and simple flat blue rune marks on the blade, alone, vertical, pointing straight DOWN
+  3. a group of 6 broken grey STONE CHUNKS and pebbles flying (debris)

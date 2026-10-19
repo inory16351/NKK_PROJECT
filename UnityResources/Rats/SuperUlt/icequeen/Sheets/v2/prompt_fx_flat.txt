@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game art exactly like the attached ref_flat_fx (approved flat ice effects) and ref_flat_bg (the game's background): Untitled Goose Game mood, simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO sparkles dust, NO painterly texture, NO black outlines, NOT realistic. Icy palette: white, pale blue, light cyan, a darker steel blue for one shade.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+  1. a giant sharp ICICLE pointing straight DOWN (vertical, long, simple faceted flat shape with one light facet)
+  2. an ice SHATTER impact burst: a ring of flat angular ice chunks flying outward from an empty center point
+  3. a flat FROST RING: a thin round ring made of small flat ice spikes and a few simple snowflakes
+  4. a horizontal WIND / blizzard streak: 3-4 long flat tapered white swoosh shapes (like simple motion lines)
+  5. a big flat STARBURST flash: a white and pale-blue spiky star shape with 8-12 sharp points
+  6. a CIRCLE of 8 simple flat snowflakes arranged around an empty center

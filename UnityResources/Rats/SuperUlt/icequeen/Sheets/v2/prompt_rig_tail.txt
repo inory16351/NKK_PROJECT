@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rig_tail.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- This is a CUT-OUT ANIMATION RIG PART of the game character "Ice Queen Rat" (a cute mouse: blue-grey fur, pink round ears, pink nose, black bead eye, white snowflake mark on the cheek, pale-blue ice crystal crown, white and pale-blue cape with a snowflake clasp, pink tail). The attached ref_old_* image is the EXISTING low-resolution game part: redraw THE SAME PART at high resolution with the SAME silhouette, SAME proportions, SAME side view (the character faces LEFT), SAME colors. Attached ref_char / ref_parts show the character.
+- STYLE: flat cartoon game art exactly like the references (Untitled Goose Game mood): flat fills with at most one soft shade step, clean edges, NO black outlines, NO gloss, NO fur strands, NO texture.
+- Draw ONLY this one part, nothing else (no other body parts, no ground, no shadow, no effects, no text). Background: ONE solid flat pure magenta #FF00FF everywhere. Do not use magenta or purple on the part. Keep it fully inside the frame with margin.
+- 1536x1024 landscape. PART: the TAIL only like ref_old_tail: a long thin pink tail with a gentle S wave, the thick base at the LEFT edge area and the thin tip at the right, horizontal, filling about 85% of the width.

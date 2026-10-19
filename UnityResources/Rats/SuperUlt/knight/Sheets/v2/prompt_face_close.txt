@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: face_close.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE CLOSE-UP of the character's head and shoulders for a skill cut-in, face filling most of the height in the right-center. Keep the simple bead eyes.
+- STYLE (MOST IMPORTANT): match EXACTLY the attached ref_zap_style and ref_flat_anim (approved flat cutscene art of this game) and ref_char: FLAT cartoon storybook look in the Untitled Goose Game mood: simple soft flat shapes, flat colors with only gentle soft shading, very little texture, NO individual fur strands, small simple black bead eyes with one tiny white highlight, no black outlines, no gloss, NOT a Disney/Pixar/3D look.
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- CHARACTER "Knight Rat": build him EXACTLY from the attached ref_rig (the game's own rig parts: grey mouse head in a silver knight helmet with an open visor and a big RED PLUME, silver armored torso, armored legs with pink feet, long pink tail) and ref_char / ref_parts: a cute grey MOUSE in shiny SILVER plate armor, a red cape, a straight silver SWORD with a gold hilt. Big head, small body.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no ground, no scenery, no effects. Do not use magenta or purple on the subject. Keep everything fully inside the frame with margin.
+- The helmet visor is up, the face is determined and brave with a small confident smile, one eye with a tiny star glint, the red plume blowing sideways, the gold sword hilt held up near the face.

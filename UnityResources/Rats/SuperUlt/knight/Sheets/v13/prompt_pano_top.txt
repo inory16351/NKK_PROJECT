@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: pano_top.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, one full-frame background picture (no transparency, no borders). NO characters, NO text, NO letters.
+- STYLE (MOST IMPORTANT): FLAT 2D game background exactly like the attached ref_rear_bg and ref_flat_bg (this game's approved flat backgrounds): big simple flat shapes, flat fills with at most one soft shade step, NO outlines, NO painterly texture. Same palette as ref_rear_bg.
+- This picture is ONE SEGMENT of a TALL vertical panorama (segments stacked vertically) seen from the same slightly HIGH camera as ref_rear_bg.
+- CONTINUITY IS CRITICAL: the attached ref_next_top is the TOP STRIP of the segment directly BELOW this one. The BOTTOM 30% of your picture must continue into it seamlessly (same shapes at the same positions, same colors), i.e. your bottom edge must match ref_next_top's top edge.
+- CONTENT: the dusk SKY above that horizon: big flat layered clouds in indigo, teal and warm orange with flat golden rays from the setting sun; at the very bottom the tops of the misty hills and standing stones meet the continuity strip.

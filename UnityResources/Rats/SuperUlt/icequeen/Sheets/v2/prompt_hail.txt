@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hail.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat ice effects of this game) and ref_flat_bg: Untitled Goose Game mood, simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines. Icy palette: white, pale blue, light cyan, one darker steel-blue shade.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+  1. a falling HAILSTONE with a motion trail: a round icy pellet at the RIGHT end and a straight tapered flat white-blue speed trail extending to the LEFT (horizontal, long and thin, about 5 times longer than wide)
+  2. a single round HAILSTONE pellet: a chunky white-blue ice ball with one flat highlight and one shade
+  3. a jagged irregular ICE CHUNK hailstone (angular, faceted, flat shading)
+  4. HAIL IMPACT frame 1: a hailstone just hitting the ground: a small flat white flash shape with 4-5 tiny ice chips starting to pop up, seen from slightly above
+  5. HAIL IMPACT frame 2: the splash spreading: a small flat oval ring on the ground and 6-7 ice chips flying outward and up
+  6. HAIL IMPACT frame 3: the end: a wider thin broken oval ring and a few small ice chips falling, smaller and sparser
+- NO text, NO letters, NO numbers.

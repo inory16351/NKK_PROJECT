@@ -26,3 +26,11 @@
 - fx_bolt_big · fx_bolt_fork · fx_ring_shock · fx_streak · fx_starburst · fx_aura
 - prop_bill (전기요금 고지서) · prop_battery (스마트폰 배터리 틀, 채우기는 UI) · prop_bulb (터지는 전구) · prop_socket · prop_roof (앞 지붕)
 - 밈: 배터리 충전 1% → 100% (② 전기가 빨려 듦) · "※ 이번 달 전기세는 연구소가 냅니다" + 날아가는 고지서 (④)
+
+## icequeen v2 (2026-10-19, 사용자: 플랫 배경 · 쥐와 배경 따로 · 마지막 컷신 제거 · 5초)
+- 그림 다시 뽑음 (Codex): 배경 = **로비 배경(`UI/lobby_bg.png`) 그림체의 플랫**(외곽선·광택·붓 질감 없음) 세로 파노라마 `pano_a~c` + 얼어붙은 판 `pano_?_alt` · 클로즈업 배경 `face_bg` / 쥐 = 자홍 배경에 따로 `pose_intro` · `pose_act` · `face_close` (클로즈업도 쥐만 → 키잉, `face_bg` 위에 같은 키로 겹침).
+  원본·프롬프트·로그 = `icequeen/Sheets/v2/` (러너 = scratchpad 식 run_iq.sh: 쥐 3 · face_bg · pano a→b→c 이어 그림 + alt 편집). 옛 그림(그림 같은 칠) = `icequeen/Sheets/_v1_painted/`.
+- 연출: ④ 피니시 컷(파노라마로 돌아가는 카메라 · 피니시 포즈) 없음 → ③ 본 연출(띠 + 고드름 다단)이 4.5초까지 이어지고 마지막 일격(큰 고드름 · 파편 · 밈 글)은 같은 화면에서 → 5.0초까지 걷힘. `pose_finish` 안 씀.
+  코드 = `SuperUltStyle.noFinishCut` · `actEnd` (매니저가 ③ 끝 = 일격 = 걷힘 시작으로 씀) · `Tools/superult_story.py` `NO_FINISH` 표 (다른 쥐도 여기 넣고 story 를 같은 식으로 바꾸면 됨).
+- (같은 날 2차) **띠 없이 화면 전체 컷신**: ③ 도 전체 화면(얼어붙은 호수 + 활강), 고드름 자리마다 실제 피해 숫자 · 누적 피해 · 화면 얼음에 금(`fx_crack1~3`) → 일격에 산산조각(`fx_shard1~3`) → 게임이 드러나며 적 꽁꽁. 금·파편 = `Sheets/v2/crack.png`.
+- (3차) **셀 애니 프레임**: 리그 파츠(`Sheets/v2/rig_*` 고해상도, `ref_rig.png`)를 참고로 동작 프레임 시트 `anim_*.png`(자홍 가로 3칸) → `anim_<동작>_1~3`. 컷 8개로 전환을 늘리고, 이펙트·소품도 플랫(`fx_flat.png` · `props_flat.png`). 러너 = `Sheets/v2/run_rig.sh` · `run_anim.sh`.

@@ -1,6 +1,7 @@
 """초필살기 레이어 컷신 그림 자르기 (2026-10-17): UnityResources/Rats/SuperUlt/<code>/Sheets → <code>/ (PNG)
 - bg_*.png · pano_on/off.png · *_face_*.png = 그대로 복사 (pano_a~c 조각은 건너뜀)
 - *_pose_*.png          = 자홍 키잉 + 여백 자르기 (캐릭터 한 장)
+- face_close.png        = face_bg.png 가 있으면(쥐·배경 따로 그린 v2) 자홍 키잉만, 없으면 그대로
 - fx_*.png              = 검은 배경 빛 효과 격자 (FX_GRID 의 열·행·이름) → 밝기 = 투명도
 - props.png             = 자홍 키잉 후 덩어리마다 따로 (PROPS 이름, 왼쪽 위부터 읽는 순서 아님 → 크기·위치로 이름 붙임, 아래 표)
 사용: python Tools/slice_superult.py <code>   →  다 자른 뒤 Assets/Art/Rats/SuperUlt/<code>/ 로 복사"""
@@ -38,6 +39,8 @@ def trim(im, pad=6):
 
 GRID_FX = ['strike', 'impact', 'ring', 'streak', 'burst', 'aura']        # gen_superult_prompts.FX
 GRID_PROPS = ['meme', 'pop', 'float1', 'float2', 'band', 'fg']           # gen_superult_prompts.PROPS
+FLAT_NAMES = {'knight': ['ghostsword', 'pillar', 'arc', 'motes', 'burst', 'ring']}      # fx_flat.png 칸 이름 (쥐마다 그린 것이 다를 때)
+GRID_CRACK = ['crack1', 'crack2', 'crack3', 'shard1', 'shard2', 'shard3']   # crack.png (자홍 3×2): 화면 얼음 금 · 깨진 파편 (2026-10-19 아이스 퀸 v2)
 
 
 def stitch_pano(src, out):
@@ -80,19 +83,108 @@ def main(code):
     src = os.path.join(ROOT, 'UnityResources', 'Rats', 'SuperUlt', code, 'Sheets')
     out = os.path.join(ROOT, 'UnityResources', 'Rats', 'SuperUlt', code)
     if code != 'zapham': stitch_pano(src, out)
+    rig_parts(code, src, out)
     for f in sorted(os.listdir(src)):
         p = os.path.join(src, f)
-        if not f.endswith('.png') or f.startswith('ref_'): continue
+        if not f.endswith('.png') or f.startswith('ref_') or f.startswith('rig_'): continue
         if f in ('pano_on.png', 'pano_off.png') or '_face_' in f:       # 세로 파노라마 (조각 pano_a~c 를 stitch_vertical 로 붙인 것) · 전체 화면 클로즈업
             shutil.copy(p, os.path.join(out, f)); print(f, '그대로')
+        elif f == 'pano_rear_full.png':   # 기사 v13 후경 파노라마 (Sheets/v13 3장 이어 붙임) → pano_rear
+            shutil.copy(p, os.path.join(out, 'pano_rear.png')); print('pano_rear', '파노라마')
+            im = Image.open(p); w, h = im.size; yy, xx = np.mgrid[0:h, 0:w]          # 크롭형 마스크 블러: 기사 둘레 타원은 선명, 바깥으로 갈수록 흐림 (카메라가 기사를 보므로 화면 가장자리 = 흐림)
+            rr = np.sqrt(((xx - 768) / 270) ** 2 + ((yy - 1080) / 210) ** 2)
+            blur_copy(im, 16, np.clip((rr - 1) / 1.4, 0, 1)).save(os.path.join(out, 'pano_rear_blur.png')); print('pano_rear_blur')
         elif f.startswith('pano_'): continue
         elif code != 'zapham' and (f.startswith('pose_') or f.startswith('face_')):
             im = Image.open(p)
             if f.startswith('pose_'): im = trim(despill(key_magenta(im)))
+            elif f == 'face_close.png' and os.path.exists(os.path.join(src, 'face_bg.png')):     # v2 (2026-10-19): 쥐 · 배경 따로 → 쥐만 키잉 (자르지 않음, face_bg 와 같은 틀)
+                im = despill(key_magenta(im))
             im.save(os.path.join(out, f)); print(f, im.size)
-        elif code != 'zapham' and f == 'fx.png':
+        elif code != 'zapham' and f == 'fx.png' and not os.path.exists(os.path.join(src, 'fx_flat.png')):
             grid(p, GRID_FX, key_black, out, 'fx_')
-        elif code != 'zapham' and f == 'props.png':
+        elif f == 'fx_flat.png':          # 플랫 이펙트 (2026-10-19, 자홍 3×2) — 있으면 fx.png(검은 배경 빛) 대신. 쥐마다 칸 이름이 다르면 FLAT_NAMES
+            grid(p, FLAT_NAMES.get(code, GRID_FX), lambda c: despill(key_magenta(c)), out, 'fx_')
+        elif f == 'altar.png':            # 기사 v3: 돌 제단 · 대검 · 돌 파편 (자홍 가로 3칸)
+            sh = Image.open(p); W3 = sh.width / 3
+            for k, n in enumerate(['prop_altar', 'prop_greatsword', 'prop_debris']):
+                cell = trim(despill(key_magenta(sh.crop((int(k * W3) + 3, 3, int((k + 1) * W3) - 3, sh.height - 3)))))
+                cell.save(os.path.join(out, n + '.png')); print(n, cell.size)
+        elif f == 'fx_wave.png':          # 기사 v4: 세로 3줄 = 파동 띠 · 충격파 줄 · 에너지 파편 (가로로 긴 그림, 여백 자름)
+            sh = Image.open(p); H3 = sh.height / 3
+            for k, n in enumerate(['slashwave', 'ripple', 'shards']):
+                cell = trim(despill(key_magenta(sh.crop((3, int(k * H3) + 3, sh.width - 3, int((k + 1) * H3) - 3)))), 4)
+                cell.save(os.path.join(out, 'fx_' + n + '.png')); print('fx_' + n, cell.size)
+        elif f == 'fx_light.png':         # 기사 v7: 별 모양 없는 빛 (둥근 섬광 · 정면 빔 · 빛 기둥 · 빛 알갱이 · 빛 고리 · 빛 띠)
+            grid(p, ['flash', 'beam', 'column', 'dots', 'lightring', 'band'], lambda c: despill(key_magenta(c)), out, 'fx_')
+        elif f in ('open1.png', 'open2.png', 'open3.png'):     # 기사 v14: 찢겨 열리는 빛 벽 3프레임 (자홍 = 투명 구멍, 크기 그대로) + 크롭형 마스크 블러 판 open*_blur
+            im = despill(key_magenta(Image.open(p))); im.save(os.path.join(out, f))
+            a = np.asarray(im).astype(np.float32) / 255; h, w = a.shape[:2]
+            pm = Image.fromarray((np.dstack([a[..., :3] * a[..., 3:], a[..., 3:]]) * 255).astype(np.uint8), 'RGBA')       # 미리 곱한 색 (투명 쪽으로 검게 번지지 않게)
+            from PIL import ImageFilter
+            bl = np.asarray(pm.filter(ImageFilter.GaussianBlur(22))).astype(np.float32) / 255
+            yy, xx = np.mgrid[0:h, 0:w]
+            rr = np.sqrt(((xx - w * 0.5) / (w * 0.2)) ** 2 + ((yy - h * 0.45) / (h * 0.225)) ** 2)     # 가운데 타원(폭 40% · 높이 45%) = 선명, 바깥으로 갈수록 흐림
+            m = np.clip((rr - 1) / 1.6, 0, 1) ** 1.2
+            al = bl[..., 3] * m; col = bl[..., :3] / np.maximum(bl[..., 3:], 1e-4)
+            Image.fromarray((np.dstack([col, al[..., None]]).clip(0, 1) * 255).astype(np.uint8), 'RGBA').save(os.path.join(out, f[:-4] + '_blur.png')); print(f, '+ blur')
+        elif f in ('fx_smear.png', 'fx_flamewall.png'):     # 기사 v12: 칼 잔상 줄무늬 · 갈라지는 빛·불꽃 벽 반쪽 (크기 그대로 — 찢긴 선 위치 계산용)
+            despill(key_magenta(Image.open(p))).save(os.path.join(out, f)); print(f, 'v12')
+            if f == 'fx_flamewall.png': blur_copy(Image.open(os.path.join(out, f)), 20).save(os.path.join(out, 'fx_flamewall_blur.png')); print('fx_flamewall_blur')
+        elif f == 'split_frame.png':      # 기사 v11 후경: 화면 양옆 갈라진 벽 (가운데 자홍 = 투명, 크기 그대로)
+            despill(key_magenta(Image.open(p))).save(os.path.join(out, f)); print(f, '양옆 벽')
+        elif f in ('rear_knight.png', 'ground_crack.png'):     # 기사 v10 후경: 휘두른 뒤 기사 · 땅 균열 (자홍, 여백 자름)
+            im = trim(despill(key_magenta(Image.open(p))), 4); im.save(os.path.join(out, f)); print(f, im.size)
+        elif f == 'pano_rear_full.png':   # 기사 v13 후경 파노라마 (Sheets/v13 3장 이어 붙임) → pano_rear
+            shutil.copy(p, os.path.join(out, 'pano_rear.png')); print('pano_rear', '파노라마')
+            im = Image.open(p); w, h = im.size; yy, xx = np.mgrid[0:h, 0:w]          # 크롭형 마스크 블러: 기사 둘레 타원은 선명, 바깥으로 갈수록 흐림 (카메라가 기사를 보므로 화면 가장자리 = 흐림)
+            rr = np.sqrt(((xx - 768) / 270) ** 2 + ((yy - 1080) / 210) ** 2)
+            blur_copy(im, 16, np.clip((rr - 1) / 1.4, 0, 1)).save(os.path.join(out, 'pano_rear_blur.png')); print('pano_rear_blur')
+        elif f == 'rear_bg.png':
+            shutil.copy(p, os.path.join(out, f)); print(f, '배경')
+        elif f in ('fx_frame.png', 'fx_blast.png'):     # 기사 v8: 탄 가장자리 화면 틀(가운데 자홍 = 투명, 크기 그대로) · 정면 빛 폭발 (여백 자름)
+            im = despill(key_magenta(Image.open(p)))
+            if f == 'fx_blast.png': im = trim(im, 4)
+            im.save(os.path.join(out, f)); print(f, im.size)
+        elif f == 'fx_cut.png':           # 기사 v3: 위 줄 = 베기선 · 차징 기운 · 불꽃 (여백 자름) / 아래 줄 = 폭발 3프레임 (칸 크기 그대로)
+            sh = Image.open(p); W, H = sh.size
+            for i, n in enumerate(['cutline', 'charge', 'sparks', 'boom1', 'boom2', 'boom3']):
+                r, c = divmod(i, 3)
+                cell = despill(key_magenta(sh.crop((int(c * W / 3) + 3, int(r * H / 2) + 3, int((c + 1) * W / 3) - 3, int((r + 1) * H / 2) - 3))))
+                if r == 0: cell = trim(cell, 4)
+                cell.save(os.path.join(out, 'fx_' + n + '.png')); print('fx_' + n, cell.size)
+        elif f == 'fx_hit.png':           # 타격 그림 (2026-10-19 기사, 자홍 3×2): 위 줄 = 베기 · 빛 물결 · 빛 입자 (여백 자름) / 아래 줄 = 타격 3프레임 (칸 크기 그대로)
+            sh = Image.open(p); W, H = sh.size
+            for i, n in enumerate(['slash', 'wave', 'mote', 'hit1', 'hit2', 'hit3']):
+                r, c = divmod(i, 3)
+                cell = despill(key_magenta(sh.crop((int(c * W / 3) + 3, int(r * H / 2) + 3, int((c + 1) * W / 3) - 3, int((r + 1) * H / 2) - 3))))
+                if r == 0: cell = trim(cell, 4)
+                cell.save(os.path.join(out, 'fx_' + n + '.png')); print('fx_' + n, cell.size)
+        elif f == 'props_flat.png':       # 플랫 소품 — 있으면 props.png 대신
+            grid(p, GRID_PROPS, lambda c: despill(key_magenta(c)), out, 'prop_')
+        elif f.startswith('anim_'):       # 셀 애니 프레임 시트 (자홍 가로 3칸) → anim_<동작>_1~3
+            im = despill(key_magenta(Image.open(p))); arr = np.asarray(im); W3 = im.width / 3
+            lab, n = ndimage.label(ndimage.binary_dilation(arr[..., 3] > 20, iterations=3))      # 덩어리마다 → 가운데가 속한 칸으로 (옆 칸에 걸친 망토·꼬리도 제 프레임에)
+            col = np.zeros(n + 1, int) - 1
+            for li, sl in enumerate(ndimage.find_objects(lab), 1):
+                if (sl[0].stop - sl[0].start) * (sl[1].stop - sl[1].start) < 400: continue
+                ys, xs = np.nonzero(lab[sl] == li); col[li] = min(2, int((xs.mean() + sl[1].start) / W3))
+            for k in range(3):
+                a2 = arr.copy(); a2[..., 3] = np.where(np.isin(lab, np.nonzero(col == k)[0]), arr[..., 3], 0)
+                cell = trim(Image.fromarray(a2, 'RGBA'))
+                cell.save(os.path.join(out, f'{f[:-4]}_{k + 1}.png')); print(f'{f[:-4]}_{k + 1}', cell.size)
+        elif f == 'hail.png':             # 우박 그림 이펙트 (2026-10-19, 자홍 3×2): 떨어지는 3종은 여백 자름 · 바닥 충돌 3프레임은 칸 크기 그대로 (프레임끼리 자리 맞춤)
+            sh = Image.open(p); W, H = sh.size
+            for i, n in enumerate(['hail_fall', 'hail_ball', 'hail_chunk', 'hail_splash1', 'hail_splash2', 'hail_splash3']):
+                r, c = divmod(i, 3)
+                cell = despill(key_magenta(sh.crop((int(c * W / 3) + 3, int(r * H / 2) + 3, int((c + 1) * W / 3) - 3, int((r + 1) * H / 2) - 3))))
+                if r == 0: cell = trim(cell, 4)
+                cell.save(os.path.join(out, 'fx_' + n + '.png')); print('fx_' + n, cell.size)
+        elif f == 'castle.png':           # 따로 떨어지는 얼음성 (2026-10-19 초필살기 v3) → prop_castle
+            im = trim(despill(key_magenta(Image.open(p)))); im.save(os.path.join(out, 'prop_castle.png')); print('prop_castle', im.size)
+        elif f == 'crack.png':
+            grid(p, GRID_CRACK, lambda c: despill(key_magenta(c)), out, 'fx_')
+        elif code != 'zapham' and f == 'props.png' and not os.path.exists(os.path.join(src, 'props_flat.png')):
             grid(p, GRID_PROPS, lambda c: despill(key_magenta(c)), out, 'prop_')
         elif f.startswith('bg_'):
             shutil.copy(p, os.path.join(out, f)); print(f, '배경')
@@ -119,11 +211,63 @@ def main(code):
                 arr = np.asarray(im).copy(); arr[..., 3] = np.where(mask, arr[..., 3], 0)
                 part = trim(Image.fromarray(arr, 'RGBA').crop((b[1].start, b[0].start, b[1].stop, b[0].stop)), 2)
                 part.save(os.path.join(out, 'prop_' + name + '.png')); print('prop_' + name, part.size)
+    if code in FLAT_NAMES and 'streak' not in FLAT_NAMES[code]:      # 속도선(fx_streak)이 없는 쥐 = 아이스 퀸 플랫 줄무늬를 씀 (흰색, 색 상관없음)
+        shutil.copy(os.path.join(ROOT, 'UnityResources', 'Rats', 'SuperUlt', 'icequeen', 'fx_streak.png'), os.path.join(out, 'fx_streak.png'))
+    pad4(out)
     dst = os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Art', 'Rats', 'SuperUlt', code)
     os.makedirs(dst, exist_ok=True)
     for f in os.listdir(out):
-        if f.endswith('.png'): shutil.copy(os.path.join(out, f), os.path.join(dst, f))
+        if f.endswith('.png') or f == 'rig.json': shutil.copy(os.path.join(out, f), os.path.join(dst, f))
     print('→', dst)
+
+
+def pad4(out):
+    """가로·세로를 4의 배수로 (투명 여백을 위 · 오른쪽에): 4의 배수가 아닌 그림은 WebAtlasBuilder 가 폴더 아틀라스(4096)로 묶는데,
+    컷신 그림은 커서 아틀라스가 넘쳐 엉뚱한 그림이 나옴 (2026-10-19 기사) → 4의 배수면 아틀라스에서 빠지고 그림마다 따로 압축됨. 발끝(아래) · 왼쪽 기준은 그대로"""
+    for f in os.listdir(out):
+        if not f.endswith('.png'): continue
+        p = os.path.join(out, f); im = Image.open(p)
+        w, h = im.size; W, H = (w + 3) // 4 * 4, (h + 3) // 4 * 4
+        if (W, H) == (w, h): continue
+        im = im.convert('RGBA'); c = Image.new('RGBA', (W, H), (0, 0, 0, 0)); c.paste(im, (0, H - h)); c.save(p)
+
+
+def blur_copy(im, radius, mask=None):
+    """흐린 사본 (미리 곱한 색으로 흐려서 투명 쪽이 검게 번지지 않게). mask = 0~1 배열이면 알파에 곱함 (크롭형 마스크 블러)"""
+    from PIL import ImageFilter
+    a = np.asarray(im.convert('RGBA')).astype(np.float32) / 255
+    pm = Image.fromarray((np.dstack([a[..., :3] * a[..., 3:], a[..., 3:]]) * 255).astype(np.uint8), 'RGBA')
+    bl = np.asarray(pm.filter(ImageFilter.GaussianBlur(radius))).astype(np.float32) / 255
+    al = bl[..., 3] * (mask if mask is not None else 1); col = bl[..., :3] / np.maximum(bl[..., 3:], 1e-4)
+    return Image.fromarray((np.dstack([col, al[..., None]]).clip(0, 1) * 255).astype(np.uint8), 'RGBA')
+
+
+def rig_parts(code, src, out):
+    """컷신 리그 고해상도 파츠 (2026-10-19, rig_torso · rig_head · rig_legs(앞 | 뒤) · rig_tail · rig_cape) → rig_*.png + rig.json
+    rig.json = 게임 파츠(Parts/<code>)와 같은 비율이 되게 하는 크기 보정 · 피벗(게임 파츠 meta) · 관절(RatRigMeta)"""
+    import json
+    if not os.path.exists(os.path.join(src, 'rig_torso.png')): return
+    got = {}
+    for n in ('torso', 'head', 'tail', 'cape'):
+        im = trim(despill(key_magenta(Image.open(os.path.join(src, f'rig_{n}.png')))))
+        im.save(os.path.join(out, f'rig_{n}.png')); got[n] = im.size; print('rig_' + n, im.size)
+    im = despill(key_magenta(Image.open(os.path.join(src, 'rig_legs.png')))); W = im.width
+    for n, box in (('front', (0, 0, W // 2, im.height)), ('back', (W // 2, 0, W, im.height))):
+        part = trim(im.crop(box)); part.save(os.path.join(out, f'rig_{n}.png')); got[n] = part.size; print('rig_' + n, part.size)
+    art = os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Art', 'Rats', 'Parts', code)
+    meta = [m for m in json.load(open(os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Data', 'RatRigMeta.json'), encoding='utf-8'))['items'] if m['code_id'] == code][0]
+    old = {n: Image.open(os.path.join(art, n + '.png')).size for n in ('torso', 'head', 'front', 'back', 'tail')}
+    def pivot(n):           # 게임 파츠 meta (왼쪽 아래 기준) → 왼쪽 위 기준
+        t = open(os.path.join(art, n + '.png.meta'), encoding='utf-8').read()
+        import re
+        m = re.search(r'spritePivot: \{x: ([\d.]+), y: ([\d.]+)\}', t); return [float(m.group(1)), round(1 - float(m.group(2)), 3)]
+    rel = lambda n: (old[n][0] / old['torso'][0]) / (got[n][0] / got['torso'][0])      # 게임 비율 유지 배율
+    head_game = min(1, 0.62 * old['torso'][0] / old['head'][0])                         # RatRig.headWidthRatio
+    rig = dict(neck=meta['neck'], shoulder=meta['shoulder'], hip=meta['hip'], tailRoot=meta['tail'],
+               headPivot=pivot('head'), frontPivot=pivot('front'), backPivot=pivot('back'), tailPivot=pivot('tail'),
+               headScale=round(rel('head') * head_game, 3), frontScale=round(rel('front') * meta['leg_front'], 3), backScale=round(rel('back') * meta['leg_back'], 3),
+               tailScale=round(rel('tail'), 3), capeScale=round(1.05 * got['torso'][0] / got['cape'][0], 3))
+    json.dump(rig, open(os.path.join(out, 'rig.json'), 'w'), indent=1); print('rig.json', rig)
 
 
 if __name__ == '__main__':

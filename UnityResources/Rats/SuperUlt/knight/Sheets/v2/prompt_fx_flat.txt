@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+- Palette: holy gold, cream white, pale spirit blue.
+  1. a GIANT GHOST SWORD pointing straight DOWN (vertical, long), flat pale spirit-blue blade with a white edge and a gold hilt, a few flat wisps
+  2. a vertical HOLY LIGHT PILLAR: a tall straight beam made of flat gold and cream-white stripes, slightly wider at the bottom
+  3. a big SLASH ARC: a wide flat crescent sword-trail shape in cream white with a gold inner edge
+  4. a small cluster of 5 flat LIGHT MOTES (little gold diamond and circle sparkles)
+  5. a big flat STARBURST flash: a gold and white spiky star with 8-10 sharp points
+  6. a flat RING of light: a thin gold ring with 4 small diamond sparkles on it

@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: crack.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE: FLAT 2D game effect art in the style of the attached ref_flat_bg (style only): clean simple flat shapes, flat fills, NO outlines, NO gloss, NO painterly texture, NO photo realism.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no gradient. Do not use magenta, pink or purple on the elements.
+  1. a CRACK in a sheet of ice glass: bold white and pale-blue zigzag crack lines radiating from one impact point (like a spider-web crack), lines fairly thick and clean
+  2. a different, bigger ice-glass CRACK pattern: long branching white crack lines with a small star burst at the center
+  3. a third ice-glass CRACK pattern: a ring of short cracks around an impact point plus 5 long radial lines
+  4. a large sharp triangular SHARD of broken ice glass, pale blue with a white flat highlight band
+  5. a medium irregular four-sided SHARD of broken ice glass, light cyan with a white flat edge
+  6. a small thin sliver SHARD of broken ice glass, pale blue-white
+- NO text, NO letters, NO numbers.

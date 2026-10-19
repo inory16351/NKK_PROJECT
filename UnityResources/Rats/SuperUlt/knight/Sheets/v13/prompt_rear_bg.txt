@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rear_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, one full-frame background picture. NO characters, NO text, NO letters.
+- STYLE (MOST IMPORTANT): FLAT 2D game background exactly like the attached ref_flat_bg, ref_meadow and ref_hill (this game's approved flat backgrounds): big simple flat shapes, flat fills with at most one soft shade step, NO outlines, NO painterly texture.
+- SCENE: the SAME meadow as the attached ref_rear_bg, but seen from a slightly HIGH camera looking DOWN at the ground at about 25 degrees: the grassy ground fills most of the picture with gentle perspective, the horizon with the misty hill, standing stones and banners is near the TOP (about 18% from the top) with a thin strip of dusk sky above it. The CENTER of the ground is empty flat grass (a character will stand there).

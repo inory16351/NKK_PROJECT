@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_hit.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+- Palette: holy gold, cream white, pale spirit blue.
+  1. a long straight diagonal SWORD SLASH streak across the cell (from lower-left to upper-right): a very thin flat cream-white blade-cut line with gold edges, tapered at both ends
+  2. a horizontal HOLY LIGHT WAVE: a wide flat crescent wave of gold and white light moving to the RIGHT, curved front edge on the right, tapered trailing tail on the left
+  3. a single small LIGHT MOTE: a flat gold diamond sparkle
+  4. SLASH IMPACT frame 1: a small flat white X-shaped cut flash with 3 tiny gold sparks
+  5. SLASH IMPACT frame 2: the impact spreading: a bigger flat white-gold X cut and a small flat ring, 6 sparks flying out
+  6. SLASH IMPACT frame 3: the end: a wide thin broken ring and a few small sparks, fading shapes

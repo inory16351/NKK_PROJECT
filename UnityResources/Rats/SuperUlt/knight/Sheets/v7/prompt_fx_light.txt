@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_light.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered, well inside its cell, none touching.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_knight_fx and ref_flat_fx (approved flat effects of this game): flat shapes, at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO black outlines. Palette: holy gold, cream white, pale blue.
+- ABSOLUTELY NO STAR SHAPES, NO spiky starbursts, NO diamond sparkles, NO cross-shaped twinkles: only round, soft, flowing and ray shapes.
+- Background: ONE solid flat pure magenta #FF00FF everywhere, no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+  1. a big round FLAT LIGHT FLASH: 3-4 concentric flat circles from cream-white in the middle to soft gold outside, smooth round edge, no spikes
+  2. a FRONTAL LIGHT BEAM seen head-on: a big round burst of flat straight light rays and bands radiating from a bright round center toward the viewer, like a beam coming at the camera (rays are long tapered bands, not star points)
+  3. a tall vertical GOLDEN LIGHT COLUMN rising up from the bottom, made of flat cream and gold vertical bands, soft rounded top
+  4. a cluster of 8 small round flat LIGHT DOTS (circles of different sizes) in gold and cream
+  5. a flat LIGHT RING in perspective: a wide thin gold ellipse ring seen slightly from above
+  6. a wide horizontal flat band of LIGHT with soft wavy edges, cream core and gold edges

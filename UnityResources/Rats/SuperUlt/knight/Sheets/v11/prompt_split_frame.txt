@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: split_frame.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 SCREEN FOREGROUND OVERLAY for a cutscene. NO characters, NO text, NO letters.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_frame and ref_light (approved flat effects of this game): flat shapes, at most one soft shade step, clean edges, NO black outlines, NO glow, NO gradients, NOT photographic. ABSOLUTELY NO STAR SHAPES.
+- The attached ref_shot is ONLY a composition reference (a sword blast has split the ground; huge torn walls of rock and light fill the LEFT and RIGHT of the screen very close to the camera, and we look through the gap in the middle). Do not copy its look.
+- CONTENT: two huge FOREGROUND WALLS very close to the camera: on the LEFT side a tall jagged wall of torn earth and rock, and on the RIGHT side another one, each filling about 30-35% of the width and the full height, slightly leaning outward at the top.
+  Their INNER edges (facing the middle gap) are ragged and blazing with flat cream-white and gold light tongues bursting out of the crack; the outer parts are dark brown rock and earth with a few deep orange cracks; a few rock chunks flying near the inner edges.
+- The MIDDLE vertical gap (about 30-40% of the width, the full height, wider at the bottom) is ONE solid flat pure magenta #FF00FF (it will become transparent). Do not use magenta anywhere else.

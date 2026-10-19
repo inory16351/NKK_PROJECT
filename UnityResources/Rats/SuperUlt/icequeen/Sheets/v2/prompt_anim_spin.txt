@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: anim_spin.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 landscape ANIMATION SHEET: 3 columns, ONE full-body frame of the SAME character per column, all frames the same size and scale, each well inside its third, none touching. Frames are consecutive key drawings of one motion for a cel-animated skill cutscene, so keep the character IDENTICAL between frames (same proportions, colors, crown, cape), only the pose changes.
+- CHARACTER "Ice Queen Rat": build her EXACTLY from the attached ref_rig (the game's own rig parts: head with ice crystal crown, cape-wrapped torso with snowflake clasp, pale-blue legs with white cuffs and pink paws, long pink tail, flowing cape) and draw her in the same style as the attached approved cutscene poses ref_pose_a / ref_pose_b (cute mouse, big head, small body, black bead eyes, white snowflake cheek mark).
+- STYLE: FLAT cartoon game art, Untitled Goose Game mood: flat fills with at most one soft shade step, clean shapes, NO black outlines, NO gloss, NO fur strands, NO texture, NOT 3D.
+- Strong, dynamic, readable animation poses with clear silhouettes (anticipation, action, follow-through), cape and tail exaggerated with motion.
+- Background: ONE solid flat pure magenta #FF00FF everywhere. No ground, no shadow, no effects, no snow, no text. Do not use magenta or purple on the character.
+- FRAMES (left to right): 1) JUMPING UP, body stretched upward, legs together, one paw pointing to the sky, cape trailing down; 2) mid-air SPIN seen from the front, cape spread out in a full circle around her, arms out; 3) mid-air SPIN seen from the back, cape wrapping around, tail swirling.

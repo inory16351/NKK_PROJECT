@@ -32,18 +32,21 @@ namespace NKK.Ults
         [Tooltip("충격 흔들림 시각들 (카메라 묶음에 주면 화면이 쾅): 각 시각부터 kickTime 동안 kickPower px 에서 줄어듦 · 회전도 kickRot 도")] public float[] kicks;
         public float kickPower = 40, kickRot = 2, kickTime = 0.3f;
         [Tooltip("그림 바꾸기 (시간 순서)")] public Swap[] swaps;
+        [Tooltip("그림을 바꿀 때 크기를 그림 픽셀 비율대로 다시 맞춤 (셀 애니 프레임마다 그림 크기가 다를 때, 피벗 = 발끝)")] public bool swapResize;
         [Tooltip("숫자 세기: 이 글의 {n} 을 count.x → count.y 로 (countTime 구간)")] public TMP_Text counter;
         public Vector2 count, countTime;
         [Tooltip("채우기 이미지 fillAmount: fillRange.x → y (countTime 구간)")] public Image fill;
         public Vector2 fillRange = new(0, 1);
 
-        RectTransform rt; CanvasGroup cg; Graphic g; Image img; string fmt;
+        RectTransform rt; CanvasGroup cg; Graphic g; Image img; string fmt; float pxK; Sprite first;
 
         void Init()
         {
             if (rt) return;
             rt = (RectTransform)transform; cg = GetComponent<CanvasGroup>(); g = GetComponent<Graphic>(); img = g as Image;
             if (counter) fmt = counter.text;
+            first = img ? img.sprite : null;
+            if (img && img.sprite) pxK = rt.sizeDelta.y / Mathf.Max(1, img.sprite.rect.height);
         }
 
         public void Apply(float t)
@@ -68,7 +71,7 @@ namespace NKK.Ults
             rt.localRotation = Quaternion.Euler(0, 0, rot + spin * t);
             if (cg) cg.alpha = al;
             else if (g) { var c = g.color; c.a = al; g.color = c; }
-            if (img && swaps != null) { Sprite s = null; foreach (var w in swaps) if (t >= w.t) s = w.sprite; if (s && img.sprite != s) img.sprite = s; }
+            if (img && swaps != null) { Sprite s = first; foreach (var w in swaps) if (t >= w.t) s = w.sprite; if (s && img.sprite != s) { img.sprite = s; if (swapResize && pxK > 0) rt.sizeDelta = s.rect.size * pxK; } }
             float ck = countTime.y > countTime.x ? Mathf.Clamp01((t - countTime.x) / (countTime.y - countTime.x)) : 1;
             if (counter && fmt != null) counter.text = fmt.Replace("{n}", Mathf.RoundToInt(Mathf.Lerp(count.x, count.y, ck)).ToString());
             if (fill) fill.fillAmount = Mathf.Lerp(fillRange.x, fillRange.y, ck);

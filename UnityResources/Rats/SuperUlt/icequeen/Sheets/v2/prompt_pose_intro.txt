@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: pose_intro.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1536 portrait image, ONE character pose, full body.
+- STYLE (MOST IMPORTANT): match EXACTLY the attached ref_zap_style pictures (approved game art) and ref_char: a FLAT cartoon storybook look in the Untitled Goose Game mood — simple soft flat shapes, flat colors with only gentle soft shading, very little texture, minimal fur detail (NO individual fur strands), small simple black bead eyes with one tiny white highlight (NOT big sparkly anime eyes), no black outlines, no gloss, no realistic rendering, NOT a Disney/Pixar/3D look.
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- CHARACTER "Ice Queen Rat": a cute MOUSE with blue-grey fur, big pink round ears, pink nose, black bead eyes, a small white snowflake mark on the cheek, a sparkling pale-blue ICE CRYSTAL CROWN, a long flowing WHITE and pale-blue CAPE with a snowflake clasp, long pink tail. Elegant, confident, a little smug. Must look exactly like the attached ref_char / ref_parts (big head, small body, same outfit and colors).
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no gradient, no ground, no scenery, no snow particles around. Draw ONLY the character (and things it holds or wears). Do not use magenta or purple on the subject. Keep the subject fully inside the frame with margin.
+- POSE: landing lightly on tiptoes and spreading both paws wide as frost blooms out of the paw pads, cape flaring, crown sparkling. Cute and lively, not scary.

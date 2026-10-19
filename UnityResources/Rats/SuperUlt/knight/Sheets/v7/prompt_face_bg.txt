@@ -1,0 +1,6 @@
+Use your built-in image generation tool to EDIT the attached image ref_face_bg_old.png and save the result as PNG to: face_bg.png (in the current working directory). Do not write code. After saving, reply only with the file name.
+
+Image spec:
+- Keep EXACTLY the same 1536x1024 composition, the same flat diagonal light bands, the same colors and the same flat style.
+- REMOVE every star and sparkle shape completely (no stars, no twinkles, no diamond sparkles anywhere); fill those spots with the band or background color behind them.
+- NO text, NO letters.

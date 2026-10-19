@@ -76,6 +76,16 @@ EASE = {'Out': 0, 'Linear': 1, 'In': 2, 'InOut': 3, 'Back': 4, 'Snap': 5}
 def f(x): return f'{x:.2f}f'
 
 
+def cs(v):
+    """표 값 → C# (정수 · 실수 · (x, y) = Vector2 · 글 = 그림 S() · 글 목록 = 그림 배열)"""
+    if isinstance(v, bool): return 'true' if v else 'false'
+    if isinstance(v, int): return str(v)
+    if isinstance(v, float): return f(v)
+    if isinstance(v, tuple): return f'new Vector2({f(v[0])}, {f(v[1])})'
+    if isinstance(v, str): return f'S("{v}")'
+    return 'new[] { ' + ', '.join(f'S("{n}")' for n in v) + ' }'
+
+
 def keys(ks):
     """ks = [(t, x, y, sc, rot, a, ease), ...]"""
     return 'new[] { ' + ', '.join(f'K({f(t)}, {f(x)}, {f(y)}, {f(s)}, {f(r)}, {f(a)}, {EASE[e]})' for t, x, y, s, r, a, e in ks) + ' }'
@@ -93,7 +103,7 @@ class W:
 
 def rat(code):
     """쥐별 연출 (superult_story.STORIES) + 쥐별 모습(SuperUltStyle)"""
-    from superult_story import Story, STORIES
+    from superult_story import Story, STORIES, NO_FINISH, WORLD, IMAGE_FX, NO_TEXT
     st = Story(code, ART, ROOT)
     gi = GI[code]
     name, wind, cols, dot, streak, sway, sfx_cut = gi[0], gi[3], gi[4], gi[5], gi[6], gi[7], gi[9]
@@ -102,7 +112,7 @@ def rat(code):
     st(f'dir = "Assets/Art/Rats/SuperUlt/{code}/"; Import(dir);')
     st(f'{{ var o = scenes.Find("{name}"); if (o) UnityEngine.Object.DestroyImmediate(o.gameObject); }}')
     st(f'var root_{code} = Go("{name}", scenes); Stretch((RectTransform)root_{code}.transform);')
-    STORIES[code](st, f'root_{code}.transform')
+    pts = STORIES[code](st, f'root_{code}.transform')          # 피해 숫자 자리를 돌려주는 쥐만 hitNumbers
     st(f'root_{code}.SetActive(false);')
     pal = ', '.join(f'new Color({f(c[0])}, {f(c[1])}, {f(c[2])}, {f(c[3])})' for c in cols)
     hit = cols[0]
@@ -110,6 +120,11 @@ def rat(code):
     st(f'  sty.dim = new Color({f(dim[0])}, {f(dim[1])}, {f(dim[2])}, {f(dim[3])}); sty.hitColor = new Color({f(hit[0])}, {f(hit[1])}, {f(hit[2])}, 1f); sty.hitSize = 1.6f; sty.hitLighten = 0.4f; sty.lightenColor = new Color({f(hit[0])}, {f(hit[1])}, {f(hit[2])}, 1f);')
     st(f'  sty.snow = new NKK.Lobby.Blizzard(); sty.snow.wind = new Vector2({f(wind[0])}, {f(wind[1])}); sty.snow.color = new Color({f(cols[0][0])}, {f(cols[0][1])}, {f(cols[0][2])}, {f(cols[0][3])});')
     st(f'  sty.snow.palette = new Color[] {{ {pal} }}; sty.snow.dotSize = new Vector2({f(dot[0])}, {f(dot[1])}); sty.snow.streak = {f(streak)}; sty.snow.sway = {f(sway)}; sty.snow.flakeChance = 0;')
+    if code in NO_FINISH: st(f'  sty.noFinishCut = true; sty.actEnd = {f(NO_FINISH[code])}; sty.finishFlash = 0.45f; sty.hitShake = 16; sty.titleOut = 0.95f;')      # ④ 피니시 컷 없음 · 화면 전체 컷신
+    if code in NO_TEXT: st('  sty.hideText = true;')      # 컷신 글 없음 (제목 띠 · 자막 · 히트 수)
+    if code in WORLD: st('  sty.worldPhase = true; ' + ' '.join(f'sty.{k} = {cs(v)};' for k, v in WORLD[code].items()))
+    if code in IMAGE_FX: st('  sty.imageFx = true; ' + ' '.join(f'sty.{k} = {cs(v)};' for k, v in IMAGE_FX[code].items()))
+    if pts: st(f'  sty.hitNumbers = true; sty.hitPoints = new[] {{ {", ".join(f"new Vector2({f(x)}, {f(y)})" for x, y in pts)} }};')
     st(f'  sty.fxCut = 40; sty.fxAct = 40; sty.fxFinish = 20; sty.sfxEnter = "jgl_ult_cutin"; sty.sfxCut = "{sfx_cut}"; sty.sfxHit = "{sfx_hit}"; sty.sfxFinish = "wall_blast"; EditorUtility.SetDirty(sty); }}')
     return '\n'.join(st.o)
 
@@ -142,7 +157,12 @@ def main():
     body.append('UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(hud.gameObject.scene);')
     body.append('UnityEditor.SceneManagement.EditorSceneManager.SaveScene(hud.gameObject.scene);')
     body.append(f'return "ok {" ".join(codes)}";')
-    open(out, 'w', encoding='utf-8').write('\n'.join(body))
+    import re
+    code = '\n'.join(body)
+    code = re.sub(r'(\d)\.00f', r'\1f', code); code = re.sub(r'(\.\d)0f', r'\1f', code)      # MCP 실행 길이 제한 5만 자 → 숫자 줄이기
+    code = re.sub(r'(?<=[,(]) (?=[-\d])', '', code)
+    if len(codes) == 1: code = re.sub(r'\b(\w+?\d+)_' + codes[0] + r'\b', r'\1_z', code)     # 한 마리씩 실행하면 변수 이름 꼬리 줄임
+    open(out, 'w', encoding='utf-8').write(code)
     print(out, codes)
 
 

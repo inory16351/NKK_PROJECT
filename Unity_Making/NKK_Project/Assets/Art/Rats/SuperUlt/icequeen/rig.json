@@ -1,0 +1,39 @@
+{
+ "neck": [
+  0.069,
+  0.395
+ ],
+ "shoulder": [
+  0.238,
+  0.448
+ ],
+ "hip": [
+  0.736,
+  0.325
+ ],
+ "tailRoot": [
+  0.944,
+  0.531
+ ],
+ "headPivot": [
+  0.599,
+  0.86
+ ],
+ "frontPivot": [
+  0.566,
+  0.063
+ ],
+ "backPivot": [
+  0.617,
+  0.059
+ ],
+ "tailPivot": [
+  0.042,
+  0.277
+ ],
+ "headScale": 0.71,
+ "frontScale": 0.995,
+ "backScale": 0.962,
+ "tailScale": 0.899,
+ "capeScale": 1.014
+}

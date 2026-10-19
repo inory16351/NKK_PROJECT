@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_smear.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_blast, ref_frame and ref_light (approved flat effects of this game): flat shapes, at most one soft shade step, clean edges, NO black outlines, NO glow, NO gradients, NOT photographic. ABSOLUTELY NO STAR SHAPES.
+- The attached ref_shot is only a mood reference (an anime sword blast covering the screen with burnt flaming edges). Do not copy it.
+- NO characters, NO text.
+- 1536x1024 image: SWORD SWING AFTERIMAGE: 7-9 long parallel HORIZONTAL motion streaks (smear lines of a very fast giant sword swing) running across almost the whole width, of different lengths and thicknesses, cream-white cores with soft gold and pale blue edges, sharply tapered at both ends, slightly curved, grouped in a band through the middle of the image.
+- Background: ONE solid flat pure magenta #FF00FF everywhere else. Do not use magenta, pink or purple on the streaks.

@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_cut.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered, well inside its cell, none touching.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_knight_fx and ref_flat_fx (approved flat effects of this game): flat shapes, at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO black outlines. Palette: holy gold, cream white, pale blue, plus a warm orange only for the explosions.
+- Background: ONE solid flat pure magenta #FF00FF everywhere, no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+  1. a GIANT straight SLASH LINE: an extremely long thin horizontal blade-cut line across the whole cell width, a cream-white core with gold edges, sharply tapered at both ends (like the screen was cut)
+  2. an ENERGY CHARGE AURA: a round flat swirl of gold and pale blue energy flames rising around an empty center
+  3. a flat cluster of gold ENERGY SPARKS converging (small diamonds and streaks pointing to the center)
+  4. EXPLOSION frame 1: a flat white-gold burst just starting, with a few rock chips
+  5. EXPLOSION frame 2: a big flat explosion cloud of gold, cream and warm orange with flying rock chips and a flat shock ring
+  6. EXPLOSION frame 3: the explosion fading into a few flat grey smoke puffs and falling chips

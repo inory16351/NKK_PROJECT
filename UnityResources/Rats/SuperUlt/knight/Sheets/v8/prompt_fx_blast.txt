@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_blast.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_light and ref_knight_fx (approved flat effects of this game): flat shapes, at most one soft shade step, clean edges, NO black outlines, NOT photographic, NOT painterly. ABSOLUTELY NO STAR SHAPES, no starbursts, no diamond sparkles. The attached ref_shot is ONLY a reference for the composition and mood (a sword thrust shot with a huge light blast and burnt glowing edges), do not copy it.
+- NO characters, NO text, NO letters, NO numbers.
+- 1536x1024 image: ONE huge FRONTAL LIGHT BLAST seen head-on, coming toward the viewer: a big bright cream-white core in the middle surrounded by layered flat gold and warm orange torn flame-like waves and long straight light rays radiating outward (rays are long tapered bands, not star points), filling most of the image; ragged outer edge.
+- Background: ONE solid flat pure magenta #FF00FF around the blast, no shadow. Do not use magenta, pink or purple on the blast.

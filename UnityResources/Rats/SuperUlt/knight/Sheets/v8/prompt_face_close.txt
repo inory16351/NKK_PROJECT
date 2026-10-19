@@ -1,0 +1,6 @@
+Use your built-in image generation tool to EDIT the attached image ref_face_close_old.png and save the result as PNG to: face_close.png (in the current working directory). Do not write code. After saving, reply only with the file name.
+
+Image spec:
+- Keep EXACTLY the same 1536x1024 picture: same knight rat, same pose, same composition, same flat style, same solid magenta #FF00FF background.
+- ONLY change: the white STAR-shaped twinkle highlight in the eye must become a simple small ROUND white highlight dot (like the other eye). No star shapes anywhere.
+- NO text, NO letters.

@@ -81,9 +81,11 @@ namespace NKK.Lobby
         [Tooltip("바람과 직각으로 흔들리는 폭 (px/초)")] public float sway = 140;
         [Tooltip("가까운 입자 중 큰 입자(flake) 비율")] public float flakeChance = 0.08f;
         [Tooltip("돌풍이 잦아드는 빠르기")] public float gustDecay = 2.8f;
+        [Tooltip("그림 입자 (2026-10-19 초필살기 우박: Codex 그림을 그대로 씀). 있으면 점 · 큰 입자가 이 중 아무 그림 — 점 그림은 늘리지 않고 그림 비율 그대로 속도 방향으로 돎. 비우면 예전 벡터 점")]
+        public Sprite[] dotSprites, flakeSprites;
 
         [NonSerialized] float gust;
-        class P { public RectTransform rt; public float depth, size, ph, spin; public bool flake; }
+        class P { public RectTransform rt; public float depth, size, ph, spin; public bool flake, art; }
         [NonSerialized] readonly List<P> ps = new();
 
         public void Add(int n)
@@ -96,13 +98,16 @@ namespace NKK.Lobby
                 bool fl = flake && d > 0.8f && Random.value < flakeChance / 0.2f;
                 var im = UnityEngine.Object.Instantiate(fl ? flake : dot, layer);
                 im.gameObject.SetActive(true); im.raycastTarget = false;
+                var pool = fl ? flakeSprites : dotSprites;
+                bool art = pool != null && pool.Length > 0;
+                if (art) im.sprite = pool[Random.Range(0, pool.Length)];
                 var c = palette != null && palette.Length > 0 ? palette[Random.Range(0, palette.Length)] : color;
                 c.a *= Mathf.Lerp(farAlpha, 1f, d); im.color = c;
                 var rt = im.rectTransform;
                 float size = fl ? Mathf.Lerp(flakeSize.x, flakeSize.y, d) : Mathf.Lerp(dotSize.x, dotSize.y, d * d);
-                rt.sizeDelta = Vector2.one * size;
+                rt.sizeDelta = art && im.sprite ? new Vector2(size * im.sprite.rect.width / Mathf.Max(1, im.sprite.rect.height), size) : Vector2.one * size;
                 rt.anchoredPosition = new Vector2(Random.Range(-half.x, half.x), Random.Range(-half.y, half.y));
-                ps.Add(new P { rt = rt, depth = d, size = size, ph = Random.value * 10, spin = Random.Range(-260f, 260f), flake = fl });
+                ps.Add(new P { rt = rt, depth = d, size = size, ph = Random.value * 10, spin = Random.Range(-260f, 260f), flake = fl, art = art });
             }
         }
 
@@ -128,7 +133,7 @@ namespace NKK.Lobby
                 else
                 {
                     // 속도 방향으로 늘어난 캡슐 = 바람 줄무늬
-                    p.rt.sizeDelta = new Vector2(p.size * (1 + v.magnitude * streak * (0.5f + p.depth)), p.size);
+                    if (!p.art) p.rt.sizeDelta = new Vector2(p.size * (1 + v.magnitude * streak * (0.5f + p.depth)), p.size);      // 그림 입자는 그림 비율 그대로, 방향만
                     p.rt.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg);
                 }
             }
