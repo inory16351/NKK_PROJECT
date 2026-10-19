@@ -88,7 +88,7 @@
    "color": "#e39a5a",
    "scale": 3.4,
    "radius_mul": 3.4,
-   "hp_pow_sec": 22.4,
+   "hp_pow_sec": 33.7,
    "cheese_mul": 300.0,
    "move_speed": 95.0,
    "atk_cd_min": 3.0,
