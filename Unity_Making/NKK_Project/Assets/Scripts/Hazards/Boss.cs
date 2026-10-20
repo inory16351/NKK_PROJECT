@@ -53,7 +53,10 @@ namespace NKK.Hazards
         [Tooltip("깎인 체력 자국 (채움 뒤, 잠깐 있다가 천천히 따라 줄어듦)")] public RectTransform barTrail;
         [Tooltip("자국이 따라오기 전 기다림 (초) · 따라오는 빠르기")] public float trailDelay = 0.45f, trailSpeed = 2.5f;
         [Tooltip("보스 엠블럼 (맞을 때 흔들림)")] public RectTransform barEmblem;
+        [Tooltip("막대 안 남은 체력 % 글 (자리표시 {0} = 정수 %)")] public TMP_Text barPct;
+        [Tooltip("% 글 틀")] public string barPctFormat = "{0}%";
         float trailK = 1, trailWait, fightStart;
+        int lastPct = -1;
 
         [Header("글 (인스펙터, 자리표시 {name} {title} {floor})")]
         [Tooltip("보스 층에 들어갈 때 배너 부제")] public string floorSub;
@@ -1546,6 +1549,11 @@ namespace NKK.Hazards
             {
                 barHit.rectTransform.anchorMax = new Vector2(k, barHit.rectTransform.anchorMax.y);
                 var c = barHit.color; c.a = Mathf.Clamp01(hitT * 3); barHit.color = c;
+            }
+            if (barPct)
+            {
+                int p = hp > 0 ? Mathf.Clamp(Mathf.CeilToInt(k * 100), 1, 100) : 0;     // 살아 있으면 최소 1%
+                if (p != lastPct) { barPct.text = string.Format(barPctFormat, p); lastPct = p; }
             }
         }
 
