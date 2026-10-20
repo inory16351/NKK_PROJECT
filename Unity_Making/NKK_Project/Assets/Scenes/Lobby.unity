@@ -8587,6 +8587,7 @@ MonoBehaviour:
   equipMark: {fileID: 371229516}
   unknownName: ???
   unknownNameKey: 0
+  inner: {fileID: 0}
 --- !u!114 &122011864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8891,6 +8892,8 @@ MonoBehaviour:
     sway: 260
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &127509660
 GameObject:
   m_ObjectHideFlags: 0
@@ -9024,7 +9027,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC544\uC9C0\uD2B8\uB85C \uCABC\uB974\uB974"
+  m_text: "\uC544\uC9C0\uD2B8\uB85C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: d6e664104e165ff498ede20d9194f326, type: 2}
@@ -9046,7 +9049,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 0
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -9116,7 +9119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5918c9e9998c044419ddd45fa545d070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.LocText
-  key: 8000037
+  key: 8000514
   template: 1
 --- !u!1 &132101776
 GameObject:
@@ -12996,6 +12999,8 @@ MonoBehaviour:
     sway: 150
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &208201544
 GameObject:
   m_ObjectHideFlags: 0
@@ -23219,11 +23224,11 @@ RectTransform:
   - {fileID: 127916881}
   m_Father: {fileID: 583450918}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 24, y: 0}
-  m_SizeDelta: {x: 270, y: 78}
-  m_Pivot: {x: 0, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -20, y: 0}
+  m_SizeDelta: {x: 157, y: 78}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!1 &411269789
 GameObject:
   m_ObjectHideFlags: 0
@@ -29494,6 +29499,8 @@ MonoBehaviour:
     sway: 140
     flakeChance: 0.08
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &550200694
 GameObject:
   m_ObjectHideFlags: 0
@@ -33523,6 +33530,7 @@ MonoBehaviour:
   equipMark: {fileID: 855327527}
   unknownName: ???
   unknownNameKey: 0
+  inner: {fileID: 0}
 --- !u!114 &629803674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34656,11 +34664,11 @@ RectTransform:
   - {fileID: 9584151}
   m_Father: {fileID: 583450918}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 24, y: 0}
   m_SizeDelta: {x: 1180, y: 90}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &667348820
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36843,6 +36851,8 @@ MonoBehaviour:
     sway: 20
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &721756728
 GameObject:
   m_ObjectHideFlags: 0
@@ -38234,6 +38244,8 @@ MonoBehaviour:
     sway: 60
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &741721290
 GameObject:
   m_ObjectHideFlags: 0
@@ -41543,6 +41555,8 @@ MonoBehaviour:
     sway: 100
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &816263351
 GameObject:
   m_ObjectHideFlags: 0
@@ -42809,6 +42823,8 @@ MonoBehaviour:
     sway: 60
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &837597876
 GameObject:
   m_ObjectHideFlags: 0
@@ -49605,6 +49621,8 @@ MonoBehaviour:
     sway: 120
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &980725986
 GameObject:
   m_ObjectHideFlags: 0
@@ -58573,6 +58591,8 @@ MonoBehaviour:
     sway: 120
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &1151466314
 GameObject:
   m_ObjectHideFlags: 0
@@ -65160,6 +65180,8 @@ MonoBehaviour:
     sway: 120
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &1282957003
 GameObject:
   m_ObjectHideFlags: 0
@@ -68043,6 +68065,8 @@ MonoBehaviour:
     sway: 40
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &1345588265
 GameObject:
   m_ObjectHideFlags: 0
@@ -70843,6 +70867,8 @@ MonoBehaviour:
     sway: 20
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &1405041657
 GameObject:
   m_ObjectHideFlags: 0
@@ -70957,6 +70983,8 @@ MonoBehaviour:
     sway: 90
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &1408275836
 GameObject:
   m_ObjectHideFlags: 0
@@ -74232,6 +74260,8 @@ MonoBehaviour:
     sway: 15
     flakeChance: 0.08
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
   speedDots: 45
   speedMul: 0.55
   speedBase: 60
@@ -82243,7 +82273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -20, y: 0}
+  m_AnchoredPosition: {x: -193, y: 0}
   m_SizeDelta: {x: 380, y: 60}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1629474523
@@ -85766,6 +85796,8 @@ MonoBehaviour:
     sway: 320
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &1678620220
 GameObject:
   m_ObjectHideFlags: 0
@@ -86173,6 +86205,8 @@ MonoBehaviour:
     sway: 220
     flakeChance: 0
     gustDecay: 2.8
+    dotSprites: []
+    flakeSprites: []
 --- !u!1 &1684169658
 GameObject:
   m_ObjectHideFlags: 0

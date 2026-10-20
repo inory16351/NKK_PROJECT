@@ -29,7 +29,7 @@ def main():
         im = im.resize((im.width // 4 * 4, im.height // 4 * 4), Image.LANCZOS)      # 4의 배수 → WebAtlas 폴더 아틀라스에서 빠짐 (큰 그림이 아틀라스를 넘치게 하지 않게)
         im.save(os.path.join(OUT, n + '.png')); made.append(n)
         bx, by = round(im.width * kx), round(im.height * ky)
-        borders[n] = [bx, by, bx, by]
+        borders[n] = [bx, by, bx, by]       # 왼 · 아래 · 오른 · 위 (판 = 처음 그림, 두꺼운 윗판 시안은 Sheets/ui/_old/aug_panel_v2_thick.png — 사용자가 되돌림)
         print(n, im.size, 'border', bx, by)
     for n in made:
         shutil.copy(os.path.join(OUT, n + '.png'), os.path.join(DST, n + '.png'))

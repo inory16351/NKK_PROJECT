@@ -14341,6 +14341,16 @@
    "en": "Total {n}"
   },
   {
+   "string_key": 8000513,
+   "ko": "증강",
+   "en": "Augments"
+  },
+  {
+   "string_key": 8000514,
+   "ko": "아지트로",
+   "en": "To Hideout"
+  },
+  {
    "string_key": 9000001,
    "ko": "찍찍!! {power} / 적정 {need}",
    "en": "SQUEAK!! {power} / Rec. {need}"

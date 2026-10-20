@@ -76,7 +76,7 @@ class Player:
         p0 = self.power[str(self.tier)]['start']; p1 = self.power[str(self.tier)]['end']
         p = p0 * (p1 / p0) ** self.tree_frac()
         if self.maxf > 31 and floor >= 31:      # 증강 (31층~ 층마다 하나, 슬롯 5 + 노드)
-            slots = 5 + self.sk('Aug_Slot')
+            slots = min(5, 2 + self.sk('Aug_Slot'))      # 2칸 시작 · 최대 5 (2026-10-20)
             p *= 1 + AUG_PER_SLOT * min(slots, max(0, run_floors))
         return p
     def births(self, n_floors):               # 판에서 깬 층 수만큼 출생 → 종마다 조각 (기댓값)

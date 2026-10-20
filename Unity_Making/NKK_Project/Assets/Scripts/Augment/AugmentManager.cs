@@ -41,7 +41,7 @@ namespace NKK
         [Tooltip("보관함 카드가 들어갈 곳 (스크롤 Content)")] public Transform storageParent;
         [Tooltip("카드 템플릿 (꺼 둠)")] public AugmentCard cardTemplate;
         [Tooltip("빈 슬롯 템플릿 (꺼 둠)")] public GameObject emptySlotTemplate;
-        [Tooltip("아직 안 열린 슬롯 미리보기 (공용 스킬로 늘어나는 최대 칸까지 자물쇠, 증강 설정 slot_max 기본 8)")] public bool showLockedSlots = true;
+        [Tooltip("아직 안 열린 슬롯 미리보기 (공용 스킬로 늘어나는 최대 칸까지 자물쇠, 증강 설정 slot_max = 5)")] public bool showLockedSlots = true;
         [Tooltip("아무것도 안 골랐을 때 자세히 자리에 켜지는 안내")] public GameObject detailHint;
         [Tooltip("보관함이 비었을 때 켜지는 안내")] public GameObject storageEmptyNote;
         [Tooltip("장착 · 빼기 버튼 그림 (비우면 그대로)")] public Sprite equipSprite, unequipSprite;
@@ -192,15 +192,15 @@ namespace NKK
         // ── 관리 창 ──
         public void OpenManage()
         {
-            if (!managePanel || Pausing) return;
+            if (!managePanel || Pausing || managePanel.activeSelf) return;
             selUid = 0; synthMode = false; replaceMode = false; synthSel.Clear();
-            managePanel.SetActive(true); Pausing = true;
+            managePanel.SetActive(true);          // 관리 창은 게임을 멈추지 않음 (2026-10-20 사용자: 시간은 자연스럽게 흐르게) — 고르기 창만 멈춤
             Refresh();
         }
         public void CloseManage()
         {
             if (!managePanel || !managePanel.activeSelf) return;
-            managePanel.SetActive(false); Pausing = false;
+            managePanel.SetActive(false);
         }
 
         void Refresh()
@@ -212,7 +212,7 @@ namespace NKK
             for (int i = 0; i < slotCards.Count; i++) if (slotCards[i].gameObject.activeSelf) BindCard(slotCards[i], Augments.Item(Augments.Equipped[i]), true);
             while (emptyCards.Count < n) { if (!emptySlotTemplate) break; emptyCards.Add(Instantiate(emptySlotTemplate, slotParent)); }
             for (int i = 0; i < emptyCards.Count; i++) { emptyCards[i].SetActive(i < n - Augments.Equipped.Count); emptyCards[i].transform.SetAsLastSibling(); SlotArt(emptyCards[i], false); }
-            int locked = showLockedSlots ? Mathf.Max(0, Mathf.RoundToInt(Augments.Cfg("slot_max", 8)) - n) : 0;
+            int locked = showLockedSlots ? Mathf.Max(0, Mathf.RoundToInt(Augments.Cfg("slot_max", 5)) - n) : 0;
             while (lockCards.Count < locked) { if (!emptySlotTemplate) break; lockCards.Add(Instantiate(emptySlotTemplate, slotParent)); }
             for (int i = 0; i < lockCards.Count; i++) { lockCards[i].SetActive(i < locked); lockCards[i].transform.SetAsLastSibling(); SlotArt(lockCards[i], true); }
             // 보관함 (장착 안 한 것, 높은 등급 · 높은 레벨 먼저)
