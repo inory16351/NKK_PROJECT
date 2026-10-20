@@ -25,7 +25,7 @@ namespace NKK.Lobby
         [Tooltip("첫 방문 선물 창 (꺼 둠) · 글 ({name} {n}) · 확인")] public GameObject giftPopup;
         public TMP_Text giftText;
         public Button giftOk;
-        [Tooltip("확인 창 (신화 구매 · 치즈 절반 넘는 리롤): 창 · 글 ({cost}) · 예 · 아니오")] public GameObject confirm;
+        [Tooltip("확인 창 (치즈 절반 넘는 리롤): 창 · 글 ({cost}) · 예 · 아니오 — 신화 구매는 2026-10-20 부터 확인 안 함")] public GameObject confirm;
         public TMP_Text confirmText;
         public Button confirmYes, confirmNo;
 
@@ -93,8 +93,8 @@ namespace NKK.Lobby
                     double price = BlackMarket.Price(g);
                     var pt = buy.transform.Find("Price")?.GetComponent<TMP_Text>(); if (pt) pt.text = pt.text.Replace("{price}", Fmt(price));
                     buy.interactable = p.cheese >= price;
-                    int slot = i; bool mythic = g != null && g.Grade == Grade.Mythic;
-                    buy.onClick.AddListener(() => Ask(mythic, Fmt(price), () => Buy(slot)));
+                    int slot = i;
+                    buy.onClick.AddListener(() => Buy(slot));      // 신화도 확인 창 없이 바로 구매 (2026-10-20 사용자)
                 }
                 var lk = go.transform.Find("Lock")?.GetComponent<Button>();
                 if (lk)
