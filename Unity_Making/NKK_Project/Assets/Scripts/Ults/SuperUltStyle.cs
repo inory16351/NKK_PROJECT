@@ -64,6 +64,7 @@ namespace NKK.Ults
         [Tooltip("몇 초마다 · 한 번에 몇 마리 · 키 (px, 최소~최대) · 속도 (px/초, 최소~최대) · 프레임 시간 (초)")] public float runGap = 0.12f; public int runCount = 3;
         public Vector2 runHeight = new(110, 190), runSpeed = new(1500, 2100); public float runFrame = 0.07f;
         [Tooltip("켜면 게임 화면 단계의 눈보라 · 입자(worldSnow)를 안 띄움")] public bool worldSnowOff;
+        [Tooltip("게임 화면 단계 입자 수 배율 (매니저 worldSnowStart · worldSnowHit 에 곱함, 2026-10-20 스트리머 하트 = 0.3)")] public float worldSnowScale = 1;
         [Header("게임 화면 큰 폭발 하나 (2026-10-20 폭탄마: 레이저가 맵에 내리꽂혀 맵 전체를 덮는 폭발 → 버섯구름)")]
         [Tooltip("게임 화면 단계 시작에 위에서 화면 가운데로 내리꽂히는 레이저 그림 · 굵기 (px) · 시간")] public Sprite blastBeam;
         public float blastBeamWidth = 260, blastBeamTime = 0.22f;
@@ -73,6 +74,8 @@ namespace NKK.Ults
         public float mushSize = 1300, mushFrame = 0.3f;
         [Tooltip("초토화 (2026-10-20 폭탄마): 폭발 순간 화면을 덮는 섬광 · 맵 끝까지 퍼지는 충격파 고리 · 사방으로 날아가는 파편 · 맵을 덮었다 걷히는 연기")] public Sprite blastFlash, blastRing, blastDebris, blastSmoke;
         public int blastDebrisCount = 14; public float blastSmokeSize = 3400;
+        [Header("버프 (2026-10-20 스트리머: 파괴 연출과 함께 모든 쥐 일정 시간 버프)")]
+        [Tooltip("마지막 일격 때 맵의 모든 쥐에게 광란(frenzy: 속도 · 피해 ×1.5)을 이 초만큼 (0 = 안 함)")] public float buffAll;
 
         [Header("화면 위 피니시 그림 (예: 화면을 가르는 번개)")]
         public Sprite finishArt;

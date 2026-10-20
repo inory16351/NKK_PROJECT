@@ -41,11 +41,12 @@ GRID_FX = ['strike', 'impact', 'ring', 'streak', 'burst', 'aura']        # gen_s
 GRID_PROPS = ['meme', 'pop', 'float1', 'float2', 'band', 'fg']           # gen_superult_prompts.PROPS
 FLAT_NAMES = {'knight': ['ghostsword', 'pillar', 'arc', 'motes', 'burst', 'ring'],      # fx_flat.png 칸 이름 (쥐마다 그린 것이 다를 때)
               'pharaoh': ['circle', 'sandburst', 'dust', 'bandage', 'sunflash', 'sandring'],
-              'bomber': ['circle', 'circle_persp', 'runering', 'circle_small', 'redflash', 'embers']}    # 폭탄마 v2 (2026-10-20): 빨간 마법진 · 원근 마법진 · 룬 고리 · 작은 마법진 · 붉은 섬광 · 불티
+              'bomber': ['circle', 'circle_persp', 'runering', 'circle_small', 'redflash', 'embers'],
+              'streamrat': ['heart', 'heartburst', 'note', 'glint', 'neonring', 'confetti']}     # 스트리머 v2 (2026-10-20): 하트 · 하트 터짐 · 음표 · 고글 반짝 · 네온 고리 · 색종이    # 폭탄마 v2 (2026-10-20): 빨간 마법진 · 원근 마법진 · 룬 고리 · 작은 마법진 · 붉은 섬광 · 불티
 STRIP3 = {'beam.png': ['fx_beam', 'fx_beamcore', 'fx_beamhit'], 'mushroom.png': ['fx_mush1', 'fx_mush2', 'fx_mush3']}   # 가로 3칸 (자홍, 여백 자름) — 폭탄마 v2 레이저 · 버섯구름 (버섯구름은 같은 바닥선 → 칸 크기 그대로)
 GRID6 = {'boom.png': (['boom1', 'boom2', 'boom3', 'shockring', 'debris', 'smoke'], 3)}    # 자홍 3×2: 앞 n 개 = 프레임 (칸 크기 그대로) · 나머지 = 여백 자름  # 파라오 v2 (2026-10-20): 소환진 · 모래 분수 · 모래 먼지 · 붕대 · 해 섬광 · 모래 고리
-HIT_NAMES = {'pharaoh': ['sandstreak', 'scarab', 'puff', 'hit1', 'hit2', 'hit3']}       # fx_hit.png 칸 이름 (기본 = 기사: slash · wave · mote · hit1~3)
-FLAT_PROPS = {'pharaoh': ['sarcophagus', 'jar', 'scarab', 'obelisk', 'meme', 'fg']}     # props_flat.png 칸 이름 (기본 = GRID_PROPS)
+HIT_NAMES = {'pharaoh': ['sandstreak', 'scarab', 'puff', 'hit1', 'hit2', 'hit3'], 'streamrat': ['streak', 'coin', 'dot', 'pop1', 'pop2', 'pop3']}       # fx_hit.png 칸 이름 (기본 = 기사: slash · wave · mote · hit1~3)
+FLAT_PROPS = {'pharaoh': ['sarcophagus', 'jar', 'scarab', 'obelisk', 'meme', 'fg'], 'streamrat': ['monitor', 'coins', 'gift', 'like', 'meme', 'glowstick']}     # props_flat.png 칸 이름 (기본 = GRID_PROPS)
 GRID_CRACK = ['crack1', 'crack2', 'crack3', 'shard1', 'shard2', 'shard3']   # crack.png (자홍 3×2): 화면 얼음 금 · 깨진 파편 (2026-10-19 아이스 퀸 v2)
 
 
@@ -146,6 +147,8 @@ def main(code):
             im = Image.open(p); w, h = im.size; yy, xx = np.mgrid[0:h, 0:w]          # 크롭형 마스크 블러: 기사 둘레 타원은 선명, 바깥으로 갈수록 흐림 (카메라가 기사를 보므로 화면 가장자리 = 흐림)
             rr = np.sqrt(((xx - 768) / 270) ** 2 + ((yy - 1080) / 210) ** 2)
             blur_copy(im, 16, np.clip((rr - 1) / 1.4, 0, 1)).save(os.path.join(out, 'pano_rear_blur.png')); print('pano_rear_blur')
+        elif f == 'rear.png':             # 스트리머 v2: 뒷모습 통이미지 (한 장 그대로) + 블러 사본 rear_blur (줌 · 회전 전환의 잔상)
+            shutil.copy(p, os.path.join(out, f)); blur_copy(Image.open(p), 18).save(os.path.join(out, 'rear_blur.png')); print('rear + rear_blur')
         elif f == 'rear_bg.png':
             shutil.copy(p, os.path.join(out, f)); print(f, '배경')
         elif f in ('fx_frame.png', 'fx_blast.png'):     # 기사 v8: 탄 가장자리 화면 틀(가운데 자홍 = 투명, 크기 그대로) · 정면 빛 폭발 (여백 자름)

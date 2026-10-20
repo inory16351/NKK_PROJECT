@@ -7,10 +7,11 @@ import json, math, os, random
 from PIL import Image
 
 HITS = [2.0 + 0.2 * i for i in range(10)]
-NO_FINISH = {'icequeen': 3.4, 'knight': 3.95, 'pharaoh': 3.75, 'bomber': 3.05}          # ④ 피니시 컷 없는 쥐: ③ 끝(마지막 일격 · 또는 컷신 끝) 시각 = SuperUltStyle.actEnd (2026-10-19 사용자)
+NO_FINISH = {'icequeen': 3.4, 'knight': 3.95, 'pharaoh': 3.75, 'bomber': 3.05, 'streamrat': 3.6}          # ④ 피니시 컷 없는 쥐: ③ 끝(마지막 일격 · 또는 컷신 끝) 시각 = SuperUltStyle.actEnd (2026-10-19 사용자)
 WORLD = {'icequeen': dict(cutFade=0.4, worldTime=3.0, freezeAll=1.5, blizzardCount=1, hailCount=3, playRate=0.75),
          'pharaoh': dict(cutFade=0.4, worldTime=2.2, blizzardCount=0, hailCount=0, playRate=0.75),     # 미라 쥐들이 왼→오로 달려 지나감 (2026-10-20 사용자: 모래바람 대신)
          'bomber': dict(cutFade=0.15, worldTime=2.2, blizzardCount=0, hailCount=0, playRate=0.75),     # 레이저 컷신 뒤 게임 맵 위 거대 폭발 하나 (2026-10-20 사용자)
+         'streamrat': dict(cutFade=0.3, worldTime=2.0, blizzardGap=0.14, blizzardCount=1, hailCount=1, playRate=0.75, worldWind=(0.0, -380.0), worldDotSize=(40.0, 70.0)),     # 하트 · 색종이가 쏟아지며 대상마다 하트 팡 (2026-10-20)
          'knight': dict(cutFade=0.4, worldTime=1.0, blizzardCount=0, hailCount=0, playRate=0.75, worldWind=(60.0, 260.0), worldDotSize=(16.0, 40.0))}
 NO_TEXT = {'knight'}       # 컷신에 글(제목 띠 · 자막 · 히트 수 · 밈 글)을 안 띄우는 쥐 (2026-10-19 사용자)
 KNIGHT_LINE = -40          # 기사 칼 각도 (도, UI 반시계 +): 후경 기사 칼날을 잰 값 — 컷신 갈라짐 · 땅 균열 · 게임 화면 파동 전부 이 각도 (2026-10-19 사용자)
@@ -18,6 +19,7 @@ IMAGE_FX = {'pharaoh': dict(hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splash
                             runFrames=['anim_mside_1', 'anim_mside_2', 'anim_mside_3'], runGap=0.11, runCount=3, runHeight=(160.0, 160.0), runSpeed=(1500.0, 2100.0), runFrame=0.07),     # 파라오 v2: 게임 화면 = 미라 돌격 · 태클 충돌 (2026-10-20 사용자: 달리는 미라 크기 균등 · 맨 끝 정면 군단 뺌)
             'bomber': dict(hailSplash=[], worldSnowOff=True, blastBeam='fx_beam', blastBeamWidth=360.0, blastBeamTime=0.12, blastFrames=['fx_boom1', 'fx_boom2', 'fx_boom3'], blastSize=3400.0, blastFrame=0.24, mushFrames=[],
                            blastFlash='fx_redflash', blastRing='fx_shockring', blastDebris='fx_debris', blastDebrisCount=16, blastSmoke='fx_smoke', blastSmokeSize=2400.0),     # 버섯구름 없이 맵 전체를 초토화하는 거대 폭발 하나 (2026-10-20 사용자)
+            'streamrat': dict(hailFall=['fx_heart', 'fx_confetti', 'fx_heart'], hailChunk=['fx_note', 'fx_coin'], hailSplash=['fx_pop1', 'fx_pop2', 'fx_pop3'], splashSize=200.0, splashHitSize=340.0, splashFinishSize=640.0, buffAll=8.0, worldSnowScale=0.3),     # 마무리에 모든 쥐 광란 8초 (사용자: 파괴 + 모든 쥐 버프)
             'icequeen': dict(hailFall=['fx_hail_fall', 'fx_hail_fall', 'fx_hail_ball'], hailChunk=['fx_hail_chunk', 'fx_hail_ball'],
                              hailSplash=['fx_hail_splash1', 'fx_hail_splash2', 'fx_hail_splash3']),
             'knight': dict(hailFall=['fx_dots'], hailChunk=['fx_dots'], hailSplash=['fx_boom1', 'fx_boom2', 'fx_boom3'],      # 별 모양 없음 (둥근 빛 알갱이 · 폭발) splashHitSize=240.0, splashFinishSize=400.0,
@@ -597,26 +599,98 @@ def alien(s, R):
 
 
 def streamrat(s, R):
-    """가로: 침실 → 방송 책상 → 네온 창. ② 침실에서 책상으로 부드럽게 다가가며 채팅 말풍선이 줄줄이 솟고 구독자 숫자 · ③ 화면 속 화면(방송 창) + 네온 하트 낙하 · ④ 비스듬히 돌며 무지개 폭발 + 상패"""
-    I = s.group('Intro', R, 0.4, 1.9)
-    tr = s.cam(I, [(0.4, 0.15, 0.55, 1.2, 0, 'Out'), (1.3, 0.5, 0.6, 1.45, 0, 'InOut'), (1.9, 0.52, 0.6, 1.55, 3, 'Linear')], kicks=[1.32])
-    s.pose(tr, 'Pose', 'pose_intro', 620, [(0.4, 0.5, 0.7, 1, 0, 1, 'Out'), (1.9, 0.5, 0.7, 1.03, 0, 1, 'Linear')], jitter=2.0)
-    s.rise(I, 'Chat', 'prop_float1', [0.6 + 0.1 * i for i in range(10)], [-750, 700, -600, 650, -800, 560, -700, 780, -620, 720], -560, 560, sc=0.35, dur=0.6)
-    s.pops(tr, 'Heart', 'prop_pop', [(0.4, 0.5), (0.6, 0.45), (0.45, 0.4), (0.55, 0.55)], 1.3, gap=0.06)
-    s.text(I, 'Counter', s.story.get('counter') or '{n}', 76, (0, 380), [(0.95, 0, 380, 0, -4, 0, 'Out'), (1.15, 0, 380, 1, -4, 1, 'Back'), (1.62, 0, 380, 1, -4, 1, 'Linear'), (1.7, 0, 380, 1.3, -4, 1, 'Back')], w=760, counter=(999950, 1000000, 1.1, 1.62))
-    s.face(I, 'zoom', 1.66)
-    A = s.group('Act', R, 1.9, 3.9)
-    b = s.band(A, 'Window', (980, 560), [(1.9, 1400, 260, 0.6, 0, 1, 'Out'), (2.1, 440, 240, 1, 0, 1, 'Back'), (3.9, 440, 240, 1, 0, 1, 'Linear')])
-    s.bandpano(b, [(1.9, -s.P(0.5, 0.5)[0], -s.P(0.5, 0.5)[1], 1, 0, 1, 'Out'), (3.9, -s.P(0.8, 0.5)[0], -s.P(0.8, 0.5)[1], 1, 0, 1, 'Linear')])
-    s.s(b, 'Pose', 'pose_act', s.hp('pose_act', 520), [(1.9, 0, -600, 0.9, 0, 1, 'Out'), (2.3, 0, 0, 1, 0, 1, 'Back'), (3.9, 0, 10, 1.05, 0, 1, 'Linear')], jitter=3.0)
-    s.rain(A, 'Heart', 'fx_strike', HITS, [-850, -400, -650, -150, -900, -300, -700, -50, -500, -800], 520, -250, sc=0.9, dur=0.15, impact='fx_impact', isc=0.8)
-    s.shower(A, 'Dono', 'prop_band', 2.1, 3.8, 10, 200, 900, -40, -560, sc=0.3)
-    F = s.group('Finish', R, 3.9)
-    tr = s.cam(F, [(3.9, 0.7, 0.45, 1.4, 16, 'Out'), (4.15, 0.52, 0.6, 1.25, -4, 'Back'), (5.0, 0.52, 0.6, 1.05, 0, 'Out')], kicks=[4.15], power=60)
-    s.pose(tr, 'Pose', 'pose_finish', 680, [(3.9, 0.52, 1.1, 1, 0, 1, 'Out'), (4.2, 0.52, 0.69, 1, 0, 1, 'Back'), (5.0, 0.52, 0.69, 1.02, 0, 1, 'Linear')])
-    s.burst_ring(F, 'Neon', 'fx_burst', 4.15, 0, 50, n=8, r=800, sc=0.6)
-    s.burst_ring(F, 'Like', 'fx_aura', 4.3, 0, 50, n=6, r=500, sc=0.45)
-    s.meme(F, 4.35)
+    """세로 (정면): 네온 천장 → 방송 방 벽(모니터) → 바닥 러그. (2026-10-20 v2, 사용자: 도네 받는 장면 → 고글 '이이잉' 리액션 + 트래킹 줌 → 제로투 느낌 전신 춤, 게임 그림체 최대한)
+    저작권: 특정 캐릭터 · 의상 · 음악 없이 '양팔 굽혀 엉덩이 흔드는 춤 동작'만 오마주. 띠 · 마무리 컷 없음 · 플랫 · 정면 셀 프레임 · 0.75배속 — 컷 5개:
+    ① 0.4 뒷모습 통이미지: 컴퓨터 앞에서 방송 중 → 띵! 모니터에 도네 알림 · 동전 → 천천히 줌인 → 쥐 주위를 돌듯 왼쪽으로 휙 패닝 + 블러 · 잔상이 화면을 덮음
+    ② 1.12 같은 방향 패닝으로 앞모습이 오른쪽에서 밀려 들어옴 → 고글을 쓱 올리면 렌즈가 하얗게 '이이잉' (패러디) → 트래킹 줌으로 얼굴까지
+    ③ 1.75 고글 반짝 얼굴 클로즈업 ④ 2.0 바닥 러그 위 전신: 머리 뒤로 깍지 · 엉덩이를 좌우로 흔드는 8박 춤 (박자마다 카메라 반동 · 하트 · 음표 · 색종이 · 네온 고리)
+    ⑤ 3.2 손가락 하트 → 하트가 화면을 덮음
+    → 컷신 걷힘 → 게임 화면: 하트 · 색종이가 쏟아지며 대상마다 하트 팡 (파괴) · 마무리에 모든 쥐 광란 버프 (buffAll)"""
+    END = NO_FINISH['streamrat']
+
+    def slim(parent, k=0.88):                           # 쥐를 가로로만 줄여 날씬하게 (2026-10-20 사용자) — 레이어 키는 고른 배율이라 부모 묶음에 가로 배율
+        v = s.v('slim'); s(f'var {v} = Go("Slim", {parent}); {v}.transform.localScale = new Vector3({k:.2f}f, 1f, 1f);'); return f'{v}.transform'
+
+    def cut_flash(g, t0, a=0.5):
+        s.s(g, 'CutFlash', 'fx_heartburst', 8.0, [(t0, 0, 0, 1.0, 0, a, 'Snap'), (t0 + 0.09, 0, 0, 1.3, 0, 0, 'Out')])
+
+    MX, MY = 0.5, 0.524                                  # 벽 가운데 큰 모니터 (파노라마 비율)
+    # ① 뒷모습 통이미지: 컴퓨터 앞에서 방송 중 → 띵! 모니터에 도네 알림 → 천천히 줌인 → 카메라가 쥐 주위를 돌듯 왼쪽으로 휙 패닝 + 블러 · 잔상이 화면을 덮음
+    #    (2026-10-20 사용자: 화면을 기울이는 회전 말고 패닝으로 뒷모습 → 앞모습)
+    RS, M = 1.25, (0, 215)                               # 통이미지 배율 (1536 → 1920) · 그림 속 모니터 자리 (화면 px)
+    D0, SP0, SP1 = 0.72, 0.9, 1.12                       # 도네 · 패닝 시작 · 끝 (= 앞모습 전환)
+    PAN = 2600                                           # 패닝 거리 (px)
+
+    def pan_keys(lag=0.0, a=1.0):
+        """천천히 줌인 → 왼쪽으로 휙 (lag = 잔상 지연)"""
+        ks = [(0.4, 0, 0, RS, 0, a, 'Out'), (SP0 + lag, 0, -40, RS * 1.12, 0, a, 'InOut')]
+        for u in (0.4, 1.0):
+            t = SP0 + lag + (SP1 - SP0) * u
+            ks.append((t, -PAN * u ** 1.6, -40, RS * (1.12 + 0.18 * u), 0, a, 'In'))
+        return ks
+    g = s.group('Cut1', R, 0.4, SP1 + 0.08)
+    s.s(g, 'Back', 'face_bg', 1.6, [(0.4, 0, 0, 1, 0, 1, 'Out')])      # 패닝으로 통이미지가 빠진 자리에 게임 화면이 비치지 않게 배경판
+    s.s(g, 'Rear', 'rear', 1.0, pan_keys(), kicks=[D0], kickPower=18, kickTime=0.2)
+    for k, (lag, al) in enumerate(((0.03, 0.5), (0.06, 0.32), (0.09, 0.2))):     # 잔상: 흐린 사본이 늦게 따라옴
+        s.s(g, f'Trail{k}', 'rear_blur', 1.0, [(t, x, y, sc, r, (0 if t <= SP0 + lag else al), e) for t, x, y, sc, r, a, e in pan_keys(lag)])
+    s.s(g, 'BlurCover', 'rear_blur', 1.0, [(t, x, y, sc, r, (0 if t <= SP0 + 0.04 else 0.85), e) for t, x, y, sc, r, a, e in pan_keys(0.0)])      # 패닝 중 흐림이 화면을 덮음
+    s.s(g, 'Ding', 'fx_heartburst', 1.6, [(D0 - 0.01, M[0], M[1], 0, 0, 0, 'Out'), (D0, M[0], M[1], 0.5, 0, 1, 'Snap'), (D0 + 0.12, M[0], M[1], 1.2, 0, 1, 'Back'), (D0 + 0.3, M[0], M[1], 1.4, 0, 0, 'Out')])
+    s.burst_ring(g, 'Coin', 'fx_coin', D0 + 0.02, M[0], M[1], n=10, r=900, sc=0.35, dur=0.4)
+    s.rise(g, 'Heart', 'fx_heart', [D0 + 0.04 * i for i in range(6)], [-700, -420, -140, 140, 420, 700], -300, 520, sc=0.3, dur=0.3)
+    # ② 같은 방향으로 이어지는 패닝: 앞모습이 오른쪽에서 밀려 들어와 멈춤 (쥐 잔상이 뒤따름) → 고글 쓱 → 렌즈가 하얗게 '이이잉' → 트래킹 줌으로 얼굴까지
+    G0, G1, G2, Z0, FACE0 = SP1, 1.3, 1.45, 1.48, 1.75
+    IN = 0.2                                             # 밀려 들어오는 시간
+    g = s.group('Cut2', R, G0, FACE0 + 0.02)
+    s.s(g, 'Back', 'face_bg', 1.6, [(G0, 0, 0, 1, 0, 1, 'Out')])      # 밀려 들어오는 동안 빈 곳 가림
+    Z = 3.4; fx_, fy_ = 0, 120                          # 고글 (화면 (0, 120) 근처)
+    UP0, UP1 = 180, 120                                 # 줌하는 동안 쥐를 화면 위쪽으로 (px, 2026-10-20 사용자: 조금 더 위로) — 1.6 · 2.2배 단계 · 3.4배 얼굴
+    K0, K1 = 1.6, 2.2                                   # 배경 · 쥐를 함께 줌 (2026-10-20 사용자: 모니터 배경과 쥐 크기 차이가 티 안 나게 빠르게 줌) — 시작 1.6배 → G1 2.2배 → 얼굴 3.4배
+    pn = s.v('pan')
+    s(f'var {pn} = E("Pan", {g}, {keys([(G0, PAN, 0, 1.12, 0, 1, "Snap"), (G0 + IN, 0, 0, 1.0, 0, 1, "Out"), (FACE0, 0, 0, 1.0, 0, 1, "Linear")])}).transform;')
+    for k, (lag, al) in enumerate(((0.035, 0.45), (0.07, 0.25))):     # 쥐 잔상 (패닝을 늦게 따라옴)
+        lg = s.v('lag')
+        s(f'var {lg} = G("PanTrail", {g}, {keys([(G0, PAN - fx_ * K0, -fy_ * K0 + UP0, K0 * 1.12, 0, al, "Snap"), (G0 + IN + lag, -fx_ * K0, -fy_ * K0 + UP0, K0, 0, al, "Out"), (G0 + IN + lag + 0.06, -fx_ * K0, -fy_ * K0 + UP0, K0, 0, 0, "Linear")])}).transform;')      # G = CanvasGroup (투명도가 자식에 먹음)
+        s.cel(slim(lg), f'Ghost{k}', [(G0, 'anim_goggle_1')], [(G0, 0, -560, 1, 0, 1, 'Out')], height=760, ref='anim_goggle_1', pano=False)
+    zv = s.v('zoom')
+    s(f'var {zv} = E("Zoom", {pn}, {keys([(G0, -fx_ * K0, -fy_ * K0 + UP0, K0, 0, 1, "Out"), (G1, -fx_ * K1, -fy_ * K1 + UP0, K1, 0, 1, "InOut"), (FACE0 + 0.02, -fx_ * Z, -fy_ * Z + UP1, Z, 0, 1, "In")])}).transform;')
+    tr = s.cam(zv, [(G0, MX, MY + 0.03, 1.5, 0, 'Out'), (FACE0, MX, MY + 0.03, 1.6, 0, 'Linear')], kicks=[G1], power=20)      # 배경도 줌 묶음 안 (쥐와 같이 확대)
+    s.cel(slim(zv), 'Rat', [(G0, 'anim_goggle_1'), (G1, 'anim_goggle_2'), (G2, 'anim_goggle_3')], [(G0, 0, -560, 1, 0, 1, 'Out')], height=760, ref='anim_goggle_1', pano=False)
+    for k, (dx, t0) in enumerate(((-90, G1 + 0.02), (90, G1 + 0.06), (-90, G2 + 0.04), (90, G2 + 0.08))):     # 렌즈 반짝 (이이잉)
+        s.s(zv, f'Glint{k}', 'fx_glint', 0.5, [(t0 - 0.01, fx_ + dx, fy_ + 10, 0, 0, 0, 'Out'), (t0, fx_ + dx, fy_ + 10, 1.0, 0, 1, 'Snap'), (t0 + 0.18, fx_ + dx, fy_ + 10, 1.4, 45, 0, 'Out')])
+    s.s(g, 'BlurOut', 'rear_blur', RS * 1.3, [(G0, -PAN, -40, 1.0, 0, 0.85, 'Snap'), (G0 + IN, -PAN * 1.6, -40, 1.05, 0, 0, 'Out')])      # 앞 컷의 흐림이 왼쪽으로 빠지며 이어짐
+    # ③ 고글 반짝 얼굴 클로즈업 (배경 + 쥐) · 렌즈 반짝 '이이잉'
+    g = s.group('Cut3', R, FACE0, 2.0)
+    s.face(g, 'full', FACE0, 2.0, bg='face_bg')
+    for k, (x, t0) in enumerate(((-260, FACE0 + 0.05), (260, FACE0 + 0.1), (-260, FACE0 + 0.24), (260, FACE0 + 0.28))):
+        s.s(g, f'Glint{k}', 'fx_glint', 1.2, [(t0 - 0.01, x, 90, 0, 0, 0, 'Out'), (t0, x, 90, 1.0, 0, 1, 'Snap'), (t0 + 0.2, x, 90, 1.5, 45, 0, 'Out')])
+    # ④ 바닥 러그 위 전신: 머리 뒤로 깍지 · 엉덩이를 좌우로 크게 흔드는 춤 (밈 춤 동작만 오마주, 2026-10-20 사용자 참고 영상)
+    #    8박 반복: 좌 끝 → 좌 중간 → 가운데(낮게) → 우 중간 → 우 끝 → 우 중간 → 가운데(높게) → 좌 중간 · 박자마다 카메라 반동
+    T0, T1, BEAT = 2.0, 3.2, 0.1
+    beats = [T0 + BEAT * i for i in range(int((T1 - T0) / BEAT) + 1)]
+    LOOP = ['anim_dance_1', 'anim_dance_2', 'anim_dance_3', 'anim_dance2_1', 'anim_dance2_2', 'anim_dance2_1', 'anim_dance2_3', 'anim_dance_2']
+    FY, H = 0.875, 560                                  # 발 (러그 앞쪽) · 키 (화면 높이 약 80%)
+    g = s.group('Cut4', R, T0, T1)
+    tr = s.cam(g, [(T0, 0.5, 0.79, 1.5, 0, 'Out'), (2.6, 0.5, 0.785, 1.42, 0, 'InOut'), (T1, 0.5, 0.79, 1.5, 0, 'InOut')], kicks=beats[::4], power=12, rot=1.2, ktime=0.12)
+    s.w(tr, 'Ring', 'fx_neonring', 1.7, [(T0, 0.5, FY - 0.08, 1.0, 0, 0.55, 'Out'), (T1, 0.5, FY - 0.08, 1.1, 0, 0.55, 'Linear')], spin=40.0, pulse=0.06, pulseHz=1 / (4 * BEAT))
+    TILT = {'anim_dance_1': 10, 'anim_dance_2': 5, 'anim_dance_3': 0, 'anim_dance2_1': -5, 'anim_dance2_2': -10, 'anim_dance2_3': 0}     # 발끝 축으로 몸을 좌우로 기울여 흔들림 보강 (도, 2026-10-20 사용자: 더 크게)
+    SWAY = {'anim_dance_1': -0.014, 'anim_dance_2': -0.007, 'anim_dance_3': 0, 'anim_dance2_1': 0.007, 'anim_dance2_2': 0.014, 'anim_dance2_3': 0}     # 엉덩이 쪽으로 몸이 좌우로 밀림 (파노라마 비율)
+    s.cel(slim(tr), 'Rat', [(t, LOOP[i % len(LOOP)]) for i, t in enumerate(beats)],
+          [(t, 0.5 + SWAY[LOOP[i % len(LOOP)]] / 0.88, FY, 1.0 if LOOP[i % len(LOOP)] != 'anim_dance_3' else 0.96, TILT[LOOP[i % len(LOOP)]], 1, 'InOut') for i, t in enumerate(beats)], height=H, ref='anim_dance_3')
+    s.rise(g, 'Heart', 'fx_heart', [T0 + 0.12 * i for i in range(10)], [(-1) ** i * s.rnd.uniform(420, 880) for i in range(10)], -560, 600, sc=0.3, dur=0.5)      # 몸 양옆으로 (가운데 쥐를 가리지 않게)
+    s.rise(g, 'Note', 'fx_note', [T0 + 0.06 + 0.16 * i for i in range(7)], [(-1) ** (i + 1) * s.rnd.uniform(420, 880) for i in range(7)], -560, 560, sc=0.35, dur=0.5)
+    s.shower(g, 'Confetti', 'fx_confetti', T0 + 0.2, T1 - 0.2, 8, -900, 900, 640, -600, sc=0.45)
+    for i, t in enumerate(beats[::8]):                  # 한 바퀴마다 분홍 번쩍
+        s.s(g, f'Beat{i}', 'fx_heartburst', 7.0, [(t, 0, 0, 1.0, 0, 0.1, 'Snap'), (t + 0.1, 0, 0, 1.2, 0, 0, 'Out')])
+    cut_flash(g, T0)
+    # ⑤ 손가락 하트 → 하트가 화면을 덮음
+    g = s.group('Cut5', R, T1)
+    tr = s.cam(g, [(T1, 0.5, 0.80, 1.7, 0, 'Out'), (END + 0.4, 0.5, 0.80, 1.95, 0, 'Linear')], kicks=[T1 + 0.05], power=30)
+    s.cel(slim(tr), 'Rat', [(T1, 'anim_finish_1')], [(T1, 0.5, FY, 1, 0, 1, 'Out'), (END, 0.5, FY, 1.05, 0, 1, 'Linear')], height=H, ref='anim_dance_3')
+    s.s(g, 'Cover', 'fx_heartburst', 2.0, [(END - 0.2, 0, 60, 0.3, 0, 0, 'Out'), (END - 0.15, 0, 60, 1.0, 0, 1, 'Snap'), (END + 0.4, 0, 60, 8.0, 0, 1, 'In')])
+    cut_flash(g, T1)
+    G = s.group('Top', R, 2.05)
+    s.meme(G, 2.1, side=-1, y=440)
+    return None
 
 
 def ramjui(s, R):

@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or hot pink close to magenta on the elements (use coral pink, salmon, cyan, yellow, white instead).
+- NO text, NO letters, NO numbers.
+- Palette: coral pink, salmon, cyan, lemon yellow, cream white.
+  1. a single flat round HEART in coral pink with a small white highlight
+  2. a big flat HEART BURST: one big coral heart with 6 small hearts flying out around it
+  3. a flat MUSIC NOTE pair (two eighth notes joined) in cyan
+  4. a flat LENS GLINT: a white rounded diamond shine with two thin crossing white light bars (a cartoon glasses shine)
+  5. a flat NEON RING: a thin cyan ring with a coral inner ring
+  6. a flat cluster of CONFETTI: small rectangles and circles in coral, cyan and yellow

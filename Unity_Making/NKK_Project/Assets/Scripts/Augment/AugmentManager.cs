@@ -41,6 +41,10 @@ namespace NKK
         [Tooltip("보관함 카드가 들어갈 곳 (스크롤 Content)")] public Transform storageParent;
         [Tooltip("카드 템플릿 (꺼 둠)")] public AugmentCard cardTemplate;
         [Tooltip("빈 슬롯 템플릿 (꺼 둠)")] public GameObject emptySlotTemplate;
+        [Tooltip("아직 안 열린 슬롯 미리보기 (공용 스킬로 늘어나는 최대 칸까지 자물쇠, 증강 설정 slot_max 기본 8)")] public bool showLockedSlots = true;
+        [Tooltip("아무것도 안 골랐을 때 자세히 자리에 켜지는 안내")] public GameObject detailHint;
+        [Tooltip("보관함이 비었을 때 켜지는 안내")] public GameObject storageEmptyNote;
+        [Tooltip("장착 · 빼기 버튼 그림 (비우면 그대로)")] public Sprite equipSprite, unequipSprite;
         [Tooltip("고른 증강 자세히 (카드)")] public AugmentCard detail;
         [Tooltip("슬롯 수 (자리: {n} {max})")] public TMP_Text slotCountText;
         [Tooltip("장착 / 교체할 슬롯 고르기 / 빼기 버튼 (글은 아래 문자열)")] public Button actionButton;
@@ -62,7 +66,7 @@ namespace NKK
         int pendingFloor = -1;
         readonly List<AugmentRow> offer = new();
         readonly List<AugmentCard> slotCards = new(), storageCards = new(), barCards = new();
-        readonly List<GameObject> emptyCards = new(), barEmpties = new();
+        readonly List<GameObject> emptyCards = new(), barEmpties = new(), lockCards = new();
         readonly List<int> synthSel = new();
         int selUid; bool synthMode, replaceMode;
         int builtVer = -1, barVer = -1; float resultT;
@@ -175,6 +179,7 @@ namespace NKK
             int n = Augments.SlotCount;
             while (barCards.Count < n) barCards.Add(Instantiate(barTemplate, barTemplate.transform.parent));
             while (barEmpties.Count < n) barEmpties.Add(barEmptyTemplate ? Instantiate(barEmptyTemplate, barEmptyTemplate.transform.parent) : null);
+            for (int i = 0; i < barEmpties.Count; i++) if (barEmpties[i]) SlotArt(barEmpties[i], false);
             for (int i = 0; i < barCards.Count; i++)
             {
                 bool has = i < Augments.Equipped.Count, inSlot = i < n;
@@ -206,17 +211,22 @@ namespace NKK
             Fill(slotCards, slotParent, Augments.Equipped.Count);
             for (int i = 0; i < slotCards.Count; i++) if (slotCards[i].gameObject.activeSelf) BindCard(slotCards[i], Augments.Item(Augments.Equipped[i]), true);
             while (emptyCards.Count < n) { if (!emptySlotTemplate) break; emptyCards.Add(Instantiate(emptySlotTemplate, slotParent)); }
-            for (int i = 0; i < emptyCards.Count; i++) { emptyCards[i].SetActive(i < n - Augments.Equipped.Count); emptyCards[i].transform.SetAsLastSibling(); }
+            for (int i = 0; i < emptyCards.Count; i++) { emptyCards[i].SetActive(i < n - Augments.Equipped.Count); emptyCards[i].transform.SetAsLastSibling(); SlotArt(emptyCards[i], false); }
+            int locked = showLockedSlots ? Mathf.Max(0, Mathf.RoundToInt(Augments.Cfg("slot_max", 8)) - n) : 0;
+            while (lockCards.Count < locked) { if (!emptySlotTemplate) break; lockCards.Add(Instantiate(emptySlotTemplate, slotParent)); }
+            for (int i = 0; i < lockCards.Count; i++) { lockCards[i].SetActive(i < locked); lockCards[i].transform.SetAsLastSibling(); SlotArt(lockCards[i], true); }
             // 보관함 (장착 안 한 것, 높은 등급 · 높은 레벨 먼저)
             var st = new List<Progress.AugItem>();
             foreach (var it in Augments.Items) if (!Augments.IsEquipped(it.uid) && Augments.RowOf(it) != null) st.Add(it);
             st.Sort((a, b) => { int g = Augments.RowOf(b).grade.CompareTo(Augments.RowOf(a).grade); return g != 0 ? g : b.lv.CompareTo(a.lv); });
             Fill(storageCards, storageParent, st.Count);
+            if (storageEmptyNote) storageEmptyNote.SetActive(st.Count == 0);
             for (int i = 0; i < st.Count; i++) BindCard(storageCards[i], st[i], false);
             if (slotCountText) slotCountText.text = countTpl.Replace("{n}", Augments.Equipped.Count.ToString()).Replace("{max}", n.ToString());
             // 자세히 · 버튼
             var sel = Augments.Item(selUid);
             if (detail) { detail.gameObject.SetActive(sel != null && !synthMode); if (sel != null) detail.BindItem(sel); }
+            if (detailHint) detailHint.SetActive(sel == null && !synthMode);
             bool selEq = sel != null && Augments.IsEquipped(sel.uid);
             if (actionButton)
             {
@@ -224,6 +234,7 @@ namespace NKK
                 actionButton.interactable = !replaceMode;
                 string lab = replaceMode ? Loc.Get(replacePickLabelKey, replacePickLabel) : selEq ? Loc.Get(unequipLabelKey, unequipLabel) : Augments.HasFreeSlot ? Loc.Get(equipLabelKey, equipLabel) : Loc.Get(replaceLabelKey, replaceLabel);
                 if (actionLabel) actionLabel.text = lab;
+                var bi = actionButton.image; var bs = selEq ? unequipSprite : equipSprite; if (bi && bs) bi.sprite = bs;      // 장착 = 초록 · 빼기 = 빨강
             }
             if (synthOnMark) synthOnMark.SetActive(synthMode);
             int need = SelGradeNeed();
@@ -235,6 +246,14 @@ namespace NKK
             }
         }
         int SelGradeNeed() { var r = synthSel.Count > 0 ? Augments.RowOf(Augments.Item(synthSel[0])) : null; return r != null ? Augments.SynthNeed(r.grade) : 0; }
+
+        // 빈 슬롯 · 안 열린 슬롯 그림 (AugmentArt, 9칸 늘리기)
+        static void SlotArt(GameObject o, bool locked)
+        {
+            var art = AugmentArt.I; var im = o ? o.GetComponent<Image>() : null; if (!art || !im) return;
+            var s = locked ? art.lockedSlot : art.emptySlot; if (!s) return;
+            im.color = Color.white; AugmentCard.SliceFit(im, s);
+        }
 
         void Fill(List<AugmentCard> list, Transform parent, int count)
         {

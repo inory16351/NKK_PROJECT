@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_hit.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or hot pink close to magenta on the elements (use coral pink, salmon, cyan, yellow, white instead).
+- NO text, NO letters, NO numbers.
+- Palette: coral pink, salmon, cyan, lemon yellow, cream white.
+  1. a flat SPEED LINE streak (a horizontal tapered white and cyan streak)
+  2. a flat gold DONATION COIN with a little cheese wedge symbol embossed on it (no letters)
+  3. a small flat round sparkle dot in yellow
+  4. HEART POP frame 1: a small flat white burst with 3 tiny coral hearts
+  5. HEART POP frame 2: a bigger flat coral-and-white burst ring with 6 hearts and confetti flying out
+  6. HEART POP frame 3: the end: a wide thin broken coral ring and a few small hearts, fading shapes

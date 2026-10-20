@@ -14326,6 +14326,21 @@
    "en": "Augments"
   },
   {
+   "string_key": 8000510,
+   "ko": "보관함이 비었어요. 층을 깨면 증강을 얻어요!",
+   "en": "Storage is empty. Clear floors to get augments!"
+  },
+  {
+   "string_key": 8000511,
+   "ko": "증강을 누르면\n여기에 자세히 보여요",
+   "en": "Tap an augment\nto see its details here"
+  },
+  {
+   "string_key": 8000512,
+   "ko": "총 피해 {n}",
+   "en": "Total {n}"
+  },
+  {
    "string_key": 9000001,
    "ko": "찍찍!! {power} / 적정 {need}",
    "en": "SQUEAK!! {power} / Rec. {need}"

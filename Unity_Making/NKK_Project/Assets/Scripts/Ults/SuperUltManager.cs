@@ -404,7 +404,7 @@ namespace NKK.Ults
                 if (snowWind0 == null) { snowWind0 = worldSnow.wind; snowDot0 = worldSnow.dotSize; }
                 worldSnow.wind = st.worldWind != Vector2.zero ? st.worldWind : snowWind0.Value;
                 worldSnow.dotSize = st.worldDotSize != Vector2.zero ? st.worldDotSize : snowDot0.Value;
-                if (!st.worldSnowOff) { worldSnow.Add(worldSnowStart); worldSnow.Gust(worldSnowGust * 1.5f); }     // 파라오 = 입자 없이 미라 돌격만
+                if (!st.worldSnowOff) { worldSnow.Add(Mathf.RoundToInt(worldSnowStart * st.worldSnowScale)); worldSnow.Gust(worldSnowGust * 1.5f); }     // 파라오 = 입자 없이 미라 돌격만
                 if (st.blastFrames != null && st.blastFrames.Length > 0) BigBlast(left);                           // 폭탄마 = 레이저가 맵에 내리꽂혀 큰 폭발 하나 → 버섯구름
                 if (st.lineSprite)
                 {
@@ -705,7 +705,7 @@ namespace NKK.Ults
             c.hitsDone++;
             var pts = Damage(c.baseDmg * Cfg("hit_mul", 4));
             if (st && st.imageFx && st.worldPhase) { SplashAt(pts, st.splashHitSize, 6); SlashFx(pts); if (!st.lineOnce) LineBoom((c.hitsDone - 0.5f) / Mathf.Max(1, Cfg("hit_count", 10)), 1); } else WorldFx(pts, false);
-            if (st && st.worldPhase) { WorldNumbers(pts, c.baseDmg * Cfg("hit_mul", 4), false); if (c.snowOn && !st.worldSnowOff) { worldSnow.Add(worldSnowHit); worldSnow.Gust(worldSnowGust); } }
+            if (st && st.worldPhase) { WorldNumbers(pts, c.baseDmg * Cfg("hit_mul", 4), false); if (c.snowOn && !st.worldSnowOff) { worldSnow.Add(Mathf.RoundToInt(worldSnowHit * st.worldSnowScale)); worldSnow.Gust(worldSnowGust); } }
             else DmgNumber(c.hitsDone - 1, false);
             if (hits && !(st && st.hideText)) { hits.text = (hitsFormat ?? "{n}").Replace("{n}", c.hitsDone.ToString()); hits.transform.localScale = Vector3.one * hitPop; }
             c.uiShake = Mathf.Max(c.uiShake, st && st.hitShake > 0 ? st.hitShake : uiShakeHit);
@@ -720,6 +720,7 @@ namespace NKK.Ults
             if (c.finished) return;
             c.finished = true;
             var pts = Damage(c.baseDmg * Cfg("finish_mul", 20));
+            if (st && st.buffAll > 0 && Rats) foreach (var o in Rats.Rats) if (o) o.frenzy = Mathf.Max(o.frenzy, st.buffAll);      // 모든 쥐 광란 버프 (속도 · 피해 ×1.5, 2026-10-20 스트리머)
             if (st && st.imageFx && st.worldPhase) { SplashAt(pts, st.splashFinishSize, 12); if (!st.lineOnce) Splash(Vector2.zero, st.splashFinishSize * 1.6f); WaveFx(); if (st.lineSprite && !st.lineOnce) { for (int i = 0; i < st.boomFinishCount; i++) LineBoom((i + 0.5f) / st.boomFinishCount, 1.4f); LineWave(1.4f); } } else WorldFx(pts, true);
             if (st && st.worldPhase) WorldNumbers(pts, c.baseDmg * Cfg("finish_mul", 20), true); else DmgNumber(st && st.hitPoints != null ? st.hitPoints.Length - 1 : 0, true);
             Pulse(st ? st.finishFlash : 1);

@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_shelf.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image: ONE long horizontal small WOODEN SHELF / TRAY in the middle of the picture (about 1400x230 px), where small skill slot tiles will sit in a row (HUD bar background), it will be 9-sliced horizontally:
+- STYLE (MOST IMPORTANT): FLAT 2D game UI art exactly like the attached ref_uikit (this game's own approved UI kit: flat cardboard tiles, wooden planks, cork board, round tiles; soft flat colors, at most one soft shade step, clean rounded edges, NO black outlines, NO gloss, NO glow, NO gradients except very soft, NO painterly texture, NOT 3D, NOT shiny mobile-game chrome).
+- NO text, NO letters, NO numbers, no logos.
+- Background: ONE solid flat pure magenta #FF00FF everywhere outside the elements (for chroma keying), no shadow on the background. Do not use magenta or purple on the elements.
+- The shelf: a flat warm light-brown wooden tray with a slightly darker front lip at the bottom, a few simple grain lines, two small metal brackets only near the two ENDS, the long middle part plain and even. Nothing on the shelf.
