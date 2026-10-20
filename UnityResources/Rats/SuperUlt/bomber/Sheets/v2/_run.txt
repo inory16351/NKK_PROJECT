@@ -1,0 +1,12 @@
+10:46:12 ok pano_a
+10:46:14 ok face_bg
+10:46:23 ok face_close
+10:46:24 ok anim_cast
+10:47:00 ok fx_flat
+10:47:02 ok pano_b
+10:47:15 ok anim_fire
+10:48:02 ok pano_c
+10:48:55 ok beam
+10:49:00 ok mushroom
+10:49:06 ok boom
+DONE

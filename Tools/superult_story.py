@@ -7,12 +7,18 @@ import json, math, os, random
 from PIL import Image
 
 HITS = [2.0 + 0.2 * i for i in range(10)]
-NO_FINISH = {'icequeen': 3.4, 'knight': 3.95}          # ④ 피니시 컷 없는 쥐: ③ 끝(마지막 일격 · 또는 컷신 끝) 시각 = SuperUltStyle.actEnd (2026-10-19 사용자)
+NO_FINISH = {'icequeen': 3.4, 'knight': 3.95, 'pharaoh': 3.75, 'bomber': 3.05}          # ④ 피니시 컷 없는 쥐: ③ 끝(마지막 일격 · 또는 컷신 끝) 시각 = SuperUltStyle.actEnd (2026-10-19 사용자)
 WORLD = {'icequeen': dict(cutFade=0.4, worldTime=3.0, freezeAll=1.5, blizzardCount=1, hailCount=3, playRate=0.75),
+         'pharaoh': dict(cutFade=0.4, worldTime=2.2, blizzardCount=0, hailCount=0, playRate=0.75),     # 미라 쥐들이 왼→오로 달려 지나감 (2026-10-20 사용자: 모래바람 대신)
+         'bomber': dict(cutFade=0.15, worldTime=2.2, blizzardCount=0, hailCount=0, playRate=0.75),     # 레이저 컷신 뒤 게임 맵 위 거대 폭발 하나 (2026-10-20 사용자)
          'knight': dict(cutFade=0.4, worldTime=1.0, blizzardCount=0, hailCount=0, playRate=0.75, worldWind=(60.0, 260.0), worldDotSize=(16.0, 40.0))}
 NO_TEXT = {'knight'}       # 컷신에 글(제목 띠 · 자막 · 히트 수 · 밈 글)을 안 띄우는 쥐 (2026-10-19 사용자)
 KNIGHT_LINE = -40          # 기사 칼 각도 (도, UI 반시계 +): 후경 기사 칼날을 잰 값 — 컷신 갈라짐 · 땅 균열 · 게임 화면 파동 전부 이 각도 (2026-10-19 사용자)
-IMAGE_FX = {'icequeen': dict(hailFall=['fx_hail_fall', 'fx_hail_fall', 'fx_hail_ball'], hailChunk=['fx_hail_chunk', 'fx_hail_ball'],
+IMAGE_FX = {'pharaoh': dict(hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashHitSize=240.0, splashFinishSize=420.0, worldSnowOff=True,
+                            runFrames=['anim_mside_1', 'anim_mside_2', 'anim_mside_3'], runGap=0.11, runCount=3, runHeight=(160.0, 160.0), runSpeed=(1500.0, 2100.0), runFrame=0.07),     # 파라오 v2: 게임 화면 = 미라 돌격 · 태클 충돌 (2026-10-20 사용자: 달리는 미라 크기 균등 · 맨 끝 정면 군단 뺌)
+            'bomber': dict(hailSplash=[], worldSnowOff=True, blastBeam='fx_beam', blastBeamWidth=360.0, blastBeamTime=0.12, blastFrames=['fx_boom1', 'fx_boom2', 'fx_boom3'], blastSize=3400.0, blastFrame=0.24, mushFrames=[],
+                           blastFlash='fx_redflash', blastRing='fx_shockring', blastDebris='fx_debris', blastDebrisCount=16, blastSmoke='fx_smoke', blastSmokeSize=2400.0),     # 버섯구름 없이 맵 전체를 초토화하는 거대 폭발 하나 (2026-10-20 사용자)
+            'icequeen': dict(hailFall=['fx_hail_fall', 'fx_hail_fall', 'fx_hail_ball'], hailChunk=['fx_hail_chunk', 'fx_hail_ball'],
                              hailSplash=['fx_hail_splash1', 'fx_hail_splash2', 'fx_hail_splash3']),
             'knight': dict(hailFall=['fx_dots'], hailChunk=['fx_dots'], hailSplash=['fx_boom1', 'fx_boom2', 'fx_boom3'],      # 별 모양 없음 (둥근 빛 알갱이 · 폭발) splashHitSize=240.0, splashFinishSize=400.0,
                            lineSprite='fx_cutline', lineAngle=float(KNIGHT_LINE), lineLength=3000.0, lineThickness=110.0, boomFrames=['fx_boom1', 'fx_boom2', 'fx_boom3'], boomSize=400.0, lineWave='fx_slashwave', lineRipple='fx_ripple', lineOnce=True, boomFinishCount=5)}     # 기사 v3: 화면을 가르는 베기선 → 선을 따라 폭발     # 게임 화면 단계 이펙트 = Codex 그림 (Sheets/v2/hail.png, 벡터 점 대신)     # 컷신 뒤 게임 화면 단계 (다단 · 일격을 게임 화면에서, SuperUltStyle.worldPhase)
@@ -316,7 +322,101 @@ def emperor(s, R):
 
 
 def pharaoh(s, R):
-    """세로: 태양 → 피라미드 → 신전. ② 신전 위에서 천천히 태양까지 올려다봄 → 태양이 번쩍 → 휙 내려와 쾅 · ③ 오른쪽 세로 띠 + 햇빛 기둥이 부채꼴로 쓸고 지나감 · ④ 비스듬히 돌며 태양 고리 · 모래 소용돌이"""
+    """세로 (정면): 노을 태양 → 피라미드 계단 → 모래 평원. (2026-10-20 v2 초안, 사용자: 아누비스 · 미라를 잔뜩 소환 → 미라가 돌격 · 정면샷 · 기사/아이스 퀸 연출 참고)
+    띠 · 마무리 컷 없음 · 플랫 그림 · 리그 파츠 바탕 셀 프레임 · 0.75배속 — 컷 6개:
+    ① 0.4 노을 태양에서 피라미드 정면으로 휙 틸트 다운 ② 0.85 계단 아래 정면: 팔짱 → 지팡이 · 도리깨를 펼쳐 → 두 팔을 하늘로 (소환진이 발밑에서 퍼짐)
+    ③ 1.4 얼굴 정면 클로즈업 (눈이 금빛으로 번쩍)
+    ④ 1.85 소환: 모래 평원 곳곳에서 모래가 터지며 아누비스 · 미라가 줄줄이 솟음 → 카메라가 물러나며 뒤로 군단이 가득 (파라오는 계단 위 가운데)
+    ⑤ 2.65 정면 지휘: 지팡이를 카메라 쪽으로 내지름 ⑥ 2.95 미라 돌격: 멀리서 카메라 쪽으로 미라들이 달려와 화면 밖으로 지나감 · 양옆 아누비스 호위 · 모래 먼지
+       → 맨 앞 미라가 카메라로 덮쳐 와 모래 먼지로 화면을 덮음
+    → 컷신 걷힘 → 게임 화면: 미라 쥐들이 왼→오로 줄줄이 달려 지나감 (runFrames, 모래 입자 없음) · 다단 10타 = 태클 충돌
+    (2026-10-20 사용자: 아누비스는 ④ 에서 한 마리만 크게 · ⑥ 옆에서 지켜봄, 미라는 잔뜩)"""
+    END = NO_FINISH['pharaoh']
+
+    def cut_flash(g, t0, a=0.55):
+        s.s(g, 'CutFlash', 'fx_sunflash', 6.0, [(t0, 0, 0, 1.0, 0, a, 'Snap'), (t0 + 0.09, 0, 0, 1.3, 0, 0, 'Out')])
+
+    def run_frames(t0, t1, gap=0.07, first=0):
+        """미라 달리기 3프레임을 t0~t1 동안 반복"""
+        fr, t, k = [], t0, first
+        while t < t1:
+            fr.append((t, f'anim_mrun_{k % 3 + 1}')); t += gap; k += 1
+        return fr
+
+    # ① 노을 태양 → 피라미드 정면으로 휙 틸트 다운
+    g = s.group('Cut1', R, 0.4, 0.85)
+    tr = s.cam(g, [(0.4, 0.58, 0.22, 1.3, 0, 'Out'), (0.62, 0.57, 0.25, 1.25, 0, 'Linear'), (0.85, 0.5, 0.52, 1.05, 0, 'In')], kicks=[0.4], power=20)
+    s.w(tr, 'SunRing', 'fx_sunflash', 2.2, [(0.4, 0.62, 0.243, 0.8, 0, 0.6, 'Out'), (0.85, 0.62, 0.243, 1.0, 20, 0.8, 'Linear')], spin=10.0)
+    s.speed(g, 0.62, 0.85, vertical=True)
+    # ② 계단 아래 정면: 팔짱 → 펼침 → 두 팔을 하늘로 · 발밑 소환진
+    S1, S2 = 1.0, 1.14
+    g = s.group('Cut2', R, 0.85, 1.4)
+    tr = s.cam(g, [(0.85, 0.5, 0.60, 1.9, 0, 'Out'), (1.4, 0.5, 0.595, 2.15, 0, 'Linear')], kicks=[S2], power=34)
+    s.w(tr, 'Circle', 'fx_circle', 0.9, [(0.85, 0.5, 0.632, 0.2, 0, 0, 'Out'), (S1, 0.5, 0.632, 0.7, 0, 0.9, 'Back'), (S2, 0.5, 0.632, 1.25, 0, 1, 'Back'), (1.4, 0.5, 0.632, 1.35, 0, 1, 'Linear')], pulse=0.05, pulseHz=8)
+    s.cel(tr, 'Pharaoh', [(0.85, 'anim_summon_1'), (S1, 'anim_summon_2'), (S2, 'anim_summon_3')],
+          [(0.85, 0.5, 0.635, 1, 0, 1, 'Out'), (S1, 0.5, 0.635, 1.04, 0, 1, 'Back'), (S2, 0.5, 0.635, 1.1, 0, 1, 'Back'), (1.4, 0.5, 0.635, 1.12, 0, 1, 'Linear')], height=300, ref='anim_summon_1')
+    s.s(g, 'Sun', 'fx_sunflash', 3.0, [(S2 - 0.01, 0, 260, 0, 0, 0, 'Out'), (S2, 0, 260, 0.8, 0, 0.8, 'Snap'), (1.4, 0, 260, 1.3, 25, 0, 'Out')])
+    s.rise(g, 'Sand', 'fx_puff', [S2 + 0.03 * i for i in range(8)], [-760, -540, -320, -110, 110, 320, 540, 760], -560, 420, sc=0.5, dur=0.28)
+    cut_flash(g, 0.85)
+    # ③ 얼굴 정면 클로즈업 (배경 + 쥐) · 눈 번쩍
+    g = s.group('Cut3', R, 1.4, 1.85)
+    s.face(g, 'zoom', 1.4, 1.85, bg='face_bg')
+    s.s(g, 'EyeFlash', 'fx_sunflash', 0.8, [(1.55, 0, 60, 0, 0, 0, 'Out'), (1.56, 0, 60, 1.0, 0, 0.9, 'Snap'), (1.75, 0, 60, 1.6, 30, 0, 'Out')])
+    cut_flash(g, 1.4)
+    # ④ 소환: 모래 평원 곳곳에서 모래가 터지며 아누비스 · 미라가 솟음 → 카메라가 물러나며 뒤로 군단이 가득
+    T = 1.85
+    g = s.group('Cut4', R, T, 2.65)
+    tr = s.cam(g, [(T, 0.5, 0.76, 1.7, 0, 'Out'), (2.65, 0.5, 0.70, 1.15, 0, 'InOut')], kicks=[T + 0.05, T + 0.3], power=30, ktime=0.2)
+    s.w(tr, 'Pharaoh', 'anim_summon_3', s.hp('anim_summon_3', 120), [(T, 0.5, 0.62, 1, 0, 1, 'Out')])          # 계단 아래 가운데 (작게, 군단 뒤)
+    s.w(tr, 'ArmyBack', 'army', s.hp('army', 260), [(T, 0.5, 0.665, 0.9, 0, 0, 'Out'), (T + 0.35, 0.5, 0.665, 0.9, 0, 0, 'Linear'), (T + 0.5, 0.5, 0.66, 1.0, 0, 1, 'Back'), (2.65, 0.5, 0.66, 1.0, 0, 1, 'Linear')])
+    rows = [(0.69, 170, 0.0, 6), (0.74, 230, 0.12, 6), (0.80, 320, 0.24, 5)]       # (파노라마 y, 키, 늦게, 수) — 뒤 줄일수록 작고 먼저
+    for r, (yy, hh, dt, n) in enumerate(rows):
+        for i in range(n):
+            x = 0.12 + 0.76 * (i + 0.5 * (r % 2)) / n
+            t0 = T + dt + 0.06 * i + s.rnd.uniform(0, 0.04)
+            who = 'anim_mrise'                          # 미라는 잔뜩 (2026-10-20 사용자: 아누비스는 한 마리만)
+            s.w(tr, f'Burst{r}_{i}', 'fx_sandburst', hh / 900, [(t0 - 0.01, x, yy, 0.3, 0, 0, 'Out'), (t0, x, yy, 0.6, 0, 1, 'Snap'), (t0 + 0.18, x, yy - 0.01, 1.1, 0, 0.9, 'Out'), (t0 + 0.35, x, yy - 0.02, 1.2, 0, 0, 'Linear')])
+            s.cel(tr, f'Rise{r}_{i}', [(t0, f'{who}_1'), (t0 + 0.08, f'{who}_2'), (t0 + 0.18, f'{who}_3')],
+                  [(t0 - 0.01, x, yy, 1, 0, 0, 'Out'), (t0, x, yy, 0.9, 0, 1, 'Snap'), (t0 + 0.18, x, yy, 1.05, 0, 1, 'Back'), (2.65, x, yy, 1.0, 0, 1, 'Linear')], height=hh, ref=f'{who}_3')
+    s.s(g, 'Ring', 'fx_sandring', 2.4, [(T + 0.05, 0, -300, 0.3, 0, 0.9, 'Snap'), (T + 0.45, 0, -300, 1.6, 0, 0, 'Out')])
+    AN = T + 0.42                                       # 아누비스 한 마리: 미라들이 다 솟은 뒤 앞줄 가운데에서 크게 (쿵 · 모래 고리)
+    s.w(tr, 'AnubisBurst', 'fx_sandburst', 0.5, [(AN - 0.01, 0.5, 0.85, 0.3, 0, 0, 'Out'), (AN, 0.5, 0.85, 0.7, 0, 1, 'Snap'), (AN + 0.2, 0.5, 0.84, 1.3, 0, 0.9, 'Out'), (AN + 0.4, 0.5, 0.83, 1.4, 0, 0, 'Linear')])
+    s.cel(tr, 'Anubis', [(AN, 'anim_anubis_1'), (AN + 0.09, 'anim_anubis_2'), (AN + 0.2, 'anim_anubis_3')],
+          [(AN - 0.01, 0.5, 0.85, 1, 0, 0, 'Out'), (AN, 0.5, 0.85, 0.9, 0, 1, 'Snap'), (AN + 0.2, 0.5, 0.85, 1.08, 0, 1, 'Back'), (2.65, 0.5, 0.85, 1.0, 0, 1, 'Linear')], height=430, ref='anim_anubis_3')
+    s.s(g, 'AnubisRing', 'fx_sandring', 3.0, [(AN + 0.2, 0, -330, 0.4, 0, 0.9, 'Snap'), (AN + 0.55, 0, -330, 1.7, 0, 0, 'Out')])
+    s.s(g, 'Dune', 'prop_fg', 2.2, [(T, 0, -470, 1, 0, 1, 'Out'), (2.65, 0, -500, 1.05, 0, 1, 'Linear')])
+    cut_flash(g, T)
+    # ⑤ 정면 지휘: 지팡이를 카메라 쪽으로 내지름
+    C1 = 2.76
+    g = s.group('Cut5', R, 2.65, 2.95)
+    tr = s.cam(g, [(2.65, 0.5, 0.60, 2.3, 0, 'Out'), (2.95, 0.5, 0.60, 2.6, 0, 'In')], kicks=[C1], power=50, rot=3)
+    s.cel(tr, 'Pharaoh', [(2.65, 'anim_command_1'), (C1, 'anim_command_2'), (C1 + 0.1, 'anim_command_3')],
+          [(2.65, 0.5, 0.635, 1, 0, 1, 'Out'), (C1, 0.5, 0.635, 1.12, 0, 1, 'Back'), (2.95, 0.5, 0.635, 1.15, 0, 1, 'Linear')], height=330, ref='anim_command_1')
+    s.s(g, 'Thrust', 'fx_sunflash', 2.4, [(C1 - 0.01, 0, -40, 0, 0, 0, 'Out'), (C1, 0, -40, 0.6, 0, 0.85, 'Snap'), (2.95, 0, -40, 1.6, 30, 0, 'Out')])
+    s.burst_ring(g, 'Band', 'fx_bandage', C1, 0, -40, n=8, r=1100, sc=0.5, dur=0.25)
+    cut_flash(g, 2.65)
+    # ⑥ 미라 돌격: 멀리서 카메라 쪽으로 (작게 → 크게 · 화면 밖으로) — 원근 = 발끝 y 가 내려오고 x 가 바깥으로 벌어짐
+    T = 2.95; LEAP = END - 0.38
+    g = s.group('Cut6', R, T)
+    tr = s.cam(g, [(T, 0.5, 0.79, 1.35, 0, 'Out'), (END + 0.4, 0.5, 0.82, 1.6, 0, 'In')], kicks=[T + 0.1, T + 0.3, T + 0.5], power=22, ktime=0.18)
+    s.cel(tr, 'Anubis', [(T, 'anim_anubis_3')], [(T, 0.83, 0.86, 1, 0, 1, 'Out')], height=360, ref='anim_anubis_3')      # 아누비스 한 마리가 옆에서 지켜봄
+    for i in range(22):                                 # 달려오는 미라 (늦게 출발한 것이 위에 그려짐)
+        t0 = T + 0.04 * i + s.rnd.uniform(0, 0.03); dur = s.rnd.uniform(0.38, 0.5)
+        x0 = s.rnd.uniform(-260, 260); x1 = x0 * 4.2 + (700 if x0 > 0 else -700)
+        s.cel(g, f'Run{i}', run_frames(t0, t0 + dur, first=i), [(t0 - 0.01, x0, -40, 0.25, 0, 0, 'Out'), (t0, x0, -40, 0.25, 0, 1, 'Snap'), (t0 + dur, x1, -900, 2.6, 0, 1, 'In')],
+              height=320, ref='anim_mrun_1', pano=False)
+    # 맨 앞 미라가 카메라로 덮쳐 와 화면을 가림 (모래 먼지 없음 — 2026-10-20 사용자: 모래바람 대신 미라가 뛰어가는 걸로 마무리)
+    s.cel(g, 'Leap', [(LEAP, 'anim_mleap_1'), (LEAP + 0.1, 'anim_mleap_2'), (LEAP + 0.22, 'anim_mleap_3')],
+          [(LEAP - 0.01, 0, -120, 0.5, 0, 0, 'Out'), (LEAP, 0, -120, 0.5, 0, 1, 'Snap'), (LEAP + 0.1, 0, -260, 0.9, 0, 1, 'Out'), (END, 0, -1300, 3.4, 0, 1, 'In')], height=420, ref='anim_mleap_1', pano=False)
+    cut_flash(g, T)
+    # 밈 (⑤~⑥ 화면 위)
+    G = s.group('Top', R, 2.7)
+    s.meme(G, 2.75, side=-1, y=440)
+    return None
+
+
+def pharaoh_v1(s, R):
+    """(옛 v1, 안 씀) 세로: 태양 → 피라미드 → 신전. ② 신전 위에서 천천히 태양까지 올려다봄 → 태양이 번쩍 → 휙 내려와 쾅 · ③ 오른쪽 세로 띠 + 햇빛 기둥이 부채꼴로 쓸고 지나감 · ④ 비스듬히 돌며 태양 고리 · 모래 소용돌이"""
     I = s.group('Intro', R, 0.4, 1.9)
     tr = s.cam(I, [(0.4, 0.55, 0.86, 1.4, 0, 'Out'), (1.1, 0.5, 0.15, 1.1, 0, 'InOut'), (1.25, 0.5, 0.14, 1.15, 0, 'Linear'), (1.45, 0.55, 0.82, 1.35, 6, 'In'), (1.9, 0.55, 0.82, 1.4, 4, 'Linear')], kicks=[1.45])
     s.w(tr, 'Sun', 'fx_ring', 3.0, [(0.4, 0.5, 0.12, 0.6, 0, 0.8, 'Out'), (1.2, 0.5, 0.12, 1.4, 0, 1, 'Back'), (1.9, 0.5, 0.12, 1.5, 0, 1, 'Linear')], spin=25.0, pulse=0.04)
@@ -640,26 +740,74 @@ def fondue(s, R):
 
 
 def bomber(s, R):
-    """세로: 붉은 하늘 마법진 → 계곡 → 절벽. ② 절벽에서 시작해 마법진이 하나씩 켜지는 대로 하늘로 천천히 올라감 · ③ 위쪽 띠 + 줄지어 떨어지는 폭탄(융단 폭격) · ④ 하늘 마법진 → 거대 폭발로 화면이 하얗게 → 뒤처리: 엎어진 폭탄마"""
-    I = s.group('Intro', R, 0.4, 1.9)
-    tr = s.cam(I, [(0.4, 0.5, 0.84, 1.3, 0, 'Out'), (1.7, 0.5, 0.2, 1.05, 0, 'InOut'), (1.9, 0.5, 0.18, 1.1, 0, 'Linear')], kicks=[0.8, 1.05, 1.3, 1.55])
-    s.pose(tr, 'Pose', 'pose_intro', 620, [(0.4, 0.5, 0.82, 1, 0, 1, 'Out'), (1.9, 0.5, 0.82, 1, 0, 1, 'Linear')], jitter=2.0)
-    for i, (t, y) in enumerate([(0.8, 0.62), (1.05, 0.46), (1.3, 0.32), (1.55, 0.18)]):
-        s.w(tr, f'Circle{i}', 'fx_ring', 2.4 - i * 0.2, [(t - 0.01, 0.5, y, 0, 0, 0, 'Out'), (t, 0.5, y, 0.3, 0, 1, 'Snap'), (t + 0.2, 0.5, y, 1.2, 0, 1, 'Back'), (1.9, 0.5, y, 1.25, 0, 1, 'Linear')], spin=40.0 * (1 if i % 2 else -1))
-    s.converge(tr, 'Ember', 'fx_streak', 1.2, [(0.1, 0.4), (0.9, 0.35), (0.2, 0.15), (0.8, 0.1)], (0.5, 0.18))
-    s.face(I, 'full', 1.7)
-    A = s.group('Act', R, 1.9, 3.9)
-    b = s.band(A, 'Band', (2500, 420), [(1.9, 0, 800, 1, -4, 1, 'Out'), (2.1, 0, 300, 1, -4, 1, 'Back'), (3.9, 0, 300, 1, -4, 1, 'Linear')])
-    s.bandpano(b, [(1.9, 0, -s.P(0.5, 0.15)[1], 1, 4, 1, 'Out'), (3.9, 0, -s.P(0.5, 0.25)[1], 1, 4, 1, 'Linear')])
-    s.s(b, 'Pose', 'pose_act', s.hp('pose_act', 500), [(1.9, 0, -500, 0.8, 0, 1, 'Out'), (2.25, 0, 20, 1, 0, 1, 'Back'), (3.9, 0, 30, 1.05, 0, 1, 'Linear')], pulse=0.03)
-    s.rain(A, 'Bomb', 'fx_strike', HITS, [-900 + 200 * i for i in range(10)], 200, -260, sc=0.9, dur=0.16, impact='fx_impact', isc=1.0, ring='fx_ring')
-    F = s.group('Finish', R, 3.9)
-    tr = s.cam(F, [(3.9, 0.5, 0.18, 1.2, 0, 'Out'), (4.15, 0.5, 0.2, 1.0, 0, 'Linear'), (4.2, 0.5, 0.84, 1.3, 3, 'Snap'), (5.0, 0.5, 0.84, 1.2, 1, 'Linear')], kicks=[4.05, 4.2], power=80)
-    s.s(F, 'Boom', 'fx_impact', 3.0, [(3.95, 0, 300, 0, 0, 0, 'Out'), (4.0, 0, 300, 0.5, 0, 1, 'Snap'), (4.18, 0, 200, 3.0, 20, 1, 'Out'), (4.2, 0, 200, 3.0, 20, 0, 'Snap')])
-    s.s(F, 'White', 'fx_burst', 6.0, [(4.12, 0, 0, 0.5, 0, 0, 'Out'), (4.18, 0, 0, 1.5, 0, 1, 'Snap'), (4.4, 0, 0, 2, 0, 0, 'Out')])
-    s.pose(tr, 'Pose', 'pose_finish', 420, [(4.2, 0.5, 0.86, 1, 0, 1, 'Out'), (5.0, 0.5, 0.86, 1, 0, 1, 'Linear')], jitter=1.0)
-    s.w(tr, 'Smoke', 'prop_fg', 0.6, [(4.2, 0.5, 0.82, 0.8, 0, 1, 'Out'), (5.0, 0.5, 0.78, 1.2, 0, 0.5, 'Linear')])
-    s.meme(F, 4.35)
+    """세로 (정면): 붉은 노을 하늘 → 황무지 지평선 → 절벽 위. (2026-10-20 v2, 사용자: 빨간 마법진 여러 겹을 쌓아 올림 → 위에서부터 익스플로전 레이저 → 큰 폭발 → 버섯구름)
+    띠 · 마무리 컷 없음 · 플랫 그림 · 정면 셀 프레임 · 0.75배속 — 컷 5개:
+    ① 0.4 절벽 위 정면: 팔짱 · 불티가 오름 ② 0.85 한 팔을 하늘로 → 두 팔을 하늘로 (발밑 작은 마법진) ③ 1.3 얼굴 정면 클로즈업 (눈이 붉게 번쩍)
+    ④ 1.75 지평선에서 하늘로 틸트 업 — 빨간 마법진이 아래부터 한 겹씩 쌓여 올라감 (원근 타원 + 룬 고리 · 돌기)
+    ⑤ 2.6 맨 위 마법진에서 번쩍 → 레이저가 마법진을 하나씩 꿰뚫으며 아래로 (카메라가 빛 끝을 따라 틸트 다운)
+    → 3.05 레이저가 지평선에 꽂히는 순간 컷신 걷힘 → 게임 화면: 레이저가 맵 가운데로 내리꽂혀 섬광 → 맵 전체를 초토화하는 거대 폭발 하나 (충격파 · 파편 · 연기, 버섯구름 없음 — worldPhase · blast*)
+    (2026-10-20 사용자: 캐릭터와 함께 나오는 버섯구름 컷 없음 · 마지막은 컷신이 아니라 게임 맵 위 큰 폭발 하나)"""
+    END = NO_FINISH['bomber']
+    wsc = lambda name, px: px / max(1, s.size(name)[0])       # 그림 폭을 px 로 맞추는 배율
+
+    def cut_flash(g, t0, a=0.55):
+        s.s(g, 'CutFlash', 'fx_redflash', 8.0, [(t0, 0, 0, 1.0, 0, a, 'Snap'), (t0 + 0.09, 0, 0, 1.3, 0, 0, 'Out')])
+
+    SX, SY = 0.5, 0.905                                   # 절벽 위 서는 자리 (파노라마 비율)
+    # ① 절벽 위 정면: 팔짱 · 불티가 오름
+    g = s.group('Cut1', R, 0.4, 0.85)
+    tr = s.cam(g, [(0.4, 0.5, 0.86, 2.0, 0, 'Out'), (0.85, 0.5, 0.86, 2.25, 0, 'Linear')], kicks=[0.4], power=18)
+    s.cel(tr, 'Bomber', [(0.4, 'anim_cast_1')], [(0.4, SX, SY, 1, 0, 1, 'Out')], height=300, ref='anim_cast_1')
+    s.rise(g, 'Ember', 'fx_embers', [0.45 + 0.04 * i for i in range(9)], [s.rnd.uniform(-800, 800) for _ in range(9)], -560, 600, sc=0.35, dur=0.4)
+    # ② 한 팔을 하늘로 → 두 팔을 하늘로 · 발밑 작은 마법진
+    C1, C2 = 0.85, 1.02
+    g = s.group('Cut2', R, 0.85, 1.3)
+    tr = s.cam(g, [(0.85, 0.5, 0.855, 2.4, 0, 'Out'), (1.3, 0.5, 0.85, 2.6, 0, 'Linear')], kicks=[C2], power=34)
+    s.w(tr, 'Circle', 'fx_circle_persp', wsc('fx_circle_persp', 260), [(C1, SX, SY, 0.2, 0, 0, 'Out'), (C2, SX, SY, 1.0, 0, 1, 'Back'), (1.3, SX, SY, 1.1, 0, 1, 'Linear')], pulse=0.05, pulseHz=8)
+    s.cel(tr, 'Bomber', [(C1, 'anim_cast_2'), (C2, 'anim_cast_3')], [(C1, SX, SY, 1, 0, 1, 'Out'), (C2, SX, SY, 1.08, 0, 1, 'Back'), (1.3, SX, SY, 1.1, 0, 1, 'Linear')], height=300, ref='anim_cast_1')
+    s.rise(g, 'Ember', 'fx_embers', [C2 + 0.03 * i for i in range(8)], [-760, -540, -320, -110, 110, 320, 540, 760], -560, 500, sc=0.4, dur=0.28)
+    cut_flash(g, 0.85)
+    # ③ 얼굴 정면 클로즈업 · 눈 번쩍
+    g = s.group('Cut3', R, 1.3, 1.75)
+    s.face(g, 'zoom', 1.3, 1.75, bg='face_bg')
+    s.s(g, 'EyeFlash', 'fx_redflash', 0.8, [(1.45, -150, 80, 0, 0, 0, 'Out'), (1.46, -150, 80, 1.0, 0, 0.9, 'Snap'), (1.65, -150, 80, 1.6, 30, 0, 'Out')])
+    cut_flash(g, 1.3)
+    # ④ 지평선에서 하늘로 틸트 업 — 빨간 마법진이 아래부터 한 겹씩 쌓여 올라감
+    T = 1.75
+    HY = 0.545                                          # 지평선 (레이저가 꽂히는 자리)
+    CY = [0.48, 0.40, 0.32, 0.24, 0.165, 0.09]           # 마법진 높이 (아래 → 위)
+    CW = [760, 860, 960, 1060, 1180, 1320]               # 폭 (파노라마 px, 위로 갈수록 큼)
+    CT = [T + 0.1 + 0.12 * k for k in range(len(CY))]    # 켜지는 시각
+    g = s.group('Cut4', R, T, 2.6)
+    tr = s.cam(g, [(T, 0.5, 0.6, 1.25, 0, 'Out'), (2.45, 0.5, 0.2, 1.0, 0, 'InOut'), (2.6, 0.5, 0.18, 0.98, 0, 'Linear')], kicks=CT, power=16, ktime=0.15)
+    for k, (yy, w, t0) in enumerate(zip(CY, CW, CT)):
+        s.w(tr, f'Ring{k}', 'fx_runering', wsc('fx_runering', w * 1.15), [(t0 - 0.01, 0.5, yy, 0.3, 0, 0, 'Out'), (t0, 0.5, yy, 0.6, 0, 0.9, 'Snap'), (t0 + 0.15, 0.5, yy, 1.0, 0, 0.9, 'Back'), (2.6, 0.5, yy, 1.0, 0, 0.8, 'Linear')], spin=-30.0 if k % 2 else 30.0)
+        s.w(tr, f'Circle{k}', 'fx_circle_persp', wsc('fx_circle_persp', w), [(t0 - 0.01, 0.5, yy, 0.2, 0, 0, 'Out'), (t0, 0.5, yy, 0.4, 0, 1, 'Snap'), (t0 + 0.14, 0.5, yy, 1.06, 0, 1, 'Back'), (2.6, 0.5, yy, 1.0, 0, 1, 'Linear')], pulse=0.03, pulseHz=6)
+        s.w(tr, f'Pop{k}', 'fx_redflash', wsc('fx_redflash', w * 0.5), [(t0 - 0.01, 0.5, yy, 0, 0, 0, 'Out'), (t0, 0.5, yy, 0.6, 0, 0.9, 'Snap'), (t0 + 0.2, 0.5, yy, 1.4, 0, 0, 'Out')])
+    s.speed(g, 2.25, 2.6, vertical=True)
+    cut_flash(g, T)
+    # ⑤ 맨 위 마법진에서 번쩍 → 레이저가 마법진을 하나씩 꿰뚫으며 아래로 (카메라가 빛 끝을 따라 내려감)
+    T = 2.6; F0 = 2.72; F1 = 3.0                          # 발사 · 빛 끝이 지평선에 닿음
+    g = s.group('Cut5', R, T, 3.05)
+    tr = s.cam(g, [(T, 0.5, 0.11, 1.2, 0, 'Out'), (F0, 0.5, 0.11, 1.25, 0, 'Linear'), (F1, 0.5, 0.47, 1.05, 0, 'In'), (3.05, 0.5, 0.48, 1.0, 0, 'Linear')], kicks=[F0], power=50, rot=2)
+    top = 0.03
+    stops = [top] + CY[::-1] + [HY]                      # 위 → 아래 (마지막 마디 = 맨 아래 마법진 → 지평선)
+    tt = lambda yy: F0 + (F1 - F0) * (yy - top) / (HY - top)       # 빛 끝이 yy 에 닿는 시각
+    for k, (yy, w) in enumerate(zip(CY, CW)):
+        s.w(tr, f'Ring{k}', 'fx_runering', wsc('fx_runering', w * 1.15), [(T, 0.5, yy, 1.0, 0, 0.8, 'Out')], spin=-60.0 if k % 2 else 60.0)
+        s.w(tr, f'Circle{k}', 'fx_circle_persp', wsc('fx_circle_persp', w), [(T, 0.5, yy, 1.0, 0, 1, 'Out'), (tt(yy), 0.5, yy, 1.12, 0, 1, 'Snap'), (tt(yy) + 0.1, 0.5, yy, 1.0, 0, 1, 'Out')], pulse=0.05, pulseHz=10)
+    for k in range(len(stops) - 1):                      # 레이저 마디: 위 마법진 → 아래 마법진, 빛 끝이 지날 때 나타남
+        y0, y1 = stops[k], stops[k + 1]; t0 = tt(y0); ym = (y0 + y1) / 2
+        hpx = (y1 - y0) * s.PH * s.PS * 1.15
+        s.w(tr, f'Beam{k}', 'fx_beam', s.hp('fx_beam', hpx), [(t0 - 0.01, 0.5, ym, 1, 0, 0, 'Out'), (t0, 0.5, ym, 1, 0, 1, 'Snap'), (3.05, 0.5, ym, 1.05, 0, 1, 'Linear')], flicker=0.15, jitter=3.0)
+        s.w(tr, f'Core{k}', 'fx_beamcore', s.hp('fx_beamcore', hpx), [(t0 - 0.01, 0.5, ym, 1, 0, 0, 'Out'), (t0, 0.5, ym, 1, 0, 1, 'Snap'), (3.05, 0.5, ym, 1, 0, 1, 'Linear')], flicker=0.3)
+    s.w(tr, 'Fire', 'fx_redflash', wsc('fx_redflash', 900), [(F0 - 0.01, 0.5, top + 0.03, 0, 0, 0, 'Out'), (F0, 0.5, top + 0.03, 1.0, 0, 1, 'Snap'), (F0 + 0.25, 0.5, top + 0.03, 1.5, 30, 0, 'Out')])
+    s.speed(g, F0 + 0.05, F1, vertical=True)
+    s.s(g, 'Hit', 'fx_redflash', 9.0, [(F1 - 0.01, 0, -300, 0, 0, 0, 'Out'), (F1, 0, -300, 0.8, 0, 1, 'Snap'), (END, 0, 0, 2.2, 0, 1, 'In')])     # 꽂히는 순간 섬광이 화면을 덮으며 → 게임 화면 섬광 · 폭발로 이어짐
+    cut_flash(g, T)
+    G = s.group('Top', R, 2.6)
+    s.meme(G, 2.62, side=-1, y=440)
+    return None
 
 
 def icequeen(s, R):

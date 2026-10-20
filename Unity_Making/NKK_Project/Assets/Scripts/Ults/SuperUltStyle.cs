@@ -59,6 +59,20 @@ namespace NKK.Ults
         [Tooltip("켜면 파동을 한 번만 (2026-10-19 기사: 한 번 딱 내려찍을 때 퍼짐): 게임 화면 단계 시작에 선 · 파동 · 폭발이 가운데서 양끝으로 한 번 퍼지고, 다단 · 마무리 때는 선 위 폭발 · 파동을 더 안 냄")] public bool lineOnce;
         [Tooltip("파동 띠 굵기 (px, 처음 → 끝) · 충격파가 퍼지는 거리 (px) · 시간")] public Vector2 waveThick = new(80, 520); public float rippleDist = 700, rippleTime = 0.6f;
         [Tooltip("게임 화면 단계 동안 화면 안 생명체(고양이 · 보스 · 사람) 꽁꽁, 끝나고도 이 초만큼 더 (0 = 안 함) — 렛잇고 필살기에서 옮겨 옴")] public float freezeAll;
+        [Header("게임 화면 돌격 (2026-10-20 파라오: 모래바람 대신 미라 쥐들이 화면을 달려 지나감)")]
+        [Tooltip("달리기 프레임 (오른쪽을 보는 옆모습, 순서대로 반복). 있으면 게임 화면 단계 동안 왼→오로 달려 지나감")] public Sprite[] runFrames;
+        [Tooltip("몇 초마다 · 한 번에 몇 마리 · 키 (px, 최소~최대) · 속도 (px/초, 최소~최대) · 프레임 시간 (초)")] public float runGap = 0.12f; public int runCount = 3;
+        public Vector2 runHeight = new(110, 190), runSpeed = new(1500, 2100); public float runFrame = 0.07f;
+        [Tooltip("켜면 게임 화면 단계의 눈보라 · 입자(worldSnow)를 안 띄움")] public bool worldSnowOff;
+        [Header("게임 화면 큰 폭발 하나 (2026-10-20 폭탄마: 레이저가 맵에 내리꽂혀 맵 전체를 덮는 폭발 → 버섯구름)")]
+        [Tooltip("게임 화면 단계 시작에 위에서 화면 가운데로 내리꽂히는 레이저 그림 · 굵기 (px) · 시간")] public Sprite blastBeam;
+        public float blastBeamWidth = 260, blastBeamTime = 0.22f;
+        [Tooltip("레이저가 닿는 순간 화면 가운데 큰 폭발 프레임 · 폭 (px) · 프레임 시간")] public Sprite[] blastFrames;
+        public float blastSize = 2600, blastFrame = 0.12f;
+        [Tooltip("이어서 피어오르는 버섯구름 단계 그림 (바닥 = 화면 아래쪽) · 폭 (px) · 단계 시간 (마지막은 단계 끝까지 남았다 사라짐)")] public Sprite[] mushFrames;
+        public float mushSize = 1300, mushFrame = 0.3f;
+        [Tooltip("초토화 (2026-10-20 폭탄마): 폭발 순간 화면을 덮는 섬광 · 맵 끝까지 퍼지는 충격파 고리 · 사방으로 날아가는 파편 · 맵을 덮었다 걷히는 연기")] public Sprite blastFlash, blastRing, blastDebris, blastSmoke;
+        public int blastDebrisCount = 14; public float blastSmokeSize = 3400;
 
         [Header("화면 위 피니시 그림 (예: 화면을 가르는 번개)")]
         public Sprite finishArt;

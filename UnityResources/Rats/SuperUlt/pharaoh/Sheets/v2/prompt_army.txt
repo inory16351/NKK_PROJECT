@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: army.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 landscape image: a summoned HORDE seen straight FROM THE FRONT, many small figures standing in 3 staggered rows (back row smallest, front row biggest), all facing the viewer: about 24 Mummy Rats ONLY (no other creatures, no jackals), arms stretched forward, eyes glowing gold, a few with loose bandage ends flapping, goofy happy faces. The figures in each row overlap a little but every figure is readable. No ground, no sand, nothing else.
+- STYLE (MOST IMPORTANT): match EXACTLY the attached ref_zap_style and ref_flat_anim (approved flat cutscene art of this game) and ref_char: FLAT cartoon storybook look in the Untitled Goose Game mood: simple soft flat shapes, flat colors with only gentle soft shading, very little texture, NO individual fur strands, small simple black bead eyes with one tiny white highlight, no black outlines, no gloss, NOT a Disney/Pixar/3D look.
+- NO text, NO letters, NO numbers, no hieroglyph writing, no logos, no speech bubbles anywhere.
+- SUBJECT "Mummy Rat": a cute summoned MUMMY MOUSE in the same flat style: a small mouse fully wrapped in cream-white bandages (flat bands with simple seam lines), pink ear tips and a pink tail tip peeking out, two round glowing soft gold eyes between the bandages, a few loose bandage ends flapping. Same chibi proportions as the Pharaoh Rat. Cute and goofy, not scary, no gore.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no ground, no scenery, no effects. Do not use magenta or purple on the subjects. Keep everything fully inside the frame with margin.
+- Draw every mummy EXACTLY like the attached ref_mummy.

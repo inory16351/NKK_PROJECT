@@ -1,0 +1,16 @@
+10:14:04 ok face_bg
+10:14:08 ok pano_a
+10:14:23 ok anim_summon
+10:14:39 ok anim_command
+10:14:41 ok face_close
+10:14:51 ok anim_anubis
+10:15:12 ok pano_b
+10:16:01 ok pano_c
+10:16:52 ok fx_hit
+10:16:54 ok props_flat
+10:16:58 ok anim_mrun
+10:17:00 ok fx_flat
+10:17:02 ok anim_mleap
+10:17:31 ok anim_mrise
+10:17:38 ok army
+DONE

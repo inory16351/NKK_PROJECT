@@ -391,7 +391,7 @@ namespace NKK.Ults
         }
 
         // ── 게임 화면 눈보라 (worldPhase): 하늘에서 화면 전체로 눈발 · 화면 안 생명체 꽁꽁 유지 (freezeAll) ──
-        float blizT, freezeT;
+        float blizT, freezeT, runT;
         readonly List<Vector2> pendingBooms = new();       // (남은 시간, 선 위 자리) — lineOnce 퍼짐
         Vector2? snowWind0, snowDot0;
         void WorldBlizzard(float dt, float left)
@@ -404,7 +404,8 @@ namespace NKK.Ults
                 if (snowWind0 == null) { snowWind0 = worldSnow.wind; snowDot0 = worldSnow.dotSize; }
                 worldSnow.wind = st.worldWind != Vector2.zero ? st.worldWind : snowWind0.Value;
                 worldSnow.dotSize = st.worldDotSize != Vector2.zero ? st.worldDotSize : snowDot0.Value;
-                worldSnow.Add(worldSnowStart); worldSnow.Gust(worldSnowGust * 1.5f);
+                if (!st.worldSnowOff) { worldSnow.Add(worldSnowStart); worldSnow.Gust(worldSnowGust * 1.5f); }     // 파라오 = 입자 없이 미라 돌격만
+                if (st.blastFrames != null && st.blastFrames.Length > 0) BigBlast(left);                           // 폭탄마 = 레이저가 맵에 내리꽂혀 큰 폭발 하나 → 버섯구름
                 if (st.lineSprite)
                 {
                     if (!st.lineOnce) MoveImage(st.lineSprite, Vector2.zero, Vector2.zero, st.lineThickness, st.lineAngle, st.worldTime + 0.35f, 0.05f, 1, st.lineLength); LineWave(1);      // lineOnce = 남는 선 없이 파동만 (2026-10-19 사용자: 후딜 선 없앰) FxManager.I?.Shake(0.5f);
@@ -414,6 +415,7 @@ namespace NKK.Ults
             }
             if (c.snowOn) worldSnow.Tick(dt);
             UpdateSplashes(dt);
+            if (st.runFrames != null && st.runFrames.Length > 0 && left > 1.0f && (runT -= dt) <= 0) { runT = st.runGap; RunWave(); }
             for (int i = pendingBooms.Count - 1; i >= 0; i--) { var b = pendingBooms[i]; b.x -= dt; if (b.x <= 0) { LineBoom(b.y, 1.2f); pendingBooms.RemoveAt(i); } else pendingBooms[i] = b; }
             if (st.imageFx)
             {
@@ -497,7 +499,7 @@ namespace NKK.Ults
             Image im;
             if (splashPool.Count > 0) { im = splashPool[splashPool.Count - 1]; splashPool.RemoveAt(splashPool.Count - 1); }
             else im = Instantiate(splashTemplate, splashTemplate.transform.parent);
-            im.gameObject.SetActive(true); im.raycastTarget = false; im.sprite = frames[0]; im.color = Color.white;
+            im.gameObject.SetActive(true); im.raycastTarget = false; im.sprite = frames[0]; im.color = Color.white; im.rectTransform.pivot = new Vector2(0.5f, 0.5f);
             var sp = frames[0].rect.size;
             im.rectTransform.sizeDelta = new Vector2(size, size * sp.y / Mathf.Max(1, sp.x));
             im.rectTransform.anchoredPosition = at; im.rectTransform.localScale = new Vector3(Random.value < 0.5f ? -1 : 1, 1, 1); im.rectTransform.localRotation = Quaternion.identity;
@@ -520,7 +522,24 @@ namespace NKK.Ults
         }
 
         // 움직이는 그림 (베기 · 빛 물결): from → to 로 가며 크기 s0 → s1, 끝 무렵 사라짐
-        class MoveFx { public Image im; public Vector2 from, to; public float t, life, s0, s1, sy0, sy1; }     // sy = 세로(굵기) 배율 따로
+        class MoveFx { public Image im; public Vector2 from, to; public float t, life, s0, s1, sy0, sy1, ft; public Sprite[] frames; public bool run; }     // sy = 세로(굵기) 배율 따로 · run = 달리는 쥐 (등속 · 안 사라짐 · 프레임 반복)
+
+        // 게임 화면 돌격 (2026-10-20 파라오): 미라 쥐 몇 마리가 화면 왼쪽 밖에서 오른쪽 밖으로 달려 지나감 (달리기 프레임 반복, 아래쪽일수록 앞에)
+        void RunWave()
+        {
+            var st = cur.st; if (!splashTemplate || !worldSnow.layer) return;
+            var half = worldSnow.layer.rect.size * 0.5f;
+            for (int i = 0; i < st.runCount; i++)
+            {
+                float h = Random.Range(st.runHeight.x, st.runHeight.y), y = Random.Range(-half.y * 0.85f, half.y * 0.55f), w = h * 1.2f;
+                float x0 = -half.x - w - Random.Range(0, 160f), x1 = half.x + w;
+                MoveImage(st.runFrames[0], new Vector2(x0, y), new Vector2(x1, y), h, 0, (x1 - x0) / Random.Range(st.runSpeed.x, st.runSpeed.y), 1, 1);
+                var m = moves[moves.Count - 1]; m.frames = st.runFrames; m.ft = Random.Range(0, st.runFrame * st.runFrames.Length); m.run = true;
+                m.im.rectTransform.pivot = new Vector2(0.5f, 0); m.im.rectTransform.anchoredPosition = new Vector2(x0, y);
+            }
+            var rs = moves.FindAll(m => m.run && m.im); rs.Sort((a, b) => b.from.y.CompareTo(a.from.y));
+            foreach (var m in rs) m.im.transform.SetAsLastSibling();
+        }
         readonly List<MoveFx> moves = new();
 
         void MoveImage(Sprite sp, Vector2 from, Vector2 to, float h, float rot, float life, float s0, float s1, float w = 0, float sy0 = -1, float sy1 = -1)
@@ -529,7 +548,7 @@ namespace NKK.Ults
             Image im;
             if (splashPool.Count > 0) { im = splashPool[splashPool.Count - 1]; splashPool.RemoveAt(splashPool.Count - 1); }
             else im = Instantiate(splashTemplate, splashTemplate.transform.parent);
-            im.gameObject.SetActive(true); im.raycastTarget = false; im.sprite = sp; im.color = Color.white;
+            im.gameObject.SetActive(true); im.raycastTarget = false; im.sprite = sp; im.color = Color.white; im.rectTransform.pivot = new Vector2(0.5f, 0.5f);
             im.rectTransform.sizeDelta = new Vector2(w > 0 ? w : h * sp.rect.width / Mathf.Max(1, sp.rect.height), h);     // w = 가로 길이 고정 (일직선 베기)
             im.rectTransform.localRotation = Quaternion.Euler(0, 0, rot); im.rectTransform.localScale = Vector3.one * s0; im.rectTransform.anchoredPosition = from;
             moves.Add(new MoveFx { im = im, from = from, to = to, life = life, s0 = s0, s1 = s1, sy0 = sy0 < 0 ? s0 : sy0, sy1 = sy1 < 0 ? s1 : sy1 });
@@ -562,6 +581,13 @@ namespace NKK.Ults
             {
                 var m = moves[i]; m.t += dt; float k = m.t / Mathf.Max(0.01f, m.life);
                 if (k >= 1 || !m.im) { if (m.im) { m.im.gameObject.SetActive(false); splashPool.Add(m.im); } moves.RemoveAt(i); continue; }
+                if (m.run)
+                {
+                    m.ft += dt; var fs = m.frames; var f = fs[(int)(m.ft / Mathf.Max(0.02f, cur?.st ? cur.st.runFrame : 0.07f)) % fs.Length];
+                    if (m.im.sprite != f) { m.im.sprite = f; m.im.rectTransform.sizeDelta = new Vector2(m.im.rectTransform.sizeDelta.y * f.rect.width / Mathf.Max(1, f.rect.height), m.im.rectTransform.sizeDelta.y); }
+                    m.im.rectTransform.anchoredPosition = Vector2.Lerp(m.from, m.to, k) + new Vector2(0, Mathf.Abs(Mathf.Sin(m.ft * 18)) * 10);      // 통통 뛰는 걸음
+                    continue;
+                }
                 float e = 1 - (1 - k) * (1 - k);
                 m.im.rectTransform.anchoredPosition = Vector2.Lerp(m.from, m.to, e);
                 float gk = Mathf.Min(1, k * 3);
@@ -570,9 +596,81 @@ namespace NKK.Ults
             }
         }
 
+        // ── 게임 화면 큰 폭발 하나 (2026-10-20 폭탄마): 레이저가 위에서 화면 가운데로 내리꽂힘 → 맵 전체를 덮는 폭발 프레임 → 버섯구름 단계 ──
+        class SeqFx { public Image im; public Sprite[] frames; public float t, delay, ft, hold, size, amax = 1; public Vector2 at, pivot; public bool shake, behind; }
+        readonly List<SeqFx> seqs = new();
+
+        void BigBlast(float left)
+        {
+            var st = cur.st; if (!splashTemplate || !worldSnow.layer) return;
+            var half = worldSnow.layer.rect.size * 0.5f;
+            float hit = 0;
+            if (st.blastBeam)
+            {
+                float h = half.y * 2.4f; hit = st.blastBeamTime;
+                MoveImage(st.blastBeam, new Vector2(0, h * 0.5f + half.y * 2), new Vector2(0, h * 0.5f), h, 0, st.blastBeamTime + 0.3f, 1, 1.15f, st.blastBeamWidth);
+            }
+            float bt = st.blastFrames.Length * st.blastFrame;
+            if (st.blastFlash) Seq(new[] { st.blastFlash }, Vector2.zero, new Vector2(0.5f, 0.5f), half.x * 4.5f, hit, 0.12f, 0.05f, false);       // 화면을 덮는 섬광
+            Seq(st.blastFrames, Vector2.zero, new Vector2(0.5f, 0.5f), st.blastSize, hit, st.blastFrame, 0, true);
+            if (st.blastSmoke) { Seq(new[] { st.blastSmoke }, new Vector2(0, -half.y * 0.15f), new Vector2(0.5f, 0.5f), st.blastSmokeSize, hit + bt * 0.85f, 0.1f, 0.35f, false); seqs[seqs.Count - 1].amax = 0.6f;      // 폭발 뒤 잠깐 남았다 걷히는 연기 (반투명, 불꽃 뒤)
+                seqs[seqs.Count - 1].behind = true; }
+            blastAt = hit;
+            if (st.mushFrames != null && st.mushFrames.Length > 0)
+            {
+                float d = hit + bt * 0.5f, hold = Mathf.Max(0, left - d - st.mushFrames.Length * st.mushFrame - 0.4f);
+                Seq(st.mushFrames, new Vector2(0, -half.y * 0.95f), new Vector2(0.5f, 0), st.mushSize, d, st.mushFrame, hold, false);
+            }
+        }
+
+        void Seq(Sprite[] frames, Vector2 at, Vector2 pivot, float size, float delay, float ft, float hold, bool shake)
+        {
+            Image im;
+            if (splashPool.Count > 0) { im = splashPool[splashPool.Count - 1]; splashPool.RemoveAt(splashPool.Count - 1); }
+            else im = Instantiate(splashTemplate, splashTemplate.transform.parent);
+            im.gameObject.SetActive(false); im.raycastTarget = false; im.sprite = frames[0]; im.color = Color.white;
+            var sp = frames[0].rect.size;
+            im.rectTransform.pivot = pivot; im.rectTransform.sizeDelta = new Vector2(size, size * sp.y / Mathf.Max(1, sp.x));
+            im.rectTransform.anchoredPosition = at; im.rectTransform.localScale = Vector3.one; im.rectTransform.localRotation = Quaternion.identity;
+            seqs.Add(new SeqFx { im = im, frames = frames, delay = delay, ft = Mathf.Max(0.02f, ft), hold = hold, size = size, at = at, pivot = pivot, shake = shake });
+        }
+
+        float blastAt = -1;
+        // 폭발 순간: 충격파 고리가 맵 끝까지 · 파편이 사방으로
+        void BlastBurst()
+        {
+            var st = cur.st; var half = worldSnow.layer ? worldSnow.layer.rect.size * 0.5f : new Vector2(960, 540);
+            if (st.blastRing) { MoveImage(st.blastRing, Vector2.zero, Vector2.zero, 160, 0, 0.75f, 0.4f, 5.5f); MoveImage(st.blastRing, Vector2.zero, Vector2.zero, 120, 0, 1.0f, 0.2f, 4.2f); }
+            if (st.blastDebris)
+                for (int i = 0; i < st.blastDebrisCount; i++)
+                {
+                    float a = (i + Random.value * 0.6f) / st.blastDebrisCount * Mathf.PI * 2;
+                    var to = new Vector2(Mathf.Cos(a) * half.x * 1.5f, Mathf.Sin(a) * half.y * 1.6f);
+                    MoveImage(st.blastDebris, Vector2.zero, to, Random.Range(140f, 260f), Random.Range(0f, 360f), Random.Range(0.6f, 0.9f), 0.4f, 1.2f);
+                }
+        }
+
+        void UpdateSeqs(float dt)
+        {
+            if (blastAt >= 0 && (blastAt -= dt) < 0) BlastBurst();
+            for (int i = seqs.Count - 1; i >= 0; i--)
+            {
+                var q = seqs[i]; q.t += dt; float u = q.t - q.delay;
+                if (!q.im) { seqs.RemoveAt(i); continue; }
+                if (u < 0) continue;
+                if (!q.im.gameObject.activeSelf) { q.im.gameObject.SetActive(true); if (q.behind) q.im.transform.SetAsFirstSibling(); else q.im.transform.SetAsLastSibling(); if (q.shake) { FxManager.I?.Shake(1.2f); cur.uiShake = Mathf.Max(cur.uiShake, uiShakeFinish); } }
+                int n = q.frames.Length, f = Mathf.Min(n - 1, (int)(u / q.ft));
+                if (q.im.sprite != q.frames[f]) q.im.sprite = q.frames[f];
+                float end = n * q.ft + q.hold, fade = q.hold > 0 ? 0.4f : q.ft;
+                q.im.rectTransform.localScale = Vector3.one * (1 + 0.04f * Mathf.Min(u, 2f));       // 천천히 부풂
+                { var c = q.im.color; c.a = q.amax * (u > end ? Mathf.Max(0, 1 - (u - end) / fade) : Mathf.Min(1, u / 0.12f + (q.amax < 1 ? 0 : 1))); q.im.color = c; }      // 반투명 그림은 살짝 차오름
+                if (u > end + fade) { q.im.gameObject.SetActive(false); q.im.rectTransform.pivot = new Vector2(0.5f, 0.5f); splashPool.Add(q.im); seqs.RemoveAt(i); }
+            }
+        }
+
         void UpdateSplashes(float dt)
         {
-            UpdateMoves(dt);
+            UpdateMoves(dt); UpdateSeqs(dt);
             var st = cur?.st; if (st == null) return;
             float fr = Mathf.Max(0.02f, st.splashFrame);
             for (int i = splashes.Count - 1; i >= 0; i--)
@@ -589,7 +687,8 @@ namespace NKK.Ults
         {
             foreach (var s in splashes) if (s.im) { s.im.gameObject.SetActive(false); splashPool.Add(s.im); }
             foreach (var m in moves) if (m.im) { m.im.gameObject.SetActive(false); splashPool.Add(m.im); }
-            splashes.Clear(); moves.Clear();
+            foreach (var q in seqs) if (q.im) { q.im.gameObject.SetActive(false); q.im.rectTransform.pivot = new Vector2(0.5f, 0.5f); splashPool.Add(q.im); }
+            splashes.Clear(); moves.Clear(); seqs.Clear(); blastAt = -1;
             if (snowWind0 != null) { worldSnow.wind = snowWind0.Value; worldSnow.dotSize = snowDot0.Value; }
         }
 
@@ -606,7 +705,7 @@ namespace NKK.Ults
             c.hitsDone++;
             var pts = Damage(c.baseDmg * Cfg("hit_mul", 4));
             if (st && st.imageFx && st.worldPhase) { SplashAt(pts, st.splashHitSize, 6); SlashFx(pts); if (!st.lineOnce) LineBoom((c.hitsDone - 0.5f) / Mathf.Max(1, Cfg("hit_count", 10)), 1); } else WorldFx(pts, false);
-            if (st && st.worldPhase) { WorldNumbers(pts, c.baseDmg * Cfg("hit_mul", 4), false); if (c.snowOn) { worldSnow.Add(worldSnowHit); worldSnow.Gust(worldSnowGust); } }
+            if (st && st.worldPhase) { WorldNumbers(pts, c.baseDmg * Cfg("hit_mul", 4), false); if (c.snowOn && !st.worldSnowOff) { worldSnow.Add(worldSnowHit); worldSnow.Gust(worldSnowGust); } }
             else DmgNumber(c.hitsDone - 1, false);
             if (hits && !(st && st.hideText)) { hits.text = (hitsFormat ?? "{n}").Replace("{n}", c.hitsDone.ToString()); hits.transform.localScale = Vector3.one * hitPop; }
             c.uiShake = Mathf.Max(c.uiShake, st && st.hitShake > 0 ? st.hitShake : uiShakeHit);

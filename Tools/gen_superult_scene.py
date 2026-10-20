@@ -83,6 +83,7 @@ def cs(v):
     if isinstance(v, float): return f(v)
     if isinstance(v, tuple): return f'new Vector2({f(v[0])}, {f(v[1])})'
     if isinstance(v, str): return f'S("{v}")'
+    if not v: return 'new Sprite[0]'       # 빈 목록 = 그림 없음 (예전 값 지우기)
     return 'new[] { ' + ', '.join(f'S("{n}")' for n in v) + ' }'
 
 

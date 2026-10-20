@@ -39,7 +39,13 @@ def trim(im, pad=6):
 
 GRID_FX = ['strike', 'impact', 'ring', 'streak', 'burst', 'aura']        # gen_superult_prompts.FX
 GRID_PROPS = ['meme', 'pop', 'float1', 'float2', 'band', 'fg']           # gen_superult_prompts.PROPS
-FLAT_NAMES = {'knight': ['ghostsword', 'pillar', 'arc', 'motes', 'burst', 'ring']}      # fx_flat.png 칸 이름 (쥐마다 그린 것이 다를 때)
+FLAT_NAMES = {'knight': ['ghostsword', 'pillar', 'arc', 'motes', 'burst', 'ring'],      # fx_flat.png 칸 이름 (쥐마다 그린 것이 다를 때)
+              'pharaoh': ['circle', 'sandburst', 'dust', 'bandage', 'sunflash', 'sandring'],
+              'bomber': ['circle', 'circle_persp', 'runering', 'circle_small', 'redflash', 'embers']}    # 폭탄마 v2 (2026-10-20): 빨간 마법진 · 원근 마법진 · 룬 고리 · 작은 마법진 · 붉은 섬광 · 불티
+STRIP3 = {'beam.png': ['fx_beam', 'fx_beamcore', 'fx_beamhit'], 'mushroom.png': ['fx_mush1', 'fx_mush2', 'fx_mush3']}   # 가로 3칸 (자홍, 여백 자름) — 폭탄마 v2 레이저 · 버섯구름 (버섯구름은 같은 바닥선 → 칸 크기 그대로)
+GRID6 = {'boom.png': (['boom1', 'boom2', 'boom3', 'shockring', 'debris', 'smoke'], 3)}    # 자홍 3×2: 앞 n 개 = 프레임 (칸 크기 그대로) · 나머지 = 여백 자름  # 파라오 v2 (2026-10-20): 소환진 · 모래 분수 · 모래 먼지 · 붕대 · 해 섬광 · 모래 고리
+HIT_NAMES = {'pharaoh': ['sandstreak', 'scarab', 'puff', 'hit1', 'hit2', 'hit3']}       # fx_hit.png 칸 이름 (기본 = 기사: slash · wave · mote · hit1~3)
+FLAT_PROPS = {'pharaoh': ['sarcophagus', 'jar', 'scarab', 'obelisk', 'meme', 'fg']}     # props_flat.png 칸 이름 (기본 = GRID_PROPS)
 GRID_CRACK = ['crack1', 'crack2', 'crack3', 'shard1', 'shard2', 'shard3']   # crack.png (자홍 3×2): 화면 얼음 금 · 깨진 파편 (2026-10-19 아이스 퀸 v2)
 
 
@@ -155,13 +161,28 @@ def main(code):
                 cell.save(os.path.join(out, 'fx_' + n + '.png')); print('fx_' + n, cell.size)
         elif f == 'fx_hit.png':           # 타격 그림 (2026-10-19 기사, 자홍 3×2): 위 줄 = 베기 · 빛 물결 · 빛 입자 (여백 자름) / 아래 줄 = 타격 3프레임 (칸 크기 그대로)
             sh = Image.open(p); W, H = sh.size
-            for i, n in enumerate(['slash', 'wave', 'mote', 'hit1', 'hit2', 'hit3']):
+            for i, n in enumerate(HIT_NAMES.get(code, ['slash', 'wave', 'mote', 'hit1', 'hit2', 'hit3'])):
                 r, c = divmod(i, 3)
                 cell = despill(key_magenta(sh.crop((int(c * W / 3) + 3, int(r * H / 2) + 3, int((c + 1) * W / 3) - 3, int((r + 1) * H / 2) - 3))))
                 if r == 0: cell = trim(cell, 4)
                 cell.save(os.path.join(out, 'fx_' + n + '.png')); print('fx_' + n, cell.size)
         elif f == 'props_flat.png':       # 플랫 소품 — 있으면 props.png 대신
-            grid(p, GRID_PROPS, lambda c: despill(key_magenta(c)), out, 'prop_')
+            grid(p, FLAT_PROPS.get(code, GRID_PROPS), lambda c: despill(key_magenta(c)), out, 'prop_')
+        elif f in STRIP3:
+            sh = Image.open(p); W3 = sh.width / 3
+            for k, n in enumerate(STRIP3[f]):
+                cell = despill(key_magenta(sh.crop((int(k * W3) + 3, 3, int((k + 1) * W3) - 3, sh.height - 3))))
+                if not n.startswith('fx_mush'): cell = trim(cell, 4)
+                cell.save(os.path.join(out, n + '.png')); print(n, cell.size)
+        elif f in GRID6:
+            names, nf = GRID6[f]; sh = Image.open(p); W, H = sh.size
+            for i, n in enumerate(names):
+                r, c = divmod(i, 3)
+                cell = despill(key_magenta(sh.crop((int(c * W / 3) + 3, int(r * H / 2) + 3, int((c + 1) * W / 3) - 3, int((r + 1) * H / 2) - 3))))
+                if i >= nf: cell = trim(drop_edge_bits(cell), 4)       # 옆 칸 부스러기(칸 테두리에 닿은 작은 덩어리) 지움
+                cell.save(os.path.join(out, 'fx_' + n + '.png')); print('fx_' + n, cell.size)
+        elif f == 'army.png':             # 파라오 v2: 정면으로 선 소환 군단 한 장 (자홍, 여백 자름)
+            im = trim(despill(key_magenta(Image.open(p))), 4); im.save(os.path.join(out, f)); print(f, im.size)
         elif f.startswith('anim_'):       # 셀 애니 프레임 시트 (자홍 가로 3칸) → anim_<동작>_1~3
             im = despill(key_magenta(Image.open(p))); arr = np.asarray(im); W3 = im.width / 3
             lab, n = ndimage.label(ndimage.binary_dilation(arr[..., 3] > 20, iterations=3))      # 덩어리마다 → 가운데가 속한 칸으로 (옆 칸에 걸친 망토·꼬리도 제 프레임에)
@@ -219,6 +240,19 @@ def main(code):
     for f in os.listdir(out):
         if f.endswith('.png') or f == 'rig.json': shutil.copy(os.path.join(out, f), os.path.join(dst, f))
     print('→', dst)
+
+
+def drop_edge_bits(im, frac=0.08):
+    """칸 테두리에 닿은 작은 덩어리(옆 칸 그림 부스러기)를 투명하게 — 전체의 frac 보다 작고 테두리에 닿은 것"""
+    arr = np.asarray(im).copy(); a = arr[..., 3] > 20
+    lab, n = ndimage.label(ndimage.binary_dilation(a, iterations=3))
+    if n < 2: return im
+    sizes = ndimage.sum(a, lab, range(1, n + 1)); big = sizes.sum()        # 전체 대비 (파편처럼 작은 덩어리 여럿인 그림도)
+    h, w = a.shape
+    for li, sl in enumerate(ndimage.find_objects(lab), 1):
+        edge = sl[0].start == 0 or sl[1].start == 0 or sl[0].stop >= h or sl[1].stop >= w
+        if edge and sizes[li - 1] < big * frac: arr[..., 3][lab == li] = 0
+    return Image.fromarray(arr, 'RGBA')
 
 
 def pad4(out):
