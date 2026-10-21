@@ -3708,6 +3708,16 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: ecec33f7c4309804698733eefd2e7778, type: 3}
   - name: story_07
     sprite: {fileID: 21300000, guid: 06f619fae2a1af441b2fac47b229e741, type: 3}
+  - name: ending_01
+    sprite: {fileID: 21300000, guid: 9a23084489e5963418b4d19c9348a1b9, type: 3}
+  - name: ending_02
+    sprite: {fileID: 21300000, guid: ba010fc4ca4dcb14a8efd134c99a2daa, type: 3}
+  - name: ending_03
+    sprite: {fileID: 21300000, guid: 6295237cf8b2a0e418130970c8741b8f, type: 3}
+  - name: ending_04
+    sprite: {fileID: 21300000, guid: e0af3895adcca414e8acfcd780252cff, type: 3}
+  - name: ending_05
+    sprite: {fileID: 21300000, guid: b9edb8526545dd54e88ccc6938c769a5, type: 3}
   charsPerSec: 26
   crossTime: 0.6
   zoomPerSec: 0.012
