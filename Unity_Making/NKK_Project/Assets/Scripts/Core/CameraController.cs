@@ -44,6 +44,7 @@ namespace NKK
             var m = Mouse.current;
             if (UpdatePeek()) m = null;                    // 미리보기 중엔 끌기·제한 없이 카메라를 옮김
             if (NKK.Tutorial.TutorialBox.Showing) m = null;  // 튜토리얼 대사 중엔 끌기·줌 없음
+            if (NKK.Rats.RosterPanel.Pausing) { m = null; pressed = dragging = false; }  // 쥐 목록 창이 열려 있으면 휠은 목록 스크롤만 (RosterPanel), 뒤 화면은 그대로
             if (m != null)
             {
                 float wheel = m.scroll.ReadValue().y;

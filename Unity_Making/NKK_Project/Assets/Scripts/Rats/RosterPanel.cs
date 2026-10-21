@@ -29,6 +29,7 @@ namespace NKK.Rats
         public Color sortOn = new(1f, 0.85f, 0.45f), sortOff = Color.white;
         [Tooltip("이번 층 피해가 없는 종의 피해 글 대신 (빈칸 = 0 표시)")] public string noDamage = "";
         [Tooltip("열려 있는 동안 이것들보다 위에 그림 (같은 부모 안 형제)")] public Transform[] drawAbove;
+        [Tooltip("휠 한 칸에 목록이 움직이는 거리 (픽셀) — 마우스가 창 밖에 있어도 목록만 움직이고 카메라 줌은 막힘")] public float wheelPixels = 120;
 
         enum Sort { Grade, Count, Damage }
         Sort sort = Sort.Grade;
@@ -37,6 +38,7 @@ namespace NKK.Rats
         readonly List<Group> groups = new();
         readonly List<RectTransform> cards = new();
         readonly Dictionary<TMP_Text, string> tpl = new();
+        ScrollRect scroll;
 
         static GameDatabase DB => GameDatabase.Instance;
         public bool IsOpen => panel && panel.activeSelf;
@@ -51,12 +53,16 @@ namespace NKK.Rats
             if (sortGrade) sortGrade.onClick.AddListener(() => SetSort(Sort.Grade));
             if (sortCount) sortCount.onClick.AddListener(() => SetSort(Sort.Count));
             if (sortDamage) sortDamage.onClick.AddListener(() => SetSort(Sort.Damage));
+            // 휠은 Update 에서 직접 처리 (창 위·밖 같은 빠르기) → ScrollRect 자체 휠은 꺼서 두 번 안 움직이게
+            scroll = content ? content.GetComponentInParent<ScrollRect>(true) : null;
+            if (scroll) scroll.scrollSensitivity = 0;
         }
 
         void OnDestroy() => Pausing = false;
 
         void Update()
         {
+            if (IsOpen) Wheel();
             var k = Keyboard.current;
             if (k == null) return;
             bool hot = hotkey != Key.None && k[hotkey].wasPressedThisFrame;
@@ -80,6 +86,20 @@ namespace NKK.Rats
         public void Close() { if (panel) panel.SetActive(false); Pausing = false; }
 
         void SetSort(Sort s) { sort = s; Refresh(); }
+
+        // 휠 위 = 목록 위로, 아래 = 아래로. 내용이 창보다 짧으면 안 움직임
+        void Wheel()
+        {
+            var m = Mouse.current;
+            if (m == null || !scroll || !scroll.vertical) return;
+            float wheel = m.scroll.ReadValue().y;
+            if (Mathf.Abs(wheel) <= 0.01f) return;
+            var view = scroll.viewport ? scroll.viewport : (RectTransform)scroll.transform;
+            float range = scroll.content.rect.height - view.rect.height;
+            if (range <= 0) return;
+            scroll.velocity = Vector2.zero;
+            scroll.verticalNormalizedPosition = Mathf.Clamp01(scroll.verticalNormalizedPosition + Mathf.Sign(wheel) * wheelPixels / range);
+        }
 
         string T(TMP_Text t) { if (!t) return ""; if (!tpl.TryGetValue(t, out var s)) tpl[t] = s = t.text; return LocText.Tpl(t, s); }
         static TMP_Text Txt(Transform t, string p) => t.Find(p)?.GetComponent<TMP_Text>();
