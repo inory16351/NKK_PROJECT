@@ -65,6 +65,9 @@ namespace NKK.Ults
         public Vector2 runHeight = new(110, 190), runSpeed = new(1500, 2100); public float runFrame = 0.07f;
         [Tooltip("켜면 게임 화면 단계의 눈보라 · 입자(worldSnow)를 안 띄움")] public bool worldSnowOff;
         [Tooltip("게임 화면 단계 입자 수 배율 (매니저 worldSnowStart · worldSnowHit 에 곱함, 2026-10-20 스트리머 하트 = 0.3)")] public float worldSnowScale = 1;
+        [Tooltip("게임 화면 단계 끝 무렵 입자(worldSnow)가 서서히 걷히는 시간 (초, 0 = 끝에 바로 사라짐) — 2026-10-20 술탄 금화 비")] public float worldSnowFade;
+        [Tooltip("worldPhase 일 때 컷신이 걷혀도 게임 화면 위에 남길 컷신 묶음 이름 (scene 바로 아래 자식, 예: Hold) — 걷히기 시작할 때 컷신 밖으로 옮겨 worldTime 동안 남고 끝 무렵 holdFade 동안 사라짐, 끝나면 제자리 (2026-10-20 쥐 황제 탄흔)")] public string holdGroup;
+        public float holdFade = 0.4f;
         [Header("게임 화면 큰 폭발 하나 (2026-10-20 폭탄마: 레이저가 맵에 내리꽂혀 맵 전체를 덮는 폭발 → 버섯구름)")]
         [Tooltip("게임 화면 단계 시작에 위에서 화면 가운데로 내리꽂히는 레이저 그림 · 굵기 (px) · 시간")] public Sprite blastBeam;
         public float blastBeamWidth = 260, blastBeamTime = 0.22f;

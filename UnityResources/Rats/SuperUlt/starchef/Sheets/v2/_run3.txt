@@ -1,0 +1,4 @@
+17:04:58 ok cu_ratride
+17:05:03 ok pose_leap
+17:05:21 ok shot_ride0
+DONE

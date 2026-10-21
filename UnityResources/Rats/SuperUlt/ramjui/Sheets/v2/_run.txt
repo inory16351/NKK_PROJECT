@@ -1,0 +1,15 @@
+14:21:37 ok face_bg
+14:21:40 ok bg_post
+14:21:40 ok bg_zap
+14:21:48 ok pano_a
+14:21:56 ok face_close
+14:21:57 ok anim_zap
+14:22:56 ok pano_b
+14:24:20 ok pano_c
+14:25:13 ok props_flat
+14:25:17 ok fx_hit
+14:25:17 ok anim_land
+14:25:19 ok anim_jiri
+14:25:26 ok anim_scratch
+14:25:27 ok fx_flat
+DONE

@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_hit.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers, no symbols printed on the coins.
+- Palette: rich gold yellow, warm amber shade, cream-white highlight, a few gems in ruby red, turquoise and royal blue, glossy black for oil.
+  1. ONE gold coin FALLING fast: a gold coin with a short flat cream-gold motion streak trailing ABOVE it (vertical)
+  2. a small open burlap SACK of gold coins tipped over, coins spilling
+  3. a wide WALL of countless gold COINS seen from the front: a thick horizontal band packed with gold coins at all angles, with loose coins dangling from its BOTTOM edge (it will slide down to cover the screen)
+  4. COIN LANDING frame 1: a small flat gold flash just hitting the ground, a few coins bouncing up
+  5. COIN LANDING frame 2: a wide crown burst of gold coins and sparkles jumping out
+  6. COIN LANDING frame 3: the end: a flat little PILE of gold coins on the ground with two small sparkles

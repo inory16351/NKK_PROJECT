@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_taste1.png and save the result as a NEW PNG file: shot_taste2.png (in the current working directory). Do not overwrite shot_taste1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_taste1.png: the same canvas size, the same framing, camera angle and zoom, the same characters' size and position, the same background, the same colors and flat style. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The rat now TASTES: its fingertip (with a dab of red sauce) is in its mouth, licking it, the eyes still CLOSED, chin still raised, a judging, critical expression (eyebrows pulled together, thinking). The plate and hands stay. Nothing else changes.

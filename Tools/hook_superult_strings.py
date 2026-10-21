@@ -21,6 +21,7 @@ EN = {
     '※ 자외선 지수: 매우 위험': '※ UV index: EXTREME',
     '※ 원탁이라 상석 다툼 없음 (아마도)': '※ Round table, so no fighting over seats (probably)',
     '※ 소원 추가 요청은 반려되었습니다': '※ Request for more wishes: DENIED',
+    '※ 오늘 금화 비는 술탄이 쏩니다': "※ Today's gold rain is on the Sultan",
     '※ 소는 촬영 후 무사히 돌려보냈습니다': '※ The cow was safely returned after filming',
     '※ 구독 · 좋아요 · 알림 설정까지!': '※ Like, subscribe and hit the bell!',
     '※ 다람쥐 헌 쳇바퀴에 타고파~': '※ Squirrel wants a spin on the old wheel~',
@@ -30,6 +31,7 @@ EN = {
     '※ 쭈욱~ 늘어나는 건 국룰': '※ The cheese pull is mandatory',
     '※ 시전 후 MP 0 · 이동 불가': '※ After casting: MP 0 · cannot move',
     '※ 얼어 죽어도 아이스 아메리카노': '※ Iced Americano, even if I freeze',
+    '※ 시간 외 근무 수당은 청구하지 않습니다': '※ No overtime pay will be claimed',     # 메이드 쥐 (2026-10-20)
 }
 TEMPLATE = re.compile(r'\{\w+\}')
 CODE_SET = ('Title', 'Line')          # 코드가 테이블 글로 채우는 TMP (틀만)

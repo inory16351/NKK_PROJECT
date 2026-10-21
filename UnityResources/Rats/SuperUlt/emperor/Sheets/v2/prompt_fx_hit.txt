@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_hit.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers.
+  1. a LONG horizontal bullet TRACER: a very long thin flat golden-yellow streak with a bright cream tip on the RIGHT end (fading to the left)
+  2. a big wide cloud of flat white-grey GUN SMOKE drifting (a horizontal band of round blobs)
+  3. a small spray of flat brown DUST and pebbles kicked up
+  4. BULLET IMPACT frame 1: a small flat white-yellow flash just hitting
+  5. BULLET IMPACT frame 2: a bigger jagged flat yellow-orange burst with sparks flying
+  6. BULLET IMPACT frame 3: the end: a fading puff of grey smoke with a few small sparks

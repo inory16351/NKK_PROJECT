@@ -424,6 +424,16 @@
 - **Play 테스트 방법 (2026-10-20)**: Claude 쪽 UnityMCP 연결이 실패해도 서버(8080)가 떠 있으면 HTTP 직접 호출 (scratchpad 식 `mcp.py`). **Play 확인은 단계마다 따로** (적용 코드 맨 앞에도 `if (isPlaying) return`), `nkk_slot` 을 5로 바꿔 Play → `TestSuper(code)` → 캡처 → 원래 슬롯으로 되돌림. (같은 날 한 번 Play 중에 새로고침 · 씬 빌드가 돌았음 — 저장 단계에서 실패해 씬 · 저장 영향 없음.)
 - **사고 기록 (2026-10-19)**: 사용자가 슬롯 1 로 Play 중일 때 MCP 체인이 멈추지 않아 Play 중 재컴파일 · 테스트 단계 `SkipTutorial()` 이 **슬롯 1 저장에 tutoSkip=true 를 씀** · 사용자 Play 를 멈춤. 원래 tutoSkip 값은 모름 (사용자 확인 필요). 이후 테스트 스크립트는 Play 중이면 중단 · 슬롯 5 가 아니면 SkipTutorial 안 함.
 - **남음**: ① 사용자 눈 확인 ② 새 씬 글 '총 피해 {n}' 스트링 테이블 등록(`import_scene_strings.py` + 영어 'Total {n}') ③ 나머지 13종도 같은 방식(햄찌는 손으로 만든 장면).
+## 5-17. 새 쥐 '메이드 쥐' (2026-10-20, 게임 적용 · Play 확인 끝) — 그림 `UnityResources/Rats/NewRats4/README.md`
+
+- **사용자 결정**: 참고 그림(은발 메이드)을 게임 그림체 쥐로 · 이름 '메이드 쥐' · 신화 7훈장(공격력 472) · 스킬 = 메이드 (패시브 '완벽한 뒷정리' 치즈 ×1.4 = Cheese_Boost · 액션 '티 타임' 20초마다 주변 광란 6초 = Cheer, 찻잔 쟁반 스티커) · 필살기·초필살기 = **시간 정지 + 칼** (시간 정지는 **연출만**, 게임 영향 없음) · 흰 털 · **큰 금색 회중시계가 잘 보이게** · 리깅은 **다른 쥐와 같은 방식** (그리는 순서 그대로 → 시계는 뒷다리 허벅지에).
+- 테이블 (백업 `Data_Table/_backup_20261020`): Character 10088 `maid` · Skill 20088 · 21088 · Ultimate 30036 '살인 인형' `UltTimeStop`(게이지 240, 자막 c1~c5) · Super_Ult 31016 '메이드의 세계' · 업적 40036 '그리고 시간은 움직인다'. 스트링 + 영어 채움 → xlsx2json 끝.
+- 코드: `Ults/UltTimeStop.cs` (회중시계 · 바늘 → 회색 화면 → 화면 안 대상 옆으로 순간이동하며 공중에 칼 → 재개 순간 일제히 꽂힘) · `Rat.Action` Cheer 에 메이드면 `maid_teatray` 스티커. 유니티 밖 dotnet 빌드 오류 0.
+- 초필살기: 그림 Codex 10장 `SuperUlt/maid/Sheets/v2/`(`gen_prompts.py` · `run_v2.sh`) → Sheets 복사 + 멈춘 세계 판 `pano_?_alt`(원본 탈색) → `slice_superult.py maid` 끝 (Art 복사됨). 연출 `superult_story.maid` (컷 6: 달·시계탑 → 회중시계 딸깍 → 얼굴 → 손가락 딱 · 회색 · 하늘에 칼 고리 → 칼 흩뿌림 → 칼이 카메라로) · 게임 화면 = 칼 비 (WORLD/IMAGE_FX maid, 칼 그림 *r = 오른쪽으로 돌린 사본). 씬 코드 `gen_superult_scene.py out.cs maid` (2.8만 자).
+- **유니티 적용 끝 (2026-10-20)**: maid 파츠 다시 임포트(피벗) · NKK/Build Rat Art Library (88종) · Game: UltimateManager Fill Props/Icons · FxManager 스티커 `maid_teatray` · AchievementToast Fill Icons · 초필살기 씬 `Scenes/Maid` · LocText(밈 8000517) · Lobby: IconBook Fill Icons. 스트링 import_scene_strings + 영어 (다른 세션의 술탄·람쥐 새 글 2개도 영어 채움).
+- **Play 확인 (슬롯 5, 콘솔 오류 0)**: 필살기 = 째깍 → 회색 · 칼이 물건 둘레에 → 재개 때 일제히 꽂혀 피해 (캡처 scratchpad). 처음엔 빈 방에서 칼이 안 나와서 **대상이 6개보다 적으면 바닥 자리에도 칼**(actor 4, 마지막 칼에 작은 충격) · 칼 폭 82 · 회색 0.46 으로 고침. 초필살기 = 컷 6개 → 게임 화면 칼 비 (처음 너무 크고 빽빽 → worldDotSize 34~62 · gap 0.1 · worldSnowScale 0.3), 대상마다 피해 숫자. 편집 모드 컷신 미리보기 = 기존 cap 스크립트(캡처 뒤 그림 되돌림).
+- 안 본 것: 티 타임은 스티커 생성만 확인 (특수 액션은 쳇바퀴 Lv 3 해금 뒤라 실제 발동 화면은 아직) · 뽑기 고유 컷씬(GachaIntro)은 없음 → 보통 공개로 나옴 (원하면 따로 제작).
+
 ## 6. 밸런스 측정 (BalanceProbe)
 
 - 목표 (사용자): 전투력 = 적정일 때 일반 층은 제한시간 180초의 **60~90%**(75% 쪽으로), 보스 층은 210초의 **약 90%**(길 117초 + 보스전 72초, 보스전은 Boss `hp_pow_sec` 로 맞춤).

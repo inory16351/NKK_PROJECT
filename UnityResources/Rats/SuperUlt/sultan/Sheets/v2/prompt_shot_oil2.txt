@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_oil1.png and save the result as a NEW PNG file: shot_oil2.png (in the current working directory). Do not overwrite shot_oil1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_oil1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The ground RUMBLES just before the oil strike: the derrick shakes (a few short flat shake lines beside it), cracks in the sand around its base, dark puffs of sand dust bursting out at the base, and a short fat spurt of glossy black OIL just popping out of the top of the derrick with a few black drops. NO coins, NO gold. Nothing else changes.

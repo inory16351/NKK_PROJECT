@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: pano_c.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, one full-frame background picture (no transparency, no panels, no borders). NO characters, NO animals, NO text, NO letters, NO numbers, no logos.
+- STYLE (MOST IMPORTANT): a FLAT 2D game background exactly in the style of the attached ref_flat_bg (the game's own approved background, style only, not its content): Untitled Goose Game mood, big simple flat color shapes with clean soft edges, flat fills with at most one soft shade step, very little texture, NO black outlines, NO gloss, NO painterly brush strokes, NOT a detailed matte painting, no tiny clutter. Palette: elegant moonlit night - deep navy blue, midnight indigo, crimson-red mansion walls, silver moonlight, warm gold clock accents.
+- This picture is ONE SEGMENT of a very TALL vertical panorama that a camera tilts through (top -> middle -> bottom). Segments are stacked vertically, so the composition must continue at the top and bottom edges.
+- CONTINUITY IS CRITICAL: the attached ref_prev_bottom is the BOTTOM STRIP of the segment directly ABOVE this one. The TOP 30% of your picture must continue it seamlessly (same shapes at the same positions, same colors).
+- SEGMENT 3 (BOTTOM) of 3: seen FROM THE FRONT, the near ground: a wide flat stone BALCONY / terrace of the mansion with a pale stone balustrade along the bottom edge, a flat crimson carpet runner in the middle, two small round topiary bushes at the far left and right; the CENTER of the terrace is EMPTY (a character will stand there).

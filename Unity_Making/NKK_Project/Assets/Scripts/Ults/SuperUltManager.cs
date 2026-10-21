@@ -91,6 +91,7 @@ namespace NKK.Ults
             public SuperUltRig[] rigs;           // 컷신 속 쥐 리그 (관절 애니메이션)
             public float lastDealt, dealt, shownDealt;      // 피해 표시: 이번 타 · 누적 · 화면에 센 값
             public bool snowOn;                             // 게임 화면 눈보라 켜짐
+            public Transform hold, holdHome; public int holdIndex;      // 컷신이 걷혀도 남기는 묶음 (SuperUltStyle.holdGroup) · 원래 자리
         }
         Run cur;
         string subFormat, hitsFormat, totalFormat;
@@ -243,10 +244,10 @@ namespace NKK.Ults
             if (FxManager.Halt) return;                  // 포기 창 · 튜토리얼 대사 중엔 멈춤
             float dt = Mathf.Min(Time.unscaledDeltaTime, 0.05f), Te = Cfg("t_enter", 0.4f), Tc = Cfg("t_cutin", 1.4f), Ta = Cfg("t_act", 3.6f), Tf = Cfg("t_finish", 4.2f), Tend = Cfg("t_end", 4.5f);
             var c = cur; var st = c.st;
-            if (st && st.noFinishCut) { Ta = Tf = Mathf.Clamp(st.actEnd, Tc + 0.1f, Tend - 0.1f); }      // 피니시 컷 없음: ③ 이 이어지다 일격 뒤 바로 걷힘
+            bool world = st && st.worldPhase;
+            if (st && st.noFinishCut) { Ta = Tf = world ? Mathf.Max(st.actEnd, Tc + 0.1f) : Mathf.Clamp(st.actEnd, Tc + 0.1f, Tend - 0.1f); }      // 피니시 컷 없음: ③ 이 이어지다 일격 뒤 바로 걷힘 (worldPhase 면 끝을 actEnd 에 맞춰 늘림 — t_end 보다 긴 컷신, 2026-10-20 치즈 퐁듀)
             // 다단 구간 · 마무리 · 끝 (기본 = 컷신 ③ 안) — worldPhase 면 컷신이 걷힌 뒤 게임 화면에서 (2026-10-19 아이스 퀸 눈보라)
             float H0 = Tc, H1 = Ta, Tfin = Ta, Tstop = Tend;
-            bool world = st && st.worldPhase;
             if (world) { Tend = Tf + Mathf.Max(0.1f, st.cutFade); H0 = Tend; H1 = H0 + Mathf.Max(0.5f, st.worldTime); Tfin = H1; Tstop = H1 + 0.3f; }
             // 컷신 재생 속도 (쥐별 playRate, 0.75 = 느리게) — 컷신이 걷힌 뒤 게임 화면 단계는 제 속도
             float rate = st && st.playRate > 0 && c.t < Tend ? st.playRate : 1;
@@ -266,6 +267,12 @@ namespace NKK.Ults
             int hc = Mathf.Max(0, (int)Cfg("hit_count", 10));
             while (c.hitsDone < hc && t >= H0 + (c.hitsDone + 0.5f) * (H1 - H0) / hc) Hit();
 
+            if (world && st.scene && !string.IsNullOrEmpty(st.holdGroup) && !c.hold && t >= Tf)      // 걷히기 시작할 때 남길 묶음을 컷신 밖(같은 HUD 층, 컷신 바로 위)으로 → 컷신 걷힘 · 꺼짐에 안 휩쓸림
+            {
+                var h = st.scene.Find(st.holdGroup);
+                if (h) { c.hold = h; c.holdHome = h.parent; c.holdIndex = h.GetSiblingIndex(); h.SetParent(cut.transform.parent, true); h.SetSiblingIndex(cut.transform.GetSiblingIndex() + 1); }
+            }
+            if (c.hold && t >= Tend && c.hold.TryGetComponent<CanvasGroup>(out var hcg)) hcg.alpha = 1 - Mathf.Clamp01((t - (H1 - st.holdFade)) / Mathf.Max(0.05f, st.holdFade));     // 게임 화면 단계 끝 무렵 사라짐
             if (t < Tend || !world) Animate(t, Te, Tc, Ta, Tf, Tend);
             else if (cut.gameObject.activeSelf) { cut.alpha = 0; if (st.scene) st.scene.gameObject.SetActive(false); cut.gameObject.SetActive(false); }
             if (world && t >= H0) WorldBlizzard(dt, Tstop - t);
@@ -399,7 +406,7 @@ namespace NKK.Ults
             var c = cur; var st = c.st; var fx = FxManager.I; var v = Ults.ViewRect(0);
             if (!c.snowOn && worldSnow.layer)
             {
-                c.snowOn = true; worldSnow.layer.gameObject.SetActive(true);
+                c.snowOn = true; worldSnow.layer.gameObject.SetActive(true); SnowAlpha(1);
                 if (st.imageFx) { worldSnow.dotSprites = st.hailFall; worldSnow.flakeSprites = st.hailChunk; }      // 쥐별 그림 (없으면 벡터 점)
                 if (snowWind0 == null) { snowWind0 = worldSnow.wind; snowDot0 = worldSnow.dotSize; }
                 worldSnow.wind = st.worldWind != Vector2.zero ? st.worldWind : snowWind0.Value;
@@ -414,6 +421,7 @@ namespace NKK.Ults
                 }
             }
             if (c.snowOn) worldSnow.Tick(dt);
+            if (c.snowOn && st.worldSnowFade > 0) SnowAlpha(Mathf.Clamp01(left / st.worldSnowFade));      // 끝 무렵 서서히 걷힘 (술탄 금화 비)
             UpdateSplashes(dt);
             if (st.runFrames != null && st.runFrames.Length > 0 && left > 1.0f && (runT -= dt) <= 0) { runT = st.runGap; RunWave(); }
             for (int i = pendingBooms.Count - 1; i >= 0; i--) { var b = pendingBooms[i]; b.x -= dt; if (b.x <= 0) { LineBoom(b.y, 1.2f); pendingBooms.RemoveAt(i); } else pendingBooms[i] = b; }
@@ -442,6 +450,14 @@ namespace NKK.Ults
                 fx.Shake(0.015f);
             }
             if (st.freezeAll > 0 && (freezeT -= dt) <= 0) { freezeT = 0.5f; FreezeView(Mathf.Max(0, left) + st.freezeAll); }
+        }
+
+        void SnowAlpha(float a)
+        {
+            if (!worldSnow.layer) return;
+            var cg = worldSnow.layer.GetComponent<CanvasGroup>();
+            if (!cg) { if (a >= 1) return; cg = worldSnow.layer.gameObject.AddComponent<CanvasGroup>(); cg.blocksRaycasts = false; cg.interactable = false; }
+            cg.alpha = a;
         }
 
         // 대상마다 이번 타 피해 숫자 (월드 팝업, 많으면 몇 개만)
@@ -812,6 +828,7 @@ namespace NKK.Ults
         void End()
         {
             var c = cur; cur = null; phase = 0;
+            if (c?.hold) { if (c.hold.TryGetComponent<CanvasGroup>(out var hcg)) hcg.alpha = 1; c.hold.SetParent(c.holdHome, true); c.hold.SetSiblingIndex(c.holdIndex); c.hold = null; }      // 남긴 묶음 제자리
             if (c?.st) { c.st.snow.Clear(); if (c.st.scene) c.st.scene.gameObject.SetActive(false); }
             ClearDmgPops();
             ClearSplashes(); pendingBooms.Clear();

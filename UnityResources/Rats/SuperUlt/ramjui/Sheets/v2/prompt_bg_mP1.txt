@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: bg_mP1.png (in the current working directory). Do not write code to draw it; it must be a generated image. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, one full-frame picture with its background, no borders, no panels.
+- It is one frame of a funny 'thunder squirrel' meme montage where the art style gradually turns from a flat cartoon into a real photo: a squirrel with dramatic LIGHTNING / electric arcs.
+- NO text, NO letters, NO numbers, NO watermark, NO logos, NO speech bubbles. No humans. No real superhero costume or logo.
+- STYLE (MOST IMPORTANT): ONE SMALL STEP away from the attached flat game art (ref_flat_anim, ref_mA1): keep the same cute cartoon character design, big head and bead eyes from ref_rig / ref_char, but add SOFT GRADIENT SHADING, gentle rim light, and a LIGHT hint of fur texture on the edges and tail. Still clearly a cartoon, no outlines. Lightning slightly glowing.
+- SCENE: the squirrel standing upright on a park lawn with both paws raised high, mouth open shouting, lightning bolts striking around it.

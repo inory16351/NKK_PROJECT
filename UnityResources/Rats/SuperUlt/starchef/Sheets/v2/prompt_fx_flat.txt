@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers.
+  1. a fluffy TUFT of messy brown wavy HAIR (a clump pulled out, flat cartoon, same brown as ref_cook's hair)
+  2. a few loose curly brown HAIR STRANDS floating (3 simple flat curls)
+  3. a cartoon DIZZY ring: 5 little yellow stars in an oval ring
+  4. a flat four-pointed TWINKLE star sparkle in cream white and gold
+  5. a wide horizontal MOTION SMEAR: a long soft cream-white swoosh band with tapered ends and 3 thin parallel speed stripes (a whip-pan blur)
+  6. a flat horizontal SPEED LINE streak in cream white (long thin tapered stripe)

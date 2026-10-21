@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: bg_zap.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, one full-frame background picture (no transparency, no panels, no borders). NO characters, NO animals, NO text, NO letters, NO numbers, no logos, no real brand or website UI.
+- STYLE (MOST IMPORTANT): a FLAT 2D game background exactly in the style of the attached ref_flat_bg (the game's own approved background, style only, not its content): Untitled Goose Game mood, big simple flat color shapes with clean soft edges, flat fills with at most one soft shade step, very little texture, NO black outlines, NO gloss, NO painterly brush strokes, NOT a detailed matte painting, no tiny clutter. Palette: stormy night forest — deep navy and slate blue sky, teal-green oak leaves, warm brown bark, electric pale-cyan and lemon-yellow light accents.
+- A dramatic flat STORM backdrop for a classic meme shot: a low flat grassy forest clearing at the bottom, a few round oak tree silhouettes at the sides, huge flat storm clouds, and big flat radial light bands in pale cyan and navy spreading from the lower-middle (where a squirrel will stand). The lower-middle is EMPTY.

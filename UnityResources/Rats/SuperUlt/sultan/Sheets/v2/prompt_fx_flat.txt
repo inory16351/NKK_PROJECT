@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers, no symbols printed on the coins.
+- Palette: rich gold yellow, warm amber shade, cream-white highlight, a few gems in ruby red, turquoise and royal blue, glossy black for oil.
+  1. ONE big round GOLD COIN seen from the front: a flat gold disc with a raised rim and one simple white diagonal shine (no symbol)
+  2. ONE gold coin seen tilted at an angle (a thin gold ellipse showing its edge), spinning
+  3. a flat four-pointed SPARKLE star in cream white and gold
+  4. a flat SPLASH of many gold coins bursting outward from a center (a round burst made of 12 coins flying out)
+  5. ONE faceted ruby-red GEM
+  6. ONE glossy black OIL DROP, a teardrop pointing UP with one white shine

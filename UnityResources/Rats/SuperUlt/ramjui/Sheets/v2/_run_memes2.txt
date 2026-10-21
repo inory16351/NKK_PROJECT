@@ -1,0 +1,17 @@
+14:56:15 ok bg_mB3
+14:56:20 ok bg_mB2
+14:56:22 ok bg_mA2
+14:56:23 ok bg_mA4
+14:56:29 ok bg_mA3
+14:56:29 ok bg_mA5
+14:56:30 ok bg_mA1
+14:56:39 ok bg_mB1
+14:57:28 ok bg_mC1
+14:57:32 ok bg_meme17
+14:57:33 ok bg_mB4
+14:57:35 ok bg_mC2
+14:57:36 ok bg_meme18
+14:57:40 ok bg_meme16
+14:57:42 ok bg_mC3
+14:57:44 ok bg_meme15
+DONE

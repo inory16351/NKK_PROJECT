@@ -1,0 +1,7 @@
+16:22:49 ok shot_rise
+16:22:50 ok shot_oil1
+16:22:51 ok pour
+16:23:16 ok anim_pour
+16:23:49 ok shot_oil2
+16:23:52 ok shot_oil3
+DONE

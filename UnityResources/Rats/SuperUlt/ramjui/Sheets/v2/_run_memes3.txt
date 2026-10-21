@@ -1,0 +1,8 @@
+15:01:33 ok bg_mQ2
+15:01:39 ok bg_mR2
+15:01:50 ok bg_mR1
+15:01:51 ok bg_mP1
+15:01:52 ok bg_mQ3
+15:02:00 ok bg_mQ1
+15:02:17 ok bg_mP2
+DONE

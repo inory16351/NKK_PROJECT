@@ -1,0 +1,7 @@
+Use your built-in image generation tool to EDIT the attached image ref_fountain_seed.png and save the result as a NEW PNG file: fountain_on.png (in the current working directory). Do not overwrite ref_fountain_seed.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec (HIGH-RESOLUTION REDRAW):
+- ref_fountain_seed.png is a blurry enlarged crop of a flat 2D game background: a baroque Roman palace fountain (like the Trevi Fountain) at sunset. Redraw it as a CRISP, CLEAN, full-resolution 1536x1024 picture with EXACTLY the same composition: every shape at the same position and the same size (the palace facade with its statues on top, the central arched niche, the columns, the rocks and the turquoise cascades, the wide turquoise basin with its stone rim, the side buildings at the edges, the sky and the paving). Same framing, nothing moved, nothing added, nothing cropped.
+- IMPORTANT: inside the central niche, on top of the central rocks, there is NO statue — keep an EMPTY flat rock pedestal there (a character will stand there later).
+- STYLE (MOST IMPORTANT): the same FLAT 2D game background style as the attached ref_flat_bg: big simple flat color shapes, clean soft edges, at most one soft shade step, very little texture, NO black outlines, NO painterly brush strokes, NO blur. Same warm sunset palette.
+- NO people, NO characters, NO animals, NO text, NO letters, NO logos. Full frame, no borders.

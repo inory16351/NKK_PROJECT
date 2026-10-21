@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: geyser.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns side by side: ONE element per column, each the same scale, each standing on the SAME bottom line (the bottom edge of the frame), none touching each other.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2: simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers.
+- Palette: golden cheese yellow, warm orange shade, cream highlight, a little turquoise water blue and white.
+- Three consecutive animation frames of a huge melted-CHEESE EXPLOSION bursting UP out of fountain water (the base of each is a wide splash of turquoise water and cheese):
+  1) the start: a short wide dome of golden cheese erupting from the water with a ring of water splash
+  2) the peak: a TALL thick column of golden cheese shooting up to the top of the frame and bursting outward at the top into big round cheese blobs, water and cheese spraying sideways at the base
+  3) the fall: the column breaking apart into many big round cheese blobs and ribbons raining down, a wide splash at the base

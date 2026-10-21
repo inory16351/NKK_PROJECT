@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_ride1.png and save the result as a NEW PNG file: shot_ride3.png (in the current working directory). Do not overwrite shot_ride1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_ride1.png: the same canvas size, the same framing, camera angle and zoom, the same characters' size and position, the same background, the same colors and flat style. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The Cook is now completely BALD: a shiny smooth round bald head with one simple white shine highlight, not a single hair left (only the sideburns), the rat stands proudly on the bald head holding up two big clumps of brown hair in both paws, grinning. The Cook looks stunned and empty: tiny dot eyes, mouth a wobbly line, a single tear. Cartoon comedy. Nothing else changes.

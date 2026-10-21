@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: bg_meme06.png (in the current working directory). Do not write code to draw it; it must be a generated image. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, one full-frame picture, no borders, no panels.
+- STYLE (MOST IMPORTANT): a funny 2000s Korean internet MEME image ('thunder squirrel' meme): a REAL-LOOKING PHOTOGRAPH of a cute wild squirrel with deliberately cheesy, amateur photoshopped LIGHTNING effects pasted on top (bright white-blue electric arcs and bolts with a soft glow), slightly over-sharpened, a bit of old JPEG compression feel, like a meme passed around web forums. Funny and cute, not scary.
+- NO text, NO letters, NO numbers, NO watermark, NO logos, NO captions, NO speech bubbles. No humans. No real brand or superhero costume.
+- SCENE: a squirrel crouched heroically on a mossy log, wearing a tiny round silver viking-style helmet with small white wings and a short red cloth cape, holding a tiny wooden hammer whose head is a big acorn, lightning flashing in a dark cloudy sky behind (generic norse-god parody, no superhero logo).

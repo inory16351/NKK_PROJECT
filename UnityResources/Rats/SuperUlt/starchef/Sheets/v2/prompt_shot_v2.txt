@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_v1.png and save the result as a NEW PNG file: shot_v2.png (in the current working directory). Do not overwrite shot_v1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_v1.png: the same canvas size, the same framing, camera angle and zoom, the same characters' size and position, the same background, the same colors and flat style. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The rat's V-sign paw is pushed a little closer to the viewer and a tiny bit bigger, both eyes now closed in a happy upward curve, mouth wide open laughing. Nothing else changes.

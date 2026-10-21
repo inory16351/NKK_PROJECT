@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_hit.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers.
+- Palette: lemon yellow, pale cyan, cream white, warm brown, slate grey.
+  1. a wide flat SHOCKWAVE ring seen in perspective (a thin wide ellipse of cream white and cyan, about 4 times wider than tall)
+  2. a flat cluster of cracked GROUND CHUNKS and pebbles in brown and slate
+  3. a flat SPEED LINE streak (a vertical tapered white and cyan streak)
+  4. LANDING IMPACT frame 1: a small flat white-yellow burst on the ground with a few dirt chunks
+  5. LANDING IMPACT frame 2: a wide flat dome burst of cream white and cyan with zig-zag lightning edges and flying ground chunks
+  6. LANDING IMPACT frame 3: the end: a wide low dust cloud in warm grey with small fading sparks

@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: pour.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns side by side: ONE element per column, each the same size, each filling the FULL HEIGHT of the image from the top edge to the bottom edge, none touching each other.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2: simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers.
+- Palette: rich gold yellow, warm amber shade, cream-white highlight, a few gems in ruby red, turquoise and royal blue, glossy black for oil.
+- Three consecutive animation frames (for a loop) of a vertical WATERFALL of shiny GOLD COINS pouring straight DOWN: a long narrow stream of many round gold coins at all angles, narrow at the TOP and slightly wider toward the BOTTOM, with a few small sparkles; in each frame the coins are at different positions (as if they moved down a little).
