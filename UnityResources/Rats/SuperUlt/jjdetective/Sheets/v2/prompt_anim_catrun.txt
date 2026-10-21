@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: anim_catrun.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 landscape ANIMATION SHEET: 3 columns, ONE full-body frame per column, all frames the same size and scale, each well inside its third, none touching. Frames are consecutive key drawings of one motion for a cel-animated skill cutscene, so keep the character IDENTICAL between frames, only the pose changes. Strong, dynamic, readable poses.
+- CAMERA: every frame is a straight SIDE VIEW, the cat runs to the RIGHT.
+- STYLE (MOST IMPORTANT): this must look like THIS GAME's own art. Match EXACTLY the attached ref_rig (the character's in-game sprite parts: copy its colors, shapes and proportions) and the approved flat cutscene art ref_flat_anim / ref_flat_face, and (for any background) the approved flat background ref_flat_bg: FLAT cartoon storybook look in the Untitled Goose Game mood, simple soft flat shapes, flat colors with only gentle soft shading, very little texture, NO individual fur strands, no black outlines, no gloss, NO painterly brush strokes, NOT a Disney/Pixar/3D look, NOT anime style, NOT a photo. Palette: a moonlit night mystery — deep navy and indigo blues, soft teal shadows, warm butter-yellow lamplight and cheese-yellow accents, cream highlights, the detective's royal blue jacket and bright red bow tie as the strongest accents.
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- THE CULPRIT CAT: drawn like the mysterious unknown criminal of a classic detective cartoon: the whole cat is ONE SOLID FLAT PURE BLACK SILHOUETTE with NO inner details at all (no fur, no shading, no outlines inside), ONLY two big glowing WHITE eyes (and, when it makes an expression, a thin white mouth line or white teeth). A slim sneaky cat shape: pointed ears, long whiskers drawn as thin black lines, a long curling tail, about TWICE as tall as the little mouse. Comic and cute, NOT scary.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no ground, no scenery. Do not use magenta, pink-purple or violet on the subjects except the pink ears, nose and paws. Keep everything fully inside the frame with margin.
+- A RUN CYCLE of the BLACK SILHOUETTE CAT fleeing in panic (head turned slightly back, white eyes wide with worry, a small light-blue sweat drop):
+  1) legs stretched far apart front and back, body long and low (gallop reach);
+  2) legs gathered together under the body, back arched up;
+  3) front legs landing, back legs kicking off, tail streaming behind.

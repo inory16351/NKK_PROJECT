@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+- Palette: cream white, butter yellow, warm light grey, a little tomato red.
+  1. a flat cartoon DUST PUFF cloud trail (cream and pale grey, three round puffs in a row getting smaller to the left)
+  2. a long thin horizontal SPEED STREAK (a flat white tapered line, thick at the left, pointed at the right)
+  3. a ring of three flat yellow DIZZY STARS circling (seen slightly from above, an ellipse)
+  4. a big flat cartoon BONK burst (a jagged cream-white star burst with a butter-yellow center)
+  5. a flat white STEAM puff shooting up (two round puffs)
+  6. a wide flat SHOCKWAVE RING seen from the front (a thin wide ellipse of cream-white, about 4 times wider than tall)

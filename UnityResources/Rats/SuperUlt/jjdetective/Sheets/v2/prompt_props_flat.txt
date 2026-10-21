@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: props_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game prop art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+  1. a muddy CAT PAW PRINT (four toe pads and a heel pad, dark brown)
+  2. a single long curly BLACK CAT HAIR
+  3. a clean white FISH BONE skeleton (head, spine, tail)
+  4. three long parallel CLAW SCRATCH marks (dark brown gouges with pale wood edges)
+  5. a flat cartoon idea LIGHT BULB (warm yellow bulb with a grey screw base and short yellow rays around it)
+  6. a small TRANQUILIZER DART pointing to the RIGHT (a silver needle tip at the right, a small glass body with a light-blue liquid, a short red feather tail at the left)

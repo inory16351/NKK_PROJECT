@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image cu_face1.png and save the result as a NEW PNG file: cu_face2.png (in the current working directory). Do not overwrite cu_face1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to cu_face1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same solid magenta background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The character SLAMS the red button DOWN with the paw (the paw pressed hard, the button pushed in, three short flat impact lines around it), eyes squeezed shut, mouth wide open shouting, the two antennae bent back with their pink bulbs flashing bright. Nothing else changes.

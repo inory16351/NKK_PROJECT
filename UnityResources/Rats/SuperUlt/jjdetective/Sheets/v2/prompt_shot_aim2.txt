@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_aim1.png and save the result as a NEW PNG file: shot_aim2.png (in the current working directory). Do not overwrite shot_aim1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_aim1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background and the same small cat. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- FIRE! A small flat white-and-yellow MUZZLE PUFF bursts from the wristwatch sight, a tiny silver DART with a red feather tail flies out toward the cat leaving a thin white streak, the arm recoils slightly, the aiming eye wide open with determination. Nothing else changes.

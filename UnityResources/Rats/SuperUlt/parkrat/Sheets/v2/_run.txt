@@ -1,0 +1,25 @@
+10:44:11 ok pano_on
+10:44:22 ok shot_hand1
+10:44:24 ok shot_think1
+10:44:36 ok anim_end
+10:44:37 ok anim_pump
+10:44:42 ok shot_parade2
+10:44:43 ok shot_parade1
+10:44:58 ok shot_parade3
+10:45:20 ok shot_crowd1
+10:45:20 ok shot_think2
+10:45:32 ok shot_hand2
+10:45:44 ok pano_alt
+10:46:11 ok wide_on
+10:46:45 ok shot_crowd1b
+10:48:44 ok shot_crowd2
+10:49:30 ok fx_flat
+10:49:44 ok shot_wave_a1
+10:49:50 ok pop
+10:49:59 ok props_flat
+10:50:11 ok shot_wave_c1
+10:50:15 ok shot_wave_b1
+10:51:09 ok shot_wave_a2
+10:51:51 ok shot_wave_c2
+10:53:14 ok shot_wave_b2
+DONE

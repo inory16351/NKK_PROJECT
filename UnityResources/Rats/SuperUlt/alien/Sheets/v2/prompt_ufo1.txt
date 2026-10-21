@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ufo1.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, ONE object: a GIGANTIC, GRAND alien MOTHERSHIP shaped like a classic FLYING SAUCER, seen from the FRONT and slightly from BELOW (we look up at it), perfectly symmetric, filling almost the full WIDTH of the image (about 92%) with a little margin: a wide layered disc hull in pale silver-teal and slate blue with several stacked rings and flat panel lines, a big glass DOME on top in pale mint (empty, no one inside), a ring of many round lights around the rim (lime green and cream white), and in the CENTER of the UNDERSIDE a big round downward-facing CANNON / emitter lens (dark teal with a lime-green ring, currently dim). Massive, heavy, impressive, menacing but still cute flat cartoon.
+- STYLE: FLAT 2D game art like the attached ref_flat_bg and ref_flat_fx (simple flat shapes, flat fills with at most one soft shade step, NO black outlines, NO gloss, NO glow, NOT 3D, NOT realistic sci-fi).
+- NO text, NO letters, NO numbers, no logos.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no ground, no scenery. Do not use magenta, pink-purple or violet on the subjects except the pink ears, nose, paws and antenna bulbs. Keep everything fully inside the frame with margin.

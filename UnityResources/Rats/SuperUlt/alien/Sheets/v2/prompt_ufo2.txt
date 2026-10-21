@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image ufo1.png and save the result as a NEW PNG file: ufo2.png (in the current working directory). Do not overwrite ufo1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to ufo1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same solid magenta background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- CHARGING the main cannon: the big lens in the center of the underside now shines bright LIME GREEN with a cream-white center, a few flat lime-green energy arcs crackle around it, ALL the rim lights are bright lime green, the panel lines on the underside glow lime green. Nothing else changes.

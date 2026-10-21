@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: props_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game prop art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+  1. a big glossy-free flat CORAL-RED rubber balloon shaped like a MOUSE HEAD (a round balloon with two smaller round ears on top, a Ratland souvenir balloon), fully inflated, perfectly round and plump, with a small tied KNOT at the very bottom center, seen from the front (no string)
+  2. the SAME mouse-head balloon OVER-INFLATED and about to burst: stretched very tight and thin, a lighter coral color, a few short flat white STRESS lines near the edges, the knot at the very bottom center
+  3. a flat cartoon idea LIGHT BULB (warm yellow bulb with a grey screw base and short yellow rays around it)
+  4. a small cartoon visitor MOUSE TUMBLING through the air, blown away: limbs spread wide, eyes as two swirls, mouth open, a souvenir mouse-ear headband flying off its head (brown fur)
+  5. another small visitor MOUSE blown away upside down, clutching a churro, cream-white fur, mouth wide open screaming comically
+  6. a black souvenir mouse-ear HEADBAND flying by itself

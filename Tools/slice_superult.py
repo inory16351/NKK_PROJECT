@@ -49,21 +49,35 @@ FLAT_NAMES = {'knight': ['ghostsword', 'pillar', 'arc', 'motes', 'burst', 'ring'
               'fondue': ['snap', 'shockring', 'splash', 'drops', 'spray', 'streak'],
               'sultan': ['coin', 'coin2', 'sparkle', 'coinburst', 'gem', 'oil'],      # 술탄 v2 (2026-10-20): 금화 · 기운 금화 · 반짝 · 금화 터짐 · 보석 · 기름 방울
               'starchef': ['tuft', 'strands', 'dizzy', 'twinkle', 'smear', 'streak'],
+              'alien': ['charge', 'lightring', 'flash', 'fire', 'cloud', 'streak'],      # 외계인 생쥐 v2 (2026-10-21): 에너지 알갱이 · 빛 고리 · 섬광 · 불 · 밤 구름 · 속도선
+              'jjdetective': ['sparkle', 'glare', 'bubble', 'dust', 'shockring', 'streak'],      # 명탐정 쥐 v2 (2026-10-21): 반짝 · 안경 번쩍 · 코풍선 · 먼지 · 충격파 고리 · 속도선
+              'zapham': ['bolt', 'forkbolt', 'sparks', 'shockring', 'hitstar', 'twinkle'],      # 짜릿햄쥐 v2 (2026-10-21): 백만볼트 · 갈라진 번개 · 스파크 · 충격파 고리 · 박치기 별 · 반짝 ✦
+              'parkrat': ['sparkle', 'confetti', 'clap', 'shockring', 'wind', 'streak'],
+              'jwerry': ['dust', 'streak', 'stars', 'bonk', 'steam', 'shockring'],      # 줴리 v2 (2026-10-21): 흙먼지 · 속도선 · 기절 별 · 뿅 · 김 · 충격파 고리      # 쥐랜드 관광쥐 v2 (2026-10-21): 유레카 반짝 · 색종이 · 박수 표시 · 충격파 고리 · 돌풍 · 속도선
               'emperor': ['muzzle', 'smoke', 'bullet', 'summon', 'spark', 'streak']}     # 쥐 황제 v2 (2026-10-20): 총구 섬광 · 연기 · 총알 · 소환 연기 · 탄착 불꽃 · 속도선     # 슈퍼 요리사 v2 (2026-10-20): 머리카락 뭉치 · 머리카락 · 기절 별 · 반짝 · 블러 휙 · 속도선     # 치즈 퐁듀 v2 (2026-10-20): 스냅 반짝 · 고리 · 치즈 튐 · 치즈 방울 · 물보라 · 속도선     # 스트리머 v2 (2026-10-20): 하트 · 하트 터짐 · 음표 · 고글 반짝 · 네온 고리 · 색종이    # 폭탄마 v2 (2026-10-20): 빨간 마법진 · 원근 마법진 · 룬 고리 · 작은 마법진 · 붉은 섬광 · 불티
-STRIP3 = {'beam.png': ['fx_beam', 'fx_beamcore', 'fx_beamhit'], 'mushroom.png': ['fx_mush1', 'fx_mush2', 'fx_mush3'], 'geyser.png': ['fx_geyser1', 'fx_geyser2', 'fx_geyser3'], 'pour.png': ['fx_pour1', 'fx_pour2', 'fx_pour3']}   # 가로 3칸 (자홍, 여백 자름) — 폭탄마 v2 레이저 · 버섯구름 (버섯구름은 같은 바닥선 → 칸 크기 그대로)
-GRID6 = {'boom.png': (['boom1', 'boom2', 'boom3', 'shockring', 'debris', 'smoke'], 3)}    # 자홍 3×2: 앞 n 개 = 프레임 (칸 크기 그대로) · 나머지 = 여백 자름  # 파라오 v2 (2026-10-20): 소환진 · 모래 분수 · 모래 먼지 · 붕대 · 해 섬광 · 모래 고리
+STRIP3 = {'beam.png': ['fx_beam', 'fx_beamcore', 'fx_beamhit'], 'mushroom.png': ['fx_mush1', 'fx_mush2', 'fx_mush3'], 'geyser.png': ['fx_geyser1', 'fx_geyser2', 'fx_geyser3'], 'pour.png': ['fx_pour1', 'fx_pour2', 'fx_pour3'], 'balloon.png': ['prop_balloon', 'prop_balloon_tight', 'prop_balloon_burst']}   # 가로 3칸 (자홍, 여백 자름) — 폭탄마 v2 레이저 · 버섯구름 (버섯구름은 같은 바닥선 → 칸 크기 그대로)
+GRID6 = {'boom.png': (['boom1', 'boom2', 'boom3', 'shockring', 'debris', 'smoke'], 3), 'pop.png': (['pop1', 'pop2', 'pop3', 'dome', 'debris', 'dustwall'], 3)}    # 자홍 3×2: 앞 n 개 = 프레임 (칸 크기 그대로) · 나머지 = 여백 자름  # 파라오 v2 (2026-10-20): 소환진 · 모래 분수 · 모래 먼지 · 붕대 · 해 섬광 · 모래 고리
 HIT_NAMES = {'maid': ['knife_fall', 'knife_fall2', 'glint', 'hit1', 'hit2', 'hit3'], 'pharaoh': ['sandstreak', 'scarab', 'puff', 'hit1', 'hit2', 'hit3'], 'streamrat': ['streak', 'coin', 'dot', 'pop1', 'pop2', 'pop3'],
              'ramjui': ['shockwave', 'chunks', 'streak', 'land1', 'land2', 'land3'],
              'fondue': ['drop', 'wedge', 'wall', 'splat1', 'splat2', 'splat3'],
              'sultan': ['coinfall', 'sack', 'wall', 'clink1', 'clink2', 'clink3'],
-             'emperor': ['tracer', 'smokeband', 'dust', 'hit1', 'hit2', 'hit3']}       # fx_hit.png 칸 이름 (기본 = 기사: slash · wave · mote · hit1~3)
-ROT_RIGHT = {'maid': ['fx_knife_fall', 'fx_knife_fall2']}     # 메이드 쥐 칼 비 (2026-10-20)
+             'emperor': ['tracer', 'smokeband', 'dust', 'hit1', 'hit2', 'hit3'],
+             'zapham': ['boltfall', 'zsparks', 'zstreak', 'hit1', 'hit2', 'hit3'],
+             'jjdetective': ['dartfall', 'feather', 'snot', 'hit1', 'hit2', 'hit3'],
+             'jwerry': ['panfall', 'pan2', 'star', 'hit1', 'hit2', 'hit3']}       # fx_hit.png 칸 이름 (기본 = 기사: slash · wave · mote · hit1~3)
+ROT_RIGHT = {'maid': ['fx_knife_fall', 'fx_knife_fall2'], 'jjdetective': ['fx_dartfall']}     # 메이드 쥐 칼 비 (2026-10-20)
 FLAT_PROPS = {'maid': ['watch', 'gear', 'teacup', 'knives', 'meme', 'headdress'], 'pharaoh': ['sarcophagus', 'jar', 'scarab', 'obelisk', 'meme', 'fg'], 'streamrat': ['monitor', 'coins', 'gift', 'like', 'meme', 'glowstick'],
               'ramjui': ['hammer', 'acorn', 'helmet', 'polaroid', 'cursor', 'leaf'],
-              'starchef': ['hat', 'sweat', 'steam', 'tear', 'meme', 'fg']}     # props_flat.png 칸 이름 (기본 = GRID_PROPS)
-ANIM_SAMEBOX = {'anim_soldier.png', 'anim_front.png'}    # 셀 프레임을 같은 틀로 자를 시트 (쥐 황제 v2 병사: 격발 프레임 총구 섬광)
+              'starchef': ['hat', 'sweat', 'steam', 'tear', 'meme', 'fg'],
+              'jjdetective': ['pawprint', 'hair', 'fishbone', 'scratch', 'bulb', 'dart'],      # 명탐정 쥐 v2: 단서 4 (발자국 · 고양이 털 · 생선 뼈 · 할퀸 자국) · 전구 · 마취침
+              'zapham': ['seed', 'cloud', 'cloudstreak', 'smoke', 'dust', 'sweat'],      # 짜릿햄쥐 v2: 해바라기씨 · 구름 · 구름 줄 · 연기 · 흙먼지 · 땀
+              'parkrat': ['balloon_old', 'balloon_tight_old', 'bulb', 'flyrat1', 'flyrat2', 'ears'],
+              'jwerry': ['pan', 'cheese', 'book', 'plant', 'chair', 'sweat']}     # 줴리 v2: 프라이팬 · 치즈 · 책 · 앞 화분 · 앞 의자 (시차) · 땀     # 쥐랜드 관광쥐 v2: 쥐 머리 풍선 · 터지기 직전 풍선 · 아이디어 전구 · 날아가는 관람객 쥐 2 · 머리띠     # props_flat.png 칸 이름 (기본 = GRID_PROPS)
+ANIM_SAMEBOX = {'anim_shock.png', 'anim_hamtease.png', 'anim_soldier.png', 'anim_front.png', 'anim_pump.png', 'anim_jrun.png', 'anim_tomrun.png'}    # 셀 프레임을 같은 틀로 자를 시트 (쥐 황제 v2 병사: 격발 프레임 총구 섬광)
+TINT = {'alien': [('fx_cloud', (112, 116, 178), (196, 198, 238))]}
 FLIP_X = {'emperor': ['fx_muzzle']}    # 자른 뒤 좌우 뒤집을 그림 (Codex 가 반대 방향으로 그린 것: 쥐 황제 총구 섬광)
-EXTRA_GRID = {'emperor': {'fx_front.png': ['fmuzzle', 'fbullet', 'fbullet3q', 'smokering', 'hole', 'radial']}}     # 쥐마다 더 그린 자홍 3×2 시트 → fx_<이름> (여백 자름)
+EXTRA_GRID = {'emperor': {'fx_front.png': ['fmuzzle', 'fbullet', 'fbullet3q', 'smokering', 'hole', 'radial']},
+              'alien': {'fx_v3.png': ['signal', 'jetdot', 'afterburn', 'shard', 'panel', 'tear']}}     # 쥐마다 더 그린 자홍 3×2 시트 → fx_<이름> (여백 자름)
 GRID_CRACK = ['crack1', 'crack2', 'crack3', 'shard1', 'shard2', 'shard3']   # crack.png (자홍 3×2): 화면 얼음 금 · 깨진 파편 (2026-10-19 아이스 퀸 v2)
 
 
@@ -111,7 +125,7 @@ def main(code):
     for f in sorted(os.listdir(src)):
         p = os.path.join(src, f)
         if not f.endswith('.png') or f.startswith('ref_') or f.startswith('rig_'): continue
-        if f in ('pano_on.png', 'pano_off.png') or '_face_' in f:       # 세로 파노라마 (조각 pano_a~c 를 stitch_vertical 로 붙인 것) · 전체 화면 클로즈업
+        if f in ('pano_on.png', 'pano_off.png', 'pano_alt.png') or '_face_' in f:       # 세로 파노라마 (조각 pano_a~c 를 stitch_vertical 로 붙인 것) · 전체 화면 클로즈업
             shutil.copy(p, os.path.join(out, f)); print(f, '그대로')
         elif f == 'pano_rear_full.png':   # 기사 v13 후경 파노라마 (Sheets/v13 3장 이어 붙임) → pano_rear
             shutil.copy(p, os.path.join(out, 'pano_rear.png')); print('pano_rear', '파노라마')
@@ -168,6 +182,10 @@ def main(code):
             blur_copy(im, 16, np.clip((rr - 1) / 1.4, 0, 1)).save(os.path.join(out, 'pano_rear_blur.png')); print('pano_rear_blur')
         elif f == 'rear.png':             # 스트리머 v2: 뒷모습 통이미지 (한 장 그대로) + 블러 사본 rear_blur (줌 · 회전 전환의 잔상)
             shutil.copy(p, os.path.join(out, f)); blur_copy(Image.open(p), 18).save(os.path.join(out, 'rear_blur.png')); print('rear + rear_blur')
+        elif f.startswith(('ufo', 'ship', 'jet_')):     # 외계인 생쥐 v2 · v3: 모선 · 전투기 연속 프레임 (자홍, 같은 틀 · 자르지 않음)
+            despill(key_magenta(Image.open(p))).save(os.path.join(out, f)); print(f, '같은 틀 프레임')
+        elif f == 'fg_wall.png':          # 외계인 생쥐 v3: 화면 1/3 을 가리는 앞 건물 (자홍, 여백 자름)
+            im = trim(despill(key_magenta(Image.open(p))), 2); im.save(os.path.join(out, f)); print(f, im.size)
         elif f.startswith('cu_'):         # 치즈 퐁듀 v2: 전체 화면 클로즈업 연속 프레임 (자홍, face_bg 위에 겹침 · 프레임끼리 같은 틀이라 자르지 않음)
             despill(key_magenta(Image.open(p))).save(os.path.join(out, f)); print(f, '클로즈업 프레임')
         elif f == 'wide_on.png':          # 치즈 퐁듀 v2 롱샷: pano_on 을 가운데에 두고 둘레를 이어 그린 넓은 판 (줌 아웃 끝)
@@ -204,6 +222,8 @@ def main(code):
                 cell = despill(key_magenta(sh.crop((int(k * W3) + 3, 3, int((k + 1) * W3) - 3, sh.height - 3))))
                 if not n.startswith(('fx_mush', 'fx_geyser', 'fx_pour')): cell = trim(cell, 4)      # 같은 바닥선 프레임 = 칸 크기 그대로
                 cell.save(os.path.join(out, n + '.png')); print(n, cell.size)
+                if n == 'fx_beam' and code == 'alien':     # 외계인 생쥐 v2: 마디로 이어 붙일 레이저 = 아래 퍼진 끝을 뺀 곧은 부분
+                    seg = cell.crop((0, 0, cell.width, int(cell.height * 0.78))); seg.save(os.path.join(out, 'fx_beamseg.png')); print('fx_beamseg', seg.size)
         elif f in GRID6:
             names, nf = GRID6[f]; sh = Image.open(p); W, H = sh.size
             for i, n in enumerate(names):
@@ -277,8 +297,15 @@ def main(code):
                 part = trim(Image.fromarray(arr, 'RGBA').crop((b[1].start, b[0].start, b[1].stop, b[0].stop)), 2)
                 part.save(os.path.join(out, 'prop_' + name + '.png')); print('prop_' + name, part.size)
     mask_blur(src, out)
+    soft_blur(src, out)
+    inset_frame(src, out)
     zoom_blur(src, out)
     motion_blur(src, out)
+    for n, lo, hi in TINT.get(code, []):     # 밝기를 두 색 사이로 다시 칠함 (외계인 생쥐 v2: 회색 구름 → 배경 구름 라벤더)
+        q = os.path.join(out, n + '.png')
+        if os.path.exists(q):
+            a = np.asarray(Image.open(q).convert('RGBA')).astype(np.float32); l = (a[..., :3].mean(2, keepdims=True) - 60) / 170
+            a[..., :3] = np.array(lo) + (np.array(hi) - np.array(lo)) * np.clip(l, 0, 1); Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA').save(q); print(n, '색 다시')
     for n in FLIP_X.get(code, []):
         q = os.path.join(out, n + '.png')
         if os.path.exists(q): Image.open(q).transpose(Image.FLIP_LEFT_RIGHT).save(q); print(n, '좌우 뒤집음')
@@ -347,6 +374,29 @@ def mask_blur(src, out):
             a[..., :3] *= 1 - dark * m[..., None]
             o = name.replace('_on', '') + '_mask' + (str(k + 1) if len(stages) > 1 else '')
             Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA').save(os.path.join(out, o + '.png')); print(name, '→', o)
+
+
+def inset_frame(src, out):
+    """story.json inset = [폭, 높이] → ui_inset (흰 둥근 테두리, 가운데 투명) · ui_insetbg (가운데 판) — 화면 구석 작은 창 (수어 통역 창 패러디, 2026-10-21 외계인 생쥐 v3)"""
+    import json
+    from PIL import ImageDraw
+    sz = json.load(open(os.path.join(src, 'story.json'), encoding='utf-8')).get('inset')
+    if not sz: return
+    w, h = sz; r = 28; b = 14
+    fr = Image.new('RGBA', (w, h), (0, 0, 0, 0)); d = ImageDraw.Draw(fr)
+    d.rounded_rectangle((0, 0, w - 1, h - 1), r, fill=(255, 255, 255, 255)); d.rounded_rectangle((b, b, w - 1 - b, h - 1 - b), r - b // 2, fill=(0, 0, 0, 0))
+    fr.save(os.path.join(out, 'ui_inset.png'))
+    bg = Image.new('RGBA', (w, h), (0, 0, 0, 0)); ImageDraw.Draw(bg).rounded_rectangle((b // 2, b // 2, w - 1 - b // 2, h - 1 - b // 2), r, fill=(206, 222, 238, 255))
+    bg.save(os.path.join(out, 'ui_insetbg.png')); print('ui_inset', sz)
+
+
+def soft_blur(src, out):
+    """story.json softBlur = {그림 이름: 흐림 px} → <이름>_soft (살짝 포커스 아웃된 배경 판, 2026-10-21 외계인 생쥐 v3: 건물 뒤 떠드는 쥐들)"""
+    import json
+    from PIL import ImageFilter
+    for name, rad in (json.load(open(os.path.join(src, 'story.json'), encoding='utf-8')).get('softBlur') or {}).items():
+        p = os.path.join(out, name + '.png')
+        if os.path.exists(p): Image.open(p).convert('RGB').filter(ImageFilter.GaussianBlur(rad)).save(os.path.join(out, name + '_soft.png')); print(name, '→', name + '_soft')
 
 
 def zoom_blur(src, out):

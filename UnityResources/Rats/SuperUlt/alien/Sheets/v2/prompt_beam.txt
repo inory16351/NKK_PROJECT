@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: beam.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 landscape image: 3 columns, ONE element per column, centered in its third, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers, NO stars.
+- Palette: alien LIME GREEN and mint, a cream-white core, a few touches of pale yellow; smoke in charcoal and slate grey; fire in warm orange.
+  1. a very TALL straight VERTICAL LASER BEAM (fills almost the full height): a thick flat beam with a cream-white core, a lime-green band and a darker green outer band, straight parallel edges, slightly flared at the bottom
+  2. a thinner tall vertical BEAM CORE line: cream white with thin mint edges (fills almost the full height)
+  3. a big flat IMPACT FLASH where the beam hits the ground: a wide dome-shaped cream-white and lime-green burst with rounded energy tongues, seen from the front

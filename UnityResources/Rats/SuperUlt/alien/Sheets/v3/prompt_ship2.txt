@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image ship.png and save the result as a NEW PNG file: ship2.png (in the current working directory). Do not overwrite ship.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to ship.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same solid magenta background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- CHARGING: the central cannon port now glows bright LIME GREEN with a cream-white core, flat lime-green energy arcs around it, the rings of lights all lime green, glowing lime lines along the panel trenches toward the center. Nothing else changes.

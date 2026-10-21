@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_hole1.png and save the result as a NEW PNG file: shot_hole2.png (in the current working directory). Do not overwrite shot_hole1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_hole1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background, the same mouse hole. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- Jwerry now WINKS one eye and sticks its tongue out cheekily, pulling down the lower eyelid of the other eye with one finger (a playful 'nyah' face), the cheese still under its arm, a couple of flat cream sparkles. Nothing else changes.

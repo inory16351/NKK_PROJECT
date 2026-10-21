@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_hand1.png and save the result as a NEW PNG file: shot_hand2.png (in the current working directory). Do not overwrite shot_hand1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_hand1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The paws SLAM the handle all the way DOWN (the handle and paws now near the middle of the image, the rod hidden inside the cylinder), short flat white motion lines above the paws, a small flat puff of air at the side of the pump. Nothing else changes.

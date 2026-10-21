@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_think1.png and save the result as a NEW PNG file: shot_think2.png (in the current working directory). Do not overwrite shot_think1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_think1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- EUREKA! The Ratland Tourist suddenly gets a brilliant idea: eyes wide open and SPARKLING (two small white star-shaped highlights in the eyes), a huge open-mouth grin, the paw that was on the chin now points one finger straight UP in the air, ears perked up, whiskers springing out, the limp balloon still in the other paw. Nothing else changes.

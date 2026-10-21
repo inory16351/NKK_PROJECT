@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_culprit1.png and save the result as a NEW PNG file: shot_culprit2.png (in the current working directory). Do not overwrite shot_culprit1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_culprit1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background and street lamp. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The BLACK SILHOUETTE CAT spins around and DASHES AWAY to the RIGHT: body stretched low and long, legs blurred in a run, head looking back over its shoulder with panicked white eyes, short flat white motion lines and a flat cream dust puff behind it, the cheese wedge left tumbling in the air. Nothing else changes.

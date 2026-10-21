@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_crowd1.png and save the result as a NEW PNG file: shot_crowd_q.png (in the current working directory). Do not overwrite shot_crowd1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_crowd1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- CURIOUS: every mouse has STOPPED clapping (paws lowered or half raised) and looks UP with raised eyebrows and a puzzled little smile, a few heads tilted, mouths small and round. A light flat soft CORAL-RED tint and a faint round shadow fall over the TOP edge of the crowd (something big above). Nothing else changes.

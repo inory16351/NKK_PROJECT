@@ -7,8 +7,9 @@ import json, math, os, random
 from PIL import Image
 
 HITS = [2.0 + 0.2 * i for i in range(10)]
-NO_FINISH = {'maid': 3.45, 'icequeen': 3.4, 'knight': 3.95, 'pharaoh': 3.75, 'bomber': 3.05, 'streamrat': 3.6, 'ramjui': 5.61, 'fondue': 5.35, 'starchef': 6.41, 'sultan': 4.15, 'emperor': 5.25}          # ④ 피니시 컷 없는 쥐: ③ 끝(마지막 일격 · 또는 컷신 끝) 시각 = SuperUltStyle.actEnd (2026-10-19 사용자)
-WORLD = {'maid': dict(cutFade=0.3, worldTime=2.4, blizzardCount=1, blizzardGap=0.1, hailCount=2, playRate=0.75, worldWind=(-260.0, -1500.0), worldDotSize=(34.0, 62.0)),     # 메이드 쥐: 시간이 다시 흐르면 게임 화면에 칼 비 (2026-10-20)
+NO_FINISH = {'maid': 3.45, 'icequeen': 3.4, 'knight': 3.95, 'pharaoh': 3.75, 'bomber': 3.05, 'streamrat': 3.6, 'ramjui': 5.61, 'fondue': 5.35, 'starchef': 6.41, 'sultan': 4.15, 'emperor': 5.25, 'alien': 8.3, 'parkrat': 9.96, 'jjdetective': 6.7, 'zapham': 6.5, 'jwerry': 7.3}          # ④ 피니시 컷 없는 쥐: ③ 끝(마지막 일격 · 또는 컷신 끝) 시각 = SuperUltStyle.actEnd (2026-10-19 사용자)
+WORLD = {'jwerry': dict(cutFade=0.3, worldTime=2.0, blizzardCount=1, hailCount=3, playRate=1.0, worldWind=(-40.0, -1100.0), worldDotSize=(30.0, 56.0)),     # 줴리 v2: 쥐구멍 메롱 뒤 게임 화면 = 프라이팬이 대상마다 떨어져 뿅 (2026-10-21)
+         'maid': dict(cutFade=0.3, worldTime=2.4, blizzardCount=1, blizzardGap=0.1, hailCount=2, playRate=0.75, worldWind=(-260.0, -1500.0), worldDotSize=(34.0, 62.0)),     # 메이드 쥐: 시간이 다시 흐르면 게임 화면에 칼 비 (2026-10-20)
          'emperor': dict(cutFade=0.3, worldTime=1.5, blizzardCount=0, hailCount=0, playRate=1.0),     # 쥐 황제 v2 정면: 게임 화면 연출 없음 · 컷신 마지막 탄흔(Hold)만 1.5초 남았다 사라짐 (2026-10-20 사용자)
          'icequeen': dict(cutFade=0.4, worldTime=3.0, freezeAll=1.5, blizzardCount=1, hailCount=3, playRate=0.75),
          'pharaoh': dict(cutFade=0.4, worldTime=2.2, blizzardCount=0, hailCount=0, playRate=0.75),     # 미라 쥐들이 왼→오로 달려 지나감 (2026-10-20 사용자: 모래바람 대신)
@@ -18,15 +19,24 @@ WORLD = {'maid': dict(cutFade=0.3, worldTime=2.4, blizzardCount=1, blizzardGap=0
          'fondue': dict(cutFade=0.3, worldTime=2.2, blizzardCount=1, hailCount=3, playRate=1.0, worldWind=(0.0, -420.0), worldDotSize=(26.0, 52.0)),     # 치즈 퐁듀 v2: 치즈 벽이 걷히면 게임 화면에 치즈가 쏟아져 철퍽 (2026-10-20 사용자: 아이스 퀸식)
          'starchef': dict(cutFade=0.3, worldTime=1.6, blizzardCount=0, hailCount=0, playRate=1.0),     # 슈퍼 요리사 v2: 브이 컷 뒤 게임 화면 = 대상마다 머리카락 · 기절 별 (2026-10-20)
          'sultan': dict(cutFade=0.35, worldTime=4.0, blizzardCount=1, hailCount=2, playRate=1.0, worldWind=(-90.0, -950.0), worldDotSize=(30.0, 62.0)),     # 술탄 v2: 컷신 금화 비가 그대로 게임 화면으로 이어져 4초 동안 쏟아지고 대상마다 짤랑 (2026-10-20 사용자 3차)
+         'alien': dict(cutFade=0.3, worldTime=2.2, blizzardCount=1, hailCount=3, playRate=1.0, worldWind=(-120.0, -900.0), worldDotSize=(30.0, 60.0)),     # 외계인 생쥐 v3: 우주선 폭발 뒤 게임 화면 = 우주선 파편이 적마다 떨어져 쾅 (2026-10-21 사용자)
+         'zapham': dict(cutFade=0.3, worldTime=1.8, blizzardCount=0, hailCount=0, playRate=1.0),     # 짜릿햄쥐 v2: 반짝 ✦ 뒤 게임 화면 = 대상마다 번개 (2026-10-21)
+         'parkrat': dict(cutFade=0.2, worldTime=1.0, blizzardCount=0, hailCount=0, playRate=1.0),     # 쥐랜드 관광쥐 v2: 데헷 컷 뒤 게임 화면 = 피해만 (2026-10-21 사용자 2차: 후처리 폭발 없앰)
+         'jjdetective': dict(cutFade=0.3, worldTime=2.0, blizzardCount=1, hailCount=3, playRate=1.0, worldWind=(-60.0, -1300.0), worldDotSize=(30.0, 56.0)),     # 명탐정 쥐 v2: 사건 해결 뒤 게임 화면 = 마취침이 대상마다 꽂혀 기절 별 (2026-10-21)
          'knight': dict(cutFade=0.4, worldTime=1.0, blizzardCount=0, hailCount=0, playRate=0.75, worldWind=(60.0, 260.0), worldDotSize=(16.0, 40.0))}
-NO_TEXT = {'knight', 'starchef', 'fondue', 'emperor'}       # 컷신에 글(제목 띠 · 자막 · 히트 수 · 밈 글)을 안 띄우는 쥐 (2026-10-19 사용자)
+NO_TEXT = {'zapham', 'knight', 'starchef', 'fondue', 'emperor', 'alien', 'parkrat', 'jjdetective', 'jwerry'}       # 컷신에 글(제목 띠 · 자막 · 히트 수 · 밈 글)을 안 띄우는 쥐 (2026-10-19 사용자)
 KNIGHT_LINE = -40          # 기사 칼 각도 (도, UI 반시계 +): 후경 기사 칼날을 잰 값 — 컷신 갈라짐 · 땅 균열 · 게임 화면 파동 전부 이 각도 (2026-10-19 사용자)
-IMAGE_FX = {'maid': dict(hailFall=['fx_knife_fallr', 'fx_knife_fallr', 'fx_knife_fall2r'], hailChunk=['fx_glint'], hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashSize=120.0, splashHitSize=220.0, splashFinishSize=420.0, worldSnowScale=0.3),     # 칼 그림은 칼끝이 오른쪽(=떨어지는 방향)으로 돌린 사본 *r (slice_superult ROT_RIGHT)
+IMAGE_FX = {'jwerry': dict(hailFall=['fx_panfall', 'fx_pan2', 'fx_panfall'], hailChunk=['fx_star'], hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashSize=150.0, splashHitSize=280.0, splashFinishSize=560.0, worldSnowScale=0.4),     # 줴리 v2: 프라이팬 비 · 뿅 (2026-10-21)
+            'maid': dict(hailFall=['fx_knife_fallr', 'fx_knife_fallr', 'fx_knife_fall2r'], hailChunk=['fx_glint'], hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashSize=120.0, splashHitSize=220.0, splashFinishSize=420.0, worldSnowScale=0.3),     # 칼 그림은 칼끝이 오른쪽(=떨어지는 방향)으로 돌린 사본 *r (slice_superult ROT_RIGHT)
             'emperor': dict(hailSplash=[], worldSnowOff=True, holdGroup='"Hold"', holdFade=0.45),     # 탄착 그림 없음 = 게임 화면 이펙트 없음 · 탄흔 묶음을 게임 화면 위에 남김 (SuperUltStyle.holdGroup)
             'pharaoh': dict(hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashHitSize=240.0, splashFinishSize=420.0, worldSnowOff=True,
                             runFrames=['anim_mside_1', 'anim_mside_2', 'anim_mside_3'], runGap=0.11, runCount=3, runHeight=(160.0, 160.0), runSpeed=(1500.0, 2100.0), runFrame=0.07),     # 파라오 v2: 게임 화면 = 미라 돌격 · 태클 충돌 (2026-10-20 사용자: 달리는 미라 크기 균등 · 맨 끝 정면 군단 뺌)
             'bomber': dict(hailSplash=[], worldSnowOff=True, blastBeam='fx_beam', blastBeamWidth=360.0, blastBeamTime=0.12, blastFrames=['fx_boom1', 'fx_boom2', 'fx_boom3'], blastSize=3400.0, blastFrame=0.24, mushFrames=[],
                            blastFlash='fx_redflash', blastRing='fx_shockring', blastDebris='fx_debris', blastDebrisCount=16, blastSmoke='fx_smoke', blastSmokeSize=2400.0),     # 버섯구름 없이 맵 전체를 초토화하는 거대 폭발 하나 (2026-10-20 사용자)
+            'alien': dict(hailFall=['fx_shard', 'fx_panel', 'fx_shard'], hailChunk=['fx_panel', 'fx_debris'], hailSplash=['fx_boom1', 'fx_boom2', 'fx_boom3'], splashSize=160.0, splashHitSize=300.0, splashFinishSize=600.0, worldSnowScale=0.5),     # 외계인 생쥐 v3: 우주선 파편 비 (2026-10-21)
+            'jjdetective': dict(hailFall=['fx_dartfallr', 'fx_feather', 'fx_dartfallr'], hailChunk=['fx_feather', 'fx_snot'], hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashSize=140.0, splashHitSize=260.0, splashFinishSize=520.0, worldSnowScale=0.3),     # 마취침 그림은 침 끝이 오른쪽(= 떨어지는 방향)으로 돌린 사본 *r
+            'zapham': dict(hailFall=['fx_boltfall', 'fx_zsparks', 'fx_boltfall'], hailChunk=['fx_zsparks'], hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashHitSize=260.0, splashFinishSize=520.0, worldSnowOff=True),     # 짜릿햄쥐 v2: 게임 화면 = 번개가 대상마다 내리꽂힘
+            'parkrat': dict(hailSplash=[], worldSnowOff=True, blastFrames=[], mushFrames=[]),     # 쥐랜드 관광쥐 v2: 게임 화면 이펙트 없음 (2026-10-21 사용자 2차: 후처리 폭발 뺌 · 빈 blastFrames = BigBlast 안 함)
             'streamrat': dict(hailFall=['fx_heart', 'fx_confetti', 'fx_heart'], hailChunk=['fx_note', 'fx_coin'], hailSplash=['fx_pop1', 'fx_pop2', 'fx_pop3'], splashSize=200.0, splashHitSize=340.0, splashFinishSize=640.0, buffAll=8.0, worldSnowScale=0.3),     # 마무리에 모든 쥐 광란 8초 (사용자: 파괴 + 모든 쥐 버프)
             'ramjui': dict(hailFall=['fx_bolt', 'fx_forkbolt', 'fx_bolt'], hailChunk=['fx_sparks'], hailSplash=['fx_land1', 'fx_land2', 'fx_land3'], splashHitSize=260.0, splashFinishSize=520.0, worldSnowOff=True),     # 람쥐 v2: 게임 화면 = 번개가 대상마다 내리꽂힘
             'fondue': dict(hailFall=['fx_drop', 'fx_drop', 'fx_wedge'], hailChunk=['fx_wedge', 'fx_drops'], hailSplash=['fx_splat1', 'fx_splat2', 'fx_splat3'], splashSize=150.0, splashHitSize=280.0, splashFinishSize=600.0, worldSnowScale=0.4),
@@ -286,8 +296,173 @@ class Story:
 # ══════════════════════ 쥐별 연출 ══════════════════════
 # 각 함수: s = Story, R = 루트 묶음. ②(Intro) · ③(Act) · ④(Finish) 를 직접 짬.
 
-def parkrat(s, R):
-    """가로: 줄 선 입구 → 퍼레이드 거리 → 호수 불꽃. ② 퍼레이드를 따라 옆으로 훑기 · ③ 아래 띠 + 폭죽이 솟아 게임 화면 위에서 터짐 · ④ 불꽃 피날레 와이드"""
+def zapham(s, R):
+    """가로 (들판 판 pano_on + 하늘 판 bg_sky). (2026-10-21 v2 = '백만볼트 · 또 당했다~', 사용자: 냐옹이 닮은 고양이가 괴롭힘 → 백만볼트 감전 → 몸통박치기 → 로켓단 퇴장)
+    띠 · 마무리 컷 없음 · 플랫 · 셀 프레임(햄쥐 anim_hamtease · anim_volt · anim_tackle / 길고양이 anim_cattease · anim_shock · anim_catfly, ChatGPT 그림) · 1배속 · 글 없음 — 컷 5개:
+    ① 0.4 들판: 해바라기씨를 먹는 햄쥐 볼을 길고양이가 콕콕 → 씨를 뺏어 들고 메롱 → 햄쥐가 빈손으로 노려봄 (볼에서 파지직)
+    ② 얼굴 클로즈업: 그늘진 눈 → 눈 번쩍 · 볼 전기
+    ③ 들판 옆모습: 웅크려 충전 → 백만볼트 발사 → 카메라가 번개를 따라 휙 → 고양이 감전 (털 곤두섬 ↔ 엑스레이 해골 깜빡) → 까맣게 그을려 콜록
+       → 몸통박치기 → 히트 스톱 · 쾅 → 고양이가 오른쪽 위 하늘로 튕겨 나감 (카메라가 따라 틸트)
+    ④ 하늘 근접 컷: 빙글빙글 날아가는 고양이 · 구름이 휙휙 (로켓단 퇴장)
+    ⑤ 들판 롱샷: 고양이가 하늘 저편 점이 되고 반짝 ✦ → 앞의 햄쥐 브이 윙크로 다가감
+    → 컷신 걷힘 → 게임 화면: 대상마다 번개 (worldPhase · imageFx)
+    (고양이 디자인: 이마에 금화 단 크림색 고양이는 이미지 생성 검열에 '냐옹이'로 걸려서 빨간 반다나 줄무늬 길고양이로 바꿈, 2026-10-21)"""
+    END = NO_FINISH['zapham']
+    K = 1920 * 1.06 / 1536                                # 한 장 컷 배율 (화면을 덮음 · 흔들려도 가장자리 안 보임)
+    at = lambda rx, ry, z=1.0, dx=0, dy=0: ((rx - 0.5) * 1536 * K * z + dx, (0.5 - ry) * 1024 * K * z + dy)     # 컷 그림 비율 → 화면 px
+    wsc = lambda name, px: px / max(1, s.size(name)[0])   # 그림 폭을 px 로 맞추는 배율
+    PPX, PWX = s.PH * s.PS, s.PW * s.PS                    # 판 높이 · 폭 px (판 비율 ↔ px)
+    kz = ZAP_H * PPX / max(1, s.size(ZAP_REF)[1])          # 햄쥐 시트 1px → 판 px (햄쥐 시트 셋은 같은 축척으로 그림)
+    kc = CAT_H * PPX / max(1, s.size(CAT_REF)[1])          # 고양이 시트 1px → 판 px
+    hgt = lambda ref, k: k * s.size(ref)[1]                # 셀 높이 (기준 프레임 높이 × 축척)
+
+    def frames(g, name, seq, ks, sc=K, **fx):
+        """같은 틀 연속 프레임 (그림만 바꿔 끼움)"""
+        var = s.s(g, name, seq[0][1], sc, ks, **fx)
+        sw = ', '.join(f'new NKK.Ults.SuperUltLayer.Swap {{ t = {f(t)}, sprite = S("{spr}") }}' for t, spr in seq[1:])
+        if sw: s(f'{var}.swaps = new[] {{ {sw} }};')
+        return var
+
+    def pop_at(g, name, spr, t0, x, y, sc, life=0.25, rot=0, w=None):
+        (w or s.s)(g, name, spr, sc, [(t0 - 0.01, x, y, 0, rot, 0, 'Out'), (t0, x, y, 0.5, rot, 1, 'Snap'), (t0 + 0.08, x, y, 1.15, rot + 10, 1, 'Back'), (t0 + life, x, y, 1.2, rot + 25, 0, 'Out')])
+
+    # ① 괴롭힘 (들판 · 셀 합성): 볼 콕콕 (찌를 때마다 고양이가 쑥 · 햄쥐 볼이 눌림) → 씨를 뺏어 들고 메롱 → 햄쥐 노려봄
+    SNATCH, T1 = 0.98, 1.55
+    POKES = [0.55, 0.7, 0.85]
+    tx = TEASE_X                                            # 햄쥐 발끝 x (판 비율)
+    hw, hh = s.size('anim_hamtease_1'); cw = s.size('anim_cattease_1')[0]
+    cheek = (tx + TEASE_CHEEK[0] * hw * kz / PWX, GROUND_Y - TEASE_CHEEK[1] * hh * kz / PPX)     # 햄쥐 볼 (판 비율)
+    cx0 = cheek[0] + 0.5 * cw * kc / PWX                   # 고양이 발끝 x = 뻗은 손끝(상자 왼쪽 끝)이 볼에 닿게
+    g = s.group('Tease', R, 0.4, T1)
+    tr = s.cam(g, [(0.4, (tx + cx0) / 2 + 0.02, GROUND_Y - 0.13, 1.75, 0, 'Out'), (SNATCH - 0.01, (tx + cx0) / 2, GROUND_Y - 0.13, 1.85, 0, 'Linear'),
+                   (SNATCH, (tx + cx0) / 2 + 0.01, GROUND_Y - 0.15, 1.95, -2, 'Snap'), (T1, tx + 0.02, GROUND_Y - 0.12, 2.15, -3, 'InOut')], kicks=POKES + [SNATCH], power=10, ktime=0.12)
+    ham = [(0.4, 'anim_hamtease_1')] + [x for t0 in POKES for x in ((t0, 'anim_hamtease_2'), (t0 + 0.1, 'anim_hamtease_1'))][:-1] + [(SNATCH + 0.06, 'anim_hamtease_3')]
+    s.cel(tr, 'Zap', ham, [(0.4, tx, GROUND_Y, 1, 0, 1, 'Out'), (T1, tx, GROUND_Y, 1, 0, 1, 'Linear')], height=hgt('anim_hamtease_1', kz), ref='anim_hamtease_1', pulse=0.015, pulseHz=3.0)
+    ck = [(0.4, cx0 + 0.02, GROUND_Y, 1, 0, 1, 'Out')]
+    for t0 in POKES: ck += [(t0 - 0.04, cx0 + 0.02, GROUND_Y, 1, 0, 1, 'Linear'), (t0, cx0, GROUND_Y, 1, -3, 1, 'Snap'), (t0 + 0.08, cx0 + 0.02, GROUND_Y, 1, 0, 1, 'Out')]
+    ck += [(SNATCH, cx0 + 0.03, GROUND_Y, 1.05, 0, 1, 'Snap'), (T1, cx0 + 0.04, GROUND_Y, 1, 0, 1, 'Linear')]
+    s.cel(tr, 'Cat', [(0.4, 'anim_cattease_1'), (SNATCH, 'anim_cattease_2')], ck, height=hgt('anim_cattease_1', kc), ref='anim_cattease_1')
+    for i, t0 in enumerate(POKES):
+        pop_at(tr, f'Poke{i}', 'fx_hitstar', t0, *s.P(*cheek), wsc('fx_hitstar', 70), life=0.12, w=s.layer)
+    for i in range(6):                                     # 노려보는 햄쥐 볼에서 파지직 (점점 잦아짐)
+        t0 = SNATCH + 0.12 + 0.07 * i
+        pop_at(tr, f'Zip{i}', 'fx_sparks', t0, *s.P(cheek[0] + s.rnd.uniform(-0.02, 0.02), cheek[1] + s.rnd.uniform(-0.03, 0.03)), wsc('fx_sparks', 70 + 10 * i), life=0.1, rot=s.rnd.uniform(-40, 40), w=s.layer)
+    # ② 얼굴 클로즈업: 천천히 다가감 → 눈 번쩍 · 볼에서 전기가 사방으로
+    FLASH, T2 = 1.83, 2.1
+    g = s.group('Glare', R, T1, T2)
+    frames(g, 'Shot', [(T1, 'shot_glare1'), (FLASH, 'shot_glare2')],
+           [(T1, 0, 0, 1.0, 0, 1, 'Out'), (FLASH - 0.01, 0, 0, 1.08, 0, 1, 'Linear'), (FLASH, 0, 0, 1.18, 2, 1, 'Snap'), (T2, 0, 0, 1.22, 1, 1, 'Linear')], kicks=[FLASH], kickPower=45, kickTime=0.2)
+    for k, ch in enumerate(GLARE_CHEEKS):
+        x, y = at(*ch, 1.18)
+        s.burst_ring(g, f'Arc{k}', 'fx_sparks', FLASH + 0.02, x, y, n=6, r=420, sc=wsc('fx_sparks', 170), dur=0.22)
+    s.speed(g, FLASH, T2, vertical=False, n=7)
+    # ③ 들판 옆모습: 충전 → 백만볼트 (카메라가 번개를 따라 고양이로) → 감전 · 그을림 → 몸통박치기 → 하늘로
+    FIRE, ARRIVE, BURNT, WIND, DASH, HIT, LAUNCH, T3 = 2.42, 2.55, 3.0, 3.28, 3.42, 3.52, 3.6, 3.9
+    hx, cxr = ZAP_X, CAT_X                                 # 햄쥐 · 고양이 발끝 x (판 비율)
+    CY = GROUND_Y - 0.17                                   # 카메라 높이 (땅 · 두 캐릭터)
+    zh, ch = ZAP_H * PPX, CAT_H * PPX                      # 햄쥐 · 고양이 키 (판 px)
+    g = s.group('Battle', R, T2, T3)
+    tr = s.cam(g, [(T2, hx + 0.02, CY + 0.02, 1.55, 0, 'Out'), (FIRE - 0.01, hx + 0.04, CY + 0.01, 1.5, 0, 'Linear'), (FIRE, hx + 0.05, CY, 1.42, -2, 'Snap'),
+                   (ARRIVE, cxr - 0.02, CY, 1.45, 1, 'InOut'), (BURNT, cxr - 0.03, CY, 1.55, 0, 'Linear'), (WIND, 0.5, CY, 1.2, 0, 'InOut'),
+                   (HIT - 0.01, 0.55, CY, 1.3, 0, 'In'), (HIT, 0.55, CY, 1.45, -3, 'Snap'), (LAUNCH + 0.04, 0.56, CY, 1.42, -2, 'Linear'),
+                   (T3, 0.66, CY - 0.18, 1.15, -6, 'In')], kicks=[FIRE, ARRIVE, ARRIVE + 0.15, ARRIVE + 0.3, HIT, HIT + 0.12], power=40, rot=2.0, ktime=0.2)
+    s.cel(tr, 'Zap', [(T2, 'anim_volt_1'), (FIRE - 0.12, 'anim_volt_2'), (FIRE, 'anim_volt_3')],
+          [(T2, hx, GROUND_Y, 1, 0, 1, 'Out'), (FIRE - 0.12, hx, GROUND_Y, 1.04, 0, 1, 'Snap'), (FIRE, hx, GROUND_Y, 1, 0, 1, 'Back'), (WIND - 0.01, hx, GROUND_Y, 1, 0, 1, 'Linear'), (WIND, hx, GROUND_Y, 0, 0, 0, 'Snap')],
+          height=hgt('anim_volt_1', kz), ref='anim_volt_1', pulse=0.02, pulseHz=14.0)
+    for k in range(5):                                     # 일어설 때 몸에서 사방으로 튀는 번개 (그림엔 번개 없음)
+        t0 = FIRE - 0.12 + 0.025 * k; a = 30 + 30 * k
+        s.w(tr, f'Burst{k}', 'fx_bolt', wsc('fx_bolt', 220), [(t0 - 0.01, hx, GROUND_Y - ZAP_H * 0.55, 0.3, a, 0, 'Out'), (t0, hx, GROUND_Y - ZAP_H * 0.55, 0.6, a, 1, 'Snap'),
+                                                         (t0 + 0.12, hx + 0.05 * math.cos(math.radians(a)), GROUND_Y - ZAP_H * 0.55 - 0.08 * math.sin(math.radians(a)), 1.1, a, 0, 'Out')], flicker=0.4)
+    s.w(tr, 'Aura', 'fx_shockring', wsc('fx_shockring', 300), [(T2, hx, GROUND_Y - ZAP_H * 0.4, 0.6, 0, 0.8, 'Out'), (FIRE - 0.12, hx, GROUND_Y - ZAP_H * 0.4, 1.0, 0, 0.9, 'Linear'),
+                                                           (FIRE + 0.1, hx, GROUND_Y - ZAP_H * 0.4, 2.0, 0, 0, 'Out')], flicker=0.35, pulse=0.08, pulseHz=12.0)
+    s.cel(tr, 'Tackle', [(WIND, 'anim_tackle_1'), (DASH, 'anim_tackle_2'), (LAUNCH + 0.1, 'anim_tackle_1')],
+          [(WIND - 0.01, hx, GROUND_Y, 0, 0, 0, 'Out'), (WIND, hx, GROUND_Y, 1, 0, 1, 'Snap'), (DASH, hx, GROUND_Y, 1, 0, 1, 'Linear'), (HIT, cxr - 0.06, GROUND_Y - 0.03, 1.05, 0, 1, 'In'),
+           (LAUNCH + 0.1, cxr - 0.1, GROUND_Y, 1, 0, 1, 'Out'), (T3, cxr - 0.1, GROUND_Y, 1, 0, 1, 'Linear')], height=hgt('anim_tackle_1', kz), ref='anim_tackle_1')
+    s.w(tr, 'TAura', 'fx_sparks', wsc('fx_sparks', 260), [(DASH - 0.01, hx, GROUND_Y - 0.06, 0, 0, 0, 'Out'), (DASH, hx, GROUND_Y - 0.06, 1, 0, 1, 'Snap'), (HIT, cxr - 0.03, GROUND_Y - 0.09, 1.2, 40, 1, 'In'),
+                                                       (HIT + 0.1, cxr - 0.03, GROUND_Y - 0.09, 1.6, 60, 0, 'Out')], flicker=0.4, spin=200.0)
+    shock = [(ARRIVE + 0.06 * k, f'anim_shock_{k % 2 + 1}') for k in range(int((BURNT - ARRIVE) / 0.06))] + [(BURNT, 'anim_shock_3')]
+    s.cel(tr, 'Cat', [(T2, 'anim_cattease_3')] + shock + [(LAUNCH, 'anim_catfly_1'), (LAUNCH + 0.12, 'anim_catfly_2')],
+          [(T2, cxr, GROUND_Y, 1, 0, 1, 'Out'), (BURNT, cxr, GROUND_Y, 1, 0, 1, 'Linear'), (BURNT + 0.06, cxr, GROUND_Y, 1.03, 0, 1, 'Back'), (HIT, cxr, GROUND_Y, 1, 0, 1, 'Linear'),
+           (LAUNCH - 0.01, cxr + 0.01, GROUND_Y, 0.95, -8, 1, 'Snap'), (T3, 0.95, 0.05, 0.6, -40, 1, 'In')], height=hgt('anim_cattease_3', kc), ref='anim_cattease_3')
+    by = GROUND_Y - ZAP_H * 0.5                            # 번개 높이 (햄쥐 볼 ~ 고양이 가슴)
+    bx0 = hx + 0.05                                        # 번개 시작 = 내민 앞발
+    bl = (cxr - bx0) * PWX                                 # 번개 길이 (판 px)
+    for k in range(3):                                     # 백만볼트: 굵은 번개 3가닥이 깜빡이며 번갈아
+        s.w(tr, f'Bolt{k}', 'fx_bolt', bl / max(1, s.size('fx_bolt')[0]) * (1 + 0.05 * k),
+            [(FIRE + 0.03 * k - 0.01, (bx0 + cxr) / 2 - 0.03, by + 0.01 * (k - 1), 0.3, 4 * (k - 1), 0, 'Out'), (FIRE + 0.03 * k, (bx0 + cxr) / 2, by + 0.01 * (k - 1), 1, 4 * (k - 1), 1, 'Snap'),
+             (BURNT - 0.05, (bx0 + cxr) / 2, by + 0.01 * (k - 1), 1.02, -4 * (k - 1), 1, 'Linear'), (BURNT, (bx0 + cxr) / 2, by, 1, 0, 0, 'Linear')], flicker=0.45, jitter=6.0)
+    for k in range(4):                                     # 고양이 둘레 갈라진 번개 · 충격파 고리
+        t0 = ARRIVE + 0.1 * k
+        pop_at(tr, f'Fork{k}', 'fx_forkbolt', t0, *s.P(cxr + s.rnd.uniform(-0.05, 0.05), GROUND_Y - CAT_H * s.rnd.uniform(0.6, 1.0)), wsc('fx_forkbolt', 260), life=0.1, rot=s.rnd.uniform(-30, 30), w=s.layer)
+        s.w(tr, f'Ring{k}', 'fx_shockring', wsc('fx_shockring', 300), [(t0 - 0.01, cxr, GROUND_Y - CAT_H * 0.5, 0.4, 0, 0, 'Out'), (t0, cxr, GROUND_Y - CAT_H * 0.5, 0.5, 0, 1, 'Snap'), (t0 + 0.25, cxr, GROUND_Y - CAT_H * 0.5, 2.2, 0, 0, 'Out')])
+    for k in range(3):                                     # 그을려 콜록 (연기)
+        t0 = BURNT + 0.06 + 0.08 * k
+        s.w(tr, f'Smoke{k}', 'prop_smoke', wsc('prop_smoke', 220), [(t0 - 0.01, cxr + 0.01 * k, GROUND_Y - CAT_H * 0.95, 0.4, 0, 0, 'Out'), (t0, cxr + 0.01 * k, GROUND_Y - CAT_H * 0.95, 0.5, 0, 0.9, 'Snap'),
+                                                          (t0 + 0.45, cxr + 0.02 * k, GROUND_Y - CAT_H * 1.25, 1.3, 20, 0, 'Out')])
+    for k in range(3):                                     # 박치기 전 뒷발 먼지
+        t0 = WIND + 0.04 * k
+        s.w(tr, f'Dust{k}', 'prop_dust', wsc('prop_dust', 260), [(t0 - 0.01, hx - 0.03, GROUND_Y, 0.5, 0, 0, 'Out'), (t0, hx - 0.03, GROUND_Y, 0.6, 0, 0.9, 'Snap'), (t0 + 0.35, hx - 0.07, GROUND_Y - 0.03, 1.3, 0, 0, 'Out')])
+    s.speed(g, DASH, HIT, vertical=False, n=6)
+    hp_ = s.P(cxr - 0.02, GROUND_Y - CAT_H * 0.45)         # 박치기 자리
+    s.layer(tr, 'HitStar', 'fx_hitstar', wsc('fx_hitstar', 520), [(HIT - 0.01, *hp_, 0, 0, 0, 'Out'), (HIT, *hp_, 0.6, 0, 1, 'Snap'), (HIT + 0.1, *hp_, 1.25, 15, 1, 'Back'), (LAUNCH + 0.15, *hp_, 1.4, 30, 0, 'Out')])
+    for k in range(2):
+        s.layer(tr, f'HRing{k}', 'fx_shockring', wsc('fx_shockring', 360), [(HIT + 0.06 * k, *hp_, 0.4, 0, 1, 'Snap'), (HIT + 0.35 + 0.06 * k, *hp_, 2.6, 0, 0, 'Out')])
+    s.burst_ring(tr, 'HitSpark', 'fx_sparks', HIT + 0.02, *hp_, n=7, r=420, sc=wsc('fx_sparks', 120), dur=0.25)
+    s.speed(g, LAUNCH, T3, vertical=True, n=7)
+    # ④ 하늘 근접 컷 (로켓단 퇴장): 빙글빙글 날아가는 고양이 · 구름이 오른쪽 위 → 왼쪽 아래로 휙휙
+    T4 = 4.75
+    g = s.group('Fly', R, T3, T4)
+    s.s(g, 'Sky', 'bg_sky', K * 1.25, [(T3, 160, -120, 1, 0, 1, 'Out'), (T4, -160, 120, 1, 0, 1, 'Linear')])
+    for k in range(7):                                     # 구름 (뒤): 오른쪽 위에서 들어와 왼쪽 아래로
+        t0 = T3 + 0.12 * k; y0 = s.rnd.uniform(-200, 500); spr = 'prop_cloudstreak' if k % 2 else 'prop_cloud'
+        s.s(g, f'CloudB{k}', spr, wsc(spr, s.rnd.uniform(380, 620)), [(t0, 1300, y0, 1, -25, 0.8, 'Out'), (t0 + 0.35, -1300, y0 - 900, 1, -25, 0.8, 'Linear')])
+    fs = [(T3 + 0.09 * k, f'anim_catfly_{1 + k % 2}') for k in range(int((T4 - T3) / 0.09))]
+    s.cel(g, 'Cat', fs, [(T3, -700, -800, 0.6, -30, 1, 'Out'), (T3 + 0.15, -80, -380, 1.0, 20, 1, 'Out'), (T4 - 0.2, 120, -300, 1.05, 330, 1, 'Linear'), (T4, 900, 500, 0.6, 400, 1, 'In')],
+          height=820, ref='anim_catfly_1', pano=False, jitter=4.0)
+    for k in range(3):                                     # 눈물 · 연기 꼬리
+        t0 = T3 + 0.25 + 0.15 * k
+        s.s(g, f'Tear{k}', 'prop_sweat', wsc('prop_sweat', 80), [(t0, 0, -100, 1, 40, 1, 'Out'), (t0 + 0.3, -500, -500, 0.6, 80, 0, 'Linear')])
+        s.s(g, f'Trail{k}', 'prop_smoke', wsc('prop_smoke', 260), [(t0, -60, -260, 0.6, 0, 0.8, 'Out'), (t0 + 0.4, -700, -700, 1.4, 30, 0, 'Linear')])
+    for k in range(5):                                     # 구름 (앞): 더 크고 빠르게 (시차)
+        t0 = T3 + 0.05 + 0.17 * k; y0 = s.rnd.uniform(-100, 600)
+        s.s(g, f'CloudF{k}', 'prop_cloud', wsc('prop_cloud', s.rnd.uniform(800, 1100)), [(t0, 1500, y0, 1, -25, 0.95, 'Out'), (t0 + 0.24, -1500, y0 - 1100, 1, -25, 0.95, 'Linear')])
+    for i in range(8):                                     # 대각선 속도선 (오른쪽 위로 날아감)
+        x = -900 + i * 260; s0 = T3 + (i % 3) * 0.05
+        s.s(g, f'Speed{i}', 'fx_streak', 1.2, [(s0, x + 500, 600, 1, 205, 0, 'Out'), (s0 + 0.05, x + 300, 300, 1.2, 205, 0.6, 'Linear'), (T4, x - 600, -800, 1.2, 205, 0, 'Linear')], flicker=0.3)
+    # ⑤ 들판 롱샷: 고양이가 하늘 저편으로 작아지다 반짝 ✦ → 앞의 햄쥐 브이 윙크로 다가감
+    STAR = 5.32
+    g = s.group('Twinkle', R, T4)
+    sx, sy = STAR_AT                                       # 반짝 자리 (판 비율)
+    tr = s.cam(g, [(T4, 0.55, 0.45, 0.95, 0, 'Out'), (STAR + 0.1, 0.56, 0.44, 0.97, 0, 'Linear'), (STAR + 0.45, 0.42, 0.62, 1.4, 0, 'InOut'), (END + 0.4, 0.4, 0.64, 1.5, 0, 'Linear')], kicks=[STAR])
+    s.cel(tr, 'Cat', [(T4 + 0.07 * k, f'anim_catfly_{3 if k % 2 else 2}') for k in range(int((STAR - T4) / 0.07))],
+          [(T4, 0.5, 0.6, 0.9, 0, 1, 'Out'), (STAR - 0.02, sx, sy + 0.01, 0.06, 720, 1, 'Linear'), (STAR, sx, sy, 0.02, 760, 0, 'Linear')], height=hgt('anim_catfly_2', kc), ref='anim_catfly_2')
+    s.w(tr, 'Star', 'fx_twinkle', wsc('fx_twinkle', 380), [(STAR - 0.01, sx, sy, 0, 0, 0, 'Out'), (STAR, sx, sy, 0.3, 0, 1, 'Snap'), (STAR + 0.1, sx, sy, 1.3, 45, 1, 'Back'),
+                                                         (STAR + 0.45, sx, sy, 1.0, 90, 1, 'Linear'), (END + 0.4, sx, sy, 0.8, 140, 0.9, 'Linear')], pulse=0.08, pulseHz=8.0)
+    vh = hgt('anim_tackle_3', kz) * 1.1; vx = 0.36
+    s.cel(tr, 'Zap', [(T4, 'anim_tackle_3')], [(T4, vx, GROUND_Y + 0.02, 1, 0, 1, 'Out'), (STAR + 0.45, vx, GROUND_Y + 0.02, 1.0, 0, 1, 'Linear'), (STAR + 0.5, vx, GROUND_Y + 0.02, 1.05, 3, 1, 'Back'),
+                                                    (END + 0.4, vx, GROUND_Y + 0.02, 1.02, 2, 1, 'Linear')], height=vh, ref='anim_tackle_3')
+    wx, wy = vx + WINK[0] * vh / PWX, GROUND_Y + 0.02 - WINK[1] * vh / PPX
+    s.w(tr, 'Wink', 'fx_twinkle', wsc('fx_twinkle', 90), [(STAR + 0.5, wx, wy, 0, 0, 0, 'Out'), (STAR + 0.51, wx, wy, 0.6, 0, 1, 'Snap'), (STAR + 0.62, wx, wy - 0.01, 1.2, 30, 1, 'Back'), (STAR + 0.9, wx, wy - 0.02, 1.0, 60, 0, 'Out')])
+    for k in range(5):                                     # 볼에서 남은 파지직
+        t0 = STAR + 0.55 + 0.1 * k
+        pop_at(tr, f'Zip{k}', 'fx_sparks', t0, *s.P(vx + s.rnd.uniform(-0.03, 0.03), GROUND_Y - vh / PPX * s.rnd.uniform(0.4, 0.7)), wsc('fx_sparks', 90), life=0.12, w=s.layer)
+    return None
+
+
+# 짜릿햄쥐 v2 그림 속 자리 (그림 · 판 비율 · 그림이 바뀌면 다시 잼)
+ZAP_REF, CAT_REF = 'anim_volt_2', 'anim_cattease_2'     # 키 기준 프레임 (선 자세)
+ZAP_H, CAT_H = 0.22, 0.3       # 햄쥐 · 고양이 선 키 (판 높이 비율)
+TEASE_X = 0.42                 # ①: 앉은 햄쥐 발끝 x (판 비율)
+TEASE_CHEEK = (0.32, 0.55)     # anim_hamtease: 볼 (발끝 가운데 기준 x · 위로 y, 상자 비율) — 고양이 손끝이 닿는 자리
+GLARE_CHEEKS = [(0.17, 0.64), (0.83, 0.64)]     # shot_glare2: 두 볼
+GROUND_Y = 0.83                # pano_on: 길 위 발끝 높이
+ZAP_X, CAT_X = 0.36, 0.64      # pano_on: ③ 햄쥐 · 고양이 발끝 x
+STAR_AT = (0.76, 0.2)          # pano_on: 고양이가 사라지며 반짝하는 하늘
+WINK = (0.05, 0.75)            # anim_tackle_3: 윙크한 눈 (발끝 가운데 기준 x · 위로 y, 키 비율)
+
+
+def parkrat_v1(s, R):
+    """(옛 것 · 칠 그림) 가로: 줄 선 입구 → 퍼레이드 거리 → 호수 불꽃. ② 퍼레이드를 따라 옆으로 훑기 · ③ 아래 띠 + 폭죽이 솟아 게임 화면 위에서 터짐 · ④ 불꽃 피날레 와이드"""
     I = s.group('Intro', R, 0.4, 1.9)
     tr = s.cam(I, [(0.4, 0.12, 0.55, 1.35, -3, 'Out'), (1.0, 0.36, 0.62, 1.25, 0, 'InOut'), (1.45, 0.52, 0.6, 1.15, 2, 'InOut'), (1.9, 0.56, 0.62, 1.3, 3, 'Linear')], kicks=[0.95])
     s.w(tr, 'Float', 'prop_float2', 0.8, [(0.4, 0.05, 0.78, 1, 0, 1, 'Out'), (1.9, 0.5, 0.78, 1, 0, 1, 'Linear')], jitter=2.0)
@@ -308,6 +483,230 @@ def parkrat(s, R):
     s.burst_ring(F, 'Burst', 'fx_impact', 4.2, 0, 150, n=7, r=750, sc=0.9)
     s.burst_ring(F, 'Heart', 'fx_aura', 4.35, 0, 150, n=5, r=500, sc=0.5)
     s.meme(F, 4.3)
+
+
+def parkrat(s, R):
+    """가로 (광장 판 pano_on + 롱샷 판 wide_on + 폐허 판 pano_alt). (2026-10-21 v2 = '풍선 펑', 사용자 콘티)
+    띠 · 마무리 컷 없음 · 플랫 · 컷마다 한 장(shot_*, 연속 프레임 = 같은 틀 바꿔 끼우기) · 셀 프레임(anim_pump · anim_end) · 1배속 · 글 없음 — 컷 10개:
+    ① 0.4 축제 퍼레이드 몽타주 3컷 (즐기는 쥐들) ② 풍선을 들고 고민 → 유레카! (전구 · 반짝) ③ 광장: 에어 펌프로 풍선을 불기 시작
+    ④ 박수 치는 쥐들 (사선 하이 앵글, 손 모음 ↔ 벌림) ⑤ 펌프를 누르는 손 클로즈업 (누를수록 빨라짐)
+    ⑥~⑦ 풍선 컷 4개 ↔ 관객 반응 컷 4개 교차 (갸웃 → 불안 → 당황 → 비명, 같은 구도 · 단계마다 더 다가가고 더 흔들림), 마지막 풍선 컷 = 트래킹 줌 아웃 ⑧ 엄청 커진 풍선 프레임 스탑 → 펑
+    · 풍선 = 평범한 둥근 풍선 (쥐 머리 · 디즈니 풍선 금지, 2026-10-21 사용자 4차) · 박수 컷부터 0.7배속 (PARK_SLOW)
+    ⑨ 풍압 몽타주 (핵폭발 영화식): 성 · 기념품 거리 · 구경하던 쥐들이 왼 → 오로 날아감 ⑩ 먼지가 걷힌 폐허 광장: 떨어져 멍 → 머리 긁적 → 데헷
+    → 컷신 걷힘 → 게임 화면: 풍선이 터진 풍압 (worldPhase · blast*, 레이저 없이)"""
+    o0 = len(s.o)
+    K = 1920 * 1.06 / 1536                                # 한 장 컷 배율 (화면을 덮음 · 흔들려도 가장자리 안 보임)
+    at = lambda rx, ry, z=1.0: ((rx - 0.5) * 1536 * K * z, (0.5 - ry) * 1024 * K * z)     # 컷 그림 비율 → 화면 px (컷 가운데 기준)
+    wsc = lambda name, px: px / max(1, s.size(name)[0])   # 그림 폭을 px 로 맞추는 배율
+
+    def frames(g, name, seq, ks, sc=K, **fx):
+        """같은 틀 연속 프레임 (그림만 바꿔 끼움)"""
+        var = s.s(g, name, seq[0][1], sc, ks, **fx)
+        sw = ', '.join(f'new NKK.Ults.SuperUltLayer.Swap {{ t = {f(t)}, sprite = S("{spr}") }}' for t, spr in seq[1:])
+        if sw: s(f'{var}.swaps = new[] {{ {sw} }};')
+        return var
+
+    def pop_at(g, name, spr, t0, x, y, sc, life=0.25):
+        s.s(g, name, spr, sc, [(t0 - 0.01, x, y, 0, 0, 0, 'Out'), (t0, x, y, 0.5, 0, 1, 'Snap'), (t0 + 0.08, x, y, 1.15, 10, 1, 'Back'), (t0 + life, x, y, 1.2, 25, 0, 'Out')])
+
+    def presses(t0, t1, d0, d1):
+        """펌프 한 번 = 1(위) → 2 → 3(아래) → 2, 한 번 걸리는 시간 d0 → d1 (점점 빨라짐) · [(시각, 그림)] · 누른 시각들"""
+        seq, downs, t = [], [], t0
+        while t < t1:
+            u = (t - t0) / max(0.01, t1 - t0); d = d0 + (d1 - d0) * u
+            for k, n in enumerate((1, 2, 3, 2)):
+                if t + d * k / 4 < t1: seq.append((t + d * k / 4, f'anim_pump_{n}'))
+            downs.append(t + d / 2); t += d
+        return seq, downs
+
+    # ① 축제 퍼레이드 몽타주 (컷 3개, 컷마다 다른 카메라 흐름)
+    T1 = 1.5
+    M = [(0.4, 'shot_parade1', (80, 0, 1.04, 0), (-80, 0, 1.08, 0)), (0.78, 'shot_parade2', (0, -20, 1.0, -2), (0, 10, 1.1, 1)), (1.14, 'shot_parade3', (0, 0, 1.12, 2), (0, 0, 1.02, 0))]
+    for i, (t0, spr, a, b) in enumerate(M):
+        t1 = M[i + 1][0] if i + 1 < len(M) else T1
+        g = s.group(f'Parade{i}', R, t0, t1)
+        s.s(g, 'Shot', spr, K, [(t0, *a, 1, 'Out'), (t1, *b, 1, 'Linear')], kicks=[t0], kickPower=16, kickTime=0.15)
+        s.shower(g, 'Confetti', 'fx_confetti', t0 - 0.2, t1, 7, -950, 950, 700, -620, sc=wsc('fx_confetti', 150))
+    # ② 풍선을 들고 고민 → 유레카!
+    EUREKA, T2 = 1.9, 2.15
+    g = s.group('Think', R, T1, T2)
+    frames(g, 'Shot', [(T1, 'shot_think1'), (EUREKA, 'shot_think2')],
+           [(T1, -30, 0, 1.0, 1, 1, 'Out'), (EUREKA - 0.02, 0, 0, 1.06, 0, 1, 'InOut'), (EUREKA, 0, -10, 1.13, -2, 1, 'Snap'), (T2, 0, -10, 1.17, -1, 1, 'Linear')], kicks=[EUREKA], kickPower=40, kickTime=0.2)
+    hx, hy = at(*THINK_HEAD, 1.13); hy -= 10
+    s.s(g, 'Bulb', 'prop_bulb', wsc('prop_bulb', 230), [(EUREKA - 0.01, hx, hy, 0, 0, 0, 'Out'), (EUREKA, hx, hy, 0.4, -15, 1, 'Snap'), (EUREKA + 0.12, hx, hy + 40, 1.15, 8, 1, 'Back'), (T2, hx, hy + 55, 1.0, 0, 1, 'Linear')], pulse=0.06, pulseHz=9.0)
+    s.burst_ring(g, 'Spark', 'fx_sparkle', EUREKA + 0.02, hx, hy + 40, n=8, r=360, sc=wsc('fx_sparkle', 90), dur=0.25)
+    pop_at(g, 'Ding', 'fx_clap', EUREKA + 0.02, hx, hy + 40, wsc('fx_clap', 420))
+    # ③ · ⑦~⑧ 광장 (같은 판 · 같은 쥐 · 같은 풍선): 펌프 셀 프레임 + 노즐에 꽂힌 풍선 (매듭 = 노즐 끝)
+    pk = RAT_H * s.PH * s.PS / max(1, s.size('anim_pump_1')[1])            # 셀 배율 (상자 높이 = 쥐 키)
+    bw_, bh_ = s.size('anim_pump_1')
+    fx_, fy_ = s.P(*RAT_FEET)                                               # 발끝 (판 px)
+    NZ = (fx_ + (NOZZLE[0] - 0.5) * bw_ * pk, fy_ + NOZZLE[1] * bh_ * pk)  # 노즐 끝 (판 px)
+    bal_w = max(1, s.size('prop_balloon')[0]); bal_ar = s.size('prop_balloon')[1] / max(1, s.size('prop_balloon')[0])
+
+    def plaza(g, t0, path, pump, bal, swaps=(), **cam):
+        """bal = [(t, 폭 px, 알파, 이징)] — 풍선은 쥐 뒤 (커지면 쥐를 넘어 광장 · 성을 덮음) · swaps = [(시각, 풍선 그림)] (팽팽 · 터지기 직전, 틀은 첫 그림 크기)"""
+        tr = s.cam(g, path, **cam)
+        v = s.layer(tr, 'Balloon', 'prop_balloon', 1.0, [(t, NZ[0], NZ[1], w / bal_w, 0, a, e) for t, w, a, e in bal], pulse=0.012, pulseHz=5.0)     # 키 배율 = 폭 px / 그림 폭
+        s(f'((RectTransform){v}.transform).pivot = new Vector2(0.5f, 0.04f);')
+        sw = ', '.join(f'new NKK.Ults.SuperUltLayer.Swap {{ t = {f(t)}, sprite = S("{spr}") }}' for t, spr in swaps)
+        if sw: s(f'{v}.swaps = new[] {{ {sw} }};')
+        s.cel(tr, 'Pump', pump, [(t0, *RAT_FEET, 1, 0, 1, 'Out')], height=RAT_H * s.PH * s.PS, ref='anim_pump_1')
+        return tr
+    # ③ 에어 펌프로 풍선을 불기 시작 (천천히 · 누를 때마다 풍선이 조금씩)
+    T3 = 2.55
+    g = s.group('Pump', R, T2, T3)
+    seq, downs = presses(T2, T3, 0.3, 0.24)
+    B3 = 70 + 45 * len([d for d in downs if d + 0.04 < T3])     # ③ 끝 풍선 폭 (판 px)
+    bal = [(T2, 70, 1, 'Out')] + [(d + 0.04, 70 + 45 * (i + 1), 1, 'Back') for i, d in enumerate(downs) if d + 0.04 < T3] + [(T3, B3, 1, 'Linear')]
+    cx_, cy_ = RAT_FEET[0] + 0.05, 0.62                    # 성 · 가게까지 보이게 (2026-10-21 사용자 2차: 펌프질 때 배경이 바닥만 보여 비어 보임) · 줌 1.2 = 위아래 ±0.3
+    Z0 = 1.2                                               # ③ 끝 줌
+    plaza(g, T2, [(T2, cx_, cy_, 1.1, 0, 'Out'), (T3, cx_, cy_, Z0, 0, 'Linear')], seq, bal, kicks=downs, power=8, rot=0.5, ktime=0.12)
+    # ④ 박수 치는 쥐들 (사선 하이 앵글 — 그림이 기울어 있음): 손 모음 ↔ 벌림
+    T4 = 2.85
+    CE = (-40, 20, 1.24, -11)                              # ④ 끝 구도 = ⑥ 이 같은 구도로 이어받음 (그림을 더 기울여 사선 하이 앵글 · 기운 만큼 키워 가장자리 가림)
+    g = s.group('Crowd', R, T3, T4)
+    claps = [T3 + 0.07 * i for i in range(int((T4 - T3) / 0.07) + 1)]
+    frames(g, 'Shot', [(t, 'shot_crowd1' if i % 2 == 0 else 'shot_crowd1b') for i, t in enumerate(claps)], [(T3, 30, -10, 1.22, -14, 1, 'Out'), (T4, *CE, 1, 'Linear')])
+    for i, t0 in enumerate(claps[::2]):
+        for j in range(2):
+            x, y = s.rnd.uniform(-750, 750), s.rnd.uniform(-380, 250)
+            pop_at(g, f'Clap{i}_{j}', 'fx_clap', t0 + 0.01 * j, x, y, wsc('fx_clap', 150), life=0.12)
+    s.shower(g, 'Confetti', 'fx_confetti', T3 - 0.2, T4, 6, -950, 950, 700, -620, sc=wsc('fx_confetti', 150))
+    # ⑤~⑧ (2026-10-21 사용자 4차: 풍선이 커지는 컷과 쥐들 표정 변화를 계속 교차 · 커질수록 감정이 변함)
+    #   손 클로즈업 → 풍선 A → 갸웃 → 풍선 B → 불안 → 풍선 C → 당황 → 풍선 D (트래킹 줌 아웃) → 비명 → 프레임 스탑 → 펑
+    #   관객 컷 = ④ 와 같은 구도, 단계마다 조금씩 더 다가가고 더 흔들림 · 풍선 = 같은 광장 · 같은 쥐, 컷마다 이어서 커짐 (누를수록 펌프질도 빨라짐)
+    T5 = 3.1
+    g = s.group('Hand', R, T4, T5)
+    hs, t = [], T4
+    while t < T5:
+        u = (t - T4) / (T5 - T4); d = 0.12 * (1 - u) + 0.06 * u
+        hs += [(t, 'shot_hand1'), (t + d * 0.45, 'shot_hand2')]; t += d
+    hs = [h for h in hs if h[0] < T5]
+    downs = [t0 for t0, spr in hs if spr == 'shot_hand2']
+    frames(g, 'Shot', hs, [(T4, 0, 0, 1.0, 0, 1, 'Out'), (T5, 0, -30, 1.15, 2, 1, 'In')], kicks=downs, kickPower=22, kickTime=0.08)
+    px_, py_ = at(*HAND_PUMP, 1.1)
+    for i, t0 in enumerate(downs[::2]):
+        pop_at(g, f'Puff{i}', 'fx_clap', t0, px_ + (-1) ** i * 260, py_ - 120, wsc('fx_clap', 220), life=0.1)
+    wd = s.story['wide']; ww_, wh_ = s.size('wide_on')     # 롱샷 판: 광장 판(pano_on)이 롱샷 판 (x, y) 에 scale 배로 들어 있음
+    WK = s.PS / wd['scale']
+    WCY = 0.5 + ((wh_ / 2) - (wd['y'] + 512 * wd['scale'])) / (1024 * wd['scale'])
+    WCX = 0.5 + ((ww_ / 2) - (wd['x'] + 768 * wd['scale'])) / (1536 * wd['scale'])
+    FULL = 1920 / (ww_ * WK) * 1.02                       # 다 빠졌을 때 = 롱샷 판 전체
+    ZE = FULL * 1.12                                       # 끝 구도 (풍선 가운데 · 쥐랜드가 화면 폭을 채움)
+    PPX = s.PH * s.PS                                      # 판 높이 px (비율 ↔ px)
+    wtop = (0.5 - WCY) * PPX + wh_ * WK / 2; wbot = wtop - wh_ * WK      # 롱샷 판 위 · 아래 끝 (판 px)
+
+    def look(y_px, z):                                     # 보는 높이 (판 px) → 비율, 롱샷 판 밖이 안 보이게
+        h = 540 / z; return 0.5 - min(wtop - h, max(wbot + h, y_px)) / PPX
+
+    def focus(w, z, u=1.0):                                # 쥐(cx_, cy_) ↔ 풍선 가운데 사이를 봄 (u = 풍선 쪽으로 얼마나)
+        x = cx_ + (NZ[0] / (s.PW * s.PS) + 0.5 - cx_) * u
+        return x, look((0.5 - cy_) * PPX + (NZ[1] + w * bal_ar * 0.5 - (0.5 - cy_) * PPX) * u, z)
+
+    def balloon_cut(name, t0, t1, w0, w1, zs, d0, d1, swaps=(), wide=False, u=1.0, power=14):
+        """풍선 컷: 누를 때마다 w0 → w1 (기하급수 · 출렁), zs = [(시각, 줌, 기울기)]"""
+        g = s.group(name, R, t0, t1)
+        seq, downs = presses(t0, t1, d0, d1)
+        ww = lambda t: w0 * (w1 / w0) ** min(1, max(0, (t - t0) / (t1 - t0)))
+        bal = [(t0, w0, 1, 'Out')] + [(d + 0.03, ww(d + 0.03), 1, 'Back') for d in downs if d + 0.03 < t1] + [(t1, w1, 1, 'Linear')]
+        path = [(t, *focus(ww(t), z, u), z, r, 'Linear' if i else 'Out') for i, (t, z, r) in enumerate(zs)]
+        tr = plaza(g, t0, path, seq, bal, swaps=swaps, kicks=downs[::2], power=power, rot=1.0, ktime=0.12)
+        if wide:
+            wl = s.w(tr, 'Wide', 'wide_on', WK, [(t0, WCX, WCY, 1, 0, 1, 'Out')]); s(f'{wl}.transform.SetAsFirstSibling();')     # 광장 판 아래 (빠지면 둘레)
+        for i, d in enumerate(downs[::2]):                 # 누를 때마다 노즐에서 바람 · 풍선 둘레가 부푸는 선
+            w = ww(d); c = (NZ[0], NZ[1] + w * bal_ar * 0.5); a = math.radians(40 + 100 * (i % 2)); r = w * 0.55
+            s.layer(tr, f'Air{i}', 'fx_wind', wsc('fx_wind', max(120, w * 0.3)), [(d, NZ[0] - w * 0.15, NZ[1], 0.7, 90, 0.9, 'Snap'), (d + 0.12, NZ[0] - w * 0.05, NZ[1] + w * 0.3, 1.1, 90, 0, 'Out')])
+            s.layer(tr, f'Bulge{i}', 'fx_clap', wsc('fx_clap', w * 0.35), [(d + 0.02, c[0] + math.cos(a) * r, c[1] + math.sin(a) * r, 0.8, math.degrees(a) - 90, 0.9, 'Snap'),
+                                                                           (d + 0.14, c[0] + math.cos(a) * r * 1.25, c[1] + math.sin(a) * r * 1.25, 1.1, math.degrees(a) - 90, 0, 'Out')])
+        return g, tr
+
+    def crowd_cut(name, t0, t1, spr, k, shake):
+        """관객 반응 컷 (④ 와 같은 구도): k = 단계 (조금씩 더 다가감) · shake = 흔들림"""
+        g = s.group(name, R, t0, t1)
+        z = CE[2] * (1 + 0.05 * k)
+        frames(g, 'Shot', [(t0, spr)], [(t0, CE[0], CE[1], z * 1.04, CE[3] - k, 1, 'Snap'), (t0 + 0.06, CE[0], CE[1], z, CE[3] - k, 1, 'Back'), (t1, CE[0], CE[1] - 10 * k, z * 1.04, CE[3] - k - 1, 1, 'Linear')],
+               kicks=[t0 + 0.02], kickPower=10 + 12 * k, kickTime=0.16, jitter=shake)
+        return g
+    BW = [B3, 400, 720, 1200, BALLOON_W]                   # 풍선 폭 단계 (판 px): ③ 끝 → A → B → C → D
+    A0, A1 = T5, 3.35
+    balloon_cut('BalloonA', A0, A1, BW[0], BW[1], [(A0, Z0, 0), (A1, Z0 * 0.96, 0)], 0.1, 0.085, u=0.4)
+    crowd_cut('CrowdQ', A1, 3.53, 'shot_crowd_q', 1, 0.0)
+    B0, B1 = 3.53, 3.78
+    balloon_cut('BalloonB', B0, B1, BW[1], BW[2], [(B0, 1.0, 1), (B1, 0.92, 2)], 0.08, 0.065, u=0.7, power=20)
+    crowd_cut('CrowdWorry', B1, 3.96, 'shot_crowd_worry', 2, 2.0)
+    C0, C1 = 3.96, 4.21
+    balloon_cut('BalloonC', C0, C1, BW[2], BW[3], [(C0, 0.78, -2), (C1, 0.66, -3)], 0.06, 0.05, swaps=[(4.12, 'prop_balloon_tight')], wide=True, power=28)
+    crowd_cut('CrowdPanic', C1, 4.39, 'shot_crowd2', 3, 4.0)
+    D0, D1 = 4.39, 4.79                                    # 트래킹 줌 아웃: 광장 → 쥐랜드 전체 (화각이 확 바뀜)
+    g, _ = balloon_cut('BalloonD', D0, D1, BW[3], BW[4], [(D0, 0.62, -5), (D0 + 0.12, 0.45, -3), (D0 + 0.24, ZE * 1.15, 2), (D1, ZE, 0)], 0.05, 0.04,
+                       swaps=[(D0, 'prop_balloon_tight'), (D1 - 0.1, 'prop_balloon_burst')], wide=True, power=34)
+    for i in range(12):                                    # 줌 아웃 속도선: 화면 가장자리에서 가운데로 모임
+        a = math.radians(i * 30 + 15); s0 = D0 + (i % 3) * 0.03; rot = math.degrees(a) + 90
+        s.s(g, f'Zoom{i}', 'fx_streak', 1.3, [(s0, math.cos(a) * 1300, math.sin(a) * 800, 1.2, rot, 0, 'Out'), (s0 + 0.04, math.cos(a) * 1100, math.sin(a) * 680, 1.2, rot, 0.8, 'Linear'),
+                                              (D0 + 0.3, math.cos(a) * 420, math.sin(a) * 260, 0.7, rot, 0, 'Out')], flicker=0.2)
+    crowd_cut('CrowdScream', D1, 4.94, 'shot_crowd_scream', 4, 7.0)
+    # ⑧ 엄청 커진 풍선 프레임 스탑 (카메라 · 풍선 · 쥐 전부 멈춤) → 펑: 하얀 번쩍 · 풍압 돔이 쥐랜드를 덮음 · 충격파 고리 · 파편
+    FREEZE, POP = 4.94, 5.34
+    T7 = POP + 0.3
+    g = s.group('Freeze', R, FREEZE, T7)
+    bcx, bcy = NZ[0], NZ[1] + BALLOON_W * bal_ar * 0.5    # 다 커진 풍선 가운데 (판 px)
+    fx0, fy0 = focus(BALLOON_W, ZE)
+    tr = plaza(g, FREEZE, [(FREEZE, fx0, fy0, ZE, 0, 'Out'), (POP, fx0, fy0, ZE, 0, 'Linear'), (POP + 0.05, fx0, fy0, ZE * 1.08, 0, 'Snap'), (T7, fx0, fy0, ZE * 1.14, 0, 'Out')],
+               [(FREEZE, 'anim_pump_3')], [(FREEZE, BALLOON_W, 1, 'Out'), (POP - 0.01, BALLOON_W, 1, 'Linear'), (POP, BALLOON_W, 0, 'Snap')], swaps=[(FREEZE, 'prop_balloon_burst')],
+               kicks=[POP, POP + 0.1, POP + 0.22], power=70, rot=3.0, ktime=0.3)
+    wl = s.w(tr, 'Wide', 'wide_on', WK, [(FREEZE, WCX, WCY, 1, 0, 1, 'Out')]); s(f'{wl}.transform.SetAsFirstSibling();')
+    s.cel(tr, 'Pop', [(POP, 'fx_pop1'), (POP + 0.07, 'fx_pop2'), (POP + 0.18, 'fx_pop3')],
+          [(POP - 0.01, bcx, bcy, 0.6, 0, 0, 'Out'), (POP, bcx, bcy, 0.8, 0, 1, 'Snap'), (POP + 0.15, bcx, bcy, 1.2, 0, 1, 'Back'), (T7, bcx, bcy, 1.4, 10, 0, 'Out')],
+          height=BALLOON_W * 1.3 * s.size('fx_pop2')[1] / max(1, s.size('fx_pop2')[0]), ref='fx_pop2', pano=False)
+    for k in range(3):
+        t0 = POP + 0.08 * k
+        s.layer(tr, f'Ring{k}', 'fx_shockring', wsc('fx_shockring', 1400), [(t0 - 0.01, NZ[0], fy_, 0.3, 0, 0, 'Out'), (t0, NZ[0], fy_, 0.3, 0, 1, 'Snap'), (t0 + 0.45, NZ[0], fy_, 4.5, 0, 0, 'Out')])
+    s.layer(tr, 'Dome', 'fx_dome', wsc('fx_dome', 1200), [(POP + 0.02, NZ[0], fy_, 0.3, 0, 0, 'Out'), (POP + 0.04, NZ[0], fy_, 0.5, 0, 1, 'Snap'), (T7, NZ[0], fy_, 5.0, 0, 0.9, 'Out')])
+    s.burst_ring(tr, 'Debris', 'fx_debris', POP + 0.04, bcx, bcy - 300, n=10, r=2600, sc=wsc('fx_debris', 380), dur=0.3)
+    s.s(g, 'Whiteout', 'fx_pop1', wsc('fx_pop1', 1800), [(POP - 0.01, 0, 0, 0, 0, 0, 'Out'), (POP, 0, 0, 1.2, 0, 1, 'Snap'), (POP + 0.22, 0, 0, 2.4, 0, 0, 'In')])
+    # ⑨ 풍압 몽타주 (핵폭발 영화식: 멀쩡 → 바람이 닿는 순간 날아감, 왼 → 오)
+    WAVES = [('a', T7, T7 + 0.31), ('b', T7 + 0.31, T7 + 0.62), ('c', T7 + 0.62, T7 + 0.96)]
+    T9 = WAVES[-1][2]
+    for k, (n, t0, t1) in enumerate(WAVES):
+        hit = t0 + 0.07
+        g = s.group(f'Wave{k}', R, t0, t1)
+        frames(g, 'Shot', [(t0, f'shot_wave_{n}1'), (hit, f'shot_wave_{n}2')],
+               [(t0, -40, 0, 1.04, 0, 1, 'Out'), (hit, -40, 0, 1.05, 0, 1, 'Linear'), (hit + 0.03, 20, -10, 1.1, -2, 1, 'Snap'), (t1, 90, -15, 1.15, -3, 1, 'Out')], kicks=[hit, hit + 0.1, hit + 0.2], kickPower=60, kickTime=0.22)
+        s.s(g, 'Dust', 'fx_dustwall', wsc('fx_dustwall', 2400), [(hit - 0.01, -2300, -300, 1, 0, 0, 'Out'), (hit, -2300, -300, 1, 0, 0.9, 'Snap'), (t1, -400 + 700 * (k == 2), -250, 1.2, 0, 0.9, 'Out')], jitter=3.0)
+        for i in range(6):                                 # 돌풍 · 속도선 (왼 → 오)
+            y = -420 + i * 170; s0 = hit + (i % 3) * 0.03
+            s.s(g, f'Wind{i}', 'fx_wind' if i % 2 else 'fx_streak', wsc('fx_wind', 700) if i % 2 else 1.4, [(s0, -1300, y, 1, 0, 0, 'Out'), (s0 + 0.04, -800, y, 1.1, 0, 0.8, 'Linear'), (s0 + 0.24, 1400, y + 40, 1.2, 0, 0, 'Linear')], flicker=0.2)
+        fly = [('fx_debris', 300)] if n == 'a' else [('prop_flyrat1', 300), ('prop_flyrat2', 280), ('prop_ears', 160), ('fx_debris', 260)]
+        for i in range(5):                                 # 날아가는 것들 (빙글빙글)
+            spr, wpx = fly[i % len(fly)]; s0 = hit + 0.02 + 0.04 * i; y0 = s.rnd.uniform(-300, 300)
+            s.s(g, f'Fly{i}', spr, wsc(spr, wpx), [(s0 - 0.01, -1200, y0, 0.8, 0, 0, 'Out'), (s0, -1200, y0, 0.8, 0, 1, 'Snap'), (s0 + 0.3, 1400, y0 + s.rnd.uniform(-150, 250), 1.2, -540, 1, 'Linear')])
+    # ⑩ 먼지가 걷힌 폐허 광장: 하늘에서 떨어져 멍 → 머리 긁적 → 데헷 (테헤페로 · 윙크 반짝)
+    LAND, SCRATCH, TEHE = T9 + 0.12, T9 + 0.46, T9 + 0.79
+    END = T9 + 1.14                                       # 늦추기 전 끝 (PARK_SLOW 로 늘린 끝 = NO_FINISH)
+    RX, RY, RH = 40, -470, 500                             # 쥐 발끝 (화면 px) · 키
+    g = s.group('After', R, T9)
+    s.cam(g, [(T9, RAT_FEET[0], 0.6, 1.15, 0, 'Out'), (END + 0.4, RAT_FEET[0], 0.6, 1.24, 0, 'Linear')], kicks=[LAND], power=40, ktime=0.2, pano='pano_alt')
+    s.cel(g, 'Rat', [(T9, 'anim_end_1'), (SCRATCH, 'anim_end_2'), (TEHE, 'anim_end_3')],
+          [(T9, RX, 900, 0.9, -20, 1, 'Out'), (LAND, RX, RY, 1.0, 0, 1, 'In'), (LAND + 0.08, RX, RY, 1.06, 0, 1, 'Back'), (SCRATCH, RX, RY, 1.0, 0, 1, 'Linear'),
+           (TEHE, RX, RY, 1.0, 0, 1, 'Linear'), (TEHE + 0.06, RX, RY + 10, 1.06, 3, 1, 'Snap'), (END + 0.4, RX, RY + 5, 1.05, 2, 1, 'Out')], height=RH, ref='anim_end_1', pano=False)
+    pop_at(g, 'LandPuff', 'fx_dustwall', LAND, RX, RY - 10, wsc('fx_dustwall', 900), life=0.4)
+    s.s(g, 'Clear', 'fx_dustwall', wsc('fx_dustwall', 3400), [(T9, 300, -100, 1.3, 0, 1, 'Out'), (T9 + 0.4, 1800, -50, 1.5, 0, 0, 'Out')])     # 화면을 덮었던 먼지가 오른쪽으로 걷힘
+    s.shower(g, 'Scrap', 'fx_confetti', T9 + 0.2, END, 6, -950, 950, 700, -620, sc=wsc('fx_confetti', 130))
+    ex, ey = RX + TEHE_EYE[0] * RH, RY + TEHE_EYE[1] * RH
+    s.s(g, 'Wink', 'fx_sparkle', wsc('fx_sparkle', 120), [(TEHE + 0.03, ex, ey, 0, 0, 0, 'Out'), (TEHE + 0.04, ex, ey, 0.6, 0, 1, 'Snap'), (TEHE + 0.15, ex, ey + 20, 1.2, 30, 1, 'Back'), (TEHE + 0.4, ex, ey + 30, 1.0, 60, 0, 'Out')])
+    s.o[o0:] = [slow_line(l, *PARK_SLOW) for l in s.o[o0:]]     # 박수 컷부터 끝까지 0.7배속 (2026-10-21 사용자 3차: 중반 이후 컷 전환이 너무 빠름)
+    # (글 없음 — NO_TEXT: 데헷은 포즈로만)
+    return None
+
+
+# 쥐랜드 관광쥐 v2 그림 속 자리 (그림 · 판 비율 · 그림이 바뀌면 다시 잼)
+THINK_HEAD = (0.47, 0.16)      # shot_think: 머리 옆 하늘 (전구가 뜨는 자리)
+RAT_FEET, RAT_H = (0.44, 0.9), 0.22    # pano_on: 펌프 쥐 발끝 · 셀 상자 높이 (판 높이 비율) — 작게 = 풍선이 드러남 (2026-10-21 사용자 3차)
+PARK_SLOW = (2.55, 0.7)        # 이 시각(박수 컷)부터 끝까지 재생 속도 0.7배
+NOZZLE = (0.95, 0.3)           # anim_pump: 노즐 끝 (상자 폭 비율 · 발끝에서 위로 상자 높이 비율)
+BALLOON_W = 1700               # 다 커진 풍선 폭 (판 px) — 평범한 풍선은 세로로 길어서 (높이 ≈ 1.36배) 끝 구도에 다 들어오게
+HAND_PUMP = (0.5, 0.72)        # shot_hand2: 펌프 손잡이 (눌렀을 때)
+TEHE_EYE = (-0.07, 0.66)       # anim_end_3: 윙크한 눈 (발끝 가운데 기준 x · 위로 y, 키 비율)
 
 
 def emperor(s, R):
@@ -853,7 +1252,378 @@ THROW_PAW = 0.8               # anim_ride: 양탄자 바닥 → 금화를 던지
 
 
 def alien(s, R):
-    """세로: 우주 모선 → 시골 → 밀밭 미스터리 서클. ② 밭에서 소가 빔에 끌려 올라가는 걸 따라 우주까지 올려다봄 · ③ 위쪽 띠(모선) + 트랙터 빔이 좌우로 쓸며 게임 화면을 훑음 · ④ 모선에서 서클로 내리꽂힘 + 고리 여러 겹"""
+    """화면 컷 모음 (파노라마 안 씀). (2026-10-21 v3, 사용자 3차: 인디펜던스 데이 패러디 — 스파이 → 버튼 → 우주 신호 → 거대 우주선 하강 → 레이저 → 전투기 발진 → 주포에 돌진 → 폭발 · 우는 외계인 쥐)
+    띠 · 마무리 컷 없음 · 플랫 · 같은 틀 연속 프레임 바꿔 끼우기 · 셀 프레임(anim_spy · anim_cry) · 1배속 · 약 8초 — 컷 8개:
+    ① 0.4 건물(화면 왼쪽 1/3) 뒤에 숨어 눈치 보는 스파이 복장 외계인 쥐 · 뒤로 살짝 포커스 아웃된 떠드는 쥐들 (앞 건물 · 쥐 · 배경 시차)
+    ② 손목 시계 버튼을 누르는 손 클로즈업 ③ 우주: 지구에서 초록 신호가 퍼짐 → 먼 우주에서 우주선 하나가 지구로 다가옴
+    ④ 롱샷: 불타는 구름을 뚫고 거대 우주선이 내려옴 (카메라도 천천히 같이 내려옴) ⑤ 주포 충전 → 프레임 스탑 → 레이저가 도시 가운데로 · 흔들림 · 크롭 줌 블러 (도시는 가운데만 부서짐)
+    ⑥ 로우 앵글 · 뒤에서 본 전투기 (배경 · 전투기 따로, 소실점) → 애프터버너 → 블러와 함께 소실점으로 순식간에 발진 (속도선)
+    ⑦ 다시 레이저 컷: 아래에서 점 같은 전투기가 주포 구멍으로 → 레이저가 천천히 멈추고 우주선 멈칫 ⑧ 우주선 폭발 + 오른쪽 아래 작은 창에 우는 외계인 쥐 (수어 통역 창 패러디)
+    → 컷신 걷힘 → 게임 화면: 우주선 파편이 적마다 떨어져 쾅 (worldPhase · imageFx)"""
+    END = NO_FINISH['alien']
+    K = 1.32                                              # 1536×1024 전체 화면 컷 배율 (화면을 덮음)
+    sz = s.size
+
+    def cut_flash(g, t0, a=0.55):
+        s.s(g, 'CutFlash', 'fx_flash', 9.0, [(t0, 0, 0, 1.0, 0, a, 'Snap'), (t0 + 0.09, 0, 0, 1.3, 0, 0, 'Out')])
+
+    def frames(g, name, seq, sc, ks, **fx):
+        """같은 틀 연속 프레임 (그림만 바꿔 끼움)"""
+        var = s.s(g, name, seq[0][1], sc, ks, **fx)
+        sw = ', '.join(f'new NKK.Ults.SuperUltLayer.Swap {{ t = {f(t)}, sprite = S("{spr}") }}' for t, spr in seq[1:])
+        if sw: s(f'{var}.swaps = new[] {{ {sw} }};')
+        return var
+
+    def at(name, k, pos, r):
+        """그림 비율 r 의 화면 자리 (그림을 배율 k 로 pos 에 둠)"""
+        w, h = sz(name); return pos[0] + (r[0] - 0.5) * w * k, pos[1] + (0.5 - r[1]) * h * k
+
+    def size_line(v, w, h, pivot=None):
+        s(f'((RectTransform){v}.transform).sizeDelta = new Vector2({f(w)}, {f(h)});' + (f' ((RectTransform){v}.transform).pivot = new Vector2({f(pivot[0])}, {f(pivot[1])});' if pivot else ''))
+
+    def ship(g, name, seq, ks, **fx):
+        """거대 우주선: 롱샷이라 아래에서 낮은 각도로 본 듯 세로로 납작하게 (SHIP_FLAT)"""
+        v = frames(g, name, seq, 1.0, ks, **fx); w, h = sz('ship'); size_line(v, w * SK, h * SK * SHIP_FLAT)
+        return v
+
+    # ① 스파이: 앞 건물(왼쪽 1/3) · 엿보는 외계인 쥐 · 뒤 흐린 떠드는 쥐들 — 셋이 다른 속도로 흘러 시차
+    PEEK, SUS, SLY, T1 = 0.55, 0.85, 1.15, 1.45
+    g = s.group('Cut1', R, 0.4, T1)
+    s.s(g, 'Chat', 'bg_chat_soft', K * 1.06, [(0.4, 40, 0, 1.0, 0, 1, 'Out'), (T1, -10, 0, 1.03, 0, 1, 'Linear')])
+    ex = -960 + 1920 / 3                                  # 건물 오른쪽 모서리 (화면 1/3)
+    s.cel(g, 'Spy', [(0.4, 'anim_spy_1'), (SUS, 'anim_spy_2'), (SLY, 'anim_spy_3')],
+          [(0.4, ex - 120, -560, 1.0, 0, 1, 'Out'), (PEEK, ex + SPY_DX, -560, 1.0, -3, 1, 'Back'), (SUS, ex + SPY_DX + 20, -560, 1.02, -5, 1, 'InOut'), (SLY, ex + SPY_DX, -555, 1.04, 0, 1, 'Back'), (T1, ex + SPY_DX - 20, -555, 1.06, 0, 1, 'Linear')],
+          height=820, ref='anim_spy_1', pano=False)
+    wv = s.s(g, 'Wall', 'fg_wall', 1180 / sz('fg_wall')[1], [(0.4, ex + 10, 0, 1.0, 0, 1, 'Out'), (T1, ex - 40, 0, 1.05, 0, 1, 'Linear')])     # 앞 건물: 가장 빨리 흐름
+    s(f'((RectTransform){wv}.transform).pivot = new Vector2(1f, 0.5f);')
+    # ② 손목 시계 버튼을 누르는 손 클로즈업
+    PRESS, T2 = 1.72, 1.98
+    g = s.group('Cut2', R, T1, T2)
+    s.s(g, 'Back', 'bg_hand', K, [(T1, 0, 0, 1.1, 0, 1, 'Out'), (T2, 0, 0, 1.0, 0, 1, 'Linear')], spin=6.0)
+    frames(g, 'Hand', [(T1, 'cu_hand1'), (PRESS, 'cu_hand2')], 1.25, [(T1, 60, -40, 1.08, 4, 1, 'Snap'), (T1 + 0.12, 0, 0, 1.0, 0, 1, 'Back'), (PRESS - 0.03, 0, 10, 1.0, 0, 1, 'Linear'), (PRESS, 0, -10, 1.08, -2, 1, 'Snap'), (T2, 0, -10, 1.12, -1, 1, 'Out')],
+           kicks=[PRESS], kickPower=40, kickTime=0.18)
+    wx, wy = at('cu_hand1', 1.25 * 1.1, (0, -10), WATCH)
+    for k in range(3):
+        t0 = PRESS + 0.06 * k
+        s.s(g, f'Sig{k}', 'fx_signal', 0.7, [(t0 - 0.01, wx, wy + 60, 0.4, 0, 0, 'Out'), (t0, wx, wy + 60, 0.5, 0, 1, 'Snap'), (t0 + 0.3, wx, wy + 320, 1.4, 0, 0, 'Out')])
+    s.s(g, 'Ring', 'fx_lightring', 0.8, [(PRESS - 0.01, wx, wy, 0.3, 0, 0, 'Out'), (PRESS, wx, wy, 0.3, 0, 1, 'Snap'), (PRESS + 0.3, wx, wy, 2.2, 0, 0, 'Out')])
+    cut_flash(g, T1, 0.4)
+    # ③ 우주: 지구에서 초록 신호가 퍼짐 → 먼 우주에서 우주선 하나가 지구로 다가옴
+    SHIP_IN, T3 = 2.3, 2.85
+    g = s.group('Cut3', R, T2, T3)
+    s.s(g, 'Space', 'bg_space', K, [(T2, 0, 0, 1.0, 0, 1, 'Out'), (T3, -20, -10, 1.06, 0, 1, 'Linear')])
+    sx, sy = at('bg_space', K, (0, 0), SIGNAL)
+    for k in range(4):                                    # 신호가 퍼져 나감 (지구 → 위 오른쪽)
+        t0 = T2 + 0.07 * k
+        s.s(g, f'Wave{k}', 'fx_signal', 0.6, [(t0 - 0.01, sx, sy, 0.3, -35, 0, 'Out'), (t0, sx, sy, 0.4, -35, 1, 'Snap'), (t0 + 0.4, sx + 420, sy + 420, 1.6, -35, 0, 'Out')])
+    s.s(g, 'Ping', 'fx_lightring', 0.6, [(T2, sx, sy, 0.2, 0, 1, 'Out'), (T2 + 0.35, sx, sy, 2.0, 0, 0, 'Out')])
+    fk = 900 / sz('ship_far')[0]
+    s.s(g, 'Arrive', 'fx_flash', 0.5, [(SHIP_IN - 0.01, 720, 380, 0, 0, 0, 'Out'), (SHIP_IN, 720, 380, 0.5, 0, 1, 'Snap'), (SHIP_IN + 0.15, 720, 380, 1.0, 30, 0, 'Out')])
+    s.s(g, 'Ship', 'ship_far', fk, [(SHIP_IN - 0.01, 720, 380, 0.02, -8, 0, 'Out'), (SHIP_IN, 720, 380, 0.04, -8, 1, 'Snap'), (T3, 200, 120, 1.2, -10, 1, 'In')])
+    cut_flash(g, T2, 0.35)
+    # ④ 롱샷: 불타는 구름을 뚫고 거대 우주선이 내려옴 · 카메라도 천천히 같이 내려옴 (세로 한 장 shot_descend 를 위 → 아래로)
+    bw, bh = sz('shot_descend'); BK = 1920 * 1.04 / bw; PANY = (bh * BK - 1080) / 2
+    T4 = 4.0
+    PEND = PANY * SHOT_END                                # 내려온 끝 (도시 · 우주선이 함께 보임)
+    SK = SHIP_W * 1920 / sz('ship')[0]                    # 우주선 배율 (화면 폭 비율)
+    cnx, cny = 0, SHIP_Y + (0.5 - SHIP_CANNON[1]) * sz('ship')[1] * SK * SHIP_FLAT     # 주포 (화면 px, 내려온 끝)
+    imx, imy = at('shot_descend', BK, (0, PEND), IMPACT)  # 레이저가 꽂히는 도시 가운데 (화면 px)
+    g = s.group('Cut4', R, T3, T4)
+    s.s(g, 'Shot', 'shot_descend', BK, [(T3, 0, -PANY, 1.0, 0, 1, 'Out'), (3.15, 0, -PANY + 40, 1.0, 0, 1, 'Linear'), (T4, 0, PEND, 1.0, 0, 1, 'InOut')], kicks=[3.05, 3.4], kickPower=14, kickTime=0.4)
+    ship(g, 'Ship', [(T3, 'ship')], [(T3, 0, 170, 0.35, 0, 0, 'Out'), (T3 + 0.12, 0, 175, 0.4, 0, 1, 'Linear'), (3.4, 0, 230, 0.7, 0, 1, 'Linear'), (T4, 0, SHIP_Y, 1.0, 0, 1, 'InOut')], kicks=[3.05, 3.4], kickPower=10, kickTime=0.4)     # 구름 구멍에서 나와 점점 커지며 내려옴
+    cut_flash(g, T3, 0.35)
+    # ⑤ 주포 충전 → 프레임 스탑 → 레이저가 도시 가운데로 · 흔들림 · 크롭 줌 블러 (도시는 가운데만 부서짐)
+    CH, FR0, FIRE, T5 = T4, 4.18, 4.5, 4.85
+    g = s.group('Cut5', R, T4, T5)
+    s.s(g, 'Shot', 'shot_descend', BK, [(T4, 0, PEND, 1.0, 0, 1, 'Out')], kicks=[FIRE, FIRE + 0.12], kickPower=46, kickTime=0.3)
+    s.s(g, 'Dmg', 'shot_descend_dmg', BK, [(FIRE + 0.01, 0, PEND, 1.0, 0, 0, 'Out'), (FIRE + 0.02, 0, PEND, 1.0, 0, 1, 'Snap')], kicks=[FIRE, FIRE + 0.12], kickPower=46, kickTime=0.3)     # 섬광 아래서 가운데만 부서진 도시로
+    zl = s.s(g, 'Blur', 'shot_descend_dmg_zoom2', BK, [(FIRE + 0.01, 0, PEND, 1.0, 0, 0, 'Out'), (FIRE + 0.02, 0, PEND, 1.0, 0, 1, 'Snap'), (T5 - 0.08, 0, PEND, 1.0, 0, 1, 'Linear'), (T5, 0, PEND, 1.0, 0, 0, 'Linear')],
+             kicks=[FIRE, FIRE + 0.12], kickPower=46, kickTime=0.3)     # 크롭 줌 블러: 꽂힌 곳은 선명 · 바깥으로 뻗는 흐림, 두 세기를 번갈아 떨림
+    sw = ', '.join(f'new NKK.Ults.SuperUltLayer.Swap {{ t = {f(FIRE + 0.05 * i)}, sprite = S("shot_descend_dmg_zoom{1 if i % 2 else 2}") }}' for i in range(1, int((T5 - FIRE) / 0.05)))
+    s(f'{zl}.swaps = new[] {{ {sw} }};')
+    ship(g, 'Ship', [(T4, 'ship2')], [(T4, 0, SHIP_Y, 1.0, 0, 1, 'Out')], kicks=[FIRE], kickPower=20, kickTime=0.25)
+    for i in range(8):                                    # 충전: 빛 알갱이가 주포로 빨려 듦 (프레임 스탑 전까지)
+        a = i * 0.79 + 0.3; x0, y0 = cnx + math.cos(a) * 520, cny + math.sin(a) * 200; t0 = CH + 0.02 * i
+        s.s(g, f'Charge{i}', 'fx_charge', 0.3, [(t0, x0, y0, 0.6, 0, 0, 'Out'), (t0 + 0.03, x0, y0, 0.8, 0, 1, 'Linear'), (FR0, cnx, cny, 0.3, 0, 1, 'In'), (FR0 + 0.01, cnx, cny, 0.3, 0, 0, 'Snap')])
+    s.s(g, 'Core', 'fx_charge', 0.5, [(CH, cnx, cny, 0.3, 0, 0, 'Out'), (CH + 0.05, cnx, cny, 0.6, 0, 1, 'Snap'), (FR0, cnx, cny, 1.3, 0, 1, 'In'), (FIRE + 0.15, cnx, cny, 1.0, 0, 0, 'Out')])
+    L = math.hypot(imx - cnx, cny - imy); ang = math.degrees(math.atan2(imx - cnx, cny - imy))
+    for nm, spr, wd, fl in (('Laser', 'fx_beamseg', 260, 0.12), ('LaserCore', 'fx_beamcore', 100, 0.25)):     # 피벗 = 주포 (위 끝), 빛 끝이 순식간에 도시까지
+        v = s.s(g, nm, spr, 1.0, [(FIRE - 0.01, cnx, cny, 0.05, ang, 0, 'Out'), (FIRE, cnx, cny, 0.05, ang, 1, 'Snap'), (FIRE + 0.05, cnx, cny, 1.0, ang, 1, 'In'), (T5, cnx, cny, 1.0, ang, 1, 'Linear')], flicker=fl)
+        size_line(v, wd, L, (0.5, 1))
+    s.s(g, 'Muzzle', 'fx_flash', 0.8, [(FIRE - 0.01, cnx, cny, 0, 0, 0, 'Out'), (FIRE, cnx, cny, 1.0, 0, 1, 'Snap'), (FIRE + 0.25, cnx, cny, 1.5, 30, 0, 'Out')])
+    s.cel(g, 'Boom', [(FIRE + 0.05, 'fx_boom1'), (FIRE + 0.12, 'fx_boom2'), (FIRE + 0.26, 'fx_boom3')],
+          [(FIRE + 0.04, imx, imy - 40, 0.5, 0, 0, 'Out'), (FIRE + 0.05, imx, imy - 40, 0.7, 0, 1, 'Snap'), (FIRE + 0.2, imx, imy - 40, 1.2, 0, 1, 'Back'), (T5, imx, imy - 40, 1.4, 0, 0.6, 'Out')], height=380, ref='fx_boom2', pano=False)
+    for k in range(3):
+        t0 = FIRE + 0.05 + 0.1 * k
+        s.s(g, f'Shock{k}', 'fx_shockring', 0.9, [(t0 - 0.01, imx, imy, 0.3, 0, 0, 'Out'), (t0, imx, imy, 0.3, 0, 1, 'Snap'), (t0 + 0.4, imx, imy, 3.0, 0, 0, 'Out')])
+    s.s(g, 'Hit', 'fx_beamhit', 1.0, [(FIRE + 0.04, imx, imy + 60, 0, 0, 0, 'Out'), (FIRE + 0.05, imx, imy + 60, 0.6, 0, 1, 'Snap'), (FIRE + 0.18, imx, imy + 60, 1.2, 0, 1, 'Back'), (FIRE + 0.4, imx, imy + 60, 1.3, 0, 0, 'Out')])
+    # ⑥ 전투기 발진: 로우 앵글 · 뒤에서 · 소실점 — 배경 · 전투기 따로 (우르릉 → 애프터버너 → 블러와 함께 소실점으로)
+    JSPD = 0.7                                            # 전투기 이동 속도 (2026-10-21 사용자: 너무 빨라 0.7배)
+    LAUNCH = 0.14 / JSPD                                  # 소실점까지 날아가는 시간
+    BURN, GO = 5.1, 5.38; T6 = GO + LAUNCH + 0.17
+    vx, vy = at('bg_runway', K, (0, 0), VANISH)
+    jk = 2100 / sz('jet_back1')[0]                        # 화면보다 큰 전투기 (웅장)
+    g = s.group('Cut6', R, T5, T6)
+    s.s(g, 'Runway', 'bg_runway', K, [(T5, 0, -30, 1.0, -2, 1, 'Out'), (GO, 0, 0, 1.04, 0, 1, 'InOut'), (GO + 0.05, 0, 0, 1.1, 0, 1, 'Snap'), (T6, 0, 0, 1.12, 0, 1, 'Linear')], kicks=[GO], kickPower=36, kickTime=0.3)
+    jks = [(T5, 0, JET_Y - 40, 1.0, -2, 1, 'Out'), (BURN, 0, JET_Y, 1.0, 0, 1, 'InOut'), (GO, 0, JET_Y + 10, 1.02, 0, 1, 'Linear'), (GO + LAUNCH, vx, vy, 0.03, 0, 1, 'In'), (GO + LAUNCH + 0.02, vx, vy, 0.02, 0, 0, 'Snap')]
+    frames(g, 'Jet', [(T5, 'jet_back1'), (BURN, 'jet_back2')], jk, jks, jitter=3.0)
+    s.s(g, 'JetBlur', 'jet_back2_mblur', jk, [(GO - 0.01, 0, JET_Y + 10, 1.02, 0, 0, 'Out'), (GO, 0, JET_Y + 10, 1.02, 0, 1, 'Snap'), (GO + LAUNCH, vx, vy, 0.03, 0, 0.8, 'In'), (GO + LAUNCH + 0.02, vx, vy, 0.02, 0, 0, 'Snap')])
+    for k, nx in enumerate(NOZZLES):                      # 애프터버너 불꽃 (노즐 자리, 켜지는 순간 펑)
+        x, y = at('jet_back1', jk, (0, JET_Y), (nx, NOZZLE_Y))
+        s.s(g, f'Burn{k}', 'fx_afterburn', 0.9, [(BURN - 0.01, x, y, 0.3, 0, 0, 'Out'), (BURN, x, y, 0.6, 0, 1, 'Snap'), (BURN + 0.1, x, y, 1.1, 0, 1, 'Back'), (GO, x, y, 1.2, 0, 1, 'Linear'), (GO + LAUNCH, vx, vy, 0.05, 0, 0, 'In')], pulse=0.08, pulseHz=14.0)
+    for i in range(14):                                   # 속도선: 화면 가장자리 → 소실점으로 빨려 듦 (순식간에 사라짐 강조)
+        a = math.radians(i * 360 / 14 + 8); rot = math.degrees(a) + 180; t0 = GO + 0.01 * (i % 3)
+        x0, y0 = vx + math.cos(a) * 1300, vy + math.sin(a) * 800
+        s.s(g, f'Zip{i}', 'fx_streak', 1.8, [(t0 - 0.01, x0, y0, 1.4, rot, 0, 'Out'), (t0, x0, y0, 1.4, rot, 0.9, 'Snap'), (t0 + LAUNCH + 0.06, vx + math.cos(a) * 80, vy + math.sin(a) * 50, 0.3, rot, 0, 'In')])
+    s.s(g, 'Gone', 'fx_flash', 0.4, [(GO + LAUNCH + 0.01, vx, vy, 0, 0, 0, 'Out'), (GO + LAUNCH + 0.02, vx, vy, 0.6, 0, 1, 'Snap'), (GO + LAUNCH + 0.2, vx, vy, 1.2, 45, 0, 'Out')])
+    for i in range(6):                                    # 발진 순간 활주로 먼지
+        x = -800 + 320 * i
+        s.s(g, f'Dust{i}', 'fx_smoke', 0.9, [(GO, x * 0.3, -420, 0.4, 0, 0, 'Out'), (GO + 0.03, x * 0.3, -420, 0.6, 0, 0.8, 'Linear'), (T6, x, -380, 1.4, 0, 0, 'Out')])
+    cut_flash(g, T5, 0.4)
+    # ⑦ 다시 레이저 컷 (⑤ 끝과 같은 구도): 전투기가 아래에서 솟아오르고 카메라가 주포 쪽으로 따라 들어감 (충돌이 크게 보이게)
+    #    → 주포 구멍에 쾅 (히트 스톱 · 섬광 · 충격파 · 불꽃) → 카메라가 빠지며 레이저가 천천히 멈추고 우주선 멈칫 (2026-10-21 사용자: 부딪치는 장면이 작아 안 보임 · 0.7배)
+    J0 = T6 + 0.08; ENTER = J0 + 0.47 / JSPD; HS = ENTER + 0.12      # 출발 · 주포에 닿음 · 히트 스톱 끝
+    STOP0, STOP1 = HS + 0.05, HS + 0.35; T7 = STOP1 + 0.25
+    g = s.group('Cut7', R, T6, T7)
+    cz = lambda t, z, ty, e: (t, -z * cnx, ty - z * cny, z, 0, 1, e)     # 카메라 묶음: 주포가 화면 높이 ty 에 오게 z 배 확대
+    cam = s.v('cam')
+    ck = keys([cz(T6, 1.0, cny, 'Out'), cz(J0 + 0.1, 1.0, cny, 'Linear'), cz(ENTER - 0.04, 2.1, 140, 'InOut'), cz(ENTER, 2.4, 150, 'Snap'), cz(HS, 2.45, 150, 'Linear'), cz(HS + 0.4, 1.0, cny, 'Out')])
+    s(f'var {cam} = E("Cam", {g}, {ck}).transform;')
+    s.s(cam, 'Shot', 'shot_descend_dmg', BK, [(T6, 0, PEND, 1.0, 0, 1, 'Out')])
+    ship(cam, 'Ship', [(T6, 'ship2'), (STOP1, 'ship')], [(T6, 0, SHIP_Y, 1.0, 0, 1, 'Out'), (STOP1, 0, SHIP_Y, 1.0, 0, 1, 'Linear'), (STOP1 + 0.04, 0, SHIP_Y + 8, 1.0, 1.2, 1, 'Snap'), (T7, 0, SHIP_Y + 4, 1.0, 0.6, 1, 'Out')],
+         kicks=[HS, STOP1], kickPower=14, kickTime=0.25)     # 쾅 · 멈칫: 불이 꺼지고 살짝 기우뚱 · 정적
+    for nm, spr, wd, fl in (('Laser', 'fx_beamseg', 260, 0.12), ('LaserCore', 'fx_beamcore', 100, 0.25)):     # 레이저가 위로 천천히 걷히며 멈춤 (피벗 = 주포)
+        v = s.s(cam, nm, spr, 1.0, [(T6, cnx, cny, 1.0, ang, 1, 'Out'), (STOP0, cnx, cny, 1.0, ang, 1, 'Linear'), (STOP1, cnx, cny, 0.02, ang, 0.6, 'In'), (STOP1 + 0.02, cnx, cny, 0.02, ang, 0, 'Snap')], flicker=fl)
+        size_line(v, wd, L, (0.5, 1))
+    jx0, jy0 = imx + 620, -700                            # 도시 오른쪽 아래에서 솟아올라 주포로
+    jang = math.degrees(math.atan2(-(cnx - jx0), cny - jy0))
+    jw = sz('jet_back2')[0]                               # 작아진 전투기 = 발진 컷과 같은 뒷모습 그림 (날개 · 불꽃이 보여 알아보기 쉬움)
+    s.s(cam, 'Jet', 'jet_back2', 520 / jw, [(J0 - 0.01, jx0, jy0, 1.0, jang * 0.5, 0, 'Out'), (J0, jx0, jy0, 1.0, jang * 0.5, 1, 'Snap'), (ENTER, cnx + 6, cny - 60, 0.42, jang * 0.3, 1, 'InOut'),
+                                             (HS, cnx + 6, cny - 60, 0.42, jang * 0.3, 1, 'Linear'), (HS + 0.01, cnx, cny, 0.3, 0, 0, 'Snap')], jitter=2.0)     # 히트 스톱 동안 구멍 앞에 멈춰 있다 사라짐
+    s.s(cam, 'Trail', 'fx_streak', 1.2, [(J0 - 0.01, jx0, jy0 - 120, 1.0, jang + 90, 0, 'Out'), (J0 + 0.05, jx0, jy0 - 120, 1.0, jang + 90, 0.45, 'Linear'), (ENTER, cnx + 6, cny - 160, 0.5, jang + 90, 0.45, 'InOut'), (ENTER + 0.01, cnx, cny, 0.3, jang + 90, 0, 'Snap')], flicker=0.2)
+    s.s(cam, 'Enter', 'fx_flash', 0.25, [(ENTER - 0.01, cnx, cny - 20, 0, 0, 0, 'Out'), (ENTER, cnx, cny - 20, 0.7, 0, 1, 'Snap'), (HS, cnx, cny - 20, 0.8, 10, 1, 'Linear'), (HS + 0.3, cnx, cny - 20, 1.6, 50, 0, 'Out')])
+    s.cel(cam, 'Pop', [(HS, 'fx_boom1'), (HS + 0.06, 'fx_boom2'), (HS + 0.18, 'fx_boom3')],
+          [(HS - 0.01, cnx, cny - 90, 0.5, 0, 0, 'Out'), (HS, cnx, cny - 90, 0.7, 0, 1, 'Snap'), (HS + 0.15, cnx, cny - 90, 1.1, 0, 1, 'Back'), (HS + 0.5, cnx, cny - 90, 1.2, 0, 0, 'Out')], height=380, ref='fx_boom2', pano=False)
+    for k in range(2):
+        t0 = HS + 0.08 * k
+        s.s(cam, f'Ring{k}', 'fx_shockring', 0.5, [(t0 - 0.01, cnx, cny - 20, 0.3, 0, 0, 'Out'), (t0, cnx, cny - 20, 0.3, 0, 1, 'Snap'), (t0 + 0.35, cnx, cny - 20, 2.2, 0, 0, 'Out')])
+    s.burst_ring(cam, 'Spark', 'fx_charge', HS, cnx, cny - 30, n=8, r=260, sc=0.12, dur=0.3)
+    s.s(g, 'HitFlash', 'fx_flash', 9.0, [(HS - 0.01, 0, 150, 0, 0, 0, 'Out'), (HS, 0, 150, 1.0, 0, 0.6, 'Snap'), (HS + 0.12, 0, 150, 1.3, 0, 0, 'Out')])
+    cut_flash(g, T6, 0.35)
+    # ⑧ 우주선 폭발 + 오른쪽 아래 작은 창에 우는 외계인 쥐 (수어 통역 창 패러디)
+    BIG = T7 + 0.25
+    g = s.group('Cut8', R, T7)
+    s.s(g, 'Shot', 'shot_descend_dmg', BK, [(T7, 0, PEND, 1.0, 0, 1, 'Out')], kicks=[BIG, BIG + 0.15], kickPower=40, kickTime=0.35)
+    ship(g, 'Ship', [(T7, 'ship')], [(T7, 0, SHIP_Y + 4, 1.0, 0.6, 1, 'Out'), (BIG, 0, SHIP_Y + 4, 1.0, 0.6, 1, 'Linear'), (BIG + 0.02, 0, SHIP_Y + 4, 1.0, 0.6, 0, 'Snap')], jitter=5.0)
+    sw_, sh_ = sz('ship'); pts = [(cnx, cny)] + [(s.rnd.uniform(-0.4, 0.4) * sw_ * SK, SHIP_Y + s.rnd.uniform(-0.25, 0.2) * sh_ * SK * SHIP_FLAT) for _ in range(7)]
+    for i, (x, y) in enumerate(pts):                      # 주포에서부터 연쇄 폭발 → 거대 폭발
+        t0 = T7 + 0.035 * i
+        s.cel(g, f'Boom{i}', [(t0, 'fx_boom1'), (t0 + 0.07, 'fx_boom2'), (t0 + 0.2, 'fx_boom3')],
+              [(t0 - 0.01, x, y - 100, 0.5, 0, 0, 'Out'), (t0, x, y - 100, 0.6, 0, 1, 'Snap'), (t0 + 0.15, x, y - 100, 1.1, 0, 1, 'Back'), (t0 + 0.6, x, y - 100, 1.3, 0, 0, 'Out')], height=420, ref='fx_boom2', pano=False)
+    s.cel(g, 'Mega', [(BIG, 'fx_boom1'), (BIG + 0.1, 'fx_boom2'), (BIG + 0.32, 'fx_boom3')],
+          [(BIG - 0.01, 0, SHIP_Y - 380, 0.5, 0, 0, 'Out'), (BIG, 0, SHIP_Y - 380, 0.7, 0, 1, 'Snap'), (BIG + 0.25, 0, SHIP_Y - 380, 1.3, 0, 1, 'Back'), (END + 0.4, 0, SHIP_Y - 380, 1.6, 0, 0.3, 'Out')], height=1100, ref='fx_boom2', pano=False)
+    s.s(g, 'MegaFlash', 'fx_flash', 9.0, [(BIG - 0.01, 0, SHIP_Y, 0, 0, 0, 'Out'), (BIG, 0, SHIP_Y, 1.0, 0, 0.95, 'Snap'), (BIG + 0.25, 0, SHIP_Y, 2.0, 0, 0, 'In')])
+    s.s(g, 'MegaRing', 'fx_shockring', 2.0, [(BIG, 0, SHIP_Y, 0.3, 0, 1, 'Out'), (BIG + 0.5, 0, SHIP_Y, 3.5, 0, 0, 'Out')])
+    for i in range(12):                                   # 파편이 사방으로 (→ 게임 화면 파편 비)
+        a = math.radians(i * 30 + 10); r = s.rnd.uniform(800, 1300); spr = ('fx_shard', 'fx_panel')[i % 2]; t0 = BIG + 0.02
+        s.s(g, f'Shard{i}', spr, s.rnd.uniform(0.35, 0.55), [(t0 - 0.01, 0, SHIP_Y, 0.4, 0, 0, 'Out'), (t0, 0, SHIP_Y, 0.5, 0, 1, 'Snap'), (t0 + 0.5, math.cos(a) * r, SHIP_Y + math.sin(a) * r * 0.6, 1.0, 360, 1, 'Out'), (END + 0.4, math.cos(a) * r * 1.1, SHIP_Y + math.sin(a) * r * 0.6 - 500, 1.0, 540, 1, 'In')])
+    # 수어 통역 창: 오른쪽 아래 작은 창이 뿅 → 우는 외계인 쥐 (충격 → 엉엉 · 훌쩍 번갈아)
+    IW, IH = INSET; ix, iy = 960 - IW / 2 - 40, -540 + IH / 2 + 40; I0 = T7 + 0.03
+    ik = [(I0 - 0.01, ix, iy, 0.2, 0, 0, 'Out'), (I0, ix, iy, 0.3, 0, 1, 'Snap'), (I0 + 0.15, ix, iy, 1.0, 0, 1, 'Back'), (END + 0.4, ix, iy, 1.0, 0, 1, 'Linear')]
+    box = s.group('Inset', g, I0 - 0.01)
+    bv = s.s(box, 'InsetBack', 'ui_insetbg', 1.0, ik)
+    seq = [(I0, 'anim_cry_1')] + [(t, f'anim_cry_{2 + i % 2}') for i, t in enumerate([BIG - 0.05 + 0.2 * j for j in range(int((END - BIG) / 0.2) + 1)])]
+    cry = s.cel(box, 'Crying', seq, [(t, x, y - IH / 2 + 14, sc, r, a, e) for t, x, y, sc, r, a, e in ik], height=IH - 40, ref='anim_cry_1', pano=False, pulse=0.02, pulseHz=5.0)
+    s.s(box, 'InsetFrame', 'ui_inset', 1.0, ik)
+    cut_flash(g, T7, 0.3)
+    # (글 없음 — NO_TEXT)
+    return None
+
+
+# 외계인 생쥐 v3 그림 속 자리 (그림 비율 · 그림이 바뀌면 다시 잼)
+SPY_DX = -40                   # anim_spy: 엿볼 때 쥐 발끝 가운데 (건물 모서리 기준 화면 px)
+WATCH = (0.45, 0.43)           # cu_hand: 시계 화면 (신호가 나가는 곳)
+SIGNAL = (0.4, 0.42)           # bg_space: 지구에서 신호가 나가는 곳
+SHOT_END = 0.56                # shot_descend: 내려온 끝 (0 = 가운데, 1 = 맨 아래) — 1 보다 작게 = 도시를 화면 아래로 내림 (아래 땅은 잘림) · 우주선과 간격
+SHIP_W, SHIP_Y, SHIP_FLAT = 1.6, 436, 0.22      # ship: 화면 폭 비율 · 내려온 끝 높이 (화면 px) · 세로 납작 — 화면보다 넓고 아주 납작하게 = 하늘을 위에서 덮은 천장 · 도시와 멀리 (2026-10-21 사용자: 도시와 거리를 훨씬 벌리고 위쪽을 덮는 느낌)
+SHIP_CANNON = (0.5, 0.58)      # ship: 아랫면 주포 (그림 비율)
+IMPACT = (0.5, 0.85)           # shot_descend: 레이저가 꽂히는 도시 가운데 (그림 비율)
+VANISH = (0.5, 0.52)            # bg_runway: 소실점
+JET_Y, NOZZLES, NOZZLE_Y = -230, (0.405, 0.585), 0.72     # jet_back: 화면 높이 · 노즐 x (그림 비율) · 노즐 y
+INSET = (560, 420)             # 수어 통역 창 크기 (px)
+
+
+def alien_v2(s, R):
+    """(옛 것 v2) 세로 (+ 폐허 판 pano_alt): 구름 위 밤하늘 → 구름 아래 → 쥐 도시 광장. (2026-10-21 v2, 사용자: 크고 웅장한 UFO 모양 우주선이 땅에 레이저 발사
+    · 카메라가 위에서 아래로 레이저와 함께 이동 · 2차: 멀쩡한 도시에 레이저를 뿌리고 터진 뒤 폐허가 된 도시를 '대비'해서 보여 줌)
+    띠 · 마무리 컷 없음 · 플랫 · 같은 틀 연속 프레임(ufo · cu_face) 바꿔 끼우기 · 셀 프레임(anim_end) · 1배속 — 컷 5개:
+    ① 0.4 구름을 가르며 거대 모선이 내려옴 ② 조종석 얼굴 클로즈업: 내려다봄 → 버튼 쾅 → 초록 빛 비친 사악한 웃음
+    ③ BEFORE: 불빛이 반짝이는 평화로운 쥐 도시 (CITY 구도) ④ 모선 주포 충전
+    ⑤ 발사 → 카메라가 레이저 끝을 따라 하늘 → 구름 → 멀쩡한 도시로 틸트 다운 → 레이저를 도시 위로 좌우로 쓸며 뿌림 · 곳곳에 줄기가 더 꽂히며 연쇄 폭발
+       → 굵은 마지막 일격 · 섬광 · 먼지 → AFTER: 먼지가 걷히면 ③ 과 같은 구도에 폐허가 된 도시 (pano_alt) → 원반 탄 외계인 생쥐: 팔짱 → 총구 후 → 브이 윙크
+    → 컷신 걷힘 → 게임 화면: 레이저가 맵 가운데로 내리꽂혀 큰 폭발 하나 (worldPhase · blast*, 폭탄마 v2 와 같은 기능)"""
+    END = 6.5
+    CU = 1.3                                              # 클로즈업 배율 (1536 → 약 2000px, 화면을 덮음)
+    wsc = lambda name, px: px / max(1, s.size(name)[0])   # 그림 폭을 px 로 맞추는 배율
+    UK = wsc('ufo1', UFO_W * s.PW * s.PS)                 # 모선 배율 (파노라마 폭 비율 UFO_W)
+    uw, uh = s.size('ufo1')
+    CAN = (0.5, UFO_Y + (CANNON[1] - 0.5) * uh * UK / (s.PH * s.PS))     # 주포 (파노라마 비율)
+    CX, CY, CZ = CITY                                     # 도시 구도 (BEFORE · AFTER 같은 구도)
+
+    def cut_flash(g, t0, a=0.55):
+        s.s(g, 'CutFlash', 'fx_flash', 9.0, [(t0, 0, 0, 1.0, 0, a, 'Snap'), (t0 + 0.09, 0, 0, 1.3, 0, 0, 'Out')])
+
+    def frames(g, name, seq, ks, sc=CU, pano=False, **fx):
+        """같은 틀 연속 프레임 (그림만 바꿔 끼움)"""
+        var = (s.w if pano else s.s)(g, name, seq[0][1], sc, ks, **fx)
+        sw = ', '.join(f'new NKK.Ults.SuperUltLayer.Swap {{ t = {f(t)}, sprite = S("{spr}") }}' for t, spr in seq[1:])
+        if sw: s(f'{var}.swaps = new[] {{ {sw} }};')
+        return var
+
+    def clouds(tr, name, t0, y, n=8, dur=0.7, sc=0.9):
+        """구름 덩어리가 가운데에서 양옆으로 밀려남 (파노라마 좌표)"""
+        for i in range(n):
+            side = -1 if i % 2 == 0 else 1; x0 = 0.5 + side * s.rnd.uniform(0.04, 0.16); x1 = 0.5 + side * s.rnd.uniform(0.42, 0.6)
+            yy = y + s.rnd.uniform(-0.03, 0.03); t = t0 + 0.03 * i
+            s.w(tr, f'{name}{i}', 'fx_cloud', sc * s.rnd.uniform(0.8, 1.3), [(t - 0.01, x0, yy, 0.8, 0, 0, 'Out'), (t, x0, yy, 0.9, 0, 1, 'Snap'), (t + dur, x1, yy + 0.01, 1.2, 0, 1, 'Out'), (t + dur + 0.3, x1, yy + 0.01, 1.2, 0, 0, 'Linear')])
+
+    def beam(tr, name, ks, width, length, spr='fx_beamseg', **fx):
+        """주포에서 뻗는 레이저 (피벗 = 위 끝 → 돌리면 땅을 쓸고 지나감) · ks = 파노라마 키 (자리 = 위 끝)"""
+        v = s.w(tr, name, spr, 1.0, ks, **fx)
+        s(f'((RectTransform){v}.transform).sizeDelta = new Vector2({f(width)}, {f(length)}); ((RectTransform){v}.transform).pivot = new Vector2(0.5f, 1f);')
+        return v
+
+    def hit_at(ang, gy):
+        """주포에서 ang 도(UI 반시계 +)로 뻗은 레이저가 높이 gy (파노라마 비율) 에 닿는 자리 · 그때 길이 px"""
+        L = (gy - CAN[1]) * s.PH * s.PS / math.cos(math.radians(ang))
+        return CAN[0] + L * math.sin(math.radians(ang)) / (s.PW * s.PS), gy, L
+
+    # ① 구름을 가르며 거대 모선이 내려옴: 모선이 위에서 묵직하게 내려와 → 카메라가 올려다보며 넓게 빠져 모선 전체
+    ARR, T1 = 0.9, 1.25
+    g = s.group('Cut1', R, 0.4, T1)
+    tr = s.cam(g, [(0.4, 0.5, CLOUD_Y - 0.06, 1.1, 0, 'Out'), (0.7, 0.5, UFO_Y + 0.07, 0.9, -1, 'InOut'), (ARR, 0.5, UFO_Y + 0.01, 0.8, 1, 'Out'), (T1, 0.5, UFO_Y + 0.01, 0.78, 0, 'Linear')],
+               kicks=[0.6, 0.78, ARR], power=26, rot=1.5, ktime=0.35)
+    frames(tr, 'Ufo', [(0.4, 'ufo1')], [(0.4, 0.5, UFO_Y - 0.2, 0.92, 0, 1, 'Out'), (ARR, 0.5, UFO_Y, 1.0, 0, 1, 'Out'), (T1, 0.5, UFO_Y + 0.004, 1.0, 0, 1, 'Linear')], sc=UK, pano=True, jitter=1.5)
+    clouds(tr, 'Cloud', 0.5, CLOUD_Y - 0.04, n=6, dur=0.8, sc=1.0)                   # 내려오는 모선에 밀려 구름이 양옆으로
+    # ② 조종석 얼굴 클로즈업: 도시를 내려다봄 → 버튼 쾅 → 초록 빛이 비친 사악한 웃음
+    SLAM, GRIN, T2 = 1.52, 1.66, 1.9
+    g = s.group('Cut2', R, T1, T2)
+    s.s(g, 'Back', 'face_bg', 1.35, [(T1, 0, 0, 1.12, 0, 1, 'Out'), (T2, 0, 0, 1.0, 0, 1, 'Linear')], kicks=[SLAM], kickPower=30, kickTime=0.2)
+    frames(g, 'Face', [(T1, 'cu_face1'), (SLAM, 'cu_face2'), (GRIN, 'cu_face3')],
+           [(T1, -40, 20, 1.1, -4, 1, 'Snap'), (T1 + 0.12, 0, 0, 1.0, 0, 1, 'Back'), (SLAM - 0.04, 10, 0, 1.02, 1, 1, 'InOut'), (SLAM, -10, -20, 1.1, -3, 1, 'Snap'), (GRIN, 0, -10, 1.08, 0, 1, 'Out'), (T2, 0, -10, 1.14, 0, 1, 'Linear')],
+           kicks=[SLAM], kickPower=44, kickTime=0.18)
+    bx, by = (BUTTON[0] - 0.5) * 1536 * CU * 1.1, (0.5 - BUTTON[1]) * 1024 * CU * 1.1
+    s.s(g, 'Click', 'fx_flash', 0.5, [(SLAM - 0.01, bx, by, 0, 0, 0, 'Out'), (SLAM, bx, by, 0.6, 0, 1, 'Snap'), (SLAM + 0.18, bx, by, 1.4, 30, 0, 'Out')])
+    for k, (ax, ay) in enumerate(ANTENNA):                # 더듬이 끝 반짝 (버튼 · 웃음)
+        x, y = (ax - 0.5) * 1536 * CU * 1.1, (0.5 - ay) * 1024 * CU * 1.1
+        for j, t0 in enumerate((SLAM + 0.02, GRIN + 0.04)):
+            s.s(g, f'Bulb{k}_{j}', 'fx_flash', 0.25, [(t0 - 0.01, x, y, 0, 0, 0, 'Out'), (t0, x, y, 0.7, 0, 1, 'Snap'), (t0 + 0.2, x, y, 1.3, 45, 0, 'Out')])
+    cut_flash(g, T1, 0.45)
+    # ③ BEFORE: 불빛이 반짝이는 평화로운 쥐 도시 (AFTER 와 같은 구도)
+    T3 = 2.5
+    g = s.group('Cut3', R, T2, T3)
+    tr = s.cam(g, [(T2, CX, CY - 0.01, CZ * 1.04, 0, 'Out'), (T3, CX, CY, CZ, 0, 'Linear')])
+    for i in range(8):                                    # 창문 · 줄 조명이 반짝반짝 (평화)
+        x, y, t0 = s.rnd.uniform(0.12, 0.88), s.rnd.uniform(CY - 0.14, CY + 0.06), T2 + s.rnd.uniform(0.05, 0.45)
+        s.w(tr, f'Twinkle{i}', 'fx_flash', 0.07, [(t0 - 0.01, x, y, 0, 0, 0, 'Out'), (t0, x, y, 0.5, 0, 0.9, 'Snap'), (t0 + 0.25, x, y, 1.0, 45, 0, 'Out')])
+    cut_flash(g, T2, 0.35)
+    # ④ 모선 주포 충전: 빛 알갱이가 사방에서 빨려 듦 · 고리가 좁혀 듦 · 우르릉
+    T4 = 2.9
+    g = s.group('Cut4', R, T3, T4)
+    tr = s.cam(g, [(T3, 0.5, CAN[1] - 0.01, 1.7, -3, 'Out'), (T4, 0.5, CAN[1] - 0.005, 2.0, 2, 'In')], kicks=[T3 + 0.05, T3 + 0.2, T3 + 0.32], power=18, rot=1.2, ktime=0.14)
+    frames(tr, 'Ufo', [(T3, 'ufo2')], [(T3, 0.5, UFO_Y, 1.0, 0, 1, 'Out')], sc=UK, pano=True, jitter=2.5)
+    s.converge(tr, 'Charge', 'fx_charge', T3 + 0.02, [(0.5 + 0.2 * math.cos(a), CAN[1] + 0.07 * math.sin(a)) for a in (i * 0.79 + 0.3 for i in range(8))], CAN, sc=0.35)
+    for k in range(3):                                    # 좁혀 드는 고리
+        t0 = T3 + 0.1 * k
+        s.w(tr, f'Ring{k}', 'fx_lightring', 0.8, [(t0 - 0.01, *CAN, 1.8, 0, 0, 'Out'), (t0, *CAN, 1.8, 0, 0.9, 'Snap'), (t0 + 0.3, *CAN, 0.2, -60, 0.9, 'In'), (t0 + 0.32, *CAN, 0.1, -60, 0, 'Linear')])
+    s.w(tr, 'Core', 'fx_charge', 0.4, [(T3, *CAN, 0.3, 0, 0, 'Out'), (T3 + 0.05, *CAN, 0.5, 0, 1, 'Snap'), (T4, *CAN, 1.4, 0, 1, 'In')], pulse=0.08, pulseHz=12.0)
+    cut_flash(g, T3, 0.4)
+    # ⑤ 발사 → 레이저 끝을 따라 도시까지 → 멀쩡한 도시 위로 레이저를 뿌림 → 마지막 일격 → AFTER 폐허 (한 카메라)
+    F0, F1 = T4 + 0.06, 3.42                              # 발사 · 빛 끝이 광장에 닿음
+    SW0, SW1, SW2 = 3.55, 3.95, 4.3                       # 레이저 쓸기: 왼 → 오 → 가운데로 돌아옴
+    BIG = 4.62                                            # 마지막 일격 (섬광 아래서 폐허로)
+    REVEAL = 5.2                                          # 먼지가 걷혀 폐허가 드러남
+    LAND, POSE2, POSE3 = 5.4, 5.85, 6.2
+    g = s.group('Cut5', R, T4)
+    path = [(T4, 0.5, CAN[1] + 0.02, 1.35, 0, 'Out'), (F0, 0.5, CAN[1] + 0.03, 1.4, 0, 'Linear'), (F1, CX, CY, CZ * 1.06, 0, 'In'), (F1 + 0.15, CX, CY, CZ, 0, 'Out'),
+            (BIG, CX, CY, CZ * 1.04, 0, 'Linear'), (BIG + 0.06, CX, CY + 0.01, CZ * 1.12, 0, 'Snap'), (REVEAL, CX, CY, CZ, 0, 'Out'), (END + 0.4, CX, CY + 0.02, CZ * 1.1, 0, 'InOut')]     # 폐허는 BEFORE 와 같은 구도로 드러난 뒤 크레이터 쪽으로 천천히 다가감
+    pops = []                                             # (시각, x, y, 크기) 폭발 자리
+    sweep = [(SW0 + (SW1 - SW0) * k / 9, -SWEEP + 2 * SWEEP * k / 9) for k in range(10)] + [(SW1 + (SW2 - SW1) * k / 5, SWEEP - SWEEP * k / 5) for k in range(1, 6)]
+    for t0, ang in sweep:
+        x, y, _ = hit_at(ang, GROUND_Y); pops.append((t0, x, y + s.rnd.uniform(-0.03, 0.03), s.rnd.uniform(0.5, 0.7)))
+    rains = [(SW1 + 0.04 + 0.09 * i, s.rnd.uniform(-SWEEP, SWEEP), GROUND_Y + s.rnd.uniform(-0.08, 0.05)) for i in range(7)]
+    for t0, ang, gy in rains:
+        x, y, _ = hit_at(ang, gy); pops.append((t0 + 0.04, x, y, 0.6))
+    tr = s.cam(g, path, kicks=[F0, F1] + [p[0] for p in pops[::2]] + [BIG, BIG + 0.12], power=40, rot=2.0, ktime=0.22, swap=(BIG + 0.03, BIG + 0.25))     # 섬광 아래서 도시 → 폐허 (pano_alt)
+    frames(tr, 'Ufo', [(T4, 'ufo2')], [(T4, 0.5, UFO_Y, 1.0, 0, 1, 'Out')], sc=UK, pano=True, jitter=2.5)
+    s.w(tr, 'Muzzle', 'fx_flash', 1.6, [(F0 - 0.01, *CAN, 0, 0, 0, 'Out'), (F0, *CAN, 1.0, 0, 1, 'Snap'), (F0 + 0.3, *CAN, 1.6, 30, 0, 'Out')])
+    top, bot = CAN[1], PLAZA[1]
+    tt = lambda yy: F0 + (F1 - F0) * (yy - top) / (bot - top)       # 빛 끝이 yy 에 닿는 시각
+    stops = [top + (bot - top) * k / 7 for k in range(8)]
+    for k in range(7):                                    # 주포 → 광장 레이저 마디 (위 → 아래, 빛 끝이 지날 때 나타남 · 쓸기 시작하면 꺼짐)
+        y0, y1 = stops[k], stops[k + 1]; t0 = tt(y0); ym = (y0 + y1) / 2; hpx = (y1 - y0) * s.PH * s.PS * 1.12
+        bk = [(t0 - 0.01, 0.5, ym, 1, 0, 0, 'Out'), (t0, 0.5, ym, 1, 0, 1, 'Snap'), (SW0, 0.5, ym, 1.0, 0, 1, 'Linear'), (SW0 + 0.02, 0.5, ym, 1.0, 0, 0, 'Snap')]
+        for nm, spr, wd in (('Beam', 'fx_beamseg', 300), ('Core', 'fx_beamcore', 120)):
+            v = s.w(tr, f'{nm}{k}', spr, 1.0, bk, flicker=0.12 if nm == 'Beam' else 0.25)
+            s(f'((RectTransform){v}.transform).sizeDelta = new Vector2({f(wd)}, {f(hpx)});')
+    clouds(tr, 'Cloud', tt(CLOUD_Y), CLOUD_Y, n=6, dur=0.6, sc=1.2)                   # 빛 끝이 구름을 뚫는 순간 구름이 양옆으로 갈라짐
+    s.w(tr, 'CloudHole', 'fx_shockring', wsc('fx_shockring', 1600), [(tt(CLOUD_Y) - 0.01, 0.5, CLOUD_Y, 0.2, 0, 0, 'Out'), (tt(CLOUD_Y), 0.5, CLOUD_Y, 0.3, 0, 0.9, 'Snap'), (tt(CLOUD_Y) + 0.4, 0.5, CLOUD_Y, 1.6, 0, 0, 'Out')])
+    s.speed(g, F0 + 0.05, F1 - 0.05, vertical=True)
+    s.w(tr, 'Plaza', 'fx_beamhit', wsc('fx_beamhit', 700), [(F1 - 0.01, *PLAZA, 0.3, 0, 0, 'Out'), (F1, *PLAZA, 0.6, 0, 1, 'Snap'), (F1 + 0.15, *PLAZA, 1.1, 0, 1, 'Back'), (F1 + 0.4, *PLAZA, 1.2, 0, 0, 'Out')])
+    # 레이저를 도시 위로 좌우로 쓸며 뿌림 (피벗 = 주포 · 쓸 때 땅에 닿게 길이 = 1/cos)
+    L0 = (GROUND_Y - top) * s.PH * s.PS; ks = 1 / math.cos(math.radians(SWEEP))
+    sk = [(SW0 - 0.01, *CAN, 1.0, 0, 0, 'Out'), (SW0, *CAN, ks, -SWEEP, 1, 'Snap'), (SW1, *CAN, ks, SWEEP, 1, 'Linear'), (SW2, *CAN, 1.0, 0, 1, 'Linear'), (BIG - 0.2, *CAN, 1.0, 0, 1, 'Linear'), (BIG - 0.18, *CAN, 1.0, 0, 0, 'Snap')]
+    beam(tr, 'Sweep', sk, 300, L0, flicker=0.12)
+    beam(tr, 'SweepCore', sk, 120, L0, spr='fx_beamcore', flicker=0.25)
+    for i, (t0, ang, gy) in enumerate(rains):            # 곳곳에 레이저 줄기가 더 꽂힘 (짧게 번쩍)
+        beam(tr, f'Rain{i}', [(t0 - 0.01, *CAN, 1, ang, 0, 'Out'), (t0, *CAN, 1, ang, 1, 'Snap'), (t0 + 0.1, *CAN, 1, ang, 1, 'Linear'), (t0 + 0.16, *CAN, 1, ang, 0, 'Linear')], 180, hit_at(ang, gy)[2], flicker=0.2)
+    for i, (t0, x, y, k) in enumerate(pops):             # 연쇄 폭발 (멀쩡한 도시 위) → 불길이 남음
+        s.cel(tr, f'Pop{i}', [(t0, 'fx_boom1'), (t0 + 0.07, 'fx_boom2'), (t0 + 0.2, 'fx_boom3')],
+              [(t0 - 0.01, x, y + 0.02, 0.5, 0, 0, 'Out'), (t0, x, y + 0.02, 0.6, 0, 1, 'Snap'), (t0 + 0.15, x, y + 0.02, 1.1, 0, 1, 'Back'), (t0 + 0.55, x, y + 0.02, 1.25, 0, 0, 'Out')], height=520 * k, ref='fx_boom2')
+        if i % 2 == 0:
+            s.w(tr, f'Burn{i}', 'fx_fire', 0.28 * k, [(t0 + 0.1, x, y + 0.01, 0, 0, 0, 'Out'), (t0 + 0.12, x, y + 0.01, 0.8, 0, 1, 'Snap'), (BIG, x, y + 0.01, 1.1, 0, 1, 'Linear'), (BIG + 0.02, x, y + 0.01, 1.1, 0, 0, 'Snap')], jitter=2.0, pulse=0.08, pulseHz=7.0)
+    # 마지막 일격: 굵은 레이저가 광장에 → 거대 폭발 · 섬광 → 먼지가 화면을 덮었다 걷힘 (그 아래서 폐허로)
+    fk = [(BIG - 0.2, *CAN, 1.0, 0, 0, 'Out'), (BIG - 0.18, *CAN, 1.0, 0, 1, 'Snap'), (BIG + 0.25, *CAN, 1.0, 0, 1, 'Linear'), (BIG + 0.4, *CAN, 1.0, 0, 0, 'Linear')]
+    beam(tr, 'Final', fk, 760, (PLAZA[1] - top) * s.PH * s.PS, flicker=0.1, jitter=4.0)
+    beam(tr, 'FinalCore', fk, 320, (PLAZA[1] - top) * s.PH * s.PS, spr='fx_beamcore', flicker=0.2)
+    s.cel(tr, 'BigBoom', [(BIG, 'fx_boom1'), (BIG + 0.1, 'fx_boom2'), (BIG + 0.3, 'fx_boom3')],
+          [(BIG - 0.01, *PLAZA, 0.5, 0, 0, 'Out'), (BIG, *PLAZA, 0.7, 0, 1, 'Snap'), (BIG + 0.25, *PLAZA, 1.2, 0, 1, 'Back'), (REVEAL, *PLAZA, 1.5, 0, 0, 'Out')], height=1700, ref='fx_boom2')
+    for k in range(3):
+        t0 = BIG + 0.1 * k
+        s.w(tr, f'BigRing{k}', 'fx_shockring', wsc('fx_shockring', 1200), [(t0 - 0.01, *PLAZA, 0.3, 0, 0, 'Out'), (t0, *PLAZA, 0.3, 0, 1, 'Snap'), (t0 + 0.55, *PLAZA, 3.4, 0, 0, 'Out')])
+    px_, py_ = s.P(*PLAZA)
+    s.burst_ring(tr, 'BigDebris', 'fx_debris', BIG + 0.03, px_, py_ + 150, n=10, r=1300, sc=0.6, dur=0.55)
+    s.s(g, 'Whiteout', 'fx_flash', 9.0, [(BIG - 0.01, 0, -100, 0, 0, 0, 'Out'), (BIG, 0, -100, 1.3, 0, 1, 'Snap'), (BIG + 0.28, 0, -100, 2.6, 0, 0, 'In')])
+    for i in range(7):                                    # 먼지 · 연기가 화면을 덮었다 걷힘 → 폐허가 드러남
+        x, y = -900 + 300 * i, s.rnd.uniform(-350, 150)
+        s.s(g, f'Dust{i}', 'fx_smoke', s.rnd.uniform(2.0, 2.6), [(BIG + 0.05, x, y - 200, 0.6, 0, 0, 'Out'), (BIG + 0.12, x, y, 1.0, 0, 0.95, 'Out'),
+                                                                (REVEAL - 0.25, x + (i - 3) * 60, y + 60, 1.15, 0, 0.9, 'Linear'), (REVEAL + 0.25, x + (i - 3) * 260, y + 160, 1.3, 0, 0, 'Out')])
+    for i in range(5):                                    # AFTER: 폐허 곳곳 피어오르는 연기
+        x = s.rnd.uniform(0.2, 0.8); t0 = REVEAL - 0.1 + 0.15 * i; y = PLAZA[1] - 0.03
+        s.w(tr, f'Smoke{i}', 'fx_smoke', s.rnd.uniform(0.5, 0.8), [(t0 - 0.01, x, y, 0.4, 0, 0, 'Out'), (t0, x, y, 0.5, 0, 0.8, 'Snap'), (END + 0.4, x + 0.03, y - 0.16, 1.4, 15, 0.4, 'Out')])
+    # AFTER: 폐허 위로 원반 탄 외계인 생쥐가 내려옴 (화면 앞, 셀 프레임): 팔짱 → 총구 후 → 브이 윙크
+    s.cel(g, 'Alien', [(LAND, 'anim_end_1'), (POSE2, 'anim_end_2'), (POSE3, 'anim_end_3')],
+          [(LAND - 0.01, 380, 900, 0.9, 6, 0, 'Out'), (LAND, 380, 900, 0.9, 6, 1, 'Snap'), (LAND + 0.3, 380, -420, 1.0, 0, 1, 'Out'), (POSE2, 380, -410, 1.0, -2, 1, 'InOut'),
+           (POSE3, 380, -430, 1.04, 2, 1, 'Back'), (END + 0.4, 380, -420, 1.05, 0, 1, 'Linear')], height=660, ref='anim_end_1', pano=False, pulse=0.015, pulseHz=3.0)
+    s.s(g, 'Wink', 'fx_flash', 0.3, [(POSE3 - 0.01, 470, 120, 0, 0, 0, 'Out'), (POSE3, 470, 120, 0.6, 0, 1, 'Snap'), (POSE3 + 0.25, 470, 120, 1.2, 45, 0, 'Out')])
+    cut_flash(g, T4, 0.5)
+    # (글 없음 — NO_TEXT)
+    return None
+
+
+# 외계인 생쥐 v2 그림 속 자리 (alien_v2) (그림 · 파노라마 비율 · 그림이 바뀌면 다시 잼)
+UFO_W, UFO_Y = 0.95, 0.2       # pano: 모선 폭 (파노라마 폭 비율) · 모선 가운데 높이
+CANNON = (0.5, 0.73)           # ufo1: 아랫면 주포 (그림 비율)
+CLOUD_Y = 0.36                 # pano: 구름층 (레이저가 뚫는 높이)
+PLAZA = (0.5, 0.87)            # pano: 쥐 도시 광장 (레이저가 꽂히는 곳)
+CITY = (0.5, 0.77, 0.86)       # pano: 도시 구도 (가운데 x · y · 줌) — BEFORE · AFTER 같은 구도
+GROUND_Y, SWEEP = 0.8, 24      # pano: 레이저를 쓸어 뿌리는 높이 · 쓸기 각도 (± 도)
+BUTTON = (0.76, 0.88)          # cu_face: 빨간 버튼
+ANTENNA = [(0.45, 0.05), (0.68, 0.14)]         # cu_face: 더듬이 끝
+
+
+def alien_v1(s, R):
+    """(옛 것) 세로: 우주 모선 → 시골 → 밀밭 미스터리 서클. ② 밭에서 소가 빔에 끌려 올라가는 걸 따라 우주까지 올려다봄 · ③ 위쪽 띠(모선) + 트랙터 빔이 좌우로 쓸며 게임 화면을 훑음 · ④ 모선에서 서클로 내리꽂힘 + 고리 여러 겹"""
     I = s.group('Intro', R, 0.4, 1.9)
     tr = s.cam(I, [(0.4, 0.5, 0.86, 1.3, 0, 'Out'), (1.4, 0.5, 0.14, 1.0, 0, 'InOut'), (1.65, 0.5, 0.12, 1.25, 3, 'Out'), (1.9, 0.5, 0.12, 1.3, 3, 'Linear')], kicks=[1.45])
     s.w(tr, 'Beam', 'fx_strike', 3.0, [(0.45, 0.5, 0.5, 1, 0, 0, 'Out'), (0.6, 0.5, 0.5, 1, 0, 0.8, 'Linear'), (1.9, 0.5, 0.5, 1.05, 0, 0.8, 'Linear')], flicker=0.2)
@@ -1053,8 +1823,8 @@ def ramjui(s, R):
     return None
 
 
-def jwerry(s, R):
-    """가로: 무대 뒤 → 무대 → 객석. ② 무대 뒤에서 무대로 걸어 나가며 스포트라이트들이 한 점에 모임 · 객석에서 장미 · ③ 아래 띠(무대) + 스포트라이트가 위에서 쓸고 장미 소나기 · ④ 객석 시점에서 확 줌 인 + 커튼콜 장미 폭발"""
+def jwerry_v1(s, R):
+    """(옛 것 · 칠 그림) 가로: 무대 뒤 → 무대 → 객석. ② 무대 뒤에서 무대로 걸어 나가며 스포트라이트들이 한 점에 모임 · 객석에서 장미 · ③ 아래 띠(무대) + 스포트라이트가 위에서 쓸고 장미 소나기 · ④ 객석 시점에서 확 줌 인 + 커튼콜 장미 폭발"""
     I = s.group('Intro', R, 0.4, 1.9)
     tr = s.cam(I, [(0.4, 0.12, 0.6, 1.4, 0, 'Out'), (1.2, 0.5, 0.62, 1.1, 0, 'InOut'), (1.9, 0.5, 0.64, 1.25, 0, 'Linear')], kicks=[1.25])
     s.pose(tr, 'Pose', 'pose_intro', 620, [(0.4, 0.18, 0.68, 1, 0, 1, 'Out'), (1.2, 0.5, 0.68, 1, 0, 1, 'InOut'), (1.9, 0.5, 0.68, 1.02, 0, 1, 'Linear')])
@@ -1076,6 +1846,209 @@ def jwerry(s, R):
     s.s(F, 'Crowd', 'prop_band', 1.4, [(4.2, 0, -800, 1, 0, 1, 'Out'), (4.4, 0, -440, 1, 0, 1, 'Back'), (5.0, 0, -430, 1, 0, 1, 'Linear')], pulse=0.03, pulseHz=4.0)
     s.meme(F, 4.35)
 
+
+def jwerry(s, R):
+    """가로 집 파노라마 pano_on (부엌 → 거실 → 복도 · 오른쪽 끝 쥐구멍). (2026-10-21 v2 = '톰과 줴리 추격전', 사용자: 고양이가 쫓아옴 → 지형지물로 반격하며 도망 → 쥐구멍으로 쏙 ·
+    고양이와 쥐의 횡방향 추격 · 추격전 느낌의 앵글과 줌). 띠 · 마무리 컷 없음 · 플랫 · 1배속 · 글 없음 — 컷 11개:
+    ① 0.4 부엌 바닥에서 치즈를 먹다 → 등 뒤 거대한 고양이 그림자 (흠칫) ② 로우 앵글 · 사선 고양이 얼굴 (입맛 다심)
+    ③ 추격 1 (부엌, 판): 몸을 웅크린 쥐에 바짝 붙은 카메라 → 튀어 나가는 순간 휙 빠지며 왼쪽에서 고양이 난입 · 돌아보며 메롱 (앞 의자 · 화분 시차, 속도선)
+    ④ 반격 1: 조리대 위 프라이팬 풀스윙 → 뿅! (히트 스톱 · 별)  ⑤ 추격 2 (거실): 팬 모양으로 납작해진 얼굴 클로즈업 → 휙 쥐 쪽으로 → 따라붙는 고양이 (넓게 · 사선)
+    ⑥ 반격 2: 문 뒤에 숨었다 쾅 → 종잇장처럼 납작 → 벗겨져 팔랑  ⑦ 추격 3 (복도): 김 뿜으며 화난 고양이가 바짝 → 카메라가 쥐 쪽으로 밀고 들어감
+    ⑧ 반격 3: 카펫 확 당기기 → 공중제비 (책이 우수수)  ⑨ 마지막 질주: 바닥에 붙은 로우 트래킹 → 쥐는 쥐구멍으로 다이빙 · 고양이는 날아 덮침 (급줌)
+    ⑩ 벽에 얼굴부터 쾅 (아코디언 · 히트 스톱) → 주르륵 기절 (별)  ⑪ 쥐구멍에서 빼꼼 → 메롱 윙크
+    → 컷신 걷힘 → 게임 화면: 프라이팬이 대상마다 떨어져 뿅 (worldPhase · hailFall)"""
+    END = NO_FINISH['jwerry']
+    K = 1920 * 1.06 / 1536                                # 한 장 컷 배율 (화면을 덮음 · 흔들려도 가장자리 안 보임)
+    at = lambda rx, ry, z=1.0: ((rx - 0.5) * 1536 * K * z, (0.5 - ry) * 1024 * K * z)     # 컷 그림 비율 → 화면 px
+    wsc = lambda name, px: px / max(1, s.size(name)[0])   # 그림 폭을 px 로 맞추는 배율
+    FY = JW_FLOOR[-1][1]                                  # 판 위 발끝 높이 기준 (비율, 쥐구멍 바닥)
+    fl = lambda x: xat(JW_FLOOR, x)                       # 그 자리 바닥 (부엌은 조리대 앞이라 더 아래 → 쥐구멍 쪽으로 벽에 붙음)
+    gy = lambda x, y: y + fl(x) - FY                      # FY 기준 높이 → 그 자리 바닥 기준
+    WPX, HPX = s.PW * s.PS, s.PH * s.PS                   # 판 크기 (px)
+
+    def C(t, x, z, r=0, e='Linear', fs=-300):
+        """추격 카메라 키: x 비율을 보고 발끝이 화면 fs px 에 오게 · 판 밖이 안 보이게 붙잡음 (기울기 · 흔들림 여유)"""
+        sn = abs(math.sin(math.radians(r))) + 0.03
+        hw, hh = (960 + 540 * sn) / (z * WPX), (540 + 960 * sn) / (z * HPX)
+        return (t, min(1 - hw, max(hw, x)), min(1 - hh, max(hh, fl(x) + fs / (HPX * z))), z, r, e)
+
+    def frames(g, name, seq, ks, sc=K, **fx):
+        """같은 틀 연속 프레임 (그림만 바꿔 끼움)"""
+        var = s.s(g, name, seq[0][1], sc, ks, **fx)
+        sw = ', '.join(f'new NKK.Ults.SuperUltLayer.Swap {{ t = {f(t)}, sprite = S("{spr}") }}' for t, spr in seq[1:])
+        if sw: s(f'{var}.swaps = new[] {{ {sw} }};')
+        return var
+
+    def pop_at(g, name, spr, t0, x, y, sc, life=0.25, rot=0):
+        s.s(g, name, spr, sc, [(t0 - 0.01, x, y, 0, rot, 0, 'Out'), (t0, x, y, 0.5, rot, 1, 'Snap'), (t0 + 0.08, x, y, 1.15, rot + 10, 1, 'Back'), (t0 + life, x, y, 1.2, rot + 25, 0, 'Out')])
+
+    def wpop(tr, name, spr, t0, x, y, wpx, life=0.3, rot=0):
+        """판 위 펑 (판 비율, y = FY 기준)"""
+        px, py = s.P(x, gy(x, y))
+        s.layer(tr, name, spr, wsc(spr, wpx), [(t0 - 0.01, px, py, 0, rot, 0, 'Out'), (t0, px, py, 0.5, rot, 1, 'Snap'), (t0 + 0.08, px, py, 1.1, rot, 1, 'Back'), (t0 + life, px, py, 1.2, rot, 0, 'Out')])
+
+    def cycle(t0, t1, pre, dt):
+        """달리기 셀 1 → 2 → 3 → 2 반복"""
+        seq, t, i = [], t0, 0
+        while t < t1 - 1e-3: seq.append((t, f'{pre}_{(1, 2, 3, 2)[i % 4]}')); t += dt; i += 1
+        return seq
+
+    def xat(ks, t):
+        """[(t, x)] 선형 보간"""
+        if t <= ks[0][0]: return ks[0][1]
+        for (t0, x0), (t1, x1) in zip(ks, ks[1:]):
+            if t <= t1: return x0 + (x1 - x0) * (t - t0) / max(1e-4, t1 - t0)
+        return ks[-1][1]
+
+    def runner(tr, name, seq, xs, ref, h, bob=0.0, ks=None, **fx):
+        """판 위 달리는 셀 (발끝 = FY) · xs = [(t, x비율)] · bob = 달릴 때 통통 튀는 높이 (판 비율) · ks = 직접 준 키 (뛰어듦 · 덮침)"""
+        ks = ks or [(t, x, FY - (bob if i % 2 else 0), 1, 0, 1, 'Linear') for i, (t, x) in enumerate(xs)]
+        ks = [(t, x, gy(x, y), *k) for t, x, y, *k in ks]
+        return s.cel(tr, name, seq, ks, height=h, ref=ref, **fx)
+
+    def fg(g, name, spr, t0, t1, y, hpx, x0=1500, x1=-1700):
+        """앞을 휙 지나가는 가구 (화면 좌표, 오른쪽 → 왼쪽 = 카메라가 오른쪽으로 달림)"""
+        s.s(g, name, spr, s.hp(spr, hpx), [(t0, x0, y, 1, 0, 1, 'Linear'), (t1, x1, y, 1, 0, 1, 'Linear')])
+
+    def speed(g, t0, t1, n=6):
+        """가로 속도선 (오른쪽 → 왼쪽)"""
+        for i in range(n):
+            y = -440 + i * 170 + s.rnd.uniform(-40, 40); s0 = t0 + (i % 3) * 0.05
+            s.s(g, f'Speed{i}', 'fx_streak', wsc('fx_streak', 900), [(s0, 1400, y, 1, 0, 0, 'Out'), (s0 + 0.04, 900, y, 1.1, 0, 0.7, 'Linear'), (t1, -1500, y, 1.2, 0, 0, 'Linear')], flicker=0.3)
+
+    def flash(g, t0, life=0.1, px=1500):
+        s.s(g, 'Flash', 'fx_bonk', wsc('fx_bonk', px), [(t0 - 0.01, 0, 0, 0.6, 0, 0, 'Out'), (t0, 0, 0, 1.0, 0, 0.6, 'Snap'), (t0 + life, 0, 0, 1.4, 15, 0, 'In')])
+
+    # ① 부엌 바닥에서 치즈 → 등 뒤 고양이 그림자 (흠칫)
+    SHADOW, T1 = 0.72, 0.98
+    g = s.group('Open', R, 0.4, T1)
+    frames(g, 'Shot', [(0.4, 'shot_open1'), (SHADOW, 'shot_open2')],
+           [(0.4, 0, -30, 1.0, 0, 1, 'Out'), (SHADOW - 0.01, 0, -20, 1.06, 0, 1, 'Linear'), (SHADOW, 0, -10, 1.15, -3, 1, 'Snap'), (T1, 0, -10, 1.2, -4, 1, 'Out')], kicks=[SHADOW], kickPower=30, kickTime=0.2)
+    hx, hy = at(*OPEN_HEAD, 1.15)
+    pop_at(g, 'Sweat', 'prop_sweat', SHADOW + 0.04, hx + 120, hy + 40, wsc('prop_sweat', 110), life=0.3, rot=-15)
+    # ② 고양이 얼굴 (로우 앵글 · 사선, 다가오며 입맛 다심)
+    T2 = 1.25
+    g = s.group('CatFace', R, T1, T2)
+    s.s(g, 'Shot', 'shot_catface', K, [(T1, 220, -120, 1.35, -8, 1, 'Out'), (T1 + 0.08, 0, 0, 1.12, -4, 1, 'Back'), (T2, 0, 10, 1.2, -6, 1, 'Linear')], kicks=[T1 + 0.08], kickPower=24, kickTime=0.15)
+    # ③ 추격 1 (부엌): 웅크린 쥐에 바짝 → 튀어 나가며 휙 빠짐 · 고양이 난입 → 돌아보며 메롱
+    GO, TAUNT, T3 = 1.4, 1.74, 2.05
+    g = s.group('Chase1', R, T2, T3)
+    jx = [(T2, 0.13), (GO, 0.13), (GO + 0.15, 0.16), (T3, 0.29)]
+    cx = [(T2, 0.02), (1.47, 0.06), (T3, 0.225)]
+    tr = s.cam(g, [C(T2, 0.135, 3.2, 0, 'Out', -200), C(GO, 0.137, 3.3, -2, 'Linear', -200), C(GO + 0.1, 0.15, 1.75, 3, 'Out'),
+                   C(TAUNT, xat(jx, TAUNT) - 0.03, 1.65, 4), C(TAUNT + 0.1, xat(jx, TAUNT + 0.1) - 0.01, 2.3, -3, 'Out', -250), C(T3, xat(jx, T3), 2.15, -5, 'Linear', -250)],
+                kicks=[GO, 1.47], power=34, rot=2.0, ktime=0.22)
+    runner(tr, 'Cat', cycle(T2, T3, 'anim_tomrun', 0.07), cx, 'anim_tomrun_1', TOM_H, bob=0.004)
+    runner(tr, 'Jerry', [(T2, 'anim_jmove_3')] + cycle(GO, TAUNT, 'anim_jrun', 0.055) + [(TAUNT, 'anim_jmove_1')] + cycle(TAUNT + 0.14, T3, 'anim_jrun', 0.055),
+           [(T2, jx[0][1]), (GO, jx[1][1])] + [(t, xat(jx, t)) for t in (GO + 0.05, GO + 0.1, GO + 0.15, 1.6, 1.7, 1.8, 1.9, T3)], 'anim_jrun_1', JER_H, bob=0.003, jitter=1.0)
+    wpop(tr, 'DashDust', 'fx_dust', GO, jx[0][1] - 0.012, FY - 0.015, 120, life=0.35)
+    wpop(tr, 'CatDust', 'fx_dust', 1.47, cx[1][1] - 0.03, FY - 0.03, 220, life=0.4)
+    speed(g, GO + 0.1, T3)
+    fg(g, 'FgChair', 'prop_chair', 1.55, 1.82, -260, 900)
+    fg(g, 'FgPlant', 'prop_plant', 1.86, T3 + 0.12, -200, 1000)
+    # ④ 반격 1: 조리대 위 프라이팬 풀스윙 → 뿅! (히트 스톱)
+    BONK, T4 = 2.3, 2.62
+    g = s.group('Pan', R, T3, T4)
+    frames(g, 'Shot', [(T3, 'shot_pan1'), (BONK, 'shot_pan2')],
+           [(T3, 140, 0, 1.06, 3, 1, 'Out'), (BONK - 0.01, -40, 0, 1.12, 0, 1, 'InOut'), (BONK, 0, 0, 1.24, -4, 1, 'Snap'), (BONK + 0.08, 0, 0, 1.24, -4, 1, 'Linear'), (T4, -30, 10, 1.3, -6, 1, 'Out')],
+           kicks=[BONK + 0.08, BONK + 0.16], kickPower=60, kickTime=0.2)
+    bx, by = at(*PAN_HIT, 1.24)
+    flash(g, BONK)
+    pop_at(g, 'Bonk', 'fx_bonk', BONK, bx, by, wsc('fx_bonk', 560), life=0.3)
+    s.burst_ring(g, 'Star', 'fx_star', BONK + 0.02, bx, by, n=7, r=520, sc=wsc('fx_star', 90), dur=0.28)
+    s.s(g, 'Stars', 'fx_stars', wsc('fx_stars', 300), [(BONK + 0.1, bx - 60, by + 160, 0, 0, 0, 'Out'), (BONK + 0.12, bx - 60, by + 160, 1, 0, 1, 'Back'), (T4, bx - 60, by + 170, 1, 0, 1, 'Linear')], spin=180.0)
+    # ⑤ 추격 2 (거실): 팬 모양 얼굴 클로즈업 → 휙 쥐 쪽으로 → 따라붙는 고양이 (넓게 · 사선)
+    POPFACE, LOOK, T5 = 2.9, 3.07, 3.4
+    g = s.group('Chase2', R, T4, T5)
+    jx = [(T4, 0.39), (T5, 0.555)]
+    cx = [(T4, 0.30), (T5, 0.51)]
+    mid = lambda t: (xat(jx, t) + xat(cx, t)) / 2
+    tr = s.cam(g, [C(T4, xat(cx, T4) + 0.02, 3.0, 5, 'Out', -120), C(2.85, xat(cx, 2.85) + 0.022, 2.9, 4, 'Linear', -120), C(2.97, xat(jx, 2.97), 2.4, -3, 'InOut', -250),
+                   C(3.17, mid(3.17), 1.6, -6, 'Out'), C(T5, mid(T5) + 0.015, 1.85, -4)], kicks=[POPFACE, 3.17], power=30, rot=2.0, ktime=0.2)
+    runner(tr, 'Cat', [(T4, 'anim_tommove_1')] + cycle(POPFACE, T5, 'anim_tomrun', 0.065), [(t, xat(cx, t)) for t in (T4, 2.7, 2.8, POPFACE, 3.0, 3.1, 3.2, 3.3, T5)], 'anim_tomrun_1', TOM_H, bob=0.004, jitter=1.5)
+    runner(tr, 'Jerry', cycle(T4, LOOK, 'anim_jrun', 0.055) + [(LOOK, 'anim_jmove_1')] + cycle(LOOK + 0.15, T5, 'anim_jrun', 0.055), [(t, xat(jx, t)) for t in (T4, 2.75, 2.9, 3.05, 3.2, 3.3, T5)], 'anim_jrun_1', JER_H, bob=0.003)
+    wpop(tr, 'Pop', 'fx_bonk', POPFACE, xat(cx, POPFACE) + 0.03, FY - 0.12, 140, life=0.2)
+    speed(g, 2.95, T5)
+    fg(g, 'FgPlant', 'prop_plant', 3.05, T5 + 0.1, -230, 1050)
+    # ⑥ 반격 2: 문 뒤 → 쾅 (종잇장처럼 납작) → 벗겨져 팔랑
+    SLAM, PEEL, T6 = 3.6, 3.84, 4.05
+    g = s.group('Door', R, T5, T6)
+    frames(g, 'Shot', [(T5, 'shot_door1'), (SLAM, 'shot_door2'), (PEEL, 'shot_door3')],
+           [(T5, -70, 0, 1.05, -3, 1, 'Out'), (SLAM - 0.01, 0, 0, 1.12, -2, 1, 'InOut'), (SLAM, 0, -10, 1.22, 3, 1, 'Snap'), (SLAM + 0.07, 0, -10, 1.22, 3, 1, 'Linear'),
+            (PEEL, 10, 0, 1.14, 1, 1, 'Out'), (T6, 20, 0, 1.1, 0, 1, 'Linear')], kicks=[SLAM + 0.07, SLAM + 0.15], kickPower=70, kickTime=0.22)
+    dx, dy = at(*DOOR_HIT, 1.22)
+    flash(g, SLAM, life=0.1)
+    s.s(g, 'Ring', 'fx_shockring', wsc('fx_shockring', 700), [(SLAM, dx, dy, 0.3, 90, 0.9, 'Snap'), (SLAM + 0.3, dx, dy, 1.6, 90, 0, 'Out')])
+    pop_at(g, 'Bonk', 'fx_bonk', SLAM, dx, dy, wsc('fx_bonk', 420), life=0.22)
+    # ⑦ 추격 3 (복도): 김 뿜는 고양이가 바짝 → 카메라가 쥐 쪽으로 밀고 들어감
+    T7 = 4.7
+    g = s.group('Chase3', R, T6, T7)
+    jx = [(T6, 0.66), (T7, 0.79)]
+    cx = [(T6, 0.57), (T7, 0.745)]
+    tr = s.cam(g, [C(T6, mid(T6), 1.5, 0, 'Out'), C(4.42, mid(4.42), 1.8, 3), C(T7, xat(jx, T7) - 0.005, 2.6, 6, 'In', -250)], kicks=[T6 + 0.05], power=26)
+    runner(tr, 'Cat', [(T6, 'anim_tommove_2')], [(t, xat(cx, t)) for t in (T6, 4.15, 4.25, 4.35, 4.45, 4.55, T7)], 'anim_tomrun_1', TOM_H, bob=0.005, jitter=2.0)
+    runner(tr, 'Jerry', cycle(T6, T7, 'anim_jrun', 0.05), [(t, xat(jx, t)) for t in (T6, 4.2, 4.35, 4.5, T7)], 'anim_jrun_1', JER_H, bob=0.003)
+    for i in range(5):                                     # 귀에서 김 (화남)
+        t0 = T6 + 0.05 + 0.12 * i
+        wpop(tr, f'Steam{i}', 'fx_steam', t0, xat(cx, t0) + 0.025 + 0.008 * (i % 2), FY - 0.17, 80, life=0.25)
+    speed(g, T6, T7)
+    fg(g, 'FgChair', 'prop_chair', 4.3, T7, -280, 950)
+    # ⑧ 반격 3: 카펫 확 당기기 → 공중제비 (책이 우수수, 카메라가 위로 따라감)
+    YANK, T8 = 4.88, 5.2
+    g = s.group('Rug', R, T7, T8)
+    frames(g, 'Shot', [(T7, 'shot_rug1'), (YANK, 'shot_rug2')],
+           [(T7, 60, 0, 1.06, 2, 1, 'Out'), (YANK - 0.01, 20, 0, 1.1, 0, 1, 'InOut'), (YANK, 0, -50, 1.18, -5, 1, 'Snap'), (T8, -20, -140, 1.26, -8, 1, 'Out')], kicks=[YANK], kickPower=50, kickTime=0.2)
+    s.shower(g, 'Book', 'prop_book', YANK + 0.02, T8, 6, -300, 900, 650, -500, sc=wsc('prop_book', 170))
+    s.speed(g, YANK, T8, vertical=True, n=6)
+    # ⑨ 마지막 질주: 바닥에 붙은 로우 트래킹 → 쥐구멍으로 다이빙 · 고양이가 날아 덮침 (급줌, 쥐구멍 = 판 오른쪽 끝이라 화면 오른쪽에 걸림)
+    DIVE, IN, POUNCE, T9 = 5.45, 5.62, 5.5, 5.8
+    g = s.group('Dash', R, T8, T9)
+    hx_ = JW_HOLE[0]
+    jx = [(T8, 0.84), (DIVE, 0.9), (IN, hx_)]
+    cx = [(T8, 0.79), (POUNCE, 0.85), (T9, hx_ - 0.025)]
+    tr = s.cam(g, [C(T8, 0.84, 2.4, -4, 'Out', -330), C(DIVE, 0.9, 2.6, -2, 'Linear', -330), C(IN, hx_, 3.4, 0, 'InOut', -300), C(T9, hx_, 3.7, 3, 'Linear', -280)],
+               kicks=[POUNCE, IN], power=30, rot=2.0, ktime=0.18)
+    runner(tr, 'Cat', cycle(T8, POUNCE, 'anim_tomrun', 0.06) + [(POUNCE, 'anim_tommove_3'), (POUNCE + 0.04, 'anim_tommove_3_mblur')], None, 'anim_tomrun_1', TOM_H,
+           ks=[(T8, cx[0][1], FY, 1, 0, 1, 'Linear'), (POUNCE, cx[1][1], FY, 1, 0, 1, 'Linear'), (POUNCE + 0.12, (cx[1][1] + hx_) / 2 - 0.01, FY - 0.05, 1, 0, 1, 'Out'), (T9, hx_ - 0.025, FY - 0.02, 1, 0, 1, 'In')])
+    runner(tr, 'Jerry', cycle(T8, DIVE, 'anim_jrun', 0.05) + [(DIVE, 'anim_jmove_2'), (DIVE + 0.03, 'anim_jmove_2_mblur')], None, 'anim_jrun_1', JER_H,
+           ks=[(T8, jx[0][1], FY, 1, 0, 1, 'Linear'), (DIVE, jx[1][1], FY, 1, 0, 1, 'Linear'), (DIVE + 0.08, (jx[1][1] + hx_) / 2, FY - 0.02, 1, 0, 1, 'Out'), (IN - 0.01, hx_, FY - 0.005, 0.7, 0, 1, 'In'), (IN, hx_, FY, 0.5, 0, 0, 'Snap')])
+    wpop(tr, 'HolePuff', 'fx_dust', IN, hx_ + 0.003, FY - 0.01, 90, life=0.3)
+    speed(g, T8, T9, n=7)
+    fg(g, 'FgPlant', 'prop_plant', T8, 5.5, -300, 1300, x0=1700, x1=-2000)
+    # ⑩ 벽에 얼굴부터 쾅 (아코디언 · 히트 스톱) → 주르륵 기절
+    CRASH, SLIDE, T10 = T9, 6.08, 6.35
+    g = s.group('Wall', R, CRASH, T10)
+    frames(g, 'Shot', [(CRASH, 'shot_wall1'), (SLIDE, 'shot_wall2')],
+           [(CRASH, 0, 0, 1.32, -6, 1, 'Snap'), (CRASH + 0.09, 0, 0, 1.32, -6, 1, 'Linear'), (6.0, 0, 0, 1.1, -2, 1, 'Back'), (SLIDE - 0.01, 0, 0, 1.08, -1, 1, 'Linear'),
+            (SLIDE, 0, 10, 1.1, 0, 1, 'Snap'), (T10, 0, 30, 1.15, 0, 1, 'Out')], kicks=[CRASH + 0.09, CRASH + 0.18, CRASH + 0.27], kickPower=80, kickTime=0.22)
+    wx, wy = at(*WALL_HIT, 1.32)
+    flash(g, CRASH, life=0.1, px=1900)
+    for k in range(2):
+        s.s(g, f'Ring{k}', 'fx_shockring', wsc('fx_shockring', 600), [(CRASH + 0.09 + 0.06 * k, wx, wy, 0.3, 90, 0.9, 'Snap'), (CRASH + 0.4 + 0.06 * k, wx, wy, 1.8, 90, 0, 'Out')])
+    sx_, sy_ = at(*WALL_HEAD, 1.12)
+    s.s(g, 'Stars', 'fx_stars', wsc('fx_stars', 320), [(SLIDE, sx_, sy_ + 120, 0, 0, 0, 'Out'), (SLIDE + 0.06, sx_, sy_, 1, 0, 1, 'Back'), (T10, sx_, sy_ - 20, 1, 0, 1, 'Linear')], spin=200.0)
+    # ⑪ 쥐구멍에서 빼꼼 → 메롱 윙크
+    WINK = 6.78
+    g = s.group('Hole', R, T10)
+    frames(g, 'Shot', [(T10, 'shot_hole1'), (WINK, 'shot_hole2')],
+           [(T10, 0, -40, 1.0, 0, 1, 'Out'), (WINK - 0.01, 0, -20, 1.07, 0, 1, 'Linear'), (WINK, 0, -20, 1.14, 2, 1, 'Snap'), (END + 0.4, 0, -10, 1.2, 2, 1, 'Out')], kicks=[WINK], kickPower=14, kickTime=0.12)
+    ex, ey = at(*HOLE_EYE, 1.14)
+    for k in range(3):
+        pop_at(g, f'Twinkle{k}', 'fx_star', WINK + 0.03 + 0.07 * k, ex + (k - 1) * 120, ey + 60 + 40 * (k % 2), wsc('fx_star', 70 + 20 * (k % 2)), life=0.35, rot=15 * k)
+    # (글 없음 — NO_TEXT)
+    return None
+
+
+# 줴리 v2 그림 속 자리 (판 · 그림 비율 · 그림이 바뀌면 다시 잼)
+JW_FLOOR = [(0.0, 0.69), (0.33, 0.69), (0.42, 0.63), (0.86, 0.63), (0.93, 0.6), (1.0, 0.6)]     # pano_on: 달리는 바닥 [(x, 발끝 y)] — 부엌 조리대 앞 → 거실 · 복도 → 쥐구멍 바닥
+JW_HOLE = (0.95, 0.594)        # pano_on: 쥐구멍 (가운데 x · 바닥)
+JER_H, TOM_H = 95, 260         # 셀 상자 높이 (판 px): 쥐 (≈ 쥐구멍 높이 78) · 고양이 달리기
+OPEN_HEAD = (0.5, 0.45)        # shot_open2: 쥐 머리
+PAN_HIT = (0.5, 0.45)          # shot_pan2: 팬이 얼굴을 친 자리
+DOOR_HIT = (0.45, 0.5)         # shot_door2: 납작해진 고양이 가운데
+WALL_HIT = (0.45, 0.6)         # shot_wall1: 얼굴이 벽에 박힌 자리
+WALL_HEAD = (0.45, 0.45)       # shot_wall2: 기절한 고양이 머리 위
+HOLE_EYE = (0.5, 0.4)          # shot_hole2: 윙크한 눈
 
 def starchef_v1(s, R):
     """(v1, 2026-10-18 · 안 씀) 가로: 식료품 창고 → 주방 → 홀. ② 칸마다 멈추는 휙휙 팬 (창고 치즈 → 주방 불 쇼 → 홀) · ③ 평행한 두 사선 띠 + 프라이팬이 쿵쿵 + 접시가 빙글 · ④ 클로슈 로우앵글 밀어 들어가기 + 별 세 개"""
@@ -1256,8 +2229,8 @@ V_HAND = (0.38, 0.25)          # shot_v: 브이 손
 DISH_TOP = (0.59, 0.13)       # cu_dish: 접시 위 (김)
 
 
-def jjdetective(s, R):
-    """가로: 사무실 → 비 오는 거리 → 범행 골목. ② 돋보기가 훑는 대로 천천히 밀고 나가며 발자국이 차례로 · ③ 왼쪽 세로 띠 + 축구공이 통통 튀며 게임 화면을 가로지름 · ④ 손가락 끝으로 급줌(돌리 줌) + 하얀 번쩍"""
+def jjdetective_v1(s, R):
+    """(옛 것 · 칠 그림) 가로: 사무실 → 비 오는 거리 → 범행 골목. ② 돋보기가 훑는 대로 천천히 밀고 나가며 발자국이 차례로 · ③ 왼쪽 세로 띠 + 축구공이 통통 튀며 게임 화면을 가로지름 · ④ 손가락 끝으로 급줌(돌리 줌) + 하얀 번쩍"""
     I = s.group('Intro', R, 0.4, 1.9)
     tr = s.cam(I, [(0.4, 0.15, 0.62, 1.5, 0, 'Out'), (1.6, 0.8, 0.66, 1.3, 0, 'InOut'), (1.9, 0.82, 0.66, 1.45, 3, 'Linear')], kicks=[1.62])
     s.trail(tr, 'Foot', 'prop_fg', [(0.18 + 0.065 * i, 0.9 - (i % 2) * 0.03) for i in range(10)], 0.45, gap=0.11, sc=0.25)
@@ -1277,6 +2250,156 @@ def jjdetective(s, R):
     s.pose(tr, 'Pose', 'pose_finish', 680, [(3.9, 0.82, 0.68, 1, 0, 1, 'Out'), (5.0, 0.82, 0.68, 1.02, 0, 1, 'Linear')])
     s.s(F, 'Flash', 'fx_burst', 4.0, [(4.1, 0, 0, 0, 0, 0, 'Out'), (4.12, 0, 0, 1, 0, 1, 'Snap'), (4.35, 0, 0, 1.5, 20, 0, 'Out')])
     s.meme(F, 4.35)
+
+
+
+def jjdetective(s, R):
+    """가로 (추격 골목 판 pano_on). (2026-10-21 v2 = '범인은 바로 너야!', 사용자 콘티)
+    띠 · 마무리 컷 없음 · 플랫 · 컷마다 한 장(shot_*, 연속 프레임 = 같은 틀 바꿔 끼우기) · 고양이 셀 프레임(anim_catrun · anim_catko) · 1배속 · 대사 2줄만 컷신 글 — 컷 8개:
+    ① 0.4 범행 현장(털린 치즈 가게) 사방에서 단서 조사 몽타주 4컷: 고양이 발자국 · 할퀸 창틀 · 고양이 털 · 생선 뼈 — 찾을 때마다 단서 아이콘이 왼쪽 위 수첩 줄로 모임
+    ② 모은 단서들이 머리 둘레를 돌며 골똘히 생각 (천천히 다가감) ③ 단서가 머리로 빨려 들고 전구 → 결론 (안경 번쩍)
+    ④ 검은 실루엣 고양이를 지목 "범인은 바로 너야!" → 고양이 흠칫 → 휙 돌아 도망
+    ⑤ 달빛 골목 추격 (옆으로 따라가는 카메라) → 손목시계 마취총 조준 · 발사 → 마취침이 엉덩이에 꽂혀 펄쩍 → 비틀 → 기절 (코풍선)
+    ⑥ 기절한 고양이를 밟고 안경 번쩍 "사건 해결!" → 엄지 척 윙크
+    → 컷신 걷힘 → 게임 화면: 마취침이 대상마다 꽂혀 기절 별 (worldPhase · imageFx)"""
+    END = NO_FINISH['jjdetective']
+    K = 1920 * 1.06 / 1536                                # 한 장 컷 배율 (화면을 덮음 · 흔들려도 가장자리 안 보임)
+    at = lambda rx, ry, z=1.0, dx=0, dy=0: ((rx - 0.5) * 1536 * K * z + dx, (0.5 - ry) * 1024 * K * z + dy)     # 컷 그림 비율 → 화면 px (컷 키 x · y · 배율 반영)
+    wsc = lambda name, px: px / max(1, s.size(name)[0])   # 그림 폭을 px 로 맞추는 배율
+
+    def frames(g, name, seq, ks, sc=K, **fx):
+        """같은 틀 연속 프레임 (그림만 바꿔 끼움)"""
+        var = s.s(g, name, seq[0][1], sc, ks, **fx)
+        sw = ', '.join(f'new NKK.Ults.SuperUltLayer.Swap {{ t = {f(t)}, sprite = S("{spr}") }}' for t, spr in seq[1:])
+        if sw: s(f'{var}.swaps = new[] {{ {sw} }};')
+        return var
+
+    def pop_at(g, name, spr, t0, x, y, sc, life=0.25, rot=0):
+        s.s(g, name, spr, sc, [(t0 - 0.01, x, y, 0, rot, 0, 'Out'), (t0, x, y, 0.5, rot, 1, 'Snap'), (t0 + 0.08, x, y, 1.15, rot + 10, 1, 'Back'), (t0 + life, x, y, 1.2, rot + 25, 0, 'Out')])
+
+    def line(g, name, txt, t0, t1, x, y, size=78, w=1300, color=(1, 0.93, 0.45)):
+        """대사 (쾅 찍히듯 커졌다 자리 잡음)"""
+        s.text(g, name, txt, size, (x, y), [(t0 - 0.01, x, y, 0, -3, 0, 'Out'), (t0, x, y, 2.2, -3, 1, 'Snap'), (t0 + 0.1, x, y, 0.95, -3, 1, 'In'), (t0 + 0.18, x, y, 1.0, -3, 1, 'Back'),
+                                            (t1, x, y + 8, 1.04, -3, 1, 'Linear')], w=w, color=color)
+
+    def cut_at(a, b, u):
+        """컷 키 a → b 사이 u 시점의 (x, y, 배율)"""
+        return a[0] + (b[0] - a[0]) * u, a[1] + (b[1] - a[1]) * u, a[2] + (b[2] - a[2]) * u
+
+    # ① 사방에서 단서 조사 몽타주 (컷 4개 · 컷마다 다른 카메라 흐름) — 단서를 찾는 순간 돋보기 고리 · 반짝 → 단서 아이콘이 수첩 줄(왼쪽 위)로 날아가 쌓임
+    T1, FIND = 1.7, 0.14
+    CLUES = [(0.4, 'shot_clue1', (60, 20, 1.12, -2), (-40, 0, 1.2, 0), 'prop_pawprint'), (0.72, 'shot_clue2', (-60, 0, 1.06, 2), (40, -10, 1.12, 1), 'prop_scratch'),
+             (1.04, 'shot_clue3', (0, -30, 1.18, 0), (0, 10, 1.1, -1), 'prop_hair'), (1.36, 'shot_clue4', (80, 0, 1.04, 0), (-20, 0, 1.12, 0), 'prop_fishbone')]
+    SLOT = lambda i: (-830 + i * 150, 430)                 # 수첩 줄 자리 (화면 px)
+    found = []
+    for i, (t0, spr, a, b, icon) in enumerate(CLUES):
+        t1 = CLUES[i + 1][0] if i + 1 < len(CLUES) else T1
+        g = s.group(f'Clue{i}', R, t0, t1)
+        s.s(g, 'Shot', spr, K, [(t0, *a, 1, 'Out'), (t1, *b, 1, 'Linear')], kicks=[t0 + FIND], kickPower=14, kickTime=0.15)
+        tf = t0 + FIND                                     # 찾은 순간
+        dx, dy, z = cut_at(a, b, FIND / (t1 - t0))
+        cx, cy = at(*JJ_CLUE_PTS[i], z, dx, dy); found.append((tf, cx, cy))
+        s.s(g, 'Ring', 'fx_shockring', wsc('fx_shockring', 260), [(tf - 0.01, cx, cy, 0.5, 0, 0, 'Out'), (tf, cx, cy, 0.5, 0, 1, 'Snap'), (tf + 0.2, cx, cy, 1.6, 0, 0, 'Out')])
+        pop_at(g, 'Spark', 'fx_sparkle', tf, cx + 90, cy + 70, wsc('fx_sparkle', 130), life=0.2)
+    g = s.group('Notes', R, 0.4, T1)                      # 수첩 줄: 단서가 하나씩 모임 (컷이 바뀌어도 남음)
+    for i, (tf, cx, cy) in enumerate(found):
+        icon = CLUES[i][4]; sx, sy = SLOT(i)
+        s.s(g, f'Note{i}', icon, wsc(icon, 120), [(tf - 0.01, cx, cy, 0, 0, 0, 'Out'), (tf, cx, cy, 1.6, -10, 1, 'Snap'), (tf + 0.06, cx, cy + 30, 1.9, 0, 1, 'Back'),
+                                                  (tf + 0.2, sx, sy, 1.0, 0, 1, 'InOut'), (tf + 0.24, sx, sy, 1.15, 0, 1, 'Back'), (T1, sx, sy, 1.0, 0, 1, 'Linear')])
+    # ② 골똘히 생각: 모은 단서들이 머리 둘레를 돌다 머리로 빨려 듦 → ③ 전구 · 안경 번쩍
+    EUREKA, T3 = 2.42, 2.78
+    g = s.group('Think', R, T1, T3)
+    ZT = (1.0, 1.1, 1.18)                                  # 생각 컷 배율: 처음 · 유레카 직전 · 끝
+    frames(g, 'Shot', [(T1, 'shot_think1'), (EUREKA, 'shot_think2')],
+           [(T1, 0, 0, ZT[0], 0, 1, 'Out'), (EUREKA - 0.02, 0, 0, ZT[1], 0, 1, 'Linear'), (EUREKA, 0, -10, ZT[2], -1, 1, 'Snap'), (T3, 0, -10, ZT[2] * 1.03, -1, 1, 'Linear')], kicks=[EUREKA], kickPower=40, kickTime=0.2)
+    hx, hy = at(*JJ_THINK_HEAD, ZT[1])
+    for i, (t0, spr, a, b, icon) in enumerate(CLUES):     # 수첩 줄 → 머리 둘레 궤도 (반지름이 줄며 빨라짐) → 머리로 쏙
+        sx, sy = SLOT(i); ks = [(T1, sx, sy, 1.0, 0, 1, 'Out')]
+        for k in range(1, 10):
+            u = k / 9; t = T1 + 0.12 + (EUREKA - 0.06 - T1 - 0.12) * u; ang = 2 * math.pi * (i / 4 + 1.4 * u ** 1.4)
+            r = 470 * (1 - u) + 40 * u
+            ks.append((t, hx + math.cos(ang) * r * 1.25, hy + math.sin(ang) * r * 0.75, 1.25 - 0.6 * u, math.degrees(ang) * 0.3, 1 if k < 9 else 0.6, 'InOut' if k == 1 else 'Linear'))
+        ks.append((EUREKA - 0.02, hx, hy, 0.2, 0, 0, 'In'))
+        s.s(g, f'Orbit{i}', icon, wsc(icon, 150), ks)
+    bx, by = hx + 330, hy + 300                            # 전구 = 머리 오른쪽 위 (든 손가락 위)
+    s.s(g, 'Bulb', 'prop_bulb', wsc('prop_bulb', 240), [(EUREKA - 0.01, bx, by - 60, 0, 0, 0, 'Out'), (EUREKA, bx, by - 60, 0.4, -15, 1, 'Snap'), (EUREKA + 0.12, bx, by, 1.2, 8, 1, 'Back'), (T3, bx, by + 15, 1.0, 0, 1, 'Linear')], pulse=0.06, pulseHz=9.0)
+    s.burst_ring(g, 'Spark', 'fx_sparkle', EUREKA + 0.02, bx, by, n=8, r=380, sc=wsc('fx_sparkle', 90), dur=0.25)
+    gx, gy = at(*JJ_THINK_GLASS, ZT[2], 0, -10)
+    pop_at(g, 'Glare', 'fx_glare', EUREKA + 0.03, gx, gy, wsc('fx_glare', 300), life=0.3)
+    s.s(g, 'Flash', 'fx_sparkle', wsc('fx_sparkle', 1300), [(EUREKA - 0.01, bx, by, 0, 0, 0, 'Out'), (EUREKA, bx, by, 0.5, 0, 0.6, 'Snap'), (EUREKA + 0.14, bx, by, 1.2, 20, 0, 'Out')])
+    # ④ 지목 "범인은 바로 너야!" (손가락이 화면 오른쪽 = 다음 컷 고양이) → 고양이 흠칫 → 도망
+    T4, RUN, T5 = 3.4, 3.72, 3.98
+    g = s.group('Point', R, T3, T4)
+    s.s(g, 'Shot', 'shot_point', K, [(T3, -260, 0, 1.45, 4, 1, 'Out'), (T3 + 0.12, 0, 0, 1.0, 0, 1, 'Back'), (T4, 30, 0, 1.06, 0, 1, 'Linear')], kicks=[T3 + 0.12], kickPower=60, kickTime=0.25)
+    s.speed(g, T3, T4, vertical=False, n=7)
+    px_, py_ = at(*JJ_POINT_TIP)
+    for k in range(2):
+        s.s(g, f'PRing{k}', 'fx_shockring', wsc('fx_shockring', 300), [(T3 + 0.12 + 0.1 * k, px_, py_, 0.4, 90, 0, 'Out'), (T3 + 0.13 + 0.1 * k, px_, py_, 0.5, 90, 1, 'Snap'), (T3 + 0.4 + 0.1 * k, px_, py_, 1.8, 90, 0, 'Out')])
+    line(g, 'Line', s.story['captions']['point'], T3 + 0.14, T4, 260, -390, size=96)
+    g = s.group('Culprit', R, T4, T5)
+    frames(g, 'Shot', [(T4, 'shot_culprit1'), (RUN, 'shot_culprit2')],
+           [(T4, 700, 0, 1.3, -8, 1, 'Out'), (T4 + 0.1, 0, 0, 1.08, 0, 1, 'Back'), (RUN - 0.01, -10, 0, 1.12, 0, 1, 'Linear'), (RUN, 0, 0, 1.08, 2, 1, 'Snap'), (T5, -220, 0, 1.14, 3, 1, 'In')],
+           kicks=[T4 + 0.1, T4 + 0.16, RUN], kickPower=45, kickTime=0.22)
+    s.speed(g, RUN, T5, vertical=False, n=7)
+    # ⑤ 달빛 골목 추격: 고양이가 오른쪽으로 달리고 카메라가 따라감 → 손목시계 마취총 조준 · 발사 → 마취침이 꽂힘 → 펄쩍 · 비틀 · 기절
+    AIM, FIRE, BACK, HIT, WOB, KO, T8 = 4.32, 4.5, 4.66, 4.84, 5.02, 5.2, 5.5
+    CH = JJ_CAT_H * s.PH * s.PS                               # 고양이 키 (판 px)
+    PWp, PHp = s.PW * s.PS, s.PH * s.PS                    # 판 크기 px (비율 ↔ px)
+    cxr = lambda t: 0.22 + 0.5 * (t - T5)                  # 달리는 고양이 발끝 x (판 비율, 1초에 판 폭의 0.5 — 맞는 자리가 판 오른쪽 끝에 닿지 않게)
+    run = lambda t0, t1: [(t0 + 0.07 * j, f'anim_catrun_{j % 3 + 1}') for j in range(int((t1 - t0) / 0.07) + 1)]
+    CAMY = JJ_ROAD_Y - 0.2                                    # 카메라 높이 (길 · 집 · 달)
+    g = s.group('Chase', R, T5, AIM)
+    tr = s.cam(g, [(T5, 0.37, CAMY, 1.25, 0, 'Out'), (AIM, max(0.4, cxr(AIM) + 0.06), CAMY, 1.3, 0, 'Linear')])     # 판 왼쪽 끝 밖이 안 보이게
+    s.cel(tr, 'Cat', run(T5, AIM), [(T5, cxr(T5), JJ_ROAD_Y, 1, 0, 1, 'Out'), (AIM, cxr(AIM), JJ_ROAD_Y, 1, 0, 1, 'Linear')], height=CH, ref='anim_catrun_1')
+    for k in range(4):
+        t0 = T5 + 0.08 * k; x = cxr(t0) - 0.04
+        s.w(tr, f'Dust{k}', 'fx_dust', wsc('fx_dust', 220), [(t0 - 0.01, x, JJ_ROAD_Y - 0.03, 0.5, 0, 0, 'Out'), (t0, x, JJ_ROAD_Y - 0.03, 0.6, 0, 0.9, 'Snap'), (t0 + 0.3, x - 0.03, JJ_ROAD_Y - 0.06, 1.2, 0, 0, 'Out')])
+    s.speed(g, T5, AIM, vertical=False, n=5)
+    g = s.group('Aim', R, AIM, BACK)
+    frames(g, 'Shot', [(AIM, 'shot_aim1'), (FIRE, 'shot_aim2')],
+           [(AIM, 0, 0, 1.0, 0, 1, 'Out'), (FIRE - 0.01, 30, 0, 1.12, 0, 1, 'In'), (FIRE, -20, 0, 1.08, -2, 1, 'Snap'), (BACK, -10, 0, 1.12, -1, 1, 'Out')], kicks=[FIRE], kickPower=55, kickTime=0.18)
+    wx, wy = at(*JJ_AIM_WATCH, 1.08, -20)
+    pop_at(g, 'Muzzle', 'fx_sparkle', FIRE, wx, wy, wsc('fx_sparkle', 260), life=0.14)
+    s.s(g, 'Dart', 'prop_dart', wsc('prop_dart', 90), [(FIRE, wx, wy, 1, -6, 1, 'Snap'), (BACK, *at(*JJ_AIM_CAT, 1.12, -10), 0.5, -6, 1, 'In')])
+    g = s.group('Catch', R, BACK, T8)
+    hx_ = cxr(HIT); kx = hx_ + 0.04                        # 맞은 자리 · 쓰러진 자리 (발끝 x)
+    cxm = lambda x: min(0.68, x)                           # 카메라 x 상한 (줌 1.5 에서 판 오른쪽 끝 밖이 안 보이게)
+    tr = s.cam(g, [(BACK, cxm(cxr(BACK) + 0.04), CAMY, 1.3, 0, 'Out'), (HIT - 0.01, cxm(hx_ + 0.03), CAMY + 0.02, 1.35, 0, 'Linear'), (HIT, cxm(hx_ + 0.03), CAMY + 0.02, 1.6, -2, 'Snap'),
+                   (KO, cxm(kx), CAMY + 0.05, 1.5, 0, 'Out'), (T8, cxm(kx), CAMY + 0.05, 1.55, 0, 'Linear')], kicks=[HIT, KO], power=50, ktime=0.22)
+    s.cel(tr, 'Cat', run(BACK, HIT) + [(HIT, 'anim_catko_1'), (WOB, 'anim_catko_2'), (KO, 'anim_catko_3')],
+          [(BACK, cxr(BACK), JJ_ROAD_Y, 1, 0, 1, 'Out'), (HIT, hx_, JJ_ROAD_Y, 1, 0, 1, 'Linear'), (HIT + 0.08, hx_ + 0.01, JJ_ROAD_Y - 0.12, 1.05, 0, 1, 'Out'), (WOB - 0.02, hx_ + 0.02, JJ_ROAD_Y, 1, 0, 1, 'In'),
+           (WOB + 0.07, hx_ + 0.02, JJ_ROAD_Y, 1, -6, 1, 'InOut'), (KO - 0.02, hx_ + 0.03, JJ_ROAD_Y, 1, 6, 1, 'InOut'), (KO, kx, JJ_ROAD_Y, 1.0, 0, 1, 'Snap'), (KO + 0.06, kx, JJ_ROAD_Y, 1.04, 0, 1, 'Back'), (T8, kx, JJ_ROAD_Y, 1.0, 0, 1, 'Linear')],
+          height=CH, ref='anim_catrun_1')
+    rump = (hx_ - JJ_CAT_RUMP[0] * CH / PWp, JJ_ROAD_Y - JJ_CAT_RUMP[1] * CH / PHp)
+    s.w(tr, 'Dart', 'prop_dart', wsc('prop_dart', 120), [(BACK, rump[0] - 0.4, rump[1] - 0.05, 1, 4, 1, 'Out'), (HIT, rump[0], rump[1], 1, 4, 1, 'Linear'), (HIT + 0.01, rump[0], rump[1], 1, 4, 0, 'Snap')])
+    s.w(tr, 'Trail', 'fx_streak', wsc('fx_streak', 500), [(BACK, rump[0] - 0.48, rump[1] - 0.05, 1, 4, 0.8, 'Out'), (HIT, rump[0] - 0.09, rump[1], 1, 4, 0.8, 'Linear'), (HIT + 0.08, rump[0] - 0.05, rump[1], 0.6, 4, 0, 'Out')])
+    for k in range(2):
+        s.w(tr, f'HRing{k}', 'fx_shockring', wsc('fx_shockring', 260), [(HIT + 0.06 * k, *rump, 0.4, 90, 1, 'Snap'), (HIT + 0.3 + 0.06 * k, *rump, 2.0, 90, 0, 'Out')])
+    s.w(tr, 'HStar', 'fx_hit2', wsc('fx_hit2', 300), [(HIT - 0.01, *rump, 0, 0, 0, 'Out'), (HIT, *rump, 0.6, 0, 1, 'Snap'), (HIT + 0.1, *rump, 1.2, 15, 1, 'Back'), (HIT + 0.3, *rump, 1.3, 30, 0, 'Out')])
+    # (코풍선은 anim_catko_3 그림에 있음)
+    # ⑥ 기절한 고양이를 밟고 "사건 해결!" → 엄지 척 윙크
+    THUMB = 6.08
+    g = s.group('Solved', R, T8)
+    frames(g, 'Shot', [(T8, 'shot_win1'), (THUMB, 'shot_win2')],
+           [(T8, 0, 0, 1.22, 0, 1, 'Out'), (T8 + 0.12, 0, 50, 1.08, 0, 1, 'Back'), (THUMB - 0.01, 0, 60, 1.04, 0, 1, 'Linear'), (THUMB, 0, 60, 1.07, 0, 1, 'Snap'), (END + 0.4, 0, 70, 1.1, 0, 1, 'Linear')],
+           kicks=[T8 + 0.12, THUMB], kickPower=35, kickTime=0.2)
+    gx, gy = at(*JJ_WIN_GLASS, 1.08, 0, 50)
+    pop_at(g, 'Glare', 'fx_glare', T8 + 0.18, gx, gy, wsc('fx_glare', 260), life=0.35)
+    line(g, 'Line', s.story['captions']['solved'], T8 + 0.3, END + 0.4, -560, 380, size=96, w=760)     # 왼쪽 위 (가운데 탐정쥐 얼굴을 가리지 않게)
+    s.burst_ring(g, 'Spark', 'fx_sparkle', THUMB + 0.02, *at(*JJ_WIN_THUMB, 1.07, 0, 60), n=6, r=300, sc=wsc('fx_sparkle', 80), dur=0.25)
+    s.shower(g, 'Twinkle', 'fx_sparkle', T8 + 0.3, END, 8, -950, 950, 700, -620, sc=wsc('fx_sparkle', 60))
+    return None
+
+
+# 명탐정 쥐 v2 그림 속 자리 (그림 · 판 비율 · 그림이 바뀌면 다시 잼)
+JJ_CLUE_PTS = [(0.47, 0.8), (0.64, 0.47), (0.72, 0.3), (0.71, 0.73)]     # shot_clue1~4: 단서 자리 (발자국 · 할퀸 자국 · 털 · 생선 뼈)
+JJ_THINK_HEAD = (0.46, 0.43)      # shot_think: 머리 가운데
+JJ_THINK_GLASS = (0.45, 0.46)     # shot_think2: 안경
+JJ_POINT_TIP = (0.93, 0.37)       # shot_point: 손가락 끝
+JJ_ROAD_Y, JJ_CAT_H = 0.86, 0.24       # pano_on: 길 위 발끝 높이 · 고양이 셀 상자 높이 (판 높이 비율)
+JJ_CAT_RUMP = (0.55, 0.85)        # anim_catko_1: 꽂힌 마취침 (그린 침과 이어지게) · anim_catrun_1 키 기준 (발끝 가운데에서 뒤로 · 위로, 키 비율)
+JJ_AIM_WATCH, JJ_AIM_CAT = (0.45, 0.48), (0.86, 0.51)     # shot_aim: 시계 조준경 · 멀리 고양이
+JJ_WIN_GLASS, JJ_WIN_THUMB = (0.47, 0.26), (0.5, 0.22)  # shot_win: 안경 · 엄지
 
 
 def fondue_v1(s, R):
@@ -1638,4 +2761,4 @@ def maid(s, R):
     return None
 
 
-STORIES = {f.__name__: f for f in (parkrat, emperor, pharaoh, knight, sultan, alien, streamrat, ramjui, jwerry, starchef, jjdetective, fondue, bomber, icequeen, maid)}
+STORIES = {f.__name__: f for f in (zapham, parkrat, emperor, pharaoh, knight, sultan, alien, streamrat, ramjui, jwerry, starchef, jjdetective, fondue, bomber, icequeen, maid)}

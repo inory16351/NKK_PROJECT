@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_wall1.png and save the result as a NEW PNG file: shot_wall2.png (in the current working directory). Do not overwrite shot_wall1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_wall1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background, the same mouse hole. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The Tomcat SLIDES DOWN the wall and sits slumped on the floor, totally dizzy: eyes as two spirals, tongue hanging out, a big round bump on its head, three flat yellow STARS circling above it, its face still a bit flat; the crack lines stay on the wall. The pink tail tip is gone (inside the hole). Nothing else changes.

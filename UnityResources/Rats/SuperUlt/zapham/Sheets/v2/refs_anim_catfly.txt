@@ -1,0 +1,1 @@
+anim_shock.png ref_rig.png ref_flat_anim.png

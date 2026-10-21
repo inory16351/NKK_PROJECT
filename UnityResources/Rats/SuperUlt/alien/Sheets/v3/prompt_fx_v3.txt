@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_v3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers, NO stars.
+- Palette: alien LIME GREEN and mint, cream white, steel grey and charcoal for metal, warm orange for fire, pale sky blue for water.
+  1. a SIGNAL wave: three flat concentric lime-green ARCS (like a wifi or radio signal symbol) opening UPWARD
+  2. a TINY fighter jet seen from below as a small simple grey dart shape with a long thin white contrail behind it (pointing UP)
+  3. a flat AFTERBURNER flame seen from behind: a round cream-white core with an orange ring and a blue outer ring
+  4. a jagged steel-grey METAL SHARD of the mothership hull with a lime-green light strip on it
+  5. a bent charcoal hull PANEL chunk with small orange flames on one edge
+  6. a big flat pale-blue TEAR DROP

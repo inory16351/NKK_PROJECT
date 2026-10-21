@@ -1,0 +1,17 @@
+09:56:52 ok face_bg
+09:56:58 ok ufo1
+09:57:02 ok pano_a
+09:57:27 ok cu_face1
+09:57:40 ok anim_end
+09:57:53 ok ufo2
+09:58:05 ok pano_a_alt
+09:58:24 ok cu_face3
+09:58:29 ok cu_face2
+09:58:30 ok pano_b
+09:59:46 ok pano_b_alt
+10:00:22 ok pano_c
+10:02:01 ok pano_c_alt
+10:03:05 ok fx_flat
+10:03:15 ok boom
+10:04:51 ok beam
+DONE

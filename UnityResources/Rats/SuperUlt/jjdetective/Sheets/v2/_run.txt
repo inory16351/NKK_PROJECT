@@ -1,0 +1,20 @@
+11:31:32 ok shot_clue3
+11:31:32 ok shot_culprit1
+11:31:39 ok shot_think1
+11:31:59 ok shot_win1
+11:32:03 ok shot_clue1
+11:32:09 ok shot_clue4
+11:32:11 ok shot_aim1
+11:32:28 ok shot_culprit2
+11:32:31 ok shot_think2
+11:33:08 ok shot_clue2
+11:33:28 ok shot_aim2
+11:33:35 ok shot_win2
+11:34:26 ok fx_flat
+11:34:30 ok fx_hit
+11:34:37 ok pano_on
+11:34:40 ok shot_point
+11:34:42 ok anim_catko
+11:34:44 ok anim_catrun
+11:34:49 ok props_flat
+DONE
