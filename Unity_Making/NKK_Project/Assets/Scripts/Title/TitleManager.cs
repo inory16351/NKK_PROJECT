@@ -91,8 +91,19 @@ namespace NKK.Title
         void OnLang() { if (slotPanel && slotPanel.activeSelf) { if (slotTitle) slotTitle.text = SlotTitle(); Refresh(); } }
         string SlotTitle() => newMode ? Loc.Get(newTitleKey, newTitle) : Loc.Get(continueTitleKey, continueTitle);
 
+        // 마지막 층을 깨고 처음 왔을 때 (StageManager 가 켜고 타이틀 씬을 엶): 엔딩 컷씬 → 로비 (2026-10-21)
+        public static bool PendingEnding;
+
         void Start()
         {
+            if (PendingEnding && story)
+            {
+                PendingEnding = false;
+                if (menu) menu.SetActive(false);
+                Progress.I?.MarkEnding();                     // 건너뛰어도 본 것으로
+                story.Play(() => SceneManager.LoadScene(lobbyScene), "ending");
+                return;
+            }
             var p = Progress.I;
             bool any = false;
             if (p) for (int s = 1; s <= Progress.SlotCount; s++) if (p.SlotExists(s)) any = true;

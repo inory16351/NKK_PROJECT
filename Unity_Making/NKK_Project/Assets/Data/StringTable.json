@@ -10926,6 +10926,41 @@
    "en": "Squeak! Squeak!! Squeak!!! (Through humans and cats alike... we WILL escape!!)"
   },
   {
+   "string_key": 4000013,
+   "ko": "찍...! (마지막 문이... 열렸어.)",
+   "en": "Squeak...! (The last door... is open.)"
+  },
+  {
+   "string_key": 4000014,
+   "ko": "찍찍! (그 너머엔 처음 보는 빛이 쏟아지고 있었어.)",
+   "en": "Squeak squeak! (A light we'd never seen was pouring through.)"
+  },
+  {
+   "string_key": 4000015,
+   "ko": "찍찍찍!! (바깥이다!! 진짜 하늘이야!!)",
+   "en": "Squeak squeak squeak!! (We're outside!! The real sky!!)"
+  },
+  {
+   "string_key": 4000016,
+   "ko": "찍~ (이제 손가락의 은총 같은 건 필요 없어.)",
+   "en": "Squeak~ (We don't need the Finger's blessing anymore.)"
+  },
+  {
+   "string_key": 4000017,
+   "ko": "찍찍... (치즈는 이제 우리 힘으로 찾을 거야.)",
+   "en": "Squeak squeak... (From now on, we'll find our own cheese.)"
+  },
+  {
+   "string_key": 4000018,
+   "ko": "찍!찍!!찍!!! (모두 함께라면 어디든 갈 수 있으니까!!)",
+   "en": "Squeak! Squeak!! Squeak!!! (Together, we can go anywhere!!)"
+  },
+  {
+   "string_key": 4000019,
+   "ko": "찍...? (그런데... 저 멀리, 또 다른 연구소의 불빛이...)",
+   "en": "Squeak...? (But... far away, the lights of another lab...)"
+  },
+  {
    "string_key": 4100001,
    "ko": "실험체",
    "en": "Test Subject"

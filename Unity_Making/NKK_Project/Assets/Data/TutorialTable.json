@@ -1693,84 +1693,152 @@
    "cut": 1,
    "image": "story_01",
    "text": "찍... 찍찍찍...! (우리들은 그저 이곳이 낙원인 줄만 알고 있었지...)",
-   "text_sk": 4000001
+   "text_sk": 4000001,
+   "story": ""
   },
   {
    "line_id": 2,
    "cut": 1,
    "image": "story_01",
    "text": "찍찍! 찍~ (매일 치즈가 나오고, 쳇바퀴는 언제나 돌아갔으니까.)",
-   "text_sk": 4000002
+   "text_sk": 4000002,
+   "story": ""
   },
   {
    "line_id": 3,
    "cut": 2,
    "image": "story_02",
    "text": "찍찍...! (가끔 하늘에서 '손가락'이 내려왔어.)",
-   "text_sk": 4000003
+   "text_sk": 4000003,
+   "story": ""
   },
   {
    "line_id": 4,
    "cut": 2,
    "image": "story_02",
    "text": "찍~ 찍찍! (손가락의 은총을 받은 친구는 더 좋은 곳으로 간다고 믿었지.)",
-   "text_sk": 4000004
+   "text_sk": 4000004,
+   "story": ""
   },
   {
    "line_id": 5,
    "cut": 3,
    "image": "story_03",
    "text": "찍...? (그런데... 은총을 받은 친구들은 다시는 돌아오지 않았어.)",
-   "text_sk": 4000005
+   "text_sk": 4000005,
+   "story": ""
   },
   {
    "line_id": 6,
    "cut": 4,
    "image": "story_04",
    "text": "찍찍찍찍...! (우리는 모이면 모일수록 똑똑해졌고...)",
-   "text_sk": 4000006
+   "text_sk": 4000006,
+   "story": ""
   },
   {
    "line_id": 7,
    "cut": 4,
    "image": "story_04",
    "text": "찍!!! (결국 알아 버렸어. 우리가... 실험당하고 있다는 걸!!)",
-   "text_sk": 4000007
+   "text_sk": 4000007,
+   "story": ""
   },
   {
    "line_id": 8,
    "cut": 5,
    "image": "story_05",
    "text": "찍... 찍찍찍... (그날, 쥐류는 떠올렸다...)",
-   "text_sk": 4000008
+   "text_sk": 4000008,
+   "story": ""
   },
   {
    "line_id": 9,
    "cut": 5,
    "image": "story_05",
    "text": "찍찍... 찍...!! (놈들에게 지배당하던 공포를... 철창 속에 갇혀 있던 굴욕을...!!)",
-   "text_sk": 4000009
+   "text_sk": 4000009,
+   "story": ""
   },
   {
    "line_id": 10,
    "cut": 6,
    "image": "story_06",
    "text": "찍찍!! (이대로 있을 순 없어!)",
-   "text_sk": 4000010
+   "text_sk": 4000010,
+   "story": ""
   },
   {
    "line_id": 11,
    "cut": 6,
    "image": "story_06",
    "text": "찍찍찍!!! (힘을 모아서 이 연구실을 탈출하자!!)",
-   "text_sk": 4000011
+   "text_sk": 4000011,
+   "story": ""
   },
   {
    "line_id": 12,
    "cut": 7,
    "image": "story_07",
    "text": "찍!찍!!찍!!! (사람과 고양이의 방해를 뚫고... 반드시 탈출하는 거야!!)",
-   "text_sk": 4000012
+   "text_sk": 4000012,
+   "story": ""
+  },
+  {
+   "line_id": 13,
+   "cut": 1,
+   "image": "ending_01",
+   "text": "찍...! (마지막 문이... 열렸어.)",
+   "text_sk": 4000013,
+   "story": "ending"
+  },
+  {
+   "line_id": 14,
+   "cut": 1,
+   "image": "ending_01",
+   "text": "찍찍! (그 너머엔 처음 보는 빛이 쏟아지고 있었어.)",
+   "text_sk": 4000014,
+   "story": "ending"
+  },
+  {
+   "line_id": 15,
+   "cut": 2,
+   "image": "ending_02",
+   "text": "찍찍찍!! (바깥이다!! 진짜 하늘이야!!)",
+   "text_sk": 4000015,
+   "story": "ending"
+  },
+  {
+   "line_id": 16,
+   "cut": 3,
+   "image": "ending_03",
+   "text": "찍~ (이제 손가락의 은총 같은 건 필요 없어.)",
+   "text_sk": 4000016,
+   "story": "ending"
+  },
+  {
+   "line_id": 17,
+   "cut": 4,
+   "image": "ending_04",
+   "text": "찍찍... (치즈는 이제 우리 힘으로 찾을 거야.)",
+   "text_sk": 4000017,
+   "story": "ending"
+  },
+  {
+   "line_id": 18,
+   "cut": 4,
+   "image": "ending_04",
+   "text": "찍!찍!!찍!!! (모두 함께라면 어디든 갈 수 있으니까!!)",
+   "text_sk": 4000018,
+   "story": "ending"
+  },
+  {
+   "line_id": 19,
+   "cut": 5,
+   "image": "ending_05",
+   "text": "찍...? (그런데... 저 멀리, 또 다른 연구소의 불빛이...)",
+   "text_sk": 4000019,
+   "story": "ending"
   }
  ]
 }

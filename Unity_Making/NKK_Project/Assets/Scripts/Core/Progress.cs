@@ -33,6 +33,7 @@ namespace NKK
             public List<string> unlocks = new(); // 해금한 기능 id (튜토리얼 테이블 Unlock_Id)
             public bool tutoSkip;                // 튜토리얼 전 저장 → 모든 단계·기능을 연 것으로 침
             public bool tutoQuiet;               // 새 게임에서 '튜토리얼 안 함' (2026-10-19) → 대사 없이 단계만 조용히 지나감 (기능은 원래 조건대로 열림)
+            public bool endingSeen;              // 마지막 층을 깨고 엔딩 컷씬을 봄 (2026-10-21) — 한 번만
             public string savedAt;               // 마지막 저장 시각 (타이틀 슬롯 표시용)
             public ShopSave shop; public GachaSave gacha;       // 쥐구멍 암시장 · 유전자 뽑기 (2026-10-12)
             public AugSave aug;                  // 증강 보관함 (2026-10-19)
@@ -121,6 +122,10 @@ namespace NKK
         // 튜토리얼 안 함 (타이틀 '처음부터' 뒤 묻는 창, 사용자 2026-10-19): 대사·연출·튜토리얼 라운드 제한 없이, 단계의 해금만 원래 조건에서 일어남
         public bool TutoQuiet => tutoQuiet;
         public void SetTutoQuiet(bool on) { tutoQuiet = on; UnlockVersion++; Save(); }
+        // 엔딩 컷씬 (마지막 층 클리어 뒤 한 번)
+        bool endingSeen;
+        public bool EndingSeen => endingSeen;
+        public void MarkEnding() { endingSeen = true; Save(); }
         public void SkipTutorial() { tutoSkip = true; UnlockVersion++; Save(); }      // 밸런스 측정 등: 튜토리얼 안 띄우고 기능 전부 열림
         public bool TutoDone(string stepId) => tutoSkip || tuto.Contains(stepId);
         public void MarkTuto(string stepId) { if (tuto.Add(stepId)) { UnlockVersion++; Save(); } }      // 튜토리얼로 드러나는 기능(뒷골목)이 있어서 FeatureGate 도 다시 그림
@@ -385,7 +390,7 @@ namespace NKK
 
         public void Save()
         {
-            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, tutoQuiet = tutoQuiet, infinite = Infinite, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
+            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, tutoQuiet = tutoQuiet, endingSeen = endingSeen, infinite = Infinite, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
             d.tuto.AddRange(tuto); d.unlocks.AddRange(unlocks);
             d.nodes.AddRange(skills);
             d.achvOn.AddRange(achvOn);
@@ -397,7 +402,7 @@ namespace NKK
         void Load()
         {
             rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0;
-            tuto.Clear(); unlocks.Clear(); tutoSkip = tutoQuiet = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new(); aug = new();
+            tuto.Clear(); unlocks.Clear(); tutoSkip = tutoQuiet = endingSeen = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new(); aug = new();
             var s = PlayerPrefs.GetString(KeyOf(Slot), "");
             if (string.IsNullOrEmpty(s)) return;
             var d = JsonUtility.FromJson<SaveData>(s);
@@ -410,7 +415,7 @@ namespace NKK
             if (d.tuto != null) foreach (var id in d.tuto) tuto.Add(id);
             if (d.unlocks != null) foreach (var id in d.unlocks) unlocks.Add(id);
             tutoSkip = d.tutoSkip || d.ver == 0;      // 튜토리얼이 생기기 전 저장 = 다 본 것으로
-            tutoQuiet = d.tutoQuiet;
+            tutoQuiet = d.tutoQuiet; endingSeen = d.endingSeen;
             shop = d.shop ?? new(); gacha = d.gacha ?? new(); aug = d.aug ?? new();
             Infinite = d.infinite;
         }

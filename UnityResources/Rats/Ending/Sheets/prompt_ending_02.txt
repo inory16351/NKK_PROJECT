@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ending_02.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 full-frame illustration for a story cutscene (no transparent background), NO text, NO letters, NO numbers, no speech bubbles, no logos anywhere (any papers/screens show only simple shapes or rat silhouettes).
+- STYLE: match the attached game screenshot and the attached opening cutscene frame: cozy flat cartoon game art (Untitled Goose Game mood), completely FLAT colors, NO black outlines, no gloss, soft simple shapes, muted warm palette. The rats look exactly like the cute flat rats in the screenshot (white lab rats with red eyes, brown rats, grey mice; pink ears, pink noses, long pink tails). Humans look like the flat scientists in the attached human sheet (white lab coats).
+- Keep the main subject in the CENTER and UPPER part of the frame; the bottom 25% of the image will be covered by a subtitle box, so keep only floor/background there.
+- SCENE: OUTSIDE AT LAST. The flat rooftop of the laboratory building at sunrise, seen from a low angle. A huge happy swarm of cute rats (white, brown, grey) pours out of a rooftop door and runs across the roof, jumping and cheering with tiny arms raised, tails flying. The sky is wide and open with soft pink and orange dawn clouds and a big rising sun. Joyful, liberating, triumphant mood.

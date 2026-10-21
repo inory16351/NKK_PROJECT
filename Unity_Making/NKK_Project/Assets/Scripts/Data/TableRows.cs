@@ -216,7 +216,7 @@ namespace NKK.Data
         public string cond1_type, cond1_value, cond2_type, cond2_value, unlock, action, action_value; public int sort;
     }
     [Serializable] public class TutoLineRow { public int line_id, text_sk; public string step_id, speaker_id, face, text, highlight; }
-    [Serializable] public class TutoStoryRow { public int line_id, cut; public string image, text; public int text_sk; }
+    [Serializable] public class TutoStoryRow { public int line_id, cut; public string image, text; public int text_sk; public string story; }     // story: 비움 = 오프닝 · ending = 엔딩 (2026-10-21)
     [Serializable] public class TutorialTableFile { public List<TutoSpeakerRow> Speaker; public List<TutoStepRow> Step; public List<TutoLineRow> Line; public List<TutoStoryRow> Story; }
 
     // 증강 (증강 테이블, 2026-10-19): 효과 = 공용 스킬 효과 타입 두 개 (CommonSkill 이 공용 스킬 노드처럼 더함). 설명 자리표시 {1} {1b} {1c} {2} {2b} {2c}, 뒤에 % = ×100

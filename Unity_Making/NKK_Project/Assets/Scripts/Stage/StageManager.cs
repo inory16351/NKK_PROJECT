@@ -33,6 +33,7 @@ namespace NKK.Stage
         [Tooltip("층 클리어 연출 (연구 자료를 훔쳤다!!!). 비우면 바로 다음 층")] public Heist Heist;
         [Tooltip("마지막 층: 이 층 보스를 잡고 계단에 닿으면 판을 끝내고 로비로 (사용자 2026-10-12: 30층 보스 = 끝)")] public int lastFloor = 100;
         [Tooltip("마지막 층을 넘으면 돌아갈 씬")] public string lobbyScene = "Lobby";
+        [Tooltip("마지막 층을 처음 깼을 때 엔딩 컷씬을 틀 씬 (타이틀 씬 StoryPlayer, 끝나면 로비로). 비우면 엔딩 없음")] public string endingScene = "Title";
         public static int LastFloor { get; private set; } = 100;
         [Tooltip("층 보스 (스테이지 테이블 Boss). 보스 층이면 계단 방에서 대기, 살아 있는 동안 계단 못 씀")] public Boss Boss;
 
@@ -510,7 +511,14 @@ namespace NKK.Stage
             void Move()
             {
                 // 마지막 층 클리어 → 저장하고 로비로 (더 위 층은 없음)
-                if (lastFloor > 0 && from >= lastFloor) Game.FadeThen(() => { Game.SaveProgress(); UnityEngine.SceneManagement.SceneManager.LoadScene(lobbyScene); });
+                // 처음 깼으면 엔딩 컷씬 (타이틀 씬의 StoryPlayer) 을 본 뒤 로비로 (2026-10-21)
+                if (lastFloor > 0 && from >= lastFloor) Game.FadeThen(() =>
+                {
+                    Game.SaveProgress();
+                    bool ending = Progress.I && !Progress.I.EndingSeen && !string.IsNullOrEmpty(endingScene);
+                    if (ending) NKK.Title.TitleManager.PendingEnding = true;
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(ending ? endingScene : lobbyScene);
+                });
                 else Game.FadeThen(() => { if (Game.Floor == from) EnterFloor(from + 1); });
             }
             if (Heist) Heist.Begin(StairsPos, Move);

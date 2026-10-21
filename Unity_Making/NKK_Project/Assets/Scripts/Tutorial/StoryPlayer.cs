@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace NKK.Tutorial
 {
-    // 오프닝 컷씬 (씬 오브젝트 Story). 튜토리얼 테이블 Story 시트를 한 줄씩: 컷 그림(cut · image) + 아래 자막.
+    // 오프닝 · 엔딩 컷씬 (씬 오브젝트 Story). 튜토리얼 테이블 Story 시트를 한 줄씩: 컷 그림(cut · image) + 아래 자막. story 칸으로 오프닝/엔딩 구분.
     // 클릭·스페이스 = 글 다 보이기 → 다음 줄, 컷이 바뀌면 그림이 겹쳐 바뀜 (천천히 확대). 건너뛰기 버튼 = 바로 끝.
     // 시간은 unscaled. 글 자체는 테이블, 버튼 글은 씬 TMP
     public class StoryPlayer : MonoBehaviour
@@ -43,10 +43,12 @@ namespace NKK.Tutorial
             if (group && !Playing) group.alpha = 0;
         }
 
-        public void Play(Action onDone)
+        // which: 테이블 Story 시트 story 칸 (비움/"opening" = 오프닝 · "ending" = 엔딩)
+        public void Play(Action onDone, string which = "")
         {
             var db = GameDatabase.Instance;
-            rows.Clear(); if (db) rows.AddRange(db.Story);
+            string Key(string s) => string.IsNullOrEmpty(s) || s == "-" || s == "opening" ? "" : s;
+            rows.Clear(); if (db) foreach (var r in db.Story) if (Key(r.story) == Key(which)) rows.Add(r);
             done = onDone;
             if (rows.Count == 0) { onDone?.Invoke(); return; }
             Playing = true; ending = false; idx = -1; curCut = -1; fadeT = 0; aFront = false;
