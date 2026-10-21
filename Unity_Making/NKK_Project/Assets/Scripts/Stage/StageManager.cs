@@ -64,6 +64,10 @@ namespace NKK.Stage
         [Tooltip("일반 벽 거리 가중: × (1 + 이 값 × 시작 방과의 거리). 스테이지 테이블이 층 지형에 맞춰 벽 배율을 정하므로 0")] public float wallDistK = 0;
         [Tooltip("전투력이 적정보다 낮으면 벽 피해 = (전투력÷적정)^지수")] public float wallGateStairs = 1.5f;
         public float wallGate = 0.5f;
+        // 초반 계단 벽 완화 (사용자 2026-10-21: 초반 계단 벽이 너무 빡셈) — 1층 값에서 earlyEndFloor 층까지 고르게 원래 값으로
+        [Tooltip("초반 완화가 끝나는 층 (이 층부터 wallGateStairs · 계단 벽 체력 그대로)")] public int earlyEndFloor = 10;
+        [Tooltip("1층 계단 벽 감산 지수 (→ earlyEndFloor 층에서 wallGateStairs)")] public float earlyGateStairs = 0.5f;
+        [Tooltip("1층 계단 벽 체력 배율 (→ earlyEndFloor 층에서 1)")] public float earlyStairsHp = 0.4f;
         [Tooltip("첫 판(탈출 시도 1회째) 1층: 시작 방 옆 벽 하나는 무조건 부술 수 있게 = 그 벽 체력 배율 (전투력 부족 감쇠도 없음). 0 = 끔")] public float firstRunWallMul = 0.3f;
 
         [Header("벽 체력바 (웹 drawWallBar)")]
@@ -175,7 +179,8 @@ namespace NKK.Stage
             if (sr != null && sr.wall_path > 0)
             {
                 float S = sr.wall_path; int d = StairsDist;
-                if (d <= 1) { curStairsWall = S; curNormalWall = 1.2f; }
+                // 계단 방이 시작 방 바로 옆: 계단 벽 몫도 합의 stairsShare 까지만 (예전엔 합 전체가 계단 벽 하나에 몰려 두 배로 튐, 사용자 2026-10-21)
+                if (d <= 1) { curStairsWall = Mathf.Max(1, S * stairsShare); curNormalWall = 1.2f; }
                 else { curNormalWall = Mathf.Max(minNormalWall, S * (1 - stairsShare) / (d - 1)); curStairsWall = Mathf.Max(1, S - curNormalWall * (d - 1)); }
             }
         }
@@ -277,7 +282,7 @@ namespace NKK.Stage
             int f = Game.Floor;
             if (IsEasyRoom(ti, tj)) return PowNeed(f) * firstRunWallMul;
             var sr = Row(f);
-            if (IsStairsRoom(ti, tj)) return PowNeed(f) * (curStairsWall > 0 ? curStairsWall : sr != null ? sr.wall_stairs : Mathf.Min(wallPowStairs, 2 + 6 * (f - 1)));
+            if (IsStairsRoom(ti, tj)) return PowNeed(f) * (curStairsWall > 0 ? curStairsWall : sr != null ? sr.wall_stairs : Mathf.Min(wallPowStairs, 2 + 6 * (f - 1))) * Early(f, earlyStairsHp, 1);
             return PowNeed(f) * (curNormalWall > 0 ? curNormalWall : sr != null ? sr.wall_normal : wallPow) * (1 + wallDistK * RoomDist(new Vector2Int(ti, tj)));
         }
 
@@ -306,8 +311,10 @@ namespace NKK.Stage
         {
             if (IsEasyRoom(ti, tj)) return 1;
             float k = Mathf.Clamp(Power / PowNeed(Game.Floor), 0.001f, 1);
-            return Mathf.Pow(k, IsStairsRoom(ti, tj) ? wallGateStairs : wallGate);
+            return Mathf.Pow(k, IsStairsRoom(ti, tj) ? Early(Game.Floor, earlyGateStairs, wallGateStairs) : wallGate);
         }
+        // 초반 완화: 1층 = early, earlyEndFloor 층부터 = normal, 사이는 고르게
+        float Early(int f, float early, float normal) => earlyEndFloor <= 1 ? normal : Mathf.Lerp(early, normal, (f - 1f) / (earlyEndFloor - 1));
 
         // 슈퍼 점프: 이 사각형(게임 좌표)에 걸친 막힌 벽 (열린 방 → 레이아웃 안 안 열린 방 쪽)
         public List<(int i, int j, int di, int dj)> WallsIn(Rect r)

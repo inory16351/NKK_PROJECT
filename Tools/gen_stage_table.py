@@ -174,7 +174,7 @@ def stairs_dist(f, n, max_row=3):
 
 def walls(f):                       # (계단 방 벽, 일반 벽) 배율 — 일반 벽은 거리 가중 없음 (StageManager.wallDistK 0)
     S, d = path_target(f), stairs_dist(f, rooms(f))
-    if d <= 1: return round(S, 2), 1.2
+    if d <= 1: return round(S * STAIRS_SHARE, 2), 1.2      # 계단 방이 바로 옆이어도 계단 벽 몫은 합의 STAIRS_SHARE 까지 (2026-10-21, StageManager 와 같게)
     normal = max(MIN_NORMAL, S * (1 - STAIRS_SHARE) / (d - 1))
     return round(max(MIN_NORMAL, S - normal * (d - 1)), 2), round(normal, 2)
 
