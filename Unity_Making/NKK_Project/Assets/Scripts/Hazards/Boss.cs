@@ -1301,6 +1301,8 @@ namespace NKK.Hazards
             propHeld = !Cat && rig;
         }
         bool propAbove, propHeld;
+        [Tooltip("머리 위 소품: 머리 꼭대기와 소품 아래쪽 사이 (게임 단위)")] public float propGap = 14;
+        [Tooltip("고양이 보스 머리 위 소품: 몸 가운데에서 머리 쪽으로 (키 × 이 값)")] public float catPropAhead = 0.3f;
         [Tooltip("진압봉 그림에서 막대 방향 (도, 손잡이 → 끝) · 손잡이 위치 (막대 길이 중 끝에서 비율)")] public float batonArtAngle = -34, batonGrip = 0.14f;
 
         // 손에 쥔 소품 놓기: 진압봉 = 손잡이를 손에, 팔 방향으로 뻗음 · 서류 가방 = 손잡이를 손에 매달림 · 토치 = 손에 쥐고 바라보는 쪽
@@ -1630,7 +1632,9 @@ namespace NKK.Hazards
             else if (specialProp && specialProp.gameObject.activeSelf && specialProp.sprite && (specialProp.sprite == cloakSprite || specialProp.sprite == cloakFlySprite)) PlaceCloak();
             else if (specialProp && specialProp.gameObject.activeSelf)
             {
-                specialProp.transform.position = World.ToUnity(x + (propAbove ? face * 30 : 0), y, propAbove ? Height * 0.75f + Mathf.Sin(Time.time * 10) * 6 : boxSize * 0.38f);
+                // 머리 위: 소품 아래쪽이 머리 꼭대기보다 propGap 위 (예전 = 키 0.75 + 앞으로 30 → 고양이 보스는 입 자리라 물고 있는 것처럼 보였음, 2026-10-21)
+                float propH = specialProp.sprite ? specialProp.sprite.bounds.size.y * Mathf.Abs(specialProp.transform.localScale.y) / World.U : 0;
+                specialProp.transform.position = World.ToUnity(x + (propAbove && Cat ? face * Height * growK * catPropAhead : 0), y, propAbove ? Height * growK + propGap + propH * 0.5f + Mathf.Sin(Time.time * 10) * 6 : boxSize * 0.38f);
                 specialProp.sortingOrder = World.SortOrder(y) + 30;
             }
             // 실루엣 색 (사람 리그는 Apply 가 매번 색을 되돌림, 고양이 리그는 원래 색으로 되돌림)

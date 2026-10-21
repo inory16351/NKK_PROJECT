@@ -338,6 +338,7 @@ namespace NKK.Stage
         public void SuperBreakWall(int i, int j, int di, int dj, Rat by)
         {
             if (by) wallBy = by;
+            DamageMeter.Add(by, IsStairsRoom(i + di, j + dj) ? WallMax(i + di, j + dj) * 0.25f : WallHP(i, j, di, dj), WallHP(i, j, di, dj));      // 딜 미터기
             if (IsStairsRoom(i + di, j + dj)) { var k = WallKey(i, j, di, dj); float hp = WallHP(i, j, di, dj) - WallMax(i + di, j + dj) * 0.25f; walls[k] = hp; ShakeWall(i, j, di, dj); if (hp <= 0) BreakWall(i, j, di, dj); }
             else BreakWall(i, j, di, dj);
         }

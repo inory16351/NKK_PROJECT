@@ -26,6 +26,8 @@ namespace NKK.Ults
         [Tooltip("화면에 쥐가 있을 때 초당 확률 (평균 8분에 한 번)")] public float chancePerSec = 1f / 480;
         [Tooltip("한 번 터지면 쉬는 시간 · 첫 발동까지 (초)")] public float cool = 120, firstCool = 60;
         [Tooltip("박살 피해 = 쥐 공격력 × 이 값 (화면 속 물건은 체력과 상관없이 전부 박살)")] public float damageK = 15;
+        [Tooltip("보스 피해 = 박살 피해 × 이 값 (화면 안에서 싸우는 중인 보스만, 2026-10-21)")] public float bossDamageK = 3;
+        [Tooltip("보스 피해 상한 = 보스 최대 체력 × 이 비율 (한 방에 안 죽게)")] [Range(0, 1)] public float bossCap = 0.15f;
         [Tooltip("단계 시간 (초): 컷인 · 기 모으기 · 발사 · 하늘 · 낙하 · 둥실 · 착지")] public float tCut = 1.9f, tCharge = 1.5f, tLaunch = 0.35f, tSky = 1.3f, tFall = 0.38f, tFloat = 1.5f, tDrop = 1;
 
         [Header("화면 (HUD 자식) — 글은 씬 TMP")]
@@ -313,6 +315,17 @@ namespace NKK.Ults
             }
             var cat = Items.Cats ? Items.Cats.Current : null;
             if (cat && cat.Alive && Ults.ViewRect(0).Contains(new Vector2(cat.x, cat.y))) cat.Damage(Mathf.Max(sjD * 2, cat.hp + 1), Random.Range(0, Mathf.PI * 2), r);
+            // 보스: 화면 안 · 싸우는 중이면 큰 피해 (상한 = 최대 체력 비율)
+            var boss = NKK.Hazards.Boss.Current;
+            if (boss && boss.CanHit && Ults.ViewRect(0).Contains(new Vector2(boss.x, boss.y)))
+            {
+                float cap = boss.hpMax * bossCap, bd = Mathf.Min(sjD * bossDamageK, cap), before = boss.hp;
+                boss.Damage(bd, r, Mathf.Atan2(boss.y - r.y, boss.x - r.x), true);
+                float over = (before - boss.hp) - cap;           // 보스 피해 배율(공용 스킬 등)로 상한을 넘은 만큼 되돌림
+                if (over > 0 && boss.hp > 0) { boss.hp += over; DamageMeter.Remove(r, over); }
+                Debug.Log($"[SuperJump] 보스 피해 {before - boss.hp:0} (요청 {bd:0} · 상한 {cap:0})");
+            }
+            else if (boss) Debug.Log($"[SuperJump] 보스 안 맞음 (상태 {boss.State} · 화면 안 {Ults.ViewRect(0).Contains(new Vector2(boss.x, boss.y))})");
             int nw = walls.Count;
             foreach (var w in walls) Stage.SuperBreakWall(w.i, w.j, w.di, w.dj, r);
             walls.Clear();
