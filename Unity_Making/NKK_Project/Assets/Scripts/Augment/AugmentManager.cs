@@ -12,7 +12,7 @@ namespace NKK
     //  · 31층 도달로 해금 → 31층 이상을 클리어하면 다음 층이 시작될 때 3장 중 1장 고르기 (게임 멈춤)
     //  · 얻은 증강은 바로 보관함(증강 연구소)에 쌓임. 장착 슬롯(기본 5 + 공용 스킬)이 비면 장착, 꽉 차면 보관함으로
     //  · 관리 창 (HUD 버튼 / Tab): 슬롯 ↔ 보관함 교체 · 빼기 · 합성 (판 안에서 합성한 재료는 보관함에서도 사라짐)
-    //  · 층 클리어 때 장착한 증강마다 강화 포인트 (Heist → Augments.GivePoints)
+    //  · 판 안 보관함 = 이번 판에 얻은 증강만 (Augments.RunItems) · 같은 증강 두 개 장착 불가 · 고르기 창 20초 뒤 자동 선택 (2026-10-21)
     public class AugmentManager : MonoBehaviour
     {
         public static AugmentManager I { get; private set; }
@@ -28,6 +28,8 @@ namespace NKK
         [Tooltip("카드 3장 (순서대로)")] public AugmentCard[] pickCards = new AugmentCard[3];
         [Tooltip("제목 (자리: {floor} = 클리어한 층)")] public TMP_Text pickTitle;
         [Tooltip("슬롯이 꽉 찼을 때 켜지는 안내 ('보관함으로 가요')")] public GameObject pickFullNote;
+        [Tooltip("안 고르면 이 초 뒤 자동 선택 (가장 높은 등급, 같으면 가장 왼쪽 카드). 0 = 끔 (2026-10-21)")] public float pickAutoSec = 20;
+        [Tooltip("자동 선택까지 남은 초 (자리: {n})")] public TMP_Text pickTimerText;
 
         [Header("HUD 슬롯 줄")]
         [Tooltip("해금 전엔 숨김")] public GameObject barRoot;
@@ -51,6 +53,8 @@ namespace NKK
         public TMP_Text actionLabel;
         public string equipLabel = "장착", replaceLabel = "교체할 슬롯 고르기", unequipLabel = "빼기", replacePickLabel = "바꿀 슬롯을 누르세요";
         public int equipLabelKey, replaceLabelKey, unequipLabelKey, replacePickLabelKey;
+        [Tooltip("같은 증강이 이미 장착돼 있을 때 버튼 글 (누를 수 없음)")] public string sameLabel = "같은 증강 장착 중";
+        public int sameLabelKey;
         [Tooltip("합성 모드 켜기/끄기")] public Button synthToggle;
         [Tooltip("합성 모드일 때 켜짐 (안내 글 등)")] public GameObject synthOnMark;
         [Tooltip("합성하기 (글 자리: {n} {need})")] public Button synthButton;
@@ -69,8 +73,8 @@ namespace NKK
         readonly List<GameObject> emptyCards = new(), barEmpties = new(), lockCards = new();
         readonly List<int> synthSel = new();
         int selUid; bool synthMode, replaceMode;
-        int builtVer = -1, barVer = -1; float resultT;
-        string pickTitleTpl, synthTpl, resultTpl, countTpl;
+        int builtVer = -1, barVer = -1; float resultT, pickLeft;
+        string pickTitleTpl, synthTpl, resultTpl, countTpl, pickTimerTpl;
 
         void Awake()
         {
@@ -96,6 +100,7 @@ namespace NKK
             synthTpl = synthLabel ? LocText.Tpl(synthLabel, synthLabel.text) : "";
             resultTpl = synthResult ? LocText.Tpl(synthResult, synthResult.text) : "";
             countTpl = slotCountText ? LocText.Tpl(slotCountText, slotCountText.text) : "";
+            pickTimerTpl = pickTimerText ? LocText.Tpl(pickTimerText, pickTimerText.text) : "";
             Augments.EquipCarry();          // 41층 해금: 들고 가는 증강
         }
         void OnDestroy() { if (I == this) { I = null; Pausing = false; } Augments.TestOpen = false; }
@@ -113,6 +118,13 @@ namespace NKK
             UpdateBar();
             if (resultT > 0 && (resultT -= Time.unscaledDeltaTime) <= 0 && synthResult) synthResult.gameObject.SetActive(false);
             if (pendingFloor > 0 && CanShowPick()) ShowPick();
+            // 안 고르면 자동 선택 (게임이 멈춰 있으니 실제 시간으로 셈)
+            if (PickShowing && pickAutoSec > 0)
+            {
+                pickLeft -= Time.unscaledDeltaTime;
+                if (pickTimerText) pickTimerText.text = pickTimerTpl.Replace("{n}", Mathf.CeilToInt(Mathf.Max(0, pickLeft)).ToString());
+                if (pickLeft <= 0) Pick(BestOffer());
+            }
             var k = Keyboard.current;
             if (k != null && !Pausing && k.tabKey.wasPressedThisFrame && Augments.Unlocked && !GameOver.Active && !Heist.Active) OpenManage();
             else if (k != null && managePanel && managePanel.activeSelf && (k.escapeKey.wasPressedThisFrame || k.tabKey.wasPressedThisFrame)) CloseManage();
@@ -128,11 +140,9 @@ namespace NKK
             int floor = pendingFloor; pendingFloor = -1;
             offer.Clear(); offer.AddRange(Augments.RollOffer(floor, Augments.OfferCount));
             if (offer.Count == 0) return;
-            if (autoPick || !pickPanel)
-            {
-                int best = 0; for (int i = 1; i < offer.Count; i++) if (offer[i].grade > offer[best].grade) best = i;
-                Take(offer[best]); return;
-            }
+            if (autoPick || !pickPanel) { Take(offer[BestOffer()]); return; }
+            pickLeft = pickAutoSec;
+            if (pickTimerText) { pickTimerText.gameObject.SetActive(pickAutoSec > 0); pickTimerText.text = pickTimerTpl.Replace("{n}", Mathf.CeilToInt(pickAutoSec).ToString()); }
             for (int i = 0; i < pickCards.Length; i++)
             {
                 if (!pickCards[i]) continue;
@@ -146,6 +156,8 @@ namespace NKK
             Pausing = true;
             SfxManager.Play("jgl_unlock");
         }
+        // 가장 높은 등급 (같으면 가장 왼쪽 = 앞 카드)
+        int BestOffer() { int best = 0; for (int i = 1; i < offer.Count; i++) if (offer[i].grade > offer[best].grade) best = i; return best; }
         void Pick(int i)
         {
             if (i < 0 || i >= offer.Count) return;
@@ -158,7 +170,8 @@ namespace NKK
         {
             float t0 = CommonSkill.TimeAdd;
             var it = Augments.Add(r.augment_id);
-            if (it != null && Augments.HasFreeSlot) Augments.Equip(it.uid);
+            if (it != null) Augments.AddToRun(it.uid);                       // 판 안 보관함
+            if (it != null && Augments.HasFreeSlot) Augments.Equip(it.uid);  // 같은 증강이 장착돼 있으면 Equip 이 거절 → 보관함으로
             GiveTimeDelta(t0);
             Debug.Log($"[Augment] {r.aug_name} (등급 {r.grade}) {(it != null && Augments.IsEquipped(it.uid) ? "장착" : "보관함")}");
         }
@@ -217,7 +230,7 @@ namespace NKK
             for (int i = 0; i < lockCards.Count; i++) { lockCards[i].SetActive(i < locked); lockCards[i].transform.SetAsLastSibling(); SlotArt(lockCards[i], true); }
             // 보관함 (장착 안 한 것, 높은 등급 · 높은 레벨 먼저)
             var st = new List<Progress.AugItem>();
-            foreach (var it in Augments.Items) if (!Augments.IsEquipped(it.uid) && Augments.RowOf(it) != null) st.Add(it);
+            foreach (var it in Augments.Items) if (!Augments.IsEquipped(it.uid) && Augments.InRun(it.uid) && Augments.RowOf(it) != null) st.Add(it);      // 이번 판에 얻은 것만
             st.Sort((a, b) => { int g = Augments.RowOf(b).grade.CompareTo(Augments.RowOf(a).grade); return g != 0 ? g : b.lv.CompareTo(a.lv); });
             Fill(storageCards, storageParent, st.Count);
             if (storageEmptyNote) storageEmptyNote.SetActive(st.Count == 0);
@@ -231,8 +244,10 @@ namespace NKK
             if (actionButton)
             {
                 actionButton.gameObject.SetActive(sel != null && !synthMode);
-                actionButton.interactable = !replaceMode;
-                string lab = replaceMode ? Loc.Get(replacePickLabelKey, replacePickLabel) : selEq ? Loc.Get(unequipLabelKey, unequipLabel) : Augments.HasFreeSlot ? Loc.Get(equipLabelKey, equipLabel) : Loc.Get(replaceLabelKey, replaceLabel);
+                // 같은 증강이 이미 장착 중 (빈 칸 장착 불가 · 교체는 그 증강 자리와만 되지만 단순하게 막음)
+                bool same = sel != null && !selEq && Augments.SameEquipped(sel.uid);
+                actionButton.interactable = !replaceMode && !same;
+                string lab = replaceMode ? Loc.Get(replacePickLabelKey, replacePickLabel) : selEq ? Loc.Get(unequipLabelKey, unequipLabel) : same ? Loc.Get(sameLabelKey, sameLabel) : Augments.HasFreeSlot ? Loc.Get(equipLabelKey, equipLabel) : Loc.Get(replaceLabelKey, replaceLabel);
                 if (actionLabel) actionLabel.text = lab;
                 var bi = actionButton.image; var bs = selEq ? unequipSprite : equipSprite; if (bi && bs) bi.sprite = bs;      // 장착 = 초록 · 빼기 = 빨강
             }
@@ -317,6 +332,7 @@ namespace NKK
             synthSel.Clear();
             if (res != null)
             {
+                Augments.AddToRun(res.uid);
                 if (Augments.HasFreeSlot) Augments.Equip(res.uid);
                 selUid = res.uid;
                 if (synthResult) { synthResult.text = resultTpl.Replace("{name}", Augments.RowOf(res).aug_name); synthResult.gameObject.SetActive(true); resultT = 2.5f; }

@@ -51,6 +51,10 @@
   {
    "key": "log_keep",
    "value": 100.0
+  },
+  {
+   "key": "shard_full_tier",
+   "value": 16.0
   }
  ],
  "Gacha_Grade": [

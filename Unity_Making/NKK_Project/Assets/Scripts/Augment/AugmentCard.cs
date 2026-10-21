@@ -14,7 +14,7 @@ namespace NKK
         public TMP_Text nameText, descText;
         [Tooltip("등급 이름")] public TMP_Text gradeText;
         [Tooltip("강화 레벨 (자리: {lv}, 0 이면 숨김)")] public TMP_Text levelText;
-        [Tooltip("강화 포인트 (자리: {pts})")] public TMP_Text pointsText;
+        [Tooltip("강화 재료 같은 증강 수 (자리: {pts})")] public TMP_Text pointsText;
         [Tooltip("골랐을 때 켜짐")] public GameObject selectMark;
         [Tooltip("새로 얻음 표시")] public GameObject newMark;
         [Tooltip("장착 중 / 들고 가기 표시")] public GameObject equipMark;
@@ -67,7 +67,8 @@ namespace NKK
             if (side < 1) { var p = im.rectTransform.parent as RectTransform; var sd = im.rectTransform.sizeDelta; side = p ? Mathf.Min(p.rect.width + sd.x, p.rect.height + sd.y) : 100; }
             im.pixelsPerUnitMultiplier = Mathf.Max(0.5f, s.border.x / Mathf.Clamp(side * k, 8f, 34f));     // 큰 카드는 테두리 최대 34px (글이 테두리를 덮지 않게)
         }
-        public void BindItem(Progress.AugItem it) => Bind(Augments.RowOf(it), it != null ? it.lv : 0, it != null ? it.uid : 0, it != null ? it.pts : -1);
+        // spares = 강화 재료로 쓸 같은 증강 수 표시 (pointsText 칸, 자리 {pts}) — 로비 증강 연구소 자세히만 (2026-10-21 강화 포인트 없앰)
+        public void BindItem(Progress.AugItem it, bool spares = false) => Bind(Augments.RowOf(it), it != null ? it.lv : 0, it != null ? it.uid : 0, it != null && spares ? Augments.Spares(it).Count : -1);
 
         public void SetSelected(bool on) { if (selectMark) selectMark.SetActive(on); }
         public void SetNew(bool on) { if (newMark) newMark.SetActive(on); }

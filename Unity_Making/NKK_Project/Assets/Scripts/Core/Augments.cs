@@ -50,7 +50,7 @@ namespace NKK
         {
             if (S == null) return;
             S.items.RemoveAll(i => i.uid == uid);
-            Equipped.Remove(uid);
+            Equipped.Remove(uid); RunItems.Remove(uid);
             if (S.carry == uid) S.carry = 0;
             P.Save(); Touch();
         }
@@ -91,8 +91,18 @@ namespace NKK
         }
         static string Num(float v) => Mathf.Abs(v - Mathf.Round(v)) < 0.05f ? Mathf.RoundToInt(v).ToString() : v.ToString("0.#", CultureInfo.InvariantCulture);
 
-        // ── 강화 (포인트 + 치즈) ──
-        public static int UpPoints(int lv) => Mathf.RoundToInt(Cfg("up_pt_base", 150) * Mathf.Pow(Cfg("up_pt_grow", 1.6f), lv));
+        // ── 강화 (같은 증강 소모 + 치즈, 2026-10-21 사용자: 강화 포인트 없앰) ──
+        // 레벨 lv → lv+1 에 드는 같은 증강 수 = 증강 설정 up_copy_(lv+1) (없으면 1)
+        public static int UpCopies(int lv) => Mathf.Max(1, Mathf.RoundToInt(Cfg("up_copy_" + (lv + 1), 1)));
+        // 재료로 쓸 수 있는 같은 증강 (자기 자신 · 장착 중 · 들고 가는 것 빼고, 낮은 레벨 먼저)
+        public static List<Progress.AugItem> Spares(Progress.AugItem it)
+        {
+            var l = new List<Progress.AugItem>();
+            if (it == null) return l;
+            foreach (var o in Items) if (o.uid != it.uid && o.id == it.id && !IsEquipped(o.uid) && (S == null || o.uid != S.carry)) l.Add(o);
+            l.Sort((a, b) => a.lv.CompareTo(b.lv));
+            return l;
+        }
         public static double UpCheese(int lv)
         {
             var st = DB && P ? DB.StageOf(Mathf.Clamp(P.maxFloor, 1, NKK.Stage.StageManager.LastFloor)) : null;
@@ -101,11 +111,14 @@ namespace NKK
             double floorK = System.Math.Pow(Cfg("up_cheese_floor_grow", 1), Mathf.Min(f, (int)Cfg("up_cheese_floor_cap", 30)) - 1);   // 상점 BC 와 같은 층 수입 배율 (2026-10-19)
             return System.Math.Round(Cfg("up_cheese_base", 40) * mul * floorK * Mathf.Pow(Cfg("up_cheese_grow", 1.5f), lv));
         }
-        public static bool CanUpgrade(Progress.AugItem it) => it != null && P && it.lv < MaxLevel && it.pts >= UpPoints(it.lv) && P.cheese >= UpCheese(it.lv);
+        public static bool CanUpgrade(Progress.AugItem it) => it != null && P && it.lv < MaxLevel && Spares(it).Count >= UpCopies(it.lv) && P.cheese >= UpCheese(it.lv);
         public static bool Upgrade(Progress.AugItem it)
         {
             if (!CanUpgrade(it)) return false;
-            P.cheese -= UpCheese(it.lv); it.pts -= UpPoints(it.lv); it.lv++;
+            var use = Spares(it); int n = UpCopies(it.lv);
+            P.cheese -= UpCheese(it.lv);
+            for (int i = 0; i < n; i++) S.items.Remove(use[i]);       // 재료 증강은 사라짐 (그 강화 레벨도)
+            it.lv++;
             P.Save(); Touch();
             return true;
         }
@@ -169,35 +182,38 @@ namespace NKK
 
         // ── 판 안 장착 (저장 안 함) ──
         public static readonly List<int> Equipped = new();
+        // 판 안 보관함 = 이번 판에 얻은 증강만 (2026-10-21 사용자: 아웃게임 보관함과 분리. 판이 끝나면 그대로 아웃게임 보관함에 남고, 다음 판 판 안에선 안 보임)
+        public static readonly List<int> RunItems = new();
         public static bool IsEquipped(int uid) => Equipped.Contains(uid);
+        public static bool InRun(int uid) => RunItems.Contains(uid) || Equipped.Contains(uid);
         public static bool HasFreeSlot => Equipped.Count < SlotCount;
-        public static void ClearRun() { Equipped.Clear(); Touch(); }
+        public static void ClearRun() { Equipped.Clear(); RunItems.Clear(); Touch(); }
+        public static void AddToRun(int uid) { if (uid != 0 && !RunItems.Contains(uid)) { RunItems.Add(uid); Touch(); } }
+        // 같은 증강(id)이 이미 장착돼 있음 (ignoreUid = 교체로 빠질 칸)
+        public static bool SameEquipped(int uid, int ignoreUid = 0)
+        {
+            var it = Item(uid); if (it == null) return false;
+            foreach (var e in Equipped) { if (e == uid || e == ignoreUid) continue; var o = Item(e); if (o != null && o.id == it.id) return true; }
+            return false;
+        }
         public static bool Equip(int uid)
         {
-            if (Item(uid) == null || Equipped.Contains(uid) || !HasFreeSlot) return false;
+            if (Item(uid) == null || Equipped.Contains(uid) || !HasFreeSlot || SameEquipped(uid)) return false;     // 같은 증강 장착 불가 (2026-10-21)
             Equipped.Add(uid); var it = Item(uid); if (it != null) it.isNew = false;
             Touch(); return true;
         }
-        public static void Unequip(int uid) { if (Equipped.Remove(uid)) Touch(); }
+        public static void Unequip(int uid) { if (Equipped.Remove(uid)) { AddToRun(uid); Touch(); } }
         // 장착 중 a 를 보관함의 b 로 바꿈 (같은 자리)
         public static bool Swap(int equippedUid, int storageUid)
         {
             int i = Equipped.IndexOf(equippedUid);
-            if (i < 0 || Item(storageUid) == null || Equipped.Contains(storageUid)) return false;
-            Equipped[i] = storageUid; Touch(); return true;
+            if (i < 0 || Item(storageUid) == null || Equipped.Contains(storageUid) || SameEquipped(storageUid, equippedUid)) return false;
+            Equipped[i] = storageUid; AddToRun(equippedUid); Touch(); return true;
         }
         // 들고 가기 (판 시작): 해금됐고 보관함에 있으면 장착
         public static void EquipCarry() { if (CarryUnlocked && S != null && S.carry != 0 && Item(S.carry) != null) Equip(S.carry); }
         public static int Carry { get => S != null ? S.carry : 0; set { if (S == null) return; S.carry = value; P.Save(); Touch(); } }
 
-        // 층 클리어: 장착한 증강 한 개마다 강화 포인트 = 클리어 층 × pt_per_floor (사용자 2026-10-19)
-        public static void GivePoints(int clearedFloor)
-        {
-            if (S == null || Equipped.Count == 0) return;
-            int pts = Mathf.Max(1, Mathf.RoundToInt(clearedFloor * Cfg("pt_per_floor", 1)));
-            foreach (var u in Equipped) { var it = Item(u); if (it != null) it.pts += pts; }
-            P.Save(); Touch();
-        }
 
         // 장착 중인 특수 효과 (타입 → [특수 효과 행, 강화 레벨] 목록) — AugmentSpecials 가 매 프레임 읽음
         static int spVer = -1;

@@ -81,7 +81,12 @@ namespace NKK
         // 연출을 다 봄 → 복구용 결과 지움
         public static void ClearPending() { if (P && P.gacha.pending.Count > 0) { P.gacha.pending.Clear(); P.Save(); } }
 
-        public static int ShardsOf(Grade g) { if (Db?.Gacha.Gacha_Grade != null) foreach (var r in Db.Gacha.Gacha_Grade) if (r.Grade == g) return r.shard_count; return 1; }
+        // 조각 개수 = 테이블 shard_count × 훈장 ÷ shard_full_tier (16훈장 = 테이블 값, 최소 1, 2026-10-21)
+        public static int ShardsOf(Grade g)
+        {
+            int n = 1; if (Db?.Gacha.Gacha_Grade != null) foreach (var r in Db.Gacha.Gacha_Grade) if (r.Grade == g) { n = r.shard_count; break; }
+            return Mathf.Max(1, Mathf.RoundToInt(n * BlackMarket.TierK(Cfg("shard_full_tier", 16))));
+        }
         public static float RateOf(Grade g) { if (Db?.Gacha.Gacha_Grade != null) foreach (var r in Db.Gacha.Gacha_Grade) if (r.Grade == g) return r.rate; return 0; }
 
         static Grade Roll(List<GachaGradeRow> rows, bool guarantee)

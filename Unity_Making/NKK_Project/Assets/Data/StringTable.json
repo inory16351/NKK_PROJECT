@@ -14551,6 +14551,36 @@
    "en": "Damage {n}"
   },
   {
+   "string_key": 8000532,
+   "ko": "강화 (같은 증강 {have}/{need} · 치즈 {cheese})",
+   "en": "Upgrade (Duplicates {have}/{need} · Cheese {cheese})"
+  },
+  {
+   "string_key": 8000533,
+   "ko": "같은 증강 {pts}개 보유",
+   "en": "{pts} duplicate(s) owned"
+  },
+  {
+   "string_key": 8000534,
+   "ko": "같은 증강 장착 중",
+   "en": "Same Augment equipped"
+  },
+  {
+   "string_key": 8000535,
+   "ko": "필살기 카메라 고정 켬",
+   "en": "Ultimate camera lock ON"
+  },
+  {
+   "string_key": 8000536,
+   "ko": "필살기 카메라 고정 끔",
+   "en": "Ultimate camera lock OFF"
+  },
+  {
+   "string_key": 8000537,
+   "ko": "{n}초 뒤에 가장 좋은 증강을 자동으로 골라요",
+   "en": "Auto-picking the best Augment in {n}s"
+  },
+  {
    "string_key": 9000001,
    "ko": "찍찍!! {power}",
    "en": "SQUEAK!! {power}"

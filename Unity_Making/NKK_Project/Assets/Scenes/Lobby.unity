@@ -39682,7 +39682,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC15\uD654 ({pts}/{need}P \xB7 \uCE58\uC988 {cheese})"
+  m_text: "\uAC15\uD654 (\uAC19\uC740 \uC99D\uAC15 {have}/{need} \xB7 \uCE58\uC988
+    {cheese})"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
   m_sharedMaterial: {fileID: -6973996884597535460, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
@@ -39774,7 +39775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5918c9e9998c044419ddd45fa545d070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.LocText
-  key: 8000480
+  key: 8000532
   template: 1
 --- !u!1 &771474848
 GameObject:
@@ -87426,7 +87427,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC15\uD654 \uD3EC\uC778\uD2B8 {pts}"
+  m_text: "\uAC19\uC740 \uC99D\uAC15 {pts}\uAC1C \uBCF4\uC720"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
   m_sharedMaterial: {fileID: -6973996884597535460, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
@@ -87518,7 +87519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5918c9e9998c044419ddd45fa545d070, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.LocText
-  key: 8000489
+  key: 8000533
   template: 1
 --- !u!1 &1721833153
 GameObject:

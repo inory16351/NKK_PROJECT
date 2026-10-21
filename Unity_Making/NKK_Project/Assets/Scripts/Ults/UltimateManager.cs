@@ -69,16 +69,29 @@ namespace NKK.Ults
         [Tooltip("공용 스킬로 줄어도 최소 (초)")] public float ultCooldownMin = 0;
         [Tooltip("상황극 중 주변 사람·고양이 휘말림 반경 · 속도 (0.3초마다)")] public float actorRadius = 220, actorSpeed = 620;
         [Tooltip("테스트: 시작부터 모든 게이지를 채움")] public bool testFullGauge;
+        [Header("동시 필살기 (2026-10-21 사용자: 필살기가 너무 쌓임)")]
+        [Tooltip("이 훈장부터 필살기 여러 개를 동시에 (두 번째부터는 컷인 없이 바로 상황극). 0 = 끔")] public int concurrentTier = 8;
+        [Tooltip("동시에 돌아가는 필살기 최대 수 (컷인 있는 대표 1 + 나머지)")] public int maxConcurrent = 3;
+        [Header("카메라 고정 (Y 키로 켜고 끔, 저장)")]
+        public UnityEngine.InputSystem.Key camLockKey = UnityEngine.InputSystem.Key.Y;
+        [Tooltip("켜고 끌 때 배너 (빈칸 = 안 띄움)")] public string camLockOn = "필살기 카메라 고정 켬", camLockOff = "필살기 카메라 고정 끔";
+        public int camLockOnKey, camLockOffKey;
+        const string CamLockPref = "nkk_ult_cam";
+        public static bool CamLock => PlayerPrefs.GetInt(CamLockPref, 1) == 1;
 
         // ── 상태 ──
         readonly List<Rat> queue = new();
         readonly Dictionary<Rat, UltButton> buttons = new();
         readonly List<Rat> buttonOrder = new();
         readonly HashSet<Rat> testFilled = new();
-        UltBase cur; bool cutPhase; float cutT, actorT, flashA; Color flashCol;
+        UltBase cur; bool cutPhase; float cutT, flashA; Color flashCol;
+        readonly List<UltBase> extras = new();      // 컷인 없이 같이 도는 필살기 (동시 필살기)
         float capBigT = -9, capSmallT = -9;
 
-        public bool Busy => cur != null;
+        public bool Busy => cur != null || extras.Count > 0;
+        int Running => (cur != null ? 1 : 0) + extras.Count;
+        bool Concurrent => concurrentTier > 0 && Progress.I && Progress.I.tier >= concurrentTier;
+        bool IsRunning(Rat r) { if (cur != null && cur.R == r) return true; foreach (var e in extras) if (e.R == r) return true; return false; }
         public bool CutPhase => cur != null && cutPhase;      // 컷인 중 (월드 정지)
         public float Cooldown => Mathf.Max(ultCooldownMin, ultCooldown - CommonSkill.UltCdLess);
         public float CooldownLeft => cdLeft;
@@ -109,7 +122,7 @@ namespace NKK.Ults
         {
             if (!r || r.temp > 0 || DB == null) return;
             if (!DB.UltCharges.TryGetValue(c, out var g) || g <= 0) return;
-            if (cur != null && cur.R == r) return;      // 쓰는 중엔 안 참
+            if (IsRunning(r)) return;      // 쓰는 중엔 안 참
             Add(r, g * times * CommonSkill.UltGaugeMul);
         }
         // 무리의 쥐 전부 (층 통과 등)
@@ -123,14 +136,14 @@ namespace NKK.Ults
         // ── 사용 ──
         public void Request(Rat r)
         {
-            if (GameOver.Active || !r || r.temp > 0 || !Full(r) || queue.Contains(r) || (cur != null && cur.R == r)) return;
+            if (GameOver.Active || !r || r.temp > 0 || !Full(r) || queue.Contains(r) || IsRunning(r)) return;
             queue.Add(r);
         }
 
         // 테스트 버튼: 게이지 채우고 바로 사용. 그 종 쥐가 화면에 없으면 화면 가운데 근처에 15초짜리로 불러옴
         public bool TestUlt(string code)
         {
-            if (cur != null || (SuperJump && SuperJump.Busy) || !DB.RatsByCode.TryGetValue(code, out var row) || DB.UltOf(row) == null) return false;
+            if ((cur != null && (!Concurrent || cutPhase || Running >= maxConcurrent)) || (SuperJump && SuperJump.Busy) || !DB.RatsByCode.TryGetValue(code, out var row) || DB.UltOf(row) == null) return false;
             Rat r = null;
             foreach (var o in Rats.Rats) if (o.codeId == code && !o.UltOn && o.OnScreen(-0.05f)) { r = o; break; }
             if (!r)
@@ -151,24 +164,32 @@ namespace NKK.Ults
         public void CancelAll()
         {
             queue.Clear();
-            if (cur != null) Stop(false);
+            foreach (var e in extras.ToArray()) Stop(e, false);
+            if (cur != null) Stop(cur, false);
         }
 
+        // 대표(컷인 + 카메라) 로 시작. 대표가 이미 돌고 있으면 (동시 필살기) 컷인 없이 바로 상황극
         bool TryStart(Rat r)
         {
             if (!r || r.UltOn) return false;
             var u = DB.UltOf(r.Data);
             var type = u != null && !string.IsNullOrEmpty(u.script) ? System.Type.GetType("NKK.Ults." + u.script) : null;
             if (type == null) { Debug.LogWarning($"[UltimateManager] 필살기 코드 없음: {u?.script} ({r.codeId})"); r.ultGauge = 0; return false; }
-            cur = (UltBase)System.Activator.CreateInstance(type);
-            cur.Setup(this, r, u);
+            var s = (UltBase)System.Activator.CreateInstance(type);
+            s.Setup(this, r, u);
             r.ultGauge = 0;
             r.UltGrab(); r.z = 0; r.vz = 0;
-            cur.Pre();
+            s.Pre();
+            if (cur != null)
+            {
+                extras.Add(s); BeginAct(s);       // 동시 필살기: 컷인 · 카메라 없이
+                return true;
+            }
+            cur = s;
             SfxManager.Play("jgl_ult_cutin");
-            cutPhase = true; cutT = 0; actorT = 0.3f;
-            FxManager.UltFreeze = true;
-            if (Cam) { Cam.ultFollow = true; Cam.ultFocus = new Vector2(r.x, r.y); }
+            cutPhase = true; cutT = 0;
+            // 컷인 중 게임 정지 없앰 (2026-10-21 사용자) — 예전: FxManager.UltFreeze = true
+            if (Cam && CamLock) { Cam.ultFollow = true; Cam.ultFocus = new Vector2(r.x, r.y); }
             Flash(u.Color, 0.35f);
             if (cutIn)
             {
@@ -181,30 +202,33 @@ namespace NKK.Ults
         }
         string subFormat;
 
-        // 컷인 끝 → 상황극 시작
-        void BeginAct()
+        // 컷인 끝 → 상황극 시작 (동시 필살기는 바로)
+        void BeginAct(UltBase s)
         {
-            cutPhase = false; FxManager.UltFreeze = false;
-            var r = cur.R;
+            var r = s.R;
+            if (s == cur) { cutPhase = false; FxManager.UltFreeze = false; if (cutIn) cutIn.gameObject.SetActive(false); }
             r.UltPose = null; r.UltJit = 0;
-            if (cutIn) cutIn.gameObject.SetActive(false);
             var fx = FxManager.I;
             if (fx)
             {
-                if (!string.IsNullOrEmpty(cur.U.ult_line)) fx.Popup(r.x, r.y, cur.U.ult_line, Color.white, 24, 1.6f, 80);
-                fx.Ring(r.x, r.y, 140, Color.white, 0.5f); fx.Ring(r.x, r.y, 220, cur.U.Color, 0.6f); fx.Dust(r.x, r.y, 14, 1.8f); fx.Shake(0.3f);
+                if (!string.IsNullOrEmpty(s.U.ult_line)) fx.Popup(r.x, r.y, s.U.ult_line, Color.white, 24, 1.6f, 80);
+                fx.Ring(r.x, r.y, 140, Color.white, 0.5f); fx.Ring(r.x, r.y, 220, s.U.Color, 0.6f); fx.Dust(r.x, r.y, 14, 1.8f); fx.Shake(0.3f);
             }
-            Flash(Color.white, 0.4f);
-            cur.Begin();
+            if (s == cur) Flash(Color.white, 0.4f);
+            s.Begin();
         }
 
         // 끝 (done = 끝까지 함 → 마무리 휘말림 + 업적)
-        void Stop(bool done)
+        void Stop(UltBase s, bool done)
         {
-            var s = cur; cur = null; cutPhase = false; FxManager.UltFreeze = false;
-            if (cutIn) cutIn.gameObject.SetActive(false);
-            if (Cam) { Cam.ultFollow = false; Cam.ultZoom = 1; }
             if (s == null) return;
+            if (s == cur)
+            {
+                cur = null; cutPhase = false; FxManager.UltFreeze = false;
+                if (cutIn) cutIn.gameObject.SetActive(false);
+                if (Cam) { Cam.ultFollow = false; Cam.ultZoom = 1; }
+            }
+            else extras.Remove(s);
             cdLeft = Cooldown;                          // 다음 필살기까지 쿨타임
             var r = s.R;
             if (done)
@@ -283,20 +307,36 @@ namespace NKK.Ults
             if (auto) foreach (var r in Rats.Rats) if (Full(r)) Request(r);
             // 대기열 → 하나씩
             if (cur == null) cdLeft -= dt;
-            if (cur == null && cdLeft <= 0 && !FxManager.Halt && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing) && !(SuperUltManager.I && SuperUltManager.I.Busy))      // 초필살기 컷신 중엔 기다림
+            // 새로 시작: 아무것도 안 돌면 대표로 · 동시 필살기 훈장이면 대표 컷인이 끝난 뒤 최대 수까지 같이
+            bool canNew = cur == null ? cdLeft <= 0 : Concurrent && !cutPhase && Running < maxConcurrent;
+            if (canNew && !FxManager.Halt && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing) && !(SuperUltManager.I && SuperUltManager.I.Busy))      // 초필살기 컷신 중엔 기다림
                 while (queue.Count > 0) { var r = queue[0]; queue.RemoveAt(0); if (r && r.temp <= 0 && Full(r) && TryStart(r)) break; }
 
             if (cur != null && cutPhase) StepCut(udt);
-            else if (cur != null) StepAct(dt);
+            else if (cur != null) StepAct(cur, dt);
+            for (int i = extras.Count - 1; i >= 0; i--) if (i < extras.Count) StepAct(extras[i], dt);
+            // Y 키: 필살기 카메라 고정 켜고 끄기 (저장)
+            var kb = UnityEngine.InputSystem.Keyboard.current;
+            if (kb != null && camLockKey != UnityEngine.InputSystem.Key.None && kb[camLockKey].wasPressedThisFrame && !FxManager.Halt) ToggleCamLock();
             UpdateUi(udt, auto);
+        }
+
+        void ToggleCamLock()
+        {
+            bool on = !CamLock;
+            PlayerPrefs.SetInt(CamLockPref, on ? 1 : 0); PlayerPrefs.Save();
+            if (Cam && cur != null) { Cam.ultFollow = on; if (!on) Cam.ultZoom = 1; }
+            string msg = on ? Loc.Get(camLockOnKey, camLockOn) : Loc.Get(camLockOffKey, camLockOff);
+            if (!string.IsNullOrEmpty(msg)) Game?.ShowBanner(msg, "");
+            SfxManager.Play("ui_click");
         }
 
         void StepCut(float udt)
         {
-            var r = cur.R; if (!r) { Stop(false); return; }
+            var r = cur.R; if (!r) { Stop(cur, false); return; }
             cutT += udt;
             float k = cutT / cutTime, e = Ease(Mathf.Clamp01((k - 0.1f) / 0.6f));
-            if (Cam) { Cam.ultZoom = 1 + (cutZoom - 1) * Ease(Mathf.Min(1, k * 2.2f)); Cam.ultFocus = new Vector2(r.x, r.y); }
+            if (Cam && CamLock) { Cam.ultZoom = 1 + (cutZoom - 1) * Ease(Mathf.Min(1, k * 2.2f)); Cam.ultFocus = new Vector2(r.x, r.y); }
             r.UltJit = k > 0.15f ? 1 + 3 * k : 0;
             r.UltPose = new RatRig.Pose { tilt = -0.5f * e, front = 2.6f * e, farFront = 2.3f * e, back = -0.3f * e, farBack = 0.3f * e, head = -0.4f * e, tail = 1.3f * e, bob = 3 * e, sx = 1, sy = 1 - 0.1f * e };
             var fx = FxManager.I;
@@ -314,24 +354,28 @@ namespace NKK.Ults
                 }
             }
             if (k > 0.85f) Flash(cur.U.Color, (k - 0.85f) / 0.15f * 0.35f);
-            if (cutT >= cutTime) BeginAct();
+            if (cutT >= cutTime) BeginAct(cur);
         }
 
-        void StepAct(float dt)
+        void StepAct(UltBase s, float dt)
         {
-            var s = cur; var r = s.R;
-            if (!r) { Stop(false); return; }
+            var r = s.R;
+            if (!r) { Stop(s, false); return; }
             s.T += dt;
-            if (Cam) { Cam.ultZoom = 1 + (Cam.ultZoom - 1) * Mathf.Max(0, 1 - dt * 6); Cam.ultFocus = new Vector2(r.x, r.y); }
+            if (s == cur && Cam) { Cam.ultZoom = 1 + (Cam.ultZoom - 1) * Mathf.Max(0, 1 - dt * 6); if (CamLock) Cam.ultFocus = new Vector2(r.x, r.y); }
             s.RunBeats();
             r.vx = r.vy = 0;
             s.Step(dt, Mathf.Min(1, s.T / s.Dur));
-            if (cur != s) return;
-            if ((actorT -= dt) <= 0) { actorT = 0.3f; Items.BlastActors(r.x, r.y, actorRadius, actorSpeed, UltDamage(r) * 0.4f, r); }
-            if (s.T >= s.Dur) Stop(true);
+            if (s != cur && !extras.Contains(s)) return;        // Step 안에서 끝남
+            if ((s.ActorT -= dt) <= 0) { s.ActorT = 0.3f; Items.BlastActors(r.x, r.y, actorRadius, actorSpeed, UltDamage(r) * 0.4f, r); }
+            if (s.T >= s.Dur) Stop(s, true);
         }
 
-        void LateUpdate() { if (cur != null) foreach (var p in cur.Props) p.Apply(); }
+        void LateUpdate()
+        {
+            if (cur != null) foreach (var p in cur.Props) p.Apply();
+            foreach (var e in extras) foreach (var p in e.Props) p.Apply();
+        }
 
         void UpdateUi(float udt, bool auto)
         {

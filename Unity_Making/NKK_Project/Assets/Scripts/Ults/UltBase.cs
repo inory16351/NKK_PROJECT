@@ -19,6 +19,7 @@ namespace NKK.Ults
         public Rat R { get; private set; }                 // 필살기 쓰는 쥐
         public RatUltimateRow U { get; private set; }
         public float T;                                    // 상황극 경과 (초)
+        public float ActorT = 0.3f;                        // 주변 휘말림 다음 시각 (필살기마다 따로 — 동시 필살기, 2026-10-21)
         public float X0, Y0;                               // 시작 위치
         public readonly List<Rat> Rats = new();            // 붙잡은 쥐 (끝나면 풀림)
         public readonly List<Item> Items = new();          // 붙잡은 물건 (끝나면 놓음)

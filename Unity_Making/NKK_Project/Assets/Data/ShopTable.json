@@ -55,6 +55,14 @@
   {
    "key": "bc_floor_cap",
    "value": 30.0
+  },
+  {
+   "key": "goods_reroll_growth",
+   "value": 1.2
+  },
+  {
+   "key": "shard_full_tier",
+   "value": 16.0
   }
  ],
  "Shop_Slot": [

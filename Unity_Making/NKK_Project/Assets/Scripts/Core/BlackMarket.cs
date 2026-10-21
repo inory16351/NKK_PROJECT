@@ -43,7 +43,11 @@ namespace NKK
                 return Cfg("bc_base", 3) * (st != null ? st.cheese : 1) * Math.Pow(Cfg("bc_floor_grow", 1), Mathf.Min(f, (int)Cfg("bc_floor_cap", 30)) - 1);
             }
         }
-        public static double Price(ShopGoodsRow g) => g == null ? 0 : Math.Round(g.price_cheese_bc * BC);
+        // 조각 가격: 유료 리롤 한 번마다 goods_reroll_growth 배 (다음 자동 입고 때 원래대로, 2026-10-21)
+        public static double Price(ShopGoodsRow g) => g == null ? 0 : Math.Round(g.price_cheese_bc * BC * Math.Pow(Cfg("goods_reroll_growth", 1.2f), P ? P.shop.rerollCount : 0));
+        // 조각 개수 = 테이블 pack_size × 훈장 ÷ shard_full_tier (16훈장 = 테이블 값, 최소 1, 2026-10-21)
+        public static int PackSize(ShopGoodsRow g) => g == null ? 0 : Mathf.Max(1, Mathf.RoundToInt(g.pack_size * TierK(Cfg("shard_full_tier", 16))));
+        public static float TierK(float fullTier) => Mathf.Clamp01((P ? P.tier : 1) / Mathf.Max(1, fullTier));
         public static ShopGoodsRow Goods(int id) { if (Db?.Shop.Shop_Goods != null) foreach (var g in Db.Shop.Shop_Goods) if (g.goods_id == id) return g; return null; }
         public static double RerollCost => P.shop.freeLeft > 0 ? 0 : Math.Round(Cfg("reroll_base_bc", 300) * Math.Pow(Cfg("reroll_growth", 1.5f), P.shop.rerollCount) * BC);
         public static long SecondsToRefresh => P ? (long)Math.Ceiling(Math.Max(0, P.shop.playLeft)) : 0;
@@ -96,7 +100,7 @@ namespace NKK
             foreach (var it in P.shop.lineup) if (it.slot == slot) item = it;
             if (item == null || item.sold || string.IsNullOrEmpty(item.code)) return false;
             var g = Goods(item.goods); if (g == null || !P.SpendCheese(Price(g))) return false;
-            P.AddShards(item.code, g.pack_size); item.sold = true;
+            P.AddShards(item.code, PackSize(g)); item.sold = true;
             P.Save();
             return true;
         }
@@ -108,7 +112,7 @@ namespace NKK
             P.shop.opened = true;
             var g = Goods((int)Cfg("first_visit_goods", 90001));
             var code = g != null ? PickSpecies(g.Grade, new HashSet<string>()) : null;
-            if (code != null) { count = g.pack_size; P.AddShards(code, count); }
+            if (code != null) { count = PackSize(g); P.AddShards(code, count); }
             P.Save();
             return code;
         }

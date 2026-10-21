@@ -83,7 +83,7 @@ namespace NKK.Lobby
                 var frame = go.transform.Find("Frame")?.GetComponent<Image>(); if (frame) frame.color = GradeColor(gi);
                 Text(go, "Grade", GradeName(gi));
                 Text(go, "Name", rat != null ? rat.character_name : "");
-                var cnt = go.transform.Find("Count")?.GetComponent<TMP_Text>(); if (cnt) { cnt.text = cnt.text.Replace("{n}", g != null ? g.pack_size.ToString() : "0"); cnt.gameObject.SetActive(rat != null); }
+                var cnt = go.transform.Find("Count")?.GetComponent<TMP_Text>(); if (cnt) { cnt.text = cnt.text.Replace("{n}", g != null ? BlackMarket.PackSize(g).ToString() : "0"); cnt.gameObject.SetActive(rat != null); }
                 var por = go.transform.Find("Portrait")?.GetComponent<RatPortrait>();
                 if (por) { por.gameObject.SetActive(rat != null); if (rat != null && artLibrary) por.Show(artLibrary.Get(rat.code_id)); }
                 var buy = go.transform.Find("Buy")?.GetComponent<Button>();

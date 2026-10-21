@@ -61,7 +61,7 @@ namespace NKK
 
         bool Stopped => testFreeze || Halted;
         bool Halted => GameOver.Active || FxManager.WorldFreeze || FxManager.Halt || Stage.Climbing
-                        || (Ults && Ults.Busy) || (SuperJump && SuperJump.Busy);
+                        || (SuperJump && SuperJump.Busy);          // 필살기 중에도 제한시간은 흐름 (2026-10-21 사용자: 필살기 시간 정지 없앰)
 
         void Update()
         {

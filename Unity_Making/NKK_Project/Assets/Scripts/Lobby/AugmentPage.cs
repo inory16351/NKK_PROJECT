@@ -27,7 +27,7 @@ namespace NKK.Lobby
         [Header("자세히")]
         public GameObject detailRoot;
         public AugmentCard detail;
-        [Tooltip("강화 (글 자리: {pts} {need} {cheese})")] public Button upgradeButton;
+        [Tooltip("강화 (글 자리: {have} 재료로 쓸 같은 증강 수 · {need} 필요 수 · {cheese}) — 2026-10-21 같은 증강 소모로 바뀜")] public Button upgradeButton;
         public TMP_Text upgradeLabel;
         [Tooltip("최대 레벨일 때 켜짐")] public GameObject maxNote;
         [Tooltip("들고 가기 버튼 (41층 해금 전엔 숨김)")] public Button carryButton;
@@ -110,14 +110,14 @@ namespace NKK.Lobby
             if (detailRoot) detailRoot.SetActive(sel != null && !synthMode);
             if (sel != null && !synthMode)
             {
-                if (detail) { detail.BindItem(sel); detail.SetEquipped(sel.uid == Augments.Carry); }
+                if (detail) { detail.BindItem(sel, true); detail.SetEquipped(sel.uid == Augments.Carry); }
                 bool max = sel.lv >= Augments.MaxLevel;
                 if (maxNote) maxNote.SetActive(max);
                 if (upgradeButton)
                 {
                     upgradeButton.gameObject.SetActive(!max);
                     upgradeButton.interactable = Augments.CanUpgrade(sel);
-                    if (upgradeLabel) upgradeLabel.text = upTpl.Replace("{pts}", sel.pts.ToString()).Replace("{need}", Augments.UpPoints(sel.lv).ToString()).Replace("{cheese}", LobbyManager.Fmt(Augments.UpCheese(sel.lv)));
+                    if (upgradeLabel) upgradeLabel.text = upTpl.Replace("{have}", Augments.Spares(sel).Count.ToString()).Replace("{need}", Augments.UpCopies(sel.lv).ToString()).Replace("{cheese}", LobbyManager.Fmt(Augments.UpCheese(sel.lv)));
                 }
                 bool carryOpen = Augments.CarryUnlocked;
                 if (carryButton) carryButton.gameObject.SetActive(carryOpen);

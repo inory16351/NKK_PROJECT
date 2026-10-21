@@ -1072,6 +1072,26 @@
   {
    "key": "seen_reveal",
    "value": 1.0
+  },
+  {
+   "key": "up_copy_1",
+   "value": 1.0
+  },
+  {
+   "key": "up_copy_2",
+   "value": 1.0
+  },
+  {
+   "key": "up_copy_3",
+   "value": 1.0
+  },
+  {
+   "key": "up_copy_4",
+   "value": 2.0
+  },
+  {
+   "key": "up_copy_5",
+   "value": 2.0
   }
  ],
  "No_Scale": [
