@@ -667,7 +667,7 @@ namespace NKK.Ults
                     b.Damage(Mathf.Min(dmg, left), r, Ang(b.x, b.y), false);
                     float got = Mathf.Max(0, before - b.hp);
                     c.bossDealt += got;
-                    if (c.bossDealt > c.bossCap && b.hp > 0) { b.hp += c.bossDealt - c.bossCap; got -= c.bossDealt - c.bossCap; c.bossDealt = c.bossCap; }      // 배율로 넘친 만큼 되돌림
+                    if (c.bossDealt > c.bossCap && b.hp > 0) { float back = c.bossDealt - c.bossCap; b.hp += back; got -= back; c.bossDealt = c.bossCap; DamageMeter.Remove(r, back); }      // 배율로 넘친 만큼 되돌림 (딜 미터기도)
                     c.lastDealt += Mathf.Max(0, got);
                 }
                 pts.Add(new Vector3(b.x, b.y, 3));

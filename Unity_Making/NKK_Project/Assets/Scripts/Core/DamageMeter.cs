@@ -23,6 +23,14 @@ namespace NKK
         // 남은 체력까지만 (넘친 피해 제외)
         public static void Add(Rat by, float dmg, float hpBefore) => Add(by, System.Math.Min(dmg, System.Math.Max(0, hpBefore)));
 
+        // 셌다가 되돌린 피해 빼기 (초필살기 보스 상한 등)
+        public static void Remove(Rat by, float dmg)
+        {
+            if (!by || dmg <= 0 || string.IsNullOrEmpty(by.codeId) || !dealt.TryGetValue(by.codeId, out var v)) return;
+            double d = System.Math.Min(v, dmg);
+            dealt[by.codeId] = v - d; Total -= d; Version++;
+        }
+
         public static double Of(string codeId) => codeId != null && dealt.TryGetValue(codeId, out var v) ? v : 0;
 
         public static void Clear() { dealt.Clear(); Total = 0; Version++; }

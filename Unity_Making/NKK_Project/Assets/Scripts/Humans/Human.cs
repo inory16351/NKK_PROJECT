@@ -223,6 +223,7 @@ namespace NKK.Humans
                 {
                     if (o == this || hitSet.Contains(o) || o.State == HState.Fly || o.State == HState.Dead || Vector2.Distance(new Vector2(o.x, o.y), new Vector2(x, y)) > o.R + R || Mathf.Abs(o.z - z) > 90) continue;
                     hitSet.Add(o);
+                    DamageMeter.Add(By, o.hp, o.hp);                      // 딜 미터기: 날아간 사람에 맞아 쓰러진 사람 = 날린 쥐 몫
                     o.hp = 0; o.By = By; o.Launch(Mathf.Atan2(o.y - y, o.x - x), 480);
                     FxManager.I?.Popup(o.x, o.y, Loc.T(9000035), new Color(0.95f, 0.76f, 0.31f), 24, 0.9f, 120);
                 }
