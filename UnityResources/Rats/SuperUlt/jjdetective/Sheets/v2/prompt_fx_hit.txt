@@ -1,0 +1,16 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_hit.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+- Palette: silver, red, light sky blue, butter yellow, cream white.
+  top row (each one alone, centered):
+  1. a small TRANQUILIZER DART flying straight DOWN (silver needle tip at the BOTTOM, small glass body with light-blue liquid, short red feather tail at the TOP)
+  2. a little loose RED FEATHER
+  3. a small flat light-blue SNOT BUBBLE
+  bottom row = 3 consecutive frames of a DART HIT, same size and centered at the same point:
+  4. a small round cream-white impact flash with short spikes
+  5. a bigger flat butter-yellow burst with three small DIZZY STARS starting to circle
+  6. a ring of three flat yellow DIZZY STARS circling (seen slightly from above, an ellipse) with a small light-blue snot bubble, fading

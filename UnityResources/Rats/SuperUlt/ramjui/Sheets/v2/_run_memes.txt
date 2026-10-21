@@ -1,0 +1,15 @@
+14:41:43 ok bg_meme03
+14:41:44 ok bg_meme04
+14:41:46 ok bg_meme01
+14:41:51 ok bg_meme06
+14:41:51 ok bg_meme05
+14:41:53 ok bg_meme07
+14:41:55 ok bg_meme02
+14:42:48 ok bg_meme08
+14:42:49 ok bg_meme12
+14:42:51 ok bg_meme14
+14:42:52 ok bg_meme10
+14:42:53 ok bg_meme13
+14:42:53 ok bg_meme11
+14:42:56 ok bg_meme09
+DONE

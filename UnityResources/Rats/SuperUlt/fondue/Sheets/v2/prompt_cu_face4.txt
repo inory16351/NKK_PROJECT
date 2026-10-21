@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image cu_face1.png and save the result as a NEW PNG file: cu_face4.png (in the current working directory). Do not overwrite cu_face1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to cu_face1.png: the same canvas size, the same framing, camera angle and zoom, the same character size and position, the same colors and flat style, the same solid magenta background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The character now WEARS the sleek black wayfarer-style SUNGLASSES properly over both eyes (flat black lenses with one simple white diagonal shine stripe each), no paw visible, a big cool confident grin showing a little tooth, chin slightly raised. Nothing else changes.

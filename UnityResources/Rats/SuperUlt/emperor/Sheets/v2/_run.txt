@@ -1,0 +1,11 @@
+20:07:08 ok bg_field
+20:07:10 ok face_bg
+20:07:16 ok cu_aim
+20:07:28 ok anim_soldier
+20:07:32 ok cu_load1
+20:07:38 ok cu_emp1
+20:08:41 ok cu_load2
+20:08:56 ok cu_emp2
+20:10:02 ok fx_flat
+20:10:24 ok fx_hit
+DONE

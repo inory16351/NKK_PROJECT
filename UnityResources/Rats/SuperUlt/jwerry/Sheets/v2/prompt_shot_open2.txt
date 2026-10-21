@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_open1.png and save the result as a NEW PNG file: shot_open2.png (in the current working directory). Do not overwrite shot_open1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_open1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- A HUGE dark blue-grey SHADOW of a cat falls over the mouse from behind (the shadow shape of a big cat standing on its hind legs, claws raised, covering the wall and the mouse, two glowing yellow-green eyes in the shadow). Jwerry FREEZES in shock: eyes wide open as white dots with tiny pupils, whiskers and ears standing straight up, a big flat light-blue sweat drop, the cheese half-bitten in its paws. Nothing else changes.

@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_hit.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers, NO stars.
+- Palette: sand gold, warm cream, apricot, lapis blue.
+  1. a long horizontal SAND STREAK (a running dust trail, tapered on the left)
+  2. a flat SCARAB SPARK: a small gold beetle shape with a little sparkle ring
+  3. a small round SAND PUFF
+  4. TACKLE IMPACT frame 1: a small flat cream burst with 3 tiny sand chunks
+  5. TACKLE IMPACT frame 2: the impact spreading: a bigger flat cream-gold burst, a small flat ring, 6 sand chunks flying out
+  6. TACKLE IMPACT frame 3: the end: a wide thin broken ring and a few small sand chunks, fading shapes

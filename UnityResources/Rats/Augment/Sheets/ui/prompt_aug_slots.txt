@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_slots.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE SQUARE slot tile per cell (about 380x380 px), centered in its cell, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game UI art exactly like the attached ref_uikit (this game's own approved UI kit: flat cardboard tiles, wooden planks, cork board, round tiles; soft flat colors, at most one soft shade step, clean rounded edges, NO black outlines, NO gloss, NO glow, NO gradients except very soft, NO painterly texture, NOT 3D, NOT shiny mobile-game chrome).
+- NO text, NO letters, NO numbers, no logos.
+- Background: ONE solid flat pure magenta #FF00FF everywhere outside the elements (for chroma keying), no shadow on the background. Do not use magenta or purple on the elements.
+- Each tile is a SKILL SLOT FRAME for a cute rat lab game (augment cards): a rounded-square tile with a THICK even BORDER band (about 13% of the tile width on every side, same thickness on all four sides so it can be 9-sliced), small simple decorations ONLY in the four CORNERS (nothing decorative in the middle of the edges), and a FLAT plain warm cream CENTER (#F3E6CC) with no pattern.
+  1. BRONZE grade: warm copper-brown border with a lighter inner rim, small round rivets in the corners
+  2. SILVER grade: cool light-grey/steel border with a lighter inner rim, small round rivets in the corners
+  3. GOLD grade: rich golden-yellow border with a lighter inner rim, small cheese-wedge shapes in the corners
+  4. PRISM grade: border made of soft pastel rainbow bands (pink, peach, mint, sky blue, lavender-free light violet is NOT allowed: use pink, peach, yellow, mint, sky blue), small sparkle-diamond shapes in the corners
+  5. EMPTY SLOT: a recessed socket: muted beige border, the center slightly darker sunken beige with a soft DASHED rounded outline inside and a small faint plus sign in the middle
+  6. LOCKED SLOT: grey-brown border, darker grey-beige center with a small flat padlock (like the ref_uikit lock) in the middle

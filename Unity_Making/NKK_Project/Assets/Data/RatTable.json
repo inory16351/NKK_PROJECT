@@ -1478,6 +1478,23 @@
    "character_desc_sk": 1110087,
    "asset_folder": "Parts/fiveg",
    "sub_asset_folder": ""
+  },
+  {
+   "character_id": 10088,
+   "character_name": "메이드 쥐",
+   "character_name_sk": 1010088,
+   "code_id": "maid",
+   "grade": "Mythic",
+   "body_type": "Rat",
+   "atk": 472,
+   "passive_skill": 20088,
+   "action_skill": 21088,
+   "ultimate": 30036,
+   "unlock_rank": 7,
+   "character_desc": "커다란 회중시계를 늘 차고 다니는 완벽한 메이드 쥐. 청소도 서빙도 눈 깜짝할 새 끝낸다. 비결을 물으면 \"시간은 충분했거든요.\" 하고 웃는다.",
+   "character_desc_sk": 1110088,
+   "asset_folder": "Parts/maid",
+   "sub_asset_folder": ""
   }
  ],
  "Skill": [
@@ -5805,6 +5822,56 @@
    "skill_asset": "RatSkillIcons/rs_21087",
    "skill_explain": "주변(250)에 동료 5마리 이상이면 (15초마다) → 데이터 전송: 반경 250 쥐 공격력 +25% (8초)",
    "skill_explain_sk": 1321087
+  },
+  {
+   "skill_id": 20088,
+   "skill_name": "완벽한 뒷정리",
+   "skill_name_sk": 1220088,
+   "skill_category": "Passive",
+   "cond1_type": "Destroy_Item",
+   "cond1_value_01": 1.0,
+   "cond1_value_02": 0.0,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Cheese_Boost",
+   "value_01": 1.4,
+   "value_02": 0.0,
+   "value_03": 0.0,
+   "value_04": 0.0,
+   "value_05": 0.0,
+   "value_06": 0.0,
+   "duration": 0.0,
+   "cool_time": 0.0,
+   "skill_icon": "🧹",
+   "skill_asset": "RatSkillIcons/rs_20088",
+   "skill_explain": "이 쥐가 부순 물건 치즈 ×1.4",
+   "skill_explain_sk": 1320006
+  },
+  {
+   "skill_id": 21088,
+   "skill_name": "티 타임",
+   "skill_name_sk": 1221088,
+   "skill_category": "Action",
+   "cond1_type": "Interval",
+   "cond1_value_01": 20.0,
+   "cond1_value_02": 0.0,
+   "cond2_type": "None",
+   "cond2_value_01": 0.0,
+   "cond2_value_02": 0.0,
+   "effect_type": "Cheer",
+   "value_01": 6.0,
+   "value_02": 320.0,
+   "value_03": 0.0,
+   "value_04": 0.0,
+   "value_05": 0.0,
+   "value_06": 0.0,
+   "duration": 1.6,
+   "cool_time": 6.0,
+   "skill_icon": "☕",
+   "skill_asset": "RatSkillIcons/rs_21088",
+   "skill_explain": "20초마다 → 티 타임: 주변 동료 전원 광란 6.0초 (속도·피해 ×1.5)",
+   "skill_explain_sk": 1321088
   }
  ],
  "Ultimate": [
@@ -6367,6 +6434,22 @@
    "ult_achv": "Rat It Go!",
    "ult_color": "#8fd3f4",
    "engine_type": "ratitgo"
+  },
+  {
+   "ultimate_id": 30036,
+   "ultimate_name": "살인 인형",
+   "ultimate_name_sk": 1430036,
+   "script": "UltTimeStop",
+   "dev_desc": "회중시계로 시간 정지(화면 회색 · 연출만) → 화면 안 물건·생명체 둘레 공중에 칼을 잔뜩 깔아 둠 → 시간이 다시 흐르면 칼이 일제히 꽂힘",
+   "dev_desc_sk": 1530036,
+   "asset": "NewRats/maid_knife, NewRats/maid_clock",
+   "ult_gauge": 240,
+   "ult_icon": "UltIcons/ult_30036",
+   "ult_line": "시간이여, 멈춰라!",
+   "ult_line_sk": 1630036,
+   "ult_achv": "그리고 시간은 움직인다",
+   "ult_color": "#d8b45a",
+   "engine_type": "timestop"
   }
  ],
  "Ult_Caption": [
@@ -8985,6 +9068,46 @@
    "text_sk": 1700310,
    "size": 30.0,
    "color": ""
+  },
+  {
+   "ultimate_id": 30036,
+   "cap_key": "c1",
+   "text": "째깍… 째깍…",
+   "text_sk": 1700321,
+   "size": 34.0,
+   "color": ""
+  },
+  {
+   "ultimate_id": 30036,
+   "cap_key": "c2",
+   "text": "시간이여, 멈춰라!",
+   "text_sk": 1700322,
+   "size": 56.0,
+   "color": "#f1dfa4"
+  },
+  {
+   "ultimate_id": 30036,
+   "cap_key": "c3",
+   "text": "…그리고 시간은 움직인다.",
+   "text_sk": 1700323,
+   "size": 40.0,
+   "color": "#ffffff"
+  },
+  {
+   "ultimate_id": 30036,
+   "cap_key": "c4",
+   "text": "청소 끝났습니다.",
+   "text_sk": 1700324,
+   "size": 34.0,
+   "color": ""
+  },
+  {
+   "ultimate_id": 30036,
+   "cap_key": "c5",
+   "text": "(칼은 이따 제가 다 주울게요)",
+   "text_sk": 1700325,
+   "size": 24.0,
+   "color": ""
   }
  ],
  "Ult_Charge": [
@@ -9444,6 +9567,17 @@
    "super_line_sk": 4331015,
    "finish_line": "전부 꽁꽁!!",
    "finish_line_sk": 4431015,
+   "motif": "Default"
+  },
+  {
+   "super_id": 31016,
+   "code_id": "maid",
+   "super_name": "메이드의 세계",
+   "super_name_sk": 4231016,
+   "super_line": "시간… 정지.",
+   "super_line_sk": 4331016,
+   "finish_line": "칼날의 비!!",
+   "finish_line_sk": 4431016,
    "motif": "Default"
   }
  ],

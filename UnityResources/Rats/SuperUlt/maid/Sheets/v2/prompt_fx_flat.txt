@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers, NO stars.
+- Palette: silver, pale steel grey, cream white, royal blue handles, warm gold.
+  1. a BIG flat gold CLOCK FACE seen straight from the front WITHOUT clock hands: cream face, thick gold rim, 12 bold dark tick marks (no numbers), a small gold crown knob on top
+  2. ONE throwing knife seen in strong PERSPECTIVE flying STRAIGHT AT THE VIEWER: the sharp silver blade tip big and close in the center, the guard and blue handle small behind it (foreshortened, almost a diamond shape)
+  3. ONE silver throwing knife lying perfectly HORIZONTAL, tip pointing RIGHT, long and thin, blue handle with a small ring at the left end
+  4. a perfect RING of 12 silver throwing knives seen from the front, evenly spaced, all tips pointing INWARD to the empty center (like a clock dial made of knives)
+  5. a flat round SILVER-WHITE FLASH disk with a cream-white center and short rounded rays
+  6. a flat cluster of 7 small round silver-white GLINT dots of different sizes (no stars)

@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: props_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game prop art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers, NO stars.
+- Palette: warm gold, cream, silver, royal blue, white, a little green.
+  1. a HUGE round GOLD POCKET WATCH seen from the front with its lid open: cream face, two dark hands, 12 bold dark tick marks (no numbers), gold crown knob and a short gold chain
+  2. a big flat gold clockwork GEAR (cog wheel) with 12 teeth and a round hole in the center
+  3. a white porcelain teacup with a royal-blue rim on a saucer, a flat pale steam curl
+  4. a flat bundle of five silver throwing knives held together with a small royal-blue ribbon
+  5. a cream paper TIME CARD (office punch card) with a small gold clock symbol in its corner and a few plain lines (NO letters, NO numbers), slightly bent
+  6. a small white frilly maid headdress with a gold clock ornament

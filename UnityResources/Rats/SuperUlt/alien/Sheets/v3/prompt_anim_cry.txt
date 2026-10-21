@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: anim_cry.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 landscape ANIMATION SHEET: 3 columns, ONE frame per column, all frames the same size and scale, each well inside its third, none touching. Frames are consecutive key drawings of one motion for a cel-animated skill cutscene, so keep the character IDENTICAL between frames, only the pose and expression change.
+- CAMERA: every frame is a straight FRONT VIEW, UPPER BODY (from the chest up), centered.
+- STYLE (MOST IMPORTANT): this must look like THIS GAME's own art. Match EXACTLY the attached ref_rig (the character's in-game sprite parts: copy its colors, shapes and proportions) and the approved flat cutscene art ref_flat_anim / ref_flat_face: FLAT cartoon storybook look in the Untitled Goose Game mood, simple soft flat shapes, flat colors with only gentle soft shading, very little texture, NO individual fur strands, no black outlines, no gloss, NOT a Disney/Pixar/3D look, NOT anime style, NOT a photo.
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- CHARACTER "Alien Mouse" in SPY DISGUISE: build the mouse EXACTLY from the attached ref_rig and ref_char (colors and design only): a cute PALE LIME-GREEN MOUSE with big round pink-lined ears, two thin green ANTENNAE ending in small round PINK bulbs that poke up through two holes in the hat, big shiny round BLACK eyes, a small pink nose, a cream-white muzzle, a long thin pink tail, small pink paws. DISGUISE: a beige belted TRENCH COAT with the collar turned up, a brown FEDORA hat pulled low, small round black SUNGLASSES, and a chunky black spy WRISTWATCH gadget with a red button on the left wrist. Big head, small round body.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no ground, no scenery. Do not use magenta, pink-purple or violet on the subjects except the pink ears, nose, paws and antenna bulbs. Keep everything fully inside the frame with margin.
+  1) SHOCKED: jaw dropped, eyes huge, the sunglasses slipping off and hanging crooked, antennae straight up;
+  2) BAWLING: eyes squeezed shut, mouth wide open crying loudly, two big flat streams of TEARS gushing from the eyes, the hat tilted, antennae drooping;
+  3) SOBBING: blowing the nose into a white handkerchief, tears dripping, shoulders hunched, antennae drooping.

@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image cu_load1.png and save the result as a NEW PNG file: cu_load2.png (in the current working directory). Do not overwrite cu_load1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to cu_load1.png: the same canvas size, the same framing, camera angle and zoom, the same character size and position, the same colors and flat style, the same background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The brass hammer is now fully COCKED back (click!), the thumb released, the finger resting on the trigger, a tiny flat white click spark next to the hammer. Nothing else changes.

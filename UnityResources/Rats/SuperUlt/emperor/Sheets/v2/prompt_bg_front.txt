@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: bg_front.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, one full-frame background picture (no transparency). NO characters, NO animals, NO people, NO text.
+- STYLE (MOST IMPORTANT): a FLAT 2D game background exactly in the style of the attached ref_flat_bg and the attached bg_field (same palace, same colors, same flat look): big simple flat color shapes, flat fills with at most one soft shade step, NO black outlines, NO gloss, NO painterly brush strokes. Palette: imperial East Asian palette — warm golden sunrise sky, crimson red and imperial yellow, jade green accents, dark grey-blue roof tiles, warm earth ground.
+- A FRONT VIEW (one-point perspective, looking straight ahead) of the same imperial parade ground: the big golden-roofed palace GATE TOWER centered in the far back, the long crimson palace walls going left and right behind it, the flat warm earth ground filling the LOWER 55% and receding toward the gate (horizon at about 45% of the image height), a few red banners on poles at both sides, a warm golden sunrise sky. Symmetric, simple, empty ground (soldiers will stand on it).

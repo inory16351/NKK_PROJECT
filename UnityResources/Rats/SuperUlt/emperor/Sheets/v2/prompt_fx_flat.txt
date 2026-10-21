@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers.
+  1. a side MUZZLE FLASH: a flat star-shaped burst of orange and yellow fire pointing to the RIGHT (wider on the right), with a cream white core
+  2. a round puff of flat WHITE-GREY GUN SMOKE (3 overlapping round blobs)
+  3. ONE flying BULLET seen from the side moving to the RIGHT: a small round golden-brass bullet at the RIGHT end with a long thin tapered flat yellow-white tracer streak behind it (to the left), horizontal
+  4. a SUMMON PUFF: a flat ring burst of golden and white smoke with a few small gold sparkles (a soldier appears)
+  5. a small flat bullet HIT SPARK: a jagged white and yellow star burst with 4 short sparks
+  6. a flat horizontal SPEED LINE streak in cream white (long thin tapered stripe)

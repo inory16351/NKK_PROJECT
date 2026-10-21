@@ -407,6 +407,18 @@
    "need": 1,
    "achv_icon": "AchvIcons/ach_40035",
    "sort_order": 35
+  },
+  {
+   "achv_id": 40036,
+   "achv_name": "그리고 시간은 움직인다",
+   "achv_name_sk": 3640036,
+   "achv_desc": "{ult} 필살기를 끝까지 쓰기",
+   "achv_desc_sk": 3740001,
+   "cond_type": "Ult_Use",
+   "target_id": 30036,
+   "need": 1,
+   "achv_icon": "AchvIcons/ach_40036",
+   "sort_order": 36
   }
  ],
  "Achv_Cond_Type": [

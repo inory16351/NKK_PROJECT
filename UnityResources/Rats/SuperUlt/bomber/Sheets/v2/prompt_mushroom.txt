@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: mushroom.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 landscape image: 3 columns, ONE element per column, centered in its third, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers, NO stars.
+- Palette: cream white, warm yellow, orange, crimson, ash grey, charcoal smoke.
+- These are 3 GROWTH STAGES of one huge cartoon MUSHROOM CLOUD explosion seen from the front (flat cartoon, like a classic cartoon explosion, NOT realistic, no destruction, no people), all drawn at the SAME scale with the base at the same bottom line:
+  1. a big round FIREBALL just lifting off the ground on a short thick column of fire, a wide flat dust skirt at the base
+  2. the fireball rising on a taller stem and starting to roll into a mushroom CAP (round puffy layers in orange and yellow, darker smoke at the edges), a ring of smoke around the stem
+  3. the FULL MUSHROOM CLOUD: a tall stem and a huge wide rounded puffy cap (yellow-orange core, red and ash-grey outer puffs), a flat smoke ring around the stem, a wide dust skirt at the ground

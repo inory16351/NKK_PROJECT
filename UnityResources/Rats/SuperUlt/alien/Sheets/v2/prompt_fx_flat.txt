@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers, NO stars.
+- Palette: alien LIME GREEN and mint, a cream-white core, a few touches of pale yellow; smoke in charcoal and slate grey; fire in warm orange.
+  1. a round ball of gathering ENERGY: a lime-green orb with a cream-white center and a few short flat lime arcs around it
+  2. a thin perfect lime-green LIGHT RING (a simple circle outline with a few evenly spaced small round dots on it)
+  3. a flat round FLASH disk: cream white center, a lime-green rim and short rounded rays
+  4. a flat cartoon FIRE: three rounded orange and yellow flame tongues
+  5. a big flat puffy CLOUD in soft violet-grey and lavender (a night cloud)
+  6. a long thin horizontal SPEED STREAK (a flat white tapered line, thick at the left, pointed at the right)

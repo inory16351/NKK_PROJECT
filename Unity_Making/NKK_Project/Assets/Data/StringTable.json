@@ -436,6 +436,11 @@
    "en": "Mi-Fi"
   },
   {
+   "string_key": 1010088,
+   "ko": "메이드 쥐",
+   "en": "Maid Rat"
+  },
+  {
    "string_key": 1110001,
    "ko": "하수구 출신의 정통파. 숫자가 곧 힘이다.",
    "en": "Old-school sewer stock. Numbers ARE power."
@@ -869,6 +874,11 @@
    "string_key": 1110087,
    "ko": "휴대폰을 손에서 놓지 않는 쥐. 5G 속도로 동료를 불러 모은다. 근데 하수구에선 잘 안 터진다.",
    "en": "A rat glued to its phone. Calls buddies over at 5G speed. Signal's terrible in the sewers, though."
+  },
+  {
+   "string_key": 1110088,
+   "ko": "커다란 회중시계를 늘 차고 다니는 완벽한 메이드 쥐. 청소도 서빙도 눈 깜짝할 새 끝낸다. 비결을 물으면 \"시간은 충분했거든요.\" 하고 웃는다.",
+   "en": "A perfect maid rat who always carries a huge pocket watch. Cleaning and serving are done in the blink of an eye. Ask her secret and she smiles: \"I had plenty of time.\""
   },
   {
    "string_key": 1220001,
@@ -1306,6 +1316,11 @@
    "en": "High-Speed Link"
   },
   {
+   "string_key": 1220088,
+   "ko": "완벽한 뒷정리",
+   "en": "Perfect Tidy-Up"
+  },
+  {
    "string_key": 1221001,
    "ko": "하수구 동창회",
    "en": "Sewer Reunion"
@@ -1729,6 +1744,11 @@
    "string_key": 1221087,
    "ko": "데이터 전송",
    "en": "Data Boost"
+  },
+  {
+   "string_key": 1221088,
+   "ko": "티 타임",
+   "en": "Tea Time"
   },
   {
    "string_key": 1320001,
@@ -2496,6 +2516,11 @@
    "en": "With 5+ buddies nearby (250) (every 15s) → Data Boost: rats within radius 250 get +25% attack (8s)"
   },
   {
+   "string_key": 1321088,
+   "ko": "20초마다 → 티 타임: 주변 동료 전원 광란 6.0초 (속도·피해 ×1.5)",
+   "en": "Every 20s → Tea Time: all nearby allies go frenzy for 6.0s (speed & damage ×1.5)"
+  },
+  {
    "string_key": 1430001,
    "ko": "슈퍼 노바 빔",
    "en": "Super Nova Beam"
@@ -2669,6 +2694,11 @@
    "string_key": 1430035,
    "ko": "렛잇고 (Rat it go)",
    "en": "Let It Go (Rat It Go)"
+  },
+  {
+   "string_key": 1430036,
+   "ko": "살인 인형",
+   "en": "Killing Doll"
   },
   {
    "string_key": 1530001,
@@ -2846,6 +2876,11 @@
    "en": "Summons a giant ice castle + 4.2s blizzard: every creature on the map (cats, bosses, humans) gets full Frost stacks (frozen solid), lasting 1.5s more after. When the castle lands, frost shock hits objects on screen"
   },
   {
+   "string_key": 1530036,
+   "ko": "회중시계로 시간 정지(화면 회색 · 연출만) → 화면 안 물건·생명체 둘레 공중에 칼을 잔뜩 깔아 둠 → 시간이 다시 흐르면 칼이 일제히 꽂힘",
+   "en": "Stops time with a pocket watch (gray screen, visual only) → lays out knives in the air around on-screen items and creatures → when time flows again, the knives strike all at once"
+  },
+  {
    "string_key": 1630001,
    "ko": "정의의 빔을 받아라!!",
    "en": "Taste the beam of JUSTICE!!"
@@ -3019,6 +3054,11 @@
    "string_key": 1630035,
    "ko": "Rat it go~! 전부 얼어붙어라!",
    "en": "Rat it go~! Freeze, all of you!"
+  },
+  {
+   "string_key": 1630036,
+   "ko": "시간이여, 멈춰라!",
+   "en": "Time, stand still!"
   },
   {
    "string_key": 1700001,
@@ -4619,6 +4659,31 @@
    "string_key": 1700320,
    "ko": "Rat it go~~!!",
    "en": "Rat it go~~!!"
+  },
+  {
+   "string_key": 1700321,
+   "ko": "째깍… 째깍…",
+   "en": "Tick… tock…"
+  },
+  {
+   "string_key": 1700322,
+   "ko": "시간이여, 멈춰라!",
+   "en": "Time, stand still!"
+  },
+  {
+   "string_key": 1700323,
+   "ko": "…그리고 시간은 움직인다.",
+   "en": "…And time moves again."
+  },
+  {
+   "string_key": 1700324,
+   "ko": "청소 끝났습니다.",
+   "en": "Cleaning complete."
+  },
+  {
+   "string_key": 1700325,
+   "ko": "(칼은 이따 제가 다 주울게요)",
+   "en": "(I will pick up all the knives later)"
   },
   {
    "string_key": 1800001,
@@ -10246,6 +10311,11 @@
    "en": "Rat It Go!"
   },
   {
+   "string_key": 3640036,
+   "ko": "그리고 시간은 움직인다",
+   "en": "And Time Moves Again"
+  },
+  {
    "string_key": 3740001,
    "ko": "{ult} 필살기를 끝까지 쓰기",
    "en": "Use the {ult} Ultimate all the way through"
@@ -10317,8 +10387,8 @@
   },
   {
    "string_key": 3900009,
-   "ko": "벌써 10마리나 모였어!",
-   "en": "There's already 10 of us!"
+   "ko": "드디어 최대 마릿수까지 꽉 찼어! 약속대로 '승급'을 알려 줄게!",
+   "en": "We've finally hit the max rat count! As promised, let me teach you 'Promote'!"
   },
   {
    "string_key": 3900010,
@@ -10327,8 +10397,8 @@
   },
   {
    "string_key": 3900011,
-   "ko": "높은 등급 쥐는 힘이 훨씬 세다구! 왼쪽 아래 승급 버튼을 눌러 봐 찍!",
-   "en": "Higher-grade rats are WAY stronger! Try the Promote button at the bottom left, squeak!"
+   "ko": "합친 만큼 자리가 생겨서 다시 번식할 수 있고, 높은 등급 쥐는 힘도 훨씬 세다구! 왼쪽 아래 승급 버튼을 눌러 봐 찍!",
+   "en": "Merging frees up space so we can breed again, and higher-grade rats are WAY stronger! Try the Promote button at the bottom left, squeak!"
   },
   {
    "string_key": 3900012,
@@ -10417,13 +10487,13 @@
   },
   {
    "string_key": 3900029,
-   "ko": "그리고 하나 더! 같은 등급 쥐가 여럿 모이면 '승급'으로 더 높은 등급 쥐로 바꿀 수 있어.",
-   "en": "Oh, one more thing! When you have lots of rats of the same grade, you can 'Promote' them into a higher-grade rat."
+   "ko": "적정 찍찍이 모자랄 땐 쥐를 최대 마릿수까지 꽉 채워 봐!",
+   "en": "When SQUEAK!! is below Rec., try filling up to the max rat count!"
   },
   {
    "string_key": 3900030,
-   "ko": "높은 등급 쥐는 힘이 훨씬 세서 찍찍이 확 올라가! 왼쪽 아래 승급 버튼을 기억해 찍!",
-   "en": "Higher-grade rats are WAY stronger and boost SQUEAK!! a ton! Remember the Promote button at the bottom left, squeak!"
+   "ko": "꽉 차면 쥐를 더 센 쥐로 바꾸는 '승급'이 열릴 거야. 그럼 찍찍이 확 올라가 찍!",
+   "en": "Once it's full, 'Promote' unlocks. It turns rats into stronger rats, and SQUEAK!! shoots way up, squeak!"
   },
   {
    "string_key": 3900031,
@@ -10712,8 +10782,8 @@
   },
   {
    "string_key": 3900090,
-   "ko": "꽉 찼을 땐 승급으로 쥐를 합치면 자리가 다시 생겨! 번식할 쥐만 남기고 나머지는 승급시키자!",
-   "en": "When it's full, merge rats with Promote to free up space! Keep the breeders and Promote the rest!"
+   "ko": "그 대신 꽉 차면 더 강해지는 비밀 기술 '승급'을 알려 줄게! 일단 꽉 채워 보자 찍!",
+   "en": "And once it's full, I'll teach you a secret way to get stronger: 'Promote'! Let's fill it up first, squeak!"
   },
   {
    "string_key": 3900092,
@@ -10767,26 +10837,31 @@
   },
   {
    "string_key": 3900102,
+   "ko": "걱정 마! 꽉 찼을 땐 '승급'을 쓰면 돼! 왼쪽 아래에 승급 버튼이 새로 생겼어!",
+   "en": "Don't worry! When we're full, just use 'Promote'! A Promote button just appeared at the bottom left!"
+  },
+  {
+   "string_key": 3900108,
    "ko": "어? 오른쪽에 순위표가 생겼어!",
    "en": "Huh? A ranking board just popped up on the right!"
   },
   {
-   "string_key": 3900103,
+   "string_key": 3900109,
    "ko": "이번 층에서 누가 제일 많이 부쉈는지 보여 주는 '피해 순위'야. 종마다 따로 세!",
    "en": "That's the Damage Ranking: who's wrecked the most on this floor. Each kind is counted separately!"
   },
   {
-   "string_key": 3900104,
+   "string_key": 3900110,
    "ko": "앞지를 때마다 순위가 휙휙 바뀌니까, 누가 우리 무리의 에이스인지 지켜봐!",
    "en": "The ranks shuffle every time someone overtakes, so keep an eye out for our ace!"
   },
   {
-   "string_key": 3900105,
+   "string_key": 3900111,
    "ko": "지금 우리 무리에 누가 몇 마리 있는지 궁금하면 '쥐 목록'을 눌러 봐! R 키로도 열려!",
    "en": "Wondering who's in our crew and how many? Hit 'Rat List', or just press R!"
   },
   {
-   "string_key": 3900106,
+   "string_key": 3900112,
    "ko": "등급순 · 마릿수순 · 피해순으로 볼 수 있어. 열어 둔 동안엔 게임이 잠깐 멈춰!",
    "en": "You can sort by Grade, Count or Damage. The game pauses while it's open!"
   },
@@ -11006,6 +11081,11 @@
    "en": "Eternal Winter"
   },
   {
+   "string_key": 4231016,
+   "ko": "메이드의 세계",
+   "en": "The Maid's World"
+  },
+  {
    "string_key": 4331001,
    "ko": "찌릿… 도시 전체를 충전 중!",
    "en": "Bzzt... charging the whole city!"
@@ -11081,6 +11161,11 @@
    "en": "The world freezes over..."
   },
   {
+   "string_key": 4331016,
+   "ko": "시간… 정지.",
+   "en": "Time… stop."
+  },
+  {
    "string_key": 4431001,
    "ko": "번개가 하늘을 가른다!!",
    "en": "Lightning splits the sky!!"
@@ -11154,6 +11239,11 @@
    "string_key": 4431015,
    "ko": "전부 꽁꽁!!",
    "en": "Freeze, everyone!!"
+  },
+  {
+   "string_key": 4431016,
+   "ko": "칼날의 비!!",
+   "en": "Rain of blades!!"
   },
   {
    "string_key": 4500001,
@@ -14352,68 +14442,113 @@
   },
   {
    "string_key": 8000510,
-   "ko": "마릿수순",
-   "en": "Count"
+   "ko": "보관함이 비었어요. 층을 깨면 증강을 얻어요!",
+   "en": "Storage is empty. Clear floors to get augments!"
   },
   {
    "string_key": 8000511,
-   "ko": "쥐 이름",
-   "en": "Rat Name"
+   "ko": "증강을 누르면\n여기에 자세히 보여요",
+   "en": "Tap an augment\nto see its details here"
   },
   {
    "string_key": 8000512,
-   "ko": "× {n}마리",
-   "en": "× {n}"
-  },
-  {
-   "string_key": 8000513,
-   "ko": "이번 층 피해 순위",
-   "en": "Damage Ranking"
-  },
-  {
-   "string_key": 8000514,
-   "ko": "피해순",
-   "en": "Damage"
-  },
-  {
-   "string_key": 8000515,
-   "ko": "{rank}위",
-   "en": "#{rank}"
-  },
-  {
-   "string_key": 8000516,
-   "ko": "합계 {n}",
-   "en": "Total {n}"
-  },
-  {
-   "string_key": 8000517,
-   "ko": "지금 함께하는 쥐들",
-   "en": "Your Crew Right Now"
-  },
-  {
-   "string_key": 8000518,
-   "ko": "{n} / {max}마리 · {kinds}종 · 이번 층 피해 {dmg}",
-   "en": "{n} / {max} rats · {kinds} kinds · Floor damage {dmg}"
-  },
-  {
-   "string_key": 8000519,
    "ko": "총 피해 {n}",
    "en": "Total {n}"
   },
   {
+   "string_key": 8000513,
+   "ko": "증강",
+   "en": "Augments"
+  },
+  {
+   "string_key": 8000514,
+   "ko": "아지트로",
+   "en": "To Hideout"
+  },
+  {
+   "string_key": 8000515,
+   "ko": "※ 오늘 금화 비는 술탄이 쏩니다",
+   "en": "※ Today's gold rain is on the Sultan"
+  },
+  {
+   "string_key": 8000516,
+   "ko": "적들은 람쥐썬더가 처리했으니 안심하라구!",
+   "en": "Ramjui Thunder took care of the enemies, so relax!"
+  },
+  {
+   "string_key": 8000517,
+   "ko": "※ 시간 외 근무 수당은 청구하지 않습니다",
+   "en": "※ No overtime pay will be claimed"
+  },
+  {
+   "string_key": 8000518,
+   "ko": "쥐 이름",
+   "en": "Rat Name"
+  },
+  {
+   "string_key": 8000519,
+   "ko": "{rank}위",
+   "en": "#{rank}"
+  },
+  {
    "string_key": 8000520,
+   "ko": "이번 층 피해 순위",
+   "en": "Damage Ranking"
+  },
+  {
+   "string_key": 8000521,
+   "ko": "마릿수순",
+   "en": "Count"
+  },
+  {
+   "string_key": 8000522,
+   "ko": "{n} / {max}마리 · {kinds}종 · 이번 층 피해 {dmg}",
+   "en": "{n} / {max} rats · {kinds} kinds · Floor damage {dmg}"
+  },
+  {
+   "string_key": 8000523,
+   "ko": "범인은 바로 너야!",
+   "en": "The culprit is YOU!"
+  },
+  {
+   "string_key": 8000524,
+   "ko": "등급순",
+   "en": "Grade"
+  },
+  {
+   "string_key": 8000525,
+   "ko": "지금 함께하는 쥐들",
+   "en": "Your Crew Right Now"
+  },
+  {
+   "string_key": 8000526,
+   "ko": "피해순",
+   "en": "Damage"
+  },
+  {
+   "string_key": 8000527,
+   "ko": "× {n}마리",
+   "en": "× {n}"
+  },
+  {
+   "string_key": 8000528,
+   "ko": "사건 해결!",
+   "en": "Case closed!"
+  },
+  {
+   "string_key": 8000529,
    "ko": "쥐 목록 <size=70%>(R)</size>",
    "en": "Rat List <size=70%>(R)</size>"
   },
   {
-   "string_key": 8000521,
-   "ko": "피해 {n}",
-   "en": "Damage {n}"
+   "string_key": 8000530,
+   "ko": "합계 {n}",
+   "en": "Total {n}"
   },
   {
-   "string_key": 8000522,
-   "ko": "등급순",
-   "en": "Grade"
+   "string_key": 8000531,
+   "ko": "피해 {n}",
+   "en": "Damage {n}"
   },
   {
    "string_key": 9000001,

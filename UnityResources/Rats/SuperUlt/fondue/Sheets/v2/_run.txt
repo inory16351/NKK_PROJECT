@@ -1,0 +1,15 @@
+15:11:57 ok face_bg
+15:11:57 ok cu_face1
+15:12:00 ok pose_top
+15:12:09 ok body_up
+15:12:11 ok cu_snap1
+15:12:14 ok pano_on
+15:12:48 ok cu_face4
+15:12:52 ok cu_face2
+15:13:00 ok cu_snap2
+15:13:05 ok cu_snap3
+15:13:25 ok cu_face3
+15:14:14 ok geyser
+15:14:23 ok fx_hit
+15:14:33 ok fx_flat
+DONE

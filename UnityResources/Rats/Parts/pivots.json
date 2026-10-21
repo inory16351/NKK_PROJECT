@@ -7395,6 +7395,91 @@
     "front": 1,
     "back": 0.934
    }
+  },
+  "maid": {
+   "parts": [
+    "Parts/maid/head.png",
+    "Parts/maid/torso.png",
+    "Parts/maid/tail.png",
+    "Parts/maid/front.png",
+    "Parts/maid/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.731,
+     0.86
+    ],
+    "tail": [
+     0.042,
+     0.299
+    ],
+    "front": [
+     0.509,
+     0.062
+    ],
+    "back": [
+     0.555,
+     0.056
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.731,
+     0.14
+    ],
+    "tail": [
+     0.042,
+     0.701
+    ],
+    "front": [
+     0.509,
+     0.938
+    ],
+    "back": [
+     0.555,
+     0.944
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.858
+   }
   }
  }
 }

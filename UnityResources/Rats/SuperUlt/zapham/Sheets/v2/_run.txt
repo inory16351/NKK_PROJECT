@@ -1,0 +1,24 @@
+11:43:53 ok bg_sky
+11:43:54 ok pano_on
+11:43:59 ok shot_glare1
+11:44:05 ok anim_shock
+11:45:17 ok anim_catfly
+11:45:34 ok shot_glare2
+11:46:07 FAIL anim_volt
+11:46:48 FAIL anim_tackle
+11:47:35 FAIL shot_tease1
+11:48:07 FAIL shot_tease2
+11:49:02 ok fx_flat
+11:49:10 ok props_flat
+11:49:12 ok fx_hit
+DONE
+11:53:08 FAIL anim_tackle
+11:53:55 FAIL shot_tease1
+11:54:09 FAIL shot_tease2
+11:54:16 FAIL anim_volt
+DONE
+12:02:38 FAIL anim_tackle
+12:02:38 FAIL anim_volt
+12:02:39 FAIL shot_tease1
+12:02:46 FAIL shot_tease2
+DONE

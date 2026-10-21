@@ -14,6 +14,7 @@ from gen_gacha_intro_scene import RATS as GI          # 쥐별 입자 (바람 ·
 
 # 쥐별 연출 차이: 캐릭터 쪽(L/R) · ③ 띠 배경 흐름(up/down/side) · ③ 등장 방향(L/R) · ④ 카메라(whip_down/pull_back/swing) · 기울기 부호 · 다단 효과음 · 월드 어둠 색
 VAR = {
+    'zapham':      ('L', 'side', 'L', 'swing', 1, 'laser', (0.12, 0.10, 0.02, 0.5)),
     'parkrat':     ('R', 'side', 'L', 'pull_back', 1, 'combo_word', (0.10, 0.05, 0.18, 0.5)),
     'emperor':     ('L', 'up', 'R', 'whip_down', -1, 'boss_slam', (0.15, 0.05, 0.02, 0.5)),
     'pharaoh':     ('R', 'down', 'L', 'swing', 1, 'laser', (0.25, 0.15, 0.02, 0.45)),
@@ -28,6 +29,7 @@ VAR = {
     'fondue':      ('L', 'up', 'R', 'pull_back', 1, 'spill', (0.15, 0.10, 0.02, 0.45)),
     'bomber':      ('R', 'down', 'L', 'swing', -1, 'wall_blast', (0.15, 0.03, 0.02, 0.55)),
     'icequeen':    ('L', 'side', 'R', 'whip_down', 1, 'hit_glass', (0.02, 0.06, 0.14, 0.6)),
+    'maid':        ('L', 'down', 'R', 'whip_down', -1, 'hit_metal', (0.04, 0.04, 0.10, 0.6)),
 }
 HITS = [2.0 + 0.2 * i for i in range(10)]       # 다단 히트 시각 (Super_Config: t_cutin 1.9 · t_act 3.9 · 10타)
 
@@ -82,7 +84,9 @@ def cs(v):
     if isinstance(v, int): return str(v)
     if isinstance(v, float): return f(v)
     if isinstance(v, tuple): return f'new Vector2({f(v[0])}, {f(v[1])})'
+    if isinstance(v, str) and v.startswith('"'): return v       # 따옴표로 시작 = C# 글 그대로 (예: holdGroup)
     if isinstance(v, str): return f'S("{v}")'
+    if not v: return 'new Sprite[0]'       # 빈 목록 = 그림 없음 (예전 값 지우기)
     return 'new[] { ' + ', '.join(f'S("{n}")' for n in v) + ' }'
 
 
@@ -153,7 +157,7 @@ def main():
     out, codes = sys.argv[1], sys.argv[2:]
     body = [PRE]
     for c in codes:
-        body.append(zapham_ground() if c == 'zapham' else rat(c))
+        body.append(rat(c))      # 짜릿햄쥐도 v2 부터 superult_story (옛 손으로 만든 장면 · zapham_ground 안 씀)
     body.append('UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(hud.gameObject.scene);')
     body.append('UnityEditor.SceneManagement.EditorSceneManager.SaveScene(hud.gameObject.scene);')
     body.append(f'return "ok {" ".join(codes)}";')

@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: face_close.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE extreme CLOSE-UP of the character's FACE straight from the FRONT for a skill cut-in, face filling most of the height, centered. Keep the simple bead eye.
+- STYLE (MOST IMPORTANT): match EXACTLY the attached ref_zap_style and ref_flat_anim (approved flat cutscene art of this game) and ref_char: FLAT cartoon storybook look in the Untitled Goose Game mood: simple soft flat shapes, flat colors with only gentle soft shading, very little texture, NO individual fur strands, small simple black bead eyes with one tiny white highlight, no black outlines, no gloss, NOT a Disney/Pixar/3D look.
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- CHARACTER "Bomber Rat": build him EXACTLY from the attached ref_rig (the game's own rig parts) and ref_char / ref_parts: a cute dark-grey MOUSE with scruffy fur, big pink ears, a black EYE PATCH with a red cross over one eye, a big toothy grin, a dark vest with a brown bandolier full of small olive-and-yellow bomb shells, two round black bombs with fuses on the back, pink paws, long pink tail with a leather band. Big head, small body.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no ground, no scenery, no effects. Do not use magenta or purple on the subjects. Keep everything fully inside the frame with margin.
+- The visible eye shines with a small flat RED glint, a huge maniac-happy toothy grin, ears pinned back by wind, a lit fuse spark near the cheek.

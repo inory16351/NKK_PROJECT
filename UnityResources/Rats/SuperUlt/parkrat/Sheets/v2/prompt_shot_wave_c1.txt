@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image old_shot_wave_c1.png and save the result as a NEW PNG file: shot_wave_c1.png (in the current working directory). Do not overwrite old_shot_wave_c1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to old_shot_wave_c1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- Replace EVERY balloon shaped like a mouse head (a balloon with two round ears on top) with a PLAIN ORDINARY ROUND BALLOON on a thin string (a simple oval rubber party balloon, same color and size, no ears, no faces, no logos). Do not add any mouse-ear shapes to balloons. Nothing else changes.

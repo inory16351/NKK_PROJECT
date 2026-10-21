@@ -117,7 +117,9 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 482fb86338ac2354e8eb78cf0a333e9f, type: 3}
   unknown: {fileID: 21300000, guid: cf07e811f5eb46f4e910308b495a1278, type: 3}
   gradeFrames:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: 63dfc61d16797234abca79816c4b3add, type: 3}
+  - {fileID: 21300000, guid: d6006a3db80c2be43a0b8971c2254215, type: 3}
+  - {fileID: 21300000, guid: d0c1ea4f270add646b4a15b40d5fea9d, type: 3}
+  - {fileID: 21300000, guid: d4f25f3b719f2004e80e207f9e1892ae, type: 3}
+  emptySlot: {fileID: 21300000, guid: 32a38f6548ad253479ae77ead90efe77, type: 3}
+  lockedSlot: {fileID: 21300000, guid: e54231b9df9e10942af3d0544a9f82fa, type: 3}

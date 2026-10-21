@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_ride1.png and save the result as a NEW PNG file: cu_ratride.png (in the current working directory). Do not overwrite shot_ride1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_ride1.png: the same canvas size, the same framing, camera angle and zoom, the same characters' size and position, the same background, the same colors and flat style. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- Keep ONLY the rat (with its chef hat, paws, tail) exactly where and how it is, the same size and position. Replace EVERYTHING else (the Cook, his hair, the whole background) with ONE solid flat pure magenta #FF00FF (for chroma keying). Where the rat's paws grab the hair, show the paws closed holding small brown hair tufts. Clean edges, no shadow.

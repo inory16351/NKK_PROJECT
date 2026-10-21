@@ -20,7 +20,7 @@ namespace NKK
         public static bool TestOpen;       // 테스트: 층과 상관없이 열기
         public static bool Unlocked => TestOpen || (P && P.maxFloor >= UnlockFloor);
         public static bool CarryUnlocked => TestOpen || (P && P.maxFloor >= CarryFloor);
-        public static int SlotCount => Mathf.Max(1, Mathf.RoundToInt(Cfg("slot_base", 5)) + CommonSkill.AugSlotAdd);
+        public static int SlotCount => Mathf.Clamp(Mathf.RoundToInt(Cfg("slot_base", 2)) + CommonSkill.AugSlotAdd, 1, Mathf.Max(1, Mathf.RoundToInt(Cfg("slot_max", 5))));      // 2칸 시작 · 최대 5 (2026-10-20)
         public static int OfferCount => Mathf.Max(1, Mathf.RoundToInt(Cfg("offer_count", 3)));
         public static int MaxLevel => Mathf.RoundToInt(Cfg("up_max", 5));
 

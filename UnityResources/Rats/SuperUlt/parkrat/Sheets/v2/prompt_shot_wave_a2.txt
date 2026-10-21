@@ -1,0 +1,6 @@
+Use your built-in image generation tool to EDIT the attached image shot_wave_a1.png and save the result as a NEW PNG file: shot_wave_a2.png (in the current working directory). Do not overwrite shot_wave_a1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_wave_a1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The BLAST WIND comes from the LEFT (a giant balloon just burst off-screen at the left): everything is pushed hard to the RIGHT, flat white-cream WIND streaks and swirls sweep from left to right across the whole picture, dust clouds in warm cream and grey roll in from the left.
+- The castle is being BLOWN APART: the cone roofs rip off and fly to the right, the towers bend and crack, bricks, flags and tiles fly away to the right, the sky turns hazy cream. Comic cartoon destruction, NO characters.

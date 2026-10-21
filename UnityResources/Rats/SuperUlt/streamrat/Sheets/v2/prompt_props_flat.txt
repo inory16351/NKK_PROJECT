@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: props_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game prop art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or hot pink close to magenta on the elements (use coral pink, salmon, cyan, yellow, white instead).
+- NO text, NO letters, NO numbers.
+  1. a big flat computer MONITOR seen from the front showing a cartoon DONATION ALERT graphic: a big gold coin, a cheese wedge and a coral heart with cyan sparkles on a navy screen (icons only, NO letters, NO numbers)
+  2. a flat stack of gold DONATION COINS
+  3. a small flat wrapped GIFT BOX shaped like a cheese wedge with a coral ribbon
+  4. a flat THUMBS-UP icon in a coral circle
+  5. a flat notification BELL icon in yellow with a small cyan ring
+  6. a flat cyan GLOW STICK

@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_panel.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE image: ONE big PANEL BOARD filling almost the whole picture (leave a thin magenta margin around it), used as the background of an 'augment management' window, it will be 9-sliced:
+- STYLE (MOST IMPORTANT): FLAT 2D game UI art exactly like the attached ref_uikit (this game's own approved UI kit: flat cardboard tiles, wooden planks, cork board, round tiles; soft flat colors, at most one soft shade step, clean rounded edges, NO black outlines, NO gloss, NO glow, NO gradients except very soft, NO painterly texture, NOT 3D, NOT shiny mobile-game chrome).
+- NO text, NO letters, NO numbers, no logos.
+- Background: ONE solid flat pure magenta #FF00FF everywhere outside the elements (for chroma keying), no shadow on the background. Do not use magenta or purple on the elements.
+- The panel: a thick flat WOODEN FRAME border (warm light-brown planks with a few simple grain lines, small round nails only near the four corners, the LEFT, RIGHT and BOTTOM frame sides about 6% of the height thick, but the TOP frame side is a much THICKER header board about 12% of the picture height (made of two stacked planks), so buttons and a title can sit ON the top board) and inside a flat plain cream PAPER area (#F3E6CC) with NO pattern, NO text.
+- Add only tiny cute touches at the two TOP CORNERS: a small cheese wedge at the top-left corner and a small test-tube at the top-right corner, both sitting fully ON the thick top board (not hanging into the paper). Keep all four edges' middles plain. Keep the same look and colors as the attached ref_panel_v1, only the top board is thicker.

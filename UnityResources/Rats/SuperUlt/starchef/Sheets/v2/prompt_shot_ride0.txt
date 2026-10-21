@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_ride1.png and save the result as a NEW PNG file: shot_ride0.png (in the current working directory). Do not overwrite shot_ride1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_ride1.png: the same canvas size, the same framing, camera angle and zoom, the same characters' size and position, the same background, the same colors and flat style. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- REMOVE the rat completely: no rat, no tail, no chef hat with stars on top of his head. Fill in his messy brown wavy hair on the top of his head where the rat was (a full head of hair, a natural flat cartoon shape). The Cook does NOT know anything yet: calm, blank face, eyes normal looking forward, eyebrows relaxed, mouth a small closed neutral line, NO sweat drop. Background and everything else unchanged.

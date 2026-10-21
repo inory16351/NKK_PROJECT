@@ -15,7 +15,11 @@ namespace NKK.Stage
         [Tooltip("남은 체력 숫자 글 보이기 (끄면 막대만)")] public bool showLabel;
         [Tooltip("물건·고양이 체력바처럼 남은 비율에 따라 초록·노랑·빨강 (FxManager hpGreen·hpYellow·hpRed). 끄면 빨간 막대 그대로 (사용자 2026-10-15: 벽은 빨강으로 구별)")] public bool hpColors;
 
+        [Tooltip("막대 안 남은 체력 % 글 (자리표시 {0} = 정수 %)")] public TMP_Text pct;
+        [Tooltip("% 글 틀")] public string pctFormat = "{0}%";
+
         float lastHp = -1, lastK = -1;
+        int lastPct = -1;
 
         public void Set(float hp, float k)
         {
@@ -28,6 +32,11 @@ namespace NKK.Stage
             }
             if (label && label.gameObject.activeSelf != showLabel) label.gameObject.SetActive(showLabel);
             if (showLabel && label && !Mathf.Approximately(hp, lastHp)) { label.text = string.Format(format, GameManager.Format(hp)); lastHp = hp; }
+            if (pct)
+            {
+                int p = hp > 0 ? Mathf.Clamp(Mathf.CeilToInt(k * 100), 1, 100) : 0;     // 남아 있으면 최소 1%
+                if (p != lastPct) { pct.text = string.Format(pctFormat, p); lastPct = p; }
+            }
         }
     }
 }

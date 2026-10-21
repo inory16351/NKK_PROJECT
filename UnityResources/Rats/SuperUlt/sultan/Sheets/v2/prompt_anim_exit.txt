@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: anim_exit.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 landscape ANIMATION SHEET: 3 columns, ONE full-body frame per column, all frames the same size and scale, each well inside its third, none touching. Frames are consecutive key drawings of one motion for a cel-animated skill cutscene, so keep the character IDENTICAL between frames, only the pose changes. Strong, dynamic, readable poses.
+- CAMERA: every frame is a straight FRONT VIEW (the character faces the viewer).
+- STYLE (MOST IMPORTANT): this must look like THIS GAME's own art. Match EXACTLY the attached ref_rig (the character's in-game sprite parts: copy its colors, shapes and proportions) and the approved flat cutscene art ref_flat_anim / ref_flat_face: FLAT cartoon storybook look in the Untitled Goose Game mood, simple soft flat shapes, flat colors with only gentle soft shading, very little texture, NO individual fur strands, small simple black bead eyes with one tiny white highlight, no black outlines, no gloss, NOT a Disney/Pixar/3D look, NOT anime style, NOT a photo.
+- NO text, NO letters, NO numbers, no logos, no speech bubbles anywhere.
+- CHARACTER "Sultan Hamster": build it EXACTLY from the attached ref_rig and ref_char (use ref_char only for the colors and the character design, NOT its painted look): a cute chubby golden-orange HAMSTER with a cream-white muzzle, belly and big round CHEEKS, small round pink-lined ears, a pink nose, white whiskers, small black bead eyes, wearing a big cream-white TURBAN with a blue band, a round gold brooch with a red ruby on the front and a tall white feather plume on top, and a short deep-red royal CAPE over the back with a gold trim band, hanging gold tassels and a gold clasp with a blue gem; small pink paws; a short fluffy cream tail. Big head, round small body.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no ground, no scenery. Do not use magenta or purple on the subjects. Keep everything fully inside the frame with margin.
+- The Sultan walks out of his palace like a proud king, FULL BODY, FRONT VIEW, standing upright like a person, the cape flowing behind:
+  1) striding toward the viewer: the left foot forward, chest puffed out, paws on the hips, chin up, smug closed-eye smile;
+  2) the next stride: the right foot forward, one paw waving like greeting a crowd, smug smile;
+  3) stopping and RAISING one paw HIGH above the head, snapping the fingers to CALL something from the sky, the other paw on the hip, a big confident open-mouth grin, cape swinging.

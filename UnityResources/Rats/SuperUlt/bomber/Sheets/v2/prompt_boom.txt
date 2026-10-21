@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: boom.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers, NO stars.
+- Palette: cream white, warm yellow, orange, crimson, charcoal smoke.
+  1. EXPLOSION frame 1: a small flat white-yellow burst with rounded flame tongues
+  2. EXPLOSION frame 2: a bigger round orange-yellow fireball burst with a few rock chunks flying out
+  3. EXPLOSION frame 3: the end: a puffy grey-orange smoke cloud with small embers, fading shapes
+  4. a wide flat SHOCKWAVE RING seen from the front (a thin wide ellipse of cream-white and orange, about 4 times wider than tall)
+  5. a flat cluster of flying ROCK DEBRIS chunks in charcoal and rust
+  6. a big flat puffy SMOKE PUFF in ash grey and charcoal

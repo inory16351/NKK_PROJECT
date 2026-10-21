@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_door1.png and save the result as a NEW PNG file: shot_door2.png (in the current working directory). Do not overwrite shot_door1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_door1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- SLAM! Jwerry has swung the door SHUT (the door is now closed, flat across the frame) and the Tomcat has smashed into it: the cat's whole body is FLATTENED paper-thin against the closed door like a pancake in the exact outline of a cat, limbs spread, eyes as two X marks, short flat shaking lines around the door. Jwerry stands at the right edge dusting off its paws. Nothing else changes.

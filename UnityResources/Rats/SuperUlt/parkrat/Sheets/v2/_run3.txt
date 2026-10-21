@@ -1,0 +1,12 @@
+11:45:36 ok balloon
+11:45:46 ok shot_parade1
+11:45:47 ok shot_wave_c2
+11:45:49 ok shot_wave_c1
+11:45:51 ok shot_crowd_scream
+11:45:53 ok shot_crowd_q
+11:45:58 ok shot_wave_b1
+11:46:07 ok shot_think1
+11:46:15 ok shot_crowd_worry
+11:46:17 ok shot_parade3
+11:48:10 ok shot_wave_b2
+DONE

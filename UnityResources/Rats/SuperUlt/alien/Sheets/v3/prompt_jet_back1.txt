@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: jet_back1.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, ONE object: a sleek cartoon FIGHTER JET seen from DIRECTLY BEHIND and slightly BELOW (low angle, symmetric), very big and heroic: two round engine NOZZLES at the bottom center (dark, engines off), wide swept wings spread to the left and right, two slanted tail fins, the bubble canopy at the top with the small round helmet of a mouse pilot visible from behind (two round mouse ears on the helmet), slate grey and steel blue body with yellow cheese-wedge emblems on the wings (no text). It fills about 85% of the image width.
+- STYLE: FLAT 2D game art like the attached ref_flat_bg and ref_flat_fx (simple flat shapes, flat fills with at most one soft shade step, NO black outlines, NO gloss, NO glow, NOT 3D, NOT realistic). NO text, NO letters, NO numbers, no logos.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow, no ground, no scenery. Do not use magenta, pink or purple on the object. Keep the object fully inside the frame with a small margin.

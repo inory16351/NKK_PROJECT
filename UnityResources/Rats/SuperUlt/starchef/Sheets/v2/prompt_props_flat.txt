@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: props_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game prop art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers.
+- HUMAN "the Cook": build him EXACTLY from the attached ref_cook (his in-game sprite parts): a young man cook with peach skin, a big round nose, small black bead eyes, messy short BROWN wavy hair with sideburns, a white double-breasted chef jacket, black-and-white CHECKERED trousers, black shoes. Same flat cartoon look as ref_cook.
+  1. the Cook's plain white CHEF HAT (no stars), tumbling, tilted
+  2. one big blue cartoon SWEAT DROP
+  3. a soft wisp of white STEAM rising (flat, 2 curls)
+  4. a little cartoon blue TEAR splash (3 drops)
+  5. a small pink plastic HAIR COMB, tilted
+  6. a hanging rack of three COPPER POTS and a ladle (foreground decoration, hanging from the top)

@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers, NO stars.
+- Palette: crimson red, scarlet, warm orange, cream white core. These are RED MAGIC CIRCLES for an explosion spell.
+  1. a big RED MAGIC CIRCLE seen straight from the FRONT (perfect circle): thick outer ring, a second inner ring, simple abstract geometric marks between them (dots, short bars, triangles; NOT letters), a hexagon inside, a small solid disk in the middle
+  2. the SAME magic circle seen in PERSPECTIVE from below (a flat wide ELLIPSE, about 3 times wider than tall)
+  3. a thin outer RUNE RING alone: one thin red ring with evenly spaced small geometric marks (no letters), perfect circle
+  4. a small simple red magic circle (two rings and a triangle), perfect circle
+  5. a flat round RED FLASH disk with a cream-white center and short rounded rays
+  6. a flat cluster of 6 small red-orange EMBER sparks (rounded diamonds)

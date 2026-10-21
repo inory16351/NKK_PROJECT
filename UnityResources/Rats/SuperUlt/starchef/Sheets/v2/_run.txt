@@ -1,0 +1,14 @@
+16:06:18 ok face_bg
+16:06:43 ok cu_dish
+16:06:59 ok shot_taste1
+16:07:08 ok shot_offer
+16:07:42 ok shot_ride1
+16:08:00 ok shot_v1
+16:08:36 ok shot_ride2
+16:08:42 ok shot_taste2
+16:08:53 ok shot_taste3
+16:08:56 ok shot_ride3
+16:09:33 ok shot_v2
+16:10:35 ok props_flat
+16:10:45 ok fx_flat
+DONE

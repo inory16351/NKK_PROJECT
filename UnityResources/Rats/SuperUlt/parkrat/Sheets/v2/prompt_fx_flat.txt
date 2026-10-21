@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+- Palette: cream white, butter yellow, coral red, mint, soft sky blue.
+  1. a flat four-pointed SPARKLE (cream-white with a butter-yellow center)
+  2. a small flat cluster of CONFETTI pieces and short curly streamers (coral, mint, yellow, sky blue)
+  3. flat cartoon CLAP marks: a small burst of five short cream-white lines radiating out
+  4. a wide flat SHOCKWAVE RING seen from the front (a thin wide ellipse of cream-white and pale sky blue, about 4 times wider than tall)
+  5. a wide flat cartoon WIND GUST: three long curling cream-white wind streaks swirling from left to right
+  6. a long thin horizontal SPEED STREAK (a flat white tapered line, thick at the left, pointed at the right)

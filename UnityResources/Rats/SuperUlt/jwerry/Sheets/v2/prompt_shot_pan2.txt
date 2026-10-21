@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_pan1.png and save the result as a NEW PNG file: shot_pan2.png (in the current working directory). Do not overwrite shot_pan1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_pan1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- BONK! Jwerry has SWUNG the frying pan full force: the pan is now in front of the mouse and SMACKS the Tomcat's face; the cat's whole face is squashed FLAT into the round shape of the pan's bottom, its body crumpled in mid-air, eyes popped, a few teeth flying, a big flat cream-and-yellow BONK burst at the hit point with flat yellow stars. The mouse is in follow-through, one foot up. Nothing else changes.

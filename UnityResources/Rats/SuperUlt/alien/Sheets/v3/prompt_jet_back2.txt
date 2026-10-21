@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image jet_back1.png and save the result as a NEW PNG file: jet_back2.png (in the current working directory). Do not overwrite jet_back1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to jet_back1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same solid magenta background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- AFTERBURNERS ON: both nozzles now blast big flat round flames toward the viewer (cream-white core, orange and blue rings), short flat heat-shimmer lines, the jet slightly lower and leaning forward ready to launch. Nothing else changes.

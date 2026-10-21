@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers.
+- Palette: golden cheese yellow, warm orange shade, cream highlight, a little turquoise water blue and white.
+  1. a flat four-pointed SNAP SPARKLE star in cream white and yellow (the 'click' of a finger snap)
+  2. a flat thin SHOCK RING, a perfect circle made of a yellow and cream band
+  3. a flat round CHEESE SPLASH BURST: a golden yellow blob with thick round droplet spikes all around
+  4. a flat cluster of 7 round melted CHEESE DROPLETS of different sizes
+  5. a flat cluster of turquoise and white WATER SPRAY droplets
+  6. a flat vertical SPEED LINE streak in cream white (long thin tapered stripe)

@@ -85,17 +85,17 @@
   {
    "step_id": "g_promote",
    "scene": "Game",
-   "trigger": "RatCount",
-   "trigger_value": 10.0,
+   "trigger": "PopFull",
+   "trigger_value": 0.0,
    "trigger_text": "",
-   "cond1_type": "FloorMin",
-   "cond1_value": "2",
-   "cond2_type": "",
-   "cond2_value": "",
+   "cond1_type": "Done",
+   "cond1_value": "g_pop_f5,g_power_pop",
+   "cond2_type": "Locked",
+   "cond2_value": "promote",
    "unlock": "promote",
    "action": "",
    "action_value": "",
-   "sort": 40
+   "sort": 47
   },
   {
    "step_id": "g_cat",
@@ -188,19 +188,19 @@
    "sort": 101
   },
   {
-   "step_id": "g_power_promote_new",
+   "step_id": "g_power_hint",
    "scene": "Game",
    "trigger": "After",
    "trigger_value": 0.0,
-   "trigger_text": "g_power",
+   "trigger_text": "g_power,g_power_pop",
    "cond1_type": "Locked",
    "cond1_value": "promote",
-   "cond2_type": "",
-   "cond2_value": "",
-   "unlock": "promote",
+   "cond2_type": "Unlocked",
+   "cond2_value": "pop",
+   "unlock": "",
    "action": "",
    "action_value": "",
-   "sort": 102
+   "sort": 104
   },
   {
    "step_id": "l_first",
@@ -342,7 +342,7 @@
    "scene": "Game",
    "trigger": "After",
    "trigger_value": 0.0,
-   "trigger_text": "g_power_promote,g_power_promote_new",
+   "trigger_text": "g_power,g_power_promote",
    "cond1_type": "Locked",
    "cond1_value": "pop",
    "cond2_type": "",
@@ -668,6 +668,21 @@
    "sort": 242
   },
   {
+   "step_id": "g_pop_promote",
+   "scene": "Game",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "g_pop",
+   "cond1_type": "Locked",
+   "cond1_value": "promote",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "promote",
+   "action": "",
+   "action_value": "",
+   "sort": 46
+  },
+  {
    "step_id": "g_meter",
    "scene": "Game",
    "trigger": "FloorTime",
@@ -680,7 +695,7 @@
    "unlock": "meter",
    "action": "",
    "action_value": "",
-   "sort": 104
+   "sort": 110
   },
   {
    "step_id": "g_roster",
@@ -695,7 +710,7 @@
    "unlock": "roster",
    "action": "",
    "action_value": "",
-   "sort": 105
+   "sort": 111
   }
  ],
  "Line": [
@@ -776,9 +791,9 @@
    "step_id": "g_promote",
    "speaker_id": "nerd",
    "face": "surprised",
-   "text": "벌써 10마리나 모였어!",
+   "text": "드디어 최대 마릿수까지 꽉 찼어! 약속대로 '승급'을 알려 줄게!",
    "text_sk": 3900009,
-   "highlight": ""
+   "highlight": "pop"
   },
   {
    "line_id": 10,
@@ -794,7 +809,7 @@
    "step_id": "g_promote",
    "speaker_id": "nerd",
    "face": "happy",
-   "text": "높은 등급 쥐는 힘이 훨씬 세다구! 왼쪽 아래 승급 버튼을 눌러 봐 찍!",
+   "text": "합친 만큼 자리가 생겨서 다시 번식할 수 있고, 높은 등급 쥐는 힘도 훨씬 세다구! 왼쪽 아래 승급 버튼을 눌러 봐 찍!",
    "text_sk": 3900011,
    "highlight": "promote"
   },
@@ -953,21 +968,21 @@
   },
   {
    "line_id": 29,
-   "step_id": "g_power_promote_new",
+   "step_id": "g_power_hint",
    "speaker_id": "nerd",
    "face": "normal",
-   "text": "그리고 하나 더! 같은 등급 쥐가 여럿 모이면 '승급'으로 더 높은 등급 쥐로 바꿀 수 있어.",
+   "text": "적정 찍찍이 모자랄 땐 쥐를 최대 마릿수까지 꽉 채워 봐!",
    "text_sk": 3900029,
-   "highlight": "promote"
+   "highlight": "pop"
   },
   {
    "line_id": 30,
-   "step_id": "g_power_promote_new",
+   "step_id": "g_power_hint",
    "speaker_id": "nerd",
    "face": "happy",
-   "text": "높은 등급 쥐는 힘이 훨씬 세서 찍찍이 확 올라가! 왼쪽 아래 승급 버튼을 기억해 찍!",
+   "text": "꽉 차면 쥐를 더 센 쥐로 바꾸는 '승급'이 열릴 거야. 그럼 찍찍이 확 올라가 찍!",
    "text_sk": 3900030,
-   "highlight": "promote"
+   "highlight": "pop"
   },
   {
    "line_id": 31,
@@ -1159,15 +1174,6 @@
    "highlight": "pop"
   },
   {
-   "line_id": 52,
-   "step_id": "g_pop",
-   "speaker_id": "nerd",
-   "face": "happy",
-   "text": "승급으로 쥐를 합치면 자리가 다시 생겨! 번식할 쥐만 남기고 나머지는 승급시키자!",
-   "text_sk": 3900052,
-   "highlight": "promote"
-  },
-  {
    "line_id": 53,
    "step_id": "g_superjump",
    "speaker_id": "labrat",
@@ -1278,24 +1284,6 @@
   {
    "line_id": 65,
    "step_id": "g_promote",
-   "speaker_id": "nerd",
-   "face": "normal",
-   "text": "승급 창의 '일괄 승급'은 번식할 쥐를 알아서 남겨 줘. 헷갈리면 그걸 눌러!",
-   "text_sk": 3900065,
-   "highlight": "promote"
-  },
-  {
-   "line_id": 66,
-   "step_id": "g_power_promote_new",
-   "speaker_id": "brownrat",
-   "face": "panic",
-   "text": "그런데 너무 많이 합치면 쥐가 적어져서 번식이 거의 안 돼!! 번식할 쥐는 꼭 남겨 둬 찍!",
-   "text_sk": 3900066,
-   "highlight": ""
-  },
-  {
-   "line_id": 67,
-   "step_id": "g_power_promote_new",
    "speaker_id": "nerd",
    "face": "normal",
    "text": "승급 창의 '일괄 승급'은 번식할 쥐를 알아서 남겨 줘. 헷갈리면 그걸 눌러!",
@@ -1505,9 +1493,9 @@
    "step_id": "g_pop_f5",
    "speaker_id": "nerd",
    "face": "happy",
-   "text": "꽉 찼을 땐 승급으로 쥐를 합치면 자리가 다시 생겨! 번식할 쥐만 남기고 나머지는 승급시키자!",
+   "text": "그 대신 꽉 차면 더 강해지는 비밀 기술 '승급'을 알려 줄게! 일단 꽉 채워 보자 찍!",
    "text_sk": 3900090,
-   "highlight": "promote"
+   "highlight": "pop"
   },
   {
    "line_id": 92,
@@ -1601,47 +1589,101 @@
   },
   {
    "line_id": 102,
+   "step_id": "g_pop_promote",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "걱정 마! 꽉 찼을 땐 '승급'을 쓰면 돼! 왼쪽 아래에 승급 버튼이 새로 생겼어!",
+   "text_sk": 3900102,
+   "highlight": "promote"
+  },
+  {
+   "line_id": 103,
+   "step_id": "g_pop_promote",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "같은 등급 쥐가 여럿 모이면 '승급'으로 더 높은 등급 쥐로 바꿀 수 있어.",
+   "text_sk": 3900010,
+   "highlight": "promote"
+  },
+  {
+   "line_id": 104,
+   "step_id": "g_pop_promote",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "합친 만큼 자리가 생겨서 다시 번식할 수 있고, 높은 등급 쥐는 힘도 훨씬 세다구! 왼쪽 아래 승급 버튼을 눌러 봐 찍!",
+   "text_sk": 3900011,
+   "highlight": "promote"
+  },
+  {
+   "line_id": 105,
+   "step_id": "g_pop_promote",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "아, 그런데 조심해! 승급에 쓴 쥐들은 하나로 합쳐져서 사라져.",
+   "text_sk": 3900063,
+   "highlight": ""
+  },
+  {
+   "line_id": 106,
+   "step_id": "g_pop_promote",
+   "speaker_id": "brownrat",
+   "face": "panic",
+   "text": "쥐가 너무 적어지면 서로 부딪힐 일이 줄어서 새끼가 거의 안 태어나!! 번식할 쥐는 꼭 남겨 둬 찍!",
+   "text_sk": 3900064,
+   "highlight": ""
+  },
+  {
+   "line_id": 107,
+   "step_id": "g_pop_promote",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "승급 창의 '일괄 승급'은 번식할 쥐를 알아서 남겨 줘. 헷갈리면 그걸 눌러!",
+   "text_sk": 3900065,
+   "highlight": "promote"
+  },
+  {
+   "line_id": 108,
    "step_id": "g_meter",
    "speaker_id": "brownrat",
    "face": "surprised",
    "text": "어? 오른쪽에 순위표가 생겼어!",
-   "text_sk": 3900102,
+   "text_sk": 3900108,
    "highlight": ""
   },
   {
-   "line_id": 103,
+   "line_id": 109,
    "step_id": "g_meter",
    "speaker_id": "nerd",
    "face": "normal",
    "text": "이번 층에서 누가 제일 많이 부쉈는지 보여 주는 '피해 순위'야. 종마다 따로 세!",
-   "text_sk": 3900103,
+   "text_sk": 3900109,
    "highlight": "meter"
   },
   {
-   "line_id": 104,
+   "line_id": 110,
    "step_id": "g_meter",
    "speaker_id": "nerd",
    "face": "happy",
    "text": "앞지를 때마다 순위가 휙휙 바뀌니까, 누가 우리 무리의 에이스인지 지켜봐!",
-   "text_sk": 3900104,
+   "text_sk": 3900110,
    "highlight": "meter"
   },
   {
-   "line_id": 105,
+   "line_id": 111,
    "step_id": "g_roster",
    "speaker_id": "brownrat",
    "face": "happy",
    "text": "지금 우리 무리에 누가 몇 마리 있는지 궁금하면 '쥐 목록'을 눌러 봐! R 키로도 열려!",
-   "text_sk": 3900105,
+   "text_sk": 3900111,
    "highlight": "roster"
   },
   {
-   "line_id": 106,
+   "line_id": 112,
    "step_id": "g_roster",
    "speaker_id": "brownrat",
    "face": "normal",
    "text": "등급순 · 마릿수순 · 피해순으로 볼 수 있어. 열어 둔 동안엔 게임이 잠깐 멈춰!",
-   "text_sk": 3900106,
+   "text_sk": 3900112,
    "highlight": ""
   }
  ],

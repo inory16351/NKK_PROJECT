@@ -135,6 +135,22 @@ TIME_ADD_SCALE = 0.5
 for _t in range(1, 9):
     for _k, _v in list(T[_t].items()):
         if _v and _v[0] == 'Time_Add': T[_t][_k] = ('Time_Add', max(2, round(_v[1] * TIME_ADD_SCALE)))
+# 스테이지 스킵 노드 (2026-10-21 사용자: 시작 가능 층과 최고 클리어 층 차이가 너무 크고 갈수록 벌어짐 → 완화)
+#   훈장 조건 층(tier_gates.GATE)은 앞당겨졌는데 노드 값은 예전(8훈장까지 누적 27) 그대로라 노드 합이 상한을 못 따라와 차이가 10~17층까지 벌어졌음.
+#   훈장 t 트리의 스킵 노드 누적 = 다음 훈장 조건 층과 그다음 조건 층의 가운데 → 승급 직후 새 노드를 안 찍어도 다음 허들까지 반쯤은 따라옴.
+#   남는 몫은 스테이지 테이블 skip_cap(최고 클리어 - 3, 넘은 허들 아래로는 안 감)이 막음. 칸 = 그 훈장 트리에서 Stage_Skip 인 칸(S1 · S3), 앞 칸이 더 큼
+import tier_gates as _TGS
+def _skip_need(t):
+    g = dict(_TGS.GATE); last = 100
+    a, b = g.get(t + 1, last), g.get(t + 2, last)
+    return last - 1 if t >= 16 else (a + b) // 2 - 1
+_prev = 0
+for _t in range(1, 17):
+    _slots = [k for k in ('S1', 'S3') if T[_t].get(k) and T[_t][k][0] == 'Stage_Skip']
+    _inc = max(len(_slots), _skip_need(_t) - _prev)
+    _vals = [_inc - _inc // 2, _inc // 2] if len(_slots) == 2 else [_inc]
+    for _k, _v in zip(_slots, _vals): T[_t][_k] = ('Stage_Skip', _v)
+    _prev += _inc
 TIERS = range(1, 17)
 
 # 훈장별 비용 (2026-10-08 경제 개편, 측정 Tools/probe_results/round8_econ.csv)
@@ -278,7 +294,7 @@ EFFECT_DOC = [
     ('Stage_Skip', '로비에서 고를 수 있는 시작 층 + 합 (최고 기록을 넘지 못함)', '층', '-', '-'),
     ('Wall_Hp_Down', '벽 체력 ×(1 - 합) (최소 0.5)', '감소율', '-', '-'),
     ('Ult_Gauge_Pct', '필살기 게이지 충전 ×(1 + 합)', '증가율', '-', '-'),
-    ('Aug_Slot', '증강 장착 슬롯 + 합 (기본 = 증강 테이블 Aug_Config slot_base 5)', '칸 수', '-', '-'),
+    ('Aug_Slot', '증강 장착 슬롯 + 합 (기본 = 증강 테이블 Aug_Config slot_base 2, 최대 slot_max 5)', '칸 수', '-', '-'),
     ('Research_Pct', '층 클리어 연구자료 ×(1 + 합) (증강용)', '증가율', '-', '-'),
     ('Ult_Power_Pct', '필살기 피해 ×(1 + 합)', '증가율', '-', '-'),
     ('Ult_Auto', '필살기 자동 사용', '-', '-', '-'),

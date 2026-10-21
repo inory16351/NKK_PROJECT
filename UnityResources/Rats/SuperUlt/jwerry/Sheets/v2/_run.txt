@@ -1,0 +1,25 @@
+11:38:58 ok shot_hole1
+11:39:04 ok shot_open1
+11:39:06 ok pano_a
+11:39:11 ok shot_pan1
+11:39:24 ok shot_wall1
+11:39:27 ok shot_door1
+11:39:30 ok shot_rug1
+11:39:49 ok shot_hole2
+11:40:00 ok shot_open2
+11:40:13 ok shot_wall2
+11:40:16 ok shot_pan2
+11:40:35 ok shot_door2
+11:40:39 ok shot_rug2
+11:40:46 ok pano_b
+11:41:45 ok pano_c
+11:41:57 ok shot_door3
+11:42:50 ok props_flat
+11:42:58 ok fx_flat
+11:43:00 ok anim_jrun
+11:43:01 ok fx_hit
+11:43:02 ok anim_tomrun
+11:43:27 ok anim_tommove
+11:43:47 ok shot_catface
+11:44:26 ok anim_jmove
+DONE

@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_descend.png and save the result as a NEW PNG file: shot_descend_dmg.png (in the current working directory). Do not overwrite shot_descend.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_descend.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- Only the CENTER of the city skyline was hit by a giant laser: the tall cheese tower in the center and two or three buildings beside it are broken and burning (flat orange flames, a glowing lime-green crater glow at their base, a thick flat charcoal smoke column rising from the center). The REST of the city on the left and right stays INTACT with lit windows. Nothing else changes. NO characters.

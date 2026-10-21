@@ -20,6 +20,7 @@ namespace NKK
         [Tooltip("장착 중 / 들고 가기 표시")] public GameObject equipMark;
         [Tooltip("못 얻은 증강일 때 이름")] public string unknownName = "???";
         [Tooltip("unknownName 스트링 키")] public int unknownNameKey;
+        [Tooltip("테두리 안 바탕 (등급 테두리 그림이 바탕까지 칠하면 숨김, 비우면 자식 'Inner')")] public Image inner;
 
         string lvTpl, ptsTpl; bool init;
         public int Uid { get; private set; }
@@ -28,6 +29,7 @@ namespace NKK
         void Init()
         {
             if (init) return; init = true;
+            if (!inner) { var t = transform.Find("Inner"); if (t) inner = t.GetComponent<Image>(); }
             lvTpl = levelText ? LocText.Tpl(levelText, levelText.text) : "{lv}";
             ptsTpl = pointsText ? LocText.Tpl(pointsText, pointsText.text) : "{pts}";
         }
@@ -43,8 +45,9 @@ namespace NKK
             if (frame)
             {
                 var fs = art && r != null ? art.Frame(r.grade) : null;
-                if (fs) { frame.sprite = fs; frame.color = Color.white; }
+                if (fs) { frame.sprite = fs; frame.color = Color.white; SliceFit(frame, fs); }
                 else frame.color = g != null ? g.Color : Color.white;
+                if (inner) inner.enabled = !fs;           // 테두리 그림 = 크림 바탕까지 (2026-10-20)
             }
             if (nameText) nameText.text = revealed && r != null ? r.aug_name : Loc.Get(unknownNameKey, unknownName);
             if (descText) descText.text = revealed && r != null ? Augments.Desc(r, lv) : "";
@@ -52,6 +55,17 @@ namespace NKK
             if (levelText) { levelText.gameObject.SetActive(lv > 0); levelText.text = (lvTpl ?? "").Replace("{lv}", lv.ToString()); }
             if (pointsText) { pointsText.gameObject.SetActive(pts >= 0); pointsText.text = (ptsTpl ?? "").Replace("{pts}", Mathf.Max(0, pts).ToString()); }
             SetSelected(false); SetNew(false); SetEquipped(false);
+        }
+        // 9칸 늘리기 테두리를 칸 크기에 맞춤: 테두리 두께 = 칸 짧은 변의 약 14% (최대 34px — HUD 62px · 관리 창 140px · 고르기 380px)
+        public static void SliceFit(Image im, Sprite s, float k = 0.14f)
+        {
+            if (!im || !s) return;
+            im.sprite = s;
+            if (s.border == Vector4.zero) { im.type = Image.Type.Simple; return; }
+            im.type = Image.Type.Sliced;
+            var r = im.rectTransform.rect; float side = Mathf.Min(r.width, r.height);
+            if (side < 1) { var p = im.rectTransform.parent as RectTransform; var sd = im.rectTransform.sizeDelta; side = p ? Mathf.Min(p.rect.width + sd.x, p.rect.height + sd.y) : 100; }
+            im.pixelsPerUnitMultiplier = Mathf.Max(0.5f, s.border.x / Mathf.Clamp(side * k, 8f, 34f));     // 큰 카드는 테두리 최대 34px (글이 테두리를 덮지 않게)
         }
         public void BindItem(Progress.AugItem it) => Bind(Augments.RowOf(it), it != null ? it.lv : 0, it != null ? it.uid : 0, it != null ? it.pts : -1);
 

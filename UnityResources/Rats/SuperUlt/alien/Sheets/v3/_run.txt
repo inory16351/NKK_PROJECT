@@ -1,0 +1,18 @@
+10:37:26 ok jet_back1
+10:37:29 ok fg_wall
+10:37:29 ok ship
+10:37:37 ok cu_hand1
+10:37:48 ok bg_chat
+10:37:52 ok anim_spy
+10:37:53 ok shot_descend
+10:38:30 ok cu_hand2
+10:38:31 ok jet_back2
+10:38:32 ok ship2
+10:38:33 ok ship_far
+10:39:10 ok shot_descend_dmg
+10:39:51 ok bg_hand
+10:40:03 ok fx_v3
+10:40:06 ok anim_cry
+10:40:10 ok bg_space
+10:40:20 ok bg_runway
+DONE

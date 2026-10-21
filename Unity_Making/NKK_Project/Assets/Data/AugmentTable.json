@@ -1023,6 +1023,10 @@
   },
   {
    "key": "slot_base",
+   "value": 2.0
+  },
+  {
+   "key": "slot_max",
    "value": 5.0
   },
   {

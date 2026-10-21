@@ -52,7 +52,7 @@ def tier_static():
     for t in range(1, 17):
         ta = sum(s['value_01'] for s in b.SKILL if s['tier'] <= t and s['effect_type'] == 'Time_Add')
         bt = sum(s['value_02'] for s in b.SKILL if s['tier'] <= t and s['effect_type'] == 'Boss_Dmg_Pct')
-        sl = 5 + sum(s['value_01'] for s in b.SKILL if s['tier'] <= t and s['effect_type'] == 'Aug_Slot')
+        sl = 2 + sum(s['value_01'] for s in b.SKILL if s['tier'] <= t and s['effect_type'] == 'Aug_Slot')
         tr = b.TIER[t]; fl = next((tr[f'cond{i}_value'] for i in range(1, 5) if tr.get(f'cond{i}_type') in ('Max_Floor', 'Boss_Clear')), 0)
         out[t] = dict(ta=ta, bt=bt, slots=sl, cost=tr['research_cost'], floor=fl)
     return out

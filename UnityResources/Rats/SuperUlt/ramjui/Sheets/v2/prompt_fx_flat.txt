@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: fx_flat.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 image, 3 columns x 2 rows grid: ONE element per cell, centered in its cell, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game effect art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, purple or pink on the elements.
+- NO text, NO letters, NO numbers.
+- Palette: lemon yellow, pale cyan, sky blue, cream white, a little navy.
+  1. a big flat zig-zag LIGHTNING BOLT, vertical, tall (fills the cell height): cream-white core with a pale cyan edge band
+  2. a FORKED lightning bolt with 3 branches, vertical, in lemon yellow with a white core
+  3. a short flat ELECTRIC ARC: a wiggly horizontal zig-zag spark line in pale cyan and white (the arc between two raised paws)
+  4. a flat round ELECTRIC BURST: a cream-white disk with short jagged yellow rays
+  5. a flat SHOCK RING: a thin jagged cyan ring with small zig-zag spikes, perfect circle
+  6. a flat cluster of 6 small yellow SPARKS (tiny zig-zags and rounded diamonds)

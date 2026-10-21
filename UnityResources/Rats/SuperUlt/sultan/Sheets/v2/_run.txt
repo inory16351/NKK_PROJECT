@@ -1,0 +1,12 @@
+16:11:20 ok shot_oil1
+16:11:22 ok pano_on
+16:11:23 ok cu_face1
+16:11:33 ok face_bg
+16:11:35 ok anim_exit
+16:11:37 ok shot_palace
+16:11:38 ok anim_ride
+16:12:14 ok cu_face2
+16:12:36 ok shot_oil2
+16:13:45 ok fx_flat
+16:13:54 ok fx_hit
+DONE

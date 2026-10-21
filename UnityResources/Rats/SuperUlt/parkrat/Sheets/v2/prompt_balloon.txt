@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: balloon.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 landscape image: 3 columns, ONE element per column, centered in its third, well inside it, none touching each other or the edges.
+- STYLE (MOST IMPORTANT): FLAT 2D game prop art exactly like the attached ref_flat_fx and ref_flat_fx2 (approved flat effects of this game): simple flat shapes, flat fills with at most one soft shade step, clean edges, NO glow, NO bloom, NO gradients, NO tiny dust, NO painterly texture, NO black outlines.
+- Background: ONE solid flat pure magenta #FF00FF everywhere (for chroma keying), no shadow. Do not use magenta, pink or purple on the elements.
+- NO text, NO letters, NO numbers.
+  1. a big coral-red PLAIN ROUND rubber party BALLOON (an ordinary oval balloon, slightly taller than wide, NO ears, NO mouse shape, no face, no logo) with a small tied KNOT at the very bottom center, seen from the front, no string, normally inflated, plump
+  2. the SAME balloon OVER-INFLATED: stretched tight and rounder, a lighter thinner coral color, a few short flat white STRESS lines near the edges, the knot at the very bottom center
+  3. the SAME balloon about to BURST: stretched extremely thin, pale coral-pink, wobbly bulging outline, many flat white stress lines and two tiny cracks, the knot at the very bottom center

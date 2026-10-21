@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: bg_mA3.png (in the current working directory). Do not write code to draw it; it must be a generated image. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, one full-frame picture with its background, no borders, no panels.
+- It is one frame of a funny 'thunder squirrel' meme montage: a squirrel with dramatic LIGHTNING / electric arcs.
+- NO text, NO letters, NO numbers, NO watermark, NO logos, NO speech bubbles. No humans. No real superhero costume or logo.
+- STYLE (MOST IMPORTANT): EXACTLY this game's own FLAT art: match the attached ref_flat_anim (character frames) and ref_flat_bg (background): Untitled Goose Game mood, simple soft flat shapes, flat colors with only gentle soft shading, very little texture, NO individual fur strands, small simple black bead eyes with one tiny white highlight, no black outlines, no gloss. The lightning is also FLAT (flat zig-zag shapes in pale cyan, white and lemon yellow).
+- CHARACTER: the game's "Ramjui the Thunder Squirrel": build it EXACTLY from the attached ref_rig and ref_char (colors, shapes, proportions): a cute chubby orange-red squirrel with tall tufted ears (pink inside), cream belly and muzzle, small brown nose, a HUGE fluffy curled tail. Big head, small body.
+- SCENE: the squirrel sitting on a flat oak branch holding up a big ACORN with both paws, a flat lightning bolt striking the acorn which glows, flat dusk sky.

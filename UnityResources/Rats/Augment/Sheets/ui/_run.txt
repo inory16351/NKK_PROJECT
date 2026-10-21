@@ -1,0 +1,4 @@
+12:10:09 ok aug_shelf
+12:10:10 ok aug_panel
+12:10:33 ok aug_slots
+DONE
