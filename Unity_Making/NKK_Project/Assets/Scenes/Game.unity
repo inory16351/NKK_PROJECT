@@ -38573,6 +38573,8 @@ MonoBehaviour:
   vz: 0
   hp: 0
   hpMax: 0
+  propGap: 14
+  catPropAhead: 0.3
   batonArtAngle: -34
   batonGrip: 0.14
 --- !u!4 &200370563
@@ -86886,7 +86888,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCC0D\uCC0D!! 0 / \uC801\uC815 0"
+  m_text: "\uCC0D\uCC0D!! 0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 4ab2187fbe0f97740a7a83575d719011, type: 2}

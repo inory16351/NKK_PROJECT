@@ -10457,18 +10457,18 @@
   },
   {
    "string_key": 3900023,
-   "ko": "지난번엔 아깝게 잡혀 버렸지... 이번엔 '적정 찍찍'을 알려 줄게!",
-   "en": "We got caught last time, so close... This time I'll teach you about 'Rec. SQUEAK!!'"
+   "ko": "지난번엔 아깝게 잡혀 버렸지... 이번엔 우리 힘을 보는 법을 알려 줄게!",
+   "en": "We got caught last time... This time I'll show you how to read our strength!"
   },
   {
    "string_key": 3900024,
-   "ko": "왼쪽 위 '찍찍!!' 숫자는 지금 우리 무리의 힘이고, 옆의 '적정'은 이 층을 넉넉히 깨려면 필요한 힘이야.",
-   "en": "The 'SQUEAK!!' number at the top left is our swarm's power right now, and 'Rec.' next to it is the power you need to clear this floor comfortably."
+   "ko": "왼쪽 위 '찍찍!!' 숫자가 지금 우리 무리의 힘이야. 쥐가 많아지고 세질수록 쑥쑥 올라가!",
+   "en": "The 'SQUEAK!!' number at the top left is our crew's power. It shoots up as we get more and stronger rats!"
   },
   {
    "string_key": 3900025,
-   "ko": "우리 힘이 적정보다 낮으면 시간 안에 계단까지 가기 힘들어!",
-   "en": "If our power is below Rec., it's tough to reach the stairs in time!"
+   "ko": "위층일수록 벽도 단단해져. 막히면 찍찍!!을 더 키워서 다시 도전하자!",
+   "en": "Walls get tougher the higher we go. If we get stuck, let's grow our SQUEAK!! and try again!"
   },
   {
    "string_key": 3900026,
@@ -10487,8 +10487,8 @@
   },
   {
    "string_key": 3900029,
-   "ko": "적정 찍찍이 모자랄 땐 쥐를 최대 마릿수까지 꽉 채워 봐!",
-   "en": "When SQUEAK!! is below Rec., try filling up to the max rat count!"
+   "ko": "더 강해지고 싶을 땐 쥐를 최대 마릿수까지 꽉 채워 봐!",
+   "en": "Want to get stronger? Fill the crew all the way up to the max rat count!"
   },
   {
    "string_key": 3900030,
@@ -13667,8 +13667,8 @@
   },
   {
    "string_key": 8000330,
-   "ko": "찍찍!! 0 / 적정 0",
-   "en": "SQUEAK!! 0 / Rec. 0"
+   "ko": "찍찍!! 0",
+   "en": "SQUEAK!! 0"
   },
   {
    "string_key": 8000331,
@@ -14552,8 +14552,8 @@
   },
   {
    "string_key": 9000001,
-   "ko": "찍찍!! {power} / 적정 {need}",
-   "en": "SQUEAK!! {power} / Rec. {need}"
+   "ko": "찍찍!! {power}",
+   "en": "SQUEAK!! {power}"
   },
   {
    "string_key": 9000002,

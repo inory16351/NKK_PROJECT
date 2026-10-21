@@ -917,7 +917,7 @@
    "step_id": "g_power",
    "speaker_id": "nerd",
    "face": "normal",
-   "text": "지난번엔 아깝게 잡혀 버렸지... 이번엔 '적정 찍찍'을 알려 줄게!",
+   "text": "지난번엔 아깝게 잡혀 버렸지... 이번엔 우리 힘을 보는 법을 알려 줄게!",
    "text_sk": 3900023,
    "highlight": ""
   },
@@ -926,7 +926,7 @@
    "step_id": "g_power",
    "speaker_id": "nerd",
    "face": "normal",
-   "text": "왼쪽 위 '찍찍!!' 숫자는 지금 우리 무리의 힘이고, 옆의 '적정'은 이 층을 넉넉히 깨려면 필요한 힘이야.",
+   "text": "왼쪽 위 '찍찍!!' 숫자가 지금 우리 무리의 힘이야. 쥐가 많아지고 세질수록 쑥쑥 올라가!",
    "text_sk": 3900024,
    "highlight": "power"
   },
@@ -934,8 +934,8 @@
    "line_id": 25,
    "step_id": "g_power",
    "speaker_id": "nerd",
-   "face": "panic",
-   "text": "우리 힘이 적정보다 낮으면 시간 안에 계단까지 가기 힘들어!",
+   "face": "happy",
+   "text": "위층일수록 벽도 단단해져. 막히면 찍찍!!을 더 키워서 다시 도전하자!",
    "text_sk": 3900025,
    "highlight": "power"
   },
@@ -971,7 +971,7 @@
    "step_id": "g_power_hint",
    "speaker_id": "nerd",
    "face": "normal",
-   "text": "적정 찍찍이 모자랄 땐 쥐를 최대 마릿수까지 꽉 채워 봐!",
+   "text": "더 강해지고 싶을 땐 쥐를 최대 마릿수까지 꽉 채워 봐!",
    "text_sk": 3900029,
    "highlight": "pop"
   },
