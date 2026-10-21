@@ -15,8 +15,10 @@ namespace NKK.Ults
     // 필살기 게이지 매니저.
     // · 게이지는 쥐 한 마리마다 따로 (Rat.ultGauge): 그 쥐가 Ult_Charge 시트 조건(물건·벽 파괴, 액션, 번식, 사람·고양이 퇴치, 층 통과…)을 하면 참.
     // · 요구량 = 쥐 테이블 Ultimate.ult_gauge, 충전량 × 공용 스킬 '필살기 연습' 배율. 다 차면 하단에 그 쥐 버튼이 뜨고 머리 위에 반짝이.
-    // · 버튼을 누르거나(또는 '필살기 자동 사용' 공용 스킬) → 대기열. 필살기는 모은 그 쥐가 씀. 한 번에 하나: 앞 필살기가 끝나야 다음 것.
-    // · 진행: ① 컷인 (cutTime 초, 화면 정지 · 확대 · 제목) → ② 상황극 (UltXxx.Dur 초, 게임 진행) → ③ 업적 알림
+    // · 버튼을 누르거나(또는 '필살기 자동 사용' 공용 스킬) → 대기열. 필살기는 모은 그 쥐가 씀. concurrentTier 전엔 한 번에 하나 (앞 필살기가 끝나야 다음 것),
+    //   그 훈장부터는 대기열을 기다림 없이 바로 전부 동시에.
+    // · 진행: ① 컷인 (cutTime 초, 확대 · 제목 — 카메라 고정 끄면 없음) → ② 상황극 (UltXxx.Dur 초, 게임 진행) → ③ 업적 알림
+    // · 컷인 없이 시작한 필살기 (동시 필살기 · 카메라 고정 끔) 는 딜 미터기 아래 UltLog 에 한 줄씩
     public class UltimateManager : MonoBehaviour
     {
         [Header("연결")]
@@ -70,8 +72,9 @@ namespace NKK.Ults
         [Tooltip("상황극 중 주변 사람·고양이 휘말림 반경 · 속도 (0.3초마다)")] public float actorRadius = 220, actorSpeed = 620;
         [Tooltip("테스트: 시작부터 모든 게이지를 채움")] public bool testFullGauge;
         [Header("동시 필살기 (2026-10-21 사용자: 필살기가 너무 쌓임)")]
-        [Tooltip("이 훈장부터 필살기 여러 개를 동시에 (두 번째부터는 컷인 없이 바로 상황극). 0 = 끔")] public int concurrentTier = 8;
-        [Tooltip("동시에 돌아가는 필살기 최대 수 (컷인 있는 대표 1 + 나머지)")] public int maxConcurrent = 3;
+        [Tooltip("이 훈장부터 필살기가 차는 대로 바로 동시에 (대표 컷인을 기다리지 않음 · 두 번째부터는 컷인 없이 바로 상황극). 0 = 끔")] public int concurrentTier = 8;
+        [Tooltip("동시에 돌아가는 필살기 최대 수 (컷인 있는 대표 1 + 나머지). 0 = 제한 없음")] public int maxConcurrent = 0;
+        [Tooltip("컷인 없이 시작한 필살기를 적는 로그 (딜 미터기 아래)")] public UltLog log;
         [Header("카메라 고정 (Y 키로 켜고 끔, 저장)")]
         public UnityEngine.InputSystem.Key camLockKey = UnityEngine.InputSystem.Key.Y;
         [Tooltip("켜고 끌 때 배너 (빈칸 = 안 띄움)")] public string camLockOn = "필살기 카메라 고정 켬", camLockOff = "필살기 카메라 고정 끔";
@@ -91,6 +94,7 @@ namespace NKK.Ults
         public bool Busy => cur != null || extras.Count > 0;
         int Running => (cur != null ? 1 : 0) + extras.Count;
         bool Concurrent => concurrentTier > 0 && Progress.I && Progress.I.tier >= concurrentTier;
+        bool RoomForMore => maxConcurrent <= 0 || Running < maxConcurrent;
         bool IsRunning(Rat r) { if (cur != null && cur.R == r) return true; foreach (var e in extras) if (e.R == r) return true; return false; }
         public bool CutPhase => cur != null && cutPhase;      // 컷인 중 (월드 정지)
         public float Cooldown => Mathf.Max(ultCooldownMin, ultCooldown - CommonSkill.UltCdLess);
@@ -143,7 +147,7 @@ namespace NKK.Ults
         // 테스트 버튼: 게이지 채우고 바로 사용. 그 종 쥐가 화면에 없으면 화면 가운데 근처에 15초짜리로 불러옴
         public bool TestUlt(string code)
         {
-            if ((cur != null && (!Concurrent || cutPhase || Running >= maxConcurrent)) || (SuperJump && SuperJump.Busy) || !DB.RatsByCode.TryGetValue(code, out var row) || DB.UltOf(row) == null) return false;
+            if ((cur != null && (!Concurrent || !RoomForMore)) || (SuperJump && SuperJump.Busy) || !DB.RatsByCode.TryGetValue(code, out var row) || DB.UltOf(row) == null) return false;
             Rat r = null;
             foreach (var o in Rats.Rats) if (o.codeId == code && !o.UltOn && o.OnScreen(-0.05f)) { r = o; break; }
             if (!r)
@@ -168,7 +172,8 @@ namespace NKK.Ults
             if (cur != null) Stop(cur, false);
         }
 
-        // 대표(컷인 + 카메라) 로 시작. 대표가 이미 돌고 있으면 (동시 필살기) 컷인 없이 바로 상황극
+        // 대표(컷인 + 카메라) 로 시작. 대표가 이미 돌고 있으면 (동시 필살기) 컷인 없이 바로 상황극.
+        // 카메라 고정을 끄면 (Y) 대표도 컷인 · 확대 · 번쩍 없이 바로 상황극 — 컷인 없이 시작한 필살기는 딜 미터기 아래 로그에 적음
         bool TryStart(Rat r)
         {
             if (!r || r.UltOn) return false;
@@ -183,9 +188,16 @@ namespace NKK.Ults
             if (cur != null)
             {
                 extras.Add(s); BeginAct(s);       // 동시 필살기: 컷인 · 카메라 없이
+                if (log) log.Add(r, u, UltIcon(u));
                 return true;
             }
             cur = s;
+            if (!CamLock)
+            {
+                cutPhase = false; BeginAct(s);    // 카메라 고정 끔: 컷인 없이
+                if (log) log.Add(r, u, UltIcon(u));
+                return true;
+            }
             SfxManager.Play("jgl_ult_cutin");
             cutPhase = true; cutT = 0;
             // 컷인 중 게임 정지 없앰 (2026-10-21 사용자) — 예전: FxManager.UltFreeze = true
@@ -214,7 +226,7 @@ namespace NKK.Ults
                 if (!string.IsNullOrEmpty(s.U.ult_line)) fx.Popup(r.x, r.y, s.U.ult_line, Color.white, 24, 1.6f, 80);
                 fx.Ring(r.x, r.y, 140, Color.white, 0.5f); fx.Ring(r.x, r.y, 220, s.U.Color, 0.6f); fx.Dust(r.x, r.y, 14, 1.8f); fx.Shake(0.3f);
             }
-            if (s == cur) Flash(Color.white, 0.4f);
+            if (s == cur && CamLock) Flash(Color.white, 0.4f);
             s.Begin();
         }
 
@@ -305,12 +317,15 @@ namespace NKK.Ults
             // 자동 사용 (공용 스킬)
             bool auto = CommonSkill.UltAuto || ForceAuto;
             if (auto) foreach (var r in Rats.Rats) if (Full(r)) Request(r);
-            // 대기열 → 하나씩
+            // 대기열 → 하나씩 (동시 필살기 훈장이면 쿨 · 대표 컷인 기다림 없이 대기열 전부 바로)
             if (cur == null) cdLeft -= dt;
-            // 새로 시작: 아무것도 안 돌면 대표로 · 동시 필살기 훈장이면 대표 컷인이 끝난 뒤 최대 수까지 같이
-            bool canNew = cur == null ? cdLeft <= 0 : Concurrent && !cutPhase && Running < maxConcurrent;
-            if (canNew && !FxManager.Halt && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing) && !(SuperUltManager.I && SuperUltManager.I.Busy))      // 초필살기 컷신 중엔 기다림
-                while (queue.Count > 0) { var r = queue[0]; queue.RemoveAt(0); if (r && r.temp <= 0 && Full(r) && TryStart(r)) break; }
+            bool conc = Concurrent;
+            if (!FxManager.Halt && !(SuperJump && SuperJump.Busy) && !Heist.Active && !(Stage && Stage.Climbing) && !(SuperUltManager.I && SuperUltManager.I.Busy))      // 초필살기 컷신 중엔 기다림
+                while (queue.Count > 0 && (conc ? RoomForMore : cur == null && cdLeft <= 0))
+                {
+                    var r = queue[0]; queue.RemoveAt(0);
+                    if (r && r.temp <= 0 && Full(r) && TryStart(r) && !conc) break;
+                }
 
             if (cur != null && cutPhase) StepCut(udt);
             else if (cur != null) StepAct(cur, dt);

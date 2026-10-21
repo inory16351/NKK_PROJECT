@@ -14616,6 +14616,11 @@
    "en": "Auto-picking the best Augment in {n}s"
   },
   {
+   "string_key": 8000538,
+   "ko": "{name}의 필살기! {ult}",
+   "en": "{name}'s Ultimate! {ult}"
+  },
+  {
    "string_key": 9000001,
    "ko": "찍찍!! {power}",
    "en": "SQUEAK!! {power}"
