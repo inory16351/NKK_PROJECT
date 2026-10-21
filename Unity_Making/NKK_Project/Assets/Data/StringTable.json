@@ -10387,8 +10387,8 @@
   },
   {
    "string_key": 3900009,
-   "ko": "벌써 10마리나 모였어!",
-   "en": "There's already 10 of us!"
+   "ko": "드디어 최대 마릿수까지 꽉 찼어! 약속대로 '승급'을 알려 줄게!",
+   "en": "We've finally hit the max rat count! As promised, let me teach you 'Promote'!"
   },
   {
    "string_key": 3900010,
@@ -10397,8 +10397,8 @@
   },
   {
    "string_key": 3900011,
-   "ko": "높은 등급 쥐는 힘이 훨씬 세다구! 왼쪽 아래 승급 버튼을 눌러 봐 찍!",
-   "en": "Higher-grade rats are WAY stronger! Try the Promote button at the bottom left, squeak!"
+   "ko": "합친 만큼 자리가 생겨서 다시 번식할 수 있고, 높은 등급 쥐는 힘도 훨씬 세다구! 왼쪽 아래 승급 버튼을 눌러 봐 찍!",
+   "en": "Merging frees up space so we can breed again, and higher-grade rats are WAY stronger! Try the Promote button at the bottom left, squeak!"
   },
   {
    "string_key": 3900012,
@@ -10487,13 +10487,13 @@
   },
   {
    "string_key": 3900029,
-   "ko": "그리고 하나 더! 같은 등급 쥐가 여럿 모이면 '승급'으로 더 높은 등급 쥐로 바꿀 수 있어.",
-   "en": "Oh, one more thing! When you have lots of rats of the same grade, you can 'Promote' them into a higher-grade rat."
+   "ko": "적정 찍찍이 모자랄 땐 쥐를 최대 마릿수까지 꽉 채워 봐!",
+   "en": "When SQUEAK!! is below Rec., try filling up to the max rat count!"
   },
   {
    "string_key": 3900030,
-   "ko": "높은 등급 쥐는 힘이 훨씬 세서 찍찍이 확 올라가! 왼쪽 아래 승급 버튼을 기억해 찍!",
-   "en": "Higher-grade rats are WAY stronger and boost SQUEAK!! a ton! Remember the Promote button at the bottom left, squeak!"
+   "ko": "꽉 차면 쥐를 더 센 쥐로 바꾸는 '승급'이 열릴 거야. 그럼 찍찍이 확 올라가 찍!",
+   "en": "Once it's full, 'Promote' unlocks. It turns rats into stronger rats, and SQUEAK!! shoots way up, squeak!"
   },
   {
    "string_key": 3900031,
@@ -10782,8 +10782,8 @@
   },
   {
    "string_key": 3900090,
-   "ko": "꽉 찼을 땐 승급으로 쥐를 합치면 자리가 다시 생겨! 번식할 쥐만 남기고 나머지는 승급시키자!",
-   "en": "When it's full, merge rats with Promote to free up space! Keep the breeders and Promote the rest!"
+   "ko": "그 대신 꽉 차면 더 강해지는 비밀 기술 '승급'을 알려 줄게! 일단 꽉 채워 보자 찍!",
+   "en": "And once it's full, I'll teach you a secret way to get stronger: 'Promote'! Let's fill it up first, squeak!"
   },
   {
    "string_key": 3900092,
@@ -10834,6 +10834,11 @@
    "string_key": 3900101,
    "ko": "41층까지 왔다고? 이제 연구소에서 증강 하나를 '들고 가기'로 정하면 1층부터 끼고 출발할 수 있다구!",
    "en": "Made it to floor 41? Now set one Augment to 'Carry' at the Workshop and start with it from floor 1!"
+  },
+  {
+   "string_key": 3900102,
+   "ko": "걱정 마! 꽉 찼을 땐 '승급'을 쓰면 돼! 왼쪽 아래에 승급 버튼이 새로 생겼어!",
+   "en": "Don't worry! When we're full, just use 'Promote'! A Promote button just appeared at the bottom left!"
   },
   {
    "string_key": 4000001,
