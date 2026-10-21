@@ -124,6 +124,14 @@ namespace NKK.Lobby
                 if (carryLabel) carryLabel.text = sel.uid == Augments.Carry ? Loc.Get(carryOnLabelKey, carryOnLabel) : Loc.Get(carryOffLabelKey, carryOffLabel);
                 if (carryLockNote) { carryLockNote.gameObject.SetActive(!carryOpen); carryLockNote.text = lockTpl.Replace("{floor}", Augments.CarryFloor.ToString()); }
             }
+            else
+            {
+                // 고른 증강이 없거나 합성 모드: 강화 · 최대 · 들고 가기 · 잠김 안내를 다 숨김 (예전엔 씬 상태 그대로 겹쳐 보였음, 2026-10-21)
+                if (maxNote) maxNote.SetActive(false);
+                if (upgradeButton) upgradeButton.gameObject.SetActive(false);
+                if (carryButton) carryButton.gameObject.SetActive(false);
+                if (carryLockNote) carryLockNote.gameObject.SetActive(false);
+            }
             if (synthOnMark) synthOnMark.SetActive(synthMode);
             var r0 = synthSel.Count > 0 ? Augments.RowOf(Augments.Item(synthSel[0])) : null;
             int need = r0 != null ? Augments.SynthNeed(r0.grade) : 0;
