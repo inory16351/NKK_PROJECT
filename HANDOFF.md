@@ -408,7 +408,19 @@
   - **v14~v15 (사용자)**: 레퍼런스 22.95~23.20초 프레임으로 '빛 벽이 찢겨 열림' 3프레임(`Sheets/v14/open1~3`, 가이드 그림 `guide_open*` = 열린 자리 대략 위치)도 만들어 봤지만, 사용자가 **v13 의 화면을 가르는 빛·불꽃 벽(칼 각도 -40°)** 으로 되돌림 (open 프레임 안 씀).
     대신: ① 칼끝 땅 균열 · 파편 뺌 ② **크롭형 마스크 블러** = `slice_superult.blur_copy` 로 흐린 사본 — 벽은 `fx_flamewall_blur` 를 크게 2겹, 후경은 `pano_rear_blur`(기사 둘레 타원은 투명, 바깥으로 갈수록 진함)를 파노라마 위에 겹침 ③ **칼 오라 (칼과 크기 딱 맞게 · 노란빛 진하게)**: rear_knight 칼날을 다각형으로 따서(가드 (440,705) → 칼끝 (934,1152), 양 가장자리 직선을 칼날 중간에서 잼) 만든 `rear_knight_glow`(안쪽 밝은 노랑 + 바깥 금빛 노랑 2겹, 기사 뒤) · `rear_knight_shine`(칼날 모양 노란빛, 기사 위, 깜빡임) — 둘 다 기사 그림과 같은 크기 · 자리 (캡처 `knight_v15_aura.png`) ④ 둥근 하얀 섬광(`fx_flash`) 은 후경 · 덮기에서 뺌 (컷 전환 번쩍만 남음). 캡처 `knight_v15_split.png` · `knight_v15_glow.png`.
 - **사고 기록 (2026-10-19)**: 사용자가 슬롯 1 로 Play 중일 때 MCP 체인이 멈추지 않아 Play 중 재컴파일 · 테스트 단계 `SkipTutorial()` 이 **슬롯 1 저장에 tutoSkip=true 를 씀** · 사용자 Play 를 멈춤. 원래 tutoSkip 값은 모름 (사용자 확인 필요). 이후 테스트 스크립트는 Play 중이면 중단 · 슬롯 5 가 아니면 SkipTutorial 안 함.
-- **남음**: ① 사용자 눈 확인 ② 새 씬 글 '총 피해 {n}' 스트링 테이블 등록(`import_scene_strings.py` + 영어 'Total {n}') ③ 나머지 13종도 같은 방식(햄찌는 손으로 만든 장면).
+- **남음**: ① 사용자 눈 확인 ② ~~새 씬 글 '총 피해 {n}' 스트링 테이블 등록~~ (2026-10-21 §5-17 에서 끝) ③ 나머지 13종도 같은 방식(햄찌는 손으로 만든 장면).
+
+## 5-17. 딜 미터기 · 쥐 목록 창 (2026-10-21, 커밋 안 함)
+
+- **사용자 결정**: 롤체 딜 미터기처럼 이번 층(층마다 0부터) 쥐 **종별** 피해 상위 5개를 화면 오른쪽에, 순위가 바뀌면 줄이 위아래로 움직이며 자리 바꿈 (유튜브 순위 영상처럼 밀고 내려오는 연출) · 대상 = 물건·가구·벽·사람·고양이·보스 전부 · 쥐 목록 창 = HUD 버튼 + 단축키(R), 열면 게임 멈춤.
+- **집계** `Core/DamageMeter.cs` (정적): `Add(쥐, 피해, 맞기 전 체력)` = 실제로 깎인 체력만 · 날아간 물건/사람이 맞힌 피해 = 날린 쥐(`By`) 몫. 훅 = `Item.Damage/SkillHit` · `Human.Damage/Blast` · `Cat.Damage` · `Boss.Damage` · `StageManager.DamageWall`, 층 시작(`EnterFloor`)에 `Clear`.
+- **딜 미터기** `Rats/DamageMeterUI.cs` · 씬 `HUD/DmgMeter` (Icon · Title · Total{n} · Rows/Row0~6 = 줄 7개 돌려 씀: Rank{rank} · Medal · Up · Portrait(RatPortrait) · Name · Value{n} · Bar/Fill). 1~3등 = 왕관·은·동 메달, 막대 = 등급 색, 피해 0 이면 숨김.
+  - **자리 바꾸기 연출 (사용자: 유튜브 순위 영상처럼 밀고 내려오게)** — 바 차트 레이스 방식 참고: 올라가는 줄 = 커지며(riseScale) 왼쪽으로 떠서 맨 앞에 그려지고 easeOutBack 으로 도착 + 노란 번쩍(Flash) + ▲ · 밀려난 줄 = pushDelay 만큼 늦게 출발해 목표보다 더 내려갔다 돌아옴(pushOvershoot) + 작아짐·흐려짐 + ▼ · 새 종 = 아래에서 떠오름 · 빠진 종 = 가라앉으며 사라짐 · 숫자는 올라가며 셈 · 순위 숫자/메달 통통. 시간·세기 전부 인스펙터 '자리 바꾸기 연출'. 줄 자식에 Flash · Down 추가, Rows 의 RectMask2D padding 은 좌우·위로 넓힘(커져도 안 잘림).
+- **쥐 목록 창** `Rats/RosterPanel.cs` · 씬 `HUD/RosterButton`(쥐 마릿수 아래) · `HUD/Roster/Panel`(Card: Title · Summary{n}{max}{kinds}{dmg} · 정렬 등급순/마릿수순/피해순 · 닫기 · Scroll/Viewport/Content/CardTemplate: Frame(등급 색) · Rank{rank}위 · Portrait · Name · Grade{grade} · Count{n} · Damage{n}). 멈춤 = `FxManager.Halt` 에 `RosterPanel.Pausing`. 임시 소환 쥐 제외.
+- **그림** `UnityResources/Rats/HUD_DmgMeter/` (Codex 1장 3×2 → 유니티에서 키잉·자르기) → `Assets/Art/HUD_DmgMeter/`.
+- **튜토리얼 (사용자 결정: 세 번째 판)**: `g_meter` = 발동 FloorTime 20 · 조건 RunMin 3 + Done g_power · 해금 `meter` (Line 102~104, 강조 meter) → `g_roster` = After g_meter · 해금 `roster` (Line 105~106, 강조 roster). 잠겨 있으면 `TutorialManager` 의 FeatureGate 가 `HUD/DmgMeter` · `HUD/RosterButton` 을 숨기고, R 키도 막음(`RosterPanel.feature`). Unlock_Id 시트에 meter · roster 추가.
+- **스트링**: 새 씬 글 8000510~8000522 (+ 기존 '닫기' 8000011) 에 LocText (자리표시 글 = template) · 대사 3900102~3900106 · 영어 채움. 초필살기 '총 피해 {n}'(8000519 = Total {n}) 도 같이 연결 (§5-16 남음 ② 끝).
+- **확인**: 테이블 로드(단계 44 · 대사 키) · 영어 JSON. **튜토리얼 흐름 자체는 Play 확인 안 함** (슬롯 1 은 tutoSkip 이라 다 열림 · 테스트 슬롯 5 를 3번째 판 상태로 만들어야 함).
 ## 6. 밸런스 측정 (BalanceProbe)
 
 - 목표 (사용자): 전투력 = 적정일 때 일반 층은 제한시간 180초의 **60~90%**(75% 쪽으로), 보스 층은 210초의 **약 90%**(길 117초 + 보스전 72초, 보스전은 Boss `hp_pow_sec` 로 맞춤).

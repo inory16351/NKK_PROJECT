@@ -13,7 +13,8 @@ namespace NKK
         public static FxManager I { get; private set; }
         public static bool Paused;
         // 멈춤 (포기 창 · 튜토리얼 대사): 게임 시간 0
-        public static bool Halt => Paused || NKK.Tutorial.TutorialManager.Pausing || AugmentManager.Pausing;      // 증강 고르기·관리 창 (2026-10-19)
+        public static bool Halt => Paused || NKK.Tutorial.TutorialManager.Pausing || AugmentManager.Pausing      // 증강 고르기·관리 창 (2026-10-19)
+                                  || NKK.Rats.RosterPanel.Pausing;      // 쥐 목록 창 (2026-10-21)
         public static bool UltFreeze;              // 필살기 컷인 중 화면 정지
         public static bool WorldFreeze;            // 슈퍼 점프 중 게임 세계 정지 (이펙트는 계속)
         public static float BaseTimeScale = 1;     // 밸런스 측정용 배속 (BalanceProbe)

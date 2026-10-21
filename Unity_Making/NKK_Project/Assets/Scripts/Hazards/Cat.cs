@@ -81,6 +81,7 @@ namespace NKK.Hazards
         {
             if (!Alive) return false;
             if (by) by.OnHitCreature(this, frost, x, y, 60);       // 빙결 (아이스 퀸 쥐) · 액션 목표
+            DamageMeter.Add(by, dmg * CommonSkill.BossDmgMul, hp);        // 딜 미터기
             hp -= dmg * CommonSkill.BossDmgMul; jit = 3;          // 보스 사냥꾼
             if (hp <= 0) { if (by) mgr.Rats.Ults?.Charge(by, CondType.Defeat_Cat); Fling(ang); SfxManager.Play("cat_down"); return true; }
             if (Random.value < 0.25f) FxManager.I?.Popup(x, y, Loc.Pick(9000008, 9000009, 9000010, 9000011), Color.white, 18, 0.6f, 60);

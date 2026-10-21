@@ -10766,6 +10766,31 @@
    "en": "Made it to floor 41? Now set one Augment to 'Carry' at the Workshop and start with it from floor 1!"
   },
   {
+   "string_key": 3900102,
+   "ko": "어? 오른쪽에 순위표가 생겼어!",
+   "en": "Huh? A ranking board just popped up on the right!"
+  },
+  {
+   "string_key": 3900103,
+   "ko": "이번 층에서 누가 제일 많이 부쉈는지 보여 주는 '피해 순위'야. 종마다 따로 세!",
+   "en": "That's the Damage Ranking: who's wrecked the most on this floor. Each kind is counted separately!"
+  },
+  {
+   "string_key": 3900104,
+   "ko": "앞지를 때마다 순위가 휙휙 바뀌니까, 누가 우리 무리의 에이스인지 지켜봐!",
+   "en": "The ranks shuffle every time someone overtakes, so keep an eye out for our ace!"
+  },
+  {
+   "string_key": 3900105,
+   "ko": "지금 우리 무리에 누가 몇 마리 있는지 궁금하면 '쥐 목록'을 눌러 봐! R 키로도 열려!",
+   "en": "Wondering who's in our crew and how many? Hit 'Rat List', or just press R!"
+  },
+  {
+   "string_key": 3900106,
+   "ko": "등급순 · 마릿수순 · 피해순으로 볼 수 있어. 열어 둔 동안엔 게임이 잠깐 멈춰!",
+   "en": "You can sort by Grade, Count or Damage. The game pauses while it's open!"
+  },
+  {
    "string_key": 4000001,
    "ko": "찍... 찍찍찍...! (우리들은 그저 이곳이 낙원인 줄만 알고 있었지...)",
    "en": "Squeak... squeak squeak squeak...! (We truly believed this place was paradise...)"
@@ -14324,6 +14349,71 @@
    "string_key": 8000509,
    "ko": "증강 관리",
    "en": "Augments"
+  },
+  {
+   "string_key": 8000510,
+   "ko": "마릿수순",
+   "en": "Count"
+  },
+  {
+   "string_key": 8000511,
+   "ko": "쥐 이름",
+   "en": "Rat Name"
+  },
+  {
+   "string_key": 8000512,
+   "ko": "× {n}마리",
+   "en": "× {n}"
+  },
+  {
+   "string_key": 8000513,
+   "ko": "이번 층 피해 순위",
+   "en": "Damage Ranking"
+  },
+  {
+   "string_key": 8000514,
+   "ko": "피해순",
+   "en": "Damage"
+  },
+  {
+   "string_key": 8000515,
+   "ko": "{rank}위",
+   "en": "#{rank}"
+  },
+  {
+   "string_key": 8000516,
+   "ko": "합계 {n}",
+   "en": "Total {n}"
+  },
+  {
+   "string_key": 8000517,
+   "ko": "지금 함께하는 쥐들",
+   "en": "Your Crew Right Now"
+  },
+  {
+   "string_key": 8000518,
+   "ko": "{n} / {max}마리 · {kinds}종 · 이번 층 피해 {dmg}",
+   "en": "{n} / {max} rats · {kinds} kinds · Floor damage {dmg}"
+  },
+  {
+   "string_key": 8000519,
+   "ko": "총 피해 {n}",
+   "en": "Total {n}"
+  },
+  {
+   "string_key": 8000520,
+   "ko": "쥐 목록 <size=70%>(R)</size>",
+   "en": "Rat List <size=70%>(R)</size>"
+  },
+  {
+   "string_key": 8000521,
+   "ko": "피해 {n}",
+   "en": "Damage {n}"
+  },
+  {
+   "string_key": 8000522,
+   "ko": "등급순",
+   "en": "Grade"
   },
   {
    "string_key": 9000001,

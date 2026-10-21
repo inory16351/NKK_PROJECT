@@ -666,6 +666,36 @@
    "action": "",
    "action_value": "",
    "sort": 242
+  },
+  {
+   "step_id": "g_meter",
+   "scene": "Game",
+   "trigger": "FloorTime",
+   "trigger_value": 20.0,
+   "trigger_text": "",
+   "cond1_type": "RunMin",
+   "cond1_value": "3",
+   "cond2_type": "Done",
+   "cond2_value": "g_power",
+   "unlock": "meter",
+   "action": "",
+   "action_value": "",
+   "sort": 104
+  },
+  {
+   "step_id": "g_roster",
+   "scene": "Game",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "g_meter",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "roster",
+   "action": "",
+   "action_value": "",
+   "sort": 105
   }
  ],
  "Line": [
@@ -1568,6 +1598,51 @@
    "text": "41층까지 왔다고? 이제 연구소에서 증강 하나를 '들고 가기'로 정하면 1층부터 끼고 출발할 수 있다구!",
    "text_sk": 3900101,
    "highlight": "aug"
+  },
+  {
+   "line_id": 102,
+   "step_id": "g_meter",
+   "speaker_id": "brownrat",
+   "face": "surprised",
+   "text": "어? 오른쪽에 순위표가 생겼어!",
+   "text_sk": 3900102,
+   "highlight": ""
+  },
+  {
+   "line_id": 103,
+   "step_id": "g_meter",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "이번 층에서 누가 제일 많이 부쉈는지 보여 주는 '피해 순위'야. 종마다 따로 세!",
+   "text_sk": 3900103,
+   "highlight": "meter"
+  },
+  {
+   "line_id": 104,
+   "step_id": "g_meter",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "앞지를 때마다 순위가 휙휙 바뀌니까, 누가 우리 무리의 에이스인지 지켜봐!",
+   "text_sk": 3900104,
+   "highlight": "meter"
+  },
+  {
+   "line_id": 105,
+   "step_id": "g_roster",
+   "speaker_id": "brownrat",
+   "face": "happy",
+   "text": "지금 우리 무리에 누가 몇 마리 있는지 궁금하면 '쥐 목록'을 눌러 봐! R 키로도 열려!",
+   "text_sk": 3900105,
+   "highlight": "roster"
+  },
+  {
+   "line_id": 106,
+   "step_id": "g_roster",
+   "speaker_id": "brownrat",
+   "face": "normal",
+   "text": "등급순 · 마릿수순 · 피해순으로 볼 수 있어. 열어 둔 동안엔 게임이 잠깐 멈춰!",
+   "text_sk": 3900106,
+   "highlight": ""
   }
  ],
  "Story": [

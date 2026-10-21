@@ -73,7 +73,9 @@ namespace NKK.Humans
             if (State == HState.Fly || State == HState.Splat || State == HState.Dead || appear < 1) return false;
             hitT = 0.25f; jit = 2;
             if (by) by.OnHitCreature(this, frost, x, y, 50);       // 빙결 (아이스 퀸 쥐) · 액션 목표
-            hp -= dmg; if (by) By = by;
+            if (by) By = by;
+            DamageMeter.Add(By, dmg, hp);                           // 딜 미터기
+            hp -= dmg;
             if (State == HState.Walk) Panic();
             if (hp > 0)
             {
@@ -89,7 +91,9 @@ namespace NKK.Humans
         public bool Blast(float ang, float spd, float dmg, Rat by)
         {
             if (State == HState.Fly || State == HState.Splat || State == HState.Dead || appear < 1) return false;
-            hp -= dmg; if (by) By = by; hitT = 0.25f; jit = 4;
+            if (by) By = by;
+            DamageMeter.Add(By, dmg, hp);
+            hp -= dmg; hitT = 0.25f; jit = 4;
             if (hp <= 0) { Launch(ang, spd); return true; }
             if (State == HState.Walk) Panic();
             vx += Mathf.Cos(ang) * spd * 0.6f; vy += Mathf.Sin(ang) * spd * 0.6f; vz = Mathf.Max(vz, 320);

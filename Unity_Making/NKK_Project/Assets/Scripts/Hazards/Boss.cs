@@ -354,6 +354,7 @@ namespace NKK.Hazards
             dmg *= CommonSkill.BossDmgMul;
             if (unbrokenT > 0) dmg *= unbrokenDmgMul;          // 중꺾마
             dmg *= MemeDmgMul;                                 // 밈 버프 (Buff)
+            DamageMeter.Add(by, dmg, hp);                                  // 딜 미터기
             hp -= dmg; hitT = 0.25f; jit = 3;
             SfxManager.Play("boss_hit", 0.7f);
             // 필살 패턴: 체력 70% · 35% 아래로 처음 내려가면 다음 공격으로 바로

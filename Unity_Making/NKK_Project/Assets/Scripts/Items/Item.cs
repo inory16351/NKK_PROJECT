@@ -55,6 +55,7 @@ namespace NKK.Items
             kp = by ? by.KnockPower : 1;
             if (Data.IsFurniture) dmg *= CommonSkill.FurnitureDmgMul;      // 이삿짐 센터
             if (tenderT > Time.time) dmg *= tenderMul;                      // 쥐포 고소한 냄새: 받는 피해 증가
+            DamageMeter.Add(By, dmg, hp);                                   // 딜 미터기 (날아온 물건에 맞음 = 날린 쥐 몫)
             hp -= dmg; wob = 1; sq = 1.25f; flashT = 0.08f; hpShowT = Time.time;
             if (hp > 0) SfxManager.PlayAt(Data.IsFurniture || Data.is_paper == 1 ? "hit_wood" : Data.is_sturdy == 1 ? "hit_metal" : "hit_glass", x, y, 0.6f);
             if (hp > 0)
@@ -190,6 +191,7 @@ namespace NKK.Items
         public bool SkillHit(float dmg, Rat by)
         {
             if (Data.IsFurniture) dmg *= CommonSkill.FurnitureDmgMul;
+            DamageMeter.Add(by, dmg, hp);
             hp -= dmg; hpShowT = Time.time; flashT = 0.08f;
             if (by) { By = by; ByAction = true; }
             Survive = hp > 0;

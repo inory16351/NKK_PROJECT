@@ -187,6 +187,7 @@ namespace NKK.Stage
             Rats.Ults?.CancelAll();
             if (entered) Rats.Ults?.ChargeAll(CondType.Stage_Clear);           // 층 통과 → 있는 종 전부
             entered = true;
+            DamageMeter.Clear();                                                // 딜 미터기는 층마다 0 부터
             Game.Floor = Mathf.Max(1, f);
             GenLayout(Game.Floor);
             Open.Clear(); Open.Add(Vector2Int.zero); walls.Clear();
@@ -353,7 +354,8 @@ namespace NKK.Stage
             if (!InLayout(i + di, j + dj)) return;               // 연구소 바깥벽은 못 부숨
             dmg *= Gate(i + di, j + dj);
             var k = WallKey(i, j, di, dj);
-            float hp = WallHP(i, j, di, dj) - dmg;
+            float hp0 = WallHP(i, j, di, dj), hp = hp0 - dmg;
+            DamageMeter.Add(by, dmg, hp0);                                 // 딜 미터기
             walls[k] = hp;
             if (rooms.TryGetValue(new Vector2Int(i, j), out var room)) room.ShakeWall(di, dj, hp / WallMax(i + di, j + dj));
             if (hp <= 0) BreakWall(i, j, di, dj);
