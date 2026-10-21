@@ -125,10 +125,11 @@ namespace NKK
         public bool TutoDone(string stepId) => tutoSkip || tuto.Contains(stepId);
         public void MarkTuto(string stepId) { if (tuto.Add(stepId)) { UnlockVersion++; Save(); } }      // 튜토리얼로 드러나는 기능(뒷골목)이 있어서 FeatureGate 도 다시 그림
 
-        // 튜토리얼 라운드 (사용자 2026-10-15): 1층(조작·벽 파괴·맵) + 2층(번식·승급·고양이·제한시간) 안내를 다 볼 때까지.
+        // 튜토리얼 라운드 (사용자 2026-10-15): 1층(조작·벽 파괴·맵) + 2층(번식·고양이·제한시간) 안내를 다 볼 때까지.
         // 그동안 1층 번식 막음 · 고양이는 안내용으로만 · 슈퍼 점프 막음 · 1층 쉬운 벽 유지 · 로비 치즈 창고(l_first)는 안 열림.
         // 판이 끝나도(게임 오버 · 포기) 본 단계만 기록되고 라운드는 이어짐. 예전 흐름으로 로비 튜토리얼까지 본 저장은 끝난 것으로
-        public static readonly string[] TutoRoundSteps = { "g_intro", "g_wall", "g_birth", "g_promote", "g_cat", "g_floor" };
+        // 승급은 라운드에서 뺌 (2026-10-21): 최대 마릿수에 처음 닿을 때 같이 열림 (g_pop → g_pop_promote · g_promote)
+        public static readonly string[] TutoRoundSteps = { "g_intro", "g_wall", "g_birth", "g_cat", "g_floor" };
         public const string TutoRoundAfter = "l_first";
         public bool InTutoRound
         {
