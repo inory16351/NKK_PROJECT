@@ -436,7 +436,7 @@ namespace NKK
             Save();
         }
 
-        // 시작 층 상한 = min(1 + 스테이지 스킵 노드 합, 기획서 건너뛰기 상한(최고 클리어 층 = maxFloor - 1), 마지막 층) — 사용자 2026-10-12: 상한은 기획서, 올리는 건 스킬 노드
+        // 시작 층 상한 = min(1 + 스테이지 스킵 노드 합, 건너뛰기 상한 skip_cap(최고 클리어 층 = maxFloor - 1), 마지막 층) — 사용자 2026-10-12: 올리는 건 스킬 노드 · 2026-10-21: skip_cap = 최고 클리어 - 3 (넘은 훈장 허들 아래로는 안 감)
         public int StartFloorCap(int t = 0)
         {
             int doc = GameDatabase.Instance ? GameDatabase.Instance.SkipCapFor(maxFloor - 1) : maxFloor;

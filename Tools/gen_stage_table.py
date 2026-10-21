@@ -33,13 +33,13 @@ HURDLE_SPIKE = 1.3                   # 훈장 허들 층 = 추세 × 이 값 (�
 BOSS_SPIKE = 1.15                    # 보스 층 (훈장 허들 아닌) = 가벼운 허들
 AUG_PER_SLOT = 0.08                  # 증강 1칸당 전투력 + (31층~, Tools/balance_sim.py 와 같게)
 AUG_FROM = 31                        # 증강 해금 층
-AUG_SLOTS = {9: 2, 10: 3, 11: 3, 12: 4, 13: 4, 14: 4, 15: 4, 16: 5}      # 그 훈장 끝 증강 슬롯 (기본 2 + Aug_Slot 노드 10·12·16훈장, 최대 5 — 2026-10-20 사용자. 스테이지 곡선은 아직 다시 안 뽑음)
+AUG_SLOTS = {9: 2, 10: 3, 11: 3, 12: 4, 13: 4, 14: 4, 15: 4, 16: 5}      # 그 훈장 끝 증강 슬롯 (기본 2 + Aug_Slot 노드 10·12·16훈장, 최대 5 — 2026-10-20 사용자. 2026-10-21 곡선 다시 뽑음)
 HURDLE = TG.hurdles()                # 훈장 t 끝 상태가 넘어야 하는 층 = 다음 훈장 조건 층 - 1 (16훈장 = 100층)
 HURDLE_FLOORS = set(HURDLE.values())
 def _curve():
     import json
     pw = json.load(open(os.path.join(ROOT, 'Tools', 'probe_results', 'power_by_tier.json'), encoding='utf-8'))
-    aug = lambda t, f: 1 + AUG_PER_SLOT * AUG_SLOTS.get(t, 5) if f >= AUG_FROM else 1
+    aug = lambda t, f: 1 + AUG_PER_SLOT * AUG_SLOTS.get(t, 2) if f >= AUG_FROM else 1     # 표에 없는 훈장(1~8) = 기본 2칸 (2026-10-21: 예전 5 → 7·8훈장 허들 34·40층이 증강 5칸 기준이라 거의 안 함 플레이어가 34층에서 못 넘었음)
     trend = {2: 500.0, **{f: pw[str(t)]['end'] * aug(t, f) / ((TG.T16_R if f == TG.T16_FULL else HURDLE_R) * HURDLE_SPIKE) for t, f in HURDLE.items()}}
     last = max(trend)
     for f in range(last + 1, FLOORS + 1): trend[f] = trend[last] * TG.POST_G ** (f - last)     # 16훈장 트리 다 찍은 뒤 마무리 구간
@@ -62,8 +62,10 @@ TYPE_SEC = {k: v * BASE_TIME / 180 for k, v in {'도입': 108, '쉬움': 108, '�
 BOSS_FIGHT_SHARE = 0.4               # 보스 층: 목표 시간 중 보스전 몫 (나머지 = 길 뚫기). 보스 테이블 hp_pow_sec 를 이 시간에 맞춤
 # 플레이어 기준 전투력 (기획서 23장, 1층 = 100). 21층~ 은 층당 ×1.85 로 이어감 (기획서: 후반 층당 기준 성장 ×1.55 → ×1.90)
 DOC_PLAYER = [100, 127, 161, 205, 273, 402, 601, 836, 1120, 1501, 2011, 2694, 3611, 4838, 6483, 9343, 14855, 24852, 43749, 81034]
-# 층 건너뛰기 상한 (기획서 26장): 최고 '클리어' 층 → 고를 수 있는 가장 높은 시작 층. 오르는 건 공용 스킬 '스테이지 스킵' 노드 (사용자 2026-10-12)
-DOC_SKIP = {5: 3, 6: 4, 7: 4, 8: 5, 9: 6, 10: 6, 11: 7, 12: 8, 13: 9, 14: 9, 15: 10, 16: 10, 17: 10, 18: 10, 19: 10}
+# 층 건너뛰기 상한: 최고 '클리어' 층 → 고를 수 있는 가장 높은 시작 층. 오르는 건 공용 스킬 '스테이지 스킵' 노드 (사용자 2026-10-12)
+# 2026-10-21 사용자 (시작 층과 최고 클리어 층 차이가 너무 크고 갈수록 벌어져 불쾌함 → 완화): 모든 층 = 최고 클리어 - SKIP_BACK, 단 넘은 훈장 허들 다음 층보다 아래로는 안 감
+#   (예전: 1~19층 기획서 26장 표 — 17층 클리어해도 10층까지 · 20~29층 15~20 · 30층~ 최고 클리어 - 4)
+SKIP_BACK = 3
 RESEARCH0 = 8                        # 층 클리어 연구자료: 1층 8, 적정 찍찍에 비례 (뽑기 기획서 BR 가정)
 CHEESE_EXP = 1.25                    # 치즈 배율 = (난이도 지수)^이 값 (예전 치즈 1.5^층 · 체력 1.38^층 관계 유지)
 
@@ -89,11 +91,9 @@ def player_pow(f):
     if f <= len(DOC_PLAYER): return DOC_PLAYER[f - 1]
     v = DOC_PLAYER[-1] * 1.85 ** (min(f, 30) - len(DOC_PLAYER))
     return v * diff(f) / diff(30) if f > 30 else v          # 31층~ 은 적정 찍찍과 같은 비율 (2026-10-19)
-def skip_cap(f):                     # 19층까지 기획서 · 20~30층 = 엑셀에서 고친 값 (main-game 5f60c6e: 20층 15 → 25층부터 20) · 31층~ 최고 클리어 층의 80% (5층 단위, 20~80 — 100층 확장 기획서 14장)
-    if f < 20: return DOC_SKIP.get(f, 1)
-    if f < 30: return min(20, 15 + max(0, f - 20))
-    # 30층~ (2026-10-19 사용자): 최고 클리어 - 4, 단 이미 넘은 허들 다음 층보다 아래로는 안 감 (판 ~25분 · 허들에서 2~3판 막힘). 스테이지 스킵 노드 누적이 따라옴
-    return min(FLOORS, max(max(h for h in HURDLE_FLOORS if h <= f) + 1, f - 4))
+def skip_cap(f):                     # f = 최고 클리어 층 (2026-10-21 사용자: 차이를 줄이고 층이 올라가도 안 벌어지게)
+    past = [h for h in HURDLE_FLOORS if h <= f]
+    return min(FLOORS, max(1, f - SKIP_BACK, max(past) + 1 if past else 1))
 
 
 def rooms(f):
@@ -214,7 +214,7 @@ def main():
                  ('floor_type', 'Stage: 층 유형 (층 별 허들 기획서 Ver02): 도입·쉬움·보통·어려움·허들. 목표 돌파 시간과 적정 찍찍 배율이 유형별'),
                  ('target_sec / boss_sec', 'Stage: 적정 찍찍일 때 목표 돌파 초 (제한 180초의 60·75·90%) · 그중 보스전 목표 초 (보스 테이블 hp_pow_sec 로 맞춤)'),
                  ('research', 'Stage: 층 클리어(계단) 연구자료 = 8 × 난이도 지수 (Heist). 뽑기 비용 단위 BR = 최고 도달 층의 이 값'),
-                 ('skip_cap', 'Stage: 이 층을 최고로 클리어했을 때 고를 수 있는 가장 높은 시작 층 (기획서 26장). 실제 = min(1 + 스테이지 스킵 노드 합, 이 값)'),
+                 ('skip_cap', 'Stage: 이 층을 최고로 클리어했을 때 고를 수 있는 가장 높은 시작 층 (= 이 층 - 3, 넘은 훈장 허들 다음 층 아래로는 안 감). 실제 = min(1 + 스테이지 스킵 노드 합, 이 값)'),
                  ('player_pow', 'Stage: 기획서 플레이어 기준 전투력 (1층 = 100 지수). 측정 비교용 (게임은 안 씀)')]:
         if k in have: continue
         r = cd.max_row + 1
