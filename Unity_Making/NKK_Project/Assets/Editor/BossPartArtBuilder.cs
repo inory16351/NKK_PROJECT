@@ -95,7 +95,7 @@ public static class BossPartArtBuilder
         giant.parts.Add(P("foot", S("boss_cartgiant/foot"), "shin", 0.53f, 0.953f, 0.746f, 0.099f, 0, M.Walk, 6, 0, 1, -67.7f, 0.717f));
         giant.parts.Add(P("arm", S("boss_cartgiant/uparm"), "body", 0.323f, 0.395f, 0.475f, 0.22f, 6, M.Walk, 14, 0, 1, -10.5f, 0.992f));
         giant.parts.Add(P("fore", S("boss_cartgiant/forearm"), "arm", 0.63f, 0.912f, 0.54f, 0.12f, 5, M.Walk, 8, 0.25f, 1, 4, 1.137f));
-        giant.parts.Add(P("head", S("boss_cartgiant/head"), "body", 0.12f, 0.26f, 0.76f, 0.92f, 7, M.Sway, 3, 0, 1, -12, alt: S("boss_cartgiant/head2")));
+        giant.parts.Add(P("head", S("boss_cartgiant/head"), "body", 0.12f, 0.26f, 0.821f, 0.92f, 7, M.Sway, 3, 0, 1, -12, alt: S("boss_cartgiant/head2")));      // 쥐 얼굴 (2026-10-22, 저작권) — 주둥이만큼 칸이 왼쪽으로 넓어져 피벗 0.76 → 0.821 (Tools/slice_cartgiant_ratface.py) · 원래 사람 머리 = head_human*.png
         // 등 위 안장 + 포탑 고양이 2마리: 공격 중엔 사격 그림(총구 불꽃)과 번갈아 깜빡이며 반동으로 흔들림 (Move.Recoil, 엇갈리게 phase)
         giant.parts.Add(P("saddle", S("boss_cartgiant/saddle"), "body", 0.747f, 0.376f, 0.5f, 0.5f, 8, M.None, 0, 0, 1, -8));
         giant.parts.Add(P("gunner1", S("boss_cartgiant/gunner"), "saddle", 0.32f, 0.089f, 0.773f, 0.95f, 9, M.Recoil, 6, 0, 1, 2, alt: S("boss_cartgiant/gunner2")));

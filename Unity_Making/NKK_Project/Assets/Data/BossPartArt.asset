@@ -593,7 +593,7 @@ MonoBehaviour:
       alt: {fileID: 21300000, guid: d7bd68ae4ec9e09479aba9a839ff714f, type: 3}
       parent: body
       at: {x: 0.12, y: 0.26}
-      pivot: {x: 0.76, y: 0.92}
+      pivot: {x: 0.821, y: 0.92}
       angle: -12
       scale: 1
       flipX: 0

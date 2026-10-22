@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tt10.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: exactly the same flat Untitled Goose Game style as the attached images (flat colors, NO outlines, no gradients, no gloss). The attached images are: 1) the current HEAD part of a giant (calm), 2) the same head angry, 3) the full-body giant for skin color reference.
+- TASK: replace the human face with a RAT head, keeping everything else the same so it plugs into the same rig. Draw TWO heads side by side, both side view facing LEFT, each a separate island with lots of magenta space around it, nothing touching:
+  1) RAT HEAD, calm blank stare: a cartoon rat head in profile (pointed snout with pink nose tip pointing LEFT, whiskers, a round pink-inside ear on top-back, small black eye), grey-brown fur like a city rat. Keep the same messy long brown hair falling over the head like the attached head. Below the head, a short thick HUMAN NECK stump in the SAME peach skin color as the giant's body (match attached full-body skin exactly), cut flat at the back-bottom exactly like the attached head part. The fur of the rat face should blend naturally into the skin of the neck around the jaw and throat (soft fur tufts over the skin, no hard seam line).
+  2) The SAME rat head ANGRY: teeth clenched and bared (big rat front incisors visible), eyes glaring, same hair, same neck stump in the same position.
+- Each head should be about the same size and proportion as the attached head part, with the neck stump at the bottom-right like the original, so that it can replace the original head at the same pivot. No body, no shoulders, no arms.
+- Original-looking parody only: generic cartoon rat, no real person's face, no logo.
