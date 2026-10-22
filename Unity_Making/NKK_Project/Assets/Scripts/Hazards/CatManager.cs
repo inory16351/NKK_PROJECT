@@ -152,15 +152,15 @@ namespace NKK.Hazards
             beam.enabled = true; beamT = 0.3f;
         }
 
-        // ── 무리 찾기: 반경 안 쥐가 가장 많은 자리 (그 무리의 평균 위치). avoid 근처(이미 고른 곳)는 뺌, maxD > 0 이면 (cx, cy) 에서 그 거리 안만 ──
-        public bool FindCrowd(float cx, float cy, out Vector2 at, out int count, List<Vector2> avoid = null, float maxD = 0)
+        // ── 무리 찾기: 반경 안 쥐가 가장 많은 자리 (그 무리의 평균 위치). avoid 근처(이미 고른 곳)는 뺌, maxD > 0 이면 (cx, cy) 에서 그 거리 안만 · awake = 기절·필살기 쥐 빼고 (보스) ──
+        public bool FindCrowd(float cx, float cy, out Vector2 at, out int count, List<Vector2> avoid = null, float maxD = 0, bool awake = false)
         {
             at = default; count = 0;
             var list = Rats.Rats; float r2 = crowdScanRadius * crowdScanRadius;
             int best = -1;
             for (int i = 0; i < list.Count; i++)
             {
-                var o = list[i]; if (!o || o.z > 40) continue;
+                var o = list[i]; if (!o || o.z > 40 || (awake && (o.stun > 0 || o.UltOn || o.Swallowed))) continue;
                 if (maxD > 0 && Dist2(o, cx, cy) > maxD * maxD) continue;
                 if (!Stage.Open.Contains(StageManager.RoomOf(o.x, o.y))) continue;
                 if (avoid != null) { bool near = false; foreach (var v in avoid) if ((o.x - v.x) * (o.x - v.x) + (o.y - v.y) * (o.y - v.y) < r2 * 4) near = true; if (near) continue; }

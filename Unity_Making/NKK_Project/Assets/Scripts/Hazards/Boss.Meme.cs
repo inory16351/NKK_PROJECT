@@ -157,7 +157,7 @@ namespace NKK.Hazards
                         }
                         else
                         {
-                            var r = Rats.RandomOnScreen() ?? Rats.NearestRat(x, y, 2000);
+                            var r = Rats.RandomNear(x, y, 1200) ?? Rats.NearestRat(x, y, 2000);
                             if (!r) continue;
                             tx = r.x + Random.Range(-1f, 1f) * (40 + atk.p1); ty = r.y + Random.Range(-1f, 1f) * (30 + atk.p1 * 0.7f);
                         }

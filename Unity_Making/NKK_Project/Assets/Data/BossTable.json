@@ -2762,6 +2762,90 @@
    "situation": "Skill",
    "text": "싫다고.",
    "text_sk": 3096353
+  },
+  {
+   "line_id": 96401,
+   "boss_id": 95038,
+   "situation": "Disguise",
+   "text": "냐옹~",
+   "text_sk": 3096401
+  },
+  {
+   "line_id": 96402,
+   "boss_id": 95038,
+   "situation": "Disguise",
+   "text": "골골골…",
+   "text_sk": 3096402
+  },
+  {
+   "line_id": 96403,
+   "boss_id": 95038,
+   "situation": "Disguise",
+   "text": "부비부비~",
+   "text_sk": 3096403
+  },
+  {
+   "line_id": 96404,
+   "boss_id": 95038,
+   "situation": "Disguise",
+   "text": "간식 있어냥?",
+   "text_sk": 3096404
+  },
+  {
+   "line_id": 96405,
+   "boss_id": 95038,
+   "situation": "Reveal",
+   "text": "찌지직…!!",
+   "text_sk": 3096405
+  },
+  {
+   "line_id": 96406,
+   "boss_id": 95038,
+   "situation": "Reveal",
+   "text": "자정이 지났다냥…",
+   "text_sk": 3096406
+  },
+  {
+   "line_id": 96407,
+   "boss_id": 95039,
+   "situation": "Join",
+   "text": "신화 우주복 쥐 획득!",
+   "text_sk": 3096407
+  },
+  {
+   "line_id": 96408,
+   "boss_id": 95039,
+   "situation": "Disguise",
+   "text": "같이 가자 찍!",
+   "text_sk": 3096408
+  },
+  {
+   "line_id": 96409,
+   "boss_id": 95039,
+   "situation": "Disguise",
+   "text": "나 착한 쥐야 찍",
+   "text_sk": 3096409
+  },
+  {
+   "line_id": 96410,
+   "boss_id": 95039,
+   "situation": "Disguise",
+   "text": "임무 하는 중~",
+   "text_sk": 3096410
+  },
+  {
+   "line_id": 96411,
+   "boss_id": 95039,
+   "situation": "Disguise",
+   "text": "통풍구? 몰라 찍",
+   "text_sk": 3096411
+  },
+  {
+   "line_id": 96412,
+   "boss_id": 95039,
+   "situation": "Reveal",
+   "text": "사실 나… 임포스터였어!",
+   "text_sk": 3096412
   }
  ],
  "Atk_Type": [
@@ -5688,6 +5772,15 @@
   },
   {
    "situation": "Skill"
+  },
+  {
+   "situation": "Join"
+  },
+  {
+   "situation": "Disguise"
+  },
+  {
+   "situation": "Reveal"
   }
  ]
 }

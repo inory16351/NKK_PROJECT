@@ -123,7 +123,7 @@ namespace NKK.Stage
         public bool IsStairsRoom(int i, int j) => i == StairsRoom.x && j == StairsRoom.y;
         public bool IsBossFloor(int f) => GameDatabase.Instance ? GameDatabase.Instance.BossOf(f) != null : f % bossEvery == 0;      // 보스 테이블 floor (91~100 구간은 94·97·100층)
         // 보스가 대기 중인 계단 방 (보스 층): 멀리 있어도 어둡게 그려서 보스가 어디 있는지 보이게
-        public bool BossWaitRoom(Vector2Int k) => k == StairsRoom && Boss && Boss.State == Boss.BState.Wait && !Boss.Test;
+        public bool BossWaitRoom(Vector2Int k) => k == StairsRoom && Boss && Boss.State == Boss.BState.Wait && !Boss.Test && !Boss.Surprise;      // 깜짝 보스 층은 보통 방처럼
         public Vector2 StairsPos => new((StairsRoom.x + 0.5f) * World.RW, StairsRoom.y * World.RH + stairsY);
 
         // 층 밸런스 = 스테이지 테이블 Stage (없으면 인스펙터 옛 수식)

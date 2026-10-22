@@ -98,7 +98,7 @@ namespace NKK.Stage
             Color openCol = zoneColors.Length > 0 ? zoneColors[zi % zoneColors.Length] : Color.white;
 
             var boss = Stage.Boss;
-            bool bossAlive = boss && (boss.State == Boss.BState.Wait || boss.State == Boss.BState.Fight) && !boss.Test;
+            bool bossAlive = boss && (boss.State == Boss.BState.Wait || boss.State == Boss.BState.Fight) && !boss.Test && !boss.Surprise;     // 깜짝 보스는 미니맵에도 안 보임
             bool stairsOpen = Stage.Open.Contains(Stage.StairsRoom);
 
             // 방 칸: 열린 방 + 열린 방 옆 안 열린 방 (+ 보스가 기다리는 계단 방)

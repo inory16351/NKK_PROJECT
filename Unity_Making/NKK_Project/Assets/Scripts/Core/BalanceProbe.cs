@@ -141,7 +141,7 @@ namespace NKK
             Vector2 p = default; bool found = false;
             var b = Hazards.Boss.Current;
             if (b && b.CanHit) { p = new Vector2(b.x, b.y); found = true; }
-            else if (Stage.Open.Contains(Stage.StairsRoom) && (!b || !b.Blocking)) { p = Stage.StairsPos; found = true; }     // 계단 방이 열렸으면 계단으로
+            else if (Stage.Open.Contains(Stage.StairsRoom) && (!b || !b.Blocking || b.Surprise)) { p = Stage.StairsPos; found = true; }     // 계단 방이 열렸으면 계단으로
             else
             {
                 // 플레이어처럼 계단 쪽 길을 뚫음: 열린 방에 붙은 안 열린 방 중 계단 방까지 (레이아웃 안) 거리가 가장 가까운 벽 → 같으면 약한 벽

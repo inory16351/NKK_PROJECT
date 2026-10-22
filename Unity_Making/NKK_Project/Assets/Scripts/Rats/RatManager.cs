@@ -144,6 +144,13 @@ namespace NKK.Rats
             foreach (var o in Rats) if (o.temp <= 0 && !o.UltOn && !o.Swallowed && o.OnScreen()) l.Add(o);
             return l.Count > 0 ? l[Random.Range(0, l.Count)] : null;
         }
+        // (x, y) 둘레 maxD 안 아무 쥐 (기절·필살기·삼켜진 쥐 빼고) — 보스 기술 목표 (화면 기준 RandomOnScreen 대신, 2026-10-22)
+        public Rat RandomNear(float x, float y, float maxD)
+        {
+            var l = new List<Rat>(); float d2 = maxD * maxD;
+            foreach (var o in Rats) if (o.temp <= 0 && !o.UltOn && !o.Swallowed && o.stun <= 0 && (o.x - x) * (o.x - x) + (o.y - y) * (o.y - y) < d2) l.Add(o);
+            return l.Count > 0 ? l[Random.Range(0, l.Count)] : null;
+        }
         public Rat NearestRat(float x, float y, float maxD)
         {
             Rat best = null; float bd = maxD;

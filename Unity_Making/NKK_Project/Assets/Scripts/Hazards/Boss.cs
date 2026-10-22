@@ -25,6 +25,10 @@ namespace NKK.Hazards
     public partial class Boss : MonoBehaviour
     {
         public static Boss Current { get; private set; }
+        // 깜짝 보스 층 (94 그렘린 · 97 우주복 쥐, 보스 개편 README): 미리 보스 층이라 안 알림 — 대기 중 안 보임 · 층 배너 부제·카메라 비추기·어두운 계단 방 없음 · 로비 층 타일도 깰 때까지 보통 층
+        public static readonly int[] SurpriseFloors = { 94, 97 };
+        public static bool IsSurpriseFloor(int f) => System.Array.IndexOf(SurpriseFloors, f) >= 0;
+        public bool Surprise => State == BState.Wait && !Test && Data != null && IsSurpriseFloor(Data.floor);
         public enum BState { Off, Wait, Fight, Dying, Dead }
         public readonly Frost frost = new();          // 빙결 (아이스 퀸 쥐)
 
@@ -115,6 +119,10 @@ namespace NKK.Hazards
         [Tooltip("꽁꽁 얼어붙은 한강: 얼음 바닥 그림 · 반경 · 미끄러질 확률(초당) · 미끄러짐 팝업")] public Sprite iceSprite;
         public float iceRadius = 520, iceSlip = 0.8f;
         public string slipPopup;
+        [Header("걷기 목표 (쥐 무리)")]
+        [Tooltip("쥐 무리를 찾는 거리 · 목표 다시 고르는 주기(초) · 도착하고 서 있는 시간(초)")] public float chaseRange = 2000, goalEvery = 2.5f, goalRest = 0.7f;
+        [Tooltip("둘레에 무리가 없을 때 산책 거리 (최소·최대)")] public float wanderMin = 250, wanderMax = 450;
+        Vector2 goal; float goalT; bool hasGoal;
         [Tooltip("불판: 불꽃 · 연기 그림 · 불꽃 크기 · 연기 크기 · 초당 개수")] public Sprite flameSprite, smokeSprite;
         public float flameSize = 46, smokeSize = 70, grillFxRate = 10;
         [Tooltip("홈랜더 눈 레이저: 소리 팝업 · 눈이 빨갛게 빛나는 머리 그림 (원래 머리와 같은 크기, 모으고 쏘는 동안 바꿈) · 눈 위치 (머리 그림 픽셀, 왼쪽 위 기준)")] public string laserSfx;
@@ -192,8 +200,8 @@ namespace NKK.Hazards
         BossAtkRow atk;
         class Shot { public float x, y, z, vx, vy, vz, rot; public string type; public SpriteRenderer r; }
         readonly System.Collections.Generic.List<Shot> flying = new();
-        bool Cat => Data != null && Data.IsCat;
-        bool Part => Data != null && (Data.IsPart || riding);      // riding = 발악 중 전용 파츠 리그로 갈아탐 (굴착기, Boss.Rework.cs)
+        bool Cat => disguiseRig || (Data != null && Data.IsCat);        // disguiseRig = 깜짝 보스 변장 (고양이 리그에 보통 고양이·쥐 그림, Boss.Surprise.cs)
+        bool Part => !disguiseRig && Data != null && (Data.IsPart || riding);      // riding = 발악 중 전용 파츠 리그로 갈아탐 (굴착기, Boss.Rework.cs)
         public float Height => Cat ? (Cats ? Cats.catLength : 115) * Data.scale * catSayLift : Part && partRig ? partRig.Height * Data.scale : rig.height;
         string nameFormat;
         BossRow stash;          // 테스트 보스를 부를 때 이 층 진짜 보스 (끝나면 되돌림)
@@ -273,6 +281,7 @@ namespace NKK.Hazards
             Spawn(row, sp.x, sp.y + waitOffsetY, false);
             Debug.Log($"[Boss] {Game.Floor}층 보스 {row.boss_name} → {State}");
             if (State != BState.Wait) return;
+            if (Surprise) { BeginSneak(); return; }          // 깜짝 보스: 알 · 동료 변장
             Game.ShowBanner(Game.BannerTitle, Fill(floorSub));
             // 계단 방은 멀리 있어 카메라(열린 방 안만 움직임)로는 안 보임 → 잠깐 비춰서 보스가 있다는 걸 보여 줌
             if (peekOnEnter && Game.cam && !BalanceProbe.Active) Game.cam.Peek(x, y - Height * 0.4f, peekDelay);
@@ -280,6 +289,7 @@ namespace NKK.Hazards
 
         public void Clear()
         {
+            ClearSneak();
             State = BState.Off; Data = null; stash = null; Test = false;
             SetVisible(false); ClearShots(); EndSpecialFx();
             if (catRig) catRig.headReplace = null;
@@ -298,12 +308,14 @@ namespace NKK.Hazards
                 var sp = Stage.StairsPos; Spawn(row, sp.x, sp.y + waitOffsetY, false);
                 if (State != BState.Wait) { Debug.LogError($"[Boss] {Game.Floor}층 보스를 못 불러옴 (그림 없음?) → 이 층은 통과 허용"); DefeatedThisFloor = true; return; }
             }
+            if (SneakStairsOpened()) return;          // 깜짝 보스: 쥐가 계단에 닿으면 변신
             StartFight();
         }
 
         public void StartFight()
         {
             if (State != BState.Wait) return;
+            if (Surprise) { FxManager.I?.Anim("poof", x, y, 0, Height / 60); FxManager.I?.Shake(0.5f); }      // 깜짝 보스: 여기서 처음 나타남
             if (!Test) Debug.Log($"[Boss] {Game.Floor}층 보스전 시작 (체력 {GameManager.Format(hpMax)})");
             fightStart = Time.time;
             State = BState.Fight; t = 0; skillCd = Data.skill_first;
@@ -421,7 +433,7 @@ namespace NKK.Hazards
             if (State == BState.Fight) dt *= frost.Step(dt, x, y, Height * 0.6f); else frost.Clear();     // 빙결: 느려짐 · 꽁꽁
             t += dt; sayCD -= dt; hitT = Mathf.Max(0, hitT - dt); jit = Mathf.Max(0, jit - dt * 12);
             sq += (1 - sq) * Mathf.Min(1, dt * 8);
-            if (State == BState.Wait) { vx = vy = 0; face = 1; walk = 0; return; }
+            if (State == BState.Wait) { if (UpdateSneak(dt)) return; vx = vy = 0; face = 1; walk = 0; return; }
             if (State == BState.Dying)
             {
                 vz -= 300 * dt; x += vx * dt; y += vy * dt; z += vz * dt; rot += vr * dt;
@@ -435,8 +447,11 @@ namespace NKK.Hazards
             if (z > 0 || vz > 0) { vz -= gravity * dt; z = Mathf.Max(0, z + vz * dt); if (z <= 0) { vz = 0; if (air && (atkType == "Stomp" || atkType == "Pounce")) Land(); } }
             if (!attacking)
             {
-                var r = Rats.NearestRat(x, y, 2000);
-                if (r) { float a = Mathf.Atan2(r.y - y, r.x - x), s = Data.move_speed * (growT > 0 ? growSpeedMul : 1); vx += (Mathf.Cos(a) * s - vx) * Mathf.Min(1, dt * 3); vy += (Mathf.Sin(a) * s - vy) * Mathf.Min(1, dt * 3); }
+                UpdateGoal(dt);
+                float gx = goal.x - x, gy = goal.y - y, gd = Mathf.Sqrt(gx * gx + gy * gy);
+                float s = hasGoal ? Data.move_speed * (growT > 0 ? growSpeedMul : 1) * Mathf.Clamp01(gd / 60) : 0;      // 다 와 가면 천천히
+                float gk = Mathf.Min(1, dt * 3);
+                vx += ((gd > 1 ? gx / gd * s : 0) - vx) * gk; vy += ((gd > 1 ? gy / gd * s : 0) - vy) * gk;
                 atkCd -= dt; skillCd -= dt;
                 bool skill = skillCd <= 0 && pendingSpecial == null && Valid(Data.skill_type);
                 if ((atkCd <= 0 || skill) && !(Ults && Ults.Busy))
@@ -482,7 +497,7 @@ namespace NKK.Hazards
                         if (atkT > atk.windup + shots * 0.22f && shots < atk.count)
                         {
                             shots++;
-                            var r = Rats.RandomOnScreen() ?? Rats.NearestRat(x, y, 2000);
+                            var r = Rats.RandomNear(x, y, 1200) ?? Rats.NearestRat(x, y, 2000);
                             if (r)
                             {
                                 float tx = r.x + Random.Range(-40f, 40f), ty = r.y + Random.Range(-30f, 30f);
@@ -514,7 +529,7 @@ namespace NKK.Hazards
                         if (atkT > atk.windup + shots * 0.3f && shots < atk.count)
                         {
                             shots++;
-                            var r = Rats.RandomOnScreen() ?? Rats.NearestRat(x, y, 2000);
+                            var r = Rats.RandomNear(x, y, 1200) ?? Rats.NearestRat(x, y, 2000);
                             if (r) Throw(r.x, r.y, atkType);
                         }
                         if (shots >= atk.count && atkT > atk.windup + atk.count * 0.3f + 0.4f) attacking = false;
@@ -577,13 +592,41 @@ namespace NKK.Hazards
             }
         }
 
+        // ── 걷기 목표 (2026-10-22): 가장 가까운 쥐 대신 보스 둘레 쥐 무리. 이미 무리 한가운데면 다른 무리·빈 곳으로 걸어감 (쥐가 붙어 있으면 제자리 까딱만 하던 것) ──
+        void UpdateGoal(float dt)
+        {
+            goalT -= dt;
+            if (hasGoal)
+            {
+                float dx = goal.x - x, dy = goal.y - y;
+                if (dx * dx + dy * dy > R * R * 0.25f && goalT > 0) return;
+                if (dx * dx + dy * dy <= R * R * 0.25f) { hasGoal = false; goalT = Random.Range(goalRest * 0.6f, goalRest * 1.4f); return; }     // 도착: 잠깐 섬
+            }
+            if (goalT > 0) return;
+            goalT = goalEvery; hasGoal = true;
+            float near = R * 1.3f;
+            if (Cats && Cats.FindCrowd(x, y, out var at, out _, null, chaseRange, true) && (at - new Vector2(x, y)).sqrMagnitude > near * near) { goal = at; return; }
+            goalAvoid.Clear(); goalAvoid.Add(new Vector2(x, y));
+            if (Cats && Cats.FindCrowd(x, y, out at, out _, goalAvoid, chaseRange, true)) { goal = at; return; }
+            // 둘레에 무리가 없음 → 아무 방향 산책 (열린 방 안만)
+            for (int i = 0; i < 6; i++)
+            {
+                float a = Random.Range(0, Mathf.PI * 2), d = Random.Range(wanderMin, wanderMax);
+                var v = new Vector2(x + Mathf.Cos(a) * d, y + Mathf.Sin(a) * d * 0.7f);
+                if (Stage.Open.Contains(StageManager.RoomOf(v.x, v.y))) { goal = v; return; }
+            }
+            hasGoal = false;
+        }
+        readonly System.Collections.Generic.List<Vector2> goalAvoid = new();
+
         // 쥐가 많이 모인 곳 n 군데 (부족하면 그 근처 흩뿌림)
         void PickTargets(int n)
         {
             for (int i = 0; i < n; i++)
             {
-                if (Cats && Cats.FindCrowd(x, y, out var at, out _, seqTargets)) { seqTargets.Add(at); continue; }
-                var r = Rats.RandomOnScreen() ?? Rats.NearestRat(x, y, 3000);
+                // 보스 둘레 무리 (화면 기준 아님, 2026-10-22)
+                if (Cats && Cats.FindCrowd(x, y, out var at, out _, seqTargets, chaseRange, true)) { seqTargets.Add(at); continue; }
+                var r = Rats.RandomNear(x, y, chaseRange) ?? Rats.NearestRat(x, y, 3000);
                 if (r) seqTargets.Add(new Vector2(r.x + Random.Range(-90f, 90f), r.y + Random.Range(-60f, 60f)));
                 else if (seqTargets.Count > 0) seqTargets.Add(seqTargets[0] + Random.insideUnitCircle * 200);
                 else seqTargets.Add(new Vector2(x, y));
@@ -1660,7 +1703,7 @@ namespace NKK.Hazards
         {
             float tt = Time.time;
             var p = new RatRig.Pose { head = Mathf.Sin(tt * 1.6f) * 0.06f, tail = 0.1f + Mathf.Sin(tt * 3) * 0.25f, sx = 1, sy = 1 };
-            if (State == BState.Wait) { p.tail = 0.3f + Mathf.Sin(tt * 2) * 0.3f; return p; }
+            if (State == BState.Wait && !disguiseRig) { p.tail = 0.3f + Mathf.Sin(tt * 2) * 0.3f; return p; }
             if (State == BState.Dying) { p.front = Mathf.Sin(tt * 30) * 1.4f; p.farFront = Mathf.Cos(tt * 27) * 1.4f; p.back = Mathf.Sin(tt * 28) * 1.2f; p.farBack = Mathf.Cos(tt * 25) * 1.2f; p.tail = Mathf.Sin(tt * 20); p.head = Mathf.Sin(tt * 15) * 0.4f; return p; }
             if (attacking && atk != null)
             {
@@ -1678,7 +1721,7 @@ namespace NKK.Hazards
             if (State == BState.Off || State == BState.Dead || (!rig && !catRig && !partRig)) return;
             // 층 보스 대기: 계단 방은 처음부터 어둡게 그려짐 (StageManager.BossWaitRoom) → 보스는 그 안에 실루엣, 계단 방이 열리면 원래 색 + 전투
             int look = 2;
-            if (State == BState.Wait && !Test) look = Stage.IsOpen(Stage.StairsRoom.x, Stage.StairsRoom.y) ? 2 : 1;
+            if (State == BState.Wait && !Test) look = Surprise ? (SneakShown ? 2 : 0) : Stage.IsOpen(Stage.StairsRoom.x, Stage.StairsRoom.y) ? 2 : 1;      // 깜짝 보스는 대기 중 안 보임
             SetVisible(look > 0 && !boxed);
             if (look == 0) return;
             float jx = jit > 0 ? Random.Range(-jit, jit) : 0;
@@ -1707,7 +1750,7 @@ namespace NKK.Hazards
             {
                 if (shadowA < 0) shadowA = shadow.color.a;
                 var sc = shadow.color; sc.a = shadowA * cloakA; shadow.color = sc;
-                float w = R * 1.4f * (1 - Mathf.Min(0.7f, z / 900)), sw = shadow.sprite ? shadow.sprite.bounds.size.x : 1;
+                float w = ShadowR * 1.4f * (1 - Mathf.Min(0.7f, z / 900)), sw = shadow.sprite ? shadow.sprite.bounds.size.x : 1;
                 shadow.enabled = State != BState.Dying;
                 shadow.transform.position = World.ToUnity(x, y);
                 shadow.transform.localScale = new Vector3(w * 2 * World.U / sw, w * World.U * World.TILT / sw, 1);
