@@ -13,7 +13,7 @@ namespace NKK.Ults
     //   → ⑤ 턱시도 줴리는 뻔뻔하게 좌우 번갈아 90도 인사, 점점 빨라짐(인사마다 펑) → ⑥ 마지막 인사 대폭발 → 아이리스 아웃
     // 무대: 어둠(jw_dark 판 + 스프라이트 마스크로 줴리 둘레 타원 구멍, 줴리 몸은 마스크로 빼서 밝게) + 빛 기둥 ult_spotlight · 극장 커튼·위 장식 · 악기
     //   · 게이지 막대(ult_gauge_bar) · 팻말(jwc_card) · 관객 말풍선(jw_bubble, 9칸 늘이기). 줴리 옷 = 턱시도 파츠(jwt_torso·front·back)로 바꿔 끼움 + 나비넥타이
-    // 화면 고정 소품은 웹 화면 좌표(1280×720)를 카메라 보이는 범위에 맞춰 옮김. 글은 전부 자막 시트 (말풍선·게이지·팻말 글 = 월드 글자)
+    // 화면 고정 소품은 웹 화면 좌표(1280×720)를 줴리 중심 무대 범위(vr)에 맞춰 옮김 (카메라를 따라가지 않음). 글은 전부 자막 시트 (말풍선·게이지·팻말 글 = 월드 글자)
     // 글자 모양 = 웹: 제목·숫자·팝업·끝 인사 = comicText (채움 + 굵은 #3c322d 테두리 + 색 그림자), 팻말·말풍선 = 흰 바탕 위 진한 글 (테두리 없음). 재질은 팝업 글자 재질을 복사해 런타임에 만듦
     // 자막: c1 (갑분싸) · c2 야유 · c3~c5 감사합니다 · c6 (…인정이지) · c7 컷인 제목 · c8·c9 게이지 제목 · c10 게이지 {n}% · c11 로딩 중
     //   c12~c23 아재개그 (질문·답 6쌍) · c24~c48 관객 대사 · c49·c50 야유 팝업 · c51 귀뚤 · c52 (빠직) · c53·c54 딱·퍽 · c55~c57 펑 · c58·c59 음표 · c61 끝 인사
@@ -60,7 +60,9 @@ namespace NKK.Ults
 
         float stX, stY, dirY, charge, gray, dark, iris, spX, spY, drumT;
         int gag, bowN = -1;
-        Rect vr; float S;        // 지금 보이는 범위 · 웹 화면 1px = 게임 단위
+        // 무대 범위 = 줴리 중심에 고정 (화면을 따라가지 않음, 2026-10-22). 크기 = 확대(ZOOM) 끝난 화면 크기 · 웹 화면 1px = 게임 단위
+        const float ZOOM = 1.75f;
+        Rect vr; float S;
         Shade spotShade, irisShade;
         UltProp cone, curtainL, curtainR, valance, gFrame, gFill, card, stick, tie, catTie;
         TMP_Text gTitle, gNum, gLoad, cardTxt, byeTxt;
@@ -82,7 +84,10 @@ namespace NKK.Ults
             Beat(10.9f, () => Cap("c6"));
             stX = R.x; stY = R.y; spX = stX; spY = stY; R.face = 1; R.z = 0;
             gag = Random.Range(0, 6);
-            vr = ViewRect(); S = vr.width / 1280f;
+            // 확대 안 한 화면 크기 (컷인 확대 중이면 되돌려 계산) → 무대 = 그 1/ZOOM, 줴리 중심
+            var v0 = ViewRect(); float z0 = M.Cam ? Mathf.Max(0.01f, M.Cam.ultZoom) : 1;
+            float vw = v0.width * z0, vh = v0.height * z0;
+            vr = new Rect(stX - vw / ZOOM / 2, stY - vh / ZOOM / 2, vw / ZOOM, vh / ZOOM); S = vr.width / 1280f;
             // 어둠·핀 조명 (화면을 덮는 판 3장, 구멍 크기를 조금씩 달리해 가장자리를 부드럽게)
             dotSprite = SpriteOf("dot");
             spotShade = MakeShade(L_DARK, SPOT_CUT);
@@ -99,9 +104,9 @@ namespace NKK.Ults
                 inst.Add(new Inst { p = p, x = stX + dx, y = stY + dy, w = w, t0 = Rand(0.1f, 0.5f) });
             }
             inst.Sort((a, b) => a.y.CompareTo(b.y)); for (int i = 0; i < inst.Count; i++) inst[i].order = i;
-            // 객석: 무대 앞(열린 쪽)으로 화면 안 쥐들이 걸어와 앉음
+            // 객석: 무대 앞(열린 쪽)으로 줴리 둘레(확대 안 한 화면 크기) 쥐들이 걸어와 앉음
             dirY = M.Stage.Open.Contains(StageManager.RoomOf(stX, stY + 220)) ? 1 : -1;
-            var vin = ViewRect(20);
+            var vin = new Rect(stX - vw / 2 + 20, stY - vh / 2 + 20, vw - 40, vh - 40);
             foreach (var o in new List<Rat>(RatMgr.Rats))
             {
                 if (crowd.Count >= 24) break;
@@ -134,9 +139,9 @@ namespace NKK.Ults
         {
             float t = T;
             R.x = stX; R.y = stY; R.z = 0; R.vx = R.vy = 0;
-            vr = ViewRect(); S = vr.width / 1280f;
-            // 평소 크기 줴리를 카메라로 크게 (몸을 키우지 않음)
-            if (M.Cam) M.Cam.ultZoom = t < 10.9f ? 1 + 0.75f * Mathf.Min(1, t / 0.6f) : 1 + 0.75f * Mathf.Max(0, 1 - (t - 10.9f) / 0.4f);
+            // 평소 크기 줴리를 카메라로 크게 (몸을 키우지 않음) — 카메라 고정 켜고 이 필살기가 주인공일 때만
+            if (M.Cam && UltimateManager.CamLock && M.Current == this)
+                M.Cam.ultZoom = t < 10.9f ? 1 + (ZOOM - 1) * Mathf.Min(1, t / 0.6f) : 1 + (ZOOM - 1) * Mathf.Max(0, 1 - (t - 10.9f) / 0.4f);
             foreach (var I in inst) I.pop = Mathf.Max(0, I.pop - dt * 4);
             dark = t < 11.2f ? Mathf.Min(0.55f, t * 1.1f) : Mathf.Max(0, dark - dt * 2);
             gray = t > T_A + 0.05f && t < T_BOO ? Mathf.Min(1, (t - T_A) / 0.25f) : Mathf.Max(0, gray - dt * 5);
@@ -421,7 +426,7 @@ namespace NKK.Ults
             }
         }
 
-        // 웹 화면 좌표(1280×720 기준 px) → 지금 보이는 범위의 게임 좌표에 소품 맞추기 (w·h 도 px)
+        // 웹 화면 좌표(1280×720 기준 px) → 무대 범위(vr)의 게임 좌표에 소품 맞추기 (w·h 도 px)
         void ScreenProp(UltProp p, float px, float py, float w, float h, int layer)
         {
             if (p == null) return;
@@ -454,9 +459,9 @@ namespace NKK.Ults
             for (int i = 0; i < n; i++)
             {
                 var p = s.plates[i]; if (p == null) continue;
-                // 화면 전체 + 여유 (흔들림·확대에도 빈틈 없게)
-                p.x = vr.center.x; p.y = vr.center.y; p.z = 0; p.w = vr.width * 1.5f;
-                p.flat = vr.height * World.TILT * 1.5f / Mathf.Max(1, p.w * Aspect(p));
+                // 무대보다 넉넉히 (확대 전 화면·흔들림에도 빈틈 없게)
+                p.x = vr.center.x; p.y = vr.center.y; p.z = 0; p.w = vr.width * 4;
+                p.flat = vr.height * World.TILT * 4 / Mathf.Max(1, p.w * Aspect(p));
                 p.alpha = a1; p.tint = tint; p.visible = alpha > 0.005f; OnTop(p, layer, i);
                 var m = s.holes[i]; if (!m || !dotSprite) continue;
                 float k = 2 / DOT_R * World.U / dotSprite.bounds.size.x;
