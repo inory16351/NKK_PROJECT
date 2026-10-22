@@ -18,6 +18,10 @@ ref() {   # 시트 종류별 참고 그림
     rt2) echo "-i $R/$D/rt1.png" ;;
     rt1) echo "-i $R/UnityResources/Rats/Sheets/ballerina.png" ;;
     pr1) echo "-i $R/$E/ref_props.png" ;;
+    # 기술 그림 br_* (Tools/gen_boss_fx_prompts.py)
+    ef1) echo "-i $R/$E/ref_props.png" ;;
+    ef2) echo "-i $R/$D/ref_fx_bosses.png -i $R/$D/ref_goerem_rage1_saw.png -i $R/$D/ref_goerem_rage2_bread.png" ;;
+    ef3) echo "-i $R/$E/ref_props.png -i $R/$D/ref_fx_bosses.png -i $R/$D/cx4_full.png -i $R/UnityResources/Rats/BossRework/Props/rebar.png" ;;
   esac
 }
 run() {

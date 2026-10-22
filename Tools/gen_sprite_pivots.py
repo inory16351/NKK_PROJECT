@@ -14,6 +14,10 @@ for folder in ('Cats/Parts', 'Humans/Parts'):
     for sid, m in json.load(io.open(os.path.join(RES, *folder.split('/'), 'pivots.json'), encoding='utf-8')).items():
         if not isinstance(m, dict) or 'pivotUnity' not in m: continue
         for part, xy in m['pivotUnity'].items(): add(f'{folder}/{sid}/{part}.png', xy)
+# 보스 기술 머리 교체 그림 (Tools/slice_boss_fx.py, 이미 좌하단 기준)
+_fx = os.path.join(RES, 'BossRework', 'FX', 'pivots.json')
+if os.path.exists(_fx):
+    for name, xy in json.load(io.open(_fx, encoding='utf-8')).items(): add(f'BossMeme/{name}.png', xy)
 # 필살기 앞모습 파츠 (웹게임 FRONT_PARTS: 좌상단 기준 → 뒤집음)
 src = io.open(HTML, encoding='utf-8').read()
 fp = json.loads(re.search(r'const FRONT_PARTS = (\{.*?\});\n', src).group(1))

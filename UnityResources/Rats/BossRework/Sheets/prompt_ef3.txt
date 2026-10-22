@@ -1,0 +1,20 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ef3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels. No grid lines, no frames, no shadows on the background.
+- These are cartoon effect props for boss attacks in a funny rat game. Copy the attached reference props exactly for flat style and scale feel.
+- STYLE IS THE MOST IMPORTANT RULE: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+- Every object is one separate island with clear magenta space around it; nothing touches or crosses into another cell. No motion lines unless asked.
+- Thrown / flying objects point or face LEFT (their direction of travel is to the left).
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+- An exact grid of 2 columns x 2 rows (each cell 768x512). Each drawing is centered in its cell with a wide magenta margin.
+- Attached references: effect props (style), the boss strip (gremlin cat head), the Merlion cat boss full body, and a bent rebar spider leg.
+
+ 1) (top-left, about 460px wide) a big round SPIDER WEB made of welded grey steel construction REBAR, seen from straight above: 8 straight ribbed rebar spokes
+    from the center plus 4 rings of bent rebar, little orange weld blobs at the joints, rough and heavy.
+ 2) (top-right, about 260px tall) a MINI MER-MEOW: a small cute version of the attached Merlion cat boss (orange cat face with a lion-like mane on a silver fish body
+    standing upright, tail curled up behind), facing LEFT, hopping.
+ 3) (bottom-left, about 240px) a BABY GREMLIN: a small cute-mischievous grey-green gremlin kitten (big bat-like ears, red eyes, toothy grin like the gremlin
+    cat head in the reference) running on all fours, facing LEFT.
+ 4) (bottom-right, about 300px wide) a big fake black curly HANDLEBAR MUSTACHE (bushy, two curled ends), flying, slightly tilted.

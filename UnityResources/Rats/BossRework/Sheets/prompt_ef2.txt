@@ -1,0 +1,29 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ef2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels. No grid lines, no frames, no shadows on the background.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+- An exact grid of 3 columns x 2 rows (each cell 512x512). Each drawing is centered in its cell with a wide magenta margin, about 400px big.
+- These are alternate looks of the boss characters shown in the attached reference strip (same characters, same colors, same flat style, same view angle).
+  Reference strip left to right: subject kitty head, subject kitty torso (an earless round white chubby cat), pop cat head, union cat head, union cat torso,
+  T-rex suit part-timer head, his torso, vertical mouse head, general cat head, gremlin cat head, rat fighter jet.
+
+Row 1:
+ 1) SUBJECT KITTY's CREEPY HEAD (replaces its normal head, facing LEFT in 3/4 side view like the reference cat heads): the same cream-white earless chubby cat,
+    but the NECK is stretched VERY long and tall (a thick white column), the face sits on top with eerie human-like features: one amber eye and one grey eye,
+    a wide unsettling smile with an open dark mouth, long whiskers, a small pink nose. A red ribbon collar with a small bow tied at the BOTTOM of the neck.
+    The neck bottom is cut flat. Creepy but still funny.
+ 2) SUBJECT KITTY TURNED INTO A LOAF OF BREAD: a big square loaf of white bread with a golden-brown crust top, sitting on the ground, the whole loaf IS the cat:
+    a sad crying cat face on its LEFT end (closed-curve eyes, blue tear drops, small 'w' mouth, whiskers), no legs.
+ 3) a 'HUH?' MEME CAT HEAD (replaces the pop cat head, same size and the same 3/4 left side view as the pop cat head in the reference): a grey-brown and white cat
+    with HUGE round shocked confused eyes, ears perked up, a small open mouth, head slightly tilted; neck cut flat at the bottom.
+Row 2:
+ 4) UNION CAT STANDING UP on its hind legs, strict side view facing LEFT (same grey tabby, red headband, red vest as the reference), holding a big
+    white-and-red MEGAPHONE to its mouth with both front paws, shouting, tail down behind.
+ 5) the same UNION CAT standing on its hind legs facing LEFT, now wearing a YELLOW construction hard hat over the red headband, holding an old phone handset
+    to its ear with one paw, worried sweat drops, the other paw on its hip.
+ 6) the T-REX SUIT PART-TIMER (same green inflatable dino costume, the person's tired face visible in the dino mouth) SQUATTING low on the ground, side view
+    facing LEFT, arms resting on the knees, a small cigarette between the fingers with a thin flat grey smoke wisp, dead-tired existential stare.

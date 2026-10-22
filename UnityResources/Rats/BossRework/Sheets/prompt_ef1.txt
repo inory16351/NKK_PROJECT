@@ -1,0 +1,33 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ef1.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. The ONLY text allowed is the three big letter shapes in cells 1-3; nothing else has any writing. No grid lines, no frames, no shadows on the background.
+- These are cartoon effect props for boss attacks in a funny rat game. Copy the attached reference props exactly for flat style and scale feel.
+- STYLE IS THE MOST IMPORTANT RULE: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+- Every object is one separate island with clear magenta space around it; nothing touches or crosses into another cell. No motion lines unless asked.
+- Thrown / flying objects point or face LEFT (their direction of travel is to the left).
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no other text.
+
+- An exact grid of 6 columns x 3 rows (each cell 256x341). Each prop is centered in its cell with a wide magenta margin, about 200px big, not touching cell borders.
+
+Row 1:
+ 1) a big chunky puffy cartoon letter "H" like a popped popcorn kernel: cream-yellow, lumpy rounded edges, flat, slightly tilted
+ 2) the same style puffy popcorn letter "U"
+ 3) the same style puffy popcorn question mark "?"
+ 4) a crying loaf of white bread (square loaf with golden-brown crust top) that has a cute cat face on its side: closed-curve eyes with blue tear drops, small 'w' mouth, whiskers, facing left
+ 5) a crying long pizza bread (oval bun topped with red tomato sauce, melted cheese, green peas) with a cute cat face and tiny cat ears at its left end, blue tears
+ 6) a crying slice of strawberry shortcake (white cream layers, strawberries on top) with a cute cat face on its side, blue tears
+Row 2:
+ 7) a crying chiffon cake (tall golden ring cake with a hole on top) with a cute cat face on its side, blue tears
+ 8) an empty green inflatable T-REX COSTUME HEAD mask (cheap mascot costume head, open mouth with white teeth, yellow eye), no person inside, tumbling through the air, facing left
+ 9) one round dark grey lead SHOTGUN PELLET with a short pale flat speed streak trailing to the RIGHT
+ 10) a big grey ergonomic VERTICAL computer mouse (upright handshake-shaped mouse, scroll wheel, short cable) falling as a meteor diagonally toward the lower LEFT, a flat orange-yellow flame tail behind it toward the upper right
+ 11) a straight steel construction REBAR spike lying horizontally: ribbed grey steel bar, the LEFT end cut to a sharp point, right end blunt, about 3x longer than thick
+ 12) a big old silver MICROWAVE OVEN with a dark glass door, a dial panel on the right, slightly dented, little flat yellow sparks
+Row 3:
+ 13) a big round RED emergency push button on a squat yellow-and-black striped base, seen from a 3/4 angle
+ 14) a small black rubber GAS MASK in strict SIDE VIEW facing LEFT (round glass eye piece, round filter canister at the front-left, strap behind), sized to fit on a small animal's head
+ 15) an artist's PAINT BRUSH lying horizontally, wooden handle on the right, bristles with red paint pointing LEFT
+ 16) a wooden artist's PALETTE (kidney shape with thumb hole) with blobs of red, yellow, blue and white paint
+ 17) a small wooden artist's EASEL (A-frame tripod), folded open, empty
+ 18) a framed stretched painting CANVAS showing a simple flat landscape (green hills, blue sky, a little house), wooden frame edge

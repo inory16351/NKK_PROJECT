@@ -49,3 +49,9 @@
   - 팝 캣: 참고 그림에 맞춰 머리를 낮춤 (목 자리 neck 0.225, 0.43) + 머리 목을 턱 아래에서 잘라 짧게 (다문 입 242px · 벌린 입은 입 아래끝 밑 273px, 턱 안 잘리게), 관절 = 위에서 230px(다문)/244px(벌린) → pivots.json → gen_sprite_pivots → Build Cat Art Library. 예전 머리 `Parts/_old/boss_popcat_head/`.
   - 상어 고양이: 다리 관절을 몸통 안쪽(배 흰 부분 위)으로, 먼 다리는 가까운 다리 바로 뒤에서 살짝 앞으로 내딛음(−12°/−10°), 신발이 바닥에 닿게 다리마다 배율(0.80~0.95), 몸 at.y 0.834.
 
+
+## 기술 그림 br_* (2026-10-22 저녁) — `FX/`
+
+- 시트 `Sheets/ef1~3.png` (프롬프트 `Tools/gen_boss_fx_prompts.py`, 참고 `Sheets/ref_fx_bosses.png` = 보스 파츠 띠) → `python Tools/slice_boss_fx.py` → `FX/br_*.png` → `Assets/Art/Rats/BossMeme/` → Game 씬 Boss 인스펙터 **Fill Meme Sprites**.
+- 발사체는 왼쪽을 보게 그림 (Boss.Rework 가 날아가는 방향으로 뒤집음). 머리 교체(`br_huh_head` = 팝 캣 머리 높이, `br_goerem_saw` = 괴렘 머리 너비 0.95)는 크기를 맞추고 목 아래 관절점을 `FX/pivots.json` 에.
+- 재사용: br_club(Props/club) · br_rat_jet(boss_carrier/jet2) · br_siren(Rogue/rg_siren) · br_smoke(FX_New/color/smoke) · br_bullet(SuperUlt/emperor/fx_bullet 뒤집음) · br_vmouse_head(Humans boss_vmouse 머리).
