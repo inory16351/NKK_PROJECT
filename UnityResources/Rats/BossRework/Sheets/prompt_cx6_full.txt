@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cx6_full.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawing. No text, no letters, no numbers, no labels, no frames, no ground shadow.
+- STYLE: copy the attached SHARK-CAT parts exactly (same blue-grey shark skin, white belly, same cat face, same blue sneakers), Untitled Goose Game flat look, NO outlines, no gradients.
+- ONE character, full body, strict SIDE VIEW, FACING LEFT, centered, big: the shark-cat boss (parody of a famous meme: a shark walking on sneakers) standing on FOUR legs like a cat: a big blue-grey shark body with white belly, dorsal fin, pectoral fin and the shark tail at the right, the head is the attached grinning cat-shark head with ears at the left.
+- The four legs grow naturally out of the belly like an animal's legs: each leg starts with a thick rounded THIGH of the same blue-grey shark skin that blends smoothly into the body (no seam, no cut), narrowing to a blue-grey lower leg with a white sock, ending in a blue sneaker. Near legs (front and back) in front, far legs (front and back) behind and slightly darker. Walking pose with the legs a little apart.

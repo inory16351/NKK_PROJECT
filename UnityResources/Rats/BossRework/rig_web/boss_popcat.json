@@ -1,0 +1,171 @@
+{
+ "kind": "cat",
+ "dir": "cat_boss_popcat/",
+ "full": "../Parts/_ref_popcat.png",
+ "full_at": {
+  "x": 337,
+  "y": 474,
+  "s": 1.053
+ },
+ "parts": [
+  {
+   "name": "torso",
+   "sprite": "torso",
+   "parent": null,
+   "at": [
+    0,
+    0.856
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "order": 3,
+   "move": "None",
+   "amp": 0,
+   "phase": 0,
+   "speed": 1,
+   "angle": 0,
+   "scale": 1,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "tail",
+   "sprite": "tail",
+   "parent": "torso",
+   "at": [
+    0.95,
+    0.563
+   ],
+   "pivot": [
+    0.044,
+    0.784
+   ],
+   "order": 2,
+   "move": "Sway",
+   "amp": 14.3,
+   "phase": 0,
+   "speed": 1,
+   "angle": 5.7,
+   "scale": 1,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "farBack",
+   "sprite": "back",
+   "parent": "torso",
+   "at": [
+    0.8700000000000001,
+    0.611
+   ],
+   "pivot": [
+    0.349,
+    0.056
+   ],
+   "order": 0,
+   "move": "Walk",
+   "amp": 25.8,
+   "phase": 0.5,
+   "speed": 1,
+   "angle": 0,
+   "scale": 0.892,
+   "far": true,
+   "alt": null
+  },
+  {
+   "name": "farFront",
+   "sprite": "front",
+   "parent": "torso",
+   "at": [
+    0.34,
+    0.607
+   ],
+   "pivot": [
+    0.591,
+    0.056
+   ],
+   "order": 1,
+   "move": "Walk",
+   "amp": 28.6,
+   "phase": 0,
+   "speed": 1,
+   "angle": 0,
+   "scale": 0.908,
+   "far": true,
+   "alt": null
+  },
+  {
+   "name": "back",
+   "sprite": "back",
+   "parent": "torso",
+   "at": [
+    0.8,
+    0.611
+   ],
+   "pivot": [
+    0.349,
+    0.056
+   ],
+   "order": 4,
+   "move": "Walk",
+   "amp": 25.8,
+   "phase": 0,
+   "speed": 1,
+   "angle": 0,
+   "scale": 0.892,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "front",
+   "sprite": "front",
+   "parent": "torso",
+   "at": [
+    0.27,
+    0.607
+   ],
+   "pivot": [
+    0.591,
+    0.056
+   ],
+   "order": 5,
+   "move": "Walk",
+   "amp": 28.6,
+   "phase": 0.5,
+   "speed": 1,
+   "angle": 0,
+   "scale": 0.908,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "head",
+   "sprite": "head",
+   "parent": "torso",
+   "at": [
+    0.225,
+    0.43
+   ],
+   "pivot": [
+    0.561,
+    0.951
+   ],
+   "order": 6,
+   "move": "Sway",
+   "amp": 3.4,
+   "phase": 0,
+   "speed": 0.533,
+   "angle": 0,
+   "scale": 1,
+   "far": false,
+   "alt": "head2",
+   "alt_pivot": [
+    0.577,
+    0.896
+   ],
+   "pop": 0.35
+  }
+ ]
+}

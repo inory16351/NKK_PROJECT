@@ -628,6 +628,108 @@
 ],
 "front": 0,
 "head_scale": 0.8
+},
+{
+"code_id": "boss_vmouse",
+"neck": [
+0.178,
+0.03
+],
+"shoulder": [
+0.3,
+0.14
+],
+"hip": [
+0.311,
+0.95
+],
+"front": 0,
+"head_scale": 0.8
+},
+{
+"code_id": "boss_dino2",
+"neck": [
+0.334,
+0.03
+],
+"shoulder": [
+0.334,
+0.12
+],
+"hip": [
+0.431,
+0.95
+],
+"front": 0,
+"head_scale": 0.8
+},
+{
+"code_id": "boss_trainer",
+"neck": [
+0.487,
+0.03
+],
+"shoulder": [
+0.5,
+0.13
+],
+"hip": [
+0.507,
+0.95
+],
+"front": 0,
+"head_scale": 0.516
+},
+{
+"code_id": "boss_operator",
+"neck": [
+0.528,
+0.03
+],
+"shoulder": [
+0.5,
+0.15
+],
+"hip": [
+0.487,
+0.95
+],
+"front": 0,
+"head_scale": 0.8
+},
+{
+"code_id": "boss_deepdiver",
+"neck": [
+0.538,
+0.03
+],
+"shoulder": [
+0.5,
+0.16
+],
+"hip": [
+0.485,
+0.95
+],
+"front": 0,
+"head_scale": 0.8
+},
+{
+"code_id": "boss_joassu",
+"neck": [
+0.294,
+0.03
+],
+"shoulder": [
+0.294,
+0.12
+],
+"hip": [
+0.423,
+0.95
+],
+"front": 0,
+"head_scale": 0.8
 }
 ]
 }

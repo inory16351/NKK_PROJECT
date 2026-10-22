@@ -14,6 +14,7 @@ namespace NKK.Humans
             public string codeId;
             public Sprite head, scared, torso, arm, leg;
             [Tooltip("화난 머리 (보스 공격 때, 없으면 head)")] public Sprite angry;
+            [Tooltip("먼 쪽 팔 (반대쪽 손, 없으면 arm)")] public Sprite arm2;
             [Tooltip("몸통 이미지 좌상단 기준 0~1")] public Vector2 neck, shoulder, hip;
             [Tooltip("몸통이 정면 그림 (보스): 팔은 몸통 양옆, 다리는 벌려서, 목은 가운데, 먼 쪽 어둡게 안 함")] public bool front;
             [Tooltip("머리 크기 배율 (목 기준). 보스 머리가 몸통만큼 커서 0.85")] public float headScale = 1;

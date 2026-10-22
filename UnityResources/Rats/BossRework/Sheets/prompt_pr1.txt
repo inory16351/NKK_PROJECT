@@ -1,0 +1,24 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: pr1.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+These are separate cartoon PROPS / SUMMONS for boss skills in a funny rat game.
+- Exact layout: 3 rows x 4 columns grid (cells 384x341), one drawing centered in each cell with a wide margin. Side view facing LEFT unless said otherwise.
+- Copy the attached reference props exactly for flat style and scale feel.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+Cells (left to right, top to bottom):
+1) a VELOCIRAPTOR running (slim, tan with dark brown stripes, long tail straight back), funny-menacing.
+2) the same VELOCIRAPTOR leaping/pouncing with claws forward.
+3) a yellow EXCAVATOR body seen from the side: cab with a window (empty seat), engine housing and black crawler tracks, NO boom arm attached.
+4) the excavator's BOOM ARM: one long yellow bent arm (boom + stick) with hydraulic cylinders, with the BUCKET with teeth at the end, the base end on the right.
+5) a big DINOSAUR-sized EGG, cream with brown speckles, standing upright.
+6) the same egg with big jagged CRACKS and a small piece missing, a faint red glow inside the crack.
+7) a small grey CAT sitting behind a tiny TURRET machine gun (side view, facing left), wearing a little military helmet.
+8) a long green ALIEN TENTACLE, curling, with suction cups, base at the bottom cut flat.
+9) a pile of three small eggshell FRAGMENTS (cream with brown speckles).
+10) a big knobby wooden caveman CLUB with a bone tied on.
+11) a bundle of three bent rusty steel REBAR rods, crossing.
+12) a red TRAFFIC CONE.

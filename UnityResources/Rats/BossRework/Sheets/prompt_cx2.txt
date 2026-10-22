@@ -1,0 +1,17 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cx2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+This is a cut-out PARTS SHEET for a 2D game boss rig (parts are assembled by code).
+- Layout: TOP BAND (upper 45% of the image) = ONE long part spanning nearly the full width. BOTTOM = 1 row x 4 cells. All side view facing LEFT.
+- Match the attached reference exactly for flat style and boss scale feel.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+Parts:
+TOP BAND: "AIRCRAFT CARRIER CAT" hull: a long grey aircraft carrier seen from the side, bow pointing LEFT, a flat flight deck on top with white runway stripes, no island tower (an empty gap on the deck near the right-middle where the tower will be placed), hull with portholes, red waterline, white sea foam along the bottom.
+Bottom cell 1: the carrier's ISLAND CONTROL TOWER that IS a CAT HEAD: a big grey cat head (facing left) wearing a grey ship-tower helmet structure with radar dish and antenna on top, stern face, the bottom cut flat (sits on the deck).
+Bottom cell 2: the same cat-head tower shouting an order, mouth open.
+Bottom cell 3: a small grey JET FIGHTER plane seen from the side facing left whose cockpit/nose is a RAT HEAD (rat with flight goggles sticking out of the nose), funny.
+Bottom cell 4: the same rat-head jet with afterburner flame at the back, wings angled (launching).

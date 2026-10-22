@@ -74,6 +74,7 @@ namespace NKK.Rats
             NewRatTick(dt);
             bite = Mathf.Max(0, bite - dt * 5); sq += (1 - sq) * Mathf.Min(1, dt * 10);
             if (z > 0 || vz > 0) { vz -= 1600 * dt; z = Mathf.Max(0, z + vz * dt); if (z <= 0) vz = 0; }
+            if (BossStateTick(dt)) return;          // 삼켜짐 · 멋대로 걷기 (Rat.Boss.cs)
 
             if (stun > 0)
             {
@@ -158,6 +159,7 @@ namespace NKK.Rats
         // 새로 기절하면 머리 위에 작은 "기절!!" (RatManager.stunPopup)
         public void Stun(float t)
         {
+            if (swallowT > 0) return;          // 삼켜진 동안은 안 맞음
             bool fresh = stun <= 0 && t >= Manager.stunPopupMin;
             stun = Mathf.Max(stun, t); rushT = 0;
             if (fresh) Manager.StunPopup(this);
@@ -166,6 +168,7 @@ namespace NKK.Rats
         // 고양이 공격에 맞아 날아감: 데굴데굴
         public void Ragdoll(float ang, float spd, float upV, float stunT)
         {
+            if (swallowT > 0) return;
             vx = Mathf.Cos(ang) * spd; vy = Mathf.Sin(ang) * spd; vz = upV; tumbleT = 0.9f; Stun(stunT);
         }
 

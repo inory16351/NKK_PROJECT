@@ -503,6 +503,132 @@
 ],
 "leg_front": 1.105,
 "leg_back": 1.057
+},
+{
+"code_id": "boss_popcat",
+"neck": [
+0.225,
+0.43
+],
+"tail": [
+0.95,
+0.563
+],
+"shoulder": [
+0.27,
+0.607
+],
+"hip": [
+0.8,
+0.611
+],
+"leg_front": 0.908,
+"leg_back": 0.892
+},
+{
+"code_id": "boss_union2",
+"neck": [
+0.056,
+0.346
+],
+"tail": [
+0.94,
+0.382
+],
+"shoulder": [
+0.197,
+0.45
+],
+"hip": [
+0.792,
+0.5
+],
+"leg_front": 0.976,
+"leg_back": 0.93
+},
+{
+"code_id": "boss_joassu",
+"neck": [
+0.056,
+0.346
+],
+"tail": [
+0.94,
+0.382
+],
+"shoulder": [
+0.197,
+0.45
+],
+"hip": [
+0.792,
+0.5
+],
+"leg_front": 0.976,
+"leg_back": 0.937
+},
+{
+"code_id": "boss_goerem",
+"neck": [
+0.056,
+0.346
+],
+"tail": [
+0.94,
+0.382
+],
+"shoulder": [
+0.197,
+0.45
+],
+"hip": [
+0.792,
+0.5
+],
+"leg_front": 1.631,
+"leg_back": 1.38
+},
+{
+"code_id": "boss_dictator",
+"neck": [
+0.056,
+0.346
+],
+"tail": [
+0.94,
+0.382
+],
+"shoulder": [
+0.197,
+0.45
+],
+"hip": [
+0.792,
+0.5
+],
+"leg_front": 1.472,
+"leg_back": 1.162
+},
+{
+"code_id": "boss_gremlin",
+"neck": [
+0.056,
+0.346
+],
+"tail": [
+0.94,
+0.382
+],
+"shoulder": [
+0.197,
+0.45
+],
+"hip": [
+0.792,
+0.5
+],
+"leg_front": 0.979,
+"leg_back": 0.827
 }
 ]
 }

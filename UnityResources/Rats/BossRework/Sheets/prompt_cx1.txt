@@ -1,0 +1,15 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cx1.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+This is a cut-out PARTS SHEET for a 2D game rig (parts are assembled by code).
+- Exact layout: 3 rows x 5 columns. Each ROW is one boss built from the parts listed. All parts in SIDE VIEW facing LEFT unless said otherwise.
+- Match the attached reference exactly for flat style and boss scale feel (boss cats).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+Rows:
+Row 1: "SPIDER CAT" (a creepy toy-chimera parody: an animal head on a crawling spider-like junk body, built from construction-site rebar). 1) a grey tabby CAT HEAD, slightly front-facing, one eye normal and one eye a wide staring glassy doll eye, neck cut flat. 2) the same head hissing, mouth open. 3) the BODY HUB: a round lump of grey concrete chunk wrapped with bent rusty steel rebar and a bit of orange safety tape, seen from the side (the legs will be attached around it). 4) ONE long SPIDER LEG made of bent rusty ribbed steel REBAR with two sharp bends (knee joints), top end cut flat, tip pointed. 5) a second shorter rebar leg variant.
+Row 2: "SHARK CAT" (the Italian brainrot shark-in-sneakers meme, as a cat): 1) the FRONT of a blue-grey shark (snout and jaw) that has a CAT FACE: cat ears on top, cat eyes, whiskers, a wide toothy shark grin; cut flat where it joins the body. 2) same head with the jaw wide open (chomp). 3) the shark BODY from behind the head to the tail fin, horizontal, with a dorsal fin and white belly, no head. 4) ONE skinny blue-grey LEG standing straight wearing a chunky blue-and-white running SNEAKER (no logo), top cut flat. 5) one side pectoral fin.
+Row 3: "FISH CAT": a big fish with a cat's head. 1) an orange tabby CAT HEAD facing left, grumpy, neck cut flat. 2) same head with mouth open gulping like a fish. 3) a fat silver-blue mackerel FISH BODY with scales and stripes, horizontal, head end on the LEFT cut flat, no tail fin. 4) the forked FISH TAIL FIN, base on the left. 5) one fish side fin.

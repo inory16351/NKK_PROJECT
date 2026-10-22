@@ -1,0 +1,15 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cr1.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+This is a cut-out PARTS SHEET for a 2D game rig (parts are assembled by code).
+- Exact layout: 3 row(s) x 6 columns. Each ROW is one boss cat. Columns: 1) HEAD facing LEFT (neck cut flat at the bottom), 2) TORSO seen from the side, horizontal, head end on the LEFT, no head, no legs, no tail, 3) TAIL starting at its left end (base) curving up to the right, 4) FRONT LEG standing straight, top cut flat, paw at the bottom, 5) BACK LEG standing, top cut flat, paw at the bottom, 6) a SECOND HEAD of the same cat (expression given per row), same size and angle as column 1.
+- Match the attached reference exactly for part shapes, proportions, layout and view angle (maine coon, witch cat, space cat bosses).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+Rows:
+Row 1: "POP CAT" (the famous popping-mouth cat meme): orange-and-white short hair cat. IMPORTANT: its HEAD is twisted toward the viewer (almost FRONT VIEW, only slightly turned left) so the meme face reads clearly: big round eyes. Column 1 = mouth CLOSED (small neutral mouth). Column 6 = the exact same head with a HUGE perfectly round open mouth (O shape) mid-'pop'. Torso orange tabby with white belly, orange tail, orange legs with white paws.
+Row 2: "UNION CAT": a big grey tabby cat with a red protest headband (blank, no text) and a lazy defiant sleepy face. Torso wearing a red union vest. Grey tabby tail and legs. Column 6 = same head shouting a protest chant with mouth wide open and one eye squinting.
+Row 3: "JOASSU CAT" (a fired-up construction worker cat, smaller helper): orange tabby cat wearing a yellow construction hard hat with a white towel around the neck. Torso = navy work jacket with reflective stripes. Orange tail, legs with dusty work-glove paws. Column 1 = proud grin. Column 6 = same head screaming a fierce battle cry, eyes squeezed shut, mouth huge.

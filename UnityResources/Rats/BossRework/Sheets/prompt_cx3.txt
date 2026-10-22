@@ -1,0 +1,17 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cx3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+Two separate drawings for a 2D game boss part (the aircraft carrier's island control tower), side by side: LEFT half and RIGHT half of the image, each centered with a wide magenta margin.
+- Copy the attached reference sheet exactly for flat style, grey ship colors and scale (the top band hull and the two tower drawings).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+Make a CAT-HEAD CONTROL TOWER that reads as a CAT FIRST and a ship tower second (the previous attempt looked too much like a plain ship tower).
+- Silhouette: a big ROUND CAT HEAD shape (like the cat-head towers in the reference sheet's bottom row), with two LARGE POINTED TRIANGULAR CAT EARS sticking up clearly (steel plates, inner ear a darker grey panel), a chubby cat cheek/muzzle bump, all made of grey ship steel with a few rivets and panel seams.
+- Face: TWO separate big ALMOND-SHAPED CAT EYES that are BRIDGE WINDOWS (dark blue glass divided by thin window frames, slanted like cat eyes), a pink-grey triangular cat NOSE plate, a 'w'-shaped cat mouth made of a vent seam, long thin antenna-rod WHISKERS.
+- Ship parts are only small accents: a small radar dish and a thin mast with antennas sitting on top of the head BETWEEN the ears, one small row of portholes on the cheek, a flat steel base at the bottom (sits on the deck).
+- Side 3/4 view facing LEFT, same size as the reference tower.
+LEFT drawing: normal — calm, stern half-lidded window eyes, mouth closed.
+RIGHT drawing: shouting an order — the window eyes glowing bright yellow and slanted angrily, the mouth wide open like a hangar door with a dark inside, ears pinned back a little.

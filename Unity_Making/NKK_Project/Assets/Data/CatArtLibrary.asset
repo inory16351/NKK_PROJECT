@@ -19,6 +19,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: f59677a19d802ed47a61534974c9382b, type: 3}
     front: {fileID: 21300000, guid: 5f1d75cdf374de14dbf43c9a1ec515f2, type: 3}
     back: {fileID: 21300000, guid: c661485cc4c76774da0e3c51f3eae77d, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.05952381, y: 0.40319148}
     tailAnchor: {x: 0.9404762, y: 0.38085106}
@@ -40,6 +41,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 57ad5e458beea204c998e442f747af3e, type: 3}
     front: {fileID: 21300000, guid: f91c23d7e2a503647b9feb4cf2bec469, type: 3}
     back: {fileID: 21300000, guid: 7a71e5b143498494e99188916c288bf5, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.055555556, y: 0.29101124}
     tailAnchor: {x: 0.9375, y: 0.38651684}
@@ -61,6 +63,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: ebd7f2473fe1a8d4bb830dafc3120030, type: 3}
     front: {fileID: 21300000, guid: 21ab2b30fb2d2f74d801f11b1e67aeec, type: 3}
     back: {fileID: 21300000, guid: 334c26c2b0ef490459b3eeb085dfe37f, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.059210528, y: 0.34012344}
     tailAnchor: {x: 0.94078946, y: 0.38271606}
@@ -82,6 +85,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: af03b1a1b99a0a7479b9d5f9dbdb9996, type: 3}
     front: {fileID: 21300000, guid: 234676f8a4357e948936a526691afb4f, type: 3}
     back: {fileID: 21300000, guid: 321474d51cc4ad54f8f98a59c900445e, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.058064517, y: 0.23157895}
     tailAnchor: {x: 0.9419355, y: 0.44421053}
@@ -103,6 +107,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: c35f10d6bf93eeb4e936bda0809f357b, type: 3}
     front: {fileID: 21300000, guid: ed3380d1ad5017240957c59de34f0641, type: 3}
     back: {fileID: 21300000, guid: a9c05a85af62cf447a5699f4ccc1d1f1, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.053892214, y: 0.32413793}
     tailAnchor: {x: 0.94011974, y: 0.39425287}
@@ -124,6 +129,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 128d5e70719170347859ea5ba060b40d, type: 3}
     front: {fileID: 21300000, guid: 353044099dd122f4bbf2def68ad225db, type: 3}
     back: {fileID: 21300000, guid: 4b105cbe660d4944eb8e52496d9f0e61, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056338027, y: 0.38214287}
     tailAnchor: {x: 0.9366197, y: 0.36190477}
@@ -145,6 +151,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 23e0d3f7528cdf4478efc501c0d04d91, type: 3}
     front: {fileID: 21300000, guid: 1c653c21f793f01409cbf518efe9c04e, type: 3}
     back: {fileID: 21300000, guid: f5f7b81c10f083d418faf6c625e6886b, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056338027, y: 0.3525641}
     tailAnchor: {x: 0.9366197, y: 0.37179488}
@@ -166,6 +173,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 007b2c5eacd794c44afbaf129e665f09, type: 3}
     front: {fileID: 21300000, guid: dc2790b98a6badf4197bc971cbfbeee1, type: 3}
     back: {fileID: 21300000, guid: 504218fde0acbde4390d369c5ac73872, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.053892214, y: 0.33707866}
     tailAnchor: {x: 0.94011974, y: 0.43258426}
@@ -187,6 +195,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 805acc0df870e37459fecebacf551ea9, type: 3}
     front: {fileID: 21300000, guid: 96b25feb98655554bbae1c010f1d9822, type: 3}
     back: {fileID: 21300000, guid: 67bb517341448664fa01bb44648745e9, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056497175, y: 0.35581395}
     tailAnchor: {x: 0.94350284, y: 0.33255813}
@@ -208,6 +217,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: e0c39924f36f0444aa74a671df7d3555, type: 3}
     front: {fileID: 21300000, guid: 4660a4e9ee744114db75a55caa99f2b4, type: 3}
     back: {fileID: 21300000, guid: d9c25201b41a5b84093670407a572e9e, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.058479533, y: 0.353125}
     tailAnchor: {x: 0.94152045, y: 0.3525}
@@ -229,6 +239,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 83c2fb0c3d23b3340be3c537bd0568b0, type: 3}
     front: {fileID: 21300000, guid: 0aedb7d92659f5040be2a27fb15e0e53, type: 3}
     back: {fileID: 21300000, guid: f741df63933ac4547960f0010b2b16b5, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -250,6 +261,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 014b0a002b343b14a8461d36b2c38b55, type: 3}
     front: {fileID: 21300000, guid: aee9c491a8b0e8046b605f3db615826c, type: 3}
     back: {fileID: 21300000, guid: 8749a4ab259e744488a3fe09517af57f, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -271,6 +283,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: bd8d8855c45616e40933b4432440ed7e, type: 3}
     front: {fileID: 21300000, guid: e7053bd612c56b748872ed48f8dccf06, type: 3}
     back: {fileID: 21300000, guid: c0a49bc8b08a5fe4aa14cb998ac850c8, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -292,6 +305,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: ce874cd45019b9c45a16677b73363526, type: 3}
     front: {fileID: 21300000, guid: 81bfea3a60af4874e8ec382b9c880692, type: 3}
     back: {fileID: 21300000, guid: 50803a74f3720e14e8e3b3ced885d5e5, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -313,6 +327,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 4865e3dbd80ff494f823dbf2e9f38536, type: 3}
     front: {fileID: 21300000, guid: ab80eafdda10fe94caf2eaab0d706ab3, type: 3}
     back: {fileID: 21300000, guid: 031157f711780c24bb6b0d4c56ec277e, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -334,6 +349,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 7c8ffec4c7a83214f89babdf95e2c739, type: 3}
     front: {fileID: 21300000, guid: fd315f996b3ffcd4b9e0dcddbdaa85cd, type: 3}
     back: {fileID: 21300000, guid: fae8e534be39e554ab6aa4acae9b8ee9, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -355,6 +371,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 263e409bf2d6d7e4b88acf3d29526af8, type: 3}
     front: {fileID: 21300000, guid: 209b3de1381716d42b0641acd1ed48bd, type: 3}
     back: {fileID: 21300000, guid: 60850f9151feada4b8ba65bd2c23aceb, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -376,6 +393,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: b49afb572ff8f544480eeed68eabfd95, type: 3}
     front: {fileID: 21300000, guid: 2e134291d812fce44a951c71660b6f58, type: 3}
     back: {fileID: 21300000, guid: f9db75981fb179542857c4f413c02a14, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -397,6 +415,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: aff434cb0c7f7f2438c873a85906d972, type: 3}
     front: {fileID: 21300000, guid: 73dc1cf9b9c516949873adb9f379320a, type: 3}
     back: {fileID: 21300000, guid: 9f0968e18b56ee145b212a88cb25958b, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -418,6 +437,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: b05d1f5bbddac39408792424b4d5d585, type: 3}
     front: {fileID: 21300000, guid: df5d49ea1a54b6547b4ae983d55b48e7, type: 3}
     back: {fileID: 21300000, guid: 0a478375bc6ed4645825b847597c4e46, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -439,6 +459,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 98253f7b4ccdfec48a08072bd8ad85a7, type: 3}
     front: {fileID: 21300000, guid: f596f48ccb2dc2548867c7fe87d4463a, type: 3}
     back: {fileID: 21300000, guid: 8731994b94e0d0b4e83946f2af919471, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -460,6 +481,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 62be3dc3ca4964c4f9e848673cb16357, type: 3}
     front: {fileID: 21300000, guid: e8e10f6af4667984bbefe1819d8d0fe4, type: 3}
     back: {fileID: 21300000, guid: 5b976619b7e217648acf77333fc15c1e, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -481,6 +503,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: c772b27a87da41f4c8b2d0fb0afa6c27, type: 3}
     front: {fileID: 21300000, guid: 60f40cf3bd87d0847a232283eafec40a, type: 3}
     back: {fileID: 21300000, guid: bbaea8bab3c011c40b7c9d14bffbf759, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -502,6 +525,7 @@ MonoBehaviour:
     tail: {fileID: 21300000, guid: 113cd66cd927d534ba1171737bdedad4, type: 3}
     front: {fileID: 21300000, guid: a6cb6a0f3db043c46a30089a3a1c12b7, type: 3}
     back: {fileID: 21300000, guid: c83bbaad634a5a141a1283f42e897bd0, type: 3}
+    head2: {fileID: 0}
     single: {fileID: 0}
     neck: {x: 0.056, y: 0.346}
     tailAnchor: {x: 0.94, y: 0.382}
@@ -509,6 +533,138 @@ MonoBehaviour:
     hip: {x: 0.792, y: 0.5}
     legFront: 1.105
     legBack: 1.057
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_popcat
+    head: {fileID: 21300000, guid: e4672356ee3dc9542be3f1d3e92661c1, type: 3}
+    torso: {fileID: 21300000, guid: 8db8f456692589342b47ff8ac96005dd, type: 3}
+    tail: {fileID: 21300000, guid: ae57fe02fb1c9564bb238f9793f87623, type: 3}
+    front: {fileID: 21300000, guid: 8574b52c880f9634baef568ff5b5df85, type: 3}
+    back: {fileID: 21300000, guid: 14ac485f87ae42e4c95e93c2f6d5739b, type: 3}
+    head2: {fileID: 21300000, guid: 8efe73e48fe63f845970e3e0d0d17b6b, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.225, y: 0.43}
+    tailAnchor: {x: 0.95, y: 0.563}
+    shoulder: {x: 0.27, y: 0.607}
+    hip: {x: 0.8, y: 0.611}
+    legFront: 0.908
+    legBack: 0.892
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_union2
+    head: {fileID: 21300000, guid: ebc91b8d89c31e547b0a80d5482c7580, type: 3}
+    torso: {fileID: 21300000, guid: bca592b0f3391524287a3697727e92a0, type: 3}
+    tail: {fileID: 21300000, guid: 750b1997d9a1cca48afe51f13a547ee5, type: 3}
+    front: {fileID: 21300000, guid: 1755990127e5c9b40a7a8576998d336e, type: 3}
+    back: {fileID: 21300000, guid: f0efbbb8efb34a540a6dd1111f26c159, type: 3}
+    head2: {fileID: 21300000, guid: 52a82bb64f39a4d48b74e52b6c7cb645, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 0.976
+    legBack: 0.93
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_joassu
+    head: {fileID: 21300000, guid: ab83f9604bf5f7947879794653d00170, type: 3}
+    torso: {fileID: 21300000, guid: e41834c224cebfe429bc5c6a7dc75235, type: 3}
+    tail: {fileID: 21300000, guid: f5d81b97bae12a74db2e245554e63866, type: 3}
+    front: {fileID: 21300000, guid: 0eda3a6c6a83ac547bb4a43ea243b1d0, type: 3}
+    back: {fileID: 21300000, guid: 9aceff04c8024ac40a92980213ac6030, type: 3}
+    head2: {fileID: 21300000, guid: 56e0cf8002bbd1c48a024fe45234031f, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 0.976
+    legBack: 0.937
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_goerem
+    head: {fileID: 21300000, guid: ad23e7d47929ebc42af8642a07ad7022, type: 3}
+    torso: {fileID: 21300000, guid: 39c2c144e41efb149bba438d00016a9d, type: 3}
+    tail: {fileID: 21300000, guid: 3533237df37904b429a849b16ebc87b9, type: 3}
+    front: {fileID: 21300000, guid: 8c251eb2dcac0974abac31875951494a, type: 3}
+    back: {fileID: 21300000, guid: fdcaa764f7945234a8f94ca0c5bb5b4d, type: 3}
+    head2: {fileID: 21300000, guid: 8a73b277ccb4d9b46b5a8c9a86bbf136, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.631
+    legBack: 1.38
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_dictator
+    head: {fileID: 21300000, guid: f2a5b6b23e01d18439d09305bd96415c, type: 3}
+    torso: {fileID: 21300000, guid: 7db3420a4e791034784551a03ac701ca, type: 3}
+    tail: {fileID: 21300000, guid: 21b1590b8ec13db4a90e7bb2d032b24a, type: 3}
+    front: {fileID: 21300000, guid: dd39ec12ecc92aa4baeea216f85a2f42, type: 3}
+    back: {fileID: 21300000, guid: 926da3e71d8129c40a3b1776761205a8, type: 3}
+    head2: {fileID: 21300000, guid: d642f664157af8849a20319c95f76e42, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 1.472
+    legBack: 1.162
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
+  - codeId: boss_gremlin
+    head: {fileID: 21300000, guid: 7e16109b1b9239e459ebccf1f9ef04c2, type: 3}
+    torso: {fileID: 21300000, guid: e13e909e82cb5d04fba59d0c842f24ef, type: 3}
+    tail: {fileID: 21300000, guid: f4ac9198dd5114b4e9e8a89b1c2ce4f9, type: 3}
+    front: {fileID: 21300000, guid: ae0b69b56fa8ead42848dfd157d2aea4, type: 3}
+    back: {fileID: 21300000, guid: 275a7def8f1653145a581ed8c9063a4e, type: 3}
+    head2: {fileID: 21300000, guid: 1656728702caa034b8300be500177863, type: 3}
+    single: {fileID: 0}
+    neck: {x: 0.056, y: 0.346}
+    tailAnchor: {x: 0.94, y: 0.382}
+    shoulder: {x: 0.197, y: 0.45}
+    hip: {x: 0.792, y: 0.5}
+    legFront: 0.979
+    legBack: 0.827
     screen: 0
     screenRect:
       serializedVersion: 2

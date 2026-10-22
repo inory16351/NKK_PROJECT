@@ -46,7 +46,7 @@ namespace NKK.Hazards
             if (string.IsNullOrEmpty(n) || n == "-") return null;
             if (n[0] == '@') return n switch      // '@이름' = 보스 인스펙터의 기존 그림
             {
-                "@grill" => grillSprite, "@gas" => gasSprite, "@ice" => iceSprite, "@coffin" => coffinSprite, "@maxwell" => maxwellSprite, "@shark" => sharkSprite,
+                "@grill" => grillSprite, "@cone" => coneSprite, "@gas" => gasSprite, "@ice" => iceSprite, "@coffin" => coffinSprite, "@maxwell" => maxwellSprite, "@shark" => sharkSprite,
                 "@money" => moneySprite, "@banana" => bananaCatSprite, "@butter" => butterCatSprite, "@flask" => flaskSprite, "@hairball" => hairballSprite, "@fireball" => fireballSprite, _ => null,
             };
             if (memeMap == null) { memeMap = new(); foreach (var s in memeSprites) if (s.sprite && !memeMap.ContainsKey(s.name)) memeMap[s.name] = s.sprite; }
@@ -77,6 +77,7 @@ namespace NKK.Hazards
                 }
             }
             if (atk.pattern == "Zone" && atk.p1 >= 1) { seqTargets.Clear(); seqTargets.Add(new Vector2(x, y)); }
+            BeginRework();          // 보스 개편 패턴 · opt (Boss.Rework.cs)
         }
 
         // 쥐 무리를 지나는 가로줄 (방 안으로 자름)
@@ -121,12 +122,18 @@ namespace NKK.Hazards
                     float gap = Mathf.Max(0.05f, atk.dur / Mathf.Max(1, seqTargets.Count));
                     while (released < seqTargets.Count && atkT >= wind + released * gap)
                     {
-                        var v = seqTargets[released++];
+                        var v = seqTargets[released];
+                        var spi = atk.sprite != null && atk.sprite.Contains(",") ? MemeSpriteAt(atk, released) : sp ? sp : atk.sprite != null && atk.sprite != "-" && !atk.sprite.StartsWith("@") ? placeholderSprite : null;
+                        released++;
                         int after = Mathf.RoundToInt(atk.p1);
-                        if (atk.pattern == "Drop" && sp && after > 0)
+                        string stk = Opt("sticky"), mph = Opt("morph");
+                        if (atk.pattern == "Drop" && spi && (after > 0 || stk != null || mph != null))
                         {
-                            int kind = after <= 4 ? after - 1 : after == 5 ? 5 : 6;
-                            AddDrop(v, sp, MemeSize, kind, after == 5 ? Mathf.Max(0.5f, atk.p2) : after == 6 ? Mathf.Max(1, atk.p2) : Mathf.Max(1, atk.p2 > 0 ? atk.p2 : maxwellDance));
+                            int kind = after <= 0 ? 5 : after <= 4 ? after - 1 : after == 5 ? 5 : 6;
+                            AddDrop(v, spi, MemeSize, kind, after == 5 || after <= 0 ? Mathf.Max(0.5f, atk.p2) : after == 6 ? Mathf.Max(1, atk.p2) : Mathf.Max(1, atk.p2 > 0 ? atk.p2 : maxwellDance));
+                            var md = maxwells[maxwells.Count - 1];
+                            if (stk != null) md.sticky = float.TryParse(stk, System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out var st) ? st : 3;
+                            if (mph != null) { var (mn, mt) = SplitAt(mph, 3); md.morph = SpriteOrTemp(mn); md.morphT = mt; }
                         }
                         else Cats?.AddStrike(true, v.x, v.y, atk.radius, atk.stun, SpName, sp);
                         if (MemePop != null) fx?.Popup(v.x, v.y, MemePop, MemeColor, 24, 0.8f, 120);
@@ -141,10 +148,20 @@ namespace NKK.Hazards
                     while (shots < n && atkT >= wind + shots * gap)
                     {
                         shots++;
-                        var r = Rats.RandomOnScreen() ?? Rats.NearestRat(x, y, 2000);
-                        if (!r) continue;
-                        float tx = r.x + Random.Range(-1f, 1f) * (40 + atk.p1), ty = r.y + Random.Range(-1f, 1f) * (30 + atk.p1 * 0.7f);
-                        if (!Stage.Open.Contains(StageManager.RoomOf(tx, ty))) { tx = r.x; ty = r.y; }
+                        float tx, ty;
+                        if (Opt("around") != null)
+                        {
+                            // 보스 둘레 사방으로 포물선 (좋았쓰 고양이 · HUH 글자 팝콘)
+                            float a = shots * Mathf.PI * 2 / n + Random.Range(-0.4f, 0.4f), d = Random.Range(220f, 480f) + atk.p1;
+                            tx = x + Mathf.Cos(a) * d; ty = y + Mathf.Sin(a) * d * 0.75f;
+                        }
+                        else
+                        {
+                            var r = Rats.RandomOnScreen() ?? Rats.NearestRat(x, y, 2000);
+                            if (!r) continue;
+                            tx = r.x + Random.Range(-1f, 1f) * (40 + atk.p1); ty = r.y + Random.Range(-1f, 1f) * (30 + atk.p1 * 0.7f);
+                        }
+                        if (!Stage.Open.Contains(StageManager.RoomOf(tx, ty))) { var nr = Rats.NearestRat(tx, ty, 3000); if (nr) { tx = nr.x; ty = nr.y; } else { tx = x; ty = y; } }      // 방 바깥이면 가까운 쥐 자리로
                         face = tx >= x ? 1 : -1;
                         Throw(tx, ty, atkType);
                     }
@@ -339,7 +356,8 @@ namespace NKK.Hazards
                     if (atkT >= wind && !atkHit)
                     {
                         atkHit = true; int c = 0;
-                        foreach (var o in Rats.Rats) if (!o.UltOn && (!Ults || Ults.OnScreen(o.x, o.y, 0))) { o.Stun(atk.stun); o.vz = Mathf.Max(o.vz, 220); c++; }
+                        bool all = Opt("all") != null;          // 맵 전체 (긴급 회의)
+                        foreach (var o in Rats.Rats) if (!o.UltOn && (all || !Ults || Ults.OnScreen(o.x, o.y, 0))) { o.Stun(atk.stun); o.vz = Mathf.Max(o.vz, 220); c++; }
                         if (MemePop != null) fx?.Popup(x, y, MemePop, MemeColor, 56, 2, Height * 1.2f);
                         fx?.Shake(0.6f); fx?.Stars(x, y, Height * 0.6f, 40, MemeColor, Color.white, 200, 700);
                         if (Ults) Ults.Flash(MemeColor, 0.45f);
@@ -400,7 +418,7 @@ namespace NKK.Hazards
                         attacking = false;
                     }
                     break;
-                default: attacking = false; break;
+                default: if (!UpdateRework(dt)) attacking = false; break;
             }
         }
 
@@ -408,6 +426,7 @@ namespace NKK.Hazards
         void AddMemeZone(float zx, float zy, Sprite sp)
         {
             var z0 = new Zone { x = zx, y = zy, rad = atk.radius, life = atk.dur, life0 = atk.dur, stun = atk.stun, expose = atk.p2 > 0 ? atk.p2 : 0.6f, meme = true, color = MemeColor, popup = MemePop };
+            var mk = Opt("mask"); if (mk != null) { z0.immune = atk.p3 > 0 ? atk.p3 : 5; z0.mask = SpriteOrTemp(mk); }      // 방구가스: 기절한 쥐에 방독면 (p3 초 면역)
             if (shotTemplate && sp) { z0.r = Instantiate(shotTemplate, shotTemplate.transform.parent); z0.r.sprite = sp; z0.r.gameObject.SetActive(true); z0.r.enabled = true; z0.r.transform.rotation = Quaternion.identity; }
             zones.Add(z0);
         }

@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hr6.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached VERTICAL MOUSE caveman rat-man exactly (same grey-brown fur, same leopard-pattern fur tunic, same flat Untitled Goose Game style, NO outlines, no gradients, same scale).
+- Draw ONE part, big, centered: the TORSO of this rat-man in strict SIDE VIEW facing LEFT, for a 2D cut-out game rig where the arms are SEPARATE parts added later.
+- The torso is like a doll body with the ARMS REMOVED: from a short neck stump (cut flat at the top) down to the hips (cut flat at the bottom). The leopard tunic covers the chest and belly. At the shoulder there is ONLY a small smooth ROUND fur shoulder bump (a joint cap no bigger than a fist) — ABSOLUTELY NO ARM: no upper arm, no elbow, no forearm, no hand, no fur limb hanging down the side of the body. The side of the body below the shoulder is the leopard tunic and the furry flank only.
+- The long pink rat tail grows from the lower back on the right and curls behind. No legs, no feet.

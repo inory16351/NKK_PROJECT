@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tt9.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached giant (the first attached image) exactly: same skin colors, same dark grey-brown briefs, same flat Untitled Goose Game style, NO outlines, no gradients. The second attached image is his current parts sheet: keep the SAME SCALE as its upper body and hips pieces.
+- Draw exactly TWO parts of this crouching giant, side view facing LEFT, side by side with clear magenta space between them:
+  1) UPPER BODY: the chest, belly and the sloping upper back, from the base of the neck (cut flat at the upper left) to the waist (right). Its outline must follow the body silhouette of the first image exactly: NO shoulder ball, NO arm socket, NO round bump where the arm joins — the shoulder area is just the smooth outline of the back and chest (the arm piece is placed on top of it). No arms, no head, no saddle, no straps. The waist end on the right narrows slightly and is rounded.
+  2) HIPS wearing the BRIEFS: starts exactly at the front edge / waistband of the briefs, the rounded rump at the back. The bottom outline follows the buttocks and the briefs leg openings of the first image smoothly: NO thigh ball, NO leg socket, NO round bump where the legs join (the thigh pieces are placed under it). No legs, no straps.

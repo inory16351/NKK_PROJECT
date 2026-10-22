@@ -41,7 +41,7 @@ window.addEventListener('message', async e => {
         saved = []
         for part in msg.iter_parts():
             name = os.path.basename(part.get_filename() or '')
-            if not re.fullmatch(r'ending_0[1-5]\.png', name): continue
+            if not re.fullmatch(r'[a-z0-9_]{1,40}\.png', name): continue      # 이름 = 영소문자·숫자·밑줄 .png (예전: ending_01~05 만)
             data = part.get_payload(decode=True)
             with open(os.path.join(OUT, name), 'wb') as f: f.write(data)
             print('saved', name, len(data), flush=True)
@@ -52,7 +52,7 @@ window.addEventListener('message', async e => {
     def do_POST(self):
         if self.path.startswith('/upload'): return self._multipart()
         name = os.path.basename(self.path.strip('/'))
-        if not re.fullmatch(r'ending_0[1-5]\.png', name):
+        if not re.fullmatch(r'[a-z0-9_]{1,40}\.png', name):
             self.send_response(400); self._cors(); self.end_headers(); return
         n = int(self.headers.get('Content-Length', 0))
         data = self.rfile.read(n)

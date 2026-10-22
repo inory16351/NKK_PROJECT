@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cx6.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached four-legged SHARK-CAT exactly (same colors, same flat Untitled Goose Game style, NO outlines, no gradients).
+- This is a cut-out PARTS SHEET of THAT SAME character for a 2D game rig (side view, facing LEFT), each part at the SAME SCALE as in the attached picture, every part a separate island with clear magenta space around it, nothing touches.
+- Layout, 2 rows:
+  Row 1: 1) HEAD (cat-shark head with ears, grin), the back of the head/neck cut with a ROUNDED end on the right so it can tuck into the body; 2) the SAME HEAD with the mouth WIDE OPEN roaring, same size and angle; 3) BODY: the shark body from the gills to the tail fin, with dorsal fin, pectoral fin and white belly, NO head (the front end on the left is cut ROUNDED), NO legs (the belly is smooth where the legs attach).
+  Row 2: 4) FRONT LEG: one whole leg from a big rounded blue-grey THIGH top (round, like a shoulder, so it can tuck behind the body) down through the lower leg and white sock to the blue sneaker pointing LEFT; 5) BACK LEG: the same for the back leg (thicker haunch at the top), sneaker pointing LEFT.

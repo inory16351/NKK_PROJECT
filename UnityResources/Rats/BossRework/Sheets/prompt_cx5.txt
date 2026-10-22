@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cx5.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawing. No text, no letters, no numbers, no labels, no frames, no shadows on the background.
+- STYLE: copy the attached spider-cat parts sheet exactly (same rusty brown rebar, same grey concrete, same flat Untitled Goose Game style, NO outlines, no gradients).
+- Draw ONE part, big and centered: a WELDED NECK MOUNT that joins the cat head (top) to the rock-and-rebar body (bottom) of this junk-toy spider (like the scrap-built toys in a toy movie): a short thick stack made of a flat round rusty METAL PLATE on top (where the head sits), a short pipe/collar in the middle, and three or four bent rebar struts flaring out at the bottom like a tripod (where it is welded onto the body), with lumpy flat WELD BEADS (small light-grey rounded blobs) along every joint and a few flat orange-brown rust patches. About as wide as the cat head's neck at the top, wider at the bottom. Side view.

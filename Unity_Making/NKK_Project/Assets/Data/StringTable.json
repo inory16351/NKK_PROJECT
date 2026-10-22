@@ -7986,6 +7986,71 @@
    "en": "Grumpy Space Commander"
   },
   {
+   "string_key": 2995024,
+   "ko": "밈 고양이",
+   "en": "Meme Cat"
+  },
+  {
+   "string_key": 2995025,
+   "ko": "실험체 고양이",
+   "en": "Subject Kitty"
+  },
+  {
+   "string_key": 2995027,
+   "ko": "원시인 버티컬 마우스",
+   "en": "Caveman Vertical Mouse"
+  },
+  {
+   "string_key": 2995030,
+   "ko": "거미 고양이",
+   "en": "Spider Cat"
+  },
+  {
+   "string_key": 2995031,
+   "ko": "굴착기 기사",
+   "en": "Excavator Operator"
+  },
+  {
+   "string_key": 2995033,
+   "ko": "머라옹 고양이",
+   "en": "Mer-Meow"
+  },
+  {
+   "string_key": 2995034,
+   "ko": "심해 잠수부",
+   "en": "Deep Sea Diver"
+  },
+  {
+   "string_key": 2995035,
+   "ko": "차력거인",
+   "en": "Strongman Giant"
+  },
+  {
+   "string_key": 2995036,
+   "ko": "항공모함 고양이",
+   "en": "Carrier Cat"
+  },
+  {
+   "string_key": 2995038,
+   "ko": "그렘린 고양이",
+   "en": "Gremlin Cat"
+  },
+  {
+   "string_key": 2995039,
+   "ko": "수상한 우주복 쥐",
+   "en": "Sus Spacesuit Rat"
+  },
+  {
+   "string_key": 2995040,
+   "ko": "좋았쓰 고양이 (소환물)",
+   "en": ""
+  },
+  {
+   "string_key": 2995041,
+   "ko": "굴착기 (탈것)",
+   "en": ""
+  },
+  {
    "string_key": 3096001,
    "ko": "쥐는 한 마리도 못 지나간다!",
    "en": "Not a single rat gets past me!"
@@ -9222,8 +9287,8 @@
   },
   {
    "string_key": 3100026,
-   "ko": "무한동력 버터 고양이",
-   "en": "Perpetual Butter Cat"
+   "ko": "잼 식빵 고양이 회전",
+   "en": "Jam Toast Cat Spin"
   },
   {
    "string_key": 3100027,
@@ -9511,6 +9576,241 @@
    "en": "Moon Drop"
   },
   {
+   "string_key": 3100084,
+   "ko": "해피캣 투하",
+   "en": "Happy Cat Drop"
+  },
+  {
+   "string_key": 3100085,
+   "ko": "맥스웰 소환",
+   "en": "Maxwell Summon"
+  },
+  {
+   "string_key": 3100086,
+   "ko": "허 고양이",
+   "en": "Huh Cat"
+  },
+  {
+   "string_key": 3100087,
+   "ko": "헤어볼 뱉기",
+   "en": "Hairball Spit"
+  },
+  {
+   "string_key": 3100088,
+   "ko": "너.. 봤구나?",
+   "en": "You... Saw That?"
+  },
+  {
+   "string_key": 3100089,
+   "ko": "나 우울해서 빵됐어",
+   "en": "Sad Into Bread"
+  },
+  {
+   "string_key": 3100090,
+   "ko": "탈 던지기",
+   "en": "Mask Toss"
+  },
+  {
+   "string_key": 3100091,
+   "ko": "티라노 흉내",
+   "en": "T-Rex Impression"
+  },
+  {
+   "string_key": 3100092,
+   "ko": "현타 담배",
+   "en": "Existential Smoke Break"
+  },
+  {
+   "string_key": 3100093,
+   "ko": "몽둥이 강타",
+   "en": "Club Smash"
+  },
+  {
+   "string_key": 3100094,
+   "ko": "워크라이",
+   "en": "War Cry"
+  },
+  {
+   "string_key": 3100095,
+   "ko": "버티컬 마우스 투하",
+   "en": "Mouse Meteor"
+  },
+  {
+   "string_key": 3100096,
+   "ko": "샷건 발사",
+   "en": "Shotgun Blast"
+  },
+  {
+   "string_key": 3100097,
+   "ko": "랩터 떼",
+   "en": "Raptor Stampede"
+  },
+  {
+   "string_key": 3100098,
+   "ko": "랩터 다루기",
+   "en": "Raptor Whisperer"
+  },
+  {
+   "string_key": 3100099,
+   "ko": "냥냥펀치",
+   "en": "Paw-Paw Slap"
+  },
+  {
+   "string_key": 3100100,
+   "ko": "단결 투쟁",
+   "en": "Solidarity Strike"
+  },
+  {
+   "string_key": 3100101,
+   "ko": "좋았쓰!! 호출",
+   "en": "Call the Looks-Good Cats"
+  },
+  {
+   "string_key": 3100102,
+   "ko": "철근 가시",
+   "en": "Rebar Spikes"
+  },
+  {
+   "string_key": 3100103,
+   "ko": "철근 거미줄",
+   "en": "Rebar Web"
+  },
+  {
+   "string_key": 3100104,
+   "ko": "거미줄 돌진",
+   "en": "Web Dash"
+  },
+  {
+   "string_key": 3100105,
+   "ko": "라바콘 투하",
+   "en": "Cone Drop"
+  },
+  {
+   "string_key": 3100106,
+   "ko": "굴삭기 회전",
+   "en": "Excavator Spin"
+  },
+  {
+   "string_key": 3100107,
+   "ko": "포크레인 댄스",
+   "en": "Digger Dance"
+  },
+  {
+   "string_key": 3100108,
+   "ko": "물방울 감옥",
+   "en": "Bubble Jail"
+  },
+  {
+   "string_key": 3100109,
+   "ko": "지느러미 돌진",
+   "en": "Fin Rush"
+  },
+  {
+   "string_key": 3100110,
+   "ko": "신발 토네이도",
+   "en": "Sneaker Tornado"
+  },
+  {
+   "string_key": 3100111,
+   "ko": "거품 난사",
+   "en": "Bubble Barrage"
+  },
+  {
+   "string_key": 3100112,
+   "ko": "꼬마 머라옹 소환",
+   "en": "Mini Mer-Meows"
+  },
+  {
+   "string_key": 3100113,
+   "ko": "물대포",
+   "en": "Water Cannon"
+  },
+  {
+   "string_key": 3100114,
+   "ko": "음파 발사",
+   "en": "Sonar Ping"
+  },
+  {
+   "string_key": 3100115,
+   "ko": "닻 투하",
+   "en": "Anchor Drop"
+  },
+  {
+   "string_key": 3100116,
+   "ko": "폭뢰",
+   "en": "Depth Charge"
+  },
+  {
+   "string_key": 3100117,
+   "ko": "기관총 사격",
+   "en": "Machine Gun Fire"
+  },
+  {
+   "string_key": 3100118,
+   "ko": "쿵쿵 행진",
+   "en": "Stomp March"
+  },
+  {
+   "string_key": 3100119,
+   "ko": "쥐 전투기 출격",
+   "en": "Rat Squadron"
+  },
+  {
+   "string_key": 3100120,
+   "ko": "눈깔 빔",
+   "en": "Eye Beam"
+  },
+  {
+   "string_key": 3100121,
+   "ko": "악어 폭격기",
+   "en": "Crocodile Bomber"
+  },
+  {
+   "string_key": 3100122,
+   "ko": "그림 도구 던지기",
+   "en": "Art Supply Toss"
+  },
+  {
+   "string_key": 3100123,
+   "ko": "방구가스",
+   "en": "Fart Gas"
+  },
+  {
+   "string_key": 3100124,
+   "ko": "수염 던지기",
+   "en": "Mustache Toss"
+  },
+  {
+   "string_key": 3100125,
+   "ko": "돌진",
+   "en": "Charge"
+  },
+  {
+   "string_key": 3100126,
+   "ko": "새끼 그렘린",
+   "en": "Baby Gremlins"
+  },
+  {
+   "string_key": 3100127,
+   "ko": "전자레인지 투하",
+   "en": "Microwave Drop"
+  },
+  {
+   "string_key": 3100128,
+   "ko": "사이렌 투하",
+   "en": "Siren Drop"
+  },
+  {
+   "string_key": 3100129,
+   "ko": "촉수 삼키기",
+   "en": "Tentacle Gulp"
+  },
+  {
+   "string_key": 3100130,
+   "ko": "긴급 회의",
+   "en": "Emergency Huddle"
+  },
+  {
    "string_key": 3200001,
    "ko": "꽁꽁 얼어붙은 한강 위로 고양이가 걸어다닙니다",
    "en": "A cat is walking across the frozen-solid Han River"
@@ -9529,6 +9829,16 @@
    "string_key": 3200004,
    "ko": "나는 나쁜 짓을 할 것을 엄숙히 맹세한다냥!",
    "en": "I solemnly swear that I am up to no good, meow!"
+  },
+  {
+   "string_key": 3200005,
+   "ko": "너... 봤구나?",
+   "en": "You... saw that?"
+  },
+  {
+   "string_key": 3200006,
+   "ko": "나 우울해서 빵됐어..",
+   "en": "I got sad... so I became bread.."
   },
   {
    "string_key": 3390001,
@@ -11549,6 +11859,176 @@
    "string_key": 4500054,
    "ko": "달이다!!",
    "en": "The moon!!"
+  },
+  {
+   "string_key": 4500055,
+   "ko": "해피!",
+   "en": "Happy!"
+  },
+  {
+   "string_key": 4500056,
+   "ko": "맥스웰~",
+   "en": "Maxwell~"
+  },
+  {
+   "string_key": 4500057,
+   "ko": "HUH?",
+   "en": "HUH?"
+  },
+  {
+   "string_key": 4500058,
+   "ko": "켁!",
+   "en": "Hack!"
+  },
+  {
+   "string_key": 4500059,
+   "ko": "으랏차!",
+   "en": "Heave!"
+  },
+  {
+   "string_key": 4500060,
+   "ko": "크아앙!",
+   "en": "RAWR!"
+  },
+  {
+   "string_key": 4500061,
+   "ko": "퍽!",
+   "en": "Bonk!"
+  },
+  {
+   "string_key": 4500062,
+   "ko": "우가!!",
+   "en": "OOGA!!"
+  },
+  {
+   "string_key": 4500063,
+   "ko": "탕!",
+   "en": "BANG!"
+  },
+  {
+   "string_key": 4500064,
+   "ko": "끼아악!",
+   "en": "SKREE!"
+  },
+  {
+   "string_key": 4500065,
+   "ko": "진정해!",
+   "en": "Easy!"
+  },
+  {
+   "string_key": 4500066,
+   "ko": "냥!",
+   "en": "Nyah!"
+  },
+  {
+   "string_key": 4500067,
+   "ko": "단결 투쟁!",
+   "en": "UNITE & FIGHT!"
+  },
+  {
+   "string_key": 4500068,
+   "ko": "좋았쓰!!",
+   "en": "LOOKS GOOD!!"
+  },
+  {
+   "string_key": 4500069,
+   "ko": "철컹!",
+   "en": "Clang!"
+  },
+  {
+   "string_key": 4500070,
+   "ko": "콘!",
+   "en": "Cone!"
+  },
+  {
+   "string_key": 4500071,
+   "ko": "위이잉!",
+   "en": "Whirr!"
+  },
+  {
+   "string_key": 4500072,
+   "ko": "빠밤-",
+   "en": "Dun dun-"
+  },
+  {
+   "string_key": 4500073,
+   "ko": "위잉~",
+   "en": "Vroom~"
+  },
+  {
+   "string_key": 4500074,
+   "ko": "머라옹!",
+   "en": "Mer-meow!"
+  },
+  {
+   "string_key": 4500075,
+   "ko": "촤아아!",
+   "en": "SPLOOSH!"
+  },
+  {
+   "string_key": 4500076,
+   "ko": "핑-",
+   "en": "Ping-"
+  },
+  {
+   "string_key": 4500077,
+   "ko": "콰앙!",
+   "en": "KABOOM!"
+  },
+  {
+   "string_key": 4500078,
+   "ko": "쾅!!",
+   "en": "SLAM!!"
+  },
+  {
+   "string_key": 4500079,
+   "ko": "쿵! 쿵!",
+   "en": "STOMP! STOMP!"
+  },
+  {
+   "string_key": 4500080,
+   "ko": "출격!",
+   "en": "Scramble!"
+  },
+  {
+   "string_key": 4500081,
+   "ko": "삐-",
+   "en": "Bzzt-"
+  },
+  {
+   "string_key": 4500082,
+   "ko": "폭격!",
+   "en": "Bombs away!"
+  },
+  {
+   "string_key": 4500083,
+   "ko": "뿌웅~",
+   "en": "Pfffft~"
+  },
+  {
+   "string_key": 4500084,
+   "ko": "끼햐햐!",
+   "en": "Kyahaha!"
+  },
+  {
+   "string_key": 4500085,
+   "ko": "띵-! 콰광!",
+   "en": "Ding! KABOOM!"
+  },
+  {
+   "string_key": 4500086,
+   "ko": "삐뽀삐뽀",
+   "en": "Wee-woo"
+  },
+  {
+   "string_key": 4500087,
+   "ko": "꿀꺽!",
+   "en": "Gulp!"
+  },
+  {
+   "string_key": 4500088,
+   "ko": "긴급 회의!",
+   "en": "EMERGENCY HUDDLE!"
   },
   {
    "string_key": 4681101,

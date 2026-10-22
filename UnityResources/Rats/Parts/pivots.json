@@ -7480,6 +7480,91 @@
     "front": 1,
     "back": 0.858
    }
+  },
+  "crewmate": {
+   "parts": [
+    "Parts/crewmate/head.png",
+    "Parts/crewmate/torso.png",
+    "Parts/crewmate/tail.png",
+    "Parts/crewmate/front.png",
+    "Parts/crewmate/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.532,
+     0.86
+    ],
+    "tail": [
+     0.041,
+     0.441
+    ],
+    "front": [
+     0.774,
+     0.06
+    ],
+    "back": [
+     0.677,
+     0.056
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.532,
+     0.14
+    ],
+    "tail": [
+     0.041,
+     0.559
+    ],
+    "front": [
+     0.774,
+     0.94
+    ],
+    "back": [
+     0.677,
+     0.944
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.938
+   }
   }
  }
 }

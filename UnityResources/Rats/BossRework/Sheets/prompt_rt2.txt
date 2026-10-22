@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rt2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+Two separate cut-out parts for a 2D game rig (the head of the red CREWMATE RAT from the attached reference sheet splits into two jaws like a monster mouth). LEFT half and RIGHT half of the image, each part centered with a wide magenta margin. Side view facing LEFT, same size and colors as the reference head (row 1, column 1).
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+LEFT: the UPPER JAW = the top half of the red suit helmet: the two round rat ears, the wide pale-blue visor, and along its whole bottom edge a row of big sharp white UPPER TEETH hanging down from a dark red gum line; the inside (roof of the mouth) dark red. The back (right side) ends in a rounded hinge where it joins the lower jaw.
+RIGHT: the LOWER JAW = the bottom half of the red helmet/neck: along its top edge a row of big sharp white LOWER TEETH pointing up from a dark red gum line, a dark wet mouth floor, a long pink TONGUE lolling out to the left, the bottom cut flat (sits on the neck). The back (right side) ends in a rounded hinge.
+When the two parts are put back together closed, they should form a head the same size as the reference head.

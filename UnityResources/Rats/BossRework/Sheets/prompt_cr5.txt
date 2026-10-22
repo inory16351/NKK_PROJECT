@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cr5.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached POP CAT parts sheet exactly (same white cat with grey-brown patches, same flat Untitled Goose Game style, NO outlines, no gradients, same colors, same scale).
+- Problem to fix: when the attached head is put on the attached torso, the neck does not connect (the head floats in front of a flat torso end). Draw NEW parts so the head joins smoothly.
+- Layout, 2 rows, every part a separate island with clear magenta space around it, nothing touches:
+  Row 1 (LEFT half): the WHOLE cat ASSEMBLED, side view facing LEFT, standing, using the attached head (closed mouth) on top of the new torso, so the neck flows naturally from the chest into the head. This is a reference picture.
+  Row 1 (RIGHT half): the same assembled cat with the attached OPEN-MOUTH head.
+  Row 2: 1) NEW TORSO: horizontal body seen from the side, head end on the LEFT, WITH a thick NECK rising up and slightly forward from the chest at the LEFT end (the neck top is cut flat and angled, a little narrower than the bottom of the head, so the head covers the cut), no head, no legs, no tail; 2) FRONT LEG standing straight, top cut flat, paw at the bottom; 3) BACK LEG standing, top cut flat, paw at the bottom; 4) TAIL starting at its left end (base) curving up to the right. Same sizes as in the assembled picture.

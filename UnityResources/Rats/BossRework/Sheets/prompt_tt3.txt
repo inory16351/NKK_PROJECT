@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tt3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached giant (full-body picture + its parts sheet) exactly: same peach skin colors, same flat Untitled Goose Game style, NO outlines, no gradients, SAME SCALE as the attached parts sheet.
+- This is a NEW cut-out PARTS SHEET of THAT SAME crouching giant (side view, facing LEFT). Every part is a separate island with clear magenta space around it. Nothing touches.
+- Layout, 2 rows:
+  Row 1: 1) UPPER BODY: the chest + upper back from the shoulders to the waist, sloping up toward the right (waist end), no head, no arms, round clean shoulder cap at the left where the arm attaches, the waist end on the right is cut with a ROUNDED end (like a doll joint) so it can overlap the hips; 2) HIPS / BUTTOCKS piece (the pelvis, the highest point of the crouched body) wearing simple plain DARK GREY-BROWN BRIEFS (tight underwear briefs, no logo, no pattern) that fully cover the crotch and the buttock crack, so nothing private is visible; round clean thigh cap at the bottom where the leg attaches, the left (front) end slightly rounded where it overlaps the upper body.
+  Row 2: 3) the wooden SADDLE PLATFORM with its grey straps ONLY (NO cats, NO guns on it); 4) ONE small grey cat in a green army helmet sitting behind a mounted MACHINE GUN on a small tripod, aiming LEFT (one piece: cat + gun); 5) the SAME cat + gun FIRING: the gun recoils a little, a flat yellow-orange muzzle flash star at the barrel tip on the left, the cat squinting with determination.

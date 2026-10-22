@@ -1,0 +1,360 @@
+{
+ "full_at": {
+  "x": 688.5,
+  "y": 990
+ },
+ "parts": [
+  {
+   "name": "body",
+   "sprite": "body",
+   "parent": null,
+   "at": [
+    0.0,
+    1.784
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "order": 4,
+   "move": "Bob",
+   "amp": 4,
+   "phase": 0,
+   "speed": 2,
+   "angle": 6,
+   "scale": 1.0,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "armFar",
+   "sprite": "uparmFar",
+   "parent": "body",
+   "at": [
+    0.375,
+    0.403
+   ],
+   "pivot": [
+    0.498,
+    0.098
+   ],
+   "order": -2,
+   "move": "Walk",
+   "amp": 14,
+   "phase": 0.5,
+   "speed": 1,
+   "angle": -37.4,
+   "scale": 0.695,
+   "far": true,
+   "alt": null
+  },
+  {
+   "name": "foreFar",
+   "sprite": "forearmFar",
+   "parent": "armFar",
+   "at": [
+    0.624,
+    0.896
+   ],
+   "pivot": [
+    0.583,
+    0.099
+   ],
+   "order": -3,
+   "move": "Walk",
+   "amp": 8,
+   "phase": 0.75,
+   "speed": 1,
+   "angle": 16.0,
+   "scale": 1.247,
+   "far": true,
+   "alt": null
+  },
+  {
+   "name": "butt",
+   "sprite": "butt",
+   "parent": "body",
+   "at": [
+    0.546,
+    0.442
+   ],
+   "pivot": [
+    0.079,
+    0.435
+   ],
+   "order": 3,
+   "move": "Wiggle",
+   "amp": 4,
+   "phase": 0,
+   "speed": 2,
+   "angle": -4,
+   "scale": 1.0,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "thighFar",
+   "sprite": "thigh",
+   "parent": "body",
+   "at": [
+    1.242,
+    0.816
+   ],
+   "pivot": [
+    0.45,
+    0.17
+   ],
+   "order": -2,
+   "move": "Walk",
+   "amp": 14,
+   "phase": 0,
+   "speed": 1,
+   "angle": -61.0,
+   "scale": 1.029,
+   "far": true,
+   "alt": null
+  },
+  {
+   "name": "shinFar",
+   "sprite": "shin",
+   "parent": "thighFar",
+   "at": [
+    0.6,
+    0.85
+   ],
+   "pivot": [
+    0.456,
+    0.131
+   ],
+   "order": -3,
+   "move": "Walk",
+   "amp": 8,
+   "phase": 0.25,
+   "speed": 1,
+   "angle": 114.3,
+   "scale": 0.838,
+   "far": true,
+   "alt": null
+  },
+  {
+   "name": "footFar",
+   "sprite": "footFar",
+   "parent": "shinFar",
+   "at": [
+    0.53,
+    0.953
+   ],
+   "pivot": [
+    0.723,
+    0.104
+   ],
+   "order": -4,
+   "move": "Walk",
+   "amp": 6,
+   "phase": 0.5,
+   "speed": 1,
+   "angle": -60.3,
+   "scale": 0.694,
+   "far": true,
+   "alt": null
+  },
+  {
+   "name": "thigh",
+   "sprite": "thigh",
+   "parent": "body",
+   "at": [
+    1.304,
+    0.825
+   ],
+   "pivot": [
+    0.45,
+    0.17
+   ],
+   "order": 5,
+   "move": "Walk",
+   "amp": 14,
+   "phase": 0.5,
+   "speed": 1,
+   "angle": -32.5,
+   "scale": 1.029,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "shin",
+   "sprite": "shin",
+   "parent": "thigh",
+   "at": [
+    0.6,
+    0.85
+   ],
+   "pivot": [
+    0.456,
+    0.131
+   ],
+   "order": 1,
+   "move": "Walk",
+   "amp": 8,
+   "phase": 0.75,
+   "speed": 1,
+   "angle": 99.9,
+   "scale": 0.838,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "foot",
+   "sprite": "foot",
+   "parent": "shin",
+   "at": [
+    0.53,
+    0.953
+   ],
+   "pivot": [
+    0.746,
+    0.099
+   ],
+   "order": 0,
+   "move": "Walk",
+   "amp": 6,
+   "phase": 0,
+   "speed": 1,
+   "angle": -67.7,
+   "scale": 0.717,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "arm",
+   "sprite": "uparm",
+   "parent": "body",
+   "at": [
+    0.323,
+    0.395
+   ],
+   "pivot": [
+    0.475,
+    0.22
+   ],
+   "order": 6,
+   "move": "Walk",
+   "amp": 14,
+   "phase": 0,
+   "speed": 1,
+   "angle": -10.5,
+   "scale": 0.992,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "fore",
+   "sprite": "forearm",
+   "parent": "arm",
+   "at": [
+    0.63,
+    0.912
+   ],
+   "pivot": [
+    0.54,
+    0.12
+   ],
+   "order": 5,
+   "move": "Walk",
+   "amp": 8,
+   "phase": 0.25,
+   "speed": 1,
+   "angle": 4.0,
+   "scale": 1.137,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "head",
+   "sprite": "head",
+   "parent": "body",
+   "at": [
+    0.12,
+    0.26
+   ],
+   "pivot": [
+    0.76,
+    0.92
+   ],
+   "order": 7,
+   "move": "Sway",
+   "amp": 3,
+   "phase": 0,
+   "speed": 1,
+   "angle": -12,
+   "scale": 1.0,
+   "far": false,
+   "alt": "head2"
+  },
+  {
+   "name": "saddle",
+   "sprite": "saddle",
+   "parent": "body",
+   "at": [
+    0.747,
+    0.376
+   ],
+   "pivot": [
+    0.5,
+    0.5
+   ],
+   "order": 8,
+   "move": "None",
+   "amp": 0,
+   "phase": 0,
+   "speed": 1,
+   "angle": -8,
+   "scale": 1.0,
+   "far": false,
+   "alt": null
+  },
+  {
+   "name": "gunner1",
+   "sprite": "gunner",
+   "parent": "saddle",
+   "at": [
+    0.32,
+    0.089
+   ],
+   "pivot": [
+    0.773,
+    0.95
+   ],
+   "order": 9,
+   "move": "Recoil",
+   "amp": 6,
+   "phase": 0,
+   "speed": 1,
+   "angle": 2,
+   "scale": 1.0,
+   "far": false,
+   "alt": "gunner2"
+  },
+  {
+   "name": "gunner2",
+   "sprite": "gunner",
+   "parent": "saddle",
+   "at": [
+    0.839,
+    0.077
+   ],
+   "pivot": [
+    0.773,
+    0.95
+   ],
+   "order": 9,
+   "move": "Recoil",
+   "amp": 6,
+   "phase": 0.5,
+   "speed": 1,
+   "angle": 2,
+   "scale": 1.0,
+   "far": false,
+   "alt": "gunner2"
+  }
+ ]
+}

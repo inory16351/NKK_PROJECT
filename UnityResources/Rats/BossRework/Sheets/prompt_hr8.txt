@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hr8.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached RAPTOR TRAINER (row 2 of the attached sheet: the assembled man on the left and his side-view torso on the right) exactly: same face, short brown swept hair, stubble, same skin tone, same flat Untitled Goose Game style, NO outlines, no gradients, SAME SCALE as the attached torso.
+- Draw 3 separate HEAD parts in a row, each a separate island with clear magenta space around it, strict SIDE VIEW facing LEFT:
+  1) NORMAL head (determined squint), 2) ANGRY shouting head (mouth open), 3) SCARED head (screaming, sweat drops).
+- IMPORTANT NECK RULE: each head ends in a SHORT, NARROW NECK stump cut flat and horizontal at the bottom. The neck cut must be NO WIDER than the neck opening of the attached torso's collar (about one third of the head width). The jaw and the back of the head curve inward to that narrow neck; nothing bulges below the jaw, no wide triangular neck, no shoulders.

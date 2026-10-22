@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hr9.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached VERTICAL MOUSE caveman rat-man exactly (same grey-brown fur, pink hands, same flat Untitled Goose Game style, NO outlines, no gradients, same scale as his arm in the attached picture).
+- Draw ONE part, centered: his OTHER ARM (the far arm) hanging straight down, strict side view (he faces LEFT): a furry grey-brown rat arm with a rounded fur shoulder cap at the top (no cut section), the pink rat HAND at the bottom EMPTY and relaxed, fingers slightly curled. NO club, NO weapon, nothing in the hand.

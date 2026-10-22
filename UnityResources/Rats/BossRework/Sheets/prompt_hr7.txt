@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hr7.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached RAPTOR TRAINER (row 2: the assembled man + his torso) exactly: same grey henley sleeve rolled up, same skin tone, same flat Untitled Goose Game style, NO outlines, no gradients, SAME SCALE as the attached torso.
+- Draw 2 separate ARM parts side by side, big, each a separate island with clear magenta space around it, for a 2D cut-out rig (the man faces LEFT, strict side view):
+  1) NEAR ARM (his left arm, toward the viewer): hanging straight down, rounded grey sleeve shoulder cap at the top (no cut section), rolled-up sleeve, muscular forearm, the HAND RELAXED and slightly open seen from the side, thumb toward the front (LEFT), fingers loosely curled downward.
+  2) FAR ARM (his right arm, the other side): the same arm but the OTHER hand: hanging straight down, rounded sleeve cap at the top, the hand seen from the back side, slightly open, thumb toward the front (LEFT), a little thinner.

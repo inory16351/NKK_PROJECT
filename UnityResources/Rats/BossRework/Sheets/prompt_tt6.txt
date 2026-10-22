@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tt6.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- This is a game asset sheet of cartoon PUPPET LIMB pieces (like a wooden/clay puppet kit), copied from the attached cartoon monster (a funny crouching titan puppet for a kids' game). Flat peach puppet color, flat style, NO outlines.
+- Draw 8 separate limb pieces, each at EXACTLY the same size, shape and TILT as the matching limb in the attached picture (do NOT straighten them). The far-side limbs are a darker peach: keep them darker. Joint ends are ROUND like puppet joints. Every piece is a separate island with clear magenta space around it; nothing touches.
+- Layout, 2 rows of 4:
+  Row 1 (arms): 1) near upper arm (lighter), 2) near forearm ending in a FIST resting on the ground, 3) far upper arm (darker), 4) far forearm with fist (darker).
+  Row 2 (legs): 5) near thigh (lighter), round top, 6) near lower leg with the bare FOOT, foot pointing LEFT, as tilted in the picture, 7) far thigh (darker), 8) far lower leg with foot (darker).

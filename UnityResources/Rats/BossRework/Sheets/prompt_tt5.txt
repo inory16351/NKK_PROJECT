@@ -1,0 +1,8 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tt5.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- The FIRST attached image is the giant wearing briefs. The SECOND attached image is a parts sheet of another character, shown ONLY as an example of how a crouched body is split into an UPPER BODY piece ("body") and a HIP piece ("butt") for a 2D cut-out rig.
+- Draw exactly TWO parts of the FIRST image's giant, at EXACTLY the same scale, shape and colors as in the first image (side view, facing LEFT, flat style, NO outlines), side by side with clear magenta space between them:
+  1) UPPER BODY: the giant's torso from the shoulders and chest (left) back to the waist just in front of the briefs (right): the sloping back, the chest, the belly underneath. NO head (the neck is cut flat at the upper left), NO arms (a smooth rounded shoulder where the arm is attached on top), NO saddle, NO straps. The right (waist) end is cut with a ROUNDED edge so the hip piece can overlap it.
+  2) HIPS: the buttocks wearing the DARK GREY-BROWN BRIEFS exactly as in the first image, from the briefs waistband at the front to the rounded rump at the back and the bottom of the briefs underneath; a little skin of the upper thighs where the legs will be attached underneath. NO legs, NO saddle, NO straps.

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>차력거인 리그 미리보기</title>
+<style>
+  :root { --bg:#f4f2ee; --panel:#fff; --ink:#222; --sub:#777; --line:#ddd; --accent:#3b6fd8; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:13px/1.4 "Malgun Gothic", sans-serif; background:var(--bg); color:var(--ink); display:flex; height:100vh; }
+  #stage { flex:1; position:relative; min-width:0; }
+  canvas { width:100%; height:100%; display:block; background:#4a7a48; }
+  #side { width:400px; background:var(--panel); border-left:1px solid var(--line); overflow:auto; padding:10px; }
+  h2 { font-size:14px; margin:12px 0 6px; }
+  .row { display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin:4px 0; }
+  button { padding:4px 9px; border:1px solid var(--line); background:#fafafa; border-radius:4px; cursor:pointer; }
+  button.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  table { border-collapse:collapse; width:100%; font-size:12px; }
+  td, th { border-bottom:1px solid #eee; padding:2px 3px; text-align:left; }
+  tr.sel { background:#e8efff; }
+  tr { cursor:pointer; }
+  input[type=number] { width:62px; }
+  #ed label { display:inline-flex; gap:3px; align-items:center; margin-right:6px; }
+  textarea { width:100%; height:180px; font:11px Consolas, monospace; }
+  .hint { color:var(--sub); font-size:12px; }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="cv"></canvas></div>
+<div id="side">
+  <div class="row">
+    <button data-mode="idle">대기</button><button data-mode="walk" class="on">걸음</button><button data-mode="attack">공격</button>
+    <button id="pause">멈춤</button>
+  </div>
+  <div class="row">걸음 빠르기 <input id="wspd" type="range" min="0.5" max="8" step="0.1" value="3"> <span id="wspdv"></span></div>
+  <div class="row">걸음 위상 <input id="wph" type="range" min="0" max="6.283" step="0.01" value="0" disabled> <span class="hint">(멈춤일 때)</span></div>
+  <div class="row"><label><input id="ov" type="checkbox"> 통 그림 겹치기</label> 투명도 <input id="ova" type="range" min="0" max="1" step="0.05" value="0.45"></div>
+  <div class="row"><label><input id="pv" type="checkbox"> 관절점 보기</label> <label><input id="side2" type="checkbox"> 통 그림 옆에 나란히</label></div>
+  <div class="row">확대 <input id="zoom" type="range" min="0.2" max="1.5" step="0.01" value="0.3"></div>
+
+  <h2>파츠 (눌러서 고치기)</h2>
+  <table id="tbl"><thead><tr><th>이름</th><th>부모</th><th>순서</th><th>각도</th><th>배율</th></tr></thead><tbody></tbody></table>
+  <div id="ed"></div>
+
+  <h2>유니티 값 (BossPartArtBuilder.cs 줄)</h2>
+  <div class="row"><button id="copy">복사</button><span class="hint" id="copied"></span></div>
+  <textarea id="out" readonly></textarea>
+</div>
+<script>
+// 유니티 BossPartRig 와 같은 계산 (y 위 +, 각도 반시계 +, 리그 좌표 = 파츠 픽셀, 원점 = 발끝 바닥)
+// 그림 = parts/ (후보 파츠, 확정되면 Parts/boss_cartgiant 로) · 값 = giant_parts.json (Tools/giant_rig_v3.py 출력, 없으면 아래 기본값)
+// 다른 보스: ?code=boss_sharkcat → 그림 ../Parts/<code>/ · 값 <code>.json · 통 그림 full_<code>.png
+const CODE = new URLSearchParams(location.search).get('code') || 'boss_cartgiant';
+let DIR = CODE === 'boss_cartgiant' ? 'parts/' : '../Parts/' + CODE + '/';
+let FULL = CODE === 'boss_cartgiant' ? 'full_keyed.png' : 'full_' + CODE + '.png';   // 통 그림 자홍 뺀 것
+let FULL_AT = { x: 688.5, y: 990 };   // 통 그림에서 리그 원점(몸통 관절 x · 바닥 y) 자리
+const FAR = 'brightness(0.77)';
+const RECOIL_RATE = 12, RECOIL_TILT = 4, IDLE_WALK = 0.15;
+// P(name, sprite, parent, ax, ay, px, py, order, move, amp, phase, speed, angle, scale, far, alt)
+let PARTS = [
+  ['body', 'body', null, 0, 1.784, 0.5, 0.5, 3, 'Bob', 4, 0, 2, 6, 1],
+  ['armFar', 'uparm', 'body', 0.055, 0.616, 0.475, 0.22, -2, 'Walk', 14, 0.5, 1, -20.1, 0.997, true],
+  ['foreFar', 'forearm', 'armFar', 0.63, 0.912, 0.54, 0.12, -3, 'Walk', 8, 0.75, 1, 6.5, 0.797, true],
+  ['butt', 'butt', 'body', 1.045, 0.456, 0.1, 0.4, 4, 'None', 0, 0, 1, -6, 1],
+  ['thighFar', 'thigh', 'butt', -0.155, 1.003, 0.45, 0.17, -2, 'Walk', 14, 0, 1, -16.2, 0.782, true],
+  ['shinFar', 'shin', 'thighFar', 0.6, 0.85, 0.28, 0.12, -3, 'Walk', 8, 0.25, 1, 76.1, 1.514, true],
+  ['footFar', 'foot', 'shinFar', 0.67, 0.91, 0.66, 0.21, -4, 'Walk', 6, 0.5, 1, -52.1, 0.912, true],
+  ['thigh', 'thigh', 'butt', 0.536, 0.934, 0.45, 0.17, 2, 'Walk', 14, 0.5, 1, -25.4, 0.988],
+  ['shin', 'shin', 'thigh', 0.6, 0.85, 0.28, 0.12, 1, 'Walk', 8, 0.75, 1, 90.2, 1.331],
+  ['foot', 'foot', 'shin', 0.67, 0.91, 0.66, 0.21, 0, 'Walk', 6, 0, 1, -55.9, 0.805],
+  ['arm', 'uparm', 'body', 0.325, 0.367, 0.475, 0.22, 6, 'Walk', 14, 0, 1, -10.3, 1.151],
+  ['fore', 'forearm', 'arm', 0.63, 0.912, 0.54, 0.12, 5, 'Walk', 8, 0.25, 1, 5.2, 0.939],
+  ['head', 'head', 'body', 0.12, 0.26, 0.76, 0.92, 7, 'Sway', 3, 0, 1, -12, 1, false, 'head2'],
+  ['saddle', 'saddle', 'body', 0.747, 0.376, 0.5, 0.5, 8, 'None', 0, 0, 1, -8, 1],
+  ['gunner1', 'gunner', 'saddle', 0.32, 0.089, 0.773, 0.95, 9, 'Recoil', 6, 0, 1, 2, 1, false, 'gunner2'],
+  ['gunner2', 'gunner', 'saddle', 0.839, 0.077, 0.773, 0.95, 9, 'Recoil', 6, 0.5, 1, 2, 1, false, 'gunner2'],
+].map(a => ({ name:a[0], sprite:a[1], parent:a[2], at:[a[3], a[4]], pivot:[a[5], a[6]], order:a[7], move:a[8], amp:a[9], phase:a[10], speed:a[11], angle:a[12], scale:a[13], far:!!a[14], alt:a[15] || null }));
+
+const img = {};
+function load(src) { return new Promise(r => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = src + '?v=' + Date.now(); }); }
+async function loadAll() {
+  try { const j = await (await fetch((CODE === 'boss_cartgiant' ? 'giant_parts.json' : CODE + '.json') + '?v=' + Date.now())).json(); PARTS = j.parts; FULL_AT = j.full_at; if (j.dir) DIR = j.dir; if (j.full) FULL = j.full; } catch (e) {}
+  const names = new Set(); PARTS.forEach(p => { names.add(p.sprite); if (p.alt) names.add(p.alt); });
+  for (const n of names) img[n] = await load(DIR + n + '.png');
+  img.__full = await load(FULL);
+}
+
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+let mode = 'walk', stopT = -99, paused = false, walk = 0, t0 = performance.now(), tPause = 0, sel = null;
+const $ = id => document.getElementById(id);
+
+function frame(now) {
+  const dpr = devicePixelRatio || 1, W = cv.clientWidth, H = cv.clientHeight;
+  if (cv.width !== W * dpr || cv.height !== H * dpr) { cv.width = W * dpr; cv.height = H * dpr; }
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height);
+  const z = +$('zoom').value * dpr, side = $('side2').checked;
+  const t = paused ? tPause : (now - t0) / 1000;
+  if (!paused) walk = t * +$('wspd').value; else walk = +$('wph').value;
+  const ox = cv.width * (side ? 0.3 : 0.5), oy = cv.height * 0.88;
+  // 바닥 선
+  ctx.fillStyle = 'rgba(0,0,0,.15)'; ctx.fillRect(0, oy, cv.width, 2 * dpr);
+  const base = new DOMMatrix().translate(ox, oy).scale(z, z);
+  if (side && img.__full) {
+    const m = new DOMMatrix().translate(cv.width * 0.72, oy).scale(z, z);
+    ctx.setTransform(m.scale(FULL_AT.s || 1)); ctx.drawImage(img.__full, -FULL_AT.x, -FULL_AT.y);
+  }
+  // 관절 트리
+  const world = {}, list = [];
+  for (const p of PARTS) {
+    const sp = img[p.sprite]; if (!sp) continue;
+    const par = p.parent ? world[p.parent] : null;
+    let a = p.angle, dx = 0, dy = 0, use = p.sprite;
+    const ph = p.phase * Math.PI * 2;
+    switch (p.move) {
+      case 'Walk': a += p.amp * Math.sin(walk * p.speed + ph) * (mode === 'walk' ? 1 : IDLE_WALK); break;
+      case 'Bob': dy = p.amp * Math.sin(t * 3 * p.speed + ph); break;
+      case 'Sway': a += p.amp * Math.sin(t * 3 * p.speed + ph); break;
+      case 'Wiggle': {   // 공격 중엔 총 반동 박자로 씰룩 · 걷다가 멈춘 순간엔 한 번 출렁 (1/speed 초, 점점 작아짐) · 그 밖엔 가만히
+        const e = t - stopT, D = 1 / p.speed;
+        if (mode === 'attack' && !paused) a += p.amp * (1 - (((t * RECOIL_RATE + p.phase) % 1) + 1) % 1);   // 총 반동과 같은 박자: 발사마다 툭 튀었다 돌아옴
+        else if (mode !== 'walk' && e >= 0 && e < D) a += p.amp * Math.sin(Math.PI * 2 * e / D) * (1 - e / D);
+        break;
+      }
+      case 'Recoil':
+        if (mode === 'attack' && !paused) {
+          const f = ((t * RECOIL_RATE * p.speed + p.phase) % 1 + 1) % 1;
+          if (f < 0.5 && p.alt) use = p.alt;
+          dx = p.amp * (1 - f); a += (Math.random() * 2 - 1) * RECOIL_TILT * (1 - f);
+        } else dy = p.amp / 3 * Math.sin(t * 3 * p.speed + ph);
+        break;
+    }
+    if (mode === 'attack' && p.alt && p.move !== 'Recoil') use = p.alt;
+    if (p.pop && p.alt) use = (t % (p.pop * 2)) < p.pop ? p.alt : p.sprite;   // 팝 캣: 늘 번갈아 뻐끔 (Boss.popHeadInterval)
+    let pos;
+    if (par) { const ps = img[par.p.sprite]; pos = [(p.at[0] - par.p.pivot[0]) * ps.width, (par.p.pivot[1] - p.at[1]) * ps.height]; }
+    else pos = [p.at[0] * sp.width, p.at[1] * sp.height];
+    pos = [pos[0] + dx, pos[1] + dy];
+    // 캔버스는 y 아래 + → y 뒤집고 각도 반대
+    const m = (par ? par.m : base).translate(pos[0], -pos[1]).rotate(-a).scale(p.scale, p.scale);
+    world[p.name] = { m, p };
+    list.push({ p, m, im: img[use] || sp, pv: use === p.alt && p.alt_pivot ? p.alt_pivot : p.pivot });   // 두 번째 그림 관절 (크기가 다를 때)
+  }
+  list.sort((a, b) => a.p.order - b.p.order);
+  for (const { p, m, im, pv } of list) {
+    ctx.setTransform(m);
+    ctx.filter = p.far ? FAR : 'none';
+    ctx.drawImage(im, -pv[0] * im.width, -pv[1] * im.height);
+    ctx.filter = 'none';
+    if (sel === p.name) { ctx.strokeStyle = '#ff0'; ctx.lineWidth = 3 / z; ctx.strokeRect(-pv[0] * im.width, -pv[1] * im.height, im.width, im.height); }
+  }
+  if ($('ov').checked && img.__full) {
+    ctx.setTransform(base); ctx.globalAlpha = +$('ova').value;
+    ctx.setTransform(base.scale(FULL_AT.s || 1)); ctx.drawImage(img.__full, -FULL_AT.x, -FULL_AT.y); ctx.globalAlpha = 1;
+  }
+  if ($('pv').checked) for (const { p, m } of list) {
+    ctx.setTransform(m); ctx.fillStyle = sel === p.name ? '#ff0' : '#f00';
+    ctx.beginPath(); ctx.arc(0, 0, 7 / z / p.scale, 0, 7); ctx.fill();
+  }
+  requestAnimationFrame(frame);
+}
+
+// 표 · 편집 · C# 내보내기
+const f3 = v => +(+v).toFixed(3);
+function fv(v) { return String(f3(v)).replace(/^(-?\d+)$/, '$1') + (Number.isInteger(f3(v)) ? '' : 'f'); }
+function csLine(p) {
+  let s = `${CODE === 'boss_cartgiant' ? 'giant' : CODE.replace('boss_', '').replace('cat', '')}.parts.Add(P("${p.name}", S("${CODE}/${p.sprite}"), ${p.parent ? '"' + p.parent + '"' : 'null'}, ${fv(p.at[0])}, ${fv(p.at[1])}, ${fv(p.pivot[0])}, ${fv(p.pivot[1])}, ${p.order}, M.${p.move}, ${fv(p.amp)}, ${fv(p.phase)}, ${fv(p.speed)}, ${fv(p.angle)}`;
+  if (p.scale !== 1) s += `, ${fv(p.scale)}`;
+  if (p.far) s += (p.scale !== 1 ? '' : ', 1') + ', far: true';
+  if (p.alt) s += `, alt: S("${CODE}/${p.alt}")`;
+  return s + '));';
+}
+function refresh() {
+  const tb = $('tbl').querySelector('tbody'); tb.innerHTML = '';
+  for (const p of PARTS) {
+    const tr = document.createElement('tr'); if (p.name === sel) tr.className = 'sel';
+    tr.innerHTML = `<td>${p.name}${p.far ? ' (먼)' : ''}</td><td>${p.parent || '-'}</td><td>${p.order}</td><td>${f3(p.angle)}</td><td>${f3(p.scale)}</td>`;
+    tr.onclick = () => { sel = sel === p.name ? null : p.name; refresh(); };
+    tb.appendChild(tr);
+  }
+  const ed = $('ed'); ed.innerHTML = '';
+  const p = PARTS.find(q => q.name === sel);
+  if (p) {
+    const fields = [['at x', 'at', 0, 0.005], ['at y', 'at', 1, 0.005], ['pivot x', 'pivot', 0, 0.005], ['pivot y', 'pivot', 1, 0.005], ['각도', 'angle', null, 0.5], ['배율', 'scale', null, 0.01], ['순서', 'order', null, 1], ['흔들림', 'amp', null, 1], ['위상', 'phase', null, 0.05]];
+    ed.innerHTML = `<div class="hint">${p.name} — 화살표키·휠로 미세 조정</div>`;
+    for (const [lab, k, i, st] of fields) {
+      const l = document.createElement('label'); l.textContent = lab;
+      const inp = document.createElement('input'); inp.type = 'number'; inp.step = st;
+      inp.value = i === null ? p[k] : p[k][i];
+      inp.oninput = () => { const v = +inp.value; if (i === null) p[k] = v; else p[k][i] = v; $('out').value = PARTS.map(csLine).join('\n'); refreshTableOnly(); };
+      l.appendChild(inp); ed.appendChild(l);
+    }
+  }
+  $('out').value = PARTS.map(csLine).join('\n');
+}
+function refreshTableOnly() {
+  const rows = $('tbl').querySelectorAll('tbody tr');
+  PARTS.forEach((p, i) => { rows[i].children[2].textContent = p.order; rows[i].children[3].textContent = f3(p.angle); rows[i].children[4].textContent = f3(p.scale); });
+}
+document.querySelectorAll('[data-mode]').forEach(b => b.onclick = () => {
+  if (mode === 'walk' && b.dataset.mode !== 'walk') stopT = paused ? tPause : (performance.now() - t0) / 1000;
+  mode = b.dataset.mode; document.querySelectorAll('[data-mode]').forEach(x => x.classList.toggle('on', x === b));
+});
+$('pause').onclick = () => {
+  paused = !paused; $('pause').classList.toggle('on', paused); $('wph').disabled = !paused;
+  if (paused) { tPause = (performance.now() - t0) / 1000; $('wph').value = (walk % 6.283 + 6.283) % 6.283; } else t0 = performance.now() - tPause * 1000;
+};
+$('wspd').oninput = () => $('wspdv').textContent = $('wspd').value; $('wspdv').textContent = $('wspd').value;
+$('copy').onclick = async () => { try { await navigator.clipboard.writeText($('out').value); $('copied').textContent = '복사됨'; } catch { $('out').select(); document.execCommand('copy'); $('copied').textContent = '복사됨'; } };
+loadAll().then(() => { refresh(); requestAnimationFrame(frame); });
+</script>
+</body>
+</html>

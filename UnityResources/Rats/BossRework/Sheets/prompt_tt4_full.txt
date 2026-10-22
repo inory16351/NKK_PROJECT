@@ -1,0 +1,4 @@
+Use your built-in image generation tool to EDIT the attached image and save the result as PNG to: tt4_full.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+- Keep the attached picture EXACTLY the same: same giant, same crouching pose, same head, arms, legs, feet, same saddle, straps and turret cats, same colors, same flat style with NO outlines, same magenta (#FF00FF) background, same size 1536x1024 and same position.
+- The ONLY change: the giant now wears simple plain DARK GREY-BROWN tight BRIEFS (underwear) on the hips: they cover the whole buttocks and the crotch area between the thighs, with a waistband around the hips just below the saddle straps. No logo, no pattern, no text. Flat color, one slightly darker flat tone for the waistband.

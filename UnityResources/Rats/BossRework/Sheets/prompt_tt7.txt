@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tt7.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- A kids' game asset: four stuffed PLUSH TOY limb pieces made of smooth peach-colored felt fabric, for a cartoon plush giant toy. Copy the shapes, sizes and layout of the four limb pieces in row 2 of the attached sheet (upper arm, lower arm ending in a mitten-like fist, thigh, lower leg ending in a foot with toes), same flat peach color, the same red stitch-like line marks, flat style, NO outlines. Separate islands with magenta space around them.
+- The ends of every piece are plainly rounded in the SAME peach color: NO darker circles, NO discs, NO caps at the ends.

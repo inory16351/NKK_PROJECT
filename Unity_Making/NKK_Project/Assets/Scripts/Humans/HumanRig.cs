@@ -26,7 +26,7 @@ namespace NKK.Humans
         public void Build(HumanArtLibrary.Entry e)
         {
             art = e; group = GetComponent<SortingGroup>();
-            torso.sprite = e.torso; head.sprite = e.head; armFar.sprite = armNear.sprite = e.arm; legFar.sprite = legNear.sprite = e.leg;
+            torso.sprite = e.torso; head.sprite = e.head; armNear.sprite = e.arm; armFar.sprite = e.arm2 ? e.arm2 : e.arm; legFar.sprite = legNear.sprite = e.leg;
             armFar.color = legFar.color = e.front ? Color.white : farColor;
             float hsc = e.headScale > 0 ? e.headScale : 1;
             float tw = e.torso.rect.width, th = e.torso.rect.height, lh = e.leg.rect.height, hh = e.head.rect.height * hsc;

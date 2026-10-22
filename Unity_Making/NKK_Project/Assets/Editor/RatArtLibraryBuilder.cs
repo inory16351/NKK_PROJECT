@@ -35,7 +35,7 @@ public static class RatArtLibraryBuilder
             lib.entries.Add(new RatArtLibrary.Entry
             {
                 codeId = m.code_id, head = S(d + "head.png"), torso = S(d + "torso.png"), tail = S(d + "tail.png"),
-                front = S(d + "front.png"), back = S(d + "back.png"),
+                front = S(d + "front.png"), back = S(d + "back.png"), head2 = S(d + "head2.png"),
                 neck = V(m.neck), tailAnchor = V(m.tail), shoulder = V(m.shoulder), hip = V(m.hip),
                 legFront = m.leg_front, legBack = m.leg_back,
             });
@@ -97,7 +97,7 @@ public static class HumanArtLibraryBuilder
             lib.entries.Add(new NKK.Humans.HumanArtLibrary.Entry
             {
                 codeId = m.code_id, head = S(d + "head.png"), scared = S(d + "scared.png"), angry = S(d + "angry.png"), torso = S(d + "torso.png"),
-                arm = S(d + "arm.png"), leg = S(d + "leg.png"), neck = V(m.neck), shoulder = V(m.shoulder), hip = V(m.hip), front = m.front == 1, headScale = m.head_scale > 0 ? m.head_scale : 1,
+                arm = S(d + "arm.png"), arm2 = S(d + "arm2.png"), leg = S(d + "leg.png"), neck = V(m.neck), shoulder = V(m.shoulder), hip = V(m.hip), front = m.front == 1, headScale = m.head_scale > 0 ? m.head_scale : 1,
             });
         }
         EditorUtility.SetDirty(lib);

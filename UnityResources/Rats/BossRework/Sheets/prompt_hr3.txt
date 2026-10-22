@@ -1,0 +1,17 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hr3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+This is a cut-out PARTS SHEET for a 2D game rig (parts are assembled by code).
+- Exact layout: 1 rows x 6 columns. Each ROW is one BOSS. Columns: 1) NORMAL HEAD side view facing LEFT with a short narrow neck stump cut flat (the nape curves inward, nothing bulges behind); 2) ANGRY SHOUTING head; 3) SCARED head (screaming, sweat drops); 4) TORSO side view, no head/arms/legs; 5) ONE ARM hanging down (rounded sleeve shoulder cap, no cut section); 6) ONE LEG standing, top cut flat.
+- Copy the attached references exactly for style and part layout (flat paper-doll human boss parts). Strict SIDE VIEW, the character FACES LEFT.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+Row 1: "SAFETY-CALL CAT" (parody of the Korean/Japanese 'site cat' meme that points and shouts "Joassu!! / Yoshi!"): a cartoon CAT that STANDS UPRIGHT ON TWO LEGS like a person, drawn with this rig's human part layout (side view facing LEFT).
+- Coat: GREY on the top of the head, ears, back, upper arms, outer legs and tail; WHITE face/muzzle, cheeks, chest, belly, paws. Round YELLOW eyes with small black pupils, a tiny pink nose, whiskers, wearing a plain WHITE construction safety HARD HAT (no logo).
+- Heads: 1) NORMAL = proud confident open smile with a little pink tongue showing, totally sure of itself. 2) the 'angry' slot = SHOUTING "Joassu!!" — mouth wide open, eyes intense, full confidence. 3) SCARED = shocked, eyes tiny, sweat drops.
+- Torso = the cat's upright grey-and-white body (grey back, white belly) with the GREY TAIL with white tip curling out from the lower back, no clothes.
+- Arm = grey upper arm with a white paw POINTING FORWARD with one extended finger (the safety-check pointing gesture), the arm hanging down from a rounded shoulder.
+- Leg = grey-and-white cat leg standing, white foot paw.

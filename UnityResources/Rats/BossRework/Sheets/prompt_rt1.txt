@@ -1,0 +1,13 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rt1.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+This is a cut-out PARTS SHEET for a 2D game RAT rig, exactly the same part set, view and proportions as the attached reference rat sheet.
+- Exact layout: 2 rows x 5 columns. All side view facing LEFT.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+Character: "CREWMATE RAT" (a space-crew game parody, the secret impostor): a rat wearing a puffy RED one-piece spacesuit shaped like the famous bean-shaped crewmates, with a wide pale-blue VISOR, a small backpack, the rat's two round ears poking out on top of the suit, a pink rat tail.
+Row 1 (normal rat parts, same as reference columns): 1) HEAD = the red suit helmet with the wide visor (no face visible, just the glossy-flat light-blue visor shape) and two round rat ears on top, neck cut flat. 2) TORSO = red suit body with the little backpack, horizontal, head end LEFT. 3) TAIL = pink rat tail, base on the left. 4) FRONT LEG = short red suit leg with a pink rat paw. 5) BACK LEG = short red suit leg with a pink rat foot.
+Row 2 (monster reveal parts): 1) the HEAD LOWER HALF only: the helmet cut horizontally through the middle of the visor, showing inside a huge dark wet mouth with rows of sharp white teeth and a long pink tongue. 2) the HEAD TOP LID only: the top half of the helmet with the upper visor and the ears, cut flat at the bottom (it flips open like a lid). 3) a GACHA PORTRAIT of the crewmate rat in FRONT view, cute innocent pose, waving. 4) a long ALIEN TONGUE-TENTACLE coming out of the mouth, pink-red, curling, with a toothy tip, base on the left. 5) a little red 'sus' bean-shaped crewmate rat silhouette sticker (front view, simple).

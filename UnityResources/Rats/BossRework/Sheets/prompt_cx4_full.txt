@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cx4_full.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawing. No text, no letters, no numbers, no labels, no frames, no ground shadow.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached game art (cat bosses parts sheet) exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette.
+- ONE character, full body, strict SIDE VIEW (3/4 is fine for the face), FACING LEFT, centered, big.
+- Character: "MER-CAT", a parody of the famous Singapore Merlion statue (silhouette and idea only, no landmarks, no text, no logos): the HEAD is an orange tabby CAT head (cat face, cat ears, whiskers) with a fluffy lion-like MANE ruff of curly fur around the head and neck, the BODY is a big silvery-white FISH body with flat scale pattern, sitting UPRIGHT like the statue (chest up, the body curving down and back), the fish TAIL curling UP behind the back with a big fan-shaped tail fin, one pectoral fin on the side. Mouth slightly open, a big arc of flat light-blue WATER spouting from the mouth toward the left, like the statue.

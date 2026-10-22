@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tt1.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+This is a cut-out PARTS SHEET for a 2D game rig, exactly the same part set and layout as the attached reference sheet (a cook crawling on all fours, used as a mount): row 1 = body (torso, horizontal, head end LEFT), butt (hips with the top of the thighs), thigh, shin with foot; row 2 = upper arm, forearm with hand, head 1, head 2.
+- 2 rows x 4 columns, same proportions and cut lines as the reference.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+Character: "CART GIANT" (a crawling titan parody): a HUGE muscular bare-skinned giant man who walks on all fours. Skin = muscular light tan with darker red muscle-stripe hints at the joints. Long straight dark hair. The BODY must be LONGER and FLATTER on top than the reference: a wide flat back carrying a strapped wooden-and-steel platform saddle (empty, cats will sit on it). The thigh and upper arm parts are thicker. Hands and feet bare and big.
+Head 1 = the giant's head (side view facing LEFT, looking down-forward), long dark hair hanging, blank calm stare, big square jaw. Head 2 = same head straining, teeth gritted, eyes wide.

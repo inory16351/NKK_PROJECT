@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hr2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+This is a cut-out PARTS SHEET for a 2D game rig (parts are assembled by code).
+- Exact layout: 2 rows x 6 columns. Each ROW is one BOSS. Columns: 1) NORMAL HEAD side view facing LEFT with a short narrow neck stump cut flat (the nape curves inward, nothing bulges behind); 2) ANGRY SHOUTING head; 3) SCARED head (screaming, sweat drops); 4) TORSO side view, no head/arms/legs; 5) ONE ARM hanging down (rounded sleeve shoulder cap, no cut section); 6) ONE LEG standing, top cut flat.
+- Copy the attached references exactly for style and part layout (flat paper-doll human boss parts). Strict SIDE VIEW, the character FACES LEFT.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference exactly: Untitled Goose Game flat look, completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no drop shadows; a few flat color areas with one slightly darker flat tone; soft muted palette. These are BOSSES of a funny rat game: big, bulky, imposing, but still cute-funny.
+- Every part is a separate island with clear magenta space around it; nothing touches or crosses into another cell.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no insignia, no text.
+
+Rows:
+Row 1: "EXCAVATOR OPERATOR": a stocky Korean construction site machine operator, sunburned face, thick eyebrows, small mustache, orange hard hat with clear safety goggles pushed up on it. Torso = navy work shirt under a bright orange high-visibility vest with two silver reflective stripes, a white towel hanging around the neck. Arm = navy sleeve with a yellow work glove. Leg = navy work pants with a dusty brown steel-toe work boot.
+Row 2: "DEEP-SEA DIVER": a big old-fashioned deep-sea diver. Heads = a ROUND BRASS diving helmet with bolts and a round glass front port, the man's face (bushy beard) visible behind the glass (normal = calm / angry = shouting, glass fogged / scared = screaming, glass slightly cracked, sweat inside). Torso = brass shoulder breastplate (corselet) over a heavy tan canvas diving suit, with a lead weight belt. Arm = puffy tan canvas sleeve with a thick dark rubber glove. Leg = puffy tan canvas leg with a heavy lead diving boot.

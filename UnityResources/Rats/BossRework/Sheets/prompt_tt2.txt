@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tt2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached full-body giant exactly (same colors, same flat Untitled Goose Game style, NO outlines, no gradients).
+- This is a cut-out PARTS SHEET of THAT SAME giant (the first attached image) for a 2D game rig assembled by code. Draw each part at the SAME SCALE as it appears in the full-body image, side view, facing LEFT, each part a separate island with clear magenta space around it. Nothing touches.
+- Exact layout, 2 rows:
+  Row 1: 1) HEAD with a short neck stump cut flat at the back-bottom (calm blank stare), 2) the same HEAD angry: teeth clenched and bared, eyes glaring, 3) TORSO+HIPS in the crouched pose: one piece from the shoulders to the buttocks, back sloping UP toward the hips at the right, NO head, NO arms, NO legs (round clean joint caps where the arm and thigh attach), WITHOUT the saddle and cats.
+  Row 2: 4) UPPER ARM hanging straight down (round shoulder cap at top, cut round at the elbow), 5) FOREARM hanging straight down ending in a FIST at the bottom (round elbow cap at top), 6) THIGH (round hip cap at top, round knee at bottom), 7) SHIN with the bare FOOT (round knee cap at top, foot pointing LEFT flat on the ground at the bottom), 8) the wooden saddle platform with grey straps and the two helmeted cats with turrets, as ONE piece.

@@ -179,13 +179,15 @@ namespace NKK.Data
         public int boss_id, boss_name_sk; public string boss_name, code_id, rig; public int floor; public string atk_type, atk2_type, color, special1_type, special2_type, skill_type;
         public float skill_cd, skill_first, special_chance, atk2_chance, scale, radius_mul, hp_pow_sec, cheese_mul, move_speed, atk_cd_min, atk_cd_max;
         public bool IsCat => rig == "Cat";
+        public bool IsPart => rig == "Part";      // 전용 파츠 리그 (BossPartArt)
         public Color Color => ColorUtility.TryParseHtmlString(color, out var c) ? c : Color.white;
     }
     [Serializable] public class BossLineRow { public int line_id, boss_id, text_sk; public string situation, text; }
     // 보스 공격별 수치 (보스 테이블 Atk_Type 시트)
     // 밈 기술 (2026-10-19): pattern 이 있으면 Boss.Meme.cs 가 테이블 값만으로 처리 (sprite = Boss.memeSprites 이름, size = 그림 크기, p1·p2 = 패턴별 값)
     [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; public string atk_name, line; public int atk_name_sk, line_sk;
-        public string pattern, sprite, color, popup; public float size, p1, p2; public int popup_sk; }
+        public string pattern, sprite, color, popup; public float size, p1, p2; public int popup_sk;
+        public float p3; public string opt; }      // 보스 개편 (2026-10-22): p3 = 넉백·남는 시간 등 · opt = 키워드 (Boss.Rework.cs)
     // 층 밸런스 (스테이지 테이블 Stage, Tools/gen_stage_table.py 로 생성)
     [Serializable] public class StageRow
     {

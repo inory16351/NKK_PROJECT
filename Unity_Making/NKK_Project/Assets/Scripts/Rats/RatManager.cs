@@ -141,13 +141,13 @@ namespace NKK.Rats
         public Rat RandomOnScreen()
         {
             var l = new List<Rat>();
-            foreach (var o in Rats) if (o.temp <= 0 && !o.UltOn && o.OnScreen()) l.Add(o);
+            foreach (var o in Rats) if (o.temp <= 0 && !o.UltOn && !o.Swallowed && o.OnScreen()) l.Add(o);
             return l.Count > 0 ? l[Random.Range(0, l.Count)] : null;
         }
         public Rat NearestRat(float x, float y, float maxD)
         {
             Rat best = null; float bd = maxD;
-            foreach (var r in Rats) { float d = Vector2.Distance(new Vector2(r.x, r.y), new Vector2(x, y)); if (d < bd) { bd = d; best = r; } }
+            foreach (var r in Rats) { if (r.Swallowed) continue; float d = Vector2.Distance(new Vector2(r.x, r.y), new Vector2(x, y)); if (d < bd) { bd = d; best = r; } }      // 삼켜진 쥐는 빼고
             return best;
         }
 

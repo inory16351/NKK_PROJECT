@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: tt8.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached giant (the first attached image) exactly: same colors, same flat Untitled Goose Game style, NO outlines, no gradients.
+- This is a cut-out PARTS SHEET of THAT SAME giant (the first attached image) for a 2D game rig assembled by code. The second attached image is an older parts sheet of him: copy its layout and part shapes. Draw each part at the SAME SCALE as it appears in the first image, side view, facing LEFT, each part a separate island with clear magenta space around it. Nothing touches.
+- JOINT RULE: every joint end is simply ROUNDED in the SAME skin color as the rest of the part. Do NOT draw any darker circle, disc, cap, cut section or ring at the ends of the parts.
+- Exact layout, 2 rows:
+  Row 1: 1) HEAD with a short neck stump at the back-bottom (calm blank stare), 2) the same HEAD angry: teeth clenched and bared, 3) UPPER BODY: chest and upper back from the shoulders to the waist, back sloping up toward the right, no head, no arms, NO saddle, NO straps; its right (waist) end narrows slightly and is rounded so it can tuck under the underwear, 4) HIPS wearing the DARK GREY-BROWN BRIEFS exactly as in the first image: the piece starts EXACTLY at the front edge / waistband of the briefs (no bare skin in front of the waistband), the rounded rump at the back, and a little skin of the upper thighs at the bottom; no legs, no straps.
+  Row 2: 5) UPPER ARM hanging straight down, 6) FOREARM hanging straight down ending in a FIST, 7) THIGH, 8) SHIN with the bare FOOT pointing LEFT flat on the ground.

@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hr4.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached human boss PARTS SHEET exactly (same characters, same colors, same flat Untitled Goose Game style, NO outlines, no gradients, same scale).
+- Problem to fix: the TORSO parts in the attached sheet are drawn from the FRONT with BOTH sleeves / an arm already painted on them, so when the game adds the separate arm parts the boss gets 3-4 arms. Draw NEW torsos in STRICT SIDE VIEW.
+- Layout: 2 rows (one boss per row), every part a separate island with clear magenta space around it, nothing touches:
+  Column 1 (left half of the row): the WHOLE boss ASSEMBLED, standing, strict SIDE VIEW facing LEFT, built from the attached head, ONE near arm hanging down in front, ONE far arm behind (darker), the near leg and far leg, on the new torso. Reference picture.
+  Column 2 (right half of the row): the NEW TORSO alone: strict SIDE VIEW facing LEFT (we see the chest on the left, the back on the right), from a short neck stump (cut flat at the top) down to the hips/crotch (cut flat at the bottom). ABSOLUTELY NO ARMS, NO SLEEVES sticking out, NO HANDS, NO LEGS, NO FEET painted on it: the shoulder is just a smooth rounded outline where the arm will be attached on top. Same width, colors and clothing details as the old torso, just turned to the side.
+Rows:
+Row 1: VERTICAL MOUSE (row 1 of the sheet): upright muscular rat-man caveman, grey-brown fur, leopard-pattern fur tunic over one shoulder; the long pink RAT TAIL may stay on the torso (growing from the lower back, curling behind). No arm, no hand, no feet on the torso.
+Row 2: RAPTOR TRAINER (row 3 of the sheet): dark brown leather vest over a grey henley shirt, khaki cargo pants waist with a belt. Side view: the vest seen from the side, NO grey sleeves sticking out on either side.

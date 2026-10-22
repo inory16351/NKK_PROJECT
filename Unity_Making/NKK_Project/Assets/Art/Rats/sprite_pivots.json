@@ -1761,6 +1761,26 @@
 "y": 0.944
 },
 {
+"path": "Assets/Art/Rats/Parts/crewmate/head.png",
+"x": 0.532,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/crewmate/tail.png",
+"x": 0.041,
+"y": 0.559
+},
+{
+"path": "Assets/Art/Rats/Parts/crewmate/front.png",
+"x": 0.774,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/Parts/crewmate/back.png",
+"x": 0.677,
+"y": 0.944
+},
+{
 "path": "Assets/Art/Rats/Cats/Parts/cheese/head.png",
 "x": 0.653,
 "y": 0.117
@@ -2239,6 +2259,156 @@
 "path": "Assets/Art/Rats/Cats/Parts/boss_fuhrer/back.png",
 "x": 0.414,
 "y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_popcat/head.png",
+"x": 0.561,
+"y": 0.049
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_popcat/tail.png",
+"x": 0.044,
+"y": 0.216
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_popcat/front.png",
+"x": 0.591,
+"y": 0.944
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_popcat/back.png",
+"x": 0.349,
+"y": 0.944
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_popcat/head2.png",
+"x": 0.577,
+"y": 0.104
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_union2/head.png",
+"x": 0.434,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_union2/tail.png",
+"x": 0.053,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_union2/front.png",
+"x": 0.534,
+"y": 0.946
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_union2/back.png",
+"x": 0.46,
+"y": 0.946
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_union2/head2.png",
+"x": 0.412,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_joassu/head.png",
+"x": 0.491,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_joassu/tail.png",
+"x": 0.054,
+"y": 0.131
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_joassu/front.png",
+"x": 0.527,
+"y": 0.946
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_joassu/back.png",
+"x": 0.518,
+"y": 0.946
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_joassu/head2.png",
+"x": 0.434,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_goerem/head.png",
+"x": 0.506,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_goerem/tail.png",
+"x": 0.054,
+"y": 0.261
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_goerem/front.png",
+"x": 0.501,
+"y": 0.939
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_goerem/back.png",
+"x": 0.429,
+"y": 0.941
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_goerem/head2.png",
+"x": 0.498,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_dictator/head.png",
+"x": 0.488,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_dictator/tail.png",
+"x": 0.054,
+"y": 0.133
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_dictator/front.png",
+"x": 0.541,
+"y": 0.94
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_dictator/back.png",
+"x": 0.38,
+"y": 0.943
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_dictator/head2.png",
+"x": 0.543,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_gremlin/head.png",
+"x": 0.489,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_gremlin/tail.png",
+"x": 0.051,
+"y": 0.151
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_gremlin/front.png",
+"x": 0.672,
+"y": 0.943
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_gremlin/back.png",
+"x": 0.544,
+"y": 0.945
+},
+{
+"path": "Assets/Art/Rats/Cats/Parts/boss_gremlin/head2.png",
+"x": 0.351,
+"y": 0.14
 },
 {
 "path": "Assets/Art/Rats/Humans/Parts/researcher/head.png",
@@ -3023,6 +3193,166 @@
 {
 "path": "Assets/Art/Rats/Humans/Parts/boss_red/leg.png",
 "x": 0.583,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_vmouse/head.png",
+"x": 0.534,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_vmouse/angry.png",
+"x": 0.534,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_vmouse/scared.png",
+"x": 0.533,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_vmouse/arm.png",
+"x": 0.52,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_vmouse/leg.png",
+"x": 0.695,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_vmouse/arm2.png",
+"x": 0.452,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_dino2/head.png",
+"x": 0.529,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_dino2/angry.png",
+"x": 0.529,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_dino2/scared.png",
+"x": 0.529,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_dino2/arm.png",
+"x": 0.46,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_dino2/leg.png",
+"x": 0.498,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_trainer/head.png",
+"x": 0.694,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_trainer/angry.png",
+"x": 0.697,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_trainer/scared.png",
+"x": 0.593,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_trainer/arm.png",
+"x": 0.43,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_trainer/leg.png",
+"x": 0.684,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_trainer/arm2.png",
+"x": 0.548,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_operator/head.png",
+"x": 0.54,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_operator/angry.png",
+"x": 0.539,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_operator/scared.png",
+"x": 0.446,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_operator/arm.png",
+"x": 0.598,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_operator/leg.png",
+"x": 0.652,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_deepdiver/head.png",
+"x": 0.421,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_deepdiver/angry.png",
+"x": 0.418,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_deepdiver/scared.png",
+"x": 0.425,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_deepdiver/arm.png",
+"x": 0.579,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_deepdiver/leg.png",
+"x": 0.642,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_joassu/head.png",
+"x": 0.518,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_joassu/angry.png",
+"x": 0.533,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_joassu/scared.png",
+"x": 0.528,
+"y": 0.03
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_joassu/arm.png",
+"x": 0.583,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/Humans/Parts/boss_joassu/leg.png",
+"x": 0.588,
 "y": 0.96
 },
 {

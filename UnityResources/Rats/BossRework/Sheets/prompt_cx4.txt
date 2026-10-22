@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: cx4.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: copy the attached MER-CAT exactly (same orange tabby cat head with curly mane, same silvery scaled fish body, same light-blue water, same flat Untitled Goose Game style, NO outlines, no gradients).
+- This is a cut-out PARTS SHEET of THAT SAME character for a 2D game rig (side view, facing LEFT), each part at the SAME SCALE as in the attached picture, every part a separate island with clear magenta space around it, nothing touches.
+- Layout, 2 rows:
+  Row 1: 1) HEAD with the whole curly MANE (mouth closed, calm smug face), the mane bottom cut so it can sit over the body top; 2) the SAME HEAD + MANE with the mouth WIDE OPEN shouting (no water), same size and angle; 3) the WATER SPOUT alone: the arc of flat light-blue water from a narrow start (right end, at the mouth) curving down to the left into a splash at the bottom.
+  Row 2: 4) FISH BODY: the upright silvery body from just under the mane (top end rounded, will be hidden by the mane) down to the bottom curve where it rests on the ground, ending at the lower right where the tail starts (that end cut with a ROUND end); 5) TAIL: the rising part of the fish tail from a ROUND joint end at its lower left up to the big fan tail fin at the top; 6) one small silvery PECTORAL FIN.
