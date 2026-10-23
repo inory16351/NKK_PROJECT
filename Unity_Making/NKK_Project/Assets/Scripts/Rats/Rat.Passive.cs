@@ -30,7 +30,7 @@ namespace NKK.Rats
         float C1 => Passive != null ? Passive.cond1_value_01 : 0;
         float C2 => Passive != null ? Passive.cond2_value_01 : 0;
         bool RollChance() => C1 <= 0 || Random.value < C1;
-        bool RollTrick() => Random.value < C1 * TrickChanceMult;      // 묘기 확률 × 재롱 본능
+        bool RollTrick() => !BallForm && Random.value < C1 * TrickChanceMult;      // 묘기 확률 × 재롱 본능 (등급 통일 공 굴리기 중엔 없음)
 
         // ── 상시 배율 (다른 코드가 물어봄) ──
         public float PassiveDamageMult => 1 + buff + (Is(EffectType.Pack_Power) ? packN * PV(1) : 0) + NewRatDamageAdd;

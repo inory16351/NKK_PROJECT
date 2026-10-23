@@ -65,7 +65,7 @@ namespace NKK.Rats
             RefreshGrowth();
         }
 
-        bool CanAct => (ActLv > 0 || ActAlwaysOpen) && NewActReady && Action != null && !act.on && Trick == TrickType.None && temp <= 0 && actCD <= 0 && born >= 1 && OnScreen(-0.02f) && Manager.VisibleActs < Manager.maxVisibleActs;
+        bool CanAct => !BallForm && (ActLv > 0 || ActAlwaysOpen) && NewActReady && Action != null && !act.on && Trick == TrickType.None && temp <= 0 && actCD <= 0 && born >= 1 && OnScreen(-0.02f) && Manager.VisibleActs < Manager.maxVisibleActs;
 
         // 이벤트형 발동 (조건 타입이 같을 때만, 확률 × 해금 레벨 배율)
         public bool ActTrigger(CondType trig, Item it = null)
@@ -94,7 +94,7 @@ namespace NKK.Rats
             if (c1 == CondType.Ally_Count)
             {
                 int n = 0; foreach (var o in Manager.Rats) if (o != this && Vector2.Distance(new Vector2(o.x, o.y), new Vector2(x, y)) < AC1b) n++;
-                if (n < AC1) { actT = 2; return; }
+                if (n < AC1 && !AugmentSpecials.DataToAll(this)) { actT = 2; return; }      // 증강 '5G 생쥐': 동료 수와 상관없이
             }
             if (CanAct) StartAction(); else actT = 2;
         }

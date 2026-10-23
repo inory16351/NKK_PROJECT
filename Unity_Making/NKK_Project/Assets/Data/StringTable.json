@@ -12216,6 +12216,11 @@
    "en": "Jackpot"
   },
   {
+   "string_key": 4681214,
+   "ko": "철거 전문가",
+   "en": "Demolition Expert"
+  },
+  {
    "string_key": 4681301,
    "ko": "치즈 운석우",
    "en": "Cheese Meteor Shower"
@@ -12286,6 +12291,31 @@
    "en": "Promotion Fireworks"
   },
   {
+   "string_key": 4681315,
+   "ko": "강철 턱",
+   "en": "Iron Jaw"
+  },
+  {
+   "string_key": 4681316,
+   "ko": "쥐 탑 쌓기",
+   "en": "Rat Tower"
+  },
+  {
+   "string_key": 4681317,
+   "ko": "치즈 비",
+   "en": "Cheese Rain"
+  },
+  {
+   "string_key": 4681318,
+   "ko": "골든 햄스터 생쥐",
+   "en": "Golden Hamster Rats"
+  },
+  {
+   "string_key": 4681319,
+   "ko": "판다 잠옷 정글리안 생쥐",
+   "en": "Panda Pajama Rats"
+  },
+  {
    "string_key": 4681401,
    "ko": "자동 필살 장치",
    "en": "Auto-Ult Device"
@@ -12344,6 +12374,61 @@
    "string_key": 4681412,
    "ko": "쥐 토네이도",
    "en": "Rat Tornado"
+  },
+  {
+   "string_key": 4681413,
+   "ko": "분신 소환",
+   "en": "Clone Summon"
+  },
+  {
+   "string_key": 4681414,
+   "ko": "운석 소환",
+   "en": "Meteor Strike"
+  },
+  {
+   "string_key": 4681415,
+   "ko": "장난감 기차",
+   "en": "Toy Train"
+  },
+  {
+   "string_key": 4681416,
+   "ko": "스케이터 생쥐",
+   "en": "Skater Rats"
+  },
+  {
+   "string_key": 4681417,
+   "ko": "맘스땃쥐 생쥐",
+   "en": "Burger Rats"
+  },
+  {
+   "string_key": 4681418,
+   "ko": "5G 생쥐",
+   "en": "5G Rats"
+  },
+  {
+   "string_key": 4700001,
+   "ko": "클릭 총공격 때 누를 때마다 {s1%}% 확률로 폭발 (공격력 ×{s3})",
+   "en": "Each rush click has a {s1%}% chance to explode (attack ×{s3})"
+  },
+  {
+   "string_key": 4700002,
+   "ko": "황금 물건을 부수면 치즈 +{s1%}%",
+   "en": "Smashing golden items gives +{s1%}% cheese"
+  },
+  {
+   "string_key": 4700003,
+   "ko": "승급할 때 새 쥐 자리에서 폭죽 폭발 (공격력 ×{s2})",
+   "en": "Promotions set off fireworks at the new rat (attack ×{s2})"
+  },
+  {
+   "string_key": 4700004,
+   "ko": "{s1}초마다 먹구름에서 번개 {s2}개 (공격력 ×{s3})",
+   "en": "Every {s1}s, {s2} bolts fall from the storm cloud (attack ×{s3})"
+  },
+  {
+   "string_key": 4700005,
+   "ko": "칠 때 {s1%}% 확률로 그 쥐 둘레를 치즈 칼날 {s2}개가 {s5}초 돌며 공격 (공격력 ×{s4})",
+   "en": "{s1%}% on hit: {s2} cheese blades spin around the rat for {s5}s (attack ×{s4})"
   },
   {
    "string_key": 4781101,
@@ -12516,6 +12601,31 @@
    "en": "Promotions explode around the new rat (attack ×{s2})"
   },
   {
+   "string_key": 4781315,
+   "ko": "쥐 공격력 +{1%}% · 벽 피해 +{2%}%",
+   "en": "Rat attack +{1%}% · Wall damage +{2%}%"
+  },
+  {
+   "string_key": 4781316,
+   "ko": "장착하면 쥐 {s2}마리씩 쌓아 합친 쥐 탑 {s1}개 (능력치 합산, 판 끝까지)",
+   "en": "Stack {s2} rats into a tower, up to {s1} towers (stats combined, lasts the run)"
+  },
+  {
+   "string_key": 4781317,
+   "ko": "{s1}초마다 {s2}초 동안 치즈 비 (치즈 +{s3%}%)",
+   "en": "Every {s1}s, cheese rains for {s2}s (cheese +{s3%}%)"
+  },
+  {
+   "string_key": 4781318,
+   "ko": "일반 쥐 전원 골든 햄스터 · 늘 공으로 굴러다님 (이후 태어나는 쥐도)",
+   "en": "All Common rats become Golden Hamsters, always rolling"
+  },
+  {
+   "string_key": 4781319,
+   "ko": "일반 쥐 전원 판다 잠옷 정글리안 · 늘 공으로 굴러다님 (이후 태어나는 쥐도)",
+   "en": "All Common rats become Panda Pajama hamsters, always rolling"
+  },
+  {
    "string_key": 4781401,
    "ko": "필살기 자동 사용 · 필살기 게이지 +{2%}%",
    "en": "Ultimates fire automatically · Ult charge +{2%}%"
@@ -12574,6 +12684,36 @@
    "string_key": 4781412,
    "ko": "{s1}초마다 토네이도가 {s2}초 동안 방을 휩씀 (초당 공격력 ×{s4})",
    "en": "Every {s1}s a tornado sweeps the room for {s2}s (attack ×{s4}/s)"
+  },
+  {
+   "string_key": 4781413,
+   "ko": "{s1}초마다 가장 강한 쥐의 거대 분신 {s2}마리가 {s3}초 동안 싸움",
+   "en": "Every {s1}s, {s2} giant clones of your strongest rat fight for {s3}s"
+  },
+  {
+   "string_key": 4781414,
+   "ko": "{s1}초마다 큰 치즈 운석 낙하 (공격력 ×{s3})",
+   "en": "Every {s1}s a giant cheese meteor falls (attack ×{s3})"
+  },
+  {
+   "string_key": 4781415,
+   "ko": "{s1}초마다 기차가 맵을 가로지름 (공격력 ×{s3})",
+   "en": "Every {s1}s a toy train crosses the map (attack ×{s3})"
+  },
+  {
+   "string_key": 4781416,
+   "ko": "레어 쥐 전원 양복 대머리 생쥐 · 매우 빠르게 달리며 박치기 (이후 태어나는 쥐도)",
+   "en": "All Rare rats become suited bald rats that dash and headbutt"
+  },
+  {
+   "string_key": 4781417,
+   "ko": "에픽 쥐 전원 맘스땃쥐 · 패티 최대 {s5}장 · 박치기 피해 +{s4%}% (이후 태어나는 쥐도)",
+   "en": "All Epic rats become Burger rats · up to {s5} patties · headbutt +{s4%}%"
+  },
+  {
+   "string_key": 4781418,
+   "ko": "에픽 쥐 전원 5G · 동료 수와 상관없이 모든 쥐에게 데이터 전송 (이후 태어나는 쥐도)",
+   "en": "All Epic rats become 5G rats that boost every rat"
   },
   {
    "string_key": 4800001,
@@ -15814,6 +15954,61 @@
    "string_key": 9000131,
    "ko": "쿠르릉!!",
    "en": "Rumble!!"
+  },
+  {
+   "string_key": 8000539,
+   "ko": "펑!",
+   "en": "Pop!"
+  },
+  {
+   "string_key": 8000540,
+   "ko": "-{n}%",
+   "en": "-{n}%"
+  },
+  {
+   "string_key": 8000541,
+   "ko": "분신!!",
+   "en": "Clones!!"
+  },
+  {
+   "string_key": 8000542,
+   "ko": "짤랑",
+   "en": "Ching"
+  },
+  {
+   "string_key": 8000543,
+   "ko": "치즈 비!! +{n}%",
+   "en": "Cheese Rain!! +{n}%"
+  },
+  {
+   "string_key": 8000544,
+   "ko": "띵!",
+   "en": "Bonk!"
+  },
+  {
+   "string_key": 8000545,
+   "ko": "쿵",
+   "en": "Thud"
+  },
+  {
+   "string_key": 8000546,
+   "ko": "쥐 탑!!",
+   "en": "Rat Tower!!"
+  },
+  {
+   "string_key": 8000547,
+   "ko": "다다다",
+   "en": "Rat-a-tat"
+  },
+  {
+   "string_key": 8000548,
+   "ko": "7 7 7",
+   "en": "7 7 7"
+  },
+  {
+   "string_key": 8000549,
+   "ko": "7 ? ?",
+   "en": "7 ? ?"
   }
  ]
 }

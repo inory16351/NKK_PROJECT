@@ -532,3 +532,9 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - 유니티: BossPartArt.Part `show`·`open`, BossPartRig `open`·`openSwap`·`HasOpen` · Boss.Crew.cs (머리 열림·입 자리·촉수·Meeting·alarm) · Rat.Boss `Grab`·HoldAt 높이·보는 쪽으로 뱉기 · 표 R_SirenDrop opt alarm · R_TentacleGulp count 6 sprite br_crew_tongue · R_Huddle pattern Meeting size 140 opt all,face:br_crew_face (gen_boss_skills.py → xlsx2json, BossTable.json 만 바뀜) · Game 씬 memeSprites 에 br_crew_* 2줄 (YAML, guid 새로 만든 .meta).
 - (이어서) 사용자 "왜 공중에 떠 있지" → 몸통 at.y 0.95 → 0.817 (뒷발 끝 = 바닥) + 앞다리 1.1배 (웹·빌더·에셋).
 - (이어서) "유니티 켜서 넣어" → 에디터 실행, 컴파일 OK, br_crew_* 임포트·아틀라스 자동 등록 · Play: TestSpawn(39) + hp 1e15 + BaseTimeScale 0.35 → 등장 촉수 · 사이렌 · 긴급 회의 모두 정상, 콘솔 오류 0. (켤 때 유니티가 `Assets/_Recovery/0 (1).unity` 를 만듦 — 건드리지 않음)
+
+### 9-25. 2026-10-23 — 증강 기획서 Ver.04 (HANDOFF §5-27)
+- 사용자 "기획서 반영 가능할지 검토, 애매한 거 전부 선택지 질문" → 33개(수치 10 + 시각 23) ↔ 지금 51개 비교 → 질문 3번으로 결정 (결정 문서). 이어서 "구현 시작, 분신·모래시계 설계 먼저" → 분신 A안(거대한 모습) · 모래시계 삭제.
+- 구현 중 유니티가 세이프 모드로 켜짐 (반쯤 쓴 코드 컴파일 오류) → 나머지 파일 마저 쓰고 Unity csc 로 밖에서 먼저 컴파일(Library/Bee/…/Assembly-CSharp.rsp 복사 + 새 파일, `dotnet exec csc.dll`) → 유니티 창을 앞으로 → 세이프 모드 풀림.
+- 그림 1차 → 사용자 "그림체가 너무 벗어났어" → 실제 게임 아이콘·이펙트·스케이터 파츠를 모은 참고 그림으로 2차 (이펙트·양복 쥐 OK) → 아이콘은 채도 높은 3D 느낌이라 3차 (흐리고 무광으로).
+- 다음 세션: 3차 아이콘 시트를 아이콘만 잘라 적용 (`slice_aug_v04` 의 아이콘 부분만, rat_suit 는 다시 안 자름). 화면 확인 중 상시 그림이 투명도 0 → 원인 = 매 프레임 `life = 99999`(= max) 로 되돌려 나타나기 페이드가 0 에 고정. 기차·칼날도 같은 패턴이라 같이 고침. 먹구름 상시 크기 520 → `stormLookSize` 260 (위 100). 확인 요령: 기차는 1600/초라 반사로 `Train(e)` 부르고 x 를 화면 가운데로 옮긴 뒤 `FxManager.BaseTimeScale` 0.05 로 찍음 (끝나면 1). 캡처는 `manage_camera screenshot output_folder=Captures` (프로젝트 안만 됨) → 확인 뒤 폴더째 치움.

@@ -1883,6 +1883,28 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+  - codeId: skater_suit
+    head: {fileID: 21300000, guid: bbc7754bde0e8ea4ab367bfce5dbaea5, type: 3}
+    torso: {fileID: 21300000, guid: 6249181758a3a6a44b3163d1cce1b035, type: 3}
+    tail: {fileID: 21300000, guid: 8a1d213a36380484db2d8c40db108537, type: 3}
+    front: {fileID: 21300000, guid: a1fcf46d1b858c242b2fc46761890906, type: 3}
+    back: {fileID: 21300000, guid: 89b269b3149f8714e800d0abd1729b72, type: 3}
+    head2: {fileID: 0}
+    single: {fileID: 0}
+    neck: {x: 0.069, y: 0.395}
+    tailAnchor: {x: 0.944, y: 0.531}
+    shoulder: {x: 0.238, y: 0.448}
+    hip: {x: 0.736, y: 0.325}
+    legFront: 1
+    legBack: 0.992
+    screen: 0
+    screenRect:
+      serializedVersion: 2
+      x: 0.15
+      y: 0.2
+      width: 0.7
+      height: 0.6
+    screenBg: {fileID: 0}
   - codeId: pcmouse
     head: {fileID: 0}
     torso: {fileID: 0}

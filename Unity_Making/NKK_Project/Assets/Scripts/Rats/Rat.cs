@@ -62,7 +62,7 @@ namespace NKK.Rats
         // 공격력 = 테이블 × 특수 능력 × 종별 성장 × 공용 스킬 (반란의 시작·이빨 강화·쥐 헬스장) × 광란
         // 공용 스킬: 공격력 + 고정값(등급별) → ×(1 + 공격력 % 합) ×(1 + 피해량 % 합)
         public float Damage => (Data.atk + CommonSkill.AtkFlat((int)Data.Grade)) * PassiveDamageMult * GrowthAtkMult * CommonSkill.AtkMul((int)Data.Grade) * (frenzy > 0 ? 1.5f : 1) * (zombie > 0 ? 2 : 1) * AugmentSpecials.RatDamageMul(this);      // 증강: 눈덩이 · 거대화
-        float RunSpeed => Manager.baseSpeed * GradeData.move_speed * PassiveSpeedMult * CommonSkill.MoveSpeedMul * (frenzy > 0 ? 1.5f : 1);
+        float RunSpeed => Manager.baseSpeed * GradeData.move_speed * PassiveSpeedMult * CommonSkill.MoveSpeedMul * (frenzy > 0 ? 1.5f : 1) * AugmentSpecials.UnifySpeedMul(this);      // 증강 '스케이터 생쥐'
         float RushHit(object target) => Rushing ? Manager.RushDamage * Manager.RushStack(target) : 1;     // 총공격 배율 × 중첩 제한
 
         public void Tick(float dt)
@@ -258,7 +258,7 @@ namespace NKK.Rats
             float c = CommonSkill.MultiHitChance;
             if (c <= 0 || Random.value >= c) return 1;
             int n = 1 + CommonSkill.MultiHitCount;
-            if (FxManager.I && OnScreen()) FxManager.I.Popup(px, py, "x" + n + "!", new Color(1, 0.86f, 0.52f), 18, 0.5f, 50);
+            if (FxManager.I && OnScreen() && !AugmentSpecials.MultiHitFx(this, px, py, n)) FxManager.I.Popup(px, py, "x" + n + "!", new Color(1, 0.86f, 0.52f), 18, 0.5f, 50);      // 증강 '다다다다': 잔상 연타 + "다다다"
             return n;
         }
 
@@ -310,10 +310,11 @@ namespace NKK.Rats
             PassiveBeforeHit(it);
             it.Damage(dmg * (crit ? CritMult : 1), this, crit, ang);
             PassiveOnHit(it, dmg, ang);
-            if (Random.value < CommonSkill.ZapChance) Manager.Items.ZapChain(this, it, dmg * CommonSkill.ZapDamageK, CommonSkill.ZapTargets);   // 전기 이빨
+            if (Random.value < CommonSkill.ZapChance) Manager.Items.ZapChain(this, it, dmg * CommonSkill.ZapDamageK, CommonSkill.ZapTargets);   // 전기 이빨 (묘기와 따로)
+            AugmentSpecials.OnRatHit(this, it);                                 // 증강 '회전 치즈 칼날' (묘기와 따로)
             // 특수 액티브가 먼저: 안 터졌을 때만 공용 스킬 묘기 확률
             if (Trick == TrickType.None && !act.on) { if (!ActTrigger(it.Gold ? CondType.Hit_Gold_Item : CondType.Hit_Item, it) && it.Gold) ActTrigger(CondType.Hit_Item, it); }
-            if (Trick == TrickType.None && !act.on && sleep <= 0) RollCommonTrick(it, ang);
+            if (Trick == TrickType.None && !act.on && sleep <= 0 && !BallForm) RollCommonTrick(it, ang);
             if (spd > 350) vz = 150;           // 세게 들이받으면 작게 튀어오름
         }
 
@@ -341,6 +342,7 @@ namespace NKK.Rats
             if (sleep > 0) { p.front = 1.5f; p.farFront = 1.5f; p.back = -1.5f; p.farBack = -1.5f; p.head = 0.4f; p.tail = -0.6f + Mathf.Sin(tt * 0.8f) * 0.08f; p.bob = 0; p.sy = 0.92f + Mathf.Sin(tt * 2) * 0.02f; return p; }
             if (act.on) { ActionPose(ref p); return p; }
             if (Trick != TrickType.None) { TrickPose(ref p); return p; }
+            if (BallForm && stun <= 0) { BallPose(ref p); return p; }          // 증강 등급 통일: 늘 공
             if (tumbleT > 0 || (stun > 0 && z > 2))
             {
                 p.front = Mathf.Sin(tt * 34) * 1.6f; p.farFront = Mathf.Cos(tt * 30) * 1.6f; p.back = Mathf.Sin(tt * 31 + 2) * 1.5f; p.farBack = Mathf.Cos(tt * 27) * 1.5f;
@@ -401,13 +403,18 @@ namespace NKK.Rats
             float scale = Manager.ratScale * GradeData.size * EaseOutBack(born) * AugmentSpecials.RatScale(this);      // 증강 '거대 쥐 출현'
             TrickTransform(out float lift, out float trot, out float tsx, out float tsy, out float pivotH);
             ActionTransform(ref trot, ref tsx, ref tsy, ref lift);
+            if (BallForm && !act.on && Trick == TrickType.None && stun <= 0 && !UltOn) BallTransform(ref trot, ref tsx, ref tsy, ref lift);
             UltTransform(ref trot, ref tsx, ref tsy, ref lift);
             MountTransform(ref scale, ref lift);          // 슈퍼 요리사 쥐: 요리사 등 위 (Rat.Mount.cs)
             NewRatTransform(ref scale, ref tsy);          // 맘스땃쥐 패티 (Rat.NewRats.cs)
             ZombieTint(); BossEffects(Time.deltaTime);
             if (ghost || temp > 0) foreach (var sr in rig.GetComponentsInChildren<SpriteRenderer>()) { var c = sr.color; c.a = ghost ? 0.55f + 0.15f * Mathf.Sin(Time.time * 10) : Mathf.Clamp01(temp / 0.6f); sr.color = c; }
             rig.tailLen = FuseLeft;                       // 쥐한폭탄: 타들어가는 심지(꼬리)
-            rig.Apply(MountPose(MakePose()), scale, face, sq, World.SortOrder(y), lift, trot, tsx, tsy, pivotH, Trick == TrickType.Windmill);
+            var pose = MountPose(MakePose());
+            rig.Apply(pose, scale, face, sq, World.SortOrder(y), lift, trot, tsx, tsy, pivotH, Trick == TrickType.Windmill);
+            TowerApply(pose, World.SortOrder(y), lift, trot);       // 증강 '쥐 탑 쌓기' (Rat.Augment.cs)
+            AfterimageApply();                            // 증강 '다다다다' 잔상
+            AugmentSpecials.RatLook(this, rig);           // 증강 상시 모습 (탄생 축제 무지개 · 스케이터 생쥐)
             NewRatSprite();                               // 한 장짜리 쥐 그림 바꾸기 (Rat.NewRats.cs)
             StunStars();
             UltReadyMark();

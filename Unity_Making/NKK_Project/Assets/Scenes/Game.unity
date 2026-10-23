@@ -38459,6 +38459,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbdc3980b0b769458fa9026f8a2b88b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Hazards.Boss
+  headOpenSpeed: 7
+  headCloseSpeed: 14
+  pounceOpen: 0.85
+  mouthPart: jawLow
+  mouthPoint: {x: 0.25, y: 0.35}
+  tentacleThick: 70
+  tentacleOut: 0.18
+  tentacleGap: 0.04
+  tentacleShoot: 0.5
+  spitGap: 0.04
+  spitOpen: 0.45
+  chewSquash: 0.06
+  buttonAhead: 130
+  buttonPaw: 70
+  buttonHop: 0.38
+  buttonHopV: 520
+  alarmEvery: 0.5
+  alarmFlash: 0.12
   memeSprites:
   - name: bm_airdrop
     sprite: {fileID: 21300000, guid: a7e2359c4e7939a4bb7209707bb52986, type: 3}
@@ -101994,6 +102012,24 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: b0751cbee690bc6418e0f1cb0526e5af, type: 3}
   - name: maid_teatray
     sprite: {fileID: 21300000, guid: 2646ec03a7eaab04ba53e6e79a3a7bef, type: 3}
+  - name: storm_cloud
+    sprite: {fileID: 21300000, guid: d8aac83939d3ee84bbb55813ec965de8, type: 3}
+  - name: cheese_cloud
+    sprite: {fileID: 21300000, guid: 69dbbb107256e25478996ce93ebcf649, type: 3}
+  - name: scorch
+    sprite: {fileID: 21300000, guid: 11749f637fe401f4795493a9005644cf, type: 3}
+  - name: toy_train
+    sprite: {fileID: 21300000, guid: 51a2edaa6a1d57d46839e492ea7a1576, type: 3}
+  - name: magic_circle
+    sprite: {fileID: 21300000, guid: 7ff1c78149da1cb4aa32030dbb066b60, type: 3}
+  - name: garland
+    sprite: {fileID: 21300000, guid: 5e4072d7ac2fb1a468ab747bf287c535, type: 3}
+  - name: footprint
+    sprite: {fileID: 21300000, guid: a4a7507caf862f2488da641c7f0421ea, type: 3}
+  - name: slot_machine
+    sprite: {fileID: 21300000, guid: c24db6383563a6546bc2e990744a92ec, type: 3}
+  - name: signal_5g
+    sprite: {fileID: 21300000, guid: ef3268a2e77e11345bfcb1ab8398b0e4, type: 3}
   beamTemplate: {fileID: 1223890124}
   beamWidth: 0.3
   boltWidth: 0.18
@@ -105799,9 +105835,9 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1313321791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 307, y: -42}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 62, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &542649673
@@ -212890,9 +212926,9 @@ RectTransform:
   - {fileID: 35890034}
   m_Father: {fileID: 1313321791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 233, y: -42}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 62, y: 74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1135598796
@@ -231480,6 +231516,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01cf46be5f684ed4fa16284949f5e9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.AugmentSpecials
+  skaterSuitArt: skater_suit
+  garlandSticker: garland
+  footprintSticker: footprint
+  slotSticker: slot_machine
+  signalSticker: signal_5g
+  headbuttPopup: "\uB775!"
+  pandaPopup: "\uCFF5"
+  towerPopup: "\uC950 \uD0D1!!"
+  rapidPopup: "\uB2E4\uB2E4\uB2E4"
+  slotWinPopup: 7 7 7
+  slotLosePopup: 7 ? ?
+  headbuttPopupKey: 8000544
+  pandaPopupKey: 8000545
+  towerPopupKey: 8000546
+  rapidPopupKey: 8000547
+  slotWinPopupKey: 8000548
+  slotLosePopupKey: 8000549
   Game: {fileID: 0}
   Stage: {fileID: 0}
   Rats: {fileID: 0}
@@ -231491,16 +231544,30 @@ MonoBehaviour:
   bladeSize: 55
   tornadoSticker: tornado
   tornadoSize: 260
+  warnSticker: ring
+  warnColor: {r: 1, g: 0.3, b: 0.25, a: 0.85}
+  stormCloudSticker: storm_cloud
+  cheeseCloudSticker: cheese_cloud
+  scorchSticker: scorch
+  trainSticker: toy_train
+  cloneCircleSticker: magic_circle
+  cloudSize: 520
+  trainSize: 420
+  meteorSprite: {fileID: 0}
   giantPopup: "\uAC70\uB300\uD654!!"
-  rewindBanner: "\uC2DC\uAC04 \uC5ED\uD589!!"
-  rewindSub: "+{n}\uCD08"
   jackpotPopup: "\uC7AD\uD31F!! \uC5F0\uAD6C\uC790\uB8CC \xD7{n}"
-  echoPopup: "\uBA54\uC544\uB9AC!!"
+  clickBombPopup: "\uD391!"
+  wallQuakePopup: -{n}%
+  clonePopup: "\uBD84\uC2E0!!"
+  midasPopup: "\uC9E4\uB791"
+  cheeseRainPopup: "\uCE58\uC988 \uBE44!! +{n}%"
   giantPopupKey: 8000501
-  rewindBannerKey: 8000502
-  rewindSubKey: 8000503
   jackpotPopupKey: 8000504
-  echoPopupKey: 8000505
+  clickBombPopupKey: 8000539
+  wallQuakePopupKey: 8000540
+  clonePopupKey: 8000541
+  midasPopupKey: 8000542
+  cheeseRainPopupKey: 8000543
   popupColor: {r: 1, g: 0.85, b: 0.35, a: 1}
 --- !u!1 &1241600405
 GameObject:
@@ -293802,9 +293869,9 @@ RectTransform:
   - {fileID: 1614839481}
   m_Father: {fileID: 1313321791}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 95, y: -42}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 190, y: 84}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1586204211
@@ -331875,7 +331942,9 @@ MonoBehaviour:
   idleWalk: 0.15
   recoilRate: 12
   recoilTilt: 4
+  openSwap: 0.1
   still: 0
+  open: 0
 --- !u!1 &1790909849
 GameObject:
   m_ObjectHideFlags: 0

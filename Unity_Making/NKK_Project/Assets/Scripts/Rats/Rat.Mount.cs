@@ -45,7 +45,7 @@ namespace NKK.Rats
         bool mountChecked, mountOk, mGallop;
         float mWalk, mSq = 1, mYank; int mStride = int.MinValue, mFace;
 
-        bool Mounted => mountOk && codeId == mountCodeId;
+        bool Mounted => mountOk && codeId == mountCodeId && !IsTower;          // 쥐 탑이 되면 사람 없이 쥐만 (2026-10-23)
 
         // ── 만들기 ──
         void MountInit()

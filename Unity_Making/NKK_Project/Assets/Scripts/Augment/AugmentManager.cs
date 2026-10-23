@@ -138,7 +138,10 @@ namespace NKK
         void ShowPick()
         {
             int floor = pendingFloor; pendingFloor = -1;
+            var rats = AugmentSpecials.I ? AugmentSpecials.I.Rats : null;
+            Augments.RatCountNow = rats ? rats.RealCount : -1;          // 쥐 탑 쌓기: 쥐가 적으면 안 나옴
             offer.Clear(); offer.AddRange(Augments.RollOffer(floor, Augments.OfferCount));
+            Augments.RatCountNow = -1;
             if (offer.Count == 0) return;
             if (autoPick || !pickPanel) { Take(offer[BestOffer()]); return; }
             pickLeft = pickAutoSec;

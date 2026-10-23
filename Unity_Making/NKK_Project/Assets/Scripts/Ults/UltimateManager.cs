@@ -253,7 +253,6 @@ namespace NKK.Ults
                 }
                 if (Progress.I) Progress.I.OnUltUsed(s.U.ultimate_id);       // 업적 알림은 업적 테이블 기준 (AchievementToast)
                 if (r && r.temp <= 0) SuperUltManager.I?.OnUltDone(r);        // 초필살기 스택 (신화 · 끝까지 쓴 것만)
-                AugmentSpecials.OnUltDone(r);                                   // 증강 특수 효과: 필살기 메아리
             }
             s.Cleanup();
             s.ReleaseAll();

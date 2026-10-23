@@ -121,6 +121,7 @@ namespace NKK.Items
         {
             sq += (1 - sq) * Mathf.Min(1, dt * 10);
             flashT = Mathf.Max(0, flashT - dt);
+            if (Gold && State == ItemState.Rest && Random.value < dt * 0.6f * AugmentSpecials.GoldSparkleMul && FxManager.I) FxManager.I.Stars(x + Random.Range(-R, R), y, 20 + Random.Range(0, R), 1, new Color(1f, 0.9f, 0.5f), Color.white, 10, 40);     // 황금 반짝 (증강 '미다스의 앞니' = 2배 자주)
             if (State == ItemState.Rest)
             {
                 wob = Mathf.MoveTowards(wob, 0, dt * 3);

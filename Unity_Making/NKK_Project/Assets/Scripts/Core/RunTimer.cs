@@ -79,7 +79,7 @@ namespace NKK
                         FxManager.I?.Shake(0.08f);
                     }
                 if (Left < tickTime && Mathf.Floor(before) != Mathf.Floor(Left)) pulse = 1;
-                if (Left <= 0 && !AugmentSpecials.TryRewind(this)) { Left = 0; if (Over) Over.Begin(GameOver.Why.Time); }     // 증강 '시간 역행'이면 되돌림
+                if (Left <= 0) { Left = 0; if (Over) Over.Begin(GameOver.Why.Time); }
             }
             UpdateHud();
         }

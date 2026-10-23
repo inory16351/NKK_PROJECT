@@ -345,7 +345,7 @@ namespace NKK.Rats
         // 자동 승급 (9훈장 노드 Promote_Auto): 켜져 있으면 일괄 승급을 PromoteAutoEvery 초마다. 끄기 = 승급 패널 토글 (PlayerPrefs nkk_auto_promote)
         public static bool AutoPromoteOn { get => PlayerPrefs.GetInt("nkk_auto_promote", 1) == 1; set => PlayerPrefs.SetInt("nkk_auto_promote", value ? 1 : 0); }
         float autoPromoteT = 5;
-        public int CountGrade(int g) { int n = 0; foreach (var r in Rats) if (r.temp <= 0 && !r.UltOn && (int)r.Data.Grade == g) n++; return n; }
+        public int CountGrade(int g) { int n = 0; foreach (var r in Rats) if (r.temp <= 0 && !r.UltOn && !r.IsTower && (int)r.Data.Grade == g) n++; return n; }      // 쥐 탑은 승급 재료가 안 됨
         public bool CanPromote(int g) => g >= 0 && g < 5 && GradeOpen(g + 1, Game.Tier) && CountGrade(g) >= PromoteNeed(g) && RealCount - PromoteNeed(g) + 1 >= 2 && !GameOver.Active;
         public Rat Promote(int g)
         {
@@ -353,7 +353,7 @@ namespace NKK.Rats
             SfxManager.Play("rat_promote");
             int need = PromoteNeed(g);
             var pool = new List<Rat>();
-            foreach (var r in Rats) if (r.temp <= 0 && !r.UltOn && (int)r.Data.Grade == g) pool.Add(r);
+            foreach (var r in Rats) if (r.temp <= 0 && !r.UltOn && !r.IsTower && (int)r.Data.Grade == g) pool.Add(r);
             pool.Sort((a, b) => b.OnScreen().CompareTo(a.OnScreen()));       // 화면 안 쥐부터
             float cx = 0, cy = 0; var fx = FxManager.I;
             var gc = GameDatabase.Instance.Grades.TryGetValue((Grade)g, out var gr) && ColorUtility.TryParseHtmlString(gr.color, out var c0) ? c0 : Color.white;
@@ -510,7 +510,7 @@ namespace NKK.Rats
             {
                 var list = new List<RatCharacterRow>();
                 foreach (var r in db.Rats.Values) if ((int)r.Grade == g && r.unlock_rank <= Game.Tier) list.Add(r);
-                if (list.Count > 0) return list[Random.Range(0, list.Count)];
+                if (list.Count > 0) return AugmentSpecials.UnifyRow(list[Random.Range(0, list.Count)]);      // 증강 등급 통일
             }
             return null;
         }
@@ -525,9 +525,20 @@ namespace NKK.Rats
             {
                 var list = new List<RatCharacterRow>();
                 foreach (var r in db.Rats.Values) if ((int)r.Grade == g && r.unlock_rank <= Game.Tier) list.Add(r);
-                if (list.Count > 0) return list[Random.Range(0, list.Count)];
+                if (list.Count > 0) return AugmentSpecials.UnifyRow(list[Random.Range(0, list.Count)]);      // 증강 등급 통일: 이후 태어나는 쥐도
             }
             return null;
+        }
+
+        // 쥐를 다른 종으로 바꿈 (증강 등급 통일): 같은 자리에 새로 (도감·조각은 안 셈)
+        public Rat Replace(Rat old, RatCharacterRow row)
+        {
+            if (!old || row == null) return null;
+            var nr = Spawn(row, old.x, old.y, false);
+            if (!nr) return null;
+            nr.face = old.face; nr.ultGauge = old.ultGauge;
+            Rats.Remove(old); Destroy(old.gameObject);
+            return nr;
         }
 
         // 번식 확률: 무료 마리 수 이하는 100%, 그 위로는 최대 마리 수 대비 채운 비율로 떨어짐 (최대 마리 수가 늘면 번식도 같이 잘 됨) + 공용 스킬 번식 확률
@@ -588,7 +599,7 @@ namespace NKK.Rats
                 }
                 // 탄생 축제: 주변 쥐 광란
                 float ft = CommonSkill.FrenzyTime;
-                if (r && ft > 0) foreach (var o in Rats) if (Vector2.Distance(new Vector2(o.x, o.y), new Vector2(p.x, p.y)) < CommonSkill.FrenzyRadius) o.frenzy = Mathf.Max(o.frenzy, ft);
+                if (r && ft > 0) { foreach (var o in Rats) if (Vector2.Distance(new Vector2(o.x, o.y), new Vector2(p.x, p.y)) < CommonSkill.FrenzyRadius) o.frenzy = Mathf.Max(o.frenzy, ft); AugmentSpecials.OnBirthParty(p.x, p.y); }      // 증강 '탄생 축제': 색종이
             }
         }
 
@@ -602,7 +613,7 @@ namespace NKK.Rats
             if (pressed && m.leftButton.wasReleasedThisFrame)
             {
                 pressed = false;
-                if (!dragged) ClickRush(World.FromUnity(Camera.main.ScreenToWorldPoint(sp)));
+                if (!dragged) { var wp = World.FromUnity(Camera.main.ScreenToWorldPoint(sp)); ClickRush(wp); AugmentSpecials.OnClick(wp); }      // 증강 '클릭 폭격': 총공격 중 누를 때마다
             }
         }
 
@@ -614,7 +625,6 @@ namespace NKK.Rats
             if (cat && cat.Alive && cat.BodyDist(p.x, p.y) <= 0) p = new Vector2(cat.x, cat.y);     // 고양이 몸을 누르면 고양이 발밑으로
             else if (Items) foreach (var h in Items.Humans) if (h && h.Alive && h.BodyDist(p.x, p.y) <= 0) { p = new Vector2(h.x, h.y); break; }      // 사람 몸을 누르면 사람 발밑으로
             StartRush(p); rushCdLeft = RushTime + RushCooldown;
-            AugmentSpecials.OnRush(p);          // 증강 특수 효과: 클릭 폭격
             return true;
         }
 

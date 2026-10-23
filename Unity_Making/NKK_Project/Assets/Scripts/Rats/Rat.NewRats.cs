@@ -30,6 +30,7 @@ namespace NKK.Rats
 
         float NewRatDamageAdd => (Is(EffectType.Grill_Stack) ? grill * PV(1) : 0) + (Is(EffectType.Patty_Stack) ? patty * PV(3) : 0) + (tuneT > 0 ? tuneAdd : 0) + (dataT > 0 ? dataAdd : 0);
         public float RushRangeAdd => Is(EffectType.Rush_Range_Up) && Passive != null ? PV(1) : 0;
+        int PattyMax => AugmentSpecials.PattyMax(this, Mathf.RoundToInt(PV(1)));         // 증강 '맘스땃쥐 생쥐': 최대 8장
 
         // 생명체(고양이 · 보스 · 사람)를 때림 (그쪽 Damage 에서 부름): 액션 목표로 기억 + 아이스 퀸 빙결 스택
         public void OnHitCreature(object who, Frost f, float fx, float fy, float h)
@@ -57,7 +58,7 @@ namespace NKK.Rats
         bool NewActReady => ActionType switch
         {
             EffectType.Tune_Up => parts >= Mathf.Max(1, PV(2)),
-            EffectType.Patty_Slam => patty >= Mathf.Max(1, Mathf.RoundToInt(PV(1))),
+            EffectType.Patty_Slam => patty >= Mathf.Max(1, PattyMax),
             EffectType.Self_Destruct => fuse == 0,
             _ => true,
         };
@@ -73,7 +74,7 @@ namespace NKK.Rats
         {
             if (temp > 0) return;
             if (Is(EffectType.Part_Collect) && parts < PV(2)) { parts = Mathf.Min(PV(2), parts + PV(1)); if (parts >= PV(2)) FxManager.I?.Stars(x, y, 30, 5, new Color(0.8f, 0.82f, 0.86f), Color.white, 60, 160); }
-            if (Is(EffectType.Patty_Stack) && patty < Mathf.RoundToInt(PV(1)))
+            if (Is(EffectType.Patty_Stack) && patty < PattyMax)
             {
                 patty++; sq = 0.7f;
                 NewPopup(Manager.pattyPopup, x, y, new Color(0.62f, 0.38f, 0.2f), 16, 0.8f, 46, patty);
@@ -135,7 +136,8 @@ namespace NKK.Rats
         void NewRatTransform(ref float scale, ref float sy)
         {
             if (!Is(EffectType.Patty_Stack) || patty <= 0) return;
-            if (rig && rig.IsSingle && Manager.burgerStack != null && Manager.burgerStack.Length > 0) return;
+            var bs = Manager.burgerStack;
+            if (rig && rig.IsSingle && bs != null && bs.Length > 0) { if (patty > bs.Length - 1) sy *= 1 + (patty - (bs.Length - 1)) * 0.14f; return; }      // 그림보다 많이 쌓이면 (맘스땃쥐 생쥐 8장) 위로 늘림
             scale *= 1 + patty * PV(2) * 0.4f; sy *= 1 + patty * PV(2);
         }
 
@@ -262,7 +264,7 @@ namespace NKK.Rats
                     if (!act.done && act.t >= act.dur * 0.5f)
                     {
                         act.done = true;
-                        float R0 = AV(2) > 0 ? AV(2) : 250; int shown = 0;
+                        float R0 = AugmentSpecials.DataToAll(this) ? 1e6f : AV(2) > 0 ? AV(2) : 250; int shown = 0;      // 증강 '5G 생쥐': 모든 쥐에게
                         foreach (var o in Manager.Rats)
                         {
                             if (o.temp > 0 || Vector2.Distance(new Vector2(o.x, o.y), new Vector2(x, y)) > R0) continue;

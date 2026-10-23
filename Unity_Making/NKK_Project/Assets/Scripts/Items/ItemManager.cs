@@ -196,9 +196,9 @@ namespace NKK.Items
 
         public void OnSmashed(Item it)
         {
-            AugmentSpecials.OnItemSmashed(it);       // 증강 특수 효과: 눈덩이 · 세포 분열
             float gain = it.value * (1 + 0.5f * Mathf.Min(it.Air, airMax)) * (it.Crit ? 2 : 1) * (it.By ? it.By.CheeseMult : 1) * (it.By && it.ByAction ? it.By.SkillKillCheeseMul : 1)
-                * (it.By && it.By.Trick != Rat.TrickType.None ? CommonSkill.TrickCheeseMul : 1);       // 묘기 중에 부숨 → 묘기 치즈
+                * (it.By && it.By.Trick != Rat.TrickType.None ? CommonSkill.TrickCheeseMul : 1)        // 묘기 중에 부숨 → 묘기 치즈
+                * AugmentSpecials.SmashCheeseMul(it) * AugmentSpecials.CheeseMul;                  // 증강: 미다스의 앞니 (황금 물건) · 치즈 비
             Game.OnSmash(gain);
             SfxManager.PlayAt(it.Data.IsFurniture || it.Data.is_paper == 1 ? "smash_wood" : it.Data.is_sturdy == 1 ? "smash_metal" : "smash_glass", it.x, it.y);
             if (it.Crit) SfxManager.PlayAt("crit", it.x, it.y, 0.8f);

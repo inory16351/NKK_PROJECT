@@ -29,7 +29,23 @@ namespace NKK
         public static void Touch() => Version++;
 
         // ── 보관함 ──
-        public static List<Progress.AugItem> Items => S != null ? S.items : new List<Progress.AugItem>();
+        public static List<Progress.AugItem> Items { get { Migrate(); return S != null ? S.items : new List<Progress.AugItem>(); } }
+
+        // 없어진 증강 → 같은 등급 새 증강 (2026-10-23 기획서 Ver.04, 증강 설정 replace_<옛 id>, 강화 레벨 그대로). 세이브마다 한 번
+        static Progress.AugSave migrated;
+        static void Migrate()
+        {
+            if (S == null || migrated == S || !DB || DB.Augments.Count == 0) return;
+            migrated = S;
+            bool any = false;
+            foreach (var it in S.items)
+            {
+                if (Row(it.id) != null) continue;
+                int to = Mathf.RoundToInt(Cfg("replace_" + it.id, 0));
+                if (to != 0 && Row(to) != null) { it.id = to; any = true; if (!S.seen.Contains(to)) S.seen.Add(to); }
+            }
+            if (any) { P.Save(); Touch(); }
+        }
         public static Progress.AugItem Item(int uid) { if (S == null) return null; foreach (var it in S.items) if (it.uid == uid) return it; return null; }
         public static AugmentRow Row(int id) => DB && DB.AugmentsById.TryGetValue(id, out var r) ? r : null;
         public static AugmentRow RowOf(Progress.AugItem it) => it == null ? null : Row(it.id);
@@ -152,11 +168,19 @@ namespace NKK
         static int MinGrade { get { int m = 99; if (DB) foreach (var g in DB.AugGrades.Keys) m = Mathf.Min(m, g); return m == 99 ? 1 : m; } }
         static int MaxGrade { get { int m = 0; if (DB) foreach (var g in DB.AugGrades.Keys) m = Mathf.Max(m, g); return m == 0 ? 4 : m; } }
 
+        // 고르기에 나올 수 있나 (쥐 탑: 쥐가 p3 마리 이상일 때만 — 탑만 남아도 번식되게 탑 2개 이상, 2026-10-23 사용자). 판 밖(합성)은 늘 됨
+        public static int RatCountNow = -1;
+        static bool Offerable(AugmentRow a)
+        {
+            var sp = SpecialOf(a);
+            return sp == null || sp.type != "Tower" || RatCountNow < 0 || RatCountNow >= sp.p3;
+        }
+
         public static AugmentRow RandomOfGrade(int grade, HashSet<int> exclude)
         {
             if (!DB) return null;
             var l = new List<AugmentRow>();
-            foreach (var a in DB.Augments) if (a.enabled != 0 && a.grade == grade && (exclude == null || !exclude.Contains(a.augment_id))) l.Add(a);
+            foreach (var a in DB.Augments) if (a.enabled != 0 && a.grade == grade && (exclude == null || !exclude.Contains(a.augment_id)) && Offerable(a)) l.Add(a);
             if (l.Count == 0 && exclude != null) return RandomOfGrade(grade, null);
             return l.Count > 0 ? l[Random.Range(0, l.Count)] : null;
         }
@@ -189,11 +213,19 @@ namespace NKK
         public static bool HasFreeSlot => Equipped.Count < SlotCount;
         public static void ClearRun() { Equipped.Clear(); RunItems.Clear(); Touch(); }
         public static void AddToRun(int uid) { if (uid != 0 && !RunItems.Contains(uid)) { RunItems.Add(uid); Touch(); } }
-        // 같은 증강(id)이 이미 장착돼 있음 (ignoreUid = 교체로 빠질 칸)
+        // 같은 증강(id)이 이미 장착돼 있음 · 같은 등급 쥐를 바꾸는 등급 통일 증강이 이미 장착돼 있음 (ignoreUid = 교체로 빠질 칸)
         public static bool SameEquipped(int uid, int ignoreUid = 0)
         {
             var it = Item(uid); if (it == null) return false;
-            foreach (var e in Equipped) { if (e == uid || e == ignoreUid) continue; var o = Item(e); if (o != null && o.id == it.id) return true; }
+            var su = SpecialOf(RowOf(it));
+            foreach (var e in Equipped)
+            {
+                if (e == uid || e == ignoreUid) continue;
+                var o = Item(e); if (o == null) continue;
+                if (o.id == it.id) return true;
+                var so = SpecialOf(RowOf(o));
+                if (su != null && so != null && su.type == "Unify" && so.type == "Unify" && Mathf.RoundToInt(su.p2) == Mathf.RoundToInt(so.p2)) return true;      // 골든 햄스터 ↔ 판다 · 맘스땃쥐 ↔ 5G (2026-10-23)
+            }
             return false;
         }
         public static bool Equip(int uid)

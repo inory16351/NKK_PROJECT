@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: rat_suit.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- This is a cut-out PARTS SHEET for a 2D game RAT rig. The attached reference shows the EXISTING parts of the game's SKATER RAT (head with red beanie, body, tail, front leg holding a skateboard, back leg). Make the SAME rat redrawn as an office worker: the same five parts, the same view (side view facing LEFT), the same shapes, sizes, proportions and soft rendering. Change ONLY what is listed below.
+- Exact layout: 1 row x 5 columns, all parts centered vertically in the image, each part a separate island with clear magenta space around it.
+- STYLE IS THE MOST IMPORTANT RULE: copy the reference rendering exactly: smooth soft shapes, gentle soft shading, a few faint soft strokes like the reference, NO black outlines, NO linework, no gloss, no hard shadows. Same warm gray-beige rat color, same pink ears, nose and paws.
+
+Changes:
+1) HEAD: exactly the reference head shape (same eye, pink nose, whiskers, big round pink ear) but WITHOUT the beanie: the top of the head is completely BALD and smooth (same gray-beige skin, a soft shine spot on top). Eyebrow slightly lowered for a serious, determined look. Neck cut flat at the bottom like the reference.
+2) TORSO: exactly the reference body shape, but wearing a charcoal-gray business suit jacket: a white shirt collar and a coral-red tie visible at the front (LEFT) end, jacket hem at the back. Same size and outline as the reference body.
+3) TAIL: same as the reference pink tail.
+4) FRONT LEG: same shape and pose as the reference front leg but in a charcoal suit sleeve with a small white cuff, ending in the same pink rat paw. NO skateboard.
+5) BACK LEG: same shape as the reference back leg but in charcoal suit trousers, ending in the same pink rat foot wearing a small black dress shoe.
