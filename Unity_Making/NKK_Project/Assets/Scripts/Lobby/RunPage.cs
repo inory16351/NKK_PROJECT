@@ -116,13 +116,7 @@ namespace NKK.Lobby
             // 스킵 스킬로 더 위에서 출발할 수 있는데 상한에 막혀 있으면: 몇 층을 클리어하면 몇 층부터 되는지
             if (skipHint)
             {
-                int last = NKK.Stage.StageManager.LastFloor, want = Mathf.Min(1 + CommonSkill.StageSkip, last), at = 0, next = 0;
-                if (p && want > cap)
-                    for (int c = Mathf.Max(1, best); c <= last; c++)      // c = 앞으로 클리어할 층 (지금 클리어 = 최고 층 - 1) → 그때 상한 = min(스킬, c + 1, skip_cap(c))
-                    {
-                        int can = Mathf.Min(want, Mathf.Min(c + 1, db.SkipCapFor(c)));
-                        if (can > cap) { at = c; next = can; break; }
-                    }
+                var (at, next) = p ? p.NextSkipUnlock() : (0, 0);
                 skipHint.gameObject.SetActive(next > 0);
                 if (next > 0) SetT(skipHint, ("floor", at), ("n", next));
             }

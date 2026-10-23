@@ -448,5 +448,20 @@ namespace NKK
             int doc = GameDatabase.Instance ? GameDatabase.Instance.SkipCapFor(maxFloor - 1) : maxFloor;
             return Mathf.Max(1, Mathf.Min(Mathf.Min(1 + CommonSkill.StageSkip, Mathf.Min(maxFloor, doc)), NKK.Stage.StageManager.LastFloor));
         }
+
+        // 스킵 스킬로 더 위에서 출발할 수 있는데 상한에 막혀 있으면: 몇 층(at)을 클리어하면 몇 층(next)부터 되는지 (안 막히면 0, 0) · extra = 아직 안 산 스킵 노드 값
+        public (int at, int next) NextSkipUnlock(int extra = 0)
+        {
+            var db = GameDatabase.Instance; if (!db) return (0, 0);
+            int last = NKK.Stage.StageManager.LastFloor, want = Mathf.Min(1 + CommonSkill.StageSkip + extra, last);
+            int cap = Mathf.Max(1, Mathf.Min(want, Mathf.Min(maxFloor, db.SkipCapFor(maxFloor - 1))));
+            if (want <= cap) return (0, 0);
+            for (int c = Mathf.Max(1, maxFloor); c <= last; c++)      // c = 앞으로 클리어할 층 (지금 클리어 = 최고 층 - 1) → 그때 상한 = min(스킬, c + 1, skip_cap(c))
+            {
+                int can = Mathf.Min(want, Mathf.Min(c + 1, db.SkipCapFor(c)));
+                if (can > cap) return (c, can);
+            }
+            return (0, 0);
+        }
     }
 }

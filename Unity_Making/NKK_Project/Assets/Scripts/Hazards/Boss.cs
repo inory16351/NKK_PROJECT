@@ -1746,11 +1746,11 @@ namespace NKK.Hazards
                 specialProp.transform.position = World.ToUnity(x + (propAbove && Cat ? face * Height * growK * catPropAhead : 0), y, propAbove ? Height * growK + propGap + propH * 0.5f + Mathf.Sin(Time.time * 10) * 6 : boxSize * 0.38f);
                 specialProp.sortingOrder = World.SortOrder(y) + 30;
             }
-            // 실루엣 색 (사람 리그는 Apply 가 매번 색을 되돌림, 고양이 리그는 원래 색으로 되돌림)
+            // 실루엣 색 (사람 리그는 Apply 가 매번 색을 되돌림, 고양이·파츠 리그는 원래 색으로 되돌림 — 파츠 리그가 빠져 있어 55층 거미 등 대기 실루엣 색이 전투 중에도 남았음)
             var k = look == 1 ? waitDarkTint : unbrokenT > 0 ? Color.Lerp(Color.white, unbrokenColor, 0.35f + 0.2f * Mathf.Sin(Time.time * 8)) : Color.white;     // 중꺾마 = 금빛
             // 투명 망토: 숨어 있으면 거의 안 보이게 (부드럽게)
             cloakA = Mathf.MoveTowards(cloakA, Hidden ? cloakAlpha : 1, Time.deltaTime * 4);
-            if (Cat || look == 1 || unbrokenT > 0 || cloakA < 0.999f) foreach (var (r, c) in baseColors) if (r) r.color = new Color(c.r * k.r, c.g * k.g, c.b * k.b, c.a * cloakA);
+            if (Cat || Part || look == 1 || unbrokenT > 0 || cloakA < 0.999f) foreach (var (r, c) in baseColors) if (r) r.color = new Color(c.r * k.r, c.g * k.g, c.b * k.b, c.a * cloakA);
             if (shadow)
             {
                 if (shadowA < 0) shadowA = shadow.color.a;

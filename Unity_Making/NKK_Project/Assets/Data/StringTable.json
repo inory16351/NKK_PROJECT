@@ -16009,6 +16009,11 @@
    "string_key": 8000549,
    "ko": "7 ? ?",
    "en": "7 ? ?"
+  },
+  {
+   "string_key": 9000132,
+   "ko": "※ 출발 층은 스킬만으로 다 열리지 않아요 · 층을 클리어해야 더 위에서 출발할 수 있어요 (출동 화면에 안내)",
+   "en": "※ Skip needs cleared floors too · clear floors to start higher (shown on the Run screen)"
   }
  ]
 }

@@ -277,7 +277,7 @@ namespace NKK.Lobby
             var st = p.StateOf(s);
             if (detailIcon) { detailIcon.sprite = s.IsRoot ? RootIcon(s.tier) : Icon(s); detailIcon.color = st == Progress.SkillState.Owned || st == Progress.SkillState.Open ? Color.white : new Color(0.55f, 0.5f, 0.45f, 0.8f); }
             if (detailName) detailName.text = s.IsRoot ? F(wRoot, ("tier", s.tier), ("name", TierName(s.tier))) : s.skill_name;
-            if (detailExplain) detailExplain.text = s.skill_explain;
+            if (detailExplain) detailExplain.text = s.Effect == CommonEffectType.Stage_Skip ? SkipNote(s, st) : s.skill_explain;
             if (detailState)
                 detailState.text = st switch
                 {
@@ -297,6 +297,15 @@ namespace NKK.Lobby
             if (costResearch) costResearch.color = p.research >= s.cost_research ? new Color(0.29f, 0.22f, 0.17f) : noColor;
             if (buyButton) { buyButton.gameObject.SetActive(!s.IsRoot); buyButton.interactable = p.CanBuySkill(s); }
             if (buyLabel) buyLabel.text = st == Progress.SkillState.Owned ? T(wOwned) : p.CanBuySkill(s) ? T(buyLabel) : T(wCant);
+        }
+
+        // 스테이지 스킵 노드: 스킬만으론 안 되고 층을 클리어해야 열린다는 안내 + 이 노드까지 찍었을 때 몇 층을 클리어하면 몇 층부터인지 (출동 화면 skipHint 와 같은 계산)
+        static string SkipNote(CommonSkillRow s, Progress.SkillState st)
+        {
+            string t = string.IsNullOrEmpty(s.skill_explain) ? Loc.T(9000132) : s.skill_explain + "\n" + Loc.T(9000132);
+            var (at, next) = Progress.I.NextSkipUnlock(st == Progress.SkillState.Owned ? 0 : Mathf.RoundToInt(s.value_01));
+            if (next > 0) t += "\n" + Loc.T(8000430).Replace("{floor}", at.ToString()).Replace("{n}", next.ToString());
+            return t;
         }
 
         // 못 단 훈장 탭: 승급 조건 · 연구자료 · 버튼
