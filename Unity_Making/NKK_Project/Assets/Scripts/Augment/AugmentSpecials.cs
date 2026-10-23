@@ -38,6 +38,8 @@ namespace NKK
         [Tooltip("천둥 번개 먹구름 · 치즈 비 구름 · 그을음 · 장난감 기차 · 분신 마법진")] public string stormCloudSticker = "storm_cloud";
         public string cheeseCloudSticker = "cheese_cloud", scorchSticker = "scorch", trainSticker = "toy_train", cloneCircleSticker = "magic_circle";
         [Tooltip("구름 크기 · 기차 크기 · 운석 그림 (비면 RatManager 치즈 운석)")] public float cloudSize = 520, trainSize = 420;
+        [Tooltip("맵에 소환되는 구름 (천둥 번개 · 치즈 비): 떠 있는 높이 · 떠다니는 속도 · 바닥 범위 원 색")] public float cloudHeight = 300, cloudDrift = 40;
+        public Color stormRingColor = new(0.25f, 0.3f, 0.5f, 0.45f), rainRingColor = new(1f, 0.82f, 0.3f, 0.45f);
         public Sprite meteorSprite;
 
         [Header("글 (자리표시 {n})")]
@@ -90,14 +92,14 @@ namespace NKK
 
         void Update()
         {
-            if (Game && Game.Floor != lastFloor) { lastFloor = Game.Floor; bladeHit.Clear(); }
+            if (Game && Game.Floor != lastFloor) { lastFloor = Game.Floor; bladeHit.Clear(); EndClouds(); }
             float dt = Time.deltaTime;
             UpdateGiants(dt);
             UpdateBlades(dt);
             UpdateTwisters(dt);
             UpdateEvents(dt);
             UpdateRatSide(dt);          // 등급 통일 · 쥐 탑 · 쥐 모습 (AugmentSpecials.Rats.cs)
-            UpdateLooks(dt);            // 상시 표시 (구름 · 슬롯머신 · 가랜드 …)
+            UpdateLooks(dt);            // 맵 위 작은 표시 (5G 신호 · 스파크 · 바퀴 자국)
             if (!Running) return;
             foreach (var e in Sp)
             {
@@ -207,36 +209,101 @@ namespace NKK
                 giantAge[r] = (giantAge.TryGetValue(r, out var a) ? a : 0) + dt;
                 // 걸음마다 흔들림 0.2초 + 먼지 원 (기획서: 거대 쥐 발동)
                 if (fx && r.Speed > 60 && Mathf.Repeat(giantAge[r], 0.35f) < dt && r.OnScreen()) { fx.Shake(0.04f); fx.Dust(r.x, r.y, 2, 1.2f); }
+                // 지나간 자리에 발자국 (예전엔 화면 가운데 붙은 그림)
+                if (fx && r.Speed > 60 && Mathf.Repeat(giantAge[r], 0.7f) < dt && r.OnScreen()) fx.AddSticker(footprintSticker, r.x, r.y, 0, 34 * RatScale(r), 1.6f, 0, true, new Color(1, 1, 1, 0.35f));
                 float t = giants[r] - dt;
                 if (t <= 0) { giants.Remove(r); giantMul.Remove(r); giantScale.Remove(r); giantAge.Remove(r); }
                 else giants[r] = t;
             }
         }
 
-        // ── 천둥 번개 (골드): 방 위 먹구름에서 예고 없이 번개, 맞은 자리 검게 그을림 ──
+        // ── 맵에 소환되는 구름 (천둥 번개 · 치즈 비) — 2026-10-23 사용자: 화면 위에 붙이지 말고 맵에 일정 시간마다 소환되어 공격 ──
+        //  구름이 대상 근처 하늘에 나타나 천천히 떠다니며 바닥 원(범위) 안을 공격하고 사라짐
+        class Cloud { public bool rain; public float x, y, vx, life, rad, dmg, gap, tick; public int bolts; public FxManager.Sticker s, ring; }
+        readonly List<Cloud> clouds = new();
+        Cloud SummonCloud(bool rain, Vector2 p, float life, float rad, float dmg)
+        {
+            var c = new Cloud { rain = rain, x = p.x, y = p.y, vx = (Random.value < 0.5f ? 1 : -1) * cloudDrift, life = Mathf.Max(0.5f, life), rad = Mathf.Max(80, rad), dmg = dmg };
+            var fx = FxManager.I;
+            if (fx)
+            {
+                c.s = fx.AddSticker(rain ? cheeseCloudSticker : stormCloudSticker, c.x, c.y, cloudHeight, cloudSize, c.life + 1);
+                c.ring = fx.AddSticker(warnSticker, c.x, c.y, 0, c.rad * 2, c.life + 1, 0, true, rain ? rainRingColor : stormRingColor);
+                fx.Dust(c.x, c.y, 4, 1.4f);
+            }
+            clouds.Add(c);
+            return c;
+        }
+        // 구름 자리: 보스 → 고양이 → 화면 속 물건 → 열린 방 아무 곳
+        Vector2 CloudSpot()
+        {
+            if (Boss.Current && Boss.Current.CanHit && Ults && Ults.OnScreen(Boss.Current.x, Boss.Current.y)) return new Vector2(Boss.Current.x, Boss.Current.y);
+            var cat = Cats ? Cats.Current : null; if (cat && cat.Alive && Ults && Ults.OnScreen(cat.x, cat.y)) return new Vector2(cat.x, cat.y);
+            var it = Items ? Items.RandomRestInView() : null;
+            return it ? new Vector2(it.x, it.y) : RandomOpenPoint(160);
+        }
+        void EndClouds()
+        {
+            foreach (var c in clouds) { c.s?.End(0.4f); c.ring?.End(0.3f); }
+            clouds.Clear();
+            rainT = 0;
+        }
+        void UpdateClouds(float dt)
+        {
+            if (clouds.Count == 0) return;
+            var fx = FxManager.I;
+            for (int i = clouds.Count - 1; i >= 0; i--)
+            {
+                var c = clouds[i];
+                if (FxManager.Halt) continue;
+                c.life -= dt; c.x += c.vx * dt;
+                var b = Stage ? Stage.OpenBounds() : View;
+                if ((c.x < b.xMin + c.rad * 0.5f && c.vx < 0) || (c.x > b.xMax - c.rad * 0.5f && c.vx > 0)) c.vx = -c.vx;
+                c.s?.Move(c.x, c.y, cloudHeight + Mathf.Sin(Time.time * 1.4f + i) * 8);
+                c.ring?.Move(c.x, c.y, 0);
+                if (c.rain && fx && Random.value < dt * 30)
+                {
+                    var q = new Vector2(c.x, c.y) + Random.insideUnitCircle * c.rad;
+                    fx.Burst(q.x, q.y, cloudHeight * 0.8f, 2, new Color(0.98f, 0.82f, 0.32f), new Color(1f, 0.93f, 0.6f), 10, 40, 6, 10);
+                }
+                if (Running && (c.tick -= dt) <= 0)
+                {
+                    if (c.rain) { c.tick = 0.25f; RainHit(c); }
+                    else if (c.bolts > 0) { c.tick = c.gap; c.bolts--; Strike(c); }
+                }
+                if (c.life <= 0 || (Stage && Stage.Climbing)) { c.s?.End(0.4f); c.ring?.End(0.3f); clouds.RemoveAt(i); }
+            }
+        }
+
+        // ── 천둥 번개 (골드): p1 초마다 대상 근처에 먹구름 소환 → p4 초 동안 바닥 원(반경 p5) 안 대상에 번개 p2 번, 맞은 자리 검게 그을림 ──
         void Lightning((AugSpecialRow s, int lv) e)
         {
-            int n = Mathf.Max(1, Mathf.RoundToInt(V(e, 2)));
-            float dmg = AvgAtk * V(e, 3);
+            float life = V(e, 4) > 0 ? V(e, 4) : 3;
+            var c = SummonCloud(false, CloudSpot(), life, V(e, 5) > 0 ? V(e, 5) : 400, AvgAtk * V(e, 3));
+            c.bolts = Mathf.Max(1, Mathf.RoundToInt(V(e, 2)));
+            c.tick = Mathf.Min(0.6f, c.life * 0.2f);                    // 구름이 먼저 나타난 뒤 첫 번개
+            c.gap = (c.life - c.tick) * 0.85f / c.bolts;
+            SfxManager.Play("whoosh");
+        }
+        void Strike(Cloud c)
+        {
             var targets = new List<object>();
-            if (Boss.Current && Boss.Current.CanHit) targets.Add(Boss.Current);
-            var cat = (Cats ? Cats.Current : null); if (cat && cat.Alive && Ults && Ults.OnScreen(cat.x, cat.y)) targets.Add(cat);
+            if (Boss.Current && Boss.Current.CanHit && Vector2.Distance(new Vector2(Boss.Current.x, Boss.Current.y), new Vector2(c.x, c.y)) < c.rad + Boss.Current.R) targets.Add(Boss.Current);
+            var cat = Cats ? Cats.Current : null; if (cat && cat.Alive && cat.BodyDist(c.x, c.y) < c.rad) targets.Add(cat);
             if (Items)
             {
-                foreach (var h in Items.Humans) if (h && h.Alive && Ults && Ults.OnScreen(h.x, h.y) && targets.Count < n * 3) targets.Add(h);
-                for (int k = 0; k < n * 2; k++) { var it = Items.RandomRestInView(); if (it != null && !targets.Contains(it)) targets.Add(it); }
+                foreach (var h in Items.Humans) if (h && h.Alive && h.BodyDist(c.x, c.y) < c.rad) targets.Add(h);
+                foreach (var it in Items.InRange(c.x, c.y, c.rad)) if (it.State == Item.ItemState.Rest && Vector2.Distance(new Vector2(it.x, it.y), new Vector2(c.x, c.y)) < c.rad) targets.Add(it);
             }
             var fx = FxManager.I;
-            for (int k = 0; k < n && targets.Count > 0; k++)
-            {
-                int idx = Random.Range(0, targets.Count); var o = targets[idx]; targets.RemoveAt(idx);
-                if (!RatManager.FoePos(o, out var p, out _)) continue;
-                fx?.Bolt(p.x, p.y, new Color(1f, 0.92f, 0.45f), 1.2f);
-                fx?.AddSticker(scorchSticker, p.x, p.y, 0, 90, 3f, 0, true, new Color(1, 1, 1, 0.8f));
-                RatManager.FoeHit(o, dmg, AnyRat(), Random.value * Mathf.PI * 2);
-            }
+            Vector2 p;
+            object o = targets.Count > 0 ? targets[Random.Range(0, targets.Count)] : null;
+            if (o == null || !RatManager.FoePos(o, out p, out _)) { p = new Vector2(c.x, c.y) + Random.insideUnitCircle * c.rad; o = null; }
+            fx?.Bolt(p.x, p.y, new Color(1f, 0.92f, 0.45f), 1.2f, 0.28f, cloudHeight);
+            fx?.AddSticker(scorchSticker, p.x, p.y, 0, 90, 3f, 0, true, new Color(1, 1, 1, 0.8f));
+            if (o != null) RatManager.FoeHit(o, c.dmg, AnyRat(), Random.value * Mathf.PI * 2);
             fx?.Shake(0.12f);
-            SfxManager.Play("zap");
+            SfxManager.PlayAt("zap", p.x, p.y);
         }
 
         // ── 회전 치즈 칼날 (프리즘): 물건을 칠 때 확률로 (묘기와 따로) 그 쥐 둘레를 칼날이 잠깐 돔 ──
@@ -371,14 +438,22 @@ namespace NKK
             });
         }
 
-        // ── 치즈 비 (골드): 방 천장 치즈 구름에서 p2 초 동안 치즈 조각이 쏟아짐 → 그동안 치즈 +p3 ──
+        // ── 치즈 비 (골드): p1 초마다 맵에 치즈 구름 소환 → p2 초 동안 바닥 원(반경 p5) 안에 치즈 조각이 쏟아져 초당 평균 공격력 × p4 · 그동안 치즈 +p3 ──
         float rainT, rainBonus;
         public static float CheeseMul => I && I.rainT > 0 ? 1 + I.rainBonus : 1;
         void CheeseRain((AugSpecialRow s, int lv) e)
         {
-            rainT = V(e, 2); rainBonus = V(e, 3);
-            var v = View;
-            FxManager.I?.Popup(v.center.x, v.center.y, T(cheeseRainPopupKey, cheeseRainPopup).Replace("{n}", Mathf.RoundToInt(rainBonus * 100).ToString()), popupColor, 30, 1.4f, 160);
+            rainT = Mathf.Max(rainT, V(e, 2)); rainBonus = V(e, 3);
+            var c = SummonCloud(true, CloudSpot(), V(e, 2), V(e, 5) > 0 ? V(e, 5) : 280, AvgAtk * V(e, 4));
+            c.tick = 0.4f;
+            FxManager.I?.Popup(c.x, c.y, T(cheeseRainPopupKey, cheeseRainPopup).Replace("{n}", Mathf.RoundToInt(rainBonus * 100).ToString()), popupColor, 30, 1.4f, 160);
+        }
+        void RainHit(Cloud c)
+        {
+            if (c.dmg <= 0) return;
+            float d = c.dmg * 0.25f;            // 0.25초마다 → 초당 dmg
+            Items?.Aoe(c.x, c.y, c.rad, d, AnyRat(), false);
+            var cat = Cats ? Cats.Current : null; if (cat && cat.Alive && cat.BodyDist(c.x, c.y) < c.rad) cat.Damage(d, Random.value * 6.28f, AnyRat());
         }
 
         // ── 장난감 기차 (프리즘): 맵 한쪽 끝 → 반대편 끝, 지나간 길의 물건이 튕겨 나감 ──
@@ -431,12 +506,8 @@ namespace NKK
         {
             UpdateWarns(dt);
             UpdateTrains(dt);
-            if (rainT > 0 && !FxManager.Halt)
-            {
-                rainT -= dt;
-                var fx = FxManager.I; var v = View;
-                if (fx && Random.value < dt * 30) { float x = Random.Range(v.xMin + 60, v.xMax - 60), y = Random.Range(v.yMin + 80, v.yMax - 40); fx.Burst(x, y, 320, 2, new Color(0.98f, 0.82f, 0.32f), new Color(1f, 0.93f, 0.6f), 10, 40, 6, 10); }
-            }
+            UpdateClouds(dt);
+            if (rainT > 0 && !FxManager.Halt) rainT -= dt;
         }
 
         // ── 훅: 물건 부숨 (미다스의 앞니: 황금 물건 치즈 +) ──
@@ -511,7 +582,7 @@ namespace NKK
             {
                 if (e.s.type != "Jackpot") continue;
                 bool win = Random.value < V(e, 1);
-                me.SpinSlot(win);
+                me.SpinSlot(win, x, y);
                 if (!win) continue;
                 m *= Mathf.Max(1, V(e, 2));
                 FxManager.I?.Popup(x, y, T(me.jackpotPopupKey, me.jackpotPopup).Replace("{n}", Mathf.RoundToInt(m).ToString()), me.popupColor, 34, 1.6f, 120);

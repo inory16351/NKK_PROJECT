@@ -2,13 +2,16 @@ Use your built-in image generation tool to create ONE image and save it as PNG t
 
 Image spec:
 - 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
-- This is a cut-out PARTS SHEET for a 2D game RAT rig. The attached reference shows the EXISTING parts of the game's SKATER RAT (head with red beanie, body, tail, front leg holding a skateboard, back leg). Make the SAME rat redrawn as an office worker: the same five parts, the same view (side view facing LEFT), the same shapes, sizes, proportions and soft rendering. Change ONLY what is listed below.
-- Exact layout: 1 row x 5 columns, all parts centered vertically in the image, each part a separate island with clear magenta space around it.
-- STYLE IS THE MOST IMPORTANT RULE: copy the reference rendering exactly: smooth soft shapes, gentle soft shading, a few faint soft strokes like the reference, NO black outlines, NO linework, no gloss, no hard shadows. Same warm gray-beige rat color, same pink ears, nose and paws.
+- NO magenta, pink-purple, violet or lavender colors inside the drawings (they get removed with the background).
+- This is a cut-out PARTS SHEET for a 2D game RAT rig. The attached reference is the EXISTING parts sheet of this exact rat: a bald office-worker rat in a charcoal suit (head, torso with white collar and coral-red tie, pink tail, front leg = suit sleeve with pink paw, back leg = suit trousers with black dress shoe). Side view facing LEFT.
+- It is a parody of a businessman who moves on ALL FOURS wearing ROLLER SKATES strapped to BOTH HANDS AND FEET. Redraw the SAME five parts with the SAME shapes, sizes, proportions, colors and flat rendering as the reference. Change ONLY the two legs as listed below. Head, torso and tail must stay exactly like the reference.
+- Exact layout: 1 row x 5 columns in this order: head, torso, tail, front leg, back leg. All parts centered vertically in the image, each part a separate island with clear magenta space around it.
+- STYLE IS THE MOST IMPORTANT RULE: copy the reference exactly: FLAT simple color shapes, one solid muted color per part with at most one slightly darker flat tone, very subtle paper grain ok, NO gradients, NO gloss, NO shine, NO black outlines, NO linework, no hard shadows.
 
-Changes:
-1) HEAD: exactly the reference head shape (same eye, pink nose, whiskers, big round pink ear) but WITHOUT the beanie: the top of the head is completely BALD and smooth (same gray-beige skin, a soft shine spot on top). Eyebrow slightly lowered for a serious, determined look. Neck cut flat at the bottom like the reference.
-2) TORSO: exactly the reference body shape, but wearing a charcoal-gray business suit jacket: a white shirt collar and a coral-red tie visible at the front (LEFT) end, jacket hem at the back. Same size and outline as the reference body.
-3) TAIL: same as the reference pink tail.
-4) FRONT LEG: same shape and pose as the reference front leg but in a charcoal suit sleeve with a small white cuff, ending in the same pink rat paw. NO skateboard.
-5) BACK LEG: same shape as the reference back leg but in charcoal suit trousers, ending in the same pink rat foot wearing a small black dress shoe.
+Parts:
+1) HEAD: identical to the reference (bald, gray-beige, pink ear and nose, whiskers, serious eye).
+2) TORSO: identical to the reference suit jacket torso with white collar and coral-red tie.
+3) TAIL: identical to the reference pink tail.
+4) FRONT LEG (arm): the same charcoal suit sleeve with a small white cuff, hanging straight down; the pink rat paw at the bottom is pressed flat into a small classic QUAD ROLLER SKATE (side view: a low boot-like cream/white skate shell with a brick-red strap over the paw, a flat sole plate and TWO round mustard-yellow wheels under it, a small red toe stopper at the front/left). The skate is under the paw, wheels at the very bottom.
+5) BACK LEG: the same charcoal suit trouser leg; the foot (pink ankle showing) wears a classic QUAD ROLLER SKATE instead of the dress shoe: same skate design as the front one (cream/white boot with brick-red laces, flat sole plate, TWO round mustard-yellow wheels at the bottom, small red toe stopper at the front/left). Wheels at the very bottom.
+Both skates the same size, small and cute, matching the rat's scale.

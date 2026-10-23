@@ -1,0 +1,25 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_icons_fa.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- NO magenta, pink-purple, violet or lavender colors inside the drawings (they get removed with the background). Use pale BLUE instead of purple.
+- These are ICONS for upgrade cards in a cute rat game. TWO reference images are attached:
+  (A) STYLE reference: the REAL game (objects on the game floor + the UI kit). Copy this rendering.
+  (B) CONTENT reference: the CURRENT icons, laid out in the SAME grid as the image you must make. Keep each icon's subject, composition, pose and colors, but REDRAW it in the style of (A).
+- STYLE IS THE MOST IMPORTANT RULE: FLAT illustration like Untitled Goose Game and the reference (A): simple flat color shapes, each part ONE solid muted color with at most one slightly darker flat tone for the shadow side, very subtle paper grain ok. NO gradients, NO glossy highlights, NO shine spots, NO glow, NO soft 3D clay or plastic look, NO painterly soft shading, NO dark outlines, NO linework. Muted slightly desaturated warm palette (mustard, brick red, sage green, slate gray, warm beige, cream, dusty sky blue). Rats are cream-white or warm gray-beige with pink ears, nose, paws and tail.
+- An exact grid of 4 columns x 3 rows. Each icon is centered in its cell, fills about 70% of the cell, with a clear magenta margin of at least 40px; nothing touches or crosses cell borders.
+- Parody only: no logos, no brand marks, no symbols, no text.
+
+Cells (left to right, top to bottom):
+1) a single cream rat incisor tooth (long curved) with a small four-point sparkle
+2) a cracked gray stone block with a cream tooth biting into its corner, small chips flying
+3) a round red-and-cream target on a little wooden stand with a cream tooth stuck in the bullseye
+4) a navy guard cap with a mustard badge, crossed by a brick-red diagonal bar
+5) a pink protein shaker bottle with a red lid and a cheese wedge label
+6) a cream tooth with a red drop at its tip
+7) a black wrecking ball on a chain smashing a gray brick wall, bricks flying
+8) a cream mouse pointer arrow with an orange burst spark at its tip
+9) a navy-blue cushion with mustard tassels holding a golden tooth
+10) a small slot machine (brick red and mustard cabinet, lever with red ball, three reels with cheese wedges)
+11) a cream cat skull with crossed bones
+12) a steel gray jaw clamp with two cream incisor teeth

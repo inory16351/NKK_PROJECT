@@ -15,7 +15,13 @@ SHEETS = os.path.join(RES, 'Sheets', 'v04')
 ART = os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Art')
 
 ICONS = ['aug_demolish', 'aug_jaw', 'aug_tower', 'aug_cheeserain', 'aug_clones', 'aug_train', 'aug_u_hamster', 'aug_u_panda', 'aug_u_skater', 'aug_u_burger', 'aug_u_fiveg']
-FX = ['storm_cloud', 'cheese_cloud', 'scorch', 'toy_train', 'magic_circle', 'garland', 'footprint', 'slot_machine', 'signal_5g']
+# 2026-10-23 저녁 아이콘 32개 플랫으로 다시 (사용자: 증강도 그림체가 다름). 부드러운 그림 판 = Sheets/v04/_v3/ (aug_icons_e) · git 기록
+FLAT = [
+    ('aug_icons_fa', 4, 3, ['aug_tooth', 'aug_wall', 'aug_crit', 'aug_boss', 'aug_protein', 'aug_fang', 'aug_demolish', 'aug_click', 'aug_gold', 'aug_jackpot', 'aug_skull', 'aug_jaw']),
+    ('aug_icons_fb', 4, 3, ['aug_rapid', 'aug_zap', 'aug_domino', 'aug_rankboom', 'aug_tower', 'aug_storm', 'aug_cheeserain', 'aug_party', 'aug_u_hamster', 'aug_u_panda', 'aug_crown', 'aug_blades']),
+    ('aug_icons_fc', 4, 2, ['aug_giant', 'aug_clones', 'aug_meteor', 'aug_tornado', 'aug_train', 'aug_u_skater', 'aug_u_burger', 'aug_u_fiveg']),
+]
+FX = ['storm_cloud','cheese_cloud', 'scorch', 'toy_train', 'magic_circle', 'garland', 'footprint', 'slot_machine', 'signal_5g']
 
 
 def cells(im, cols, rows):
@@ -53,6 +59,13 @@ def main():
     if os.path.exists(s):
         im = key_magenta(Image.open(s))
         for name, c in zip(ICONS, cells(im, 4, 3)):
+            t = trim(c)
+            if t: save(t, name, RES, os.path.join(ART, 'Augment'))
+    for sheet, cols, rows, names in FLAT:
+        s = os.path.join(SHEETS, sheet + '.png')
+        if not os.path.exists(s): continue
+        im = key_magenta(Image.open(s))
+        for name, c in zip(names, cells(im, cols, rows)):
             t = trim(c)
             if t: save(t, name, RES, os.path.join(ART, 'Augment'))
     s = os.path.join(SHEETS, 'aug_fx.png')

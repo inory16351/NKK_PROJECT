@@ -1,0 +1,21 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_icons_fc.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- NO magenta, pink-purple, violet or lavender colors inside the drawings (they get removed with the background). Use pale BLUE instead of purple.
+- These are ICONS for upgrade cards in a cute rat game. TWO reference images are attached:
+  (A) STYLE reference: the REAL game (objects on the game floor + the UI kit). Copy this rendering.
+  (B) CONTENT reference: the CURRENT icons, laid out in the SAME grid as the image you must make. Keep each icon's subject, composition, pose and colors, but REDRAW it in the style of (A).
+- STYLE IS THE MOST IMPORTANT RULE: FLAT illustration like Untitled Goose Game and the reference (A): simple flat color shapes, each part ONE solid muted color with at most one slightly darker flat tone for the shadow side, very subtle paper grain ok. NO gradients, NO glossy highlights, NO shine spots, NO glow, NO soft 3D clay or plastic look, NO painterly soft shading, NO dark outlines, NO linework. Muted slightly desaturated warm palette (mustard, brick red, sage green, slate gray, warm beige, cream, dusty sky blue). Rats are cream-white or warm gray-beige with pink ears, nose, paws and tail.
+- An exact grid of 4 columns x 2 rows. Each icon is centered in its cell, fills about 70% of the cell, with a clear magenta margin of at least 40px; nothing touches or crosses cell borders.
+- Parody only: no logos, no brand marks, no symbols, no text.
+
+Cells (left to right, top to bottom):
+1) a big muscular cream-white rat flexing both arms next to a tiny rat
+2) a cream-white rat running to the right with two pale blue ghost copies of it behind
+3) a cheese wedge meteor flying with an orange flame trail
+4) a gray tornado carrying a mug, a book and a cheese wedge
+5) a toy train engine in side view (brick red body, mustard trim, dark round wheels, chimney)
+6) a bald gray-beige rat in a charcoal business suit with a white collar and red tie, crouching ON ALL FOURS, wearing small cream ROLLER SKATES with mustard wheels on BOTH HANDS AND BOTH FEET, determined face, side view facing right
+7) a tall double cheeseburger with rat ears on top and a pink rat tail curling out
+8) a dark smartphone standing up next to four ascending dusty-blue signal bars

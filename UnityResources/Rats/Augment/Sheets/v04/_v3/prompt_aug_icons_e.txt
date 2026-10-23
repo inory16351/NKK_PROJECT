@@ -1,0 +1,27 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_icons_e.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the icons. No text, no letters, no numbers, no labels, no grid lines, no frames, no cards, no badges or circles behind the icons.
+- NO magenta, pink-purple, violet or lavender colors anywhere inside the icons (they get removed with the background). Use pale BLUE instead of purple.
+- A sheet of game icons in an exact 4 columns x 3 rows grid (equal cells, each 384x341). Each icon is ONE simple object centered in its cell, filling about 60% of the cell height, with a wide empty margin; icons must NOT touch or cross cell borders. The LAST cell (row 3, column 4) stays completely empty magenta.
+- STYLE IS THE MOST IMPORTANT RULE: the attached reference sheet shows the game's EXISTING augment icons (incisor, muscle rat, cheese meteor, party popper, tornado, slot machine, storm, fireworks rat). The new icons must look like they belong to that exact same set:
+  * SIMPLE, SMOOTH, CLEAN shapes with very few details. Soft gentle shading only (smooth soft gradient on each shape), NO fur strands, NO wood grain, NO brush texture, NO painterly detail, NO hatching.
+  * NO outlines, no dark contour lines, no glossy highlights, no drop shadows.
+  * Same light, soft, warm, slightly desaturated palette as the reference. Rats exactly like the reference rats: cream-white body, simple round pink ears, tiny dot eye, pink nose, smooth pink tail.
+  * Same size, simplicity and level of detail as the reference icons. When unsure, make it SIMPLER.
+  * MATTE and MUTED exactly like the reference: low saturation, dusty soft colors, a faint soft painted feel. NOT bright, NOT vivid, NOT glossy, NOT shiny plastic or clay 3D render, no specular highlights. Put each new icon next to the reference in your mind: the colors must look equally soft and faded.
+- Parody only: no real person's face, no logos, no brand marks, no symbols, no text.
+
+Cells (left to right, top to bottom):
+1) a small round dark-gray wrecking ball on a short chain knocking a few pale-gray bricks off a small brick wall
+2) a simple steel-gray metal rat jaw: a rounded metal block with two big flat front teeth
+3) five small cream rats (like the reference rats) stacked on each other in a tall slightly wobbly tower
+4) a simple mustard-yellow cheese cloud with a few round holes, a few small cheese cubes falling below
+5) a cream rat running, with two pale BLUE see-through copies of itself fanning out behind it
+6) a simple toy train engine (coral red body, mustard roof and chimney, round wheels) seen from the side
+7) a golden-orange hamster curled into a smooth round ball, eyes closed, smiling
+8) a small hamster wearing a black-and-white panda pajama hood with panda ears, curled into a smooth round ball
+9) a small bald pinkish-gray rat in a dark gray suit with a coral-red tie, leaning forward head-first as if head-butting (simple shapes like the reference rats)
+10) a tall simple burger with many stacked patties, cheese and lettuce, tiny round rat ears on the top bun, a pink rat tail on one side
+11) a simple smartphone with four ascending pale-blue signal bars beside it
+12) (empty)
