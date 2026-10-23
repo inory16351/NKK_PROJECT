@@ -75,3 +75,4 @@
 - **GIF** `rig_web/hydra.gif` (`Tools/hydra_gif.py`) · **유니티** `Assets/Art/Rats/BossParts/boss_hydra/` + `BossPartArtBuilder.Hydra()/AddHydra()` + BossPartRig Neck·Twitch (보스 테이블 행은 아직 없음).
 - **목 움직임 IK (같은 날, 사용자 "목 움직임이 이상함")**: 머리 관절 목표(떠다님 + 물기 뒤로 → 앞·아래로 찌름)를 먼저 정하고 마디 3개가 CCD 로 따라옴, 머리는 거의 수평. 첫 마디에 amp(떠다님 px)·wind·strike, 머리 amp = 끄덕임. `hydra_rig.py neck_ik` = `hydra.html neckIK` = `BossPartRig.NeckIK`.
 - **목 모양·방향 제각각 (같은 날, 사용자)**: 목마다 S/C 모양 · 머리 고개 숙임/듦 · 4·5·6 은 목 사슬째 뒤집어 뒤를 봄 (배 줄무늬가 머리 턱 쪽과 이어짐).
+- **보관만 (안 씀)**: 쥐 덩어리 목 마디 `Sheets/hy6` → `Parts/boss_hydra/ratneck_a~f` · 쥐 덩어리 머리 `Sheets/hy7` → `ratheadA/B(_bite/_angry)` — 사용자가 이전 모습(매끈한 목)을 고름 (2026-10-23 저녁).

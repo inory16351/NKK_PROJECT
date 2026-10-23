@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hy6.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: exactly the same flat Untitled Goose Game style and the SAME colors as the attached images: 1) the full-body "Rat Hydra" boss, 2) its parts sheet (rat heads, fused rat body mass with many rat heads). Grey-brown rat fur, lighter beige belly/throat, pink noses, pink paws, pink tails, round pink-inside ears, small black eyes, whiskers. Flat colors, NO outlines, no gradients, no gloss.
+- TASK: SIX separate NECK SEGMENTS for the hydra, arranged 3 per row in 2 rows, every segment a separate island with plenty of magenta space around it, NOTHING touching.
+  Each neck segment is a long horizontal tube (long side left-right, about 3 times as long as it is thick, all six about the same thickness and length) that is NOT smooth fur: it is made of 3 to 5 whole rats squeezed and tangled together lengthwise, as if the rats are FIGHTING and COMPETING with each other to become the neck: rats climbing over each other, one rat biting another rat's tail, paws grabbing and pushing faces, a rat squeezing its head out of the bundle squeaking with open mouth and little incisors, a rat being squashed with eyes shut, bodies twisted around each other like a braided rope. Rat heads and paws may poke out slightly above or below the tube, but the overall silhouette stays a straight horizontal tube of even thickness.
+  The darker grey-brown backs are mostly on the TOP side and the lighter beige bellies mostly on the BOTTOM side of each tube (like a neck: dark back on top, light throat below).
+  BOTH ENDS of every segment are ROUNDED furry ends (rat rumps / curled-up rat backs forming a half-circle), so the segments can overlap at the joints. Do not put a big rat face exactly at the end.
+  Make all six different (different rats, poses and expressions).
+- Moderately creepy cartoon, no blood, no guts, no wounds. Generic cartoon rats, no logo.

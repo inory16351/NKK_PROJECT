@@ -595,6 +595,7 @@
 - **웹 미리보기 `rig_web/hydra.html`** (launch.json `boss-rig-web` → `http://localhost:8772/rig_web/hydra.html`): 대기·걸음·물기(한 목씩)·일제히 물기·맞음, 몸통 고르기(body_chaos/body), 좌우 뒤집기(flipX) 지원, C# 줄 = 빌더 `P(..., flip: true, neck:, wind:, strike:, stretch:)` 형식. 확인함 (콘솔 오류 0).
 - **GIF `rig_web/hydra.gif`** (`Tools/hydra_gif.py`, 14.5초 7.9MB: 걸음 → 대기 → 한 목씩 물기 7번 → 일제히 물기 → 맞음, 공통 팔레트 96색).
 - **유니티 (모델만)**: 그림 19장 `Assets/Art/Rats/BossParts/boss_hydra/` · `BossPartArt.Move` 에 **Neck · Twitch** + Part 칸 `neck` `wind` `strike` · `BossPartRig` = Neck(`NeckIK`, 공격(alt) 중 `biteOrder` 차례 목이 물기 + 찌르는 동안 head_bite, 인스펙터 `neckLimit` 40 · `neckIters` 8) · Twitch(가끔 몸부림 + 표정 바뀜) · 인스펙터 `biteTime` 0.9 · `biteWind` 0.3 · `biteStrike` 0.55 · `biteOrder` · `BossPartArtBuilder.Hydra()` (length 300 · height 380) + **`AddHydra()`** = 다른 보스 값은 두고 히드라 줄만 에셋에 넣음 (execute_code: `System.Type.GetType("BossPartArtBuilder, Assembly-CSharp-Editor").GetMethod("AddHydra").Invoke(null, null)`). `BossPartArt.asset` 에 들어감 (47파츠, 그림 빠짐 0) · 컴파일 오류 0 · 에디터에서 리그 조립해 대기·걸음·공격 찍어 봄 (웹과 같음). 씬은 안 건드림.
+- **시도 후 되돌림 (같은 날 저녁)**: 목·머리를 쥐 여러 마리가 엉겨 붙은 그림으로 바꿔 봄 (Codex `hy6` 목 마디 6종 `ratneck_a~f` · `hy7` 머리 2종×3표정 `ratheadA/B`, 목 굵기 230 · 몸통 1.45배까지) → 사용자 "그냥 이전 모습으로" → 매끈한 목(neck1s~3s)·머리(head*) 그대로. 그림·프롬프트는 `BossRework/Sheets/hy6·hy7` · `Parts/boss_hydra/ratneck_*·rathead*` 에 보관만 (유니티·웹에는 안 넣음).
 - **남은 일**: 보스 테이블 행(95042~?)·층·행동은 사용자에게 (`BossRow.rig = Part`, code `boss_hydra`) · 맞음 그림 `head_angry` 는 웹 전용 (유니티 BossPartRig 엔 맞음 입력이 없음).
 
 ## 6. 밸런스 측정 (BalanceProbe)
