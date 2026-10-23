@@ -5062,14 +5062,14 @@
    "line_sk": 0,
    "pattern": "Parade",
    "sprite": "bm_picket",
-   "size": 150.0,
+   "size": 100.0,
    "color": "#e05050",
    "popup": "단결 투쟁!",
    "popup_sk": 4500067,
    "p1": 0.0,
    "p2": 0.0,
    "p3": 0.0,
-   "opt": "red,body:br_union_megaphone@300"
+   "opt": "red,body:br_union_megaphone@300,rig:boss_union2|boss_joassu@1"
   },
   {
    "atk_type": "R_LooksGood",
@@ -5089,9 +5089,9 @@
    "popup": "좋았쓰!!",
    "popup_sk": 4500068,
    "p1": 0.0,
-   "p2": 0.0,
+   "p2": 3.0,
    "p3": 0.0,
-   "opt": "around,shake,body:br_union_phone@300"
+   "opt": "around,shake,dust,body:br_union_phone@300,rig:boss_joassu@0.8"
   },
   {
    "atk_type": "R_RebarSpikes",
