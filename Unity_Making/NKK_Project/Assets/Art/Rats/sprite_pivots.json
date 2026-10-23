@@ -1741,26 +1741,6 @@
 "y": 0.942
 },
 {
-"path": "Assets/Art/Rats/Parts/maid/head.png",
-"x": 0.731,
-"y": 0.14
-},
-{
-"path": "Assets/Art/Rats/Parts/maid/tail.png",
-"x": 0.042,
-"y": 0.701
-},
-{
-"path": "Assets/Art/Rats/Parts/maid/front.png",
-"x": 0.509,
-"y": 0.938
-},
-{
-"path": "Assets/Art/Rats/Parts/maid/back.png",
-"x": 0.555,
-"y": 0.944
-},
-{
 "path": "Assets/Art/Rats/Parts/crewmate/head.png",
 "x": 0.532,
 "y": 0.14

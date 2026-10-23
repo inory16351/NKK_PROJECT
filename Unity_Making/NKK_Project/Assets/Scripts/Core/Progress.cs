@@ -407,7 +407,8 @@ namespace NKK
             if (string.IsNullOrEmpty(s)) return;
             var d = JsonUtility.FromJson<SaveData>(s);
             cheese = d.cheese; research = d.research; tier = Mathf.Max(1, d.tier); maxFloor = Mathf.Max(1, d.maxFloor); runs = d.runs;
-            foreach (var e in d.rats) rats[e.code] = e;
+            var db = GameDatabase.Instance;
+            foreach (var e in d.rats) if (!db || db.RatsByCode.Count == 0 || db.RatsByCode.ContainsKey(e.code)) rats[e.code] = e;      // 표에서 지운 쥐 (메이드 쥐 2026-10-23) 기록은 버림
             if (d.nodes != null) foreach (var id in d.nodes) skills.Add(id);
             SkillVersion++;
             if (d.achvs != null) foreach (var e in d.achvs) achvs[e.ult] = e.count;

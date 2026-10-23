@@ -43,7 +43,6 @@ GRID_PROPS = ['meme', 'pop', 'float1', 'float2', 'band', 'fg']           # gen_s
 FLAT_NAMES = {'knight': ['ghostsword', 'pillar', 'arc', 'motes', 'burst', 'ring'],      # fx_flat.png 칸 이름 (쥐마다 그린 것이 다를 때)
               'pharaoh': ['circle', 'sandburst', 'dust', 'bandage', 'sunflash', 'sandring'],
               'bomber': ['circle', 'circle_persp', 'runering', 'circle_small', 'redflash', 'embers'],
-              'maid': ['clockface', 'knife_front', 'knife', 'knifering', 'flash', 'glints'],      # 메이드 쥐 (2026-10-20)
               'streamrat': ['heart', 'heartburst', 'note', 'glint', 'neonring', 'confetti'],
               'ramjui': ['bolt', 'forkbolt', 'arc', 'zapburst', 'shockring', 'sparks'],
               'fondue': ['snap', 'shockring', 'splash', 'drops', 'spray', 'streak'],
@@ -57,7 +56,7 @@ FLAT_NAMES = {'knight': ['ghostsword', 'pillar', 'arc', 'motes', 'burst', 'ring'
               'emperor': ['muzzle', 'smoke', 'bullet', 'summon', 'spark', 'streak']}     # 쥐 황제 v2 (2026-10-20): 총구 섬광 · 연기 · 총알 · 소환 연기 · 탄착 불꽃 · 속도선     # 슈퍼 요리사 v2 (2026-10-20): 머리카락 뭉치 · 머리카락 · 기절 별 · 반짝 · 블러 휙 · 속도선     # 치즈 퐁듀 v2 (2026-10-20): 스냅 반짝 · 고리 · 치즈 튐 · 치즈 방울 · 물보라 · 속도선     # 스트리머 v2 (2026-10-20): 하트 · 하트 터짐 · 음표 · 고글 반짝 · 네온 고리 · 색종이    # 폭탄마 v2 (2026-10-20): 빨간 마법진 · 원근 마법진 · 룬 고리 · 작은 마법진 · 붉은 섬광 · 불티
 STRIP3 = {'beam.png': ['fx_beam', 'fx_beamcore', 'fx_beamhit'], 'mushroom.png': ['fx_mush1', 'fx_mush2', 'fx_mush3'], 'geyser.png': ['fx_geyser1', 'fx_geyser2', 'fx_geyser3'], 'pour.png': ['fx_pour1', 'fx_pour2', 'fx_pour3'], 'balloon.png': ['prop_balloon', 'prop_balloon_tight', 'prop_balloon_burst']}   # 가로 3칸 (자홍, 여백 자름) — 폭탄마 v2 레이저 · 버섯구름 (버섯구름은 같은 바닥선 → 칸 크기 그대로)
 GRID6 = {'boom.png': (['boom1', 'boom2', 'boom3', 'shockring', 'debris', 'smoke'], 3), 'pop.png': (['pop1', 'pop2', 'pop3', 'dome', 'debris', 'dustwall'], 3)}    # 자홍 3×2: 앞 n 개 = 프레임 (칸 크기 그대로) · 나머지 = 여백 자름  # 파라오 v2 (2026-10-20): 소환진 · 모래 분수 · 모래 먼지 · 붕대 · 해 섬광 · 모래 고리
-HIT_NAMES = {'maid': ['knife_fall', 'knife_fall2', 'glint', 'hit1', 'hit2', 'hit3'], 'pharaoh': ['sandstreak', 'scarab', 'puff', 'hit1', 'hit2', 'hit3'], 'streamrat': ['streak', 'coin', 'dot', 'pop1', 'pop2', 'pop3'],
+HIT_NAMES = {'pharaoh': ['sandstreak', 'scarab', 'puff', 'hit1', 'hit2', 'hit3'], 'streamrat': ['streak', 'coin', 'dot', 'pop1', 'pop2', 'pop3'],
              'ramjui': ['shockwave', 'chunks', 'streak', 'land1', 'land2', 'land3'],
              'fondue': ['drop', 'wedge', 'wall', 'splat1', 'splat2', 'splat3'],
              'sultan': ['coinfall', 'sack', 'wall', 'clink1', 'clink2', 'clink3'],
@@ -65,8 +64,8 @@ HIT_NAMES = {'maid': ['knife_fall', 'knife_fall2', 'glint', 'hit1', 'hit2', 'hit
              'zapham': ['boltfall', 'zsparks', 'zstreak', 'hit1', 'hit2', 'hit3'],
              'jjdetective': ['dartfall', 'feather', 'snot', 'hit1', 'hit2', 'hit3'],
              'jwerry': ['panfall', 'pan2', 'star', 'hit1', 'hit2', 'hit3']}       # fx_hit.png 칸 이름 (기본 = 기사: slash · wave · mote · hit1~3)
-ROT_RIGHT = {'maid': ['fx_knife_fall', 'fx_knife_fall2'], 'jjdetective': ['fx_dartfall']}     # 메이드 쥐 칼 비 (2026-10-20)
-FLAT_PROPS = {'maid': ['watch', 'gear', 'teacup', 'knives', 'meme', 'headdress'], 'pharaoh': ['sarcophagus', 'jar', 'scarab', 'obelisk', 'meme', 'fg'], 'streamrat': ['monitor', 'coins', 'gift', 'like', 'meme', 'glowstick'],
+ROT_RIGHT = {'jjdetective': ['fx_dartfall']}     # 메이드 쥐 칼 비 (2026-10-20)
+FLAT_PROPS = {'pharaoh': ['sarcophagus', 'jar', 'scarab', 'obelisk', 'meme', 'fg'], 'streamrat': ['monitor', 'coins', 'gift', 'like', 'meme', 'glowstick'],
               'ramjui': ['hammer', 'acorn', 'helmet', 'polaroid', 'cursor', 'leaf'],
               'starchef': ['hat', 'sweat', 'steam', 'tear', 'meme', 'fg'],
               'jjdetective': ['pawprint', 'hair', 'fishbone', 'scratch', 'bulb', 'dart'],      # 명탐정 쥐 v2: 단서 4 (발자국 · 고양이 털 · 생선 뼈 · 할퀸 자국) · 전구 · 마취침
