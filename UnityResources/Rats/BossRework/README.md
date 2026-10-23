@@ -55,3 +55,23 @@
 - 시트 `Sheets/ef1~3.png` (프롬프트 `Tools/gen_boss_fx_prompts.py`, 참고 `Sheets/ref_fx_bosses.png` = 보스 파츠 띠) → `python Tools/slice_boss_fx.py` → `FX/br_*.png` → `Assets/Art/Rats/BossMeme/` → Game 씬 Boss 인스펙터 **Fill Meme Sprites**.
 - 발사체는 왼쪽을 보게 그림 (Boss.Rework 가 날아가는 방향으로 뒤집음). 머리 교체(`br_huh_head` = 팝 캣 머리 높이, `br_goerem_saw` = 괴렘 머리 너비 0.95)는 크기를 맞추고 목 아래 관절점을 `FX/pivots.json` 에.
 - 재사용: br_club(Props/club) · br_rat_jet(boss_carrier/jet2) · br_siren(Rogue/rg_siren) · br_smoke(FX_New/color/smoke) · br_bullet(SuperUlt/emperor/fx_bullet 뒤집음) · br_vmouse_head(Humans boss_vmouse 머리).
+
+## 쥐 히드라 (2026-10-23, 새 보스 · 리깅 끝, 층·행동 미정) — 코드 `boss_hydra`
+
+- **사용자 결정 (질문)**: 목 **7개** · 머리 = 차력거인 쥐 머리(tt10) 계열 (머리칼·사람 목 없음) · 몸통 = 쥐 몸 뭉친 덩어리 + 쥐 다리 8개 + 꼬리 4개 · 징그러움 **중간** (발·꼬리·얼굴이 몸에서 튀어나옴, 피·내장 없음).
+- 사용자 추가 요청 (작업 중): **몸통에 쥐 머리 더 많이** → hy4 몸통(머리 9개+) · **박힌 각도 제각각** → hy5 몸통(거꾸로·옆·뒤 보는 머리) + 리그에서 박힌 머리 조각을 각도·좌우 뒤집기 제각각 · **위 목 머리 7개도 제각각 움직이게** (목마다 위상·빠르기·흔들림 다르게).
+- **그림 (Codex, `Sheets/`, 프롬프트 `prompt_hy*.txt` · 로그 `log_hy*.txt`)**: 참고 = tt10 · `ref_hydra_ratparts.png`(갈색 쥐·털 없는 쥐 파츠 띠)
+  - `hy1_full` 통 그림 (옆모습, 목 7 · 다리 8 · 꼬리 4) → `Parts/boss_hydra/_full.png` (= `rig_web/hydra/full.png`)
+  - `hy2` 몸통(머리 2개, 예전 판 `body_v1`) · 꼬리 `tail` · 다리 `legF1` `legB1` `legF2` `legB2` (윗끝 털 공 = 몸통 밑에 숨김)
+  - `hy3` 목 머리 `head`(평소) · `head_bite`(입 크게 벌림 = 물기 alt) · `head_angry` + 목 마디 `neck1`(굵음) `neck2` `neck3`(가늚 = 머리 목 그루터기 굵기). 머리마다 오른쪽으로 가로 목 그루터기 → 마디 왼끝에 이어 붙임, 마디 양끝 둥글어 겹치면 관절 원 안 보임
+  - `hy4` **몸통 `body`**(쥐 머리 9개+ 박힘, 지금 쓰는 것) + 박힌 머리 조각 `emb_a`(잠) `emb_b`(빤히) `emb_c`(찍찍 입) `emb_d`(화남) `emb_e`(위 봄) `emb_f`(발 하나)
+  - `hy5` **머리 각도 제각각인 몸통 `body_chaos`** (사용자 요청: 머리 12개+ 거꾸로·옆·오른쪽, 발·꼬리 조각 삐죽, 1405×896) — hy4 `body` 와 사용자에게 고르게
+  - 자르기 = `Tools/reslice_blobs.py` (hy2 4×2 · hy3 3×2 · hy4 6×3, 몸통은 칸 8)
+- **웹 미리보기 `rig_web/hydra.html`** (만듦, 값 파일 `rig_web/hydra_parts.json` 은 아직 없음 → 다음 세션): giant.html 과 같은 계산 + 새 움직임
+  - `Neck`: 대기·걸음 = 마디마다 위상 밀린 뱀 물결 · 물기 = 같은 `neck` 번호 마디가 `wind`(젖힘) → `strike`(뻗음) + 마디 길이 ×(1+`stretch`), 뻗는 동안 머리 alt(`head_bite`). 버튼: 대기 · 걸음 · 물기(한 목씩, 순서 3,0,5,1,6,2,4) · 일제히 물기 · 맞음.
+  - `Twitch`: 박힌 머리가 가끔 몸부림 (펄스 동안 떨고 튀어나옴, alt 로 표정 바뀜: emb_a↔emb_c, emb_b↔emb_d).
+  - 값 고치기 칸 · C# 줄(`hydra.parts.Add(P(...neck:, wind:, strike:, stretch:))`) · JSON 내려받기. 띄우기 = launch.json `boss-rig-web` (8772) → `http://127.0.0.1:8772/rig_web/hydra.html`.
+- **리그 값 (끝)**: `Tools/hydra_rig.py` → `rig_web/hydra_parts.json` (`--cs` = 유니티 빌더 줄). 몸통 = `body_chaos` · 목 마디 = neck2 로 만든 짧은 마디 `neck1s~3s` (Parts 에도 저장) · 목 각도는 머리 관절 목표에서 풀어 냄(`solve_neck`) · 박힌 머리 6 각도·좌우 제각각. 웹 `hydra.html` 에 몸통 고르기·flipX 추가.
+- **GIF** `rig_web/hydra.gif` (`Tools/hydra_gif.py`) · **유니티** `Assets/Art/Rats/BossParts/boss_hydra/` + `BossPartArtBuilder.Hydra()/AddHydra()` + BossPartRig Neck·Twitch (보스 테이블 행은 아직 없음).
+- **목 움직임 IK (같은 날, 사용자 "목 움직임이 이상함")**: 머리 관절 목표(떠다님 + 물기 뒤로 → 앞·아래로 찌름)를 먼저 정하고 마디 3개가 CCD 로 따라옴, 머리는 거의 수평. 첫 마디에 amp(떠다님 px)·wind·strike, 머리 amp = 끄덕임. `hydra_rig.py neck_ik` = `hydra.html neckIK` = `BossPartRig.NeckIK`.
+- **목 모양·방향 제각각 (같은 날, 사용자)**: 목마다 S/C 모양 · 머리 고개 숙임/듦 · 4·5·6 은 목 사슬째 뒤집어 뒤를 봄 (배 줄무늬가 머리 턱 쪽과 이어짐).

@@ -1,0 +1,15 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hy3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: exactly the same flat Untitled Goose Game style and SAME colors as the attached images: 1) the full-body "Rat Hydra" boss, 2) the rat head design (grey-brown fur, pointed snout with pink nose tip, whiskers, round pink-inside ear, small black eye) but WITHOUT the long brown hair and WITHOUT the human neck. The heads must look exactly like the heads on the hydra in image 1 (same slender rat head, same colors, lighter beige throat). Flat colors, NO outlines, no gradients, no gloss.
+- TASK: separate rig PARTS of the hydra's necks and heads. Every part is a separate island with plenty of magenta space around it, NOTHING touching. All side view, facing LEFT.
+  Top row, three RAT HEADS of the same size, each with the back of the head rounded and a short furry neck stump going to the RIGHT (the stump is a horizontal tube of fur the same thickness as the neck segments below, cut off round):
+  1) calm rat head, mouth closed, blank stare,
+  2) the same rat head BITING: mouth opened very wide (lower jaw dropped about 50 degrees), big yellow-white rat incisors on top and bottom, pink-dark mouth inside, eyes angry,
+  3) the same rat head ANGRY snarl: mouth slightly open with clenched bared incisors, glaring eye.
+  Bottom row, NECK SEGMENTS drawn horizontally (long side left-right), each a thick snake-like tube of rat fur, darker grey-brown on the top (back) side and lighter beige on the bottom (belly) side, a few fur tufts, both ends ROUNDED (half-circle ends) so segments can overlap at joints:
+  4) a thick neck segment (base, about 2.5 times as long as it is thick),
+  5) a medium neck segment (a bit thinner, same length),
+  6) a thin neck segment (thinner again, same length, same thickness as the head stump).
+- Moderately creepy cartoon, no blood, no guts. Generic cartoon rats, no logo.

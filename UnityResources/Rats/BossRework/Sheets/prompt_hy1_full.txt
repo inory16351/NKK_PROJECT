@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hy1_full.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawing. No text, no letters, no numbers, no labels, no grid lines, no frames, no ground line, no cast shadow.
+- STYLE: exactly the flat Untitled Goose Game style of the attached images (flat colors, NO outlines, no gradients, no gloss, simple shapes). Attached: 1) the rat head used on another boss (use THIS rat face design: grey-brown fur, pointed snout with pink nose tip, whiskers, round pink-inside ear, small black eye) — but WITHOUT the long brown human hair and WITHOUT the human neck; 2) the game's normal rat body parts (body, legs, pink tail) for proportions and style.
+- SUBJECT: a game BOSS monster "Rat Hydra": many city rats horribly fused together into ONE creature. Full body, side view, facing LEFT, standing on the bottom edge area, one single island with magenta space all around.
+  - BODY: a big lumpy round mass made of several grey-brown rat bodies squeezed and fused together (bulging rat backs and haunches, fur tufts, seams where bodies merge, a few small rat paws and a couple of half-buried closed-eye rat faces poking out of the mass). Moderately creepy but NO blood, NO guts, NO wounds - keep it a cartoon game boss.
+  - NECKS: SEVEN long thick snake-like necks growing out of the top and front of the mass, each neck made of rat fur (grey-brown with lighter belly side), curving upward and forward in different S-curves like a hydra, each ending in a rat head (the attached rat face design, no hair). One bigger central neck. Heads mostly look LEFT, mouths closed, a couple slightly snarling. Necks must not cross over each other too much; keep them readable.
+  - LEGS: 8 short rat legs underneath the mass (front and back rat legs like the attached rat legs, grey-brown fur, pink paws), slightly irregular placement as if belonging to different rats.
+  - TAILS: 4 long pink rat tails trailing out of the back (right side), tangled a little.
+- The whole creature should fill about 85% of the image width.
+- Original design: generic cartoon rats, no real creature IP, no logo.

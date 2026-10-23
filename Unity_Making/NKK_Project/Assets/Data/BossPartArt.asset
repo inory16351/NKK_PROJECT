@@ -32,6 +32,11 @@ MonoBehaviour:
       amp: 5
       phase: 0
       speed: 2
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: legF0
       sprite: {fileID: 21300000, guid: 3a01c889da887be45a9e8e5e1886f47e, type: 3}
       alt: {fileID: 0}
@@ -47,6 +52,11 @@ MonoBehaviour:
       amp: 12
       phase: 0.5
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: leg0
       sprite: {fileID: 21300000, guid: 3a01c889da887be45a9e8e5e1886f47e, type: 3}
       alt: {fileID: 0}
@@ -62,6 +72,11 @@ MonoBehaviour:
       amp: 14
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: legF1
       sprite: {fileID: 21300000, guid: 3a01c889da887be45a9e8e5e1886f47e, type: 3}
       alt: {fileID: 0}
@@ -77,6 +92,11 @@ MonoBehaviour:
       amp: 12
       phase: 0.75
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: leg1
       sprite: {fileID: 21300000, guid: 3a01c889da887be45a9e8e5e1886f47e, type: 3}
       alt: {fileID: 0}
@@ -92,6 +112,11 @@ MonoBehaviour:
       amp: 14
       phase: 0.25
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: legF2
       sprite: {fileID: 21300000, guid: 6d88cb2f376b98247a3a5c0ea7ae165f, type: 3}
       alt: {fileID: 0}
@@ -107,6 +132,11 @@ MonoBehaviour:
       amp: 12
       phase: 1
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: leg2
       sprite: {fileID: 21300000, guid: 6d88cb2f376b98247a3a5c0ea7ae165f, type: 3}
       alt: {fileID: 0}
@@ -122,6 +152,11 @@ MonoBehaviour:
       amp: 14
       phase: 0.5
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: legF3
       sprite: {fileID: 21300000, guid: 6d88cb2f376b98247a3a5c0ea7ae165f, type: 3}
       alt: {fileID: 0}
@@ -137,6 +172,11 @@ MonoBehaviour:
       amp: 12
       phase: 1.25
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: leg3
       sprite: {fileID: 21300000, guid: 6d88cb2f376b98247a3a5c0ea7ae165f, type: 3}
       alt: {fileID: 0}
@@ -152,6 +192,11 @@ MonoBehaviour:
       amp: 14
       phase: 0.75
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: neck
       sprite: {fileID: 21300000, guid: c7e337b995cc10348ae6a95f849f7a7b, type: 3}
       alt: {fileID: 0}
@@ -167,6 +212,11 @@ MonoBehaviour:
       amp: 0
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: head
       sprite: {fileID: 21300000, guid: 2563a7151d2e0604eb34d2e8d36c1e9e, type: 3}
       alt: {fileID: 21300000, guid: eaa47de84ea54a548a2b4adc04d7c948, type: 3}
@@ -182,6 +232,11 @@ MonoBehaviour:
       amp: 3
       phase: 0
       speed: 1.5
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
   - codeId: boss_sharkcat
     length: 330
     height: 260
@@ -201,6 +256,11 @@ MonoBehaviour:
       amp: 2
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: legFarF
       sprite: {fileID: 21300000, guid: 4bd9ed546889b884ea6b6db02e4f7d0c, type: 3}
       alt: {fileID: 0}
@@ -216,6 +276,11 @@ MonoBehaviour:
       amp: 22
       phase: 0.5
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: legFarB
       sprite: {fileID: 21300000, guid: b8dd6a2202252724f96be572b3d067f1, type: 3}
       alt: {fileID: 0}
@@ -231,6 +296,11 @@ MonoBehaviour:
       amp: 22
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: legF
       sprite: {fileID: 21300000, guid: 247d7642bef77c042b2c58a70beaf94e, type: 3}
       alt: {fileID: 0}
@@ -246,6 +316,11 @@ MonoBehaviour:
       amp: 22
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: legB
       sprite: {fileID: 21300000, guid: b8dd6a2202252724f96be572b3d067f1, type: 3}
       alt: {fileID: 0}
@@ -261,6 +336,11 @@ MonoBehaviour:
       amp: 22
       phase: 0.5
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: head
       sprite: {fileID: 21300000, guid: b863deeca2d87cf488fc0150d208037a, type: 3}
       alt: {fileID: 21300000, guid: af8cdbbd74af8dc41af887430fa8bc42, type: 3}
@@ -276,6 +356,11 @@ MonoBehaviour:
       amp: 4
       phase: 0.2
       speed: 1.5
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
   - codeId: boss_fishcat
     length: 252
     height: 300
@@ -295,6 +380,11 @@ MonoBehaviour:
       amp: 10
       phase: 0
       speed: 2
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: tail
       sprite: {fileID: 21300000, guid: 0989b69da3e012644ad4c517d97268ac, type: 3}
       alt: {fileID: 0}
@@ -310,6 +400,11 @@ MonoBehaviour:
       amp: 7
       phase: 0
       speed: 2
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: fin
       sprite: {fileID: 21300000, guid: 4695b7b21320ad045888a6bda0387070, type: 3}
       alt: {fileID: 0}
@@ -325,6 +420,11 @@ MonoBehaviour:
       amp: 12
       phase: 0.3
       speed: 3
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: head
       sprite: {fileID: 21300000, guid: 45884bc9f89fa34488977da410589955, type: 3}
       alt: {fileID: 21300000, guid: 1a986e416088a294daf1f4aad5795462, type: 3}
@@ -340,6 +440,11 @@ MonoBehaviour:
       amp: 4
       phase: 0
       speed: 1.5
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: water
       sprite: {fileID: 0}
       alt: {fileID: 21300000, guid: 0967721457f6ad944b28e0e6bf22ebbc, type: 3}
@@ -355,6 +460,11 @@ MonoBehaviour:
       amp: 3
       phase: 0
       speed: 4
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
   - codeId: boss_carrier
     length: 700
     height: 260
@@ -374,6 +484,11 @@ MonoBehaviour:
       amp: 5
       phase: 0
       speed: 0.6
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: tower
       sprite: {fileID: 21300000, guid: 4ab988d02394e2b4f9cf74636ed38953, type: 3}
       alt: {fileID: 21300000, guid: 0562155a10aea8642908c0d9f832d5a2, type: 3}
@@ -389,6 +504,11 @@ MonoBehaviour:
       amp: 2
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: jet
       sprite: {fileID: 21300000, guid: 651c58bfdcb43ce4e9b169d277cbd7a1, type: 3}
       alt: {fileID: 0}
@@ -404,6 +524,11 @@ MonoBehaviour:
       amp: 0
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
   - codeId: boss_cartgiant
     length: 263
     height: 360
@@ -423,6 +548,11 @@ MonoBehaviour:
       amp: 4
       phase: 0
       speed: 2
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: armFar
       sprite: {fileID: 21300000, guid: 3ed4d2d0ca7cd3d49a6dad38442ca032, type: 3}
       alt: {fileID: 0}
@@ -438,6 +568,11 @@ MonoBehaviour:
       amp: 14
       phase: 0.5
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: foreFar
       sprite: {fileID: 21300000, guid: 3f47db45c89ab1f479e7717735359699, type: 3}
       alt: {fileID: 0}
@@ -453,6 +588,11 @@ MonoBehaviour:
       amp: 8
       phase: 0.75
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: butt
       sprite: {fileID: 21300000, guid: dac50d0bfe4177b4399f797fb11bb298, type: 3}
       alt: {fileID: 0}
@@ -468,6 +608,11 @@ MonoBehaviour:
       amp: 4
       phase: 0
       speed: 2
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: thighFar
       sprite: {fileID: 21300000, guid: 8da2291f2c5539749977f83cae726c3b, type: 3}
       alt: {fileID: 0}
@@ -483,6 +628,11 @@ MonoBehaviour:
       amp: 14
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: shinFar
       sprite: {fileID: 21300000, guid: adcfd78d9792aa549ae2515a49feac44, type: 3}
       alt: {fileID: 0}
@@ -498,6 +648,11 @@ MonoBehaviour:
       amp: 8
       phase: 0.25
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: footFar
       sprite: {fileID: 21300000, guid: 14b91c3bd38cf564689024ee278554fd, type: 3}
       alt: {fileID: 0}
@@ -513,6 +668,11 @@ MonoBehaviour:
       amp: 6
       phase: 0.5
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: thigh
       sprite: {fileID: 21300000, guid: 8da2291f2c5539749977f83cae726c3b, type: 3}
       alt: {fileID: 0}
@@ -528,6 +688,11 @@ MonoBehaviour:
       amp: 14
       phase: 0.5
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: shin
       sprite: {fileID: 21300000, guid: adcfd78d9792aa549ae2515a49feac44, type: 3}
       alt: {fileID: 0}
@@ -543,6 +708,11 @@ MonoBehaviour:
       amp: 8
       phase: 0.75
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: foot
       sprite: {fileID: 21300000, guid: 3eaa3af770232154daf20dae4864cf57, type: 3}
       alt: {fileID: 0}
@@ -558,6 +728,11 @@ MonoBehaviour:
       amp: 6
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: arm
       sprite: {fileID: 21300000, guid: c39ef6cfaf3a0584fa5b6af30702277c, type: 3}
       alt: {fileID: 0}
@@ -573,6 +748,11 @@ MonoBehaviour:
       amp: 14
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: fore
       sprite: {fileID: 21300000, guid: 517f30b731c342a4484bc2364f706dd4, type: 3}
       alt: {fileID: 0}
@@ -588,6 +768,11 @@ MonoBehaviour:
       amp: 8
       phase: 0.25
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: head
       sprite: {fileID: 21300000, guid: ff1c0e68c8c94ef4a931a3e3c0f08332, type: 3}
       alt: {fileID: 21300000, guid: d7bd68ae4ec9e09479aba9a839ff714f, type: 3}
@@ -603,6 +788,11 @@ MonoBehaviour:
       amp: 3
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: saddle
       sprite: {fileID: 21300000, guid: 74b4787947e43d64583d4b158603b93f, type: 3}
       alt: {fileID: 0}
@@ -618,6 +808,11 @@ MonoBehaviour:
       amp: 0
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: gunner1
       sprite: {fileID: 21300000, guid: 4a752c4cf968f7641877e0f8d2c5e642, type: 3}
       alt: {fileID: 21300000, guid: 8cb8c568f51c3af46b772e914c3aee5e, type: 3}
@@ -633,6 +828,11 @@ MonoBehaviour:
       amp: 6
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: gunner2
       sprite: {fileID: 21300000, guid: 4a752c4cf968f7641877e0f8d2c5e642, type: 3}
       alt: {fileID: 21300000, guid: 8cb8c568f51c3af46b772e914c3aee5e, type: 3}
@@ -648,6 +848,11 @@ MonoBehaviour:
       amp: 6
       phase: 0.5
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
   - codeId: boss_excavator
     length: 300
     height: 260
@@ -667,6 +872,11 @@ MonoBehaviour:
       amp: 2
       phase: 0
       speed: 3
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: arm
       sprite: {fileID: 21300000, guid: 76e63ea7e678bee4581d18fb28cbec44, type: 3}
       alt: {fileID: 0}
@@ -682,6 +892,11 @@ MonoBehaviour:
       amp: 8
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
   - codeId: boss_crewmate
     length: 260
     height: 260
@@ -701,6 +916,11 @@ MonoBehaviour:
       amp: 3
       phase: 0
       speed: 2
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: tail
       sprite: {fileID: 21300000, guid: c5ca0459b09855d498b447622277136d, type: 3}
       alt: {fileID: 0}
@@ -716,6 +936,11 @@ MonoBehaviour:
       amp: 12
       phase: 0
       speed: 1.5
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: backFar
       sprite: {fileID: 21300000, guid: f76bdee38d1ac074db95d4dce096f18a, type: 3}
       alt: {fileID: 0}
@@ -731,6 +956,11 @@ MonoBehaviour:
       amp: 20
       phase: 0.5
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: frontFar
       sprite: {fileID: 21300000, guid: 8fc333ea95a594f49a9c668751717d36, type: 3}
       alt: {fileID: 0}
@@ -746,6 +976,11 @@ MonoBehaviour:
       amp: 20
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: back
       sprite: {fileID: 21300000, guid: f76bdee38d1ac074db95d4dce096f18a, type: 3}
       alt: {fileID: 0}
@@ -761,6 +996,11 @@ MonoBehaviour:
       amp: 20
       phase: 0
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: front
       sprite: {fileID: 21300000, guid: 8fc333ea95a594f49a9c668751717d36, type: 3}
       alt: {fileID: 0}
@@ -776,6 +1016,11 @@ MonoBehaviour:
       amp: 20
       phase: 0.5
       speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: head
       sprite: {fileID: 21300000, guid: c8a8522af13452449b628d1b5f54a616, type: 3}
       alt: {fileID: 0}
@@ -793,6 +1038,9 @@ MonoBehaviour:
       speed: 1.5
       show: 1
       open: 0
+      neck: 0
+      wind: 0
+      strike: 0
     - name: jawLow
       sprite: {fileID: 21300000, guid: de35ff0ae0bba264c8258177b6e1b40e, type: 3}
       alt: {fileID: 0}
@@ -810,6 +1058,9 @@ MonoBehaviour:
       speed: 1.5
       show: 2
       open: 6
+      neck: 0
+      wind: 0
+      strike: 0
     - name: jawUp
       sprite: {fileID: 21300000, guid: d21d75f34e8a2d74b815141b6e83412b, type: 3}
       alt: {fileID: 0}
@@ -827,3 +1078,950 @@ MonoBehaviour:
       speed: 4
       show: 2
       open: -40
+      neck: 0
+      wind: 0
+      strike: 0
+  - codeId: boss_hydra
+    length: 300
+    height: 380
+    parts:
+    - name: body
+      sprite: {fileID: 21300000, guid: a9c3c4239ddd4c14798f637f9b45a686, type: 3}
+      alt: {fileID: 0}
+      parent: 
+      at: {x: 0, y: 0.691}
+      pivot: {x: 0.5, y: 0.5}
+      angle: 0
+      scale: 1
+      flipX: 0
+      order: 50
+      far: 0
+      move: 2
+      amp: 6
+      phase: 0
+      speed: 1.4
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: n0_neck1
+      sprite: {fileID: 21300000, guid: 86862c768edc0d347bba9f2508ffb847, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.15, y: 0.45}
+      pivot: {x: 0.835, y: 0.479}
+      angle: -45
+      scale: 0.977
+      flipX: 0
+      order: 37
+      far: 0
+      move: 7
+      amp: 22
+      phase: 0
+      speed: 0.85
+      show: 0
+      open: 0
+      neck: 0
+      wind: 70
+      strike: 230
+    - name: n0_neck2
+      sprite: {fileID: 21300000, guid: c60b2323116a5be44b81832eae6e9692, type: 3}
+      alt: {fileID: 0}
+      parent: n0_neck1
+      at: {x: 0.165, y: 0.479}
+      pivot: {x: 0.818, y: 0.479}
+      angle: 70
+      scale: 1
+      flipX: 0
+      order: 36
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0
+      speed: 0.85
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: n0_neck3
+      sprite: {fileID: 21300000, guid: fd331ca2d65d9e94b84af5d33c5f3b19, type: 3}
+      alt: {fileID: 0}
+      parent: n0_neck2
+      at: {x: 0.182, y: 0.479}
+      pivot: {x: 0.798, y: 0.479}
+      angle: -15
+      scale: 1
+      flipX: 0
+      order: 35
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0
+      speed: 0.85
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: n0_head
+      sprite: {fileID: 21300000, guid: 7e52420abb1bd6a4cad22062c2e04399, type: 3}
+      alt: {fileID: 21300000, guid: 3526cec95611f6449b778014c0799781, type: 3}
+      parent: n0_neck3
+      at: {x: 0.202, y: 0.479}
+      pivot: {x: 0.93, y: 0.638}
+      angle: 30
+      scale: 0.85
+      flipX: 0
+      order: 34
+      far: 0
+      move: 7
+      amp: 4
+      phase: 0
+      speed: 0.85
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: n1_neck1
+      sprite: {fileID: 21300000, guid: 86862c768edc0d347bba9f2508ffb847, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.22, y: 0.32}
+      pivot: {x: 0.835, y: 0.479}
+      angle: 30
+      scale: 1.003
+      flipX: 0
+      order: 29
+      far: 0
+      move: 7
+      amp: 18
+      phase: 0.37
+      speed: 1.1
+      show: 0
+      open: 0
+      neck: 1
+      wind: 70
+      strike: 230
+    - name: n1_neck2
+      sprite: {fileID: 21300000, guid: c60b2323116a5be44b81832eae6e9692, type: 3}
+      alt: {fileID: 0}
+      parent: n1_neck1
+      at: {x: 0.165, y: 0.479}
+      pivot: {x: 0.818, y: 0.479}
+      angle: -65
+      scale: 1
+      flipX: 0
+      order: 28
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.37
+      speed: 1.1
+      show: 0
+      open: 0
+      neck: 1
+      wind: 0
+      strike: 0
+    - name: n1_neck3
+      sprite: {fileID: 21300000, guid: fd331ca2d65d9e94b84af5d33c5f3b19, type: 3}
+      alt: {fileID: 0}
+      parent: n1_neck2
+      at: {x: 0.182, y: 0.479}
+      pivot: {x: 0.798, y: 0.479}
+      angle: -10
+      scale: 1
+      flipX: 0
+      order: 27
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.37
+      speed: 1.1
+      show: 0
+      open: 0
+      neck: 1
+      wind: 0
+      strike: 0
+    - name: n1_head
+      sprite: {fileID: 21300000, guid: 7e52420abb1bd6a4cad22062c2e04399, type: 3}
+      alt: {fileID: 21300000, guid: 3526cec95611f6449b778014c0799781, type: 3}
+      parent: n1_neck3
+      at: {x: 0.202, y: 0.479}
+      pivot: {x: 0.93, y: 0.638}
+      angle: 15
+      scale: 0.85
+      flipX: 0
+      order: 26
+      far: 0
+      move: 7
+      amp: 4
+      phase: 0.37
+      speed: 1.1
+      show: 0
+      open: 0
+      neck: 1
+      wind: 0
+      strike: 0
+    - name: n2_neck1
+      sprite: {fileID: 21300000, guid: 86862c768edc0d347bba9f2508ffb847, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.32, y: 0.25}
+      pivot: {x: 0.835, y: 0.479}
+      angle: -69
+      scale: 1.32
+      flipX: 0
+      order: 21
+      far: 0
+      move: 7
+      amp: 24
+      phase: 0.71
+      speed: 0.7
+      show: 0
+      open: 0
+      neck: 2
+      wind: 70
+      strike: 230
+    - name: n2_neck2
+      sprite: {fileID: 21300000, guid: c60b2323116a5be44b81832eae6e9692, type: 3}
+      alt: {fileID: 0}
+      parent: n2_neck1
+      at: {x: 0.165, y: 0.479}
+      pivot: {x: 0.818, y: 0.479}
+      angle: -15
+      scale: 1
+      flipX: 0
+      order: 20
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.71
+      speed: 0.7
+      show: 0
+      open: 0
+      neck: 2
+      wind: 0
+      strike: 0
+    - name: n2_neck3
+      sprite: {fileID: 21300000, guid: fd331ca2d65d9e94b84af5d33c5f3b19, type: 3}
+      alt: {fileID: 0}
+      parent: n2_neck2
+      at: {x: 0.182, y: 0.479}
+      pivot: {x: 0.798, y: 0.479}
+      angle: 70
+      scale: 1
+      flipX: 0
+      order: 19
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.71
+      speed: 0.7
+      show: 0
+      open: 0
+      neck: 2
+      wind: 0
+      strike: 0
+    - name: n2_head
+      sprite: {fileID: 21300000, guid: 7e52420abb1bd6a4cad22062c2e04399, type: 3}
+      alt: {fileID: 21300000, guid: 3526cec95611f6449b778014c0799781, type: 3}
+      parent: n2_neck3
+      at: {x: 0.202, y: 0.479}
+      pivot: {x: 0.93, y: 0.638}
+      angle: 49
+      scale: 0.85
+      flipX: 0
+      order: 18
+      far: 0
+      move: 7
+      amp: 4
+      phase: 0.71
+      speed: 0.7
+      show: 0
+      open: 0
+      neck: 2
+      wind: 0
+      strike: 0
+    - name: n3_neck1
+      sprite: {fileID: 21300000, guid: 86862c768edc0d347bba9f2508ffb847, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.46, y: 0.18}
+      pivot: {x: 0.835, y: 0.479}
+      angle: -93
+      scale: 1.088
+      flipX: 0
+      order: 13
+      far: 0
+      move: 7
+      amp: 20
+      phase: 0.15
+      speed: 0.95
+      show: 0
+      open: 0
+      neck: 3
+      wind: 70
+      strike: 230
+    - name: n3_neck2
+      sprite: {fileID: 21300000, guid: c60b2323116a5be44b81832eae6e9692, type: 3}
+      alt: {fileID: 0}
+      parent: n3_neck1
+      at: {x: 0.165, y: 0.479}
+      pivot: {x: 0.818, y: 0.479}
+      angle: 25
+      scale: 1
+      flipX: 0
+      order: 12
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.15
+      speed: 0.95
+      show: 0
+      open: 0
+      neck: 3
+      wind: 0
+      strike: 0
+    - name: n3_neck3
+      sprite: {fileID: 21300000, guid: fd331ca2d65d9e94b84af5d33c5f3b19, type: 3}
+      alt: {fileID: 0}
+      parent: n3_neck2
+      at: {x: 0.182, y: 0.479}
+      pivot: {x: 0.798, y: 0.479}
+      angle: 5
+      scale: 1
+      flipX: 0
+      order: 11
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.15
+      speed: 0.95
+      show: 0
+      open: 0
+      neck: 3
+      wind: 0
+      strike: 0
+    - name: n3_head
+      sprite: {fileID: 21300000, guid: 7e52420abb1bd6a4cad22062c2e04399, type: 3}
+      alt: {fileID: 21300000, guid: 3526cec95611f6449b778014c0799781, type: 3}
+      parent: n3_neck3
+      at: {x: 0.202, y: 0.479}
+      pivot: {x: 0.93, y: 0.638}
+      angle: 8
+      scale: 0.85
+      flipX: 0
+      order: 10
+      far: 0
+      move: 7
+      amp: 4
+      phase: 0.15
+      speed: 0.95
+      show: 0
+      open: 0
+      neck: 3
+      wind: 0
+      strike: 0
+    - name: n4_neck1
+      sprite: {fileID: 21300000, guid: 86862c768edc0d347bba9f2508ffb847, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.6, y: 0.24}
+      pivot: {x: 0.835, y: 0.479}
+      angle: 90
+      scale: 1.26
+      flipX: 1
+      order: 17
+      far: 0
+      move: 7
+      amp: 18
+      phase: 0.58
+      speed: 1.25
+      show: 0
+      open: 0
+      neck: 4
+      wind: 70
+      strike: 230
+    - name: n4_neck2
+      sprite: {fileID: 21300000, guid: c60b2323116a5be44b81832eae6e9692, type: 3}
+      alt: {fileID: 0}
+      parent: n4_neck1
+      at: {x: 0.165, y: 0.479}
+      pivot: {x: 0.818, y: 0.479}
+      angle: -15
+      scale: 1
+      flipX: 0
+      order: 16
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.58
+      speed: 1.25
+      show: 0
+      open: 0
+      neck: 4
+      wind: 0
+      strike: 0
+    - name: n4_neck3
+      sprite: {fileID: 21300000, guid: fd331ca2d65d9e94b84af5d33c5f3b19, type: 3}
+      alt: {fileID: 0}
+      parent: n4_neck2
+      at: {x: 0.182, y: 0.479}
+      pivot: {x: 0.798, y: 0.479}
+      angle: 70
+      scale: 1
+      flipX: 0
+      order: 15
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.58
+      speed: 1.25
+      show: 0
+      open: 0
+      neck: 4
+      wind: 0
+      strike: 0
+    - name: n4_head
+      sprite: {fileID: 21300000, guid: 7e52420abb1bd6a4cad22062c2e04399, type: 3}
+      alt: {fileID: 21300000, guid: 3526cec95611f6449b778014c0799781, type: 3}
+      parent: n4_neck3
+      at: {x: 0.202, y: 0.479}
+      pivot: {x: 0.93, y: 0.638}
+      angle: 47
+      scale: 0.85
+      flipX: 0
+      order: 14
+      far: 0
+      move: 7
+      amp: 4
+      phase: 0.58
+      speed: 1.25
+      show: 0
+      open: 0
+      neck: 4
+      wind: 0
+      strike: 0
+    - name: n5_neck1
+      sprite: {fileID: 21300000, guid: 86862c768edc0d347bba9f2508ffb847, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.72, y: 0.28}
+      pivot: {x: 0.835, y: 0.479}
+      angle: 96
+      scale: 1.323
+      flipX: 1
+      order: 25
+      far: 0
+      move: 7
+      amp: 24
+      phase: 0.86
+      speed: 0.8
+      show: 0
+      open: 0
+      neck: 5
+      wind: 70
+      strike: 230
+    - name: n5_neck2
+      sprite: {fileID: 21300000, guid: c60b2323116a5be44b81832eae6e9692, type: 3}
+      alt: {fileID: 0}
+      parent: n5_neck1
+      at: {x: 0.165, y: 0.479}
+      pivot: {x: 0.818, y: 0.479}
+      angle: 35
+      scale: 1
+      flipX: 0
+      order: 24
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.86
+      speed: 0.8
+      show: 0
+      open: 0
+      neck: 5
+      wind: 0
+      strike: 0
+    - name: n5_neck3
+      sprite: {fileID: 21300000, guid: fd331ca2d65d9e94b84af5d33c5f3b19, type: 3}
+      alt: {fileID: 0}
+      parent: n5_neck2
+      at: {x: 0.182, y: 0.479}
+      pivot: {x: 0.798, y: 0.479}
+      angle: 70
+      scale: 1
+      flipX: 0
+      order: 23
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.86
+      speed: 0.8
+      show: 0
+      open: 0
+      neck: 5
+      wind: 0
+      strike: 0
+    - name: n5_head
+      sprite: {fileID: 21300000, guid: 7e52420abb1bd6a4cad22062c2e04399, type: 3}
+      alt: {fileID: 21300000, guid: 3526cec95611f6449b778014c0799781, type: 3}
+      parent: n5_neck3
+      at: {x: 0.202, y: 0.479}
+      pivot: {x: 0.93, y: 0.638}
+      angle: 31
+      scale: 0.85
+      flipX: 0
+      order: 22
+      far: 0
+      move: 7
+      amp: 4
+      phase: 0.86
+      speed: 0.8
+      show: 0
+      open: 0
+      neck: 5
+      wind: 0
+      strike: 0
+    - name: n6_neck1
+      sprite: {fileID: 21300000, guid: 86862c768edc0d347bba9f2508ffb847, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.84, y: 0.4}
+      pivot: {x: 0.835, y: 0.479}
+      angle: 60
+      scale: 0.935
+      flipX: 1
+      order: 33
+      far: 0
+      move: 7
+      amp: 18
+      phase: 0.27
+      speed: 1.05
+      show: 0
+      open: 0
+      neck: 6
+      wind: 70
+      strike: 230
+    - name: n6_neck2
+      sprite: {fileID: 21300000, guid: c60b2323116a5be44b81832eae6e9692, type: 3}
+      alt: {fileID: 0}
+      parent: n6_neck1
+      at: {x: 0.165, y: 0.479}
+      pivot: {x: 0.818, y: 0.479}
+      angle: 70
+      scale: 1
+      flipX: 0
+      order: 32
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.27
+      speed: 1.05
+      show: 0
+      open: 0
+      neck: 6
+      wind: 0
+      strike: 0
+    - name: n6_neck3
+      sprite: {fileID: 21300000, guid: fd331ca2d65d9e94b84af5d33c5f3b19, type: 3}
+      alt: {fileID: 0}
+      parent: n6_neck2
+      at: {x: 0.182, y: 0.479}
+      pivot: {x: 0.798, y: 0.479}
+      angle: -15
+      scale: 1
+      flipX: 0
+      order: 31
+      far: 0
+      move: 7
+      amp: 0
+      phase: 0.27
+      speed: 1.05
+      show: 0
+      open: 0
+      neck: 6
+      wind: 0
+      strike: 0
+    - name: n6_head
+      sprite: {fileID: 21300000, guid: 7e52420abb1bd6a4cad22062c2e04399, type: 3}
+      alt: {fileID: 21300000, guid: 3526cec95611f6449b778014c0799781, type: 3}
+      parent: n6_neck3
+      at: {x: 0.202, y: 0.479}
+      pivot: {x: 0.93, y: 0.638}
+      angle: -17
+      scale: 0.85
+      flipX: 0
+      order: 30
+      far: 0
+      move: 7
+      amp: 4
+      phase: 0.27
+      speed: 1.05
+      show: 0
+      open: 0
+      neck: 6
+      wind: 0
+      strike: 0
+    - name: tail0
+      sprite: {fileID: 21300000, guid: cfbaf4f37826a5742a07b40c68fc4225, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.93, y: 0.55}
+      pivot: {x: 0.08, y: 0.38}
+      angle: 16
+      scale: 1.1
+      flipX: 0
+      order: 4
+      far: 0
+      move: 3
+      amp: 7
+      phase: 0
+      speed: 0.8
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: tail1
+      sprite: {fileID: 21300000, guid: cfbaf4f37826a5742a07b40c68fc4225, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.93, y: 0.62}
+      pivot: {x: 0.08, y: 0.38}
+      angle: 4
+      scale: 1.1
+      flipX: 0
+      order: 3
+      far: 0
+      move: 3
+      amp: 7
+      phase: 0.3
+      speed: 0.9
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: tail2
+      sprite: {fileID: 21300000, guid: cfbaf4f37826a5742a07b40c68fc4225, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.93, y: 0.69}
+      pivot: {x: 0.08, y: 0.38}
+      angle: -8
+      scale: 1.1
+      flipX: 0
+      order: 4
+      far: 0
+      move: 3
+      amp: 7
+      phase: 0.6
+      speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: tail3
+      sprite: {fileID: 21300000, guid: cfbaf4f37826a5742a07b40c68fc4225, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.93, y: 0.76}
+      pivot: {x: 0.08, y: 0.38}
+      angle: -20
+      scale: 1.1
+      flipX: 0
+      order: 3
+      far: 0
+      move: 3
+      amp: 7
+      phase: 0.85
+      speed: 1.1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: leg0
+      sprite: {fileID: 21300000, guid: b19a74405959f5044ac8ade7d4f5f116, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.2, y: 0.86}
+      pivot: {x: 0.55, y: 0.2}
+      angle: 0
+      scale: 1.25
+      flipX: 0
+      order: 60
+      far: 0
+      move: 1
+      amp: 20
+      phase: 0
+      speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: leg1
+      sprite: {fileID: 21300000, guid: ac0c8d0631e5a7f49b5dc61095b2952a, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.4, y: 0.86}
+      pivot: {x: 0.55, y: 0.2}
+      angle: 0
+      scale: 1.25
+      flipX: 0
+      order: 61
+      far: 0
+      move: 1
+      amp: 20
+      phase: 0.5
+      speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: leg2
+      sprite: {fileID: 21300000, guid: 76ee33d3b54527847811cb0bdab45ae7, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.6, y: 0.86}
+      pivot: {x: 0.55, y: 0.2}
+      angle: 0
+      scale: 1.25
+      flipX: 0
+      order: 62
+      far: 0
+      move: 1
+      amp: 20
+      phase: 0
+      speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: leg3
+      sprite: {fileID: 21300000, guid: cdbd371a2822cee4fb53e1e4afd30be2, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.79, y: 0.86}
+      pivot: {x: 0.55, y: 0.2}
+      angle: 0
+      scale: 1.25
+      flipX: 0
+      order: 63
+      far: 0
+      move: 1
+      amp: 20
+      phase: 0.5
+      speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: leg4Far
+      sprite: {fileID: 21300000, guid: 76ee33d3b54527847811cb0bdab45ae7, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.27, y: 0.83}
+      pivot: {x: 0.55, y: 0.2}
+      angle: 0
+      scale: 1.25
+      flipX: 0
+      order: 2
+      far: 1
+      move: 1
+      amp: 20
+      phase: 0.5
+      speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: leg5Far
+      sprite: {fileID: 21300000, guid: cdbd371a2822cee4fb53e1e4afd30be2, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.47, y: 0.83}
+      pivot: {x: 0.55, y: 0.2}
+      angle: 0
+      scale: 1.25
+      flipX: 0
+      order: 2
+      far: 1
+      move: 1
+      amp: 20
+      phase: 0
+      speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: leg6Far
+      sprite: {fileID: 21300000, guid: b19a74405959f5044ac8ade7d4f5f116, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.67, y: 0.83}
+      pivot: {x: 0.55, y: 0.2}
+      angle: 0
+      scale: 1.25
+      flipX: 0
+      order: 2
+      far: 1
+      move: 1
+      amp: 20
+      phase: 0.5
+      speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: leg7Far
+      sprite: {fileID: 21300000, guid: ac0c8d0631e5a7f49b5dc61095b2952a, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.86, y: 0.83}
+      pivot: {x: 0.55, y: 0.2}
+      angle: 0
+      scale: 1.25
+      flipX: 0
+      order: 2
+      far: 1
+      move: 1
+      amp: 20
+      phase: 0
+      speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: emb0
+      sprite: {fileID: 21300000, guid: 5e08327d977d72f419bee7201c7b494d, type: 3}
+      alt: {fileID: 21300000, guid: 5bd99cf8b73770a49a4d46e115b6fbfc, type: 3}
+      parent: body
+      at: {x: 0.24, y: 0.62}
+      pivot: {x: 0.55, y: 0.55}
+      angle: 25
+      scale: 0.85
+      flipX: 0
+      order: 51
+      far: 0
+      move: 8
+      amp: 9
+      phase: 0.1
+      speed: 0.9
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: emb1
+      sprite: {fileID: 21300000, guid: 72e34b26d6e90db4bba9e863bfaff318, type: 3}
+      alt: {fileID: 21300000, guid: a4a35b68e1461354db93f17e556f5d3a, type: 3}
+      parent: body
+      at: {x: 0.45, y: 0.42}
+      pivot: {x: 0.55, y: 0.55}
+      angle: -150
+      scale: 0.8
+      flipX: 0
+      order: 52
+      far: 0
+      move: 8
+      amp: 9
+      phase: 0.45
+      speed: 1.2
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: emb2
+      sprite: {fileID: 21300000, guid: c2f10e92f40c4c44e83e71148578992d, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.62, y: 0.62}
+      pivot: {x: 0.55, y: 0.55}
+      angle: 70
+      scale: 0.8
+      flipX: 1
+      order: 53
+      far: 0
+      move: 8
+      amp: 9
+      phase: 0.8
+      speed: 0.7
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: emb3
+      sprite: {fileID: 21300000, guid: a4a35b68e1461354db93f17e556f5d3a, type: 3}
+      alt: {fileID: 21300000, guid: 5bd99cf8b73770a49a4d46e115b6fbfc, type: 3}
+      parent: body
+      at: {x: 0.82, y: 0.55}
+      pivot: {x: 0.55, y: 0.55}
+      angle: -15
+      scale: 0.85
+      flipX: 1
+      order: 54
+      far: 0
+      move: 8
+      amp: 9
+      phase: 0.3
+      speed: 1
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: emb4
+      sprite: {fileID: 21300000, guid: b59cde2af35a0fb42bc457ea66865397, type: 3}
+      alt: {fileID: 0}
+      parent: body
+      at: {x: 0.36, y: 0.78}
+      pivot: {x: 0.55, y: 0.55}
+      angle: 160
+      scale: 0.75
+      flipX: 1
+      order: 55
+      far: 0
+      move: 8
+      amp: 9
+      phase: 0.65
+      speed: 1.3
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0
+    - name: emb5
+      sprite: {fileID: 21300000, guid: 5bd99cf8b73770a49a4d46e115b6fbfc, type: 3}
+      alt: {fileID: 21300000, guid: 72e34b26d6e90db4bba9e863bfaff318, type: 3}
+      parent: body
+      at: {x: 0.7, y: 0.8}
+      pivot: {x: 0.55, y: 0.55}
+      angle: -35
+      scale: 0.75
+      flipX: 0
+      order: 56
+      far: 0
+      move: 8
+      amp: 9
+      phase: 0.95
+      speed: 0.8
+      show: 0
+      open: 0
+      neck: 0
+      wind: 0
+      strike: 0

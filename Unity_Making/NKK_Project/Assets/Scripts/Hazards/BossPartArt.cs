@@ -10,7 +10,7 @@ namespace NKK.Hazards
     [CreateAssetMenu(menuName = "NKK/Boss Part Art")]
     public class BossPartArt : ScriptableObject
     {
-        public enum Move { None, Walk, Bob, Sway, Spin, Recoil, Wiggle }
+        public enum Move { None, Walk, Bob, Sway, Spin, Recoil, Wiggle, Neck, Twitch }
         public enum Show { Always, Closed, Open }
 
         [Serializable]
@@ -27,12 +27,15 @@ namespace NKK.Hazards
             [Tooltip("좌우 뒤집기 (자식도 같이)")] public bool flipX;
             [Tooltip("그리는 순서 (클수록 앞)")] public int order;
             [Tooltip("먼 쪽 파츠 (어둡게)")] public bool far;
-            [Tooltip("움직임: Walk = 걸을 때 흔듦 · Bob = 위아래 · Sway = 늘 흔듦 · Spin = 빙글 · Recoil = 공격 중 사격 (두 번째 그림과 번갈아 깜빡 + 반동으로 흔들림, 평소엔 살짝 들썩) · Wiggle = 걷다 멈춘 순간 한 번 출렁 (1/speed 초) + 공격 중엔 사격 박자로 툭툭 (차력거인 엉덩이)")] public Move move;
+            [Tooltip("움직임: Walk = 걸을 때 흔듦 · Bob = 위아래 · Sway = 늘 흔듦 · Spin = 빙글 · Recoil = 공격 중 사격 (두 번째 그림과 번갈아 깜빡 + 반동으로 흔들림, 평소엔 살짝 들썩) · Wiggle = 걷다 멈춘 순간 한 번 출렁 (1/speed 초) + 공격 중엔 사격 박자로 툭툭 (차력거인 엉덩이) · Neck = 히드라 목 (같은 neck 번호 마디 3 + 머리, 머리 자리를 먼저 정하고 마디가 따라옴: 늘 머리가 떠다님, 공격 중엔 뒤로 움찔 → 앞·아래로 찔러 물기 + 머리 두 번째 그림. 값은 첫 마디 amp(떠다님 px)·speed·phase·wind·strike, 머리 amp = 끄덕임 °) · Twitch = 몸에 박힌 머리가 가끔 몸부림 (그동안 두 번째 그림)")] public Move move;
             [Tooltip("움직임 크기 (각도 ° · Bob·Recoil 은 픽셀)")] public float amp;
             [Tooltip("위상 (0~1, 다리마다 엇갈리게)")] public float phase;
             [Tooltip("빠르기 배율")] public float speed = 1;
             [Tooltip("보임: Always 늘 · Closed 머리가 닫혀 있을 때만 · Open 머리가 열렸을 때만 (우주복 쥐 괴물 머리, BossPartRig.open)")] public Show show;
             [Tooltip("머리 열림 1 일 때 더하는 각도 (°, 위턱이 경첩에서 들림)")] public float open;
+            [Tooltip("Neck: 목 번호 (같은 번호 = 한 목, 마디 3 + 머리 순서로)")] public int neck;
+            [Tooltip("Neck 첫 마디: 물기 전 머리가 뒤·위로 움찔하는 거리 (그림 픽셀)")] public float wind;
+            [Tooltip("Neck 첫 마디: 물 때 머리가 앞·아래로 찌르는 거리 (그림 픽셀)")] public float strike;
         }
 
         [Serializable]

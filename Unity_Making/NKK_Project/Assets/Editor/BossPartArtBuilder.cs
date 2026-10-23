@@ -17,9 +17,10 @@ public static class BossPartArtBuilder
 
     static BossPartArt.Part P(string name, Sprite sp, string parent, float ax, float ay, float px, float py, int order,
         M move = M.None, float amp = 0, float phase = 0, float speed = 1, float angle = 0, float scale = 1, bool flip = false, bool far = false, Sprite alt = null,
-        Sh show = Sh.Always, float open = 0) =>
+        Sh show = Sh.Always, float open = 0, int neck = 0, float wind = 0, float strike = 0) =>
         new() { name = name, sprite = sp, alt = alt, parent = parent, at = new Vector2(ax, ay), pivot = new Vector2(px, py), order = order,
-                move = move, amp = amp, phase = phase, speed = speed, angle = angle, scale = scale, flipX = flip, far = far, show = show, open = open };
+                move = move, amp = amp, phase = phase, speed = speed, angle = angle, scale = scale, flipX = flip, far = far, show = show, open = open,
+                neck = neck, wind = wind, strike = strike };
 
     [MenuItem("NKK/Build Boss Part Art")]
     public static void Build()
@@ -126,10 +127,82 @@ public static class BossPartArtBuilder
         crew.parts.Add(P("jawUp", S("boss_crewmate/upper"), "jawLow", 0.93f, 0.18f, 0.9f, 0.82f, 6, M.Sway, 5, 0, 4, 0, 1, show: Sh.Open, open: -40));
         lib.entries.Add(crew);
 
+        lib.entries.Add(Hydra());
+
         EditorUtility.SetDirty(lib);
         AssetDatabase.SaveAssets();
         var missing = new List<string>();
         foreach (var e in lib.entries) foreach (var p in e.parts) if (!p.sprite && !p.alt) missing.Add(e.codeId + "/" + p.name);
         Debug.Log($"[BossPartArt] {lib.entries.Count}종" + (missing.Count > 0 ? " · 그림 없음: " + string.Join(", ", missing) : ""));
+    }
+
+    // 쥐 히드라 (새 보스, 층 미정 · 2026-10-23): 쥐 몸이 뭉친 덩어리 몸통(박힌 머리 각도 제각각) + 목 7 (마디 3 + 쥐 머리) · 다리 8 (먼 4) · 꼬리 4 · 박힌 머리 6.
+    // 값 = Tools/hydra_rig.py --cs (웹 미리보기 BossRework/rig_web/hydra.html 과 같은 값, GIF = Tools/hydra_gif.py). 그림 = Art/Rats/BossParts/boss_hydra (BossRework/Parts/boss_hydra)
+    // 목 = neck1s→neck2s→neck3s→head 사슬 (Neck: 머리 자리를 먼저 정하고 마디가 따라옴 = BossPartRig.NeckIK, 목마다 위상·빠르기 다르게 떠다님, 공격 중 biteOrder 차례로 물기, 목 모양 S/C·머리 방향 제각각 — 4·5·6 은 목 사슬째 첫 마디에서 뒤집어 뒤를 봄) · 박힌 머리 = Twitch (각도·좌우 제각각)
+    // NKK/Build Boss Part Art 는 전부 다시 만듦 → 히드라만 넣을 땐 BossPartArtBuilder.AddHydra()
+    public static BossPartArt.Entry Hydra()
+    {
+        var hydra = new BossPartArt.Entry { codeId = "boss_hydra", length = 300, height = 380 };
+        hydra.parts.Add(P("body", S("boss_hydra/body_chaos"), null, 0, 0.691f, 0.5f, 0.5f, 50, M.Bob, 6, 0, 1.4f, 0, 1));
+        hydra.parts.Add(P("n0_neck1", S("boss_hydra/neck1s"), "body", 0.15f, 0.45f, 0.835f, 0.479f, 37, M.Neck, 22, 0, 0.85f, -45, 0.977f, neck: 0, wind: 70, strike: 230));
+        hydra.parts.Add(P("n0_neck2", S("boss_hydra/neck2s"), "n0_neck1", 0.165f, 0.479f, 0.818f, 0.479f, 36, M.Neck, 0, 0, 0.85f, 70, 1, neck: 0));
+        hydra.parts.Add(P("n0_neck3", S("boss_hydra/neck3s"), "n0_neck2", 0.182f, 0.479f, 0.798f, 0.479f, 35, M.Neck, 0, 0, 0.85f, -15, 1, neck: 0));
+        hydra.parts.Add(P("n0_head", S("boss_hydra/head"), "n0_neck3", 0.202f, 0.479f, 0.93f, 0.638f, 34, M.Neck, 4, 0, 0.85f, 30, 0.85f, alt: S("boss_hydra/head_bite"), neck: 0));
+        hydra.parts.Add(P("n1_neck1", S("boss_hydra/neck1s"), "body", 0.22f, 0.32f, 0.835f, 0.479f, 29, M.Neck, 18, 0.37f, 1.1f, 30, 1.003f, neck: 1, wind: 70, strike: 230));
+        hydra.parts.Add(P("n1_neck2", S("boss_hydra/neck2s"), "n1_neck1", 0.165f, 0.479f, 0.818f, 0.479f, 28, M.Neck, 0, 0.37f, 1.1f, -65, 1, neck: 1));
+        hydra.parts.Add(P("n1_neck3", S("boss_hydra/neck3s"), "n1_neck2", 0.182f, 0.479f, 0.798f, 0.479f, 27, M.Neck, 0, 0.37f, 1.1f, -10, 1, neck: 1));
+        hydra.parts.Add(P("n1_head", S("boss_hydra/head"), "n1_neck3", 0.202f, 0.479f, 0.93f, 0.638f, 26, M.Neck, 4, 0.37f, 1.1f, 15, 0.85f, alt: S("boss_hydra/head_bite"), neck: 1));
+        hydra.parts.Add(P("n2_neck1", S("boss_hydra/neck1s"), "body", 0.32f, 0.25f, 0.835f, 0.479f, 21, M.Neck, 24, 0.71f, 0.7f, -69, 1.32f, neck: 2, wind: 70, strike: 230));
+        hydra.parts.Add(P("n2_neck2", S("boss_hydra/neck2s"), "n2_neck1", 0.165f, 0.479f, 0.818f, 0.479f, 20, M.Neck, 0, 0.71f, 0.7f, -15, 1, neck: 2));
+        hydra.parts.Add(P("n2_neck3", S("boss_hydra/neck3s"), "n2_neck2", 0.182f, 0.479f, 0.798f, 0.479f, 19, M.Neck, 0, 0.71f, 0.7f, 70, 1, neck: 2));
+        hydra.parts.Add(P("n2_head", S("boss_hydra/head"), "n2_neck3", 0.202f, 0.479f, 0.93f, 0.638f, 18, M.Neck, 4, 0.71f, 0.7f, 49, 0.85f, alt: S("boss_hydra/head_bite"), neck: 2));
+        hydra.parts.Add(P("n3_neck1", S("boss_hydra/neck1s"), "body", 0.46f, 0.18f, 0.835f, 0.479f, 13, M.Neck, 20, 0.15f, 0.95f, -93, 1.088f, neck: 3, wind: 70, strike: 230));
+        hydra.parts.Add(P("n3_neck2", S("boss_hydra/neck2s"), "n3_neck1", 0.165f, 0.479f, 0.818f, 0.479f, 12, M.Neck, 0, 0.15f, 0.95f, 25, 1, neck: 3));
+        hydra.parts.Add(P("n3_neck3", S("boss_hydra/neck3s"), "n3_neck2", 0.182f, 0.479f, 0.798f, 0.479f, 11, M.Neck, 0, 0.15f, 0.95f, 5, 1, neck: 3));
+        hydra.parts.Add(P("n3_head", S("boss_hydra/head"), "n3_neck3", 0.202f, 0.479f, 0.93f, 0.638f, 10, M.Neck, 4, 0.15f, 0.95f, 8, 0.85f, alt: S("boss_hydra/head_bite"), neck: 3));
+        hydra.parts.Add(P("n4_neck1", S("boss_hydra/neck1s"), "body", 0.6f, 0.24f, 0.835f, 0.479f, 17, M.Neck, 18, 0.58f, 1.25f, 90, 1.26f, flip: true, neck: 4, wind: 70, strike: 230));
+        hydra.parts.Add(P("n4_neck2", S("boss_hydra/neck2s"), "n4_neck1", 0.165f, 0.479f, 0.818f, 0.479f, 16, M.Neck, 0, 0.58f, 1.25f, -15, 1, neck: 4));
+        hydra.parts.Add(P("n4_neck3", S("boss_hydra/neck3s"), "n4_neck2", 0.182f, 0.479f, 0.798f, 0.479f, 15, M.Neck, 0, 0.58f, 1.25f, 70, 1, neck: 4));
+        hydra.parts.Add(P("n4_head", S("boss_hydra/head"), "n4_neck3", 0.202f, 0.479f, 0.93f, 0.638f, 14, M.Neck, 4, 0.58f, 1.25f, 47, 0.85f, alt: S("boss_hydra/head_bite"), neck: 4));
+        hydra.parts.Add(P("n5_neck1", S("boss_hydra/neck1s"), "body", 0.72f, 0.28f, 0.835f, 0.479f, 25, M.Neck, 24, 0.86f, 0.8f, 96, 1.323f, flip: true, neck: 5, wind: 70, strike: 230));
+        hydra.parts.Add(P("n5_neck2", S("boss_hydra/neck2s"), "n5_neck1", 0.165f, 0.479f, 0.818f, 0.479f, 24, M.Neck, 0, 0.86f, 0.8f, 35, 1, neck: 5));
+        hydra.parts.Add(P("n5_neck3", S("boss_hydra/neck3s"), "n5_neck2", 0.182f, 0.479f, 0.798f, 0.479f, 23, M.Neck, 0, 0.86f, 0.8f, 70, 1, neck: 5));
+        hydra.parts.Add(P("n5_head", S("boss_hydra/head"), "n5_neck3", 0.202f, 0.479f, 0.93f, 0.638f, 22, M.Neck, 4, 0.86f, 0.8f, 31, 0.85f, alt: S("boss_hydra/head_bite"), neck: 5));
+        hydra.parts.Add(P("n6_neck1", S("boss_hydra/neck1s"), "body", 0.84f, 0.4f, 0.835f, 0.479f, 33, M.Neck, 18, 0.27f, 1.05f, 60, 0.935f, flip: true, neck: 6, wind: 70, strike: 230));
+        hydra.parts.Add(P("n6_neck2", S("boss_hydra/neck2s"), "n6_neck1", 0.165f, 0.479f, 0.818f, 0.479f, 32, M.Neck, 0, 0.27f, 1.05f, 70, 1, neck: 6));
+        hydra.parts.Add(P("n6_neck3", S("boss_hydra/neck3s"), "n6_neck2", 0.182f, 0.479f, 0.798f, 0.479f, 31, M.Neck, 0, 0.27f, 1.05f, -15, 1, neck: 6));
+        hydra.parts.Add(P("n6_head", S("boss_hydra/head"), "n6_neck3", 0.202f, 0.479f, 0.93f, 0.638f, 30, M.Neck, 4, 0.27f, 1.05f, -17, 0.85f, alt: S("boss_hydra/head_bite"), neck: 6));
+        hydra.parts.Add(P("tail0", S("boss_hydra/tail"), "body", 0.93f, 0.55f, 0.08f, 0.38f, 4, M.Sway, 7, 0, 0.8f, 16, 1.1f));
+        hydra.parts.Add(P("tail1", S("boss_hydra/tail"), "body", 0.93f, 0.62f, 0.08f, 0.38f, 3, M.Sway, 7, 0.3f, 0.9f, 4, 1.1f));
+        hydra.parts.Add(P("tail2", S("boss_hydra/tail"), "body", 0.93f, 0.69f, 0.08f, 0.38f, 4, M.Sway, 7, 0.6f, 1, -8, 1.1f));
+        hydra.parts.Add(P("tail3", S("boss_hydra/tail"), "body", 0.93f, 0.76f, 0.08f, 0.38f, 3, M.Sway, 7, 0.85f, 1.1f, -20, 1.1f));
+        hydra.parts.Add(P("leg0", S("boss_hydra/legF1"), "body", 0.2f, 0.86f, 0.55f, 0.2f, 60, M.Walk, 20, 0, 1, 0, 1.25f));
+        hydra.parts.Add(P("leg1", S("boss_hydra/legB1"), "body", 0.4f, 0.86f, 0.55f, 0.2f, 61, M.Walk, 20, 0.5f, 1, 0, 1.25f));
+        hydra.parts.Add(P("leg2", S("boss_hydra/legF2"), "body", 0.6f, 0.86f, 0.55f, 0.2f, 62, M.Walk, 20, 0, 1, 0, 1.25f));
+        hydra.parts.Add(P("leg3", S("boss_hydra/legB2"), "body", 0.79f, 0.86f, 0.55f, 0.2f, 63, M.Walk, 20, 0.5f, 1, 0, 1.25f));
+        hydra.parts.Add(P("leg4Far", S("boss_hydra/legF2"), "body", 0.27f, 0.83f, 0.55f, 0.2f, 2, M.Walk, 20, 0.5f, 1, 0, 1.25f, far: true));
+        hydra.parts.Add(P("leg5Far", S("boss_hydra/legB2"), "body", 0.47f, 0.83f, 0.55f, 0.2f, 2, M.Walk, 20, 0, 1, 0, 1.25f, far: true));
+        hydra.parts.Add(P("leg6Far", S("boss_hydra/legF1"), "body", 0.67f, 0.83f, 0.55f, 0.2f, 2, M.Walk, 20, 0.5f, 1, 0, 1.25f, far: true));
+        hydra.parts.Add(P("leg7Far", S("boss_hydra/legB1"), "body", 0.86f, 0.83f, 0.55f, 0.2f, 2, M.Walk, 20, 0, 1, 0, 1.25f, far: true));
+        hydra.parts.Add(P("emb0", S("boss_hydra/emb_a"), "body", 0.24f, 0.62f, 0.55f, 0.55f, 51, M.Twitch, 9, 0.1f, 0.9f, 25, 0.85f, alt: S("boss_hydra/emb_c")));
+        hydra.parts.Add(P("emb1", S("boss_hydra/emb_b"), "body", 0.45f, 0.42f, 0.55f, 0.55f, 52, M.Twitch, 9, 0.45f, 1.2f, -150, 0.8f, alt: S("boss_hydra/emb_d")));
+        hydra.parts.Add(P("emb2", S("boss_hydra/emb_e"), "body", 0.62f, 0.62f, 0.55f, 0.55f, 53, M.Twitch, 9, 0.8f, 0.7f, 70, 0.8f, flip: true));
+        hydra.parts.Add(P("emb3", S("boss_hydra/emb_d"), "body", 0.82f, 0.55f, 0.55f, 0.55f, 54, M.Twitch, 9, 0.3f, 1, -15, 0.85f, flip: true, alt: S("boss_hydra/emb_c")));
+        hydra.parts.Add(P("emb4", S("boss_hydra/emb_f"), "body", 0.36f, 0.78f, 0.55f, 0.55f, 55, M.Twitch, 9, 0.65f, 1.3f, 160, 0.75f, flip: true));
+        hydra.parts.Add(P("emb5", S("boss_hydra/emb_c"), "body", 0.7f, 0.8f, 0.55f, 0.55f, 56, M.Twitch, 9, 0.95f, 0.8f, -35, 0.75f, alt: S("boss_hydra/emb_b")));
+        return hydra;
+    }
+
+    // 에셋의 다른 보스 값은 그대로 두고 히드라 줄만 넣거나 바꿈
+    public static void AddHydra()
+    {
+        var lib = AssetDatabase.LoadAssetAtPath<BossPartArt>(AssetPath);
+        lib.entries.RemoveAll(e => e.codeId == "boss_hydra");
+        lib.entries.Add(Hydra());
+        EditorUtility.SetDirty(lib);
+        AssetDatabase.SaveAssets();
+        var missing = new List<string>();
+        foreach (var p in lib.Get("boss_hydra").parts) if (!p.sprite) missing.Add(p.name);
+        Debug.Log("[BossPartArt] 히드라 " + lib.Get("boss_hydra").parts.Count + "파츠" + (missing.Count > 0 ? " · 그림 없음: " + string.Join(", ", missing) : ""));
     }
 }
