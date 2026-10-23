@@ -1839,28 +1839,6 @@ MonoBehaviour:
       width: 0.8559
       height: 0.7536
     screenBg: {fileID: 21300000, guid: d1738440607c73c4f97052aba0bbccb0, type: 3}
-  - codeId: maid
-    head: {fileID: 21300000, guid: dfbe1fe65dfe1a4419d08a1edceac7c7, type: 3}
-    torso: {fileID: 21300000, guid: c29a57aab0cb2fc41a8c9423b77334f2, type: 3}
-    tail: {fileID: 21300000, guid: 76fd25bac34faea4fb49dd790f4cc7fa, type: 3}
-    front: {fileID: 21300000, guid: 0f90c2edf3845844baf8e4adc35ad895, type: 3}
-    back: {fileID: 21300000, guid: 7cf27a79a482d1b48bf1d1d6119183c0, type: 3}
-    head2: {fileID: 0}
-    single: {fileID: 0}
-    neck: {x: 0.069, y: 0.395}
-    tailAnchor: {x: 0.944, y: 0.531}
-    shoulder: {x: 0.238, y: 0.448}
-    hip: {x: 0.736, y: 0.325}
-    legFront: 1
-    legBack: 0.858
-    screen: 0
-    screenRect:
-      serializedVersion: 2
-      x: 0.15
-      y: 0.2
-      width: 0.7
-      height: 0.6
-    screenBg: {fileID: 0}
   - codeId: crewmate
     head: {fileID: 21300000, guid: c8a8522af13452449b628d1b5f54a616, type: 3}
     torso: {fileID: 21300000, guid: c7d309ae84a765e4daff9439d244d540, type: 3}

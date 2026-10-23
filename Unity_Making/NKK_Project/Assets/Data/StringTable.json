@@ -436,11 +436,6 @@
    "en": "Mi-Fi"
   },
   {
-   "string_key": 1010088,
-   "ko": "메이드 쥐",
-   "en": "Maid Rat"
-  },
-  {
    "string_key": 1110001,
    "ko": "하수구 출신의 정통파. 숫자가 곧 힘이다.",
    "en": "Old-school sewer stock. Numbers ARE power."
@@ -874,11 +869,6 @@
    "string_key": 1110087,
    "ko": "휴대폰을 손에서 놓지 않는 쥐. 5G 속도로 동료를 불러 모은다. 근데 하수구에선 잘 안 터진다.",
    "en": "A rat glued to its phone. Calls buddies over at 5G speed. Signal's terrible in the sewers, though."
-  },
-  {
-   "string_key": 1110088,
-   "ko": "커다란 회중시계를 늘 차고 다니는 완벽한 메이드 쥐. 청소도 서빙도 눈 깜짝할 새 끝낸다. 비결을 물으면 \"시간은 충분했거든요.\" 하고 웃는다.",
-   "en": "A perfect maid rat who always carries a huge pocket watch. Cleaning and serving are done in the blink of an eye. Ask her secret and she smiles: \"I had plenty of time.\""
   },
   {
    "string_key": 1220001,
@@ -1316,11 +1306,6 @@
    "en": "High-Speed Link"
   },
   {
-   "string_key": 1220088,
-   "ko": "완벽한 뒷정리",
-   "en": "Perfect Tidy-Up"
-  },
-  {
    "string_key": 1221001,
    "ko": "하수구 동창회",
    "en": "Sewer Reunion"
@@ -1744,11 +1729,6 @@
    "string_key": 1221087,
    "ko": "데이터 전송",
    "en": "Data Boost"
-  },
-  {
-   "string_key": 1221088,
-   "ko": "티 타임",
-   "en": "Tea Time"
   },
   {
    "string_key": 1320001,
@@ -2516,11 +2496,6 @@
    "en": "With 5+ buddies nearby (250) (every 15s) → Data Boost: rats within radius 250 get +25% attack (8s)"
   },
   {
-   "string_key": 1321088,
-   "ko": "20초마다 → 티 타임: 주변 동료 전원 광란 6.0초 (속도·피해 ×1.5)",
-   "en": "Every 20s → Tea Time: all nearby allies go frenzy for 6.0s (speed & damage ×1.5)"
-  },
-  {
    "string_key": 1430001,
    "ko": "슈퍼 노바 빔",
    "en": "Super Nova Beam"
@@ -2694,11 +2669,6 @@
    "string_key": 1430035,
    "ko": "렛잇고 (Rat it go)",
    "en": "Let It Go (Rat It Go)"
-  },
-  {
-   "string_key": 1430036,
-   "ko": "살인 인형",
-   "en": "Killing Doll"
   },
   {
    "string_key": 1530001,
@@ -2876,11 +2846,6 @@
    "en": "Summons a giant ice castle + 4.2s blizzard: every creature on the map (cats, bosses, humans) gets full Frost stacks (frozen solid), lasting 1.5s more after. When the castle lands, frost shock hits objects on screen"
   },
   {
-   "string_key": 1530036,
-   "ko": "회중시계로 시간 정지(화면 회색 · 연출만) → 화면 안 물건·생명체 둘레 공중에 칼을 잔뜩 깔아 둠 → 시간이 다시 흐르면 칼이 일제히 꽂힘",
-   "en": "Stops time with a pocket watch (gray screen, visual only) → lays out knives in the air around on-screen items and creatures → when time flows again, the knives strike all at once"
-  },
-  {
    "string_key": 1630001,
    "ko": "정의의 빔을 받아라!!",
    "en": "Taste the beam of JUSTICE!!"
@@ -3054,11 +3019,6 @@
    "string_key": 1630035,
    "ko": "Rat it go~! 전부 얼어붙어라!",
    "en": "Rat it go~! Freeze, all of you!"
-  },
-  {
-   "string_key": 1630036,
-   "ko": "시간이여, 멈춰라!",
-   "en": "Time, stand still!"
   },
   {
    "string_key": 1700001,
@@ -4659,31 +4619,6 @@
    "string_key": 1700320,
    "ko": "Rat it go~~!!",
    "en": "Rat it go~~!!"
-  },
-  {
-   "string_key": 1700321,
-   "ko": "째깍… 째깍…",
-   "en": "Tick… tock…"
-  },
-  {
-   "string_key": 1700322,
-   "ko": "시간이여, 멈춰라!",
-   "en": "Time, stand still!"
-  },
-  {
-   "string_key": 1700323,
-   "ko": "…그리고 시간은 움직인다.",
-   "en": "…And time moves again."
-  },
-  {
-   "string_key": 1700324,
-   "ko": "청소 끝났습니다.",
-   "en": "Cleaning complete."
-  },
-  {
-   "string_key": 1700325,
-   "ko": "(칼은 이따 제가 다 주울게요)",
-   "en": "(I will pick up all the knives later)"
   },
   {
    "string_key": 1800001,
@@ -10681,11 +10616,6 @@
    "en": "Rat It Go!"
   },
   {
-   "string_key": 3640036,
-   "ko": "그리고 시간은 움직인다",
-   "en": "And Time Moves Again"
-  },
-  {
    "string_key": 3740001,
    "ko": "{ult} 필살기를 끝까지 쓰기",
    "en": "Use the {ult} Ultimate all the way through"
@@ -11486,11 +11416,6 @@
    "en": "Eternal Winter"
   },
   {
-   "string_key": 4231016,
-   "ko": "메이드의 세계",
-   "en": "The Maid's World"
-  },
-  {
    "string_key": 4331001,
    "ko": "찌릿… 도시 전체를 충전 중!",
    "en": "Bzzt... charging the whole city!"
@@ -11566,11 +11491,6 @@
    "en": "The world freezes over..."
   },
   {
-   "string_key": 4331016,
-   "ko": "시간… 정지.",
-   "en": "Time… stop."
-  },
-  {
    "string_key": 4431001,
    "ko": "번개가 하늘을 가른다!!",
    "en": "Lightning splits the sky!!"
@@ -11644,11 +11564,6 @@
    "string_key": 4431015,
    "ko": "전부 꽁꽁!!",
    "en": "Freeze, everyone!!"
-  },
-  {
-   "string_key": 4431016,
-   "ko": "칼날의 비!!",
-   "en": "Rain of blades!!"
   },
   {
    "string_key": 4500001,
@@ -16009,6 +15924,11 @@
    "string_key": 8000549,
    "ko": "7 ? ?",
    "en": "7 ? ?"
+  },
+  {
+   "string_key": 9000132,
+   "ko": "※ 출발 층은 스킬만으로 다 열리지 않아요 · 층을 클리어해야 더 위에서 출발할 수 있어요 (출동 화면에 안내)",
+   "en": "※ Skip needs cleared floors too · clear floors to start higher (shown on the Run screen)"
   }
  ]
 }

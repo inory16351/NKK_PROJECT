@@ -7,9 +7,8 @@ import json, math, os, random
 from PIL import Image
 
 HITS = [2.0 + 0.2 * i for i in range(10)]
-NO_FINISH = {'maid': 3.45, 'icequeen': 3.4, 'knight': 3.95, 'pharaoh': 3.75, 'bomber': 3.05, 'streamrat': 3.6, 'ramjui': 5.61, 'fondue': 5.35, 'starchef': 6.41, 'sultan': 4.15, 'emperor': 5.25, 'alien': 8.3, 'parkrat': 9.96, 'jjdetective': 6.7, 'zapham': 6.5, 'jwerry': 7.3}          # ④ 피니시 컷 없는 쥐: ③ 끝(마지막 일격 · 또는 컷신 끝) 시각 = SuperUltStyle.actEnd (2026-10-19 사용자)
+NO_FINISH = {'icequeen': 3.4, 'knight': 3.95, 'pharaoh': 3.75, 'bomber': 3.05, 'streamrat': 3.6, 'ramjui': 5.61, 'fondue': 5.35, 'starchef': 6.41, 'sultan': 4.15, 'emperor': 5.25, 'alien': 8.3, 'parkrat': 9.96, 'jjdetective': 6.7, 'zapham': 6.5, 'jwerry': 7.3}          # ④ 피니시 컷 없는 쥐: ③ 끝(마지막 일격 · 또는 컷신 끝) 시각 = SuperUltStyle.actEnd (2026-10-19 사용자)
 WORLD = {'jwerry': dict(cutFade=0.3, worldTime=2.0, blizzardCount=1, hailCount=3, playRate=1.0, worldWind=(-40.0, -1100.0), worldDotSize=(30.0, 56.0)),     # 줴리 v2: 쥐구멍 메롱 뒤 게임 화면 = 프라이팬이 대상마다 떨어져 뿅 (2026-10-21)
-         'maid': dict(cutFade=0.3, worldTime=2.4, blizzardCount=1, blizzardGap=0.1, hailCount=2, playRate=0.75, worldWind=(-260.0, -1500.0), worldDotSize=(34.0, 62.0)),     # 메이드 쥐: 시간이 다시 흐르면 게임 화면에 칼 비 (2026-10-20)
          'emperor': dict(cutFade=0.3, worldTime=1.5, blizzardCount=0, hailCount=0, playRate=1.0),     # 쥐 황제 v2 정면: 게임 화면 연출 없음 · 컷신 마지막 탄흔(Hold)만 1.5초 남았다 사라짐 (2026-10-20 사용자)
          'icequeen': dict(cutFade=0.4, worldTime=3.0, freezeAll=1.5, blizzardCount=1, hailCount=3, playRate=0.75),
          'pharaoh': dict(cutFade=0.4, worldTime=2.2, blizzardCount=0, hailCount=0, playRate=0.75),     # 미라 쥐들이 왼→오로 달려 지나감 (2026-10-20 사용자: 모래바람 대신)
@@ -27,7 +26,6 @@ WORLD = {'jwerry': dict(cutFade=0.3, worldTime=2.0, blizzardCount=1, hailCount=3
 NO_TEXT = {'zapham', 'knight', 'starchef', 'fondue', 'emperor', 'alien', 'parkrat', 'jjdetective', 'jwerry'}       # 컷신에 글(제목 띠 · 자막 · 히트 수 · 밈 글)을 안 띄우는 쥐 (2026-10-19 사용자)
 KNIGHT_LINE = -40          # 기사 칼 각도 (도, UI 반시계 +): 후경 기사 칼날을 잰 값 — 컷신 갈라짐 · 땅 균열 · 게임 화면 파동 전부 이 각도 (2026-10-19 사용자)
 IMAGE_FX = {'jwerry': dict(hailFall=['fx_panfall', 'fx_pan2', 'fx_panfall'], hailChunk=['fx_star'], hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashSize=150.0, splashHitSize=280.0, splashFinishSize=560.0, worldSnowScale=0.4),     # 줴리 v2: 프라이팬 비 · 뿅 (2026-10-21)
-            'maid': dict(hailFall=['fx_knife_fallr', 'fx_knife_fallr', 'fx_knife_fall2r'], hailChunk=['fx_glint'], hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashSize=120.0, splashHitSize=220.0, splashFinishSize=420.0, worldSnowScale=0.3),     # 칼 그림은 칼끝이 오른쪽(=떨어지는 방향)으로 돌린 사본 *r (slice_superult ROT_RIGHT)
             'emperor': dict(hailSplash=[], worldSnowOff=True, holdGroup='"Hold"', holdFade=0.45),     # 탄착 그림 없음 = 게임 화면 이펙트 없음 · 탄흔 묶음을 게임 화면 위에 남김 (SuperUltStyle.holdGroup)
             'pharaoh': dict(hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashHitSize=240.0, splashFinishSize=420.0, worldSnowOff=True,
                             runFrames=['anim_mside_1', 'anim_mside_2', 'anim_mside_3'], runGap=0.11, runCount=3, runHeight=(160.0, 160.0), runSpeed=(1500.0, 2100.0), runFrame=0.07),     # 파라오 v2: 게임 화면 = 미라 돌격 · 태클 충돌 (2026-10-20 사용자: 달리는 미라 크기 균등 · 맨 끝 정면 군단 뺌)
@@ -2686,79 +2684,6 @@ def icequeen(s, R):
     return None                                     # 피해 숫자는 게임 화면 단계에서 대상마다 (worldPhase)
 
 
-def maid(s, R):
-    """세로 (정면, + 회색 판 pano_alt = 멈춘 세계): 달밤 하늘 → 시계탑 저택 → 발코니. (2026-10-20, 사용자: 초필살기 = 시간 정지 + 칼 모티브)
-    띠 · 마무리 컷 없음 · 플랫 그림 · 정면 셀 프레임 · 0.75배속 — 컷 6개:
-    ① 0.4 보름달 → 시계탑으로 틸트 다운 (시계 톱니가 돎) ② 0.85 발코니 정면: 회중시계를 가슴에 → 높이 들어 용두를 딸깍
-    ③ 1.3 얼굴 클로즈업 (눈이 붉게 · 칼 세 자루) ④ 1.75 손가락 딱 → 세상이 회색으로 멈춤 (pano_alt) · 하늘로 틸트 업하며 칼 고리가 겹겹이 펼쳐짐
-    ⑤ 2.55 두 팔을 크게 펼쳐 칼을 흩뿌림 → 화면 가득 칼이 멈춘 채 떠 있음 ⑥ 3.05 '그리고 시간은 움직인다' — 색이 돌아오며 칼이 카메라로 쏟아져 하얗게
-    → 3.45 컷신 걷힘 → 게임 화면 칼 비 (다단 10타 · 대상마다 칼 꽂힘 = worldPhase · imageFx)"""
-    END = NO_FINISH['maid']
-    wsc = lambda name, px: px / max(1, s.size(name)[0])
-
-    def cut_flash(g, t0, a=0.55):
-        s.s(g, 'CutFlash', 'fx_flash', 8.0, [(t0, 0, 0, 1.0, 0, a, 'Snap'), (t0 + 0.09, 0, 0, 1.3, 0, 0, 'Out')])
-
-    SX, SY = 0.5, 0.885                    # 발코니 가운데 서는 자리 (파노라마 비율, pano_on 1536×2252)
-    CLX, CLY = 0.456, 0.51                 # 시계탑 시계판
-    # ① 보름달 → 시계탑으로 틸트 다운 · 톱니가 돎
-    g = s.group('Cut1', R, 0.4, 0.85)
-    tr = s.cam(g, [(0.4, 0.36, 0.1, 1.3, 3, 'Out'), (0.85, CLX, CLY, 1.5, 0, 'InOut')], kicks=[0.4], power=16)
-    s.w(tr, 'Gear', 'prop_gear', wsc('prop_gear', 260), [(0.4, CLX - 0.16, CLY - 0.05, 1, 0, 0.9, 'Out'), (0.85, CLX - 0.16, CLY - 0.05, 1, 0, 0.9, 'Linear')], spin=60.0)
-    s.w(tr, 'Gear2', 'prop_gear', wsc('prop_gear', 180), [(0.4, CLX + 0.17, CLY + 0.02, 1, 0, 0.9, 'Out'), (0.85, CLX + 0.17, CLY + 0.02, 1, 0, 0.9, 'Linear')], spin=-90.0)
-    s.speed(g, 0.55, 0.85, vertical=True)
-    # ② 발코니 정면: 시계를 가슴에 → 높이 들어 딸깍
-    C1, C2 = 0.85, 1.05
-    g = s.group('Cut2', R, 0.85, 1.3)
-    tr = s.cam(g, [(0.85, 0.5, 0.825, 2.0, 0, 'Out'), (1.3, 0.5, 0.82, 2.25, 0, 'Linear')], kicks=[C2], power=26)
-    s.cel(tr, 'Maid', [(C1, 'anim_watch_1'), (C2, 'anim_watch_2')], [(C1, SX, SY, 1, 0, 1, 'Out'), (C2, SX, SY, 1.06, 0, 1, 'Back'), (1.3, SX, SY, 1.08, 0, 1, 'Linear')], height=330, ref='anim_watch_1')
-    s.s(g, 'Tick', 'fx_glints', 0.9, [(C2 - 0.01, -260, 330, 0, 0, 0, 'Out'), (C2, -260, 330, 0.6, 0, 1, 'Snap'), (C2 + 0.25, -260, 330, 1.3, 40, 0, 'Out')])
-    s.s(g, 'Dial', 'fx_clockface', 1.6, [(C1, 0, 0, 0.6, 0, 0, 'Out'), (C2, 0, 0, 1.0, 0, 0.25, 'Back'), (1.3, 0, 0, 1.15, 0, 0.2, 'Linear')], spin=-40.0)
-    cut_flash(g, 0.85)
-    # ③ 얼굴 클로즈업 · 눈 번쩍
-    g = s.group('Cut3', R, 1.3, 1.75)
-    s.face(g, 'zoom', 1.3, 1.75, bg='face_bg')
-    s.s(g, 'Glint', 'fx_glints', 0.7, [(1.45, -330, 160, 0, 0, 0, 'Out'), (1.46, -330, 160, 0.9, 0, 1, 'Snap'), (1.65, -330, 160, 1.4, 30, 0, 'Out')])
-    cut_flash(g, 1.3)
-    # ④ 손가락 딱 → 세상이 회색으로 멈춤 · 하늘로 틸트 업하며 칼 고리가 겹겹이
-    T = 1.75; SNAP = 1.9
-    g = s.group('Cut4', R, T, 2.55)
-    tr = s.cam(g, [(T, 0.5, 0.825, 2.0, 0, 'Out'), (SNAP + 0.1, 0.5, 0.82, 2.1, 0, 'Linear'), (2.4, 0.55, 0.2, 1.1, 0, 'InOut'), (2.55, 0.56, 0.18, 1.05, 0, 'Linear')],
-               kicks=[SNAP], power=40, swap=(SNAP, SNAP + 0.1))
-    s.cel(tr, 'Maid', [(T, 'anim_watch_2'), (SNAP - 0.05, 'anim_watch_3')], [(T, SX, SY, 1.08, 0, 1, 'Out'), (2.55, SX, SY, 1.08, 0, 1, 'Linear')], height=330, ref='anim_watch_1')
-    s.s(g, 'Stop', 'fx_flash', 6.0, [(SNAP - 0.01, 0, 0, 0.3, 0, 0, 'Out'), (SNAP, 0, 0, 0.6, 0, 0.9, 'Snap'), (SNAP + 0.3, 0, 0, 1.6, 0, 0, 'Out')])
-    RINGS = [(0.62, 0.30, 700, 2.1), (0.42, 0.22, 560, 2.18), (0.70, 0.14, 820, 2.26), (0.50, 0.08, 1000, 2.34)]
-    for k, (x, y, w, t0) in enumerate(RINGS):
-        s.w(tr, f'KRing{k}', 'fx_knifering', wsc('fx_knifering', w), [(t0 - 0.01, x, y, 0.4, 0, 0, 'Out'), (t0, x, y, 0.6, 0, 1, 'Snap'), (t0 + 0.14, x, y, 1.05, 0, 1, 'Back'), (2.55, x, y, 1.0, 0, 1, 'Linear')], spin=12.0 if k % 2 else -12.0)
-    s.speed(g, 2.05, 2.4, vertical=True)
-    cut_flash(g, T)
-    # ⑤ 두 팔을 펼쳐 칼을 흩뿌림 → 화면 가득 멈춘 칼 (회색 세계)
-    T = 2.55; FL = 2.7
-    g = s.group('Cut5', R, T, 3.05)
-    tr = s.cam(g, [(T, 0.5, 0.83, 2.2, 0, 'Out'), (3.05, 0.5, 0.82, 1.9, 0, 'Linear')], kicks=[FL], power=34, pano='pano_alt')
-    s.cel(tr, 'Maid', [(T, 'anim_throw_1'), (FL, 'anim_throw_2')], [(T, SX, SY, 1, 0, 1, 'Out'), (FL, SX, SY, 1.08, 0, 1, 'Back'), (3.05, SX, SY, 1.1, 0, 1, 'Linear')], height=330, ref='anim_throw_1')
-    for i in range(18):                    # 손에서 퍼져 나가 그 자리에 멈춰 뜸 (멈춘 시간)
-        a = math.radians(-160 + 340 * i / 17 + s.rnd.uniform(-6, 6)); r = s.rnd.uniform(420, 980)
-        x, y = math.cos(a) * r * 1.2, math.sin(a) * r * 0.75 + 60
-        rot = math.degrees(a) + 180       # 칼끝이 가운데(관객 쪽 표적)로 — 앞모습 칼과 섞음
-        spr = 'fx_knife' if i % 3 else 'fx_knife_front'
-        s.s(g, f'Knife{i}', spr, 0.32 if spr == 'fx_knife' else 0.22, [(FL - 0.01, 0, 60, 0.2, rot, 0, 'Out'), (FL, 0, 60, 0.4, rot, 1, 'Snap'), (FL + 0.12, x, y, 1.0, rot, 1, 'Out'), (3.05, x * 1.02, y * 1.02, 1.0, rot, 1, 'Linear')])
-    cut_flash(g, T)
-    # ⑥ 시간이 다시 흐름: 색이 돌아오며 칼이 카메라로 쏟아져 하얗게
-    T = 3.05
-    g = s.group('Cut6', R, T)
-    tr = s.cam(g, [(T, 0.56, 0.2, 1.1, 0, 'Out'), (END + 0.4, 0.56, 0.18, 1.6, 0, 'In')], kicks=[T], power=50, rot=2)
-    for k, (x, y, w, _) in enumerate(RINGS):
-        s.w(tr, f'KRing{k}', 'fx_knifering', wsc('fx_knifering', w), [(T, x, y, 1.0, 0, 1, 'Out'), (T + 0.25, x, y, 1.8, 0, 0, 'In')])
-    for i in range(26):                    # 앞모습 칼이 멀리서 커지며 카메라로
-        x, y, t0 = s.rnd.uniform(-900, 900), s.rnd.uniform(-480, 480), T + s.rnd.uniform(0, 0.3)
-        s.s(g, f'Rush{i}', 'fx_knife_front', 0.25, [(t0 - 0.01, x * 0.3, y * 0.3, 0.1, 0, 0, 'Out'), (t0, x * 0.3, y * 0.3, 0.15, 0, 1, 'Snap'), (t0 + 0.18, x, y, 2.2, 0, 1, 'In'), (t0 + 0.22, x * 1.2, y * 1.2, 2.8, 0, 0, 'Linear')])
-    s.speed(g, T, END, vertical=False)
-    s.s(g, 'WhiteOut', 'fx_flash', 9.0, [(T + 0.12, 0, 0, 0.5, 0, 0, 'Out'), (END, 0, 0, 1.4, 0, 0.95, 'In'), (END + 0.4, 0, 0, 1.6, 0, 0.95, 'Linear')])
-    cut_flash(g, T, 0.8)
-    G = s.group('Top', R, 2.55)
-    s.meme(G, 2.6, side=1, y=440)
-    return None
 
 
-STORIES = {f.__name__: f for f in (zapham, parkrat, emperor, pharaoh, knight, sultan, alien, streamrat, ramjui, jwerry, starchef, jjdetective, fondue, bomber, icequeen, maid)}
+STORIES = {f.__name__: f for f in (zapham, parkrat, emperor, pharaoh, knight, sultan, alien, streamrat, ramjui, jwerry, starchef, jjdetective, fondue, bomber, icequeen)}

@@ -492,8 +492,6 @@ namespace NKK.Rats
                     z = Mathf.Abs(Mathf.Sin(act.t * 9)) * 26; vx = vy = 0;
                     if (act.hitT <= 0)
                     {
-                        // 메이드 쥐 '티 타임': 첫 박자에 찻잔 쟁반을 머리 위로 내밂 (FxManager 스티커 maid_teatray)
-                        if (act.t < 0.3f && codeId == "maid") fx?.AddSticker("maid_teatray", x, y, 78, 62, 1.5f);
                         act.hitT = 0.5f;
                         foreach (var o in Manager.Rats) if (act.x ? o.OnScreen() : Vector2.Distance(new Vector2(o.x, o.y), new Vector2(x, y)) < AV(2)) o.frenzy = Mathf.Max(o.frenzy, AV(1));
                         fx?.Ring(x, y, act.x ? 400 : AV(2), new Color(0.91f, 0.64f, 0.63f, 0.8f), 0.5f);

@@ -36,8 +36,8 @@ SKILLS = [
     ('R_Whisperer', ('랩터 다루기', 'Raptor Whisperer'), 'Orbit', 110, 1, 3, 1.0, 5, 'bm_raptor', 140, '#9ab06a', ('진정해!', 'Easy!'), None, 240, 70, 0, '', '[발악2] 랩터 3마리가 투명→불투명 등장, 5초간 보스 둘레를 돎 (보스는 천천히 걸음)'),
     # 50 노조 고양이
     ('R_PawSlap', ('냥냥펀치', 'Paw-Paw Slap'), 'Slam', 200, 1, 1, 1.0, 0, '-', 0, '#e8a0a0', ('냥!', 'Nyah!'), None, 4, 0, 0, '', '[스킬] 사냥 자세 1초 → 쥐 무리로 뛰어가 앞발 4연타 (칠 때마다 흔들림 + 기절)'),
-    ('R_Solidarity', ('단결 투쟁', 'Solidarity Strike'), 'Parade', 120, 2, 8, 1.2, 3, 'bm_picket', 150, '#e05050', ('단결 투쟁!', 'UNITE & FIGHT!'), None, 0, 0, 0, 'red,body:br_union_megaphone@300', '[발악1] 두 발로 서서 확성기 → 화면 붉게 깜빡 + 시위대가 화면을 가로지름'),
-    ('R_LooksGood', ('좋았쓰!! 호출', 'Call the Looks-Good Cats'), 'Throw', 120, 2, 8, 1.6, 1.2, 'bm_joassu', 110, '#f0d050', ('좋았쓰!!', 'LOOKS GOOD!!'), None, 0, 0, 0, 'around,shake,body:br_union_phone@300', '[발악2] 안전모 쓰고 전화 → 점점 진동, 먼지 속에서 좋았쓰 고양이들이 사방 포물선'),
+    ('R_Solidarity', ('단결 투쟁', 'Solidarity Strike'), 'Parade', 120, 2, 8, 1.2, 3, 'bm_picket', 100, '#e05050', ('단결 투쟁!', 'UNITE & FIGHT!'), None, 0, 0, 0, 'red,body:br_union_megaphone@300,rig:boss_union2|boss_joassu@1', '[발악1] 두 발로 서서 확성기 → 화면 붉게 깜빡 + 시위대가 화면을 가로지름'),
+    ('R_LooksGood', ('좋았쓰!! 호출', 'Call the Looks-Good Cats'), 'Throw', 120, 2, 8, 1.6, 1.2, 'bm_joassu', 110, '#f0d050', ('좋았쓰!!', 'LOOKS GOOD!!'), None, 0, 3, 0, 'around,shake,dust,body:br_union_phone@300,rig:boss_joassu@0.8', '[발악2] 안전모 쓰고 전화 → 점점 진동, 먼지 속에서 좋았쓰 고양이들이 사방 포물선 → 착지 후 3초 돌아다니며 닿은 쥐 기절'),
     # 55 거미 고양이
     ('R_RebarSpikes', ('철근 가시', 'Rebar Spikes'), 'Fan', 60, 1, 7, 0.9, 0, 'br_rebar', 90, '#8a8f99', None, None, 60, 700, 0, '', '[스킬] 입을 우물거리다 바라보는 방향 60° 부채꼴로 철근 가시'),
     ('R_RebarWeb', ('철근 거미줄', 'Rebar Web'), 'Drop', 360, 2, 1, 1.0, 0.3, 'br_rebar_web', 720, '#8a8f99', ('철컹!', 'Clang!'), None, 5, 2, 0, '', '[발악1] 공중에서 큰 철근 거미줄이 낙하 (그림자 예고 1초), 떨어진 자리에 2초 남았다 사라짐'),

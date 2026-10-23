@@ -40,13 +40,21 @@ namespace NKK.Rats
         [Tooltip("패널 전체 (숨길 때 알파)")] public CanvasGroup group;
         [Tooltip("이번 층 피해 합 ({n}, 비워도 됨)")] public TMP_Text totalText;
         public float panelFade = 5;
+        [Tooltip("이름 칸 ({name} 쥐 이름 · {n} 지금 있는 마리 수, 0 마리면 이름만)")] public string nameFormat = "{name} <size=85%><color=#8a7a6a>({n})</color></size>";
+
+        [Header("접기 (오른쪽 화면 가릴 때, 쥐 목록 버튼 옆)")]
+        [Tooltip("접기/펴기 버튼 (HUD 자식, 패널 밖)")] public Button foldButton;
+        [Tooltip("버튼 화살표 (펴져 있으면 위 = 접기, 접히면 아래 = 펴기)")] public RectTransform foldArrow;
+        [Tooltip("접힐 때 오른쪽으로 밀려나는 거리 (px)")] public float foldSlide = 60;
+        bool folded; Vector2 panelPos; float shownK, foldK;
+        const string FoldKey = "dmgMeterFolded";
 
         enum Move { None, Rise, Push, Enter, Leave }
         class Slot
         {
             public RectTransform rt; public CanvasGroup cg;
             public RatPortrait portrait; public TMP_Text name, value, rank; public Image medal, up, down, fill, flash;
-            public string code; public int target = -1, shownRank = -1;
+            public string code; public int target = -1, shownRank = -1, shownCount = -1;
             public float y, fromY, toY, t, dur, delay; public Move move;
             public float frac, upT, downT, flashT, popT; public double shownVal;
             public string valTpl, rankTpl; public Color upCol, downCol, flashCol;
@@ -54,6 +62,7 @@ namespace NKK.Rats
         readonly List<Slot> slots = new();
         readonly List<KeyValuePair<string, double>> sorted = new();
         readonly HashSet<string> topCodes = new();
+        readonly Dictionary<string, int> counts = new();
         float refreshT; int seenVer = -1; double top = 1; string totalTpl; double totalShown;
 
         static GameDatabase DB => GameDatabase.Instance;
@@ -75,7 +84,50 @@ namespace NKK.Rats
                 slots.Add(s);
             }
             if (totalText) totalTpl = totalText.text;
-            if (group && hideWhenEmpty) group.alpha = 0;
+            panelPos = ((RectTransform)transform).anchoredPosition;
+            try { folded = PlayerPrefs.GetInt(FoldKey, 0) == 1; } catch { }
+            if (foldButton) foldButton.onClick.AddListener(ToggleFold);
+            shownK = folded || hideWhenEmpty ? 0 : 1; foldK = folded ? 1 : 0;
+            if (group) group.alpha = shownK;
+            ApplyFold();
+        }
+
+        public void ToggleFold()
+        {
+            folded = !folded;
+            PlayerPrefs.SetInt(FoldKey, folded ? 1 : 0);
+            SfxManager.Play("ui_click");
+        }
+
+        // 접힘: 오른쪽으로 밀리며 사라짐 (눌리지도 않음) · 화살표 뒤집기
+        void ApplyFold()
+        {
+            float e = foldK * foldK * (3 - 2 * foldK);
+            ((RectTransform)transform).anchoredPosition = panelPos + new Vector2(foldSlide * e, 0);
+            if (group) group.blocksRaycasts = !folded;
+            if (foldArrow) foldArrow.localRotation = Quaternion.Euler(0, 0, folded ? 180 : 0);
+        }
+
+        // 지금 있는 쥐 종별 마리 수 (임시 쥐 빼고, 쥐 목록과 같은 기준)
+        void Count()
+        {
+            counts.Clear();
+            if (!Rats) return;
+            foreach (var r in Rats.Rats)
+            {
+                if (!r || r.temp > 0 || string.IsNullOrEmpty(r.codeId)) continue;
+                counts.TryGetValue(r.codeId, out var n); counts[r.codeId] = n + 1;
+            }
+        }
+
+        void SetName(Slot s)
+        {
+            int n = counts.TryGetValue(s.code, out var c) ? c : 0;
+            if (n == s.shownCount || !s.name) return;
+            s.shownCount = n;
+            var row = DB != null && DB.RatsByCode.TryGetValue(s.code, out var r) ? r : null;
+            string nm = row != null ? row.character_name : s.code;
+            s.name.text = n > 0 && !string.IsNullOrEmpty(nameFormat) ? nameFormat.Replace("{name}", nm).Replace("{n}", n.ToString()) : nm;
         }
 
         static TMP_Text Txt(Transform t, string p) => t.Find(p)?.GetComponent<TMP_Text>();
@@ -90,8 +142,16 @@ namespace NKK.Rats
         void Update()
         {
             float dt = Time.unscaledDeltaTime;
-            if ((refreshT -= dt) <= 0 || seenVer < 0) { refreshT = refresh; if (seenVer != DamageMeter.Version) { seenVer = DamageMeter.Version; Rank(); } }
-            if (group && hideWhenEmpty) group.alpha = Mathf.MoveTowards(group.alpha, DamageMeter.Total > 0 ? 1 : 0, dt * panelFade);
+            if ((refreshT -= dt) <= 0 || seenVer < 0)
+            {
+                refreshT = refresh;
+                if (seenVer != DamageMeter.Version) { seenVer = DamageMeter.Version; Rank(); }
+                Count(); foreach (var s in slots) if (s.code != null) SetName(s);
+            }
+            shownK = Mathf.MoveTowards(shownK, folded || (hideWhenEmpty && DamageMeter.Total <= 0) ? 0 : 1, dt * panelFade);
+            foldK = Mathf.MoveTowards(foldK, folded ? 1 : 0, dt * panelFade);
+            if (group) group.alpha = shownK;
+            ApplyFold();
             float kb = 1 - Mathf.Exp(-barSharp * dt);
             foreach (var s in slots) Animate(s, dt, kb);
             if (totalText && totalTpl != null)
@@ -195,7 +255,7 @@ namespace NKK.Rats
             if (s == null) return null;
             s.code = code; s.cg.alpha = 0; s.y = Y(showCount); s.frac = 0; s.shownVal = 0; s.shownRank = -1; s.upT = s.downT = s.flashT = 0; s.move = Move.None;
             var row = DB != null && DB.RatsByCode.TryGetValue(code, out var r) ? r : null;
-            if (s.name) s.name.text = row != null ? row.character_name : code;
+            s.shownCount = -1; SetName(s);
             if (s.portrait) s.portrait.Show(Rats && Rats.artLibrary ? Rats.artLibrary.Get(code) : null);
             if (s.fill && gradeColorBar && row != null) { var g = DB.GradeOf(row); if (g != null && ColorUtility.TryParseHtmlString(g.color, out var c)) s.fill.color = c; }
             return s;

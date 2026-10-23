@@ -25,8 +25,13 @@ namespace NKK.Rats
             for (int i = 0; i < arts.Count; i++)
             {
                 if (arts[i] == null) continue;
-                var r = Instantiate(rig, rig.transform.parent);
+                // rig 은 쥐 본체(Rat)와 같은 오브젝트 → 복제하면 쥐가 통째로 생겨 매니저 밖에서 멈춰 있었음 (벽에 낀 탑, 2026-10-23).
+                // 이 쥐 자식으로 붙이고 그림(Visual)만 남김: Rat 컴포넌트 · 그림자(원래 쥐 것을 가리킴) · 탈것 · 다른 층은 지움
+                var r = Instantiate(rig, transform);
                 r.name = "Tower" + (towerRigs.Count + 1);
+                var body = r.GetComponent<Rat>(); if (body) { body.shadow = null; DestroyImmediate(body); }
+                for (int c = r.transform.childCount - 1; c >= 0; c--) { var ch = r.transform.GetChild(c); if (ch.name != "Visual") DestroyImmediate(ch.gameObject); }
+                r.transform.localRotation = Quaternion.identity; r.transform.localScale = Vector3.one;
                 r.Build(arts[i], lengths[i]);
                 towerRigs.Add(r); towerScales.Add(scales[i]);
             }

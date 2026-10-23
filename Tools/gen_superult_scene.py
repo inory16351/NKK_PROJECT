@@ -29,7 +29,6 @@ VAR = {
     'fondue':      ('L', 'up', 'R', 'pull_back', 1, 'spill', (0.15, 0.10, 0.02, 0.45)),
     'bomber':      ('R', 'down', 'L', 'swing', -1, 'wall_blast', (0.15, 0.03, 0.02, 0.55)),
     'icequeen':    ('L', 'side', 'R', 'whip_down', 1, 'hit_glass', (0.02, 0.06, 0.14, 0.6)),
-    'maid':        ('L', 'down', 'R', 'whip_down', -1, 'hit_metal', (0.04, 0.04, 0.10, 0.6)),
 }
 HITS = [2.0 + 0.2 * i for i in range(10)]       # 다단 히트 시각 (Super_Config: t_cutin 1.9 · t_act 3.9 · 10타)
 

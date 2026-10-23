@@ -25,6 +25,8 @@ namespace NKK.Hazards
     //  around (Throw: 쥐 대신 보스 둘레 사방으로) · sticky:초 (Drop: 떨어진 자리에 닿으면 기절하는 반죽) · morph:그림@초 (Drop: 떨어진 자리 크레이터, 닿으면 그 머리로 멋대로 걷기)
     //  mask:그림 (Zone: 기절한 쥐에 방독면, p3 초 면역) · intro (발악 1 을 전투 시작 때도 씀)
     //  alarm (Drop: 떨어진 것이 남아 있는 동안 화면 붉게 깜빡, 사이렌) · face:그림 (Meeting: 회의 화면 보스 얼굴) · all (Meeting: 맵 전체)
+    //  rig:코드|코드@길이배율 (고양이 그림 리그로 소환, 여러 개면 돌아가며 · 2026-10-23) — Parade: 고양이가 sprite(팻말)를 앞발로 들고 행진 · Throw: sprite 대신 고양이가 포물선으로 날아가 착지 → 잠깐 서서 외침 → p2 초 쥐 쪽으로 돌아다니며 닿은 쥐 기절 → 펑
+    //  dust (준비 동안 보스 발밑 먼지 구름이 점점 크게, 던질 때마다 먼지 펑)
     public partial class Boss
     {
         [Header("보스 개편 패턴 (Boss.Rework.cs)")]
@@ -34,7 +36,9 @@ namespace NKK.Hazards
         [Tooltip("Path 기본 반경 · Parade 크기 배율")] public float pathRadius = 300;
 
         class Proj { public float x, y, vx, vy, life, rad, stun, size, knock, dist, maxDist, rot; public bool explode, roll; public SpriteRenderer r; public readonly HashSet<Rat> hit = new(); }
-        class Walker { public float x, y, vx, rad, stun, size, t; public SpriteRenderer r; public readonly HashSet<Rat> hit = new(); }
+        class Walker { public float x, y, vx, rad, stun, size, t, len; public SpriteRenderer r; public Cat c; public readonly HashSet<Rat> hit = new(); }
+        class Leaper { public float x, y, z, vx, vy, vz, t, stay, rad, stun, len, roam, ang, turnT, walk; public bool landed; public Cat c; public string name, pop; public Color color; public readonly HashSet<Rat> hit = new(); }
+        readonly List<Leaper> leapers = new();
         class Orbiter { public float ang, size, rad, stun; public SpriteRenderer r; }
         readonly List<Proj> projs = new();
         readonly List<Walker> walkers = new();
@@ -125,11 +129,6 @@ namespace NKK.Hazards
             var fx = FxManager.I;
             float wind = Mathf.Max(0.1f, atk.windup), k = Mathf.Clamp01(atkT / wind);
             int n = Mathf.Max(1, atk.count);
-            if (atkT < wind)
-            {
-                if (Opt("red") != null && Ults && Mathf.Repeat(atkT, 0.3f) < dt) Ults.Flash(new Color(0.95f, 0.2f, 0.2f), 0.15f);
-                if (Opt("shake") != null && Random.value < dt * 12) fx?.Shake(0.05f + 0.25f * k);
-            }
             switch (atk.pattern)
             {
                 case "Fan":
@@ -239,6 +238,127 @@ namespace NKK.Hazards
             return true;
         }
 
+        // 준비 동안 opt 연출 (모든 밈·개편 패턴 공통, UpdateMeme 처음에 부름): red · shake · dust
+        void ReworkWindup(float dt)
+        {
+            float wind = Mathf.Max(0.1f, atk.windup);
+            if (atkT >= wind) return;
+            float k = Mathf.Clamp01(atkT / wind);
+            var fx = FxManager.I;
+            if (Opt("red") != null && Ults && Mathf.Repeat(atkT, 0.3f) < dt) Ults.Flash(new Color(0.95f, 0.2f, 0.2f), 0.15f);
+            if (Opt("shake") != null && Random.value < dt * 12) fx?.Shake(0.05f + 0.25f * k);
+            if (Opt("dust") != null && fx && Random.value < dt * (8 + 30 * k))
+                fx.Dust(x + Random.Range(-1f, 1f) * R * (0.6f + 0.6f * k), y + Random.Range(-0.4f, 0.4f) * R, 2, 0.8f + 1.4f * k);
+        }
+
+        // ── 소환 고양이 꼭두각시 (opt rig): 고양이 프리팹의 리그만 빌려 씀 (게임 고양이 아님, Cat 은 꺼 둠) ──
+        Cat MakePuppet(string codes, int i, float len)
+        {
+            if (!Cats || !Cats.catPrefab || !Cats.catArt || string.IsNullOrEmpty(codes)) return null;
+            var l = codes.Split('|');
+            var art = Cats.catArt.Get(l[Mathf.Abs(i) % l.Length].Trim());
+            if (art == null) { Debug.LogWarning("[Boss] 소환 고양이 그림 없음: " + codes); return null; }
+            var c = Instantiate(Cats.catPrefab, Cats.catRoot ? Cats.catRoot : Cats.transform);
+            c.enabled = false; c.name = "BossPuppet";
+            c.rig.Build(art, len, 1, false);
+            if (c.shadow && Rats.shadowRoot) { c.shadow.transform.SetParent(Rats.shadowRoot, true); c.shadow.sortingOrder = Rats.shadowSortOrder; }
+            return c;
+        }
+        void PlacePuppet(Cat c, float px, float py, float pz, in RatRig.Pose p, int f, int order, float len, float rot = 0)
+        {
+            c.transform.position = World.ToUnity(px, py, pz);
+            c.transform.rotation = Quaternion.identity;
+            c.rig.Apply(p, 1, f, 1, order, 0, rot);
+            if (!c.shadow) return;
+            float w = len * 0.5f * (1 - Mathf.Min(0.7f, pz / 500)), sw = c.shadow.sprite ? c.shadow.sprite.bounds.size.x : 1;
+            c.shadow.transform.position = World.ToUnity(px, py);
+            c.shadow.transform.localScale = new Vector3(w * 2 * World.U / sw, w * 0.6f * 2 * World.TILT * World.U / sw, 1);
+        }
+        static void KillPuppet(Cat c) { if (c) Destroy(c.gameObject); }      // 그림자는 Cat.OnDestroy 가 지움
+
+        // ── Throw + rig: 고양이가 보스 발밑 먼지 속에서 튀어나와 포물선 → 착지 기절 → 잠깐 서서 외치고 펑 ──
+        void Leap(float tx, float ty)
+        {
+            var (codes, lk) = SplitAt(Opt("rig"), 0.8f);
+            float len = (Cats ? Cats.catLength : 115) * lk;
+            var c = MakePuppet(codes, shots, len);
+            if (!c) { Throw(tx, ty, atkType); return; }
+            float T = Mathf.Max(0.35f, shotTime * 1.25f);
+            leapers.Add(new Leaper { x = x, y = y, z = 10, vx = (tx - x) / T, vy = (ty - y) / T, vz = 0.5f * shotGravity * T, rad = atk.radius, stun = atk.stun, len = len, c = c, name = SpName, pop = MemePop, color = MemeColor,
+                roam = Mathf.Max(0, atk.p2) });
+            var fx = FxManager.I;
+            if (fx) { fx.Dust(x, y, 6, 1.8f); fx.Anim("poof", x + Random.Range(-30f, 30f), y, 0, 1.3f); }
+        }
+
+        void UpdateLeapers(float dt)
+        {
+            var fx = FxManager.I;
+            for (int i = leapers.Count - 1; i >= 0; i--)
+            {
+                var l = leapers[i]; l.t += dt;
+                if (!l.c) { leapers.RemoveAt(i); continue; }
+                int f = l.vx >= 0 ? 1 : -1;
+                var p = new RatRig.Pose { sx = 1, sy = 1 };
+                if (!l.landed)
+                {
+                    l.x += l.vx * dt; l.y += l.vy * dt; l.vz -= shotGravity * dt; l.z += l.vz * dt;
+                    // 날아가는 중: 네 다리 쫙 (만세) · 닿은 쥐 기절
+                    p.front = 1.4f; p.farFront = 1.2f; p.back = -1.2f; p.farBack = -1; p.tail = 1.2f + Mathf.Sin(l.t * 30) * 0.3f; p.head = -0.2f; p.tilt = Mathf.Clamp(-l.vz / 900, -0.5f, 0.5f);
+                    if (l.z < 90)
+                        foreach (var o in Rats.Rats)
+                        {
+                            if (o.UltOn || l.hit.Contains(o)) continue;
+                            float dx = o.x - l.x, dy = o.y - l.y;
+                            if (dx * dx + dy * dy < l.rad * l.rad * 0.36f) { l.hit.Add(o); o.Ragdoll(Mathf.Atan2(dy, dx), 260, 300, l.stun); }
+                        }
+                    if (l.z <= 0)
+                    {
+                        l.z = 0; l.landed = true; l.stay = 0.9f;
+                        int c = Cats ? Cats.StunArea(l.x, l.y, l.rad, l.stun, 60, 260) : 0;
+                        Cats?.HitFx(l.x, l.y, l.rad, l.name, c, 0.3f);
+                        if (fx && (!Ults || Ults.OnScreen(l.x, l.y, 0)))
+                        {
+                            fx.Ring(l.x, l.y, l.rad, l.color, 0.45f); fx.Dust(l.x, l.y, 8, 1.4f); fx.Shake(0.12f);
+                            if (l.pop != null) fx.Popup(l.x, l.y, l.pop, l.color, 22, 0.8f, l.len * 0.9f);
+                        }
+                    }
+                }
+                else if (l.stay > 0)
+                {
+                    // 착지: 앞발 들고 서서 가리키며 "좋았쓰!!" (p2 초 돌아다닐 거면 짧게)
+                    float k = Mathf.Clamp01((0.9f - l.stay) / 0.15f);
+                    p.tilt = -0.7f * k; p.back = 1.1f * k; p.farBack = 1.1f * k; p.front = 2.5f * k + Mathf.Sin(l.t * 24) * 0.15f; p.farFront = 0.6f * k; p.head = -0.25f * k; p.tail = 0.6f + Mathf.Sin(l.t * 8) * 0.3f;
+                    if ((l.stay -= dt) <= 0 && l.roam <= 0) { fx?.Anim("poof", l.x, l.y, 30, 1.1f); fx?.Dust(l.x, l.y, 4, 1); KillPuppet(l.c); leapers.RemoveAt(i); continue; }
+                }
+                else
+                {
+                    // 돌아다니기 (p2 초): 가까운 쥐 쪽으로 어슬렁 (가끔 방향 바꿈), 닿은 쥐 기절 → 펑
+                    l.roam -= dt; l.turnT -= dt; l.walk += dt * 14;
+                    if (l.turnT <= 0)
+                    {
+                        l.turnT = Random.Range(0.4f, 0.8f);
+                        var r = Rats.NearestRat(l.x, l.y, 600);
+                        l.ang = r && Random.value < 0.75f ? Mathf.Atan2(r.y - l.y, r.x - l.x) : Random.Range(0, Mathf.PI * 2);
+                    }
+                    float spd = memeWalk * 1.4f, nx = l.x + Mathf.Cos(l.ang) * spd * dt, ny = l.y + Mathf.Sin(l.ang) * spd * dt;
+                    if (Stage.Open.Contains(StageManager.RoomOf(nx, ny))) { l.x = nx; l.y = ny; } else l.turnT = 0;      // 벽이면 다음 프레임에 방향 바꿈
+                    l.vx = Mathf.Cos(l.ang); f = l.vx >= 0 ? 1 : -1;
+                    float s1 = Mathf.Sin(l.walk);
+                    p.front = s1 * 0.5f; p.farBack = s1 * 0.45f; p.farFront = -s1 * 0.5f; p.back = -s1 * 0.45f; p.bob = -Mathf.Abs(Mathf.Cos(l.walk)) * 2.5f; p.tail = 0.4f + Mathf.Sin(l.walk * 0.5f) * 0.3f;
+                    float tr = l.rad * 0.55f;
+                    foreach (var o in Rats.Rats)
+                    {
+                        if (o.UltOn || o.stun > 0) continue;
+                        float dx = o.x - l.x, dy = o.y - l.y;
+                        if (dx * dx + dy * dy < tr * tr) { o.Ragdoll(Mathf.Atan2(dy, dx), 300, 300, l.stun); if (fx && Random.value < 0.5f && l.pop != null) fx.Popup(l.x, l.y, l.pop, l.color, 18, 0.6f, l.len * 0.8f); }
+                    }
+                    if (fx && Random.value < dt * 6) fx.Dust(l.x, l.y, 1, 0.7f);
+                    if (l.roam <= 0) { fx?.Anim("poof", l.x, l.y, 30, 1.1f); fx?.Dust(l.x, l.y, 4, 1); KillPuppet(l.c); leapers.RemoveAt(i); continue; }
+                }
+                PlacePuppet(l.c, l.x, l.y, Mathf.Max(0, l.z), p, f, World.SortOrder(l.y) + (l.landed ? 0 : 40), l.len);
+            }
+        }
+
         // ── Fan 발사체 ──
         void ShowAim(float k)
         {
@@ -315,6 +435,8 @@ namespace NKK.Hazards
             var view = Ults ? Ults.ViewRect(0) : new Rect(x - World.RW / 2, y - World.RH / 2, World.RW, World.RH);
             float speed = (view.width + 600) / Mathf.Max(0.3f, atk.dur);
             walkersAll = atk.p1 >= 1; walkersStun = atk.stun;
+            var (codes, lk) = SplitAt(Opt("rig"), 1);
+            float len = (Cats ? Cats.catLength : 115) * lk;
             for (int i = 0; i < n; i++)
             {
                 var sp = MemeSpriteAt(atk, i);
@@ -322,7 +444,7 @@ namespace NKK.Hazards
                 if (shotTemplate && sp) { r = Instantiate(shotTemplate, shotTemplate.transform.parent); r.sprite = sp; r.gameObject.SetActive(true); r.enabled = true; r.transform.rotation = Quaternion.identity; }
                 float row = n > 1 ? i / (float)(n - 1) : 0.5f;
                 walkers.Add(new Walker { x = view.xMin - 200 - Random.Range(0f, 250f), y = Mathf.Lerp(view.yMin + 80, view.yMax - 80, row) + Random.Range(-30f, 30f), vx = speed * Random.Range(0.9f, 1.1f),
-                    rad = atk.radius, stun = atk.stun, size = MemeSize, r = r, t = Random.Range(0f, 1f) });
+                    rad = atk.radius, stun = atk.stun, size = MemeSize, r = r, t = Random.Range(0f, 1f), c = MakePuppet(codes, i, len), len = len });
             }
             if (MemePop != null) FxManager.I?.Popup(x, y, MemePop, MemeColor, 40, 1.4f, Height * 1.1f);
             FxManager.I?.Shake(0.3f);
@@ -336,7 +458,27 @@ namespace NKK.Hazards
             for (int i = walkers.Count - 1; i >= 0; i--)
             {
                 var w = walkers[i]; w.t += dt; w.x += w.vx * dt;
-                if (w.r)
+                if (w.c)
+                {
+                    // 시위 행진: 뒷다리로 걷고 앞발로 팻말을 치켜듦 (팻말은 고양이 뒤, 머리 위로 흔들)
+                    float s1 = Mathf.Sin(w.t * 16), sway = Mathf.Sin(w.t * 6);
+                    var p = new RatRig.Pose { sx = 1, sy = 1, tilt = -0.35f, front = 2.4f + sway * 0.15f, farFront = 1.6f - sway * 0.2f, back = -s1 * 0.55f, farBack = s1 * 0.55f,
+                        bob = -Mathf.Abs(Mathf.Cos(w.t * 16)) * 4, head = -0.1f + sway * 0.08f, tail = 0.5f + Mathf.Sin(w.t * 5) * 0.3f };
+                    int order = World.SortOrder(w.y) + 30;
+                    PlacePuppet(w.c, w.x, w.y, 0, p, 1, order, w.len);
+                    if (w.r)
+                    {
+                        float s = w.size * World.U / Mathf.Max(0.001f, w.r.sprite.bounds.size.x), h = w.r.sprite.bounds.size.y * s / World.U;
+                        // 막대 끝 = 치켜든 앞발 높이 (몸 뒤로 숨음), 판 = 머리 위
+                        w.r.transform.position = World.ToUnity(w.x + w.len * 0.28f, w.y, w.len * 0.4f + h * 0.5f + Mathf.Abs(Mathf.Sin(w.t * 8)) * 10);
+                        w.r.transform.rotation = Quaternion.Euler(0, 0, sway * 7);
+                        w.r.transform.localScale = new Vector3(-s, s, 1);
+                        var sg = w.c.rig.GetComponent<UnityEngine.Rendering.SortingGroup>();
+                        if (sg) w.r.sortingLayerID = sg.sortingLayerID;
+                        w.r.sortingOrder = order - 1;
+                    }
+                }
+                else if (w.r)
                 {
                     float s = w.size * World.U / Mathf.Max(0.001f, w.r.sprite.bounds.size.x);
                     w.r.transform.position = World.ToUnity(w.x, w.y, Mathf.Abs(Mathf.Sin(w.t * 12)) * 14);
@@ -350,7 +492,7 @@ namespace NKK.Hazards
                     float dx = o.x - w.x, dy = o.y - w.y;
                     if (dx * dx + dy * dy < w.rad * w.rad) { w.hit.Add(o); o.Ragdoll(0, 380, 300, w.stun); }
                 }
-                if (w.x > view.xMax + 300) { if (w.r) Destroy(w.r.gameObject); walkers.RemoveAt(i); }
+                if (w.x > view.xMax + 300) { if (w.r) Destroy(w.r.gameObject); KillPuppet(w.c); walkers.RemoveAt(i); }
             }
             if (walkers.Count == 0 && walkersAll)
             {
@@ -443,7 +585,7 @@ namespace NKK.Hazards
         // ── 매 프레임 (공격 밖에서도): 발사체 · 행렬 · 회전 · 삼킨 쥐 · 모습 ──
         void UpdateReworkFx(float dt)
         {
-            UpdateProjs(dt); UpdateWalkers(dt); UpdateOrbiters(dt); UpdateCrew(dt);
+            UpdateProjs(dt); UpdateWalkers(dt); UpdateLeapers(dt); UpdateOrbiters(dt); UpdateCrew(dt);
             for (int i = swallowed.Count - 1; i >= 0; i--)
             {
                 var o = swallowed[i];
@@ -488,8 +630,10 @@ namespace NKK.Hazards
         {
             foreach (var p in projs) if (p.r) Destroy(p.r.gameObject);
             projs.Clear();
-            foreach (var w in walkers) if (w.r) Destroy(w.r.gameObject);
+            foreach (var w in walkers) { if (w.r) Destroy(w.r.gameObject); KillPuppet(w.c); }
             walkers.Clear(); walkersAll = false;
+            foreach (var l in leapers) KillPuppet(l.c);
+            leapers.Clear();
             ClearOrbiters(false);
             foreach (var o in swallowed) if (o && o.Swallowed) o.swallowT = 0.01f;      // 다음 프레임에 뱉음
             swallowed.Clear();

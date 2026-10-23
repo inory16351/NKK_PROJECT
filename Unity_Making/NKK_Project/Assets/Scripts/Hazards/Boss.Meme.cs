@@ -25,6 +25,7 @@ namespace NKK.Hazards
     //  Summon   보스 둘레에 sprite 를 count 마리 소환 → 쥐에게 걸어가다 닿거나 dur 초가 지나면 펑 (반경 기절). p1 = 걷는 속도
     //  Mark     쥐 count 마리에 표식(sprite) → windup 뒤 그 쥐들을 멀리 날려 버림 (기절)
     //  Rush     sprite 를 count 개 쥐 무리 쪽으로 가로질러 날림 (dur 초, 방 안에서 튕김), 닿은 반경 안 쥐 기절
+    //  (Throw · Parade 에 opt rig:고양이코드 = 그림 대신 고양이 리그 소환, Boss.Rework.cs)
     public partial class Boss
     {
         [Header("밈 기술 (Atk_Type pattern · sprite 이름 = 이 목록)")]
@@ -111,6 +112,7 @@ namespace NKK.Hazards
             float wind = Mathf.Max(0.1f, atk.windup), k = Mathf.Clamp01(atkT / wind);
             int n = Mathf.Max(1, atk.count);
             var sp = MemeSprite(atk.sprite);
+            ReworkWindup(dt);          // opt red · shake · dust (Boss.Rework.cs)
             switch (atk.pattern)
             {
                 case "Drop":
@@ -143,7 +145,8 @@ namespace NKK.Hazards
                 }
                 case "Throw":
                 {
-                    jit = atkT < wind ? 2 : 0;
+                    bool rigged = Opt("rig") != null;
+                    jit = atkT < wind ? (Opt("dust") != null ? 2 + 5 * k : 2) : 0;          // 먼지 구름: 진동이 점점 심해짐
                     float gap = atk.dur / n;
                     while (shots < n && atkT >= wind + shots * gap)
                     {
@@ -163,7 +166,7 @@ namespace NKK.Hazards
                         }
                         if (!Stage.Open.Contains(StageManager.RoomOf(tx, ty))) { var nr = Rats.NearestRat(tx, ty, 3000); if (nr) { tx = nr.x; ty = nr.y; } else { tx = x; ty = y; } }      // 방 바깥이면 가까운 쥐 자리로
                         face = tx >= x ? 1 : -1;
-                        Throw(tx, ty, atkType);
+                        if (rigged) Leap(tx, ty); else Throw(tx, ty, atkType);          // rig = 그림 대신 고양이가 튀어나옴
                     }
                     if (shots >= n && atkT > wind + atk.dur + 0.2f) attacking = false;
                     break;
