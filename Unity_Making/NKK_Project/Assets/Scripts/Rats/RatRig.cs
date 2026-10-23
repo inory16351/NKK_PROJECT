@@ -222,6 +222,22 @@ namespace NKK.Rats
         [HideInInspector] public float tailLen = 1;       // 꼬리 길이 배율 (쥐한폭탄 심지)
         public struct Pose { public float head, headX, tail, front, back, farFront, farBack, bob, tilt, sx, sy; }
 
+        // 발끝 바닥 맞추기 (스케이터 생쥐 롤러스케이트): 몸 기울기 · 다리 각도로 가장 낮은 발끝(바퀴)이 바닥에 닿게 하는 bob (게임 단위, + = 아래)
+        // 웹 미리보기 UnityResources/Rats/Augment/rig_web/skater.html 의 groundBob 과 같은 계산 (리그 픽셀 y 아래 +, 원점 = 바닥)
+        public float GroundBob(in Pose p)
+        {
+            if (IsSingle || !front || !back || !front.sprite || !back.sprite || !torso.sprite) return 0;
+            float lenF = front.sprite.rect.height * (1 - PivotTL(front.sprite).y) * legF, lenB = back.sprite.rect.height * (1 - PivotTL(back.sprite).y) * legB;
+            float gap = torso.sprite.rect.width * farGap, t = -p.tilt, c = Mathf.Cos(t), s = Mathf.Sin(t), low = float.MinValue;
+            void Leg(Vector2 a, float ang, float len, float g)
+            {
+                float ax = a.x + g - hipPx.x, ay = a.y - hipPx.y;
+                low = Mathf.Max(low, hipPx.y + ax * s + ay * c + len * Mathf.Cos(ang + t));
+            }
+            Leg(shoulderPx, p.front, lenF, 0); Leg(shoulderPx, p.farFront, lenF, gap); Leg(hipPx, p.back, lenB, 0); Leg(hipPx, p.farBack, lenB, gap);
+            return -low * Unit;
+        }
+
         // lift·rot·tsx·tsy·pivotH = 묘기 중 몸 전체 변환 (게임 단위·라디안, pivotH = 회전 중심 높이)
         // bodyPivot = 몸통 중심을 축으로 돎 (윈드밀: 뒤집혀도 제자리). 몸통 중심이 바닥 위 (몸통 반 높이 + lift) 에 옴
         public void Apply(in Pose p, float scale, int face, float sq, int sortOrder, float lift = 0, float rot = 0, float tsx = 1, float tsy = 1, float pivotH = 0, bool bodyPivot = false)

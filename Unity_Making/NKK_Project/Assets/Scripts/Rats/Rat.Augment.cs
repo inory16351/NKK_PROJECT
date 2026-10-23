@@ -79,6 +79,85 @@ namespace NKK.Rats
             rot = ballRot; sx = sy = 0.8f; lift = Speed > 40 ? Mathf.Abs(Mathf.Sin(ballRot * 2)) * 5 : 0;
         }
 
+        // ── 롤러스케이트 (등급 통일 스케이터 생쥐 = 양복 대머리, 겟 투 워크 패러디: 팔·다리 네 곳에 롤러스케이트) ──
+        //  걷지 않고 미끄러짐: 달릴 땐 뒷다리가 번갈아 뒤로 차고(밀기) 앞발은 바퀴를 바닥에 댄 채 활주 · 몸은 낮게 앞으로 숙임 · 걸음 들썩임 없음
+        //  아주 빠르면 앞발을 앞으로 뻗고 쭉 미끄러짐 · 멈출 땐 바로 서지 않고 관성으로 미끄러지며 브레이크 (StopDash → SkateCoast)
+        public bool SkateForm => AugmentSpecials.SkateForm(this);
+        // 값 = AugmentSpecials 인스펙터 '스케이트' (웹 미리보기 UnityResources/Rats/Augment/rig_web/skater.html 의 pose() 와 같은 계산)
+        float skatePh, skatePhT = -1;           // 밀기 박자 (한 주기 = 가까운 다리 · 먼 다리 한 번씩, 원래 빠른 쥐라 거리 기준이면 너무 바빠 보여 시간 기준)
+        bool skateWasRun;
+        static float SkatePush(AugmentSpecials.SkateTune k, float u)         // 밀기 한 번의 다리 각도: 뒤로 참 → 돌아옴 → 활주
+        {
+            if (u < k.kickEnd) return k.kick * Mathf.SmoothStep(0, 1, u / k.kickEnd);
+            if (u < k.recoverEnd) return Mathf.Lerp(k.kick, k.recover, Mathf.SmoothStep(0, 1, (u - k.kickEnd) / (k.recoverEnd - k.kickEnd)));
+            return Mathf.Lerp(k.recover, 0, (u - k.recoverEnd) / (1 - k.recoverEnd));
+        }
+        void SkatePose(ref RatRig.Pose p)
+        {
+            var k = AugmentSpecials.Skate;
+            float tt = Time.time;
+            bool run = mode == Mode.Run;
+            if (run && !skateWasRun) skatePh = Mathf.Floor(skatePh * 2 + 1) / 2;      // 새로 달릴 때마다 다른 다리로 첫 밀기
+            skateWasRun = run;
+            if (skatePhT != tt) { if (skatePhT >= 0 && run && !Rushing) skatePh += (tt - skatePhT) * Mathf.Clamp(Speed / k.cadenceDiv, k.cadenceMin, k.cadenceMax); skatePhT = tt; }
+            p.bob = 0; p.head = k.head + Mathf.Sin(tt * 1.3f + seed) * 0.02f; p.headX = k.headX; p.sx = k.sx; p.sy = k.sy;
+            p.tail = k.tailBase + Mathf.Sin(tt * 5 + seed) * k.tailWave;
+            bool fastCoast = !run && Speed > RunSpeed * k.glideAt;
+            if (fastCoast || (Rushing && Speed > 30))
+            {
+                // 쭉 미끄러짐 (관성으로 빠르게 · 총공격 돌진): 앞발 앞으로 · 뒷발 뒤로 뻗음 (슈퍼맨 자세), 꼬리 펄럭
+                p.front = k.glideFront; p.farFront = k.glideFarFront; p.back = k.glideBack; p.farBack = k.glideFarBack; p.head = k.glideHead; p.tilt = k.glideTilt; p.sx = k.glideSx; p.sy = k.glideSy;
+                p.tail = -0.2f + Mathf.Sin(tt * 30) * 0.07f;
+            }
+            else if (Speed > 30 && run)
+            {
+                // 밀기: 가까운 뒷다리 · 먼 뒷다리 번갈아, 미는 순간 몸이 살짝 앞으로 쏠림
+                float ph = skatePh, a = SkatePush(k, Mathf.Repeat(ph, 1)), b = SkatePush(k, Mathf.Repeat(ph + 0.5f, 1));
+                float pw = Mathf.Max(-a, -b) / Mathf.Max(0.01f, -k.kick);
+                p.back = a; p.farBack = b;
+                p.front = k.frontBase + k.frontSwing * Mathf.Sin(ph * Mathf.PI * 2); p.farFront = k.frontBase - k.frontSwing * Mathf.Sin(ph * Mathf.PI * 2);
+                p.tilt = k.tilt + pw * k.tiltPush; p.sx = k.sx + pw * k.sxPush;
+            }
+            else if (Speed > 30)
+            {
+                // 관성 활주: 네 발 다 바닥에 대고 균형만
+                p.front = k.coastFront; p.farFront = k.coastFarFront; p.back = k.coastBack; p.farBack = k.coastFarBack; p.tilt = k.coastTilt + Mathf.Sin(tt * 3 + seed) * k.coastWobble;
+            }
+            else
+            {
+                // 제자리: 바퀴 위에서 앞뒤로 살짝 굴러다님
+                float s = Mathf.Sin(tt * k.idleSpeed + seed);
+                p.front = k.frontBase + s * k.idleFront; p.farFront = k.frontBase - 0.05f + s * k.idleFront; p.back = -0.05f - s * k.idleBack; p.farBack = -s * k.idleBack; p.tilt = s * k.idleTilt;
+            }
+            // 브레이크: 몸을 뒤로 젖히고 앞발을 듦 (뒷바퀴로 끼익)
+            float bk = 1 - Mathf.Clamp01((tt - stopT) / k.brakeTime);
+            if (bk > 0 && Speed > 30)
+            {
+                p.front = Mathf.Lerp(p.front, k.brakeFront, bk); p.farFront = Mathf.Lerp(p.farFront, k.brakeFarFront, bk); p.back = Mathf.Lerp(p.back, k.brakeBack, bk); p.farBack = Mathf.Lerp(p.farBack, k.brakeFarBack, bk);
+                p.tilt = Mathf.Lerp(p.tilt, k.brakeTilt, bk); p.head = Mathf.Lerp(p.head, k.brakeHead, bk); p.tail = Mathf.Lerp(p.tail, k.brakeTail, bk);
+            }
+            if (k.ground > 0.5f && rig) p.bob = rig.GroundBob(p);      // 가장 낮은 바퀴가 바닥에 닿게
+        }
+        // 멈춤 → 속도를 두고 미끄러지다 섬 (Move 첫머리, Pause 동안). 빠르면 바퀴 자국 먼지 · 브레이크 불꽃
+        bool SkateStop(float t0, float t1)
+        {
+            if (!SkateForm || Held || UltOn) return false;
+            if (Speed > 150) stopT = Time.time;
+            mode = Mode.Pause; t = Random.Range(t0, t1) * CommonSkill.StopTimeMul; sq = 1.05f;
+            return true;
+        }
+        void SkateCoast(float dt)
+        {
+            float f = Mathf.Exp(-AugmentSpecials.Skate.friction * dt);
+            vx *= f; vy *= f;
+            if (Speed > 150 && OnScreen() && Random.value < dt * 10)
+            {
+                var fx = FxManager.I; if (!fx) return;
+                fx.Dust(x - face * Radius * 0.6f, y, 1, 0.6f);
+                if (Time.time - stopT < AugmentSpecials.Skate.brakeTime) fx.Spark(x + face * Radius * 0.7f, y, 4, new Color(1f, 0.85f, 0.4f), 30, 0.12f);
+            }
+        }
+
         // ── 다다다다 잔상: 몸통 그림 하나를 조금 늦게 따라오게 ──
         SpriteRenderer ghostImg;
         Vector3 ghostPos;

@@ -1,0 +1,9 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hy5.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawing. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: exactly the same flat Untitled Goose Game style and the SAME colors as the attached image (the fused rat body mass of the "Rat Hydra" boss). Flat colors, NO outlines, no gradients, no gloss.
+- TASK: redraw ONLY the big BODY MASS (one single island, about 75% of the image width, centered, magenta all around), same overall lumpy shape, same lighter fur belly at the bottom, same rounded fur stumps on top and front where long necks attach, NO long necks, NO legs, NO tails.
+  The difference: it must look much more WRONG and creepy because the 10+ rat heads fused into the mass stick out at CHAOTIC, INCONSISTENT ANGLES: some upside down, some sideways (snout pointing straight up or straight down), some facing RIGHT (backwards), some twisted diagonally, a couple only half a face emerging, different sizes. Mix of expressions: eyes closed, eyes wide open staring, mouths open squeaking with small incisors. Several small pink paws and one or two bits of pink tail poking out between them at odd angles.
+  Rat heads look like the attached ones (grey-brown fur, pointed snout, pink nose, whiskers, beige throat, pink-inside round ears).
+- Moderately creepy cartoon: no blood, no guts, no wounds, no gore. Generic cartoon rats, no logo.

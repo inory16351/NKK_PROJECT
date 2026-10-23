@@ -3,18 +3,18 @@ Use your built-in image generation tool to create ONE image and save it as PNG t
 Image spec:
 - 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
 - NO magenta, pink-purple, violet or lavender colors inside the drawings (they get removed with the background). Use pale BLUE instead of purple.
-- These are effect sprites for a cute rat game, placed over the game floor. The attached reference sheet shows the game's EXISTING effect sprites (tornado, smoke puff, cheese blade, fireball, heart, toxic bubbles, coin, sweat drop).
-- STYLE IS THE MOST IMPORTANT RULE: copy the reference rendering exactly: cute casual-game cartoon, SOFT SMOOTH SHADING with gentle gradients and soft light rims (each shape is softly lit, slightly rounded and puffy), clean smooth edges, NO dark outlines, NO linework, NO flat vector look, NO texture, NO hard drop shadows. Same bright-but-soft palette and the same level of simplicity as the reference.
+- These are effect sprites for a cute rat game, placed on the game map. The attached reference shows the REAL game: on the left, objects on the game floor (fire extinguishers, biohazard bins, lab jars, flasks, stairs, clipboards, mug); on the right, the game's UI kit (wooden planks, paper cards, round buttons, ribbons).
+- STYLE IS THE MOST IMPORTANT RULE: copy the reference exactly. FLAT illustration like Untitled Goose Game: simple flat color shapes, each part filled with ONE solid muted color, at most one slightly darker flat tone for the shadow side, very subtle paper grain is ok. NO gradients, NO glossy highlights, NO shine spots, NO glow, NO soft 3D clay or plastic look, NO puffy rounded shading, NO dark outlines, NO linework. Muted, slightly desaturated warm palette like the reference (mustard yellow, brick red, sage green, slate gray, warm beige, dusty sky blue).
 - An exact grid of 3 columns x 3 rows (each cell 512x341). Each drawing is centered in its cell with a clear magenta margin of at least 30px and must NOT touch or cross cell borders. Wide things (clouds, garland, train) fill most of the cell WIDTH but keep the margin.
 - Parody only: no logos, no brand marks, no symbols, no text.
 
 Cells (left to right, top to bottom):
-1) a wide puffy dark slate-gray STORM CLOUD, much wider than tall, softly shaded like the reference smoke puff, with two small soft yellow lightning zigzags hanging under it
-2) a wide puffy mustard-yellow CHEESE CLOUD, much wider than tall, softly shaded, with round cheese holes
-3) a dark brown-black SCORCH MARK on the floor seen from above: a soft irregular oval burn splat with soft edges and a few soot specks
-4) a TOY TRAIN in strict SIDE VIEW facing RIGHT: a cute toy engine (coral red, mustard trim, big round wheels, little chimney) pulling two small wooden cars, long and low, softly shaded
-5) a pale BLUE glowing MAGIC CIRCLE seen from above, as a flat ellipse lying on the floor: two soft concentric rings with a few small sparkles, no runes, no letters
-6) a long party BUNTING GARLAND: a gently sagging string with about 10 small triangle flags in alternating coral, mustard, mint green and sky blue, spanning the cell width, softly shaded
-7) a pair of big RAT FOOTPRINTS on the floor seen from above (four-toed rat paw prints, one ahead of the other), pale warm gray, soft edges
-8) a cute small SLOT MACHINE like the reference style (rounded coral-red and mustard cabinet, a lever with a red ball on the right, three reel windows each showing a cheese wedge), softly shaded, no text
-9) a phone SIGNAL icon: four ascending rounded sky-blue bars with two small curved radio waves above, softly shaded, no text
+1) a wide flat dark slate-gray STORM CLOUD, much wider than tall, made of a few overlapping flat rounded lumps (one flat darker tone at the bottom), with two small flat mustard-yellow lightning zigzags hanging under it, no glow
+2) a wide flat mustard-yellow CHEESE CLOUD, much wider than tall, flat overlapping lumps with round flat darker-yellow cheese holes, and a few small flat cheese cubes falling under it
+3) a dark brown-black SCORCH MARK on the floor seen from above: a flat irregular oval burn splat with a few flat soot specks around it
+4) a TOY TRAIN in strict SIDE VIEW facing RIGHT: a toy engine (brick red, mustard trim, round dark wheels, little chimney) pulling two small wooden cars, long and low, flat colors
+5) a dusty pale BLUE MAGIC CIRCLE seen from above, as a flat ellipse lying on the floor: two flat concentric rings with a few small flat four-point sparkles, no glow, no runes, no letters
+6) a long party BUNTING GARLAND: a gently sagging string with about 10 small flat triangle flags in alternating brick red, mustard, sage green and dusty sky blue, spanning the cell width
+7) a pair of big RAT FOOTPRINTS on the floor seen from above (four-toed rat paw prints, one ahead of the other), flat warm gray
+8) a small SLOT MACHINE (flat brick-red and mustard cabinet, a lever with a red ball on the right, three cream reel windows each showing a flat cheese wedge), flat colors, no text
+9) a phone SIGNAL icon: four ascending flat dusty sky-blue bars with two small flat curved radio waves above, no text

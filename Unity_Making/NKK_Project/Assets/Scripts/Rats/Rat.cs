@@ -95,14 +95,15 @@ namespace NKK.Rats
                 var p = Manager.RushPoint;
                 float dx = p.x - x, dy = p.y - y, d = Mathf.Max(0.001f, Mathf.Sqrt(dx * dx + dy * dy)), sp = RunSpeed * Manager.rushSpeedMult;
                 float tx = d > 30 ? dx / d * sp : Random.Range(-sp, sp), ty = d > 30 ? dy / d * sp : Random.Range(-sp, sp);
-                vx += (tx - vx) * Mathf.Min(1, dt * 8); vy += (ty - vy) * Mathf.Min(1, dt * 8);
+                float acc = SkateForm ? 3 : 8;            // 롤러스케이트: 미끄러워서 방향이 천천히 바뀜
+                vx += (tx - vx) * Mathf.Min(1, dt * acc); vy += (ty - vy) * Mathf.Min(1, dt * acc);
                 mode = Mode.Run;
             }
             else
             {
                 t -= dt;
-                if (mode == Mode.Run) { if (t <= 0) { StopDash(); Stomp(); } }
-                else { vx = vy = 0; if (t <= 0 && !TrySleep()) NewDash(); }
+                if (mode == Mode.Run) { if (t <= 0) { if (!SkateStop(0.25f, 0.9f)) StopDash(); Stomp(); } }
+                else { if (SkateForm) SkateCoast(dt); else vx = vy = 0; if (t <= 0 && !TrySleep()) NewDash(); }      // 롤러스케이트: 멈출 때 미끄러짐 (Rat.Augment.cs)
             }
             Move(dt, rushing, true);
         }
@@ -215,7 +216,7 @@ namespace NKK.Rats
             float rad = Radius;
             bool wasRun = mode == Mode.Run && !rushing;
             bool edge = Manager.Stage.Confine(ref x, ref y, ref vx, ref vy, rad, px, py, 0.8f, HitWall);
-            if (edge && wasRun) StopDash(0.1f, 0.4f);
+            if (edge && wasRun && !SkateStop(0.1f, 0.4f)) StopDash(0.1f, 0.4f);      // 롤러스케이트: 벽에 튕겨 미끄러짐
             Speed = Mathf.Sqrt(vx * vx + vy * vy);
             if (Mathf.Abs(vx) > 20) face = vx > 0 ? 1 : -1;
             if (Speed > 20) walk += dt * Speed / 9;
@@ -343,6 +344,7 @@ namespace NKK.Rats
             if (act.on) { ActionPose(ref p); return p; }
             if (Trick != TrickType.None) { TrickPose(ref p); return p; }
             if (BallForm && stun <= 0) { BallPose(ref p); return p; }          // 증강 등급 통일: 늘 공
+            if (SkateForm && stun <= 0 && tumbleT <= 0) SkatePose(ref p);      // 스케이터 생쥐: 롤러스케이트 (아래 총공격·깨물기·공중 자세는 그 위에 얹음)
             if (tumbleT > 0 || (stun > 0 && z > 2))
             {
                 p.front = Mathf.Sin(tt * 34) * 1.6f; p.farFront = Mathf.Cos(tt * 30) * 1.6f; p.back = Mathf.Sin(tt * 31 + 2) * 1.5f; p.farBack = Mathf.Cos(tt * 27) * 1.5f;

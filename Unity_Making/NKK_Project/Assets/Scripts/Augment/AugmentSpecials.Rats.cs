@@ -10,14 +10,15 @@ namespace NKK
     //  등급 통일 (Unify): 그 등급 쥐 전원 + 이후 태어나는 쥐 → p1 쥐. 빼면 이미 바뀐 쥐는 종류 그대로 · 동작만 원래.
     //    골든 햄스터·판다 = 늘 공 (특수 액션·묘기 없음) · 스케이터 = 양복 대머리 그림 + 빠르게 + 박치기 · 맘스땃쥐 = 패티 최대 p5 + 박치기 +p4 · 5G = 모든 쥐에게 데이터 전송
     //  쥐 탑 쌓기 (Tower): 장착하는 순간 5마리 → 1마리 탑 (판 끝까지, 같은 증강 한 개당 판에 한 번)
-    //  상시 표시: 먹구름 (천둥 번개) · 치즈 구름 (치즈 비 중) · 가랜드 (탄생 축제) · 발자국 (거대 쥐) · 슬롯머신 (잭팟) · 5G 신호 막대 · 잔상 · 스파크
+    //  표시: 화면에 붙는 그림 없음 (2026-10-23 사용자) — 가랜드 = 탄생 자리 · 발자국 = 거대 쥐 지나간 자리 · 슬롯머신 = 계단 자리 (층 클리어) · 5G 신호 = 5G 쥐 머리 위 · 잔상 · 스파크
+    //  먹구름 · 치즈 구름은 맵에 소환되어 공격 (AugmentSpecials.cs SummonCloud)
     public partial class AugmentSpecials
     {
         [Header("등급 통일 · 쥐 탑 · 상시 표시 (AugmentSpecials.Rats.cs)")]
         [Tooltip("스케이터 생쥐 통일 때 그림 (쥐 그림 모음 code_id, 양복 대머리)")] public string skaterSuitArt = "skater_suit";
-        [Tooltip("상시 그림 (FxManager 스티커): 가랜드 · 발자국 · 슬롯머신 · 5G 신호 막대")] public string garlandSticker = "garland";
+        [Tooltip("맵 위 그림 (FxManager 스티커): 가랜드 · 발자국 · 슬롯머신 · 5G 신호 막대")] public string garlandSticker = "garland";
         public string footprintSticker = "footprint", slotSticker = "slot_machine", signalSticker = "signal_5g";
-        [Tooltip("천둥 번개 상시 먹구름 크기 (기획서: 상시 = 작게 · 큰 구름 cloudSize 는 치즈 비 발동 때)")] public float stormLookSize = 260;
+        [Tooltip("크기: 가랜드 (탄생 자리) · 슬롯머신 (계단 자리) · 5G 신호 (쥐 머리 위)")] public float garlandSize = 120, slotSize = 150, signalSize = 40;
         public string headbuttPopup = "띵!", pandaPopup = "쿵", towerPopup = "쥐 탑!!", rapidPopup = "다다다", slotWinPopup = "7 7 7", slotLosePopup = "7 ? ?";
         public int headbuttPopupKey, pandaPopupKey, towerPopupKey, rapidPopupKey, slotWinPopupKey, slotLosePopupKey;
 
@@ -63,6 +64,28 @@ namespace NKK
             return s != null && DB && DB.Rats.TryGetValue(Mathf.RoundToInt(s.p1), out var to) ? to : row;
         }
         public static bool BallForm(Rat r) { var s = UnifyFor(r); return s != null && ActionOf(r.Data) == EffectType.Rolling_Ball; }
+        // 스케이터 생쥐 = 양복 대머리 + 팔·다리 롤러스케이트 (겟 투 워크 패러디): 미끄러지는 동작 · 관성 (Rat.Augment.cs SkatePose)
+        public static bool SkateForm(Rat r) { var s = UnifyFor(r); return s != null && PassiveOf(r.Data) == EffectType.Trick_Flip; }
+        // 스케이트 동작 값 = 웹 미리보기 UnityResources/Rats/Augment/rig_web/skater.html 과 같은 이름 (웹 JSON → JsonUtility.FromJsonOverwrite 로 그대로 넣음)
+        //  각도 = 라디안 (다리 + = 앞으로, 꼬리·머리 + = 위로), 박자 = 초당 밀기 주기 (한 주기 = 가까운 다리 · 먼 다리 한 번씩)
+        [System.Serializable]
+        public class SkateTune
+        {
+            [Header("밀기 · 기본")] public float cadenceMin = 0.8f; public float cadenceMax = 1.4f, cadenceDiv = 500;
+            public float kick = -1.0f, kickEnd = 0.3f, recover = 0.15f, recoverEnd = 0.55f;
+            public float frontBase = 0.3f, frontSwing = 0.15f, tilt = 0.08f, tiltPush = 0.05f, sx = 1.04f, sy = 0.96f, sxPush = 0.04f;
+            public float head = -0.06f, headX = -1, tailBase = -0.1f, tailWave = 0.06f;
+            [Header("쭉 미끄러짐 (총공격 돌진 · 관성 속도 > RunSpeed × glideAt)")] public float glideAt = 1.3f;
+            public float glideFront = 0.9f, glideFarFront = 0.75f, glideBack = -0.75f, glideFarBack = -0.6f, glideTilt = 0.12f, glideHead = -0.14f, glideSx = 1.12f, glideSy = 0.92f;
+            [Header("관성 활주")] public float coastFront = 0.35f; public float coastFarFront = 0.3f, coastBack = 0.08f, coastFarBack = 0.12f, coastTilt = 0.05f, coastWobble = 0.03f;
+            [Header("제자리")] public float idleSpeed = 1.6f; public float idleFront = 0.08f, idleBack = 0.06f, idleTilt = 0.04f;
+            [Header("브레이크")] public float brakeTime = 0.45f; public float brakeFront = 1.0f, brakeFarFront = 0.9f, brakeBack = 0.5f, brakeFarBack = 0.4f, brakeTilt = -0.16f, brakeHead = 0.1f, brakeTail = 0.6f;
+            [Header("관성")] [Tooltip("멈출 때 미끄러지는 마찰 (클수록 빨리 섬, 1.6 = 약 0.4초에 속도 반)")] public float friction = 1.6f;
+            [Tooltip("1 = 가장 낮은 바퀴가 늘 바닥에 닿게 몸 높이 맞춤 (RatRig.GroundBob)")] public float ground = 1;
+        }
+        [Tooltip("스케이터 생쥐 동작 (웹 rig_web/skater.html 에서 맞춘 값)")] public SkateTune skate = new();
+        static readonly SkateTune skateDef = new();
+        public static SkateTune Skate => I ? I.skate : skateDef;
         public static float UnifySpeedMul(Rat r) { var s = UnifyFor(r); return s != null && s.p3 > 0 ? s.p3 : 1; }
         static float UnifyBumpMul(Rat r) { var s = UnifyFor(r); return s != null ? 1 + s.p4 : 1; }
         // 크기 배율 = Aug_Config unify_scale, 쥐마다 unify_scale_<character_id> 로 덮어씀 (맘스땃쥐 10085 = 1, 원래 잘 보임 — 2026-10-23 사용자)
@@ -143,7 +166,10 @@ namespace NKK
             if (!I || !PartyOn) return;
             var fx = FxManager.I; if (!fx) return;
             for (int k = 0; k < 3; k++) fx.Stars(x, y, 30, 6, Color.HSVToRGB(Random.value, 0.7f, 1), Color.white, 120, 320);
+            // 탄생 자리 위에 가랜드 잠깐 (번식이 잦아 0.6초에 하나만)
+            if (Time.time - I.garlandAt > 0.6f) { I.garlandAt = Time.time; fx.AddSticker(I.garlandSticker, x, y, 70, I.garlandSize, 1.2f); }
         }
+        float garlandAt = -9;
 
         // ── 쥐 탑 쌓기: 장착하는 순간 (같은 증강 한 개당 판에 한 번) ──
         readonly HashSet<int> towerDone = new();
@@ -201,29 +227,19 @@ namespace NKK
             if (Running) UpdateTowers();
         }
 
-        // ── 상시 표시 (화면에 붙는 그림 하나씩, 효과가 꺼지면 사라짐) ──
-        readonly Dictionary<string, FxManager.Sticker> looks = new();
-        void Look(string key, bool on, string sticker, float x, float y, float z, float size, bool ground = false, Color? col = null)
-        {
-            looks.TryGetValue(key, out var s);
-            if (!on || (Stage && Stage.Climbing)) { if (s != null) { s.End(0.3f); looks.Remove(key); } return; }
-            if (s == null || s.life <= 0) { s = FxManager.I ? FxManager.I.AddSticker(sticker, x, y, z, size, 99999, 0, ground, col) : null; if (s == null) return; looks[key] = s; }
-            s.Move(x, y, z);       // life 를 매 프레임 max 로 되돌리면 나타나기 투명도((max - life) / 0.15)가 늘 0 → 안 보임
-        }
-        float lookT;
+        // ── 맵 위 작은 표시 (화면에 붙는 그림은 없음 — 2026-10-23 사용자) ──
+        float lookT, signalT;
         void UpdateLooks(float dt)
         {
-            var v = View; float t = Time.time;
-            // 화면 위쪽에 붙는 것은 높이(z) 0 · 바닥 y 를 화면 위끝에서 그림 반 높이만큼 아래로 (z 를 올리면 화면 밖으로 나감)
-            Look("storm", Has("Lightning"), stormCloudSticker, v.center.x, v.yMin + 100 + Mathf.Sin(t * 0.7f) * 6, 0, stormLookSize);
-            Look("cheese", rainT > 0, cheeseCloudSticker, v.center.x - v.width * 0.15f, v.yMin + 150, 0, cloudSize);
-            Look("garland", PartyOn, garlandSticker, v.center.x, v.yMin + 90, 0, v.width * 0.6f);
-            Look("slot", Has("Jackpot"), slotSticker, v.xMin + 300, v.yMax - 140, 0, 110);
-            bool g5 = false; foreach (var e in Sp) if (e.s.type == "Unify" && DB && DB.Rats.TryGetValue(Mathf.RoundToInt(e.s.p1), out var row) && PassiveOf(row) == EffectType.Rush_Range_Up) g5 = true;
-            Look("5g", g5, signalSticker, v.center.x + v.width * 0.22f, v.yMin + 90, 0, 90);
-            Look("foot", Has("Giant"), footprintSticker, v.center.x - v.width * 0.2f, v.center.y + 60, 0, 220, true, new Color(1, 1, 1, 0.25f));
             if (!Running || !Rats) return;
             var fx = FxManager.I; if (!fx) return;
+            bool g5 = false; foreach (var e in Sp) if (e.s.type == "Unify" && DB && DB.Rats.TryGetValue(Mathf.RoundToInt(e.s.p1), out var row) && PassiveOf(row) == EffectType.Rush_Range_Up) g5 = true;
+            // 5G: 가끔 5G 쥐 머리 위에 신호 막대
+            if (g5 && (signalT -= dt) <= 0)
+            {
+                signalT = 1.5f;
+                for (int k = 0; k < 6; k++) { var r = AnyRat(); if (r && r.OnScreen() && DataToAll(r) && PassiveOf(r.Data) == EffectType.Rush_Range_Up) { fx.AddSticker(signalSticker, r.x, r.y, 70 * RatScale(r), signalSize, 1.2f); break; } }
+            }
             // 찌릿찌릿: 쥐 털 끝 작은 파란 스파크
             if (Eff("Bite_Zap") && Random.value < dt * 4) { var r = AnyRat(); if (r && r.OnScreen()) fx.Spark(r.x + Random.Range(-10f, 10f), r.y, 24, new Color(0.6f, 0.9f, 1f), 24, 0.12f); }
             if ((lookT -= dt) > 0) return;
@@ -238,14 +254,14 @@ namespace NKK
             if (g5 && Rats.Rats.Count > 1) { var a = AnyRat(); var b = AnyRat(); if (a && b && a != b && a.OnScreen()) fx.Beam(a.x, a.y, 30, b.x, b.y, 30, new Color(0.45f, 0.9f, 1f, 0.35f), 0.4f, 0.4f); }
         }
 
-        // 잭팟 슬롯머신: 층 클리어 때 릴이 돌아감 → 당첨이면 777 + 화면 위에서 연구자료가 쏟아짐
-        void SpinSlot(bool win)
+        // 잭팟 슬롯머신: 층 클리어 때 계단 자리에 슬롯머신이 나타나 릴이 돌아감 → 당첨이면 777 + 둘레에 연구자료가 쏟아짐
+        void SpinSlot(bool win, float x, float y)
         {
-            var v = View; float x = v.xMin + 300, y = v.yMax - 140;
             var fx = FxManager.I; if (!fx) return;
-            fx.Popup(x, y, win ? T(slotWinPopupKey, slotWinPopup) : T(slotLosePopupKey, slotLosePopup), win ? popupColor : Color.white, win ? 28 : 20, 1.2f, 130);
+            fx.AddSticker(slotSticker, x + 120, y, 40, slotSize, 2.2f);
+            fx.Popup(x + 120, y, win ? T(slotWinPopupKey, slotWinPopup) : T(slotLosePopupKey, slotLosePopup), win ? popupColor : Color.white, win ? 28 : 20, 1.2f, 130 + slotSize * 0.6f);
             if (!win || !Rats) return;
-            for (int k = 0; k < 15; k++) { float d = k * 0.1f; Rats.Later(d, () => { var w = View; FxManager.I?.Stars(Random.Range(w.xMin, w.xMax), w.center.y, 400, 2, new Color(0.7f, 0.85f, 1f), Color.white, 40, 120); }); }
+            for (int k = 0; k < 15; k++) { float d = k * 0.1f; Rats.Later(d, () => FxManager.I?.Stars(x + Random.Range(-300f, 300f), y + Random.Range(-120f, 120f), 400, 2, new Color(0.7f, 0.85f, 1f), Color.white, 40, 120)); }
         }
     }
 }

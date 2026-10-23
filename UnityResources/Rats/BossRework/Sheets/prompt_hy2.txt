@@ -1,0 +1,16 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hy2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: exactly the same flat Untitled Goose Game style and the SAME colors as the attached full-body "Rat Hydra" boss (attached image 1). Flat colors, NO outlines, no gradients, no gloss.
+- TASK: draw the separate rig PARTS of that Rat Hydra so it can be animated. Every part is a separate island with plenty of magenta space around it, NOTHING touching or overlapping another part. All side view, facing LEFT like the attached boss.
+  Top half of the image:
+  1) BODY MASS (big, left two-thirds of the top half): the lumpy fused mass of rat bodies exactly like the attached boss, with the half-buried rat faces and small paws in the fur, BUT with NO necks, NO heads on necks, NO legs and NO tails. Where the necks grew out (top and front of the mass) leave rounded fur bumps / stumps. The bottom of the mass is a smooth fur belly.
+  2) ONE TAIL (top right): a single long pink rat tail, gently curved, thick at the left (root) end with a little grey-brown fur at the root, thin pointed at the right end.
+  Bottom half, a row of 4 legs, each standing upright, well separated:
+  3) a rat FRONT leg (grey-brown fur upper part, pink paw with toes at the bottom, rounded fur top end),
+  4) a rat BACK leg (thicker haunch at top, bent, long pink foot at the bottom),
+  5) another front leg slightly different (a bit thinner, lighter fur),
+  6) another back leg slightly different (darker fur).
+- Keep the parts at the same scale as each other as on the attached boss (legs short compared to the mass).
+- Moderately creepy cartoon, no blood, no guts, no wounds. Generic cartoon rats, no logo.

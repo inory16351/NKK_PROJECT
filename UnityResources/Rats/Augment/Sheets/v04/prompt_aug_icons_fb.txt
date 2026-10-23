@@ -1,0 +1,25 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: aug_icons_fb.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- NO magenta, pink-purple, violet or lavender colors inside the drawings (they get removed with the background). Use pale BLUE instead of purple.
+- These are ICONS for upgrade cards in a cute rat game. TWO reference images are attached:
+  (A) STYLE reference: the REAL game (objects on the game floor + the UI kit). Copy this rendering.
+  (B) CONTENT reference: the CURRENT icons, laid out in the SAME grid as the image you must make. Keep each icon's subject, composition, pose and colors, but REDRAW it in the style of (A).
+- STYLE IS THE MOST IMPORTANT RULE: FLAT illustration like Untitled Goose Game and the reference (A): simple flat color shapes, each part ONE solid muted color with at most one slightly darker flat tone for the shadow side, very subtle paper grain ok. NO gradients, NO glossy highlights, NO shine spots, NO glow, NO soft 3D clay or plastic look, NO painterly soft shading, NO dark outlines, NO linework. Muted slightly desaturated warm palette (mustard, brick red, sage green, slate gray, warm beige, cream, dusty sky blue). Rats are cream-white or warm gray-beige with pink ears, nose, paws and tail.
+- An exact grid of 4 columns x 3 rows. Each icon is centered in its cell, fills about 70% of the cell, with a clear magenta margin of at least 40px; nothing touches or crosses cell borders.
+- Parody only: no logos, no brand marks, no symbols, no text.
+
+Cells (left to right, top to bottom):
+1) three cream rat paws in a row with brick-red speed swoosh marks (rapid multi-hit)
+2) a cream tooth with mustard lightning bolts on both sides
+3) three brick walls falling over one after another like dominoes
+4) three mustard rank chevron stripes stacked, with a small firework burst
+5) five cream-white rats stacked on top of each other in a tall tower
+6) a dark slate-gray storm cloud with a mustard lightning bolt and short blue rain dashes
+7) a mustard cheese cloud with round holes and cheese cubes falling
+8) a striped red-and-cream party popper bursting confetti, a little white rat peeking out
+9) a round golden hamster curled into a ball, happy closed eyes, tiny paws together
+10) a hamster in a black-and-white panda onesie hood curled into a ball, happy closed eyes
+11) a cream molar tooth wearing a mustard crown
+12) three cheese wedge blades spinning in a circle with curved motion marks

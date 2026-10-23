@@ -1762,23 +1762,23 @@
 },
 {
 "path": "Assets/Art/Rats/Parts/skater_suit/head.png",
-"x": 0.627,
+"x": 0.588,
 "y": 0.14
 },
 {
 "path": "Assets/Art/Rats/Parts/skater_suit/tail.png",
-"x": 0.042,
-"y": 0.666
+"x": 0.045,
+"y": 0.686
 },
 {
 "path": "Assets/Art/Rats/Parts/skater_suit/front.png",
-"x": 0.684,
-"y": 0.938
+"x": 0.641,
+"y": 0.945
 },
 {
 "path": "Assets/Art/Rats/Parts/skater_suit/back.png",
-"x": 0.396,
-"y": 0.941
+"x": 0.603,
+"y": 0.946
 },
 {
 "path": "Assets/Art/Rats/Cats/Parts/cheese/head.png",

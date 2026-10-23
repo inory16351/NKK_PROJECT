@@ -1874,7 +1874,7 @@ MonoBehaviour:
     shoulder: {x: 0.238, y: 0.448}
     hip: {x: 0.736, y: 0.325}
     legFront: 1
-    legBack: 0.992
+    legBack: 1.038
     screen: 0
     screenRect:
       serializedVersion: 2

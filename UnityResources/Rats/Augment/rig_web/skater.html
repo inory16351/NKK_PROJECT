@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>스케이터 생쥐 리그</title>
+<style>
+  :root { --bg:#f4f2ee; --panel:#fff; --ink:#222; --sub:#777; --line:#ddd; --accent:#3b6fd8; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:13px/1.4 "Malgun Gothic", sans-serif; background:var(--bg); color:var(--ink); display:flex; height:100vh; }
+  #stage { flex:1; position:relative; min-width:0; }
+  canvas { width:100%; height:100%; display:block; }
+  #hud { position:absolute; left:10px; top:8px; background:rgba(255,255,255,.85); padding:4px 8px; border-radius:4px; font-size:12px; }
+  #side { width:420px; background:var(--panel); border-left:1px solid var(--line); overflow:auto; padding:10px; }
+  h2 { font-size:14px; margin:12px 0 4px; }
+  .row { display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin:4px 0; }
+  button { padding:4px 9px; border:1px solid var(--line); background:#fafafa; border-radius:4px; cursor:pointer; }
+  button.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .p { display:grid; grid-template-columns: 150px 1fr 54px; gap:4px; align-items:center; margin:1px 0; }
+  .p span { color:#444; font-size:12px; }
+  .p input[type=number] { width:54px; font-size:11px; }
+  textarea { width:100%; height:150px; font:11px Consolas, monospace; }
+  .hint { color:var(--sub); font-size:12px; }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="cv"></canvas><div id="hud"></div></div>
+<div id="side">
+  <div class="row" id="modes">
+    <button data-m="auto" class="on">자동 (게임 흐름)</button><button data-m="push">밀기</button><button data-m="coast">관성 활주</button>
+    <button data-m="brake">브레이크</button><button data-m="glide">쭉 미끄러짐</button><button data-m="idle">제자리</button>
+  </div>
+  <div class="row"><button id="pause">멈춤</button> 느리게 <input id="slow" type="range" min="0.1" max="1" step="0.05" value="1"> <span id="slowv"></span></div>
+  <div class="row">확대 <input id="zoom" type="range" min="2" max="14" step="0.1" value="7"> <label><input id="flip" type="checkbox"> 오른쪽 보기</label> <label><input id="pv" type="checkbox"> 관절점</label></div>
+  <p class="hint">겟 투 워크 패러디: 팔·다리 네 곳에 롤러스케이트. 걷지 않고 뒷다리로 번갈아 밀고(달리기), 네 발 바퀴로 미끄러지며(관성), 멈출 땐 몸을 젖혀 브레이크. 총공격 돌진 = 슈퍼맨 자세. 각도 = 라디안 (다리 + = 앞으로, 꼬리·머리 + = 위로).</p>
+  <div id="params"></div>
+  <h2>유니티 값 (AugmentSpecials 인스펙터 '스케이트' · JSON)</h2>
+  <div class="row"><button id="copy">복사</button><button id="reset">기본값</button><span class="hint" id="copied"></span></div>
+  <textarea id="out"></textarea>
+  <p class="hint">JSON 을 고쳐 붙여 넣으면 슬라이더에 반영됩니다.</p>
+</div>
+<script>
+// 유니티 RatRig.Build/Apply + Rat.Augment.cs SkatePose 와 같은 계산 (리그 픽셀 = 파츠 그림 픽셀, y 아래 +, 원점 = 앞발 끝 바닥)
+// 그림 = ../../Parts/skater_suit/ · 관절 = ../../Parts/pivots.json (Tools/slice_rat_parts.py 출력)
+const CODE = 'skater_suit', RIG_LEN = 36, RUN_SPEED = 336;      // 쥐 리그 길이 (Mouse) · 스케이터 RunSpeed (200 × 레어 1.05 × 통일 1.6)
+const DEF = {
+  cadenceMin: 0.8, cadenceMax: 1.4, cadenceDiv: 500,
+  kick: -1.0, kickEnd: 0.3, recover: 0.15, recoverEnd: 0.55,
+  frontBase: 0.3, frontSwing: 0.15, tilt: 0.08, tiltPush: 0.05, sx: 1.04, sy: 0.96, sxPush: 0.04,
+  head: -0.06, headX: -1, tailBase: -0.1, tailWave: 0.06,
+  glideAt: 1.3, glideFront: 0.9, glideFarFront: 0.75, glideBack: -0.75, glideFarBack: -0.6, glideTilt: 0.12, glideHead: -0.14, glideSx: 1.12, glideSy: 0.92,
+  coastFront: 0.35, coastFarFront: 0.3, coastBack: 0.08, coastFarBack: 0.12, coastTilt: 0.05, coastWobble: 0.03,
+  idleSpeed: 1.6, idleFront: 0.08, idleBack: 0.06, idleTilt: 0.04,
+  brakeTime: 0.45, brakeFront: 1.0, brakeFarFront: 0.9, brakeBack: 0.5, brakeFarBack: 0.4, brakeTilt: -0.16, brakeHead: 0.1, brakeTail: 0.6,
+  friction: 1.6, ground: 1,
+};
+const RANGE = {   // [min, max, step, 이름]
+  cadenceMin: [0.2, 3, 0.05, '밀기 박자 최소 (주기/초)'], cadenceMax: [0.2, 4, 0.05, '밀기 박자 최대'], cadenceDiv: [100, 1500, 10, '박자 = 속도 ÷ 이 값'],
+  kick: [-2, 0, 0.02, '뒤로 차기 각도'], kickEnd: [0.05, 0.6, 0.01, '차기 끝 (주기 비율)'], recover: [-0.5, 1, 0.02, '돌아올 때 앞으로'], recoverEnd: [0.2, 0.95, 0.01, '돌아오기 끝'],
+  frontBase: [-0.5, 1.2, 0.02, '앞발 기본 각도'], frontSwing: [0, 0.8, 0.01, '앞발 흔들림'], tilt: [-0.3, 0.4, 0.01, '몸 숙임'], tiltPush: [0, 0.3, 0.01, '밀 때 더 숙임'],
+  sx: [0.8, 1.3, 0.01, '몸 가로 배율'], sy: [0.8, 1.2, 0.01, '몸 세로 배율'], sxPush: [0, 0.2, 0.01, '밀 때 늘어남'],
+  head: [-0.5, 0.5, 0.01, '머리 각도'], headX: [-8, 4, 0.5, '머리 앞뒤 (게임 단위)'], tailBase: [-1, 1.5, 0.02, '꼬리 각도'], tailWave: [0, 0.5, 0.01, '꼬리 흔들림'],
+  glideAt: [0.5, 3, 0.05, '쭉: 관성 속도 > RunSpeed × 이면'], glideFront: [-0.5, 2, 0.02, '쭉: 앞발'], glideFarFront: [-0.5, 2, 0.02, '쭉: 먼 앞발'], glideBack: [-2, 0.5, 0.02, '쭉: 뒷발'], glideFarBack: [-2, 0.5, 0.02, '쭉: 먼 뒷발'],
+  glideTilt: [-0.3, 0.5, 0.01, '쭉: 숙임'], glideHead: [-0.5, 0.5, 0.01, '쭉: 머리'], glideSx: [0.8, 1.4, 0.01, '쭉: 가로'], glideSy: [0.7, 1.2, 0.01, '쭉: 세로'],
+  coastFront: [-0.5, 1.5, 0.02, '활주: 앞발'], coastFarFront: [-0.5, 1.5, 0.02, '활주: 먼 앞발'], coastBack: [-1, 1, 0.02, '활주: 뒷발'], coastFarBack: [-1, 1, 0.02, '활주: 먼 뒷발'],
+  coastTilt: [-0.3, 0.4, 0.01, '활주: 숙임'], coastWobble: [0, 0.2, 0.005, '활주: 균형 흔들림'],
+  idleSpeed: [0.2, 5, 0.1, '제자리: 굴러다님 빠르기'], idleFront: [0, 0.4, 0.01, '제자리: 앞발'], idleBack: [0, 0.4, 0.01, '제자리: 뒷발'], idleTilt: [0, 0.2, 0.005, '제자리: 기울기'],
+  brakeTime: [0.1, 1.5, 0.05, '브레이크: 시간 (초)'], brakeFront: [-0.5, 2, 0.02, '브레이크: 앞발'], brakeFarFront: [-0.5, 2, 0.02, '브레이크: 먼 앞발'], brakeBack: [-1, 1.5, 0.02, '브레이크: 뒷발'],
+  brakeFarBack: [-1, 1.5, 0.02, '브레이크: 먼 뒷발'], brakeTilt: [-0.6, 0.3, 0.01, '브레이크: 젖힘'], brakeHead: [-0.5, 0.6, 0.01, '브레이크: 머리'], brakeTail: [-1, 1.5, 0.02, '브레이크: 꼬리'],
+  friction: [0.3, 6, 0.05, '관성: 미끄러짐 마찰 (클수록 빨리 섬)'], ground: [0, 1, 1, '관성: 바퀴 바닥 맞추기 (1 = 켬)'],
+};
+let T = load();
+function load() { try { const s = JSON.parse(localStorage.getItem('skaterTune') || 'null'); if (s) return Object.assign({}, DEF, s); } catch (e) {} return Object.assign({}, DEF); }
+function save() { try { localStorage.setItem('skaterTune', JSON.stringify(T)); } catch (e) {} out.value = JSON.stringify(T, null, 1); }
+
+// ── 리그 조립 (RatRig.Build) ──
+const IMG = {}, PARTS = ['head', 'torso', 'tail', 'front', 'back'];
+let R = null;
+async function init() {
+  const pv = await (await fetch('../../Parts/pivots.json')).json();
+  const sp = pv.species[CODE];
+  await Promise.all(PARTS.map(p => new Promise(ok => { const i = new Image(); i.onload = ok; i.src = '../../Parts/' + CODE + '/' + p + '.png'; IMG[p] = i; })));
+  const A = sp.torsoAnchor, P = sp.pivot;      // 왼쪽 위 기준 0~1
+  const tw = IMG.torso.width, th = IMG.torso.height, legF = sp.legScale.front, legB = sp.legScale.back;
+  const legLenF = IMG.front.height * (1 - P.front[1]) * legF;
+  const tx = -tw / 2, ty = -(A.shoulder[1] * th + legLenF);
+  const place = a => [tx + a[0] * tw, ty + a[1] * th];
+  const headScale = Math.min(1, 0.62 * tw / IMG.head.width);
+  const len = tw + IMG.head.width * headScale * 0.55;
+  R = { P, tw, th, legF, legB, tx, ty, hip: place(A.hip), neck: place(A.neck), tail: place(A.tail), shoulder: place(A.shoulder), headScale, u: len / RIG_LEN, gap: tw * 0.07,
+        lenF: legLenF, lenB: IMG.back.height * (1 - P.back[1]) * legB };
+  build(); save(); requestAnimationFrame(loop);
+}
+
+// ── 동작 (Rat.Augment.cs SkatePose 와 같음) ──
+function smooth(a, b, x) { x = Math.min(1, Math.max(0, (x - a) / (b - a))); return x * x * (3 - 2 * x); }
+function lerp(a, b, k) { return a + (b - a) * k; }
+function rep(v) { return v - Math.floor(v); }
+function push(u) {
+  if (u < T.kickEnd) return T.kick * smooth(0, 1, u / T.kickEnd);
+  if (u < T.recoverEnd) return lerp(T.kick, T.recover, smooth(0, 1, (u - T.kickEnd) / (T.recoverEnd - T.kickEnd)));
+  return lerp(T.recover, 0, (u - T.recoverEnd) / (1 - T.recoverEnd));
+}
+// 상태: mode (run · pause), speed, rushing, stopT, ph
+const S = { mode: 'pause', speed: 0, rushing: false, stopT: -9, ph: 0, t: 0, timer: 0, scroll: 0, seed: 1.7 };
+function pose(tt) {
+  const p = { bob: 0, head: T.head + Math.sin(tt * 1.3 + S.seed) * 0.02, headX: T.headX, sx: T.sx, sy: T.sy, tail: T.tailBase + Math.sin(tt * 5 + S.seed) * T.tailWave, front: 0, farFront: 0, back: 0, farBack: 0, tilt: 0 };
+  const fast = S.mode !== 'run' && S.speed > RUN_SPEED * T.glideAt;
+  if (fast || (S.rushing && S.speed > 30)) {
+    Object.assign(p, { front: T.glideFront, farFront: T.glideFarFront, back: T.glideBack, farBack: T.glideFarBack, head: T.glideHead, tilt: T.glideTilt, sx: T.glideSx, sy: T.glideSy, tail: -0.2 + Math.sin(tt * 30) * 0.07 });
+  } else if (S.speed > 30 && S.mode === 'run') {
+    const u = rep(S.ph), u2 = rep(S.ph + 0.5), a = push(u), b = push(u2), pw = Math.max(-a, -b) / Math.max(0.01, -T.kick);
+    p.back = a; p.farBack = b;
+    p.front = T.frontBase + T.frontSwing * Math.sin(S.ph * Math.PI * 2); p.farFront = T.frontBase - T.frontSwing * Math.sin(S.ph * Math.PI * 2);
+    p.tilt = T.tilt + pw * T.tiltPush; p.sx = T.sx + pw * T.sxPush;
+  } else if (S.speed > 30) {
+    Object.assign(p, { front: T.coastFront, farFront: T.coastFarFront, back: T.coastBack, farBack: T.coastFarBack, tilt: T.coastTilt + Math.sin(tt * 3 + S.seed) * T.coastWobble });
+  } else {
+    const s = Math.sin(tt * T.idleSpeed + S.seed);
+    Object.assign(p, { front: T.frontBase + s * T.idleFront, farFront: T.frontBase - 0.05 + s * T.idleFront, back: -0.05 - s * T.idleBack, farBack: -s * T.idleBack, tilt: s * T.idleTilt });
+  }
+  const bk = 1 - Math.min(1, Math.max(0, (tt - S.stopT) / T.brakeTime));
+  if (bk > 0 && S.speed > 30) {
+    p.front = lerp(p.front, T.brakeFront, bk); p.farFront = lerp(p.farFront, T.brakeFarFront, bk); p.back = lerp(p.back, T.brakeBack, bk); p.farBack = lerp(p.farBack, T.brakeFarBack, bk);
+    p.tilt = lerp(p.tilt, T.brakeTilt, bk); p.head = lerp(p.head, T.brakeHead, bk); p.tail = lerp(p.tail, T.brakeTail, bk);
+  }
+  if (T.ground) p.bob = groundBob(p);
+  return p;
+}
+// 바퀴 바닥 맞추기 (RatRig.GroundBob): 몸 기울기 · 다리 각도로 가장 낮은 바퀴가 바닥(0)에 닿게 몸을 내리거나 올림 → bob (게임 단위, + = 아래)
+function groundBob(p) {
+  const t = -p.tilt, c = Math.cos(t), s = Math.sin(t);
+  const legs = [[R.shoulder, p.front, R.lenF, 0], [R.shoulder, p.farFront, R.lenF, R.gap], [R.hip, p.back, R.lenB, 0], [R.hip, p.farBack, R.lenB, R.gap]];
+  let low = -1e9;
+  for (const [a, ang, L, g] of legs) {
+    const ax = a[0] + g - R.hip[0], ay = a[1] - R.hip[1];
+    const y = R.hip[1] + ax * s + ay * c + L * Math.cos(ang + t);
+    low = Math.max(low, y);
+  }
+  return -low / R.u;
+}
+// 게임 흐름 흉내 (Rat.cs NewDash · SkateStop · SkateCoast)
+let M = 'auto';
+function sim(dt, tt) {
+  S.rushing = false;
+  if (M === 'auto') {
+    S.timer -= dt;
+    if (S.mode === 'run') { if (S.timer <= 0) { if (S.speed > 150) S.stopT = tt; S.mode = 'pause'; S.timer = 0.25 + Math.random() * 0.65; } }
+    else { S.speed *= Math.exp(-T.friction * dt); if (S.timer <= 0) { S.mode = 'run'; S.speed = RUN_SPEED * (2.2 + Math.random() * 0.8); S.timer = 0.18 + Math.random() * 0.27; S.ph = Math.floor(S.ph * 2 + 1) / 2; } }
+  } else if (M === 'push') { S.mode = 'run'; S.speed = RUN_SPEED * 2.4; S.stopT = -9; }
+  else if (M === 'coast') { S.mode = 'pause'; S.speed = RUN_SPEED * 1.1; S.stopT = -9; }
+  else if (M === 'brake') { S.mode = 'pause'; if (S.speed < 100 || tt - S.stopT > T.brakeTime + 0.6) { S.speed = RUN_SPEED * 2.6; S.stopT = tt; } S.speed *= Math.exp(-T.friction * dt); }
+  else if (M === 'glide') { S.mode = 'run'; S.rushing = true; S.speed = RUN_SPEED * 2.6; S.stopT = -9; }
+  else { S.mode = 'pause'; S.speed = 0; S.stopT = -9; }
+  if (S.mode === 'run' && !S.rushing) S.ph += dt * Math.min(T.cadenceMax, Math.max(T.cadenceMin, S.speed / T.cadenceDiv));
+  S.scroll += S.speed * dt;
+}
+
+// ── 그리기 (RatRig.Apply) ──
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+function part(img, piv, x, y, rot, sc, far) {
+  ctx.save(); ctx.translate(x, y); ctx.rotate(rot); ctx.scale(sc[0], sc[1]);
+  if (far) ctx.filter = 'brightness(0.79)';
+  ctx.drawImage(img, -piv[0] * img.width, -piv[1] * img.height);
+  ctx.restore();
+}
+function draw(p) {
+  const W = cv.width = cv.clientWidth * devicePixelRatio, H = cv.height = cv.clientHeight * devicePixelRatio;
+  const K = +zoom.value / R.u * devicePixelRatio * 0.6, gy = H * 0.66, cx = W / 2, flip = document.getElementById('flip').checked ? -1 : 1;
+  // 바닥 타일 (쥐가 가는 방향 반대로 흐름, 100 게임 단위 칸)
+  ctx.fillStyle = '#e9e6df'; ctx.fillRect(0, 0, W, H);
+  const cell = 100 * R.u * K, off = ((S.scroll * R.u * K * flip) % cell + cell) % cell;
+  ctx.strokeStyle = '#d3cec4'; ctx.lineWidth = 2 * devicePixelRatio;
+  for (let x = cx - Math.ceil(cx / cell + 1) * cell + off; x < W + cell; x += cell) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+  for (let y = gy % cell; y < H; y += cell) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
+  // 그림자
+  ctx.fillStyle = 'rgba(0,0,0,.12)'; ctx.beginPath(); ctx.ellipse(cx, gy, R.tw * K * 0.6, R.tw * K * 0.08, 0, 0, Math.PI * 2); ctx.fill();
+  ctx.save(); ctx.translate(cx, gy); ctx.scale(K * flip * p.sx, K * p.sy);
+  const P = R.P, hip = R.hip;
+  ctx.translate(hip[0], hip[1] + p.bob * R.u); ctx.rotate(-p.tilt);
+  const rel = a => [a[0] - hip[0], a[1] - hip[1]];
+  const sh = rel(R.shoulder), hp = [0, 0], tl = rel(R.tail), nk = rel(R.neck);
+  part(IMG.back, P.back, hp[0] + R.gap, hp[1], p.farBack, [R.legB, R.legB], true);
+  part(IMG.front, P.front, sh[0] + R.gap, sh[1], p.farFront, [R.legF, R.legF], true);
+  part(IMG.tail, P.tail, tl[0], tl[1], -p.tail, [1, 1]);
+  ctx.drawImage(IMG.torso, -IMG.torso.width / 2 + (R.tx + R.tw / 2 - hip[0]) + 0, R.ty - hip[1]);
+  part(IMG.back, P.back, hp[0], hp[1], p.back, [R.legB, R.legB]);
+  const frontUp = p.front > 0.9;
+  if (!frontUp) part(IMG.front, P.front, sh[0], sh[1], p.front, [R.legF, R.legF]);
+  part(IMG.head, P.head, nk[0] + p.headX * R.u, nk[1], -p.head, [R.headScale, R.headScale]);
+  if (frontUp) part(IMG.front, P.front, sh[0], sh[1], p.front, [R.legF, R.legF]);
+  if (document.getElementById('pv').checked) { ctx.fillStyle = '#e33'; for (const a of [hp, sh, tl, nk]) { ctx.beginPath(); ctx.arc(a[0], a[1], 4 / K, 0, 7); ctx.fill(); } }
+  ctx.restore();
+  // 브레이크 불꽃 · 활주 먼지 (게임: SkateCoast)
+  if (S.speed > 150 && S.mode !== 'run' && Math.random() < 0.5) dust.push({ x: cx + flip * (Math.random() * 60 - 30) * devicePixelRatio, y: gy, life: 0.4, spark: clock - S.stopT < T.brakeTime });
+  for (const d of dust) { d.life -= 1 / 60; d.x += flip * S.speed * R.u * K / 60 * 0.6; ctx.fillStyle = d.spark ? `rgba(255,210,90,${d.life * 2})` : `rgba(160,150,140,${d.life})`; ctx.beginPath(); ctx.arc(d.x, d.y - 4, (d.spark ? 3 : 7) * devicePixelRatio, 0, 7); ctx.fill(); }
+  dust = dust.filter(d => d.life > 0);
+}
+let dust = [];
+let paused = false, last = performance.now(), clock = 0;
+function loop(now) {
+  const real = Math.min(0.05, (now - last) / 1000); last = now;
+  const dt = paused ? 0 : real * +slow.value; clock += dt;
+  sim(dt, clock);
+  const p = pose(clock);
+  draw(p);
+  document.getElementById('hud').textContent = `${S.mode === 'run' ? (S.rushing ? '총공격 돌진' : '밀기') : S.speed > 30 ? '미끄러짐' : '제자리'} · 속도 ${S.speed.toFixed(0)} (RunSpeed ×${(S.speed / RUN_SPEED).toFixed(2)})`;
+  requestAnimationFrame(loop);
+}
+
+// ── 슬라이더 ──
+const params = document.getElementById('params'), out = document.getElementById('out');
+function build() {
+  params.innerHTML = '';
+  let group = '';
+  for (const k in DEF) {
+    const [mn, mx, st, name] = RANGE[k];
+    const g = name.includes(':') ? name.split(':')[0] : '밀기 · 기본';
+    if (g !== group) { group = g; const h = document.createElement('h2'); h.textContent = g; params.appendChild(h); }
+    const d = document.createElement('div'); d.className = 'p';
+    d.innerHTML = `<span>${name.includes(':') ? name.split(':')[1].trim() : name}</span><input type="range" min="${mn}" max="${mx}" step="${st}" value="${T[k]}"><input type="number" step="${st}" value="${T[k]}">`;
+    const [r, n] = d.querySelectorAll('input');
+    r.oninput = () => { T[k] = +r.value; n.value = r.value; save(); };
+    n.onchange = () => { T[k] = +n.value; r.value = n.value; save(); };
+    params.appendChild(d);
+  }
+}
+out.onchange = () => { try { T = Object.assign({}, DEF, JSON.parse(out.value)); build(); save(); } catch (e) { alert('JSON 오류'); } };
+document.getElementById('copy').onclick = () => { navigator.clipboard.writeText(out.value); document.getElementById('copied').textContent = '복사함'; };
+document.getElementById('reset').onclick = () => { T = Object.assign({}, DEF); build(); save(); };
+document.getElementById('pause').onclick = e => { paused = !paused; e.target.classList.toggle('on', paused); };
+const slow = document.getElementById('slow'), zoom = document.getElementById('zoom');
+slow.oninput = () => document.getElementById('slowv').textContent = '×' + slow.value; slow.oninput();
+for (const b of document.querySelectorAll('#modes button')) b.onclick = () => { M = b.dataset.m; for (const c of document.querySelectorAll('#modes button')) c.classList.toggle('on', c === b); };
+init();
+</script>
+</body>
+</html>

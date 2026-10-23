@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hy7.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames, no shadows on the background.
+- STYLE: exactly the same flat Untitled Goose Game style and the SAME colors as the attached images: 1) the full-body "Rat Hydra" boss, 2) its neck segments made of many small whole rats tangled together, 3) its rat head designs (calm / biting with mouth wide open / angry snarl). Grey-brown rat fur, lighter beige belly, pink noses, pink paws, pink tails, round pink-inside ears, small black eyes, whiskers. Flat colors, NO outlines, no gradients, no gloss.
+- TASK: hydra HEADS made of MANY SMALL RATS, in the same spirit as the neck segments: each head is the silhouette of one big rat head in side view facing LEFT (pointed snout on the left, rounded skull, big round ear on top, eye), but the whole head is built out of 5 to 8 small whole rats squeezed together and competing to form the head: one rat stretched along the snout forming the long nose with its own pink nose at the tip, a curled-up rat forming the big round ear (pink inside), a rat's face with a wide-open eye forming the big eye, small rats clinging on the skull and cheeks, paws grabbing each other, tails wrapping around, some squeaking with tiny incisors, one being squashed with eyes shut. From the back of each head a short horizontal stump goes to the RIGHT (also made of tangled rats, same thickness as the neck segments, ending in a rounded end) where the head attaches to the neck.
+  Draw 2 rows x 3 heads, every head a separate island with plenty of magenta space, NOTHING touching. In each row the three heads have the SAME size, SAME silhouette and SAME stump position, only the expression differs:
+  column 1: CALM (mouth closed),
+  column 2: BITING: the big mouth opened very wide (lower jaw dropped about 50 degrees) — the jaws are formed by rats, with big yellow-white incisors (made of rat teeth) top and bottom, dark pink mouth inside,
+  column 3: ANGRY snarl, mouth slightly open with bared incisors.
+  Row 1 and row 2 are two different head designs (different arrangement of the small rats).
+- Moderately creepy cartoon, no blood, no guts, no wounds. Generic cartoon rats, no logo.

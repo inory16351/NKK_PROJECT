@@ -9,8 +9,12 @@ ref() {
   case $1 in
     # 2026-10-23 다시 (사용자: 그림체가 게임과 너무 다름) → 실제 게임 그림을 모은 참고 그림 (증강 아이콘 · 이펙트 · 스케이터 쥐 파츠). 처음 것 = _v1/
     aug_icons_e) echo "-i $R/$D/ref_icons_game.png" ;;
-    aug_fx) echo "-i $R/$D/ref_fx_game.png" ;;
-    rat_suit) echo "-i $R/$D/ref_rat_parts.png" ;;
+    # 2026-10-23 이펙트 다시 (사용자: 광택 그림체 → 플랫) → 실제 게임 바닥 물건 + UI 키트. 광택 판 = _v2/
+    aug_fx) echo "-i $R/$D/ref_flat_game.png" ;;
+    # 2026-10-23 저녁 (사용자: 증강 아이콘도 그림체가 다름) → 아이콘 32개 플랫으로: 그림체 = ref_flat_game · 내용 = 지금 아이콘을 같은 격자로 모은 ref_icons_f*
+    aug_icons_fa|aug_icons_fb|aug_icons_fc) echo "-i $R/$D/ref_flat_game.png -i $R/$D/ref_icons_${1#aug_icons_}.png" ;;
+    # 2026-10-23 저녁 (사용자: 겟 투 워크 패러디 → 팔·다리에 롤러스케이트) → 지난 양복 쥐 시트를 참고로 다리만 바꿈. 이전 판 = _v2/
+    rat_suit) echo "-i $R/$D/_v2/rat_suit.png" ;;
   esac
 }
 run() {
