@@ -49204,7 +49204,7 @@ MonoBehaviour:
   earlyEndFloor: 10
   earlyGateStairs: 0.5
   earlyStairsHp: 0.4
-  firstRunWallMul: 0.3
+  firstRunWallMul: 0.75
   wallBarTemplate: {fileID: 95008337}
   wallBarLift: 14
   wallBarFixedSize: 1
@@ -231521,6 +231521,7 @@ MonoBehaviour:
   footprintSticker: footprint
   slotSticker: slot_machine
   signalSticker: signal_5g
+  stormLookSize: 260
   headbuttPopup: "\uB775!"
   pandaPopup: "\uCFF5"
   towerPopup: "\uC950 \uD0D1!!"

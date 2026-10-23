@@ -45,11 +45,14 @@ def cells(sheet, cols, rows, inset=4):
 
 
 def grid(sheet, cols, rows, names, out_dir, art_dir):
+    # 칸으로 딱 자르면 칸 밖으로 나온 부분이 잘림 → 덩어리 '가운데가 있는 칸' 기준으로 통째로 (2026-10-23, reslice_blobs)
+    import reslice_blobs as R
+    im = key_magenta(Image.open(sheet).convert('RGBA'))
+    lab, blobs = R.blobs_by_cell(im, cols, rows, 0)
     n = 0
-    for r, c, cell in cells(sheet, cols, rows):
-        i = r * cols + c
+    for i in range(cols * rows):
         if i >= len(names) or names[i] == '-': continue
-        p = crop(biggest(cell))
+        p = R.cut(im, lab, blobs[i]) if blobs.get(i) else None
         if p is None: print('  빈 칸', names[i]); continue
         os.makedirs(out_dir, exist_ok=True)
         f = os.path.join(out_dir, names[i] + '.png'); p.save(f)

@@ -83843,6 +83843,7 @@ MonoBehaviour:
   noColor: {r: 0.75, g: 0.35, b: 0.3, a: 1}
   guideTargetId: skill_next
   iconSprites:
+  - {fileID: 21300000, guid: f082c2e2ccf5d124a95e2bb33683f481, type: 3}
   - {fileID: 21300000, guid: c7be15c61f362cf47b08c13fe58372a4, type: 3}
   - {fileID: 21300000, guid: 47d65d74add3eef4d9f4dbbe7227199c, type: 3}
   - {fileID: 21300000, guid: 15a0e35305091e54bace80ee811e22af, type: 3}
@@ -83872,14 +83873,17 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8df88d5006878cf49a06f19da046f9f1, type: 3}
   - {fileID: 21300000, guid: 67c5044ad23beb04f99d450fc84fb608, type: 3}
   - {fileID: 21300000, guid: 4f828cfc59c0afa43a8024dfb2452471, type: 3}
+  - {fileID: 21300000, guid: c0f0e88734c77474d9f63ef76bbd8f9d, type: 3}
   - {fileID: 21300000, guid: ae7b56e8a08541f48853a7e05135b541, type: 3}
   - {fileID: 21300000, guid: c29b7add9721e3140884b49a3f79b220, type: 3}
   - {fileID: 21300000, guid: 568e9c25044d68a4db20aa7851302fc1, type: 3}
   - {fileID: 21300000, guid: 271abf7538e5262468ba6a34a12570fb, type: 3}
+  - {fileID: 21300000, guid: ed2acc2c45b50e2419d24f120d574f31, type: 3}
   - {fileID: 21300000, guid: 75158306277f7e1489a08b6d55ea7807, type: 3}
   - {fileID: 21300000, guid: d6cf7b227f96e574793f81ea9e96b497, type: 3}
   - {fileID: 21300000, guid: 033b21906a1b55c4fad19b3d734c3b39, type: 3}
   - {fileID: 21300000, guid: e15ec7c295ba875459a1ce294ad20cd2, type: 3}
+  - {fileID: 21300000, guid: bfededc05963f7949a02b338844c05d6, type: 3}
   - {fileID: 21300000, guid: cbc4dd77cf5c1524ab4d1c860e79e6c4, type: 3}
   - {fileID: 21300000, guid: b94dcb76d16bdb64badada1a144f3e2c, type: 3}
   - {fileID: 21300000, guid: f9473b9fa87725745bf4b2f1b60add56, type: 3}
@@ -83894,9 +83898,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 32802aff92e6ba244b1433c4ac9f37dc, type: 3}
   - {fileID: 21300000, guid: b57aaadd28bef4646aac1925b5c086f2, type: 3}
   - {fileID: 21300000, guid: f06e12c3cf987d34ebe5bd470926bd7a, type: 3}
+  - {fileID: 21300000, guid: d637f240ae396c248bab532eaba8f735, type: 3}
   - {fileID: 21300000, guid: 1a55bb3f8888a7d4792f909db0bd6c5a, type: 3}
   - {fileID: 21300000, guid: f63af653056d19f45a49a4186722525b, type: 3}
-  - {fileID: 21300000, guid: d637f240ae396c248bab532eaba8f735, type: 3}
   badgeSprites:
   - {fileID: 21300000, guid: b2776e2c83a3e4e469f278cfe3d4735d, type: 3}
   - {fileID: 21300000, guid: 80869a623518b45428c4096b8c87d479, type: 3}

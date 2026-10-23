@@ -168,7 +168,13 @@ namespace NKK
         }
         public static float RatScale(Rat r)
         {
-            var me = I; if (!me || !r || !me.giants.TryGetValue(r, out var t)) return 1;
+            var me = I; if (!me || !r) return 1;
+            float u = UnifyScale(r);       // 등급 통일로 바뀐 쥐는 잘 보이게 크게 (AugmentSpecials.Rats.cs)
+            if (!me.giants.TryGetValue(r, out var t)) return u;
+            return u * GiantScale(me, r, t);
+        }
+        static float GiantScale(AugmentSpecials me, Rat r, float t)
+        {
             float k = me.giantScale.TryGetValue(r, out var s) ? s : 1.8f;
             float a = Mathf.Clamp01(Mathf.Min(t, 0.4f) / 0.4f);        // 끝날 때 줄어듦
             float grow = Mathf.Clamp01((me.giantAge.TryGetValue(r, out var age) ? age : 1) / 0.5f);   // 0.5초에 걸쳐 커짐 (기획서)

@@ -118,8 +118,24 @@ namespace NKK.Lobby
             string n = s.skill_asset.Substring(s.skill_asset.LastIndexOf('/') + 1);
             return icons.TryGetValue(n, out var sp) ? sp : null;
         }
-        [Tooltip("훈장 배지 (rk_1 ~ rk_8) — 시작점 노드 아이콘")] public Sprite[] badgeSprites;
-        Sprite RootIcon(int t) => badgeSprites != null && t - 1 < badgeSprites.Length ? badgeSprites[t - 1] : null;
+        [Tooltip("훈장 배지 (rk_1 ~ rk_16) — 시작점 노드 아이콘")] public Sprite[] badgeSprites;
+        Sprite RootIcon(int t) => badgeSprites != null && t >= 1 && t - 1 < badgeSprites.Length ? badgeSprites[t - 1] : null;
+
+#if UNITY_EDITOR
+        // 새 스킬 아이콘을 넣으면 다시 실행 (안 하면 그 노드가 흰 네모로 나옴 — 2026-10-23)
+        [ContextMenu("Fill Icons (SkillIcons · rk_*)")]
+        void FillIcons()
+        {
+            var l = new List<Sprite>();
+            foreach (var g in UnityEditor.AssetDatabase.FindAssets("t:Sprite", new[] { "Assets/Art/Rats/SkillIcons" }))
+            { var s = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>(UnityEditor.AssetDatabase.GUIDToAssetPath(g)); if (s) l.Add(s); }
+            iconSprites = l.ToArray();
+            var b = new List<Sprite>();
+            for (int t = 1; ; t++) { var s = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/Rats/Rogue/rk_" + t + ".png"); if (!s) break; b.Add(s); }
+            badgeSprites = b.ToArray();
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
+#endif
 
         Color BranchColor(CommonSkillRow s)
         {

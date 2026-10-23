@@ -69,7 +69,7 @@ namespace NKK.Stage
         [Tooltip("초반 완화가 끝나는 층 (이 층부터 wallGateStairs · 계단 벽 체력 그대로)")] public int earlyEndFloor = 10;
         [Tooltip("1층 계단 벽 감산 지수 (→ earlyEndFloor 층에서 wallGateStairs)")] public float earlyGateStairs = 0.5f;
         [Tooltip("1층 계단 벽 체력 배율 (→ earlyEndFloor 층에서 1)")] public float earlyStairsHp = 0.4f;
-        [Tooltip("첫 판(탈출 시도 1회째) 1층: 시작 방 옆 벽 하나는 무조건 부술 수 있게 = 그 벽 체력 배율 (전투력 부족 감쇠도 없음). 0 = 끔")] public float firstRunWallMul = 0.3f;
+        [Tooltip("첫 판(탈출 시도 1회째) 1층: 시작 방 옆 벽 하나는 무조건 부술 수 있게 = 그 벽 체력 배율 (전투력 부족 감쇠도 없음). 0 = 끔. 2026-10-23 사용자: 너무 바로 깨짐 → 0.3 의 2.5배")] public float firstRunWallMul = 0.75f;
 
         [Header("벽 체력바 (웹 drawWallBar)")]
         [Tooltip("월드 캔버스 안 템플릿 (꺼 둬도 됨). 부술 수 있는 막힌 벽마다 하나씩 복제")] public WallBar wallBarTemplate;

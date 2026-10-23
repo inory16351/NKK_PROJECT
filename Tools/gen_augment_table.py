@@ -47,6 +47,8 @@ CONFIG = [
     ('up_cheese_floor_grow', _KB, '층 수입 배율 (Tools/gen_economy.fit_k, 상점 bc_floor_grow 와 같음)'),
     ('up_cheese_floor_cap', 30, '층 수입 배율을 이 층까지만'),
     ('seen_reveal', 1, '1 = 한 번이라도 얻은 증강만 이름·설명 보임 (나머지 ???)'),
+    ('unify_scale', 1.4, '등급 통일 증강으로 바뀐 쥐 크기 배율 (장착 중만, 2026-10-23 사용자: 잘 보이게 크게)'),
+    ('unify_scale_10085', 1, '맘스땃쥐는 원래 잘 보여서 그대로 (unify_scale_<character_id> = 그 쥐만 따로)'),
 ]
 # 2026-10-23 기획서 Ver.04 로 빠진 증강 → 같은 등급 새 증강 (사용자: 세이브에 있던 것은 자동 교체, 강화 레벨 그대로). Aug_Config 'replace_<옛 id>' = 새 id
 REPLACE = {

@@ -65,6 +65,12 @@ namespace NKK
         public static bool BallForm(Rat r) { var s = UnifyFor(r); return s != null && ActionOf(r.Data) == EffectType.Rolling_Ball; }
         public static float UnifySpeedMul(Rat r) { var s = UnifyFor(r); return s != null && s.p3 > 0 ? s.p3 : 1; }
         static float UnifyBumpMul(Rat r) { var s = UnifyFor(r); return s != null ? 1 + s.p4 : 1; }
+        // 크기 배율 = Aug_Config unify_scale, 쥐마다 unify_scale_<character_id> 로 덮어씀 (맘스땃쥐 10085 = 1, 원래 잘 보임 — 2026-10-23 사용자)
+        static float UnifyScale(Rat r)
+        {
+            var s = UnifyFor(r); if (s == null) return 1;
+            return Augments.Cfg("unify_scale_" + Mathf.RoundToInt(s.p1), Augments.Cfg("unify_scale", 1));
+        }
         public static int PattyMax(Rat r, int def) { var s = UnifyFor(r); return s != null && s.p5 > 0 ? Mathf.RoundToInt(s.p5) : def; }
         public static bool DataToAll(Rat r) => UnifyFor(r) != null;      // 5G 생쥐: 동료 수와 상관없이 · 모든 쥐에게 (데이터는 Max 라 여러 마리여도 한 번만)
         static float TowerMul(Rat r) => r ? r.TowerMul : 1;
