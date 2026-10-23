@@ -15,7 +15,8 @@ namespace NKK.Hazards
     //  Rise     Drop 과 같지만 바닥 포탈에서 솟아오름 (p1 = 춤 종류 1~4 · p2 = 춤 시간)
     //  Slam     쥐 무리로 뛰어가 착지 → p1 번(기본 4) 연타 (반경 기절 + 화면 흔들림)
     //  Smash    팔을 들었다가 바로 앞을 내려침 (반경 기절)
-    //  Swallow  반경 안 쥐를 p1 초 삼켰다가 뱉음 (쥐 목록에 남아 인구 그대로)
+    //  Swallow  머리가 열리고 입에서 촉수(sprite) count 갈래 → 반경 안 쥐를 잡아 dur 초에 입으로 → p1 초 삼켰다가 뱉음 (쥐 목록에 남아 인구 그대로, Boss.Crew.cs)
+    //  Meeting  빨간 버튼(sprite) → 보스가 폴짝 눌러 긴급 회의 화면 → 쥐 전부 stun 초 기절 (Boss.Crew.cs)
     //  Grow     dur 초 동안 거대화해서 걸어다님, 0.6초마다 둘레 기절 + 화면 진동
     // opt (쉼표로 여러 개, '키:값'):
     //  head:그림 (고양이 머리, 이 공격 동안) · head_keep:그림 (그 뒤로 계속) · body:그림@크기 (보스를 그림 한 장으로, 공격 + 1.5초)
@@ -23,6 +24,7 @@ namespace NKK.Hazards
     //  explode (Fan: 목표 거리에서 터짐) · near (Fan: 쏠 때 보스 둘레도 기절) · all (Global: 맵 전체) · red (준비 동안 화면 붉게 깜빡) · shake (준비 동안 점점 크게 흔들림)
     //  around (Throw: 쥐 대신 보스 둘레 사방으로) · sticky:초 (Drop: 떨어진 자리에 닿으면 기절하는 반죽) · morph:그림@초 (Drop: 떨어진 자리 크레이터, 닿으면 그 머리로 멋대로 걷기)
     //  mask:그림 (Zone: 기절한 쥐에 방독면, p3 초 면역) · intro (발악 1 을 전투 시작 때도 씀)
+    //  alarm (Drop: 떨어진 것이 남아 있는 동안 화면 붉게 깜빡, 사이렌) · face:그림 (Meeting: 회의 화면 보스 얼굴) · all (Meeting: 맵 전체)
     public partial class Boss
     {
         [Header("보스 개편 패턴 (Boss.Rework.cs)")]
@@ -90,9 +92,11 @@ namespace NKK.Hazards
             var b = Opt("body"); if (b != null) { var (bn, sz) = SplitAt(b, Height * 1.1f); bodySprite = SpriteOrTemp(bn); bodySize = sz; bodyT = atk.windup + atk.dur + 1.5f; }
             var hd = Opt("hide"); if (hd != null) { hideSprite = SpriteOrTemp(hd); Hidden = true; }
             var rd = Opt("ride"); if (rd != null && !riding) Ride(rd);
+            if (Opt("alarm") != null) { alarmT = atk.windup + atk.dur + Mathf.Max(0, atk.p2) + 0.3f; alarmTick = atk.windup; }
             int n = Mathf.Max(1, atk.count);
             switch (atk.pattern)
             {
+                case "Meeting": BeginMeeting(); break;
                 case "Rise": PickTargets(n); break;
                 case "Slam": PickTargets(1); break;
                 case "Path": BuildPath(); break;
@@ -222,24 +226,8 @@ namespace NKK.Hazards
                     if (!atkHit) { atkHit = true; Cats?.HideWarns(); MemeHit(x + face * R * 1.2f, y, atk.radius, atk.stun); fx?.Shake(0.5f); sq = 0.6f; if (Ults) Ults.Flash(Color.white, 0.15f); }
                     if (atkT > wind + Mathf.Max(0.3f, atk.dur)) attacking = false;
                     break;
-                case "Swallow":
-                    if (atkT < wind) { jit = 2; Cats?.ShowWarn(0, x, y, atk.radius, k); Cats?.ShowVortex(x, y, atk.radius, k); break; }
-                    if (!atkHit)
-                    {
-                        atkHit = true; Cats?.HideWarns();
-                        float hold = atk.p1 > 0 ? atk.p1 : 3;
-                        int c = 0;
-                        foreach (var o in Rats.Rats)
-                        {
-                            if (o.UltOn || o.Swallowed || (o.x - x) * (o.x - x) + (o.y - y) * (o.y - y) > atk.radius * atk.radius) continue;
-                            o.Swallow(hold, x, y); swallowed.Add(o); c++;
-                        }
-                        fx?.Shake(0.4f); fx?.Stars(x, y, Height * 0.6f, 20, MemeColor, Color.white, 150, 400);
-                        if (MemePop != null) fx?.Popup(x, y, MemePop, MemeColor, 34, 1.2f, Height);
-                        Cats?.HitFx(x, y, atk.radius, SpName, c, 0.3f);
-                    }
-                    if (atkT > wind + Mathf.Max(0.5f, atk.dur)) attacking = false;
-                    break;
+                case "Swallow": UpdateSwallow(dt, wind, k); break;          // 촉수 삼키기 (Boss.Crew.cs)
+                case "Meeting": UpdateMeeting(dt, wind); break;             // 긴급 회의 (Boss.Crew.cs)
                 case "Grow":
                     if (atkT < wind) { jit = 3; break; }
                     growT = atk.dur; growAtk = atk; pulseEvery = 0.6f; pulseT = 0;
@@ -455,12 +443,12 @@ namespace NKK.Hazards
         // ── 매 프레임 (공격 밖에서도): 발사체 · 행렬 · 회전 · 삼킨 쥐 · 모습 ──
         void UpdateReworkFx(float dt)
         {
-            UpdateProjs(dt); UpdateWalkers(dt); UpdateOrbiters(dt);
+            UpdateProjs(dt); UpdateWalkers(dt); UpdateOrbiters(dt); UpdateCrew(dt);
             for (int i = swallowed.Count - 1; i >= 0; i--)
             {
                 var o = swallowed[i];
                 if (!o || !o.Swallowed) { swallowed.RemoveAt(i); continue; }
-                o.HoldAt(x + face * R * 0.3f, y);
+                o.HoldAt(mouth.x, mouth.y, mouth.z, face);          // 입 자리 · 뱉을 땐 보는 쪽으로
             }
             if (bodyT > 0 && (bodyT -= dt) <= 0) bodySprite = null;
             if (hideSprite && !(attacking && Opt("hide") != null)) { hideSprite = null; Hidden = false; }
@@ -505,6 +493,7 @@ namespace NKK.Hazards
             ClearOrbiters(false);
             foreach (var o in swallowed) if (o && o.Swallowed) o.swallowT = 0.01f;      // 다음 프레임에 뱉음
             swallowed.Clear();
+            ClearCrew();
             if (formFx) formFx.gameObject.SetActive(false);
             bodySprite = null; hideSprite = null; bodyT = 0;
         }

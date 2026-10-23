@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>우주복 쥐 미리보기</title>
+<style>
+  :root { --bg:#f4f2ee; --panel:#fff; --ink:#222; --sub:#777; --line:#ddd; --accent:#c8332f; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:13px/1.4 "Malgun Gothic", sans-serif; background:var(--bg); color:var(--ink); display:flex; height:100vh; }
+  #stage { flex:1; position:relative; min-width:0; }
+  canvas { width:100%; height:100%; display:block; background:#5d6470; }
+  #side { width:410px; background:var(--panel); border-left:1px solid var(--line); overflow:auto; padding:10px; }
+  h2 { font-size:14px; margin:12px 0 6px; }
+  .row { display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin:4px 0; }
+  button { padding:4px 9px; border:1px solid var(--line); background:#fafafa; border-radius:4px; cursor:pointer; }
+  button.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  button.big { font-weight:bold; }
+  table { border-collapse:collapse; width:100%; font-size:12px; }
+  td, th { border-bottom:1px solid #eee; padding:2px 3px; text-align:left; }
+  tr.sel { background:#ffe9e8; }
+  tr { cursor:pointer; }
+  input[type=number] { width:62px; }
+  #ed label { display:inline-flex; gap:3px; align-items:center; margin-right:6px; }
+  textarea { width:100%; height:170px; font:11px Consolas, monospace; }
+  .hint { color:var(--sub); font-size:12px; }
+  #log { font:11px Consolas, monospace; color:#555; height:90px; overflow:auto; background:#fafafa; border:1px solid #eee; padding:3px; }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="cv"></canvas></div>
+<div id="side">
+  <h2>97층 수상한 우주복 쥐 — 흐름</h2>
+  <div class="row">
+    <button class="big" id="bFlow">처음부터 (합류 → 변신)</button>
+    <button id="bStairs">계단 닿음 (변신)</button>
+    <button id="bFight">바로 보스전</button>
+  </div>
+  <h2>동작</h2>
+  <div class="row">
+    <button data-act="stomp">평타1 밟기</button><button data-act="pounce">평타2 덮치기</button><button data-act="hit">맞음</button>
+  </div>
+  <div class="row">
+    <button data-act="siren">쿨타임: 사이렌 투하</button>
+  </div>
+  <div class="row">
+    <button data-act="gulp">발악1: 촉수 삼키기</button><button data-act="huddle">발악2: 긴급 회의</button>
+  </div>
+  <div class="row">
+    <button data-act="die">죽음</button><label><input id="auto" type="checkbox"> 게임처럼 자동 (8초 쿨타임 · 평타 3~4.5초)</label>
+  </div>
+  <div class="row">빠르기 <input id="tscale" type="range" min="0.1" max="1.5" step="0.05" value="1"> <span id="tsv">1</span> <button id="pause">멈춤</button></div>
+  <div class="row">확대 <input id="zoom" type="range" min="0.3" max="2.5" step="0.01" value="1"> <label><input id="follow" type="checkbox" checked> 보스 따라가기</label></div>
+  <div class="row">쥐 수 <input id="nrats" type="range" min="0" max="80" step="1" value="40"> <span id="nratsv"></span></div>
+  <div id="log"></div>
+
+  <h2>리그</h2>
+  <div class="row">머리 열림 (손으로) <input id="openMan" type="range" min="-0.01" max="1" step="0.01" value="-0.01"> <span id="openv" class="hint">자동</span></div>
+  <div class="row"><label><input id="pv" type="checkbox"> 관절점 보기</label> <label><input id="still" type="checkbox"> 리그 움직임 끔</label></div>
+  <table id="tbl"><thead><tr><th>이름</th><th>부모</th><th>순서</th><th>보임</th><th>각도</th><th>배율</th></tr></thead><tbody></tbody></table>
+  <div id="ed"></div>
+  <h2>유니티 값 (BossPartArtBuilder.cs 줄)</h2>
+  <div class="row"><button id="copy">복사</button><span class="hint" id="copied"></span></div>
+  <textarea id="out" readonly></textarea>
+</div>
+<script>
+// 유니티 BossPartRig 와 같은 계산 (y 위 +, 각도 반시계 +, 리그 좌표 = 파츠 픽셀, 원점 = 발끝 바닥, 그림은 왼쪽을 봄)
+// 새로 더한 것 (유니티에도 같이): show = 늘 / 닫힘 (머리 열림 < SWAP) / 열림 (머리 열림 ≥ SWAP), open = 머리 열림 1 일 때 더하는 각도.
+// 기술·연출 = Boss.Crew.cs 와 같은 순서·수치 (보스 테이블 Atk_Type 값)
+const DIR = 'crewmate/';
+const SWAP = 0.1;           // BossPartRig.openSwap
+const LENGTH = 260, HEIGHT = 260;          // BossPartArt.Entry length·height (보스 scale 1)
+const RAT_LEN = 40, DISGUISE_LEN = 46;     // 게임 쥐 길이 · 변장 쥐 길이 (Boss.disguiseRatLength)
+// [name, sprite, parent, ax, ay, px, py, order, move, amp, phase, speed, angle, scale, far, show, open]
+let PARTS = [
+  ['torso', 'torso', null, 0, 0.817, 0.5, 0.5, 3, 'Bob', 3, 0, 2, 0, 1],      // 2026-10-23: 0.95 → 발이 바닥에서 떠 있었음 (뒷발 끝 = 바닥),
+  ['tail', 'tail', 'torso', 0.94, 0.53, 0.04, 0.44, 0, 'Sway', 12, 0, 1.5, 0, 1],
+  ['backFar', 'back', 'torso', 0.78, 0.4, 0.68, 0.06, 1, 'Walk', 20, 0.5, 1, 0, 1, true],
+  ['frontFar', 'front', 'torso', 0.28, 0.5, 0.77, 0.06, 1, 'Walk', 20, 0, 1, 0, 1.1, true],
+  ['back', 'back', 'torso', 0.72, 0.4, 0.68, 0.06, 4, 'Walk', 20, 0, 1, 0, 1],
+  ['front', 'front', 'torso', 0.22, 0.5, 0.77, 0.06, 4, 'Walk', 20, 0.5, 1, 0, 1.1],
+  ['head', 'head', 'torso', 0.07, 0.4, 0.53, 0.86, 5, 'Sway', 4, 0, 1.5, 0, 0.72, false, 'Closed'],
+  // 괴물 머리: 아래턱(혀) + 위턱(헬멧·바이저·윗니)이 뒤쪽 경첩에서 들림
+  ['jawLow', 'lower', 'torso', 0.1, 0.42, 0.62, 0.9, 5, 'Sway', 4, 0, 1.5, 0, 0.42, false, 'Open', 6],
+  ['jawUp', 'upper', 'jawLow', 0.93, 0.18, 0.9, 0.82, 6, 'Sway', 5, 0, 4, 0, 1, false, 'Open', -40],
+].map(a => ({ name:a[0], sprite:a[1], parent:a[2], at:[a[3], a[4]], pivot:[a[5], a[6]], order:a[7], move:a[8], amp:a[9], phase:a[10], speed:a[11], angle:a[12], scale:a[13], far:!!a[14], show:a[15] || 'Always', open:a[16] || 0 }));
+const RAT_PARTS = new Set(['torso', 'tail', 'back', 'front', 'head']);   // 쥐 파츠 (Art/Rats/Parts/crewmate) — 나머지는 BossParts/boss_crewmate
+// 입 (위턱·아래턱 사이, 아래턱 그림 기준 0~1) = 촉수가 나오는 자리 · 삼킨 쥐가 있는 자리
+const MOUTH = { part:'jawLow', tl:[0.25, 0.35] };
+
+// 쥐 리그 (RatRig.Build 와 같음): 파츠 피벗 = 좌상단 기준 0~1, 몸통 관절 = RatRigMeta
+const RATS_ART = {
+  crewmate: { dir:'crewmate/', pv:{ head:[0.532, 0.86], tail:[0.041, 0.441], front:[0.774, 0.06], back:[0.677, 0.056] },
+              neck:[0.069, 0.395], tail:[0.944, 0.531], shoulder:[0.238, 0.448], hip:[0.736, 0.325], legF:1, legB:0.938 },
+  labrat:   { dir:'crewmate/labrat/', pv:{ head:[0.789, 0.85], tail:[0.05, 0.316], front:[0.456, 0.094], back:[0.615, 0.093] },
+              neck:[0.071, 0.363], tail:[0.947, 0.551], shoulder:[0.241, 0.448], hip:[0.735, 0.322], legF:1, legB:0.884 },
+};
+
+// 기술 값 (보스 테이블 Atk_Type) — 유니티에 그대로
+const SK = {
+  siren:  { name:'사이렌 투하', radius:170, stun:1, count:4, windup:0.8, dur:1.0, size:90, stay:1.5, pop:'삐뽀삐뽀', color:'#ff4040' },
+  gulp:   { name:'촉수 삼키기', radius:300, stun:0, count:6, windup:1.0, dur:0.6, hold:3, pop:'꿀꺽!', color:'#c03030' },
+  huddle: { name:'긴급 회의', stun:2, windup:1.2, dur:1.0, size:140, pop:'긴급 회의!', color:'#ff3030' },
+  stomp:  { radius:200, stun:1, windup:0.5 },
+  pounce: { radius:180, stun:1, windup:0.4 },
+};
+const LINES = { Join:'신화 우주복 쥐 획득!', Disguise:['같이 가자 찍!', '나 착한 쥐야 찍', '임무 하는 중~', '통풍구? 몰라 찍'], Reveal:'사실 나… 임포스터였어!' };
+
+const img = {};
+function load(src) { return new Promise(r => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = src + '?v=' + Date.now(); }); }
+async function loadAll() {
+  const names = new Set(['torso', 'tail', 'back', 'front', 'head', 'lower', 'upper', 'jaw', 'tongue', 'br_siren', 'br_red_button', 'meeting_bg', 'portrait']);
+  PARTS.forEach(p => names.add(p.sprite));
+  for (const n of names) img[n] = await load(DIR + n + '.png');
+  for (const k of ['torso', 'tail', 'back', 'front', 'head']) img['lab_' + k] = await load('crewmate/labrat/' + k + '.png');
+}
+
+// ───────── 상태 ─────────
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+const $ = id => document.getElementById(id);
+const ARENA = { w:2200, h:1300 };
+const rnd = (a, b) => a + Math.random() * (b - a);
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const lerp = (a, b, k) => a + (b - a) * k;
+let T = 0, paused = false, sel = null;
+let rats = [], fx = [], tents = [], sirens = [], props = [];
+let shakeT = 0, shakeA = 0, flashT = 0, flashC = '#fff', banner = null, cut = null;
+let crowd = { x:ARENA.w * 0.5, y:ARENA.h * 0.55, tx:ARENA.w * 0.5, ty:ARENA.h * 0.55, t:0 };
+const boss = { x:ARENA.w * 0.55, y:ARENA.h * 0.5, z:0, vz:0, vx:0, vy:0, face:-1, walk:0, growK:1, open:0, openTo:0, sq:1, jit:0, hitT:0,
+  mode:'fight', act:null, atkCd:3, skillCd:4, rot:0, dieT:0, say:null, alpha:1, sneakT:0, goal:null, goalT:0, rest:0, special1:false, special2:false };
+
+function log(s) { const l = $('log'); l.textContent += `[${T.toFixed(1)}] ${s}\n`; l.scrollTop = 1e9; }
+
+function makeRats(n) {
+  while (rats.length < n) rats.push({ x:crowd.x + rnd(-260, 260), y:crowd.y + rnd(-160, 160), z:0, vz:0, vx:0, vy:0, face:-1, walk:rnd(0, 6), stun:0, swallowT:0,
+    grab:null, ox:rnd(-260, 260), oy:rnd(-160, 160), rag:false, spd:rnd(90, 130), mark:0 });
+  rats.length = n;
+}
+
+// ───────── 쥐 행동 (Rat: Stun · Ragdoll · Swallow) ─────────
+function stunRat(o, t) { if (o.swallowT > 0 || o.grab) return; o.stun = Math.max(o.stun, t); }
+function ragdoll(o, a, spd, up, stun) { if (o.swallowT > 0 || o.grab) return; o.vx = Math.cos(a) * spd; o.vy = Math.sin(a) * spd * 0.7; o.vz = up; o.rag = true; o.stun = Math.max(o.stun, stun); }
+function stunArea(x, y, r, stun, spd = 220, up = 260) {
+  let c = 0;
+  for (const o of rats) { if (o.swallowT > 0 || o.grab) continue; const dx = o.x - x, dy = o.y - y; if (dx * dx + dy * dy < r * r) { ragdoll(o, Math.atan2(dy, dx), spd, up, stun); c++; } }
+  return c;
+}
+function findCrowd() {
+  let best = null, bc = -1;
+  for (const o of rats) { if (o.swallowT > 0 || o.grab) continue; let c = 0; for (const q of rats) if (Math.hypot(q.x - o.x, q.y - o.y) < 180) c++; if (c > bc) { bc = c; best = o; } }
+  return best ? { x:best.x, y:best.y } : { x:crowd.x, y:crowd.y };
+}
+function pickTargets(n) {
+  const live = rats.filter(o => o.swallowT <= 0 && !o.grab), out = [];
+  for (let i = 0; i < n; i++) {
+    let best = null, bs = -1;
+    for (let k = 0; k < 12 && live.length; k++) {
+      const o = live[Math.random() * live.length | 0]; let s = 0;
+      for (const q of live) if (Math.hypot(q.x - o.x, q.y - o.y) < 150) s++;
+      for (const v of out) if (Math.hypot(v.x - o.x, v.y - o.y) < 260) s -= 6;
+      if (s > bs) { bs = s; best = o; }
+    }
+    out.push(best ? { x:best.x + rnd(-30, 30), y:best.y + rnd(-20, 20) } : { x:boss.x + rnd(-400, 400), y:boss.y + rnd(-250, 250) });
+  }
+  return out;
+}
+
+function updateRats(dt) {
+  crowd.t -= dt;
+  if (crowd.t <= 0) { crowd.t = rnd(3, 6); crowd.tx = rnd(400, ARENA.w - 400); crowd.ty = rnd(300, ARENA.h - 300); }
+  crowd.x = lerp(crowd.x, crowd.tx, Math.min(1, dt * 0.4)); crowd.y = lerp(crowd.y, crowd.ty, Math.min(1, dt * 0.4));
+  for (const o of rats) {
+    o.mark = Math.max(0, o.mark - dt);
+    if (o.swallowT > 0) {
+      o.swallowT -= dt;
+      if (o.swallowT <= 0) spit(o);
+      continue;
+    }
+    if (o.grab) continue;          // 촉수가 끌고 감
+    if (o.rag || o.z > 0 || o.vz > 0) {
+      o.vz -= 1600 * dt; o.z = Math.max(0, o.z + o.vz * dt); o.x += o.vx * dt; o.y += o.vy * dt;
+      if (o.z <= 0 && o.vz <= 0) { o.vz = 0; o.rag = false; o.vx *= 0.2; o.vy *= 0.2; }
+    } else if (o.stun > 0) { o.vx = o.vy = 0; }
+    else {
+      const tx = crowd.x + o.ox, ty = crowd.y + o.oy, dx = tx - o.x, dy = ty - o.y, d = Math.hypot(dx, dy);
+      const s = d > 20 ? o.spd : 0;
+      o.vx = lerp(o.vx, d > 1 ? dx / d * s : 0, Math.min(1, dt * 5)); o.vy = lerp(o.vy, d > 1 ? dy / d * s : 0, Math.min(1, dt * 5));
+      o.x += o.vx * dt; o.y += o.vy * dt;
+      if (Math.random() < dt * 0.3) { o.ox = rnd(-260, 260); o.oy = rnd(-160, 160); }
+    }
+    if (Math.abs(o.vx) > 8) o.face = o.vx > 0 ? 1 : -1;
+    o.walk += dt * Math.hypot(o.vx, o.vy) / 8;
+    o.stun = Math.max(0, o.stun - dt);
+    o.x = clamp(o.x, 30, ARENA.w - 30); o.y = clamp(o.y, 30, ARENA.h - 30);
+  }
+}
+
+// ───────── 연출 도구 (FxManager 흉내) ─────────
+function popup(x, y, z, text, color, size, life = 1) { fx.push({ k:'pop', x, y, z, text, color, size, t:0, life }); }
+function ring(x, y, r, color, life = 0.45) { fx.push({ k:'ring', x, y, r, color, t:0, life }); }
+function warn(x, y, r, life) { const w = { k:'warn', x, y, r, t:0, life }; fx.push(w); return w; }
+function stars(x, y, z, n, color) { for (let i = 0; i < n; i++) { const a = rnd(0, 6.28), s = rnd(120, 380); fx.push({ k:'star', x, y, z, vx:Math.cos(a) * s, vy:Math.sin(a) * s * 0.6, vz:rnd(100, 400), color, t:0, life:rnd(0.4, 0.8) }); } }
+function poof(x, y, r) { for (let i = 0; i < 10; i++) { const a = rnd(0, 6.28); fx.push({ k:'puff', x:x + Math.cos(a) * r * 0.3, y:y + Math.sin(a) * r * 0.2, z:rnd(0, r * 0.4), r:r * rnd(0.25, 0.45), vx:Math.cos(a) * r, vy:Math.sin(a) * r * 0.5, t:0, life:0.5 }); } }
+function spark(x, y, z, len, color) { fx.push({ k:'spark', x, y, z, len, a:rnd(0, 6.28), color, t:0, life:0.12 }); }
+function shake(a) { shakeT = 0.25; shakeA = Math.max(shakeA, a * 30); }
+function flash(c, t = 0.25) { flashC = c; flashT = t; }
+function say(text, t) { boss.say = { text, t }; }
+
+// ───────── 보스 리그 (BossPartRig.Apply 와 같음) ─────────
+function rigMatrices(base, b, t) {
+  const world = {}, list = [];
+  const still = $('still').checked;
+  const tt = still ? 0 : t, open = b.open;
+  const moving = Math.hypot(b.vx, b.vy) > 12;
+  for (const p of PARTS) {
+    const sp = img[p.sprite]; if (!sp) continue;
+    const par = p.parent ? world[p.parent] : null;
+    let a = p.angle, dx = 0, dy = 0;
+    const ph = p.phase * Math.PI * 2;
+    switch (p.move) {
+      case 'Walk': a += p.amp * Math.sin(b.walk * p.speed + ph) * (moving ? 1 : 0.15); break;
+      case 'Bob': dy = p.amp * Math.sin(tt * 3 * p.speed + ph); break;
+      case 'Sway': a += p.amp * Math.sin(tt * 3 * p.speed + ph); break;
+    }
+    a += p.open * open;
+    if (b.mode === 'dying') a += rnd(-6, 6);
+    let pos;
+    if (par) { const ps = img[par.p.sprite]; pos = [(p.at[0] - par.p.pivot[0]) * ps.width, (par.p.pivot[1] - p.at[1]) * ps.height]; }
+    else pos = [p.at[0] * sp.width, p.at[1] * sp.height];
+    pos = [pos[0] + dx, pos[1] + dy];
+    const m = (par ? par.m : base).translate(pos[0], -pos[1]).rotate(-a).scale(p.scale, p.scale);
+    // 보임: 열림이 SWAP 이상이면 닫힘 파츠 대신 열림 파츠
+    const alpha = p.show === 'Always' ? 1 : (p.show === 'Open') === (open >= SWAP) ? 1 : 0;
+    world[p.name] = { m, p };
+    list.push({ p, m, im:sp, alpha });
+  }
+  return { world, list };
+}
+
+function bossBase(b) {
+  const s = LENGTH / img.torso.width * b.growK;
+  const [sx, sy] = toScreen(b.x + (b.jit > 0 ? rnd(-b.jit, b.jit) : 0), b.y, b.z);
+  const h = HEIGHT * b.growK * 0.45 * view.z;
+  let m = new DOMMatrix().translate(sx, sy);
+  if (b.rot) m = m.translate(0, -h).rotate(-b.rot * 57.3).translate(0, h);
+  return m.scale(view.z, view.z).scale(-b.face * s / Math.sqrt(b.sq), s * b.sq);
+}
+
+// 입 자리 (화면 좌표)
+function mouthScreen(rig) {
+  const w = rig.world[MOUTH.part]; if (!w) return null;
+  const im = img[w.p.sprite];
+  return w.m.transformPoint(new DOMPoint((MOUTH.tl[0] - w.p.pivot[0]) * im.width, (MOUTH.tl[1] - w.p.pivot[1]) * im.height));
+}
+let lastRig = null, mouth = { x:0, y:0, z:0 };      // 입 자리 (게임 좌표)
+
+// ───────── 쥐 그리기 (RatRig.Build·Apply) ─────────
+function drawRat(o, art, len, imgPre, alpha = 1, tint = null) {
+  const A = RATS_ART[art];
+  const g = k => img[imgPre + k];
+  const torso = g('torso'), head = g('head'), front = g('front'), back = g('back'), tail = g('tail');
+  if (!torso) return;
+  const tw = torso.width, th = torso.height;
+  const legLenF = front.height * (1 - A.pv.front[1]) * A.legF;
+  const torsoX = -tw * 0.5, torsoY = -(A.shoulder[1] * th + legLenF);
+  const place = a => [torsoX + a[0] * tw, torsoY + a[1] * th];
+  const hip = place(A.hip), neck = place(A.neck), tl = place(A.tail), sh = place(A.shoulder);
+  const hs = Math.min(1, 0.62 * tw / head.width);
+  const unit = len / (tw + head.width * hs * 0.55);
+  // 자세 (Boss.MakeCatPose·쥐 걷기 흉내)
+  const moving = Math.hypot(o.vx, o.vy) > 12 && !o.stun, sn = Math.sin(o.walk);
+  const q = { front:0, back:0, farFront:0, farBack:0, tail:0.1, head:0, bob:0 };
+  if (moving) { q.front = sn * 0.5; q.farBack = sn * 0.45; q.farFront = -sn * 0.5; q.back = -sn * 0.45; q.bob = -Math.abs(Math.cos(o.walk)) * 2.5; q.tail = Math.sin(o.walk * 0.5) * 0.3 + 0.1; }
+  if (o.stun > 0 || o.rag) { q.front = 1.2; q.back = -1; q.farFront = 1; q.farBack = -0.8; q.head = 0.3; q.tail = 0.6; }
+  const [sx, sy] = toScreen(o.x, o.y, o.z);
+  const s = unit * view.z;
+  let m = new DOMMatrix().translate(sx, sy);
+  if (o.rag) m = m.translate(0, -len * 0.3 * view.z).rotate(o.z * 0.8 * (o.face > 0 ? 1 : -1)).translate(0, len * 0.3 * view.z);
+  m = m.scale(o.face > 0 ? -s : s, s);
+  const body = m.translate(hip[0], hip[1] + q.bob / unit);
+  const rel = p => [p[0] - hip[0], p[1] - hip[1]];
+  ctx.globalAlpha = alpha;
+  const draw = (im, at, pv, rotRad, sc, dark) => {
+    const r = rel(at);
+    ctx.setTransform(body.translate(r[0], r[1]).rotate(rotRad * 57.3).scale(sc, sc));
+    ctx.filter = dark ? 'brightness(0.8)' : tint || 'none';
+    ctx.drawImage(im, -pv[0] * im.width, -pv[1] * im.height);
+  };
+  const gap = tw * 0.07;
+  draw(back, [hip[0] + gap, hip[1]], A.pv.back, q.farBack, A.legB, true);
+  draw(front, [sh[0] + gap, sh[1]], A.pv.front, q.farFront, A.legF, true);
+  draw(tail, tl, A.pv.tail, -q.tail, 1);
+  ctx.setTransform(body.translate(0 - hip[0], torsoY + th * 0.5 - hip[1])); ctx.filter = tint || 'none'; ctx.drawImage(torso, -tw / 2, -th / 2);
+  draw(back, hip, A.pv.back, q.back, A.legB);
+  draw(front, sh, A.pv.front, q.front, A.legF);
+  draw(head, neck, A.pv.head, -q.head, hs);
+  ctx.filter = 'none'; ctx.globalAlpha = 1;
+}
+
+// ───────── 화면 ─────────
+const view = { x:ARENA.w / 2, y:ARENA.h / 2, z:1 };
+function toScreen(x, y, z = 0) { return [(x - view.x) * view.z + cv.width / 2 + view.sx, (y - view.y) * view.z + cv.height / 2 + view.sy - z * view.z]; }
+function fromScreen(sx, sy, y) { return { x:(sx - cv.width / 2 - view.sx) / view.z + view.x, z:((y - view.y) * view.z + cv.height / 2 + view.sy - sy) / view.z }; }
+
+// ───────── 기술 ─────────
+// 공격 = { k, t, ... }, 매 프레임 step(dt) → 끝나면 false
+const ACT = {
+  stomp(a, dt) {
+    const s = SK.stomp;
+    if (a.t < s.windup) { boss.jit = 3; boss.sq = 1 - 0.15 * (a.t / s.windup); return true; }
+    if (!a.jumped) { a.jumped = true; boss.vz = 700; boss.sq = 1.1; }
+    if (boss.z <= 0 && boss.vz <= 0 && a.t > s.windup + 0.1) {
+      if (!a.landed) { a.landed = true; boss.sq = 0.75; const c = stunArea(boss.x, boss.y, s.radius, s.stun); ring(boss.x, boss.y, s.radius, '#fff'); shake(0.4); poof(boss.x, boss.y, 120); log(`밟기: ${c}마리 기절`); }
+      return a.t < s.windup + 0.9;
+    }
+    return true;
+  },
+  pounce(a, dt) {
+    const s = SK.pounce;
+    if (!a.tg) { a.tg = findCrowd(); a.w = warn(a.tg.x, a.tg.y, s.radius, s.windup + 0.6); }
+    if (a.t < s.windup) { boss.jit = 1; boss.face = a.tg.x >= boss.x ? 1 : -1; boss.sq = 1 - 0.1 * (a.t / s.windup); return true; }
+    if (!a.jumped) { a.jumped = true; a.x0 = boss.x; a.y0 = boss.y; boss.vz = 520; a.T = 2 * 520 / 1600; }
+    const k = clamp((a.t - s.windup) / a.T, 0, 1);
+    if (!a.landed) {
+      boss.x = lerp(a.x0, a.tg.x, k); boss.y = lerp(a.y0, a.tg.y, k);
+      boss.openTo = 0.85;                       // 덮치며 입 쩍 (물기)
+      if (k >= 1 || (boss.z <= 0 && a.t > s.windup + 0.1)) {
+        a.landed = true; a.lt = a.t; boss.z = 0; boss.vz = 0; boss.sq = 0.8; boss.openTo = 0; boss.open = 0.15;       // 콱 다묾
+        const c = stunArea(boss.x, boss.y, s.radius, s.stun); ring(boss.x, boss.y, s.radius, '#fff'); shake(0.3); popup(boss.x, boss.y, 200, '콱!', '#fff', 30, 0.6); log(`덮치기: ${c}마리 기절`);
+      }
+      return true;
+    }
+    return a.t < a.lt + 0.6;
+  },
+  siren(a, dt) {
+    const s = SK.siren;
+    if (!a.tg) {
+      a.tg = pickTargets(s.count); a.ws = a.tg.map(v => warn(v.x, v.y, s.radius, s.windup + s.dur)); a.n = 0; popup(boss.x, boss.y, 300, s.pop, s.color, 30, 0.9); boss.openTo = 0;
+      alarm = { t:s.windup + s.dur + s.stay + 0.3, tick:s.windup };      // opt alarm: 화면 붉게 깜빡 (Boss.alarmEvery 0.5초 · 세기 0.12)
+    }
+    boss.jit = a.t < s.windup ? 2 : 0;
+    if (a.t < s.windup) return true;
+    const gap = s.dur / s.count;
+    while (a.n < s.count && a.t >= s.windup + a.n * gap) {
+      const v = a.tg[a.n++];
+      sirens.push({ x:v.x, y:v.y, z:900, vz:-1800, t:0, life:s.stay, landed:false, r:s.radius, stun:s.stun, ws:a.ws[a.n - 1] });
+    }
+    return a.n < s.count;
+  },
+  gulp(a, dt) {
+    const s = SK.gulp, OPEN_T = 0.45, SHOOT = 0.5;
+    // ① 머리가 열림 (위턱이 뒤쪽 경첩에서 들림) + 범위 예고
+    if (!a.w) { a.w = warn(boss.x, boss.y, s.radius, s.windup); a.w.follow = true; say('', 0); log('촉수 삼키기 시작'); }
+    boss.openTo = 1;
+    if (a.t < s.windup) { boss.jit = 2; a.w.x = boss.x; a.w.y = boss.y; }
+    // ② 촉수가 입에서 범위 안 쥐 쪽으로 뻗음 (몇 갈래, 쥐가 없으면 빈 쪽으로)
+    if (a.t >= SHOOT && !a.shot) {
+      a.shot = true;
+      const inR = rats.filter(o => o.swallowT <= 0 && !o.grab && Math.hypot(o.x - boss.x, o.y - boss.y) < s.radius);
+      inR.sort((p, q) => Math.atan2(p.y - boss.y, p.x - boss.x) - Math.atan2(q.y - boss.y, q.x - boss.x));
+      const n = Math.max(3, Math.min(s.count, inR.length));
+      for (let i = 0; i < n; i++) {
+        const o = inR.length ? inR[Math.floor((i + 0.5) * inR.length / n)] : null;
+        const ang = o ? Math.atan2(o.y - boss.y, o.x - boss.x) : i / n * 6.283 + 0.4;
+        const d = o ? Math.hypot(o.x - boss.x, o.y - boss.y) : s.radius * 0.8;
+        tents.push({ ang, tx:boss.x + Math.cos(ang) * d, ty:boss.y + Math.sin(ang) * d, ext:0, t:-i * 0.04, state:'out', rats:[], wig:rnd(0, 6) });
+      }
+      shake(0.2); popup(boss.x, boss.y, 320, '쉬익!', '#ff8fa0', 26, 0.6);
+    }
+    // ③ 다 뻗으면 범위 안 쥐를 가장 가까운 촉수가 잡음 → 입으로 끌어감
+    if (a.t >= s.windup && !a.grabbed) {
+      a.grabbed = true; a.w.life = 0; let c = 0;
+      for (const o of rats) {
+        if (o.swallowT > 0 || o.grab || Math.hypot(o.x - boss.x, o.y - boss.y) > s.radius) continue;
+        const ao = Math.atan2(o.y - boss.y, o.x - boss.x);
+        let best = null, bd = 1e9;
+        for (const te of tents) { const d = Math.abs(Math.atan2(Math.sin(ao - te.ang), Math.cos(ao - te.ang))); if (d < bd) { bd = d; best = te; } }
+        if (!best) continue;
+        o.grab = best; best.rats.push({ o, x0:o.x, y0:o.y, z0:o.z }); o.stun = 0; o.rag = false; c++;
+      }
+      for (const te of tents) { te.state = 'in'; te.t = 0; te.x0 = te.tx; te.y0 = te.ty; }
+      a.count = c; log(`촉수 삼키기: ${c}마리 잡음`);
+    }
+    if (a.grabbed && !tents.length && !a.done) {
+      a.done = true; boss.openTo = 0; boss.sq = 0.82; shake(0.35); popup(boss.x, boss.y, 300, s.pop, '#fff', 36, 1.2);
+      a.chewT = 0;
+    }
+    if (a.done) { a.chewT += dt; return a.chewT < 0.4; }
+    return true;
+  },
+  huddle(a, dt) {
+    const s = SK.huddle;
+    // 빨간 버튼이 보스 앞에 떨어짐 → 보스가 폴짝 올라가 꾹 → 긴급 회의 화면 (세상 멈춤) → 모든 쥐 기절
+    if (!a.btn) { a.btn = { x:boss.x + boss.face * 130, y:boss.y + 10, z:600, vz:-1500, sq:1, size:s.size }; props.push(a.btn); log('긴급 회의 시작'); }
+    const b = a.btn;
+    if (a.t < s.windup) {
+      flashT = Math.max(flashT, Mathf_repeat(a.t, 0.35) < dt ? 0.18 : 0); flashC = s.color;
+      if (a.t > 0.45 && !a.hop) { a.hop = true; boss.vz = 520; a.hx = boss.x; boss.face = b.x > boss.x ? 1 : -1; }
+      if (a.hop && !a.pressed) {
+        const k = clamp((a.t - 0.45) / 0.65, 0, 1);
+        boss.x = lerp(a.hx, b.x - boss.face * 70, k);      // 앞발이 버튼 위에 (앞발 = 몸 가운데에서 약 70 앞)
+        if (k >= 1 || (boss.z <= 0 && a.t > 0.6)) { a.pressed = true; boss.z = 0; boss.vz = 0; boss.sq = 0.7; b.sq = 0.45; shake(0.3); popup(b.x, b.y, 120, '딸깍', '#fff', 26, 0.5); }
+      }
+      return true;
+    }
+    if (!a.cut) {
+      a.cut = true; b.sq = 0.45;
+      cut = { t:0, hold:2.0, title:'긴급 회의!', face:img.jaw, done:() => {
+        let c = 0; for (const o of rats) if (o.swallowT <= 0 && !o.grab) { o.stun = Math.max(o.stun, s.stun); o.vz = Math.max(o.vz, 220); o.mark = s.stun; c++; }
+        shake(0.6); flash(s.color, 0.45); stars(boss.x, boss.y, 160, 30, s.color); popup(boss.x, boss.y, 320, s.pop, s.color, 46, 1.6);
+        log(`긴급 회의: 맵 전체 ${c}마리 ${s.stun}초 기절`);
+        a.after = T;
+      } };
+      return true;
+    }
+    if (a.after == null) return true;
+    if (T - a.after > s.dur) { poof(b.x, b.y, 80); props.splice(props.indexOf(b), 1); return false; }
+    return true;
+  },
+};
+function Mathf_repeat(t, l) { return t - Math.floor(t / l) * l; }
+
+function startAct(k) {
+  if (boss.mode !== 'fight') { if (k === 'hit') return; startFight(); }
+  if (k === 'hit') { boss.hitT = 0.2; popup(boss.x, boss.y, 230, '-' + (Math.random() * 900 + 100 | 0), '#fff', 22, 0.6); return; }
+  if (k === 'die') { boss.mode = 'dying'; boss.dieT = 0; boss.act = null; boss.openTo = 0; log('죽음'); return; }
+  if (boss.act) endAct();
+  boss.act = { k, t:0 };
+  if (SK[k] && SK[k].name) { banner = { text:SK[k].name, t:0 }; flash('#6b4ac8', 0.25); shake(0.3); }
+}
+function endAct() { boss.act = null; boss.openTo = 0; boss.jit = 0; for (const f of fx) if (f.k === 'warn') f.life = 0; }
+
+// 삼킨 쥐 뱉기 (Rat.Spit): 입을 벌리고 앞쪽으로 튕겨 냄
+function spit(o) {
+  o.swallowT = 0; o.x = mouth.x; o.y = boss.y + rnd(-20, 20); o.z = mouth.z;
+  const a = boss.face > 0 ? rnd(-0.9, 0.9) : Math.PI + rnd(-0.9, 0.9);
+  ragdoll(o, a, rnd(260, 420), rnd(380, 560), 0.8);
+  if (!boss.spitT || T - boss.spitT > 0.3) { boss.spitT = T; popup(mouth.x, boss.y, mouth.z + 40, '퉤!', '#ffd0d8', 26, 0.6); boss.sq = 1.15; }
+  boss.openHold = 0.45;
+}
+
+// ───────── 흐름: 합류 → 변장 → 변신 → 보스전 ─────────
+function startFlow() {
+  resetAll(); boss.mode = 'pending'; boss.sneakT = 0; log('층 들어옴 (8초 뒤 합류 — 미리보기는 2초)');
+}
+function join() {
+  boss.mode = 'disguise'; const c = findCrowd(); boss.x = c.x + rnd(-60, 60); boss.y = c.y + rnd(-40, 40);
+  banner = { text:LINES.Join, t:0, big:true }; say(LINES.Join, 2.5); flash('#ffd159', 0.35); poof(boss.x, boss.y, 60); stars(boss.x, boss.y, 30, 24, '#ffd159');
+  boss.sayT = 3; log('합류: 신화 우주복 쥐 획득!');
+}
+function beginReveal() {
+  if (boss.mode !== 'disguise') { if (boss.mode === 'pending') join(); else return; }
+  boss.mode = 'reveal'; boss.sneakT = 0; boss.vx = boss.vy = 0; say(LINES.Reveal, 1.8); log('변신');
+}
+function startFight(intro) {
+  boss.mode = 'fight'; boss.growK = intro ? 0.3 : 1; boss.atkCd = intro ? 0.8 : 3; boss.skillCd = 4; boss.alpha = 1; boss.rot = 0; boss.act = null;
+  if (intro) boss.pending = 'gulp';      // 등장 스킬 (opt intro)
+}
+function resetAll() {
+  rats.length = 0; makeRats(+$('nrats').value); fx.length = 0; tents.length = 0; sirens.length = 0; props.length = 0; cut = null;
+  Object.assign(boss, { x:ARENA.w * 0.55, y:ARENA.h * 0.5, z:0, vz:0, vx:0, vy:0, growK:1, open:0, openTo:0, sq:1, jit:0, hitT:0, act:null, rot:0, alpha:1, say:null, pending:null, special1:false, special2:false });
+}
+
+// ───────── 갱신 ─────────
+function updateBoss(dt) {
+  boss.hitT = Math.max(0, boss.hitT - dt); boss.jit = Math.max(0, boss.jit - dt * 0); if (boss.say) { boss.say.t -= dt; if (boss.say.t <= 0) boss.say = null; }
+  boss.sq = lerp(boss.sq, 1, Math.min(1, dt * 8));
+  if (boss.z > 0 || boss.vz > 0) { boss.vz -= 1600 * dt; boss.z = Math.max(0, boss.z + boss.vz * dt); if (boss.z <= 0) boss.vz = 0; }
+  // 머리 열림: openTo 로 (열 때 빠르게, 닫을 때 콱)
+  boss.openHold = Math.max(0, (boss.openHold || 0) - dt);
+  const want = Math.max(boss.openTo, boss.openHold > 0 ? 1 : 0);
+  boss.open = lerp(boss.open, want, Math.min(1, dt * (want > boss.open ? 7 : 14)));
+  if (Math.abs(boss.open - want) < 0.003) boss.open = want;
+  // 삼킨 쥐가 있으면 우물우물 (몸 출렁) — 곧 뱉을 쥐가 있으면 입을 벌림
+  const inside = rats.filter(o => o.swallowT > 0);
+  if (inside.length && boss.open < 0.1) { boss.sq = 1 + 0.06 * Math.sin(T * 14); if (Math.random() < dt * 3) popup(boss.x + rnd(-40, 40), boss.y, 160 + rnd(0, 40), '찍..', '#ffd0d8', 16, 0.5); }
+  if (inside.some(o => o.swallowT < 0.3)) boss.openHold = 0.45;
+
+  if (boss.mode === 'pending') { boss.sneakT += dt; if (boss.sneakT > 2) join(); return; }
+  if (boss.mode === 'disguise') {
+    boss.sayT -= dt; if (boss.sayT <= 0) { boss.sayT = rnd(2.8, 5.2); say(LINES.Disguise[Math.random() * 4 | 0], 1.4); }
+    // 쥐 하나 골라 옆으로 → 잠깐 섬
+    boss.goalT -= dt;
+    if (!boss.goal || boss.goalT <= 0 || Math.hypot(boss.goal.x - boss.x, boss.goal.y - boss.y) < 20) {
+      if (boss.goal && Math.hypot(boss.goal.x - boss.x, boss.goal.y - boss.y) < 20) boss.rest = rnd(0.8, 2);
+      boss.goalT = 3; const r = rats[Math.random() * rats.length | 0]; boss.goal = r ? { x:r.x + rnd(-50, 50), y:r.y + rnd(-35, 35) } : { x:boss.x, y:boss.y };
+    }
+    let gx = boss.goal.x - boss.x, gy = boss.goal.y - boss.y, gd = Math.hypot(gx, gy);
+    if (boss.rest > 0) { boss.rest -= dt; gd = 0; }
+    const s = gd > 1 ? 80 * clamp(gd / 40, 0, 1) : 0;
+    boss.vx = lerp(boss.vx, gd > 1 ? gx / gd * s : 0, Math.min(1, dt * 4)); boss.vy = lerp(boss.vy, gd > 1 ? gy / gd * s : 0, Math.min(1, dt * 4));
+    boss.x += boss.vx * dt; boss.y += boss.vy * dt; if (Math.abs(boss.vx) > 8) boss.face = boss.vx > 0 ? 1 : -1;
+    boss.walk += dt * Math.hypot(boss.vx, boss.vy) / 10;
+    return;
+  }
+  if (boss.mode === 'reveal') {
+    boss.sneakT += dt; const k = clamp(boss.sneakT / 1.4, 0, 1); boss.jit = 2 + 6 * k;
+    if (Math.random() < dt * (10 + 30 * k)) spark(boss.x + rnd(-1, 1) * DISGUISE_LEN, boss.y, rnd(0, DISGUISE_LEN), DISGUISE_LEN * (0.8 + k), '#99f27f');
+    if (Math.random() < dt * 8) shake(0.05 + 0.3 * k);
+    if (boss.sneakT >= 1.4) { boss.jit = 0; poof(boss.x, boss.y, 250); shake(0.6); flash('#99f27f', 0.4); startFight(true); log('보스전 (작게 → 커짐) + 등장 촉수'); }
+    return;
+  }
+  if (boss.mode === 'dying') {
+    boss.dieT += dt; boss.rot = Math.min(1.4, boss.dieT * 2); boss.alpha = clamp(1.8 - boss.dieT, 0, 1);
+    if (Math.random() < dt * 20) stars(boss.x, boss.y, 120, 1, '#ffd159');
+    if (boss.dieT > 2.2) { boss.mode = 'dead'; log('끝'); }
+    return;
+  }
+  if (boss.mode !== 'fight') return;
+  boss.growK = Math.min(1, boss.growK + dt * 0.9);
+  if (boss.act) {
+    boss.act.t += dt;
+    boss.vx *= 0.8; boss.vy *= 0.8;
+    if (!ACT[boss.act.k](boss.act, dt)) endAct();
+  } else {
+    if (boss.pending) boss.openTo = 1;                // 커지면서 머리가 열림 → 그대로 등장 촉수
+    if (boss.pending && boss.growK >= 0.95) { const p = boss.pending; boss.pending = null; startAct(p); return; }
+    // 걷기: 쥐 무리 쪽 (멀면)
+    const c = findCrowd(), dx = c.x - boss.x, dy = c.y - boss.y, d = Math.hypot(dx, dy);
+    const sp = d > 220 ? 95 : 0;
+    boss.vx = lerp(boss.vx, d > 1 ? dx / d * sp : 0, Math.min(1, dt * 3)); boss.vy = lerp(boss.vy, d > 1 ? dy / d * sp : 0, Math.min(1, dt * 3));
+    if ($('auto').checked) {
+      boss.atkCd -= dt; boss.skillCd -= dt;
+      if (boss.skillCd <= 0) { boss.skillCd = 8; startAct('siren'); }
+      else if (boss.atkCd <= 0) { boss.atkCd = rnd(3, 4.5); startAct(Math.random() < 0.4 ? 'pounce' : 'stomp'); }
+      else if (Math.random() < dt * 0.06) startAct(Math.random() < 0.5 ? 'gulp' : 'huddle');
+    }
+  }
+  boss.x += boss.vx * dt; boss.y += boss.vy * dt;
+  boss.x = clamp(boss.x, 150, ARENA.w - 150); boss.y = clamp(boss.y, 120, ARENA.h - 80);
+  if (Math.abs(boss.vx) > 8 && !boss.act) boss.face = boss.vx > 0 ? 1 : -1;
+  boss.walk += dt * Math.hypot(boss.vx, boss.vy) / 10;
+}
+
+let swallowN = 0;
+function updateTents(dt) {
+  for (let i = tents.length - 1; i >= 0; i--) {
+    const te = tents[i]; te.t += dt;
+    if (te.state === 'out') { te.ext = clamp(te.t / 0.18, 0, 1); continue; }
+    // 끌어당김: 끝이 입으로 (점점 빨라짐), 잡은 쥐가 끝에 매달려 따라감
+    const k = clamp(te.t / SK.gulp.dur, 0, 1), e = k * k;
+    te.tx = lerp(te.x0, mouth.x, e); te.ty = lerp(te.y0, boss.y + 1, e);
+    for (const g of te.rats) {
+      g.o.x = lerp(g.x0, mouth.x, e) + Math.sin(T * 30 + g.x0) * 3 * (1 - k); g.o.y = lerp(g.y0, boss.y + 1, e); g.o.z = lerp(g.z0, mouth.z - 10, e); g.o.stun = 0.2;
+    }
+    if (k >= 1) {
+      for (const g of te.rats) { g.o.grab = null; g.o.swallowT = SK.gulp.hold + (swallowN++ % 20) * 0.04; }      // 한 마리씩 퉤퉤 (한꺼번에 뭉쳐 나오지 않게)
+      tents.splice(i, 1);
+    }
+  }
+}
+
+function updateSirens(dt) {
+  for (let i = sirens.length - 1; i >= 0; i--) {
+    const s = sirens[i];
+    if (!s.landed) {
+      s.z += s.vz * dt;
+      if (s.z <= 0) {
+        s.z = 0; s.landed = true; s.t = 0; if (s.ws) s.ws.life = 0;
+        const c = stunArea(s.x, s.y, s.r, s.stun, 160, 220); ring(s.x, s.y, s.r, '#ff4040'); ring(s.x, s.y, s.r * 0.6, '#fff', 0.3); shake(0.2); popup(s.x, s.y, 110, '삐뽀!', '#ff6060', 22, 0.6); log(`사이렌 착지: ${c}마리`);
+      }
+      continue;
+    }
+    s.t += dt;
+    if (s.t > s.life) { poof(s.x, s.y, 60); sirens.splice(i, 1); }
+  }
+  if (alarm) { alarm.t -= dt; if ((alarm.tick -= dt) <= 0) { alarm.tick = 0.5; flash('#ff2626', 0.12); } if (alarm.t <= 0) alarm = null; }
+}
+let alarm = null;
+
+function updateFx(dt) {
+  for (let i = fx.length - 1; i >= 0; i--) {
+    const f = fx[i]; f.t += dt;
+    if (f.k === 'star' || f.k === 'puff') { f.x += f.vx * dt; f.y += f.vy * dt; if (f.k === 'star') { f.vz -= 1200 * dt; f.z = Math.max(0, f.z + f.vz * dt); } }
+    if (f.t >= f.life) fx.splice(i, 1);
+  }
+  for (const p of props) if (p.z > 0 || p.vz < 0) { p.z = Math.max(0, p.z + p.vz * dt); if (p.z <= 0 && p.vz < 0) { p.vz = 0; shake(0.15); poof(p.x, p.y, 50); } }
+  for (const p of props) p.sq = lerp(p.sq, 1, Math.min(1, dt * 2));
+  if (banner) { banner.t += dt; if (banner.t > (banner.big ? 2.5 : 1.6)) banner = null; }
+  shakeT = Math.max(0, shakeT - dt); if (shakeT <= 0) shakeA = 0;
+  flashT = Math.max(0, flashT - dt);
+}
+
+// ───────── 그리기 ─────────
+function drawFloor() {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const [x0, y0] = toScreen(0, 0), [x1, y1] = toScreen(ARENA.w, ARENA.h);
+  ctx.fillStyle = '#8a8f99'; ctx.fillRect(x0, y0, x1 - x0, y1 - y0);
+  ctx.strokeStyle = 'rgba(0,0,0,.08)'; ctx.lineWidth = 1;
+  for (let x = 0; x <= ARENA.w; x += 100) { const [a, b] = toScreen(x, 0), [c, d] = toScreen(x, ARENA.h); ctx.beginPath(); ctx.moveTo(a, b); ctx.lineTo(c, d); ctx.stroke(); }
+  for (let y = 0; y <= ARENA.h; y += 100) { const [a, b] = toScreen(0, y), [c, d] = toScreen(ARENA.w, y); ctx.beginPath(); ctx.moveTo(a, b); ctx.lineTo(c, d); ctx.stroke(); }
+}
+function shadow(x, y, r, a = 0.25) { const [sx, sy] = toScreen(x, y); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = `rgba(0,0,0,${a})`; ctx.beginPath(); ctx.ellipse(sx, sy, r * view.z, r * 0.35 * view.z, 0, 0, 7); ctx.fill(); }
+function sprite(im, x, y, z, size, opt = {}) {
+  if (!im) return;
+  const [sx, sy] = toScreen(x, y, z), s = size * view.z / im.width;
+  ctx.setTransform(1, 0, 0, 1, sx, sy); if (opt.rot) ctx.rotate(opt.rot);
+  ctx.scale(s * (opt.flip ? -1 : 1) / Math.sqrt(opt.sq || 1), s * (opt.sq || 1));
+  ctx.globalAlpha = opt.alpha ?? 1;
+  ctx.drawImage(im, -im.width / 2, opt.mid ? -im.height / 2 : -im.height);
+  ctx.globalAlpha = 1;
+}
+
+function drawTentacle(te) {
+  // 입 → 끝: 혀 촉수 그림(왼쪽 = 뿌리, 오른쪽 = 이빨 달린 끝)을 길이만큼 늘이고 살짝 꿈틀
+  const im = img.tongue; if (!im) return;
+  const [mx, my] = toScreen(mouth.x, boss.y, mouth.z);
+  let tx = te.tx, ty = te.ty;
+  if (te.state === 'out') { tx = lerp(mouth.x, te.tx, te.ext); ty = lerp(boss.y, te.ty, te.ext); }
+  const [ex, ey] = toScreen(tx, ty, te.state === 'out' ? lerp(mouth.z, 20, te.ext) : (te.rats[0] ? te.rats[0].o.z + 15 : 20));
+  const dx = ex - mx, dy = ey - my, d = Math.hypot(dx, dy);
+  if (d < 4) return;
+  const thick = clamp(70 / im.height, 0.25, 1) * view.z * (0.8 + 0.2 * Math.sin(T * 12 + te.wig));
+  ctx.setTransform(1, 0, 0, 1, mx, my); ctx.rotate(Math.atan2(dy, dx) + Math.sin(T * 9 + te.wig) * 0.05);
+  ctx.scale(d / im.width, thick * im.height / im.height);
+  ctx.drawImage(im, 0, -im.height / 2);
+}
+
+function drawBoss() {
+  if (boss.mode === 'pending' || boss.mode === 'dead') return;
+  if (boss.mode === 'disguise' || boss.mode === 'reveal') {
+    shadow(boss.x, boss.y, DISGUISE_LEN * 0.35);
+    const o = { x:boss.x + (boss.jit ? rnd(-boss.jit, boss.jit) : 0), y:boss.y, z:0, vx:boss.vx, vy:boss.vy, face:boss.face, walk:boss.walk, stun:0 };
+    drawRat(o, 'crewmate', DISGUISE_LEN, '', 1, boss.mode === 'reveal' && Math.random() < 0.3 ? 'brightness(1.6) hue-rotate(60deg)' : null);
+    return;
+  }
+  shadow(boss.x, boss.y, 110 * boss.growK, 0.3);
+  const base = bossBase(boss);
+  const rig = rigMatrices(base, boss, T); lastRig = rig;
+  const tint = boss.hitT > 0 ? 'brightness(1.8) saturate(0.6)' : 'none';
+  rig.list.sort((a, b) => a.p.order - b.p.order);
+  for (const { p, m, im, alpha } of rig.list) {
+    if (alpha <= 0.001) continue;
+    ctx.setTransform(m); ctx.globalAlpha = alpha * boss.alpha;
+    ctx.filter = p.far ? 'brightness(0.78)' : tint;
+    ctx.drawImage(im, -p.pivot[0] * im.width, -p.pivot[1] * im.height);
+    ctx.filter = 'none';
+    if (sel === p.name) { ctx.strokeStyle = '#ff0'; ctx.lineWidth = 3 / view.z; ctx.strokeRect(-p.pivot[0] * im.width, -p.pivot[1] * im.height, im.width, im.height); }
+  }
+  ctx.globalAlpha = 1;
+  if ($('pv').checked) for (const { p, m } of rig.list) { ctx.setTransform(m); ctx.fillStyle = sel === p.name ? '#ff0' : '#f00'; ctx.beginPath(); ctx.arc(0, 0, 8 / view.z / p.scale, 0, 7); ctx.fill(); }
+  // 입 자리 → 게임 좌표
+  const ms = mouthScreen(rig);
+  if (ms) { const w = fromScreen(ms.x, ms.y, boss.y); mouth = { x:w.x, y:boss.y, z:Math.max(0, w.z) }; }
+  if ($('pv').checked && ms) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.strokeStyle = '#0ff'; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(ms.x, ms.y, 8, 0, 7); ctx.stroke(); }
+}
+
+function drawSiren(s) {
+  shadow(s.x, s.y, 40, 0.25 * (s.landed ? 1 : clamp(1 - s.z / 900, 0, 1)));
+  sprite(img.br_siren, s.x, s.y, s.z, SK.siren.size, { rot: s.landed ? 0 : (s.z / 1100) * 9.4 });      // 빙글 돌며 떨어짐 (Boss.UpdateMaxwells)
+}
+
+function drawFxItem(f) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const k = f.t / f.life;
+  if (f.k === 'ring') { const [sx, sy] = toScreen(f.x, f.y); ctx.strokeStyle = f.color; ctx.globalAlpha = 1 - k; ctx.lineWidth = 6 * (1 - k) + 1; ctx.beginPath(); ctx.ellipse(sx, sy, f.r * view.z * (0.6 + 0.4 * k), f.r * view.z * 0.5 * (0.6 + 0.4 * k), 0, 0, 7); ctx.stroke(); ctx.globalAlpha = 1; }
+  if (f.k === 'warn') { const [sx, sy] = toScreen(f.x, f.y); ctx.fillStyle = 'rgba(255,40,40,.16)'; ctx.strokeStyle = 'rgba(255,60,60,.8)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(sx, sy, f.r * view.z, f.r * view.z * 0.5, 0, 0, 7); ctx.fill(); ctx.stroke(); ctx.fillStyle = 'rgba(255,40,40,.3)'; ctx.beginPath(); ctx.ellipse(sx, sy, f.r * view.z * k, f.r * view.z * 0.5 * k, 0, 0, 7); ctx.fill(); }
+}
+function drawTopFx(f) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const k = f.t / f.life;
+  if (f.k === 'pop') { const [sx, sy] = toScreen(f.x, f.y, f.z + k * 60); ctx.globalAlpha = k < 0.8 ? 1 : (1 - k) * 5; ctx.font = `bold ${f.size * view.z * (k < 0.1 ? 0.6 + k * 4 : 1)}px "Malgun Gothic"`; ctx.textAlign = 'center'; ctx.lineWidth = 5; ctx.strokeStyle = '#000'; ctx.strokeText(f.text, sx, sy); ctx.fillStyle = f.color; ctx.fillText(f.text, sx, sy); ctx.globalAlpha = 1; }
+  if (f.k === 'star') { const [sx, sy] = toScreen(f.x, f.y, f.z); ctx.fillStyle = f.color; ctx.globalAlpha = 1 - k; ctx.beginPath(); ctx.arc(sx, sy, 5 * view.z, 0, 7); ctx.fill(); ctx.globalAlpha = 1; }
+  if (f.k === 'puff') { const [sx, sy] = toScreen(f.x, f.y, f.z); ctx.fillStyle = `rgba(255,255,255,${0.7 * (1 - k)})`; ctx.beginPath(); ctx.arc(sx, sy, f.r * view.z * (0.6 + k), 0, 7); ctx.fill(); }
+  if (f.k === 'spark') { const [sx, sy] = toScreen(f.x, f.y, f.z); ctx.strokeStyle = f.color; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(sx, sy); let x = sx, y = sy; for (let i = 0; i < 4; i++) { x += Math.cos(f.a + rnd(-1, 1)) * f.len * view.z / 4; y += Math.sin(f.a + rnd(-1, 1)) * f.len * view.z / 4; ctx.lineTo(x, y); } ctx.stroke(); }
+}
+
+function drawCutscene() {
+  if (!cut) return;
+  const W = cv.width, H = cv.height, FI = 0.15, FO = 0.25, TT = FI + cut.hold + FO, t = cut.t;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const bg = img.meeting_bg;
+  if (bg) { const s = Math.max(W / bg.width, H / bg.height); ctx.drawImage(bg, (W - bg.width * s) / 2, (H - bg.height * s) / 2, bg.width * s, bg.height * s); }
+  // 가운데 원 = 보스 얼굴 (쾅 커졌다 작아짐 + 덜덜)
+  if (cut.face) { const sc = (1 + 0.35 * Math.exp(-t * 6) + 0.03 * Math.sin(t * 20)) * Math.min(W, H) * 0.42 / cut.face.width; ctx.setTransform(sc, 0, 0, sc, W / 2, H * 0.4); ctx.drawImage(cut.face, -cut.face.width / 2, -cut.face.height / 2); }
+  ctx.setTransform(1, 0, 0, 1, W / 2 + rnd(-6, 6), H * 0.86 + rnd(-6, 6));
+  ctx.font = `900 ${Math.min(W, H) * 0.11}px "Malgun Gothic"`; ctx.textAlign = 'center'; ctx.lineWidth = 12; ctx.strokeStyle = '#000'; ctx.strokeText(cut.title, 0, 0); ctx.fillStyle = '#ff3b3b'; ctx.fillText(cut.title, 0, 0);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  const fa = t < FI ? 1 - t / FI : t > FI + cut.hold ? (t - FI - cut.hold) / FO : 0;
+  if (fa > 0) { ctx.fillStyle = `rgba(255,255,255,${fa})`; ctx.fillRect(0, 0, W, H); }
+  if (t >= TT) { const d = cut.done; cut = null; d && d(); }
+}
+
+function frame(now) {
+  const dpr = devicePixelRatio || 1, W = cv.clientWidth, H = cv.clientHeight;
+  if (cv.width !== W * dpr || cv.height !== H * dpr) { cv.width = W * dpr; cv.height = H * dpr; }
+  const rdt = Math.min(0.05, (now - (frame.last || now)) / 1000); frame.last = now;
+  const dt = paused ? 0 : rdt * +$('tscale').value;
+  if (cut) cut.t += dt;                         // 컷씬 동안 세상 멈춤 (FxManager.WorldFreeze)
+  else if (dt > 0) { T += dt; updateRats(dt); updateBoss(dt); updateTents(dt); updateSirens(dt); updateFx(dt); }
+  // 카메라
+  const fit = Math.min(cv.width / ARENA.w, cv.height / ARENA.h) * 0.95;
+  view.z = fit * +$('zoom').value;
+  if ($('follow').checked && boss.mode !== 'pending') { view.x = lerp(view.x, boss.x, 0.08); view.y = lerp(view.y, boss.y - 80, 0.08); } else { view.x = lerp(view.x, ARENA.w / 2, 0.08); view.y = lerp(view.y, ARENA.h / 2, 0.08); }
+  view.sx = shakeT > 0 ? rnd(-shakeA, shakeA) * dpr : 0; view.sy = shakeT > 0 ? rnd(-shakeA, shakeA) * dpr : 0;
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, cv.width, cv.height);
+  drawFloor();
+  for (const f of fx) if (f.k === 'ring' || f.k === 'warn') drawFxItem(f);
+  // y 순서로 그리기 (쥐 · 보스 · 사이렌 · 버튼)
+  const items = [];
+  for (const o of rats) if (o.swallowT <= 0) items.push({ y:o.y, d:() => { if (!o.grab) shadow(o.x, o.y, 14); drawRat(o, 'labrat', RAT_LEN, 'lab_', 1); if (o.stun > 0 && !o.grab) { const [sx, sy] = toScreen(o.x, o.y, 40 + o.z); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.fillStyle = o.mark > 0 ? '#ff4040' : '#ffd159'; ctx.font = `bold ${16 * view.z}px sans-serif`; ctx.textAlign = 'center'; ctx.fillText(o.mark > 0 ? '!' : '★', sx + Math.sin(T * 8) * 6 * view.z, sy); } } });
+  items.push({ y:boss.y, d:drawBoss });
+  for (const s of sirens) items.push({ y:s.y, d:() => drawSiren(s) });
+  for (const p of props) items.push({ y:p.y, d:() => { shadow(p.x, p.y, 45); sprite(img.br_red_button, p.x, p.y, p.z, p.size, { sq:p.sq }); } });
+  items.sort((a, b) => a.y - b.y);
+  for (const it of items) it.d();
+  for (const te of tents) drawTentacle(te);
+  // 촉수에 잡힌 쥐는 촉수 위에
+  for (const o of rats) if (o.grab) drawRat(o, 'labrat', RAT_LEN, 'lab_', 1);
+  for (const f of fx) drawTopFx(f);
+  // 말풍선
+  if (boss.say && boss.say.text && boss.mode !== 'dead') {
+    const h = boss.mode === 'fight' || boss.mode === 'dying' ? HEIGHT * boss.growK + 30 : DISGUISE_LEN + 30;
+    const [sx, sy] = toScreen(boss.x, boss.y, h);
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.font = `bold ${15 * Math.max(1, view.z)}px "Malgun Gothic"`; ctx.textAlign = 'center';
+    const w = ctx.measureText(boss.say.text).width + 16; ctx.fillStyle = '#fff'; ctx.strokeStyle = '#333'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.roundRect(sx - w / 2, sy - 26, w, 28, 8); ctx.fill(); ctx.stroke(); ctx.fillStyle = '#222'; ctx.fillText(boss.say.text, sx, sy - 7);
+  }
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  if (flashT > 0) { ctx.fillStyle = flashC; ctx.globalAlpha = Math.min(0.5, flashT * 2); ctx.fillRect(0, 0, cv.width, cv.height); ctx.globalAlpha = 1; }
+  if (banner) { const k = banner.t; ctx.font = `900 ${(banner.big ? 44 : 34) * dpr}px "Malgun Gothic"`; ctx.textAlign = 'center'; const y = cv.height * 0.16 + Math.max(0, 0.15 - k) * 300; ctx.lineWidth = 8; ctx.strokeStyle = '#000'; ctx.strokeText(banner.text, cv.width / 2, y); ctx.fillStyle = banner.big ? '#ffd159' : '#fff'; ctx.fillText(banner.text, cv.width / 2, y); }
+  drawCutscene();
+  ctx.font = `${12 * dpr}px Consolas`; ctx.fillStyle = '#fff'; ctx.textAlign = 'left';
+  ctx.fillText(`${boss.mode}${boss.act ? ' · ' + boss.act.k + ' ' + boss.act.t.toFixed(2) : ''} · 열림 ${boss.open.toFixed(2)} · 삼킨 쥐 ${rats.filter(o => o.swallowT > 0).length} · 쥐 ${rats.length}`, 10 * dpr, 18 * dpr);
+  if (+$('openMan').value >= 0) { boss.open = +$('openMan').value; boss.openTo = boss.open; }
+  requestAnimationFrame(frame);
+}
+
+// ───────── 표 · 편집 · C# 내보내기 ─────────
+const f3 = v => +(+v).toFixed(3);
+function fv(v) { return String(f3(v)) + (Number.isInteger(f3(v)) ? '' : 'f'); }
+function sp(n) { return RAT_PARTS.has(n) ? `R("crewmate/${n}")` : `S("boss_crewmate/${n}")`; }
+function csLine(p) {
+  let s = `crew.parts.Add(P("${p.name}", ${sp(p.sprite)}, ${p.parent ? '"' + p.parent + '"' : 'null'}, ${fv(p.at[0])}, ${fv(p.at[1])}, ${fv(p.pivot[0])}, ${fv(p.pivot[1])}, ${p.order}, M.${p.move}, ${fv(p.amp)}, ${fv(p.phase)}, ${fv(p.speed)}, ${fv(p.angle)}, ${fv(p.scale)}`;
+  if (p.far) s += ', far: true';
+  if (p.show !== 'Always') s += `, show: Sh.${p.show}`;
+  if (p.open) s += `, open: ${fv(p.open)}`;
+  return s + '));';
+}
+const SHOW_KO = { Always:'늘', Closed:'닫힘', Open:'열림' };
+function refresh() {
+  const tb = $('tbl').querySelector('tbody'); tb.innerHTML = '';
+  for (const p of PARTS) {
+    const tr = document.createElement('tr'); if (p.name === sel) tr.className = 'sel';
+    tr.innerHTML = `<td>${p.name}${p.far ? ' (먼)' : ''}</td><td>${p.parent || '-'}</td><td>${p.order}</td><td>${SHOW_KO[p.show]}</td><td>${f3(p.angle)}</td><td>${f3(p.scale)}</td>`;
+    tr.onclick = () => { sel = sel === p.name ? null : p.name; refresh(); };
+    tb.appendChild(tr);
+  }
+  const ed = $('ed'); ed.innerHTML = '';
+  const p = PARTS.find(q => q.name === sel);
+  if (p) {
+    const fields = [['at x', 'at', 0, 0.005], ['at y', 'at', 1, 0.005], ['pivot x', 'pivot', 0, 0.005], ['pivot y', 'pivot', 1, 0.005], ['각도', 'angle', null, 0.5], ['배율', 'scale', null, 0.01], ['순서', 'order', null, 1], ['흔들림', 'amp', null, 1], ['위상', 'phase', null, 0.05], ['빠르기', 'speed', null, 0.1], ['열림 각도', 'open', null, 1]];
+    ed.innerHTML = `<div class="hint">${p.name} — 화살표키·휠로 미세 조정</div>`;
+    for (const [lab, k, i, st] of fields) {
+      const l = document.createElement('label'); l.textContent = lab;
+      const inp = document.createElement('input'); inp.type = 'number'; inp.step = st;
+      inp.value = i === null ? p[k] : p[k][i];
+      inp.oninput = () => { const v = +inp.value; if (i === null) p[k] = v; else p[k][i] = v; $('out').value = PARTS.map(csLine).join('\n'); refreshTableOnly(); };
+      l.appendChild(inp); ed.appendChild(l);
+    }
+  }
+  $('out').value = PARTS.map(csLine).join('\n');
+}
+function refreshTableOnly() {
+  const rows = $('tbl').querySelectorAll('tbody tr');
+  PARTS.forEach((p, i) => { rows[i].children[2].textContent = p.order; rows[i].children[4].textContent = f3(p.angle); rows[i].children[5].textContent = f3(p.scale); });
+}
+
+document.querySelectorAll('[data-act]').forEach(b => b.onclick = () => startAct(b.dataset.act));
+$('bFlow').onclick = startFlow;
+$('bStairs').onclick = beginReveal;
+$('bFight').onclick = () => { resetAll(); startFight(false); log('바로 보스전'); };
+$('pause').onclick = () => { paused = !paused; $('pause').classList.toggle('on', paused); };
+$('tscale').oninput = () => $('tsv').textContent = $('tscale').value;
+$('nrats').oninput = () => { $('nratsv').textContent = $('nrats').value; makeRats(+$('nrats').value); }; $('nratsv').textContent = $('nrats').value;
+$('openMan').oninput = () => $('openv').textContent = +$('openMan').value < 0 ? '자동' : (+$('openMan').value).toFixed(2);
+$('copy').onclick = async () => { try { await navigator.clipboard.writeText($('out').value); $('copied').textContent = '복사됨'; } catch { $('out').select(); document.execCommand('copy'); $('copied').textContent = '복사됨'; } };
+loadAll().then(() => { resetAll(); startFight(false); refresh(); requestAnimationFrame(frame); });
+</script>
+</body>
+</html>

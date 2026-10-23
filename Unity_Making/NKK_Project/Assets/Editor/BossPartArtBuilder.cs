@@ -3,6 +3,7 @@ using NKK.Hazards;
 using UnityEditor;
 using UnityEngine;
 using M = NKK.Hazards.BossPartArt.Move;
+using Sh = NKK.Hazards.BossPartArt.Show;
 
 // Assets/Art/Rats/BossParts/<보스>/*.png (Tools/slice_boss_rework.py) → Assets/Data/BossPartArt.asset
 // 붙는 자리·관절·움직임 기본값 (보스 개편 2026-10-22). 다시 만들면 에셋에서 고친 값은 덮어써짐 → 고친 값은 여기에도 옮길 것.
@@ -15,9 +16,10 @@ public static class BossPartArtBuilder
     static Sprite R(string p) => AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Art/Rats/Parts/" + p + ".png");
 
     static BossPartArt.Part P(string name, Sprite sp, string parent, float ax, float ay, float px, float py, int order,
-        M move = M.None, float amp = 0, float phase = 0, float speed = 1, float angle = 0, float scale = 1, bool flip = false, bool far = false, Sprite alt = null) =>
+        M move = M.None, float amp = 0, float phase = 0, float speed = 1, float angle = 0, float scale = 1, bool flip = false, bool far = false, Sprite alt = null,
+        Sh show = Sh.Always, float open = 0) =>
         new() { name = name, sprite = sp, alt = alt, parent = parent, at = new Vector2(ax, ay), pivot = new Vector2(px, py), order = order,
-                move = move, amp = amp, phase = phase, speed = speed, angle = angle, scale = scale, flipX = flip, far = far };
+                move = move, amp = amp, phase = phase, speed = speed, angle = angle, scale = scale, flipX = flip, far = far, show = show, open = open };
 
     [MenuItem("NKK/Build Boss Part Art")]
     public static void Build()
@@ -108,17 +110,20 @@ public static class BossPartArtBuilder
         exc.parts.Add(P("arm", S("props/excavator_arm"), "body", 0.12f, 0.45f, 0.93f, 0.92f, 4, M.Sway, 8, 0, 1));
         lib.entries.Add(exc);
 
-        // 97층 우주복 쥐 (보스 크기): 쥐 파츠 + 정체 드러낼 때 머리 = 아랫입(alt), 뚜껑은 그때만 보임
+        // 97층 우주복 쥐 (보스 크기): 쥐 파츠 + 괴물 머리 (웹 미리보기 BossRework/rig_web/crewmate.html 에서 확인, 2026-10-23)
+        // 머리 = 닫힘(쥐 머리) ↔ 열림(아래턱 + 위턱이 뒤쪽 경첩에서 open° 들림). 열림 = Boss.Crew.cs 가 정함 (등장·촉수 삼키기·덮치기·뱉기 때만)
+        // 예전엔 머리를 alt(공격·맞을 때 그림)로 바꿔서 맞을 때마다 괴물 입이 깜빡였음
         var crew = new BossPartArt.Entry { codeId = "boss_crewmate", length = 260, height = 260 };
-        crew.parts.Add(P("torso", R("crewmate/torso"), null, 0, 0.95f, 0.5f, 0.5f, 3, M.Bob, 3, 0, 2));
+        crew.parts.Add(P("torso", R("crewmate/torso"), null, 0, 0.817f, 0.5f, 0.5f, 3, M.Bob, 3, 0, 2));      // 2026-10-23: 0.95 → 발이 바닥에서 떠 있었음 (뒷발 끝 = 바닥, 앞다리 1.1배)
         crew.parts.Add(P("tail", R("crewmate/tail"), "torso", 0.94f, 0.53f, 0.04f, 0.44f, 0, M.Sway, 12, 0, 1.5f));
         crew.parts.Add(P("backFar", R("crewmate/back"), "torso", 0.78f, 0.4f, 0.68f, 0.06f, 1, M.Walk, 20, 0.5f, 1, 0, 1, false, true));
-        crew.parts.Add(P("frontFar", R("crewmate/front"), "torso", 0.28f, 0.5f, 0.77f, 0.06f, 1, M.Walk, 20, 0, 1, 0, 1, false, true));
+        crew.parts.Add(P("frontFar", R("crewmate/front"), "torso", 0.28f, 0.5f, 0.77f, 0.06f, 1, M.Walk, 20, 0, 1, 0, 1.1f, false, true));
         crew.parts.Add(P("back", R("crewmate/back"), "torso", 0.72f, 0.4f, 0.68f, 0.06f, 4, M.Walk, 20, 0));
-        crew.parts.Add(P("front", R("crewmate/front"), "torso", 0.22f, 0.5f, 0.77f, 0.06f, 4, M.Walk, 20, 0.5f));
-        // 정체: 머리 → 아래턱(alt, 혀) + 위턱(alt, 헬멧·바이저·윗니)이 뒤쪽 경첩에서 위로 벌어져 들썩 (사용자: 위턱·아래턱 따로 리깅)
-        crew.parts.Add(P("head", R("crewmate/head"), "torso", 0.07f, 0.4f, 0.53f, 0.86f, 5, M.Sway, 4, 0, 1.5f, 0, 0.72f, alt: S("boss_crewmate/lower")));
-        crew.parts.Add(P("upper", null, "head", 0.8f, 0.62f, 0.88f, 0.8f, 6, M.Sway, 10, 0, 2.5f, -28, alt: S("boss_crewmate/upper")));
+        crew.parts.Add(P("front", R("crewmate/front"), "torso", 0.22f, 0.5f, 0.77f, 0.06f, 4, M.Walk, 20, 0.5f, 1, 0, 1.1f));
+        // 정체: 아래턱(혀) + 위턱(헬멧·바이저·윗니)을 따로 리깅 (사용자) — 위턱은 아래턱 뒤쪽 경첩에 붙음
+        crew.parts.Add(P("head", R("crewmate/head"), "torso", 0.07f, 0.4f, 0.53f, 0.86f, 5, M.Sway, 4, 0, 1.5f, 0, 0.72f, show: Sh.Closed));
+        crew.parts.Add(P("jawLow", S("boss_crewmate/lower"), "torso", 0.1f, 0.42f, 0.62f, 0.9f, 5, M.Sway, 4, 0, 1.5f, 0, 0.42f, show: Sh.Open, open: 6));
+        crew.parts.Add(P("jawUp", S("boss_crewmate/upper"), "jawLow", 0.93f, 0.18f, 0.9f, 0.82f, 6, M.Sway, 5, 0, 4, 0, 1, show: Sh.Open, open: -40));
         lib.entries.Add(crew);
 
         EditorUtility.SetDirty(lib);

@@ -690,7 +690,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: c7d309ae84a765e4daff9439d244d540, type: 3}
       alt: {fileID: 0}
       parent: 
-      at: {x: 0, y: 0.95}
+      at: {x: 0, y: 0.817}
       pivot: {x: 0.5, y: 0.5}
       angle: 0
       scale: 1
@@ -738,7 +738,7 @@ MonoBehaviour:
       at: {x: 0.28, y: 0.5}
       pivot: {x: 0.77, y: 0.06}
       angle: 0
-      scale: 1
+      scale: 1.1
       flipX: 0
       order: 1
       far: 1
@@ -768,7 +768,7 @@ MonoBehaviour:
       at: {x: 0.22, y: 0.5}
       pivot: {x: 0.77, y: 0.06}
       angle: 0
-      scale: 1
+      scale: 1.1
       flipX: 0
       order: 4
       far: 0
@@ -778,7 +778,7 @@ MonoBehaviour:
       speed: 1
     - name: head
       sprite: {fileID: 21300000, guid: c8a8522af13452449b628d1b5f54a616, type: 3}
-      alt: {fileID: 21300000, guid: de35ff0ae0bba264c8258177b6e1b40e, type: 3}
+      alt: {fileID: 0}
       parent: torso
       at: {x: 0.07, y: 0.4}
       pivot: {x: 0.53, y: 0.86}
@@ -791,18 +791,39 @@ MonoBehaviour:
       amp: 4
       phase: 0
       speed: 1.5
-    - name: upper
-      sprite: {fileID: 0}
-      alt: {fileID: 21300000, guid: d21d75f34e8a2d74b815141b6e83412b, type: 3}
-      parent: head
-      at: {x: 0.8, y: 0.62}
-      pivot: {x: 0.88, y: 0.8}
-      angle: -28
+      show: 1
+      open: 0
+    - name: jawLow
+      sprite: {fileID: 21300000, guid: de35ff0ae0bba264c8258177b6e1b40e, type: 3}
+      alt: {fileID: 0}
+      parent: torso
+      at: {x: 0.1, y: 0.42}
+      pivot: {x: 0.62, y: 0.9}
+      angle: 0
+      scale: 0.42
+      flipX: 0
+      order: 5
+      far: 0
+      move: 3
+      amp: 4
+      phase: 0
+      speed: 1.5
+      show: 2
+      open: 6
+    - name: jawUp
+      sprite: {fileID: 21300000, guid: d21d75f34e8a2d74b815141b6e83412b, type: 3}
+      alt: {fileID: 0}
+      parent: jawLow
+      at: {x: 0.93, y: 0.18}
+      pivot: {x: 0.9, y: 0.82}
+      angle: 0
       scale: 1
       flipX: 0
       order: 6
       far: 0
       move: 3
-      amp: 10
+      amp: 5
       phase: 0
-      speed: 2.5
+      speed: 4
+      show: 2
+      open: -40

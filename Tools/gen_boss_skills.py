@@ -75,9 +75,10 @@ SKILLS = [
     ('R_BabyGremlins', ('새끼 그렘린', 'Baby Gremlins'), 'Summon', 100, 2, 6, 0.9, 2, 'br_mini_gremlin', 80, '#70a050', None, None, 0, 0, 0, '', '[발악1] 등에서 새끼 그렘린 6마리, 2초간 돌아다님'),
     ('R_Microwave', ('전자레인지 투하', 'Microwave Drop'), 'Drop', 330, 3, 1, 1.3, 0.4, 'br_microwave', 260, '#c0c0c0', ('띵-! 콰광!', 'Ding! KABOOM!'), None, 0, 0, 0, '', '[발악2] 하늘에서 거대 전자레인지 → 폭발'),
     # 97 수상한 우주복 쥐
-    ('R_SirenDrop', ('사이렌 투하', 'Siren Drop'), 'Drop', 170, 1, 4, 0.8, 1.0, 'br_siren', 90, '#ff4040', ('삐뽀삐뽀', 'Wee-woo'), None, 5, 1.5, 0, '', '[스킬] 사이렌 4개 낙하, 둘레 1초 기절'),
-    ('R_TentacleGulp', ('촉수 삼키기', 'Tentacle Gulp'), 'Swallow', 300, 0, 0, 1.0, 0.6, '-', 0, '#c03030', ('꿀꺽!', 'Gulp!'), None, 3, 0, 0, 'intro', '[발악1·등장] 둘레 쥐를 삼켰다 3초 뒤 뱉음 (인구 그대로)'),
-    ('R_Huddle', ('긴급 회의', 'Emergency Huddle'), 'Global', 0, 2, 0, 1.2, 1.0, 'br_red_button', 90, '#ff3030', ('긴급 회의!', 'EMERGENCY HUDDLE!'), None, 0, 0, 0, 'all', '[발악2] 빨간 버튼 → 맵의 모든 쥐 2초 멈춤'),
+    # 2026-10-23 웹 미리보기(BossRework/rig_web/crewmate.html)로 다시 만듦: 촉수 = 혀 촉수 6갈래 (예전엔 블랙홀 소용돌이), 긴급 회의 = 버튼 누르기 + 회의 화면, 사이렌 = 경보 깜빡
+    ('R_SirenDrop', ('사이렌 투하', 'Siren Drop'), 'Drop', 170, 1, 4, 0.8, 1.0, 'br_siren', 90, '#ff4040', ('삐뽀삐뽀', 'Wee-woo'), None, 5, 1.5, 0, 'alarm', '[스킬] 사이렌 4개 낙하, 둘레 1초 기절 · 남아 있는 동안 화면 붉게 깜빡'),
+    ('R_TentacleGulp', ('촉수 삼키기', 'Tentacle Gulp'), 'Swallow', 300, 0, 6, 1.0, 0.6, 'br_crew_tongue', 0, '#c03030', ('꿀꺽!', 'Gulp!'), None, 3, 0, 0, 'intro', '[발악1·등장] 머리가 열리고 혀 촉수 6갈래가 둘레 쥐를 잡아 입으로 → 3초 뒤 한 마리씩 뱉음 (인구 그대로)'),
+    ('R_Huddle', ('긴급 회의', 'Emergency Huddle'), 'Meeting', 0, 2, 0, 1.2, 1.0, 'br_red_button', 140, '#ff3030', ('긴급 회의!', 'EMERGENCY HUDDLE!'), None, 0, 0, 0, 'all,face:br_crew_face', '[발악2] 빨간 버튼을 폴짝 눌러 긴급 회의 화면 → 맵의 모든 쥐 2초 멈춤'),
 ]
 
 # (boss_id, 이름(한,영), 층, 같은 층 예전 보스 id(체력·치즈·속도·색), 쿨타임, 발악1, 발악2)

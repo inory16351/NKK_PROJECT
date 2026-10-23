@@ -524,3 +524,11 @@ NKK.BalanceProbe.RunQueue();   // 끝나면 NKK.BalanceProbe.RowsCsv() / Report(
 - (밤) 사용자 Play 확인 → "팝캣 목 · 상어고양이 다리 몸통 아래로 내려간 것만" → 팝 캣 머리 피벗 0.62→0.75 · 상어 다리 통 그림 기준 크기·자리 다시 + 가까운 다리 몸통 위 (README 끝).
 - (밤) 사용자 "이 두 개도 웹 빌드에 먼저" → 팝 캣(고양이 리그 웹 흉내, 참고 그림에 머리 낮춤 + 목 짧게, 늘 뻐끔 · 벌린 입 턱 잘림 고침) · 상어(다리 관절 몸 안쪽, 먼 다리 뒤에서 내딛음) → 사용자 확인 → 유니티 반영.
 - (밤) 보스 행동 명세 → 선택지 질문 → 기획서 세션(boss-plan-doc, 기획서/20261022_..._정승운) → 이름 표 확정 → 구현 1차: Boss.Rework.cs 패턴 9종 + opt, Rat 삼켜짐/멋대로 걷기/방독면, gen_boss_skills.py 기술 48 · 보스 17 층 배치. 컴파일 OK, Play 확인 전.
+
+### 9-24. 2026-10-23 — 97층 우주복 쥐 다시 (웹 미리보기 먼저)
+- 사용자 "지금 어몽어스 패러디 이상함. 스킬도 블랙홀 복붙이고" → (작업 중) "웹에 리깅 형태 띄우고 모든 액션 재현 가능하게 해서 테스트 후에 게임에 넣어".
+- 원인: ① 머리(head alt = lower, upper alt)가 `attacking || hitT > 0` 일 때 바뀜 → 맞을 때마다 괴물 입이 깜빡, 열린 머리는 head 피벗을 그대로 써서 크기·자리 어긋남 ② Swallow = `ShowVortex`(블랙홀) + 쥐가 제자리에서 사라짐, 만들어 둔 tongue 그림 안 씀 ③ 긴급 회의 = Global(화면 깜빡 + 기절)뿐, 기존 회의 컷씬(BossCutscene.PlayMeeting) 안 씀.
+- 웹 `UnityResources/Rats/BossRework/rig_web/crewmate.html` (`preview_start boss-rig-web` → /rig_web/crewmate.html): BossPartRig 계산 그대로 + RatRig 로 쥐·변장 쥐 · 버튼 = 처음부터(합류→변장→계단 닿음→변신) · 평타 2 · 맞음 · 사이렌 · 촉수 · 긴급 회의 · 죽음 · 자동 · 빠르기 · 머리 열림 손으로 · 파츠 표 고치기 → BossPartArtBuilder 줄. 그림은 `rig_web/crewmate/` 복사본.
+- 유니티: BossPartArt.Part `show`·`open`, BossPartRig `open`·`openSwap`·`HasOpen` · Boss.Crew.cs (머리 열림·입 자리·촉수·Meeting·alarm) · Rat.Boss `Grab`·HoldAt 높이·보는 쪽으로 뱉기 · 표 R_SirenDrop opt alarm · R_TentacleGulp count 6 sprite br_crew_tongue · R_Huddle pattern Meeting size 140 opt all,face:br_crew_face (gen_boss_skills.py → xlsx2json, BossTable.json 만 바뀜) · Game 씬 memeSprites 에 br_crew_* 2줄 (YAML, guid 새로 만든 .meta).
+- (이어서) 사용자 "왜 공중에 떠 있지" → 몸통 at.y 0.95 → 0.817 (뒷발 끝 = 바닥) + 앞다리 1.1배 (웹·빌더·에셋).
+- (이어서) "유니티 켜서 넣어" → 에디터 실행, 컴파일 OK, br_crew_* 임포트·아틀라스 자동 등록 · Play: TestSpawn(39) + hp 1e15 + BaseTimeScale 0.35 → 등장 촉수 · 사이렌 · 긴급 회의 모두 정상, 콘솔 오류 0. (켤 때 유니티가 `Assets/_Recovery/0 (1).unity` 를 만듦 — 건드리지 않음)

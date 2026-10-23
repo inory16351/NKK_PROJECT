@@ -10,22 +10,32 @@ namespace NKK.Rats
     public partial class Rat
     {
         Sprite headSwap; float headSwapT, burnT; bool burnTinted;
-        [HideInInspector] public float swallowT, wanderT, gasImmuneT;
-        float wanderTurn;
+        [HideInInspector] public float swallowT, wanderT, gasImmuneT, grabT;
+        float wanderTurn, spitFace;
         public bool Swallowed => swallowT > 0;
+        public bool Grabbed => grabT > 0;
+
+        // t 초 동안 촉수에 잡힘: 보스가 매 프레임 x·y·z 를 정함 (입으로 끌려감, 보임) → 보통 Swallow 로 이어짐
+        public void Grab(float t)
+        {
+            if (UltOn || swallowT > 0) return;
+            Stun(t); grabT = Mathf.Max(grabT, t); vx = vy = vz = 0; rushT = 0;
+        }
 
         // t 초 동안 삼켜짐 (보스가 매 프레임 HoldAt 으로 입 자리를 알려 줌). 끝나면 Spit
         public void Swallow(float t, float px, float py)
         {
             if (UltOn) return;
-            swallowT = Mathf.Max(swallowT, t); x = px; y = py; vx = vy = vz = 0; z = 0; rushT = 0; HideBody = true;
+            grabT = 0; swallowT = Mathf.Max(swallowT, t); x = px; y = py; vx = vy = vz = 0; z = 0; rushT = 0; HideBody = true;
         }
-        public void HoldAt(float px, float py) { if (swallowT > 0) { x = px; y = py; } }
+        // 입 자리 (pz = 높이, face = 보스가 보는 쪽 → 그쪽으로 뱉음, 0 = 아무 쪽)
+        public void HoldAt(float px, float py, float pz = 0, float face = 0) { if (swallowT > 0) { x = px; y = py; z = pz; spitFace = face; } }
 
         void Spit()
         {
             swallowT = 0; HideBody = false;
-            Ragdoll(Random.Range(0, Mathf.PI * 2), Random.Range(260f, 420f), Random.Range(380f, 560f), 0.8f);
+            float a = spitFace == 0 ? Random.Range(0, Mathf.PI * 2) : (spitFace > 0 ? 0 : Mathf.PI) + Random.Range(-0.9f, 0.9f);
+            Ragdoll(a, Random.Range(260f, 420f), Random.Range(380f, 560f), 0.8f);
         }
 
         // t 초 동안 조종 불가로 멋대로 돌아다님 (머리 = s, 없으면 그대로)
@@ -39,6 +49,7 @@ namespace NKK.Rats
         bool BossStateTick(float dt)
         {
             gasImmuneT = Mathf.Max(0, gasImmuneT - dt);
+            if (grabT > 0) { grabT -= dt; vx = vy = vz = 0; noBreed = Mathf.Max(noBreed, 0.3f); return true; }      // 촉수가 끌고 감 (보스가 자리를 정함)
             if (swallowT > 0)
             {
                 if ((swallowT -= dt) <= 0) Spit();

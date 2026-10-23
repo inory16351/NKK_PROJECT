@@ -1728,7 +1728,12 @@ namespace NKK.Hazards
             transform.position = World.ToUnity(x + jx, y, z);
             if (Cat) catRig.headReplace = attacking && atkType == "Orbital_Laser" && State == BState.Fight ? laserHeadSprite : ReworkHead() ?? CatHead2();      // 홈랜더: 빨간 눈
             if (Cat) catRig.Apply(MakeCatPose(), growK, face, sq, World.SortOrder(y), 0, State == BState.Dying ? rot : 0);
-            else if (Part) partRig.Apply(walk, Mathf.Sqrt(vx * vx + vy * vy) > 12, attacking || hitT > 0 || State == BState.Dying, growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), State == BState.Dying ? 6 : 0);
+            else if (Part)
+            {
+                ApplyHeadOpen();          // 우주복 쥐 괴물 머리 (Boss.Crew.cs)
+                partRig.Apply(walk, Mathf.Sqrt(vx * vx + vy * vy) > 12, attacking || hitT > 0 || State == BState.Dying, growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), State == BState.Dying ? 6 : 0);
+                UpdateMouth();
+            }
             else rig.Apply(MakePose(), growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), 1);
             ApplyForm();          // 식빵 · 지느러미 등 그림 한 장 모습 (Boss.Rework.cs)
             UpdateMarks(Time.deltaTime);

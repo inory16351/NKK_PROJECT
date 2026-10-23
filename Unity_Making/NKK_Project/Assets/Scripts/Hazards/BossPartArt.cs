@@ -11,6 +11,7 @@ namespace NKK.Hazards
     public class BossPartArt : ScriptableObject
     {
         public enum Move { None, Walk, Bob, Sway, Spin, Recoil, Wiggle }
+        public enum Show { Always, Closed, Open }
 
         [Serializable]
         public class Part
@@ -30,6 +31,8 @@ namespace NKK.Hazards
             [Tooltip("움직임 크기 (각도 ° · Bob·Recoil 은 픽셀)")] public float amp;
             [Tooltip("위상 (0~1, 다리마다 엇갈리게)")] public float phase;
             [Tooltip("빠르기 배율")] public float speed = 1;
+            [Tooltip("보임: Always 늘 · Closed 머리가 닫혀 있을 때만 · Open 머리가 열렸을 때만 (우주복 쥐 괴물 머리, BossPartRig.open)")] public Show show;
+            [Tooltip("머리 열림 1 일 때 더하는 각도 (°, 위턱이 경첩에서 들림)")] public float open;
         }
 
         [Serializable]

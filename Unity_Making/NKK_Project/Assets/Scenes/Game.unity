@@ -38548,6 +38548,10 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 9a4a08fa59d0b7045a714e8c33cae6b6, type: 3}
   - name: br_club
     sprite: {fileID: 21300000, guid: 013371eb13c21bc40b20a1effc0ea9fe, type: 3}
+  - name: br_crew_tongue
+    sprite: {fileID: 21300000, guid: 7ce64b3ac3b24669a5d6c9de1e5f81e8, type: 3}
+  - name: br_crew_face
+    sprite: {fileID: 21300000, guid: 8ecb39d403974b63ae37656ae08a5ecd, type: 3}
   - name: br_dino_head
     sprite: {fileID: 21300000, guid: 6d25a143aedecbf499026ac4d1ce5d76, type: 3}
   - name: br_dino_sit

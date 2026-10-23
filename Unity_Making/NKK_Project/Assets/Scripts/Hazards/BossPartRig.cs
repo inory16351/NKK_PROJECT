@@ -13,7 +13,9 @@ namespace NKK.Hazards
         [Tooltip("먼 쪽 파츠 색")] public Color farColor = new(0.78f, 0.76f, 0.77f);
         [Tooltip("멈춰 있을 때 Walk 파츠 흔들림 (걸을 때 대비)")] public float idleWalk = 0.15f;
         [Tooltip("Recoil 파츠 사격: 초당 발사 수 (그림 깜빡) · 반동 각도 흔들림 (°)")] public float recoilRate = 12, recoilTilt = 4;
+        [Tooltip("머리 열림이 이 값 이상이면 닫힘 파츠 대신 열림 파츠를 보임")] public float openSwap = 0.1f;
         [HideInInspector] public bool still;      // 미리보기용: 시간에 따른 움직임 끔 (BossRigPreview)
+        [HideInInspector] public float open;      // 머리 열림 0~1 (Boss 가 매 프레임 정함, 우주복 쥐 — 웹 미리보기 BossRework/rig_web/crewmate.html)
 
         class J { public BossPartArt.Part p; public Transform j; public SpriteRenderer r; public Vector3 basePos; }
         readonly List<J> joints = new();
@@ -25,6 +27,7 @@ namespace NKK.Hazards
 
         public float Height => art != null ? art.height : 200;
         public BossPartArt.Entry Art => art;
+        public bool HasOpen { get; private set; }      // 열리는 머리가 있음 (닫힘·열림 파츠)
 
         static Vector3 SpritePoint(Sprite s, Vector2 tl) => s ? new Vector3((tl.x * s.rect.width - s.pivot.x) / 100f, ((1 - tl.y) * s.rect.height - s.pivot.y) / 100f, 0) : Vector3.zero;
 
@@ -33,7 +36,8 @@ namespace NKK.Hazards
             art = e; group = GetComponent<SortingGroup>();
             if (!visual) { visual = new GameObject("Visual").transform; visual.SetParent(transform, false); }
             for (int i = visual.childCount - 1; i >= 0; i--) Destroy(visual.GetChild(i).gameObject);
-            joints.Clear(); byName.Clear();
+            joints.Clear(); byName.Clear(); open = 0;
+            HasOpen = e.parts.Exists(p => p.show != BossPartArt.Show.Always);
             if (e.parts.Count == 0 || !e.parts[0].sprite) return;
             var root = e.parts[0].sprite;
             unit = e.length * scale / root.rect.width;
@@ -110,6 +114,8 @@ namespace NKK.Hazards
                         }
                         break;
                 }
+                a += p.open * open;
+                if (p.show != BossPartArt.Show.Always) { bool vis = (p.show == BossPartArt.Show.Open) == (open >= openSwap); if (j.r.enabled != vis) j.r.enabled = vis; }
                 if (shake > 0) a += Random.Range(-shake, shake);
                 j.j.localRotation = Quaternion.Euler(0, 0, a);
                 j.j.localPosition = j.basePos + new Vector3(dx, dy, 0);      // 그림은 왼쪽을 봄 → dx + = 뒤로
