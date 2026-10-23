@@ -265,7 +265,8 @@ namespace NKK.Hazards
             }
             SetVisible(true);
             baseColors.Clear();
-            foreach (var r in (row.IsCat ? (Component)catRig : row.IsPart ? partRig : rig).GetComponentsInChildren<SpriteRenderer>(true)) baseColors.Add((r, r.color));
+            if (row.IsPart) partRig.BaseColors(baseColors);
+            else foreach (var r in (row.IsCat ? (Component)catRig : rig).GetComponentsInChildren<SpriteRenderer>(true)) baseColors.Add((r, r.color));
             Current = this;
         }
 

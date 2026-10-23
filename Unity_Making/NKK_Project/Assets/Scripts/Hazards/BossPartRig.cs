@@ -69,6 +69,12 @@ namespace NKK.Hazards
         }
         public SpriteRenderer Renderer(string part) => byName.TryGetValue(part, out var j) ? j.r : null;
 
+        // 파츠 원래 색 (먼 쪽 = farColor): Boss 가 실루엣·금빛·투명을 칠한 뒤 되돌리는 기준. 렌더러의 지금 색을 읽으면 칠해 둔 어두운 색이 기준이 될 수 있음
+        public void BaseColors(List<(SpriteRenderer r, Color c)> into)
+        {
+            foreach (var j in joints) if (j.r) into.Add((j.r, j.p.far ? farColor : Color.white));
+        }
+
         // walk = 걸음 위상 (라디안), moving = 걷는 중, alt = 두 번째 그림, rot = 날아갈 때 회전 (라디안), sq = 통통 납작
         public void Apply(float walk, bool moving, bool alt, float scale, int face, float rot, float sq, int sortOrder, float shake = 0)
         {

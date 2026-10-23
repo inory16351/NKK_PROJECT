@@ -219,7 +219,8 @@ namespace NKK.Hazards
         void RefreshBaseColors()
         {
             baseColors.Clear();
-            foreach (var r in (Cat ? (Component)catRig : Part ? partRig : rig).GetComponentsInChildren<SpriteRenderer>(true)) baseColors.Add((r, r.color));
+            if (Part && partRig) partRig.BaseColors(baseColors);
+            else foreach (var r in (Cat ? (Component)catRig : rig).GetComponentsInChildren<SpriteRenderer>(true)) baseColors.Add((r, r.color));
         }
     }
 }

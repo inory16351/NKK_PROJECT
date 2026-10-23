@@ -116,7 +116,7 @@ namespace NKK.Hazards
             EnsurePartRig(); riding = true;
             partRig.Build(art, 1);
             SetVisible(true);
-            baseColors.Clear(); foreach (var r in partRig.GetComponentsInChildren<SpriteRenderer>(true)) baseColors.Add((r, r.color));
+            baseColors.Clear(); partRig.BaseColors(baseColors);
             FxManager.I?.Anim("poof", x, y, 0, 3); FxManager.I?.Shake(0.4f);
         }
 
