@@ -1,0 +1,981 @@
+{
+ "Human": [
+  {
+   "human_id": 90001,
+   "human_name": "연구원",
+   "human_name_sk": 3390001,
+   "code_id": "researcher",
+   "hp_mul": 3.0,
+   "value_mul": 6.0,
+   "speed_mul": 1.0,
+   "from_floor": 1,
+   "asset_folder": "Humans/Parts/researcher",
+   "to_floor": 30
+  },
+  {
+   "human_id": 90002,
+   "human_name": "청소부",
+   "human_name_sk": 3390002,
+   "code_id": "janitor",
+   "hp_mul": 3.5,
+   "value_mul": 6.0,
+   "speed_mul": 0.9,
+   "from_floor": 1,
+   "asset_folder": "Humans/Parts/janitor",
+   "to_floor": 30
+  },
+  {
+   "human_id": 90003,
+   "human_name": "경비원",
+   "human_name_sk": 3390003,
+   "code_id": "guard",
+   "hp_mul": 5.0,
+   "value_mul": 9.0,
+   "speed_mul": 1.1,
+   "from_floor": 3,
+   "asset_folder": "Humans/Parts/guard",
+   "to_floor": 0
+  },
+  {
+   "human_id": 90004,
+   "human_name": "요리사",
+   "human_name_sk": 3390004,
+   "code_id": "cook",
+   "hp_mul": 4.0,
+   "value_mul": 8.0,
+   "speed_mul": 0.95,
+   "from_floor": 2,
+   "asset_folder": "Humans/Parts/cook",
+   "to_floor": 30
+  },
+  {
+   "human_id": 90011,
+   "human_name": "털 범벅 집사 연구원",
+   "human_name_sk": 3390011,
+   "code_id": "catres",
+   "hp_mul": 3.0,
+   "value_mul": 6.0,
+   "speed_mul": 1.0,
+   "from_floor": 16,
+   "asset_folder": "Humans/Parts/catres",
+   "to_floor": 30
+  },
+  {
+   "human_id": 90012,
+   "human_name": "수의사",
+   "human_name_sk": 3390012,
+   "code_id": "vet",
+   "hp_mul": 3.5,
+   "value_mul": 6.5,
+   "speed_mul": 1.05,
+   "from_floor": 16,
+   "asset_folder": "Humans/Parts/vet",
+   "to_floor": 30
+  },
+  {
+   "human_id": 90013,
+   "human_name": "사료 배달원",
+   "human_name_sk": 3390013,
+   "code_id": "feeder",
+   "hp_mul": 4.0,
+   "value_mul": 7.0,
+   "speed_mul": 1.1,
+   "from_floor": 16,
+   "asset_folder": "Humans/Parts/feeder",
+   "to_floor": 30
+  },
+  {
+   "human_id": 90014,
+   "human_name": "알레르기 연구원",
+   "human_name_sk": 3390014,
+   "code_id": "allergy",
+   "hp_mul": 3.0,
+   "value_mul": 6.0,
+   "speed_mul": 0.95,
+   "from_floor": 16,
+   "asset_folder": "Humans/Parts/allergy",
+   "to_floor": 30
+  },
+  {
+   "human_id": 90015,
+   "human_name": "고생물학자",
+   "human_name_sk": 3390015,
+   "code_id": "paleo",
+   "hp_mul": 3.5,
+   "value_mul": 6.5,
+   "speed_mul": 1.0,
+   "from_floor": 31,
+   "asset_folder": "Humans/Parts/paleo",
+   "to_floor": 45
+  },
+  {
+   "human_id": 90016,
+   "human_name": "조련사",
+   "human_name_sk": 3390016,
+   "code_id": "trainer",
+   "hp_mul": 4.5,
+   "value_mul": 8.0,
+   "speed_mul": 1.1,
+   "from_floor": 31,
+   "asset_folder": "Humans/Parts/trainer",
+   "to_floor": 45
+  },
+  {
+   "human_id": 90017,
+   "human_name": "견학 어린이",
+   "human_name_sk": 3390017,
+   "code_id": "kid",
+   "hp_mul": 2.5,
+   "value_mul": 5.0,
+   "speed_mul": 1.2,
+   "from_floor": 31,
+   "asset_folder": "Humans/Parts/kid",
+   "to_floor": 45
+  },
+  {
+   "human_id": 90018,
+   "human_name": "매직 워드 프로그래머",
+   "human_name_sk": 3390018,
+   "code_id": "nedry",
+   "hp_mul": 3.0,
+   "value_mul": 7.0,
+   "speed_mul": 0.9,
+   "from_floor": 31,
+   "asset_folder": "Humans/Parts/nedry",
+   "to_floor": 45
+  },
+  {
+   "human_id": 90019,
+   "human_name": "현장소장",
+   "human_name_sk": 3390019,
+   "code_id": "harold",
+   "hp_mul": 4.0,
+   "value_mul": 8.0,
+   "speed_mul": 0.95,
+   "from_floor": 46,
+   "asset_folder": "Humans/Parts/harold",
+   "to_floor": 60
+  },
+  {
+   "human_id": 90020,
+   "human_name": "신호수",
+   "human_name_sk": 3390020,
+   "code_id": "flagger",
+   "hp_mul": 4.0,
+   "value_mul": 7.0,
+   "speed_mul": 1.1,
+   "from_floor": 46,
+   "asset_folder": "Humans/Parts/flagger",
+   "to_floor": 60
+  },
+  {
+   "human_id": 90021,
+   "human_name": "믹스커피 인부",
+   "human_name_sk": 3390021,
+   "code_id": "coffeeman",
+   "hp_mul": 4.5,
+   "value_mul": 7.5,
+   "speed_mul": 1.0,
+   "from_floor": 46,
+   "asset_folder": "Humans/Parts/coffeeman",
+   "to_floor": 60
+  },
+  {
+   "human_id": 90022,
+   "human_name": "철근 작업자",
+   "human_name_sk": 3390022,
+   "code_id": "rebar",
+   "hp_mul": 5.0,
+   "value_mul": 8.5,
+   "speed_mul": 1.0,
+   "from_floor": 46,
+   "asset_folder": "Humans/Parts/rebar",
+   "to_floor": 60
+  },
+  {
+   "human_id": 90023,
+   "human_name": "해양학자",
+   "human_name_sk": 3390023,
+   "code_id": "oceanog",
+   "hp_mul": 3.5,
+   "value_mul": 6.5,
+   "speed_mul": 1.0,
+   "from_floor": 61,
+   "asset_folder": "Humans/Parts/oceanog",
+   "to_floor": 75
+  },
+  {
+   "human_id": 90024,
+   "human_name": "다이버",
+   "human_name_sk": 3390024,
+   "code_id": "diver",
+   "hp_mul": 4.0,
+   "value_mul": 7.0,
+   "speed_mul": 1.05,
+   "from_floor": 61,
+   "asset_folder": "Humans/Parts/diver",
+   "to_floor": 75
+  },
+  {
+   "human_id": 90025,
+   "human_name": "생선 경매사",
+   "human_name_sk": 3390025,
+   "code_id": "auctioneer",
+   "hp_mul": 4.5,
+   "value_mul": 9.0,
+   "speed_mul": 1.0,
+   "from_floor": 61,
+   "asset_folder": "Humans/Parts/auctioneer",
+   "to_floor": 75
+  },
+  {
+   "human_id": 90026,
+   "human_name": "소금 뿌리는 사장",
+   "human_name_sk": 3390026,
+   "code_id": "saltbae",
+   "hp_mul": 4.0,
+   "value_mul": 8.0,
+   "speed_mul": 1.1,
+   "from_floor": 61,
+   "asset_folder": "Humans/Parts/saltbae",
+   "to_floor": 75
+  },
+  {
+   "human_id": 90027,
+   "human_name": "노병 해설사",
+   "human_name_sk": 3390027,
+   "code_id": "veteran",
+   "hp_mul": 3.5,
+   "value_mul": 7.0,
+   "speed_mul": 0.85,
+   "from_floor": 76,
+   "asset_folder": "Humans/Parts/veteran",
+   "to_floor": 90
+  },
+  {
+   "human_id": 90028,
+   "human_name": "군복 재연 배우",
+   "human_name_sk": 3390028,
+   "code_id": "reenactor",
+   "hp_mul": 4.5,
+   "value_mul": 8.0,
+   "speed_mul": 1.1,
+   "from_floor": 76,
+   "asset_folder": "Humans/Parts/reenactor",
+   "to_floor": 90
+  },
+  {
+   "human_id": 90029,
+   "human_name": "견학 학생",
+   "human_name_sk": 3390029,
+   "code_id": "student",
+   "hp_mul": 3.0,
+   "value_mul": 6.0,
+   "speed_mul": 1.15,
+   "from_floor": 76,
+   "asset_folder": "Humans/Parts/student",
+   "to_floor": 90
+  },
+  {
+   "human_id": 90030,
+   "human_name": "통신병",
+   "human_name_sk": 3390030,
+   "code_id": "radioman",
+   "hp_mul": 4.0,
+   "value_mul": 7.5,
+   "speed_mul": 1.0,
+   "from_floor": 76,
+   "asset_folder": "Humans/Parts/radioman",
+   "to_floor": 90
+  },
+  {
+   "human_id": 90031,
+   "human_name": "관제사",
+   "human_name_sk": 3390031,
+   "code_id": "controller",
+   "hp_mul": 3.5,
+   "value_mul": 7.0,
+   "speed_mul": 1.0,
+   "from_floor": 91,
+   "asset_folder": "Humans/Parts/controller",
+   "to_floor": 0
+  },
+  {
+   "human_id": 90032,
+   "human_name": "바나나 우주비행사",
+   "human_name_sk": 3390032,
+   "code_id": "astro_banana",
+   "hp_mul": 4.5,
+   "value_mul": 8.5,
+   "speed_mul": 1.05,
+   "from_floor": 91,
+   "asset_folder": "Humans/Parts/astro_banana",
+   "to_floor": 0
+  },
+  {
+   "human_id": 90033,
+   "human_name": "조명 우주비행사",
+   "human_name_sk": 3390033,
+   "code_id": "astro_set",
+   "hp_mul": 4.5,
+   "value_mul": 8.5,
+   "speed_mul": 1.05,
+   "from_floor": 91,
+   "asset_folder": "Humans/Parts/astro_set",
+   "to_floor": 0
+  },
+  {
+   "human_id": 90034,
+   "human_name": "커피 쏟는 관제소장",
+   "human_name_sk": 3390034,
+   "code_id": "flightdir",
+   "hp_mul": 4.0,
+   "value_mul": 9.0,
+   "speed_mul": 0.95,
+   "from_floor": 91,
+   "asset_folder": "Humans/Parts/flightdir",
+   "to_floor": 0
+  }
+ ],
+ "Human_Line": [
+  {
+   "line_id": 91001,
+   "human_id": 90001,
+   "situation": "Panic",
+   "text": "쥐, 쥐다아아!!",
+   "text_sk": 3491001
+  },
+  {
+   "line_id": 91002,
+   "human_id": 90001,
+   "situation": "Panic",
+   "text": "실험체가 탈출했어!",
+   "text_sk": 3491002
+  },
+  {
+   "line_id": 91003,
+   "human_id": 90001,
+   "situation": "Panic",
+   "text": "꺄아아악!",
+   "text_sk": 3491003
+  },
+  {
+   "line_id": 91004,
+   "human_id": 90001,
+   "situation": "Panic",
+   "text": "내 논문!!",
+   "text_sk": 3491004
+  },
+  {
+   "line_id": 91005,
+   "human_id": 90002,
+   "situation": "Panic",
+   "text": "으악 쥐!!",
+   "text_sk": 3491005
+  },
+  {
+   "line_id": 91006,
+   "human_id": 90002,
+   "situation": "Panic",
+   "text": "대걸레 어디 갔지?!",
+   "text_sk": 3491006
+  },
+  {
+   "line_id": 91007,
+   "human_id": 90002,
+   "situation": "Panic",
+   "text": "퇴근할래…",
+   "text_sk": 3491007
+  },
+  {
+   "line_id": 91008,
+   "human_id": 90003,
+   "situation": "Panic",
+   "text": "거, 거기 서!",
+   "text_sk": 3491008
+  },
+  {
+   "line_id": 91009,
+   "human_id": 90003,
+   "situation": "Panic",
+   "text": "지원 요청!!",
+   "text_sk": 3491009
+  },
+  {
+   "line_id": 91010,
+   "human_id": 90003,
+   "situation": "Panic",
+   "text": "나 무서운 거 싫어!!",
+   "text_sk": 3491010
+  },
+  {
+   "line_id": 91011,
+   "human_id": 90004,
+   "situation": "Panic",
+   "text": "내 주방에 쥐가?!",
+   "text_sk": 3491011
+  },
+  {
+   "line_id": 91012,
+   "human_id": 90004,
+   "situation": "Panic",
+   "text": "위생 점검 망했다!",
+   "text_sk": 3491012
+  },
+  {
+   "line_id": 91013,
+   "human_id": 90004,
+   "situation": "Panic",
+   "text": "으악 쥐다!!",
+   "text_sk": 3491013
+  },
+  {
+   "line_id": 91014,
+   "human_id": 90004,
+   "situation": "Panic",
+   "text": "누가 내 머리 잡아당겨?!",
+   "text_sk": 3491014
+  },
+  {
+   "line_id": 91015,
+   "human_id": 0,
+   "situation": "Hit",
+   "text": "아얏!",
+   "text_sk": 3491015
+  },
+  {
+   "line_id": 91016,
+   "human_id": 0,
+   "situation": "Hit",
+   "text": "물었어!!",
+   "text_sk": 3491016
+  },
+  {
+   "line_id": 91017,
+   "human_id": 0,
+   "situation": "Hit",
+   "text": "저리 가!",
+   "text_sk": 3491017
+  },
+  {
+   "line_id": 91018,
+   "human_id": 0,
+   "situation": "Hit",
+   "text": "히익!",
+   "text_sk": 3491018
+  },
+  {
+   "line_id": 91019,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "으아아아악~!",
+   "text_sk": 3491019
+  },
+  {
+   "line_id": 91020,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "엄마아아~!",
+   "text_sk": 3491020
+  },
+  {
+   "line_id": 91021,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "산재 처리 부탁해요…",
+   "text_sk": 3491021
+  },
+  {
+   "line_id": 91022,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "퇴사하겠습니다아아!",
+   "text_sk": 3491022
+  },
+  {
+   "line_id": 91023,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "월급 루팡 실패~",
+   "text_sk": 3491023
+  },
+  {
+   "line_id": 91024,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "논문 마감이…!",
+   "text_sk": 3491024
+  },
+  {
+   "line_id": 91025,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "(비명)",
+   "text_sk": 3491025
+  },
+  {
+   "line_id": 91026,
+   "human_id": 0,
+   "situation": "Fly",
+   "text": "이건 계약서에 없었어!!",
+   "text_sk": 3491026
+  },
+  {
+   "line_id": 91027,
+   "human_id": 0,
+   "situation": "Poof",
+   "text": "펑!!",
+   "text_sk": 3491027
+  },
+  {
+   "line_id": 91028,
+   "human_id": 0,
+   "situation": "Poof",
+   "text": "뿅!",
+   "text_sk": 3491028
+  },
+  {
+   "line_id": 91029,
+   "human_id": 0,
+   "situation": "Poof",
+   "text": "퐁!",
+   "text_sk": 3491029
+  },
+  {
+   "line_id": 91030,
+   "human_id": 0,
+   "situation": "Poof",
+   "text": "(퇴근 완료)",
+   "text_sk": 3491030
+  },
+  {
+   "line_id": 91031,
+   "human_id": 0,
+   "situation": "Poof",
+   "text": "(조퇴)",
+   "text_sk": 3491031
+  },
+  {
+   "line_id": 91032,
+   "human_id": 0,
+   "situation": "Item_Hit",
+   "text": "누가 던졌어!",
+   "text_sk": 3491032
+  },
+  {
+   "line_id": 91033,
+   "human_id": 0,
+   "situation": "Item_Hit",
+   "text": "아야야!",
+   "text_sk": 3491033
+  },
+  {
+   "line_id": 91034,
+   "human_id": 0,
+   "situation": "Item_Hit",
+   "text": "실험 장비가!",
+   "text_sk": 3491034
+  },
+  {
+   "line_id": 91035,
+   "human_id": 90003,
+   "situation": "Raid",
+   "text": "저기 있다!!",
+   "text_sk": 3491035
+  },
+  {
+   "line_id": 91036,
+   "human_id": 90003,
+   "situation": "Raid",
+   "text": "전원 포획!!",
+   "text_sk": 3491036
+  },
+  {
+   "line_id": 91037,
+   "human_id": 90003,
+   "situation": "Raid",
+   "text": "한 마리도 놓치지 마!",
+   "text_sk": 3491037
+  },
+  {
+   "line_id": 91038,
+   "human_id": 90003,
+   "situation": "Raid_Catch",
+   "text": "한 마리 잡았다!",
+   "text_sk": 3491038
+  },
+  {
+   "line_id": 91039,
+   "human_id": 90003,
+   "situation": "Raid_Catch",
+   "text": "가만히 있어!",
+   "text_sk": 3491039
+  },
+  {
+   "line_id": 91040,
+   "human_id": 90003,
+   "situation": "Raid_Catch",
+   "text": "포획 완료!",
+   "text_sk": 3491040
+  },
+  {
+   "line_id": 91101,
+   "human_id": 90011,
+   "situation": "Panic",
+   "text": "내 실험복이 털 범벅이야!",
+   "text_sk": 3491101
+  },
+  {
+   "line_id": 91102,
+   "human_id": 90011,
+   "situation": "Panic",
+   "text": "냥이들 밥 줄 시간인데!",
+   "text_sk": 3491102
+  },
+  {
+   "line_id": 91103,
+   "human_id": 90012,
+   "situation": "Panic",
+   "text": "쥐는 진료 안 해요!!",
+   "text_sk": 3491103
+  },
+  {
+   "line_id": 91104,
+   "human_id": 90012,
+   "situation": "Panic",
+   "text": "주사 맞을래?!",
+   "text_sk": 3491104
+  },
+  {
+   "line_id": 91105,
+   "human_id": 90013,
+   "situation": "Panic",
+   "text": "배송 지연이에요!",
+   "text_sk": 3491105
+  },
+  {
+   "line_id": 91106,
+   "human_id": 90013,
+   "situation": "Panic",
+   "text": "사료 봉지 물지 마!",
+   "text_sk": 3491106
+  },
+  {
+   "line_id": 91107,
+   "human_id": 90014,
+   "situation": "Panic",
+   "text": "에, 에취!!",
+   "text_sk": 3491107
+  },
+  {
+   "line_id": 91108,
+   "human_id": 90014,
+   "situation": "Panic",
+   "text": "쥐 알레르기도 있었나?!",
+   "text_sk": 3491108
+  },
+  {
+   "line_id": 91109,
+   "human_id": 90015,
+   "situation": "Panic",
+   "text": "화석 건드리지 마!",
+   "text_sk": 3491109
+  },
+  {
+   "line_id": 91110,
+   "human_id": 90015,
+   "situation": "Panic",
+   "text": "이건 백악기 유물이라고!",
+   "text_sk": 3491110
+  },
+  {
+   "line_id": 91111,
+   "human_id": 90016,
+   "situation": "Panic",
+   "text": "진정해, 진정!",
+   "text_sk": 3491111
+  },
+  {
+   "line_id": 91112,
+   "human_id": 90016,
+   "situation": "Panic",
+   "text": "랩터보다 빠르잖아!",
+   "text_sk": 3491112
+  },
+  {
+   "line_id": 91113,
+   "human_id": 90017,
+   "situation": "Panic",
+   "text": "엄마, 쥐가 막 뛰어!",
+   "text_sk": 3491113
+  },
+  {
+   "line_id": 91114,
+   "human_id": 90017,
+   "situation": "Panic",
+   "text": "와 쥐다! 귀여워!",
+   "text_sk": 3491114
+  },
+  {
+   "line_id": 91115,
+   "human_id": 90018,
+   "situation": "Panic",
+   "text": "아아아, 매직 워드를 말 안 했잖아!",
+   "text_sk": 3491115
+  },
+  {
+   "line_id": 91116,
+   "human_id": 90018,
+   "situation": "Panic",
+   "text": "시스템 다운이다!",
+   "text_sk": 3491116
+  },
+  {
+   "line_id": 91117,
+   "human_id": 90019,
+   "situation": "Panic",
+   "text": "하하… 괜찮아요… (안 괜찮음)",
+   "text_sk": 3491117
+  },
+  {
+   "line_id": 91118,
+   "human_id": 90019,
+   "situation": "Panic",
+   "text": "무재해 기록이 깨진다!",
+   "text_sk": 3491118
+  },
+  {
+   "line_id": 91119,
+   "human_id": 90020,
+   "situation": "Panic",
+   "text": "멈춰! 멈추라고!",
+   "text_sk": 3491119
+  },
+  {
+   "line_id": 91120,
+   "human_id": 90020,
+   "situation": "Panic",
+   "text": "차량 통제 중!",
+   "text_sk": 3491120
+  },
+  {
+   "line_id": 91121,
+   "human_id": 90021,
+   "situation": "Panic",
+   "text": "커피 타는 중이었는데!",
+   "text_sk": 3491121
+  },
+  {
+   "line_id": 91122,
+   "human_id": 90021,
+   "situation": "Panic",
+   "text": "봉지로 젓는 게 국룰인데!",
+   "text_sk": 3491122
+  },
+  {
+   "line_id": 91123,
+   "human_id": 90022,
+   "situation": "Panic",
+   "text": "철근 무너진다!",
+   "text_sk": 3491123
+  },
+  {
+   "line_id": 91124,
+   "human_id": 90022,
+   "situation": "Panic",
+   "text": "안전모 써!",
+   "text_sk": 3491124
+  },
+  {
+   "line_id": 91125,
+   "human_id": 90023,
+   "situation": "Panic",
+   "text": "샘플이 도망간다!",
+   "text_sk": 3491125
+  },
+  {
+   "line_id": 91126,
+   "human_id": 90023,
+   "situation": "Panic",
+   "text": "쥐는 해양 생물이 아냐!",
+   "text_sk": 3491126
+  },
+  {
+   "line_id": 91127,
+   "human_id": 90024,
+   "situation": "Panic",
+   "text": "꼬르륵… 쥐다!",
+   "text_sk": 3491127
+  },
+  {
+   "line_id": 91128,
+   "human_id": 90024,
+   "situation": "Panic",
+   "text": "산소통 물지 마!",
+   "text_sk": 3491128
+  },
+  {
+   "line_id": 91129,
+   "human_id": 90025,
+   "situation": "Panic",
+   "text": "묻고 더블로 가!",
+   "text_sk": 3491129
+  },
+  {
+   "line_id": 91130,
+   "human_id": 90025,
+   "situation": "Panic",
+   "text": "이 쥐 싯가요!",
+   "text_sk": 3491130
+  },
+  {
+   "line_id": 91131,
+   "human_id": 90026,
+   "situation": "Panic",
+   "text": "소금 맛 좀 볼래?!",
+   "text_sk": 3491131
+  },
+  {
+   "line_id": 91132,
+   "human_id": 90026,
+   "situation": "Panic",
+   "text": "내 팔꿈치 각도가!",
+   "text_sk": 3491132
+  },
+  {
+   "line_id": 91133,
+   "human_id": 90027,
+   "situation": "Panic",
+   "text": "내가 왕년에 말이야!",
+   "text_sk": 3491133
+  },
+  {
+   "line_id": 91134,
+   "human_id": 90027,
+   "situation": "Panic",
+   "text": "전시물 만지지 마!",
+   "text_sk": 3491134
+  },
+  {
+   "line_id": 91135,
+   "human_id": 90028,
+   "situation": "Panic",
+   "text": "이건 대본에 없었어!",
+   "text_sk": 3491135
+  },
+  {
+   "line_id": 91136,
+   "human_id": 90028,
+   "situation": "Panic",
+   "text": "엄폐! 엄폐!",
+   "text_sk": 3491136
+  },
+  {
+   "line_id": 91137,
+   "human_id": 90029,
+   "situation": "Panic",
+   "text": "숙제 사진 찍어야 돼!",
+   "text_sk": 3491137
+  },
+  {
+   "line_id": 91138,
+   "human_id": 90029,
+   "situation": "Panic",
+   "text": "선생님, 쥐요!!",
+   "text_sk": 3491138
+  },
+  {
+   "line_id": 91139,
+   "human_id": 90030,
+   "situation": "Panic",
+   "text": "여기는 박물관, 쥐 출현!",
+   "text_sk": 3491139
+  },
+  {
+   "line_id": 91140,
+   "human_id": 90030,
+   "situation": "Panic",
+   "text": "치직… 응답하라!",
+   "text_sk": 3491140
+  },
+  {
+   "line_id": 91141,
+   "human_id": 90031,
+   "situation": "Panic",
+   "text": "휴스턴, 문제가 생겼다!",
+   "text_sk": 3491141
+  },
+  {
+   "line_id": 91142,
+   "human_id": 90031,
+   "situation": "Panic",
+   "text": "궤도 이탈!",
+   "text_sk": 3491142
+  },
+  {
+   "line_id": 91143,
+   "human_id": 90032,
+   "situation": "Panic",
+   "text": "원래 이랬어. (Always has been)",
+   "text_sk": 3491143
+  },
+  {
+   "line_id": 91144,
+   "human_id": 90032,
+   "situation": "Panic",
+   "text": "바나나 내려놔!",
+   "text_sk": 3491144
+  },
+  {
+   "line_id": 91145,
+   "human_id": 90033,
+   "situation": "Panic",
+   "text": "컷! 컷! 다시 찍어!",
+   "text_sk": 3491145
+  },
+  {
+   "line_id": 91146,
+   "human_id": 90033,
+   "situation": "Panic",
+   "text": "조명 넘어진다!",
+   "text_sk": 3491146
+  },
+  {
+   "line_id": 91147,
+   "human_id": 90034,
+   "situation": "Panic",
+   "text": "내 커피!!",
+   "text_sk": 3491147
+  },
+  {
+   "line_id": 91148,
+   "human_id": 90034,
+   "situation": "Panic",
+   "text": "발사 중지!",
+   "text_sk": 3491148
+  }
+ ],
+ "Situation_Type": [
+  {
+   "situation": "Panic"
+  },
+  {
+   "situation": "Hit"
+  },
+  {
+   "situation": "Fly"
+  },
+  {
+   "situation": "Poof"
+  },
+  {
+   "situation": "Item_Hit"
+  },
+  {
+   "situation": "Raid"
+  },
+  {
+   "situation": "Raid_Catch"
+  }
+ ]
+}

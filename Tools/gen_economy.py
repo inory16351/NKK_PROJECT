@@ -64,7 +64,7 @@ def main():
     params = {'RESEARCH': {1: 0}, 'CHEESE_PER_RES': {}, 'T1_CHEESE_TOTAL': round(sum(run_chz[:run_of(TIER_CLEAR[2]) + 1]) * CHEESE_SHARE, -2)}
     # 2~8훈장 승급 연구자료 = 조건 층 연구자료 × TG.RANK_K (2026-10-19: 9~16훈장과 같은 식. 예전 판 일정 방식은 30층까지만 있어 조건 층을 30층 위로 못 옮김)
     #   트리 연구자료(RESEARCH)·노드 치즈(CHEESE_PER_RES) 는 gen_skill_tree 가 승급 비용 · 층대 치즈 수입 비율로 정함
-    promo = {t: res(TG.GATE[t]) * TG.RANK_K for t in range(2, 9)}
+    promo = {t: res(TG.GATE[t]) * TG.rank_k(t) for t in range(2, 9)}
     report = [f'1훈장 트리 치즈 {params["T1_CHEESE_TOTAL"]:,.0f}']
     json.dump(params, io.open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     # 티어 테이블: 승급 연구자료 · 조건 최고 층 (Max_Floor = 도달 층 = 클리어 + 1)

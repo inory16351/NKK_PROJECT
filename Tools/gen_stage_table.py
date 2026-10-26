@@ -15,7 +15,8 @@ FLOORS = 100                        # 2026-10-19 100층 확장 (기획서 Ver.01
 POW0 = 400                          # 적정 전투력 기준 (기획서 지수 100 = 400)
 # 층별로 따로 정한 적정 (사용자 2026-10-13: 1층만 300, 2층부터는 400 기준 그대로. 측정 round8 — 400 이면 첫 판 2층에서, 전체 260 이면 너무 쉬움)
 POW_FIX = {1: 300}
-def pow_need(f): return POW_FIX.get(f, POW0 * diff(f))
+CAL_NEED = {}                       # 실측 보정 곡선 (아래 _curve_calib) — 있으면 적정 = 이 값 그대로
+def pow_need(f): return CAL_NEED[f] if CAL_NEED else POW_FIX.get(f, POW0 * diff(f))
 BOSS_EVERY = 5                      # 보스 층 (5층마다, 사용자 2026-10-12 유지)
 # 보스 층 (보스 테이블 floor 와 같게): 5층마다 90층까지 + 91~100 구간은 94·97·100층 (사용자 2026-10-19)
 BOSS_FLOORS = set(range(5, 91, 5)) | {94, 97, 100}
@@ -40,7 +41,7 @@ def _curve():
     import json
     pw = json.load(open(os.path.join(ROOT, 'Tools', 'probe_results', 'power_by_tier.json'), encoding='utf-8'))
     aug = lambda t, f: 1 + AUG_PER_SLOT * AUG_SLOTS.get(t, 2) if f >= AUG_FROM else 1     # 표에 없는 훈장(1~8) = 기본 2칸 (2026-10-21: 예전 5 → 7·8훈장 허들 34·40층이 증강 5칸 기준이라 거의 안 함 플레이어가 34층에서 못 넘었음)
-    trend = {2: 500.0, **{f: pw[str(t)]['end'] * aug(t, f) / ((TG.T16_R if f == TG.T16_FULL else HURDLE_R) * HURDLE_SPIKE) for t, f in HURDLE.items()}}
+    trend = {2: 500.0, **{f: pw[str(t)]['end'] * TG.rank_mul(t) * aug(t, f) / ((TG.T16_R if f == TG.T16_FULL else HURDLE_R) * HURDLE_SPIKE) for t, f in HURDLE.items()}}
     last = max(trend)
     for f in range(last + 1, FLOORS + 1): trend[f] = trend[last] * TG.POST_G ** (f - last)     # 16훈장 트리 다 찍은 뒤 마무리 구간
     ks = sorted(trend); out = {1: float(POW0), 2: 500.0}
@@ -50,9 +51,7 @@ def _curve():
             sp = HURDLE_SPIKE if f in HURDLE_FLOORS else TG.FINAL_SPIKE if f == FLOORS else BOSS_SPIKE if f in BOSS_FLOORS else 1
             out[f] = trend[a] * g ** (f - a) * sp
     return out
-_NEED = _curve()
 for _f in range(2, FLOORS + 1):
-    DOC_MUL[_f] = _NEED[_f] / _NEED[_f - 1]
     DOC_TYPE[_f] = ('허들' if _f in HURDLE_FLOORS else '어려움' if _f in BOSS_FLOORS
                     else '쉬움' if _f - 1 in HURDLE_FLOORS else '보통')
 DOC_TYPE[1] = '도입'
@@ -65,7 +64,8 @@ DOC_PLAYER = [100, 127, 161, 205, 273, 402, 601, 836, 1120, 1501, 2011, 2694, 36
 # 층 건너뛰기 상한: 최고 '클리어' 층 → 고를 수 있는 가장 높은 시작 층. 오르는 건 공용 스킬 '스테이지 스킵' 노드 (사용자 2026-10-12)
 # 2026-10-21 사용자 (시작 층과 최고 클리어 층 차이가 너무 크고 갈수록 벌어져 불쾌함 → 완화): 모든 층 = 최고 클리어 - SKIP_BACK, 단 넘은 훈장 허들 다음 층보다 아래로는 안 감
 #   (예전: 1~19층 기획서 26장 표 — 17층 클리어해도 10층까지 · 20~29층 15~20 · 30층~ 최고 클리어 - 4)
-SKIP_BACK = 3
+SKIP_BACK = 3                        # 2026-10-26: 층대별 = TG.SKIP_BACK (70층까지 3 · 71층~ 5)
+def skip_back(f): return next(v for top, v in sorted(TG.SKIP_BACK.items()) if f <= top)
 RESEARCH0 = 8                        # 층 클리어 연구자료: 1층 8, 적정 찍찍에 비례 (뽑기 기획서 BR 가정)
 CHEESE_EXP = 1.25                    # 치즈 배율 = (난이도 지수)^이 값 (예전 치즈 1.5^층 · 체력 1.38^층 관계 유지)
 
@@ -84,16 +84,19 @@ def _tier_limit(t, boss):          # 훈장 t 트리까지 다 찍었을 때 제
     bt = sum(v[2] for tt in range(1, t + 1) for v in sk.T[tt].values() if v and v[0] == 'Boss_Dmg_Pct' and len(v) > 2) if boss else 0
     return BASE_TIME + ta + bt
 _HURDLE_TIER = {f: t for t, f in HURDLE.items()}
+# 2026-10-26 사용자 (1시간에 깨는 층이 점점 줄게): 허들 아닌 층 목표 초 = 유형 초 × 층 램프 (1층 TIME_RAMP[0] → 100층 TIME_RAMP[1]) — 초반 벽은 얇게 · 후반 벽은 두껍게
+TIME_RAMP = (0.8, 1.534)
+def time_ramp(f): return TIME_RAMP[0] + (TIME_RAMP[1] - TIME_RAMP[0]) * (f - 1) / (FLOORS - 1)
 def target_sec(f):
     if f in _HURDLE_TIER: return round(HURDLE_TIME_FRAC * _tier_limit(_HURDLE_TIER[f], is_boss(f)), 1)
-    return TYPE_SEC[ftype(f)]
+    return round(TYPE_SEC[ftype(f)] * time_ramp(f), 1)
 def player_pow(f):
     if f <= len(DOC_PLAYER): return DOC_PLAYER[f - 1]
     v = DOC_PLAYER[-1] * 1.85 ** (min(f, 30) - len(DOC_PLAYER))
     return v * diff(f) / diff(30) if f > 30 else v          # 31층~ 은 적정 찍찍과 같은 비율 (2026-10-19)
 def skip_cap(f):                     # f = 최고 클리어 층 (2026-10-21 사용자: 차이를 줄이고 층이 올라가도 안 벌어지게)
     past = [h for h in HURDLE_FLOORS if h <= f]
-    return min(FLOORS, max(1, f - SKIP_BACK, max(past) + 1 if past else 1))
+    return min(FLOORS, max(1, f - skip_back(f), max(past) + 1 if past else 1))
 
 
 def rooms(f):
@@ -179,10 +182,54 @@ def walls(f):                       # (계단 방 벽, 일반 벽) 배율 — �
     return round(max(MIN_NORMAL, S - normal * (d - 1)), 2), round(normal, 2)
 
 
+# ── 2026-10-26 실측 보정 곡선 (Tools/probe_results/sim_calib.json 이 있으면 이걸 씀) ── 층 시간 설계 → 적정 역산
+#   층마다 '그 층에 처음 닿는 플레이어' (그 층의 훈장 · 훈장 안 트리 진행률 · 판에서 지난 층 n) 가 설계 시간에 깨는 적정.
+#   실측 모델 = Tools/calib_from_probe.py (round10·11: 판 안 쥐 수 a0 + a1·n · 한 마리 보정 · 층 시간 = exp(c·[1, log 경로 벽, log 적정/찍찍, 보스, 층/100]))
+#   예전 _curve 는 적정을 power_by_tier(최대 마릿수 포화 가정)에 맞춰 실측 찍찍!!의 3~10배였음 → 보정 시뮬에선 거의 모든 층이 벽
+DESIGN_T = (35.0, 60.696, 0.706)         # 허들 아닌 층 설계 초 (클릭, 처음 닿을 때): 1층 → 100층, 곡선 지수
+BOSS_T = 1.55                        # 보스 층 (허들 아닌) = 설계 초 × 이 값
+HURDLE_T_FRAC = 0.464                 # 훈장 허들 = 그 훈장 트리 전부·제한시간(_tier_limit)의 이 비율에 깸 → 트리 덜 찍으면 못 넘음
+FLOOR1_PATH = 0.02                   # 1층 실제 벽 = 테이블의 2% (초반 계단 벽 완화 StageManager.earlyStairsHp, round10~12 측정)
+DESIGN_N = {70: 4, 100: 6}           # 신기록 층에 닿을 때 판에서 지난 층 (시작 = 최고 클리어 −3 / −5 → 4 / 6층째)
+def design_time(f):
+    if f in _HURDLE_TIER: return HURDLE_T_FRAC * _tier_limit(_HURDLE_TIER[f], is_boss(f))
+    t = DESIGN_T[0] + (DESIGN_T[1] - DESIGN_T[0]) * ((f - 1) / (FLOORS - 1)) ** DESIGN_T[2]
+    return t * (BOSS_T if is_boss(f) else 1)
+def tier_at(f): return max([t for t, g in TG.GATE.items() if g <= f] or [1])
+def tree_at(f, t):                   # 훈장 t 안 진행률: 해금 층 0 → 허들 층 1
+    a, b = TG.GATE.get(t, 1), HURDLE[t]
+    return 1.0 if f >= b else max(0.0, (f - a) / max(1, b - a))
+def run_n(f):
+    past = max([h for h in HURDLE_FLOORS if h < f] or [0])
+    return max(0, min(next(v for top, v in sorted(DESIGN_N.items()) if f <= top), f - (past + 1)))
+def real_pow(t, x, n, cal, pw):      # calib_from_probe.model_pow 와 같은 식
+    pop = pw[str(t)].get('pop', 100) * 0.8; a, k = cal['rats'], cal['per_rat']
+    per = pw[str(t)]['start'] * (pw[str(t)]['end'] / pw[str(t)]['start']) ** x * TG.rank_mul(t) / pop
+    return per * math.exp(k[0] + k[1] * (1 - x) + k[2] * max(0, t - 12) / 4) * min(pop, a[0] + a[1] * n)
+def _curve_calib():
+    import json
+    cp = os.path.join(ROOT, 'Tools', 'probe_results', 'sim_calib.json')
+    if not os.path.exists(cp): return {}
+    cal = json.load(open(cp, encoding='utf-8')); c = cal['time']
+    pw = json.load(open(os.path.join(ROOT, 'Tools', 'probe_results', 'power_by_tier.json'), encoding='utf-8'))
+    out = {}
+    for f in range(1, FLOORS + 1):
+        t = tier_at(f); P = real_pow(t, tree_at(f, t), run_n(f), cal, pw)
+        base = math.exp(c[0] + c[1] * math.log(max(0.3, wall_path(f) * (FLOOR1_PATH if f == 1 else 1))) + c[3] * is_boss(f) + c[4] * f / 100)
+        out[f] = P * (design_time(f) / base) ** (1 / c[2])          # 층 시간 = base × (적정/P)^c2 = 설계 초
+    out[1] = min(out[1], out[2] / 1.3)          # 1층은 벽이 거의 없어 역산하면 2층보다 커짐 → 보상(연구자료·치즈 ∝ 적정)이 2층보다 크지 않게
+    return out
+
+
 def nice(v):
     if v < 100: return round(v, 2)
     mag = 10 ** (int(math.log10(v)) - 2)
     return round(v / mag) * mag
+
+
+CAL_NEED.update(_curve_calib())
+_NEED = CAL_NEED or _curve()
+for _f in range(2, FLOORS + 1): DOC_MUL[_f] = _NEED[_f] / _NEED[_f - 1]
 
 
 def main():
@@ -220,7 +267,7 @@ def main():
         r = cd.max_row + 1
         for c, v in enumerate((k, d), 1): cd.cell(r, c, v)._style = copy.copy(cd.cell(r - 1, c)._style)
     wb.save(PATH)
-    print('Stage', FLOORS, '층 · 1층', pow_need(1), '· 2층', nice(pow_need(2)), '· 10층', nice(POW0 * diff(10)), '· 20층', nice(POW0 * diff(20)), '· 30층', nice(POW0 * diff(30)))
+    print('Stage', FLOORS, '층', '(실측 보정 곡선)' if CAL_NEED else '', ' · '.join(f'{f}층 {nice(pow_need(f))}' for f in (1, 2, 10, 20, 30, 50, 70, 90, 100)))
 
 
 if __name__ == '__main__':

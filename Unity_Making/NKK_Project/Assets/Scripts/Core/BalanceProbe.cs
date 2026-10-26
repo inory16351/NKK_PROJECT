@@ -26,6 +26,7 @@ namespace NKK
         public static int PromoteMode = 1;          // 0 승급 안 함 · 1 꽉 찼을 때 한 묶음만 (가장 낮은 등급) · 2 될 때마다 일괄 승급 (최대 마리 수 절반은 남음)
         public static bool UseUlt = true;
         public static bool UseRush = true;
+        public static int FakeRuns;                 // >0 이면 판 횟수를 이 값으로 (첫 판 '쉬운 방'·튜토리얼 라운드 없이 재기, 2026-10-26)
         public static bool Calib;                   // 적정 고정: 적정 전투력 = 지금 무리 전투력 (전투력 = 적정일 때 몇 초 걸리나 재기)          // 플레이어처럼 클릭 총공격 (쿨타임마다: 보스 → 계단 방 벽 → 가장 약한 벽)           // 필살기가 차면 바로 씀 (플레이어처럼, Ults.UltimateManager.ForceAuto)
         public static readonly List<string> Results = new();
         public static float BaseTime = 120, BossBaseTime = 30;      // 목표 비교 기준 (노드 추가 시간 빼고): 일반 120초 (2026-10-19, 예전 180) · 보스 층 +30
@@ -53,6 +54,7 @@ namespace NKK
             var p = Progress.I;
             p.saveKey = "nkk_probe"; p.ResetAll(); p.SkipTutorial(); p.autoUpgradeInRun = false; p.testSkills.Clear(); p.testSkillTier = 0;
             p.tier = tier; p.maxFloor = Mathf.Max(startFloor, 1);
+            if (FakeRuns > 0) p.runs = FakeRuns;
             MakeMeta(p, tier, nodes, shards);
             Progress.PendingStartFloor = startFloor;
             EndFloor = endFloor; GiveUp = giveUp; SimHz = simHz; Active = true;
@@ -66,8 +68,10 @@ namespace NKK
         {
             var db = GameDatabase.Instance;
             db.Tiers.TryGetValue(tier + 1, out var next);
-            float Need(string type) => next == null ? 0 : next.cond1_type == type ? next.cond1_value : next.cond2_type == type ? next.cond2_value : next.cond3_type == type ? next.cond3_value : 0;
-            int cur = nodes >= 0 ? nodes : next != null && (next.cond3_type == "Skill_Tree_Complete" || next.cond2_type == "Skill_Tree_Complete" || next.cond1_type == "Skill_Tree_Complete") ? 999 : Mathf.RoundToInt(Need("Skill_Node_Count")), shardSum = shards >= 0 ? shards : Mathf.RoundToInt(Need("Shard_Level_Sum"));
+            // 조건 1~4 칸 (2026-10-26: 10~15훈장은 '트리 전부'가 cond4 라 예전엔 못 봐서 노드 -1 이면 트리 0개로 쟀음)
+            float Need(string type) => next == null ? 0 : next.cond1_type == type ? next.cond1_value : next.cond2_type == type ? next.cond2_value : next.cond3_type == type ? next.cond3_value : next.cond4_type == type ? next.cond4_value : 0;
+            bool needTree = next != null && (next.cond1_type == "Skill_Tree_Complete" || next.cond2_type == "Skill_Tree_Complete" || next.cond3_type == "Skill_Tree_Complete" || next.cond4_type == "Skill_Tree_Complete");
+            int cur = nodes >= 0 ? nodes : needTree ? 999 : Mathf.RoundToInt(Need("Skill_Node_Count")), shardSum = shards >= 0 ? shards : Mathf.RoundToInt(Need("Shard_Level_Sum"));
             foreach (var s in db.CommonSkills) if (s.tier < tier && !s.IsRoot) p.testSkills.Add(s.skill_id);
             for (int n = 0; n < cur; n++)
             {
@@ -94,7 +98,12 @@ namespace NKK
             foreach (var c in Camera.allCameras) { if (c == Camera.main) { mask = c.cullingMask; c.cullingMask = 0; } else { c.enabled = false; offCams.Add(c); } }
             timer = FindFirstObjectByType<RunTimer>(); if (timer) timer.testFreeze = true;     // 제한시간은 재기만 함
             floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; research0 = Game.RunResearch; limit = 0; pathD = -1;
+            runTier = Progress.I ? Progress.I.tier : 0; runTree = Progress.I ? Progress.I.SkillCountIn(runTier) : 0; runStart = floor; runN = 0;
         }
+        // 보정용 (2026-10-26, Tools/calib_from_probe.py): 훈장 · 지금 훈장 트리 노드 수 · 판 시작 층 · 이 판에서 몇 번째 층(0부터)
+        int runTier, runTree, runStart, runN;
+        float[] Extra(float pow) => new float[] { runTier, runTree, runStart, runN, Rats ? Rats.RealCount : 0, pow, Stage ? Stage.PowNeed(floor) : 0 };
+        static float[] Cat(float[] a, float[] b) { var r = new float[a.Length + b.Length]; a.CopyTo(r, 0); b.CopyTo(r, a.Length); return r; }
 
         void Update()
         {
@@ -121,14 +130,15 @@ namespace NKK
                 Add($"   └ 사람 등장 {humanSpawned}명 · 평균 {humanSum / Mathf.Max(0.01f, dt):0.0}명 · 최대 {humanMax}명");
                 humanSum = 0; humanMax = 0;
                 Add($"   └ 기준 {BaseLimit(floor):0}초의 {used / BaseLimit(floor) * 100:0}% · 계단 거리 {pathD} · 경로 벽 배율 합 {pathSum:0.0} · 방 {pathRooms}");
-                Rows.Add(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 1, bossDur, (float)(Game.Cheese - cheese0), (float)(Game.RunResearch - research0) });
+                Rows.Add(Cat(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 1, bossDur, (float)(Game.Cheese - cheese0), (float)(Game.RunResearch - research0) }, Extra(maxPow)));
+                runN++;
                 floor = Game.Floor; t0 = Time.time; maxPow = 0; cheese0 = Game.Cheese; research0 = Game.RunResearch; limit = 0; bossT0 = -1; bossDur = 0; pathD = -1;
                 if (floor > EndFloor) Finish();
             }
             else if ((!Calib && limit > 0 && used > limit) || dt > Mathf.Max(GiveUp, limit * 2))      // 적정 고정 모드는 제한시간을 넘어도 끝까지 잼
             {
                 if (bossT0 >= 0) Add($"   └ 보스전 {(bossDur > 0 ? bossDur : (timer ? timer.Used : dt) - bossT0):0}초{(bossDur > 0 ? "" : " (못 잡음)")}");
-                Rows.Add(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 0, bossDur, (float)(Game.Cheese - cheese0), (float)(Game.RunResearch - research0) });
+                Rows.Add(Cat(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 0, bossDur, (float)(Game.Cheese - cheese0), (float)(Game.RunResearch - research0) }, Extra(pow)));
                 Add($"{floor}층 실패 (제한 {limit:0}초 넘음, 전체 {dt:0}초) · 쥐 {Rats.RealCount} · 전투력 {GameManager.Format(pow)} / 적정 {GameManager.Format(Stage.PowNeed(floor))} ({pow / Stage.PowNeed(floor):0.00}배) · 방 {Stage.Open.Count}/{Stage.Layout.Count}");
                 Finish();
             }
@@ -179,6 +189,16 @@ namespace NKK
         float BaseLimit(int f) => BaseTime + (Stage.IsBossFloor(f) ? BossBaseTime : 0);
 
         void Add(string s) { Results.Add(s); Debug.Log("[BalanceProbe] " + s); }
+        // 마지막 층(100층)을 깨면 엔딩 씬으로 넘어가 Update 가 끝을 못 찍음 → 여기서 마무리하고 다음 측정 (2026-10-26)
+        void OnDestroy()
+        {
+            if (!Active || done || floor < EndFloor) return;          // 마지막 측정 층에서 씬이 바뀐 경우만 (Play 끄기 등은 그냥 둠)
+            float used = timer ? timer.Used : Time.time - t0;
+            Rows.Add(Cat(new[] { floor, used, BaseLimit(floor), pathD, pathSum, pathRooms, 1, bossDur, (float)(Game ? Game.Cheese - cheese0 : 0), (float)(Game ? Game.RunResearch - research0 : 0) }, Extra(maxPow)));
+            Add($"{floor}층 클리어 (마지막 층 → 엔딩) {used:0}초 · 전투력 {GameManager.Format(maxPow)} / 적정 {GameManager.Format(Stage ? Stage.PowNeed(floor) : 0)}");
+            Finish();
+        }
+
         void Finish()
         {
             done = true; Active = false; Time.captureDeltaTime = 0; StageManager.PowOverride = 0; Ults.UltimateManager.ForceAuto = false;
@@ -188,7 +208,7 @@ namespace NKK
             if (Queue.Count > 0) RunQueue();
         }
 
-        public static string RowsCsv() { var sb = new StringBuilder("floor,used,base,d,path,rooms,ok,boss,cheese,research").AppendLine(); foreach (var r in Rows) sb.AppendLine(string.Join(",", r)); return sb.ToString(); }
+        public static string RowsCsv() { var sb = new StringBuilder("floor,used,base,d,path,rooms,ok,boss,cheese,research,tier,tree,start,n,rats,pow,need").AppendLine(); foreach (var r in Rows) sb.AppendLine(string.Join(",", r)); return sb.ToString(); }
         public static string Report() { var sb = new StringBuilder(); foreach (var l in Results) sb.AppendLine(l); return sb.ToString(); }
     }
 }

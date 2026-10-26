@@ -1,0 +1,885 @@
+{
+ "Augment": [
+  {
+   "augment_id": 81101,
+   "grade": 1,
+   "aug_name": "날카로운 앞니",
+   "aug_name_sk": 4681101,
+   "aug_desc": "쥐 공격력 +{1%}%",
+   "aug_desc_sk": 4781101,
+   "effect1": "Atk_Pct",
+   "e1_v1": 0.12,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_tooth",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81105,
+   "grade": 1,
+   "aug_name": "강철 앞니",
+   "aug_name_sk": 4681105,
+   "aug_desc": "벽 피해 +{1%}%",
+   "aug_desc_sk": 4781105,
+   "effect1": "Wall_Dmg_Pct",
+   "e1_v1": 0.2,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_wall",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81106,
+   "grade": 1,
+   "aug_name": "급소 찾기",
+   "aug_name_sk": 4681106,
+   "aug_desc": "치명타 확률 +{1%}%",
+   "aug_desc_sk": 4781106,
+   "effect1": "Crit_Chance",
+   "e1_v1": 0.04,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_crit",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81107,
+   "grade": 1,
+   "aug_name": "보스 사냥 면허",
+   "aug_name_sk": 4681107,
+   "aug_desc": "보스 피해 +{1%}%",
+   "aug_desc_sk": 4781107,
+   "effect1": "Boss_Dmg_Pct",
+   "e1_v1": 0.2,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_boss",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81210,
+   "grade": 2,
+   "aug_name": "프로틴 셰이크",
+   "aug_name_sk": 4681210,
+   "aug_desc": "쥐 공격력 +{1%}%",
+   "aug_desc_sk": 4781101,
+   "effect1": "Atk_Pct",
+   "e1_v1": 0.3,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_protein",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81207,
+   "grade": 2,
+   "aug_name": "치명적 앞니",
+   "aug_name_sk": 4681207,
+   "aug_desc": "치명타 확률 +{1%}% · 치명타 피해 +{2%}%",
+   "aug_desc_sk": 4781207,
+   "effect1": "Crit_Chance",
+   "e1_v1": 0.06,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "Crit_Dmg",
+   "e2_v1": 0.5,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_fang",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81214,
+   "grade": 2,
+   "aug_name": "철거 전문가",
+   "aug_name_sk": 4681214,
+   "aug_desc": "벽 피해 +{1%}%",
+   "aug_desc_sk": 4781105,
+   "effect1": "Wall_Dmg_Pct",
+   "e1_v1": 0.5,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_demolish",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81212,
+   "grade": 2,
+   "aug_name": "클릭 폭격",
+   "aug_name_sk": 4681212,
+   "aug_desc": "클릭 총공격 때 누를 때마다 {s1%}% 확률로 폭발 (공격력 ×{s3})",
+   "aug_desc_sk": 4700001,
+   "effect1": "Special",
+   "e1_v1": 83005.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_click",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81206,
+   "grade": 2,
+   "aug_name": "미다스의 앞니",
+   "aug_name_sk": 4681206,
+   "aug_desc": "황금 물건을 부수면 치즈 +{s1%}%",
+   "aug_desc_sk": 4700002,
+   "effect1": "Special",
+   "e1_v1": 83013.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_gold",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81213,
+   "grade": 2,
+   "aug_name": "잭팟",
+   "aug_name_sk": 4681213,
+   "aug_desc": "층 클리어 때 {s1%}% 확률로 연구자료 ×{s2}",
+   "aug_desc_sk": 4781213,
+   "effect1": "Special",
+   "e1_v1": 83012.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_jackpot",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81306,
+   "grade": 3,
+   "aug_name": "보스 킬러",
+   "aug_name_sk": 4681306,
+   "aug_desc": "보스 피해 +{1%}% · 필살기 게이지 +{2%}%",
+   "aug_desc_sk": 4781306,
+   "effect1": "Boss_Dmg_Pct",
+   "e1_v1": 0.6,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "Ult_Gauge_Pct",
+   "e2_v1": 0.25,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_skull",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81315,
+   "grade": 3,
+   "aug_name": "강철 턱",
+   "aug_name_sk": 4681315,
+   "aug_desc": "쥐 공격력 +{1%}% · 벽 피해 +{2%}%",
+   "aug_desc_sk": 4781315,
+   "effect1": "Atk_Pct",
+   "e1_v1": 0.5,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "Wall_Dmg_Pct",
+   "e2_v1": 0.4,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_jaw",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81307,
+   "grade": 3,
+   "aug_name": "다다다다",
+   "aug_name_sk": 4681307,
+   "aug_desc": "부딪힐 때 {1%}% 확률로 {1b}번 더 공격",
+   "aug_desc_sk": 4781201,
+   "effect1": "Multi_Hit",
+   "e1_v1": 0.25,
+   "e1_v2": 3.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_rapid",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81202,
+   "grade": 3,
+   "aug_name": "찌릿찌릿 이빨",
+   "aug_name_sk": 4681202,
+   "aug_desc": "물 때 {1%}% 확률로 주변 물건 {1b}개 감전",
+   "aug_desc_sk": 4781202,
+   "effect1": "Bite_Zap",
+   "e1_v1": 0.08,
+   "e1_v2": 3.0,
+   "e1_v3": 0.6,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_zap",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81313,
+   "grade": 3,
+   "aug_name": "연쇄 붕괴",
+   "aug_name_sk": 4681313,
+   "aug_desc": "벽 하나가 무너지면 남은 벽 체력 -{s1%}%",
+   "aug_desc_sk": 4781313,
+   "effect1": "Special",
+   "e1_v1": 83010.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_domino",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81314,
+   "grade": 3,
+   "aug_name": "승급 폭죽",
+   "aug_name_sk": 4681314,
+   "aug_desc": "승급할 때 새 쥐 자리에서 폭죽 폭발 (공격력 ×{s2})",
+   "aug_desc_sk": 4700003,
+   "effect1": "Special",
+   "e1_v1": 83011.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_rankboom",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81316,
+   "grade": 3,
+   "aug_name": "쥐 탑 쌓기",
+   "aug_name_sk": 4681316,
+   "aug_desc": "장착하면 쥐 {s2}마리씩 쌓아 합친 쥐 탑 {s1}개 (능력치 합산, 판 끝까지)",
+   "aug_desc_sk": 4781316,
+   "effect1": "Special",
+   "e1_v1": 83014.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_tower",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81311,
+   "grade": 3,
+   "aug_name": "천둥 번개",
+   "aug_name_sk": 4681311,
+   "aug_desc": "{s1}초마다 먹구름에서 번개 {s2}개 (공격력 ×{s3})",
+   "aug_desc_sk": 4700004,
+   "effect1": "Special",
+   "e1_v1": 83004.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_storm",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81317,
+   "grade": 3,
+   "aug_name": "치즈 비",
+   "aug_name_sk": 4681317,
+   "aug_desc": "{s1}초마다 {s2}초 동안 치즈 비 (치즈 +{s3%}%)",
+   "aug_desc_sk": 4781317,
+   "effect1": "Special",
+   "e1_v1": 83015.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_cheeserain",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81303,
+   "grade": 3,
+   "aug_name": "탄생 축제",
+   "aug_name_sk": 4681303,
+   "aug_desc": "새끼가 태어나면 주변 쥐 {1}초 광란",
+   "aug_desc_sk": 4781303,
+   "effect1": "Birth_Frenzy",
+   "e1_v1": 4.0,
+   "e1_v2": 250.0,
+   "e1_v3": 1.6,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_party",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81318,
+   "grade": 3,
+   "aug_name": "골든 햄스터 생쥐",
+   "aug_name_sk": 4681318,
+   "aug_desc": "일반 쥐 전원 골든 햄스터 · 늘 공으로 굴러다님 (이후 태어나는 쥐도)",
+   "aug_desc_sk": 4781318,
+   "effect1": "Special",
+   "e1_v1": 83016.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_u_hamster",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81319,
+   "grade": 3,
+   "aug_name": "판다 잠옷 정글리안 생쥐",
+   "aug_name_sk": 4681319,
+   "aug_desc": "일반 쥐 전원 판다 잠옷 정글리안 · 늘 공으로 굴러다님 (이후 태어나는 쥐도)",
+   "aug_desc_sk": 4781319,
+   "effect1": "Special",
+   "e1_v1": 83017.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_u_panda",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81403,
+   "grade": 4,
+   "aug_name": "전설의 앞니",
+   "aug_name_sk": 4681403,
+   "aug_desc": "쥐 공격력 +{1%}% · 모든 피해 +{2%}%",
+   "aug_desc_sk": 4781403,
+   "effect1": "Atk_Pct",
+   "e1_v1": 1.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "Dmg_Pct",
+   "e2_v1": 0.3,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_crown",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81409,
+   "grade": 4,
+   "aug_name": "회전 치즈 칼날",
+   "aug_name_sk": 4681409,
+   "aug_desc": "칠 때 {s1%}% 확률로 그 쥐 둘레를 치즈 칼날 {s2}개가 {s5}초 돌며 공격 (공격력 ×{s4})",
+   "aug_desc_sk": 4700005,
+   "effect1": "Special",
+   "e1_v1": 83003.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_blades",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81408,
+   "grade": 4,
+   "aug_name": "거대 쥐 출현",
+   "aug_name_sk": 4681408,
+   "aug_desc": "{s1}초마다 쥐 {s2}마리가 {s5}초 동안 거대화 (공격력 ×{s4})",
+   "aug_desc_sk": 4781408,
+   "effect1": "Special",
+   "e1_v1": 83001.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_giant",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81413,
+   "grade": 4,
+   "aug_name": "분신 소환",
+   "aug_name_sk": 4681413,
+   "aug_desc": "{s1}초마다 가장 강한 쥐의 거대 분신 {s2}마리가 {s3}초 동안 싸움",
+   "aug_desc_sk": 4781413,
+   "effect1": "Special",
+   "e1_v1": 83018.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_clones",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81414,
+   "grade": 4,
+   "aug_name": "운석 소환",
+   "aug_name_sk": 4681414,
+   "aug_desc": "{s1}초마다 큰 치즈 운석 낙하 (공격력 ×{s3})",
+   "aug_desc_sk": 4781414,
+   "effect1": "Special",
+   "e1_v1": 83019.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_meteor",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81412,
+   "grade": 4,
+   "aug_name": "쥐 토네이도",
+   "aug_name_sk": 4681412,
+   "aug_desc": "{s1}초마다 토네이도가 {s2}초 동안 방을 휩씀 (초당 공격력 ×{s4})",
+   "aug_desc_sk": 4781412,
+   "effect1": "Special",
+   "e1_v1": 83009.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_tornado",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81415,
+   "grade": 4,
+   "aug_name": "장난감 기차",
+   "aug_name_sk": 4681415,
+   "aug_desc": "{s1}초마다 기차가 맵을 가로지름 (공격력 ×{s3})",
+   "aug_desc_sk": 4781415,
+   "effect1": "Special",
+   "e1_v1": 83020.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_train",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81416,
+   "grade": 4,
+   "aug_name": "스케이터 생쥐",
+   "aug_name_sk": 4681416,
+   "aug_desc": "레어 쥐 전원 양복 대머리 생쥐 · 매우 빠르게 달리며 박치기 (이후 태어나는 쥐도)",
+   "aug_desc_sk": 4781416,
+   "effect1": "Special",
+   "e1_v1": 83021.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_u_skater",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81417,
+   "grade": 4,
+   "aug_name": "맘스땃쥐 생쥐",
+   "aug_name_sk": 4681417,
+   "aug_desc": "에픽 쥐 전원 맘스땃쥐 · 패티 최대 {s5}장 · 박치기 피해 +{s4%}% (이후 태어나는 쥐도)",
+   "aug_desc_sk": 4781417,
+   "effect1": "Special",
+   "e1_v1": 83022.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_u_burger",
+   "enabled": 1
+  },
+  {
+   "augment_id": 81418,
+   "grade": 4,
+   "aug_name": "5G 생쥐",
+   "aug_name_sk": 4681418,
+   "aug_desc": "에픽 쥐 전원 5G · 동료 수와 상관없이 모든 쥐에게 데이터 전송 (이후 태어나는 쥐도)",
+   "aug_desc_sk": 4781418,
+   "effect1": "Special",
+   "e1_v1": 83023.0,
+   "e1_v2": 0.0,
+   "e1_v3": 0.0,
+   "effect2": "None",
+   "e2_v1": 0.0,
+   "e2_v2": 0.0,
+   "e2_v3": 0.0,
+   "icon": "aug_u_fiveg",
+   "enabled": 1
+  }
+ ],
+ "Grade": [
+  {
+   "grade": 1,
+   "grade_name": "브론즈",
+   "grade_name_sk": 4800001,
+   "color": "#c98a4b",
+   "synth_need": 4,
+   "synth_up": 0.3,
+   "synth_same": 0.7,
+   "synth_down": 0.0
+  },
+  {
+   "grade": 2,
+   "grade_name": "실버",
+   "grade_name_sk": 4800002,
+   "color": "#b9c3cc",
+   "synth_need": 3,
+   "synth_up": 0.4,
+   "synth_same": 0.45,
+   "synth_down": 0.15
+  },
+  {
+   "grade": 3,
+   "grade_name": "골드",
+   "grade_name_sk": 4800003,
+   "color": "#f2c14e",
+   "synth_need": 2,
+   "synth_up": 0.5,
+   "synth_same": 0.35,
+   "synth_down": 0.15
+  },
+  {
+   "grade": 4,
+   "grade_name": "프리즘",
+   "grade_name_sk": 4800004,
+   "color": "#c58cf0",
+   "synth_need": 2,
+   "synth_up": 0.0,
+   "synth_same": 0.85,
+   "synth_down": 0.15
+  }
+ ],
+ "Offer": [
+  {
+   "from_floor": 31,
+   "w1": 45.0,
+   "w2": 35.0,
+   "w3": 18.0,
+   "w4": 2.0
+  },
+  {
+   "from_floor": 41,
+   "w1": 35.0,
+   "w2": 38.0,
+   "w3": 23.0,
+   "w4": 4.0
+  },
+  {
+   "from_floor": 51,
+   "w1": 28.0,
+   "w2": 38.0,
+   "w3": 28.0,
+   "w4": 6.0
+  },
+  {
+   "from_floor": 61,
+   "w1": 22.0,
+   "w2": 37.0,
+   "w3": 33.0,
+   "w4": 8.0
+  },
+  {
+   "from_floor": 71,
+   "w1": 17.0,
+   "w2": 35.0,
+   "w3": 38.0,
+   "w4": 10.0
+  },
+  {
+   "from_floor": 81,
+   "w1": 12.0,
+   "w2": 33.0,
+   "w3": 42.0,
+   "w4": 13.0
+  },
+  {
+   "from_floor": 91,
+   "w1": 8.0,
+   "w2": 30.0,
+   "w3": 45.0,
+   "w4": 17.0
+  }
+ ],
+ "Aug_Config": [
+  {
+   "key": "unlock_floor",
+   "value": 31.0
+  },
+  {
+   "key": "carry_floor",
+   "value": 41.0
+  },
+  {
+   "key": "slot_base",
+   "value": 2.0
+  },
+  {
+   "key": "slot_max",
+   "value": 5.0
+  },
+  {
+   "key": "offer_count",
+   "value": 3.0
+  },
+  {
+   "key": "pt_per_floor",
+   "value": 1.0
+  },
+  {
+   "key": "up_max",
+   "value": 5.0
+  },
+  {
+   "key": "up_pct",
+   "value": 0.1
+  },
+  {
+   "key": "up_pt_base",
+   "value": 150.0
+  },
+  {
+   "key": "up_pt_grow",
+   "value": 1.6
+  },
+  {
+   "key": "up_cheese_base",
+   "value": 1623.0
+  },
+  {
+   "key": "up_cheese_grow",
+   "value": 1.5
+  },
+  {
+   "key": "up_cheese_floor_grow",
+   "value": 1.2213
+  },
+  {
+   "key": "up_cheese_floor_cap",
+   "value": 30.0
+  },
+  {
+   "key": "seen_reveal",
+   "value": 1.0
+  },
+  {
+   "key": "unify_scale",
+   "value": 1.4
+  },
+  {
+   "key": "unify_scale_10085",
+   "value": 1.0
+  },
+  {
+   "key": "replace_81102",
+   "value": 81101.0
+  },
+  {
+   "key": "replace_81103",
+   "value": 81105.0
+  },
+  {
+   "key": "replace_81104",
+   "value": 81106.0
+  },
+  {
+   "key": "replace_81108",
+   "value": 81107.0
+  },
+  {
+   "key": "replace_81109",
+   "value": 81101.0
+  },
+  {
+   "key": "replace_81110",
+   "value": 81105.0
+  },
+  {
+   "key": "replace_81111",
+   "value": 81106.0
+  },
+  {
+   "key": "replace_81112",
+   "value": 81107.0
+  },
+  {
+   "key": "replace_81201",
+   "value": 81210.0
+  },
+  {
+   "key": "replace_81203",
+   "value": 81207.0
+  },
+  {
+   "key": "replace_81204",
+   "value": 81214.0
+  },
+  {
+   "key": "replace_81205",
+   "value": 81212.0
+  },
+  {
+   "key": "replace_81208",
+   "value": 81206.0
+  },
+  {
+   "key": "replace_81209",
+   "value": 81213.0
+  },
+  {
+   "key": "replace_81211",
+   "value": 81210.0
+  },
+  {
+   "key": "replace_81301",
+   "value": 81306.0
+  },
+  {
+   "key": "replace_81302",
+   "value": 81315.0
+  },
+  {
+   "key": "replace_81304",
+   "value": 81307.0
+  },
+  {
+   "key": "replace_81305",
+   "value": 81202.0
+  },
+  {
+   "key": "replace_81308",
+   "value": 81313.0
+  },
+  {
+   "key": "replace_81309",
+   "value": 81314.0
+  },
+  {
+   "key": "replace_81310",
+   "value": 81311.0
+  },
+  {
+   "key": "replace_81312",
+   "value": 81303.0
+  },
+  {
+   "key": "replace_81401",
+   "value": 81403.0
+  },
+  {
+   "key": "replace_81402",
+   "value": 81409.0
+  },
+  {
+   "key": "replace_81404",
+   "value": 81408.0
+  },
+  {
+   "key": "replace_81405",
+   "value": 81413.0
+  },
+  {
+   "key": "replace_81406",
+   "value": 81414.0
+  },
+  {
+   "key": "replace_81407",
+   "value": 81412.0
+  },
+  {
+   "key": "replace_81410",
+   "value": 81415.0
+  },
+  {
+   "key": "replace_81411",
+   "value": 81403.0
+  }
+ ],
+ "No_Scale": [
+  {
+   "effect": "Birth_Frenzy",
+   "index": 2
+  },
+  {
+   "effect": "Birth_Frenzy",
+   "index": 3
+  },
+  {
+   "effect": "Bite_Zap",
+   "index": 2
+  },
+  {
+   "effect": "Multi_Hit",
+   "index": 2
+  }
+ ]
+}

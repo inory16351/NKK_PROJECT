@@ -1,0 +1,28 @@
+{
+ "rats": [
+  9.117,
+  1.1298
+ ],
+ "per_rat": [
+  0.254,
+  -0.1296,
+  1.5603
+ ],
+ "pow_form": "P = power_by_tier(t, tree) * rank_mul / (pop*0.8) * exp(k0 + k1*(1-tree) + k2*max(0,t-12)/4) * min(pop*0.8, a0 + a1*n)",
+ "time": [
+  2.8765,
+  0.4528,
+  1.2472,
+  0.4044,
+  -2.1089
+ ],
+ "time_form": "sec = exp(c0 + c1*log(wall_path) + c2*log(need/P) + c3*boss + c4*floor/100)",
+ "files": [
+  "round10_hourly.txt",
+  "round11_calib.csv",
+  "round12_early.csv",
+  "round13_verify.csv"
+ ],
+ "points": 130,
+ "hit": 118
+}

@@ -191,12 +191,15 @@ def tiers():
     for (tier, name, icon, conds, bk, start, atk) in C.TIERS:
         conds = [(('Max_Floor', TG.GATE[tier]) if k in ('Max_Floor', 'Boss_Clear') else ('Shard_Level_Sum', TG.SHARD[tier]) if k == 'Shard_Level_Sum' else (k, v)) for k, v in conds]
         floor = TG.GATE[tier]
-        cost = round(research.get(min(floor, 100), 0) * TG.RANK_K, -3)
+        cost = round(research.get(min(floor, 100), 0) * TG.rank_k(tier), -3)
         d = dict(tier_name=ko(name), icon=icon, research_cost=cost, birth_grade_k=bk, start_rat_count=start, start_floor_cap=0, badge_asset=f'Rogue/rk_{tier}', rat_atk_mul=atk)
         for i in range(4):
             k, v = conds[i] if i < len(conds) else ('None', 0)
             d[f'cond{i + 1}_type'] = k; d[f'cond{i + 1}_value'] = v
         t.upsert('tier', tier, d)
+    # 훈장 승급 배율 (2026-10-26, tier_gates.rank_mul): 1~16훈장 모두. 게임 = Rat.Damage × CommonSkill.RankMul
+    t.col('rank_mul', '승급 배율 (누적)', 'float')
+    for tier in range(1, 17): t.upsert('tier', tier, dict(rank_mul=round(TG.rank_mul(tier), 4)))
     ct = Sheet(wb['Cond_Type'])
     for k, desc, val in C.COND_DOC: ct.upsert('cond_type', k, dict(desc=desc, value=val))
     wb.save(p)

@@ -1,0 +1,184 @@
+{
+ "Shop_Config": [
+  {
+   "key": "unlock_floor",
+   "value": 17.0
+  },
+  {
+   "key": "refresh_interval_sec",
+   "value": 900.0
+  },
+  {
+   "key": "reroll_base_bc",
+   "value": 300.0
+  },
+  {
+   "key": "reroll_growth",
+   "value": 1.5
+  },
+  {
+   "key": "lock_slot_max",
+   "value": 1.0
+  },
+  {
+   "key": "mythic_pity_count",
+   "value": 8.0
+  },
+  {
+   "key": "pity_slot_id",
+   "value": 4.0
+  },
+  {
+   "key": "first_visit_goods",
+   "value": 90001.0
+  },
+  {
+   "key": "catchup_weight_mul",
+   "value": 1.5
+  },
+  {
+   "key": "new_unlock_weight_mul",
+   "value": 1.3
+  },
+  {
+   "key": "bc_base",
+   "value": 6.76
+  },
+  {
+   "key": "mythic_confirm_ratio",
+   "value": 0.5
+  },
+  {
+   "key": "bc_floor_grow",
+   "value": 1.2213
+  },
+  {
+   "key": "bc_floor_cap",
+   "value": 30.0
+  },
+  {
+   "key": "goods_reroll_growth",
+   "value": 1.2
+  },
+  {
+   "key": "shard_full_tier",
+   "value": 16.0
+  }
+ ],
+ "Shop_Slot": [
+  {
+   "slot_id": 1,
+   "unlock_floor": 17,
+   "legend_rate": 1.0,
+   "mythic_rate": 0.0
+  },
+  {
+   "slot_id": 2,
+   "unlock_floor": 17,
+   "legend_rate": 1.0,
+   "mythic_rate": 0.0
+  },
+  {
+   "slot_id": 3,
+   "unlock_floor": 17,
+   "legend_rate": 1.0,
+   "mythic_rate": 0.0
+  },
+  {
+   "slot_id": 4,
+   "unlock_floor": 17,
+   "legend_rate": 0.75,
+   "mythic_rate": 0.25
+  },
+  {
+   "slot_id": 5,
+   "unlock_floor": 18,
+   "legend_rate": 0.6,
+   "mythic_rate": 0.4
+  },
+  {
+   "slot_id": 6,
+   "unlock_floor": 20,
+   "legend_rate": 0.0,
+   "mythic_rate": 1.0
+  }
+ ],
+ "Shop_Goods": [
+  {
+   "goods_id": 90001,
+   "goods_name": "전설 조각 (소)",
+   "goods_name_sk": 3590001,
+   "grade": "Legendary",
+   "pack_size": 30,
+   "spawn_weight": 50.0,
+   "price_cheese_bc": 360.0
+  },
+  {
+   "goods_id": 90002,
+   "goods_name": "전설 조각 (중)",
+   "goods_name_sk": 3590002,
+   "grade": "Legendary",
+   "pack_size": 60,
+   "spawn_weight": 35.0,
+   "price_cheese_bc": 650.0
+  },
+  {
+   "goods_id": 90003,
+   "goods_name": "전설 조각 (대)",
+   "goods_name_sk": 3590003,
+   "grade": "Legendary",
+   "pack_size": 100,
+   "spawn_weight": 15.0,
+   "price_cheese_bc": 1000.0
+  },
+  {
+   "goods_id": 90011,
+   "goods_name": "신화 조각 (소)",
+   "goods_name_sk": 3590011,
+   "grade": "Mythic",
+   "pack_size": 20,
+   "spawn_weight": 60.0,
+   "price_cheese_bc": 720.0
+  },
+  {
+   "goods_id": 90012,
+   "goods_name": "신화 조각 (중)",
+   "goods_name_sk": 3590012,
+   "grade": "Mythic",
+   "pack_size": 40,
+   "spawn_weight": 30.0,
+   "price_cheese_bc": 1320.0
+  },
+  {
+   "goods_id": 90013,
+   "goods_name": "신화 조각 (대)",
+   "goods_name_sk": 3590013,
+   "grade": "Mythic",
+   "pack_size": 60,
+   "spawn_weight": 10.0,
+   "price_cheese_bc": 1800.0
+  }
+ ],
+ "Shop_Floor": [
+  {
+   "floor": 17,
+   "free_reroll": 0,
+   "slot_count": 4
+  },
+  {
+   "floor": 18,
+   "free_reroll": 0,
+   "slot_count": 5
+  },
+  {
+   "floor": 19,
+   "free_reroll": 1,
+   "slot_count": 5
+  },
+  {
+   "floor": 20,
+   "free_reroll": 2,
+   "slot_count": 6
+  }
+ ]
+}

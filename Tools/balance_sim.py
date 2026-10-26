@@ -27,6 +27,8 @@ SPECIES = {g: sorted((r['unlock_rank'], r['code_id']) for r in _RT if r['grade']
 SKILL = J('CommonSkillTable.json')['Common_Skill']
 BOSS_FLOORS = {b['floor'] for b in J('BossTable.json')['Boss'] if b['floor'] > 0}
 LAST = max(STAGE)
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import tier_gates as TG
 
 LATE_SHARE = 0.5          # 16층~ 훈장·트리에 쓰는 몫
 PASSIVE_SLOW = 1.35       # 클릭 거의 안 함: 같은 상태에서 층 시간 배율 (측정으로 보정)
@@ -39,6 +41,11 @@ TIME_C, TIME_LO, TIME_HI = 0.8, 1.5, 0.5
 BASE_TIME = 120           # RunTimer.baseTime (2026-10-19: 180 → 120)
 BIRTH_PER_POP = 1.0       # 층 하나 클리어하는 동안 태어나는 쥐 ≈ 최대 마릿수 × 이 값 (round9: 1훈장 6층 판 승급 28번 ≈ 출생 300) — 조각 = 태어난 종 +1
 K_FLOOR_CAP = 30          # 치즈 K 곡선(1~20층 측정 맞춤)은 이 층까지만 늘림 (그 뒤 외삽은 폭주)
+# 2026-10-26 실측 보정 (Tools/calib_from_probe.py → probe_results/sim_calib.json): 판 안 쥐 수(판에서 지난 층 n) · 트리 효과 · 전투력 밖 피해(필살기·증강 등)
+#   있으면 무리 전투력 = 시뮬 한 마리 × exp(k·[1, 1-트리, max(0,훈장-12)/4]) × 쥐 수(a0 + a1·n) (증강 배율·RAMP_SEC 대신)
+#   층 시간 = exp(c·[1, log(경로 벽 합 wall_path), log(적정/전투력), 보스, 층/100]) (time_mul 대신, 측정 78층 중 71층 성공/실패 맞춤)
+_CP = os.path.join(ROOT, 'Tools', 'probe_results', 'sim_calib.json')
+CAL = json.load(open(_CP, encoding='utf-8')) if os.path.exists(_CP) and '--nocal' not in sys.argv else None
 
 
 def load_k():
@@ -74,7 +81,11 @@ class Player:
         return sum(1 for s in l if s['skill_id'] in self.nodes) / max(1, len(l))
     def pow(self, floor, run_floors):
         p0 = self.power[str(self.tier)]['start']; p1 = self.power[str(self.tier)]['end']
-        p = p0 * (p1 / p0) ** self.tree_frac()
+        p = p0 * (p1 / p0) ** self.tree_frac() * TG.rank_mul(self.tier)      # 2026-10-26 훈장 승급 배율 (측정값엔 없음)
+        if CAL:      # 한 마리 × 판 안 쥐 수 (calib_from_probe.model_pow 와 같은 식)
+            a, k, t, fr = CAL['rats'], CAL['per_rat'], self.tier, self.tree_frac()
+            pop = self.power[str(t)].get('pop', 100) * 0.8
+            return p / pop * math.exp(k[0] + k[1] * (1 - fr) + k[2] * max(0, t - 12) / 4) * min(pop, a[0] + a[1] * max(0, run_floors))
         if self.maxf > 31 and floor >= 31:      # 증강 (31층~ 층마다 하나, 슬롯 5 + 노드)
             slots = min(5, 2 + self.sk('Aug_Slot'))      # 2칸 시작 · 최대 5 (2026-10-20)
             p *= 1 + AUG_PER_SLOT * min(slots, max(0, run_floors))
@@ -110,8 +121,12 @@ class Player:
         while f <= LAST:
             st = STAGE[f]
             r = self.pow(f, n) / st['pow_need']
-            sec = st['target_sec'] * time_mul(r) * self.calib.get(f, self.calib.get('all', 1)) * (PASSIVE_SLOW if self.passive else 1)
-            if n == 0: sec += RAMP_SEC
+            if CAL:      # 실측 보정 시간 = 벽 체력 ÷ 피해 꼴 (calib_from_probe.model_time 과 같은 식)
+                c = CAL['time']
+                sec = math.exp(c[0] + c[1] * math.log(max(0.3, st['wall_path'] * (0.02 if f == 1 else 1))) + c[2] * math.log(1 / max(1e-9, r)) + c[3] * (f in BOSS_FLOORS) + c[4] * f / 100) * (PASSIVE_SLOW if self.passive else 1)
+            else:
+                sec = st['target_sec'] * time_mul(r) * self.calib.get(f, self.calib.get('all', 1)) * (PASSIVE_SLOW if self.passive else 1)
+            if n == 0 and not CAL: sec += RAMP_SEC      # 보정 모드는 판 안 쥐 수가 전투력 식에 들어 있음
             lim = self.limit(f)
             if sec > lim:
                 dt += lim; chz += self.cheese_of(f) * 0.6

@@ -179,7 +179,7 @@ _TC = _tier_costs()
 import tier_gates as _TG           # 2026-10-19 재밸런싱: 2~16훈장 모두 트리 연구자료 ≈ 다음 승급 연구자료 × TREE_K (16훈장 = 16훈장 승급 × 2.5 × T16_TREE_K)
 for _t in range(2, 17):
     _next = _TC.get(_t + 1) or _TC.get(16, 1e11) * 2.5 * _TG.T16_TREE_K
-    RESEARCH[_t] = round(_next * (_TG.TREE_K if _t < 16 else 1) / 75, 3)
+    RESEARCH[_t] = round(_next * (_TG.tree_k(_t) if _t < 16 else 1) / 75, 3)
 # 치즈 (2026-10-19 전체 밸런스): 7훈장부터 치즈가 트리 값의 10~45배 남았음 (balance_sim) → 노드 치즈 = 노드 연구자료 × 그 훈장 층대의
 #   (층 치즈 수입 ÷ 층 연구자료) × CHEESE_FIT × (트리 + 승급 연구자료)/트리. 치즈 수입 = gen_economy.fit_k 곡선 (K 는 30층까지만 늘림, balance_sim 과 같게)
 #   → 연구자료가 모자랄 즈음 치즈도 바닥 (사용자 2026-10-08). 나머지 치즈 = 상점 · 증강 강화

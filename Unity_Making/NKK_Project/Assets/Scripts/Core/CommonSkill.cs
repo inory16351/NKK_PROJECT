@@ -45,6 +45,8 @@ namespace NKK
 
         // ── 전투 ──
         public static float AtkFlat(int gradeIndex) => SumGrade(CommonEffectType.Atk_Flat, gradeIndex);
+        // 훈장 승급 배율 (2026-10-26): 티어 테이블 rank_mul (누적, 승급할 때마다 모든 쥐 공격력 ×). 칸이 없거나 0 이면 1
+        public static float RankMul { get { var p = Progress.I; var db = GameDatabase.Instance; return p && db && db.Tiers.TryGetValue(p.tier, out var t) && t.rank_mul > 0 ? t.rank_mul : 1; } }
         public static float AtkMul(int gradeIndex) => (1 + SumGrade(CommonEffectType.Atk_Pct, gradeIndex)) * (1 + Sum(CommonEffectType.Dmg_Pct));
         public static float WallDmgMul => 1 + Sum(CommonEffectType.Wall_Dmg_Pct);
         public static float CritAdd => Sum(CommonEffectType.Crit_Chance);

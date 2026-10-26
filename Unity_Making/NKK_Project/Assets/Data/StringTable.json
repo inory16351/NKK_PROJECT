@@ -4906,6 +4906,11 @@
    "en": "Floor time limit +2s"
   },
   {
+   "string_key": 2400002,
+   "ko": "스테이지 스킵 +8층",
+   "en": "Floor Skip +8"
+  },
+  {
    "string_key": 2492100,
    "ko": "1훈장 트리",
    "en": "Rank 1 Tree"
@@ -15216,6 +15221,61 @@
    "en": "{name}'s Ultimate! {ult}"
   },
   {
+   "string_key": 8000539,
+   "ko": "펑!",
+   "en": "Pop!"
+  },
+  {
+   "string_key": 8000540,
+   "ko": "-{n}%",
+   "en": "-{n}%"
+  },
+  {
+   "string_key": 8000541,
+   "ko": "분신!!",
+   "en": "Clones!!"
+  },
+  {
+   "string_key": 8000542,
+   "ko": "짤랑",
+   "en": "Ching"
+  },
+  {
+   "string_key": 8000543,
+   "ko": "치즈 비!! +{n}%",
+   "en": "Cheese Rain!! +{n}%"
+  },
+  {
+   "string_key": 8000544,
+   "ko": "띵!",
+   "en": "Bonk!"
+  },
+  {
+   "string_key": 8000545,
+   "ko": "쿵",
+   "en": "Thud"
+  },
+  {
+   "string_key": 8000546,
+   "ko": "쥐 탑!!",
+   "en": "Rat Tower!!"
+  },
+  {
+   "string_key": 8000547,
+   "ko": "다다다",
+   "en": "Rat-a-tat"
+  },
+  {
+   "string_key": 8000548,
+   "ko": "7 7 7",
+   "en": "7 7 7"
+  },
+  {
+   "string_key": 8000549,
+   "ko": "7 ? ?",
+   "en": "7 ? ?"
+  },
+  {
    "string_key": 9000001,
    "ko": "찍찍!! {power}",
    "en": "SQUEAK!! {power}"
@@ -15869,61 +15929,6 @@
    "string_key": 9000131,
    "ko": "쿠르릉!!",
    "en": "Rumble!!"
-  },
-  {
-   "string_key": 8000539,
-   "ko": "펑!",
-   "en": "Pop!"
-  },
-  {
-   "string_key": 8000540,
-   "ko": "-{n}%",
-   "en": "-{n}%"
-  },
-  {
-   "string_key": 8000541,
-   "ko": "분신!!",
-   "en": "Clones!!"
-  },
-  {
-   "string_key": 8000542,
-   "ko": "짤랑",
-   "en": "Ching"
-  },
-  {
-   "string_key": 8000543,
-   "ko": "치즈 비!! +{n}%",
-   "en": "Cheese Rain!! +{n}%"
-  },
-  {
-   "string_key": 8000544,
-   "ko": "띵!",
-   "en": "Bonk!"
-  },
-  {
-   "string_key": 8000545,
-   "ko": "쿵",
-   "en": "Thud"
-  },
-  {
-   "string_key": 8000546,
-   "ko": "쥐 탑!!",
-   "en": "Rat Tower!!"
-  },
-  {
-   "string_key": 8000547,
-   "ko": "다다다",
-   "en": "Rat-a-tat"
-  },
-  {
-   "string_key": 8000548,
-   "ko": "7 7 7",
-   "en": "7 7 7"
-  },
-  {
-   "string_key": 8000549,
-   "ko": "7 ? ?",
-   "en": "7 ? ?"
   },
   {
    "string_key": 9000132,

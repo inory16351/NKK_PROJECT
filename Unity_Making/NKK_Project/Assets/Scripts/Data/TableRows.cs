@@ -146,6 +146,7 @@ namespace NKK.Data
         public string cond1_type; public float cond1_value; public string cond2_type; public float cond2_value; public string cond3_type; public float cond3_value;
         public string cond4_type; public float cond4_value;        // 4번째 조건 (2026-10-19, 9훈장~)
         public float birth_grade_k; public int start_rat_count, start_floor_cap; public string badge_asset; public float rat_atk_mul;
+        public float rank_mul;                                      // 승급 배율 누적 (2026-10-26, Tools/tier_gates.rank_mul) — CommonSkill.RankMul
     }
     [Serializable] public class TierTableFile { public List<TierRow> Tier; }
 
