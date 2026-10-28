@@ -34,7 +34,11 @@ namespace NKK.Stage
         [Tooltip("마지막 층: 이 층 보스를 잡고 계단에 닿으면 판을 끝내고 로비로 (사용자 2026-10-12: 30층 보스 = 끝)")] public int lastFloor = 100;
         [Tooltip("마지막 층을 넘으면 돌아갈 씬")] public string lobbyScene = "Lobby";
         [Tooltip("마지막 층을 처음 깼을 때 엔딩 컷씬을 틀 씬 (타이틀 씬 StoryPlayer, 끝나면 로비로). 비우면 엔딩 없음")] public string endingScene = "Title";
-        public static int LastFloor { get; private set; } = 100;
+        // 공개 층: 만든 층(lastFloor 100) 중 유저에게 연 층. 이 층을 깨면 엔딩 → 로비 (2026-10-28: 40층부터 며칠마다 10층씩 업데이트 — 업데이트 때 여기만 올림, 0 = 만든 층 전부)
+        // 밸런스 측정(BalanceProbe) 중엔 무시하고 만든 층 끝까지 감
+        public const int OpenFloor = 40;
+        int EndFloor => lastFloor <= 0 ? int.MaxValue : OpenFloor > 0 && !BalanceProbe.Active ? Mathf.Min(lastFloor, OpenFloor) : lastFloor;
+        public static int LastFloor { get; private set; } = OpenFloor > 0 ? OpenFloor : 100;      // 로비 등 게임 씬 밖에서도 공개 층 기준
         [Tooltip("층 보스 (스테이지 테이블 Boss). 보스 층이면 계단 방에서 대기, 살아 있는 동안 계단 못 씀")] public Boss Boss;
 
         [Header("방 배치")]
@@ -448,6 +452,7 @@ namespace NKK.Stage
         void Start()
         {
             if (wallBarTemplate) { wallBarScale = wallBarTemplate.transform.localScale; wallBarTemplate.gameObject.SetActive(false); }
+            LastFloor = EndFloor;
             EnterFloor(Game.Floor);
         }
 
@@ -507,12 +512,12 @@ namespace NKK.Stage
             if (Boss && !Boss.FloorCleared(Game.Floor)) { Debug.LogWarning($"[Boss] {Game.Floor}층 보스를 안 잡아서 계단 막음 (보스 {Boss.State})"); if (Open.Contains(StairsRoom)) Boss.OnStairsOpened(); return; }
             climbing = true;
             int from = Game.Floor;
-            LastFloor = lastFloor > 0 ? lastFloor : int.MaxValue;
+            LastFloor = EndFloor;
             void Move()
             {
-                // 마지막 층 클리어 → 저장하고 로비로 (더 위 층은 없음)
+                // 마지막 층(공개 층) 클리어 → 저장하고 로비로 (더 위 층은 없음)
                 // 처음 깼으면 엔딩 컷씬 (타이틀 씬의 StoryPlayer) 을 본 뒤 로비로 (2026-10-21)
-                if (lastFloor > 0 && from >= lastFloor) Game.FadeThen(() =>
+                if (from >= LastFloor) Game.FadeThen(() =>
                 {
                     Game.SaveProgress();
                     bool ending = Progress.I && !Progress.I.EndingSeen && !string.IsNullOrEmpty(endingScene);
