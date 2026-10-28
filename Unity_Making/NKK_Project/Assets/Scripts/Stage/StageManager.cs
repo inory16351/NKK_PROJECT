@@ -198,6 +198,7 @@ namespace NKK.Stage
             if (entered) Rats.Ults?.ChargeAll(CondType.Stage_Clear);           // 층 통과 → 있는 종 전부
             entered = true;
             DamageMeter.Clear();                                                // 딜 미터기는 층마다 0 부터
+            stairsDist.Clear();
             Game.Floor = Mathf.Max(1, f);
             GenLayout(Game.Floor);
             Open.Clear(); Open.Add(Vector2Int.zero); walls.Clear();
@@ -440,6 +441,22 @@ namespace NKK.Stage
             var l = new List<Vector2Int>();
             foreach (var d in Dirs) if (!IsOpen(i + d.x, j + d.y) && InLayout(i + d.x, j + d.y)) l.Add(d);
             return l;
+        }
+
+        // 계단 방 쪽 한 칸: 레이아웃 안에서 계단 방까지 방 거리가 줄어드는 옆방 방향 (열렸든 막혔든, 같으면 아무거나). 계단 방이거나 레이아웃 밖이면 null
+        // 방치 중 쥐가 계단 방 쪽 벽을 파러 감 (Rat.NewDash, 2026-10-28). 거리는 층마다 한 번 계산
+        readonly Dictionary<Vector2Int, int> stairsDist = new();
+        public Vector2Int? StepToStairs(Vector2Int room)
+        {
+            if (stairsDist.Count == 0 && Layout.Contains(StairsRoom))
+            {
+                var q = new Queue<Vector2Int>(); stairsDist[StairsRoom] = 0; q.Enqueue(StairsRoom);
+                while (q.Count > 0) { var c = q.Dequeue(); foreach (var d in Dirs) { var k = c + d; if (Layout.Contains(k) && !stairsDist.ContainsKey(k)) { stairsDist[k] = stairsDist[c] + 1; q.Enqueue(k); } } }
+            }
+            if (!stairsDist.TryGetValue(room, out int cur) || cur == 0) return null;
+            Vector2Int? best = null; int n = 0;
+            foreach (var d in Dirs) if (stairsDist.TryGetValue(room + d, out int nd) && nd < cur && UnityEngine.Random.Range(0, ++n) == 0) best = d;
+            return best;
         }
 
         public Rect OpenBounds()

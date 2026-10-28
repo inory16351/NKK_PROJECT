@@ -64,6 +64,14 @@ namespace NKK.Rats
         [Tooltip("멈칫 끝에 잠들 확률 (코골이 능력은 테이블 값)")] public float sleepChance = 0.01f;
         [Tooltip("떼거리 판정 반경 (Pack_Power value_03 이 우선)")] public float packRadius = 120;
 
+        [Header("방치 (클릭 안 할 때)")]
+        [Tooltip("마지막 클릭 뒤 이 초가 지나면 방치로 봄 → 쥐가 물건·계단 쪽으로 더 자주 달림 (2026-10-28)")] public float idleAfter = 8;
+        [Tooltip("방치 중 물건 쪽으로 달릴 확률 · 찾는 거리 (평소 0.35 · 280)")] public float idleItemChance = 0.5f, idleItemRange = 420;
+        [Tooltip("방치 중 계단 쪽으로 달릴 확률 (계단 방이 열렸을 때, 평소 0.12)")] public float idleStairsChance = 0.3f;
+        [Tooltip("방치 중 계단 방이 아직 막혀 있을 때 계단 방 쪽 옆방(막혔으면 그 벽)으로 달릴 확률 (평소 0)")] public float idleStairsDigChance = 0.25f;
+        float lastInputT;
+        public bool Idle => Time.time - lastInputT >= idleAfter;
+
         [Header("번식 (웹게임 기준)")]
         [Tooltip("최대 인구 (둥지 확장 스킬로 늘어남)")] public int popCap = 30;
         [Tooltip("번식할 때 솟아오르는 하트 수")] public int birthHearts = 4;
@@ -608,7 +616,7 @@ namespace NKK.Rats
         {
             var m = Mouse.current; if (m == null || GameOver.Active) return;      // 게임 오버 습격 중엔 총공격 없음
             Vector2 sp = m.position.ReadValue();
-            if (m.leftButton.wasPressedThisFrame) { pressed = !(EventSystem.current && EventSystem.current.IsPointerOverGameObject()); dragged = false; pressPos = sp; }
+            if (m.leftButton.wasPressedThisFrame) { lastInputT = Time.time; pressed = !(EventSystem.current && EventSystem.current.IsPointerOverGameObject()); dragged = false; pressPos = sp; }
             if (pressed && (sp - pressPos).magnitude > clickDragPixels) dragged = true;
             if (pressed && m.leftButton.wasReleasedThisFrame)
             {
@@ -620,6 +628,7 @@ namespace NKK.Rats
         // 클릭 총공격 (쿨타임 적용). 밸런스 측정도 이걸 씀
         public bool ClickRush(Vector2 p)
         {
+            lastInputT = Time.time;         // 밸런스 측정 클릭도 방치 아님
             if (!RushReady || RushActive) return false;
             var cat = Cats ? Cats.Current : null;
             if (cat && cat.Alive && cat.BodyDist(p.x, p.y) <= 0) p = new Vector2(cat.x, cat.y);     // 고양이 몸을 누르면 고양이 발밑으로

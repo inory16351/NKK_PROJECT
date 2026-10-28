@@ -655,6 +655,15 @@
 - 컴파일 오류 0 · 로비에서 `LastFloor` = 40 확인. 실제 40층 클리어 Play 는 안 해 봄.
 - **업데이트 때 주의**: `EndingSeen` 이 한 번 보면 끝이라, 40층에서 엔딩 본 유저는 50층 업데이트 뒤 50층을 깨도 엔딩 안 나옴 (바로 로비).
 
+## 5-33. 방치 시 쥐가 물건·계단 쪽으로 더 자주 · 개발자 패널 삭제 (2026-10-28, 커밋함 · 50f 브랜치)
+
+- **방치**: 마지막 클릭(게임 화면 왼쪽 버튼 누름 · `ClickRush`, 밸런스 측정 클릭 포함) 뒤 `RatManager.idleAfter` 8초가 지나면 `RatManager.Idle`. 이때 `Rat.NewDash` 에서 물건 쪽 확률 0.35 → `idleItemChance` **0.5** · 찾는 거리 280 → `idleItemRange` **420** · 계단 쪽(계단 방 열림) 0.12 → `idleStairsChance` **0.3**. 클릭하는 동안은 예전 그대로.
+  - 계단 방이 아직 막혀 있으면: `idleStairsDigChance` **0.25** 로 계단 방까지 방 거리가 줄어드는 옆방 쪽으로 (막혔으면 그 벽을 팜, 평소 0). 방 거리 = `StageManager.StepToStairs` (레이아웃 BFS, 층마다 한 번).
+  - 미클릭 진행 속도가 바뀌므로 BalanceProbe 미클릭(`UseRush` 끔) 결과도 달라질 수 있음 (클릭 측정은 `ClickRush` 가 방치를 풀어서 그대로).
+- **개발자 패널 삭제** (웹 버전 대비): ` 키로 열던 `UltTestPanel`(필살기·보스·층 클리어·게임 오버·저장 초기화·전부 해제 버튼) 스크립트와 Game 씬 `HUD/TestPanel` 오브젝트 37개 지움 · `PromotePanel.drawAbove` 비움. Unity 가 꺼져 있어서 씬 파일을 직접 고침.
+  - 남겨 둔 것: 패널이 부르던 테스트 함수(`UltimateManager.TestUlt` · `StageManager.TestClear` · `Boss.TestSpawn` · `SuperUltManager.TestSuper` · `Progress.UnlockEverything` 등)와 `Assets/_Recovery/0.unity`(복구용 씬, 이제 빈 스크립트 칸).
+- 컴파일 오류 0 · Game 씬 검사 깨진 스크립트/참조 0 · Play: 클릭 없이 8초 뒤 `Idle` 켜짐, `StepToStairs` 방향 맞음, 콘솔 오류 0. 방치 이동 '느낌'은 사람이 봐야 함.
+
 ## 6. 밸런스 측정 (BalanceProbe)
 
 - 목표 (사용자): 전투력 = 적정일 때 일반 층은 제한시간 180초의 **60~90%**(75% 쪽으로), 보스 층은 210초의 **약 90%**(길 117초 + 보스전 72초, 보스전은 Boss `hp_pow_sec` 로 맞춤).

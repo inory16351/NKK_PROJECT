@@ -114,9 +114,10 @@ namespace NKK.Rats
             if (rushLock > 0 && !(rushT > 0)) rushLock--;      // 총공격 뒤 한 번 흩어지면 다시 번식 가능
             float a = Random.Range(0, Mathf.PI * 2);
             var st = Manager.Stage; var room = StageManager.RoomOf(x, y);
-            if (Random.value < 0.35f)
+            bool idle = Manager.Idle;      // 방치 중: 물건·계단 쪽으로 더 자주 (RatManager 방치 칸)
+            if (Random.value < (idle ? Manager.idleItemChance : 0.35f))
             {
-                var best = Manager.Items.Nearest(x, y, 280);
+                var best = Manager.Items.Nearest(x, y, idle ? Manager.idleItemRange : 280);
                 if (best) a = Mathf.Atan2(best.y - y, best.x - x) + Random.Range(-0.3f, 0.3f);
             }
             else if (Random.value < 0.12f)
@@ -134,7 +135,9 @@ namespace NKK.Rats
             }
             var boss = Boss.Current;
             if (boss && boss.CanHit && !boss.Hidden && Random.value < 0.45f && Manager.Ults && Manager.Ults.OnScreen(boss.x, boss.y, 0)) a = Mathf.Atan2(boss.y - y, boss.x - x) + Random.Range(-0.3f, 0.3f);   // 보스한테 우르르
-            else if (st.Open.Contains(st.StairsRoom) && !(boss && boss.Blocking && !boss.Surprise) && Random.value < 0.12f) { var s = st.StairsPos; a = Mathf.Atan2(s.y - y, s.x - x) + Random.Range(-0.3f, 0.3f); }
+            else if (st.Open.Contains(st.StairsRoom) && !(boss && boss.Blocking && !boss.Surprise) && Random.value < (idle ? Manager.idleStairsChance : 0.12f)) { var s = st.StairsPos; a = Mathf.Atan2(s.y - y, s.x - x) + Random.Range(-0.3f, 0.3f); }
+            else if (idle && !st.Open.Contains(st.StairsRoom) && Random.value < Manager.idleStairsDigChance && st.StepToStairs(room) is Vector2Int sd)
+                a = Mathf.Atan2((room.y + sd.y + 0.5f) * World.RH - y, (room.x + sd.x + 0.5f) * World.RW - x) + Random.Range(-0.4f, 0.4f);     // 방치: 계단 방이 아직 막혀 있으면 그쪽 옆방(막혔으면 벽)으로
             // 쥐덫의 치즈 미끼에 홀려서 (가끔)
             var bait = Random.value < 0.1f ? st.NearestArmedTrap(x, y, 320) : null;
             if (bait) a = Mathf.Atan2(bait.y - y, bait.x - x) + Random.Range(-0.08f, 0.08f);
