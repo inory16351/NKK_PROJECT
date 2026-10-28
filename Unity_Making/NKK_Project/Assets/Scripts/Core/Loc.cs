@@ -22,9 +22,16 @@ namespace NKK
         // 언어가 바뀌면 (LocText · 글을 채우는 스크립트가 다시 그림)
         public static event Action Changed;
 
+        // 처음 실행(고른 언어 없음) 때 언어: 웹 빌드(itch.io) = 영어, 에디터·윈도우 = 한국어 (팀 작업용)
+#if UNITY_WEBGL && !UNITY_EDITOR
+        public const string Default = English;
+#else
+        public const string Default = Korean;
+#endif
+
         public static string Lang
         {
-            get { if (lang == null) lang = PlayerPrefs.GetString(Pref, Korean); return lang; }
+            get { if (lang == null) lang = PlayerPrefs.GetString(Pref, Default); return lang; }
         }
         public static bool IsKorean => Lang == Korean;
         public static bool Loaded => map.Count > 0;

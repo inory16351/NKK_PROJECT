@@ -664,6 +664,14 @@
   - 남겨 둔 것: 패널이 부르던 테스트 함수(`UltimateManager.TestUlt` · `StageManager.TestClear` · `Boss.TestSpawn` · `SuperUltManager.TestSuper` · `Progress.UnlockEverything` 등)와 `Assets/_Recovery/0.unity`(복구용 씬, 이제 빈 스크립트 칸).
 - 컴파일 오류 0 · Game 씬 검사 깨진 스크립트/참조 0 · Play: 클릭 없이 8초 뒤 `Idle` 켜짐, `StepToStairs` 방향 맞음, 콘솔 오류 0. 방치 이동 '느낌'은 사람이 봐야 함.
 
+## 5-34. itch.io 웹 버전 = 50f 빌드 (40층 엔딩) (2026-10-28, 커밋함 · 50f 브랜치)
+
+- **사용자 결정**: 50f 그대로 빌드 (mvp 머지 안 함 — 서버 랭킹·기록은 이번 웹 버전에 없음). 웹 빌드 사양만 mvp 와 같게.
+- mvp 에서 가져온 것 (50f 에 커밋): `Assets/WebGLTemplates/Fit` (게임 칸 16:9 맞춤) · `Loc.Default` (웹 = 영어, 에디터·윈도우 = 한국어) · `LocText.Fit` 월드 글 최소 크기 수정 · 플레이어 설정 (템플릿 Fit · Gzip + decompression fallback · 데이터 캐시 · 기본 1280×720). Unity 가 WebGL 빌드하며 바꾼 URP 설정·배칭도 같이.
+- **용량**: 100층 그림이 늘어 data 파일이 222MB → itch 파일 하나 200MB 제한 초과. 사용자 결정 = **웹(WebGL)에서만 Crunch 압축**: `_WebAtlas` 아틀라스 213개 (V2 아틀라스는 `SpriteAtlasImporter` 에 설정해야 먹음 — `SpriteAtlas` 에 넣으면 무시됨) + 아틀라스 밖 큰 그림 59장 (초필살기 파노라마·클로즈업 등, 빌드 보고서 0.5MB 이상) WebGL 덮어쓰기 = Compressed · Crunch 50. 윈도우·에디터 화질 그대로. → data **197MB** (전체 200.4MB). 로컬 확인: 그림 깨짐 없음.
+  - **다음 웹 빌드도 200MB 근처** — 그림이 더 늘면 다시 넘음 (남은 큰 것: 폰트 SDF 3개 각 16MB · 배경음악 45MB).
+- 빌드 `Unity_Making/NKK_Project/Builds/WebGL_20261028` → `butler push ... parksongho/squeak-squeak:html5 --userversion 40f-20261028` → 빌드 #2232414 (html5 버전 이름 `40f-20261028`). itch 페이지에서 Unity 로딩 → 영어 타이틀 확인.
+
 ## 6. 밸런스 측정 (BalanceProbe)
 
 - 목표 (사용자): 전투력 = 적정일 때 일반 층은 제한시간 180초의 **60~90%**(75% 쪽으로), 보스 층은 210초의 **약 90%**(길 117초 + 보스전 72초, 보스전은 Boss `hp_pow_sec` 로 맞춤).
