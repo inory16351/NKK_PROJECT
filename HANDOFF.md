@@ -672,6 +672,15 @@
   - **다음 웹 빌드도 200MB 근처** — 그림이 더 늘면 다시 넘음 (남은 큰 것: 폰트 SDF 3개 각 16MB · 배경음악 45MB).
 - 빌드 `Unity_Making/NKK_Project/Builds/WebGL_20261028` → `butler push ... parksongho/squeak-squeak:html5 --userversion 40f-20261028` → 빌드 #2232414 (html5 버전 이름 `40f-20261028`). itch 페이지에서 Unity 로딩 → 영어 타이틀 확인.
 
+## 5-35. 서버 랭킹·기록 (mvp) → 50f 로 옮김 · itch.io 웹 버전 다시 (2026-10-28, 커밋함 · 50f 브랜치)
+
+- **사용자 결정**: mvp 의 서버 랭킹·기록을 50f 에 넣어 웹 버전을 다시 올림. **머지 안 함** — 서버 부분만 골라 옮김.
+- 그대로 가져옴 (mvp 최종본): `Scripts/Net/*` (FirebaseClient · ServerConfig · Telemetry · Leaderboard) · `Lobby/LeaderboardPage` · `NickPopup` · `ServerSettings` · `Data/ServerConfig.asset`(키·프로젝트 nkk-mvp, mvp 와 같음) · `Data/NickBanned.txt` · `Art/Rats/Lobby/lb_rank_board.png` · 저장소 `Firebase/` (보안 규칙) · `Cloudflare/nation-worker.js` · `Tools/server_stats.py`.
+- 손으로 반영: `Progress` (playSec · rankRuns · floorRuns · `FloorRecord` · `FeatureUnlocked` 이벤트 · `RunsSinceLastRank` · 처음부터 열린 기능에 `lb` · **예전 저장의 무제한 플래그 무시**) · `LobbyManager` Esc 로 닉네임 창 닫기 · 스트링 8000405~8000429 (25개, 엑셀·JSON).
+- 씬: mvp 씬에서 같은 경로로 복사 — Title·Lobby·Game 의 `Server` 오브젝트 · Lobby `Tab_lb` · `Page_lb` · `NickPopup` · `Page_rec/Card/ServerRows` + `LobbyManager.pages` 에 lb. 50f 낮잠 침대엔 효과음 줄이 더 있어 겹침 → Card 높이 560 → 720 · Volume y 52 · ServerRows y -94.
+- 확인 (에디터, `sendInEditor` 를 메모리에서만 잠깐 켬): 익명 로그인 · 랭킹 52명 불러옴 · 랭킹 탭/닉네임 창/낮잠 침대 표시. 기록 보내기는 에디터에서 안 함.
+- 빌드 `Builds/WebGL_20261028_srv` (data 197MB) → `butler push ... :html5 --userversion 40f-server-20261028`.
+
 ## 6. 밸런스 측정 (BalanceProbe)
 
 - 목표 (사용자): 전투력 = 적정일 때 일반 층은 제한시간 180초의 **60~90%**(75% 쪽으로), 보스 층은 210초의 **약 90%**(길 117초 + 보스전 72초, 보스전은 Boss `hp_pow_sec` 로 맞춤).

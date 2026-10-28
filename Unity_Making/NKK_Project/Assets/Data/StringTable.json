@@ -15934,6 +15934,131 @@
    "string_key": 9000132,
    "ko": "※ 출발 층은 스킬만으로 다 열리지 않아요 · 층을 클리어해야 더 위에서 출발할 수 있어요 (출동 화면에 안내)",
    "en": "※ Skip needs cleared floors too · clear floors to start higher (shown on the Run screen)"
+  },
+  {
+   "string_key": 8000405,
+   "ko": "최고 층",
+   "en": "Best Floor"
+  },
+  {
+   "string_key": 8000406,
+   "ko": "닉네임 바꾸기",
+   "en": "Change Nickname"
+  },
+  {
+   "string_key": 8000407,
+   "ko": "바꾸기",
+   "en": "Change"
+  },
+  {
+   "string_key": 8000408,
+   "ko": "닉네임 입력",
+   "en": "Enter nickname"
+  },
+  {
+   "string_key": 8000409,
+   "ko": "순위",
+   "en": "#"
+  },
+  {
+   "string_key": 8000410,
+   "ko": "닉네임 정하기",
+   "en": "Choose a Nickname"
+  },
+  {
+   "string_key": 8000411,
+   "ko": "아직 랭킹에 오른 쥐가 없어요. 첫 번째가 되어 보세요!",
+   "en": "No rats on the board yet. Be the first!"
+  },
+  {
+   "string_key": 8000412,
+   "ko": "훈장",
+   "en": "Rank"
+  },
+  {
+   "string_key": 8000413,
+   "ko": "아직 없음",
+   "en": "Not set"
+  },
+  {
+   "string_key": 8000414,
+   "ko": "시도",
+   "en": "Runs"
+  },
+  {
+   "string_key": 8000415,
+   "ko": "닉네임",
+   "en": "Nickname"
+  },
+  {
+   "string_key": 8000416,
+   "ko": "불러오는 중...",
+   "en": "Loading..."
+  },
+  {
+   "string_key": 8000417,
+   "ko": "랭킹에 보일 이름이에요 (2~12자)",
+   "en": "The name shown on the leaderboard (2-12 characters)"
+  },
+  {
+   "string_key": 8000418,
+   "ko": "지금은 서버에 연결할 수 없어요",
+   "en": "Can't reach the server right now"
+  },
+  {
+   "string_key": 8000419,
+   "ko": "새로고침",
+   "en": "Refresh"
+  },
+  {
+   "string_key": 8000420,
+   "ko": "랭킹",
+   "en": "Leaderboard"
+  },
+  {
+   "string_key": 8000421,
+   "ko": "랭킹을 불러오지 못했어요. 인터넷 연결을 확인해 주세요.",
+   "en": "Couldn't load the leaderboard. Please check your connection."
+  },
+  {
+   "string_key": 8000422,
+   "ko": "{n}회",
+   "en": "{n}"
+  },
+  {
+   "string_key": 8000423,
+   "ko": "최고 층이 높은 순 · 같은 층이면 더 적은 시도로 닿은 순",
+   "en": "Highest floor first · ties go to fewer runs"
+  },
+  {
+   "string_key": 8000424,
+   "ko": "내 기록",
+   "en": "My Record"
+  },
+  {
+   "string_key": 8000425,
+   "ko": "익명 통계 보내기",
+   "en": "Send anonymous stats"
+  },
+  {
+   "string_key": 8000426,
+   "ko": "100위 밖",
+   "en": "100+"
+  },
+  {
+   "string_key": 8000427,
+   "ko": "닉네임을 정하면 내 기록이 랭킹에 올라가요",
+   "en": "Set a nickname to put your record on the board"
+  },
+  {
+   "string_key": 8000428,
+   "ko": "2~12자로 정해 주세요",
+   "en": "Use 2-12 characters"
+  },
+  {
+   "string_key": 8000429,
+   "ko": "쓸 수 없는 말이 들어 있어요",
+   "en": "That name contains a word we can't use"
   }
  ]
 }

@@ -2162,6 +2162,9 @@ MonoBehaviour:
   tier: 1
   maxFloor: 1
   runs: 0
+  playSec: 0
+  rankRuns: 0
+  floorRuns: 0
   testMarket: 0
   alleyRevealStep: l_alley
 --- !u!4 &14758970
@@ -52220,6 +52223,11 @@ MonoBehaviour:
     length: 40
   sleepChance: 0.01
   packRadius: 120
+  idleAfter: 8
+  idleItemChance: 0.5
+  idleItemRange: 420
+  idleStairsChance: 0.3
+  idleStairsDigChance: 0.25
   popCap: 30
   birthHearts: 4
   breedCool: 4
@@ -129546,6 +129554,89 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694979146}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &695309877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 695309881}
+  - component: {fileID: 695309880}
+  - component: {fileID: 695309879}
+  - component: {fileID: 695309878}
+  m_Layer: 0
+  m_Name: Server
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &695309878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695309877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2a8d659d9e765e47b7fb1fbf23b497e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.Net.Leaderboard
+  collection: players
+  top: 100
+  cacheSec: 300
+  nickMin: 2
+  nickMax: 12
+  bannedWords: {fileID: 4900000, guid: 4df78732f8d8f684bb04dc36a65c9378, type: 3}
+--- !u!114 &695309879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695309877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5b1792ac5d0507488b380b7ea479147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.Net.Telemetry
+  collection: rankups
+  milestoneCollection: milestones
+  logFeatures:
+  - rats
+  maxQueue: 50
+--- !u!114 &695309880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695309877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 446f6ef1738219c41837b7e5e775bab6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.Net.FirebaseClient
+  config: {fileID: 11400000, guid: 8a2663521e77de74a844170d473de5bb, type: 2}
+  log: 1
+--- !u!4 &695309881
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695309877}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -221504,7 +221595,9 @@ MonoBehaviour:
   footprintSticker: footprint
   slotSticker: slot_machine
   signalSticker: signal_5g
-  stormLookSize: 260
+  garlandSize: 120
+  slotSize: 150
+  signalSize: 40
   headbuttPopup: "\uB775!"
   pandaPopup: "\uCFF5"
   towerPopup: "\uC950 \uD0D1!!"
@@ -221517,6 +221610,54 @@ MonoBehaviour:
   rapidPopupKey: 8000547
   slotWinPopupKey: 8000548
   slotLosePopupKey: 8000549
+  skate:
+    cadenceMin: 0.8
+    cadenceMax: 1.4
+    cadenceDiv: 500
+    kick: -1
+    kickEnd: 0.3
+    recover: 0.15
+    recoverEnd: 0.55
+    frontBase: 0.3
+    frontSwing: 0.15
+    tilt: 0.08
+    tiltPush: 0.05
+    sx: 1.04
+    sy: 0.96
+    sxPush: 0.04
+    head: -0.06
+    headX: -1
+    tailBase: -0.1
+    tailWave: 0.06
+    glideAt: 1.3
+    glideFront: 0.9
+    glideFarFront: 0.75
+    glideBack: -0.75
+    glideFarBack: -0.6
+    glideTilt: 0.12
+    glideHead: -0.14
+    glideSx: 1.12
+    glideSy: 0.92
+    coastFront: 0.35
+    coastFarFront: 0.3
+    coastBack: 0.08
+    coastFarBack: 0.12
+    coastTilt: 0.05
+    coastWobble: 0.03
+    idleSpeed: 1.6
+    idleFront: 0.08
+    idleBack: 0.06
+    idleTilt: 0.04
+    brakeTime: 0.45
+    brakeFront: 1
+    brakeFarFront: 0.9
+    brakeBack: 0.5
+    brakeFarBack: 0.4
+    brakeTilt: -0.16
+    brakeHead: 0.1
+    brakeTail: 0.6
+    friction: 1.6
+    ground: 1
   Game: {fileID: 0}
   Stage: {fileID: 0}
   Rats: {fileID: 0}
@@ -221537,6 +221678,10 @@ MonoBehaviour:
   cloneCircleSticker: magic_circle
   cloudSize: 520
   trainSize: 420
+  cloudHeight: 300
+  cloudDrift: 40
+  stormRingColor: {r: 0.25, g: 0.3, b: 0.5, a: 0.45}
+  rainRingColor: {r: 1, g: 0.82, b: 0.3, a: 0.45}
   meteorSprite: {fileID: 0}
   giantPopup: "\uAC70\uB300\uD654!!"
   jackpotPopup: "\uC7AD\uD31F!! \uC5F0\uAD6C\uC790\uB8CC \xD7{n}"
@@ -317404,6 +317549,12 @@ MonoBehaviour:
   recoilRate: 12
   recoilTilt: 4
   openSwap: 0.1
+  biteTime: 0.9
+  biteWind: 0.3
+  biteStrike: 0.55
+  biteOrder: 03000000000000000500000001000000060000000200000004000000
+  neckLimit: 40
+  neckIters: 8
   still: 0
   open: 0
 --- !u!1 &1790909849
@@ -374904,3 +375055,4 @@ SceneRoots:
   - {fileID: 701137307}
   - {fileID: 1184066576}
   - {fileID: 1241555473}
+  - {fileID: 695309881}

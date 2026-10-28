@@ -28,6 +28,8 @@ namespace NKK
             public List<int> nodes = new();      // 활성화한 공용 스킬 노드 (훈장별 트리). skills 는 예전 레벨식 (안 씀)
             public List<int> achvOn = new();     // 업적 스위치: 달성한 업적 id (이 저장 파일 기준, 한 번 켜지면 계속 켜짐)
             public double cheese, research; public int tier = 1, maxFloor = 1, runs;
+            public double playSec; public int rankRuns;     // 누적 플레이 시간(초) · 마지막 훈장을 달았을 때의 탈출 시도 횟수 (서버 기록용, 2026-10-13)
+            public int floorRuns;                // 최고 층에 처음 닿았을 때의 탈출 시도 횟수 (랭킹 동점 순위용)
             public int ver;                      // 0 = 튜토리얼 전 저장 (그대로 이어 하면 튜토리얼 끝난 것으로 침)
             public List<string> tuto = new();    // 본 튜토리얼 단계 id
             public List<string> unlocks = new(); // 해금한 기능 id (튜토리얼 테이블 Unlock_Id)
@@ -87,6 +89,13 @@ namespace NKK
         [Tooltip("티어 (훈장)")] public int tier = 1;
         [Tooltip("최고 층 기록")] public int maxFloor = 1;
         [Tooltip("탈출 시도 횟수")] public int runs;
+        [Tooltip("누적 플레이 시간 (초, 타이틀·일시정지·창 비활성 제외)")] public double playSec;
+        [Tooltip("마지막 훈장을 달았을 때의 탈출 시도 횟수")] public int rankRuns;
+        [Tooltip("최고 층에 처음 닿았을 때의 탈출 시도 횟수 (랭킹 동점 순위)")] public int floorRuns;
+        // 최고 층 기록이 오름 (랭킹 갱신)
+        public event Action<int> FloorRecord;
+        // 방금 단 훈장까지 걸린 시도 횟수 (이전 훈장 이후, RankUp 직후 값)
+        public int RunsSinceLastRank { get; private set; }
 
         // 로비 → 게임 씬으로 넘기는 시작 층 (0 = 게임 씬을 바로 켬 → GameManager 인스펙터 값)
         public static int PendingStartFloor;
@@ -115,7 +124,7 @@ namespace NKK
         readonly HashSet<string> tuto = new(), unlocks = new();
         bool tutoSkip, tutoQuiet;
         // 처음부터 열려 있는 기능 (작전 회의 · 낮잠 침대)
-        static readonly string[] OpenAtStart = { "run", "rec" };
+        static readonly string[] OpenAtStart = { "run", "rec", "lb" };     // lb = 랭킹 (MVP, 처음부터 열림)
         // 해금이 바뀔 때마다 +1 (FeatureGate 가 다시 그림)
         public int UnlockVersion { get; private set; }
         public bool TutoSkipped => tutoSkip;
@@ -159,16 +168,20 @@ namespace NKK
         [Tooltip("테스트: 층과 상관없이 뒷골목·뽑기·암시장 열기")] public bool testMarket;
         [Tooltip("뒷골목(맨홀)이 드러나는 튜토리얼 단계 id — 이 단계가 시작돼야 보임 (비우면 16층 클리어만으로)")] public string alleyRevealStep = "l_alley";
         // 쉼표로 여러 개. 새로 열린 게 있으면 true
+        // 기능이 새로 열릴 때 (기능 id) — 서버 기록용 (Telemetry)
+        public event Action<string> FeatureUnlocked;
         public bool Unlock(string features)
         {
             if (string.IsNullOrEmpty(features)) return false;
-            bool any = false;
-            foreach (var f in features.Split(',')) { var t = f.Trim(); if (t.Length > 0 && unlocks.Add(t)) any = true; }
-            if (any) { UnlockVersion++; Save(); }
-            return any;
+            var added = new List<string>();
+            foreach (var f in features.Split(',')) { var t = f.Trim(); if (t.Length > 0 && unlocks.Add(t)) added.Add(t); }
+            if (added.Count == 0) return false;
+            UnlockVersion++; Save();
+            foreach (var t in added) FeatureUnlocked?.Invoke(t);
+            return true;
         }
         public bool SpendCheese(double v) { if (v < 0 || cheese < v) return false; cheese -= v; Save(); return true; }
-        public void OnFloorReached(int f) { if (f > maxFloor) { maxFloor = f; Save(); } }
+        public void OnFloorReached(int f) { if (f > maxFloor) { maxFloor = f; floorRuns = runs; Save(); FloorRecord?.Invoke(f); } }
 
         // 공용 스킬 지도에서 노드 상태: 활성화 · 열림(살 수 있음) · 잠김(이어진 노드가 아직) · 훈장 부족
         public enum SkillState { Owned, Open, Locked, TierLock }
@@ -316,6 +329,8 @@ namespace NKK
             if (h != testHash) { testHash = h; SkillVersion++; }
             if (BlackMarket.TestOpen != testMarket) { BlackMarket.TestOpen = GeneGacha.TestOpen = testMarket; UnlockVersion++; }
             // 무제한: 써서 줄어든 치즈·연구자료를 다시 채움
+            // 누적 플레이 시간: 타이틀·일시정지·창 비활성 제외
+            if (Application.isFocused && !FxManager.Paused && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "Title") playSec += Time.unscaledDeltaTime;
             if (Infinite) { if (cheese < InfiniteAmount) cheese = InfiniteAmount; if (research < InfiniteAmount) research = InfiniteAmount; }
         }
 
@@ -384,13 +399,14 @@ namespace NKK
         {
             if (!CanRankUp()) return false;
             research -= NextTier.research_cost; tier++; SkillVersion++;
+            RunsSinceLastRank = runs - rankRuns; rankRuns = runs;
             Save(); RankedUp?.Invoke(tier);
             return true;
         }
 
         public void Save()
         {
-            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, tutoQuiet = tutoQuiet, endingSeen = endingSeen, infinite = Infinite, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
+            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, playSec = playSec, rankRuns = rankRuns, floorRuns = floorRuns, ver = SaveVer, tutoSkip = tutoSkip, tutoQuiet = tutoQuiet, endingSeen = endingSeen, infinite = Infinite, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
             d.tuto.AddRange(tuto); d.unlocks.AddRange(unlocks);
             d.nodes.AddRange(skills);
             d.achvOn.AddRange(achvOn);
@@ -401,12 +417,12 @@ namespace NKK
 
         void Load()
         {
-            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0;
+            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0; playSec = 0; rankRuns = 0; floorRuns = 0;
             tuto.Clear(); unlocks.Clear(); tutoSkip = tutoQuiet = endingSeen = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new(); aug = new();
             var s = PlayerPrefs.GetString(KeyOf(Slot), "");
             if (string.IsNullOrEmpty(s)) return;
             var d = JsonUtility.FromJson<SaveData>(s);
-            cheese = d.cheese; research = d.research; tier = Mathf.Max(1, d.tier); maxFloor = Mathf.Max(1, d.maxFloor); runs = d.runs;
+            cheese = d.cheese; research = d.research; tier = Mathf.Max(1, d.tier); maxFloor = Mathf.Max(1, d.maxFloor); runs = d.runs; playSec = d.playSec; rankRuns = d.rankRuns; floorRuns = d.floorRuns > 0 || maxFloor <= 1 ? d.floorRuns : runs;     // 예전 저장 = 지금 시도 횟수로
             var db = GameDatabase.Instance;
             foreach (var e in d.rats) if (!db || db.RatsByCode.Count == 0 || db.RatsByCode.ContainsKey(e.code)) rats[e.code] = e;      // 표에서 지운 쥐 (메이드 쥐 2026-10-23) 기록은 버림
             if (d.nodes != null) foreach (var id in d.nodes) skills.Add(id);
@@ -418,7 +434,7 @@ namespace NKK
             tutoSkip = d.tutoSkip || d.ver == 0;      // 튜토리얼이 생기기 전 저장 = 다 본 것으로
             tutoQuiet = d.tutoQuiet; endingSeen = d.endingSeen;
             shop = d.shop ?? new(); gacha = d.gacha ?? new(); aug = d.aug ?? new();
-            Infinite = d.infinite;
+            Infinite = false;      // 웹(랭킹) 빌드: 테스트 패널 없음 → 예전 저장의 '전부 해제'(무제한)도 무시 (랭킹·기록 오염 방지)
         }
 
         [ContextMenu("진행도 초기화")]
