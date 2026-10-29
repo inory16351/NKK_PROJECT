@@ -135,7 +135,8 @@ namespace NKK.Rats
             }
             var boss = Boss.Current;
             if (boss && boss.CanHit && !boss.Hidden && Random.value < 0.45f && Manager.Ults && Manager.Ults.OnScreen(boss.x, boss.y, 0)) a = Mathf.Atan2(boss.y - y, boss.x - x) + Random.Range(-0.3f, 0.3f);   // 보스한테 우르르
-            else if (st.Open.Contains(st.StairsRoom) && !(boss && boss.Blocking && !boss.Surprise) && Random.value < 0.12f) { var s = st.StairsPos; a = Mathf.Atan2(s.y - y, s.x - x) + Random.Range(-0.3f, 0.3f); }
+            else if (st.Open.Contains(st.StairsRoom) && !(boss && boss.Blocking && !boss.Surprise) && Random.value < (Manager.Idle ? Mathf.Max(0.12f, Manager.idleStairsChance) : 0.12f)) { var s = st.StairsPos; a = Mathf.Atan2(s.y - y, s.x - x) + Random.Range(-0.3f, 0.3f); }
+            else if (Manager.Idle && !st.Open.Contains(st.StairsRoom) && Random.value < Manager.idleStairsChance) { var s = st.StairsStep(room); a = Mathf.Atan2(s.y - y, s.x - x) + Random.Range(-0.3f, 0.3f); }     // 방치: 계단 방이 안 열렸어도 계단 쪽 길로 (벽 부수며)
             // 쥐덫의 치즈 미끼에 홀려서 (가끔)
             var bait = Random.value < 0.1f ? st.NearestArmedTrap(x, y, 320) : null;
             if (bait) a = Mathf.Atan2(bait.y - y, bait.x - x) + Random.Range(-0.08f, 0.08f);

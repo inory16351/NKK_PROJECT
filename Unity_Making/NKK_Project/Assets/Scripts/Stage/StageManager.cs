@@ -125,6 +125,15 @@ namespace NKK.Stage
         // 보스가 대기 중인 계단 방 (보스 층): 멀리 있어도 어둡게 그려서 보스가 어디 있는지 보이게
         public bool BossWaitRoom(Vector2Int k) => k == StairsRoom && Boss && Boss.State == Boss.BState.Wait && !Boss.Test && !Boss.Surprise;      // 깜짝 보스 층은 보통 방처럼
         public Vector2 StairsPos => new((StairsRoom.x + 0.5f) * World.RW, StairsRoom.y * World.RH + stairsY);
+        readonly Dictionary<Vector2Int, int> toStairs = new();      // 계단 방까지 방 이동 횟수 (레이아웃 안, 벽 무시)
+        // 계단 쪽 한 걸음: 옆 방 중 계단 방까지 가장 가까운 방의 가운데 (안 열린 방이면 그 벽으로 달려가 부숨). 계단 방이 열렸으면 계단
+        public Vector2 StairsStep(Vector2Int room)
+        {
+            if (Open.Contains(StairsRoom) || !toStairs.TryGetValue(room, out int best)) return StairsPos;
+            var step = room;
+            foreach (var d in Dirs) if (toStairs.TryGetValue(room + d, out int v) && v < best) { best = v; step = room + d; }
+            return step == room ? StairsPos : new((step.x + 0.5f) * World.RW, (step.y + 0.5f) * World.RH);
+        }
 
         // 층 밸런스 = 스테이지 테이블 Stage (없으면 인스펙터 옛 수식)
         StageRow Row(int f) => GameDatabase.Instance ? GameDatabase.Instance.StageOf(f) : null;
@@ -175,6 +184,8 @@ namespace NKK.Stage
             while (q.Count > 0) { var c = q.Dequeue(); foreach (var d in Dirs) { var k = c + d; if (Layout.Contains(k) && !dist.ContainsKey(k)) { dist[k] = dist[c] + 1; q.Enqueue(k); } } }
             var best = Vector2Int.zero; foreach (var kv in dist) if (kv.Value > dist[best] && kv.Value <= stairsMaxDist) best = kv.Key;
             StairsRoom = best; StairsDist = dist[best];
+            toStairs.Clear(); toStairs[best] = 0; q.Enqueue(best);
+            while (q.Count > 0) { var c = q.Dequeue(); foreach (var d in Dirs) { var k = c + d; if (Layout.Contains(k) && !toStairs.ContainsKey(k)) { toStairs[k] = toStairs[c] + 1; q.Enqueue(k); } } }
             // 벽 체력 자동 계산: 경로 벽 배율 합 = 테이블 wall_path (gen_stage_table.py walls() 와 같은 나눔)
             curStairsWall = curNormalWall = -1;
             if (sr != null && sr.wall_path > 0)

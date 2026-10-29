@@ -91,6 +91,12 @@ namespace NKK.Rats
         public float RushCooldown => Mathf.Max(rushCooldownMin, rushCooldown - CommonSkill.RushCdLess);
         public bool RushReady => rushCdLeft <= 0;
         float rushCdLeft;
+
+        [Header("방치 (입력 없음)")]
+        [Tooltip("마우스·키보드·터치 입력이 이 초 동안 없으면 방치로 봄 (0 = 끔)")] public float idleSec = 30;
+        [Tooltip("방치 중 쥐가 달릴 때 계단 쪽으로 갈 확률 (계단 방이 안 열렸으면 계단 방까지 가까운 길의 다음 방·벽 쪽). 평소엔 계단 방이 열렸을 때만 0.12")] [Range(0, 1)] public float idleStairsChance = 0.3f;
+        public bool Idle => idleSec > 0 && idleT >= idleSec;
+        float idleT;
         readonly Dictionary<object, (float t0, int n)> rushStacks = new();
         // 총공격 중첩 제한: 같은 대상(물건·사람·보스·벽 키)이 짧은 시간에 너무 많이 맞으면 넘은 타격은 약하게
         public float RushStack(object target)
@@ -627,9 +633,19 @@ namespace NKK.Rats
             }
         }
 
+        // 방치 판정: 아무 입력도 없으면 idleT 가 쌓임 (클릭 총공격 ClickRush 도 입력으로 셈 — 밸런스 측정은 방치 아님)
+        void TrackIdle()
+        {
+            var m = Mouse.current; var kb = Keyboard.current; var ts = Touchscreen.current;
+            bool any = m != null && (m.leftButton.isPressed || m.rightButton.isPressed || m.delta.ReadValue().sqrMagnitude > 0 || m.scroll.ReadValue().sqrMagnitude > 0)
+                || kb != null && kb.anyKey.isPressed || ts != null && ts.primaryTouch.press.isPressed;
+            idleT = any ? 0 : idleT + Time.deltaTime;
+        }
+
         // 클릭 총공격 (쿨타임 적용). 밸런스 측정도 이걸 씀
         public bool ClickRush(Vector2 p)
         {
+            idleT = 0;
             if (!RushReady || RushActive) return false;
             var cat = Cats ? Cats.Current : null;
             if (cat && cat.Alive && cat.BodyDist(p.x, p.y) <= 0) p = new Vector2(cat.x, cat.y);     // 고양이 몸을 누르면 고양이 발밑으로
@@ -673,7 +689,7 @@ namespace NKK.Rats
         void Update()
         {
             if (FxManager.WorldFreeze) return;
-            HandleInput();
+            HandleInput(); TrackIdle();
             if ((squeakT -= Time.deltaTime) <= 0) { squeakT = Random.Range(squeakMin, squeakMax); if (Rats.Count > 0) { var sq = Rats[Random.Range(0, Rats.Count)]; SfxManager.PlayAt("rat_squeak", sq.x, sq.y, 0.5f); } }
             float dt = Mathf.Min(Time.deltaTime, 0.05f);
             rushLeft -= dt; rushCdLeft -= dt;
