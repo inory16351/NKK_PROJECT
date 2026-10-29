@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: butterfly_head.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawing. No text, no letters, no labels, no grid lines, no frames.
+- ONE single drawing centered with a wide magenta margin (about 60% of the canvas), nothing touching the borders.
+- STYLE: Untitled Goose Game look like the attached reference parts sheets (ref_std_rats, ref_std_rats2, ref_newrats3_parts): completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows. Soft muted pastel palette.
+- DRAW EXACTLY THE HEAD FROM THE ATTACHED SKETCH (ref_butterfly_concept): a cute pale cream-white mouse HEAD seen in a 3/4 FRONT view, turned toward the viewer and slightly to the LEFT: a big round head, the short snout pointing toward the viewer's lower-left with a small pink nose, one clearly visible small black dot eye and the second eye small and partly hidden on the far side, a few thin whiskers on each side of the snout, a tiny smile line, a soft pale pink cheek. The head is the whole creature (round, fully drawn at the bottom and back, no neck cut). ABSOLUTELY NO EARS on the head (the ears are separate wings drawn elsewhere), no body, no tail.

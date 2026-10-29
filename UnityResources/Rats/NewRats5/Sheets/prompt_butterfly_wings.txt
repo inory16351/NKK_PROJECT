@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: butterfly_wings.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no labels, no grid lines, no frames.
+- An exact grid of 2 columns x 1 row (each cell 768x1024). Each drawing sits centered in its own cell with a wide magenta margin; nothing touches the cell borders.
+- STYLE: Untitled Goose Game look like the attached reference parts sheets: completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows. Soft muted pastel palette.
+- LOOK AT THE ATTACHED SKETCH (ref_butterfly_concept): the mouse's ears are HUGE, WIDE and ROUND like big round discs or big round butterfly wings, about as wide as the head, almost circular (slightly egg-shaped), paper-thin, not tall narrow rabbit ears. Draw them in the flat style.
+
+Cells:
+1) BIG EAR-WING: one single huge, wide, almost CIRCULAR ear (width about 0.92 x height, slightly wider at the top), pale cream-white outer rim, soft pale pink inner area, one thin slightly darker pink fold curve starting at the base. A small rounded attachment base at the bottom center (a short stub) so it can be hidden behind a head.
+2) SMALL LOWER WING: a smaller round ear-wing shape, about 0.6 x the size of the big one, also almost circular, same colors and fold curve, with a small rounded attachment base at the top center (stub pointing up) so it hangs down from the head.

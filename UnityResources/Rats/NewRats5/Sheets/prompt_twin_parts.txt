@@ -1,0 +1,20 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: twin_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 5 columns x 3 rows (each cell about 307x341). Fill ONLY rows 1 and 2; row 3 stays completely empty magenta. Each drawing sits centered in its own cell with a clear magenta margin; drawings must NOT touch or cross cell borders.
+- STYLE AND PROPORTIONS ARE THE MOST IMPORTANT RULE: copy the attached reference parts sheets (ref_std_rats, ref_std_rats2, ref_newrats3_parts) exactly. They are cut-out body parts of ordinary four-legged RATS for a 2D paper-doll rig (each row = one rat: head, torso, tail, front leg, back leg). Untitled Goose Game look: completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no sparkles, no drop shadows. Soft muted pastel palette.
+- The attached sketch (ref_kongpat_concept) is ONLY for the idea: two cute little mice joined together. Ignore its sketchy line art.
+- These are ANIMALS, NOT HUMANS. Real rat anatomy, side view, every character FACES LEFT (snout pointing left). Same size relationships as the reference rows:
+  * HEAD: pointed rat snout with small pink nose, round pink ear, a few thin whiskers, small simple dark dot eye, cut flat at the neck on its lower right. Head width about 0.8 x torso width.
+  * TORSO: a plump HORIZONTAL rat body lying level like a four-legged animal (about 1.7x longer than tall), NO head, NO legs, NO tail, flat cut at the neck end (left).
+  * TAIL: long thin pink rat tail lying horizontally, root on the left.
+  * FRONT LEG: a SHORT furry rat foreleg hanging straight down, cut flat at the top; height about 0.55 x torso width; small pink rat paw with 4 thin toes at the bottom. NOT a human arm.
+  * BACK LEG: rat hind leg: big rounded furry thigh at the top (cut flat), thin bent ankle, LONG flat pink rat foot pointing LEFT on the ground. Height about 0.75 x torso width.
+  * Clothing only on the head (ribbon) and the torso (at most a tiny bit of fabric at the very top of a leg).
+
+These are TWIN mice in KOREAN HANBOK (Kongjwi and Patjwi folktale). Both twins have the same anatomy; they differ only in fur tone and clothes.
+
+Row 1 - Twin A "Kongjwi": light cream-grey fur. HEAD: a long red-pink Korean daenggi hair ribbon (a short braid with a pink ribbon) hanging behind the ear. TORSO: wearing a Korean hanbok: a pale YELLOW jeogori (short jacket with a thin white collar and a small pink goreum bow-ribbon at the neck end) over the front half of the body, and a CORAL-PINK chima (full skirt, soft rounded flat shape) over the rear half down along the lower rear. TAIL: plain pink tail with a tiny pink ribbon bow near the root. FRONT LEG: short furry foreleg with a small yellow sleeve cuff at the very top, pink paw. BACK LEG: furry hind leg, a tiny coral-pink skirt hem at the very top, long flat pink foot.
+
+Row 2 - Twin B "Patjwi": slightly darker warm beige-brown fur, otherwise the same design: HEAD with a daenggi ribbon in TEAL-GREEN. TORSO wearing a MINT-GREEN jeogori with a thin white collar and a small purple goreum bow at the neck, and a deep INDIGO-BLUE chima over the rear half. TAIL with a tiny teal ribbon. FRONT LEG with a mint sleeve cuff at the top. BACK LEG with a tiny indigo skirt hem at the very top.

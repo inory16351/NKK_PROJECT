@@ -7650,6 +7650,226 @@
     "front": 1,
     "back": 1.038
    }
+  },
+  "kongpat": {
+   "parts": [
+    "Parts/kongpat/head.png",
+    "Parts/kongpat/torso.png",
+    "Parts/kongpat/tail.png",
+    "Parts/kongpat/front.png",
+    "Parts/kongpat/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.599,
+     0.86
+    ],
+    "tail": [
+     0.042,
+     0.384
+    ],
+    "front": [
+     0.494,
+     0.061
+    ],
+    "back": [
+     0.63,
+     0.058
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.599,
+     0.14
+    ],
+    "tail": [
+     0.042,
+     0.616
+    ],
+    "front": [
+     0.494,
+     0.939
+    ],
+    "back": [
+     0.63,
+     0.942
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.978
+   }
+  },
+  "patjwi": {
+   "parts": [
+    "Parts/patjwi/head.png",
+    "Parts/patjwi/torso.png",
+    "Parts/patjwi/tail.png",
+    "Parts/patjwi/front.png",
+    "Parts/patjwi/back.png"
+   ],
+   "pivot": {
+    "head": [
+     0.58,
+     0.86
+    ],
+    "tail": [
+     0.042,
+     0.41
+    ],
+    "front": [
+     0.484,
+     0.061
+    ],
+    "back": [
+     0.627,
+     0.058
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.58,
+     0.14
+    ],
+    "tail": [
+     0.042,
+     0.59
+    ],
+    "front": [
+     0.484,
+     0.939
+    ],
+    "back": [
+     0.627,
+     0.942
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "torsoAnchorUnity": {
+    "neck": [
+     0.069,
+     0.605
+    ],
+    "tail": [
+     0.944,
+     0.469
+    ],
+    "shoulder": [
+     0.238,
+     0.552
+    ],
+    "hip": [
+     0.736,
+     0.675
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 0.969
+   }
+  },
+  "butterfly": {
+   "parts": [
+    "Parts/butterfly/head.png",
+    "Parts/butterfly/tail.png",
+    "Parts/butterfly/wing.png",
+    "Parts/butterfly/wing2.png"
+   ],
+   "pivot": {
+    "head": [
+     0.5,
+     0.5
+    ],
+    "tail": [
+     0.042,
+     0.408
+    ]
+   },
+   "pivotUnity": {
+    "head": [
+     0.5,
+     0.5
+    ],
+    "tail": [
+     0.042,
+     0.592
+    ]
+   },
+   "torsoAnchor": {
+    "neck": [
+     0.069,
+     0.395
+    ],
+    "tail": [
+     0.944,
+     0.531
+    ],
+    "shoulder": [
+     0.238,
+     0.448
+    ],
+    "hip": [
+     0.736,
+     0.325
+    ]
+   },
+   "legScale": {
+    "front": 1,
+    "back": 1
+   }
   }
  }
 }

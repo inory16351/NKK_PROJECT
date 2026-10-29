@@ -436,6 +436,16 @@
    "en": "Mi-Fi"
   },
   {
+   "string_key": 1010088,
+   "ko": "콩쥐팥쥐",
+   "en": "Hanbok Twins"
+  },
+  {
+   "string_key": 1010089,
+   "ko": "나비쥐",
+   "en": "Butterfly Mouse"
+  },
+  {
    "string_key": 1110001,
    "ko": "하수구 출신의 정통파. 숫자가 곧 힘이다.",
    "en": "Old-school sewer stock. Numbers ARE power."
@@ -869,6 +879,16 @@
    "string_key": 1110087,
    "ko": "휴대폰을 손에서 놓지 않는 쥐. 5G 속도로 동료를 불러 모은다. 근데 하수구에선 잘 안 터진다.",
    "en": "A rat glued to its phone. Calls buddies over at 5G speed. Signal's terrible in the sewers, though."
+  },
+  {
+   "string_key": 1110088,
+   "ko": "등을 맞대고 붙어 버린 한복 쌍둥이. 위에 붙은 한 마리는 늘 거꾸로 버둥거리고, 뛰어오르면 공중제비로 위아래가 바뀐다.",
+   "en": "Two mice stuck back to back in hanbok. The one on top always flails upside down, and when they jump they somersault and swap places."
+  },
+  {
+   "string_key": 1110089,
+   "ko": "커다란 귀를 날개처럼 팔랑이며 땅에서 살짝 떠서 다닌다. 날갯짓 한 번이 나비 효과가 된다.",
+   "en": "Flutters its huge ears like wings and hovers just above the floor. One flap becomes the butterfly effect."
   },
   {
    "string_key": 1220001,
@@ -1306,6 +1326,16 @@
    "en": "High-Speed Link"
   },
   {
+   "string_key": 1220088,
+   "ko": "둘이서 두 번",
+   "en": "Two Bites at Once"
+  },
+  {
+   "string_key": 1220089,
+   "ko": "나비 효과",
+   "en": "Butterfly Effect"
+  },
+  {
    "string_key": 1221001,
    "ko": "하수구 동창회",
    "en": "Sewer Reunion"
@@ -1731,6 +1761,16 @@
    "en": "Data Boost"
   },
   {
+   "string_key": 1221088,
+   "ko": "공중제비 쌍둥이",
+   "en": "Twin Somersault"
+  },
+  {
+   "string_key": 1221089,
+   "ko": "비늘가루 소나기",
+   "en": "Scale Dust Shower"
+  },
+  {
    "string_key": 1320001,
    "ko": "주변 쥐 1마리당 피해 +6% (최대 10마리)",
    "en": "+6% damage per nearby rat (max 10)"
@@ -2064,6 +2104,16 @@
    "string_key": 1320087,
    "ko": "쥐 집결(클릭 총공격) 범위 +30% (5G 가 여러 마리여도 한 번만)",
    "en": "Rat rally (click-to-swarm) range +30% (only once, even with several Mi-Fis)"
+  },
+  {
+   "string_key": 1320088,
+   "ko": "한 번 더 갉을 확률 30% (둘이서 한입씩)",
+   "en": "30% chance to bite once more (one bite each)"
+  },
+  {
+   "string_key": 1320089,
+   "ko": "크리티컬 확률 +10%, 크리티컬 ×3.7",
+   "en": "Crit chance +10%, crits x3.7"
   },
   {
    "string_key": 1321001,
@@ -2494,6 +2544,16 @@
    "string_key": 1321087,
    "ko": "주변(250)에 동료 5마리 이상이면 (15초마다) → 데이터 전송: 반경 250 쥐 공격력 +25% (8초)",
    "en": "With 5+ buddies nearby (250) (every 15s) → Data Boost: rats within radius 250 get +25% attack (8s)"
+  },
+  {
+   "string_key": 1321088,
+   "ko": "물건에 부딪힐 때 4% 확률로 → 공중제비 쌍둥이: 3번 뛰어올라 공중제비로 위아래를 바꾸며 쾅! 내려찍기 (반경 100)",
+   "en": "4% chance when hitting an object -> Twin Somersault: jumps 3 times, swapping top and bottom with a somersault, then slams down! (radius 100)"
+  },
+  {
+   "string_key": 1321089,
+   "ko": "10초마다 → 비늘가루 소나기: 반경 300 안 물건이 5초 동안 받는 피해 +30%",
+   "en": "Every 10s -> Scale Dust Shower: objects within radius 300 take +30% damage for 5s"
   },
   {
    "string_key": 1430001,

@@ -244,6 +244,16 @@ namespace NKK.Rats
         public Color iceMissileColor = new(0.7f, 0.9f, 1f);
         [Tooltip("얼음 미사일 유도 세기 (클수록 빨리 꺾임)")] public float iceHoming = 6;
 
+        [Header("콩쥐팥쥐 (두 마리가 등을 맞대고 붙은 쌍둥이 쥐 · 2026-10-29)")]
+        [Tooltip("두 마리가 맞붙는 높이 = 한 마리 등 높이 × 이 값 (1 = 몸통 등이 딱 닿음, 작을수록 더 겹침, 크면 뜸)")] public float twinGap = 1.0f;
+        [Tooltip("거꾸로 붙은 쥐 바둥거림: 빠르기 · 팔다리 각도 · 꼬리 각도")] public float twinFlailSpeed = 14, twinFlailLeg = 1.1f, twinFlailTail = 0.7f;
+        [Tooltip("공중제비 한 번(점프 하나)에 도는 속도 (1 = 점프 시간 전체에 걸쳐 한 번 뒤집힘)")] public float twinFlipRate = 1;
+
+        [Header("나비쥐 (공중에 떠서 나는 느낌 · 2026-10-29) — 동작은 그대로, 보이는 것만")]
+        [Tooltip("떠 있는 높이 (게임 단위) · 둥실 폭 · 둥실 속도")] public float flyHeight = 34, flyBob = 5, flyBobSpeed = 3;
+        [Tooltip("날갯짓 빠르기 (가만히 · 이동 중) · 한 번 펄럭일 때 몸이 출렁이는 높이 (게임 단위)")] public float flapIdle = 9, flapMove = 15, flapBob = 3;
+        [Tooltip("이동 중 몸 앞으로 숙임 (라디안)")] public float flyLean = 0.12f;
+
         // 얼음 미사일: 쥐 주위에 생긴 고드름이 잠깐 떠 있다가 목표(고양이 · 보스 · 사람 · 물건)로 유도
         class IceShot { public float x, y, vx, vy, delay, life, dmg, speed; public Rat by; public object tgt; public SpriteRenderer r; }
         readonly List<IceShot> iceShots = new();

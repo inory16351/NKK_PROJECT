@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: butterfly_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing sits centered in its own cell with a clear magenta margin; drawings must NOT touch or cross cell borders. Only the cells listed below are filled, the others stay empty magenta.
+- STYLE: Untitled Goose Game look like the attached reference parts sheets (ref_std_rats, ref_std_rats2, ref_newrats3_parts): completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no sparkles, no drop shadows. Soft muted pastel palette.
+- THE DESIGN IS THE ATTACHED SKETCH (ref_butterfly_concept), copy it as faithfully as possible but in the flat style: a cute white-grey mouse that has NO BODY at all: just a big round HEAD, and its two HUGE round paper-thin EARS are flapping like butterfly wings (each ear is nearly as big as the head or bigger), plus a small curved flap under the head and a thin wavy tail. The whole creature looks like a flying mouse head. Same pale white-grey fur everywhere with the inner part of the ears a soft pale pink, only a thin slightly darker grey fold line on the ears. Side view, FACES LEFT.
+
+Cells:
+Row 1, cell 1: HEAD only: a big round head, snout pointing LEFT-DOWN with a small pink nose, one small simple black dot eye, 3 thin whiskers, a tiny smile line under the nose, a soft pale pink cheek. Absolutely NO EARS on it (ears are separate). Fully drawn round head (no cut edge at the back or bottom - it is the whole creature).
+Row 1, cell 2: TAIL: a long thin wavy S-shaped tail in pale grey-pink, root on the left, lying horizontally, ending in a small curl.
+Row 2, cell 1: BIG EAR-WING: one single huge round paper-thin ear drawn alone, flat: a big smooth rounded oval about 1.3 x the head height, rounded on top, narrowing to a small rounded attachment base at the bottom; pale grey-white outer rim, large soft pale pink inner oval, one thin darker grey fold line from the base upward.
+Row 2, cell 2: SMALL LOWER WING: the same kind of ear shape but about 0.55 x the size of the big ear-wing, slightly curved like a leaf, same colors, narrow rounded attachment base at one end.
+All other cells: empty magenta.

@@ -48,6 +48,7 @@ namespace NKK.Rats
             x = px; y = py; t = Random.Range(0f, 0.5f); walk = Random.Range(0f, 6f); seed = Random.Range(0f, 10f);
             breedCD = Random.Range(1f, 4f);
             rig.Build(art, m.RigLength(data));
+            InitTwin(art);
             born = 0;
             InitPassive();
             InitAction();
@@ -409,11 +410,16 @@ namespace NKK.Rats
             UltTransform(ref trot, ref tsx, ref tsy, ref lift);
             MountTransform(ref scale, ref lift);          // 슈퍼 요리사 쥐: 요리사 등 위 (Rat.Mount.cs)
             NewRatTransform(ref scale, ref tsy);          // 맘스땃쥐 패티 (Rat.NewRats.cs)
+            ButterflyTransform(ref lift);                 // 나비쥐: 떠서 다님 (Rat.Pair.cs)
             ZombieTint(); BossEffects(Time.deltaTime);
             if (ghost || temp > 0) foreach (var sr in rig.GetComponentsInChildren<SpriteRenderer>()) { var c = sr.color; c.a = ghost ? 0.55f + 0.15f * Mathf.Sin(Time.time * 10) : Mathf.Clamp01(temp / 0.6f); sr.color = c; }
             rig.tailLen = FuseLeft;                       // 쥐한폭탄: 타들어가는 심지(꼬리)
             var pose = MountPose(MakePose());
+            if (IsButterfly) ButterflyPose(ref pose);
+            RatRig.Pose poseB = default; float rotB = 0;
+            if (twinRig) TwinSplit(scale, ref pose, ref trot, ref pivotH, out poseB, out rotB);       // 콩쥐팥쥐: 위 쥐 거꾸로
             rig.Apply(pose, scale, face, sq, World.SortOrder(y), lift, trot, tsx, tsy, pivotH, Trick == TrickType.Windmill);
+            if (twinRig) twinRig.Apply(poseB, scale, face, sq, World.SortOrder(y) + 1, lift, rotB, tsx, tsy, pivotH);
             TowerApply(pose, World.SortOrder(y), lift, trot);       // 증강 '쥐 탑 쌓기' (Rat.Augment.cs)
             AfterimageApply();                            // 증강 '다다다다' 잔상
             AugmentSpecials.RatLook(this, rig);           // 증강 상시 모습 (탄생 축제 무지개 · 스케이터 생쥐)

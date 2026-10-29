@@ -28,6 +28,7 @@ namespace NKK.Rats
         [HideInInspector] public bool asScreen;            // 이 리그가 화면 속 쥐 (파츠로 조립)
 
         public float Unit { get; private set; }        // 리그 1 픽셀 = 게임 단위
+        public float BackHeight { get; private set; }     // 발끝 → 등(몸통 윗면) 높이 (게임 단위, 크기 1 기준) — 콩쥐팥쥐가 등을 맞대는 높이
         public bool IsSingle => single && single.enabled;
 
         Vector2 hipPx, neckPx, tailPx, shoulderPx;
@@ -44,6 +45,15 @@ namespace NKK.Rats
         static Vector2 PivotTL(Sprite s) => new(s.pivot.x / s.rect.width, 1 - s.pivot.y / s.rect.height);
 
         bool legsBehind;
+        // 날개 (나비쥐): 머리 뒤통수에서 위로 뻗은 큰 귀 둘 (머리를 따라 움직임). 각도 = Pose.wing
+        // 0 = 큰 날개 가까운 쪽 · 1 = 큰 날개 먼 쪽 · 2 = 작은(아래) 날개 가까운 쪽 · 3 = 작은 날개 먼 쪽
+        readonly Transform[] wingPivot = new Transform[4];
+        readonly SpriteRenderer[] wingRend = new SpriteRenderer[4];
+        readonly float[] wingK = new float[4];
+        bool hasWings;
+        int wingOff;                       // 날개가 있으면 가까운 다리·머리 그리는 순서를 한 칸씩 올림
+        bool headOnly;                     // 머리만 있는 쥐 (나비쥐: 몸통·다리 없이 머리 + 귀 날개 + 꼬리)
+        Vector3 headBase, headRel, tailRel;
 
         // headScaleOverride > 0 이면 머리 크기 고정 (고양이), legsBehind = 가까운 다리도 몸통 뒤 (고양이)
         public void Build(RatArtLibrary.Entry e, float rigLength, float headScaleOverride = -1, bool legsBehind = false)
@@ -65,6 +75,9 @@ namespace NKK.Rats
                 return;
             }
             SetupScreen(null);
+            headOnly = e.headOnly && e.head;
+            if (headOnly) { BuildHeadOnly(e, rigLength); return; }
+            torso.enabled = back.enabled = front.enabled = farBack.enabled = farFront.enabled = true;
 
             torso.sprite = e.torso; head.sprite = artHead = e.head; tail.sprite = e.tail;
             front.sprite = farFront.sprite = e.front; back.sprite = farBack.sprite = e.back;
@@ -76,10 +89,11 @@ namespace NKK.Rats
             float torsoX = -tw * 0.5f, torsoY = -(e.shoulder.y * th + legLenF);
             Vector2 Place(Vector2 a) => new(torsoX + a.x * tw, torsoY + a.y * th);
             hipPx = Place(e.hip); neckPx = Place(e.neck); tailPx = Place(e.tailAnchor); shoulderPx = Place(e.shoulder);
-            headScale = headScaleOverride > 0 ? headScaleOverride : e.head ? Mathf.Min(1, headWidthRatio * tw / e.head.rect.width) : 1;
+            headScale = headScaleOverride > 0 ? headScaleOverride : e.headScale > 0 ? e.headScale : e.head ? Mathf.Min(1, headWidthRatio * tw / e.head.rect.width) : 1;
             this.legsBehind = legsBehind;
             float len = tw + (e.head ? e.head.rect.width * headScale * 0.55f : 0);
             Unit = rigLength / len;
+            BackHeight = (-torsoY - 4) * Unit;      // 등(몸통 윗면) 높이 (그림 둘레 여백 4px 만큼 빼서 등선이 딱 닿게)
 
             // body = 엉덩이 위치 (기울기 축). 파츠는 body 기준 상대 위치
             body.localPosition = L(hipPx);
@@ -99,6 +113,88 @@ namespace NKK.Rats
             farBack.sortingOrder = 0; farFront.sortingOrder = 1; tail.sortingOrder = 2; torso.sortingOrder = 3;
             back.sortingOrder = 4; front.sortingOrder = 5; head.sortingOrder = 6;
             if (legsBehind) { back.sortingOrder = 2; front.sortingOrder = 2; tail.sortingOrder = 1; }
+            BuildWings(e, tw, hipPx, Place);
+        }
+
+        // 머리만 있는 쥐: 리그 원점 = 바닥 (띄우기는 lift), 몸 기준점 body = 머리 중심. 머리가 몸이라 기울기·둥실거림이 머리째 움직임
+        void BuildHeadOnly(RatArtLibrary.Entry e, float rigLength)
+        {
+            foreach (var r in new[] { farBack, farFront, torso, back, front }) { r.sprite = null; r.enabled = false; }
+            head.sprite = artHead = e.head; tail.sprite = e.tail; head.enabled = tail.enabled = true;
+            headScale = e.headScale > 0 ? e.headScale : 1;
+            float w = e.head.rect.width, h = e.head.rect.height; var pv = e.head.pivot;
+            Unit = rigLength / (w * headScale * 1.7f);
+            headBase = new Vector3(0, h * headScale / 200f, 0);
+            headRel = new Vector3(-(w / 2 - pv.x) / 100f * headScale, -(h / 2 - pv.y) / 100f * headScale, 0);
+            tailRel = new Vector3(w * headScale * 0.42f / 100f, -h * headScale * 0.12f / 100f, 0);
+            body.localPosition = headBase;
+            head.transform.localScale = Vector3.one * headScale;
+            tail.sortingOrder = 2; head.sortingOrder = 6;
+            BuildWings(e, 0, Vector2.zero, null);
+            head.sortingOrder = 6;
+        }
+
+        void ApplyHeadOnly(in Pose p)
+        {
+            const float D = Mathf.Rad2Deg;
+            float u = 1f / Mathf.Max(Unit, 1e-5f);
+            body.localPosition = headBase + new Vector3(0, -p.bob * u / 100f, 0);
+            body.localRotation = Quaternion.Euler(0, 0, p.tilt * D);
+            head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D);
+            head.transform.localPosition = headRel + new Vector3(p.headX * u / 100f, 0, 0);
+            tail.transform.localPosition = tailRel;
+            tail.transform.localRotation = Quaternion.Euler(0, 0, p.tail * D);
+            tail.transform.localScale = new Vector3(tailLen, 1, 1);
+            ApplyWings(p);
+        }
+
+        // 나비 날갯짓: Pose.wing = 펄럭임 신호 (−1 접힘 ~ +1 활짝). 큰 날개는 머리 위에서 V 로 활짝 열렸다가 거의 모이고(닫힐수록 폭이 좁아져 옆에서 본 날개처럼),
+        // 작은 아래 날개는 조금 늦게 (위상 지연) 아래 양옆에서 열리고 닫힘. 가까운 쪽(넓은 원판) −각 · 먼 쪽(돌아간 납작한 모양) +각 좌우 대칭
+        void ApplyWings(in Pose p)
+        {
+            if (!hasWings || !wingPivot[0]) return;
+            const float D = Mathf.Rad2Deg;
+            float o = (p.wing + 1) * 0.5f, o2 = Mathf.Clamp01(o * 0.8f + 0.1f);                 // 큰 날개 열림 · 작은 날개 열림 (덜 움직임)
+            float ang = Mathf.Lerp(wingClosed, wingOpen, o), ang2 = Mathf.Lerp(smallClosed, smallOpen, o2);
+            float nx = Mathf.Lerp(wingNarrow, 1, o), nx2 = Mathf.Lerp(wingNarrow + 0.15f, 1, o2);     // 닫힐수록 폭 좁아짐
+            void W(int i, float a, float n) { if (!wingPivot[i]) return; wingPivot[i].localRotation = Quaternion.Euler(0, 0, a * D); wingPivot[i].localScale = new Vector3(wingK[i] * n, wingK[i], 1); }
+            W(0, -ang, nx); W(1, ang * 0.96f, nx * 0.96f); W(2, -ang2, nx2); W(3, ang2 * 0.96f, nx2 * 0.96f);      // 가까운 쪽 = 얼굴이 향한 반대(오른쪽) 위, 먼 쪽 = 왼쪽
+        }
+        [Tooltip("큰 날개 각도 (라디안, 위 = 0): 접힘 · 활짝")] public float wingClosed = 0.12f, wingOpen = 1.25f;
+        [Tooltip("작은 아래 날개 각도 (위 = 0, π = 아래): 접힘 · 활짝")] public float smallClosed = 3.0f, smallOpen = 2.2f;
+        [Tooltip("접혔을 때 날개 폭 비율 (1 = 안 좁아짐)")] public float wingNarrow = 0.5f;
+
+        void BuildWings(RatArtLibrary.Entry e, float tw, Vector2 hip, System.Func<Vector2, Vector2> place)
+        {
+            hasWings = e.wing;
+            wingOff = e.wing ? 1 : 0;
+            foreach (var pv in wingPivot) if (pv) pv.gameObject.SetActive(e.wing);
+            if (!e.wing) return;
+            float hw = e.head.rect.width, hh = e.head.rect.height; var hp = e.head.pivot;
+            // 날개 한 벌 (가까운 쪽 · 먼 쪽): 큰 귀 = e.wing, 작은 귀(아래) = e.wing2 (없으면 안 그림)
+            void Set(int set, Sprite spNear, Sprite spFar, Vector2 anchor, float size)
+            {
+                for (int far = 0; far < 2; far++)
+                {
+                    int i = set * 2 + far; var sp = far == 1 && spFar ? spFar : spNear;
+                    if (!spNear) { if (wingPivot[i]) wingPivot[i].gameObject.SetActive(false); continue; }
+                    if (!wingPivot[i])
+                    {
+                        wingPivot[i] = new GameObject("Wing" + i).transform; wingPivot[i].SetParent(head.transform, false);
+                        var g = new GameObject("Img"); g.transform.SetParent(wingPivot[i], false); wingRend[i] = g.AddComponent<SpriteRenderer>();
+                    }
+                    wingPivot[i].gameObject.SetActive(true);
+                    float ph = sp.rect.height, k = size * hw / ph;                     // 날개 키 = 머리 폭 × size (머리 좌표계)
+                    float axi = far == 1 ? 1 - anchor.x : anchor.x;      // 먼 쪽 날개는 머리 반대쪽 (좌우 대칭)
+                    wingPivot[i].localPosition = new Vector3((axi * hw - hp.x) / 100f, ((1 - anchor.y) * hh - hp.y) / 100f, 0);
+                    wingPivot[i].localScale = Vector3.one * k; wingK[i] = k;
+                    var r = wingRend[i]; r.sprite = sp; r.color = far == 1 ? Color.Lerp(Color.white, farLegColor, 0.45f) : Color.white;
+                    r.transform.localPosition = new Vector3(0, ph / 200f - ph * 0.06f / 100f, 0);      // 날개 밑동 = 회전축 (그림 아래 끝, 조금 안쪽)
+                    r.sortingOrder = set == 0 ? (far == 1 ? -2 : 4) : (far == 1 ? -1 : 3);
+                }
+            }
+            Set(0, e.wing, e.wingFar, e.wingAnchor, e.wingSize); Set(1, e.wing2, e.wing2Far, e.wing2Anchor, e.wing2Size);
+            back.sortingOrder = 5; front.sortingOrder = 6; head.sortingOrder = 7;
         }
 
         // ── 화면 속 쥐 (5G): 겉 휴대폰(single)은 컴퓨터 마우스처럼 움직이고, 화면 칸 안에서 파츠 쥐가 걷고 행동함 ──
@@ -220,7 +316,7 @@ namespace NKK.Rats
 
         // 웹게임 ratPose 의 자세 값 (각도는 라디안, 캔버스 기준 → 유니티는 부호 반대)
         [HideInInspector] public float tailLen = 1;       // 꼬리 길이 배율 (쥐한폭탄 심지)
-        public struct Pose { public float head, headX, tail, front, back, farFront, farBack, bob, tilt, sx, sy; }
+        public struct Pose { public float head, headX, tail, front, back, farFront, farBack, bob, tilt, sx, sy, wing; }
 
         // 발끝 바닥 맞추기 (스케이터 생쥐 롤러스케이트): 몸 기울기 · 다리 각도로 가장 낮은 발끝(바퀴)이 바닥에 닿게 하는 bob (게임 단위, + = 아래)
         // 웹 미리보기 UnityResources/Rats/Augment/rig_web/skater.html 의 groundBob 과 같은 계산 (리그 픽셀 y 아래 +, 원점 = 바닥)
@@ -255,6 +351,7 @@ namespace NKK.Rats
             }
             else visual.localPosition = new Vector3(0, (lift + pivotH) * World.U, 0) + q * new Vector3(0, -pivotH * World.U, 0);
             if (IsSingle) { if (screenOn) ApplyScreen(p); return; }
+            if (headOnly) { ApplyHeadOnly(p); return; }
             float u = 1f / Mathf.Max(Unit, 1e-5f);
             body.localPosition = L(hipPx) + new Vector3(0, -p.bob * u / 100f, 0);
             body.localRotation = Quaternion.Euler(0, 0, p.tilt * Mathf.Rad2Deg);
@@ -263,6 +360,7 @@ namespace NKK.Rats
             farFront.transform.localRotation = Quaternion.Euler(0, 0, -p.farFront * D);
             back.transform.localRotation = Quaternion.Euler(0, 0, -p.back * D);
             front.transform.localRotation = Quaternion.Euler(0, 0, -p.front * D);
+            ApplyWings(p);
             tail.transform.localRotation = Quaternion.Euler(0, 0, p.tail * D);
             tail.transform.localScale = new Vector3(tailLen, 1, 1);
             head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D);
@@ -277,7 +375,7 @@ namespace NKK.Rats
                 head.transform.localPosition += new Vector3(-aw * headScale * headSwapFwd / 100f, 0, 0);
             }
             else { var want = headReplace ? headReplace : artHead; if (head.sprite != want) { head.sprite = want; head.transform.localScale = Vector3.one * headScale; } }
-            front.sortingOrder = p.front > 0.9f ? 7 : legsBehind ? 2 : 5;      // 치켜든 앞발은 얼굴 앞으로
+            front.sortingOrder = p.front > 0.9f ? 7 + wingOff : legsBehind ? 2 : 5 + wingOff;      // 치켜든 앞발은 얼굴 앞으로
         }
     }
 }

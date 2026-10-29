@@ -1868,6 +1868,82 @@
 ],
 "leg_front": 1,
 "leg_back": 1.038
+},
+{
+"code_id": "kongpat",
+"neck": [
+0.069,
+0.395
+],
+"tail": [
+0.944,
+0.531
+],
+"shoulder": [
+0.238,
+0.448
+],
+"hip": [
+0.736,
+0.325
+],
+"leg_front": 1,
+"leg_back": 0.978,
+"twin": "patjwi"
+},
+{
+"code_id": "patjwi",
+"neck": [
+0.069,
+0.395
+],
+"tail": [
+0.944,
+0.531
+],
+"shoulder": [
+0.238,
+0.448
+],
+"hip": [
+0.736,
+0.325
+],
+"leg_front": 1,
+"leg_back": 0.969
+},
+{
+"code_id": "butterfly",
+"neck": [
+0.069,
+0.395
+],
+"tail": [
+0.944,
+0.531
+],
+"shoulder": [
+0.238,
+0.448
+],
+"hip": [
+0.736,
+0.325
+],
+"leg_front": 1,
+"leg_back": 1,
+"head_only": 1,
+"head_scale": 1.0,
+"wing_anchor": [
+0.62,
+0.2
+],
+"wing_size": 1.05,
+"wing2_anchor": [
+0.6,
+0.62
+],
+"wing2_size": 0.65
 }
 ]
 }

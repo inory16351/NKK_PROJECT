@@ -40,6 +40,14 @@ namespace NKK.Lobby
             if (e == null) return;
             if (isSingle) { Put(single, e.single, Vector2.zero, 1, tint); Fit(); if (scr) ShowScreen(e, tint); return; }
 
+            if (e.headOnly && e.head)          // 머리만 있는 쥐 (나비쥐): 머리 가운데 + 꼬리 + 날개 (귀)
+            {
+                float hw = e.head.rect.width, hh = e.head.rect.height;
+                Put(head, e.head, Vector2.zero, 1, tint, true);
+                Put(tail, e.tail, new Vector2(-hw * 0.42f, -hh * 0.12f), 1, tint);
+                tail.rectTransform.localRotation = Quaternion.identity;
+                Fit(); return;
+            }
             float tw = e.torso.rect.width, th = e.torso.rect.height;
             float legLenF = e.front ? e.front.rect.height * (1 - PivotTL(e.front).y) * e.legFront : 0;
             float torsoX = -tw * 0.5f, torsoY = -(e.shoulder.y * th + legLenF);

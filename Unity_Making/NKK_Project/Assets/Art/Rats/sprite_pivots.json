@@ -3504,6 +3504,56 @@
 "path": "Assets/Art/Rats/FrontRig/rs_arm_up_back2.png",
 "x": 0.822,
 "y": 0.05
+},
+{
+"path": "Assets/Art/Rats/Parts/kongpat/head.png",
+"x": 0.599,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/kongpat/tail.png",
+"x": 0.042,
+"y": 0.616
+},
+{
+"path": "Assets/Art/Rats/Parts/kongpat/front.png",
+"x": 0.494,
+"y": 0.939
+},
+{
+"path": "Assets/Art/Rats/Parts/kongpat/back.png",
+"x": 0.63,
+"y": 0.942
+},
+{
+"path": "Assets/Art/Rats/Parts/patjwi/head.png",
+"x": 0.58,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/patjwi/tail.png",
+"x": 0.042,
+"y": 0.59
+},
+{
+"path": "Assets/Art/Rats/Parts/patjwi/front.png",
+"x": 0.484,
+"y": 0.939
+},
+{
+"path": "Assets/Art/Rats/Parts/patjwi/back.png",
+"x": 0.627,
+"y": 0.942
+},
+{
+"path": "Assets/Art/Rats/Parts/butterfly/head.png",
+"x": 0.5,
+"y": 0.5
+},
+{
+"path": "Assets/Art/Rats/Parts/butterfly/tail.png",
+"x": 0.042,
+"y": 0.592
 }
 ]
 }

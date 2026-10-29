@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>콩쥐팥쥐 · 나비쥐 리그</title>
+<style>
+  :root { --bg:#f4f2ee; --panel:#fff; --ink:#222; --sub:#777; --line:#ddd; --accent:#3b6fd8; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:13px/1.4 "Malgun Gothic", sans-serif; background:var(--bg); color:var(--ink); display:flex; height:100vh; }
+  #stage { flex:1; position:relative; min-width:0; }
+  canvas { width:100%; height:100%; display:block; }
+  #hud { position:absolute; left:10px; top:8px; background:rgba(255,255,255,.85); padding:4px 8px; border-radius:4px; font-size:12px; }
+  #side { width:400px; background:var(--panel); border-left:1px solid var(--line); overflow:auto; padding:10px; }
+  h2 { font-size:14px; margin:12px 0 4px; }
+  .row { display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin:4px 0; }
+  button { padding:4px 9px; border:1px solid var(--line); background:#fafafa; border-radius:4px; cursor:pointer; }
+  button.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .p { display:grid; grid-template-columns: 150px 1fr 56px; gap:4px; align-items:center; margin:1px 0; }
+  .p span { color:#444; font-size:12px; }
+  .p input[type=number] { width:56px; font-size:11px; }
+  textarea { width:100%; height:170px; font:11px Consolas, monospace; }
+  .hint { color:var(--sub); font-size:12px; }
+</style>
+</head>
+<body>
+<div id="stage"><canvas id="cv"></canvas><div id="hud">불러오는 중…</div></div>
+<div id="side">
+  <h2>콩쥐팥쥐 (왼쪽)</h2>
+  <div class="row" id="tmodes">
+    <button data-m="auto" class="on">자동 (걷기 → 공중제비)</button><button data-m="walk">걷기</button><button data-m="idle">제자리</button><button data-m="flip">공중제비 반복</button>
+  </div>
+  <h2>나비쥐 (오른쪽)</h2>
+  <div class="row" id="bmodes"><button data-m="idle" class="on">제자리</button><button data-m="move">이동</button></div>
+  <div class="row"><button id="pause">멈춤</button> 느리게 <input id="slow" type="range" min="0.1" max="1" step="0.05" value="1"> 확대 <input id="zoom" type="range" min="0.2" max="1.6" step="0.02" value="0.42"></div>
+  <div class="row"><label><input id="flip" type="checkbox"> 오른쪽 보기</label> <label><input id="grid" type="checkbox" checked> 바닥 선</label></div>
+  <p class="hint">유니티와 같은 계산입니다. 쥐는 왼쪽을 봄. 값 이름 = 유니티 인스펙터 이름 (RatManager · RatRig · 리그 메타).</p>
+  <div id="params"></div>
+  <h2>유니티 값 (JSON)</h2>
+  <div class="row"><button id="copy">복사</button><button id="reset">기본값</button><span class="hint" id="copied"></span></div>
+  <textarea id="out"></textarea>
+  <p class="hint">JSON 을 고쳐 붙여 넣으면 슬라이더에 반영됩니다.</p>
+</div>
+<script>
+// ── 값 (이름 = 유니티 필드 이름) ──
+const DEF = {
+  twinGap: 1, twinFlailSpeed: 14, twinFlailLeg: 1.1, twinFlailTail: .7, twinFlipRate: 1,                       // RatManager 콩쥐팥쥐
+  flyHeight: 34, flyBob: 5, flyBobSpeed: 3, flapIdle: 9, flapMove: 15, flapBob: 3, flyLean: .12,  // RatManager 나비쥐
+  wingClosed: .12, wingOpen: 1.25, smallClosed: 3, smallOpen: 2.2, wingNarrow: .5,                                                                                // RatRig
+  wing_ax: .62, wing_ay: .2, wing_size: 1.05, wing2_ax: .6, wing2_ay: .62, wing2_size: .65,                      // RatRigMeta (wing_anchor · wing_size · wing2_anchor · wing2_size)
+};
+const RANGE = {
+  twinGap: [.5, 1.2, .01], twinFlailSpeed: [2, 30, .5], twinFlailLeg: [0, 2, .05], twinFlailTail: [0, 1.5, .05], twinFlipRate: [.5, 2, .05],
+  flyHeight: [0, 80, 1], flyBob: [0, 20, .5], flyBobSpeed: [.5, 8, .1], flapIdle: [2, 30, .5], flapMove: [2, 40, .5], flapBob: [0, 10, .5], flyLean: [0, .6, .01],
+  wingClosed: [0, 1, .01], wingOpen: [.3, 1.8, .01], smallClosed: [1.5, 3.4, .01], smallOpen: [1.5, 3.4, .01], wingNarrow: [.2, 1, .01],
+  wing_ax: [0, 1, .01], wing_ay: [0, 1, .01], wing_size: [.3, 2, .01], wing2_ax: [0, 1, .01], wing2_ay: [0, 1, .01], wing2_size: [.2, 1.5, .01],
+};
+const LABEL = {
+  twinGap: '맞붙는 높이 (1 = 몸통 등이 딱 닿음)', twinFlailSpeed: '바둥 속도', twinFlailLeg: '바둥 다리 각도', twinFlailTail: '바둥 꼬리 각도', twinFlipRate: '공중제비 속도',
+  flyHeight: '뜬 높이', flyBob: '둥실 폭', flyBobSpeed: '둥실 속도', flapIdle: '날갯짓(제자리)', flapMove: '날갯짓(이동)', flapBob: '펄럭일 때 몸 출렁임', flyLean: '이동 중 숙임',
+  wingClosed: '큰 날개 접힘 각도', wingOpen: '큰 날개 활짝 각도', smallClosed: '아래 날개 접힘 각도', smallOpen: '아래 날개 활짝 각도', wingNarrow: '접혔을 때 폭 비율',
+  wing_ax: '큰 날개 자리 x (머리 0~1)', wing_ay: '큰 날개 자리 y', wing_size: '큰 날개 키 (머리 폭×)', wing2_ax: '아래 날개 자리 x', wing2_ay: '아래 날개 자리 y', wing2_size: '아래 날개 키',
+};
+const GROUPS = [['콩쥐팥쥐', ['twinGap','twinFlailSpeed','twinFlailLeg','twinFlailTail','twinFlipRate']],
+  ['나비쥐 동작', ['flyHeight','flyBob','flyBobSpeed','flapIdle','flapMove','flapBob','flyLean','wingClosed','wingOpen','smallClosed','smallOpen','wingNarrow']],
+  ['나비쥐 날개 자리·크기 (리그 메타)', ['wing_ax','wing_ay','wing_size','wing2_ax','wing2_ay','wing2_size']]];
+let V = JSON.parse(JSON.stringify(DEF));
+const RATSCALE = 1.25 * 1.12, RIGLEN = 36;      // 레어 등급 크기 1.12 × ratScale 1.25 · 체형 Mouse 몸길이 36 (게임 단위)
+const ANCHOR = { neck: [.069, .395], tail: [.944, .531], shoulder: [.238, .448], hip: [.736, .325] };
+
+// ── 그림 ──
+const IMG = {}; let PIV = null;
+function load(src) { return new Promise(r => { const i = new Image(); i.onload = () => r(i); i.onerror = () => r(null); i.src = src; }); }
+async function loadAll() {
+  PIV = (await (await fetch('/Parts/pivots.json')).json()).species;
+  const jobs = [];
+  for (const [id, parts] of [['kongpat', ['head','torso','tail','front','back']], ['patjwi', ['head','torso','tail','front','back']], ['butterfly', ['head','tail','wing','wing2','wing_far','wing2_far']]])
+    for (const p of parts) jobs.push(load(`/Parts/${id}/${p}.png`).then(i => { (IMG[id] = IMG[id] || {})[p] = i; }));
+  await Promise.all(jobs);
+}
+
+// ── 일반 쥐 리그 (RatRig.Build / Apply 와 같은 계산, 리그 픽셀 · 발끝 = 원점 · y 아래 +) ──
+function layout(id) {
+  const im = IMG[id], pv = PIV[id].pivot, legB = PIV[id].legScale.back, legF = 1;
+  const tw = im.torso.width, th = im.torso.height;
+  const legLenF = im.front.height * (1 - pv.front[1]) * legF;
+  const torsoY = -(ANCHOR.shoulder[1] * th + legLenF), torsoX = -tw / 2;
+  const P = a => [torsoX + a[0] * tw, torsoY + a[1] * th];
+  const headScale = Math.min(1, .62 * tw / im.head.width);
+  const len = tw + im.head.width * headScale * .55;
+  return { id, im, pv, tw, th, legF, legB, hip: P(ANCHOR.hip), neck: P(ANCHOR.neck), tail: P(ANCHOR.tail), sh: P(ANCHOR.shoulder), headScale, torsoX, torsoY, Unit: RIGLEN / len, len };
+}
+// 파츠: (x,y) 에 피벗을 놓고 각도(캔버스 시계 방향 +) · 크기
+function part(g, img, pivFrac, x, y, ang, sc, flt) {
+  g.save(); g.translate(x, y); g.rotate(ang); g.scale(sc, sc); if (flt) g.filter = flt;
+  g.drawImage(img, -pivFrac[0] * img.width, -pivFrac[1] * img.height); g.restore();
+}
+function drawRat(g, L, p) {
+  const { im, pv } = L, gap = L.tw * .07, u = 1 / L.Unit, far = 'brightness(.8)';
+  g.save();
+  g.scale(p.sx || 1, p.sy || 1);
+  g.translate(L.hip[0], L.hip[1] + p.bob * u); g.rotate(-p.tilt);                   // 몸 = 엉덩이 기준 기울기
+  const R = a => [a[0] - L.hip[0], a[1] - L.hip[1]];
+  let q;
+  q = R([L.hip[0] + gap, L.hip[1]]); part(g, im.back, pv.back, q[0], q[1], p.farBack, L.legB, far);
+  q = R([L.sh[0] + gap, L.sh[1]]); part(g, im.front, pv.front, q[0], q[1], p.farFront, L.legF, far);
+  q = R(L.tail); part(g, im.tail, pv.tail, q[0], q[1], -p.tail, 1);
+  g.drawImage(im.torso, L.torsoX - L.hip[0], L.torsoY - L.hip[1]);
+  q = R(L.hip); part(g, im.back, pv.back, q[0], q[1], p.back, L.legB);
+  q = R(L.sh); part(g, im.front, pv.front, q[0], q[1], p.front, L.legF);
+  q = R(L.neck); q[0] += p.headX * u; part(g, im.head, pv.head, q[0], q[1], -p.head, L.headScale);
+  g.restore();
+}
+
+// ── 자세 (Rat.MakePose · ActionPose · TwinFlail 과 같은 계산) ──
+const ZP = () => ({ head: 0, headX: 0, tail: 0, front: 0, back: 0, farFront: 0, farBack: 0, bob: 0, tilt: 0, sx: 1, sy: 1, wing: 0 });
+function walkPose(t, w, moving) {
+  const p = ZP(); p.head = Math.sin(t * 1.7) * .05; p.tail = .15 + Math.sin(t * 2.6) * .15;
+  if (moving) {
+    const amp = Math.min(1.25, .45 + 160 / 900);
+    p.front = Math.sin(w) * amp; p.farFront = Math.sin(w + .6) * amp; p.back = Math.sin(w + Math.PI) * amp; p.farBack = Math.sin(w + Math.PI + .6) * amp;
+    p.bob = -Math.abs(Math.sin(w)) * 3.5; p.tilt = Math.sin(w) * .06; p.tail = .05 + Math.sin(w * .5) * .25; p.head = Math.cos(w) * .05 - .05; p.sx = 1 + Math.sin(w) * .05;
+  }
+  return p;
+}
+function jumpPose(z) {       // Rat.ActionPose Jump_Slam
+  const p = ZP();
+  if (z > 10) { p.front = 2.7; p.farFront = 2.5; p.back = -1.2; p.farBack = -1; p.tail = 1.2; p.head = -.3; }
+  else { p.front = .3; p.farFront = .2; p.back = -.3; p.farBack = -.2; p.head = .35; p.sy = .85; p.sx = 1.12; }
+  return p;
+}
+function flailPose(t, z) {
+  const tt = t * V.twinFlailSpeed, k = z > 8 ? 1.5 : 1, L = V.twinFlailLeg * k, p = ZP();
+  p.front = Math.sin(tt) * L; p.farFront = Math.sin(tt + 1.9) * L; p.back = Math.sin(tt * .9 + 3.1) * L; p.farBack = Math.sin(tt * .9 + 4.6) * L;
+  p.head = Math.sin(tt * .7 + 1) * .22; p.tail = Math.sin(tt * .6) * V.twinFlailTail; p.tilt = Math.sin(tt * .5 + 2) * .07;
+  return p;
+}
+
+// ── 상태 ──
+const S = { t: 0, tmode: 'auto', bmode: 'idle', paused: false, slow: 1, zoom: .42, face: -1, grid: true,
+  w: 0, cyc: 0, twinBase: 0, twinP: 0, wasAct: false, bx: 0, bdir: 1 };
+const DUR = 1.55, HOPS = 3, HOPH = 75;           // 특수 액션 시간 · 점프 수 · 점프 높이 (게임 단위, 테이블 21088 · Rat.Action Jump_Slam)
+const smooth = x => { x = Math.max(0, Math.min(1, x)); return x * x * (3 - 2 * x); };
+
+function twinState(dt) {
+  let walking = false, act = false, a = 0;
+  if (S.tmode === 'walk') walking = true;
+  else if (S.tmode === 'flip') { S.cyc = (S.cyc + dt) % (DUR + .6); act = S.cyc < DUR; a = S.cyc; }
+  else if (S.tmode === 'auto') { S.cyc = (S.cyc + dt) % (3 + DUR + .4); if (S.cyc < 3) walking = true; else if (S.cyc < 3 + DUR) { act = true; a = S.cyc - 3; } }
+  let z = 0;
+  if (act) {
+    const u = Math.min(HOPS, a / DUR * HOPS * V.twinFlipRate), f = Math.floor(u);
+    S.twinP = S.twinBase + f + smooth(u - f); S.wasAct = true;
+    z = Math.sin(((a / DUR * HOPS) % 1) * Math.PI) * HOPH;
+  } else if (S.wasAct) { S.twinBase = Math.round(S.twinP); S.twinP = S.twinBase; S.wasAct = false; }
+  if (walking) S.w += dt * 9;
+  return { walking, act, z };
+}
+
+// ── 그리기 ──
+const cv = document.getElementById('cv'), g = cv.getContext('2d');
+const LA = {};
+function frame(ts) {
+  requestAnimationFrame(frame);
+  if (!LA.kongpat) { LA.kongpat = layout('kongpat'); LA.patjwi = layout('patjwi'); document.getElementById('hud').textContent = ''; }
+  const dt = S.paused ? 0 : Math.min(.05, (ts - (frame.last || ts)) / 1000) * S.slow; frame.last = ts;
+  S.t += dt;
+  const dpr = devicePixelRatio || 1, W = cv.clientWidth, H = cv.clientHeight;
+  if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(H * dpr)) { cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); }
+  g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+  const ground = H * .78, zm = S.zoom;
+  if (S.grid) { g.strokeStyle = '#d8d4cc'; g.lineWidth = 1; g.beginPath(); g.moveTo(0, ground); g.lineTo(W, ground); g.stroke(); }
+  drawTwin(W * .27, ground, zm, dt);
+  drawButterfly(W * .73, ground, zm, dt);
+}
+
+function shadow(cx, ground, rx, ry) { g.save(); g.translate(cx, ground); g.fillStyle = 'rgba(0,0,0,.12)'; g.beginPath(); g.ellipse(0, 4, rx, ry, 0, 0, 7); g.fill(); g.restore(); }
+
+function drawTwin(cx, ground, zm, dt) {
+  const A = LA.kongpat, B = LA.patjwi, st = twinState(dt), face = S.face;
+  const gamePerPx = RATSCALE * A.Unit;                // 리그 픽셀 → 게임 단위
+  const H = (-A.torsoY - 4) * V.twinGap;                 // 쌍의 가운데 높이 (리그 픽셀) = 등 높이 × twinGap (유니티 RatRig.BackHeight)
+  const zpx = st.z / gamePerPx;
+  const th = Math.PI * S.twinP, c = Math.cos(th);
+  const base = st.act ? jumpPose(st.z) : walkPose(S.t, S.w, st.walking), flail = flailPose(S.t, st.z);
+  const aUp = c >= 0, pa = aUp ? base : flail, pb = aUp ? flail : base;     // 서 있는 쪽이 걷기·점프 자세, 거꾸로 선 쪽은 바둥
+  shadow(cx, ground, A.len * zm * .45 * (1 - Math.min(.5, st.z / 200)), 9 * zm);
+  for (const [L, p, extra] of [[A, pa, 0], [B, pb, Math.PI]]) {
+    g.save(); g.translate(cx, ground - zpx * zm); g.scale(zm * -face, zm);      // 쥐는 왼쪽을 봄 → 오른쪽(face 1) 이면 뒤집음
+    g.translate(0, -H); g.rotate(th + extra); g.translate(0, H);                // 쌍의 가운데 축으로 회전 (위 쥐 = 아래 쥐 + 180°)
+    drawRat(g, L, p);
+    g.restore();
+  }
+  g.fillStyle = '#555'; g.font = '12px sans-serif'; g.textAlign = 'center'; g.fillText('콩쥐팥쥐', cx, ground + 28);
+}
+
+function drawButterfly(cx, ground, zm, dt) {
+  const im = IMG.butterfly, hw = im.head.width, hh = im.head.height, tailPv = PIV.butterfly.pivot.tail;
+  const Unit = RIGLEN / (hw * 1.7), gamePerPx = RATSCALE * Unit;
+  const moving = S.bmode === 'move';
+  if (moving) { S.bx += S.bdir * dt * 120; if (Math.abs(S.bx) > 200) { S.bx = Math.sign(S.bx) * 200; S.bdir *= -1; } }
+  const tt = S.t, seed = 0, p = ZP();
+  p.tilt = (moving ? V.flyLean : 0) + Math.sin(tt * 2 + seed) * .06; p.head = Math.sin(tt * 3 + seed) * .05; p.tail = .1 + Math.sin(tt * 3.4 + seed) * .35;
+  const ph = tt * (moving ? V.flapMove : V.flapIdle) + seed; p.wing = Math.sin(ph);          // −1 접힘 ~ +1 활짝
+  const lift = (V.flyHeight + Math.sin(tt * V.flyBobSpeed + seed) * V.flyBob - Math.cos(ph) * V.flapBob) / gamePerPx;
+  const face = moving ? (S.bdir > 0 ? 1 : -1) : S.face;
+  const kU = Unit / LA.kongpat.Unit, zb = zm * kU;      // 나비쥐 리그 픽셀 → 같은 게임 단위로 (다른 쥐와 크기 맞춤)
+  const x = cx + S.bx * zm;
+  shadow(x, ground, hw * zb * .45 * (1 - Math.min(.5, lift * gamePerPx / 200)), 8 * zm);
+  g.save(); g.translate(x, ground - lift * zb); g.scale(zb * -face, zb);
+  g.translate(0, -hh / 2);                      // body = 머리 중심 (RatRig.headBase)
+  g.rotate(-p.tilt);
+  // 날개 한 장 (머리의 자식): 자리 = 머리 그림 좌상단 기준 0~1 · 밑동이 회전축 · 각도 반시계 +
+  const wing2 = (img, ax, ay, size, ang, tint, nx) => {
+    const ph = img.height, k = size * hw / ph;
+    g.save(); g.rotate(-p.head); g.translate((ax - .5) * hw, (ay - .5) * hh); g.rotate(-ang); g.scale(k * (nx || 1), k);
+    if (tint) g.filter = tint;
+    // 그림 중심이 회전축 위쪽 (ph/2 - 0.06ph) 에 오도록
+    g.drawImage(img, -img.width / 2, -(ph / 2 - ph * .06) - ph / 2);
+    g.restore();
+  };
+  const far = 'brightness(.9)', o = (p.wing + 1) / 2, o2 = Math.min(1, Math.max(0, o * .8 + .1));
+  const ang = V.wingClosed + (V.wingOpen - V.wingClosed) * o, ang2 = V.smallClosed + (V.smallOpen - V.smallClosed) * o2;
+  const nx = V.wingNarrow + (1 - V.wingNarrow) * o, nx2 = V.wingNarrow + .15 + (1 - V.wingNarrow - .15) * o2;
+  wing2(im.wing_far, 1 - V.wing_ax, V.wing_ay, V.wing_size, ang * .96, far, nx * .96);                 // 큰 날개 먼 쪽
+  wing2(im.wing2_far, 1 - V.wing2_ax, V.wing2_ay, V.wing2_size, ang2 * .96, far, nx2 * .96);            // 작은 날개 먼 쪽
+  g.save(); g.translate(hw * .42, hh * .12); g.rotate(-p.tail);                               // 꼬리
+  g.drawImage(im.tail, -tailPv[0] * im.tail.width, -tailPv[1] * im.tail.height); g.restore();
+  wing2(im.wing2, V.wing2_ax, V.wing2_ay, V.wing2_size, -ang2, null, nx2);                            // 작은 날개 가까운 쪽
+  wing2(im.wing, V.wing_ax, V.wing_ay, V.wing_size, -ang, null, nx);                                  // 큰 날개 가까운 쪽
+  g.save(); g.rotate(-p.head); g.drawImage(im.head, -hw / 2, -hh / 2); g.restore();            // 머리
+  g.restore();
+  g.fillStyle = '#555'; g.font = '12px sans-serif'; g.textAlign = 'center'; g.fillText('나비쥐', cx, ground + 28);
+}
+
+// ── UI ──
+const paramsEl = document.getElementById('params'), outEl = document.getElementById('out'), inputs = {};
+for (const [title, keys] of GROUPS) {
+  const h = document.createElement('h2'); h.textContent = title; paramsEl.appendChild(h);
+  for (const k of keys) {
+    const [mn, mx, st] = RANGE[k], row = document.createElement('div'); row.className = 'p';
+    row.innerHTML = `<span>${LABEL[k]}</span><input type="range" min="${mn}" max="${mx}" step="${st}"><input type="number" step="${st}">`;
+    const r = row.children[1], n = row.children[2]; inputs[k] = [r, n];
+    const set = v => { V[k] = +v; r.value = n.value = V[k]; dump(); };
+    r.oninput = () => set(r.value); n.onchange = () => set(n.value);
+    paramsEl.appendChild(row);
+  }
+}
+function syncUI() { for (const k in inputs) inputs[k][0].value = inputs[k][1].value = V[k]; dump(); }
+function dump() { const o = {}; for (const k in V) o[k] = +(+V[k]).toFixed(3); outEl.value = JSON.stringify(o, null, 1); }
+outEl.onchange = () => { try { Object.assign(V, JSON.parse(outEl.value)); syncUI(); } catch (e) { document.getElementById('copied').textContent = 'JSON 오류'; } };
+document.getElementById('copy').onclick = () => { outEl.select(); navigator.clipboard?.writeText(outEl.value); document.getElementById('copied').textContent = '복사됨'; };
+document.getElementById('reset').onclick = () => { V = JSON.parse(JSON.stringify(DEF)); syncUI(); };
+for (const [id, key] of [['tmodes', 'tmode'], ['bmodes', 'bmode']])
+  document.getElementById(id).onclick = e => { const b = e.target.closest('button'); if (!b) return; S[key] = b.dataset.m; for (const x of document.getElementById(id).children) x.classList.toggle('on', x === b); };
+document.getElementById('pause').onclick = e => { S.paused = !S.paused; e.target.classList.toggle('on', S.paused); };
+document.getElementById('slow').oninput = e => S.slow = +e.target.value;
+document.getElementById('zoom').oninput = e => S.zoom = +e.target.value;
+document.getElementById('flip').onchange = e => S.face = e.target.checked ? 1 : -1;
+document.getElementById('grid').onchange = e => S.grid = e.target.checked;
+syncUI();
+loadAll().then(() => requestAnimationFrame(frame));
+</script>
+</body>
+</html>
