@@ -57,6 +57,11 @@ namespace NKK.Lobby
         [Tooltip("티어 2 부터 탁자 위 치즈")] public SpriteRenderer propCheese;
         [Tooltip("티어 3 부터 탁자 위 찻잔")] public SpriteRenderer propCup;
 
+        [Header("훈장별 아지트 배경 (배경판 그림 교체, 같은 크기·배치)")]
+        [Tooltip("지금 훈장 이상인 것 중 fromTier 가 가장 큰 그림. 없으면 처음 배경 (예: 4훈장 = 16~30층 고양이 연구소)")] public TierLook[] tierLooks;
+        [Serializable] public class TierLook { [Tooltip("이 훈장부터")] public int fromTier; public Sprite sprite; }
+        Sprite baseBackground;
+
         [Header("말풍선 · 효과 (템플릿, 꺼져 있음)")]
         [Tooltip("말풍선 프리팹 (Prefabs/LobbyBubble: 배경 + 꼬리 + 글자를 SortingGroup 으로 한 덩어리) — 씬에 꺼 둔 인스턴스")] public SpriteRenderer bubbleTemplate;
         [Tooltip("말풍선 그리는 순서 시작값 (새 말풍선일수록 위)")] public int bubbleOrder = 9000;
@@ -107,6 +112,7 @@ namespace NKK.Lobby
             if (hotRoot) hots.AddRange(hotRoot.GetComponentsInChildren<LobbyHot>());
             if (bubbleTemplate) bubbleTemplate.gameObject.SetActive(false);
             if (fxTemplate) fxTemplate.gameObject.SetActive(false);
+            if (background) baseBackground = background.sprite;
         }
 
         // 아지트 · 하수구 쥐 무리 전부 (물건 버튼을 누를 때 어느 층이든 쥐가 먼저)
@@ -169,7 +175,15 @@ namespace NKK.Lobby
             for (int i = 0; i < badges.Length; i++) if (badges[i]) badges[i].color = i < tier ? Color.white : lockedBadgeColor;
             if (propCheese) propCheese.enabled = tier >= 2;
             if (propCup) propCup.enabled = tier >= 3;
+            if (background && baseBackground) background.sprite = LookFor(tier);
             if (manager) foreach (var h in hots) h.Fill(manager.FillTokens, manager.Alert(h.id));
+        }
+
+        Sprite LookFor(int tier)
+        {
+            Sprite s = baseBackground; int best = int.MinValue;
+            if (tierLooks != null) foreach (var l in tierLooks) if (l != null && l.sprite && tier >= l.fromTier && l.fromTier > best) { best = l.fromTier; s = l.sprite; }
+            return s;
         }
 
         // ── 말풍선 · 효과 ──

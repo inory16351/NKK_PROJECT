@@ -1,0 +1,25 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lobby_catlab_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Attached references:
+- ref_layout_lobby_bg.png = the CURRENT rat hideout background. Use it ONLY for LAYOUT and COMPOSITION (camera angle, scale, where every object is). Do NOT copy its painted, soft-brush, warm-lit style.
+- ref_style_catlab_props.png and ref_style_catlab_wall.png = the IN-GAME art of the "cat research lab" floors. Copy THIS style and palette exactly.
+
+Image spec:
+- 1536x1024, a full background illustration filling the whole canvas. No text, no letters, no numbers, no signs with writing, no characters, no animals, no cats, no rats.
+- STYLE IS THE MOST IMPORTANT RULE: Untitled Goose Game flat look, exactly like the style references. Completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no light rays, no drop shadows, no texture or brush strokes; each object = a few flat color areas with one slightly darker flat tone. Soft muted pastel palette of the cat lab: clean white and pale grey tiles, soft pink stripes with small white paw prints, pale mint, light lavender, a little warm cheese yellow. Low contrast so small characters on top stay readable.
+- Story: the rats moved their secret hideout INSIDE the wall of the CAT RESEARCH LAB. It is the same hideout room as the layout reference, now built from stolen cat-lab things.
+
+KEEP THE LAYOUT OF THE LAYOUT REFERENCE EXACTLY (positions in % of image width / height, measured from the top-left):
+- Top band (0% to 22% height): the space above the room, like the reference beams area — pale grey metal ceiling beams and pastel pipes/cables (mint, pink), simple flat shapes. A horizontal beam across the whole width at about 20%-24% height. Keep the area between 45% and 70% width and 10%-22% height fairly plain (small medals are placed there later).
+- Back wall (24% to 65% height): white lab wall tiles with ONE soft pink horizontal stripe with small white paw prints (like ref_style_catlab_wall.png), split by two or three pale vertical support posts like the reference.
+- A ROUND HOLE in the wall at the left, centered at about 7.5% width / 43% height, about 9% of the width across, showing a glimpse of a bright white-and-pink cat lab room behind it.
+- A WHITEBOARD on the wall centered at about 27% width / 39% height (about 14% wide), with simple flat doodles (a staircase arrow, a cheese wedge, a paw print — no letters), and a few small instant photos pinned around it connected by red strings, covering about 15%-50% width and 30%-55% height.
+- A string of small round pastel lights hanging across the upper wall from about 18% to 85% width at about 24%-30% height (flat dots, no glow).
+- The FLOOR is a long horizontal lab shelf / bench top running across the WHOLE width: its top surface edge at about 64% height and its front edge at about 66%, with the front face of the shelf (pale mint or light grey) down to about 78% height. Rats walk on this top surface, so keep the surface plain.
+- Things standing on the shelf (same places and sizes as the reference):
+  * at 1%-20% width: a little rat BED made from a pink cat-treat box with a white cloth on it and a small flat rug;
+  * at 27%-42% width: a big round cat-food CAN used as a table (pink label with a simple white paw print, no text), with two small round STOOLS beside it at about 23% and 45% width (made of pastel bottle caps), a small pencil cup and a folded note on top of the can;
+  * at 50%-66% width: a pile of lab binders/notebooks (pastel colors, blank spines) and a small flat desk lamp clipped to them, plus one small glass beaker;
+  * at 67%-87% width: EMPTY plain wall behind the shelf (an exercise wheel is placed here later) — no objects there;
+  * at 87%-100% width: a tall pastel SHELF unit standing on the floor with stolen CHEESE wedges and blocks on three shelves and a white cat-treat box at the bottom.
+- Bottom band (78% to 100% height): under the shelf, the wall cavity like the reference — pale metal pipes, pastel cables and simple flat insulation puffs (light pink-grey), plain and calm. Keep the area around 50% width, 66%-78% height plain (a manhole cover is placed there later).

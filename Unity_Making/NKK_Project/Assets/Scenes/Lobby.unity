@@ -22978,6 +22978,7 @@ MonoBehaviour:
   lockedBadgeColor: {r: 0.45, g: 0.38, b: 0.33, a: 0.55}
   propCheese: {fileID: 0}
   propCup: {fileID: 0}
+  tierLooks: []
   bubbleTemplate: {fileID: 1016988256}
   bubbleOrder: 9000
   fxTemplate: {fileID: 426985776}
@@ -24360,6 +24361,11 @@ MonoBehaviour:
   lockedBadgeColor: {r: 0.45, g: 0.38, b: 0.33, a: 0.55}
   propCheese: {fileID: 305451765}
   propCup: {fileID: 1035091300}
+  tierLooks:
+  - fromTier: 4
+    sprite: {fileID: 21300000, guid: 388bb738e77550342a5e251020ff2532, type: 3}
+  - fromTier: 6
+    sprite: {fileID: 21300000, guid: 12c08a354e321dc46840e2fd34733c98, type: 3}
   bubbleTemplate: {fileID: 1016988256}
   bubbleOrder: 9000
   fxTemplate: {fileID: 426985776}

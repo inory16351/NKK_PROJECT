@@ -1,0 +1,26 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lobby_earthlab_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Attached references:
+- ref_layout_lobby_bg.png = the ORIGINAL rat hideout background. Use it ONLY for LAYOUT and COMPOSITION (camera angle, scale, where every object is). Do NOT copy its painted, soft-brush, warm-lit style.
+- ref_flat_lobby_catlab.png = the SAME hideout already redrawn for another zone in the correct flat in-game style. Match its flatness, simplicity, shape language and level of detail exactly, and keep the SAME positions of every object as in it.
+- ref_style_earthlab_props.png and ref_style_earthlab_wall.png = the IN-GAME art of the "earth science lab" floors (fossils, dinosaur bones, amber, rocks, sandstone wall, dark wood). Use THIS theme and palette, but drawn even flatter (no stone texture).
+
+Image spec:
+- 1536x1024, a full background illustration filling the whole canvas. No text, no letters, no numbers, no signs with writing, no characters, no animals, no rats, no living dinosaurs.
+- STYLE IS THE MOST IMPORTANT RULE: Untitled Goose Game flat look, exactly like ref_flat_lobby_catlab.png. Completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no light rays, no drop shadows, no texture, no brush strokes, no speckles; each object = a few flat color areas with one slightly darker flat tone. Soft muted earthy palette: warm sandstone beige, light sand, dusty terracotta, moss/olive green, bone ivory, warm brown wood, a little amber orange and cheese yellow. Low contrast so small characters on top stay readable.
+- Story: the rats moved their secret hideout INSIDE the wall of the EARTH SCIENCE LAB (a natural history / fossil research lab). It is the same hideout room, now built from stolen fossil-lab things.
+
+KEEP THE LAYOUT EXACTLY (positions in % of image width / height, measured from the top-left), same as both layout references:
+- Top band (0% to 22% height): the space above the room — wooden ceiling beams and simple earthy pipes, plus a few rock strata layers (flat horizontal bands of sand, terracotta and grey, like a cross-section of the ground) between the beams. A horizontal wooden beam across the whole width at about 20%-24% height. Keep the area between 45% and 70% width and 10%-22% height fairly plain (small medals are placed there later).
+- Back wall (24% to 65% height): flat sandstone block wall (like ref_style_earthlab_wall.png but flat, no texture), split by two or three wooden vertical support posts like the reference. Optionally ONE thin horizontal band of small flat fossil shapes (ammonite spirals, tiny bone shapes) across the wall at about 35%-40% height, very calm.
+- A ROUND HOLE in the wall at the left, centered at about 7.5% width / 43% height, about 9% of the width across, showing a glimpse of a bright museum-like fossil lab room behind it.
+- A PINBOARD on the wall centered at about 27% width / 39% height (about 14% wide): a cork board or field-map board with simple flat doodles (a staircase arrow, a cheese wedge, a dinosaur footprint — no letters), and a few small instant photos (a fossil, a bone, an amber drop, a pickaxe) pinned around it connected by red strings, covering about 15%-50% width and 30%-55% height.
+- A string of small round warm lights hanging across the upper wall from about 18% to 85% width at about 24%-30% height (flat dots, no glow).
+- The FLOOR is a long horizontal wooden shelf running across the WHOLE width: its top surface edge at about 64% height and its front edge at about 66%, with the front face of the shelf (warm brown wood) down to about 78% height. Rats walk on this top surface, so keep the surface plain.
+- Things standing on the shelf (same places and sizes as the references):
+  * at 1%-20% width: a little rat BED made from a half dinosaur EGG shell (ivory with flat spots) with a straw nest and a small cloth, on a small flat rug;
+  * at 27%-42% width: a big flat round fossil (ammonite stone slab) or a short round rock drum used as a TABLE, with two small round STOOLS beside it at about 23% and 45% width (made of small rock discs), a small pencil cup and a folded note on top;
+  * at 50%-66% width: a pile of old field notebooks and books (earthy colors, blank spines), a small flat desk lamp clipped to them, plus a small brush and a little piece of amber;
+  * at 67%-87% width: EMPTY plain wall behind the shelf (an exercise wheel is placed here later) — no objects there;
+  * at 87%-100% width: a tall wooden SHELF unit standing on the floor with stolen CHEESE wedges and blocks on three shelves, one shelf also holding a small fossil, and a wooden specimen crate at the bottom.
+- Bottom band (78% to 100% height): under the shelf, the cavity like the references — layered ground strata (flat bands of sand, terracotta, grey rock) with a few small flat buried fossils/bones and simple pipes, plain and calm. Keep the area around 50% width, 66%-78% height plain (a manhole cover is placed there later).
