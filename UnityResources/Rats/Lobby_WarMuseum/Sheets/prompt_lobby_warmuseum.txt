@@ -1,0 +1,26 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lobby_warmuseum_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A RESKIN / EDIT OF ref_flat_lobby_catlab.png.
+Take ref_flat_lobby_catlab.png as the base image and REPAINT it with a new theme while keeping its composition PIXEL-ALIGNED: every object, beam, post, the floor shelf, the round hole, the board, the table, the stools, the books, the right shelf and the bed must stay at EXACTLY the same position, size and outline as in ref_flat_lobby_catlab.png. Only the materials, colors and small decorations change. Do NOT move, enlarge, shrink or re-arrange anything. The canvas framing must be identical (1536x1024).
+
+Other references:
+- ref_layout_lobby_bg.png = the original hideout with the same layout (for extra layout check only; do NOT copy its painted style).
+- ref_style_war_props.png and ref_style_war_wall.png = the IN-GAME art of the "WORLD WAR 2 MUSEUM" floors (olive green wall panels, steel helmets, wooden ammo crates, field radio, ration tins, a map table, toy propeller planes, a parachute crate, museum display shelf). Use THIS theme and palette.
+
+IMPORTANT CONTENT RULES: a friendly cartoon MUSEUM look, not a battlefield. No real national flags, no national or military insignia, no swastikas, no rising-sun rays, no emblems or unit badges, no weapons (no guns, no bombs, no grenades, no bullets), no soldiers, no people, no characters, no rats, no text, no letters, no numbers.
+
+STYLE (most important, same as the base image): Untitled Goose Game flat look. Completely FLAT color shapes, NO black outlines, NO linework, no gloss, no metal reflections, no gradients, no glow, no light rays, no drop shadows, no texture, no wood grain; each object = a few flat color areas with one slightly darker flat tone. Soft muted palette: sage and olive green, khaki, warm wood brown, canvas beige, muted brick red, a little brass gold, and cheese yellow. Keep the back wall fairly LIGHT (pale sage/khaki) like the white tile wall of the base, low contrast so small characters on top stay readable.
+
+What to repaint (same places as in the base image):
+- Top band above the big horizontal beam: instead of pink/mint pipes and insulation puffs -> old wooden museum roof beams, simple olive pipes, a couple of small toy propeller planes hanging on strings, and a rolled canvas tarp. The big horizontal beam (same position, about 20%-24% height) becomes a dark wooden beam with simple bolts.
+- Back wall: white tiles with the pink paw stripe -> pale sage green wall panels (upper) and a darker olive vertical-plank band at the same height as the pink stripe (like ref_style_war_wall.png but flat). Vertical posts stay where they are (dark wood).
+- The round hole on the left (same place and size) -> a round hole with a wooden frame showing a bright museum hall behind it with a small olive green jeep and a parachute display.
+- The whiteboard (same place and size) -> a dark green field chalkboard / map board with flat white doodles (staircase arrow, cheese wedge, a little paper plane); the instant photos stay at the same spots but show a helmet, a field radio, a propeller plane, a parachute crate, with red strings. The paper map pinned beside it stays (a simple old map with a red dashed route).
+- The string lights stay the same, warm pale yellow.
+- The floor shelf (same top edge and same front face height) -> a warm wooden plank shelf with simple bolts.
+- Bed on the left (same place and size as the pink box bed) -> an upside-down olive STEEL HELMET used as a bed with a small khaki blanket, on the same small rug.
+- The pink cat-food can table (same place and size) -> a round olive RATION TIN (big round tin can, no text) used as a table, with the same pencil cup and note on top; the two round stools (same places and sizes) -> small round olive tins / short wooden drums.
+- The pile of binders + clip lamp (same place and size) -> old field notebooks, a canvas map case and binders in khaki/olive/brick red + the same clip lamp + a small brass medal on a ribbon (plain ribbon colors, no national pattern).
+- The empty wall area right of the books stays EMPTY.
+- The right shelf unit with cheese (same place and size) -> a wooden museum display shelf with the same cheese wedges and blocks, one small toy propeller plane on a stand, and a small wooden ammo crate (closed, empty, no markings) at the bottom.
+- Bottom band below the floor shelf: instead of pipes and pink insulation -> simple olive pipes, a few sandbags, stacked closed wooden crates and a rolled canvas, plain and calm. Keep the area around 50% width just below the floor plain.
