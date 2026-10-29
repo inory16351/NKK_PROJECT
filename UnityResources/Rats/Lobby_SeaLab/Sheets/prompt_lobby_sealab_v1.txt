@@ -1,0 +1,26 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lobby_sealab_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Attached references:
+- ref_layout_lobby_bg.png = the ORIGINAL rat hideout background. Use it ONLY for LAYOUT and COMPOSITION (camera angle, scale, where every object is). Do NOT copy its painted, soft-brush, warm-lit style.
+- ref_flat_lobby_catlab.png = the SAME hideout already redrawn for another zone in the correct flat in-game style. Match its flatness, simplicity, shape language and level of detail exactly, and keep the SAME positions of every object as in it.
+- ref_style_sea_props.png and ref_style_sea_wall.png = the IN-GAME art of the "UNDERWATER RESEARCH LAB" floors (riveted steel wall panels with round portholes showing blue sea water, coral, shells, starfish, aquariums, specimen jars, ice boxes). Use THIS theme and palette, but drawn even flatter (no metal shine, no water texture).
+
+Image spec:
+- 1536x1024, a full background illustration filling the whole canvas. No text, no letters, no numbers, no signs with writing, no characters, no people, no rats, no big sea creatures (only tiny simple fish silhouettes far away outside the windows are allowed).
+- STYLE IS THE MOST IMPORTANT RULE: Untitled Goose Game flat look, exactly like ref_flat_lobby_catlab.png. Completely FLAT color shapes, NO black outlines, NO linework, no gloss, no metal reflections, no gradients, no glow, no light rays, no caustics, no drop shadows, no texture, no brush strokes; each object = a few flat color areas with one slightly darker flat tone. Soft muted underwater-lab palette: pale steel blue-grey, soft teal, light sea blue, a little coral pink and orange, sand beige, and cheese yellow. Low contrast so small characters on top stay readable.
+- Story: the rats moved their secret hideout INSIDE the wall of the UNDERWATER RESEARCH LAB (a submarine-like station on the sea floor). It is the same hideout room, now built from stolen sea-lab things.
+
+KEEP THE LAYOUT EXACTLY (positions in % of image width / height, measured from the top-left), same as both layout references:
+- Top band (0% to 22% height): the space above the room — riveted steel ceiling beams and pipes, with a few small round portholes showing flat blue sea water and a couple of tiny fish silhouettes. A horizontal riveted steel beam across the whole width at about 20%-24% height. Keep the area between 45% and 70% width and 10%-22% height fairly plain (small medals are placed there later).
+- Back wall (24% to 65% height): flat pale steel wall panels with a few simple rivet dots (like ref_style_sea_wall.png but flat), split by two or three vertical steel frame posts like the reference. Keep the wall mostly plain; no portholes on this wall except the round hole below.
+- A ROUND HOLE in the wall at the left, centered at about 7.5% width / 43% height, about 9% of the width across: drawn as a ROUND PORTHOLE window with a thick steel ring, showing the flat blue sea outside with a bit of coral and a tiny fish.
+- A BOARD on the wall centered at about 27% width / 39% height (about 14% wide): a small dark slate board with simple flat white doodles (a staircase arrow, a cheese wedge, a fish — no letters), and a few small instant photos (a crab, a shell, a starfish, a jellyfish) pinned around it connected by red strings, covering about 15%-50% width and 30%-55% height.
+- A string of small round lights hanging across the upper wall from about 18% to 85% width at about 24%-30% height (flat dots in pale yellow and aqua, no glow).
+- The FLOOR is a long horizontal steel deck (catwalk) running across the WHOLE width: its top surface edge at about 64% height and its front edge at about 66%, with the front face (plain steel blue-grey panel with a few rivets) down to about 78% height. Rats walk on this top surface, so keep the surface plain.
+- Things standing on the deck (same places and sizes as the references):
+  * at 1%-20% width: a little rat BED made from a big open CLAM SHELL with a pearl as a pillow and a small cloth, on a small flat rug;
+  * at 27%-42% width: a big round upturned red PLASTIC BASIN (or a round buoy drum) used as a TABLE, with two small round STOOLS beside it at about 23% and 45% width (made of small round fishing floats/buoys), a small pencil cup and a folded note on top;
+  * at 50%-66% width: a pile of waterproof notebooks and binders (blank, muted colors), a small flat desk lamp clipped to them, plus one small specimen jar with a tiny seahorse and a small shell;
+  * at 67%-87% width: EMPTY plain wall behind the deck (an exercise wheel is placed here later) — no objects there;
+  * at 87%-100% width: a tall metal SHELF unit standing on the floor with stolen CHEESE wedges and blocks on three shelves, one small specimen jar with a starfish, and a small white ice box at the bottom.
+- Bottom band (78% to 100% height): under the deck, the cavity like the references — steel pipes and valves, a couple of round portholes showing flat blue water with a bit of sand, coral and seaweed, plain and calm. Keep the area around 50% width, 66%-78% height plain (a manhole cover is placed there later).

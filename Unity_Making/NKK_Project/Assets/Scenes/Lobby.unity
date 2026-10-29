@@ -24368,6 +24368,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 12c08a354e321dc46840e2fd34733c98, type: 3}
   - fromTier: 9
     sprite: {fileID: 21300000, guid: f795432ed5224fc42a39bc8f2152d8a6, type: 3}
+  - fromTier: 11
+    sprite: {fileID: 21300000, guid: d331b59a6d9ddca4dae6b0eef68f522d, type: 3}
   bubbleTemplate: {fileID: 1016988256}
   bubbleOrder: 9000
   fxTemplate: {fileID: 426985776}

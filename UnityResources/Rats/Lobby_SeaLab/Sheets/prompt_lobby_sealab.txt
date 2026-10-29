@@ -1,0 +1,24 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lobby_sealab_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A RESKIN / EDIT OF ref_flat_lobby_catlab.png.
+Take ref_flat_lobby_catlab.png as the base image and REPAINT it with a new theme while keeping its composition PIXEL-ALIGNED: every object, beam, post, the floor shelf, the round hole, the board, the table, the stools, the books, the right shelf and the bed must stay at EXACTLY the same position, size and outline as in ref_flat_lobby_catlab.png. Only the materials, colors and small decorations change. Do NOT move, enlarge, shrink or re-arrange anything. The canvas framing must be identical (1536x1024).
+
+Other references:
+- ref_layout_lobby_bg.png = the original hideout with the same layout (for extra layout check only; do NOT copy its painted style).
+- ref_style_sea_props.png and ref_style_sea_wall.png = the IN-GAME art of the "UNDERWATER RESEARCH LAB" floors (riveted steel wall panels with round portholes showing blue sea water, coral, shells, starfish, aquariums, specimen jars, ice boxes). Use THIS theme and palette.
+
+STYLE (most important, same as the base image): Untitled Goose Game flat look. Completely FLAT color shapes, NO black outlines, NO linework, no gloss, no metal reflections, no gradients, no glow, no light rays, no caustics, no drop shadows, no texture; each object = a few flat color areas with one slightly darker flat tone. Soft muted palette: pale steel blue-grey, soft teal, light sea blue, a little coral pink and orange, sand beige, cheese yellow. Keep the back wall LIGHT (pale blue-grey) like the white tile wall of the base, low contrast so small characters on top stay readable. No text, no letters, no numbers, no characters, no rats, no big creatures (tiny fish silhouettes outside windows are fine).
+
+What to repaint (same places as in the base image):
+- Top band above the big horizontal beam: instead of pink/mint pipes and insulation puffs -> steel pipes with a red valve wheel or two and a few small round portholes with flat blue water. The big horizontal beam (same position, about 20%-24% height) becomes a riveted steel beam.
+- Back wall: white tiles with the pink paw stripe -> pale steel wall panels with small rivet dots and ONE calm teal horizontal stripe at the same height as the pink stripe. Vertical posts stay where they are (steel).
+- The round hole on the left (same place and size) -> a round PORTHOLE with a thick steel ring, showing flat blue sea with a little coral and a tiny fish.
+- The whiteboard (same place and size) -> a dark slate board with flat white doodles (staircase arrow, cheese wedge, fish); the instant photos stay at the same spots but show a crab, a shell, a starfish, a jellyfish, with red strings.
+- The string lights stay the same, colored pale yellow and aqua.
+- The floor shelf (same top edge and same front face height) -> a pale steel deck with a few rivets on its front face.
+- Bed on the left (same place and size as the pink box bed) -> an open CLAM SHELL bed with a pearl pillow and a small cloth, on the same small rug.
+- The pink cat-food can table (same place and size) -> a round upturned red plastic BASIN used as a table, with the same pencil cup and note on top; the two round stools (same places and sizes) -> round fishing floats (white/blue and white/red).
+- The pile of binders + clip lamp (same place and size) -> waterproof notebooks and binders in muted blue/teal/coral + the same lamp + one small specimen jar with a tiny seahorse.
+- The empty wall area right of the books stays EMPTY.
+- The right shelf unit with cheese (same place and size) -> a steel shelf with the same cheese wedges and blocks, one small specimen jar with a starfish, and a small white ice box at the bottom.
+- Bottom band below the floor shelf: instead of pipes and pink insulation -> steel pipes and valves and one or two round portholes showing flat blue water with sand, coral and seaweed. Keep the area around 50% width just below the floor plain.
