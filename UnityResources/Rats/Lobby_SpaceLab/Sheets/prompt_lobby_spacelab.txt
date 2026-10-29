@@ -1,0 +1,24 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lobby_spacelab_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A RESKIN / EDIT OF ref_flat_lobby_catlab.png.
+Take ref_flat_lobby_catlab.png as the base image and REPAINT it with a new theme while keeping its composition PIXEL-ALIGNED: every object, beam, post, the floor shelf, the round hole, the board, the table, the stools, the books, the right shelf and the bed must stay at EXACTLY the same position, size and outline as in ref_flat_lobby_catlab.png. Only the materials, colors and small decorations change. Do NOT move, enlarge, shrink or re-arrange anything. The canvas framing must be identical (1536x1024).
+
+Other references:
+- ref_layout_lobby_bg.png = the original hideout with the same layout (for extra layout check only; do NOT copy its painted style).
+- ref_style_space_props.png and ref_style_space_wall.png = the IN-GAME art of the "SPACE RESEARCH CENTER" floors (white and light grey panel walls with a navy stripe and small green/yellow/red indicator lights, astronaut helmet, toy rocket, ringed planet model, telescope, satellite dish, moon rock in a glass case, control panel, space food packets). Use THIS theme and palette.
+
+STYLE (most important, same as the base image): Untitled Goose Game flat look. Completely FLAT color shapes, NO black outlines, NO linework, no gloss, no metal reflections, no gradients, no glow, no light rays, no lens flares, no drop shadows, no texture; each object = a few flat color areas with one slightly darker flat tone. Soft muted palette: off-white, light grey, slate and navy blue, a little rocket red, soft gold, tiny green/yellow/red indicator dots, and cheese yellow. Keep the back wall LIGHT (off-white/light grey panels) like the white tile wall of the base, low contrast so small characters on top stay readable. No text, no letters, no numbers, no real logos or flags, no characters, no people, no astronauts, no rats.
+
+What to repaint (same places as in the base image):
+- Top band above the big horizontal beam: instead of pink/mint pipes and insulation puffs -> light grey station ducts and cables, plus a couple of small square windows showing a flat navy starry sky with a tiny ringed planet. The big horizontal beam (same position, about 20%-24% height) becomes a light grey riveted station beam.
+- Back wall: white tiles with the pink paw stripe -> off-white/light grey wall panels with tiny corner screws and ONE navy horizontal stripe at the same height as the pink stripe, with small flat green/yellow/red indicator dots on it (like ref_style_space_wall.png but flat). Vertical posts stay where they are (light grey).
+- The round hole on the left (same place and size) -> a round station PORTHOLE with a thick grey ring, showing flat navy space with a few stars and a small Earth-like blue-green planet.
+- The whiteboard (same place and size) -> a small dark mission screen/board with flat white doodles (staircase arrow, cheese wedge, a little rocket); the instant photos stay at the same spots but show a rocket, a planet, a satellite dish, a moon rock, with red strings. The paper map beside it becomes a simple flat star chart with a red dashed route.
+- The string lights stay the same, pale yellow and white.
+- The floor shelf (same top edge and same front face height) -> a light grey station deck with a thin navy edge and a few tiny indicator dots on its front face.
+- Bed on the left (same place and size as the pink box bed) -> a rat bed made from an open ASTRONAUT HELMET lying on its back (white with a soft gold visor) with a small cloth inside, on the same small rug.
+- The pink cat-food can table (same place and size) -> a round white space-food container / small round capsule drum used as a table, with the same pencil cup and a small silver space-food packet on top; the two round stools (same places and sizes) -> small round grey canisters.
+- The pile of binders + clip lamp (same place and size) -> mission binders and manuals in navy/grey/red (blank) + the same clip lamp + a small ringed planet model on a stand.
+- The empty wall area right of the books stays EMPTY.
+- The right shelf unit with cheese (same place and size) -> a light grey station shelf with the same cheese wedges and blocks (space cheese), one small toy rocket on a stand, and a small moon rock in a glass box at the bottom.
+- Bottom band below the floor shelf: instead of pipes and pink insulation -> grey station pipes, cables, a small control panel with flat colored buttons and a round window showing flat navy space with stars. Keep the area around 50% width just below the floor plain.
