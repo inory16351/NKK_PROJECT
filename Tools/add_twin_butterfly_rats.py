@@ -20,7 +20,7 @@ def upsert(ws, key, row):
         if h in row: ws.cell(target, i + 1).value = row[h]
 
 CH = [
-    dict(character_id=10088, character_name='콩쥐팥쥐', code_id='kongpat', grade='Rare', body_type='Mouse', atk=52, passive_skill=20088, action_skill=21088, ultimate=0, unlock_rank=8,
+    dict(character_id=10088, character_name='콩쥐팥쥐', code_id='kongpat', grade='Epic', body_type='Mouse', atk=88, passive_skill=20088, action_skill=21088, ultimate=0, unlock_rank=8,
          character_desc='등을 맞대고 붙어 버린 한복 쌍둥이. 위에 붙은 한 마리는 늘 거꾸로 버둥거리고, 뛰어오르면 공중제비로 위아래가 바뀐다.', asset_folder='Parts/kongpat'),
     dict(character_id=10089, character_name='나비쥐', code_id='butterfly', grade='Rare', body_type='Mouse', atk=46, passive_skill=20089, action_skill=21089, ultimate=0, unlock_rank=8,
          character_desc='커다란 귀를 날개처럼 팔랑이며 땅에서 살짝 떠서 다닌다. 날갯짓 한 번이 나비 효과가 된다.', asset_folder='Parts/butterfly'),
