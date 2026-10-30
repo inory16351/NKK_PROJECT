@@ -76,7 +76,7 @@ namespace NKK.Lobby
         public TMP_Text augLabel, augSubUse, augSubNeed, augCountText;
         [Tooltip("가진 증강 줄 템플릿 (자식: Bar · Icon · Name({name}{lv}) · Desc)")] public Image augRowTpl;
         [Tooltip("가진 증강 줄 간격 · 줄 수 상한")] public float augRowStep = 46; public int augRowMax = 9;
-        [Tooltip("빠르게 ({n}) · 회수 · 조준 안내")] public Button ffButton;
+        [Tooltip("빠르게 (글 = 지금 배속 X{n}) · 회수 · 조준 안내")] public Button ffButton;
         public TMP_Text ffLabel;
         public Button recallButton;
         public GameObject aimHint;
@@ -944,8 +944,7 @@ namespace NKK.Lobby
                 ffButton.gameObject.SetActive(fly);
                 if (fly)
                 {
-                    int mx = (int)Cf("ff_max", 4);
-                    Fill(ffLabel, ("n", ffMul >= mx ? 1 : ffMul * 2));
+                    Fill(ffLabel, ("n", ffMul));          // 지금 배속 (X1 · X2 · X4, 2026-10-30 사용자 — 예전엔 다음 배속을 보여 줘서 어긋남)
                     if (ffButton.image) ffButton.image.color = flyT > 4 && Mathf.Sin(time * 8) > 0 ? ffBlink : ffColor;
                 }
             }
