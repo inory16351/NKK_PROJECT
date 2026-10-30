@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace NKK.Lobby
 {
-    // 쥐돌깨기 누르기 입력 → JudolGame. id: board = 판 (끌었다 놓아 발사) · buy = 쥐 뽑기 버튼 (Shift = 10마리, 꾹 = 연속)
+    // 쥐돌깨기 누르기 입력 → JudolGame. id: board = 판 (끌었다 놓아 발사) · buy = 쥐 뽑기 버튼 (누름 = 1마리 · 꾹 = 연속 · Ctrl = 일괄)
     public class JudolPress : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
         public JudolGame game;

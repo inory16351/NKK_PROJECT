@@ -61,7 +61,7 @@ namespace NKK.Lobby
 
         [Header("왼쪽: 치즈 · 쥐 뽑기 · 보유 쥐")]
         public TMP_Text cheeseText;
-        [Tooltip("쥐 뽑기 (JudolPress id buy) · 아래 글 ({price} {pity})")] public Button buyButton;
+        [Tooltip("쥐 뽑기 (JudolPress id buy: 누름 = 1마리 · 꾹 = 연속 · Ctrl = 일괄) · 아래 글 ({price} {pity})")] public Button buyButton;
         public TMP_Text buySub, ownedText;
         [Tooltip("등급 줄 6개 (자식: Pic(RawImage) · Name · Dmg({n}) · Skill · Count({n}))")] public Image[] gradeRows = new Image[0];
         [Tooltip("등급 줄 바탕 투명도: 있음 · 없음")] public float rowOn = 0.9f, rowOff = 0.4f;
@@ -574,7 +574,10 @@ namespace NKK.Lobby
             return true;
         }
         void Recent(Rat r) { recent.Insert(0, r); if (recent.Count > 10) recent.RemoveRange(10, recent.Count - 10); }
-        void PullMany() { for (int i = 0; i < (int)Cf("ten_pull", 10); i++) if (!PullRat()) break; }
+        // 일괄 뽑기 (왼쪽 Ctrl · Ctrl + 뽑기 버튼): 치즈가 되는 만큼, 한 번에 bulk_max 마리까지
+        void PullAll() { int n = 0; for (int i = 0; i < (int)Cf("bulk_max", 100); i++) { if (!PullRat()) break; n++; } if (n == 0) Sfx(sfxDeny); }
+        // 한 마리 뽑고 꾹 누르면 연속 (뽑기 버튼 · 왼쪽 Shift)
+        void PullHold() { if (!PullRat()) Sfx(sfxDeny); holdBuy = Cf("hold_delay", 0.35f); }
 
         int AugCost() => Mathf.RoundToInt(Cf("aug_base", 10) * Mathf.Pow(Cf("aug_mul", 1.5f), augCount));
         // 재료 = 낮은 등급 먼저, 같은 등급이면 오래된(먼저 얻은) 쥐 먼저
@@ -652,7 +655,7 @@ namespace NKK.Lobby
             if (paused || !board) return;
             if (id == "buy")
             {
-                if (phase == 0) { var k = Keyboard.current; if (k != null && k.shiftKey.isPressed) PullMany(); else { if (!PullRat()) Sfx(sfxDeny); holdBuy = Cf("hold_delay", 0.35f); } }
+                if (phase == 0) { var k = Keyboard.current; if (k != null && k.ctrlKey.isPressed) PullAll(); else PullHold(); }
                 if (phase == 2) holdBuy = -1;
                 return;
             }
@@ -674,7 +677,10 @@ namespace NKK.Lobby
             }
             if (k.mKey.wasPressedThisFrame) MusicOn = !MusicOn;
             if (paused) return;
-            if (k.qKey.wasPressedThisFrame) { if (k.shiftKey.isPressed) PullMany(); else PullRat(); }
+            if (k.leftShiftKey.wasPressedThisFrame) PullHold();          // 왼쪽 Shift = 쥐 뽑기 (꾹 = 연속, 2026-10-30 사용자)
+            if (k.leftShiftKey.wasReleasedThisFrame) holdBuy = -1;
+            if (k.leftCtrlKey.wasPressedThisFrame) PullAll();          // 왼쪽 Ctrl = 일괄 뽑기
+            if (k.qKey.wasPressedThisFrame) PullRat();
             if (k.eKey.wasPressedThisFrame) OpenAug();
             if (k.fKey.wasPressedThisFrame) ToggleFast();
             if (k.spaceKey.wasPressedThisFrame) Recall();

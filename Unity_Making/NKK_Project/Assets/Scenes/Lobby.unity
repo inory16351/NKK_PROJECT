@@ -104803,8 +104803,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "{price} \uCE58\uC988 \xB7 Shift = 10\uB9C8\uB9AC \xB7 \uAFB9 = \uC5F0\uC18D
-    \xB7 \uCC9C\uC7A5 {pity}"
+  m_text: "{price} \uCE58\uC988 \xB7 Shift \uBF51\uAE30 \xB7 Ctrl \uC77C\uAD04 \xB7
+    \uCC9C\uC7A5 {pity}"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
   m_sharedMaterial: {fileID: -6973996884597535460, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
@@ -104834,9 +104834,9 @@ MonoBehaviour:
   m_fontSize: 14
   m_fontSizeBase: 14
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 10
+  m_fontSizeMax: 14
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -122617,10 +122617,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB04C\uC5C8\uB2E4 \uB193\uAE30 = \uBC1C\uC0AC \xB7 Q \uC950 \uBF51\uAE30
-    (Shift = 10\uB9C8\uB9AC, \uAFB9 = \uC5F0\uC18D) \xB7 E \uC99D\uAC15 \uBF51\uAE30
-    \xB7 F \uBE60\uB974\uAC8C \xB7 Space \uD68C\uC218 \xB7 R \uB2E4\uC2DC \xB7 Esc
-    \uC77C\uC2DC\uC815\uC9C0 \xB7 M \uC74C\uC545"
+  m_text: "\uB04C\uC5C8\uB2E4 \uB193\uAE30 = \uBC1C\uC0AC \xB7 \uC67C\uCABD Shift
+    \uC950 \uBF51\uAE30 (\uAFB9 = \uC5F0\uC18D) \xB7 \uC67C\uCABD Ctrl \uC77C\uAD04
+    \uBF51\uAE30 \xB7 E \uC99D\uAC15 \uBF51\uAE30 \xB7 F \uBE60\uB974\uAC8C \xB7
+    Space \uD68C\uC218 \xB7 R \uB2E4\uC2DC \xB7 Esc \uC77C\uC2DC\uC815\uC9C0 \xB7
+    M \uC74C\uC545"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
   m_sharedMaterial: {fileID: -6973996884597535460, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}

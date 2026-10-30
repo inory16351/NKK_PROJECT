@@ -109,8 +109,8 @@
    "value": 10.0
   },
   {
-   "key": "ten_pull",
-   "value": 10.0
+   "key": "bulk_max",
+   "value": 100.0
   },
   {
    "key": "hold_delay",

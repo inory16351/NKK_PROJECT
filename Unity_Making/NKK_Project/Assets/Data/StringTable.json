@@ -15497,8 +15497,8 @@
   },
   {
    "string_key": 8000577,
-   "ko": "{price} 치즈 · Shift = 10마리 · 꾹 = 연속 · 천장 {pity}",
-   "en": "{price} cheese · Shift = 10 · Hold = repeat · Pity {pity}"
+   "ko": "{price} 치즈 · Shift 뽑기 · Ctrl 일괄 · 천장 {pity}",
+   "en": "{price} cheese · Shift draw · Ctrl all · Pity {pity}"
   },
   {
    "string_key": 8000578,
@@ -15512,8 +15512,8 @@
   },
   {
    "string_key": 8000580,
-   "ko": "끌었다 놓기 = 발사 · Q 쥐 뽑기 (Shift = 10마리, 꾹 = 연속) · E 증강 뽑기 · F 빠르게 · Space 회수 · R 다시 · Esc 일시정지 · M 음악",
-   "en": "Drag & release = launch · Q rat draw (Shift = 10, hold = repeat) · E augment draw · F fast · Space recall · R restart · Esc pause · M music"
+   "ko": "끌었다 놓기 = 발사 · 왼쪽 Shift 쥐 뽑기 (꾹 = 연속) · 왼쪽 Ctrl 일괄 뽑기 · E 증강 뽑기 · F 빠르게 · Space 회수 · R 다시 · Esc 일시정지 · M 음악",
+   "en": "Drag & release = launch · Left Shift rat draw (hold = repeat) · Left Ctrl draw all · E augment draw · F fast · Space recall · R restart · Esc pause · M music"
   },
   {
    "string_key": 8000581,
