@@ -52,7 +52,7 @@ FLAT_NAMES = {'knight': ['ghostsword', 'pillar', 'arc', 'motes', 'burst', 'ring'
               'jjdetective': ['sparkle', 'glare', 'bubble', 'dust', 'shockring', 'streak'],      # 명탐정 쥐 v2 (2026-10-21): 반짝 · 안경 번쩍 · 코풍선 · 먼지 · 충격파 고리 · 속도선
               'zapham': ['bolt', 'forkbolt', 'sparks', 'shockring', 'hitstar', 'twinkle'],      # 짜릿햄쥐 v2 (2026-10-21): 백만볼트 · 갈라진 번개 · 스파크 · 충격파 고리 · 박치기 별 · 반짝 ✦
               'parkrat': ['sparkle', 'confetti', 'clap', 'shockring', 'wind', 'streak'],
-              'jwerry': ['dust', 'streak', 'stars', 'bonk', 'steam', 'shockring'],      # 줴리 v2 (2026-10-21): 흙먼지 · 속도선 · 기절 별 · 뿅 · 김 · 충격파 고리      # 쥐랜드 관광쥐 v2 (2026-10-21): 유레카 반짝 · 색종이 · 박수 표시 · 충격파 고리 · 돌풍 · 속도선
+              'jwerry': ['dust', 'streak', 'stars', 'splat', 'steam', 'shockring'],      # 줴리 v3 무성영화 (2026-10-30): 흙먼지 · 속도선 · 기절 별 · 크림 철퍼덕 · 김 · 충격파 고리      # 쥐랜드 관광쥐 v2 (2026-10-21): 유레카 반짝 · 색종이 · 박수 표시 · 충격파 고리 · 돌풍 · 속도선
               'emperor': ['muzzle', 'smoke', 'bullet', 'summon', 'spark', 'streak']}     # 쥐 황제 v2 (2026-10-20): 총구 섬광 · 연기 · 총알 · 소환 연기 · 탄착 불꽃 · 속도선     # 슈퍼 요리사 v2 (2026-10-20): 머리카락 뭉치 · 머리카락 · 기절 별 · 반짝 · 블러 휙 · 속도선     # 치즈 퐁듀 v2 (2026-10-20): 스냅 반짝 · 고리 · 치즈 튐 · 치즈 방울 · 물보라 · 속도선     # 스트리머 v2 (2026-10-20): 하트 · 하트 터짐 · 음표 · 고글 반짝 · 네온 고리 · 색종이    # 폭탄마 v2 (2026-10-20): 빨간 마법진 · 원근 마법진 · 룬 고리 · 작은 마법진 · 붉은 섬광 · 불티
 STRIP3 = {'beam.png': ['fx_beam', 'fx_beamcore', 'fx_beamhit'], 'mushroom.png': ['fx_mush1', 'fx_mush2', 'fx_mush3'], 'geyser.png': ['fx_geyser1', 'fx_geyser2', 'fx_geyser3'], 'pour.png': ['fx_pour1', 'fx_pour2', 'fx_pour3'], 'balloon.png': ['prop_balloon', 'prop_balloon_tight', 'prop_balloon_burst']}   # 가로 3칸 (자홍, 여백 자름) — 폭탄마 v2 레이저 · 버섯구름 (버섯구름은 같은 바닥선 → 칸 크기 그대로)
 GRID6 = {'boom.png': (['boom1', 'boom2', 'boom3', 'shockring', 'debris', 'smoke'], 3), 'pop.png': (['pop1', 'pop2', 'pop3', 'dome', 'debris', 'dustwall'], 3)}    # 자홍 3×2: 앞 n 개 = 프레임 (칸 크기 그대로) · 나머지 = 여백 자름  # 파라오 v2 (2026-10-20): 소환진 · 모래 분수 · 모래 먼지 · 붕대 · 해 섬광 · 모래 고리
@@ -63,7 +63,7 @@ HIT_NAMES = {'pharaoh': ['sandstreak', 'scarab', 'puff', 'hit1', 'hit2', 'hit3']
              'emperor': ['tracer', 'smokeband', 'dust', 'hit1', 'hit2', 'hit3'],
              'zapham': ['boltfall', 'zsparks', 'zstreak', 'hit1', 'hit2', 'hit3'],
              'jjdetective': ['dartfall', 'feather', 'snot', 'hit1', 'hit2', 'hit3'],
-             'jwerry': ['panfall', 'pan2', 'star', 'hit1', 'hit2', 'hit3']}       # fx_hit.png 칸 이름 (기본 = 기사: slash · wave · mote · hit1~3)
+             'jwerry': ['piefall', 'pie2', 'star', 'hit1', 'hit2', 'hit3']}       # 줴리 v3: 날아오는 크림 파이 · 별 · 철퍼덕 3프레임 (게임 화면, 세피아 안 함)       # fx_hit.png 칸 이름 (기본 = 기사: slash · wave · mote · hit1~3)
 ROT_RIGHT = {'jjdetective': ['fx_dartfall']}     # 메이드 쥐 칼 비 (2026-10-20)
 FLAT_PROPS = {'pharaoh': ['sarcophagus', 'jar', 'scarab', 'obelisk', 'meme', 'fg'], 'streamrat': ['monitor', 'coins', 'gift', 'like', 'meme', 'glowstick'],
               'ramjui': ['hammer', 'acorn', 'helmet', 'polaroid', 'cursor', 'leaf'],
@@ -71,12 +71,32 @@ FLAT_PROPS = {'pharaoh': ['sarcophagus', 'jar', 'scarab', 'obelisk', 'meme', 'fg
               'jjdetective': ['pawprint', 'hair', 'fishbone', 'scratch', 'bulb', 'dart'],      # 명탐정 쥐 v2: 단서 4 (발자국 · 고양이 털 · 생선 뼈 · 할퀸 자국) · 전구 · 마취침
               'zapham': ['seed', 'cloud', 'cloudstreak', 'smoke', 'dust', 'sweat'],      # 짜릿햄쥐 v2: 해바라기씨 · 구름 · 구름 줄 · 연기 · 흙먼지 · 땀
               'parkrat': ['balloon_old', 'balloon_tight_old', 'bulb', 'flyrat1', 'flyrat2', 'ears'],
-              'jwerry': ['pan', 'cheese', 'book', 'plant', 'chair', 'sweat']}     # 줴리 v2: 프라이팬 · 치즈 · 책 · 앞 화분 · 앞 의자 (시차) · 땀     # 쥐랜드 관광쥐 v2: 쥐 머리 풍선 · 터지기 직전 풍선 · 아이디어 전구 · 날아가는 관람객 쥐 2 · 머리띠     # props_flat.png 칸 이름 (기본 = GRID_PROPS)
-ANIM_SAMEBOX = {'anim_shock.png', 'anim_hamtease.png', 'anim_soldier.png', 'anim_front.png', 'anim_pump.png', 'anim_jrun.png', 'anim_tomrun.png'}    # 셀 프레임을 같은 틀로 자를 시트 (쥐 황제 v2 병사: 격발 프레임 총구 섬광)
+              'jwerry': ['pie', 'hat', 'cane', 'cake', 'rose', 'sandbag']}       # 줴리 v3 무성영화: 크림 파이 · 중절모 · 지팡이 · 케이크 조각 · 장미 · 모래주머니     # 줴리 v2: 프라이팬 · 치즈 · 책 · 앞 화분 · 앞 의자 (시차) · 땀     # 쥐랜드 관광쥐 v2: 쥐 머리 풍선 · 터지기 직전 풍선 · 아이디어 전구 · 날아가는 관람객 쥐 2 · 머리띠     # props_flat.png 칸 이름 (기본 = GRID_PROPS)
+ANIM_SAMEBOX = {'anim_shock.png', 'anim_hamtease.png', 'anim_soldier.png', 'anim_front.png', 'anim_pump.png', 'anim_jrun.png', 'anim_tomrun.png', 'anim_mrun.png', 'anim_crun.png'}    # 셀 프레임을 같은 틀로 자를 시트 (쥐 황제 v2 병사: 격발 프레임 총구 섬광)
 TINT = {'alien': [('fx_cloud', (112, 116, 178), (196, 198, 238))]}
 FLIP_X = {'emperor': ['fx_muzzle']}    # 자른 뒤 좌우 뒤집을 그림 (Codex 가 반대 방향으로 그린 것: 쥐 황제 총구 섬광)
 EXTRA_GRID = {'emperor': {'fx_front.png': ['fmuzzle', 'fbullet', 'fbullet3q', 'smokering', 'hole', 'radial']},
-              'alien': {'fx_v3.png': ['signal', 'jetdot', 'afterburn', 'shard', 'panel', 'tear']}}     # 쥐마다 더 그린 자홍 3×2 시트 → fx_<이름> (여백 자름)
+              'alien': {'fx_v3.png': ['signal', 'jetdot', 'afterburn', 'shard', 'panel', 'tear']},
+              'jwerry': {'film.png': ['scratch1', 'scratch2', 'hair', 'specks', 'blotch', 'cross']}}      # 줴리 v3: 낡은 필름 긁힘 (세피아 안 함)     # 쥐마다 더 그린 자홍 3×2 시트 → fx_<이름> (여백 자름)
+# 세피아 무성영화 (2026-10-30 줴리 v3): 자른 그림 전부 세피아로 (컬러로 그린 뒤 입힘). 이 이름으로 시작하는 그림은 그대로 (게임 화면 파이 · 필름 긁힘 · 아이리스 · 자막 카드)
+SEPIA = {'jwerry': ('fx_piefall', 'fx_pie2', 'fx_star', 'fx_hit1', 'fx_hit2', 'fx_hit3', 'fx_scratch', 'fx_hair', 'fx_specks', 'fx_blotch', 'fx_cross', 'bg_', 'shot_card')}
+SEPIA_STOPS = ((0.0, (38, 26, 18)), (0.5, (156, 118, 80)), (1.0, (246, 233, 206)))      # 어두운 갈색 → 중간 → 크림
+
+
+def sepia(out, code):
+    for fn in sorted(os.listdir(out)):
+        if not fn.endswith('.png') or fn.startswith(SEPIA[code]): continue
+        q = os.path.join(out, fn); a = np.asarray(Image.open(q).convert('RGBA')).astype(np.float32)
+        l = (a[..., 0] * 0.299 + a[..., 1] * 0.587 + a[..., 2] * 0.114) / 255
+        l = np.clip((l - 0.5) * 1.12 + 0.52, 0, 1)
+        (t0, c0), (t1, c1), (t2, c2) = SEPIA_STOPS
+        lo = l[..., None] / t1; hi = (l[..., None] - t1) / (t2 - t1)
+        rgb = np.where(l[..., None] < t1, np.array(c0) + (np.array(c1) - np.array(c0)) * lo, np.array(c1) + (np.array(c2) - np.array(c1)) * hi)
+        a[..., :3] = rgb
+        Image.fromarray(a.clip(0, 255).astype(np.uint8), 'RGBA').save(q)
+    print('세피아', code)
+
+
 GRID_CRACK = ['crack1', 'crack2', 'crack3', 'shard1', 'shard2', 'shard3']   # crack.png (자홍 3×2): 화면 얼음 금 · 깨진 파편 (2026-10-19 아이스 퀸 v2)
 
 
@@ -314,6 +334,7 @@ def main(code):
     if code in FLAT_NAMES and 'streak' not in FLAT_NAMES[code]:      # 속도선(fx_streak)이 없는 쥐 = 아이스 퀸 플랫 줄무늬를 씀 (흰색, 색 상관없음)
         shutil.copy(os.path.join(ROOT, 'UnityResources', 'Rats', 'SuperUlt', 'icequeen', 'fx_streak.png'), os.path.join(out, 'fx_streak.png'))
     pad4(out)
+    if code in SEPIA: sepia(out, code)
     dst = os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Art', 'Rats', 'SuperUlt', code)
     os.makedirs(dst, exist_ok=True)
     for f in os.listdir(out):

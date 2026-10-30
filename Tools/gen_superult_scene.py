@@ -106,7 +106,7 @@ class W:
 
 def rat(code):
     """쥐별 연출 (superult_story.STORIES) + 쥐별 모습(SuperUltStyle)"""
-    from superult_story import Story, STORIES, NO_FINISH, WORLD, IMAGE_FX, NO_TEXT
+    from superult_story import Story, STORIES, NO_FINISH, WORLD, IMAGE_FX, NO_TEXT, STYLE_EXTRA
     st = Story(code, ART, ROOT)
     gi = GI[code]
     name, wind, cols, dot, streak, sway, sfx_cut = gi[0], gi[3], gi[4], gi[5], gi[6], gi[7], gi[9]
@@ -128,7 +128,7 @@ def rat(code):
     if code in WORLD: st('  sty.worldPhase = true; ' + ' '.join(f'sty.{k} = {cs(v)};' for k, v in WORLD[code].items()))
     if code in IMAGE_FX: st('  sty.imageFx = true; ' + ' '.join(f'sty.{k} = {cs(v)};' for k, v in IMAGE_FX[code].items()))
     if pts: st(f'  sty.hitNumbers = true; sty.hitPoints = new[] {{ {", ".join(f"new Vector2({f(x)}, {f(y)})" for x, y in pts)} }};')
-    st(f'  sty.fxCut = 40; sty.fxAct = 40; sty.fxFinish = 20; sty.sfxEnter = "jgl_ult_cutin"; sty.sfxCut = "{sfx_cut}"; sty.sfxHit = "{sfx_hit}"; sty.sfxFinish = "wall_blast"; EditorUtility.SetDirty(sty); }}')
+    st(f'  sty.fxCut = 40; sty.fxAct = 40; sty.fxFinish = 20; sty.sfxEnter = "jgl_ult_cutin"; sty.sfxCut = "{sfx_cut}"; sty.sfxHit = "{sfx_hit}"; sty.sfxFinish = "wall_blast"; ' + ' '.join(f'sty.{k} = {cs(v)};' for k, v in STYLE_EXTRA.get(code, {}).items()) + ' EditorUtility.SetDirty(sty); }')
     return '\n'.join(st.o)
 
 

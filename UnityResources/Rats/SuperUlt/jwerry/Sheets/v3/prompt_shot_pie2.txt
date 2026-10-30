@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_pie1.png and save the result as a NEW PNG file: shot_pie2.png (in the current working directory). Do not overwrite shot_pie1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_pie1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- SPLAT! The cream pie has landed squarely on the cat's FACE: the round pie tin stuck on its face, thick white cream splattered all over its head, whiskers and chest, big flat cream drips and a few flat cream blobs flying, its paws frozen in the air. At the right edge of the frame the little mouse (warm grey, black bowler hat, bow tie, cane) politely tips its hat to the viewer. Nothing else changes.

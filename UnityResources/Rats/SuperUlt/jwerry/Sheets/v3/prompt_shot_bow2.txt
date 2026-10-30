@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_bow1.png and save the result as a NEW PNG file: shot_bow2.png (in the current working directory). Do not overwrite shot_bow1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_bow1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background, the same spotlight and curtains. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- The mouse has straightened up and puts its hat back on with a cheeky WINK to the viewer, holding the cane up in a little salute; a few red ROSES are falling and landing on the stage around it. Nothing else changes.

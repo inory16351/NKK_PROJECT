@@ -1,0 +1,24 @@
+16:00:07 ok shot_card
+16:00:26 ok shot_catface
+16:00:29 ok shot_pie1
+16:00:44 ok shot_bow1
+16:00:45 ok shot_trip1
+16:00:46 ok shot_open1
+16:00:48 ok pano_a
+16:01:16 ok shot_stage1
+16:01:51 ok shot_pie2
+16:01:58 ok shot_trip2
+16:02:13 ok pano_b
+16:02:14 ok shot_bow2
+16:02:33 ok shot_stage2
+16:02:34 ok shot_open2
+16:03:41 ok pano_c
+16:04:53 ok props_flat
+16:04:59 ok film
+16:05:01 ok anim_crun
+16:05:02 ok anim_mrun
+16:05:05 ok fx_flat
+16:05:05 ok anim_mmove
+16:05:08 ok fx_hit
+16:06:24 ok anim_cmove
+16:06:24 done

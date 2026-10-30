@@ -7,8 +7,8 @@ import json, math, os, random
 from PIL import Image
 
 HITS = [2.0 + 0.2 * i for i in range(10)]
-NO_FINISH = {'icequeen': 3.4, 'knight': 3.95, 'pharaoh': 3.75, 'bomber': 3.05, 'streamrat': 3.6, 'ramjui': 5.61, 'fondue': 5.35, 'starchef': 6.41, 'sultan': 4.15, 'emperor': 5.25, 'alien': 8.3, 'parkrat': 9.96, 'jjdetective': 6.7, 'zapham': 6.5, 'jwerry': 7.3}          # ④ 피니시 컷 없는 쥐: ③ 끝(마지막 일격 · 또는 컷신 끝) 시각 = SuperUltStyle.actEnd (2026-10-19 사용자)
-WORLD = {'jwerry': dict(cutFade=0.3, worldTime=2.0, blizzardCount=1, hailCount=3, playRate=1.0, worldWind=(-40.0, -1100.0), worldDotSize=(30.0, 56.0)),     # 줴리 v2: 쥐구멍 메롱 뒤 게임 화면 = 프라이팬이 대상마다 떨어져 뿅 (2026-10-21)
+NO_FINISH = {'icequeen': 3.4, 'knight': 3.95, 'pharaoh': 3.75, 'bomber': 3.05, 'streamrat': 3.6, 'ramjui': 5.61, 'fondue': 5.35, 'starchef': 6.41, 'sultan': 4.15, 'emperor': 5.25, 'alien': 8.3, 'parkrat': 9.96, 'jjdetective': 6.7, 'zapham': 6.5, 'jwerry': 7.2}          # ④ 피니시 컷 없는 쥐: ③ 끝(마지막 일격 · 또는 컷신 끝) 시각 = SuperUltStyle.actEnd (2026-10-19 사용자)
+WORLD = {'jwerry': dict(cutFade=0.3, worldTime=2.0, blizzardCount=1, hailCount=3, playRate=1.0, worldWind=(-40.0, -1100.0), worldDotSize=(30.0, 56.0)),     # 줴리 v3: '끝' 카드 뒤 게임 화면 = 크림 파이가 대상마다 날아와 철퍼덕 (2026-10-30)
          'emperor': dict(cutFade=0.3, worldTime=1.5, blizzardCount=0, hailCount=0, playRate=1.0),     # 쥐 황제 v2 정면: 게임 화면 연출 없음 · 컷신 마지막 탄흔(Hold)만 1.5초 남았다 사라짐 (2026-10-20 사용자)
          'icequeen': dict(cutFade=0.4, worldTime=3.0, freezeAll=1.5, blizzardCount=1, hailCount=3, playRate=0.75),
          'pharaoh': dict(cutFade=0.4, worldTime=2.2, blizzardCount=0, hailCount=0, playRate=0.75),     # 미라 쥐들이 왼→오로 달려 지나감 (2026-10-20 사용자: 모래바람 대신)
@@ -24,8 +24,9 @@ WORLD = {'jwerry': dict(cutFade=0.3, worldTime=2.0, blizzardCount=1, hailCount=3
          'jjdetective': dict(cutFade=0.3, worldTime=2.0, blizzardCount=1, hailCount=3, playRate=1.0, worldWind=(-60.0, -1300.0), worldDotSize=(30.0, 56.0)),     # 명탐정 쥐 v2: 사건 해결 뒤 게임 화면 = 마취침이 대상마다 꽂혀 기절 별 (2026-10-21)
          'knight': dict(cutFade=0.4, worldTime=1.0, blizzardCount=0, hailCount=0, playRate=0.75, worldWind=(60.0, 260.0), worldDotSize=(16.0, 40.0))}
 NO_TEXT = {'zapham', 'knight', 'starchef', 'fondue', 'emperor', 'alien', 'parkrat', 'jjdetective', 'jwerry'}       # 컷신에 글(제목 띠 · 자막 · 히트 수 · 밈 글)을 안 띄우는 쥐 (2026-10-19 사용자)
+STYLE_EXTRA = {'jwerry': dict(fxCut=0, fxAct=0, fxFinish=0)}     # 쥐별 SuperUltStyle 덮어쓰기 (줴리 v3: 세피아 컷신 위에 컬러 입자가 내리지 않게, 2026-10-30)
 KNIGHT_LINE = -40          # 기사 칼 각도 (도, UI 반시계 +): 후경 기사 칼날을 잰 값 — 컷신 갈라짐 · 땅 균열 · 게임 화면 파동 전부 이 각도 (2026-10-19 사용자)
-IMAGE_FX = {'jwerry': dict(hailFall=['fx_panfall', 'fx_pan2', 'fx_panfall'], hailChunk=['fx_star'], hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashSize=150.0, splashHitSize=280.0, splashFinishSize=560.0, worldSnowScale=0.4),     # 줴리 v2: 프라이팬 비 · 뿅 (2026-10-21)
+IMAGE_FX = {'jwerry': dict(hailFall=['fx_piefall', 'fx_pie2', 'fx_piefall'], hailChunk=['fx_star'], hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashSize=150.0, splashHitSize=280.0, splashFinishSize=560.0, worldSnowScale=0.4),     # 줴리 v3: 크림 파이 비 · 철퍼덕 (2026-10-30)
             'emperor': dict(hailSplash=[], worldSnowOff=True, holdGroup='"Hold"', holdFade=0.45),     # 탄착 그림 없음 = 게임 화면 이펙트 없음 · 탄흔 묶음을 게임 화면 위에 남김 (SuperUltStyle.holdGroup)
             'pharaoh': dict(hailSplash=['fx_hit1', 'fx_hit2', 'fx_hit3'], splashHitSize=240.0, splashFinishSize=420.0, worldSnowOff=True,
                             runFrames=['anim_mside_1', 'anim_mside_2', 'anim_mside_3'], runGap=0.11, runCount=3, runHeight=(160.0, 160.0), runSpeed=(1500.0, 2100.0), runFrame=0.07),     # 파라오 v2: 게임 화면 = 미라 돌격 · 태클 충돌 (2026-10-20 사용자: 달리는 미라 크기 균등 · 맨 끝 정면 군단 뺌)
@@ -1845,8 +1846,8 @@ def jwerry_v1(s, R):
     s.meme(F, 4.35)
 
 
-def jwerry(s, R):
-    """가로 집 파노라마 pano_on (부엌 → 거실 → 복도 · 오른쪽 끝 쥐구멍). (2026-10-21 v2 = '톰과 줴리 추격전', 사용자: 고양이가 쫓아옴 → 지형지물로 반격하며 도망 → 쥐구멍으로 쏙 ·
+def jwerry_v2(s, R):
+    """(v2, 2026-10-21 · 안 씀 — 톰과 제리 연상으로 2026-10-30 v3 로 교체) 가로 집 파노라마 pano_on (부엌 → 거실 → 복도 · 오른쪽 끝 쥐구멍). (2026-10-21 v2 = '톰과 줴리 추격전', 사용자: 고양이가 쫓아옴 → 지형지물로 반격하며 도망 → 쥐구멍으로 쏙 ·
     고양이와 쥐의 횡방향 추격 · 추격전 느낌의 앵글과 줌). 띠 · 마무리 컷 없음 · 플랫 · 1배속 · 글 없음 — 컷 11개:
     ① 0.4 부엌 바닥에서 치즈를 먹다 → 등 뒤 거대한 고양이 그림자 (흠칫) ② 로우 앵글 · 사선 고양이 얼굴 (입맛 다심)
     ③ 추격 1 (부엌, 판): 몸을 웅크린 쥐에 바짝 붙은 카메라 → 튀어 나가는 순간 휙 빠지며 왼쪽에서 고양이 난입 · 돌아보며 메롱 (앞 의자 · 화분 시차, 속도선)
@@ -2047,6 +2048,199 @@ DOOR_HIT = (0.45, 0.5)         # shot_door2: 납작해진 고양이 가운데
 WALL_HIT = (0.45, 0.6)         # shot_wall1: 얼굴이 벽에 박힌 자리
 WALL_HEAD = (0.45, 0.45)       # shot_wall2: 기절한 고양이 머리 위
 HOLE_EYE = (0.5, 0.4)          # shot_hole2: 윙크한 눈
+
+
+def jwerry(s, R):
+    """줴리 v3 = '무성영화 앵콜' (2026-10-30 사용자: 톰과 제리 연상 연출 교체 → 턱시도 고양이와 찰리 채플린풍 무성영화 슬랩스틱 ·
+    고양이는 게임 턱시도 고양이 그림체 · 채플린 느낌은 무성영화 장치 위주 (떠돌이 차림 X) · 실제 영화 장면 X · 세피아 · 자막 카드 3장 · 다른 초필살기처럼 다양한 구도와 전환).
+    가로 카페 파노라마 pano_on (테이블 → 디저트 카트 · 피아노 → 작은 무대). 띠 · 마무리 컷 없음 · 1배속 · 관리자 글 없음 (자막 카드는 레이어 글) — 컷 12개:
+    카드 '오늘의 앵콜 공연' → ① 아이리스 인: 카페 테이블 위 쥐 신사가 모자 인사 → 케이크 조각을 짊어지고 살금 ② 로우 앵글 · 사선 턱시도 고양이 웨이터 (쟁반 위 크림 파이)
+    ③ 추격 1 (빨리감기 트래킹): 케이크 진 쥐 · 쟁반 든 고양이, 돌아보며 모자 인사 ④ 지팡이로 발 걸기 → 넘어지며 파이가 공중으로 ⑤ 파이가 얼굴에 철퍼덕 → 정지 화면
+    카드 '웨이터는 단단히 화가 났다!' → ⑥ 추격 2: 크림 범벅 고양이 · 테이블을 뛰어넘는 쥐 → 덮치기 ⑦ 무대: 모래주머니 쿵 (크래시 줌)
+    ⑧ 스포트라이트 모자 인사 → 윙크 · 장미 → 아이리스 아웃 → 카드 '끝' → 컷신 걷힘 → 게임 화면: 대상마다 크림 파이 철퍼덕 (컬러)
+    필름 효과 (맨 위, 내내): 비네트 · 깜빡임 · 세로 긁힘 · 먼지 · 털 · 얼룩 (그림 = film.png, 세피아 안 함)"""
+    END = NO_FINISH['jwerry']
+    K = 1920 * 1.06 / 1536                                # 한 장 컷 배율 (화면을 덮음 · 흔들려도 가장자리 안 보임)
+    at = lambda rx, ry, z=1.0: ((rx - 0.5) * 1536 * K * z, (0.5 - ry) * 1024 * K * z)     # 컷 그림 비율 → 화면 px
+    wsc = lambda name, px: px / max(1, s.size(name)[0])   # 그림 폭을 px 로 맞추는 배율
+    FY = JV_FLOOR                                         # 판 위 발끝 높이 (비율)
+    WPX, HPX = s.PW * s.PS, s.PH * s.PS
+    CREAM = (0.96, 0.92, 0.82)
+
+    def C(t, x, z, r=0, e='Linear', fs=-300):
+        """추격 카메라 키: x 비율을 보고 발끝이 화면 fs px 에 오게 · 판 밖이 안 보이게 붙잡음"""
+        sn = abs(math.sin(math.radians(r))) + 0.03
+        hw, hh = (960 + 540 * sn) / (z * WPX), (540 + 960 * sn) / (z * HPX)
+        return (t, min(1 - hw, max(hw, x)), min(1 - hh, max(hh, FY + fs / (HPX * z))), z, r, e)
+
+    def frames(g, name, seq, ks, sc=K, **fx):
+        var = s.s(g, name, seq[0][1], sc, ks, **fx)
+        sw = ', '.join(f'new NKK.Ults.SuperUltLayer.Swap {{ t = {f(t)}, sprite = S("{spr}") }}' for t, spr in seq[1:])
+        if sw: s(f'{var}.swaps = new[] {{ {sw} }};')
+        return var
+
+    def pop_at(g, name, spr, t0, x, y, sc, life=0.25, rot=0):
+        s.s(g, name, spr, sc, [(t0 - 0.01, x, y, 0, rot, 0, 'Out'), (t0, x, y, 0.5, rot, 1, 'Snap'), (t0 + 0.08, x, y, 1.15, rot + 10, 1, 'Back'), (t0 + life, x, y, 1.2, rot + 25, 0, 'Out')])
+
+    def wpop(tr, name, spr, t0, x, y, wpx, life=0.3, rot=0):
+        px, py = s.P(x, y)
+        s.layer(tr, name, spr, wsc(spr, wpx), [(t0 - 0.01, px, py, 0, rot, 0, 'Out'), (t0, px, py, 0.5, rot, 1, 'Snap'), (t0 + 0.08, px, py, 1.1, rot, 1, 'Back'), (t0 + life, px, py, 1.2, rot, 0, 'Out')])
+
+    def cycle(t0, t1, pre, dt):
+        seq, t, i = [], t0, 0
+        while t < t1 - 1e-3: seq.append((t, f'{pre}_{(1, 2, 3, 2)[i % 4]}')); t += dt; i += 1
+        return seq
+
+    def xat(ks, t):
+        if t <= ks[0][0]: return ks[0][1]
+        for (t0, x0), (t1, x1) in zip(ks, ks[1:]):
+            if t <= t1: return x0 + (x1 - x0) * (t - t0) / max(1e-4, t1 - t0)
+        return ks[-1][1]
+
+    def jerky(t0, t1, dt=0.06):
+        """빨리감기 무성영화 느낌: 키를 dt 마다 Snap (프레임이 툭툭 끊김)"""
+        out, t = [], t0
+        while t < t1 - 1e-3: out.append(t); t += dt
+        return out + [t1]
+
+    def runner(tr, name, seq, xs, ref, h, bob=0.0, ks=None, **fx):
+        ks = ks or [(t, x, FY - (bob if i % 2 else 0), 1, 0, 1, 'Snap' if i else 'Linear') for i, (t, x) in enumerate(xs)]
+        return s.cel(tr, name, seq, ks, height=h, ref=ref, **fx)
+
+    def speed(g, t0, t1, n=6):
+        for i in range(n):
+            y = -440 + i * 170 + s.rnd.uniform(-40, 40); s0 = t0 + (i % 3) * 0.05
+            s.s(g, f'Speed{i}', 'fx_streak', wsc('fx_streak', 620), [(s0, 1400, y, 1, 0, 0, 'Out'), (s0 + 0.04, 900, y, 0.7, 0, 0.3, 'Linear'), (t1, -1500, y, 0.8, 0, 0, 'Linear')], flicker=0.3)
+
+    def card(name, t0, t1, txt, size):
+        """무성영화 자막 카드: 검은 판 + 장식 테두리 (shot_card) + 가운데 글. 글은 언어와 상관없이 영어 고정 (옛날 영화 느낌, 2026-10-30 사용자) → LocText 없음"""
+        g = s.group(name, R, t0, t1)
+        s.s(g, 'Card', 'shot_card', K, [(t0, 0, 0, 1.0, 0, 1, 'Out'), (t1, 0, 0, 1.03, 0, 1, 'Linear')], jitter=1.5)
+        var = s.v('t')
+        s(f'{{ var {var} = G("Text", {g}, null); var mt = T("Text", {var}.transform, "{txt}", {size}, new Color({f(CREAM[0])}, {f(CREAM[1])}, {f(CREAM[2])}, 1f)); ((RectTransform)mt.transform).sizeDelta = new Vector2(1500, {int(size * 1.8)}); mt.fontSharedMaterial = mt.font.material; mt.enableVertexGradient = false; mt.enableAutoSizing = false; mt.fontStyle = TMPro.FontStyles.Normal; mt.characterSpacing = 6;')
+        s(f'  {var}.keys = {keys([(t0, 0, 0, 0.96, 0, 0, "Out"), (t0 + 0.08, 0, 0, 1.0, 0, 1, "Out"), (t1, 0, 0, 1.02, 0, 1, "Linear")])}; {var}.jitter = 1.5f; }}')
+        return g
+
+    # ── 카드 1: 오늘의 앵콜 공연 ──
+    T1 = 0.95
+    card('Card1', 0.4, T1, "Tonight's Encore", 120)
+    # ① 아이리스 인 → 카페 테이블: 모자 인사 → 케이크를 짊어지고 살금 (살짝 밀고 들어감 · 오른쪽으로 패닝)
+    SNEAK, T2 = 1.3, 1.6
+    g = s.group('Open', R, T1, T2)
+    frames(g, 'Shot', [(T1, 'shot_open1'), (SNEAK, 'shot_open2')],
+           [(T1, 0, -20, 1.0, 0, 1, 'Out'), (SNEAK - 0.01, 0, -20, 1.08, 0, 1, 'Linear'), (SNEAK, -60, -20, 1.12, 0, 1, 'Snap'), (T2, -140, -20, 1.16, 0, 1, 'Linear')], jitter=1.5)
+    ix, iy = at(*OPEN_FACE)
+    s.s(g, 'Iris', 'bg_iris', 1.2, [(T1, ix, iy, 1.2, 0, 1, 'Out'), (T1 + 0.25, 0, 0, 50, 0, 1, 'In'), (T2, 0, 0, 50, 0, 1, 'Linear')])
+    # ② 턱시도 고양이 웨이터 (로우 앵글 · 사선, 휙 들어와 멈춤)
+    T3 = 1.95
+    g = s.group('CatFace', R, T2, T3)
+    s.s(g, 'Shot', 'shot_catface', K, [(T2, 260, -140, 1.35, -9, 1, 'Out'), (T2 + 0.08, 0, 0, 1.12, -5, 1, 'Back'), (T3, 0, 10, 1.2, -7, 1, 'Linear')], kicks=[T2 + 0.08], kickPower=24, kickTime=0.15, jitter=1.5)
+    # ③ 추격 1 (빨리감기 트래킹, 판 왼쪽 → 가운데): 케이크 진 쥐 · 쟁반 든 고양이 → 쥐가 돌아보며 모자 인사
+    TIP, T4 = 2.4, 2.7
+    g = s.group('Chase1', R, T3, T4)
+    mx = [(T3, 0.13), (T4, 0.40)]
+    cx = [(T3, 0.0), (T4, 0.31)]
+    mid = lambda t: (xat(mx, t) + xat(cx, t)) / 2
+    tr = s.cam(g, [C(T3, mid(T3) + 0.02, 1.9, -3, 'Out'), C(2.2, mid(2.2) + 0.02, 1.7, 2), C(TIP, xat(mx, TIP) - 0.01, 2.4, 4, 'InOut', -250), C(T4, xat(mx, T4) - 0.015, 2.5, 5, 'Linear', -250)],
+               kicks=[T3 + 0.04], power=26, rot=2.0, ktime=0.2)
+    runner(tr, 'Cat', cycle(T3, T4, 'anim_crun', 0.05), [(t, xat(cx, t)) for t in jerky(T3, T4)], 'anim_crun_1', CAT_H, bob=0.004, jitter=1.0)
+    runner(tr, 'Mouse', cycle(T3, TIP, 'anim_mrun', 0.045) + [(TIP, 'anim_mmove_1')] + cycle(TIP + 0.12, T4, 'anim_mrun', 0.045), [(t, xat(mx, t)) for t in jerky(T3, T4)], 'anim_mrun_1', MOUSE_H, bob=0.003, jitter=1.0)
+    for i, t0 in enumerate((T3 + 0.05, 2.15, 2.35, 2.55)):
+        wpop(tr, f'Dust{i}', 'fx_dust', t0, xat(cx, t0) - 0.01, FY - 0.01, 160, life=0.3)
+    speed(g, T3 + 0.05, T4)
+    # ④ 지팡이로 발 걸기 → 넘어지며 크림 파이가 공중으로 (히트 스톱 · 위로 휙)
+    TRIP, T5 = 2.9, 3.15
+    g = s.group('Trip', R, T4, T5)
+    frames(g, 'Shot', [(T4, 'shot_trip1'), (TRIP, 'shot_trip2')],
+           [(T4, 120, 0, 1.06, 2, 1, 'Out'), (TRIP - 0.01, 30, 0, 1.12, 0, 1, 'InOut'), (TRIP, 0, -30, 1.2, -4, 1, 'Snap'), (TRIP + 0.07, 0, -30, 1.2, -4, 1, 'Linear'), (T5, -20, -120, 1.26, -7, 1, 'Out')],
+           kicks=[TRIP + 0.07], kickPower=50, kickTime=0.2, jitter=1.5)
+    tx, ty = at(*TRIP_TRAY, 1.2)
+    for k in range(3):
+        x1 = tx + (k - 1) * 260
+        s.s(g, f'Pie{k}', 'prop_pie', wsc('prop_pie', 300), [(TRIP, tx, ty, 0.8, 0, 0, 'Out'), (TRIP + 0.02, tx, ty, 0.9, 0, 1, 'Snap'), (T5, x1, ty + 650 + 80 * (k % 2), 1.1, (k - 1) * 120 + 200, 1, 'Out')])
+    s.speed(g, TRIP, T5, vertical=True, n=6)
+    # ⑤ 파이가 얼굴에 철퍼덕 → 정지 화면 (필름만 깜빡)
+    SPLAT, T6 = 3.35, 3.6
+    g = s.group('Pie', R, T5, T6)
+    frames(g, 'Shot', [(T5, 'shot_pie1'), (SPLAT, 'shot_pie2')],
+           [(T5, 0, 40, 1.04, 0, 1, 'Out'), (SPLAT - 0.01, 0, 0, 1.1, 0, 1, 'In'), (SPLAT, 0, 0, 1.18, 3, 1, 'Snap'), (T6, 0, 0, 1.18, 3, 1, 'Linear')],
+           kicks=[SPLAT], kickPower=40, kickTime=0.12, jitter=1.0)
+    fx_, fy_ = at(*PIE_FACE, 1.1)
+    s.s(g, 'Fall', 'prop_pie', wsc('prop_pie', 380), [(T5, fx_ + 40, 760, 1, 170, 1, 'Out'), (SPLAT - 0.01, fx_, fy_ + 60, 1.1, 180, 1, 'In'), (SPLAT, fx_, fy_, 1.1, 180, 0, 'Snap')])
+    sx_, sy_ = at(*PIE_FACE, 1.18)
+    pop_at(g, 'Splat', 'fx_splat', SPLAT, sx_, sy_, wsc('fx_splat', 820), life=0.2)
+    # ── 카드 2 ──
+    T7 = 4.05
+    card('Card2', T6, T7, 'The waiter is NOT amused!', 100)
+    # ⑥ 추격 2 (판 가운데 → 무대 앞): 크림 범벅 고양이 · 테이블을 뛰어넘는 쥐 → 고양이 덮치기 (넓게 · 사선 → 급줌)
+    POUNCE, T8 = 4.55, 4.78
+    g = s.group('Chase2', R, T7, T8)
+    mx = [(T7, 0.47), (T8, 0.71)]
+    cx = [(T7, 0.36), (POUNCE, 0.55), (T8, 0.66)]
+    tr = s.cam(g, [C(T7, (xat(mx, T7) + xat(cx, T7)) / 2, 1.45, -5, 'Out'), C(4.35, (xat(mx, 4.35) + xat(cx, 4.35)) / 2, 1.55, -3), C(POUNCE, xat(cx, POUNCE) + 0.03, 2.1, 3, 'InOut', -230), C(T8, xat(cx, T8) + 0.02, 2.6, 6, 'In', -230)],
+               kicks=[T7 + 0.04, POUNCE], power=28, rot=2.0, ktime=0.2)
+    runner(tr, 'Cat', [(T7, 'anim_cmove_1'), (POUNCE, 'anim_cmove_2'), (POUNCE + 0.04, 'anim_cmove_2_mblur')], None, 'anim_crun_1', CAT_H,
+           ks=[(t, xat(cx, t), FY - (0.006 if i % 2 else 0), 1, 0, 1, 'Snap' if i else 'Linear') for i, t in enumerate(jerky(T7, POUNCE))] + [(POUNCE + 0.1, xat(cx, POUNCE + 0.1), FY - 0.06, 1, 0, 1, 'Out'), (T8, xat(cx, T8), FY - 0.03, 1, 0, 1, 'In')], jitter=1.5)
+    hops = [(T7, 0.47), (4.3, 0.56), (4.55, 0.64), (T8, 0.71)]
+    mk = []
+    for (ta, xa), (tb, xb) in zip(hops, hops[1:]):
+        mk += [(ta, xa, FY, 1, 0, 1, 'Linear'), ((ta + tb) / 2, (xa + xb) / 2, FY - 0.09, 1, -8, 1, 'Out'), (tb - 0.01, xb, FY, 1, 0, 1, 'In')]
+    runner(tr, 'Mouse', [(T7, 'anim_mmove_2'), (4.29, 'anim_mmove_3'), (4.31, 'anim_mmove_2'), (4.54, 'anim_mmove_3'), (4.56, 'anim_mmove_2')], None, 'anim_mrun_1', MOUSE_H, ks=mk)
+    for i in range(4):
+        t0 = T7 + 0.05 + 0.11 * i
+        wpop(tr, f'Steam{i}', 'fx_steam', t0, xat(cx, t0) + 0.02 + 0.008 * (i % 2), FY - CAT_H / HPX * 0.95, 90, life=0.25)
+    speed(g, T7, T8)
+    # ⑦ 무대: 덮치는 고양이 위로 모래주머니 쿵 (넓게 → 크래시 줌 · 히트 스톱)
+    THUD, T9 = 5.0, 5.38
+    g = s.group('Stage', R, T8, T9)
+    frames(g, 'Shot', [(T8, 'shot_stage1'), (THUD, 'shot_stage2')],
+           [(T8, 0, 0, 1.0, 0, 1, 'Out'), (THUD - 0.01, 0, 0, 1.04, 0, 1, 'Linear'), (THUD, 0, -40, 1.26, -3, 1, 'Snap'), (THUD + 0.08, 0, -40, 1.26, -3, 1, 'Linear'), (T9, 0, -60, 1.3, -4, 1, 'Out')],
+           kicks=[THUD + 0.08, THUD + 0.16], kickPower=70, kickTime=0.22, jitter=1.5)
+    hx, hy = at(*STAGE_HIT, 1.26)
+    s.s(g, 'Ring', 'fx_shockring', wsc('fx_shockring', 900), [(T8, hx, hy, 0.3, 0, 0, 'Out'), (THUD, hx, hy, 0.3, 0, 0.9, 'Snap'), (THUD + 0.32, hx, hy, 1.6, 0, 0, 'Out')])
+    for k in range(3):
+        pop_at(g, f'Dust{k}', 'fx_dust', THUD + 0.02 * k, hx + (k - 1) * 420, hy - 40, wsc('fx_dust', 380), life=0.35, rot=0 if k != 0 else 180)
+    s.s(g, 'Stars', 'fx_stars', wsc('fx_stars', 300), [(THUD + 0.1, hx, hy + 260, 0, 0, 0, 'Out'), (THUD + 0.14, hx, hy + 240, 1, 0, 1, 'Back'), (T9, hx, hy + 230, 1, 0, 1, 'Linear')], spin=200.0)
+    # ⑧ 스포트라이트: 모자 인사 → 윙크 · 장미 → 아이리스 아웃
+    WINK, IRIS, T10 = 5.8, 6.3, 6.6
+    g = s.group('Bow', R, T9, T10)
+    frames(g, 'Shot', [(T9, 'shot_bow1'), (WINK, 'shot_bow2')],
+           [(T9, 0, 30, 1.0, 0, 1, 'Out'), (WINK - 0.01, 0, 20, 1.07, 0, 1, 'Linear'), (WINK, 0, 10, 1.12, 1, 1, 'Snap'), (T10, 0, 0, 1.16, 1, 1, 'Linear')], kicks=[WINK], kickPower=14, kickTime=0.12, jitter=1.5)
+    s.shower(g, 'Rose', 'prop_rose', WINK, IRIS, 7, -700, 700, 700, -380, sc=wsc('prop_rose', 150))
+    ex, ey = at(*BOW_FACE, 1.14)
+    s.s(g, 'Iris', 'bg_iris', 50, [(T9, 0, 0, 50, 0, 1, 'Out'), (IRIS, ex, ey, 50, 0, 1, 'Linear'), (IRIS + 0.24, ex, ey, 1.1, 0, 1, 'Out'), (T10, ex, ey, 1.1, 0, 1, 'Linear')])
+    s.s(g, 'Black', 'bg_flick', 40, [(T9, 0, 0, 1, 0, 0, 'Out'), (IRIS + 0.24, 0, 0, 1, 0, 0, 'Linear'), (IRIS + 0.25, 0, 0, 1, 0, 1, 'Snap')])
+    # ── 카드 3: 끝 ──
+    card('Card3', T10, END + 0.4, 'The End', 170)
+    # ── 필름 효과 (맨 위, 내내): 비네트 · 깜빡임 · 세로 긁힘 · 먼지 · 털 · 얼룩 ──
+    g = s.group('Film', R, 0.4)
+    s.s(g, 'Vignette', 'bg_vignette', 1.0, [(0.4, 0, 0, 1.0, 0, 1, 'Out')])
+    s.s(g, 'Flick', 'bg_flick', 40, [(0.4, 0, 0, 1, 0, 0.14, 'Out')], flicker=0.9)
+    rnd = s.rnd
+    for i in range(3):                                      # 세로 긁힘: 자리를 툭툭 옮기며 나타났다 사라짐
+        spr = ('fx_scratch1', 'fx_scratch2', 'fx_scratch1')[i]
+        ks, t = [], 0.4 + 0.07 * i
+        while t < END + 0.4:
+            x = rnd.uniform(-860, 860); on = rnd.random() < 0.45
+            ks.append((t, x, 0, 1, 0, 0.3 if on else 0, 'Snap')); t += rnd.uniform(0.08, 0.22)
+        s.s(g, f'Scratch{i}', spr, 1100 / max(1, s.size(spr)[1]), ks, flicker=0.4)
+    for i, spr in enumerate(('fx_specks', 'fx_hair', 'fx_blotch', 'fx_cross', 'fx_specks')):     # 먼지 · 털 · 얼룩: 한두 프레임씩 번쩍
+        ks, t = [(0.4, 0, 0, 1, 0, 0, 'Snap')], 0.5 + 0.13 * i
+        while t < END + 0.4:
+            x, y, r = rnd.uniform(-820, 820), rnd.uniform(-440, 440), rnd.uniform(0, 360)
+            ks += [(t, x, y, 1, r, 0.5, 'Snap'), (t + 0.05, x, y, 1, r, 0, 'Snap')]; t += rnd.uniform(0.35, 0.9)
+        s.s(g, f'Dirt{i}', spr, wsc(spr, (300, 160, 150, 110, 260)[i]), ks)
+    return None
+
+
+# 줴리 v3 그림 속 자리 (판 · 그림 비율 · 그림이 바뀌면 다시 잼)
+JV_FLOOR = 0.74                # pano_on: 달리는 바닥 발끝 높이 (비율, 바닥 띠 = 0.645 부터)
+MOUSE_H, CAT_H = 190, 520      # 셀 상자 높이 (판 px, 판 높이 1500): 쥐 (케이크 진 상자) · 고양이 (쟁반을 든 상자)
+OPEN_FACE = (0.62, 0.30)        # shot_open1: 쥐 얼굴 (아이리스가 열리는 자리)
+TRIP_TRAY = (0.22, 0.18)       # shot_trip2: 날아가는 쟁반 (파이가 튀어 오르는 자리)
+PIE_FACE = (0.48, 0.31)         # shot_pie2: 파이가 붙은 얼굴
+STAGE_HIT = (0.47, 0.60)        # shot_stage2: 모래주머니에 깔린 자리
+BOW_FACE = (0.53, 0.36)         # shot_bow2: 윙크한 얼굴 (아이리스가 닫히는 자리)
 
 def starchef_v1(s, R):
     """(v1, 2026-10-18 · 안 씀) 가로: 식료품 창고 → 주방 → 홀. ② 칸마다 멈추는 휙휙 팬 (창고 치즈 → 주방 불 쇼 → 홀) · ③ 평행한 두 사선 띠 + 프라이팬이 쿵쿵 + 접시가 빙글 · ④ 클로슈 로우앵글 밀어 들어가기 + 별 세 개"""

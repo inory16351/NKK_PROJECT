@@ -15631,6 +15631,21 @@
    "en": "Choose an Augment"
   },
   {
+   "string_key": 8000604,
+   "ko": "끝",
+   "en": "The End"
+  },
+  {
+   "string_key": 8000605,
+   "ko": "웨이터는 단단히 화가 났다!",
+   "en": "The waiter is NOT amused!"
+  },
+  {
+   "string_key": 8000606,
+   "ko": "오늘의 앵콜 공연",
+   "en": "Tonight's Encore"
+  },
+  {
    "string_key": 9000001,
    "ko": "찍찍!! {power}",
    "en": "SQUEAK!! {power}"

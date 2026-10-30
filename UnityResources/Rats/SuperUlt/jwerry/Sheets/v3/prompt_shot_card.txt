@@ -1,0 +1,5 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: shot_card.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024 LANDSCAPE, one full-frame picture WITH background (no transparency, no panels, no borders).
+- A SILENT-FILM INTERTITLE CARD with NO words: a flat solid near-black background filling the whole frame, with an elegant thin cream-white ART DECO ornamental BORDER frame inside the edges (double thin lines with small geometric corner ornaments and a small simple ornament at the top and bottom center). The whole middle area is EMPTY plain black for text to be added later. Flat, clean, simple shapes. NO text, NO letters, NO numbers.

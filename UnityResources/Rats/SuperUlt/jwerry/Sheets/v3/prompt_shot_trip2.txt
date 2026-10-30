@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_trip1.png and save the result as a NEW PNG file: shot_trip2.png (in the current working directory). Do not overwrite shot_trip1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_trip1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- TRIP! The mouse has YANKED the cane: its crook caught the cat's ankle and the cat is FALLING forward flat in mid-air, horizontal, arms flung out, eyes popping in surprise, the silver tray flipping away and the three cream pies flying HIGH up into the air above it, short flat motion lines. The mouse holds the cane with both paws, leaning back. Nothing else changes.

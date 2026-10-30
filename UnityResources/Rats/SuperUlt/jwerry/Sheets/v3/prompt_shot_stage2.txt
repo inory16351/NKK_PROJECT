@@ -1,0 +1,5 @@
+Use your built-in image generation tool to EDIT the attached image shot_stage1.png and save the result as a NEW PNG file: shot_stage2.png (in the current working directory). Do not overwrite shot_stage1.png. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Edit spec:
+- Keep EVERYTHING identical to shot_stage1.png: the same canvas size, the same framing, camera angle and zoom, the same sizes and positions, the same colors and flat style, the same background, the same stage. Change ONLY what is described below, so the two pictures can be swapped as consecutive animation frames.
+- THUD! The mouse has let go of the rope: the big SANDBAG has dropped right onto the cat at the center of the stage, the cat squashed flat under it with only its paws, tail and dizzy face sticking out, eyes as two spirals, three flat yellow stars above it, flat dust puffs around. The mouse dusts off its paws at the right. Nothing else changes.

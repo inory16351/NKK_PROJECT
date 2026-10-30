@@ -30,7 +30,9 @@ namespace NKK
         void Fit()
         {
             if (Loc.IsKorean || !t || t.enableAutoSizing) return;
-            t.fontSizeMax = t.fontSize; t.fontSizeMin = Mathf.Max(8, t.fontSize * MinScale); t.enableAutoSizing = true;
+            // 최소 크기 바닥 8 은 화면 UI 글자만 (월드 글자 = 로비 팻말 · 말풍선은 크기가 1.5~2.4 라 8 이면 오히려 몇 배로 커짐, 2026-10-30)
+            float floor = t is TextMeshPro ? 0 : 8;
+            t.fontSizeMax = t.fontSize; t.fontSizeMin = Mathf.Min(t.fontSize, Mathf.Max(floor, t.fontSize * MinScale)); t.enableAutoSizing = true;
         }
 
         // 글에 LocText 가 있으면 지금 언어 틀, 없으면 cached (예전처럼 씬 글)

@@ -149,3 +149,12 @@
     `anim_volt` (충전 · 젖힘 · 발사) · `anim_tackle` (준비 · 박치기 · 브이 윙크) · `anim_hamtease` (씨 먹기 · 볼 눌림 · 노려봄, 같은 틀) / `anim_cattease` (콕 · 씨 뺏고 메롱 · 흠칫) · `anim_shock` (털 곤두섬 ↔ 엑스레이 해골 · 그을림, 같은 틀) · `anim_catfly` (날아감 · 빙글 · 손 흔듦). 옛 Codex 고양이 = `Sheets/v2/_codex_cat/`.
 - 연출 `superult_story.zapham`, 1배속 · 6.5초 · 글 없음: ① 들판 괴롭힘 (콕콕 3번 → 씨 뺏기 → 노려봄) ② 얼굴 클로즈업 눈 번쩍 ③ 충전 → 백만볼트 · 카메라가 번개를 따라 휙 → 감전(해골 깜빡) → 그을림 → 몸통박치기 · 히트 별 → 하늘로 ④ 하늘 근접 컷 빙글빙글 ⑤ 롱샷: 점 → 반짝 ✦ → 햄쥐 브이 윙크로 다가감 → 게임 화면: 대상마다 번개 (`fx_boltfall` · `fx_hit1~3`).
 - 크기 = 시트 축척 (`ZAP_REF`/`CAT_REF` 선 자세 프레임 높이 → `ZAP_H`/`CAT_H`), 그림 속 자리 = `TEASE_X · TEASE_CHEEK · GLARE_CHEEKS · GROUND_Y · ZAP_X/CAT_X · STAR_AT · WINK`. 미리보기 `preview/zapham_v2/`. Game 씬 적용 · 옛 v1 그림 git rm · Web Atlas 다시 (packed 0).
+
+## jwerry v3 = 무성영화 앵콜 (2026-10-30, 사용자: 톰과 제리 연상 연출 교체 → 턱시도 고양이와 찰리 채플린풍 무성영화 슬랩스틱)
+- 사용자 결정: 고양이 = 게임 턱시도 고양이 그림체 그대로 (톰 연상 금지) · 채플린 느낌은 **무성영화 장치 위주** (떠돌이 차림 X: 쥐는 낡은 중절모 · 나비넥타이 · 지팡이만, 콧수염 · 큰 구두 · 뒤뚱 걸음 없음) · 실제 영화 장면 X · **세피아** · 자막 카드 3장 · 컷신 쥐는 게임 그림체로 새로 (게임 `Parts/mouse` 참고).
+- 그림: `jwerry/Sheets/v3/` (`gen_prompts.py` · `run_v3.sh` · 프롬프트 · 로그, 참고 = 게임 생쥐 `ref_mouse` · 턱시도 고양이 `ref_cat` · 로비 배경 · 파라오 셀 · 스트리머 클로즈업) → Sheets 로 복사 → `slice_superult.py jwerry` (컬러로 그린 뒤 `SEPIA` 단계에서 세피아, 게임 화면 파이 `fx_hit` · 필름 `film.png` · `bg_*` · 자막 카드 `shot_card` 는 그대로).
+  - 코드로 만든 판: `bg_iris`(아이리스, 검은 판 가운데 반지름 28 구멍 — 1.2배 = 화면을 덮는 작은 구멍 · 50배 = 다 열림) · `bg_vignette` · `bg_flick`(필름 깜빡임 · 검은 덮개).
+  - 옛 v2 (톰과 제리 추격전) 그림 = `jwerry/_v2_tomjerry/` · `jwerry/Sheets/_v2_tomjerry/` (Assets 에서는 지움), 연출 = `superult_story.jwerry_v2`.
+- 연출 `superult_story.jwerry` (1배속 · 7.2초 · 관리자 글 없음, 자막 카드 = 레이어 글 + LocText 8000604~8000606): 카드 '오늘의 앵콜 공연' → ① 아이리스 인 · 카페 테이블 모자 인사 → 케이크 살금 ② 로우 앵글 · 사선 턱시도 웨이터 ③ 빨리감기 트래킹 추격 (툭툭 끊기는 키) · 돌아보며 모자 인사 ④ 지팡이로 발 걸기 → 파이가 공중으로 ⑤ 얼굴에 철퍼덕 → 정지 화면 → 카드 '웨이터는 단단히 화가 났다!' ⑥ 크림 범벅 추격 · 테이블 뛰어넘기 · 덮치기 (블러) ⑦ 무대 모래주머니 쿵 (크래시 줌) ⑧ 스포트라이트 인사 → 윙크 · 장미 → 아이리스 아웃 → 카드 '끝' → 게임 화면: 크림 파이 비 · 철퍼덕 (컬러). 필름 효과(비네트 · 깜빡임 · 세로 긁힘 · 먼지 · 털 · 얼룩)는 맨 위에서 내내.
+- `STYLE_EXTRA['jwerry']` = 컷신 입자 0 (세피아 위 컬러 입자 없음). 그림 속 자리 = `JV_FLOOR · MOUSE_H/CAT_H · OPEN_FACE · TRIP_TRAY · PIE_FACE · STAGE_HIT · BOW_FACE`. 미리보기 `preview/jwerry_v3_caps.png`(편집 모드) · `preview/jwerry_v3_play.png`(Play).
+- 씬 적용: `gen_superult_scene.py out.cs jwerry` → 코드가 3만 7천 자라 MCP execute_code 안에서 파일을 읽어 CSharpCodeProvider 로 컴파일·실행 (참조 = netstandard · UnityEngine.CoreModule · UIModule · UI · TextRenderingModule · UnityEditor.CoreModule · Unity.TextMeshPro · Assembly-CSharp).
