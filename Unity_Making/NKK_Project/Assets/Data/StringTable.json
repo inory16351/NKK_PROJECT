@@ -15387,8 +15387,8 @@
   },
   {
    "string_key": 8000555,
-   "ko": "쥐를 새총처럼 끌었다 놓으면 가진 쥐가 <b>전부 줄지어</b> 날아가 연구소 벽돌을 튕기며 깎습니다. 벽돌 숫자 = 남은 체력.\n처음 바닥에 닿은 쥐 자리에서 다음 발사. 한 턴이 끝나면 벽돌이 한 줄씩 내려오고, <b>바닥에 닿으면 끝</b>. 받침대는 없어요 — 첫 발사 각도가 전부!\n벽돌을 부수면 치즈 → <b>쥐 뽑기(10 치즈)</b>로 쥐를 늘리고, 쥐를 재료로 <b>증강 뽑기</b>.",
-   "en": "Pull a rat like a slingshot and release — <b>all your rats fly in a line</b>, bouncing off the lab bricks. Brick number = HP left.\nThe next launch starts where the first rat landed. After each turn the bricks drop one row — <b>if they reach the floor, it's over</b>. No paddle — the first angle is everything!\nBreak bricks for cheese → <b>Rat Draw (10 cheese)</b> for more rats, then spend rats on <b>Augment Draw</b>."
+   "ko": "쥐를 날리고 싶은 방향으로 끌었다 놓으면 가진 쥐가 <b>전부 줄지어</b> 날아가 연구소 벽돌을 튕기며 깎습니다. 벽돌 숫자 = 남은 체력.\n처음 바닥에 닿은 쥐 자리에서 다음 발사. 한 턴이 끝나면 벽돌이 한 줄씩 내려오고, <b>바닥에 닿으면 끝</b>. 받침대는 없어요 — 첫 발사 각도가 전부!\n벽돌을 부수면 치즈 → <b>쥐 뽑기(10 치즈)</b>로 쥐를 늘리고, 쥐를 재료로 <b>증강 뽑기</b>.",
+   "en": "Drag toward where you want to aim and release — <b>all your rats fly in a line</b>, bouncing off the lab bricks. Brick number = HP left.\nThe next launch starts where the first rat landed. After each turn the bricks drop one row — <b>if they reach the floor, it's over</b>. No paddle — the first angle is everything!\nBreak bricks for cheese → <b>Rat Draw (10 cheese)</b> for more rats, then spend rats on <b>Augment Draw</b>."
   },
   {
    "string_key": 8000556,
@@ -15412,8 +15412,8 @@
   },
   {
    "string_key": 8000560,
-   "ko": "경기장 아무 곳이나 끌었다 놓아 발사",
-   "en": "Drag anywhere on the field and release to launch"
+   "ko": "날리고 싶은 방향으로 끌었다 놓아 발사",
+   "en": "Drag toward your target and release to launch"
   },
   {
    "string_key": 8000561,
@@ -15512,8 +15512,8 @@
   },
   {
    "string_key": 8000580,
-   "ko": "끌었다 놓기 = 발사 · 왼쪽 Shift 쥐 뽑기 (꾹 = 연속) · 왼쪽 Ctrl 일괄 뽑기 · E 증강 뽑기 · F 빠르게 · Space 회수 · R 다시 · Esc 일시정지 · M 음악",
-   "en": "Drag & release = launch · Left Shift rat draw (hold = repeat) · Left Ctrl draw all · E augment draw · F fast · Space recall · R restart · Esc pause · M music"
+   "ko": "쏠 방향으로 끌었다 놓기 = 발사 · 왼쪽 Shift 쥐 뽑기 (꾹 = 연속) · 왼쪽 Ctrl 일괄 뽑기 · E 증강 뽑기 · F 빠르게 · Space 회수 · R 다시 · Esc 일시정지 · M 음악",
+   "en": "Drag toward target & release = launch · Left Shift rat draw (hold = repeat) · Left Ctrl draw all · E augment draw · F fast · Space recall · R restart · Esc pause · M music"
   },
   {
    "string_key": 8000581,

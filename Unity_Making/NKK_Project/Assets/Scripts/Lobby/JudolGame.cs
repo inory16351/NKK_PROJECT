@@ -662,7 +662,7 @@ namespace NKK.Lobby
             RectTransformUtility.ScreenPointToLocalPointInRectangle(board, e.position, e.pressEventCamera, out var l);
             var p = new Vector2(l.x + W / 2, H / 2 - l.y);
             if (phase == 0) { if (state == St.Aim && p.x > FX0 - 40 && p.x < FX0 + FW + 40) { pressAt = p; aim = Vector2.zero; } }
-            else if (phase == 1) { if (aim != null) aim = pressAt - p; }
+            else if (phase == 1) { if (aim != null) aim = p - pressAt; }          // 날리고 싶은 방향으로 끎 (2026-10-30 사용자, 예전 = 새총처럼 뒤로)
             else { if (aim != null && state == St.Aim) { var d = AimDir(); if (d != null) Fire(d.Value); } aim = null; }
         }
 
