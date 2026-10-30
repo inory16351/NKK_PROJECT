@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: arcade.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Attached references:
+- ref_style_props.png and ref_style_items.png = the IN-GAME art of this game. Copy THIS style exactly.
+
+Image spec:
+- 1024x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawing. No text, no letters, no numbers, no labels, no grid lines, no frames. Avoid magenta or pink-purple colors inside the drawing.
+- ONE object centered, standing on the bottom of the image with a clear magenta margin; nothing touches the borders. No ground shadow.
+- STYLE IS THE MOST IMPORTANT RULE: Untitled Goose Game flat look, exactly like the style references. Completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no light rays, no drop shadows, no texture or brush strokes; each part = one flat color area with at most one slightly darker flat tone for the side. Simple big shapes, few details, rounded friendly corners, same front 3/4 view and proportions as the references.
+
+The object: a MINI ARCADE GAME MACHINE for a hidden rat city, rat-sized, built from junk: an upright arcade cabinet whose body is an old wooden cigar box standing on end, painted soft teal-green; a slightly tilted screen in the upper middle made from an old phone screen, dark navy, showing only a few simple flat yellow and mint blocky shapes (a tiny cheese and a tiny rat silhouette, no text, no numbers); below the screen a small control shelf with one joystick made from a thumbtack topped with a red bead and two round buttons made from bottle caps (red and yellow); a coin slot shaped like a little cheese wedge on the front panel; a blank cream marquee board on top held by two small grey screws (no text); the cabinet stands on four bottle-cap feet; a small wooden spool of thread in front as a stool. Height about 1.6 times its width. Palette: soft teal-green, warm wood brown, cream, cheese yellow, tomato red, dark navy, light grey.

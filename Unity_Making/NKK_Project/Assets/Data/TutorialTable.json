@@ -711,6 +711,36 @@
    "action": "",
    "action_value": "",
    "sort": 111
+  },
+  {
+   "step_id": "l_arcade",
+   "scene": "Lobby",
+   "trigger": "TierAtLeast",
+   "trigger_value": 10.0,
+   "trigger_text": "",
+   "cond1_type": "Unlocked",
+   "cond1_value": "alley",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "arcade",
+   "action": "",
+   "action_value": "",
+   "sort": 330
+  },
+  {
+   "step_id": "l_arcade_hot",
+   "scene": "Lobby",
+   "trigger": "AlleyEnter",
+   "trigger_value": 0.0,
+   "trigger_text": "",
+   "cond1_type": "Done",
+   "cond1_value": "l_arcade",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 331
   }
  ],
  "Line": [
@@ -1685,6 +1715,51 @@
    "text": "등급순 · 마릿수순 · 피해순으로 볼 수 있어. 열어 둔 동안엔 게임이 잠깐 멈춰!",
    "text_sk": 3900112,
    "highlight": ""
+  },
+  {
+   "line_id": 113,
+   "step_id": "l_arcade",
+   "speaker_id": "brownrat",
+   "face": "surprised",
+   "text": "어?! 맨홀 아래에서 뿅뿅 하는 소리가 나!",
+   "text_sk": 3900113,
+   "highlight": ""
+  },
+  {
+   "line_id": 114,
+   "step_id": "l_arcade",
+   "speaker_id": "brownrat",
+   "face": "happy",
+   "text": "누가 뒷골목에 게임기를 들여놨나 봐! 맨홀로 내려가 보자!",
+   "text_sk": 3900114,
+   "highlight": "alley_arrow"
+  },
+  {
+   "line_id": 115,
+   "step_id": "l_arcade_hot",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "이건… 전설의 미니 게임기잖아! 10훈장을 단 쥐만 만질 수 있다는 그거!",
+   "text_sk": 3900115,
+   "highlight": "arcade"
+  },
+  {
+   "line_id": 116,
+   "step_id": "l_arcade_hot",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "판과 판 사이에 여기서 머리 좀 식혀 봐. 게임기를 누르면 미니게임을 할 수 있어!",
+   "text_sk": 3900116,
+   "highlight": "arcade"
+  },
+  {
+   "line_id": 117,
+   "step_id": "l_arcade_hot",
+   "speaker_id": "broker",
+   "face": "happy",
+   "text": "흐흐, 고양이 연구소 휴게실에서 슬쩍한 물건이지. 공짜니까 실컷 놀다 가라고.",
+   "text_sk": 3900117,
+   "highlight": "arcade"
   }
  ],
  "Story": [

@@ -678,6 +678,24 @@
 - **2차대전 박물관 배경 (같은 날, 사용자)**: 76~90층(구간 70009 2차대전 박물관, War 테마)에 맞춰 **13훈장(쥐 공화국 의장, 최고 76층)부터**. 그림 `UnityResources/Rats/Lobby_WarMuseum/` (고양이 연구소판 reskin 프롬프트로 한 번에 배치 맞음 · 국기·마크·무기·사람 없음) → `Assets/Art/Rats/UI/lobby_warmuseum_bg.png`. Lobby `Home.tierLooks` = 4 · 6 · 9 · 11 · 13. Play 확인: 메모리에서 3 원래 / 4 고양이 / 6 지구과학 / 9 공사 / 11·12 수중 / 13·16 박물관 (저장 안 함) · 캡처 = 간판·바닥·쳇바퀴·쥐구멍 맞음 · 콘솔 에러 0.
 - **우주 연구소 배경 (같은 날, 사용자)**: 91~100층(구간 70010 우주 연구소, Space 테마)에 맞춰 **16훈장(찍찍!! 신화, 최고 91층)부터**. 그림 `UnityResources/Rats/Lobby_SpaceLab/` (고양이 연구소판 reskin, 한 번에 배치 맞음) → `Assets/Art/Rats/UI/lobby_spacelab_bg.png`. Lobby `Home.tierLooks` = 4 · 6 · 9 · 11 · 13 · 16 (구간 6개 전부). Play 확인: 메모리에서 3 원래 / 4 고양이 / 6 지구과학 / 9 공사 / 11 수중 / 13·15 박물관 / 16 우주 (저장 안 함) · 캡처 = 간판·바닥·쳇바퀴·쥐구멍 맞음 · 콘솔 에러 0.
 
+## 5-35. 뒷골목 미니 게임기 = 10훈장 해금 (2026-10-30, Play 확인 · 커밋 안 함) — 그림 `UnityResources/Rats/Lobby_Market/Sheets/arcade/`
+
+- **사용자**: 미니게임은 처음부터가 아니라 2~3시간 진행 뒤 → **10훈장 해금 시 하수구 뒷골목에 미니게임을 할 게임기** · 위치 = **암시장 왼쪽** · 그림 = **인게임 화풍**(플랫) · 해금되면 안내 튜토리얼. (시뮬 기준 10훈장 = 클릭 2.86h · 미클릭 2.94h. main-game 전용 — 50f 는 40층 공개라 10훈장에 못 감)
+- **그림**: Codex 1장 `Sheets/arcade/arcade.png` (참고 = 인게임 소품 `ref_style_props/items` · 담배 상자 몸통 청록 오락기 + 압정 조이스틱 · 병뚜껑 버튼 · 치즈 동전 구멍 · 실패 의자) → 키잉 `Lobby_Market/lm_arcade.png` → `Assets/Art/Rats/Lobby_Market/lm_arcade.png`. 첫 시도(로비 그림체 프롬프트)는 `Sheets/arcade/_v1_lobby_style` (저장 실패, 그림 없음).
+- **씬 Lobby**: `Alley/Arcade` (높이 1.75 · 바닥 −1.725 · x −5.11 = 노점 바로 왼쪽, `ArcadeMachine`) · `Alley/ArcadeBubble`(브로커 말풍선 복제) · `Home/Hots/Alley/Hot_arcade` (Hot_aug 복제: LobbyHot id `arcade` · FeatureGate `arcade` — 잠김 = 게임기·팻말·강조 숨김 + **깡통 가게 `Decor/HouseCan` 보임**, 열림 = 깡통 가게 자리에 게임기 · TutorialTarget `arcade`). 팻말 '미니 게임기 / 쉬어 가는 한 판' (8000553 · 8000552), 누르면 대사 2개 (8000550~551, LocScene 연결), 영어 채움.
+- **코드**: `Lobby/ArcadeMachine.cs` (누르면 통 튀기 + 말풍선, `bubbleLift` 로 위 팻말 피함) · `LobbyManager.OnHot("arcade")` (잠김 = 자물쇠 반응, 열림 = `ArcadeMachine.Poke`). **미니게임 화면은 아직 없음** → 생기면 `Poke` 에서 열면 됨.
+- **튜토리얼** (튜토리얼 테이블, 백업 `Data_Table/_backup_20261030`): `l_arcade` (발동 TierAtLeast 10 · 조건 Unlocked alley · 해금 `arcade` · sort 330, 아지트에서 시궁쥐 대사 113~114 → 맨홀 강조) → `l_arcade_hot` (뒷골목 도착 · Done l_arcade · sort 331, 안경 쥐 115~116 · 브로커 117, 게임기 강조). Unlock_Id 시트에 `arcade`. 스트링 3900113~117 + 영어. 튜토리얼 안 함(quiet) 저장도 해금은 됨.
+- **Play 확인 (슬롯 3 = 9훈장을 메모리에서 10훈장으로, 끝나고 저장값 되돌림)**: 아지트 대사 2줄 · 맨홀 강조 → 뒷골목 도착 대사 3줄 · 게임기 노란 강조 · 깡통 가게 사라지고 게임기 · 누르면 말풍선. 콘솔 에러 0. 캡처 `Unity_Making/NKK_Project/Captures/arcade_*.png`.
+- 참고: `gen_string_table.py` 가 다른 테이블 xlsx 도 다시 저장해서 git 에 여러 xlsx 가 바뀐 것으로 뜸 (JSON 은 스트링·튜토리얼만 내용 변경).
+- **남음**: ① 미니게임 내용·화면 (지금은 '준비 중' 말풍선) ② 영어 화면 확인 ③ 커밋.
+
+## 5-36. 튜토리얼 대사 5초 자동 넘김 (2026-10-30, Play 확인 · 커밋 안 함)
+
+- **사용자**: 튜토리얼 대사가 뜨면 넘길 때까지 게임이 멈춰서 방치 중엔 진행이 안 됨 → 오프닝 컷씬처럼 **5초 뒤 저절로 다음 대사**.
+- `TutorialBox.autoNext` 5 (인스펙터, 0 = 끔): 한 줄이 뜨고 5초가 지나면 클릭 없이 다음 줄 · 마지막 줄이면 대사창이 닫히고 다음 단계로. 글이 다 나오고 기존 넘김 조건(nextDelay·minLineTime)을 채운 뒤에만 넘어감. 클릭으로 넘기는 건 그대로. Game · Lobby 씬 둘 다 같은 컴포넌트라 같이 적용 (오프닝 컷씬 `StoryPlayer.autoNext` 10초는 그대로).
+- **Play 확인 (로비, 대사 3줄 l_arcade_hot 을 클릭 없이)**: 줄 바뀜 0 → 4.9 → 9.9초 · 14.9초에 창 닫힘 · timeScale 1 · 콘솔 에러 0 (저장값 손대지 않음, 테스트 뒤 되돌림). 게임 씬은 같은 컴포넌트·같은 닫힘 경로(TutorialManager.Finish → Pausing 끔)라 따로 안 봄.
+- 참고: 방치 중 멈추는 다른 창 = 증강 고르기 창(31층~, 게임 멈춤 · 고를 때까지 대기)은 이번에 손대지 않음.
+
 ## 6. 밸런스 측정 (BalanceProbe)
 
 - 목표 (사용자): 전투력 = 적정일 때 일반 층은 제한시간 180초의 **60~90%**(75% 쪽으로), 보스 층은 210초의 **약 90%**(길 117초 + 보스전 72초, 보스전은 Boss `hp_pow_sec` 로 맞춤).

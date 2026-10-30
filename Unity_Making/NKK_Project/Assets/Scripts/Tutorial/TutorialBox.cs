@@ -10,6 +10,7 @@ namespace NKK.Tutorial
 {
     // 튜토리얼 대사창 (씬 오브젝트 TutorialBox). 아래쪽 대사 판 + 왼쪽 해설 쥐 초상화 + 이름표 + 글.
     // 대사가 떠 있는 동안 화면 전체(blocker)가 클릭을 받음 → 글자가 다 나오면 다음 대사, 나오는 중이면 한 번에 다 보여 줌.
+    // 클릭이 없으면 autoNext 초 뒤 저절로 다음 대사 (방치 중에도 진행).
     // 시간은 unscaled (게임이 멈춰 있어도 돌아감). 글 자체는 튜토리얼 테이블 Line 시트
     public class TutorialBox : MonoBehaviour
     {
@@ -42,6 +43,7 @@ namespace NKK.Tutorial
         [Tooltip("줄이 나오고 이 초 동안은 클릭을 무시 (글자 한 번에 보이기도 안 됨)")] public float clickGuard = 0.35f;
         [Tooltip("글이 다 나온 뒤 이 초가 지나야 다음 줄로 넘어감 ('계속' 표시도 그때 나옴)")] public float nextDelay = 0.45f;
         [Tooltip("한 줄을 최소 이 초는 보여 줌")] public float minLineTime = 1.0f;
+        [Tooltip("클릭이 없으면 한 줄이 나오고 이 초 뒤 자동으로 다음 줄 (0 = 끔) — 방치 중에도 튜토리얼이 막히지 않게 (2026-10-30)")] public float autoNext = 5;
 
         [Header("가리키는 곳 보이게")]
         [Tooltip("가리키는 곳이 대사 판·초상화에 가리면 대사창을 화면 위쪽으로 옮김")] public bool dodge = true;
@@ -152,6 +154,7 @@ namespace NKK.Tutorial
             if (nextMark) { nextMark.SetActive(canNext); if (canNext) nextMark.transform.localScale = Vector3.one * (1 + 0.08f * Mathf.Sin(Time.unscaledTime * 6)); }
             SetHighlight(lines[idx].highlight);
 
+            if (autoNext > 0 && canNext && lineT >= autoNext) { Next(); return; }      // 가만히 있어도 넘어감 (오프닝 컷씬과 같음)
             if (inT >= inTime && lineT >= clickGuard && Pressed())
             {
                 if (!full) { shown = TotalChars; if (bodyText) bodyText.maxVisibleCharacters = TotalChars; }

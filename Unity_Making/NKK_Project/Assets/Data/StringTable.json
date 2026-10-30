@@ -11231,6 +11231,31 @@
    "en": "You can sort by Grade, Count or Damage. The game pauses while it's open!"
   },
   {
+   "string_key": 3900113,
+   "ko": "어?! 맨홀 아래에서 뿅뿅 하는 소리가 나!",
+   "en": "Huh?! I hear beeping and booping under the manhole!"
+  },
+  {
+   "string_key": 3900114,
+   "ko": "누가 뒷골목에 게임기를 들여놨나 봐! 맨홀로 내려가 보자!",
+   "en": "Someone brought a game machine into the back alley! Let's head down the manhole!"
+  },
+  {
+   "string_key": 3900115,
+   "ko": "이건… 전설의 미니 게임기잖아! 10훈장을 단 쥐만 만질 수 있다는 그거!",
+   "en": "No way… it's the legendary mini arcade! They say only rats with the 10th rank can touch it!"
+  },
+  {
+   "string_key": 3900116,
+   "ko": "판과 판 사이에 여기서 머리 좀 식혀 봐. 게임기를 누르면 미니게임을 할 수 있어!",
+   "en": "Take a breather here between runs. Tap the machine to play a mini game!"
+  },
+  {
+   "string_key": 3900117,
+   "ko": "흐흐, 고양이 연구소 휴게실에서 슬쩍한 물건이지. 공짜니까 실컷 놀다 가라고.",
+   "en": "Heh heh, I swiped it from the cat lab break room. It's free, so play all you want."
+  },
+  {
    "string_key": 4000001,
    "ko": "찍... 찍찍찍...! (우리들은 그저 이곳이 낙원인 줄만 알고 있었지...)",
    "en": "Squeak... squeak squeak squeak...! (We truly believed this place was paradise...)"
@@ -15334,6 +15359,26 @@
    "string_key": 8000549,
    "ko": "7 ? ?",
    "en": "7 ? ?"
+  },
+  {
+   "string_key": 8000550,
+   "ko": "새 게임을 들여오는 중이야! 조금만 기다려, 찍!",
+   "en": "Bringing in a new game! Hang on a little, squeak!"
+  },
+  {
+   "string_key": 8000551,
+   "ko": "뿅뿅! 화면 속 쥐가 치즈를 쫓고 있어!",
+   "en": "Beep boop! The rat on screen is chasing cheese!"
+  },
+  {
+   "string_key": 8000552,
+   "ko": "쉬어 가는 한 판",
+   "en": "A quick game break"
+  },
+  {
+   "string_key": 8000553,
+   "ko": "미니 게임기",
+   "en": "Mini Arcade"
   },
   {
    "string_key": 9000001,

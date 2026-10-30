@@ -87,6 +87,12 @@ namespace NKK.Lobby
                 if (LobbyPan.I) LobbyPan.I.Go(true);
                 return;
             }
+            if (id == "arcade")        // 뒷골목 미니 게임기 (10훈장, 2026-10-30) — 아직 페이지 없음, 게임기 반응만
+            {
+                if (Progress.I && !Progress.I.IsUnlocked(id)) { OnLocked?.Invoke(id); return; }
+                if (ArcadeMachine.I) ArcadeMachine.I.Poke();
+                return;
+            }
             OpenPage(id);
         }
         // 잠긴 기능을 누름 (자물쇠 흔들기 등)
