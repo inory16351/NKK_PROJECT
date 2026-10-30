@@ -386,7 +386,7 @@
    "action_skill": 21023,
    "ultimate": 0,
    "unlock_rank": 2,
-   "character_desc": "어디선가 본 것 같은 요리사. 치즈 요리만 18가지.",
+   "character_desc": "치즈 요리만 18가지를 아는 요리사 쥐.",
    "character_desc_sk": 1110023,
    "asset_folder": "Parts/chef",
    "sub_asset_folder": ""
@@ -607,7 +607,7 @@
    "action_skill": 21036,
    "ultimate": 0,
    "unlock_rank": 1,
-   "character_desc": "하수구에서 무술을 배웠다. 피자를 좋아한다.",
+   "character_desc": "하수구에서 무술을 배웠다. 수리검 대신 해바라기씨를 던진다.",
    "character_desc_sk": 1110036,
    "asset_folder": "Parts/ninja",
    "sub_asset_folder": ""
@@ -1134,7 +1134,7 @@
    "action_skill": 21067,
    "ultimate": 30021,
    "unlock_rank": 1,
-   "character_desc": "전기 쥐 코스프레 중인 햄스터. 사실 전기는 등에 멘 건전지에서 나온다.",
+   "character_desc": "번개 머리띠를 쓰고 전기 흉내를 내는 햄스터. 사실 전기는 등에 멘 건전지에서 나온다.",
    "character_desc_sk": 1110067,
    "asset_folder": "Parts/zapham",
    "sub_asset_folder": ""
@@ -1151,7 +1151,7 @@
    "action_skill": 21068,
    "ultimate": 30022,
    "unlock_rank": 1,
-   "character_desc": "놀이공원 기념품 가게에서 산 동그란 귀 머리띠를 절대 안 벗는다. 자기가 원조라고 우긴다.",
+   "character_desc": "놀이공원 기념품 가게에서 산 머리띠를 절대 안 벗는다. 퍼레이드만 보이면 맨 앞에 선다.",
    "character_desc_sk": 1110068,
    "asset_folder": "Parts/parkrat",
    "sub_asset_folder": ""
@@ -1355,7 +1355,7 @@
    "action_skill": 0,
    "ultimate": 30034,
    "unlock_rank": 6,
-   "character_desc": "폭발 마법(이라고 우기는 폭탄)만 배웠다. 하루에 딱 한 발 쏘고 그대로 뻗는다. 안대는 멋으로 찼다.",
+   "character_desc": "폭탄을 마법이라고 우기는 쥐. 한 번 크게 터뜨리고 나면 기운이 쭉 빠져 뻗는다.",
    "character_desc_sk": 1110080,
    "asset_folder": "Parts/bomber",
    "sub_asset_folder": ""
@@ -1457,7 +1457,7 @@
    "action_skill": 21086,
    "ultimate": 30035,
    "unlock_rank": 5,
-   "character_desc": "엘사가 연상되는 얼음 마법사 쥐. 때릴 때마다 생명체를 얼린다. 렛잇고를 부르면 동료 쥐들도 덜덜 떤다.",
+   "character_desc": "얼음 마법을 쓰는 쥐 여왕. 때릴 때마다 생명체를 얼린다. 노래를 부르면 동료 쥐들도 덜덜 떤다.",
    "character_desc_sk": 1110086,
    "asset_folder": "Parts/icequeen",
    "sub_asset_folder": ""
@@ -3292,7 +3292,7 @@
   },
   {
    "skill_id": 21036,
-   "skill_name": "그림자 분신술",
+   "skill_name": "그림자 쥐떼",
    "skill_name_sk": 1221036,
    "skill_category": "Action",
    "cond1_type": "Hit_Item",
@@ -3312,7 +3312,7 @@
    "cool_time": 6.0,
    "skill_icon": "🥷",
    "skill_asset": "RatSkillIcons/rs_21036",
-   "skill_explain": "물건에 부딪힐 때 3% 확률로 → 그림자 분신술: 동료 3마리 소환 (6초 동안 함께 난동)",
+   "skill_explain": "물건에 부딪힐 때 3% 확률로 → 그림자 쥐떼: 동료 3마리 소환 (6초 동안 함께 난동)",
    "skill_explain_sk": 1321036
   },
   {
@@ -4842,7 +4842,7 @@
   },
   {
    "skill_id": 21067,
-   "skill_name": "건전지 백만 볼트",
+   "skill_name": "건전지 대방전",
    "skill_name_sk": 1221067,
    "skill_category": "Action",
    "cond1_type": "Interval",
@@ -4862,7 +4862,7 @@
    "cool_time": 6.0,
    "skill_icon": "⚡",
    "skill_asset": "RatSkillIcons/rs_21067",
-   "skill_explain": "18초마다 → 건전지 백만 볼트: 360° 회전 레이저 (피해 ×8.0)",
+   "skill_explain": "18초마다 → 건전지 대방전: 360° 회전 레이저 (피해 ×8.0)",
    "skill_explain_sk": 1321067
   },
   {
@@ -5467,7 +5467,7 @@
   },
   {
    "skill_id": 20080,
-   "skill_name": "폭렬 외길",
+   "skill_name": "폭탄 외길",
    "skill_name_sk": 1220080,
    "skill_category": "Passive",
    "cond1_type": "Always",
@@ -6104,7 +6104,7 @@
   },
   {
    "ultimate_id": 30011,
-   "ultimate_name": "천본앵 난무",
+   "ultimate_name": "벚꽃 일섬",
    "ultimate_name_sk": 1430011,
    "script": "UltSplit",
    "dev_desc": "칼을 넣는 순간 전부 반으로 쩍",
@@ -6272,7 +6272,7 @@
    "asset": "Parody/ult_battery",
    "ult_gauge": 200,
    "ult_icon": "UltIcons/ult_30021",
-   "ult_line": "백만 볼트…! (건전지는 1.5볼트)",
+   "ult_line": "충전 완료…! (건전지는 1.5볼트)",
    "ult_line_sk": 1630021,
    "ult_achv": "감전 주의 (진짜로)",
    "ult_color": "#f2c94c",
@@ -6480,7 +6480,7 @@
    "asset": "NewRats/magic_circle, NewRats/explosion_big",
    "ult_gauge": 480,
    "ult_icon": "UltIcons/ult_30034",
-   "ult_line": "내 이름은 찍구밍! 최강의 폭렬 마법을 다루는 쥐!",
+   "ult_line": "이 한 방에 전부 건다! 폭탄 마법, 발사!",
    "ult_line_sk": 1630034,
    "ult_achv": "폭발은 예술이다!",
    "ult_color": "#e0524a",
@@ -6907,7 +6907,7 @@
   {
    "ultimate_id": 30011,
    "cap_key": "c1",
-   "text": "뇌의 호흡…",
+   "text": "번개의 기운…",
    "text_sk": 1700051,
    "size": 38.0,
    "color": ""
@@ -6915,7 +6915,7 @@
   {
    "ultimate_id": 30011,
    "cap_key": "c2",
-   "text": "제1형…",
+   "text": "첫 번째 칼…",
    "text_sk": 1700052,
    "size": 38.0,
    "color": "#fff3bf"
@@ -6923,7 +6923,7 @@
   {
    "ultimate_id": 30011,
    "cap_key": "c3",
-   "text": "벽력일섬!!",
+   "text": "번개 일섬!!",
    "text_sk": 1700053,
    "size": 96.0,
    "color": "#fff3bf"

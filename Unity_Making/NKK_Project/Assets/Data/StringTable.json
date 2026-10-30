@@ -388,7 +388,7 @@
   {
    "string_key": 1010078,
    "ko": "찍찍 탐정",
-   "en": "Detective Squeakan"
+   "en": "Detective Squeaks"
   },
   {
    "string_key": 1010079,
@@ -557,8 +557,8 @@
   },
   {
    "string_key": 1110023,
-   "ko": "어디선가 본 것 같은 요리사. 치즈 요리만 18가지.",
-   "en": "A chef you swear you've seen somewhere before. Knows 18 cheese recipes."
+   "ko": "치즈 요리만 18가지를 아는 요리사 쥐.",
+   "en": "A chef rat who knows 18 cheese recipes."
   },
   {
    "string_key": 1110024,
@@ -622,8 +622,8 @@
   },
   {
    "string_key": 1110036,
-   "ko": "하수구에서 무술을 배웠다. 피자를 좋아한다.",
-   "en": "Learned martial arts in the sewers. Loves pizza."
+   "ko": "하수구에서 무술을 배웠다. 수리검 대신 해바라기씨를 던진다.",
+   "en": "Learned martial arts in the sewers. Throws sunflower seeds instead of shuriken."
   },
   {
    "string_key": 1110037,
@@ -777,13 +777,13 @@
   },
   {
    "string_key": 1110067,
-   "ko": "전기 쥐 코스프레 중인 햄스터. 사실 전기는 등에 멘 건전지에서 나온다.",
-   "en": "A hamster cosplaying an electric mouse. The zap actually comes from the batteries strapped to its back."
+   "ko": "번개 머리띠를 쓰고 전기 흉내를 내는 햄스터. 사실 전기는 등에 멘 건전지에서 나온다.",
+   "en": "A hamster in a lightning headband, pretending to be electric. The zap actually comes from the batteries strapped to its back."
   },
   {
    "string_key": 1110068,
-   "ko": "놀이공원 기념품 가게에서 산 동그란 귀 머리띠를 절대 안 벗는다. 자기가 원조라고 우긴다.",
-   "en": "Never takes off the round-ear headband from the theme park gift shop. Insists it's the original."
+   "ko": "놀이공원 기념품 가게에서 산 머리띠를 절대 안 벗는다. 퍼레이드만 보이면 맨 앞에 선다.",
+   "en": "Never takes off the headband from the theme park gift shop. Always first in line for the parade."
   },
   {
    "string_key": 1110069,
@@ -842,8 +842,8 @@
   },
   {
    "string_key": 1110080,
-   "ko": "폭발 마법(이라고 우기는 폭탄)만 배웠다. 하루에 딱 한 발 쏘고 그대로 뻗는다. 안대는 멋으로 찼다.",
-   "en": "Only learned Explosion magic (a bomb it swears is magic). Fires exactly one shot a day, then faceplants. The eyepatch is for style."
+   "ko": "폭탄을 마법이라고 우기는 쥐. 한 번 크게 터뜨리고 나면 기운이 쭉 빠져 뻗는다.",
+   "en": "A rat that insists its bomb is magic. After one big blast, it runs out of steam and collapses."
   },
   {
    "string_key": 1110081,
@@ -872,8 +872,8 @@
   },
   {
    "string_key": 1110086,
-   "ko": "엘사가 연상되는 얼음 마법사 쥐. 때릴 때마다 생명체를 얼린다. 렛잇고를 부르면 동료 쥐들도 덜덜 떤다.",
-   "en": "An ice-mage rat with a certain snow-queen vibe. Freezes every creature it hits. When it sings \"Rat It Go\", even its buddies shiver."
+   "ko": "얼음 마법을 쓰는 쥐 여왕. 때릴 때마다 생명체를 얼린다. 노래를 부르면 동료 쥐들도 덜덜 떤다.",
+   "en": "An ice-magic rat queen. Freezes every creature it hits. When it sings, even its buddies start shivering."
   },
   {
    "string_key": 1110087,
@@ -1287,8 +1287,8 @@
   },
   {
    "string_key": 1220080,
-   "ko": "폭렬 외길",
-   "en": "Explosion or Bust"
+   "ko": "폭탄 외길",
+   "en": "Bombs Only"
   },
   {
    "string_key": 1220081,
@@ -1512,8 +1512,8 @@
   },
   {
    "string_key": 1221036,
-   "ko": "그림자 분신술",
-   "en": "Shadow Clone Jutsu"
+   "ko": "그림자 쥐떼",
+   "en": "Shadow Swarm"
   },
   {
    "string_key": 1221037,
@@ -1662,8 +1662,8 @@
   },
   {
    "string_key": 1221067,
-   "ko": "건전지 백만 볼트",
-   "en": "Million-Volt Battery"
+   "ko": "건전지 대방전",
+   "en": "Battery Overload"
   },
   {
    "string_key": 1221068,
@@ -2292,8 +2292,8 @@
   },
   {
    "string_key": 1321036,
-   "ko": "물건에 부딪힐 때 3% 확률로 → 그림자 분신술: 동료 3마리 소환 (6초 동안 함께 난동)",
-   "en": "3% chance on object impact → Shadow Clone Jutsu: summons 3 buddies (they rampage together for 6s)"
+   "ko": "물건에 부딪힐 때 3% 확률로 → 그림자 쥐떼: 동료 3마리 소환 (6초 동안 함께 난동)",
+   "en": "3% chance on object impact → Shadow Swarm: summons 3 buddies (they rampage together for 6s)"
   },
   {
    "string_key": 1321037,
@@ -2447,8 +2447,8 @@
   },
   {
    "string_key": 1321067,
-   "ko": "18초마다 → 건전지 백만 볼트: 360° 회전 레이저 (피해 ×8.0)",
-   "en": "Every 18s → Million-Volt Battery: spinning 360° laser (damage ×8.0)"
+   "ko": "18초마다 → 건전지 대방전: 360° 회전 레이저 (피해 ×8.0)",
+   "en": "Every 18s → Battery Overload: spinning 360° laser (damage ×8.0)"
   },
   {
    "string_key": 1321068,
@@ -2607,8 +2607,8 @@
   },
   {
    "string_key": 1430011,
-   "ko": "천본앵 난무",
-   "en": "Thousand Cherry Blossom Slash"
+   "ko": "벚꽃 일섬",
+   "en": "Cherry Blossom Flash"
   },
   {
    "string_key": 1430012,
@@ -3007,8 +3007,8 @@
   },
   {
    "string_key": 1630021,
-   "ko": "백만 볼트…! (건전지는 1.5볼트)",
-   "en": "A million volts...! (Battery: 1.5V)"
+   "ko": "충전 완료…! (건전지는 1.5볼트)",
+   "en": "Fully charged...! (Battery: 1.5V)"
   },
   {
    "string_key": 1630022,
@@ -3072,8 +3072,8 @@
   },
   {
    "string_key": 1630034,
-   "ko": "내 이름은 찍구밍! 최강의 폭렬 마법을 다루는 쥐!",
-   "en": "My name is Squeakumin! Wielder of the mightiest Explosion magic!"
+   "ko": "이 한 방에 전부 건다! 폭탄 마법, 발사!",
+   "en": "Everything on this one shot! Bomb magic, FIRE!"
   },
   {
    "string_key": 1630035,
@@ -3243,7 +3243,7 @@
   {
    "string_key": 1700033,
    "ko": "천국으로 가는 계단~",
-   "en": "Stairway to heaven~"
+   "en": "Stairs to heaven~"
   },
   {
    "string_key": 1700034,
@@ -3332,18 +3332,18 @@
   },
   {
    "string_key": 1700051,
-   "ko": "뇌의 호흡…",
-   "en": "Thunder Breathing..."
+   "ko": "번개의 기운…",
+   "en": "Lightning gathers..."
   },
   {
    "string_key": 1700052,
-   "ko": "제1형…",
-   "en": "First Form..."
+   "ko": "첫 번째 칼…",
+   "en": "First strike..."
   },
   {
    "string_key": 1700053,
-   "ko": "벽력일섬!!",
-   "en": "Thunderclap and Flash!!"
+   "ko": "번개 일섬!!",
+   "en": "Lightning Flash!!"
   },
   {
    "string_key": 1700054,
