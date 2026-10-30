@@ -45,7 +45,7 @@ namespace NKK.Lobby
 
         void Awake()
         {
-            if (home) { home.manager = this; home.inputBlocked = () => PrepOpen || NKK.Tutorial.TutorialBox.Showing || GachaShow.Busy; }   // 뽑기 연출 중(지하 장면에선 Prep 를 숨김)에도 막음
+            if (home) { home.manager = this; home.inputBlocked = () => PrepOpen || NKK.Tutorial.TutorialBox.Showing || GachaShow.Busy || JudolGame.IsOpen; }   // 뽑기 연출 중(지하 장면에선 Prep 를 숨김)에도 막음
             if (homeButton) homeButton.onClick.AddListener(CloseToHome);
             if (saveExitButton) saveExitButton.onClick.AddListener(SaveAndExit);
             foreach (var p in pages) { var id = p.id; if (p.tab) p.tab.onClick.AddListener(() => OpenPage(id)); }
@@ -87,7 +87,7 @@ namespace NKK.Lobby
                 if (LobbyPan.I) LobbyPan.I.Go(true);
                 return;
             }
-            if (id == "arcade")        // 뒷골목 미니 게임기 (10훈장, 2026-10-30) — 아직 페이지 없음, 게임기 반응만
+            if (id == "arcade")        // 뒷골목 미니 게임기 (10훈장, 2026-10-30) → 쥐돌깨기 창 (ArcadeMachine.game)
             {
                 if (Progress.I && !Progress.I.IsUnlocked(id)) { OnLocked?.Invoke(id); return; }
                 if (ArcadeMachine.I) ArcadeMachine.I.Poke();

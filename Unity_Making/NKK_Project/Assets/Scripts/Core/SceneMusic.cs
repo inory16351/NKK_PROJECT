@@ -23,6 +23,7 @@ namespace NKK
         public float hurryAt = 30;
         [Tooltip("Lobby: 지하도시(하수구)에 있을 때 곡 · 유전자 뽑기 연출 중 곡")] public AudioClip alleyClip;
         public AudioClip gachaClip;
+        [Tooltip("Lobby: 미니 게임기 쥐돌깨기 창이 열려 있을 때 곡 (M = 끄기)")] public AudioClip arcadeClip;
         [Tooltip("뽑기 연출이 끝나 결과 칸이 뜨면 뽑기 곡이 줄어드는 시간 (초)")] public float gachaFadeOut = 2.5f;
 
         void Update()
@@ -36,6 +37,7 @@ namespace NKK
         {
             if (story && storyClip && story.Playing) return storyClip;
             if (gachaClip && Lobby.GachaShow.Cutscene) return gachaClip;
+            if (arcadeClip && Lobby.JudolGame.IsOpen) return Lobby.JudolGame.MusicOn ? arcadeClip : null;
             if (alleyClip && Lobby.LobbyPan.I && Lobby.LobbyPan.I.AtRoom) return alleyClip;
             var boss = Hazards.Boss.Current;
             if (boss && boss.State == Hazards.Boss.BState.Fight)

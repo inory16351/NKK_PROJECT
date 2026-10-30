@@ -1,0 +1,474 @@
+{
+ "Judol_Config": [
+  {
+   "key": "cols",
+   "value": 7.0
+  },
+  {
+   "key": "rows",
+   "value": 9.0
+  },
+  {
+   "key": "cell",
+   "value": 70.0
+  },
+  {
+   "key": "field_y",
+   "value": 22.0
+  },
+  {
+   "key": "rat_r",
+   "value": 9.0
+  },
+  {
+   "key": "speed",
+   "value": 15.0
+  },
+  {
+   "key": "substeps",
+   "value": 4.0
+  },
+  {
+   "key": "min_angle",
+   "value": 8.0
+  },
+  {
+   "key": "launch_min",
+   "value": 0.02
+  },
+  {
+   "key": "launch_max",
+   "value": 0.07
+  },
+  {
+   "key": "launch_total",
+   "value": 2.8
+  },
+  {
+   "key": "walk",
+   "value": 900.0
+  },
+  {
+   "key": "ff_max",
+   "value": 4.0
+  },
+  {
+   "key": "start_rats",
+   "value": 3.0
+  },
+  {
+   "key": "turn_cheese",
+   "value": 10.0
+  },
+  {
+   "key": "row_min",
+   "value": 3.0
+  },
+  {
+   "key": "p4_base",
+   "value": 0.3
+  },
+  {
+   "key": "p4_per",
+   "value": 0.015
+  },
+  {
+   "key": "p4_max",
+   "value": 0.8
+  },
+  {
+   "key": "p5_per",
+   "value": 0.012
+  },
+  {
+   "key": "p5_max",
+   "value": 0.6
+  },
+  {
+   "key": "hp_grow",
+   "value": 1.075
+  },
+  {
+   "key": "hard_rate",
+   "value": 0.15
+  },
+  {
+   "key": "hard_mul",
+   "value": 2.0
+  },
+  {
+   "key": "item_rate",
+   "value": 0.25
+  },
+  {
+   "key": "item_r",
+   "value": 18.0
+  },
+  {
+   "key": "rat_price",
+   "value": 10.0
+  },
+  {
+   "key": "ten_pull",
+   "value": 10.0
+  },
+  {
+   "key": "hold_delay",
+   "value": 0.35
+  },
+  {
+   "key": "hold_repeat",
+   "value": 0.07
+  },
+  {
+   "key": "pity",
+   "value": 30.0
+  },
+  {
+   "key": "pity_grade",
+   "value": 4.0
+  },
+  {
+   "key": "pity_mythic",
+   "value": 0.25
+  },
+  {
+   "key": "skill_grade",
+   "value": 3.0
+  },
+  {
+   "key": "aug_base",
+   "value": 10.0
+  },
+  {
+   "key": "aug_mul",
+   "value": 1.5
+  },
+  {
+   "key": "blade_radius",
+   "value": 28.0
+  },
+  {
+   "key": "blade_spin",
+   "value": 8.0
+  },
+  {
+   "key": "blade_cd",
+   "value": 0.15
+  }
+ ],
+ "Judol_Grade": [
+  {
+   "grade": "Common",
+   "dmg": 1.0,
+   "skill_p": 0.0,
+   "aura_alpha": 0.0,
+   "aura_r": 30.0,
+   "color": "#e9e4da"
+  },
+  {
+   "grade": "Rare",
+   "dmg": 2.0,
+   "skill_p": 0.0,
+   "aura_alpha": 0.35,
+   "aura_r": 33.0,
+   "color": "#4f9be8"
+  },
+  {
+   "grade": "Epic",
+   "dmg": 3.0,
+   "skill_p": 0.0,
+   "aura_alpha": 0.42,
+   "aura_r": 36.0,
+   "color": "#b26cf0"
+  },
+  {
+   "grade": "Unique",
+   "dmg": 4.0,
+   "skill_p": 0.1,
+   "aura_alpha": 0.5,
+   "aura_r": 39.0,
+   "color": "#f2cc3a"
+  },
+  {
+   "grade": "Legendary",
+   "dmg": 5.0,
+   "skill_p": 0.15,
+   "aura_alpha": 0.58,
+   "aura_r": 42.0,
+   "color": "#ff8a24"
+  },
+  {
+   "grade": "Mythic",
+   "dmg": 6.0,
+   "skill_p": 0.25,
+   "aura_alpha": 0.66,
+   "aura_r": 45.0,
+   "color": "#ff4060"
+  }
+ ],
+ "Judol_Aug": [
+  {
+   "key": "dmg",
+   "augment_id": 81101,
+   "tier": 1,
+   "v1": 1.0,
+   "cap": 0.0,
+   "v2": 0.0,
+   "v3": 0.0
+  },
+  {
+   "key": "crit",
+   "augment_id": 81106,
+   "tier": 1,
+   "v1": 10.0,
+   "cap": 50.0,
+   "v2": 2.0,
+   "v3": 0.0
+  },
+  {
+   "key": "gold",
+   "augment_id": 81206,
+   "tier": 1,
+   "v1": 30.0,
+   "cap": 0.0,
+   "v2": 0.0,
+   "v3": 0.0
+  },
+  {
+   "key": "jackpot",
+   "augment_id": 81213,
+   "tier": 2,
+   "v1": 5.0,
+   "cap": 0.0,
+   "v2": 5.0,
+   "v3": 0.0
+  },
+  {
+   "key": "multi",
+   "augment_id": 81307,
+   "tier": 2,
+   "v1": 15.0,
+   "cap": 60.0,
+   "v2": 0.0,
+   "v3": 0.0
+  },
+  {
+   "key": "zap",
+   "augment_id": 81202,
+   "tier": 2,
+   "v1": 10.0,
+   "cap": 50.0,
+   "v2": 1.0,
+   "v3": 0.0
+  },
+  {
+   "key": "rain",
+   "augment_id": 81317,
+   "tier": 2,
+   "v1": 1.0,
+   "cap": 0.0,
+   "v2": 0.0,
+   "v3": 0.0
+  },
+  {
+   "key": "birth",
+   "augment_id": 81303,
+   "tier": 2,
+   "v1": 20.0,
+   "cap": 80.0,
+   "v2": 0.0,
+   "v3": 0.0
+  },
+  {
+   "key": "domino",
+   "augment_id": 81313,
+   "tier": 3,
+   "v1": 1.0,
+   "cap": 0.0,
+   "v2": 0.0,
+   "v3": 0.0
+  },
+  {
+   "key": "storm",
+   "augment_id": 81311,
+   "tier": 3,
+   "v1": 3.0,
+   "cap": 0.0,
+   "v2": 0.0,
+   "v3": 0.0
+  },
+  {
+   "key": "giant",
+   "augment_id": 81408,
+   "tier": 3,
+   "v1": 2.0,
+   "cap": 0.0,
+   "v2": 2.0,
+   "v3": 0.0
+  },
+  {
+   "key": "train",
+   "augment_id": 81415,
+   "tier": 3,
+   "v1": 3.0,
+   "cap": 0.0,
+   "v2": 0.0,
+   "v3": 0.0
+  },
+  {
+   "key": "clone",
+   "augment_id": 81413,
+   "tier": 4,
+   "v1": 1.0,
+   "cap": 0.0,
+   "v2": 0.0,
+   "v3": 0.0
+  },
+  {
+   "key": "meteor",
+   "augment_id": 81414,
+   "tier": 4,
+   "v1": 1.0,
+   "cap": 0.0,
+   "v2": 3.0,
+   "v3": 50.0
+  },
+  {
+   "key": "blades",
+   "augment_id": 81409,
+   "tier": 4,
+   "v1": 2.0,
+   "cap": 0.0,
+   "v2": 1.0,
+   "v3": 0.0
+  },
+  {
+   "key": "legend",
+   "augment_id": 81403,
+   "tier": 4,
+   "v1": 50.0,
+   "cap": 0.0,
+   "v2": 0.0,
+   "v3": 0.0
+  }
+ ],
+ "Judol_Tier": [
+  {
+   "tier": 1,
+   "weight": 55.0
+  },
+  {
+   "tier": 2,
+   "weight": 30.0
+  },
+  {
+   "tier": 3,
+   "weight": 12.0
+  },
+  {
+   "tier": 4,
+   "weight": 3.0
+  }
+ ],
+ "Judol_Band": [
+  {
+   "hp_below": 10.0,
+   "color": "#fff6d888"
+  },
+  {
+   "hp_below": 25.0,
+   "color": "#ffd08988"
+  },
+  {
+   "hp_below": 50.0,
+   "color": "#ff9f5a88"
+  },
+  {
+   "hp_below": 100.0,
+   "color": "#ff6b4a88"
+  },
+  {
+   "hp_below": 200.0,
+   "color": "#e8436a88"
+  },
+  {
+   "hp_below": 400.0,
+   "color": "#b73fd088"
+  },
+  {
+   "hp_below": 800.0,
+   "color": "#5f4ae088"
+  },
+  {
+   "hp_below": 0.0,
+   "color": "#2f7de088"
+  }
+ ],
+ "Judol_Shape": [
+  {
+   "effect_type": "Jump_Slam",
+   "shape": "sq"
+  },
+  {
+   "effect_type": "Patty_Slam",
+   "shape": "sq"
+  },
+  {
+   "effect_type": "Sonic_Wave",
+   "shape": "sq"
+  },
+  {
+   "effect_type": "Self_Destruct",
+   "shape": "sq"
+  },
+  {
+   "effect_type": "Cheese_Fountain",
+   "shape": "sq"
+  },
+  {
+   "effect_type": "Dash_Slash",
+   "shape": "row"
+  },
+  {
+   "effect_type": "Gun_Kata",
+   "shape": "row"
+  },
+  {
+   "effect_type": "Blaster_Shot",
+   "shape": "row"
+  },
+  {
+   "effect_type": "Breath",
+   "shape": "row"
+  },
+  {
+   "effect_type": "Meteor",
+   "shape": "col"
+  },
+  {
+   "effect_type": "Thunder",
+   "shape": "col"
+  },
+  {
+   "effect_type": "Ice_Missile",
+   "shape": "col"
+  },
+  {
+   "effect_type": "Truth_Point",
+   "shape": "col"
+  },
+  {
+   "effect_type": "Vortex",
+   "shape": "x"
+  },
+  {
+   "effect_type": "Tornado",
+   "shape": "x"
+  },
+  {
+   "effect_type": "Spin_Beam",
+   "shape": "x"
+  }
+ ]
+}

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace NKK.Lobby
 {
     // 뒷골목 미니 게임기 (2026-10-30): 10훈장 승급 뒤 튜토리얼 l_arcade 가 'arcade' 를 해금하면 암시장 왼쪽에 나타남 (FeatureGate).
-    // 누르면 (물건 버튼 Hot_arcade → LobbyManager.OnHot) 통 튀고 말풍선. 미니게임 화면이 생기면 Play 에서 열면 됨.
+    // 누르면 (물건 버튼 Hot_arcade → LobbyManager.OnHot) 통 튀고 미니게임 쥐돌깨기 창(JudolGame)을 엶. 창이 없으면 말풍선만.
     // 말풍선 대사 = 인스펙터 (씬에서 고침)
     public class ArcadeMachine : MonoBehaviour
     {
@@ -19,6 +19,7 @@ namespace NKK.Lobby
         [Tooltip("말풍선 높이: 게임기 꼭대기에서 말풍선 아래 끝까지 (월드 유닛, 음수 = 게임기에 겹침 — 위 팻말을 피함)")] public float bubbleLift = -0.35f;
         [Tooltip("눌렀을 때 통 튀기: 시간 (초) · 세기")] public float pokeTime = 0.35f, pokeSquash = 0.12f;
         [Tooltip("눌렀을 때 효과음")] public string pokeSfx = "ui_open";
+        [Tooltip("미니게임 창 (쥐돌깨기)")] public JudolGame game;
 
         Vector3 baseScale;
         float bubbleT, pokeT = -1;
@@ -39,6 +40,7 @@ namespace NKK.Lobby
         {
             if (!string.IsNullOrEmpty(pokeSfx)) SfxManager.Play(pokeSfx);
             pokeT = 0;
+            if (game) { game.Open(); return; }
             if (pokeLines != null && pokeLines.Length > 0) Say(pokeLines[Random.Range(0, pokeLines.Length)]);
         }
 

@@ -15381,6 +15381,256 @@
    "en": "Mini Arcade"
   },
   {
+   "string_key": 8000554,
+   "ko": "유니크 이상 스킬: 발사마다 첫 타격 + 이후 {rates}",
+   "en": "Unique+ skill: first hit each launch + then {rates}"
+  },
+  {
+   "string_key": 8000555,
+   "ko": "쥐를 새총처럼 끌었다 놓으면 가진 쥐가 <b>전부 줄지어</b> 날아가 연구소 벽돌을 튕기며 깎습니다. 벽돌 숫자 = 남은 체력.\n처음 바닥에 닿은 쥐 자리에서 다음 발사. 한 턴이 끝나면 벽돌이 한 줄씩 내려오고, <b>바닥에 닿으면 끝</b>. 받침대는 없어요 — 첫 발사 각도가 전부!\n벽돌을 부수면 치즈 → <b>쥐 뽑기(10 치즈)</b>로 쥐를 늘리고, 쥐를 재료로 <b>증강 뽑기</b>.",
+   "en": "Pull a rat like a slingshot and release — <b>all your rats fly in a line</b>, bouncing off the lab bricks. Brick number = HP left.\nThe next launch starts where the first rat landed. After each turn the bricks drop one row — <b>if they reach the floor, it's over</b>. No paddle — the first angle is everything!\nBreak bricks for cheese → <b>Rat Draw (10 cheese)</b> for more rats, then spend rats on <b>Augment Draw</b>."
+  },
+  {
+   "string_key": 8000556,
+   "ko": "최고 {n}",
+   "en": "Best {n}"
+  },
+  {
+   "string_key": 8000557,
+   "ko": "계속",
+   "en": "Resume"
+  },
+  {
+   "string_key": 8000558,
+   "ko": "증강 {n}개",
+   "en": "Augments {n}"
+  },
+  {
+   "string_key": 8000559,
+   "ko": "벽돌이 바닥에 닿았어요!",
+   "en": "The bricks hit the floor!"
+  },
+  {
+   "string_key": 8000560,
+   "ko": "경기장 아무 곳이나 끌었다 놓아 발사",
+   "en": "Drag anywhere on the field and release to launch"
+  },
+  {
+   "string_key": 8000561,
+   "ko": "· 스킬",
+   "en": "· Skill"
+  },
+  {
+   "string_key": 8000562,
+   "ko": "일시정지",
+   "en": "Paused"
+  },
+  {
+   "string_key": 8000563,
+   "ko": "도달한 턴 <b>{turn}</b> (최고 {best})\n부순 벽돌 {broken} · 모은 치즈 {cheese} · 쥐 {rats}마리 · 가장 높은 등급 {grade} · 증강 {augs}개",
+   "en": "Reached turn <b>{turn}</b> (Best {best})\nBricks broken {broken} · Cheese earned {cheese} · Rats {rats} · Top grade {grade} · Augments {augs}"
+  },
+  {
+   "string_key": 8000564,
+   "ko": "쥐가 {n}마리 이상 필요",
+   "en": "Need {n}+ rats"
+  },
+  {
+   "string_key": 8000565,
+   "ko": "보유 쥐 {n}마리",
+   "en": "Rats {n}"
+  },
+  {
+   "string_key": 8000566,
+   "ko": "{list} 사용",
+   "en": "Uses {list}"
+  },
+  {
+   "string_key": 8000567,
+   "ko": "쥐돌깨기",
+   "en": "Rat Breaker"
+  },
+  {
+   "string_key": 8000568,
+   "ko": "최근 뽑은 쥐",
+   "en": "Recent draws"
+  },
+  {
+   "string_key": 8000569,
+   "ko": "재료로 쓴 쥐: {list}",
+   "en": "Rats used: {list}"
+  },
+  {
+   "string_key": 8000570,
+   "ko": "빠르게 ×{n}",
+   "en": "Fast ×{n}"
+  },
+  {
+   "string_key": 8000571,
+   "ko": "시작",
+   "en": "Start"
+  },
+  {
+   "string_key": 8000572,
+   "ko": "턴 {n}",
+   "en": "Turn {n}"
+  },
+  {
+   "string_key": 8000573,
+   "ko": "피해  일반 1 · 희귀 2 · 에픽 3 · 유니크 4 · 전설 5 · 신화 6\n고유 스킬 유니크 이상: 발사마다 첫 타격 + 이후 확률로 범위 피해 (3×3 · 가로줄 · 세로줄 · 대각선 · 십자)\n증강 쥐 10마리부터 1.5배씩 · 낮은 등급·오래된 쥐부터 재료로 씀 · 3개 중 1개",
+   "en": "Damage  Common 1 · Rare 2 · Epic 3 · Unique 4 · Legendary 5 · Mythic 6\nUnique skill  Unique+: first hit each launch + chance of area damage after (3×3 · row · column · diagonal · cross)\nAugment  from 10 rats, ×1.5 each · uses lowest-grade, oldest rats first · pick 1 of 3"
+  },
+  {
+   "string_key": 8000574,
+   "ko": "쥐 뽑기",
+   "en": "Rat Draw"
+  },
+  {
+   "string_key": 8000575,
+   "ko": "다시 하기",
+   "en": "Play Again"
+  },
+  {
+   "string_key": 8000576,
+   "ko": "회수",
+   "en": "Recall"
+  },
+  {
+   "string_key": 8000577,
+   "ko": "{price} 치즈 · Shift = 10마리 · 꾹 = 연속 · 천장 {pity}",
+   "en": "{price} cheese · Shift = 10 · Hold = repeat · Pity {pity}"
+  },
+  {
+   "string_key": 8000578,
+   "ko": "증강 뽑기 · 쥐 {n}마리",
+   "en": "Augment Draw · {n} rats"
+  },
+  {
+   "string_key": 8000579,
+   "ko": "뽑기 확률(%) {rates} (일반→신화)",
+   "en": "Draw rates (%) {rates} (Common→Mythic)"
+  },
+  {
+   "string_key": 8000580,
+   "ko": "끌었다 놓기 = 발사 · Q 쥐 뽑기 (Shift = 10마리, 꾹 = 연속) · E 증강 뽑기 · F 빠르게 · Space 회수 · R 다시 · Esc 일시정지 · M 음악",
+   "en": "Drag & release = launch · Q rat draw (Shift = 10, hold = repeat) · E augment draw · F fast · Space recall · R restart · Esc pause · M music"
+  },
+  {
+   "string_key": 8000581,
+   "ko": "모든 쥐 피해 +{v}",
+   "en": "All rats damage +{v}"
+  },
+  {
+   "string_key": 8000582,
+   "ko": "부딪힐 때 {v}% 확률 피해 ×{v2}",
+   "en": "{v}% chance on hit: damage ×{v2}"
+  },
+  {
+   "string_key": 8000583,
+   "ko": "벽돌 치즈 +{v}%",
+   "en": "Brick cheese +{v}%"
+  },
+  {
+   "string_key": 8000584,
+   "ko": "벽돌을 부수면 {v}% 확률 치즈 ×{v2}",
+   "en": "{v}% chance on break: cheese ×{v2}"
+  },
+  {
+   "string_key": 8000585,
+   "ko": "부딪힐 때 {v}% 확률 한 번 더 타격",
+   "en": "{v}% chance on hit: strike again"
+  },
+  {
+   "string_key": 8000586,
+   "ko": "부딪힐 때 {v}% 확률 옆 벽돌 감전 (피해 {v2})",
+   "en": "{v}% chance on hit: shock a neighbor brick ({v2} dmg)"
+  },
+  {
+   "string_key": 8000587,
+   "ko": "턴마다 치즈 + 턴 수 × {v}",
+   "en": "Each turn: cheese + turn × {v}"
+  },
+  {
+   "string_key": 8000588,
+   "ko": "쥐를 뽑을 때 {v}% 확률 1마리 더",
+   "en": "{v}% chance for 1 extra rat per draw"
+  },
+  {
+   "string_key": 8000589,
+   "ko": "벽돌이 부서지면 상하좌우 벽돌 피해 {v}",
+   "en": "Broken bricks deal {v} damage to adjacent bricks"
+  },
+  {
+   "string_key": 8000590,
+   "ko": "턴 시작마다 무작위 벽돌 {v}개에 번개 (최고 등급 쥐 피해)",
+   "en": "Each turn: lightning on {v} random bricks (top-grade rat damage)"
+  },
+  {
+   "string_key": 8000591,
+   "ko": "발사마다 첫 쥐 거대화 (크기 ×{v2}, 피해 +{v})",
+   "en": "First rat each launch grows (size ×{v2}, damage +{v})"
+  },
+  {
+   "string_key": 8000592,
+   "ko": "턴마다 가장 아래 벽돌 줄에 기차 (피해 {v})",
+   "en": "Each turn: a train hits the lowest brick row ({v} dmg)"
+  },
+  {
+   "string_key": 8000593,
+   "ko": "발사마다 가장 강한 쥐 분신 {v}마리가 같이 날아감",
+   "en": "{v} clones of your strongest rat join each launch"
+  },
+  {
+   "string_key": 8000594,
+   "ko": "{v2}턴마다 체력이 많은 벽돌 {v}개에 운석 (체력 {v3}%)",
+   "en": "Every {v2} turns: meteors on the {v} toughest bricks ({v3}% HP)"
+  },
+  {
+   "string_key": 8000595,
+   "ko": "첫 쥐 둘레에 치즈 칼날 {v}개 (스치면 피해 {v2})",
+   "en": "{v} cheese blades circle the first rat ({v2} dmg on touch)"
+  },
+  {
+   "string_key": 8000596,
+   "ko": "모든 피해 +{v}%",
+   "en": "All damage +{v}%"
+  },
+  {
+   "string_key": 8000597,
+   "ko": "치명!",
+   "en": "Crit!"
+  },
+  {
+   "string_key": 8000598,
+   "ko": "잭팟!",
+   "en": "Jackpot!"
+  },
+  {
+   "string_key": 8000599,
+   "ko": "치즈 비 +{n}",
+   "en": "Cheese rain +{n}"
+  },
+  {
+   "string_key": 8000600,
+   "ko": "장난감 기차!",
+   "en": "Toy train!"
+  },
+  {
+   "string_key": 8000601,
+   "ko": "필살!",
+   "en": "Special!"
+  },
+  {
+   "string_key": 8000602,
+   "ko": " · {n}단계",
+   "en": " · Lv {n}"
+  },
+  {
+   "string_key": 8000603,
+   "ko": "증강 고르기",
+   "en": "Choose an Augment"
+  },
+  {
    "string_key": 9000001,
    "ko": "찍찍!! {power}",
    "en": "SQUEAK!! {power}"

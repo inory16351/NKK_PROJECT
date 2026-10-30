@@ -38,6 +38,7 @@ namespace NKK
             public ShopSave shop; public GachaSave gacha;       // 쥐구멍 암시장 · 유전자 뽑기 (2026-10-12)
             public AugSave aug;                  // 증강 보관함 (2026-10-19)
             public bool infinite;                // 테스트: 치즈·연구자료 무제한 (테스트 패널 "전부 해제")
+            public int judolBest;                // 미니 게임기 쥐돌깨기 최고 턴 (2026-10-30)
         }
         // ── 쥐구멍 암시장 (상점 기획서 Shop_Save) · 유전자 뽑기 (뽑기 기획서 Gacha_Save) ──
         [Serializable] public class ShopItem { public int slot, goods; public string code; public bool sold; }
@@ -87,6 +88,8 @@ namespace NKK
         [Tooltip("티어 (훈장)")] public int tier = 1;
         [Tooltip("최고 층 기록")] public int maxFloor = 1;
         [Tooltip("탈출 시도 횟수")] public int runs;
+        [Tooltip("미니 게임기 쥐돌깨기 최고 턴")] public int judolBest;
+        public void SetJudolBest(int t) { if (t > judolBest) { judolBest = t; Save(); } }
 
         // 로비 → 게임 씬으로 넘기는 시작 층 (0 = 게임 씬을 바로 켬 → GameManager 인스펙터 값)
         public static int PendingStartFloor;
@@ -390,7 +393,7 @@ namespace NKK
 
         public void Save()
         {
-            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, tutoQuiet = tutoQuiet, endingSeen = endingSeen, infinite = Infinite, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
+            var d = new SaveData { cheese = cheese, research = research, tier = tier, maxFloor = maxFloor, runs = runs, ver = SaveVer, tutoSkip = tutoSkip, tutoQuiet = tutoQuiet, endingSeen = endingSeen, infinite = Infinite, judolBest = judolBest, savedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm") }; d.rats.AddRange(rats.Values);
             d.tuto.AddRange(tuto); d.unlocks.AddRange(unlocks);
             d.nodes.AddRange(skills);
             d.achvOn.AddRange(achvOn);
@@ -401,12 +404,12 @@ namespace NKK
 
         void Load()
         {
-            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0;
+            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0; judolBest = 0;
             tuto.Clear(); unlocks.Clear(); tutoSkip = tutoQuiet = endingSeen = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new(); aug = new();
             var s = PlayerPrefs.GetString(KeyOf(Slot), "");
             if (string.IsNullOrEmpty(s)) return;
             var d = JsonUtility.FromJson<SaveData>(s);
-            cheese = d.cheese; research = d.research; tier = Mathf.Max(1, d.tier); maxFloor = Mathf.Max(1, d.maxFloor); runs = d.runs;
+            cheese = d.cheese; research = d.research; tier = Mathf.Max(1, d.tier); maxFloor = Mathf.Max(1, d.maxFloor); runs = d.runs; judolBest = d.judolBest;
             var db = GameDatabase.Instance;
             foreach (var e in d.rats) if (!db || db.RatsByCode.Count == 0 || db.RatsByCode.ContainsKey(e.code)) rats[e.code] = e;      // 표에서 지운 쥐 (메이드 쥐 2026-10-23) 기록은 버림
             if (d.nodes != null) foreach (var id in d.nodes) skills.Add(id);
