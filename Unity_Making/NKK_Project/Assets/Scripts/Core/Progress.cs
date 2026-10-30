@@ -100,12 +100,12 @@ namespace NKK
         public static int Slot { get; private set; } = 1;
         string KeyOf(int slot) => slot <= 1 ? saveKey : saveKey + "_s" + slot;
         public bool SlotExists(int slot) => PlayerPrefs.HasKey(KeyOf(slot));
-        // 슬롯 요약 (타이틀 화면): 없으면 false
+        // 슬롯 요약 (타이틀 화면): 없거나 깨졌으면 false (깨진 슬롯 하나 때문에 타이틀 전체가 멈추지 않게, 2026-10-30)
         public bool SlotSummary(int slot, out int sTier, out int sMaxFloor, out int sRuns, out string sSavedAt)
         {
             sTier = sMaxFloor = 1; sRuns = 0; sSavedAt = "";
             var s = PlayerPrefs.GetString(KeyOf(slot), ""); if (string.IsNullOrEmpty(s)) return false;
-            var d = JsonUtility.FromJson<SaveData>(s);
+            var d = Parse(s); if (d == null) return false;
             sTier = Mathf.Max(1, d.tier); sMaxFloor = Mathf.Max(1, d.maxFloor); sRuns = d.runs; sSavedAt = d.savedAt ?? "";
             return true;
         }
@@ -402,13 +402,27 @@ namespace NKK
             PlayerPrefs.SetString(KeyOf(Slot), JsonUtility.ToJson(d)); PlayerPrefs.Save();
         }
 
+        // 저장 글 → SaveData (JSON 이 깨졌으면 null)
+        static SaveData Parse(string s)
+        {
+            try { return JsonUtility.FromJson<SaveData>(s); }
+            catch (ArgumentException) { return null; }
+        }
+
         void Load()
         {
             rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0; judolBest = 0;
             tuto.Clear(); unlocks.Clear(); tutoSkip = tutoQuiet = endingSeen = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new(); aug = new();
             var s = PlayerPrefs.GetString(KeyOf(Slot), "");
             if (string.IsNullOrEmpty(s)) return;
-            var d = JsonUtility.FromJson<SaveData>(s);
+            var d = Parse(s);
+            if (d == null)
+            {
+                // 깨진 저장 = 처음 상태로 시작, 원본은 지우지 않고 키_broken 에 보관 (다음 Save 가 덮어써도 살릴 수 있게)
+                Debug.LogWarning($"[Progress] 슬롯 {Slot} 저장을 읽지 못함 → 처음 상태로 시작, 원본은 {KeyOf(Slot)}_broken 에 보관");
+                PlayerPrefs.SetString(KeyOf(Slot) + "_broken", s); PlayerPrefs.Save();
+                return;
+            }
             cheese = d.cheese; research = d.research; tier = Mathf.Max(1, d.tier); maxFloor = Mathf.Max(1, d.maxFloor); runs = d.runs; judolBest = d.judolBest;
             var db = GameDatabase.Instance;
             foreach (var e in d.rats) if (!db || db.RatsByCode.Count == 0 || db.RatsByCode.ContainsKey(e.code)) rats[e.code] = e;      // 표에서 지운 쥐 (메이드 쥐 2026-10-23) 기록은 버림

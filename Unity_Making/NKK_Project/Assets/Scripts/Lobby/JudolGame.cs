@@ -579,7 +579,12 @@ namespace NKK.Lobby
         // 한 마리 뽑고 꾹 누르면 연속 (뽑기 버튼 · 왼쪽 Shift)
         void PullHold() { if (!PullRat()) Sfx(sfxDeny); holdBuy = Cf("hold_delay", 0.35f); }
 
-        int AugCost() => Mathf.RoundToInt(Cf("aug_base", 10) * Mathf.Pow(Cf("aug_mul", 1.5f), augCount));
+        // 비용 = aug_base × aug_mul^n, aug_late_from 번째 증강부터는 aug_mul_late 로 늘어남 (후반 비용이 확 뛰지 않게)
+        int AugCost()
+        {
+            int early = Mathf.Max(0, (int)Cf("aug_late_from", 9) - 2), n1 = Mathf.Min(augCount, early), n2 = augCount - n1;
+            return Mathf.RoundToInt(Cf("aug_base", 10) * Mathf.Pow(Cf("aug_mul", 1.5f), n1) * Mathf.Pow(Cf("aug_mul_late", 1.3f), n2));
+        }
         // 재료 = 낮은 등급 먼저, 같은 등급이면 오래된(먼저 얻은) 쥐 먼저
         List<Rat> AugMaterials()
         {

@@ -106,7 +106,7 @@ namespace NKK.Title
             }
             var p = Progress.I;
             bool any = false;
-            if (p) for (int s = 1; s <= Progress.SlotCount; s++) if (p.SlotExists(s)) any = true;
+            if (p) for (int s = 1; s <= Progress.SlotCount; s++) if (p.SlotSummary(s, out _, out _, out _, out _)) any = true;      // 읽히는 슬롯이 있어야 이어 하기 (깨진 슬롯만 있으면 끔)
             if (continueButton) continueButton.interactable = any;
         }
 
