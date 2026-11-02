@@ -20,7 +20,7 @@ namespace NKK.Rats
         [Tooltip("등급 줄 (일반 → 레어 … 전설 → 신화 순서)")] public Row[] rows = new Row[5];
         [Tooltip("일괄 승급 결과 배너 ({n} 횟수) · 못 할 때 배너 ({keep} 남길 마리 수)")] public string allDone, allFail;
         public Color okColor = new(0.29f, 0.22f, 0.17f), dimColor = new(0.62f, 0.5f, 0.42f);
-        [Tooltip("패널이 열려 있는 동안 이것들보다 위에 그림 (같은 부모 안 형제, 예: 테스트 패널). 닫으면 원래 순서로")] public Transform[] drawAbove;
+        [Tooltip("패널이 열려 있는 동안 이것들보다 위에 그림 (같은 부모 안 형제). 닫으면 원래 순서로")] public Transform[] drawAbove;
         int homeIndex = -1;
 
         string[] fmt;
