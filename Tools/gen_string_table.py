@@ -1,6 +1,8 @@
 """스트링 테이블 생성기 → Data_Table/스트링 테이블.xlsx (그다음 Tools/xlsx2json.py)
 
-다른 테이블의 화면에 나오는 글 칸(아래 COLS) 옆에 `<칸>_sk` 키 칸(int)을 두고, 그 키로 스트링 테이블(String 시트)의 ko·en 을 찾음.
+다른 테이블의 화면에 나오는 글 칸(아래 COLS) 옆에 `<칸>_sk` 키 칸(int)을 두고, 그 키로 스트링 테이블(String 시트)의 언어 칸(LANGS)을 찾음.
+- 언어: ko 한국어 · en 영어 · ja 일본어 · zh 중국어(간체) · pt 포르투갈어(브라질 기준, 포르투갈도 읽음) · es 스페인어(중남미 공통, 스페인도 읽음) · ru 러시아어.
+- 번역 칸이 하나라도 비면 상태 '번역 필요' (게임은 빈 칸을 영어 → 한글 순으로 대신 씀).
 - 다른 테이블의 한글은 그대로 둠 (사람이 읽는 용). 키는 관리·코드용.
 - 같은 칸에서 같은 한글이면 같은 키 (공용 스킬처럼 이름이 반복되는 칸).
 - 키 = 칸 번호(prefix) × 100000 + 행 id (id 가 int 이고 비어 있으면), 아니면 그 칸 범위에서 빈 번호.
@@ -60,10 +62,18 @@ COLS = [
     ('증강 테이블', 'Grade', None, 'grade_name', 48),
 ]
 
-HEAD = (['스트링 키', '한국어', '영어', '출처', '상태', '번역 메모'],
-        ['string_key', 'ko', 'en', 'source', 'status', 'note'],
-        ['int', 'string', 'string', '-', '-', '-'])
-GLOSSARY_HEAD = (['한국어', '영어', '메모'], ['ko', 'en', 'note'], ['-', '-', '-'])
+# 번역 언어 (ko 다음 칸들, Loc.cs Row 와 같은 이름)
+LANGS = ['en', 'ja', 'zh', 'pt', 'es', 'ru']
+LANG_NAMES = ['영어', '일본어', '중국어(간체)', '포르투갈어(브라질)', '스페인어(중남미 공통)', '러시아어']
+HEAD = (['스트링 키', '한국어', *LANG_NAMES, '출처', '상태', '번역 메모'],
+        ['string_key', 'ko', *LANGS, 'source', 'status', 'note'],
+        ['int', 'string', *['string'] * len(LANGS), '-', '-', '-'])
+GLOSSARY_HEAD = (['한국어', *LANG_NAMES, '메모'], ['ko', *LANGS, 'note'], ['-'] * (len(LANGS) + 2))
+
+
+def untranslated(s):
+    """빈 번역 칸 (언어 코드 목록)"""
+    return [l for l in LANGS if not s.get(l)]
 
 
 def load_strings():
@@ -155,7 +165,7 @@ def main():
             c['key'] = by_src_ko[(c['pre'], c['ko'])]
         else:
             k = free(c['pre'], c['pre'] * STEP + c['id'] % STEP if c['id'] is not None else None)
-            strings[k] = dict(string_key=k, ko=c['ko'], en='', source='', status='', note='')
+            strings[k] = dict(string_key=k, ko=c['ko'], **{l: '' for l in LANGS}, source='', status='', note='')
             c['key'] = k; by_src_ko[(c['pre'], c['ko'])] = k
         used.setdefault(c['key'], []).append(c)
 
@@ -165,7 +175,7 @@ def main():
     table_pres = {p for *_, p in COLS}
     for k, s in strings.items():
         if k // STEP not in table_pres:
-            if not s['en']: s['status'] = '번역 필요'
+            if untranslated(s): s['status'] = '번역 필요'
             elif s['status'] == '번역 필요': s['status'] = ''
             continue
         cs = used.get(k)
@@ -174,7 +184,7 @@ def main():
         ids = [c['label'] for c in cs]
         s['source'] = f"{cs[0]['src']} · {', '.join(ids[:6])}{' 외 %d' % (len(ids) - 6) if len(ids) > 6 else ''}"
         if k in changed and s['en']: s['status'] = '한글 바뀜'
-        elif not s['en']: s['status'] = '번역 필요'
+        elif untranslated(s): s['status'] = '번역 필요'
         elif s['status'] in ('번역 필요', '안 쓰임'): s['status'] = ''
 
     for f, wb in books.items(): wb.save(os.path.join(SRC, f + '.xlsx'))
@@ -194,8 +204,9 @@ def write(strings):
         s = strings[k]
         for c, key in enumerate(HEAD[1], 1):
             cell = ws.cell(i, c, s.get(key) or None); cell._style = copy.copy(st[3])
-            cell.alignment = openpyxl.styles.Alignment(wrap_text=key in ('ko', 'en'), vertical='top')
-    for c, w in zip('ABCDEF', (11, 50, 50, 44, 11, 30)): ws.column_dimensions[c].width = w
+            cell.alignment = openpyxl.styles.Alignment(wrap_text=key == 'ko' or key in LANGS, vertical='top')
+    widths = (11, 40, *[40] * len(LANGS), 44, 11, 30)
+    for c, w in enumerate(widths, 1): ws.column_dimensions[openpyxl.utils.get_column_letter(c)].width = w
     ws.freeze_panes = 'B4'
     # 용어집 (번역 기준 · 사람이 보는 용)
     g = wb.create_sheet('Glossary')
@@ -204,8 +215,9 @@ def write(strings):
     else:
         for r in range(3): g.append(list(GLOSSARY_HEAD[r]))
     for r in range(1, 4):
-        for c in range(1, 4): g.cell(r, c)._style = copy.copy(st[r - 1])
-    for c, w in zip('ABC', (24, 30, 60)): g.column_dimensions[c].width = w
+        for c in range(1, g.max_column + 1): g.cell(r, c)._style = copy.copy(st[r - 1])
+    for c in range(1, g.max_column + 1):
+        g.column_dimensions[openpyxl.utils.get_column_letter(c)].width = 60 if c == g.max_column else 24
     wb.save(OUT)
 
 

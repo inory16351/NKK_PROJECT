@@ -8,12 +8,28 @@ namespace NKK
     // 언어 (스트링 테이블 Data_Table/스트링 테이블.xlsx → StringTable.json).
     // 키 = 다른 테이블의 <칸>_sk · 씬 글 80xxxxx · 코드 글 90xxxxx. 한국어는 원래 글(씬·테이블)을 그대로 쓰고, 다른 언어만 테이블에서 찾음.
     // 고른 언어는 PlayerPrefs (저장 슬롯과 상관없이 이 PC 에 하나).
+    // 언어: 한국어 · 영어 · 일본어 · 중국어(간체) · 포르투갈어(브라질, 포르투갈도 읽음) · 스페인어(중남미 공통, 스페인도 읽음) · 러시아어.
+    // 번역이 빈 칸이면 영어 → 원래 글 순서로 대신 씀. 한·영이 아닌 언어는 글꼴도 바뀜 (LocFont).
     public static class Loc
     {
         public const string Pref = "nkk_lang";
-        public const string Korean = "ko", English = "en";
+        public const string Korean = "ko", English = "en", Japanese = "ja", Chinese = "zh", Portuguese = "pt", Spanish = "es", Russian = "ru";
+        // 설정 창에 나오는 순서
+        public static readonly string[] All = { Korean, English, Japanese, Chinese, Portuguese, Spanish, Russian };
 
-        [Serializable] class Row { public int string_key; public string ko, en; }
+        [Serializable] class Row { public int string_key; public string ko, en, ja, zh, pt, es, ru; }
+
+        static string Text(Row r, string l) => l switch
+        {
+            Korean => r.ko, English => r.en, Japanese => r.ja, Chinese => r.zh,
+            Portuguese => r.pt, Spanish => r.es, Russian => r.ru, _ => null,
+        };
+        // 지금 언어 글, 비었으면 영어 (번역이 덜 된 언어도 한국어보다 읽기 쉬움)
+        static string Best(Row r)
+        {
+            var s = Text(r, Lang);
+            return string.IsNullOrEmpty(s) && !IsKorean ? r.en : s;
+        }
         [Serializable] class File { public List<Row> String; }
 
         static readonly Dictionary<int, Row> map = new();
@@ -24,9 +40,15 @@ namespace NKK
 
         public static string Lang
         {
-            get { if (lang == null) lang = PlayerPrefs.GetString(Pref, Korean); return lang; }
+            get
+            {
+                if (lang == null) { lang = PlayerPrefs.GetString(Pref, Korean); if (Array.IndexOf(All, lang) < 0) lang = Korean; }
+                return lang;
+            }
         }
         public static bool IsKorean => Lang == Korean;
+        // 한국어·영어는 씬에 정한 글꼴 그대로, 나머지는 LocFont 가 그 언어 글꼴로 바꿈
+        public static bool OwnFont => Lang != Korean && Lang != English;
         public static bool Loaded => map.Count > 0;
 
         public static void Load(TextAsset t)
@@ -39,7 +61,7 @@ namespace NKK
 
         public static void SetLang(string l)
         {
-            if (string.IsNullOrEmpty(l) || l == Lang) return;
+            if (string.IsNullOrEmpty(l) || l == Lang || Array.IndexOf(All, l) < 0) return;
             lang = l; PlayerPrefs.SetString(Pref, l); PlayerPrefs.Save();
             Changed?.Invoke();
         }
@@ -75,10 +97,11 @@ namespace NKK
             if (IsKorean || key <= 0) return fallback;
             if (map.TryGetValue(key, out var r))
             {
-                string s = Lang == English ? r.en : null;
+                if (string.IsNullOrEmpty(Text(r, Lang))) Missing(key);
+                string s = Best(r);
                 if (!string.IsNullOrEmpty(s)) return s;
             }
-            Missing(key);
+            else Missing(key);
             return fallback;
         }
 
@@ -87,10 +110,11 @@ namespace NKK
         {
             if (map.TryGetValue(key, out var r))
             {
-                string s = IsKorean ? r.ko : Lang == English ? r.en : null;
+                if (string.IsNullOrEmpty(Text(r, Lang))) Missing(key);
+                string s = Best(r);
                 if (!string.IsNullOrEmpty(s)) return s;
             }
-            Missing(key);
+            else Missing(key);
             return "#" + key;
         }
         // 무작위 하나 (팝업 글 묶음)

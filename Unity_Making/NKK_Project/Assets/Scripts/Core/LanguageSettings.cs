@@ -3,13 +3,13 @@ using UnityEngine.UI;
 
 namespace NKK
 {
-    // 설정 창 언어 고르기 (타이틀 UI/Settings/Card/Language). 버튼마다 언어 코드(ko · en), 고른 버튼은 색으로 표시.
+    // 설정 창 언어 고르기 (타이틀 UI/Settings/Card/Language). 버튼마다 언어 코드(Loc.All: ko · en · ja · zh · pt · es · ru), 고른 버튼은 색으로 표시.
     public class LanguageSettings : MonoBehaviour
     {
         [System.Serializable]
         public class Option
         {
-            [Tooltip("언어 코드: ko · en")] public string lang;
+            [Tooltip("언어 코드: ko · en · ja · zh · pt · es · ru")] public string lang;
             public Button button;
             [Tooltip("고른 언어일 때 색을 바꿀 그림 (비우면 버튼 그림)")] public Graphic mark;
         }

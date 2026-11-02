@@ -30,6 +30,7 @@ namespace NKK
             if (Loc.IsKorean) return;
             foreach (var t in FindObjectsByType<LocText>(FindObjectsInactive.Include, FindObjectsSortMode.None))
                 if (t.gameObject.scene == gameObject.scene) t.ApplyNow();
+            LocFont.ApplyScene(gameObject.scene);
             foreach (var f in fields)
             {
                 if (!f.target || string.IsNullOrEmpty(f.path)) continue;
