@@ -791,6 +791,14 @@
 - **개발자 패널 삭제**: ` 키 `UltTestPanel` 스크립트 + Game 씬 `HUD/TestPanel` 오브젝트 37개 지움 · `PromotePanel.drawAbove` 비움. 패널이 부르던 테스트 함수(`StageManager.TestClear` 등)는 남겨 둠. `Assets/_Recovery/0.unity` 는 빈 스크립트 칸이 됨 (복구용 씬, 빌드 안 들어감).
 - 컴파일 오류 0 · Game 씬 깨진 스크립트 0 · Play: 50층으로 옮겨 보스 처치 처리 후 계단 → Title 씬 엔딩(StoryPlayer) 재생 확인, 콘솔 오류·경고 0. 저장값 Base64 백업으로 되돌림 (슬롯 2). 1층부터 실제로 50층까지 올라가 보지는 않음.
 
+## 5-45. itch.io 웹 버전 = 50층 데모 (2026-11-02, 업로드함 · 50f 브랜치)
+
+- 사용자 지시: 웹 빌드해서 itch 페이지(게임 5148827 = `parksongho/squeak-squeak`)에 새 버전으로, 웹은 처음 실행 때 항상 영어.
+- 로컬 50f 에 없던 원격 §5-34(커밋 6423002b) 웹 빌드 사양을 패치로 옮김 (머지·체리픽 없음): `Assets/WebGLTemplates/Fit` · 플레이어 설정(템플릿 Fit · Gzip + decompression fallback · 1280×720 · WebGL 배칭 끔) · `_WebAtlas` 아틀라스·큰 그림 WebGL Crunch. 로컬에 없는 `Rats_SuperUlt_jwerry` 아틀라스 메타만 뺌. `LocText.Fit` 은 로컬에 이미 같은 수정이 있어 그대로.
+- `Loc.Default`: 웹 빌드 = 영어, 에디터·윈도우 = 한국어. 언어를 이미 고른 사람(`nkk_lang`)은 그대로.
+- **용량**: 첫 빌드 data 206.6MB (200MB 제한 초과) → 그 뒤 들어온 그림에 Crunch 가 빠져 있었음. 같은 기준(웹 빌드 보고서 0.5MB 이상)으로 그림 194장 + 아틀라스 2개(`Rats_Parts_butterfly` · `Rats_Parts_patjwi`) WebGL 덮어쓰기 = Compressed · Crunch 50 → data **157MB** (전체 162MB). 스토리·엔딩 컷 · 뽑기 인트로 · 초필살기 컷 · 아지트 배경이 웹에서만 Crunch (윈도우·에디터 화질 그대로).
+- 빌드 `Unity_Making/NKK_Project/Builds/WebGL_20261102_demo50` → `butler push ... parksongho/squeak-squeak:html5 --userversion demo50-20261102` → 빌드 #2278285. 공개 페이지에서 새 빌드 로딩 → 영어 타이틀·오프닝 자막 확인.
+
 ## 6. 밸런스 측정 (BalanceProbe)
 
 - 목표 (사용자): 전투력 = 적정일 때 일반 층은 제한시간 180초의 **60~90%**(75% 쪽으로), 보스 층은 210초의 **약 90%**(길 117초 + 보스전 72초, 보스전은 Boss `hp_pow_sec` 로 맞춤).
