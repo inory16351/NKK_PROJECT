@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e7417ef0cdc61d342b788adc7a739aa6
+guid: 2985d1665de0e4545a7adabb908cbc9a
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Resource Han Rounded JP
+  - Baloo Bhaijaan 2 NKK
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

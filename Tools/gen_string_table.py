@@ -63,8 +63,8 @@ COLS = [
 ]
 
 # 번역 언어 (ko 다음 칸들, Loc.cs Row 와 같은 이름)
-LANGS = ['en', 'ja', 'zh', 'pt', 'es', 'ru']
-LANG_NAMES = ['영어', '일본어', '중국어(간체)', '포르투갈어(브라질)', '스페인어(중남미 공통)', '러시아어']
+LANGS = ['en', 'ja', 'zh', 'pt', 'es', 'ru', 'fr', 'de', 'ar']
+LANG_NAMES = ['영어', '일본어', '중국어(간체)', '포르투갈어(브라질)', '스페인어(중남미 공통)', '러시아어', '프랑스어', '독일어', '아랍어(표준)']
 HEAD = (['스트링 키', '한국어', *LANG_NAMES, '출처', '상태', '번역 메모'],
         ['string_key', 'ko', *LANGS, 'source', 'status', 'note'],
         ['int', 'string', *['string'] * len(LANGS), '-', '-', '-'])

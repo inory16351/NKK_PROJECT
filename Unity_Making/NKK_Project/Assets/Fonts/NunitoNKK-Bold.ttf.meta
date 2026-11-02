@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 44884b2cc3dda264fa2ddadd1f2847bb
+guid: 7b449bc06615fb74aacc55a104f1a9d9
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Resource Han Rounded CN
+  - Nunito NKK
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

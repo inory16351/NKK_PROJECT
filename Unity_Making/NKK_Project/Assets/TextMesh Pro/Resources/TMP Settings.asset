@@ -37,8 +37,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2ef23b7e860ec1048b840cafdeac2774, type: 2}
   - {fileID: 11400000, guid: c7f31f37130b1e640b8fe486c3bb6953, type: 2}
   - {fileID: 11400000, guid: 968b4ffda8a2dcb4b92015ce2c94e186, type: 2}
-  - {fileID: 11400000, guid: 4595486d885a67a4ab0f7cf4b59e64fa, type: 2}
-  - {fileID: 11400000, guid: e10f8276b62851e4bb07d3522d0465b4, type: 2}
+  - {fileID: 11400000, guid: dccb1244491b25a4a80fc31053e1af34, type: 2}
+  - {fileID: 11400000, guid: b04093a532a1c3f4586626e4a65f71e9, type: 2}
   m_matchMaterialPreset: 1
   m_HideSubTextObjects: 0
   m_defaultSpriteAsset: {fileID: 11400000, guid: c41005c129ba4d66911b75229fd70b45, type: 2}

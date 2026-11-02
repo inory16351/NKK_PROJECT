@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d970c25063c1ffb4d8858cbc8316635d
+guid: bac7217946ac141478b72fc22baf3658
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Resource Han Rounded CN
+  - Mochiy Pop One
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 23018ded6054f934c98391bd113b95aa
+guid: b9821f102eb502647932959436952759
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Resource Han Rounded JP
+  - ZCOOL KuaiLe
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
