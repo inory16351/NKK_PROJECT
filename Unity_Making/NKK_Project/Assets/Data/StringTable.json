@@ -437,10 +437,10 @@
    "zh": "触角突变鼠",
    "pt": "Mutante de Antenas",
    "es": "Mutante con Antenas",
-   "ru": "Мутант с усиками",
+   "ru": "Мутант с антеннами",
    "fr": "Mutant à antennes",
    "de": "Antennen-Mutant",
-   "ar": "متحول بمجسات"
+   "ar": "متحول بقرون استشعار"
   },
   {
    "string_key": 1010035,
@@ -487,8 +487,8 @@
    "en": "Computer Mouse",
    "ja": "パソコンマウスネズミ",
    "zh": "电脑鼠标鼠",
-   "pt": "Mouse de Computador",
-   "es": "Mouse de Computadora",
+   "pt": "Rato de Computador",
+   "es": "Ratón de Computadora",
    "ru": "Компьютерная мышь",
    "fr": "Souris d'ordinateur",
    "de": "Computermaus",
@@ -556,7 +556,7 @@
    "es": "Ratoncita Enfermera",
    "ru": "Мышь-медсестра",
    "fr": "Souris infirmière",
-   "de": "Schwester Maus",
+   "de": "Krankenschwester-Maus",
    "ar": "فأرة ممرضة"
   },
   {
@@ -568,9 +568,9 @@
    "pt": "Gerbil Mineiro",
    "es": "Jerbo Minero",
    "ru": "Песчанка-шахтёр",
-   "fr": "Gerbille mineuse",
+   "fr": "Gerbille mineure",
    "de": "Bergbau-Rennmaus",
-   "ar": "يربوع منقب"
+   "ar": "جربيل منقب"
   },
   {
    "string_key": 1010045,
@@ -882,7 +882,7 @@
    "ru": "Турист Крысоленда",
    "fr": "Touriste de Ratland",
    "de": "Rattenland-Tourist",
-   "ar": "سائح راتلاند"
+   "ar": "سائح فأرلاند"
   },
   {
    "string_key": 1010069,
@@ -921,7 +921,7 @@
    "ru": "Крыса-рыцарь",
    "fr": "Rat chevalier",
    "de": "Ritter-Ratte",
-   "ar": "الفأر الفارس"
+   "ar": "فأر فارس"
   },
   {
    "string_key": 1010072,
@@ -934,7 +934,7 @@
    "ru": "Хомяк-султан",
    "fr": "Hamster sultan",
    "de": "Sultan-Hamster",
-   "ar": "الهامستر السلطان"
+   "ar": "هامستر سلطان"
   },
   {
    "string_key": 1010073,
@@ -1030,15 +1030,15 @@
   {
    "string_key": 1010080,
    "ko": "폭탄마 쥐",
-   "en": "Bomb Mage Rat",
+   "en": "Bomber Rat",
    "ja": "爆弾魔ネズミ",
    "zh": "炸弹狂鼠",
-   "pt": "Rato Mago das Bombas",
-   "es": "Rata Maga Bombera",
+   "pt": "Rato Bombardeiro",
+   "es": "Rata Bombardera",
    "ru": "Крыса-подрывник",
-   "fr": "Rat mage-bombe",
-   "de": "Bombenmagier-Ratte",
-   "ar": "فأر ساحر القنابل"
+   "fr": "Rat bombardier",
+   "de": "Bomber-Ratte",
+   "ar": "فأر مفجّر"
   },
   {
    "string_key": 1010081,
@@ -1641,11 +1641,11 @@
   {
    "string_key": 1110038,
    "ko": "얼굴이 없다. 그냥 진짜 마우스인데 혼자 돌아다닌다. 누르면 딸깍, 꼬리는 USB 케이블.",
-   "en": "Has no face. It's literally a computer mouse wandering around. Click to click. Tail is a USB cable.",
+   "en": "Has no face. It's literally a computer mouse wandering around. Clicks when pressed. Tail is a USB cable.",
    "ja": "顔がない。ただの本物のマウスがひとりで歩きまわっている。押すとカチッ、しっぽはUSBケーブル。",
    "zh": "没有脸。就是一只真鼠标自己在乱跑。按一下咔哒，尾巴是USB线。",
-   "pt": "Não tem rosto. É literalmente um mouse de computador andando por aí. Clique pra clicar. O rabo é um cabo USB.",
-   "es": "No tiene cara. Es literalmente un mouse de computadora paseando. Haz clic para hacer clic. La cola es un cable USB.",
+   "pt": "Não tem rosto. É literalmente um mouse de computador andando por aí. Faz clique ao apertar. O rabo é um cabo USB.",
+   "es": "No tiene cara. Es literalmente un mouse de computadora paseando. Al presionarlo, hace clic. La cola es un cable USB.",
    "ru": "Без лица. Буквально компьютерная мышь, которая бродит сама по себе. Нажми — щёлк. Хвост — USB-кабель.",
    "fr": "Pas de visage. C'est juste une vraie souris d'ordi qui se balade. Elle fait « clic » quand on appuie, et sa queue est un câble USB.",
    "de": "Hat kein Gesicht. Ist einfach eine echte Computermaus auf Wanderschaft. Macht „Klick“ beim Drücken, der Schwanz ist ein USB-Kabel.",
@@ -1685,7 +1685,7 @@
    "zh": "在下水道航行的亡命之徒。宝藏是奶酪。",
    "pt": "Um fora da lei navegando pelo esgoto. O tesouro? Queijo.",
    "es": "Un forajido que navega por la alcantarilla. ¿El tesoro? Queso.",
-   "ru": "Изгой, бороздящий канализацию. Сокровище? Сыр.",
+   "ru": "Разбойник, бороздящий канализацию. Сокровище? Сыр.",
    "fr": "Un hors-la-loi qui écume les égouts. Son trésor ? Le fromage.",
    "de": "Ein Gesetzloser auf Kaperfahrt in der Kanalisation. Der Schatz? Käse.",
    "ar": "خارج عن القانون يبحر في المجاري. والكنز؟ الجبن."
@@ -1773,7 +1773,7 @@
    "ko": "기본이야, 왓슨. 범인은 이 방 안의 물건… 전부다.",
    "en": "Elementary, my dear Watson. The culprit is an object in this room... all of them.",
    "ja": "初歩的なことだよ、ワトソン君。犯人はこの部屋の物…全部だ。",
-   "zh": "这很基本，华生。凶手就是这个房间里的东西……全部都是。",
+   "zh": "这很简单，华生。凶手就是这个房间里的东西……全部都是。",
    "pt": "Elementar, meu caro Watson. O culpado é um objeto desta sala... todos eles.",
    "es": "Elemental, mi querido Watson. El culpable es un objeto de esta sala... todos.",
    "ru": "Элементарно, Ватсон. Виновник — предмет в этой комнате... все они.",
@@ -1903,7 +1903,7 @@
    "ko": "하수구 투어 매진, 관객은 전부 쥐다. 무대 위에선 쥐.D, 무대 밖에선 그냥 시궁쥐.",
    "en": "Sewer tour sold out, every fan a rat. On stage: Rat.D. Off stage: just a sewer rat.",
    "ja": "下水道ツアーは完売、客は全員ネズミ。ステージではネズ.D、ステージを降りればただのドブネズミ。",
-   "zh": "下水道巡演门票售罄，观众全是老鼠。台上是鼠.D，台下只是一只褐家鼠。",
+   "zh": "下水道巡演门票售罄，观众全是老鼠。台上是鼠.D，台下只是一只阴沟老鼠。",
    "pt": "Turnê do esgoto esgotada, todo fã é rato. No palco: Rato.D. Fora dele: só um rato de esgoto.",
    "es": "Gira por la alcantarilla agotada, cada fan es una rata. En el escenario: Rata.D. Fuera: solo una rata de alcantarilla.",
    "ru": "Тур по канализации распродан, все фанаты — крысы. На сцене — Крыс.D. За сценой — просто серая крыса.",
@@ -2005,12 +2005,12 @@
   {
    "string_key": 1110066,
    "ko": "쳇바퀴를 너무 빨리 돌려서 시공간을 넘어버린 친칠라.",
-   "en": "Spun the wheel so fast it broke through space-time.",
+   "en": "A chinchilla that spun the wheel so fast it broke through space-time.",
    "ja": "回し車を速く回しすぎて時空を超えてしまったチンチラ。",
    "zh": "滚轮转得太快，冲破了时空的龙猫。",
-   "pt": "Girou a rodinha tão rápido que atravessou o espaço-tempo.",
-   "es": "Giró la rueda tan rápido que atravesó el espacio-tiempo.",
-   "ru": "Крутила колесо так быстро, что пробила пространство-время.",
+   "pt": "Uma chinchila que girou a rodinha tão rápido que atravessou o espaço-tempo.",
+   "es": "Una chinchilla que giró la rueda tan rápido que atravesó el espacio-tiempo.",
+   "ru": "Шиншилла, которая крутила колесо так быстро, что пробила пространство-время.",
    "fr": "Un chinchilla qui a fait tourner la roue si vite qu'il a traversé l'espace-temps.",
    "de": "Ein Chinchilla, das so schnell im Laufrad lief, dass es Raum und Zeit durchbrochen hat.",
    "ar": "شنشيلة ركضت في العجلة بسرعة فائقة حتى اخترقت الزمكان."
@@ -2200,12 +2200,12 @@
   {
    "string_key": 1110081,
    "ko": "쥐라고 우기는 쥐포. 연탄불에 너무 오래 누워 있었다. 고소한 냄새에 물건들이 정신을 못 차린다. 마요네즈 찍지 마세요.",
-   "en": "A dried snack insisting it's a rat. Lay on the grill way too long. The toasty smell drives objects crazy. Do NOT dip it in mayo.",
-   "ja": "ネズミだと言いはるジャーキー。炭火の上に長く寝すぎた。香ばしいにおいに物たちが正気を失う。マヨネーズにつけないでください。",
-   "zh": "坚称自己是老鼠的肉干。在炭火上躺太久了。香喷喷的味道让东西们神魂颠倒。请勿蘸蛋黄酱。",
-   "pt": "Um petisco seco que jura que é rato. Ficou tempo demais na brasa. O cheirinho tostado deixa os objetos doidos. NÃO molhe na maionese.",
-   "es": "Una botana seca que jura que es rata. Se quedó demasiado tiempo en la parrilla. El olorcito tostado vuelve locos a los objetos. NO la mojes en mayonesa.",
-   "ru": "Сушёная закуска, уверяющая, что она крыса. Слишком долго лежала на углях. Поджаристый запах сводит предметы с ума. НЕ макать в майонез.",
+   "en": "Rat Jerky insisting it's a rat. Lay on the grill way too long. The toasty smell drives objects crazy. Do NOT dip it in mayo.",
+   "ja": "ネズミだと言いはるネズミジャーキー。炭火の上に長く寝すぎた。香ばしいにおいに物たちが正気を失う。マヨネーズにつけないでください。",
+   "zh": "坚称自己是老鼠的鼠肉干。在炭火上躺太久了。香喷喷的味道让东西们神魂颠倒。请勿蘸蛋黄酱。",
+   "pt": "Um Charque de Rato que jura que é rato. Ficou tempo demais na brasa. O cheirinho tostado deixa os objetos doidos. NÃO molhe na maionese.",
+   "es": "Una Cecina de Rata que jura que es rata. Se quedó demasiado tiempo en la parrilla. El olorcito tostado vuelve locos a los objetos. NO la mojes en mayonesa.",
+   "ru": "Крысиная вяленка, уверяющая, что она крыса. Слишком долго лежала на углях. Поджаристый запах сводит предметы с ума. НЕ макать в майонез.",
    "fr": "Une souris séchée qui jure être un vrai rat. Elle a bronzé trop longtemps sur le gril. Sa bonne odeur grillée rend les objets fous. Ne PAS tremper dans la mayo.",
    "de": "Eine Dörr-Ratte, die steif und fest behauptet, eine echte Ratte zu sein. Lag viel zu lange auf dem Grill. Der Röstduft bringt alle Gegenstände um den Verstand. Bitte NICHT in Mayo dippen.",
    "ar": "قديد جرذ يصر على أنه فأر حقيقي. رقد على الجمر طويلاً جداً. رائحته الشهية تفقد الأشياء صوابها. الرجاء عدم تغميسه بالمايونيز."
@@ -2298,7 +2298,7 @@
    "es": "Dos ratoncitos pegados espalda con espalda en hanbok. El de arriba siempre patalea de cabeza y, cuando saltan, dan una voltereta y cambian de lugar.",
    "ru": "Две мышки в ханбоках, сросшиеся спинами. Верхняя вечно барахтается вверх ногами, а в прыжке они делают сальто и меняются местами.",
    "fr": "Des jumeaux en hanbok collés dos à dos. Celui du dessus gigote toujours la tête en bas, et à chaque saut, ils font un salto et échangent leurs places.",
-   "de": "Zwei Rücken an Rücken klebende Zwillinge im Hanbok. Der obere strampelt immer kopfüber, und beim Springen wechseln sie per Salto den Platz.",
+   "de": "Zwei Rücken an Rücken klebende Zwillinge im Hanbok. Der obere strampelt immer kopfüber, und beim Springen wechseln sie per Salto die Plätze.",
    "ar": "توأمان بالهانبوك ملتصقان ظهراً لظهر. العلوي يتخبط دائماً بالمقلوب، وعندما يقفزان يتشقلبان في الهواء ويتبادلان الأماكن."
   },
   {
@@ -2319,7 +2319,7 @@
    "ko": "떼거리 근성",
    "en": "Mob Mentality",
    "ja": "群れ根性",
-   "zh": "群殴本能",
+   "zh": "抱团本能",
    "pt": "Mentalidade de Bando",
    "es": "Mentalidad de Manada",
    "ru": "Стадный инстинкт",
@@ -2348,7 +2348,7 @@
    "zh": "迷宫狂奔",
    "pt": "Corredor do Labirinto",
    "es": "Corredor del Laberinto",
-   "ru": "Бегун лабиринта",
+   "ru": "Бегущий в лабиринте",
    "fr": "Sprint du labyrinthe",
    "de": "Labyrinth-Sprint",
    "ar": "عدو المتاهة"
@@ -2502,7 +2502,7 @@
    "en": "Panda Roll",
    "ja": "パンダごろごろ",
    "zh": "熊猫打滚",
-   "pt": "Rolada de Panda",
+   "pt": "Rolamento de Panda",
    "es": "Rodada de Panda",
    "ru": "Перекат панды",
    "fr": "Roulade de panda",
@@ -2863,15 +2863,15 @@
   {
    "string_key": 1220043,
    "ko": "산후조리",
-   "en": "Maternity Ward",
+   "en": "Postpartum Care",
    "ja": "産後ケア",
    "zh": "月子护理",
-   "pt": "Maternidade",
-   "es": "Maternidad",
-   "ru": "Роддом",
+   "pt": "Cuidados Pós-Parto",
+   "es": "Cuidado Posparto",
+   "ru": "Послеродовой уход",
    "fr": "Soins postnatals",
    "de": "Wochenbettpflege",
-   "ar": "رعاية المواليد"
+   "ar": "رعاية ما بعد الولادة"
   },
   {
    "string_key": 1220044,
@@ -2923,7 +2923,7 @@
    "ru": "Сверхзвуковой прорыв",
    "fr": "Percée supersonique",
    "de": "Überschall-Durchbruch",
-   "ar": "اختراق فرط صوتي"
+   "ar": "اختراق فوق صوتي"
   },
   {
    "string_key": 1220048,
@@ -2962,7 +2962,7 @@
    "ru": "Гран фуэте",
    "fr": "Grand fouetté",
    "de": "Grand Fouetté",
-   "ar": "دوران الباليه"
+   "ar": "جراند فويتيه"
   },
   {
    "string_key": 1220051,
@@ -3025,9 +3025,9 @@
    "pt": "Pisada de Dino",
    "es": "Pisotón de Dino",
    "ru": "Топот динозавра",
-   "fr": "Pas de dino",
+   "fr": "Écrasement de dino",
    "de": "Dino-Stampfer",
-   "ar": "دبكة الديناصور"
+   "ar": "دعسة الديناصور"
   },
   {
    "string_key": 1220056,
@@ -3246,7 +3246,7 @@
    "pt": "Cofre do Sultão",
    "es": "Bóveda del Sultán",
    "ru": "Сокровищница султана",
-   "fr": "Trésor du sultan",
+   "fr": "Coffre du sultan",
    "de": "Schatzkammer des Sultans",
    "ar": "خزنة السلطان"
   },
@@ -3573,7 +3573,7 @@
    "ru": "Голый рывок",
    "fr": "Charge tout nu",
    "de": "Nackter Ansturm",
-   "ar": "اندفاع أعزل"
+   "ar": "اندفاع عارٍ"
   },
   {
    "string_key": 1221009,
@@ -3659,7 +3659,7 @@
    "en": "Giant Panda Roll",
    "ja": "大王パンダごろごろ",
    "zh": "熊猫大王打滚",
-   "pt": "Rolada do Panda Gigante",
+   "pt": "Rolamento do Panda Gigante",
    "es": "Rodada del Panda Gigante",
    "ru": "Перекат гигантской панды",
    "fr": "Roulade du roi panda",
@@ -3723,7 +3723,7 @@
    "ko": "플라스크 난사",
    "en": "Flask Barrage",
    "ja": "フラスコ乱射",
-   "zh": "烧瓶乱扔",
+   "zh": "烧瓶狂掷",
    "pt": "Chuva de Frascos",
    "es": "Lluvia de Matraces",
    "ru": "Шквал колб",
@@ -3763,7 +3763,7 @@
    "en": "Chop Frenzy",
    "ja": "包丁乱舞",
    "zh": "乱刀狂舞",
-   "pt": "Frenesi de Facadas",
+   "pt": "Frenesi de Cortes",
    "es": "Frenesí de Cuchillo",
    "ru": "Безумная шинковка",
    "fr": "Hachage frénétique",
@@ -3828,8 +3828,8 @@
    "en": "Mop Swing",
    "ja": "モップスイング",
    "zh": "拖把横扫",
-   "pt": "Esfregão Giratório",
-   "es": "Trapeador Giratorio",
+   "pt": "Golpe de Esfregão",
+   "es": "Golpe de Trapeador",
    "ru": "Взмах шваброй",
    "fr": "Coup de serpillière",
    "de": "Wischmopp-Schwung",
@@ -3885,7 +3885,7 @@
    "ru": "Кикфлип на рампе",
    "fr": "Kickflip en half-pipe",
    "de": "Halfpipe-Kickflip",
-   "ar": "شقلبة لوح التزلج"
+   "ar": "كيك فليب في نصف الأنبوب"
   },
   {
    "string_key": 1221033,
@@ -3895,7 +3895,7 @@
    "zh": "辐射暴走",
    "pt": "Colapso Radioativo",
    "es": "Colapso Radiactivo",
-   "ru": "Радиоактивный срыв",
+   "ru": "Радиоактивная перегрузка",
    "fr": "Surcharge radioactive",
    "de": "Radioaktive Kernschmelze",
    "ar": "فوران إشعاعي"
@@ -3956,7 +3956,7 @@
    "string_key": 1221038,
    "ko": "광클 연타",
    "en": "Spam Click",
-   "ja": "連打クリック",
+   "ja": "クリック連打",
    "zh": "疯狂连点",
    "pt": "Clique Frenético",
    "es": "Clics Frenéticos",
@@ -4087,7 +4087,7 @@
    "ko": "바리츠!",
    "en": "Baritsu!",
    "ja": "バリツ！",
-   "zh": "巴流术！",
+   "zh": "巴顿术！",
    "pt": "Baritsu!",
    "es": "¡Baritsu!",
    "ru": "Бартитсу!",
@@ -4398,8 +4398,8 @@
    "string_key": 1221073,
    "ko": "외계인 친구들",
    "en": "Alien Buddies",
-   "ja": "宇宙人の友だち",
-   "zh": "外星朋友",
+   "ja": "宇宙人のなかまたち",
+   "zh": "外星伙伴",
    "pt": "Parças Alienígenas",
    "es": "Compas Alienígenas",
    "ru": "Друзья-пришельцы",
@@ -4416,9 +4416,9 @@
    "pt": "Grito Hehe~",
    "es": "Grito Jeje~",
    "ru": "Крик «Хе-хе~»",
-   "fr": "Cri « Ouin~ »",
-   "de": "„Uäääh~“-Schrei",
-   "ar": "صرخة «واااء~»"
+   "fr": "Cri « Héhé~ »",
+   "de": "„Hehe~“-Schrei",
+   "ar": "صرخة «هيهي~»"
   },
   {
    "string_key": 1221075,
@@ -4566,11 +4566,11 @@
   {
    "string_key": 1221087,
    "ko": "데이터 전송",
-   "en": "Data Boost",
+   "en": "Data Transfer",
    "ja": "データ転送",
    "zh": "数据传输",
-   "pt": "Turbo de Dados",
-   "es": "Impulso de Datos",
+   "pt": "Transferência de Dados",
+   "es": "Transferencia de Datos",
    "ru": "Передача данных",
    "fr": "Transfert de données",
    "de": "Datenübertragung",
@@ -4650,8 +4650,8 @@
    "pt": "Arremessa objetos ×1.3 mais forte (objetos voando batem mais forte também)",
    "es": "Lanza objetos ×1.3 más fuerte (los objetos voladores también pegan más)",
    "ru": "Отбрасывает предметы ×1.3 сильнее (летящие предметы тоже бьют сильнее)",
-   "fr": "Projette les objets ×1.3 plus fort (dégâts d'impact ↑ aussi)",
-   "de": "Schleudert Objekte ×1.3 stärker (Aufprallschaden ebenfalls ↑)",
+   "fr": "Projette les objets ×1.3 plus fort (dégâts d'impact des objets volants ↑ aussi)",
+   "de": "Schleudert Objekte ×1.3 stärker (Aufprallschaden fliegender Objekte ebenfalls ↑)",
    "ar": "يقذف الأشياء بقوة ×1.3 (ضرر اصطدام الأشياء المتطايرة ↑ أيضاً)"
   },
   {
@@ -4741,9 +4741,9 @@
    "pt": "Recarga de procriação ÷1.6, mais chance de filhote de grau maior",
    "es": "Recarga de cría ÷1.6, más probabilidad de cría de grado superior",
    "ru": "Перезарядка размножения ÷1.6, выше шанс детёныша высшего класса",
-   "fr": "Temps de recharge de Reproduction ÷1.6, meilleures chances d'avoir un petit de grade supérieur ↑",
-   "de": "Zucht-Abklingzeit ÷1.6, höhere Chance auf Nachwuchs höherer Stufe ↑",
-   "ar": "وقت تهدئة التكاثر ÷1.6، فرصة أكبر لصغير بدرجة أعلى ↑"
+   "fr": "Recharge de Reproduction ÷1.6, chance de petit de grade supérieur ↑",
+   "de": "Zucht-Abklingzeit ÷1.6, Chance auf höherstufigen Nachwuchs ↑",
+   "ar": "وقت تهدئة التكاثر ÷1.6، احتمال ظهور صغير بدرجة أعلى ↑"
   },
   {
    "string_key": 1320018,
@@ -4754,9 +4754,9 @@
    "pt": "Arremessa objetos ×1.4 mais forte (objetos voando batem mais forte também)",
    "es": "Lanza objetos ×1.4 más fuerte (los objetos voladores también pegan más)",
    "ru": "Отбрасывает предметы ×1.4 сильнее (летящие предметы тоже бьют сильнее)",
-   "fr": "Projette les objets ×1.4 plus fort (dégâts d'impact des objets volants ↑)",
-   "de": "Schleudert Objekte ×1.4 stärker (Aufprallschaden fliegender Objekte ↑)",
-   "ar": "يقذف الأشياء بقوة ×1.4 (يزيد ضرر اصطدام الأشياء المتطايرة أيضاً ↑)"
+   "fr": "Projette les objets ×1.4 plus fort (dégâts d'impact des objets volants ↑ aussi)",
+   "de": "Schleudert Objekte ×1.4 stärker (Aufprallschaden fliegender Objekte ebenfalls ↑)",
+   "ar": "يقذف الأشياء بقوة ×1.4 (ضرر اصطدام الأشياء المتطايرة ↑ أيضاً)"
   },
   {
    "string_key": 1320019,
@@ -4794,8 +4794,8 @@
    "es": "Daño a paredes ×3.6",
    "ru": "Урон по стенам ×3.6",
    "fr": "Dégâts aux murs ×3.6",
-   "de": "Wandschaden ×3.6",
-   "ar": "ضرر الجدران ×3.6"
+   "de": "Schaden an Wänden ×3.6",
+   "ar": "الضرر على الجدران ×3.6"
   },
   {
    "string_key": 1320023,
@@ -4819,9 +4819,9 @@
    "pt": "Objetos quebrados por este rato dão Queijo ×1.5",
    "es": "Los objetos que rompe esta rata dan Queso ×1.5",
    "ru": "Предметы, сломанные этой крысой, дают сыр ×1.5",
-   "fr": "Les objets détruits par ce rat donnent Fromage ×1.5",
-   "de": "Von dieser Ratte zerstörte Objekte geben Käse ×1.5",
-   "ar": "الأشياء التي يحطمها هذا الفأر تعطي جبن ×1.5"
+   "fr": "Fromage des objets détruits par cette souris ×1.5",
+   "de": "Käse aus von dieser Maus zerstörten Objekten ×1.5",
+   "ar": "الجبن من الأشياء التي يحطمها هذا الفأر ×1.5"
   },
   {
    "string_key": 1320025,
@@ -4871,8 +4871,8 @@
    "pt": "Objetos quebrados por este rato explodem FORTE (raio +43)",
    "es": "Los objetos que rompe esta rata explotan EN GRANDE (radio +43)",
    "ru": "Предметы, сломанные этой крысой, взрываются МОЩНО (радиус +43)",
-   "fr": "Les objets détruits par ce rat explosent FORT (rayon +43)",
-   "de": "Von dieser Ratte zerstörte Objekte explodieren GROSS (Radius +43)",
+   "fr": "Les objets détruits par cette souris explosent FORT (rayon +43)",
+   "de": "Von dieser Maus zerstörte Objekte explodieren GROSS (Radius +43)",
    "ar": "الأشياء التي يحطمها هذا الفأر تنفجر بقوة كبيرة (نطاق +43)"
   },
   {
@@ -5489,7 +5489,7 @@
   {
    "string_key": 1320089,
    "ko": "크리티컬 확률 +10%, 크리티컬 ×3.7",
-   "en": "Crit chance +10%, crits x3.7",
+   "en": "Crit chance +10%, Crit damage ×3.7",
    "ja": "クリティカル率+10％、クリティカル×3.7",
    "zh": "暴击率+10%，暴击×3.7",
    "pt": "Chance de crítico +10%, dano crítico ×3.7",
@@ -6115,7 +6115,7 @@
    "ko": "물건에 부딪힐 때 3% 확률로 → 바리츠!: 주변 물건을 번쩍 들어 집어던짐 (충돌 피해 ×6.6)",
    "en": "3% chance on object impact → Baritsu!: hoists nearby objects and hurls them (impact damage ×6.6)",
    "ja": "物にぶつかった時3％の確率で → バリツ！：周囲の物をひょいと持ち上げて投げつける（衝突ダメージ×6.6）",
-   "zh": "撞击物品时3%概率 → 巴流术！：举起周围物品扔出去（撞击伤害×6.6）",
+   "zh": "撞击物品时3%概率 → 巴顿术！：举起周围物品扔出去（撞击伤害×6.6）",
    "pt": "3% de chance ao bater num objeto → Baritsu!: levanta objetos próximos e arremessa (dano de impacto ×6.6)",
    "es": "3% de probabilidad al chocar con un objeto → ¡Baritsu!: levanta objetos cercanos y los arroja (daño de impacto ×6.6)",
    "ru": "3% шанс при ударе о предмет → Бартитсу!: поднимает предметы вокруг и швыряет их (урон от столкновения ×6.6)",
@@ -6439,8 +6439,8 @@
    "string_key": 1321073,
    "ko": "22초마다 → 외계인 친구들: 동료 6마리 소환 (6초 동안 함께 난동)",
    "en": "Every 22s → Alien Buddies: summons 6 buddies (they rampage together for 6s)",
-   "ja": "22秒ごとに → 宇宙人の友だち：仲間6匹を召喚（6秒間いっしょに大暴れ）",
-   "zh": "每22秒 → 外星朋友：召唤6只伙伴（一起大闹6秒）",
+   "ja": "22秒ごとに → 宇宙人の仲間たち：仲間6匹を召喚（6秒間いっしょに大暴れ）",
+   "zh": "每22秒 → 外星伙伴：召唤6只伙伴（一起大闹6秒）",
    "pt": "A cada 22s → Parças Alienígenas: invoca 6 parças (fazem baderna juntos por 6s)",
    "es": "Cada 22 s → Compas Alienígenas: invoca 6 compas (arman desmadre juntos 6 s)",
    "ru": "Каждые 22 с → Друзья-пришельцы: призывает 6 друзей (буянят вместе 6 с)",
@@ -6503,7 +6503,7 @@
   {
    "string_key": 1321078,
    "ko": "10초마다 → 진실은 언제나 하나!: 체력이 가장 높은 물건을 가리켜 강력한 피해 (공격력 ×40)",
-   "en": "Every 10s → There Is Only One Truth!: points at the toughest object for massive damage (attack ×40)",
+   "en": "Every 10s → One Truth Prevails!: points at the toughest object for massive damage (attack ×40)",
    "ja": "10秒ごとに → 真実はいつもひとつ！：体力がいちばん高い物を指さして強力なダメージ（攻撃力×40）",
    "zh": "每10秒 → 真相只有一个！：指向耐久最高的物品造成强力伤害（攻击力×40）",
    "pt": "A cada 10s → Só Existe Uma Verdade!: aponta pro objeto mais resistente e causa dano massivo (ataque ×40)",
@@ -6607,11 +6607,11 @@
   {
    "string_key": 1321087,
    "ko": "주변(250)에 동료 5마리 이상이면 (15초마다) → 데이터 전송: 반경 250 쥐 공격력 +25% (8초)",
-   "en": "With 5+ buddies nearby (250) (every 15s) → Data Boost: rats within radius 250 get +25% attack (8s)",
+   "en": "With 5+ buddies nearby (250) (every 15s) → Data Transfer: rats within radius 250 get +25% attack (8s)",
    "ja": "周囲（250）に仲間が5匹以上いると（15秒ごと）→ データ転送：半径250のネズミの攻撃力+25％（8秒）",
    "zh": "周围（250）有5只以上伙伴时（每15秒）→ 数据传输：半径250内老鼠攻击力+25%（8秒）",
-   "pt": "Com 5+ parças por perto (250) (a cada 15s) → Turbo de Dados: ratos num raio de 250 ganham +25% de ataque (8s)",
-   "es": "Con 5+ compas cerca (250) (cada 15 s) → Impulso de Datos: las ratas en radio 250 ganan +25% de ataque (8 s)",
+   "pt": "Com 5+ parças por perto (250) (a cada 15s) → Transferência de Dados: ratos num raio de 250 ganham +25% de ataque (8s)",
+   "es": "Con 5+ compas cerca (250) (cada 15 s) → Transferencia de Datos: las ratas en radio 250 ganan +25% de ataque (8 s)",
    "ru": "При 5+ друзьях рядом (250) (раз в 15 с) → Передача данных: крысы в радиусе 250 получают +25% атаки (8 с)",
    "fr": "Avec 5+ copains proches (250) (toutes les 15 s) → Transfert de données : attaque +25% pour les rats dans un rayon de 250 (8 s)",
    "de": "Bei 5+ Kumpels in der Nähe (250) (alle 15 Sek.) → Datentransfer: Ratten im Radius von 250 erhalten +25% Angriff (8 Sek.)",
@@ -6793,7 +6793,7 @@
    "ja": "アンコール大爆発",
    "zh": "安可大爆炸",
    "pt": "Big Bang do Bis",
-   "es": "Big Bang de Encore",
+   "es": "Big Bang del Bis",
    "ru": "Большой взрыв на бис",
    "fr": "Rappel explosif",
    "de": "Zugabe-Urknall",
@@ -7091,7 +7091,7 @@
    "en": "Let It Go (Rat It Go)",
    "ja": "レット・イット・ゴー（Rat it go）",
    "zh": "随它吧（Rat it go）",
-   "pt": "Let It Go (Rat It Go)",
+   "pt": "Livre Estou (Rat It Go)",
    "es": "Libre Soy (Rat It Go)",
    "ru": "Отпусти и забудь (Rat It Go)",
    "fr": "Libérée, dé-rat-vrée (Rat It Go)",
@@ -7382,7 +7382,7 @@
    "ru": "Вырастает замок Крысоленда → крысы-юристы вылетают толпой и клеят на каждый предмет уведомление об аресте → замок взрывается",
    "fr": "Le Château de Ratland surgit → des rats avocats déferlent et collent un avis de saisie sur chaque objet → le château explose",
    "de": "Schloss Rattenland erhebt sich → Anwaltsratten strömen heraus und kleben Pfändungssiegel auf jedes Objekt → das Schloss explodiert",
-   "ar": "ترتفع قلعة رات لاند → تندفع فئران محامون وتلصق إشعار مصادرة على كل شيء → تنفجر القلعة"
+   "ar": "ترتفع قلعة رات لاند → تندفع فئران محامية وتلصق إشعار مصادرة على كل شيء → تنفجر القلعة"
   },
   {
    "string_key": 1530023,
@@ -7733,7 +7733,7 @@
    "ru": "Хо-хо-хо! ...Рудольф, ты что, ПИЛ?!",
    "fr": "Ho ho ho ! …Rudolphe, t'as picolé ou quoi ?!",
    "de": "Ho, ho, ho! …Rudolph, hast du etwa GETRUNKEN?!",
-   "ar": "هو هو هو! ...رودولف، هل شربت شيئاً؟!"
+   "ar": "هو هو هو! ...رودولف، هل شربت الخمر؟! "
   },
   {
    "string_key": 1630015,
@@ -7782,7 +7782,7 @@
    "zh": "飞向瓦尔哈拉!!",
    "pt": "Rumo a Valhallaaaaa!!",
    "es": "¡¡Rumbo a Valhallaaaaa!!",
-   "ru": "В Вальхалла-а-а-у!!",
+   "ru": "В Вальхаллу-у-у!!",
    "fr": "En vol vers le Valhallaaaaa !!",
    "de": "Ab nach Walhallaaaaa!!",
    "ar": "نطير إلى فالهالاااا!!"
@@ -7871,7 +7871,7 @@
    "en": "Legendary sword, choose ME!",
    "ja": "伝説の剣よ、我を選べ！",
    "zh": "传说之剑啊，选择我吧！",
-   "pt": "Espada lendária, escolha EU!",
+   "pt": "Espada lendária, escolha a MIM!",
    "es": "¡Espada legendaria, elígeME!",
    "ru": "Легендарный меч, выбери МЕНЯ!",
    "fr": "Épée légendaire, choisis-MOI !",
@@ -7991,7 +7991,7 @@
    "pt": "Tudo neste golpe! Magia de bomba, FOGO!",
    "es": "¡Todo en este golpe! ¡Magia de bomba, FUEGO!",
    "ru": "Всё на один удар! Бомбомагия, ОГОНЬ!",
-   "fr": "Je mise tout sur ce coup ! Magie explosive, FEU !",
+   "fr": "Je mise tout sur ce coup ! Magie de bombe, FEU !",
    "de": "Alles auf diesen einen Schuss! Bombenmagie, FEUER!",
    "ar": "أراهن بكل شيء على هذه الضربة! سحر القنابل، إطلاق!"
   },
@@ -8104,7 +8104,7 @@
    "ko": "기본이야, 왓슨. 전부 연결돼 있어!!",
    "en": "Elementary, Watson. It's ALL connected!!",
    "ja": "初歩的なことだよ、ワトソン。全部つながっている!!",
-   "zh": "很基本，华生。一切都是相连的!!",
+   "zh": "这很简单，华生。一切都是相连的!!",
    "pt": "Elementar, Watson. Está TUDO conectado!!",
    "es": "Elemental, Watson. ¡¡TODO está conectado!!",
    "ru": "Элементарно, Ватсон. ВСЁ связано!!",
@@ -8129,7 +8129,7 @@
    "string_key": 1700010,
    "ko": "(사건 종결: 증거가 전부 부서짐)",
    "en": "(Case closed: all evidence destroyed)",
-   "ja": "（事件解決：証拠は全部壊れた）",
+   "ja": "（事件終結：証拠は全部壊れた）",
    "zh": "（结案：证据全被毁了）",
    "pt": "(Caso encerrado: todas as provas destruídas)",
    "es": "(Caso cerrado: todas las pruebas destruidas)",
@@ -8325,7 +8325,7 @@
    "ko": "(바닥 전체가 퐁듀가 됐다)",
    "en": "(The whole floor is fondue now)",
    "ja": "（床全体がフォンデュになった）",
-   "zh": "（整片地板都变成火锅了）",
+   "zh": "（整片地板都变成奶酪火锅了）",
    "pt": "(O chão inteiro virou fondue)",
    "es": "(Todo el piso es fondue ahora)",
    "ru": "(Весь пол теперь — фондю)",
@@ -8708,7 +8708,7 @@
    "ru": "...Шестикратно.",
    "fr": "… Six coups.",
    "de": "… Sechsfach.",
-   "ar": "...سداسي."
+   "ar": "...ست ضربات."
   },
   {
    "string_key": 1700055,
@@ -8744,7 +8744,7 @@
    "zh": "女士们先生鼠们!!",
    "pt": "Senhoras e senhoratos!!",
    "es": "¡¡Damas y caballeratas!!",
-   "ru": "Дамы и господа крысы!!",
+   "ru": "Дамы и крыспода!!",
    "fr": "Mesdames et messieurs les rats !!",
    "de": "Meine Damen und Ratten!!",
    "ar": "سيداتي وفئراني!!"
@@ -8901,9 +8901,9 @@
    "pt": "Oppa!!",
    "es": "¡¡Oppa!!",
    "ru": "Оппа!!",
-   "fr": "Chéri !!",
-   "de": "Ich liebe dich!!",
-   "ar": "أنت الأروع!!"
+   "fr": "Oppa !!",
+   "de": "Oppa!!",
+   "ar": "أوبا!!"
   },
   {
    "string_key": 1700070,
@@ -8968,7 +8968,7 @@
    "ru": "Рудольф, но-о...! (ик)",
    "fr": "Rudolphe, en avant… ! (hips)",
    "de": "Rudolph, los geht's…! (hicks)",
-   "ar": "رودولف، انطلق...! (زغطة)"
+   "ar": "رودولف، انطلق...! (هيك)"
   },
   {
    "string_key": 1700075,
@@ -8999,12 +8999,12 @@
   {
    "string_key": 1700077,
    "ko": "(귀환)",
-   "en": "(Returning home)",
+   "en": "(Return)",
    "ja": "（帰還）",
    "zh": "（返航）",
-   "pt": "(Voltando pra casa)",
-   "es": "(Regresando a casa)",
-   "ru": "(Возвращается домой)",
+   "pt": "(Retorno)",
+   "es": "(Regreso)",
+   "ru": "(Возвращение)",
    "fr": "(Retour à la base)",
    "de": "(Rückkehr)",
    "ar": "(عودة)"
@@ -9264,7 +9264,7 @@
    "zh": "装填完毕！（装的是自己）",
    "pt": "Carregado! (Eu mesmo)",
    "es": "¡Cargado! (A mí mismo)",
-   "ru": "Заряжено! (Мной)",
+   "ru": "Заряжено! (Меня)",
    "fr": "Chargé ! (Moi)",
    "de": "Geladen! (Ich)",
    "ar": "تم التلقيم! (أنا)"
@@ -9280,7 +9280,7 @@
    "ru": "(Без предохранителя)",
    "fr": "(Pas de cran de sûreté)",
    "de": "(Keine Sicherung vorhanden)",
-   "ar": "(بدون صمام أمان)"
+   "ar": "(بدون قفل أمان)"
   },
   {
    "string_key": 1700099,
@@ -9339,7 +9339,7 @@
    "ko": "스콜!!! 발할라로!!",
    "en": "SKÅL!!! To Valhalla!!",
    "ja": "スコール!!! ヴァルハラへ!!",
-   "zh": "干杯!!! 前往瓦尔哈拉!!",
+   "zh": "斯考尔!!! 前往瓦尔哈拉!!",
    "pt": "SKÅL!!! Rumo a Valhalla!!",
    "es": "¡¡¡SKÅL!!! ¡¡A Valhalla!!",
    "ru": "СКОЛЬ!!! В Вальхаллу!!",
@@ -9394,7 +9394,7 @@
    "zh": "（超速摄像头：咔嚓）",
    "pt": "(Radar de velocidade: clique)",
    "es": "(Fotomulta: clic)",
-   "ru": "(Камера скорости: щёлк)",
+   "ru": "(Камера контроля скорости: щёлк)",
    "fr": "(Radar : clic)",
    "de": "(Blitzer: Klick)",
    "ar": "(رادار السرعة: تشك)"
@@ -9507,7 +9507,7 @@
    "string_key": 1700116,
    "ko": "우주.exe",
    "en": "universe.exe",
-   "ja": "uchuu.exe",
+   "ja": "宇宙.exe",
    "zh": "宇宙.exe",
    "pt": "universo.exe",
    "es": "universo.exe",
@@ -9520,7 +9520,7 @@
    "string_key": 1700117,
    "ko": "우주.exe 가 응답하지 않습니다.",
    "en": "universe.exe is not responding.",
-   "ja": "uchuu.exe は応答していません。",
+   "ja": "宇宙.exe は応答していません。",
    "zh": "宇宙.exe 没有响应。",
    "pt": "universo.exe não está respondendo.",
    "es": "universo.exe no responde.",
@@ -9735,7 +9735,7 @@
    "ru": "Это нарушение авторских прав.",
    "fr": "Violation des droits d'auteur.",
    "de": "Das ist eine Urheberrechtsverletzung.",
-   "ar": "هذا انتهاك لحقوق الملكية."
+   "ar": "هذا انتهاك لحقوق الطبع والنشر."
   },
   {
    "string_key": 1700134,
@@ -9923,7 +9923,7 @@
    "string_key": 1700148,
    "ko": "피라미드… 팽이!!",
    "en": "Pyramid... SPINNING TOP!!",
-   "ja": "ピラミッド…ごま!!",
+   "ja": "ピラミッド…コマ!!",
    "zh": "金字塔……陀螺!!",
    "pt": "Pirâmide... PIÃO!!",
    "es": "Pirámide... ¡¡TROMPO!!",
@@ -10299,12 +10299,12 @@
   {
    "string_key": 1700177,
    "ko": "\"쥐커드 리마스터 해줘!!!\"",
-   "en": "\"DO THE SHUFFLE REMASTER!!!\"",
+   "en": "\"DO THE SQUEAK SHUFFLE REMASTER!!!\"",
    "ja": "「チューシャッフル・リマスターやって!!!」",
    "zh": "“来个吱吱舞步重制版!!!”",
-   "pt": "\"FAZ A DANÇA REMASTERIZADA!!!\"",
-   "es": "\"¡¡¡HAZ EL BAILE REMASTERIZADO!!!\"",
-   "ru": "«ДАВАЙ ШАФФЛ РЕМАСТЕР!!!»",
+   "pt": "\"FAZ A DANÇA DO GUINCHO REMASTERIZADA!!!\"",
+   "es": "\"¡¡¡HAZ EL BAILE DEL CHILLIDO REMASTERIZADO!!!\"",
+   "ru": "«ДАВАЙ ПИСК-ШАФФЛ РЕМАСТЕР!!!»",
    "fr": "\"FAIS LE COUIC-SHUFFLE REMASTERISÉ !!!\"",
    "de": "\"MACH DAS PIEP-SHUFFLE-REMASTER!!!\"",
    "ar": "\"اعمل رقصة الصِيء ريماستر!!!\""
@@ -10325,12 +10325,12 @@
   {
    "string_key": 1700179,
    "ko": "\"이이잉~~ 쥐커드!!\"",
-   "en": "\"pleeeease~~ SHUFFLE!!\"",
-   "ja": "「おねがい〜〜 シャッフル!!」",
-   "zh": "“求求了~~ 舞步!!”",
-   "pt": "\"por favoooor~~ DANÇA!!\"",
-   "es": "\"porfaaaa~~ ¡¡BAILE!!\"",
-   "ru": "«ну пожа-а-алуйста~~ ШАФФЛ!!»",
+   "en": "\"pleeeease~~ SQUEAK SHUFFLE!!\"",
+   "ja": "「おねがい〜〜 チューシャッフル!!」",
+   "zh": "“求求了~~ 吱吱舞步!!”",
+   "pt": "\"por favoooor~~ DANÇA DO GUINCHO!!\"",
+   "es": "\"porfaaaa~~ ¡¡BAILE DEL CHILLIDO!!\"",
+   "ru": "«ну пожа-а-алуйста~~ ПИСК-ШАФФЛ!!»",
    "fr": "\"Alleez~~ COUIC-SHUFFLE !!\"",
    "de": "\"Biiitte~~ PIEP-SHUFFLE!!\"",
    "ar": "\"أرجوووك~~ رقصة الصِيء!!\""
@@ -10338,12 +10338,12 @@
   {
    "string_key": 1700180,
    "ko": "\"믿고 있었다구!! 쥐커드!!\"",
-   "en": "\"I BELIEVED IN YOU!! SHUFFLE!!\"",
-   "ja": "「信じてたよ!! シャッフル!!」",
-   "zh": "“我就知道你行!! 舞步!!”",
-   "pt": "\"EU ACREDITEI EM VOCÊ!! DANÇA!!\"",
-   "es": "\"¡¡CREÍ EN TI!! ¡¡BAILE!!\"",
-   "ru": "«Я В ТЕБЯ ВЕРИЛ!! ШАФФЛ!!»",
+   "en": "\"I BELIEVED IN YOU!! SQUEAK SHUFFLE!!\"",
+   "ja": "「信じてたよ!! チューシャッフル!!」",
+   "zh": "“我就知道你行!! 吱吱舞步!!”",
+   "pt": "\"EU ACREDITEI EM VOCÊ!! DANÇA DO GUINCHO!!\"",
+   "es": "\"¡¡CREÍ EN TI!! ¡¡BAILE DEL CHILLIDO!!\"",
+   "ru": "«Я В ТЕБЯ ВЕРИЛ!! ПИСК-ШАФФЛ!!»",
    "fr": "\"J'AI TOUJOURS CRU EN TOI !! COUIC-SHUFFLE !!\"",
    "de": "\"ICH HAB AN DICH GEGLAUBT!! PIEP-SHUFFLE!!\"",
    "ar": "\"كنت واثقاً بك!! رقصة الصِيء!!\""
@@ -10390,12 +10390,12 @@
   {
    "string_key": 1700184,
    "ko": "\"엄마가 쥐커드 보래요\"",
-   "en": "\"my mom told me to watch the shuffle\"",
-   "ja": "「ママがシャッフル見ろって」",
-   "zh": "“我妈叫我来看舞步”",
-   "pt": "\"minha mãe mandou eu ver a dança\"",
-   "es": "\"mi mamá me dijo que viera el baile\"",
-   "ru": "«мама сказала посмотреть шаффл»",
+   "en": "\"my mom told me to watch the Squeak Shuffle\"",
+   "ja": "「ママがチューシャッフル見ろって」",
+   "zh": "“我妈叫我来看吱吱舞步”",
+   "pt": "\"minha mãe mandou eu ver a Dança do Guincho\"",
+   "es": "\"mi mamá me dijo que viera el Baile del Chillido\"",
+   "ru": "«мама сказала посмотреть писк-шаффл»",
    "fr": "\"Maman m'a dit de regarder le Couic-Shuffle\"",
    "de": "\"Mama hat gesagt, ich soll Piep-Shuffle gucken\"",
    "ar": "\"أمي قالت لي شاهد رقصة الصِيء\""
@@ -10533,7 +10533,7 @@
   {
    "string_key": 1700195,
    "ko": "쥐구멍: 쥐커드 고고",
-   "en": "rathole_tv: SHUFFLE SHUFFLE",
+   "en": "rathole_tv: SQUEAK SHUFFLE GOGO",
    "ja": "ネズミ穴TV: シャッフルいけいけ",
    "zh": "鼠洞TV: 舞步冲冲",
    "pt": "buracodorato_tv: DANÇA DANÇA",
@@ -10585,7 +10585,7 @@
   {
    "string_key": 1700199,
    "ko": "하수구왕: 쥐커드!!!",
-   "en": "sewerking: SHUFFLE!!!",
+   "en": "sewerking: SQUEAK SHUFFLE!!!",
    "ja": "下水道キング: シャッフル!!!",
    "zh": "下水道之王: 舞步!!!",
    "pt": "reidoesgoto: DANÇA!!!",
@@ -10916,9 +10916,9 @@
    "pt": "O que o tomate foi fazer no banco?",
    "es": "¿Qué le dijo un techo a otro techo?",
    "ru": "Какая мышь не боится кошки?",
-   "fr": "Ça fait quoi, 4 souris qui se rassemblent ?",
-   "de": "Was passiert, wenn 4 Mäuse zusammenkommen?",
-   "ar": "ماذا تفعل 4 فئران عندما تجتمع؟"
+   "fr": "Quel est le jeu préféré des souris ?",
+   "de": "Was ist das Lieblingsspiel von Mäusen?",
+   "ar": "ما هي اللعبة المفضلة للفئران؟"
   },
   {
    "string_key": 1700225,
@@ -11521,12 +11521,12 @@
   {
    "string_key": 1700271,
    "ko": "완성!! 대왕 치즈 요리!!",
-   "en": "Done!! Grand Cheese Cuisine!!",
+   "en": "Done!! Grand Cheese Dish!!",
    "ja": "完成!! 大王チーズ料理!!",
    "zh": "完成!! 大王奶酪料理!!",
-   "pt": "Pronto!! Grande Culinária de Queijo!!",
-   "es": "¡¡Listo!! ¡¡Gran Cocina de Queso!!",
-   "ru": "Готово!! Великая сырная кухня!!",
+   "pt": "Pronto!! Grande Prato de Queijo!!",
+   "es": "¡¡Listo!! ¡¡Gran Plato de Queso!!",
+   "ru": "Готово!! Великое сырное блюдо!!",
    "fr": "Et voilà !! Le Grand Plat au Fromage !!",
    "de": "Fertig!! Das Große Käse-Menü!!",
    "ar": "اكتمل!! طبق الجبن العظيم!!"
@@ -11573,12 +11573,12 @@
   {
    "string_key": 1700275,
    "ko": "재료 {n}개 대왕 치즈 요리!",
-   "en": "{n}-Ingredient Grand Cheese Cuisine!",
+   "en": "{n}-Ingredient Grand Cheese Dish!",
    "ja": "材料{n}個の大王チーズ料理！",
    "zh": "{n}种材料的大王奶酪料理！",
-   "pt": "Grande Culinária de Queijo com {n} Ingredientes!",
-   "es": "¡Gran Cocina de Queso de {n} Ingredientes!",
-   "ru": "Великая сырная кухня из {n} ингредиентов!",
+   "pt": "Grande Prato de Queijo com {n} Ingredientes!",
+   "es": "¡Gran Plato de Queso de {n} Ingredientes!",
+   "ru": "Великое сырное блюдо из {n} ингредиентов!",
    "fr": "Grand Plat au Fromage à {n} ingrédients !",
    "de": "Großes Käse-Menü mit {n} Zutaten!",
    "ar": "طبق الجبن العظيم بـ {n} مكونات!"
@@ -11679,7 +11679,7 @@
    "ko": "킥력 증강 운동화… 출력 최대!",
    "en": "Power-Kick Sneakers... MAX OUTPUT!",
    "ja": "キック力増強シューズ…出力最大！",
-   "zh": "踢力增强鞋……输出最大！",
+   "zh": "脚力增强鞋……输出最大！",
    "pt": "Tênis de Chute Turbinado... POTÊNCIA MÁXIMA!",
    "es": "Tenis de Patada Potenciada... ¡POTENCIA MÁXIMA!",
    "ru": "Кроссовки силы удара... МАКСИМАЛЬНАЯ МОЩНОСТЬ!",
@@ -11695,7 +11695,7 @@
    "zh": "凶手就是……你!!",
    "pt": "O culpado é... VOCÊ!!",
    "es": "El culpable es... ¡¡TÚ!!",
-   "ru": "Виновник... ТЫ!!",
+   "ru": "Преступник... это ТЫ!!",
    "fr": "Le coupable… c'est TOI !!",
    "de": "Der Täter… bist DU!!",
    "ar": "المجرم هو… أنت!!"
@@ -11704,7 +11704,7 @@
    "string_key": 1700285,
    "ko": "{n}번째 쿠션!",
    "en": "Bounce #{n}!",
-   "ja": "{n}回目のクッション！",
+   "ja": "{n}回目のバウンド！",
    "zh": "第{n}次反弹！",
    "pt": "Quique nº {n}!",
    "es": "¡Rebote n.º {n}!",
@@ -11717,7 +11717,7 @@
    "string_key": 1700286,
    "ko": "단서 {n}개 = 추가 쿠션!",
    "en": "{n} Clues = bonus bounce!",
-   "ja": "手がかり{n}個＝追加クッション！",
+   "ja": "手がかり{n}個＝追加バウンド！",
    "zh": "线索{n}条＝追加反弹！",
    "pt": "{n} Pistas = quique bônus!",
    "es": "¡{n} Pistas = rebote extra!",
@@ -11781,12 +11781,12 @@
   {
    "string_key": 1700291,
    "ko": "치즈로 해주고 대신 먹어주는 쥐, 테스터 쮜입니다.",
-   "en": "The rat who eats it for you so you don't have to — Taster Squee here.",
+   "en": "The rat who makes it with cheese and eats it for you — Taster Squee here.",
    "ja": "チーズで作って代わりに食べてあげるネズミ、テスターチューです。",
    "zh": "用奶酪做菜还替你吃掉的老鼠，试吃员吱吱是也。",
-   "pt": "O rato que prova por você pra você não precisar — aqui é o Provador Guinchinho.",
-   "es": "La rata que lo prueba por ti para que no tengas que hacerlo — aquí Catador Chillidito.",
-   "ru": "Крыса, которая пробует за вас, чтобы вам не пришлось, — Дегустатор Пискун на связи.",
+   "pt": "O rato que faz com queijo e come por você — aqui é o Provador Guinchinho.",
+   "es": "La rata que lo prepara con queso y lo come por ti — aquí Catador Chillidito.",
+   "ru": "Крыса, которая готовит с сыром и ест за вас, — Дегустатор Пискун на связи.",
    "fr": "Le rat qui teste tout au fromage pour vous : voici Goûteur Couic !",
    "de": "Die Maus, die alles mit Käse für euch probiert – hier ist Tester Piep!",
    "ar": "الفأر الذي يجرّب ويأكل بالجبن بدلاً عنكم، معكم الذوّاق صِيء."
@@ -11892,8 +11892,8 @@
    "es": "Corte.",
    "ru": "Снято.",
    "fr": "Coupez.",
-   "de": "Schnitt.",
-   "ar": "قص."
+   "de": "Cut.",
+   "ar": "اقطع."
   },
   {
    "string_key": 1700300,
@@ -12002,12 +12002,12 @@
   {
    "string_key": 1700308,
    "ko": "찍찍… 손끝이 시려 온다…",
-   "en": "Squeak... my paws are getting cold...",
-   "ja": "チュー…手先が冷えてきた…",
-   "zh": "吱……爪子开始发冷了……",
-   "pt": "Guinch... minhas patinhas tão ficando geladas...",
-   "es": "Iiik... se me están enfriando las patitas...",
-   "ru": "Пи... лапки мёрзнут...",
+   "en": "Squeak squeak... my paws are getting cold...",
+   "ja": "チューチュー…手先が冷えてきた…",
+   "zh": "吱吱……爪子开始发冷了……",
+   "pt": "Guinch-guinch... minhas patinhas tão ficando geladas...",
+   "es": "Iiik-iiik... se me están enfriando las patitas...",
+   "ru": "Пи-пи... лапки мёрзнут...",
    "fr": "Couic couic… j'ai le bout des pattes gelé…",
    "de": "Piep piep… meine Pfoten werden kalt…",
    "ar": "صِيء صِيء… أطراف مخالبي تبرد…"
@@ -12166,7 +12166,7 @@
    "ru": "Rat it go~~!!",
    "fr": "Libé-rat, déliv-rat~~ !!",
    "de": "Ratt' jetzt los~~!!",
-   "ar": "أطلقي سراح الفأر~~!!"
+   "ar": "Rat it go~~!!"
   },
   {
    "string_key": 1800001,
@@ -12410,7 +12410,7 @@
    "zh": "解锁特殊动作。从2级起触发概率·频率各+{p1}%",
    "pt": "Desbloqueia a Ação Especial. A partir do Nv 2: chance e frequência +{p1}% cada",
    "es": "Desbloquea la Acción Especial. Desde Nv 2: probabilidad y frecuencia +{p1}% cada una",
-   "ru": "Открывает особое действие. С ур. 2: шанс и частота +{p1}% каждый",
+   "ru": "Открывает особое действие. С ур. 2: шанс и частота — по +{p1}%",
    "fr": "Débloque l'Action spéciale. Dès le niv. 2 : chances·fréquence +{p1}% chacune",
    "de": "Schaltet Spezialaktion frei. Ab St. 2: Chance·Häufigkeit je +{p1}%",
    "ar": "يفتح الحركة الخاصة. من المستوى 2: احتمالية·تكرار التفعيل +{p1}% لكل منهما"
@@ -12503,7 +12503,7 @@
    "es": "Desbloquear Definitiva: la barra de Definitiva empieza a cargar",
    "ru": "Открытие ульты: шкала ульты начинает заполняться",
    "fr": "Déblocage d'Ultime : la jauge d'Ultime commence à se charger",
-   "de": "Ultimativ freigeschaltet: Ultimativ-Leiste beginnt sich aufzuladen",
+   "de": "Ultimativ-Freischaltung: Ultimativ-Leiste beginnt sich aufzuladen",
    "ar": "فتح المهارة القاضية: يبدأ شحن عداد القاضية"
   },
   {
@@ -12642,7 +12642,7 @@
    "en": "Hiss",
    "ja": "シャーッ",
    "zh": "哈气",
-   "pt": "Chiado",
+   "pt": "Bufido",
    "es": "Bufido",
    "ru": "Шипение",
    "fr": "Feulement",
@@ -12694,7 +12694,7 @@
    "en": "Loaf Roll",
    "ja": "香箱ころころ",
    "zh": "面包猫滚滚",
-   "pt": "Rolada de Pãozinho",
+   "pt": "Rolamento de Pãozinho",
    "es": "Rodada de Pancito",
    "ru": "Перекат буханочки",
    "fr": "Roulade de miche",
@@ -12719,7 +12719,7 @@
    "ko": "레이저 눈빛",
    "en": "Laser Stare",
    "ja": "レーザー眼光",
-   "zh": "激光眼神",
+   "zh": "激光凝视",
    "pt": "Olhar Laser",
    "es": "Mirada Láser",
    "ru": "Лазерный взгляд",
@@ -13214,7 +13214,7 @@
    "en": "New object: Cheese Safe",
    "ja": "新しい物が出現：チーズ金庫",
    "zh": "新物品出现：奶酪保险箱",
-   "pt": "Novo objeto: Cofre de Queijo",
+   "pt": "Novo objeto: Cofre-forte de Queijo",
    "es": "Nuevo objeto: Caja Fuerte de Queso",
    "ru": "Новый предмет: сырный сейф",
    "fr": "Nouvel objet : Coffre-fort à fromage",
@@ -13569,8 +13569,8 @@
    "es": "Truco desbloqueado: Molino",
    "ru": "Трюк открыт: мельница",
    "fr": "Tour débloqué : Moulin",
-   "de": "Trick freigeschaltet: Windmühle",
-   "ar": "فتح حيلة: طاحونة الهواء"
+   "de": "Trick freigeschaltet: Windmill",
+   "ar": "فتح حيلة: حركة الطاحونة"
   },
   {
    "string_key": 2492226,
@@ -13582,8 +13582,8 @@
    "es": "Probabilidad de Molino +2%",
    "ru": "Шанс мельницы +2%",
    "fr": "Chance de Moulin +2%",
-   "de": "Windmühle-Chance +2%",
-   "ar": "فرصة طاحونة الهواء +2%"
+   "de": "Windmill-Chance +2%",
+   "ar": "فرصة حركة الطاحونة +2%"
   },
   {
    "string_key": 2492232,
@@ -13737,9 +13737,9 @@
    "pt": "Tempo limite do andar +6s",
    "es": "Tiempo límite del piso +6 s",
    "ru": "Лимит времени этажа +6 с",
-   "fr": "Temps d'étage +6s",
+   "fr": "Temps limite d'étage +6s",
    "de": "Etagen-Zeitlimit +6s",
-   "ar": "وقت الطابق +6 ث"
+   "ar": "الحد الزمني للطابق +6 ث"
   },
   {
    "string_key": 2492312,
@@ -13904,7 +13904,7 @@
    "ja": "ネズミ捕り2個の出現確率-5％",
    "zh": "出现2个捕鼠夹的概率-5%",
    "pt": "Chance de ratoeira dupla -5%",
-   "es": "Probabilidad de trampa doble -5%",
+   "es": "Probabilidad de ratonera doble -5%",
    "ru": "Шанс двойной мышеловки −5%",
    "fr": "Chance de double tapette -5%",
    "de": "Doppel-Mausefallen-Chance -5%",
@@ -13940,7 +13940,7 @@
    "string_key": 2492333,
    "ko": "전기 이빨: 5% 확률로 2개 감전",
    "en": "Electric Teeth: 5% chance to shock 2 objects",
-   "ja": "電気の歯：5％の確率で2個に感電",
+   "ja": "電気の歯：5％の確率で2個を感電させる",
    "zh": "电击牙：5%概率电击2个物品",
    "pt": "Dentes Elétricos: 5% de chance de eletrocutar 2 objetos",
    "es": "Dientes Eléctricos: 5% de probabilidad de electrocutar 2 objetos",
@@ -14051,7 +14051,7 @@
    "ru": "Урон по боссам +25%",
    "fr": "Dégâts aux boss +25%",
    "de": "Boss-Schaden +25%",
-   "ar": "ضرر الزعماء +25%"
+   "ar": "الضرر ضد الزعماء +25%"
   },
   {
    "string_key": 2492410,
@@ -14064,7 +14064,7 @@
    "ru": "Лимит времени этажа +7 с",
    "fr": "Temps limite d'Étage +7s",
    "de": "Etagen-Zeitlimit +7s",
-   "ar": "وقت الطابق +7 ث"
+   "ar": "مهلة الطابق +7 ث"
   },
   {
    "string_key": 2492415,
@@ -14389,7 +14389,7 @@
    "ru": "Лимит времени этажа +8 с",
    "fr": "Temps limite d'Étage +8s",
    "de": "Etagen-Zeitlimit +8s",
-   "ar": "وقت الطابق +8 ث"
+   "ar": "الحد الزمني للطابق +8 ث"
   },
   {
    "string_key": 2492512,
@@ -14489,7 +14489,7 @@
    "ja": "新しい物が出現：薬品ドラム",
    "zh": "新物品出现：药品桶",
    "pt": "Novo objeto: Tambor de Químicos",
-   "es": "Nuevo objeto: Tambo de Químicos",
+   "es": "Nuevo objeto: Tambor de Químicos",
    "ru": "Новый предмет: бочка с химикатами",
    "fr": "Nouvel objet : Baril chimique",
    "de": "Neues Objekt: Chemiefass",
@@ -14789,7 +14789,7 @@
    "zh": "新物品出现：金条箱",
    "pt": "Novo objeto: Caixa de Barras de Ouro",
    "es": "Nuevo objeto: Caja de Lingotes de Oro",
-   "ru": "Новый предмет: ящик слитков",
+   "ru": "Новый предмет: ящик золотых слитков",
    "fr": "Nouvel objet : Caisse de lingots d'or",
    "de": "Neues Objekt: Goldbarrenkiste",
    "ar": "شيء جديد: صندوق سبائك ذهب"
@@ -15124,7 +15124,7 @@
    "ko": "고양이 체력 -30% · 겁 -30%",
    "en": "Cat HP -30% · Fear -30%",
    "ja": "ネコの体力-30％・怖さ-30％",
-   "zh": "猫体力-30%·恐吓-30%",
+   "zh": "猫体力-30%·恐惧-30%",
    "pt": "HP dos gatos -30% · Medo -30%",
    "es": "PV de gatos -30% · Miedo -30%",
    "ru": "Здоровье котов −30% · страх −30%",
@@ -16487,7 +16487,7 @@
   {
    "string_key": 2493212,
    "ko": "승급 필요 수 -1",
-   "en": "Promote cost -1 rats",
+   "en": "Promote cost -1 rat",
    "ja": "昇格に必要な数-1",
    "zh": "晋升所需数量-1",
    "pt": "Custo de promoção -1 rato",
@@ -16591,7 +16591,7 @@
   {
    "string_key": 2493224,
    "ko": "방마다 물건 +3개",
-   "en": "+3 object per room",
+   "en": "+3 objects per room",
    "ja": "部屋ごとに物+3個",
    "zh": "每个房间物品+3个",
    "pt": "+3 objetos por sala",
@@ -17117,9 +17117,9 @@
    "pt": "Queijo por derrotar criaturas +110%",
    "es": "Queso por derrotar criaturas +110%",
    "ru": "Сыр за победу над существами +110%",
-   "fr": "Fromage de créatures vaincues +110%",
+   "fr": "Fromage en battant des créatures +110%",
    "de": "Käse durch besiegte Kreaturen +110%",
-   "ar": "جبن من هزيمة الكائنات +110%"
+   "ar": "جبن هزيمة الكائنات +110%"
   },
   {
    "string_key": 2493413,
@@ -17813,7 +17813,7 @@
   {
    "string_key": 2493611,
    "ko": "시작 쥐 +2마리 (등급은 훈장 확률)",
-   "en": "+2 starting rat (grade follows Rank odds)",
+   "en": "+2 starting rats (grade follows Rank odds)",
    "ja": "開始ネズミ+2匹（等級は勲章の確率）",
    "zh": "初始老鼠+2只（等级按勋章概率）",
    "pt": "+2 ratos iniciais (grau segue as chances da Patente)",
@@ -18027,7 +18027,7 @@
    "pt": "Dano em chefes +50% · Tempo do andar do chefe +3s",
    "es": "Daño a jefes +50% · Tiempo del piso del jefe +3 s",
    "ru": "Урон по боссам +50% · время этажа босса +3 с",
-   "fr": "Dégâts aux boss +50% · Temps d'Étage de boss +3 s",
+   "fr": "Dégâts aux boss +50% · Temps d'étage du boss +3 s",
    "de": "Bossschaden +50% · Boss-Etagenzeit +3s",
    "ar": "ضرر الزعماء +50% · وقت طابق الزعيم +3 ث"
   },
@@ -18100,7 +18100,7 @@
    "string_key": 2600003,
    "ko": "승급·시간·시작 쥐",
    "en": "Promote · Time · Starting Rats",
-   "ja": "昇格・時間・開始ネズミ",
+   "ja": "昇格・時間・初期ネズミ",
    "zh": "晋升·时间·初始老鼠",
    "pt": "Promover · Tempo · Ratos Iniciais",
    "es": "Ascender · Tiempo · Ratas Iniciales",
@@ -18143,7 +18143,7 @@
    "zh": "解锁·特殊",
    "pt": "Desbloqueios · Especial",
    "es": "Desbloqueos · Especial",
-   "ru": "Открытия · особое",
+   "ru": "Разблокировки · особое",
    "fr": "Déblocages · Spécial",
    "de": "Freischaltungen · Spezial",
    "ar": "فتح · خاص"
@@ -18181,7 +18181,7 @@
    "ja": "ビーカー",
    "zh": "烧杯",
    "pt": "Béquer",
-   "es": "Vaso de Precipitado",
+   "es": "Vaso de precipitados",
    "ru": "Химический стакан",
    "fr": "Bécher",
    "de": "Becherglas",
@@ -18248,7 +18248,7 @@
    "pt": "Prancheta",
    "es": "Portapapeles",
    "ru": "Планшет с зажимом",
-   "fr": "Presse-papiers",
+   "fr": "Porte-bloc",
    "de": "Klemmbrett",
    "ar": "لوح مشبك"
   },
@@ -18337,7 +18337,7 @@
    "ja": "ウォーターサーバー",
    "zh": "饮水机",
    "pt": "Bebedouro",
-   "es": "Garrafón de Agua",
+   "es": "Dispensador de Agua",
    "ru": "Кулер",
    "fr": "Fontaine à eau",
    "de": "Wasserspender",
@@ -18439,9 +18439,9 @@
    "ko": "약품 드럼",
    "en": "Chemical Drum",
    "ja": "薬品ドラム",
-   "zh": "药品桶",
-   "pt": "Tambor de Químicos",
-   "es": "Tambo de Químicos",
+   "zh": "化学品桶",
+   "pt": "Tambor de Produtos Químicos",
+   "es": "Tambor de Productos Químicos",
    "ru": "Бочка с химикатами",
    "fr": "Fût chimique",
    "de": "Chemikalienfass",
@@ -18466,7 +18466,7 @@
    "en": "Cheese Safe",
    "ja": "チーズ金庫",
    "zh": "奶酪保险箱",
-   "pt": "Cofre de Queijo",
+   "pt": "Cofre-forte de Queijo",
    "es": "Caja Fuerte de Queso",
    "ru": "Сырный сейф",
    "fr": "Coffre-fort à fromage",
@@ -18533,7 +18533,7 @@
    "zh": "金条箱",
    "pt": "Caixa de Barras de Ouro",
    "es": "Caja de Lingotes de Oro",
-   "ru": "Ящик слитков",
+   "ru": "Ящик золотых слитков",
    "fr": "Caisse de lingots d'or",
    "de": "Goldbarrenkiste",
    "ar": "صندوق سبائك ذهب"
@@ -18714,7 +18714,7 @@
    "ja": "ペン立て",
    "zh": "笔筒",
    "pt": "Porta-Lápis",
-   "es": "Lapicero",
+   "es": "Portalápices",
    "ru": "Стаканчик для ручек",
    "fr": "Pot à crayons",
    "de": "Stiftehalter",
@@ -18944,15 +18944,15 @@
   {
    "string_key": 2762102,
    "ko": "츄르 상자",
-   "en": "Churu Boxes",
+   "en": "Churu Box",
    "ja": "ちゅ〜るの箱",
    "zh": "啾噜箱",
-   "pt": "Caixas de Churu",
-   "es": "Cajas de Churu",
-   "ru": "Коробки чуру",
-   "fr": "Boîtes de Churu",
-   "de": "Churu-Boxen",
-   "ar": "علب تشورو"
+   "pt": "Caixa de Churu",
+   "es": "Caja de Churu",
+   "ru": "Коробка чуру",
+   "fr": "Boîte de Churu",
+   "de": "Churu-Box",
+   "ar": "علبة تشورو"
   },
   {
    "string_key": 2762103,
@@ -19035,12 +19035,12 @@
   {
    "string_key": 2762109,
    "ko": "구멍 난 식빵",
-   "en": "Cat-Bread Slice",
-   "ja": "ネコ型食パン",
-   "zh": "猫咪吐司",
-   "pt": "Pão de Forma de Gato",
-   "es": "Pan de Molde de Gato",
-   "ru": "Ломтик хлеба-кота",
+   "en": "Holed Bread Slice",
+   "ja": "穴あき食パン",
+   "zh": "挖洞吐司",
+   "pt": "Pão de Forma Furado",
+   "es": "Pan de Molde Agujereado",
+   "ru": "Ломтик хлеба с дыркой",
    "fr": "Pain de mie troué",
    "de": "Loch-Toastscheibe",
    "ar": "شريحة خبز مثقوبة"
@@ -19152,7 +19152,7 @@
   {
    "string_key": 2762205,
    "ko": "발굴용 곡괭이",
-   "en": "Dig Pickaxe",
+   "en": "Excavation Pickaxe",
    "ja": "発掘用つるはし",
    "zh": "挖掘用镐",
    "pt": "Picareta de Escavação",
@@ -19269,8 +19269,8 @@
   {
    "string_key": 2762301,
    "ko": "조아쓰 안전모",
-   "en": "\"Joassu!\" Helmet",
-   "ja": "「よっしゃ！」ヘルメット",
+   "en": "\"Looks Good!\" Helmet",
+   "ja": "「ヨシ！」ヘルメット",
    "zh": "“好嘞！”安全帽",
    "pt": "Capacete \"Bora!\"",
    "es": "Casco \"¡Vamos!\"",
@@ -19471,7 +19471,7 @@
    "es": "Caracola",
    "ru": "Раковина",
    "fr": "Conque",
-   "de": "Muschelhorn",
+   "de": "Turbanschnecke",
    "ar": "قوقعة بحرية"
   },
   {
@@ -19496,7 +19496,7 @@
    "pt": "Caixa de Linguado",
    "es": "Caja de Lenguado",
    "ru": "Ящик с камбалой",
-   "fr": "Caisse à poisson",
+   "fr": "Caisse en polystyrène de flet",
    "de": "Flunder-Styroporbox",
    "ar": "صندوق فلين للسمك"
   },
@@ -19509,7 +19509,7 @@
    "pt": "Bacia Vermelha de Borracha",
    "es": "Tina Roja de Hule",
    "ru": "Красный резиновый таз",
-   "fr": "Bassine rouge",
+   "fr": "Bassine rouge en caoutchouc",
    "de": "Rote Gummiwanne",
    "ar": "طشت مطاطي أحمر"
   },
@@ -19662,7 +19662,7 @@
    "en": "Model Fighter",
    "ja": "戦闘機の模型",
    "zh": "模型战斗机",
-   "pt": "Caça de Brinquedo",
+   "pt": "Modelo de Caça",
    "es": "Caza a Escala",
    "ru": "Модель истребителя",
    "fr": "Maquette d'avion de chasse",
@@ -19713,7 +19713,7 @@
    "ko": "손가락 쥐 포스터",
    "en": "\"I Want You\" Poster",
    "ja": "指さしネズミのポスター",
-   "zh": "指人老鼠海报",
+   "zh": "“我需要你”海报",
    "pt": "Pôster \"Quero Você\"",
    "es": "Póster \"Te Quiero a Ti\"",
    "ru": "Плакат «Ты записался?»",
@@ -19815,12 +19815,12 @@
   {
    "string_key": 2762604,
    "ko": "동결건조 우주식량",
-   "en": "Freeze-Dried Food",
+   "en": "Freeze-Dried Space Food",
    "ja": "フリーズドライ宇宙食",
    "zh": "冻干太空食品",
-   "pt": "Comida Liofilizada",
-   "es": "Comida Liofilizada",
-   "ru": "Сублимированная еда",
+   "pt": "Comida Espacial Liofilizada",
+   "es": "Comida Espacial Liofilizada",
+   "ru": "Сублимированная космическая еда",
    "fr": "Repas spatial lyophilisé",
    "de": "Gefrier-Weltraumkost",
    "ar": "طعام فضاء مجفف بالتجميد"
@@ -20101,12 +20101,12 @@
   {
    "string_key": 2763303,
    "ko": "자재 팔레트",
-   "en": "Brick Pallet",
+   "en": "Material Pallet",
    "ja": "資材パレット",
    "zh": "建材托盘",
-   "pt": "Palete de Tijolos",
-   "es": "Tarima de Ladrillos",
-   "ru": "Поддон с кирпичом",
+   "pt": "Palete de Materiais",
+   "es": "Tarima de Materiales",
+   "ru": "Поддон с материалами",
    "fr": "Palette de matériaux",
    "de": "Materialpalette",
    "ar": "طبلية مواد بناء"
@@ -20452,12 +20452,12 @@
   {
    "string_key": 2870010,
    "ko": "우주 연구소",
-   "en": "Space Research Center",
+   "en": "Space Lab",
    "ja": "宇宙研究所",
    "zh": "宇宙研究所",
-   "pt": "Centro de Pesquisa Espacial",
-   "es": "Centro de Investigación Espacial",
-   "ru": "Космический исследовательский центр",
+   "pt": "Laboratório Espacial",
+   "es": "Laboratorio Espacial",
+   "ru": "Космическая лаборатория",
    "fr": "Labo spatial",
    "de": "Weltraumlabor",
    "ar": "مختبر الفضاء"
@@ -20471,7 +20471,7 @@
    "pt": "Capitão da Guarda Steele",
    "es": "Capitán de la Guardia Steele",
    "ru": "Начальник охраны Стил",
-   "fr": "Capitaine de garde Acier",
+   "fr": "Capitaine de la garde Acier",
    "de": "Wachhauptmann Stahl",
    "ar": "قائد الحرس فولاذ"
   },
@@ -20655,7 +20655,7 @@
    "ru": "Кошка-русалка",
    "fr": "Chat-sirène",
    "de": "Meerjungfrauen-Katze",
-   "ar": "القط الحورية"
+   "ar": "القطة الحورية"
   },
   {
    "string_key": 2995016,
@@ -20699,15 +20699,15 @@
   {
    "string_key": 2995019,
    "ko": "라이언 이병 고양이",
-   "en": "Private Lion Cat",
+   "en": "Private Ryan Cat",
    "ja": "ライアン二等兵ネコ",
    "zh": "列兵瑞恩猫",
    "pt": "Gato Soldado Ryan",
    "es": "Gato Soldado Ryan",
    "ru": "Кот рядовой Райан",
-   "fr": "Soldat Chat-Lion",
-   "de": "Gefreiter Löwenkatze",
-   "ar": "القط الجندي ليون"
+   "fr": "Chat soldat Ryan",
+   "de": "Gefreiter Ryan-Katze",
+   "ar": "القط الجندي رايان"
   },
   {
    "string_key": 2995020,
@@ -20907,25 +20907,25 @@
   {
    "string_key": 2995040,
    "ko": "좋았쓰 고양이 (소환물)",
-   "en": "",
-   "ja": "",
-   "zh": "",
-   "pt": "",
-   "es": "",
-   "ru": "",
-   "fr": "Chat Super (invocation)",
-   "de": "Super-Katze (Beschwörung)",
-   "ar": "قط ممتاز (استدعاء)"
+   "en": "Worksite Cat (Summon)",
+   "ja": "現場猫（召喚物）",
+   "zh": "现场猫（召唤物）",
+   "pt": "Gato da Obra (Invocação)",
+   "es": "Gato de la Obra (Invocación)",
+   "ru": "Кот со стройки (призыв)",
+   "fr": "Chat du chantier (invocation)",
+   "de": "Baustellenkatze (Beschwörung)",
+   "ar": "قط موقع البناء (استدعاء)"
   },
   {
    "string_key": 2995041,
    "ko": "굴착기 (탈것)",
-   "en": "",
-   "ja": "",
-   "zh": "",
-   "pt": "",
-   "es": "",
-   "ru": "",
+   "en": "Excavator (Mount)",
+   "ja": "ショベルカー（乗り物）",
+   "zh": "挖掘机（坐骑）",
+   "pt": "Escavadeira (Montaria)",
+   "es": "Excavadora (Montura)",
+   "ru": "Экскаватор (транспорт)",
    "fr": "Pelleteuse (monture)",
    "de": "Bagger (Fahrzeug)",
    "ar": "حفارة (مركبة)"
@@ -20951,7 +20951,7 @@
    "zh": "嗯哼！",
    "pt": "Hnnngh!",
    "es": "¡Hnnngh!",
-   "ru": "Хны-ы-ых!",
+   "ru": "Хн-н-нгх!",
    "fr": "Humpf !",
    "de": "Hmpf!",
    "ar": "همف!"
@@ -21162,7 +21162,7 @@
    "ru": "Эксперимент провален~!",
    "fr": "Expérience ratééée~ !",
    "de": "Experiment fehlgeschlageeen~!",
-   "ar": "فشلت التجربةةة~!"
+   "ar": "فشلت التجربـــة~!"
   },
   {
    "string_key": 3096019,
@@ -21185,7 +21185,7 @@
    "zh": "削减预算！",
    "pt": "Corte de verba!",
    "es": "¡Recorte de presupuesto!",
-   "ru": "Урезать бюджет!",
+   "ru": "Сокращение бюджета!",
    "fr": "Coupe budgétaire !",
    "de": "Budgetkürzung!",
    "ar": "تقليص الميزانية!"
@@ -21225,7 +21225,7 @@
    "pt": "Isso vai pra auditoria!",
    "es": "¡Esto va a auditoría!",
    "ru": "Это пойдёт на аудит!",
-   "fr": "Ça mérite un audit !",
+   "fr": "Ça va passer à l'audit !",
    "de": "Das gibt eine Revision!",
    "ar": "هذا يخضع للتفتيش المالي!"
   },
@@ -21318,7 +21318,7 @@
    "ru": "Ш-ш-ш!",
    "fr": "Ksss !",
    "de": "Fauch!",
-   "ar": "خسسس!"
+   "ar": "فششش!"
   },
   {
    "string_key": 3096034,
@@ -21343,7 +21343,7 @@
    "es": "¡FSSSS!",
    "ru": "ШШШ!",
    "fr": "CHHH !",
-   "de": "ZISCH!",
+   "de": "FAUCH!",
    "ar": "هسسس!"
   },
   {
@@ -21362,12 +21362,12 @@
   {
    "string_key": 3096037,
    "ko": "냐옹…(기절)",
-   "en": "Meow... (fainted)",
+   "en": "Meow... (stunned)",
    "ja": "ニャ…（気絶）",
-   "zh": "喵……（晕倒）",
-   "pt": "Miau... (desmaiou)",
-   "es": "Miau... (se desmayó)",
-   "ru": "Мяу... (в обмороке)",
+   "zh": "喵……（眩晕）",
+   "pt": "Miau... (atordoado)",
+   "es": "Miau... (aturdido)",
+   "ru": "Мяу... (оглушён)",
    "fr": "Miaou… (étourdi)",
    "de": "Miau… (betäubt)",
    "ar": "مياو... (مصعوق)"
@@ -21429,7 +21429,7 @@
    "ko": "주문이 꼬였다냥!",
    "en": "The spell got tangled, meow!",
    "ja": "呪文がこんがらがったニャ！",
-   "zh": "咒语缠住了喵！",
+   "zh": "咒语念乱了喵！",
    "pt": "O feitiço embolou, miau!",
    "es": "¡Se enredó el hechizo, miau!",
    "ru": "Заклинание запуталось, мяу!",
@@ -21624,7 +21624,7 @@
    "ko": "이븐하게 익혀 드릴게요~",
    "en": "I'll cook you nice and EVEN~",
    "ja": "イーブンに焼いてあげますよ〜",
-   "zh": "给你烤得均匀均匀~",
+   "zh": "给你烤得均均匀匀~",
    "pt": "Vou te assar no ponto CERTINHO~",
    "es": "Te voy a cocinar PAREJITO~",
    "ru": "Прожарю тебя РОВНЕНЬКО~",
@@ -21728,7 +21728,7 @@
    "ko": "해피해피해피~!",
    "en": "Happy happy happy~!",
    "ja": "ハッピーハッピーハッピー〜！",
-   "zh": "快乐快乐快乐~！",
+   "zh": "哈皮哈皮哈皮~！",
    "pt": "Happy happy happy~!",
    "es": "¡Happy happy happy~!",
    "ru": "Хэппи-хэппи-хэппи~!",
@@ -21795,7 +21795,7 @@
    "ja": "バターを塗ったネコ、出動〜！",
    "zh": "涂黄油的猫出动~！",
    "pt": "Gato amanteigado, a postos~!",
-   "es": "¡Gato con mantequilla, despliéguense~!",
+   "es": "¡Gato con mantequilla, despliégate~!",
    "ru": "Кот с маслом, на вылет~!",
    "fr": "Chat beurré, en avant~ !",
    "de": "Butterkatze, im Einsatz~!",
@@ -21844,7 +21844,7 @@
    "string_key": 3096095,
    "ko": "무야호~!!!",
    "en": "YAHOOO~!!!",
-   "ja": "ムヤホ〜!!!",
+   "ja": "イヤッホ〜!!!",
    "zh": "呀吼~!!!",
    "pt": "IAHUUU~!!!",
    "es": "¡¡¡YAJUUU~!!!",
@@ -21938,7 +21938,7 @@
    "ja": "ネズミがインポスターだ!! 投票しろ!!",
    "zh": "老鼠是内鬼!! 投票!!",
    "pt": "Os ratos são os impostores!! VOTEM NELES!!",
-   "es": "¡¡Las ratas son los impostores!! ¡¡VOTEN POR ELLAS!!",
+   "es": "¡¡Las ratas son las impostoras!! ¡¡VOTEN POR ELLAS!!",
    "ru": "Крысы — предатели!! ГОЛОСУЙТЕ!!",
    "fr": "Les souris sont les imposteurs !! VOTEZ !!",
    "de": "Die Ratten sind die Impostors!! VOTET SIE RAUS!!",
@@ -21952,7 +21952,7 @@
    "zh": "（在汉江上散步的猫）",
    "pt": "(Um gato passeando sobre o rio Han)",
    "es": "(Un gato paseando sobre el río Han)",
-   "ru": "(Кот гуляет над рекой Ханган)",
+   "ru": "(Кот гуляет по реке Ханган)",
    "fr": "(Un chat qui marche sur le fleuve gelé)",
    "de": "(Eine Katze spaziert über den zugefrorenen Fluss)",
    "ar": "(قطة تتمشى فوق النهر المتجمد)"
@@ -21974,7 +21974,7 @@
    "string_key": 3096105,
    "ko": "(엉엉엉엉) 바나나...",
    "en": "(sob sob sob) Banana...",
-   "ja": "（オイオイオイ）バナナ…",
+   "ja": "（うわーん）バナナ…",
    "zh": "（呜呜呜呜）香蕉……",
    "pt": "(snif snif snif) Banana...",
    "es": "(snif snif snif) Plátano...",
@@ -22066,13 +22066,13 @@
    "ko": "해피해피해피~!!",
    "en": "Happy happy happy~!!",
    "ja": "ハッピーハッピーハッピー〜!!",
-   "zh": "快乐快乐快乐~!!",
+   "zh": "哈皮哈皮哈皮~!!",
    "pt": "Happy happy happy~!!",
    "es": "¡¡Happy happy happy~!!",
    "ru": "Хэппи-хэппи-хэппи~!!",
    "fr": "Happy happy happy~ !!",
    "de": "Happy happy happy~!!",
-   "ar": "سعيد سعيد سعيد~!!"
+   "ar": "هابي هابي هابي~!!"
   },
   {
    "string_key": 3096202,
@@ -22118,7 +22118,7 @@
    "ko": "안 해피해!",
    "en": "Not happy!",
    "ja": "ハッピーじゃない！",
-   "zh": "不快乐！",
+   "zh": "不Happy！",
    "pt": "Nada happy!",
    "es": "¡Nada happy!",
    "ru": "Не хэппи!",
@@ -22131,7 +22131,7 @@
    "ko": "해피… 해피…",
    "en": "Happy... happy...",
    "ja": "ハッピー…ハッピー…",
-   "zh": "快乐……快乐……",
+   "zh": "Happy……Happy……",
    "pt": "Happy... happy...",
    "es": "Happy... happy...",
    "ru": "Хэппи... хэппи...",
@@ -22157,7 +22157,7 @@
    "ko": "다 같이 해피~!",
    "en": "Everybody happy~!",
    "ja": "みんなでハッピー〜！",
-   "zh": "大家一起快乐~！",
+   "zh": "大家一起Happy~！",
    "pt": "Todo mundo happy~!",
    "es": "¡Todos happy~!",
    "ru": "Все хэппи~!",
@@ -22170,7 +22170,7 @@
    "ko": "치피치피~",
    "en": "Chipi chipi~",
    "ja": "チピチピ〜",
-   "zh": "吃皮吃皮~",
+   "zh": "Chipi chipi~",
    "pt": "Chipi chipi~",
    "es": "Chipi chipi~",
    "ru": "Чипи-чипи~",
@@ -22378,7 +22378,7 @@
    "ko": "원숭이로 돌아간다!",
    "en": "Return to monke!",
    "ja": "サルに戻る！",
-   "zh": "回归猿猴！",
+   "zh": "回归猴子！",
    "pt": "Volta pro macaco!",
    "es": "¡Regresa al mono!",
    "ru": "Назад к обезьяне!",
@@ -22623,14 +22623,14 @@
   {
    "string_key": 3096245,
    "ko": "둠칫둠칫~",
-   "en": "Dum-dum-dance~",
+   "en": "Boom-tss boom-tss~",
    "ja": "ズンチャズンチャ〜",
    "zh": "动次打次~",
-   "pt": "Tum-tum-dança~",
-   "es": "Pum-pum-bailecito~",
-   "ru": "Тыц-тыц-танец~",
+   "pt": "Tum-tss tum-tss~",
+   "es": "Pum-tss pum-tss~",
+   "ru": "Бум-тсс бум-тсс~",
    "fr": "Boum-tchak boum-tchak~",
-   "de": "Uffz-uffz-tanz~",
+   "de": "Uffz-uffz uffz-uffz~",
    "ar": "دوم-تك دوم-تك~"
   },
   {
@@ -22727,8 +22727,8 @@
   {
    "string_key": 3096253,
    "ko": "조아쓰!! 가즈아!!",
-   "en": "Joassu!! Let's go!!",
-   "ja": "よっしゃ!! 行くぞ!!",
+   "en": "Alright!! Let's go!!",
+   "ja": "ヨシ!! 行くぞ!!",
    "zh": "好嘞!! 冲啊!!",
    "pt": "Bora!! Vamo que vamo!!",
    "es": "¡¡Vamos!! ¡¡Échale!!",
@@ -22754,7 +22754,7 @@
    "string_key": 3096255,
    "ko": "츄르 인상 없인 일 안 한다냥!",
    "en": "No churu raise, no work!",
-   "ja": "ちゅ〜る値上げなしでは働かないニャ！",
+   "ja": "ちゅ〜る賃上げなしでは働かないニャ！",
    "zh": "不涨啾噜就不干活喵！",
    "pt": "Sem aumento de churu, sem trabalho!",
    "es": "¡Sin aumento de churu, no hay trabajo!",
@@ -22786,7 +22786,7 @@
    "es": "¡Represión sindical!",
    "ru": "Давление на профсоюз!",
    "fr": "Répression syndicale !",
-   "de": "Streikbrecher!",
+   "de": "Gewerkschaftsunterdrückung!",
    "ar": "هذا قمع للعمال!"
   },
   {
@@ -23031,9 +23031,9 @@
    "zh": "在海底~",
    "pt": "Aqui no mar~",
    "es": "Bajo del mar~",
-   "ru": "На морском дне~",
+   "ru": "В мире морском~",
    "fr": "Sous l'océan~",
-   "de": "Unter dem Meer~",
+   "de": "Unten im Meer~",
    "ar": "تحت البحر~"
   },
   {
@@ -23131,7 +23131,7 @@
    "string_key": 3096291,
    "ko": "빠밤… 빠밤…",
    "en": "Dun dun... dun dun...",
-   "ja": "ダダン…ダダン…",
+   "ja": "デーデン…デーデン…",
    "zh": "噔噔……噔噔……",
    "pt": "Tan tan... tan tan...",
    "es": "Tan tan... tan tan...",
@@ -23158,7 +23158,7 @@
    "ko": "지느러미가!",
    "en": "My fin!",
    "ja": "ヒレが！",
-   "zh": "鱼鳍！",
+   "zh": "我的鱼鳍！",
    "pt": "Minha barbatana!",
    "es": "¡Mi aleta!",
    "ru": "Мой плавник!",
@@ -23170,7 +23170,7 @@
    "string_key": 3096296,
    "ko": "뚜루루뚜루…",
    "en": "Doo doo doo...",
-   "ja": "ドゥルルドゥルル…",
+   "ja": "トゥルルットゥル…",
    "zh": "嘟噜噜嘟噜……",
    "pt": "Du du du...",
    "es": "Du du du...",
@@ -23287,11 +23287,11 @@
    "string_key": 3096309,
    "ko": "라이언 이병, 임무 수행 중이다냥!",
    "en": "Private Lion, on duty!",
-   "ja": "ライアン二等兵、任務遂行中だニャ！",
-   "zh": "列兵瑞恩，正在执行任务喵！",
-   "pt": "Soldado Ryan, em serviço!",
-   "es": "¡Soldado Ryan, en servicio!",
-   "ru": "Рядовой Райан, на посту!",
+   "ja": "ライオン二等兵、任務遂行中だニャ！",
+   "zh": "狮子列兵，正在执行任务喵！",
+   "pt": "Soldado Leão, em serviço!",
+   "es": "¡Soldado León, en servicio!",
+   "ru": "Рядовой Лев, на посту!",
    "fr": "Soldat Lion, en mission, miaou !",
    "de": "Gefreiter Löwe, im Einsatz, miau!",
    "ar": "الجندي أسد، في مهمة، مياو!"
@@ -23617,7 +23617,7 @@
    "pt": "Pro duto!",
    "es": "¡A la ventila!",
    "ru": "В вентиляцию!",
-   "fr": "Dans la conduite !",
+   "fr": "Dans le conduit !",
    "de": "Ab in den Lüftungsschacht!",
    "ar": "إلى فتحة التهوية!"
   },
@@ -23702,12 +23702,12 @@
   {
    "string_key": 3096344,
    "ko": "레이저 발사!",
-   "en": "Laser on!",
+   "en": "Laser fire!",
    "ja": "レーザー発射！",
    "zh": "激光发射！",
-   "pt": "Laser ligado!",
-   "es": "¡Láser activado!",
-   "ru": "Лазер включён!",
+   "pt": "Disparar laser!",
+   "es": "¡Disparar láser!",
+   "ru": "Лазерный залп!",
    "fr": "Tir laser !",
    "de": "Laserfeuer!",
    "ar": "إطلاق الليزر!"
@@ -23949,12 +23949,12 @@
   {
    "string_key": 3096411,
    "ko": "통풍구? 몰라 찍",
-   "en": "Vents? Never heard of them",
+   "en": "Vents? Never heard of them, squeak",
    "ja": "ベント？知らないチュー",
    "zh": "通风口？不知道吱",
-   "pt": "Duto? Nunca ouvi falar",
-   "es": "¿Ventilas? Ni idea",
-   "ru": "Вентиляция? Впервые слышу",
+   "pt": "Duto? Nunca ouvi falar, guinch",
+   "es": "¿Ventilas? Ni idea, iiik",
+   "ru": "Вентиляция? Впервые слышу, пи",
    "fr": "Une conduite ? Connais pas, couic",
    "de": "Lüftungsschacht? Nie gehört, piep",
    "ar": "فتحة تهوية؟ لا أعرفها، صِيء"
@@ -24067,7 +24067,7 @@
    "string_key": 3100008,
    "ko": "무야호~!! 3단 점프",
    "en": "YAHOOO~!! Triple Jump",
-   "ja": "ムヤホ〜!! 3段ジャンプ",
+   "ja": "ヤッホー〜!! 3段ジャンプ",
    "zh": "呀吼~!! 三段跳",
    "pt": "IAHUUU~!! Pulo Triplo",
    "es": "¡¡YAJUUU~!! Triple Salto",
@@ -24149,7 +24149,7 @@
    "zh": "冻得结结实实的汉江",
    "pt": "O Rio Han Congelado",
    "es": "El Río Han Congelado",
-   "ru": "Замёрзшая Ханган",
+   "ru": "Замёрзший Ханган",
    "fr": "Le fleuve Han tout gelé",
    "de": "Der tiefgefrorene Han-Fluss",
    "ar": "نهر هان المتجمد"
@@ -24568,7 +24568,7 @@
    "ru": "Ковш экскаватора",
    "fr": "Coup de pelleteuse",
    "de": "Baggerschaufel",
-   "ar": "غرفة الحفارة"
+   "ar": "مغرفة الحفارة"
   },
   {
    "string_key": 3100047,
@@ -24586,8 +24586,8 @@
   {
    "string_key": 3100048,
    "ko": "조아쓰!!",
-   "en": "Joassu!!",
-   "ja": "よっしゃ!!",
+   "en": "Looks Good!!",
+   "ja": "ヨシ!!",
    "zh": "好嘞!!",
    "pt": "Bora!!",
    "es": "¡¡Vamos!!",
@@ -24613,7 +24613,7 @@
    "string_key": 3100050,
    "ko": "츄르 인상 요구",
    "en": "Churu Raise Demand",
-   "ja": "ちゅ〜る値上げ要求",
+   "ja": "ちゅ〜る賃上げ要求",
    "zh": "要求啾噜加薪",
    "pt": "Exigência de Aumento de Churu",
    "es": "Exigencia de Aumento de Churu",
@@ -24708,10 +24708,10 @@
    "zh": "在海底",
    "pt": "Aqui no Mar",
    "es": "Bajo del Mar",
-   "ru": "На морском дне",
+   "ru": "В мире морском",
    "fr": "Sous l'océan",
    "de": "Unter dem Meer",
-   "ar": "تحت البحر"
+   "ar": "تحت المحيط"
   },
   {
    "string_key": 3100058,
@@ -24729,12 +24729,12 @@
   {
    "string_key": 3100059,
    "ko": "생선 따귀",
-   "en": "Fish Slap Dance",
-   "ja": "魚ビンタダンス",
-   "zh": "鱼巴掌舞",
-   "pt": "Dança do Tapa de Peixe",
-   "es": "Baile del Pescadazo",
-   "ru": "Танец рыбных пощёчин",
+   "en": "Fish Slap",
+   "ja": "魚ビンタ",
+   "zh": "鱼巴掌",
+   "pt": "Tapa de Peixe",
+   "es": "Pescadazo",
+   "ru": "Рыбная пощёчина",
    "fr": "Baffe de poisson",
    "de": "Fisch-Ohrfeige",
    "ar": "صفعة السمكة"
@@ -24757,7 +24757,7 @@
    "ko": "소나 핑",
    "en": "Sonar Ping",
    "ja": "ソナーピン",
-   "zh": "声呐",
+   "zh": "声呐脉冲",
    "pt": "Ping do Sonar",
    "es": "Ping de Sonar",
    "ru": "Сигнал сонара",
@@ -24799,9 +24799,9 @@
    "zh": "大白鲨冲锋",
    "pt": "Investida de Tubarão",
    "es": "Embestida de Tiburón",
-   "ru": "Рывок челюстей",
+   "ru": "Рывок «Челюстей»",
    "fr": "Charge des Dents de la mer",
-   "de": "Jaws-Ansturm",
+   "de": "Weißer-Hai-Ansturm",
    "ar": "اندفاع الفك المفترس"
   },
   {
@@ -24812,7 +24812,7 @@
    "zh": "鲨卷风",
    "pt": "Sharknado",
    "es": "Sharknado",
-   "ru": "Акулонадо",
+   "ru": "Акулий торнадо",
    "fr": "Sharknado",
    "de": "Sharknado",
    "ar": "شاركنادو"
@@ -24848,10 +24848,10 @@
    "ko": "360 노스코프",
    "en": "360 No-Scope",
    "ja": "360ノースコープ",
-   "zh": "360度不开镜",
+   "zh": "360度盲狙",
    "pt": "360 No-Scope",
    "es": "360 No-Scope",
-   "ru": "360 без прицела",
+   "ru": "360 ноускоп",
    "fr": "360 No-Scope",
    "de": "360 No-Scope",
    "ar": "360 بدون منظار"
@@ -24874,11 +24874,11 @@
    "ko": "생명의 순환",
    "en": "Circle of Life",
    "ja": "サークル・オブ・ライフ",
-   "zh": "生命循环",
-   "pt": "Ciclo da Vida",
-   "es": "Ciclo de la Vida",
+   "zh": "生生不息",
+   "pt": "Ciclo Sem Fim",
+   "es": "Ciclo Sin Fin",
    "ru": "Круг жизни",
-   "fr": "Cycle de la vie",
+   "fr": "L'Histoire de la vie",
    "de": "Der ewige Kreis",
    "ar": "دائرة الحياة"
   },
@@ -24886,8 +24886,8 @@
    "string_key": 3100071,
    "ko": "이병 구하기 보급",
    "en": "Saving Private Supply",
-   "ja": "二等兵救出の補給",
-   "zh": "拯救列兵补给",
+   "ja": "プライベート・サプライ",
+   "zh": "拯救大兵补给",
    "pt": "Resgate do Soldado Suprimento",
    "es": "Rescatando al Soldado Suministro",
    "ru": "Спасти рядового снабжения",
@@ -24926,7 +24926,7 @@
    "ko": "작전 지도 쾅!",
    "en": "Map Table Slam",
    "ja": "作戦地図バン！",
-   "zh": "作战地图拍桌！",
+   "zh": "怒拍作战地图！",
    "pt": "Murro no Mapa",
    "es": "Golpe al Mapa",
    "ru": "Удар по карте",
@@ -24977,7 +24977,7 @@
    "string_key": 3100078,
    "ko": "레이저 눈",
    "en": "Laser Eyes",
-   "ja": "レーザー目",
+   "ja": "レーザーアイ",
    "zh": "激光眼",
    "pt": "Olhos de Laser",
    "es": "Ojos Láser",
@@ -25030,7 +25030,7 @@
    "ko": "재미없어",
    "en": "I Had Fun Once",
    "ja": "つまらない",
-   "zh": "一次开心",
+   "zh": "没意思",
    "pt": "Me Diverti Uma Vez",
    "es": "Me Divertí Una Vez",
    "ru": "Однажды было весело",
@@ -25276,7 +25276,7 @@
    "string_key": 3100101,
    "ko": "좋았쓰!! 호출",
    "en": "Call the Looks-Good Cats",
-   "ja": "よっしゃ!! ネコ呼び",
+   "ja": "ヨシ!! ネコ呼び",
    "zh": "呼叫“好嘞!!”猫",
    "pt": "Chamar os Gatos \"Bora!!\"",
    "es": "Llamar a los Gatos \"¡¡Vamos!!\"",
@@ -25367,7 +25367,7 @@
    "string_key": 3100108,
    "ko": "물방울 감옥",
    "en": "Bubble Jail",
-   "ja": "水玉の牢屋",
+   "ja": "泡の牢屋",
    "zh": "水泡牢笼",
    "pt": "Prisão de Bolha",
    "es": "Cárcel de Burbuja",
@@ -25643,8 +25643,8 @@
    "ja": "触手のみこみ",
    "zh": "触手吞噬",
    "pt": "Engolida de Tentáculo",
-   "es": "Trago de Tentáculo",
-   "ru": "Глоток щупальцем",
+   "es": "Tragada de Tentáculo",
+   "ru": "Поглощение щупальцами",
    "fr": "Gobage à tentacules",
    "de": "Tentakel-Schlinger",
    "ar": "ابتلاع المجسات"
@@ -25652,14 +25652,14 @@
   {
    "string_key": 3100130,
    "ko": "긴급 회의",
-   "en": "Emergency Huddle",
+   "en": "Emergency Meeting",
    "ja": "緊急会議",
    "zh": "紧急会议",
    "pt": "Reunião de Emergência",
-   "es": "Junta de Emergencia",
-   "ru": "Экстренный сбор",
+   "es": "Reunión de Emergencia",
+   "ru": "Экстренное собрание",
    "fr": "Réunion d'urgence",
-   "de": "Notfall-Meeting",
+   "de": "Notfalltreffen",
    "ar": "اجتماع طارئ"
   },
   {
@@ -25899,12 +25899,12 @@
   {
    "string_key": 3390019,
    "ko": "현장소장",
-   "en": "Site Manager Harold",
+   "en": "Site Manager",
    "ja": "現場所長",
    "zh": "工地主任",
-   "pt": "Mestre de Obras Haroldo",
-   "es": "Jefe de Obra Haroldo",
-   "ru": "Прораб Гарольд",
+   "pt": "Mestre de Obras",
+   "es": "Jefe de Obra",
+   "ru": "Прораб",
    "fr": "Chef de chantier",
    "de": "Bauleiter",
    "ar": "مدير الموقع"
@@ -26094,12 +26094,12 @@
   {
    "string_key": 3390034,
    "ko": "커피 쏟는 관제소장",
-   "en": "Flight Director",
+   "en": "Coffee-Spilling Flight Director",
    "ja": "コーヒーをこぼす管制所長",
    "zh": "洒咖啡的指挥中心主任",
-   "pt": "Diretor de Voo",
-   "es": "Director de Vuelo",
-   "ru": "Руководитель полёта",
+   "pt": "Diretor de Voo Derramando Café",
+   "es": "Director de Vuelo Derramando Café",
+   "ru": "Проливающий кофе руководитель полёта",
    "fr": "Directeur renversant son café",
    "de": "Kaffee-verschüttender Flugdirektor",
    "ar": "مدير المراقبة ساكب القهوة"
@@ -26251,7 +26251,7 @@
    "string_key": 3491012,
    "ko": "위생 점검 망했다!",
    "en": "The health inspection is ruined!",
-   "ja": "衛生検査が終わった！",
+   "ja": "衛生検査が台無しだ！",
    "zh": "卫生检查完蛋了！",
    "pt": "A vistoria sanitária já era!",
    "es": "¡Se arruinó la inspección sanitaria!",
@@ -26304,7 +26304,7 @@
    "ko": "물었어!!",
    "en": "It BIT me!!",
    "ja": "かまれた!!",
-   "zh": "咬我!!",
+   "zh": "咬我了!!",
    "pt": "Me MORDEU!!",
    "es": "¡¡Me MORDIÓ!!",
    "ru": "Он УКУСИЛ меня!!",
@@ -26397,7 +26397,7 @@
    "ja": "給料泥棒失敗〜",
    "zh": "带薪摸鱼失败~",
    "pt": "Enrolação: falhou~",
-   "es": "Hacerse güey: falló~",
+   "es": "Holgazanear: falló~",
    "ru": "Отлынивание: провалено~",
    "fr": "Glandouille au boulot : échec~",
    "de": "Arbeitszeitbetrug gescheitert~",
@@ -26627,7 +26627,7 @@
   {
    "string_key": 3491101,
    "ko": "내 실험복이 털 범벅이야!",
-   "en": "My coat is all fur!",
+   "en": "My lab coat is covered in fur!",
    "ja": "白衣が毛まみれだ！",
    "zh": "我的实验服全是毛！",
    "pt": "Meu jaleco tá todo peludo!",
@@ -26640,11 +26640,11 @@
   {
    "string_key": 3491102,
    "ko": "냥이들 밥 줄 시간인데!",
-   "en": "It's feeding time!",
+   "en": "It's time to feed the kitties!",
    "ja": "ネコたちのご飯の時間なのに！",
    "zh": "该喂猫了！",
    "pt": "É hora de alimentar os gatos!",
-   "es": "¡Es hora de darles de comer!",
+   "es": "¡Es hora de darles de comer a los gatos!",
    "ru": "Пора кормить котиков!",
    "fr": "C'est l'heure de nourrir les minous !",
    "de": "Zeit, die Miezen zu füttern!",
@@ -26749,7 +26749,7 @@
    "zh": "这可是白垩纪的！",
    "pt": "Isso é do Cretáceo!",
    "es": "¡Eso es del Cretácico!",
-   "ru": "Это мел-период!",
+   "ru": "Это же реликвия мелового периода!",
    "fr": "Ça date du Crétacé !",
    "de": "Das ist aus der Kreidezeit!",
    "ar": "هذه آثار من العصر الطباشيري!"
@@ -26796,7 +26796,7 @@
   {
    "string_key": 3491114,
    "ko": "와 쥐다! 귀여워!",
-   "en": "Aww, rats!",
+   "en": "Wow, rats! So cute!",
    "ja": "わあネズミだ！かわいい！",
    "zh": "哇，老鼠！好可爱！",
    "pt": "Own, ratinhos!",
@@ -26955,8 +26955,8 @@
    "en": "Rats aren't marine life!",
    "ja": "ネズミは海洋生物じゃない！",
    "zh": "老鼠不是海洋生物！",
-   "pt": "Rato não é vida marinha!",
-   "es": "¡Las ratas no son vida marina!",
+   "pt": "Rato não é animal marinho!",
+   "es": "¡Las ratas no son animales marinos!",
    "ru": "Крысы — не морские обитатели!",
    "fr": "Les rats ne sont pas des animaux marins !",
    "de": "Ratten sind keine Meerestiere!",
@@ -26973,7 +26973,7 @@
    "ru": "Буль... крысы!",
    "fr": "Glouglou… des rats !",
    "de": "Blubb… Ratten!",
-   "ar": "بغبغ… فئران!"
+   "ar": "بقبق… فئران!"
   },
   {
    "string_key": 3491128,
@@ -27217,7 +27217,7 @@
    "zh": "灯要倒了！",
    "pt": "As luzes tão caindo!",
    "es": "¡Se caen las luces!",
-   "ru": "Свет падает!",
+   "ru": "Софиты падают!",
    "fr": "Les projecteurs tombent !",
    "de": "Die Scheinwerfer kippen um!",
    "ar": "الأضواء تسقط!"
@@ -27255,7 +27255,7 @@
    "ja": "レジェンドのかけら（小）",
    "zh": "传说碎片（小）",
    "pt": "Fragmento Lendário (P)",
-   "es": "Fragmento Legendario (C)",
+   "es": "Fragmento Legendario (P)",
    "ru": "Легендарный осколок (М)",
    "fr": "Fragment légendaire (P)",
    "de": "Legendärer Splitter (K)",
@@ -27294,7 +27294,7 @@
    "ja": "ミシックのかけら（小）",
    "zh": "神话碎片（小）",
    "pt": "Fragmento Mítico (P)",
-   "es": "Fragmento Mítico (C)",
+   "es": "Fragmento Mítico (P)",
    "ru": "Мифический осколок (М)",
    "fr": "Fragment mythique (P)",
    "de": "Mythischer Splitter (K)",
@@ -27464,7 +27464,7 @@
    "zh": "早就坏了",
    "pt": "Já Estava Quebrado",
    "es": "Ya Estaba Roto",
-   "ru": "Он уже был сломан",
+   "ru": "Оно уже было сломано",
    "fr": "C'était déjà cassé",
    "de": "Das war schon kaputt",
    "ar": "كان مكسوراً من الأصل"
@@ -27474,7 +27474,7 @@
    "ko": "모싱 피트",
    "en": "Mosh Pit",
    "ja": "モッシュピット",
-   "zh": "人浪池",
+   "zh": "冲撞区",
    "pt": "Mosh Pit",
    "es": "Mosh Pit",
    "ru": "Мош-пит",
@@ -27577,7 +27577,7 @@
    "string_key": 3640020,
    "ko": "우주.exe 재시작",
    "en": "Restarting universe.exe",
-   "ja": "uchuu.exe 再起動",
+   "ja": "宇宙.exe 再起動",
    "zh": "重启宇宙.exe",
    "pt": "Reiniciando universo.exe",
    "es": "Reiniciando universo.exe",
@@ -27812,7 +27812,7 @@
    "ko": "시궁쥐",
    "en": "Sewer Rat",
    "ja": "ドブネズミ",
-   "zh": "褐家鼠",
+   "zh": "下水道鼠",
    "pt": "Rato de Esgoto",
    "es": "Rata de Alcantarilla",
    "ru": "Серая крыса",
@@ -28206,9 +28206,9 @@
    "pt": "E criar ratos de grau maior com Promover também aumenta muito o GUINCHO!! Só deixa alguns ratos pra procriar, guinch!",
    "es": "¡Y crear ratas de grado superior con Ascender también sube mucho el CHILLIDO!! Solo deja algunas para criar, iiik!",
    "ru": "А ещё высокие классы через «Повышение» сильно поднимают ПИСК!! Просто оставь пару крыс на размножение, пи!",
-   "fr": "Et créer des rats de haut rang via Promouvoir booste aussi le COUIC !! Garde juste de quoi assurer la reproduction, couic !",
+   "fr": "Et créer des rats de classe supérieure via Promouvoir booste aussi le COUIC !! Garde juste de quoi assurer la reproduction, couic !",
    "de": "Und hochstufige Ratten durch Befördern lassen PIEP!! ebenfalls stark steigen! Behalte nur genug Ratten für die Zucht, piep!",
-   "ar": "وصنع فئران عالية الرتبة عبر الترقية يرفع صِيء!! كثيراً أيضاً! فقط اترك بعض الفئران للتكاثر، صِيء!"
+   "ar": "وصنع فئران ذات درجة أعلى عبر الترقية يرفع صِيء!! كثيراً أيضاً! فقط اترك بعض الفئران للتكاثر، صِيء!"
   },
   {
    "string_key": 3900029,
@@ -28294,7 +28294,7 @@
    "en": "You need the connected skill first to open the next one. Higher-tier skills need 'Research' as well as Cheese!",
    "ja": "つながったスキルを取らないと次のスキルは開かないよ。高い段階のスキルはチーズといっしょに『研究資料』も必要！",
    "zh": "要先点相连的技能，才能开启下一个。高阶技能除了奶酪还需要“研究资料”！",
-   "pt": "Precisa do talento ligado antes pra abrir o próximo. Habilidades de nível alto precisam de 'Pesquisa' além de Queijo!",
+   "pt": "Precisa da habilidade ligada antes pra abrir a próxima. Habilidades de nível alto precisam de 'Pesquisa' além de Queijo!",
    "es": "Necesitas la habilidad conectada para abrir la siguiente. ¡Las de nivel alto necesitan 'Investigación' además de Queso!",
    "ru": "Чтобы открыть следующий навык, нужен связанный. Навыки высоких ступеней требуют ещё и «Исследования», а не только сыр!",
    "fr": "Débloque une compétence reliée pour ouvrir la suivante. Les compétences avancées demandent de la « Recherche » en plus du Fromage !",
@@ -28435,7 +28435,7 @@
    "string_key": 3900046,
    "ko": "찍찍 훈장을 얻으면 친구들도 늘어날 거야 찍찍!!",
    "en": "Earn a SQUEAK!! Rank and more buddies will join us, squeak squeak!!",
-   "ja": "チュー!!勲章を手に入れたら仲間も増えるよチューチュー!!",
+   "ja": "チュー!!勲章を手に入れたらなかまも増えるよチューチュー!!",
    "zh": "获得吱吱!!勋章，伙伴也会变多吱吱!!",
    "pt": "Ganhe uma Patente GUINCHO!! e mais parças vão se juntar a nós, guinch-guinch!!",
    "es": "¡¡Gana un Rango CHILLIDO!! y se nos unirán más compas, iiik-iiik!!",
@@ -28506,7 +28506,7 @@
    "es": "El número arriba a la derecha es ratas actuales / máximo. ¡Cuando se llena, ya no hay cría!",
    "ru": "Число справа вверху — крыс сейчас / максимум. Когда заполнено, размножаться нельзя!",
    "fr": "Le nombre en haut à droite indique rats actuels / rats max. Une fois plein, plus de reproduction !",
-   "de": "Die Zahl oben rechts zeigt aktuelle Ratten / Max. Ratten. Wenn voll ist, gibt es keine Zucht mehr!",
+   "de": "Die Zahl oben rechts zeigt aktuelle Ratten / Max. Ratten. Wenn es voll ist, gibt es keine Zucht mehr!",
    "ar": "الرقم أعلى اليمين هو عدد الفئران الحالي / الحد الأقصى. عند الامتلاء، يتوقف التكاثر!"
   },
   {
@@ -28814,7 +28814,7 @@
    "en": "All the odds are written right here. Shards you get can be used in Wheel Training right away!",
    "ja": "確率はここに全部書いてあるよ。出たかけらは回し車トレーニングですぐ使える！",
    "zh": "概率全都写在这里了。抽到的碎片可以马上用在滚轮训练里！",
-   "pt": "Todas as chances estão escritas aqui. Os Fragmentos que sair dá pra usar no Treino na Rodinha na hora!",
+   "pt": "Todas as chances estão escritas aqui. Os Fragmentos que saírem dá pra usar no Treino na Rodinha na hora!",
    "es": "Todas las probabilidades están aquí. ¡Los Fragmentos que salgan se usan en el Entrenamiento en la Rueda al instante!",
    "ru": "Все шансы расписаны здесь. Выпавшие осколки сразу идут в тренировку в колесе!",
    "fr": "Toutes les probabilités sont écrites ici. Les Fragments obtenus sont utilisables tout de suite dans l'Entraînement à la roue !",
@@ -29227,7 +29227,7 @@
   {
    "string_key": 3900115,
    "ko": "이건… 전설의 미니 게임기잖아! 10훈장을 단 쥐만 만질 수 있다는 그거!",
-   "en": "No way… it's the legendary mini arcade! They say only rats with the 10th rank can touch it!",
+   "en": "No way… it's the legendary mini arcade! They say only rats with Rank 10 can touch it!",
    "ja": "これは…伝説のミニゲーム機じゃないか！勲章10をつけたネズミしかさわれないっていうアレ！",
    "zh": "这是……传说中的迷你游戏机！据说只有佩戴10级勋章的老鼠才能碰！",
    "pt": "Não acredito... é o lendário mini fliperama! Dizem que só ratos da 10ª Patente podem tocar nele!",
@@ -29413,7 +29413,7 @@
    "ja": "チュー！チュー!!チュー!!!（人間とネコの邪魔を突きやぶって…必ず脱出するんだ!!）",
    "zh": "吱！吱!!吱!!!（冲破人类和猫的阻挠……一定要逃出去!!）",
    "pt": "Guinch! Guinch!! Guinch!!! (Passando por humanos e gatos... a gente VAI fugir!!)",
-   "es": "¡Iiik! ¡¡Iiik!! ¡¡¡Iiik!!! (Entre humanos y gatos... ¡¡vamos a ESCAPAR!!)",
+   "es": "¡Iiik! ¡¡Iiik!! ¡¡¡Iiik!!! (Superando los obstáculos de humanos y gatos... ¡¡vamos a ESCAPAR!!)",
    "ru": "Пи! Пи!! Пи!!! (Сквозь людей и котов... мы ОБЯЗАТЕЛЬНО сбежим!!)",
    "fr": "Couic ! Couic !! Couic !!! (Malgré les humains et les chats... on réussira notre évasion !!)",
    "de": "Piep! Piep!! Piep!!! (Vorbei an Menschen und Katzen... uns wird die Flucht gelingen!!)",
@@ -29519,9 +29519,9 @@
    "pt": "Cobaia",
    "es": "Sujeto de Prueba",
    "ru": "Подопытный",
-   "fr": "Sujet de test",
+   "fr": "Cobaye",
    "de": "Versuchsobjekt",
-   "ar": "عينة تجارب"
+   "ar": "فأر تجارب"
   },
   {
    "string_key": 4100002,
@@ -29673,7 +29673,7 @@
    "ja": "ネズミ共和国議長",
    "zh": "鼠共和国议长",
    "pt": "Presidente da República dos Ratos",
-   "es": "Presidente de la República Rata",
+   "es": "Presidente de la República de las Ratas",
    "ru": "Глава Крысиной республики",
    "fr": "Président de la République des Rats",
    "de": "Präsident der Rattenrepublik",
@@ -29739,7 +29739,7 @@
    "zh": "鼠乐园烟花游行",
    "pt": "Desfile de Fogos da Ratolândia",
    "es": "Desfile de Fuegos de Ratilandia",
-   "ru": "Огненный парад Крысоленда",
+   "ru": "Парад фейерверков Крысоленда",
    "fr": "Parade pyrotechnique de Ratland",
    "de": "Rattenland-Feuerwerksparade",
    "ar": "موكب الألعاب النارية في راتلاند"
@@ -29838,7 +29838,7 @@
   {
    "string_key": 4231010,
    "ko": "줴리 감사합니다 (앵콜)",
-   "en": "Thank You, Jerreh (Encore)",
+   "en": "Thank You Very Much, Jerreh (Encore)",
    "ja": "ジェリィ ありがとうございます（アンコール）",
    "zh": "杰锐 谢谢大家（安可）",
    "pt": "Muito Obrigado, Jerreh (Bis)",
@@ -29972,7 +29972,7 @@
    "ja": "円卓の騎士たちよ、突撃！",
    "zh": "圆桌骑士们，冲锋！",
    "pt": "Cavaleiros da Távola, atacar!",
-   "es": "¡Caballeros de la Mesa, a la carga!",
+   "es": "¡Caballeros de la Mesa Redonda, a la carga!",
    "ru": "Рыцари Круглого стола, в атаку!",
    "fr": "Chevaliers de la Table ronde, chargez !",
    "de": "Ritter der Tafelrunde, Angriff!",
@@ -30008,7 +30008,7 @@
    "string_key": 4331008,
    "ko": "채팅창 폭주! 후원 폭주!",
    "en": "Chat is exploding! Donos are flooding!",
-   "ja": "チャット大荒れ！投げ銭大荒れ！",
+   "ja": "チャット大暴走！投げ銭大暴走！",
    "zh": "弹幕爆炸！打赏爆炸！",
    "pt": "O chat tá explodindo! Choveu doação!",
    "es": "¡El chat está explotando! ¡Llueven donaciones!",
@@ -30064,7 +30064,7 @@
    "zh": "凶手就是……你！",
    "pt": "O culpado é... VOCÊ!",
    "es": "El culpable es... ¡TÚ!",
-   "ru": "Виновник... ТЫ!",
+   "ru": "Преступник... ТЫ!",
    "fr": "Le coupable… c'est TOI !",
    "de": "Der Täter… bist DU!",
    "ar": "المجرم هو... أنت!"
@@ -30153,8 +30153,8 @@
    "en": "Everything burns white!!",
    "ja": "すべてが白く燃え上がる!!",
    "zh": "一切燃成白色!!",
-   "pt": "Tudo queima em branco!!",
-   "es": "¡¡Todo arde en blanco!!",
+   "pt": "Tudo arde em chamas brancas!!",
+   "es": "¡¡Todo arde en llamas blancas!!",
    "ru": "Всё сгорает добела!!",
    "fr": "Tout brûle d'un feu blanc !!",
    "de": "Alles verbrennt in weißer Glut!!",
@@ -30181,7 +30181,7 @@
    "zh": "最后的愿望！全部炸飞!!",
    "pt": "Último desejo! Manda todos pelos ares!!",
    "es": "¡Último deseo! ¡¡Vuélalos a todos!!",
-   "ru": "Последнее желание! Сдуй их всех!!",
+   "ru": "Последнее желание! Разнеси их всех!!",
    "fr": "Dernier vœu ! Envoie-les tous valser !!",
    "de": "Letzter Wunsch! Jag sie alle weg!!",
    "ar": "الأمنية الأخيرة! أطِح بهم جميعاً!!"
@@ -30197,7 +30197,7 @@
    "ru": "Главный калибр, огонь!!",
    "fr": "Canon principal, feu !!",
    "de": "Hauptgeschütz, Feuer frei!!",
-   "ar": "المدفع الرئيسي، إطلاااق!!"
+   "ar": "المدفع الرئيسي، إطلاق!!"
   },
   {
    "string_key": 4431008,
@@ -30228,7 +30228,7 @@
   {
    "string_key": 4431010,
    "ko": "줴리 감사합니다!!",
-   "en": "Thank you, Jerreh!!",
+   "en": "Thank you very much!!",
    "ja": "ジェリィ、ありがとうございます!!",
    "zh": "杰锐谢谢大家!!",
    "pt": "Muito obrigado, Jerreh!!",
@@ -30360,7 +30360,7 @@
    "ko": "클릭!",
    "en": "Click!",
    "ja": "クリック！",
-   "zh": "点击！",
+   "zh": "咔哒！",
    "pt": "Clique!",
    "es": "¡Clic!",
    "ru": "Клик!",
@@ -30450,7 +30450,7 @@
    "string_key": 4500012,
    "ko": "영리한 녀석…",
    "en": "Clever girl...",
-   "ja": "賢いやつ…",
+   "ja": "賢い子だ…",
    "zh": "聪明的姑娘……",
    "pt": "Garota esperta...",
    "es": "Chica lista...",
@@ -30540,8 +30540,8 @@
   {
    "string_key": 4500019,
    "ko": "조아쓰!!",
-   "en": "Joassu!!",
-   "ja": "よっしゃ!!",
+   "en": "Looks good!!",
+   "ja": "ヨシ!!",
    "zh": "好嘞!!",
    "pt": "Bora!!",
    "es": "¡¡Vamos!!",
@@ -30567,8 +30567,8 @@
    "string_key": 4500021,
    "ko": "츄르 인상하라!!",
    "en": "Raise the churu!!",
-   "ja": "ちゅ〜る値上げしろ!!",
-   "zh": "啾噜涨价!!",
+   "ja": "ちゅ〜る増やせ!!",
+   "zh": "加啾噜!!",
    "pt": "Aumento de churu já!!",
    "es": "¡¡Aumento de churu ya!!",
    "ru": "Прибавку чуру!!",
@@ -30662,9 +30662,9 @@
    "zh": "在海底~♪",
    "pt": "Aqui no mar~♪",
    "es": "Bajo del mar~♪",
-   "ru": "На морском дне~♪",
+   "ru": "В море под водой~♪",
    "fr": "Sous l'océan~♪",
-   "de": "Unter dem Meer~♪",
+   "de": "Unten im Meer~♪",
    "ar": "تحت البحر~♪"
   },
   {
@@ -30678,7 +30678,7 @@
    "ru": "Плюх!",
    "fr": "Plouf !",
    "de": "Platsch!",
-   "ar": "طراش!"
+   "ar": "طشّ!"
   },
   {
    "string_key": 4500030,
@@ -30749,11 +30749,11 @@
    "string_key": 4500035,
    "ko": "빠밤… 빠밤…",
    "en": "Dun dun... dun dun...",
-   "ja": "ダダン…ダダン…",
+   "ja": "デンドン…デンドン…",
    "zh": "噔噔……噔噔……",
    "pt": "Tan tan... tan tan...",
    "es": "Tan tan... tan tan...",
-   "ru": "Та-дам... та-дам...",
+   "ru": "Ту-дум... ту-дум...",
    "fr": "Tou-doum… tou-doum…",
    "de": "Damm-damm… damm-damm…",
    "ar": "دم دم... دم دم..."
@@ -30826,12 +30826,12 @@
   {
    "string_key": 4500041,
    "ko": "나~ 쥐 고냐~!!",
-   "en": "Naaants ingonyama!!",
-   "ja": "ナ〜ツィゴンニャ〜!!",
-   "zh": "那~斯 冈耶玛!!",
-   "pt": "Naaants ingonyama!!",
-   "es": "¡¡Naaants ingonyama!!",
-   "ru": "На-а-анц ингоньяма!!",
+   "en": "Naaants mousegonyama!!",
+   "ja": "ナ〜チュ〜ゴンニャ〜!!",
+   "zh": "那~鼠 冈耶玛!!",
+   "pt": "Naaants ratogonyama!!",
+   "es": "¡¡Naaants ratongonyama!!",
+   "ru": "На-а-анц мышьгоньяма!!",
    "fr": "Naaants sourigonyama !!",
    "de": "Naaants Mausgonyama!!",
    "ar": "نااانتس فأرغونياما!!"
@@ -30895,7 +30895,7 @@
    "ja": "ベント！",
    "zh": "通风口！",
    "pt": "Duto!",
-   "es": "¡Ventila!",
+   "es": "¡Ventilación!",
    "ru": "Вентиляция!",
    "fr": "Conduit !",
    "de": "Lüftungsschacht!",
@@ -31010,7 +31010,7 @@
    "ko": "해피!",
    "en": "Happy!",
    "ja": "ハッピー！",
-   "zh": "快乐！",
+   "zh": "哈皮！",
    "pt": "Happy!",
    "es": "¡Happy!",
    "ru": "Хэппи!",
@@ -31142,7 +31142,7 @@
    "ja": "落ち着け！",
    "zh": "冷静！",
    "pt": "Calma!",
-   "es": "¡Tranquila!",
+   "es": "¡Calma!",
    "ru": "Тихо!",
    "fr": "Du calme !",
    "de": "Ganz ruhig!",
@@ -31178,11 +31178,11 @@
    "string_key": 4500068,
    "ko": "좋았쓰!!",
    "en": "LOOKS GOOD!!",
-   "ja": "よっしゃ!!",
-   "zh": "好嘞!!",
-   "pt": "BORA!!",
-   "es": "¡¡VAMOS!!",
-   "ru": "ПОГНАЛИ!!",
+   "ja": "ヨシ!!",
+   "zh": "没问题!!",
+   "pt": "TUDO CERTO!!",
+   "es": "¡¡TODO BIEN!!",
+   "ru": "ПОЙДЁТ!!",
    "fr": "C'EST TOUT BON !!",
    "de": "PASST SO!!",
    "ar": "تمام التمام!!"
@@ -31195,7 +31195,7 @@
    "zh": "哐当！",
    "pt": "Clang!",
    "es": "¡Clang!",
-   "ru": "Дзынь!",
+   "ru": "Лязг!",
    "fr": "Clang !",
    "de": "Klang!",
    "ar": "طَقّ!"
@@ -31205,7 +31205,7 @@
    "ko": "콘!",
    "en": "Cone!",
    "ja": "コーン！",
-   "zh": "雪糕筒！",
+   "zh": "锥桶！",
    "pt": "Cone!",
    "es": "¡Cono!",
    "ru": "Конус!",
@@ -31234,8 +31234,8 @@
    "zh": "噔噔-",
    "pt": "Tan tan-",
    "es": "Tan tan-",
-   "ru": "Та-дам-",
-   "fr": "Ta-dam-",
+   "ru": "Ту-дум-",
+   "fr": "Tou-doum-",
    "de": "Damm-damm-",
    "ar": "دم دم-"
   },
@@ -31247,7 +31247,7 @@
    "zh": "嗡~",
    "pt": "Vrum~",
    "es": "Brum~",
-   "ru": "Вжух~",
+   "ru": "Врум~",
    "fr": "Vroum~",
    "de": "Brumm~",
    "ar": "فرووم~"
@@ -31416,7 +31416,7 @@
    "zh": "呜哇呜哇",
    "pt": "Uiu-uiu",
    "es": "Uiu-uiu",
-   "ru": "Уи-у уи-у",
+   "ru": "Виу-виу",
    "fr": "Pin-pon",
    "de": "Tatü-tata",
    "ar": "وي-وو"
@@ -31437,14 +31437,14 @@
   {
    "string_key": 4500088,
    "ko": "긴급 회의!",
-   "en": "EMERGENCY HUDDLE!",
+   "en": "EMERGENCY MEETING!",
    "ja": "緊急会議！",
    "zh": "紧急会议！",
    "pt": "REUNIÃO DE EMERGÊNCIA!",
-   "es": "¡JUNTA DE EMERGENCIA!",
-   "ru": "ЭКСТРЕННЫЙ СБОР!",
+   "es": "¡REUNIÓN DE EMERGENCIA!",
+   "ru": "ЭКСТРЕННОЕ СОБРАНИЕ!",
    "fr": "RÉUNION D'URGENCE !",
-   "de": "NOTFALLTREFFEN!",
+   "de": "NOTFALL-MEETING!",
    "ar": "اجتماع طارئ!"
   },
   {
@@ -31502,14 +31502,14 @@
   {
    "string_key": 4681105,
    "ko": "강철 앞니",
-   "en": "Steel Teeth",
+   "en": "Steel Incisors",
    "ja": "鋼鉄の前歯",
    "zh": "钢铁门牙",
-   "pt": "Dentes de Aço",
-   "es": "Dientes de Acero",
-   "ru": "Стальные зубы",
+   "pt": "Incisivos de Aço",
+   "es": "Incisivos de Acero",
+   "ru": "Стальные резцы",
    "fr": "Incisives d'acier",
-   "de": "Stahlzähne",
+   "de": "Stahlnagezähne",
    "ar": "قواطع فولاذية"
   },
   {
@@ -31533,8 +31533,8 @@
    "zh": "首领狩猎执照",
    "pt": "Licença pra Caçar Chefes",
    "es": "Licencia para Cazar Jefes",
-   "ru": "Лицензия на охоту за боссами",
-   "fr": "Permis chasse-boss",
+   "ru": "Лицензия на охоту на боссов",
+   "fr": "Permis de chasse aux boss",
    "de": "Boss-Jagdschein",
    "ar": "رخصة صيد الزعماء"
   },
@@ -31671,27 +31671,27 @@
   {
    "string_key": 4681206,
    "ko": "미다스의 앞니",
-   "en": "Midas Bite",
+   "en": "Midas Incisors",
    "ja": "ミダスの前歯",
    "zh": "点金门牙",
-   "pt": "Mordida de Midas",
-   "es": "Mordida de Midas",
-   "ru": "Укус Мидаса",
+   "pt": "Incisivos de Midas",
+   "es": "Incisivos de Midas",
+   "ru": "Резцы Мидаса",
    "fr": "Incisives de Midas",
-   "de": "Midas-Biss",
+   "de": "Midas-Schneidezähne",
    "ar": "قواطع ميداس"
   },
   {
    "string_key": 4681207,
    "ko": "치명적 앞니",
-   "en": "Deadly Fang",
+   "en": "Deadly Incisors",
    "ja": "致命的な前歯",
    "zh": "致命门牙",
-   "pt": "Presa Mortal",
-   "es": "Colmillo Mortal",
-   "ru": "Смертельный клык",
+   "pt": "Incisivos Mortais",
+   "es": "Incisivos Mortales",
+   "ru": "Смертельные резцы",
    "fr": "Incisives fatales",
-   "de": "Tödlicher Zahn",
+   "de": "Tödliche Schneidezähne",
    "ar": "قواطع قاتلة"
   },
   {
@@ -31710,13 +31710,13 @@
   {
    "string_key": 4681209,
    "ko": "부실 공사",
-   "en": "Shoddy Walls",
+   "en": "Shoddy Construction",
    "ja": "手抜き工事",
    "zh": "豆腐渣工程",
    "pt": "Obra Malfeita",
    "es": "Obra Chafa",
-   "ru": "Халтурные стены",
-   "fr": "Murs bâclés",
+   "ru": "Халтурная стройка",
+   "fr": "Construction bâclée",
    "de": "Pfusch am Bau",
    "ar": "بناء هش"
   },
@@ -31801,12 +31801,12 @@
   {
    "string_key": 4681302,
    "ko": "연쇄 폭발",
-   "en": "Chain Reaction",
+   "en": "Chain Explosion",
    "ja": "連鎖爆発",
    "zh": "连锁爆炸",
-   "pt": "Reação em Cadeia",
-   "es": "Reacción en Cadena",
-   "ru": "Цепная реакция",
+   "pt": "Explosão em Cadeia",
+   "es": "Explosión en Cadena",
+   "ru": "Цепной взрыв",
    "fr": "Explosion en chaîne",
    "de": "Kettenexplosion",
    "ar": "انفجار متسلسل"
@@ -31892,14 +31892,14 @@
   {
    "string_key": 4681309,
    "ko": "번개 앞니",
-   "en": "Thunder Fang",
+   "en": "Thunder Incisors",
    "ja": "雷の前歯",
    "zh": "雷霆门牙",
-   "pt": "Presa Trovejante",
-   "es": "Colmillo de Trueno",
-   "ru": "Громовой клык",
+   "pt": "Incisivos Trovejantes",
+   "es": "Incisivos de Trueno",
+   "ru": "Громовые резцы",
    "fr": "Incisives foudroyantes",
-   "de": "Donnerzahn",
+   "de": "Donner-Nagezähne",
    "ar": "قواطع البرق"
   },
   {
@@ -32108,7 +32108,7 @@
    "ru": "Сырапокалипсис",
    "fr": "Fromapocalypse",
    "de": "Käsepokalypse",
-   "ar": "طوفان الجبن"
+   "ar": "أبوكاليبس الجبن"
   },
   {
    "string_key": 4681407,
@@ -32243,12 +32243,12 @@
   {
    "string_key": 4681417,
    "ko": "맘스땃쥐 생쥐",
-   "en": "Burger Rats",
+   "en": "McSqueak's Rats",
    "ja": "マックチューズネズミ",
    "zh": "麦吱劳鼠",
-   "pt": "Ratos Hambúrguer",
-   "es": "Ratas Hamburguesa",
-   "ru": "Крысы-бургеры",
+   "pt": "Ratos McSqueak's",
+   "es": "Ratas McSqueak's",
+   "ru": "Крысы МакПиск",
    "fr": "Souris McCouic",
    "de": "McPiep's-Mäuse",
    "ar": "فئران ماك صِيء"
@@ -32256,12 +32256,12 @@
   {
    "string_key": 4681418,
    "ko": "5G 생쥐",
-   "en": "5G Rats",
+   "en": "Mi-Fi Rats",
    "ja": "Mi-Fiネズミ",
    "zh": "鼠-Fi鼠",
-   "pt": "Ratos 5G",
-   "es": "Ratas 5G",
-   "ru": "Крысы 5G",
+   "pt": "Ratos Mi-Fi",
+   "es": "Ratas Mi-Fi",
+   "ru": "Крысы Мышь-Fi",
    "fr": "Souris Mi-Fi",
    "de": "Mi-Fi-Mäuse",
    "ar": "فئران ماي-فاي"
@@ -32269,7 +32269,7 @@
   {
    "string_key": 4700001,
    "ko": "클릭 총공격 때 누를 때마다 {s1%}% 확률로 폭발 (공격력 ×{s3})",
-   "en": "Each rush click has a {s1%}% chance to explode (attack ×{s3})",
+   "en": "Each Rally click has a {s1%}% chance to explode (attack ×{s3})",
    "ja": "クリック総攻撃時、押すたびに{s1%}％の確率で爆発（攻撃力×{s3}）",
    "zh": "点击总攻击时每次点击有{s1%}%概率爆炸（攻击力×{s3}）",
    "pt": "Cada clique do Ataque Total tem {s1%}% de chance de explodir (ataque ×{s3})",
@@ -32542,7 +32542,7 @@
   {
    "string_key": 4781205,
    "ko": "총공격 시간 +{1}초 · 위력 +{1b} · 쿨타임 -{2}초",
-   "en": "Rush time +{1}s · power +{1b} · cooldown -{2}s",
+   "en": "Rally time +{1}s · power +{1b} · cooldown -{2}s",
    "ja": "総攻撃の時間+{1}秒・威力+{1b}・クールタイム-{2}秒",
    "zh": "总攻击时间+{1}秒·威力+{1b}·冷却-{2}秒",
    "pt": "Tempo do Ataque Total +{1}s · poder +{1b} · recarga -{2}s",
@@ -32594,7 +32594,7 @@
   {
    "string_key": 4781212,
    "ko": "클릭 총공격 때 누른 곳에 작은 폭발 {s1}번 (공격력 ×{s3})",
-   "en": "Rush clicks set off {s1} small blasts (attack ×{s3})",
+   "en": "Rally clicks set off {s1} small blasts (attack ×{s3})",
    "ja": "クリック総攻撃時、押した場所で小爆発{s1}回（攻撃力×{s3}）",
    "zh": "点击总攻击时在点击处小爆炸{s1}次（攻击力×{s3}）",
    "pt": "Cliques do Ataque Total soltam {s1} pequenas explosões (ataque ×{s3})",
@@ -32815,12 +32815,12 @@
   {
    "string_key": 4781318,
    "ko": "일반 쥐 전원 골든 햄스터 · 늘 공으로 굴러다님 (이후 태어나는 쥐도)",
-   "en": "All Common rats become Golden Hamsters, always rolling",
+   "en": "All Common rats become Golden Hamsters · Always roll into a ball (including rats born later)",
    "ja": "コモンネズミ全員がゴールデンハムスターに・いつもボールで転がる（以後生まれるネズミも）",
    "zh": "所有普通老鼠变成金丝熊·总是滚成球（之后出生的也一样）",
-   "pt": "Todos os ratos Comuns viram Hamsters Dourados, sempre rolando",
-   "es": "Todas las ratas Comunes se vuelven Hámsters Dorados, siempre rodando",
-   "ru": "Все обычные крысы становятся золотистыми хомяками и всегда катаются шаром",
+   "pt": "Todos os ratos Comuns viram Hamsters Dourados · Sempre rolando em bola (inclusive os que nascerem depois)",
+   "es": "Todas las ratas Comunes se vuelven Hámsters Dorados · Siempre rodando en bola (incluso las que nazcan después)",
+   "ru": "Все обычные крысы становятся золотистыми хомяками · Всегда катаются шаром (включая рождённых позже)",
    "fr": "Toutes les souris Communes deviennent des hamsters dorés · Roulent toujours en boule (même celles nées après)",
    "de": "Alle Gewöhnlichen Mäuse werden zu Goldhamstern · Rollen ständig als Kugel (auch später geborene)",
    "ar": "كل الفئران العادية تصبح هامستر ذهبي · تتدحرج ككرة دائماً (حتى المولودة لاحقاً)"
@@ -33049,12 +33049,12 @@
   {
    "string_key": 4781417,
    "ko": "에픽 쥐 전원 맘스땃쥐 · 패티 최대 {s5}장 · 박치기 피해 +{s4%}% (이후 태어나는 쥐도)",
-   "en": "All Epic rats become Burger rats · up to {s5} patties · headbutt +{s4%}%",
+   "en": "All Epic rats become McSqueak's · up to {s5} patties · headbutt +{s4%}%",
    "ja": "エピックネズミ全員がマックチューズに・パティ最大{s5}枚・頭突きダメージ+{s4%}％（以後生まれるネズミも）",
    "zh": "所有史诗老鼠变成麦吱劳·肉饼最多{s5}片·头槌伤害+{s4%}%（之后出生的也一样）",
-   "pt": "Todos os ratos Épicos viram Ratos Hambúrguer · até {s5} hambúrgueres · cabeçada +{s4%}%",
-   "es": "Todas las ratas Épicas se vuelven Ratas Hamburguesa · hasta {s5} carnes · cabezazo +{s4%}%",
-   "ru": "Все эпические крысы становятся крысами-бургерами · до {s5} котлет · таран +{s4%}%",
+   "pt": "Todos os ratos Épicos viram McSqueak's · até {s5} hambúrgueres · cabeçada +{s4%}%",
+   "es": "Todas las ratas Épicas se vuelven McSqueak's · hasta {s5} carnes · cabezazo +{s4%}%",
+   "ru": "Все эпические крысы становятся МакПиском · до {s5} котлет · таран +{s4%}%",
    "fr": "Toutes les souris Épiques deviennent McCouic · Jusqu'à {s5} steaks · Dégâts de coup de tête +{s4%}% (même celles nées après)",
    "de": "Alle Epischen Mäuse werden zu McPiep's · Max. {s5} Pattys · Kopfnuss-Schaden +{s4%}% (auch später geborene)",
    "ar": "كل الفئران الملحمية تصبح ماك صِيء · حتى {s5} شرائح برغر · ضرر النطح +{s4%}% (حتى المولودة لاحقاً)"
@@ -33062,12 +33062,12 @@
   {
    "string_key": 4781418,
    "ko": "에픽 쥐 전원 5G · 동료 수와 상관없이 모든 쥐에게 데이터 전송 (이후 태어나는 쥐도)",
-   "en": "All Epic rats become 5G rats that boost every rat",
+   "en": "All Epic rats become Mi-Fi that boost every rat",
    "ja": "エピックネズミ全員がMi-Fiに・仲間の数に関係なくすべてのネズミにデータ転送（以後生まれるネズミも）",
    "zh": "所有史诗老鼠变成鼠-Fi·无论同伴数量都向所有老鼠传输数据（之后出生的也一样）",
-   "pt": "Todos os ratos Épicos viram Ratos 5G que turbinam todos os ratos",
-   "es": "Todas las ratas Épicas se vuelven Ratas 5G que potencian a todas las ratas",
-   "ru": "Все эпические крысы становятся крысами 5G и усиливают всех крыс",
+   "pt": "Todos os ratos Épicos viram Mi-Fi que turbinam todos os ratos",
+   "es": "Todas las ratas Épicas se vuelven Mi-Fi que potencian a todas las ratas",
+   "ru": "Все эпические крысы становятся Мышь-Fi и усиливают всех крыс",
    "fr": "Toutes les souris Épiques deviennent Mi-Fi · Transmettent des données à toutes les souris, peu importe leur nombre (même celles nées après)",
    "de": "Alle Epischen Mäuse werden zu Mi-Fi · Senden Daten an alle Mäuse unabhängig von der Anzahl (auch später geborene)",
    "ar": "كل الفئران الملحمية تصبح ماي-فاي · ترسل البيانات لكل الفئران مهما كان عددها (حتى المولودة لاحقاً)"
@@ -33166,7 +33166,7 @@
   {
    "string_key": 8000004,
    "ko": "{tier}훈장 {tierName} · 최고 {floor}층 · 탈출 시도 {runs}번\n<size=75%>{time}</size>",
-   "en": "Rank {tier} {tierName} · Best F{floor} · Escapes {runs}\n<size=75%>{time}</size>",
+   "en": "Rank {tier} {tierName} · Best F{floor} · Escape Attempts {runs}\n<size=75%>{time}</size>",
    "ja": "勲章{tier} {tierName}・最高{floor}階・脱出挑戦{runs}回\n<size=75%>{time}</size>",
    "zh": "勋章{tier} {tierName}·最高{floor}层·逃脱尝试{runs}次\n<size=75%>{time}</size>",
    "pt": "Patente {tier} {tierName} · Recorde A{floor} · Fugas {runs}\n<size=75%>{time}</size>",
@@ -33470,7 +33470,7 @@
    "zh": "这个伙伴没有必杀技",
    "pt": "Este parça não tem Ultimate",
    "es": "Este compa no tiene Definitiva",
-   "ru": "У этого друга нет ульты",
+   "ru": "У этого дружка нет ульты",
    "fr": "Ce copain n'a pas d'Ultime",
    "de": "Dieser Kumpel hat kein Ultimativ",
    "ar": "هذا الرفيق ليس لديه مهارة قاضية"
@@ -33494,9 +33494,9 @@
    "en": "Pity (pulls without one)",
    "ja": "天井（出なかった回数）",
    "zh": "保底（未出次数）",
-   "pt": "Garantia (sorteios sem)",
+   "pt": "Garantia (sorteios sem obter)",
    "es": "Garantía (tiradas sin obtener)",
-   "ru": "Гарант (призывов без)",
+   "ru": "Гарант (призывов без получения)",
    "fr": "Garantie (tirages sans l'obtenir)",
    "de": "Garantie (Ziehungen ohne Treffer)",
    "ar": "الضمان (سحبات بدون الحصول عليه)"
@@ -33509,7 +33509,7 @@
    "zh": "会出谁就看抽卡运气！勋章越高越容易出稀有伙伴",
    "pt": "Quem vai aparecer? Surpresa! Quanto maior a Patente, mais raros os parças",
    "es": "¿Quién saldrá? ¡Sorpresa! Entre más alto el Rango, más raros los compas",
-   "ru": "Кто выпадет? Сюрприз! Чем выше ранг, тем реже друзья",
+   "ru": "Кто выпадет? Сюрприз! Чем выше ранг, тем более редкие друзья выпадают",
    "fr": "Qui va sortir ? Suspense au tirage ! Plus ton Rang est élevé, plus les copains sont rares",
    "de": "Wer kommt wohl? Spannende Ziehung! Je höher dein Rang, desto seltenere Kumpels erscheinen",
    "ar": "من سيظهر؟ سحب مشوّق! كلما ارتفعت الرتبة، ظهر رفاق أندر"
@@ -33654,7 +33654,7 @@
    "es": "Haz clic para continuar",
    "ru": "Кликните, чтобы продолжить",
    "fr": "Cliquer pour continuer",
-   "de": "Klicken für weiter",
+   "de": "Klicke, um fortzufahren",
    "ar": "انقر للتالي"
   },
   {
@@ -33899,7 +33899,7 @@
    "zh": "溜溜地去找楼梯房间！啃墙打开房间，碰到楼梯就去下一层",
    "pt": "Corre achar a sala da escada! Roa paredes pra abrir salas e encoste na escada pra subir de andar",
    "es": "¡Corre a buscar la sala de las escaleras! Roe paredes para abrir salas y toca las escaleras para subir",
-   "ru": "Шмыг искать комнату с лестницей! Прогрызай стены и коснись лестницы, чтобы подняться",
+   "ru": "Шмыг искать комнату с лестницей! Прогрызай стены, чтобы расширить комнату, и коснись лестницы, чтобы перейти на следующий этаж",
    "fr": "File chercher la salle des escaliers ! Ronge les murs pour agrandir la salle et touche les escaliers pour monter d'un étage",
    "de": "Flitz los und such den Treppenraum! Nage an Wänden, um Räume zu erweitern, und berühre die Treppe zur nächsten Etage",
    "ar": "هرول للعثور على غرفة الدرج! اقرض الجدران لتوسيع الغرفة، والمس الدرج للصعود إلى الطابق التالي"
@@ -33912,7 +33912,7 @@
    "zh": "这真是正品吗？|嘘，别问",
    "pt": "Isso é original?|Shh, não pergunta",
    "es": "¿Esto es original?|Shh, no preguntes",
-   "ru": "Это вообще легально?|Тсс, не спрашивай",
+   "ru": "Это правда оригинал?|Тсс, не спрашивай",
    "fr": "C'est vraiment de l'authentique ?|Chut, pose pas de questions",
    "de": "Ist das auch echte Originalware?|Pst, frag nicht",
    "ar": "هل هذا أصلي فعلاً؟|ششش، لا تسأل"
@@ -33925,8 +33925,8 @@
    "zh": "听说今天进了神话碎片！|中间商又在吹牛吧？",
    "pt": "Disseram que chegou Fragmento Mítico hoje!|O Atravessador não tá mentindo de novo?",
    "es": "¡Dicen que hoy llegó un Fragmento Mítico!|¿No estará mintiendo otra vez el Intermediario?",
-   "ru": "Говорят, сегодня завезли мифический осколок!|Барыга опять не врёт?",
-   "fr": "Paraît qu'un Fragment Mythique est arrivé aujourd'hui !|Le Courtier nous baratine pas encore ?",
+   "ru": "Говорят, сегодня завезли мифический осколок!|Барыга опять врёт, небось?",
+   "fr": "Paraît qu'un Fragment Mythique est arrivé aujourd'hui !|Le Courtier nous baratine pas encore une fois ?",
    "de": "Heute soll ein Mythischer Splitter reingekommen sein!|Flunkert der Schieber nicht schon wieder?",
    "ar": "سمعت أن شظية خرافية وصلت اليوم!|ألا يكذب السمسار مجدداً؟"
   },
@@ -33948,7 +33948,7 @@
    "ko": "네온 예쁘다|우리 아지트에도 달자!",
    "en": "The neon is so pretty|Let's put some in our Hideout!",
    "ja": "ネオンきれい|ボクたちのアジトにもつけよう！",
-   "zh": "霓虹灯好漂亮|我们基地也装一个吧！",
+   "zh": "霓虹灯好漂亮|我们秘密基地也装一个吧！",
    "pt": "O neon é tão bonito|Vamos colocar no nosso Esconderijo!",
    "es": "El neón está bien bonito|¡Pongamos uno en nuestra Guarida!",
    "ru": "Неон такой красивый|Давай повесим в Убежище!",
@@ -34080,7 +34080,7 @@
    "ja": "チュー?!",
    "zh": "吱?!",
    "pt": "Guinch?!",
-   "es": "¿¡Iiik!?",
+   "es": "¿Iiik?!",
    "ru": "Пи?!",
    "fr": "Couic ?!",
    "de": "Piep?!",
@@ -34240,7 +34240,7 @@
    "ru": "Пых-пых",
    "fr": "Hah, hah",
    "de": "Keuch, keuch",
-   "ar": "لهاث، لهاث"
+   "ar": "هاه، هاه"
   },
   {
    "string_key": 8000087,
@@ -34349,12 +34349,12 @@
   {
    "string_key": 8000095,
    "ko": "훈련 Lv <color=#c05545>{list}</color> 에서 올라요",
-   "en": "Learned at Training Lv <color=#c05545>{list}</color>",
-   "ja": "トレーニング Lv <color=#c05545>{list}</color> で習得",
-   "zh": "在训练 Lv <color=#c05545>{list}</color> 学会",
-   "pt": "Aprendido no Treino Nv <color=#c05545>{list}</color>",
-   "es": "Se aprende en Entrenamiento Nv <color=#c05545>{list}</color>",
-   "ru": "Изучается на тренировке ур. <color=#c05545>{list}</color>",
+   "en": "Increases at Training Lv <color=#c05545>{list}</color>",
+   "ja": "トレーニング Lv <color=#c05545>{list}</color> で上昇",
+   "zh": "在训练 Lv <color=#c05545>{list}</color> 提升",
+   "pt": "Aumenta no Treino Nv <color=#c05545>{list}</color>",
+   "es": "Aumenta en Entrenamiento Nv <color=#c05545>{list}</color>",
+   "ru": "Повышается на тренировке ур. <color=#c05545>{list}</color>",
    "fr": "Augmente à l'entraînement Niv. <color=#c05545>{list}</color>",
    "de": "Steigt auf Trainings-Lv. <color=#c05545>{list}</color>",
    "ar": "يرتفع عند مستوى التدريب <color=#c05545>{list}</color>"
@@ -34368,7 +34368,7 @@
    "pt": "Treino na Rodinha (melhorias com Fragmentos) total {have} / {need}",
    "es": "Entrenamiento en la Rueda (mejoras con Fragmentos) total {have} / {need}",
    "ru": "Тренировка в колесе (усиление осколками) всего {have} / {need}",
-   "fr": "Total Entraînement à la roue (Fragments) {have} / {need}",
+   "fr": "Total Entraînement à la roue (améliorations de fragments) {have} / {need}",
    "de": "Laufrad-Training (Splitter-Upgrades) gesamt {have} / {need}",
    "ar": "إجمالي تدريب العجلة (ترقيات الشظايا) {have} / {need}"
   },
@@ -34587,7 +34587,7 @@
    "ja": "なかまたち!!",
    "zh": "伙伴们!!",
    "pt": "Parças!!",
-   "es": "¡¡Compas!!",
+   "es": "¡Compas!!",
    "ru": "Друзья!!",
    "fr": "Copains !!",
    "de": "Kumpels!!",
@@ -34757,7 +34757,7 @@
    "zh": "这个伙伴没有特殊动作",
    "pt": "Este parça não tem Ação Especial",
    "es": "Este compa no tiene Acción Especial",
-   "ru": "У этого друга нет особого действия",
+   "ru": "У этого дружка нет особого действия",
    "fr": "Ce copain n'a pas d'Action spéciale",
    "de": "Dieser Kumpel hat keine Spezialaktion",
    "ar": "هذا الرفيق ليس لديه حركة خاصة"
@@ -35030,7 +35030,7 @@
    "zh": "滚轮训练 Lv {lv} <size=70%><color=#7a6654>·每次训练按固定顺序学会一项</color></size>",
    "pt": "Treino na Rodinha Nv {lv} <size=70%><color=#7a6654>· Aprende uma coisa por treino, numa ordem fixa</color></size>",
    "es": "Entrenamiento en la Rueda Nv {lv} <size=70%><color=#7a6654>· Aprende una cosa por entrenamiento, en orden fijo</color></size>",
-   "ru": "Тренировка в колесе ур. {lv} <size=70%><color=#7a6654>· За тренировку учится одному, в заданном порядке</color></size>",
+   "ru": "Тренировка в колесе ур. {lv} <size=70%><color=#7a6654>· За тренировку учится чему-то одному, в заданном порядке</color></size>",
    "fr": "Entraînement à la roue Niv. {lv} <size=70%><color=#7a6654>· Apprend un élément par entraînement, dans un ordre fixe</color></size>",
    "de": "Laufrad-Training Lv. {lv} <size=70%><color=#7a6654>· Lernt pro Training eine Sache in fester Reihenfolge</color></size>",
    "ar": "تدريب العجلة مستوى {lv} <size=70%><color=#7a6654>· يتعلم شيئاً واحداً في كل تدريب بترتيب محدد</color></size>"
@@ -35122,9 +35122,9 @@
    "pt": "{n}",
    "es": "{n}",
    "ru": "{n}",
-   "fr": "N° {n}",
-   "de": "Nr. {n}",
-   "ar": "رقم {n}"
+   "fr": "{n}",
+   "de": "{n}",
+   "ar": "{n}"
   },
   {
    "string_key": 8000155,
@@ -35264,8 +35264,8 @@
    "zh": "更换新货·奶酪{cost}",
    "pt": "Trocar estoque · Queijo {cost}",
    "es": "Cambiar mercancía · Queso {cost}",
-   "ru": "Обновить товар · сыр {cost}",
-   "fr": "Nouvel arrivage · Fromage {cost}",
+   "ru": "Обновить товар · Сыр {cost}",
+   "fr": "Renouveler le stock · Fromage {cost}",
    "de": "Neue Ware holen · Käse {cost}",
    "ar": "تبديل ببضاعة جديدة · جبن {cost}"
   },
@@ -35340,9 +35340,9 @@
    "en": "A gift for our first deal!\n<color=#c0603a>{name}</color> Shard ×{n}",
    "ja": "初取引記念のプレゼントだ！\n<color=#c0603a>{name}</color> のかけら×{n}",
    "zh": "首次交易纪念礼物！\n<color=#c0603a>{name}</color> 碎片×{n}",
-   "pt": "Um presente pelo nosso primeiro negócio!\n<color=#c0603a>{name}</color> Fragmento ×{n}",
-   "es": "¡Un regalo por nuestro primer trato!\n<color=#c0603a>{name}</color> Fragmento ×{n}",
-   "ru": "Подарок за первую сделку!\n<color=#c0603a>{name}</color> осколок ×{n}",
+   "pt": "Um presente pelo nosso primeiro negócio!\nFragmento de <color=#c0603a>{name}</color> ×{n}",
+   "es": "¡Un regalo por nuestro primer trato!\nFragmento de <color=#c0603a>{name}</color> ×{n}",
+   "ru": "Подарок за первую сделку!\nОсколок <color=#c0603a>{name}</color> ×{n}",
    "fr": "Un cadeau pour notre premier échange !\nFragment de <color=#c0603a>{name}</color> ×{n}",
    "de": "Ein Geschenk für unseren ersten Deal!\n<color=#c0603a>{name}</color>-Splitter ×{n}",
    "ar": "هدية بمناسبة صفقتنا الأولى!\nشظية <color=#c0603a>{name}</color> ×{n}"
@@ -35447,7 +35447,7 @@
    "pt": "Extrator de Genes <size=60%><color=#7a6a5a>Sorteie Fragmentos de rato com Pesquisa</color></size>",
    "es": "Extractor de Genes <size=60%><color=#7a6a5a>Tira Fragmentos de rata con Investigación</color></size>",
    "ru": "Экстрактор генов <size=60%><color=#7a6a5a>Призыв осколков крыс за исследования</color></size>",
-   "fr": "Extracteur de gènes <size=60%><color=#7a6a5a>Tire des Fragments avec la Recherche</color></size>",
+   "fr": "Extracteur de gènes <size=60%><color=#7a6a5a>Tire des Fragments de souris avec la Recherche</color></size>",
    "de": "Gen-Extraktor <size=60%><color=#7a6a5a>Ziehe Mäuse-Splitter mit Forschung</color></size>",
    "ar": "مستخرج الجينات <size=60%><color=#7a6a5a>اسحب شظايا الفئران بالأبحاث</color></size>"
   },
@@ -35485,7 +35485,7 @@
    "zh": "滚轮训练 <size=60%><color=#7a6a5a>再遇到同一伙伴碎片+1</color></size>",
    "pt": "Treino na Rodinha <size=60%><color=#7a6a5a>Mesmo parça de novo = Fragmento +1</color></size>",
    "es": "Entrenamiento en la Rueda <size=60%><color=#7a6a5a>Mismo compa otra vez = Fragmento +1</color></size>",
-   "ru": "Тренировка в колесе <size=60%><color=#7a6a5a>Тот же друг снова = осколок +1</color></size>",
+   "ru": "Тренировка в колесе <size=60%><color=#7a6a5a>Тот же дружок снова = осколок +1</color></size>",
    "fr": "Entraînement à la roue <size=60%><color=#7a6a5a>Même copain revu = Fragment +1</color></size>",
    "de": "Laufrad-Training <size=60%><color=#7a6a5a>Gleicher Kumpel = Splitter +1</color></size>",
    "ar": "تدريب العجلة <size=60%><color=#7a6a5a>مقابلة نفس الرفيق مجدداً = شظية +1</color></size>"
@@ -35677,7 +35677,7 @@
    "ko": "정말 치즈 <color=#c0603a>{cost}</color>를 쓸까요?",
    "en": "Really spend <color=#c0603a>{cost}</color> Cheese?",
    "ja": "本当にチーズ<color=#c0603a>{cost}</color>を使いますか？",
-   "zh": "真的要花奶酪<color=#c0603a>{cost}</color>吗？",
+   "zh": "真的要花<color=#c0603a>{cost}</color>奶酪吗？",
    "pt": "Gastar mesmo <color=#c0603a>{cost}</color> de Queijo?",
    "es": "¿De verdad gastar <color=#c0603a>{cost}</color> de Queso?",
    "ru": "Точно потратить <color=#c0603a>{cost}</color> сыра?",
@@ -35753,12 +35753,12 @@
   {
    "string_key": 8000203,
    "ko": "쳇바퀴 훈련 Lv {lv}",
-   "en": "Training Lv {lv}",
+   "en": "Wheel Training Lv {lv}",
    "ja": "回し車トレーニング Lv {lv}",
    "zh": "滚轮训练 Lv {lv}",
-   "pt": "Treino Nv {lv}",
-   "es": "Entrenamiento Nv {lv}",
-   "ru": "Тренировка ур. {lv}",
+   "pt": "Treino na Rodinha Nv {lv}",
+   "es": "Entrenamiento en la Rueda Nv {lv}",
+   "ru": "Тренировка в колесе ур. {lv}",
    "fr": "Entraînement à la roue Niv. {lv}",
    "de": "Laufrad-Training Lv. {lv}",
    "ar": "تدريب العجلة مستوى {lv}"
@@ -35939,7 +35939,7 @@
    "ja": "へへ…チーズのにおいがするな。",
    "zh": "嘿嘿……闻到奶酪味了。",
    "pt": "Hehe... tô sentindo cheiro de Queijo.",
-   "es": "Jeje... huelo a Queso.",
+   "es": "Jeje... huele a Queso.",
    "ru": "Хе-хе... пахнет сыром.",
    "fr": "Héhé… Ça sent le Fromage par ici.",
    "de": "Hehe… Ich rieche doch Käse.",
@@ -36040,7 +36040,7 @@
    "string_key": 8000225,
    "ko": "이미 단 훈장이에요",
    "en": "Rank already earned",
-   "ja": "もうつけた勲章です",
+   "ja": "すでに獲得した勲章です",
    "zh": "已获得该勋章",
    "pt": "Patente já conquistada",
    "es": "Rango ya obtenido",
@@ -36123,7 +36123,7 @@
    "pt": "Patente GUINCHO!! <size=60%><color=#7a6a5a>Conquiste Patentes com Pesquisa roubada pra liberar parças e truques novos, e parças raros aparecem mais</color></size>",
    "es": "Rango CHILLIDO!! <size=60%><color=#7a6a5a>Gana Rangos con Investigación robada para desbloquear compas y trucos nuevos, y los compas raros salen más</color></size>",
    "ru": "Ранг ПИСК!! <size=60%><color=#7a6a5a>Повышайте ранг украденными исследованиями — откроются новые друзья и приёмы, а редкие друзья будут выпадать чаще</color></size>",
-   "fr": "Rang COUIC !! <size=60%><color=#7a6a5a>Monte de Rang avec la Recherche volée pour débloquer nouveaux copains · nouvelles astuces et voir plus de copains rares</color></size>",
+   "fr": "Rang COUIC !! <size=60%><color=#7a6a5a>Monte de Rang avec la Recherche volée pour débloquer de nouveaux copains · de nouvelles astuces et voir plus de copains rares</color></size>",
    "de": "PIEP!!-Rang <size=60%><color=#7a6a5a>Steige mit gestohlener Forschung im Rang auf, um neue Kumpels · neue Geheimtipps freizuschalten und öfter seltene Kumpels zu treffen</color></size>",
    "ar": "رتبة صِيء!! <size=60%><color=#7a6a5a>ارتقِ بالرتبة باستخدام أبحاث مسروقة لفتح رفاق جدد · أسرار جديدة وزيادة ظهور الرفاق النادرين</color></size>"
   },
@@ -36161,7 +36161,7 @@
    "zh": "哐当……哐当……!!",
    "pt": "Treme... treme...!!",
    "es": "¡¡Traca... traca...!!",
-   "ru": "Трах... трах...!!",
+   "ru": "Громых... громых...!!",
    "fr": "Clac… clac… !!",
    "de": "Ratter… ratter…!!",
    "ar": "قرقعة... قرقعة...!!"
@@ -36253,7 +36253,7 @@
    "pt": "Um parça que você conhece quando sua Patente GUINCHO!! chegar à Patente {tier}.\nVamos subir de Patente, guinch-guinch!",
    "es": "Un compa que conocerás cuando tu Rango CHILLIDO!! llegue al Rango {tier}.\n¡Subamos de Rango, iiik-iiik!",
    "ru": "Этот друг появится, когда ранг ПИСК!! достигнет ранга {tier}.\nДавай повышать ранг, пи-пи!",
-   "fr": "Un copain que tu pourras rencontrer au Rang COUIC !! {tier}.\nMontons de Rang, couic couic !",
+   "fr": "Un copain que tu pourras rencontrer quand ton Rang COUIC !! atteint le Rang {tier}.\nMontons de Rang, couic couic !",
    "de": "Ein Kumpel, den du triffst, sobald dein PIEP!!-Rang auf Rang {tier} steigt.\nSteigen wir im Rang auf, piep piep!",
    "ar": "رفيق يمكنك مقابلته عندما تصل رتبة صِيء!! إلى الرتبة {tier}.\nلنرفع الرتبة، صِيء صِيء!"
   },
@@ -36342,7 +36342,7 @@
    "ja": "うわぁぁ吸いこまれる!!",
    "zh": "哇啊啊要被吸进去了!!",
    "pt": "Aaaah, tamos sendo sugados!!",
-   "es": "¡¡Aaaah, nos está chupando!!",
+   "es": "¡¡Aaaah, nos está absorbiendo!!",
    "ru": "А-а-а, нас засасывает!!",
    "fr": "Aaah, on se fait aspirer !!",
    "de": "Uaaah, wir werden eingesaugt!!",
@@ -36508,7 +36508,7 @@
    "string_key": 8000261,
    "ko": "시작 쥐",
    "en": "Starting rats",
-   "ja": "開始ネズミ",
+   "ja": "初期ネズミ",
    "zh": "初始老鼠",
    "pt": "Ratos iniciais",
    "es": "Ratas iniciales",
@@ -36707,7 +36707,7 @@
    "zh": "{from} {have}/{need}只 → {to} 1只",
    "pt": "{from} {have}/{need} ratos → 1 {to}",
    "es": "{from} {have}/{need} ratas → 1 {to}",
-   "ru": "{from} {have}/{need} → 1 {to}",
+   "ru": "{from} {have}/{need} крыс → 1 {to}",
    "fr": "{from} {have}/{need} rats → 1 {to}",
    "de": "{from} {have}/{need} Ratten → 1 {to}",
    "ar": "{from} {have}/{need} فئران → 1 {to}"
@@ -36721,7 +36721,7 @@
    "pt": "Andar alcançado\nPesquisa nesta partida\nRecorde\nRatos capturados",
    "es": "Piso alcanzado\nInvestigación de esta partida\nRécord\nRatas atrapadas",
    "ru": "Достигнутый этаж\nИсследования за забег\nРекорд\nПоймано крыс",
-   "fr": "Étage atteint\nRecherche obtenue\nRecord\nRats capturés",
+   "fr": "Étage atteint\nRecherche de cette partie\nRecord\nRats capturés",
    "de": "Erreichte Etage\nForschung dieser Runde\nRekord\nGefangene Ratten",
    "ar": "الطابق الذي بلغته\nأبحاث هذه الجولة\nأفضل رقم\nالفئران المقبوض عليها"
   },
@@ -36807,7 +36807,7 @@
    "string_key": 8000284,
    "ko": "냥냥펀치!!",
    "en": "Paw-paw punch!!",
-   "ja": "ネコネコパンチ!!",
+   "ja": "ニャンニャンパンチ!!",
    "zh": "喵喵拳!!",
    "pt": "Patada de gato!!",
    "es": "¡¡Zarpazo gatuno!!",
@@ -36884,14 +36884,14 @@
   {
    "string_key": 8000290,
    "ko": "{name}의 필살 패턴!!",
-   "en": "{name}'s Special Pattern!!",
+   "en": "{name}'s Ultimate Pattern!!",
    "ja": "{name}の必殺パターン!!",
    "zh": "{name}的必杀招式!!",
-   "pt": "Padrão Especial de {name}!!",
-   "es": "¡¡Patrón Especial de {name}!!",
-   "ru": "Особый приём: {name}!!",
-   "fr": "Attaque fatale de {name} !!",
-   "de": "Spezialmuster von {name}!!",
+   "pt": "Padrão Ultimate de {name}!!",
+   "es": "¡¡Patrón Definitivo de {name}!!",
+   "ru": "Ультимативный приём: {name}!!",
+   "fr": "Attaque ultime de {name} !!",
+   "de": "Ultimatives Muster von {name}!!",
    "ar": "النمط القاضي لـ {name}!!"
   },
   {
@@ -36905,7 +36905,7 @@
    "ru": "Ква!",
    "fr": "Coâ !",
    "de": "Quak!",
-   "ar": "نقيق!"
+   "ar": "نق!"
   },
   {
    "string_key": 8000292,
@@ -36924,7 +36924,7 @@
    "string_key": 8000293,
    "ko": "무야호~!!",
    "en": "YAHOOO~!!",
-   "ja": "ムヤホ〜!!",
+   "ja": "ヒャッホー〜!!",
    "zh": "呀吼~!!",
    "pt": "IAHUUU~!!",
    "es": "¡¡YAJUUU~!!",
@@ -36976,7 +36976,7 @@
    "string_key": 8000297,
    "ko": "엉엉",
    "en": "Sob sob",
-   "ja": "オイオイ",
+   "ja": "エーンエーン",
    "zh": "呜呜",
    "pt": "Buá buá",
    "es": "Buaa buaa",
@@ -37108,10 +37108,10 @@
    "en": "Cooked perfectly even!",
    "ja": "イーブンに焼けましたね！",
    "zh": "烤得很均匀！",
-   "pt": "No ponto certinho!",
+   "pt": "Ficou assado por igual!",
    "es": "¡Quedó parejito!",
    "ru": "Прожарено ровненько!",
-   "fr": "Cuit à la perfection !",
+   "fr": "Cuit de façon bien homogène !",
    "de": "Perfekt gleichmäßig gegart!",
    "ar": "مطهوة بالتساوي تماماً!"
   },
@@ -37126,7 +37126,7 @@
    "ru": "Вечный двигатель!",
    "fr": "Mouvement perpétuel !",
    "de": "Perpetuum mobile!",
-   "ar": "طاقة لا نهائية!"
+   "ar": "حركة أبدية!"
   },
   {
    "string_key": 8000309,
@@ -37137,7 +37137,7 @@
    "pt": "Não come!! Esse queijo tá ESTRAGADO!!",
    "es": "¡¡No te lo comas!! ¡¡Ese queso está ECHADO A PERDER!!",
    "ru": "Не ешь!! Этот сыр ИСПОРЧЕН!!",
-   "fr": "Mange pas ça !! Ce Fromage est POURRI !!",
+   "fr": "Mange pas ça !! Ce fromage est POURRI !!",
    "de": "Nicht essen!! Der Käse ist VERDORBEN!!",
    "ar": "لا تأكله!! ذلك الجبن فاسد!!"
   },
@@ -37210,7 +37210,7 @@
    "string_key": 8000315,
    "ko": "연구소장 층",
    "en": "Director's Floor",
-   "ja": "研究所長の階",
+   "ja": "研究所長フロア",
    "zh": "所长层",
    "pt": "Andar do Diretor",
    "es": "Piso del Director",
@@ -37226,7 +37226,7 @@
    "ja": "ボスをついに倒せなかった…",
    "zh": "最终没能打倒首领……",
    "pt": "A gente não conseguiu derrubar o chefe...",
-   "es": "No pudimos derribar al jefe...",
+   "es": "No pudimos derrotar al jefe...",
    "ru": "Босса так и не одолели...",
    "fr": "On n'a pas réussi à vaincre le boss…",
    "de": "Wir konnten den Boss einfach nicht besiegen…",
@@ -37256,7 +37256,7 @@
    "ru": "Промах!",
    "fr": "Raté !",
    "de": "Verfehlt!",
-   "ar": "أخطأت!"
+   "ar": "أخطأ!"
   },
   {
    "string_key": 8000319,
@@ -37331,7 +37331,7 @@
    "zh": "滋……滋……",
    "pt": "Tsss... tsss...",
    "es": "Tsss... tsss...",
-   "ru": "Тсс... тсс...",
+   "ru": "Пш-ш-ш... пш-ш-ш...",
    "fr": "Pschhh… pschhh…",
    "de": "Zisch… zisch…",
    "ar": "تششش... تششش..."
@@ -37564,7 +37564,7 @@
    "ja": "一括昇格できません（繁殖用の{keep}匹は残します）",
    "zh": "无法批量晋升（保留繁殖用的{keep}只）",
    "pt": "Não dá pra Promover em Massa (deixando {keep} ratos pra procriar)",
-   "es": "No se puede Ascenso Masivo (se quedan {keep} ratas para criar)",
+   "es": "No se puede realizar el Ascenso Masivo (se quedan {keep} ratas para criar)",
    "ru": "Массовое повышение невозможно (оставляем {keep} крыс на размножение)",
    "fr": "Promotion groupée impossible ({keep} souris gardées pour la reproduction)",
    "de": "Massenbeförderung nicht möglich ({keep} Ratten bleiben für die Zucht)",
@@ -37589,8 +37589,8 @@
    "en": "Find the stairs room!! The guards are coming",
    "ja": "階段の部屋を探せ!! 警備員が来ている",
    "zh": "找到楼梯房间!! 保安要来了",
-   "pt": "Achem a sala da escada!! Os seguranças tão vindo",
-   "es": "¡¡Encuentren la sala de las escaleras!! Vienen los guardias",
+   "pt": "Ache a sala da escada!! Os seguranças tão vindo",
+   "es": "¡¡Encuentra la sala de las escaleras!! Vienen los guardias",
    "ru": "Ищите комнату с лестницей!! Охрана идёт",
    "fr": "Trouve la salle des escaliers !! Les gardes arrivent",
    "de": "Finde den Treppenraum!! Die Wachen kommen",
@@ -37628,7 +37628,7 @@
    "en": "Rumble!!",
    "ja": "ゴロゴロ!!",
    "zh": "轰隆隆!!",
-   "pt": "Ronco!!",
+   "pt": "Estrondo!!",
    "es": "¡¡Retumbo!!",
    "ru": "Грохот!!",
    "fr": "Broum !!",
@@ -37749,7 +37749,7 @@
    "es": "¡¡Iiik-iiik!! ¡¡Levanta las patas!!",
    "ru": "Пи-пи!! Убери лапы!!",
    "fr": "Couic couic !! Lève les pattes !!",
-   "de": "Piep piep!! Pfoten hoch!!",
+   "de": "Piep piep!! Pfoten weg!!",
    "ar": "صِيء صِيء!! ارفع قدميك!!"
   },
   {
@@ -37892,8 +37892,8 @@
    "es": "Redada Total",
    "ru": "Полная облава",
    "fr": "Coup de filet",
-   "de": "Rundumschlag",
-   "ar": "إحاطة شاملة"
+   "de": "Großrazzia",
+   "ar": "مداهمة شاملة"
   },
   {
    "string_key": 8000368,
@@ -38267,7 +38267,7 @@
    "zh": "奶酪·研究资料·通用技能·勋章·滚轮训练都会保留！\n老鼠和爬过的楼层从头开始……",
    "pt": "Queijo · Pesquisa · Habilidades · Patente · Treino na Rodinha ficam!\nSeus ratos e andares voltam do zero...",
    "es": "¡Queso · Investigación · Habilidades · Rango · Entrenamiento en la Rueda se quedan!\nTus ratas y pisos empiezan de cero...",
-   "ru": "Сыр · исследования · навыки · ранг · тренировки остаются!\nКрысы и пройденные этажи — заново...",
+   "ru": "Сыр · исследования · навыки · ранг · тренировка в колесе остаются!\nКрысы и пройденные этажи — заново...",
    "fr": "Fromage · Recherche · Compétences · Rang · Entraînement à la roue restent !\nTes souris et les étages repartent de zéro…",
    "de": "Käse · Forschung · Skills · Rang · Laufrad-Training bleiben!\nDeine Ratten und erklommenen Etagen fangen von vorn an…",
    "ar": "الجبن · الأبحاث · المهارات · الرتبة · تدريب العجلة تبقى كما هي!\nالفئران والطوابق التي صعدتها تبدأ من جديد…"
@@ -38372,9 +38372,9 @@
    "pt": "한국어",
    "es": "한국어",
    "ru": "한국어",
-   "fr": "Coréen",
-   "de": "Koreanisch",
-   "ar": "الكورية"
+   "fr": "한국어",
+   "de": "한국어",
+   "ar": "한국어"
   },
   {
    "string_key": 8000430,
@@ -38515,9 +38515,9 @@
    "pt": "※ O esquilo quer dar uma volta na rodinha velha~",
    "es": "※ La ardilla quiere dar una vuelta en la rueda vieja~",
    "ru": "※ Белка хочет покрутить старое колесо~",
-   "fr": "※ Même les écureuils veulent faire un tour de roue~",
-   "de": "※ Selbst das Eichhörnchen will mal ins Laufrad~",
-   "ar": "※ حتى السنجاب يتمنى جولة في هذه العجلة~"
+   "fr": "※ L'écureuil veut faire un tour dans la vieille roue~",
+   "de": "※ Das Eichhörnchen will mal ins alte Laufrad~",
+   "ar": "※ السنجاب يتمنى جولة في العجلة القديمة~"
   },
   {
    "string_key": 8000441,
@@ -38894,17 +38894,17 @@
    "ru": "Музей Второй мировой 76–90",
    "fr": "Musée de la 2e GM 76-90",
    "de": "WK2-Museum 76-90",
-   "ar": "متحف الحرب العالمية 2 76-90"
+   "ar": "متحف الحرب العالمية الثانية 76-90"
   },
   {
    "string_key": 8000470,
    "ko": "우주 연구소 91~100",
-   "en": "Space Research Center 91-100",
+   "en": "Space Research Lab 91-100",
    "ja": "宇宙研究所 91〜100",
    "zh": "宇宙研究所 91~100",
-   "pt": "Centro Espacial 91-100",
-   "es": "Centro Espacial 91-100",
-   "ru": "Космический центр 91–100",
+   "pt": "Laboratório Espacial 91-100",
+   "es": "Laboratorio Espacial 91-100",
+   "ru": "Космическая лаборатория 91–100",
    "fr": "Labo spatial 91-100",
    "de": "Weltraumlabor 91-100",
    "ar": "مختبر الفضاء 91-100"
@@ -38956,7 +38956,7 @@
    "zh": "保管·合成·强化",
    "pt": "Guardar · Fundir · Melhorar",
    "es": "Guardar · Fusionar · Mejorar",
-   "ru": "Хранение · сплав · улучшение",
+   "ru": "Хранение · слияние · улучшение",
    "fr": "Stocker · Fusionner · Améliorer",
    "de": "Lagern · Fusionieren · Verbessern",
    "ar": "تخزين · دمج · تطوير"
@@ -39060,7 +39060,7 @@
    "zh": "合成模式",
    "pt": "Modo Fusão",
    "es": "Modo Fusión",
-   "ru": "Режим сплава",
+   "ru": "Режим слияния",
    "fr": "Mode Fusion",
    "de": "Fusionsmodus",
    "ar": "وضع الدمج"
@@ -39160,11 +39160,11 @@
    "string_key": 8000490,
    "ko": "들고 가는 중",
    "en": "Carrying",
-   "ja": "持っていく中",
+   "ja": "持ち込み中",
    "zh": "携带中",
    "pt": "Levando",
    "es": "Llevando",
-   "ru": "Берётся",
+   "ru": "С собой",
    "fr": "Emporté",
    "de": "Mitgenommen",
    "ar": "مُصطحَب"
@@ -39177,7 +39177,7 @@
    "zh": "增强研究所 <size=60%><color=#7a6a5a>保管·合成·强化</color></size>",
    "pt": "Oficina de Aprimoramentos <size=60%><color=#7a6a5a>Guardar · Fundir · Melhorar</color></size>",
    "es": "Taller de Aumentos <size=60%><color=#7a6a5a>Guardar · Fusionar · Mejorar</color></size>",
-   "ru": "Мастерская усилений <size=60%><color=#7a6a5a>Хранение · сплав · улучшение</color></size>",
+   "ru": "Мастерская усилений <size=60%><color=#7a6a5a>Хранение · слияние · улучшение</color></size>",
    "fr": "Atelier d'augmentations <size=60%><color=#7a6a5a>Stocker · Fusionner · Améliorer</color></size>",
    "de": "Augment-Werkstatt <size=60%><color=#7a6a5a>Lagern · Fusionieren · Verbessern</color></size>",
    "ar": "ورشة التعزيزات <size=60%><color=#7a6a5a>تخزين · دمج · تطوير</color></size>"
@@ -39216,7 +39216,7 @@
    "zh": "合成 {n}/{need}",
    "pt": "Fundir {n}/{need}",
    "es": "Fusionar {n}/{need}",
-   "ru": "Сплавить {n}/{need}",
+   "ru": "Слияние {n}/{need}",
    "fr": "Fusionner {n}/{need}",
    "de": "Fusionieren {n}/{need}",
    "ar": "دمج {n}/{need}"
@@ -39320,7 +39320,7 @@
    "zh": "时间倒流!!",
    "pt": "VOLTA NO TEMPO!!",
    "es": "¡¡RETROCESO!!",
-   "ru": "ОТМОТКА!!",
+   "ru": "ПЕРЕМОТКА ВРЕМЕНИ!!",
    "fr": "RETOUR DANS LE TEMPS !!",
    "de": "ZEITRÜCKSPULUNG!!",
    "ar": "إرجاع الزمن!!"
@@ -39473,7 +39473,7 @@
    "ko": "아지트로",
    "en": "To Hideout",
    "ja": "アジトへ",
-   "zh": "回基地",
+   "zh": "回秘密基地",
    "pt": "Pro Esconderijo",
    "es": "A la Guarida",
    "ru": "В Убежище",
@@ -39497,7 +39497,7 @@
   {
    "string_key": 8000516,
    "ko": "적들은 람쥐썬더가 처리했으니 안심하라구!",
-   "en": "Ramjui Thunder took care of the enemies, so relax!",
+   "en": "Squirrel Thunder took care of the enemies, so relax!",
    "ja": "敵はリスサンダーが片づけたから安心しな！",
    "zh": "敌人已经被松鼠雷霆收拾了，放心吧！",
    "pt": "O Trovão do Esquilo já cuidou dos inimigos, relaxa!",
@@ -39801,10 +39801,10 @@
    "zh": "啵！",
    "pt": "Pop!",
    "es": "¡Pop!",
-   "ru": "Поп!",
+   "ru": "Хлоп!",
    "fr": "Pouf !",
    "de": "Plopp!",
-   "ar": "بوب!"
+   "ar": "باف!"
   },
   {
    "string_key": 8000540,
@@ -39966,8 +39966,8 @@
    "string_key": 8000552,
    "ko": "쉬어 가는 한 판",
    "en": "A quick game break",
-   "ja": "ひと休みの一局",
-   "zh": "休息一局",
+   "ja": "ひと休みの1プレイ",
+   "zh": "轻松一局",
    "pt": "Uma pausa rapidinha",
    "es": "Un descanso rapidito",
    "ru": "Игровая передышка",
@@ -40005,11 +40005,11 @@
    "string_key": 8000555,
    "ko": "쥐를 날리고 싶은 방향으로 끌었다 놓으면 가진 쥐가 <b>전부 줄지어</b> 날아가 연구소 벽돌을 튕기며 깎습니다. 벽돌 숫자 = 남은 체력.\n처음 바닥에 닿은 쥐 자리에서 다음 발사. 한 턴이 끝나면 벽돌이 한 줄씩 내려오고, <b>바닥에 닿으면 끝</b>. 받침대는 없어요 — 첫 발사 각도가 전부!\n벽돌을 부수면 치즈 → <b>쥐 뽑기(10 치즈)</b>로 쥐를 늘리고, 쥐를 재료로 <b>증강 뽑기</b>.",
    "en": "Drag toward where you want to aim and release — <b>all your rats fly in a line</b>, bouncing off the lab bricks. Brick number = HP left.\nThe next launch starts where the first rat landed. After each turn the bricks drop one row — <b>if they reach the floor, it's over</b>. No paddle — the first angle is everything!\nBreak bricks for cheese → <b>Rat Draw (10 cheese)</b> for more rats, then spend rats on <b>Augment Draw</b>.",
-   "ja": "飛ばしたい方向にドラッグして離すと、持っているネズミが<b>全員一列に</b>飛んで研究所のブロックを跳ね返りながら削ります。ブロックの数字＝残り体力。\n最初に床に着いたネズミの位置から次の発射。1ターン終わるとブロックが1列ずつ下がり、<b>床に着いたら終わり</b>。受け台はありません——最初の発射角度がすべて！\nブロックを壊すとチーズ → <b>ネズミガチャ（チーズ10）</b>でネズミを増やし、ネズミを素材に<b>オーグメントガチャ</b>。",
+   "ja": "飛ばしたい方向にドラッグして離すと、持っているネズミが<b>全員一列に</b>飛んで研究所のブロックを跳ね返りながら削ります。ブロックの数字＝残り体力。\n最初に床に着いたネズミの位置から次の発射。1ターン終わるとブロックが1列ずつ下がり、<b>床に着いたら終わり</b>。パドルはありません——最初の発射角度がすべて！\nブロックを壊すとチーズ → <b>ネズミガチャ（チーズ10）</b>でネズミを増やし、ネズミを素材に<b>オーグメントガチャ</b>。",
    "zh": "朝想发射的方向拖动后松开，所有老鼠会<b>排成一列</b>飞出，在研究所砖块间弹射削减。砖块上的数字＝剩余体力。\n从第一只落地老鼠的位置开始下一次发射。每回合结束砖块下降一行，<b>碰到地面就结束</b>。没有挡板——第一次发射的角度决定一切！\n打碎砖块得奶酪 → 用<b>抽老鼠（10奶酪）</b>增加老鼠，再用老鼠做材料<b>抽增强</b>。",
    "pt": "Arraste na direção que quer mirar e solte — <b>todos os seus ratos voam em fila</b>, quicando nos tijolos do laboratório. Número no tijolo = HP restante.\nO próximo lançamento sai de onde o primeiro rato caiu. A cada turno os tijolos descem uma fileira — <b>se chegarem ao chão, acabou</b>. Sem raquete — o primeiro ângulo é tudo!\nQuebre tijolos pra ganhar queijo → <b>Sorteio de Ratos (10 queijos)</b> pra ter mais ratos, depois gaste ratos no <b>Sorteio de Aprimoramento</b>.",
    "es": "Arrastra hacia donde quieras apuntar y suelta: <b>todas tus ratas vuelan en fila</b>, rebotando en los ladrillos del laboratorio. Número del ladrillo = vida restante.\nEl siguiente lanzamiento sale de donde cayó la primera rata. Tras cada turno los ladrillos bajan una fila: <b>si llegan al piso, se acabó</b>. Sin paleta: ¡el primer ángulo lo es todo!\nRompe ladrillos para ganar queso → <b>Tirada de Ratas (10 de queso)</b> para más ratas, luego gasta ratas en la <b>Tirada de Aumentos</b>.",
-   "ru": "Тяните в нужную сторону и отпустите — <b>все ваши крысы летят цепочкой</b>, отскакивая от кирпичей лаборатории. Число на кирпиче = остаток прочности.\nСледующий запуск — с места, где приземлилась первая крыса. После хода кирпичи опускаются на ряд — <b>дошли до пола — конец</b>. Ракетки нет — всё решает первый угол!\nЛомайте кирпичи ради сыра → <b>Призыв крыс (10 сыра)</b>, затем тратьте крыс на <b>Призыв усилений</b>.",
+   "ru": "Тяните в нужную сторону и отпустите — <b>все ваши крысы летят цепочкой</b>, отскакивая от кирпичей лаборатории. Число на кирпиче = остаток прочности.\nСледующий запуск — с места, где приземлилась первая крыса. После хода кирпичи опускаются на ряд — <b>дошли до пола — конец</b>. Ракетки нет — всё решает первый угол!\nЛомайте кирпичи ради сыра → <b>Призыв крыс (10 сыра)</b>, чтобы увеличить число крыс, затем тратьте крыс на <b>Призыв усилений</b>.",
    "fr": "Glisse dans la direction visée et relâche : <b>tous tes rats volent à la file</b> et rebondissent sur les briques du Labo. Nombre sur la brique = PV restants.\nLe tir suivant part de là où le 1er rat atterrit. À chaque tour, les briques descendent d'une ligne : <b>si elles touchent le sol, c'est fini</b>. Pas de raquette — l'angle initial fait tout !\nCasse des briques pour du fromage → <b>Tirage de rat (10 fromages)</b> pour plus de rats, puis utilise-les pour le <b>Tirage d'augmentation</b>.",
    "de": "Ziehe in die gewünschte Richtung und lass los — <b>alle deine Ratten fliegen in einer Reihe</b> und prallen an den Labor-Ziegeln ab. Ziegelzahl = übrige LP.\nDer nächste Schuss startet dort, wo die erste Ratte landet. Nach jedem Zug rutschen die Ziegel eine Reihe tiefer — <b>berühren sie den Boden, ist es vorbei</b>. Kein Schläger — der erste Winkel entscheidet alles!\nZerstöre Ziegel für Käse → <b>Ratten-Ziehung (10 Käse)</b> für mehr Ratten, und nutze Ratten für die <b>Augment-Ziehung</b>.",
    "ar": "اسحب نحو الاتجاه الذي تريد التصويب إليه ثم أفلت — <b>ستطير كل فئرانك في صف واحد</b> وترتد عن طوب المختبر لتنقص صحته. رقم الطوبة = الصحة المتبقية.\nالإطلاق التالي يبدأ من مكان هبوط أول فأر. بعد كل دور ينزل الطوب صفًا واحدًا — <b>وإذا لمس الأرض تنتهي اللعبة</b>. لا يوجد مضرب — زاوية الإطلاق الأولى هي كل شيء!\nحطّم الطوب للحصول على الجبن → <b>سحب الفئران (10 جبن)</b> لزيادة الفئران، ثم استخدم الفئران في <b>سحب التعزيزات</b>."
@@ -40087,7 +40087,7 @@
    "zh": "·技能",
    "pt": "· Habilidade",
    "es": "· Habilidad",
-   "ru": "· навык",
+   "ru": "· Навык",
    "fr": "· Compétence",
    "de": "· Fähigkeit",
    "ar": "· مهارة"
@@ -40113,7 +40113,7 @@
    "zh": "到达回合 <b>{turn}</b>（最高 {best}）\n打碎砖块{broken}·收集奶酪{cheese}·老鼠{rats}只·最高等级{grade}·增强{augs}个",
    "pt": "Chegou ao turno <b>{turn}</b> (Recorde {best})\nTijolos quebrados {broken} · Queijo ganho {cheese} · Ratos {rats} · Maior grau {grade} · Aprimoramentos {augs}",
    "es": "Llegaste al turno <b>{turn}</b> (Récord {best})\nLadrillos rotos {broken} · Queso ganado {cheese} · Ratas {rats} · Mejor grado {grade} · Aumentos {augs}",
-   "ru": "Достигнут ход <b>{turn}</b> (рекорд {best})\nКирпичей разбито {broken} · сыра {cheese} · крыс {rats} · высший класс {grade} · усилений {augs}",
+   "ru": "Достигнут ход <b>{turn}</b> (рекорд {best})\nКирпичей разбито {broken} · сыра собрано {cheese} · крыс {rats} · высший класс {grade} · усилений {augs}",
    "fr": "Tour atteint <b>{turn}</b> (Record {best})\nBriques cassées {broken} · Fromage gagné {cheese} · Rats {rats} · Meilleur rang {grade} · Augmentations {augs}",
    "de": "Erreichter Zug <b>{turn}</b> (Rekord {best})\nZiegel zerstört {broken} · Käse gesammelt {cheese} · Ratten {rats} · Höchste Stufe {grade} · Augmente {augs}",
    "ar": "الدور الذي وصلت إليه <b>{turn}</b> (الأفضل {best})\nالطوب المحطم {broken} · الجبن المجموع {cheese} · الفئران {rats} · أعلى درجة {grade} · التعزيزات {augs}"
@@ -40602,12 +40602,12 @@
   {
    "string_key": 8000601,
    "ko": "필살!",
-   "en": "Special!",
+   "en": "Ultimate!",
    "ja": "必殺！",
    "zh": "必杀！",
-   "pt": "Especial!",
-   "es": "¡Especial!",
-   "ru": "Спецприём!",
+   "pt": "Ultimate!",
+   "es": "¡Definitiva!",
+   "ru": "Ульта!",
    "fr": "Ultime !",
    "de": "Ultimativ!",
    "ar": "قاضية!"
@@ -40671,7 +40671,7 @@
    "ja": "今日のアンコール公演",
    "zh": "今日安可演出",
    "pt": "O Bis de Hoje",
-   "es": "La Otra de Esta Noche",
+   "es": "El bis de esta noche",
    "ru": "Сегодняшний бис",
    "fr": "Le rappel du jour",
    "de": "Heutige Zugabe",
@@ -40753,7 +40753,7 @@
    "ru": "Ква!",
    "fr": "Coâ !",
    "de": "Quak!",
-   "ar": "نقيق!"
+   "ar": "كواك!"
   },
   {
    "string_key": 9000007,
@@ -40876,7 +40876,7 @@
    "string_key": 9000016,
    "ko": "냥냥펀치!!",
    "en": "Paw-paw punch!!",
-   "ja": "ネコネコパンチ!!",
+   "ja": "ニャンニャンパンチ!!",
    "zh": "喵喵拳!!",
    "pt": "Patada de gato!!",
    "es": "¡¡Zarpazo gatuno!!",
@@ -41059,7 +41059,7 @@
    "ko": "치즈만 쏙!",
    "en": "Snatched the cheese!",
    "ja": "チーズだけひょいっ！",
-   "zh": "奶酪被顺走了！",
+   "zh": "只顺走了奶酪！",
    "pt": "Roubou só o queijo!",
    "es": "¡Se robó el queso!",
    "ru": "Стащил сыр!",
@@ -41101,7 +41101,7 @@
    "zh": "啵！",
    "pt": "Pop!",
    "es": "¡Pop!",
-   "ru": "Поп!",
+   "ru": "Хлоп!",
    "fr": "Pop !",
    "de": "Plopp!",
    "ar": "بوب!"
@@ -41110,11 +41110,11 @@
    "string_key": 9000034,
    "ko": "(맞음)",
    "en": "(hit)",
-   "ja": "（命中）",
-   "zh": "（命中）",
-   "pt": "(acertou)",
+   "ja": "（被弾）",
+   "zh": "（被打）",
+   "pt": "(atingido)",
    "es": "(golpe)",
-   "ru": "(попал)",
+   "ru": "(попадание)",
    "fr": "(touché)",
    "de": "(getroffen)",
    "ar": "(إصابة)"
@@ -41219,9 +41219,9 @@
    "pt": "CRASH!",
    "es": "¡CRASH!",
    "ru": "ДЗЫНЬ!",
-   "fr": "CRAC !",
+   "fr": "FRACAS !",
    "de": "KRACH!",
-   "ar": "تحطيم!"
+   "ar": "طراخ!"
   },
   {
    "string_key": 9000043,
@@ -41273,7 +41273,7 @@
    "ru": "ДЗЫНЬ!!",
    "fr": "FRACAS !!",
    "de": "KRACH!!",
-   "ar": "تكسير!!"
+   "ar": "طراخ!!"
   },
   {
    "string_key": 9000047,
@@ -41283,7 +41283,7 @@
    "zh": "噼里啪啦哐!!",
    "pt": "CATAPLOFT!!",
    "es": "¡¡CATAPLÚN!!",
-   "ru": "БАБАХ-ТРАХ!!",
+   "ru": "БАБАХ!!",
    "fr": "PATATRAS !!",
    "de": "RUMMS!!",
    "ar": "طراااخ!!"
@@ -41299,7 +41299,7 @@
    "ru": "ХРЯСЬ!!",
    "fr": "CRAC !!",
    "de": "KNIRSCH!!",
-   "ar": "قرمشة!!"
+   "ar": "كرانش!!"
   },
   {
    "string_key": 9000049,
@@ -41377,7 +41377,7 @@
    "ru": "Бух!",
    "fr": "POUF !",
    "de": "BUMS!",
-   "ar": "دب!"
+   "ar": "طَخ!"
   },
   {
    "string_key": 9000055,
@@ -41491,7 +41491,7 @@
    "zh": "再去偷研究资料吧！|吱吱！",
    "pt": "Vamos roubar mais Pesquisa!|Guinch-guinch!",
    "es": "¡Robemos más Investigación!|¡Iiik-iiik!",
-   "ru": "Давай ещё стащим исследований!|Пи-пи!",
+   "ru": "Давай ещё стащим Исследования!|Пи-пи!",
    "fr": "Volons encore de la Recherche !|Couic couic !",
    "de": "Klauen wir mehr Forschung!|Piep piep!",
    "ar": "لنَسْرق المزيد من الأبحاث!|صِيء صِيء!"
@@ -41541,7 +41541,7 @@
    "en": "Sniff sniff...",
    "ja": "くんくん…",
    "zh": "嗅嗅……",
-   "pt": "Fun fun...",
+   "pt": "Fung fung...",
    "es": "Snif snif...",
    "ru": "Нюх-нюх...",
    "fr": "Snif snif…",
@@ -41607,7 +41607,7 @@
    "ja": "チュー?!",
    "zh": "吱?!",
    "pt": "Guinch?!",
-   "es": "¿¡Iiik!?",
+   "es": "¿Iiik?!",
    "ru": "Пи?!",
    "fr": "Couic ?!",
    "de": "Piep?!",
@@ -41749,10 +41749,10 @@
    "en": "Huff puff",
    "ja": "ハァハァ",
    "zh": "呼哧呼哧",
-   "pt": "Ufa, ufa",
-   "es": "Uf, uf",
+   "pt": "Arf, arf",
+   "es": "Buf, buf",
    "ru": "Пых-пых",
-   "fr": "Pouf pouf",
+   "fr": "Han, han",
    "de": "Keuch keuch",
    "ar": "هف هف"
   },
@@ -41778,7 +41778,7 @@
    "pt": "Ganhando músculo",
    "es": "Ganando músculo",
    "ru": "Мышцы растут",
-   "fr": "Les muscles poussent",
+   "fr": "Je prends du muscle",
    "de": "Muskeln wachsen",
    "ar": "العضلات تنمو"
   },
@@ -41816,10 +41816,10 @@
    "zh": "哈~ 睡得真香",
    "pt": "Uaaah~ que soneca",
    "es": "Uaaah~ qué siesta",
-   "ru": "Зева-а-ю~ славно поспал",
-   "fr": "Bâille~ bien dormi",
+   "ru": "А-а-х~ славно поспал",
+   "fr": "Ouaaah~ bien dormi",
    "de": "Gähn~ gut geschlafen",
-   "ar": "تثاؤب~ يا لها من قيلولة"
+   "ar": "هااام~ يا لها من قيلولة"
   },
   {
    "string_key": 9000089,
@@ -41903,7 +41903,7 @@
    "string_key": 9000095,
    "ko": "콰릉!",
    "en": "Ka-boom!",
-   "ja": "ゴロッ！",
+   "ja": "ドカン！",
    "zh": "轰隆！",
    "pt": "Ka-bum!",
    "es": "¡Ka-bum!",
@@ -41948,7 +41948,7 @@
    "es": "¡Feliz Ratidad!",
    "ru": "С Крысмасом!",
    "fr": "Joyeux Rat-Noël !",
-   "de": "Frohe Mäuseweihnacht!",
+   "de": "Frohe Mäusenachten!",
    "ar": "ميلاد فئران سعيد!"
   },
   {
@@ -42061,12 +42061,12 @@
    "en": "WINDMILL!!",
    "ja": "ウィンドミル!!",
    "zh": "风车!!",
-   "pt": "MOINHO DE VENTO!!",
+   "pt": "WINDMILL!!",
    "es": "¡¡MOLINO!!",
    "ru": "МЕЛЬНИЦА!!",
    "fr": "WINDMILL !!",
    "de": "WINDMILL!!",
-   "ar": "طاحونة الهواء!!"
+   "ar": "ويندميل!!"
   },
   {
    "string_key": 9000108,
@@ -42154,7 +42154,7 @@
    "zh": "转转转~",
    "pt": "Gira gira~",
    "es": "Vueltas y vueltas~",
-   "ru": "Кругом-кругом~",
+   "ru": "Кручусь-верчусь~",
    "fr": "Ça tourne, ça tourne~",
    "de": "Immer im Kreis~",
    "ar": "ندور وندور~"
@@ -42338,7 +42338,7 @@
    "es": "Toca las escaleras para ir al Piso {next}",
    "ru": "Коснитесь лестницы, чтобы перейти на {next}-й этаж",
    "fr": "Touche les escaliers pour aller à l'Étage {next}",
-   "de": "Berühre die Treppe für Etage {next}",
+   "de": "Berühre die Treppe, um zu Etage {next} zu gelangen",
    "ar": "المس الدرج للانتقال إلى طابق {next}"
   },
   {
@@ -42359,7 +42359,7 @@
    "ko": "콰광!!",
    "en": "KA-BOOM!!",
    "ja": "ドッカーン!!",
-   "zh": "轰隆隆!!",
+   "zh": "轰隆!!",
    "pt": "KA-BUM!!",
    "es": "¡¡KA-BUM!!",
    "ru": "БА-БАХ!!",
@@ -42373,7 +42373,7 @@
    "en": "Rumble!!",
    "ja": "ゴロゴロ!!",
    "zh": "轰隆隆!!",
-   "pt": "Ronco!!",
+   "pt": "Estrondo!!",
    "es": "¡¡Retumbo!!",
    "ru": "Грохот!!",
    "fr": "Broum !!",
