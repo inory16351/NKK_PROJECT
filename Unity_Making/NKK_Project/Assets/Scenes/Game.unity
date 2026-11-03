@@ -2130,6 +2130,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b635d77ffdbba478112489511b159a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Progress
+  acorn: 0
+  acornTotal: 0
+  acornMini: 0
+  acornAchv: 0
+  judolRats: 0
+  judolRuns: 0
   autoUpgradeInRun: 0
   saveKey: nkk_progress_v1
   testSkills: 
@@ -13664,6 +13670,7 @@ MonoBehaviour:
   desc: {fileID: 0}
   icon: {fileID: 1472330263}
   newMark: {fileID: 1043605440}
+  acornLine: {fileID: 2124004816}
   showTime: 3.2
   icons:
   - {fileID: 21300000, guid: 5ac08932ee54f5d4791c1d3df5a15c4b, type: 3}
@@ -13700,6 +13707,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ae1cae0c890e72f43841389631739562, type: 3}
   - {fileID: 21300000, guid: 204c003aff04d094792a166d7206bbfa, type: 3}
   - {fileID: 21300000, guid: ee69c6424f2bd274d9cae97edc304c8a, type: 3}
+  groupOver: 5
+  groupTitle: "\uC5C5\uC801 {n}\uAC1C \uB2EC\uC131!"
+  groupDesc: "\uC5EC\uB7EC \uC5C5\uC801\uC744 \uD55C\uAEBC\uBC88\uC5D0 \uB2EC\uC131\uD588\uC5B4\uC694"
+  pastTitle: "\uC9C0\uB09C \uC5C5\uC801 {n}\uAC1C!"
+  pastDesc: "\uC548\uB0B4 \uC804\uC5D0 \uB2EC\uC131\uD55C \uC5C5\uC801 \uB3C4\uD1A0\uB9AC\uB97C
+    \uD55C\uAEBC\uBC88\uC5D0 \uBC1B\uC558\uC5B4\uC694"
 --- !u!1 &88721873
 GameObject:
   m_ObjectHideFlags: 0
@@ -91530,7 +91543,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: 20}
+  m_AnchoredPosition: {x: 115, y: 34}
   m_SizeDelta: {x: 300, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &475622945
@@ -114618,6 +114631,7 @@ MonoBehaviour:
   stringTable: {fileID: 4900000, guid: 0b646e67f8e854144a2630ac19ac5c97, type: 3}
   augmentTable: {fileID: 4900000, guid: e4e75a4c97bdfa343a3261e3818fc15f, type: 3}
   augmentSpecialTable: {fileID: 4900000, guid: 5aca48c6a2845f14dbce6d8f9a380d6c, type: 3}
+  acornTable: {fileID: 4900000, guid: 1d5cdb78a86004546b2317d3b67e6965, type: 3}
   Shop:
     Shop_Config: []
     Shop_Slot: []
@@ -135930,7 +135944,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: -16}
+  m_AnchoredPosition: {x: 115, y: -2}
   m_SizeDelta: {x: 300, y: 44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &716160426
@@ -185913,12 +185927,13 @@ RectTransform:
   - {fileID: 1472330265}
   - {fileID: 715628726}
   - {fileID: 1043605441}
+  - {fileID: 2124004819}
   m_Father: {fileID: 730249102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -300, y: -215}
-  m_SizeDelta: {x: 560, y: 120}
+  m_SizeDelta: {x: 560, y: 132}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1049190494
 MonoBehaviour:
@@ -212524,6 +212539,18 @@ MonoBehaviour:
   - target: {fileID: 712030468}
     path: 'breakWords[2]'
     key: 8000347
+  - target: {fileID: 88700339}
+    path: groupTitle
+    key: 8000628
+  - target: {fileID: 88700339}
+    path: groupDesc
+    key: 8000629
+  - target: {fileID: 88700339}
+    path: pastTitle
+    key: 8000630
+  - target: {fileID: 88700339}
+    path: pastDesc
+    key: 8000631
 --- !u!4 &1184066576
 Transform:
   m_ObjectHideFlags: 0
@@ -373968,6 +373995,158 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2123167368}
   m_CullTransparentMesh: 1
+--- !u!1 &2124004815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2124004819}
+  - component: {fileID: 2124004818}
+  - component: {fileID: 2124004816}
+  - component: {fileID: 2124004817}
+  m_Layer: 0
+  m_Name: Acorn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2124004816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124004815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "+{n} \uB3C4\uD1A0\uB9AC"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: fd48720a843b5aa409ef81551491c7c5, type: 2}
+  m_sharedMaterial: {fileID: 2039848308}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 2039848308}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 0.85, g: 0.6, b: 0.3, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: 0
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 22
+  m_fontSizeBase: 22
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 14
+  m_fontSizeMax: 22
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_characterHorizontalScale: 1
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 0
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &2124004817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124004815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5918c9e9998c044419ddd45fa545d070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.LocText
+  key: 8000612
+  template: 1
+--- !u!222 &2124004818
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124004815}
+  m_CullTransparentMesh: 1
+--- !u!224 &2124004819
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124004815}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1049190493}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 115, y: -40}
+  m_SizeDelta: {x: 300, y: 28}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2124504508
 GameObject:
   m_ObjectHideFlags: 0

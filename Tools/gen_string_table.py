@@ -60,6 +60,9 @@ COLS = [
     ('증강 테이블', 'Augment', 'augment_id', 'aug_name', 46),   # 증강 (2026-10-19)
     ('증강 테이블', 'Augment', 'augment_id', 'aug_desc', 47),
     ('증강 테이블', 'Grade', None, 'grade_name', 48),
+    ('도토리 테이블', 'Deco_Category', None, 'cat_name', 49),     # 도토리 장식 상점 (2026-11-03)
+    ('도토리 테이블', 'Deco_Item', 'deco_id', 'deco_name', 50),
+    ('도토리 테이블', 'Deco_Lock', None, 'hint', 51),
 ]
 
 # 번역 언어 (ko 다음 칸들, Loc.cs Row 와 같은 이름)

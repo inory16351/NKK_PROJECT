@@ -184,7 +184,7 @@ namespace NKK.Ults
                 boss = Boss.Current, col = st && st.color.a > 0 ? st.color : u != null ? u.Color : Color.white,
             };
             if (cur.boss) cur.bossCap = cur.boss.hpMax * Cfg("boss_cap", 0.35f);
-            if (!test) { used.Add(code); stacks[code] = 0; }
+            if (!test) { used.Add(code); stacks[code] = 0; if (Progress.I) Progress.I.ReportSuperUse(row.super_id); }      // 업적 Super_Use (테스트 발동은 제외)
             if (log) Debug.Log($"[SuperUlt] 발동 {code} ({row.super_name}) 공격력 {cur.baseDmg:0}");
 
             // UI 처음 상태

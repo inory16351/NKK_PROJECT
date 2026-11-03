@@ -478,5 +478,19 @@
    "effect_type": "Spin_Beam",
    "shape": "x"
   }
+ ],
+ "Minigame_Reward": [
+  {
+   "key": "floor_step",
+   "value": 10.0
+  },
+  {
+   "key": "acorn_step",
+   "value": 10.0
+  },
+  {
+   "key": "repeat",
+   "value": 1.0
+  }
  ]
 }

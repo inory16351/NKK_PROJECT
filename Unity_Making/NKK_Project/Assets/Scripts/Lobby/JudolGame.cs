@@ -17,7 +17,7 @@ namespace NKK.Lobby
     [Serializable] public class JudolTierRow { public int tier; public float weight; }
     [Serializable] public class JudolBandRow { public float hp_below; public string color; }
     [Serializable] public class JudolShapeRow { public string effect_type, shape; }
-    [Serializable] public class JudolTableFile { public List<KeyValueRow> Judol_Config; public List<JudolGradeRow> Judol_Grade; public List<JudolAugRow> Judol_Aug; public List<JudolTierRow> Judol_Tier; public List<JudolBandRow> Judol_Band; public List<JudolShapeRow> Judol_Shape; }
+    [Serializable] public class JudolTableFile { public List<KeyValueRow> Judol_Config; public List<JudolGradeRow> Judol_Grade; public List<JudolAugRow> Judol_Aug; public List<JudolTierRow> Judol_Tier; public List<JudolBandRow> Judol_Band; public List<JudolShapeRow> Judol_Shape; public List<KeyValueRow> Minigame_Reward; }
 
     // 쥐돌깨기 (뒷골목 미니 게임기, 2026-10-30): 웹 프로토타입 쥐돌깨기.html (Shooting Ballz 식 벽돌깨기) 을 로비 창으로 옮김.
     // 끌었다 놓으면 가진 쥐 전부가 줄지어 날아가 벽돌을 튕기며 깎음. 처음 바닥에 닿은 쥐 자리 = 다음 발사 지점. 턴마다 벽돌 한 줄씩 내려오고 바닥 줄에 닿으면 끝.
@@ -89,6 +89,13 @@ namespace NKK.Lobby
         [Tooltip("재료로 쓴 쥐 ({list}) · 끝 ({turn} {best} {broken} {cheese} {rats} {grade} {augs})")] public TMP_Text augInfo, overBody;
         [Tooltip("증강 고르기 카드 3장 (Image = 등급 색 테두리, 자식: Icon · Name · Tier({tier}{lv}) · Desc)")] public Button[] augCards = new Button[0];
 
+        [Header("도토리 보상 · 기록 (2026-11-03 미니게임 기획서 Ver.05: 1턴 = 1층, 10층마다 도토리)")]
+        [Tooltip("시작 화면 기록 줄 ({best} 최고 층 · {next} 다음 업적 · {rats} 쥐 누적)")] public TMP_Text titleInfo;
+        [Tooltip("오른쪽: 이번 판 도토리 ({n})")] public TMP_Text runAcornText;
+        [Tooltip("10층 보상 떠오르는 글 ({n}) · 다음 업적이 없을 때")] public string acornGainText = "+{n} 도토리", nextAchvDone = "미니게임 업적 전부 달성!";
+        [Tooltip("10층 보상 글 색")] public Color acornCol = new(0.85f, 0.6f, 0.3f);
+        public string sfxAcorn = "cheese";
+
         [Header("글 (자리표시만 채움)")]
         [Tooltip("증강 설명: key = 테이블 key · desc ({v} {v2} {v3})")] public AugText[] augTexts = new AugText[0];
         [Serializable] public class AugText { public string key; public string desc; }
@@ -107,7 +114,9 @@ namespace NKK.Lobby
         // ── 표 ──
         const float W = 1280, H = 720;
         int COLS = 7, ROWS = 9; float CELL = 70, FX0, FY0 = 22, FW, FH, FLOOR;
-        readonly Dictionary<string, float> cfg = new();
+        readonly Dictionary<string, float> cfg = new(), rewardCfg = new();
+        float Rw(string k, float d) => rewardCfg.TryGetValue(k, out var v) ? v : d;
+        int runAcorn;          // 이번 판에 받은 10층 보상
         float Cf(string k, float d) => cfg.TryGetValue(k, out var v) ? v : d;
         readonly JudolGradeRow[] grades = new JudolGradeRow[6];
         readonly List<JudolAugRow> augRows = new();
@@ -160,12 +169,22 @@ namespace NKK.Lobby
             Init();
             if (state == St.Aim || state == St.Fly) { paused = true; Show(ovPause); }
             else if (state == St.Title) Show(ovTitle);
+            TitleInfo();
             Sfx(sfxStart);
+        }
+
+        // 시작 화면: 최고 층 · 다음 미니게임 업적 · 쥐 누적
+        void TitleInfo()
+        {
+            var p = Progress.I; var db = GameDatabase.Instance; string next = nextAchvDone;
+            if (p && db) foreach (var a in db.Achievements) if (a.achv_category == "Minigame" && !p.AchvDone(a)) { next = a.achv_desc; break; }
+            Fill(titleInfo, ("best", Best), ("next", next), ("rats", p ? p.judolRats.ToString("N0") : "0"));
         }
 
         public void Close()
         {
             holdBuy = -1; aim = null;
+            if (Progress.I) Progress.I.FlushJudol();
             Sfx(sfxClose);
             gameObject.SetActive(false);
         }
@@ -193,7 +212,7 @@ namespace NKK.Lobby
 
         void LoadTable()
         {
-            cfg.Clear(); augRows.Clear(); tiers.Clear(); bands.Clear(); shapeOf.Clear();
+            cfg.Clear(); rewardCfg.Clear(); augRows.Clear(); tiers.Clear(); bands.Clear(); shapeOf.Clear();
             var t = table ? JsonUtility.FromJson<JudolTableFile>(table.text) : null;
             if (t != null)
             {
@@ -203,6 +222,7 @@ namespace NKK.Lobby
                 if (t.Judol_Tier != null) tiers.AddRange(t.Judol_Tier);
                 if (t.Judol_Band != null) bands.AddRange(t.Judol_Band);
                 if (t.Judol_Shape != null) foreach (var s in t.Judol_Shape) shapeOf[s.effect_type] = s.shape;
+                if (t.Minigame_Reward != null) foreach (var r in t.Minigame_Reward) rewardCfg[r.key] = r.value;
             }
             for (int i = 0; i < 6; i++) grades[i] ??= new JudolGradeRow { grade = ((Grade)i).ToString(), dmg = i + 1, color = "#ffffff" };
             COLS = (int)Cf("cols", 7); ROWS = (int)Cf("rows", 9); CELL = Cf("cell", 70); FY0 = Cf("field_y", 22);
@@ -241,8 +261,8 @@ namespace NKK.Lobby
         void Reset()
         {
             turn = 1; cheese = 0; nextId = 0; rats.Clear(); bricks.Clear(); items.Clear(); flyers.Clear(); walkers.Clear(); parts.Clear(); floats.Clear(); cellFx.Clear(); recent.Clear(); later.Clear();
-            augs.Clear(); augCount = 0; pity = 0; ffMul = 1; launchQ.Clear(); aim = null; broken = 0; cheeseTotal = 0; bestGrade = 0;
-            AddRat(0, "brownrat"); for (int i = 1; i < (int)Cf("start_rats", 3); i++) AddRat(0);
+            augs.Clear(); augCount = 0; runAcorn = 0; pity = 0; ffMul = 1; launchQ.Clear(); aim = null; broken = 0; cheeseTotal = 0; bestGrade = 0;
+            AddRat(0, "brownrat", true); for (int i = 1; i < (int)Cf("start_rats", 3); i++) AddRat(0, null, true);
             launchX = FX0 + FW / 2; firstLandX = null;
             SpawnRow(); TurnStart();
         }
@@ -250,14 +270,17 @@ namespace NKK.Lobby
         public void NewGame()
         {
             Reset();
+            if (Progress.I) Progress.I.OnJudolRun();
             state = St.Aim; paused = false; Show(null);
             Sfx(sfxStart);
         }
 
-        Rat AddRat(int grade, string code = null)
+        // start = 판 시작 쥐 (쥐돌깨기 쥐 누적에 안 셈 — 업적 Mini_Rat 은 뽑기 · 탄생으로 얻은 쥐만)
+        Rat AddRat(int grade, string code = null, bool start = false)
         {
             var p = pool[grade];
             var r = new Rat { id = nextId++, grade = grade, code = code ?? p[Random.Range(0, p.Count)] };
+            if (!start && Progress.I) Progress.I.AddJudolRats(1);
             rats.Add(r); bestGrade = Mathf.Max(bestGrade, grade); return r;
         }
 
@@ -423,10 +446,26 @@ namespace NKK.Lobby
         {
             launchX = firstLandX ?? launchX; firstLandX = null;
             turn++;
+            FloorReward();
             if (ShiftDown()) { GameOver(); return; }
             SpawnRow(); TurnStart();
             state = St.Aim; ffMul = 1;
             Sfx(sfxTurn);
+        }
+
+        // 층(턴)이 오름: 최고 층 기록 (업적 Mini_Floor 바로 판정) · 10층마다 도토리 (판마다 다시 받음) · 모아 둔 쥐 누적 저장
+        void FloorReward()
+        {
+            var p = Progress.I; if (!p) return;
+            p.SetJudolBest(turn);
+            int step = Mathf.Max(1, (int)Rw("floor_step", 10));
+            if (turn % step == 0)
+            {
+                int got = p.AddAcorn(Progress.SrcMini, (int)Rw("acorn_step", 10));
+                runAcorn += got;
+                if (got > 0) { Float(FX0 + FW / 2, FY0 + 70, acornGainText.Replace("{n}", got.ToString()), acornCol); Sfx(sfxAcorn); }
+            }
+            p.FlushJudol();
         }
 
         void GameOver()
@@ -434,7 +473,9 @@ namespace NKK.Lobby
             state = St.Over;
             int best = Best;
             if (turn > best) { best = turn; if (Progress.I) Progress.I.SetJudolBest(turn); }
-            Fill(overBody, ("turn", turn), ("best", best), ("broken", broken), ("cheese", LobbyManager.Fmt(cheeseTotal)), ("rats", rats.Count), ("grade", GradeName(bestGrade)), ("augs", augCount));
+            if (Progress.I) Progress.I.FlushJudol();
+            Fill(overBody, ("turn", turn), ("best", best), ("broken", broken), ("cheese", LobbyManager.Fmt(cheeseTotal)), ("rats", rats.Count), ("grade", GradeName(bestGrade)), ("augs", augCount),
+                 ("acorn", runAcorn), ("ratsTotal", Progress.I ? Progress.I.judolRats.ToString("N0") : "0"));
             Sfx(sfxLose);
             Later(0.4f, () => Show(ovOver));
         }
@@ -922,7 +963,7 @@ namespace NKK.Lobby
                 if (on) RatPic(pic, recent[i].code, recent[i].grade, false, pic.rectTransform.anchoredPosition, pic.rectTransform.sizeDelta.x, 0, 1, true);
             }
             // 오른쪽
-            Fill(turnText, ("n", turn)); Fill(bestText, ("n", Best));
+            Fill(turnText, ("n", turn)); Fill(bestText, ("n", Best)); Fill(runAcornText, ("n", runAcorn));
             int cost = AugCost(); bool can = rats.Count > cost;
             if (augButton) augButton.interactable = state == St.Aim && can;
             Fill(augLabel, ("n", cost));

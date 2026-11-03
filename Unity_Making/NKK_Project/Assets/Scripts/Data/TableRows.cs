@@ -197,8 +197,15 @@ namespace NKK.Data
         public string floor_type; public float target_sec, boss_sec, research; public int skip_cap; public float player_pow;
     }     // wall_path = 계단까지 경로 벽 배율 합 (판마다 지형이 바뀌어 StageManager 가 경로에 나눔)
     // 업적 (업적 테이블 Achievement): 조건 타입 cond_type + 대상 target_id + 필요 횟수 need. 설명 {ult} = 대상 필살기 이름
-    [Serializable] public class AchievementRow { public int achv_id, achv_name_sk, achv_desc_sk; public string achv_name, achv_desc, cond_type; public int target_id, need; public string achv_icon; public int sort_order; }
-    [Serializable] public class AchievementTableFile { public List<AchievementRow> Achievement; }
+    // 업적 (2026-11-03 업적 기획서 Ver.05): 분류 Tier · Super · Boss · Minigame · Legacy(기존 필살기) · 도토리 · 공개 훈장 · 진행값 방식 Once · Max · Sum
+    [Serializable] public class AchievementRow { public int achv_id, achv_name_sk, achv_desc_sk; public string achv_name, achv_desc, cond_type; public int target_id, need; public string achv_icon; public int sort_order; public string achv_category, value_mode; public int reward_acorn, reveal_tier; }
+    [Serializable] public class AchvCategoryRow { public string category; public int acorn, reveal; }
+    [Serializable] public class AchievementTableFile { public List<AchievementRow> Achievement; public List<AchvCategoryRow> Achv_Category; }
+    // 도토리 테이블 (2026-11-03 신규 재화 기획서 Ver.05): 설정 · 장식 종류 16 · 장식 상품 36 · 잠긴 상품 해금 조건 글 (판매 조건 기능 id 별)
+    [Serializable] public class DecoCategoryRow { public int cat_no, cat_name_sk; public string category, cat_name, zone; }
+    [Serializable] public class DecoItemRow { public int deco_id, deco_name_sk, price, sort_order; public string deco_name, category, theme, sell_feature, asset; }
+    [Serializable] public class DecoLockRow { public string feature, hint; public int hint_sk; }
+    [Serializable] public class AcornTableFile { public List<KeyValueRow> Acorn_Config; public List<DecoCategoryRow> Deco_Category; public List<DecoItemRow> Deco_Item; public List<DecoLockRow> Deco_Lock; }
     [Serializable] public class StageTableFile { public List<StageRow> Stage; }
     // 상점 테이블 (쥐구멍 암시장) · 뽑기 테이블 (유전자 뽑기) — 기획서 2026-10-12
     [Serializable] public class KeyValueRow { public string key; public float value; }

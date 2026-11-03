@@ -11,7 +11,7 @@ namespace NKK.Lobby
     // 위: 훈장 사다리 8칸 (지금 · 단 것 · 앞으로) → 고르면 아래에 그 훈장 정보
     // 왼쪽 아래: 배지·이름·상태 · 효과(시작 쥐 · 윗등급 배율, 지금 → 그 훈장) · 승급 조건 막대 + 훈장 달기 (티어 테이블 연구자료 + 조건 3개)
     // 가운데 아래: 그 훈장에 오는 친구들 (쥐 테이블 unlock_rank, 안 만난 친구는 그림자 + ???)
-    // 오른쪽 아래: 업적 (업적 테이블 — 지금은 필살기 완주 Ult_Use, 나중에 조건 타입을 늘려 확장. 못 한 것은 ???)
+    // 오른쪽 아래: 업적 (업적 테이블, 2026-11-03 Ver.05 = 분류 탭 전체 · 훈장 · 초필살기 · 보스 · 미니게임 · 기존 + 진행도 · 도토리 · 달성일. 공개 전 분류는 '?')
     // 글은 씬 TMP (자리표시 {tier} {name} {a} {b} {have} {need} {n} {got} {total} {prev}), 코드는 값만.
     public class RankPage : MonoBehaviour
     {
@@ -50,9 +50,15 @@ namespace NKK.Lobby
         public Color unknownTint = new(0.25f, 0.2f, 0.18f, 0.85f);
 
         [Header("업적")]
-        [Tooltip("줄 템플릿 (꺼져 있음): 자식 Icon · Name · Title · Count({n})")] public RectTransform achvTemplate;
+        [Tooltip("줄 템플릿 (꺼져 있음): 자식 Icon · Name · Title · Count({n}) · Progress({have} / {need}) · Bar(자식 Fill = Image Filled) · Acorn · Date({date}) · New")] public RectTransform achvTemplate;
         [Tooltip("업적 {got} / {total}")] public TMP_Text achvCount;
         public Color achvOff = new(1, 1, 1, 0.35f);
+        [Tooltip("분류 탭 버튼 (자식 Label · Sel) — achvTabIds 와 같은 순서")] public Button[] achvTabs = new Button[0];
+        [Tooltip("탭 분류: All · Tier · Super · Boss · Minigame · Legacy")] public string[] achvTabIds = { "All", "Tier", "Super", "Boss", "Minigame", "Legacy" };
+        [Tooltip("업적 글 (씬 Words): 받을 도토리 +{n} · 받은 도토리 받음 +{n} · 공개 전 분류 ?")] public TMP_Text wAcornGet, wAcornGot, wAchvLocked;
+        [Tooltip("분류별 달성 수 줄 ({got} {total})")] public TMP_Text achvCatCount;
+        [Tooltip("달성일 형식 (C# 날짜 형식)")] public string achvDateFormat = "MM.dd";
+        string achvTab = "All";
 
         int selTier;
         readonly List<GameObject> spawned = new(), achvSpawned = new();
@@ -68,6 +74,9 @@ namespace NKK.Lobby
             if (reqTemplate) T(Txt(reqTemplate, "Value"));
             if (achvTemplate) T(Txt(achvTemplate, "Count"));
             if (rankButton) rankButton.onClick.AddListener(RankUp);
+            for (int i = 0; i < achvTabs.Length && i < achvTabIds.Length; i++) { var id = achvTabIds[i]; if (achvTabs[i]) achvTabs[i].onClick.AddListener(() => { achvTab = id; DrawAchv(); }); }
+            foreach (var t in new[] { achvCatCount }) T(t);
+            if (achvTemplate) { T(Txt(achvTemplate, "Progress")); T(Txt(achvTemplate, "Date")); }
         }
 
         static GameDatabase DB => GameDatabase.Instance;
@@ -168,24 +177,51 @@ namespace NKK.Lobby
             Show(row, "Ok", ok);
         }
 
-        // 업적 (업적 테이블): 달성한 것 먼저. 못 한 것은 이름 ??? + 조건 설명만 (힌트)
+        // 업적 (업적 테이블): 고른 분류 탭만 · 달성한 것 먼저. 못 한 것은 이름 ??? + 조건 설명 · 진행도 · 받을 도토리. 공개 전 분류는 이름 · 설명 모두 '?'
         void DrawAchv()
         {
             foreach (var g in achvSpawned) Destroy(g);
             achvSpawned.Clear();
-            var p = Progress.I; var db = DB; int got = 0, total = 0;
+            var p = Progress.I; var db = DB; int got = 0, total = 0, catGot = 0, catTotal = 0;
+            string lk = T(wAchvLocked);
+            // 분류 탭: 공개 전 분류는 '?' (전체 · 기존은 늘 이름)
+            for (int i = 0; i < achvTabs.Length && i < achvTabIds.Length; i++)
+            {
+                if (!achvTabs[i]) continue;
+                var id = achvTabIds[i]; var lb = Txt(achvTabs[i].transform, "Label");
+                bool open = id == "All" || p.CategoryRevealed(id);
+                if (lb) { T(lb); lb.text = open ? T(lb) : lk; }
+                Show(achvTabs[i].transform, "Sel", id == achvTab);
+            }
             var list = new List<AchievementRow>(db.Achievements);
             list.Sort((a, b) => { int c = p.AchvDone(b).CompareTo(p.AchvDone(a)); return c != 0 ? c : a.sort_order.CompareTo(b.sort_order); });
+            var shown = new List<int>();
             foreach (var a in list)
             {
                 total++; bool has = p.AchvDone(a); if (has) got++;
+                if (achvTab != "All" && a.achv_category != achvTab) continue;
+                catTotal++; if (has) catGot++;
+                bool open = p.CategoryRevealed(a.achv_category);
                 var row = Instantiate(achvTemplate, achvTemplate.parent); row.gameObject.SetActive(true); achvSpawned.Add(row.gameObject);
                 var ic = row.Find("Icon")?.GetComponent<Image>(); if (ic) { ic.sprite = IconBook.I ? IconBook.I.Get(a.achv_icon) : null; ic.enabled = ic.sprite; ic.color = has ? Color.white : achvOff; }
-                var nm = Txt(row, "Name"); if (nm) nm.text = has ? a.achv_name : T(wUnknown);
-                var tt = Txt(row, "Title"); if (tt) tt.text = AchvDesc(a);
-                var cn = Txt(row, "Count"); if (cn) { cn.gameObject.SetActive(has); cn.text = F(cn, ("n", p.AchvProgress(a))); }
+                var nm = Txt(row, "Name"); if (nm) nm.text = !open ? lk : has ? a.achv_name : T(wUnknown);
+                var tt = Txt(row, "Title"); if (tt) tt.text = open ? AchvDesc(a) : lk;
+                var cn = Txt(row, "Count"); if (cn) { cn.gameObject.SetActive(has && a.cond_type == "Ult_Use"); cn.text = F(cn, ("n", p.AchvProgress(a))); }
+                // 진행도 (최댓값 · 누적형만, 못 한 것): 지금 / 필요
+                int have = p.AchvProgress(a), need = p.AchvNeed(a); bool bar = open && !has && need > 1 && a.value_mode != "Once";
+                var pg = Txt(row, "Progress"); if (pg) { pg.gameObject.SetActive(bar); if (bar) pg.text = F(pg, ("have", LobbyManager.Fmt(Mathf.Min(have, need))), ("need", LobbyManager.Fmt(need))); }
+                var bt = row.Find("Bar"); if (bt) { bt.gameObject.SetActive(bar); var fl = bt.Find("Fill")?.GetComponent<Image>(); if (fl) fl.fillAmount = Mathf.Clamp01((float)have / need); }
+                // 도토리: 받을 양 · 받았으면 '받음'
+                int ac = p.AchvReward(a); var an = Txt(row, "Acorn");
+                if (an) { an.gameObject.SetActive(open && ac > 0); an.text = F(has ? wAcornGot : wAcornGet, ("n", ac)); }
+                long at = p.AchvTime(a.achv_id); var dt = Txt(row, "Date");
+                if (dt) { dt.gameObject.SetActive(has && at > 0); if (at > 0) dt.text = F(dt, ("date", System.DateTimeOffset.FromUnixTimeSeconds(at).ToLocalTime().ToString(achvDateFormat))); }
+                Show(row, "New", has && !p.AchvSeen(a.achv_id));
+                if (has) shown.Add(a.achv_id);
             }
             if (achvCount) achvCount.text = F(achvCount, ("got", got), ("total", total));
+            if (achvCatCount) achvCatCount.text = F(achvCatCount, ("got", catGot), ("total", catTotal));
+            p.MarkAchvSeen(shown);       // 다음에 열면 NEW 꺼짐
         }
 
         static string AchvDesc(AchievementRow a)

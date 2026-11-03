@@ -31,6 +31,7 @@ namespace NKK.Lobby
         [Header("아지트 화면 UI")]
         public GameObject homeUI;
         public TMP_Text homeCheese, homeResearch;
+        [Tooltip("도토리 (2훈장 업적 안내 뒤 · FeatureGate acorn 으로 표시줄 칸을 숨김)")] public TMP_Text homeAcorn, prepAcorn;
 
         [Header("탈출 준비실")]
         public GameObject prep;
@@ -51,6 +52,9 @@ namespace NKK.Lobby
             foreach (var p in pages) { var id = p.id; if (p.tab) p.tab.onClick.AddListener(() => OpenPage(id)); }
             if (prep) prep.SetActive(false);
         }
+
+        // 로딩 중 놓친 업적 판정을 아지트에 들어올 때 다시 (업적 기획서 예외처리)
+        void Start() { if (Progress.I) Progress.I.CheckAchvAll(); }
 
         // 글 자리표시 채우기: {tier} 훈장 번호 · {tierName} 훈장 이름 · {cheese} · {research} · {floor} 최고 층
         // 글 자체는 씬의 TMP 텍스트에 적혀 있음 (하이라키에서 고침)
@@ -76,6 +80,7 @@ namespace NKK.Lobby
             if (id == "market") return p.shop.lineup.Count == 0 || p.shop.freeLeft > 0 || BlackMarket.SecondsToRefresh <= 0;
             if (id == "aug") { foreach (var it in Augments.Items) if (it.isNew || Augments.CanUpgrade(it)) return true; return false; }     // 증강 연구소: 새 증강 · 강화 가능
             if (id == "alley") return Alert("gacha") || Alert("market") || Alert("aug");
+            if (id == "shop") { foreach (var d in GameDatabase.Instance.DecoItems) if (p.DecoStateOf(d) == Progress.DecoState.Buyable) return true; return false; }     // 도토리 상점: 살 수 있는 장식
             return false;
         }
 
@@ -147,6 +152,7 @@ namespace NKK.Lobby
             string c = Fmt(p ? p.cheese : 0), r = Fmt(p ? p.research : 0);
             if (homeCheese) homeCheese.text = c; if (homeResearch) homeResearch.text = r;
             if (prepCheese) prepCheese.text = c; if (prepResearch) prepResearch.text = r;
+            string a = Fmt(p ? p.acorn : 0); if (homeAcorn) homeAcorn.text = a; if (prepAcorn) prepAcorn.text = a;
             // 탈출 준비실에서 ESC = 아지트로
             var k = Keyboard.current;
             if (k != null && k.escapeKey.wasPressedThisFrame && PrepOpen && !NKK.Tutorial.TutorialBox.Showing && !GachaShow.Busy)

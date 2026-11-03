@@ -1,0 +1,591 @@
+{
+ "Acorn_Config": [
+  {
+   "key": "intro_tier",
+   "value": 2.0
+  },
+  {
+   "key": "acorn_max",
+   "value": 99999.0
+  },
+  {
+   "key": "confirm_price",
+   "value": 100.0
+  },
+  {
+   "key": "themes",
+   "value": 2.0
+  },
+  {
+   "key": "friend_max",
+   "value": 6.0
+  },
+  {
+   "key": "mini_floor_step",
+   "value": 10.0
+  },
+  {
+   "key": "mini_acorn_step",
+   "value": 10.0
+  }
+ ],
+ "Deco_Category": [
+  {
+   "cat_no": 1,
+   "category": "LobbyBg",
+   "cat_name": "로비 전체 배경",
+   "cat_name_sk": 4900001,
+   "zone": "Lobby"
+  },
+  {
+   "cat_no": 2,
+   "category": "NapBed",
+   "cat_name": "낮잠침대",
+   "cat_name_sk": 4900002,
+   "zone": "Lobby"
+  },
+  {
+   "cat_no": 3,
+   "category": "Badge",
+   "cat_name": "훈장",
+   "cat_name_sk": 4900003,
+   "zone": "Lobby"
+  },
+  {
+   "cat_no": 4,
+   "category": "Table",
+   "cat_name": "회의 테이블",
+   "cat_name_sk": 4900004,
+   "zone": "Lobby"
+  },
+  {
+   "cat_no": 5,
+   "category": "Bookshelf",
+   "cat_name": "친구들 책장",
+   "cat_name_sk": 4900005,
+   "zone": "Lobby"
+  },
+  {
+   "cat_no": 6,
+   "category": "Wheel",
+   "cat_name": "쳇바퀴",
+   "cat_name_sk": 4900006,
+   "zone": "Lobby"
+  },
+  {
+   "cat_no": 7,
+   "category": "CheeseStore",
+   "cat_name": "치즈창고",
+   "cat_name_sk": 4900007,
+   "zone": "Lobby"
+  },
+  {
+   "cat_no": 8,
+   "category": "Manhole",
+   "cat_name": "뒷골목 입구 맨홀 뚜껑",
+   "cat_name_sk": 4900008,
+   "zone": "Lobby"
+  },
+  {
+   "cat_no": 9,
+   "category": "Arcade",
+   "cat_name": "미니게임기",
+   "cat_name_sk": 4900009,
+   "zone": "Alley"
+  },
+  {
+   "cat_no": 10,
+   "category": "Market",
+   "cat_name": "암시장",
+   "cat_name_sk": 4900010,
+   "zone": "Alley"
+  },
+  {
+   "cat_no": 11,
+   "category": "Lab",
+   "cat_name": "실험실",
+   "cat_name_sk": 4900011,
+   "zone": "Alley"
+  },
+  {
+   "cat_no": 12,
+   "category": "AugLab",
+   "cat_name": "증강연구소",
+   "cat_name_sk": 4900012,
+   "zone": "Alley"
+  },
+  {
+   "cat_no": 13,
+   "category": "AlleyBg",
+   "cat_name": "뒷골목 전체 배경",
+   "cat_name_sk": 4900013,
+   "zone": "Alley"
+  },
+  {
+   "cat_no": 14,
+   "category": "UiButton",
+   "cat_name": "UI 버튼",
+   "cat_name_sk": 4900014,
+   "zone": "Common"
+  },
+  {
+   "cat_no": 15,
+   "category": "Cursor",
+   "cat_name": "마우스 커서",
+   "cat_name_sk": 4900015,
+   "zone": "Common"
+  },
+  {
+   "cat_no": 16,
+   "category": "RatFriend",
+   "cat_name": "쥐 친구",
+   "cat_name_sk": 4900016,
+   "zone": "Lobby"
+  }
+ ],
+ "Deco_Item": [
+  {
+   "deco_id": 95011,
+   "deco_name": "로비 전체 배경 · 도토리 숲",
+   "deco_name_sk": 5095011,
+   "category": "LobbyBg",
+   "theme": "Forest",
+   "price": 220,
+   "sell_feature": "",
+   "asset": "Deco/Lobby/lobbybg_forest",
+   "sort_order": 11
+  },
+  {
+   "deco_id": 95012,
+   "deco_name": "로비 전체 배경 · 네온 오락실",
+   "deco_name_sk": 5095012,
+   "category": "LobbyBg",
+   "theme": "Neon",
+   "price": 300,
+   "sell_feature": "",
+   "asset": "Deco/Lobby/lobbybg_neon",
+   "sort_order": 12
+  },
+  {
+   "deco_id": 95021,
+   "deco_name": "낮잠침대 · 도토리 숲",
+   "deco_name_sk": 5095021,
+   "category": "NapBed",
+   "theme": "Forest",
+   "price": 60,
+   "sell_feature": "",
+   "asset": "Deco/Lobby/napbed_forest",
+   "sort_order": 21
+  },
+  {
+   "deco_id": 95022,
+   "deco_name": "낮잠침대 · 네온 오락실",
+   "deco_name_sk": 5095022,
+   "category": "NapBed",
+   "theme": "Neon",
+   "price": 90,
+   "sell_feature": "",
+   "asset": "Deco/Lobby/napbed_neon",
+   "sort_order": 22
+  },
+  {
+   "deco_id": 95031,
+   "deco_name": "훈장 · 도토리 숲",
+   "deco_name_sk": 5095031,
+   "category": "Badge",
+   "theme": "Forest",
+   "price": 60,
+   "sell_feature": "rank",
+   "asset": "Deco/Lobby/badge_forest",
+   "sort_order": 31
+  },
+  {
+   "deco_id": 95032,
+   "deco_name": "훈장 · 네온 오락실",
+   "deco_name_sk": 5095032,
+   "category": "Badge",
+   "theme": "Neon",
+   "price": 90,
+   "sell_feature": "rank",
+   "asset": "Deco/Lobby/badge_neon",
+   "sort_order": 32
+  },
+  {
+   "deco_id": 95041,
+   "deco_name": "회의 테이블 · 도토리 숲",
+   "deco_name_sk": 5095041,
+   "category": "Table",
+   "theme": "Forest",
+   "price": 60,
+   "sell_feature": "",
+   "asset": "Deco/Lobby/table_forest",
+   "sort_order": 41
+  },
+  {
+   "deco_id": 95042,
+   "deco_name": "회의 테이블 · 네온 오락실",
+   "deco_name_sk": 5095042,
+   "category": "Table",
+   "theme": "Neon",
+   "price": 90,
+   "sell_feature": "",
+   "asset": "Deco/Lobby/table_neon",
+   "sort_order": 42
+  },
+  {
+   "deco_id": 95051,
+   "deco_name": "친구들 책장 · 도토리 숲",
+   "deco_name_sk": 5095051,
+   "category": "Bookshelf",
+   "theme": "Forest",
+   "price": 60,
+   "sell_feature": "dex",
+   "asset": "Deco/Lobby/bookshelf_forest",
+   "sort_order": 51
+  },
+  {
+   "deco_id": 95052,
+   "deco_name": "친구들 책장 · 네온 오락실",
+   "deco_name_sk": 5095052,
+   "category": "Bookshelf",
+   "theme": "Neon",
+   "price": 90,
+   "sell_feature": "dex",
+   "asset": "Deco/Lobby/bookshelf_neon",
+   "sort_order": 52
+  },
+  {
+   "deco_id": 95061,
+   "deco_name": "쳇바퀴 · 도토리 숲",
+   "deco_name_sk": 5095061,
+   "category": "Wheel",
+   "theme": "Forest",
+   "price": 60,
+   "sell_feature": "rats",
+   "asset": "Deco/Lobby/wheel_forest",
+   "sort_order": 61
+  },
+  {
+   "deco_id": 95062,
+   "deco_name": "쳇바퀴 · 네온 오락실",
+   "deco_name_sk": 5095062,
+   "category": "Wheel",
+   "theme": "Neon",
+   "price": 90,
+   "sell_feature": "rats",
+   "asset": "Deco/Lobby/wheel_neon",
+   "sort_order": 62
+  },
+  {
+   "deco_id": 95071,
+   "deco_name": "치즈창고 · 도토리 숲",
+   "deco_name_sk": 5095071,
+   "category": "CheeseStore",
+   "theme": "Forest",
+   "price": 60,
+   "sell_feature": "skill",
+   "asset": "Deco/Lobby/cheesestore_forest",
+   "sort_order": 71
+  },
+  {
+   "deco_id": 95072,
+   "deco_name": "치즈창고 · 네온 오락실",
+   "deco_name_sk": 5095072,
+   "category": "CheeseStore",
+   "theme": "Neon",
+   "price": 90,
+   "sell_feature": "skill",
+   "asset": "Deco/Lobby/cheesestore_neon",
+   "sort_order": 72
+  },
+  {
+   "deco_id": 95081,
+   "deco_name": "뒷골목 입구 맨홀 뚜껑 · 도토리 숲",
+   "deco_name_sk": 5095081,
+   "category": "Manhole",
+   "theme": "Forest",
+   "price": 40,
+   "sell_feature": "alley",
+   "asset": "Deco/Lobby/manhole_forest",
+   "sort_order": 81
+  },
+  {
+   "deco_id": 95082,
+   "deco_name": "뒷골목 입구 맨홀 뚜껑 · 네온 오락실",
+   "deco_name_sk": 5095082,
+   "category": "Manhole",
+   "theme": "Neon",
+   "price": 60,
+   "sell_feature": "alley",
+   "asset": "Deco/Lobby/manhole_neon",
+   "sort_order": 82
+  },
+  {
+   "deco_id": 95091,
+   "deco_name": "미니게임기 · 도토리 숲",
+   "deco_name_sk": 5095091,
+   "category": "Arcade",
+   "theme": "Forest",
+   "price": 60,
+   "sell_feature": "arcade",
+   "asset": "Deco/Alley/arcade_forest",
+   "sort_order": 91
+  },
+  {
+   "deco_id": 95092,
+   "deco_name": "미니게임기 · 네온 오락실",
+   "deco_name_sk": 5095092,
+   "category": "Arcade",
+   "theme": "Neon",
+   "price": 90,
+   "sell_feature": "arcade",
+   "asset": "Deco/Alley/arcade_neon",
+   "sort_order": 92
+  },
+  {
+   "deco_id": 95101,
+   "deco_name": "암시장 · 도토리 숲",
+   "deco_name_sk": 5095101,
+   "category": "Market",
+   "theme": "Forest",
+   "price": 60,
+   "sell_feature": "market",
+   "asset": "Deco/Alley/market_forest",
+   "sort_order": 101
+  },
+  {
+   "deco_id": 95102,
+   "deco_name": "암시장 · 네온 오락실",
+   "deco_name_sk": 5095102,
+   "category": "Market",
+   "theme": "Neon",
+   "price": 90,
+   "sell_feature": "market",
+   "asset": "Deco/Alley/market_neon",
+   "sort_order": 102
+  },
+  {
+   "deco_id": 95111,
+   "deco_name": "실험실 · 도토리 숲",
+   "deco_name_sk": 5095111,
+   "category": "Lab",
+   "theme": "Forest",
+   "price": 60,
+   "sell_feature": "gacha",
+   "asset": "Deco/Alley/lab_forest",
+   "sort_order": 111
+  },
+  {
+   "deco_id": 95112,
+   "deco_name": "실험실 · 네온 오락실",
+   "deco_name_sk": 5095112,
+   "category": "Lab",
+   "theme": "Neon",
+   "price": 90,
+   "sell_feature": "gacha",
+   "asset": "Deco/Alley/lab_neon",
+   "sort_order": 112
+  },
+  {
+   "deco_id": 95121,
+   "deco_name": "증강연구소 · 도토리 숲",
+   "deco_name_sk": 5095121,
+   "category": "AugLab",
+   "theme": "Forest",
+   "price": 60,
+   "sell_feature": "aug",
+   "asset": "Deco/Alley/auglab_forest",
+   "sort_order": 121
+  },
+  {
+   "deco_id": 95122,
+   "deco_name": "증강연구소 · 네온 오락실",
+   "deco_name_sk": 5095122,
+   "category": "AugLab",
+   "theme": "Neon",
+   "price": 90,
+   "sell_feature": "aug",
+   "asset": "Deco/Alley/auglab_neon",
+   "sort_order": 122
+  },
+  {
+   "deco_id": 95131,
+   "deco_name": "뒷골목 전체 배경 · 도토리 숲",
+   "deco_name_sk": 5095131,
+   "category": "AlleyBg",
+   "theme": "Forest",
+   "price": 220,
+   "sell_feature": "alley",
+   "asset": "Deco/Alley/alleybg_forest",
+   "sort_order": 131
+  },
+  {
+   "deco_id": 95132,
+   "deco_name": "뒷골목 전체 배경 · 네온 오락실",
+   "deco_name_sk": 5095132,
+   "category": "AlleyBg",
+   "theme": "Neon",
+   "price": 300,
+   "sell_feature": "alley",
+   "asset": "Deco/Alley/alleybg_neon",
+   "sort_order": 132
+  },
+  {
+   "deco_id": 95141,
+   "deco_name": "UI 버튼 · 도토리 숲",
+   "deco_name_sk": 5095141,
+   "category": "UiButton",
+   "theme": "Forest",
+   "price": 150,
+   "sell_feature": "",
+   "asset": "Deco/Common/uibutton_forest",
+   "sort_order": 141
+  },
+  {
+   "deco_id": 95142,
+   "deco_name": "UI 버튼 · 네온 오락실",
+   "deco_name_sk": 5095142,
+   "category": "UiButton",
+   "theme": "Neon",
+   "price": 200,
+   "sell_feature": "",
+   "asset": "Deco/Common/uibutton_neon",
+   "sort_order": 142
+  },
+  {
+   "deco_id": 95151,
+   "deco_name": "마우스 커서 · 도토리 숲",
+   "deco_name_sk": 5095151,
+   "category": "Cursor",
+   "theme": "Forest",
+   "price": 30,
+   "sell_feature": "",
+   "asset": "Deco/Common/cursor_forest",
+   "sort_order": 151
+  },
+  {
+   "deco_id": 95152,
+   "deco_name": "마우스 커서 · 네온 오락실",
+   "deco_name_sk": 5095152,
+   "category": "Cursor",
+   "theme": "Neon",
+   "price": 50,
+   "sell_feature": "",
+   "asset": "Deco/Common/cursor_neon",
+   "sort_order": 152
+  },
+  {
+   "deco_id": 95161,
+   "deco_name": "박쥐",
+   "deco_name_sk": 5095161,
+   "category": "RatFriend",
+   "theme": "-",
+   "price": 70,
+   "sell_feature": "",
+   "asset": "Deco/Rat/bat",
+   "sort_order": 161
+  },
+  {
+   "deco_id": 95162,
+   "deco_name": "앙기뮤띠쥐",
+   "deco_name_sk": 5095162,
+   "category": "RatFriend",
+   "theme": "-",
+   "price": 90,
+   "sell_feature": "",
+   "asset": "Deco/Rat/thumbs",
+   "sort_order": 162
+  },
+  {
+   "deco_id": 95163,
+   "deco_name": "마녀 생쥐",
+   "deco_name_sk": 5095163,
+   "category": "RatFriend",
+   "theme": "-",
+   "price": 110,
+   "sell_feature": "",
+   "asset": "Deco/Rat/witch",
+   "sort_order": 163
+  },
+  {
+   "deco_id": 95164,
+   "deco_name": "따봉도치",
+   "deco_name_sk": 5095164,
+   "category": "RatFriend",
+   "theme": "-",
+   "price": 130,
+   "sell_feature": "",
+   "asset": "Deco/Rat/hedgehog",
+   "sort_order": 164
+  },
+  {
+   "deco_id": 95165,
+   "deco_name": "랫 댄스 쥐",
+   "deco_name_sk": 5095165,
+   "category": "RatFriend",
+   "theme": "-",
+   "price": 150,
+   "sell_feature": "",
+   "asset": "Deco/Rat/ratdance",
+   "sort_order": 165
+  },
+  {
+   "deco_id": 95166,
+   "deco_name": "황금 쥐",
+   "deco_name_sk": 5095166,
+   "category": "RatFriend",
+   "theme": "-",
+   "price": 180,
+   "sell_feature": "",
+   "asset": "Deco/Rat/golden",
+   "sort_order": 166
+  }
+ ],
+ "Deco_Lock": [
+  {
+   "feature": "rank",
+   "hint": "찍찍!! 훈장이 열리면 팔아요",
+   "hint_sk": 5100001
+  },
+  {
+   "feature": "dex",
+   "hint": "친구들!!이 열리면 팔아요",
+   "hint_sk": 5100002
+  },
+  {
+   "feature": "rats",
+   "hint": "쳇바퀴 훈련이 열리면 팔아요",
+   "hint_sk": 5100003
+  },
+  {
+   "feature": "skill",
+   "hint": "치즈 창고가 열리면 팔아요",
+   "hint_sk": 5100004
+  },
+  {
+   "feature": "alley",
+   "hint": "16층을 클리어하면 뒷골목과 함께 열려요",
+   "hint_sk": 5100005
+  },
+  {
+   "feature": "gacha",
+   "hint": "16층을 클리어하면 비밀 실험실과 함께 열려요",
+   "hint_sk": 5100006
+  },
+  {
+   "feature": "market",
+   "hint": "17층을 클리어하면 암시장과 함께 열려요",
+   "hint_sk": 5100007
+  },
+  {
+   "feature": "aug",
+   "hint": "31층에 도달하면 증강 연구소와 함께 열려요",
+   "hint_sk": 5100008
+  },
+  {
+   "feature": "arcade",
+   "hint": "10훈장을 달면 미니 게임기와 함께 열려요",
+   "hint_sk": 5100009
+  }
+ ]
+}

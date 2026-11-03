@@ -38,8 +38,10 @@ namespace NKK
             // 플레이 중에만 (에디터에서 바꾸면 바뀐 글꼴이 씬·프리팹에 저장됨)
             if (!Application.isPlaying || !Loc.OwnFont || o is not TMP_Text t) return;
             bool changed = Apply(t);
-            if (Loc.Lang == Loc.Arabic && orig.ContainsKey(t))
+            // 템플릿을 복제(Instantiate)한 글은 글꼴은 이미 바뀌어 있지만 textPreprocessor(직렬화 안 됨)가 빠져 숫자가 뒤집혀 보임 (2026-11-03) → 여기서 붙임
+            if (Loc.Lang == Loc.Arabic && (orig.ContainsKey(t) || mine.Contains(t.font)))
             {
+                if (t.textPreprocessor != LocArabic.Instance) { t.textPreprocessor = LocArabic.Instance; t.enableKerning = false; changed = true; }
                 bool rtl = LocArabic.Has(t.text);
                 if (t.isRightToLeftText != rtl) { t.isRightToLeftText = rtl; changed = true; }
             }

@@ -741,6 +741,66 @@
    "action": "",
    "action_value": "",
    "sort": 331
+  },
+  {
+   "step_id": "l_achv",
+   "scene": "Lobby",
+   "trigger": "TierAtLeast",
+   "trigger_value": 2.0,
+   "trigger_text": "",
+   "cond1_type": "Unlocked",
+   "cond1_value": "rank",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "achv,acorn,shop",
+   "action": "",
+   "action_value": "",
+   "sort": 232
+  },
+  {
+   "step_id": "l_shop",
+   "scene": "Lobby",
+   "trigger": "After",
+   "trigger_value": 0.0,
+   "trigger_text": "l_achv",
+   "cond1_type": "",
+   "cond1_value": "",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 233
+  },
+  {
+   "step_id": "l_achv_page",
+   "scene": "Lobby",
+   "trigger": "PageOpen",
+   "trigger_value": 0.0,
+   "trigger_text": "rank",
+   "cond1_type": "Done",
+   "cond1_value": "l_achv",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 234
+  },
+  {
+   "step_id": "l_shop_page",
+   "scene": "Lobby",
+   "trigger": "PageOpen",
+   "trigger_value": 0.0,
+   "trigger_text": "shop",
+   "cond1_type": "Done",
+   "cond1_value": "l_achv",
+   "cond2_type": "",
+   "cond2_value": "",
+   "unlock": "",
+   "action": "",
+   "action_value": "",
+   "sort": 235
   }
  ],
  "Line": [
@@ -1759,6 +1819,105 @@
    "face": "happy",
    "text": "흐흐, 고양이 연구소 휴게실에서 슬쩍한 물건이지. 공짜니까 실컷 놀다 가라고.",
    "text_sk": 3900117,
+   "highlight": "arcade"
+  },
+  {
+   "line_id": 118,
+   "step_id": "l_achv",
+   "speaker_id": "nerd",
+   "face": "surprised",
+   "text": "찍찍!! 훈장을 달았더니 새 기록장이 생겼어! 이름하여 '업적'!",
+   "text_sk": 3900118,
+   "highlight": ""
+  },
+  {
+   "line_id": 119,
+   "step_id": "l_achv",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "훈장을 달거나, 보스를 처치하거나, 초필살기를 쓰면 업적이 달성돼. 업적마다 도토리를 줘!",
+   "text_sk": 3900119,
+   "highlight": "tab_rank"
+  },
+  {
+   "line_id": 120,
+   "step_id": "l_achv",
+   "speaker_id": "brownrat",
+   "face": "happy",
+   "text": "벌써 달성한 것도 있대! 지난 업적 도토리도 한꺼번에 챙겨 줄게 찍찍!",
+   "text_sk": 3900120,
+   "highlight": ""
+  },
+  {
+   "line_id": 121,
+   "step_id": "l_shop",
+   "speaker_id": "brownrat",
+   "face": "surprised",
+   "text": "어? 벽에 구멍이 뚫렸어! 저기가 도토리 상점이래!",
+   "text_sk": 3900121,
+   "highlight": "wallhole"
+  },
+  {
+   "line_id": 122,
+   "step_id": "l_shop",
+   "speaker_id": "brownrat",
+   "face": "happy",
+   "text": "도토리로 아지트를 꾸밀 장식을 살 수 있어. 전투에는 영향 없으니까 마음껏 골라!",
+   "text_sk": 3900122,
+   "highlight": "wallhole"
+  },
+  {
+   "line_id": 123,
+   "step_id": "l_achv_page",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "여기 오른쪽이 업적 목록이야. 분류별로 보고, 받을 도토리도 확인할 수 있어.",
+   "text_sk": 3900123,
+   "highlight": "achv_list"
+  },
+  {
+   "line_id": 124,
+   "step_id": "l_achv_page",
+   "speaker_id": "nerd",
+   "face": "happy",
+   "text": "아직 열리지 않은 분류는 '?'로 보여. 훈장을 더 달면 하나씩 열릴 거야!",
+   "text_sk": 3900124,
+   "highlight": "achv_list"
+  },
+  {
+   "line_id": 125,
+   "step_id": "l_shop_page",
+   "speaker_id": "brownrat",
+   "face": "happy",
+   "text": "어서 와! 아지트 · 뒷골목 · UI · 쥐 친구 구역에서 장식을 골라 봐.",
+   "text_sk": 3900125,
+   "highlight": "shop_tabs"
+  },
+  {
+   "line_id": 126,
+   "step_id": "l_shop_page",
+   "speaker_id": "brownrat",
+   "face": "normal",
+   "text": "자물쇠가 걸린 장식은 아직 그 시설이 안 열린 거야. 아래에 언제 열리는지 적혀 있어!",
+   "text_sk": 3900126,
+   "highlight": "shop_list"
+  },
+  {
+   "line_id": 127,
+   "step_id": "l_shop_page",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "도토리는 업적을 달성하거나, 나중에 열리는 미니게임에서 모을 수 있어.",
+   "text_sk": 3900127,
+   "highlight": "shop_acorn"
+  },
+  {
+   "line_id": 128,
+   "step_id": "l_arcade_hot",
+   "speaker_id": "nerd",
+   "face": "normal",
+   "text": "쥐돌깨기는 10층을 넘을 때마다 도토리를 줘! 업적 탭에 미니게임 업적도 새로 열렸어.",
+   "text_sk": 3900128,
    "highlight": "arcade"
   }
  ],

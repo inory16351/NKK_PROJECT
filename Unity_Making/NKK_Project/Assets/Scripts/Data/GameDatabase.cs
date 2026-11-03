@@ -26,6 +26,7 @@ namespace NKK.Data
         [Tooltip("상점 테이블 (쥐구멍 암시장) · 뽑기 테이블 (유전자 뽑기)")] public TextAsset shopTable, gachaTable;
         [Tooltip("스트링 테이블 (언어, Loc)")] public TextAsset stringTable;
         [Tooltip("증강 테이블 · 증강 특수 효과 테이블 (2026-10-19)")] public TextAsset augmentTable, augmentSpecialTable;
+        [Tooltip("도토리 테이블 (도토리 · 장식 상점, 2026-11-03)")] public TextAsset acornTable;
 
         public readonly Dictionary<int, RatCharacterRow> Rats = new();
         public readonly Dictionary<string, RatCharacterRow> RatsByCode = new();
@@ -69,6 +70,14 @@ namespace NKK.Data
         public float AugCfg(string key, float def = 0) => augCfg.TryGetValue(key, out var v) ? v : def;
         public readonly List<BossRow> Bosses = new();
         public readonly List<AchievementRow> Achievements = new();
+        public readonly Dictionary<string, AchvCategoryRow> AchvCategories = new();
+        // 도토리 · 장식 상점 (도토리 테이블)
+        public readonly Dictionary<string, float> AcornCfg = new();
+        public float AcornConfig(string key, float def) => AcornCfg.TryGetValue(key, out var v) ? v : def;
+        public readonly List<DecoCategoryRow> DecoCategories = new();
+        public readonly List<DecoItemRow> DecoItems = new();
+        public readonly Dictionary<int, DecoItemRow> DecoItemsById = new();
+        public readonly Dictionary<string, DecoLockRow> DecoLocks = new();
         public readonly List<BossLineRow> BossLines = new();
         public readonly Dictionary<string, BossAtkRow> BossAtks = new();
         public readonly Dictionary<string, TutoSpeakerRow> TutoSpeakers = new();
@@ -141,7 +150,17 @@ namespace NKK.Data
                 }
                 foreach (var b in f.Branch) SkillBranches[b.Branch] = b;
             }
-            if (achievementTable) { var f = JsonUtility.FromJson<AchievementTableFile>(achievementTable.text); if (f.Achievement != null) { Achievements.AddRange(f.Achievement); Achievements.Sort((a, b) => a.sort_order.CompareTo(b.sort_order)); } }
+            AchvCategories.Clear();
+            if (achievementTable) { var f = JsonUtility.FromJson<AchievementTableFile>(achievementTable.text); if (f.Achievement != null) { Achievements.AddRange(f.Achievement); Achievements.Sort((a, b) => a.sort_order.CompareTo(b.sort_order)); } if (f.Achv_Category != null) foreach (var c in f.Achv_Category) AchvCategories[c.category] = c; }
+            AcornCfg.Clear(); DecoCategories.Clear(); DecoItems.Clear(); DecoItemsById.Clear(); DecoLocks.Clear();
+            if (acornTable)
+            {
+                var f = JsonUtility.FromJson<AcornTableFile>(acornTable.text);
+                if (f.Acorn_Config != null) foreach (var r in f.Acorn_Config) AcornCfg[r.key] = r.value;
+                if (f.Deco_Category != null) { DecoCategories.AddRange(f.Deco_Category); DecoCategories.Sort((a, b) => a.cat_no.CompareTo(b.cat_no)); }
+                if (f.Deco_Item != null) { DecoItems.AddRange(f.Deco_Item); DecoItems.Sort((a, b) => a.sort_order.CompareTo(b.sort_order)); foreach (var d in DecoItems) DecoItemsById[d.deco_id] = d; }
+                if (f.Deco_Lock != null) foreach (var l in f.Deco_Lock) DecoLocks[l.feature] = l;
+            }
             if (stageTable) { var f = JsonUtility.FromJson<StageTableFile>(stageTable.text); if (f.Stage != null) { Stages.AddRange(f.Stage); Stages.Sort((a, b) => a.floor.CompareTo(b.floor)); } }
             if (bossTable) { var f = JsonUtility.FromJson<BossTableFile>(bossTable.text); if (f.Boss != null) Bosses.AddRange(f.Boss); if (f.Boss_Line != null) BossLines.AddRange(f.Boss_Line); if (f.Atk_Type != null) foreach (var a in f.Atk_Type) BossAtks[a.atk_type] = a; Bosses.Sort((a, b) => a.floor.CompareTo(b.floor)); }
             if (tutorialTable)
@@ -177,6 +196,7 @@ namespace NKK.Data
                 foreach (var l in TutoLines.Values) Loc.ApplyAll(l);
                 if (Shop?.Shop_Goods != null) Loc.ApplyAll(Shop.Shop_Goods);
                 Loc.ApplyAll(Augments); Loc.ApplyAll(AugGrades.Values);
+                Loc.ApplyAll(DecoCategories); Loc.ApplyAll(DecoItems); Loc.ApplyAll(DecoLocks.Values);
             }
             Debug.Log($"[GameDatabase] 쥐 {Rats.Count} · 스킬 {RatSkills.Count} · 필살기 {Ultimates.Count} · 등급 {Grades.Count} · 성장 노드 {GrowthNodes.Count} · 고양이 {Cats.Count} · 물건 {Items.Count} · 티어 {Tiers.Count} · 사람 {Humans.Count} · 공용 스킬 {CommonSkills.Count}");
         }

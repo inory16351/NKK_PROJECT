@@ -9,7 +9,7 @@ namespace NKK
     // (웹게임 S.shard / S.rlv / S.seen / S.skills / S.cheese / S.research / S.rank / S.maxFloor / S.runs).
     // 조각 강화 레벨 L → 성장 테이블 Growth_Order 순서대로 노드가 자동으로 찍힘 (웹게임 autoTree).
     [DefaultExecutionOrder(-900)]
-    public class Progress : MonoBehaviour
+    public partial class Progress : MonoBehaviour
     {
         public static Progress I { get; private set; }
 
@@ -38,7 +38,17 @@ namespace NKK
             public ShopSave shop; public GachaSave gacha;       // 쥐구멍 암시장 · 유전자 뽑기 (2026-10-12)
             public AugSave aug;                  // 증강 보관함 (2026-10-19)
             public bool infinite;                // 테스트: 치즈·연구자료 무제한 (테스트 패널 "전부 해제")
-            public int judolBest;                // 미니 게임기 쥐돌깨기 최고 턴 (2026-10-30)
+            public int judolBest;                // 미니 게임기 쥐돌깨기 최고 턴 (2026-10-30) = 최고 층 (1턴 = 1층, 2026-11-03)
+            // ── 도토리 · 장식 · 업적 (2026-11-03 신규 재화 · 업적 · 미니게임 기획서 Ver.05, Progress.Acorn.cs) ──
+            public int acorn, acornTotal, acornMini, acornAchv;      // 보유 · 누적 · 출처별 누적 (미니게임 · 업적)
+            public List<int> decoOwn = new();                        // 산 장식 (도토리 테이블 Deco_Item)
+            public List<DecoEquip> decoEquip = new();                // 종류마다 적용한 장식 (없으면 기본) — 그림 적용은 리소스가 생기면
+            public List<int> ratFriendOn = new();                    // 아지트에 보이게 둔 쥐 친구
+            public int judolRats, judolRuns;                         // 쥐돌깨기에서 얻은 쥐 누적 · 판 수
+            public List<int> superUsed = new(), bossKills = new();   // 처음 쓴 초필살기 id · 처치한 보스 층 (업적 Super_Use · Boss_Kill)
+            public List<AchvAt> achvAt = new();                      // 업적 달성 시각 (UTC)
+            public bool achvIntro;                                   // 업적 안내 뒤 첫 정산 (지난 업적 소급)을 했음
+            public List<int> achvSeen = new();                       // 업적 탭에서 확인한 업적 (NEW 표시)
         }
         // ── 쥐구멍 암시장 (상점 기획서 Shop_Save) · 유전자 뽑기 (뽑기 기획서 Gacha_Save) ──
         [Serializable] public class ShopItem { public int slot, goods; public string code; public bool sold; }
@@ -89,7 +99,7 @@ namespace NKK
         [Tooltip("최고 층 기록")] public int maxFloor = 1;
         [Tooltip("탈출 시도 횟수")] public int runs;
         [Tooltip("미니 게임기 쥐돌깨기 최고 턴")] public int judolBest;
-        public void SetJudolBest(int t) { if (t > judolBest) { judolBest = t; Save(); } }
+        public void SetJudolBest(int t) { if (t > judolBest) { judolBest = t; Save(); CheckAchvAll("Mini_Floor"); } }
 
         // 로비 → 게임 씬으로 넘기는 시작 층 (0 = 게임 씬을 바로 켬 → GameManager 인스펙터 값)
         public static int PendingStartFloor;
@@ -167,11 +177,11 @@ namespace NKK
             if (string.IsNullOrEmpty(features)) return false;
             bool any = false;
             foreach (var f in features.Split(',')) { var t = f.Trim(); if (t.Length > 0 && unlocks.Add(t)) any = true; }
-            if (any) { UnlockVersion++; Save(); }
+            if (any) { UnlockVersion++; Save(); if (unlocks.Contains("achv")) CheckAchvAll(); }       // 업적 안내(l_achv) → 지난 업적 소급 정산
             return any;
         }
         public bool SpendCheese(double v) { if (v < 0 || cheese < v) return false; cheese -= v; Save(); return true; }
-        public void OnFloorReached(int f) { if (f > maxFloor) { maxFloor = f; Save(); } }
+        public void OnFloorReached(int f) { if (f > maxFloor) { maxFloor = f; Save(); CheckAchvAll("Boss_Kill"); } }
 
         // 공용 스킬 지도에서 노드 상태: 활성화 · 열림(살 수 있음) · 잠김(이어진 노드가 아직) · 훈장 부족
         public enum SkillState { Owned, Open, Locked, TierLock }
@@ -187,29 +197,14 @@ namespace NKK
         readonly HashSet<int> achvOn = new();         // 업적 스위치 (저장 파일마다)
         public bool AchvSwitch(int achvId) => achvOn.Contains(achvId);
         public int UltUses(int ultId) => achvs.TryGetValue(ultId, out var n) ? n : 0;
-        // 업적 테이블 한 줄의 진행 수 (조건 타입별) · 달성 여부
-        public int AchvProgress(AchievementRow a) => a == null ? 0 : a.cond_type switch { "Ult_Use" => UltUses(a.target_id), _ => 0 };
         public bool AchvDone(AchievementRow a) => a != null && achvOn.Contains(a.achv_id);       // 달성 = 스위치가 켜짐
-        // 업적 달성 알림 — 스위치가 처음 켜질 때 한 번만 (게임 화면 AchievementToast 가 받음)
-        public event Action<AchievementRow> AchvGot;
 
         // 필살기를 끝까지 씀 → Ult_Use 업적 확인
         public void OnUltUsed(int ultId)
         {
             achvs[ultId] = UltUses(ultId) + 1;
             Save();
-            CheckAchv("Ult_Use", ultId);
-        }
-        void CheckAchv(string type, int target)
-        {
-            var db = GameDatabase.Instance; if (!db) return;
-            foreach (var a in db.Achievements)
-            {
-                if (a.cond_type != type || a.target_id != target) continue;
-                if (achvOn.Contains(a.achv_id) || AchvProgress(a) < Mathf.Max(1, a.need)) continue;     // 이미 켜진 스위치 · 조건 미달은 무시
-                achvOn.Add(a.achv_id); Save();
-                AchvGot?.Invoke(a);
-            }
+            CheckAchvAll("Ult_Use");
         }
         public event Action<int> SkillLeveled;
         readonly Dictionary<int, Dictionary<GrowthEffectType, int>> treeCache = new();
@@ -388,6 +383,7 @@ namespace NKK
             if (!CanRankUp()) return false;
             research -= NextTier.research_cost; tier++; SkillVersion++;
             Save(); RankedUp?.Invoke(tier);
+            CheckAchvAll();          // 훈장 업적 + 이 훈장에 공개되는 분류 (미니게임 = 10훈장)
             return true;
         }
 
@@ -398,6 +394,7 @@ namespace NKK
             d.nodes.AddRange(skills);
             d.achvOn.AddRange(achvOn);
             d.shop = shop; d.gacha = gacha; d.aug = aug;
+            SaveAcorn(d);
             foreach (var kv in achvs) d.achvs.Add(new AchvEntry { ult = kv.Key, count = kv.Value });     // 필살기 완주 횟수
             PlayerPrefs.SetString(KeyOf(Slot), JsonUtility.ToJson(d)); PlayerPrefs.Save();
         }
@@ -413,6 +410,7 @@ namespace NKK
         {
             rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0; judolBest = 0;
             tuto.Clear(); unlocks.Clear(); tutoSkip = tutoQuiet = endingSeen = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new(); aug = new();
+            ClearAcorn();
             var s = PlayerPrefs.GetString(KeyOf(Slot), "");
             if (string.IsNullOrEmpty(s)) return;
             var d = Parse(s);
@@ -436,6 +434,7 @@ namespace NKK
             tutoQuiet = d.tutoQuiet; endingSeen = d.endingSeen;
             shop = d.shop ?? new(); gacha = d.gacha ?? new(); aug = d.aug ?? new();
             Infinite = d.infinite;
+            LoadAcorn(d);
         }
 
         [ContextMenu("진행도 초기화")]
@@ -457,6 +456,7 @@ namespace NKK
             }
             Infinite = true; cheese = research = InfiniteAmount;
             treeCache.Clear(); UnlockVersion++; SkillVersion++;
+            GrantAchvSilently();      // 전부 해제로 켜진 업적은 도토리 없이 (업적 기획서 예외처리)
             Save();
         }
 

@@ -2315,6 +2315,7 @@ MonoBehaviour:
   stringTable: {fileID: 4900000, guid: 0b646e67f8e854144a2630ac19ac5c97, type: 3}
   augmentTable: {fileID: 4900000, guid: e4e75a4c97bdfa343a3261e3818fc15f, type: 3}
   augmentSpecialTable: {fileID: 4900000, guid: 5aca48c6a2845f14dbce6d8f9a380d6c, type: 3}
+  acornTable: {fileID: 4900000, guid: 1d5cdb78a86004546b2317d3b67e6965, type: 3}
   Shop:
     Shop_Config: []
     Shop_Slot: []
@@ -4836,6 +4837,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9b635d77ffdbba478112489511b159a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NKK.Progress
+  acorn: 0
+  acornTotal: 0
+  acornMini: 0
+  acornAchv: 0
+  judolRats: 0
+  judolRuns: 0
   autoUpgradeInRun: 0
   saveKey: nkk_progress_v1
   testSkills: 

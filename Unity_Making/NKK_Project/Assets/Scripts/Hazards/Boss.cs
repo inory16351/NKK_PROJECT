@@ -406,7 +406,7 @@ namespace NKK.Hazards
         {
             State = BState.Dying; t = 0; hp = 0; attacking = false; EndSpecialFx(); unbrokenT = 0;
             SfxManager.Play("jgl_boss_down");
-            if (!Test && bossFloor == Game.Floor) DefeatedThisFloor = true;
+            if (!Test && bossFloor == Game.Floor) { DefeatedThisFloor = true; if (Progress.I) Progress.I.ReportBossKill(Game.Floor); }      // 업적 Boss_Kill
             Debug.Log($"[Boss] {Game.Floor}층 보스 격파{(Test ? " (테스트)" : "")} · 전투 {Time.time - fightStart:0}초");
             vx = Random.Range(-120f, 120f); vy = -40; vz = downV; vr = downSpin; ClearShots();
             if (!Test) Game.ShowBanner(Fill(downTitle), Fill(downSub));
