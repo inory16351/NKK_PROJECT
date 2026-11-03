@@ -212,7 +212,7 @@ LINES = [
     (123, 'l_achv_page', 'nerd', 'normal', '여기 오른쪽이 업적 목록이야. 분류별로 보고, 받을 도토리도 확인할 수 있어.', 'achv_list'),
     (124, 'l_achv_page', 'nerd', 'happy', '아직 열리지 않은 분류는 \'?\'로 보여. 훈장을 더 달면 하나씩 열릴 거야!', 'achv_list'),
     (125, 'l_shop_page', 'brownrat', 'happy', '어서 와! 아지트 · 뒷골목 · UI · 쥐 친구 구역에서 장식을 골라 봐.', 'shop_tabs'),
-    (126, 'l_shop_page', 'brownrat', 'normal', '자물쇠가 걸린 장식은 아직 그 시설이 안 열린 거야. 아래에 언제 열리는지 적혀 있어!', 'shop_list'),
+    (126, 'l_shop_page', 'brownrat', 'normal', '자물쇠가 걸린 장식은 아직 그 시설이 안 열린 거야. 아래에 언제 열리는지 적혀 있어!', 'shop_lock'),
     (127, 'l_shop_page', 'nerd', 'normal', '도토리는 업적을 달성하거나, 나중에 열리는 미니게임에서 모을 수 있어.', 'shop_acorn'),
     # 미니게임 안내 (l_arcade_hot) 에 도토리 · 업적 한 줄 추가
     (128, 'l_arcade_hot', 'nerd', 'normal', '쥐돌깨기는 10층을 넘을 때마다 도토리를 줘! 업적 탭에 미니게임 업적도 새로 열렸어.', 'arcade'),

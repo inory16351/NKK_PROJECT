@@ -50,6 +50,7 @@ namespace NKK.Tutorial
         [Tooltip("위로 옮긴 대사 판의 화면 위 여백 (픽셀)")] public float dodgeTopMargin = 28;
         [Tooltip("위로 옮긴 초상화의 화면 위 여백 (픽셀)")] public float dodgePortraitMargin = 8;
         [Tooltip("옮겨 가는 빠르기")] public float dodgeSpeed = 12;
+        [Tooltip("가리키는 곳이 화면의 이 비율보다 크면: 대사창을 옮기지 않고 화살표도 숨김 (테두리만)")] [Range(0, 1)] public float bigTarget = 0.35f;
         [Tooltip("가리키는 UI 를 이만큼 키워서 보여 줌 (1 = 그대로, 대상마다 TutorialTarget.zoom 으로 따로 정할 수 있음)")] public float targetZoom = 1.25f;
         [Tooltip("키우는 빠르기")] public float targetZoomSpeed = 10;
 
@@ -214,6 +215,8 @@ namespace NKK.Tutorial
             Offsets(out float panelUp, out float portraitUp);
             float down = Cover(tr, 0, 0), up = Cover(tr, panelUp, portraitUp);
             if (down <= 0) return 0;
+            // 화면 대부분을 덮는 큰 대상(상점 목록 등)은 위로 옮겨도 가림 → 위쪽 제목 · 탭을 덮지 않게 아래 기본 자리 (2026-11-03)
+            if (up > 0 && tr.width * tr.height > cr.rect.width * cr.rect.height * bigTarget) return 0;
             return up < down ? 1 : 0;
         }
 
@@ -268,7 +271,9 @@ namespace NKK.Tutorial
             highlight.pivot = new Vector2(0.5f, 0.5f);
             highlight.anchoredPosition = (a + b) / 2 - cr.rect.center;
             highlight.sizeDelta = new Vector2(Mathf.Abs(b.x - a.x) + p * 2, Mathf.Abs(b.y - a.y) + p * 2);
-            if (arrow)
+            bool big = Mathf.Abs(b.x - a.x) * Mathf.Abs(b.y - a.y) > cr.rect.width * cr.rect.height * bigTarget;
+            if (arrow && big) arrow.gameObject.SetActive(false);       // 큰 대상은 테두리만 (화살표가 대사창 · 화면 가운데를 가리지 않게)
+            else if (arrow)
             {
                 arrow.gameObject.SetActive(true);
                 // 대상이 화면 위쪽이면 화살표를 아래에, 아래쪽이면 위에

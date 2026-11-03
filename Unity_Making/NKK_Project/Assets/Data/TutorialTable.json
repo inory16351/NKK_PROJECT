@@ -1900,7 +1900,7 @@
    "face": "normal",
    "text": "자물쇠가 걸린 장식은 아직 그 시설이 안 열린 거야. 아래에 언제 열리는지 적혀 있어!",
    "text_sk": 3900126,
-   "highlight": "shop_list"
+   "highlight": "shop_lock"
   },
   {
    "line_id": 127,

@@ -62,11 +62,14 @@ namespace NKK.Lobby
             return "";
         }
 
+        [Tooltip("튜토리얼 강조 id: 첫 번째 잠긴 카드 (잠긴 카드가 없으면 강조 없음)")] public string lockTargetId = "shop_lock";
+
         void Draw()
         {
             var p = Progress.I; if (!p || !DB || !itemTemplate) return;
             foreach (var g in spawned) Destroy(g);
             spawned.Clear();
+            RectTransform firstLocked = null;
             if (acornText) acornText.text = F(acornText, ("n", p.acorn.ToString("N0")));
             for (int i = 0; i < zoneTabs.Length && i < zoneIds.Length; i++) if (zoneTabs[i]) Show(zoneTabs[i].transform, "Sel", zoneIds[i] == zone);
             foreach (var d in DB.DecoItems)
@@ -74,6 +77,7 @@ namespace NKK.Lobby
                 if (ZoneOf(d) != zone) continue;
                 var st = p.DecoStateOf(d);
                 var c = Instantiate(itemTemplate, itemTemplate.parent); c.gameObject.SetActive(true); spawned.Add(c.gameObject);
+                if (!firstLocked && st == Progress.DecoState.Locked) firstLocked = c;
                 var nm = Txt(c, "Name"); if (nm) nm.text = d.deco_name;
                 var pr = Txt(c, "Price"); if (pr) pr.text = F(pr, ("n", d.price.ToString("N0")));
                 Show(c, "Lock", st == Progress.DecoState.Locked);
@@ -96,6 +100,9 @@ namespace NKK.Lobby
                     var dd = d; buy.onClick.AddListener(() => Buy(dd, false));
                 }
             }
+            // 튜토리얼 '자물쇠 걸린 장식' 대사가 가리킬 카드 (상점 목록 전체를 가리키면 대사창 · 화살표가 화면을 덮음)
+            var tc = firstLocked;
+            if (tc && !string.IsNullOrEmpty(lockTargetId)) { var tt = tc.gameObject.AddComponent<NKK.Tutorial.TutorialTarget>(); tt.id = lockTargetId; tt.zoom = 1; }
         }
 
         static string LockHint(DecoItemRow d) => DB.DecoLocks.TryGetValue(d.sell_feature ?? "", out var l) ? l.hint : "";
