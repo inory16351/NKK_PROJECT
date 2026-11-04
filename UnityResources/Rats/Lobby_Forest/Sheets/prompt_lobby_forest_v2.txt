@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lobby_forest_bg.png (in the current working directory, overwrite it). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A SMALL EDIT OF ref_forest_v1.png (1536x1024).
+Keep ref_forest_v1.png EXACTLY as it is - same composition, same positions and sizes of every object, same flat Untitled Goose Game style (flat color shapes, no outlines, no gradients, no gloss, no texture), same warm acorn-forest palette. Only make the two changes below. ref_flat_lobby_catlab.png is the original layout for reference only.
+
+CHANGE 1 - REMOVE ALL METAL HARDWARE. This hideout is inside a hollow oak tree, so there must be NO metal anywhere:
+- Remove every grey metal clamp/strap that holds the tree roots and branches (top band: on the branch at the upper left, on the small post top near the left, on the branch at the upper right; bottom band: on the root at the lower right, and the small grey plate on the post near the bottom middle). Just paint over them with the natural branch/root/post they were on.
+- Also replace the grey square metal plates on the big horizontal log beam and the grey metal corner brackets under the beam with natural wood: small wooden pegs (flat light-brown round dots) and simple twine/vine lashing (a few flat green or tan wraps) where logs join. No bolts, no screws, no grey metal.
+- Nothing else in the top and bottom bands changes.
+
+CHANGE 2 - REDESIGN THE NAP BED on the left (keep EXACTLY the same footprint: same place, same width and height as the current bed and its rug; it sits on the floor deck to the left of the left mushroom stool, under the round knothole window).
+The current bed (a brown box with an acorn cap stuck on it) looks awkward. Replace it with ONE clear, cute object: a big ACORN-CAP CRADLE bed - a wide, shallow half-dome acorn cap (flat warm brown with a simple flat scale pattern of slightly darker brown dots/scallops on its outside, a short little stem curling up at one end) lying open-side up like a bowl, resting on two small twig legs or directly on the rug, filled with a soft cream pillow at the left end and a fluffy flat orange oak-leaf blanket draped over the middle and hanging a little over the front rim. The round woven leaf-mat rug stays under it. No box, no rectangular frame, no label panel.
+
+Everything else (board, photos, string lights, map, knothole window, table stump, mushroom stools, books, lamp, right shelf, wall, floor deck) must remain unchanged.

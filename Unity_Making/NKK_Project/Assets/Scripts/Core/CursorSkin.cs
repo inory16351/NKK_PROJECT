@@ -11,6 +11,16 @@ namespace NKK
         [Tooltip("누르고 있을 때 포인터 (비우면 평소 그림 그대로)")] public Texture2D pressed;
         [Tooltip("클릭 지점 = 그림 왼쪽 위에서 픽셀 (쥐 코끝)")] public Vector2 hotspot = new(2, 2);
         [Tooltip("하드웨어 포인터를 못 쓰는 환경이면 켬 (소프트웨어 포인터)")] public bool forceSoftware;
+        [System.Serializable] public class Deco { public int decoId; public Texture2D normal, pressed; }
+        [Tooltip("도토리 상점 마우스 커서 장식 (종류 Cursor) → 그림 (같은 크기 · 같은 끝점)")] public Deco[] decos;
+
+        // 그림이 준비된 커서 장식 id → DecoArt.Ready (상점 '적용하기')
+        public static void RegisterReady()
+        {
+            var s = skin ? skin : Resources.Load<CursorSkin>("CursorSkin");
+            if (s && s.decos != null) foreach (var d in s.decos) if (d != null && d.normal) DecoArt.Ready.Add(d.decoId);
+        }
+        static int equipped;
 
         static CursorSkin skin;
         static bool down;
@@ -20,7 +30,8 @@ namespace NKK
         {
             skin = Resources.Load<CursorSkin>("CursorSkin");
             if (!skin || !skin.normal) return;
-            down = false;
+            down = false; equipped = DecoArt.Equipped("Cursor");
+            RegisterReady();
             skin.Apply(false);
             var go = new GameObject("CursorSkin") { hideFlags = HideFlags.HideInHierarchy };
             DontDestroyOnLoad(go);
@@ -29,7 +40,9 @@ namespace NKK
 
         void Apply(bool press)
         {
-            var tex = press && pressed ? pressed : normal;
+            Texture2D n = normal, pr = pressed;
+            if (equipped != 0 && decos != null) foreach (var d in decos) if (d != null && d.decoId == equipped && d.normal) { n = d.normal; pr = d.pressed; break; }
+            var tex = press && pr ? pr : n;
             Cursor.SetCursor(tex, hotspot, forceSoftware ? CursorMode.ForceSoftware : CursorMode.Auto);
         }
 
@@ -40,8 +53,9 @@ namespace NKK
             {
                 var m = UnityEngine.InputSystem.Mouse.current;
                 bool d = m != null && (m.leftButton.isPressed || m.rightButton.isPressed);
-                if (d == down || !skin) return;
-                down = d;
+                int e = DecoArt.Equipped("Cursor");          // 커서 장식을 바꾸면 바로
+                if ((d == down && e == equipped) || !skin) return;
+                down = d; equipped = e;
                 skin.Apply(d);
             }
             void OnApplicationFocus(bool f) { if (f && skin) skin.Apply(down); }     // 창 바꿨다 오면 다시

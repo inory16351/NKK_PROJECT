@@ -43,6 +43,14 @@ namespace NKK
             if (got < n) { Debug.Log($"[Acorn] 상한 {AcornMax} → {n - got} 버림"); AcornOverflow?.Invoke(n - got); }
             return got;
         }
+        // 테스트 패널: 도토리 바로 넣기 (출처 · 누적 기록에는 안 셈, 상한 지킴). 바로 저장
+        public int DevAddAcorn(int n)
+        {
+            int got = Mathf.Clamp(n, 0, Mathf.Max(0, AcornMax - acorn));
+            acorn += got; Save(); AcornChanged?.Invoke();
+            Debug.Log($"[Acorn] 테스트 +{got} (보유 {acorn})");
+            return got;
+        }
         public bool SpendAcorn(int n)
         {
             if (n < 0 || acorn < n) return false;
@@ -73,6 +81,27 @@ namespace NKK
             return true;
         }
         public int EquippedDeco(string cat) => decoEquip.TryGetValue(cat, out var id) ? id : 0;      // 0 = 기본
+        public bool IsDecoEquipped(DecoItemRow d) => d != null && EquippedDeco(d.category) == d.deco_id;
+        // 장식 적용 (종류마다 하나) — 이미 적용 중이면 해제(기본으로). 보유한 것만. 바로 저장
+        public event Action DecoEquipChanged;
+        // 스킨 적용 탭 (2026-11-04): 종류마다 고른 것. 0 = 자동(훈장 배경 따라) / 기본 · 양수 = 산 장식 id · 음수 = 훈장 배경 테마 (−fromTier, −1 = 처음 아지트)
+        public void SetDeco(string cat, int id)
+        {
+            if (string.IsNullOrEmpty(cat)) return;
+            if (id > 0 && !decoOwn.Contains(id)) return;
+            if (EquippedDeco(cat) == id) return;
+            if (id == 0) decoEquip.Remove(cat); else decoEquip[cat] = id;
+            Save(); DecoEquipChanged?.Invoke();
+            Debug.Log($"[AcornShop] 스킨 {cat} = {id}");
+        }
+        public bool ToggleDeco(DecoItemRow d)
+        {
+            if (d == null || !decoOwn.Contains(d.deco_id)) return false;
+            if (IsDecoEquipped(d)) decoEquip.Remove(d.category); else decoEquip[d.category] = d.deco_id;
+            Save(); DecoEquipChanged?.Invoke();
+            Debug.Log($"[AcornShop] {(IsDecoEquipped(d) ? "적용" : "해제")} {d.deco_id} {d.deco_name}");
+            return true;
+        }
         public int DecoOwnedCount => decoOwn.Count;
 
         // ── 업적 ──

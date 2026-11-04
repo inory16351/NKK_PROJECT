@@ -1,0 +1,26 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lobby_park_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A RESKIN / EDIT OF ref_flat_lobby_catlab.png.
+Take ref_flat_lobby_catlab.png as the base image and REPAINT it with a new theme while keeping its composition PIXEL-ALIGNED: every object, beam, post, the floor shelf, the round hole, the board, the table, the stools, the books, the right shelf and the bed must stay at EXACTLY the same position, size and outline as in ref_flat_lobby_catlab.png. Only the materials, colors and small decorations change. Do NOT move, enlarge, shrink or re-arrange anything. The canvas framing must be identical (1536x1024).
+
+Other references:
+- ref_layout_lobby_bg.png = the original hideout with the same layout (for extra layout check only; do NOT copy its painted style).
+- ref_flat_lobby_forest.png = another finished reskin of the same base, as an example of how strictly the layout and the flat style must be kept.
+
+THEME: "AMUSEMENT PARK" - a cheerful hideout built like a little carnival / theme park in the daytime. Motifs: circus-tent stripes, bunting flags, carousel horses (simple shapes), a small ferris wheel seen through the window, roller-coaster track, balloons, popcorn boxes, cotton candy, ticket stubs (blank), teacup ride, marquee bulbs.
+
+STYLE (most important, same as the base image): Untitled Goose Game flat look. Completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no light rays, no drop shadows, no texture; each object = a few flat color areas with one slightly darker flat tone. Soft muted cheerful palette: cream and off-white, soft candy red and white stripes, sky blue, mint, buttercup yellow, soft lilac, and cheese yellow. Keep the back wall LIGHT (cream with very soft pastel stripes), low contrast so small characters on top stay readable. No text, no letters, no numbers, no logos, no real mascots, no people, no animals, no rats.
+
+What to repaint (same places as in the base image):
+- Top band above the big horizontal beam: instead of pink/mint pipes and insulation puffs -> the top of a striped circus tent canopy (soft red and cream stripes), strings of triangle bunting flags, a piece of roller-coaster track crossing like the old pipes, and a few floating balloons. The big horizontal beam (same position, about 20%-24% height) becomes a painted carnival beam (cream with a row of small flat round marquee bulbs, no glow).
+- Back wall: white tiles with the pink paw stripe -> cream wall with very soft vertical pastel candy stripes, and ONE horizontal stripe at the same height as the pink stripe made of small repeating flat ticket and star shapes (soft red/yellow, blank). Vertical posts stay where they are (painted like candy-striped carousel poles, soft red and cream).
+- The round hole on the left (same place and size) -> a round window with a thick candy-striped ring, showing a flat sky-blue view of a small ferris wheel and a roller coaster outside.
+- The whiteboard (same place and size) -> a flat carnival notice board (wooden with a little scalloped tent-like top edge) with flat white chalk doodles (staircase arrow, cheese wedge, a balloon); the instant photos stay at the same spots but show a carousel horse, a ferris wheel, a cotton candy and a teacup ride, with red strings. The paper map beside it becomes a simple flat park map (blank paths and tiny tent shapes) with a red dashed route.
+- The string lights stay at the same place, bulbs become small flat round marquee bulbs in buttercup yellow and cream (no glow), with a few small bunting flags between them.
+- The floor shelf (same top edge and same front face height) -> a painted wooden boardwalk deck in soft cream/tan with a scalloped red-and-white tent-edge trim on its front face.
+- Bed on the left (same place and size as the pink box bed) -> a rat bed made from a TEACUP RIDE cup (wide pastel teacup, soft blue with cream polka dots) lined with a pink cushion and a small blanket, on the same small rug (rug becomes a round striped mat).
+- The pink cat-food can table (same place and size) -> a round carousel-platform table (a short round striped drum like a mini carousel base), with the same pencil cup (now a striped popcorn box) and a small cotton candy on top; the two round stools (same places and sizes) -> two small round striped drums like circus pedestals (one blue, one yellow).
+- The pile of binders + clip lamp (same place and size) -> a stack of flat game prize boxes and folded park maps (blank) + the same clip lamp + a small toy carousel horse on top.
+- The empty wall area right of the books stays EMPTY.
+- The right shelf unit with cheese (same place and size) -> a candy-striped prize-booth shelf with the same cheese wedges and blocks, plus a small cluster of balloons tied at the side and a striped popcorn cart-like box at the bottom.
+- Bottom band below the floor shelf: instead of pipes and pink insulation -> under-boardwalk wooden supports, the lower part of a roller-coaster track, scattered popcorn and a few ticket stubs (blank). Keep the area around 50% width just below the floor plain.

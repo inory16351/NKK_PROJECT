@@ -1741,6 +1741,26 @@
 "y": 0.942
 },
 {
+"path": "Assets/Art/Rats/Parts/maid/head.png",
+"x": 0.731,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/maid/tail.png",
+"x": 0.042,
+"y": 0.701
+},
+{
+"path": "Assets/Art/Rats/Parts/maid/front.png",
+"x": 0.509,
+"y": 0.938
+},
+{
+"path": "Assets/Art/Rats/Parts/maid/back.png",
+"x": 0.555,
+"y": 0.944
+},
+{
 "path": "Assets/Art/Rats/Parts/crewmate/head.png",
 "x": 0.532,
 "y": 0.14
@@ -1779,6 +1799,56 @@
 "path": "Assets/Art/Rats/Parts/skater_suit/back.png",
 "x": 0.603,
 "y": 0.946
+},
+{
+"path": "Assets/Art/Rats/Parts/kongpat/head.png",
+"x": 0.599,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/kongpat/tail.png",
+"x": 0.042,
+"y": 0.616
+},
+{
+"path": "Assets/Art/Rats/Parts/kongpat/front.png",
+"x": 0.494,
+"y": 0.939
+},
+{
+"path": "Assets/Art/Rats/Parts/kongpat/back.png",
+"x": 0.63,
+"y": 0.942
+},
+{
+"path": "Assets/Art/Rats/Parts/patjwi/head.png",
+"x": 0.58,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/Parts/patjwi/tail.png",
+"x": 0.042,
+"y": 0.59
+},
+{
+"path": "Assets/Art/Rats/Parts/patjwi/front.png",
+"x": 0.484,
+"y": 0.939
+},
+{
+"path": "Assets/Art/Rats/Parts/patjwi/back.png",
+"x": 0.627,
+"y": 0.942
+},
+{
+"path": "Assets/Art/Rats/Parts/butterfly/head.png",
+"x": 0.5,
+"y": 0.5
+},
+{
+"path": "Assets/Art/Rats/Parts/butterfly/tail.png",
+"x": 0.042,
+"y": 0.592
 },
 {
 "path": "Assets/Art/Rats/Cats/Parts/cheese/head.png",
@@ -3366,6 +3436,236 @@
 "y": 0.04
 },
 {
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_base_bed.png",
+"x": 2.5452,
+"y": 1.4366
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_base_table.png",
+"x": 1.0635,
+"y": 1.0333
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_base_books.png",
+"x": 0.0082,
+"y": 0.5719
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_base_shelf.png",
+"x": -2.802,
+"y": 0.4088
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_catlab_bed.png",
+"x": 2.4756,
+"y": 1.3759
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_catlab_table.png",
+"x": 1.0491,
+"y": 1.0526
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_catlab_books.png",
+"x": -0.0075,
+"y": 0.6073
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_catlab_shelf.png",
+"x": -3.0851,
+"y": 0.4658
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_earthlab_bed.png",
+"x": 2.5065,
+"y": 1.1609
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_earthlab_table.png",
+"x": 1.0412,
+"y": 0.9789
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_earthlab_books.png",
+"x": 0.0,
+"y": 0.6486
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_earthlab_shelf.png",
+"x": -2.84,
+"y": 0.4053
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_buildsite_bed.png",
+"x": 3.0837,
+"y": 1.7027
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_buildsite_table.png",
+"x": 1.1057,
+"y": 1.1156
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_buildsite_books.png",
+"x": -0.0461,
+"y": 1.0452
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_buildsite_shelf.png",
+"x": -2.9793,
+"y": 0.3857
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_sealab_bed.png",
+"x": 2.4934,
+"y": 1.1471
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_sealab_table.png",
+"x": 1.0395,
+"y": 1.0345
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_sealab_books.png",
+"x": -0.0037,
+"y": 0.6057
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_sealab_shelf.png",
+"x": -3.0851,
+"y": 0.4645
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_warmuseum_bed.png",
+"x": 2.4739,
+"y": 1.3377
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_warmuseum_table.png",
+"x": 1.046,
+"y": 1.0517
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_warmuseum_books.png",
+"x": -0.0088,
+"y": 0.6014
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_warmuseum_shelf.png",
+"x": -2.9385,
+"y": 0.4606
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_spacelab_bed.png",
+"x": 2.5418,
+"y": 1.1322
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_spacelab_table.png",
+"x": 1.0441,
+"y": 1.0514
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_spacelab_books.png",
+"x": -0.0064,
+"y": 0.6079
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_spacelab_shelf.png",
+"x": -3.1522,
+"y": 0.4517
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_forest_bed.png",
+"x": 2.7004,
+"y": 1.1765
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_forest_table.png",
+"x": 1.0368,
+"y": 0.9788
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_forest_books.png",
+"x": 0.0,
+"y": 0.6071
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_forest_shelf.png",
+"x": -3.0851,
+"y": 0.4698
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_neon_bed.png",
+"x": 2.5233,
+"y": 1.4388
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_neon_table.png",
+"x": 1.0394,
+"y": 0.9792
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_neon_books.png",
+"x": -0.011,
+"y": 0.6143
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_neon_shelf.png",
+"x": -3.0851,
+"y": 0.4725
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_park_bed.png",
+"x": 2.5066,
+"y": 1.3026
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_park_table.png",
+"x": 1.0467,
+"y": 0.9737
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_park_books.png",
+"x": 0.011,
+"y": 0.6085
+},
+{
+"path": "Assets/Art/Rats/UI/LobbySplit/lp_park_shelf.png",
+"x": -2.8985,
+"y": 0.4672
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Bat/head.png",
+"x": 0.67,
+"y": 0.07
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Bat/torso.png",
+"x": 0.5,
+"y": 0.5
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Bat/wing.png",
+"x": 0.05,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Bat/wing_far.png",
+"x": 0.07,
+"y": 0.14
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Bat/wing_fold.png",
+"x": 0.52,
+"y": 0.95
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Bat/feet.png",
+"x": 0.5,
+"y": 0.98
+},
+{
 "path": "Assets/Art/Rats/FrontRig/rs_head.png",
 "x": 0.497,
 "y": 0.05
@@ -3504,86 +3804,6 @@
 "path": "Assets/Art/Rats/FrontRig/rs_arm_up_back2.png",
 "x": 0.822,
 "y": 0.05
-},
-{
-"path": "Assets/Art/Rats/Parts/kongpat/head.png",
-"x": 0.599,
-"y": 0.14
-},
-{
-"path": "Assets/Art/Rats/Parts/kongpat/tail.png",
-"x": 0.042,
-"y": 0.616
-},
-{
-"path": "Assets/Art/Rats/Parts/kongpat/front.png",
-"x": 0.494,
-"y": 0.939
-},
-{
-"path": "Assets/Art/Rats/Parts/kongpat/back.png",
-"x": 0.63,
-"y": 0.942
-},
-{
-"path": "Assets/Art/Rats/Parts/patjwi/head.png",
-"x": 0.58,
-"y": 0.14
-},
-{
-"path": "Assets/Art/Rats/Parts/patjwi/tail.png",
-"x": 0.042,
-"y": 0.59
-},
-{
-"path": "Assets/Art/Rats/Parts/patjwi/front.png",
-"x": 0.484,
-"y": 0.939
-},
-{
-"path": "Assets/Art/Rats/Parts/patjwi/back.png",
-"x": 0.627,
-"y": 0.942
-},
-{
-"path": "Assets/Art/Rats/Parts/butterfly/head.png",
-"x": 0.5,
-"y": 0.5
-},
-{
-"path": "Assets/Art/Rats/Parts/butterfly/tail.png",
-"x": 0.042,
-"y": 0.592
-},
-{
-"path": "Assets/Art/Rats/RatFriends/Bat/head.png",
-"x": 0.67,
-"y": 0.07
-},
-{
-"path": "Assets/Art/Rats/RatFriends/Bat/torso.png",
-"x": 0.5,
-"y": 0.5
-},
-{
-"path": "Assets/Art/Rats/RatFriends/Bat/wing.png",
-"x": 0.05,
-"y": 0.14
-},
-{
-"path": "Assets/Art/Rats/RatFriends/Bat/wing_far.png",
-"x": 0.07,
-"y": 0.14
-},
-{
-"path": "Assets/Art/Rats/RatFriends/Bat/wing_fold.png",
-"x": 0.52,
-"y": 0.95
-},
-{
-"path": "Assets/Art/Rats/RatFriends/Bat/feet.png",
-"x": 0.5,
-"y": 0.98
 }
 ]
 }

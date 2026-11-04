@@ -15,6 +15,8 @@ namespace NKK.Lobby
         [Tooltip("(선택) 아지트 화면의 '내려가기' 버튼 (잠겨 있으면 숨김) · 하수구 화면의 '올라가기' 버튼")] public Button toRoom, toHome;
         [Tooltip("맨홀 뚜껑 그림: 닫힘 · 열림 (내려갈 때 열림)")] public SpriteRenderer manhole;
         public Sprite manholeClosed, manholeOpen;
+        [System.Serializable] public class DecoManhole { public int decoId; public Sprite closed, open; }
+        [Tooltip("도토리 상점 맨홀 뚜껑 장식 (종류 Manhole) → 닫힘 · 열림 그림 (같은 크기)")] public DecoManhole[] decoManholes;
         [Tooltip("열림 그림일 때 맨홀 위치 보정 (부모 기준) — 열림 그림은 옆에 뚜껑이 있어서 구멍이 가운데가 아님")] public Vector2 manholeOpenOffset;
         Vector3 manholeBase;
         [Tooltip("뒷골목에 있을 때 숨길 아지트 화면 UI (로고 · 팁 등)")] public GameObject[] hideInRoom;
@@ -30,6 +32,7 @@ namespace NKK.Lobby
         {
             I = this;
             if (manhole) manholeBase = manhole.transform.localPosition;
+            if (decoManholes != null) foreach (var d in decoManholes) if (d != null && d.closed) DecoArt.Ready.Add(d.decoId);
             if (toRoom) toRoom.onClick.AddListener(() => Go(true));
             if (toHome) toHome.onClick.AddListener(() => Go(false));
         }
@@ -64,8 +67,11 @@ namespace NKK.Lobby
             var p = home.cam.transform.position; p.y = Mathf.Lerp(homeY, roomY, Mathf.SmoothStep(0, 1, k)); home.cam.transform.position = p;
             if (manhole)
             {
-                bool open = (AtRoom || k > 0) && manholeOpen;
-                manhole.sprite = open ? manholeOpen : manholeClosed;
+                Sprite cl = manholeClosed, op = manholeOpen;
+                int deco = DecoArt.Equipped("Manhole");
+                if (deco != 0 && decoManholes != null) foreach (var d in decoManholes) if (d != null && d.decoId == deco && d.closed) { cl = d.closed; op = d.open ? d.open : op; break; }
+                bool open = (AtRoom || k > 0) && op;
+                manhole.sprite = open ? op : cl;
                 manhole.transform.localPosition = manholeBase + (open ? (Vector3)manholeOpenOffset : Vector3.zero);
             }
             if (prev != k && (k == 0 || k == 1)) Moved?.Invoke(k == 1);

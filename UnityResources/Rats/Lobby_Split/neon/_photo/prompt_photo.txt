@@ -1,0 +1,4 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: neon_empty_fixed.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A TINY EDIT OF ref_neon_empty.png (1536x1024). Keep the whole image EXACTLY as it is (same composition, every pixel position, same flat style, same colors).
+Change ONLY ONE thing: on the wall, the instant photo at the upper right of the photo group (the one showing a small green pixel ALIEN / space-invader-like creature, to the right of the photo with the handheld game console) - keep the photo frame, its red pin and red string exactly where they are, but replace the picture inside with an ORIGINAL simple flat pixel-art CHEESE WEDGE (yellow with orange holes) on the same dark background. No alien, no creature, no character from any existing game. Everything else stays unchanged.

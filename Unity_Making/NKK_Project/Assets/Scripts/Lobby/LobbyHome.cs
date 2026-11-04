@@ -57,10 +57,25 @@ namespace NKK.Lobby
         [Tooltip("티어 2 부터 탁자 위 치즈")] public SpriteRenderer propCheese;
         [Tooltip("티어 3 부터 탁자 위 찻잔")] public SpriteRenderer propCup;
 
+        // 아지트 소품 4종 (2026-11-04 배경에서 분리): 배경판 = 소품 없는 빈 배경, 소품은 따로 그림 (피벗 = 배경 가운데라 자리 이동 없이 그림만 바꿈)
+        [Serializable] public class PropSet { public Sprite bed, table, books, shelf; }
+        [Header("아지트 소품 (배경에서 분리, 쥐보다 뒤)")]
+        [Tooltip("낮잠침대 · 회의 테이블(의자 포함) · 친구들 책장(책 더미) · 치즈창고(선반)")] public SpriteRenderer propBed, propTable, propBooks, propShelf;
+        [Tooltip("처음 배경의 소품")] public PropSet baseProps;
+
         [Header("훈장별 아지트 배경 (배경판 그림 교체, 같은 크기·배치)")]
         [Tooltip("지금 훈장 이상인 것 중 fromTier 가 가장 큰 그림. 없으면 처음 배경 (예: 4훈장 = 16~30층 고양이 연구소)")] public TierLook[] tierLooks;
-        [Serializable] public class TierLook { [Tooltip("이 훈장부터")] public int fromTier; public Sprite sprite; }
+        [Serializable] public class TierLook { [Tooltip("이 훈장부터")] public int fromTier; public Sprite sprite; [Tooltip("이 배경의 소품 (빈 칸 = 처음 소품)")] public PropSet props; [Tooltip("스킨 적용 탭에 보일 이름 = 이 구간 이름 (아이템 테이블 Zone)")] public int zoneId; }
         Sprite baseBackground;
+
+        [Header("도토리 상점 로비 배경 (적용하면 훈장 배경보다 먼저)")]
+        [Tooltip("장식 id (도토리 테이블 Deco_Item, 종류 LobbyBg) → 배경 그림 + 그 테마 소품 (같은 크기·배치)")] public DecoLook[] decoLooks;
+        [Serializable] public class DecoLook { public int decoId; public Sprite sprite; public PropSet props; }
+        [Tooltip("소품 하나만 바꾸는 장식 (종류 NapBed · Table · Bookshelf · CheeseStore) → 그림. 적용하면 배경 테마 소품보다 먼저")] public DecoProp[] decoProps;
+        [Serializable] public class DecoProp { public int decoId; public Sprite sprite; }
+        // 그림이 준비된 장식 (상점이 '적용하기' 버튼을 낼지 정함)
+        static HashSet<int> readyDeco => DecoArt.Ready;
+        public static bool DecoReady(int id) => DecoArt.Ready.Contains(id);
 
         [Header("말풍선 · 효과 (템플릿, 꺼져 있음)")]
         [Tooltip("말풍선 프리팹 (Prefabs/LobbyBubble: 배경 + 꼬리 + 글자를 SortingGroup 으로 한 덩어리) — 씬에 꺼 둔 인스턴스")] public SpriteRenderer bubbleTemplate;
@@ -113,6 +128,11 @@ namespace NKK.Lobby
             if (bubbleTemplate) bubbleTemplate.gameObject.SetActive(false);
             if (fxTemplate) fxTemplate.gameObject.SetActive(false);
             if (background) baseBackground = background.sprite;
+            if (decoLooks != null) foreach (var l in decoLooks) if (l != null && l.sprite) readyDeco.Add(l.decoId);
+            if (decoProps != null) foreach (var l in decoProps) if (l != null && l.sprite) readyDeco.Add(l.decoId);
+            // 씬의 다른 장식 그림 (꺼져 있는 뒷골목 건물 포함) · UI 버튼 · 커서 도 '적용하기' 대상으로
+            foreach (var s in FindObjectsByType<DecoSkin>(FindObjectsInactive.Include, FindObjectsSortMode.None)) s.Register();
+            UiDecoSkin.RegisterReady(); CursorSkin.RegisterReady();
         }
 
         // 아지트 · 하수구 쥐 무리 전부 (물건 버튼을 누를 때 어느 층이든 쥐가 먼저)
@@ -175,15 +195,64 @@ namespace NKK.Lobby
             for (int i = 0; i < badges.Length; i++) if (badges[i]) badges[i].color = i < tier ? Color.white : lockedBadgeColor;
             if (propCheese) propCheese.enabled = tier >= 2;
             if (propCup) propCup.enabled = tier >= 3;
-            if (background && baseBackground) background.sprite = LookFor(tier);
+            if (background && baseBackground)
+            {
+                var (bg, set) = LookFor(tier);
+                background.sprite = bg;
+                SetProp(propBed, "NapBed", set?.bed, baseProps?.bed);
+                SetProp(propTable, "Table", set?.table, baseProps?.table);
+                SetProp(propBooks, "Bookshelf", set?.books, baseProps?.books);
+                SetProp(propShelf, "CheeseStore", set?.shelf, baseProps?.shelf);
+            }
             if (manager) foreach (var h in hots) h.Fill(manager.FillTokens, manager.Alert(h.id));
         }
 
-        Sprite LookFor(int tier)
+        // 배경 + 그 배경의 소품: 스킨 적용 탭에서 고른 것 (장식 · 훈장 테마 · 처음 아지트) → 자동 = 지금 훈장 배경
+        (Sprite, PropSet) LookFor(int tier)
         {
-            Sprite s = baseBackground; int best = int.MinValue;
-            if (tierLooks != null) foreach (var l in tierLooks) if (l != null && l.sprite && tier >= l.fromTier && l.fromTier > best) { best = l.fromTier; s = l.sprite; }
-            return s;
+            int pick = Progress.I ? Progress.I.EquippedDeco("LobbyBg") : 0;
+            if (pick > 0 && decoLooks != null) foreach (var l in decoLooks) if (l != null && l.sprite && l.decoId == pick) return (l.sprite, l.props);
+            if (pick < 0) { var t = ThemeOf(-pick, tier); if (t.Item1) return t; }
+            Sprite s = baseBackground; PropSet p = baseProps; int best = int.MinValue;
+            if (tierLooks != null) foreach (var l in tierLooks) if (l != null && l.sprite && tier >= l.fromTier && l.fromTier > best) { best = l.fromTier; s = l.sprite; p = l.props; }
+            return (s, p);
+        }
+
+        // 훈장 테마 하나 (1 = 처음 아지트). 아직 그 훈장을 못 달았으면 없음
+        (Sprite, PropSet) ThemeOf(int fromTier, int tier)
+        {
+            if (fromTier <= 1) return (baseBackground, baseProps);
+            if (tier < fromTier || tierLooks == null) return (null, null);
+            foreach (var l in tierLooks) if (l != null && l.sprite && l.fromTier == fromTier) return (l.sprite, l.props);
+            return (null, null);
+        }
+
+        // 스킨 적용 탭: 지금 훈장으로 고를 수 있는 훈장 테마 (−fromTier, 이름용 구간 id). 처음 아지트 = (−1, 0)
+        public List<(int id, int zoneId)> TierThemes()
+        {
+            int tier = Progress.I ? Progress.I.tier : 1;
+            var l = new List<(int, int)> { (-1, 0) };
+            if (tierLooks != null) foreach (var t in tierLooks) if (t != null && t.sprite && tier >= t.fromTier) l.Add((-t.fromTier, t.zoneId));
+            l.Sort((a, b) => b.Item1.CompareTo(a.Item1));
+            return l;
+        }
+        // 그림이 있는 장식 id (스킨 적용 탭에 보일 것)
+        public static bool HasArt(int decoId) => DecoArt.Ready.Contains(decoId);
+
+        // 소품 하나: 그 종류에 고른 것 (장식 · 훈장 테마 소품) → 자동 = 배경 테마 소품 → 처음 소품
+        void SetProp(SpriteRenderer r, string cat, Sprite theme, Sprite fallback)
+        {
+            if (!r) return;
+            Sprite s = null;
+            int pick = Progress.I ? Progress.I.EquippedDeco(cat) : 0;
+            if (pick > 0 && decoProps != null) foreach (var d in decoProps) if (d != null && d.sprite && d.decoId == pick) { s = d.sprite; break; }
+            if (pick < 0)
+            {
+                var t = ThemeOf(-pick, Progress.I ? Progress.I.tier : 1);
+                var set = t.Item1 ? (t.Item2 ?? baseProps) : null;
+                if (set != null) s = cat == "NapBed" ? set.bed : cat == "Table" ? set.table : cat == "Bookshelf" ? set.books : set.shelf;
+            }
+            r.sprite = s ? s : theme ? theme : fallback;
         }
 
         // ── 말풍선 · 효과 ──

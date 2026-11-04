@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: props.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS AN EDIT OF base.png (1536x1024). Keep ONLY the FOUR furniture groups standing on the floor deck:
+  (1) BED = the nap bed at the far LEFT of the floor deck, under the round window, INCLUDING the small rug/mat under it and everything on it (pillow, blanket).
+  (2) TABLE SET = the round table in the left-middle of the floor deck INCLUDING everything on top of it (pencil cup, papers, small items) AND the two small round stools/seats on its left and right.
+  (3) BOOKS = the pile of books/binders/boxes in the middle-right of the floor deck INCLUDING the clip lamp attached to it, any small object on top of the pile, and the small flask/bottle standing right next to it.
+  (4) CHEESE SHELF = the whole shelf unit at the RIGHT edge (its frame/boards, all the cheese on it, and the box/basket/case at its bottom).
+
+Each of these four groups must stay EXACTLY as in base.png: same position on the canvas, same size, same outline, same colors and same art style (pixel-aligned with base.png).
+Paint EVERYTHING ELSE as one solid, completely flat pure magenta color #FF00FF: the whole back wall, the floor deck, the beams, posts, top band, bottom band, string lights, window, board, photos, map - all of it becomes flat #FF00FF. No shadows, no floor, no outlines or halos around the kept objects, no gradient in the magenta. Do not add anything new. Do not use magenta or pink-purple colors inside the kept objects.

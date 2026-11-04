@@ -16,3 +16,10 @@ MonoBehaviour:
   pressed: {fileID: 2800000, guid: f08d0910090a473d8d760b9601e57279, type: 3}
   hotspot: {x: 1, y: 1}
   forceSoftware: 0
+  decos:
+  - decoId: 95151
+    normal: {fileID: 2800000, guid: f4d21fa8e68b5b04a8e7cbc41a6d7669, type: 3}
+    pressed: {fileID: 2800000, guid: a7df5cd43feadd148827162c4db9ad48, type: 3}
+  - decoId: 95152
+    normal: {fileID: 2800000, guid: 7c928faea0bfa684584b82a6a3091532, type: 3}
+    pressed: {fileID: 2800000, guid: 4616e748b3c7a2d4f8a2d44a2f284e7c, type: 3}

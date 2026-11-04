@@ -1,0 +1,11 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: empty.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS AN EDIT OF base.png (1536x1024). Keep base.png EXACTLY as it is - same canvas framing, same composition, same art style, same colors, every remaining element at exactly the same position and size - but REMOVE the FOUR furniture groups standing on the floor deck:
+  (1) BED = the nap bed at the far LEFT of the floor deck, under the round window, INCLUDING the small rug/mat under it and everything on it (pillow, blanket).
+  (2) TABLE SET = the round table in the left-middle of the floor deck INCLUDING everything on top of it (pencil cup, papers, small items) AND the two small round stools/seats on its left and right.
+  (3) BOOKS = the pile of books/binders/boxes in the middle-right of the floor deck INCLUDING the clip lamp attached to it, any small object on top of the pile, and the small flask/bottle standing right next to it.
+  (4) CHEESE SHELF = the whole shelf unit at the RIGHT edge (its frame/boards, all the cheese on it, and the box/basket/case at its bottom).
+
+Where those objects were, paint what is naturally behind them: the continuing back wall (with its stripe/border continuing at the same height), the vertical post(s) continuing down to the floor, and the plain empty top surface and front face of the floor deck. The floor deck top edge and front face must stay exactly where they are. Leave those areas EMPTY - do not add any new furniture, objects, characters or decorations there.
+
+Everything else (top band, big beam, string lights, round window, board, photos, map, wall stripe, empty space for the hamster wheel, bottom band) must stay unchanged. No text, no letters, no characters, no animals.

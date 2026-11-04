@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A SMALL RECOLOR EDIT of ref_grid.png (1536x1024): LEFT = a wide green autumn-leaf button, RIGHT = a round green autumn-leaf button.
+Keep both objects EXACTLY as they are - same position, same size, same shape, same outline, same veins, same toothed edges, same speckles, same cream center of the round one, same flat style.
+Change ONLY the colors: right now they mix olive GREEN with YELLOW patches at the ends/corners and yellow leaf points on the round rim. Repaint every yellow / yellow-green part with the SAME olive green family used in the rest of the button (light olive for the inner area, mid olive, darker olive for the rim, veins and speckles), so each button uses ONE single green color family only - no yellow, no orange.
+BACKGROUND: keep the whole background ONE solid, completely flat pure magenta #FF00FF with no shadows, no gradient, no halos.

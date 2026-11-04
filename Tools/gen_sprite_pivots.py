@@ -18,6 +18,10 @@ for folder in ('Cats/Parts', 'Humans/Parts'):
 _fx = os.path.join(RES, 'BossRework', 'FX', 'pivots.json')
 if os.path.exists(_fx):
     for name, xy in json.load(io.open(_fx, encoding='utf-8')).items(): add(f'BossMeme/{name}.png', xy)
+# 아지트 소품 (배경에서 분리, Tools/lobby_split_cut.py · 2026-11-04): 피벗 = 배경 가운데 → 소품을 배경 원점에 두면 제자리
+_ls = os.path.join(RES, 'Lobby_Split', 'pivots.json')
+if os.path.exists(_ls):
+    for name, xy in json.load(io.open(_ls, encoding='utf-8')).items(): add(f'UI/LobbySplit/{name}.png', xy)
 # 쥐 친구 (도토리 상점, UnityResources/Rats/RatFriends/<이름>/pivots.json 의 pivotUnity → Assets/Art/Rats/RatFriends/<이름>/)
 _rf = os.path.join(RES, 'RatFriends')
 if os.path.isdir(_rf):

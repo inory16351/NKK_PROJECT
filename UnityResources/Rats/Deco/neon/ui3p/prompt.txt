@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A SMALL RECOLOR EDIT of ref_grid.png (1536x1024): one wide neon arcade button (dark violet body with a red neon double-line frame and two red dots).
+Keep the button EXACTLY as it is - same position, same size, same shape, same frame lines and their thickness, same dots, same dark violet body, same flat style (no glow).
+Change ONLY the neon color: every RED / red-orange part (outer tube, inner line, the two dots) becomes a bright fluorescent HOT PINK neon (flat bright pink with one flat lighter pink inner line). No red left.
+BACKGROUND: keep the whole background ONE solid, completely flat pure chroma GREEN #00FF00 with no shadows, no gradient, no halos. Do not use green inside the button.

@@ -1,0 +1,40 @@
+[
+ {
+  "src": "Rats/Lobby_Market/lobby_manhole_closed.png",
+  "cell": [
+   0,
+   0,
+   768,
+   1024
+  ],
+  "box": [
+   46,
+   324,
+   721,
+   700
+  ],
+  "size": [
+   400,
+   223
+  ]
+ },
+ {
+  "src": "Rats/Lobby_Market/lobby_manhole_open.png",
+  "cell": [
+   768,
+   0,
+   1536,
+   1024
+  ],
+  "box": [
+   814,
+   302,
+   1489,
+   721
+  ],
+  "size": [
+   483,
+   300
+  ]
+ }
+]

@@ -33,6 +33,9 @@ namespace NKK.Ults
         [Tooltip("초기화 뒤 갈 씬")] public string lobbyScene = "Lobby";
         [Tooltip("전부 해제: 지금 저장 파일의 기능·튜토리얼 전부 열림 · 마지막 층까지 클리어 · 최고 훈장 · 공용 스킬 전부 · 치즈·연구자료 무제한 → 로비로")] public Button unlockAllButton;
 
+        [Tooltip("도토리 넣기 (상한 99,999 까지)")] public Button acornButton;
+        public int acornAmount = 10000;
+
         [Header("보이기 · 숨기기 (2026-10-19)")]
         [Tooltip("이 키로 패널을 숨기고/보이게 (숨김 상태는 저장돼 다음 판에도 유지)")] public Key toggleKey = Key.Backquote;
         [Tooltip("패널 전체 (숨길 때 투명 · 클릭 안 됨). 이 오브젝트의 CanvasGroup")] public CanvasGroup group;
@@ -66,6 +69,7 @@ namespace NKK.Ults
             if (gameOverButton) gameOverButton.onClick.AddListener(() => { if (Over && !Heist.Active) Over.Begin(GameOver.Why.Time); });
             if (resetButton) resetButton.onClick.AddListener(ResetSave);
             if (unlockAllButton) unlockAllButton.onClick.AddListener(UnlockAll);
+            if (acornButton) acornButton.onClick.AddListener(() => { if (Progress.I) Progress.I.DevAddAcorn(acornAmount); });
             Show();
             SetVisible(PlayerPrefs.GetInt(HiddenPref, 0) == 0);
         }

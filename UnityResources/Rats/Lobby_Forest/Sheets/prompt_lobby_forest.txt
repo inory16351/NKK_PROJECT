@@ -1,0 +1,26 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: lobby_forest_bg.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A RESKIN / EDIT OF ref_flat_lobby_catlab.png.
+Take ref_flat_lobby_catlab.png as the base image and REPAINT it with a new theme while keeping its composition PIXEL-ALIGNED: every object, beam, post, the floor shelf, the round hole, the board, the table, the stools, the books, the right shelf and the bed must stay at EXACTLY the same position, size and outline as in ref_flat_lobby_catlab.png. Only the materials, colors and small decorations change. Do NOT move, enlarge, shrink or re-arrange anything. The canvas framing must be identical (1536x1024).
+
+Other references:
+- ref_layout_lobby_bg.png = the original hideout with the same layout (for extra layout check only; do NOT copy its painted style).
+- ref_flat_lobby_spacelab.png = another finished reskin of the same base, as an example of how strictly the layout and the flat style must be kept.
+
+THEME: "ACORN FOREST" - a cozy hideout INSIDE A BIG HOLLOW OAK TREE in an autumn acorn forest. This is a premium decoration bought with acorns, so acorns should appear everywhere as small cute motifs (acorn shapes with little caps), plus oak leaves, mushrooms, moss and twigs.
+
+STYLE (most important, same as the base image): Untitled Goose Game flat look. Completely FLAT color shapes, NO black outlines, NO linework, no gloss, no gradients, no glow, no light rays, no drop shadows, no wood-grain texture; each object = a few flat color areas with one slightly darker flat tone. Soft muted warm palette: light warm beige/cream, soft tan and light oak brown, acorn brown, muted moss green, sage green, soft autumn orange and a little muted red (mushroom caps), and cheese yellow. Keep the back wall LIGHT (pale warm beige inner-wood tone) like the white tile wall of the base, low contrast so small characters on top stay readable. No text, no letters, no numbers, no logos, no characters, no people, no animals, no rats, no squirrels.
+
+What to repaint (same places as in the base image):
+- Top band above the big horizontal beam: instead of pink/mint pipes and insulation puffs -> tree roots and branches crossing, hanging moss, a few oak leaves and small hanging acorns, and one or two small openings showing a flat pale autumn sky with orange leaves. The big horizontal beam (same position, about 20%-24% height) becomes a light brown log beam (flat, a darker tone only on its lower edge).
+- Back wall: white tiles with the pink paw stripe -> pale beige inner tree wall made of soft flat vertical wood planks/bark panels, with ONE horizontal stripe at the same height as the pink stripe made of a small repeating acorn-and-oak-leaf border (flat). Vertical posts stay where they are (light brown branch/log posts with a little moss).
+- The round hole on the left (same place and size) -> a round knothole window in the tree trunk with a thick bark ring, showing a flat view of the autumn forest outside (soft orange and green trees, falling leaves).
+- The whiteboard (same place and size) -> a flat cork/bark notice board with flat white chalk-like doodles (staircase arrow, cheese wedge, an acorn); the instant photos stay at the same spots but show an acorn, a mushroom, an oak leaf and a pine cone, with red strings. The paper map beside it becomes a simple flat leaf-shaped forest map with a red dashed route.
+- The string lights stay at the same place, but the bulbs become tiny pale yellow acorn-shaped lanterns.
+- The floor shelf (same top edge and same front face height) -> a light brown wooden log deck with a strip of moss along its top edge and a few tiny acorns and small mushrooms on its front face.
+- Bed on the left (same place and size as the pink box bed) -> a rat bed made from a big ACORN CAP turned upside down, filled with a soft leaf blanket, on the same small rug (rug becomes a round woven leaf mat).
+- The pink cat-food can table (same place and size) -> a TREE STUMP table, with the same pencil cup (now a little acorn-cap cup with twigs) and a small acorn on top; the two round stools (same places and sizes) -> two red-capped mushroom stools with white dots.
+- The pile of binders + clip lamp (same place and size) -> a stack of flat books in brown/green/orange (blank covers) + the same clip lamp + a small pine cone on top.
+- The empty wall area right of the books stays EMPTY.
+- The right shelf unit with cheese (same place and size) -> a rustic branch-and-plank shelf with the same cheese wedges and blocks, plus a small basket full of acorns and a little jar of acorns at the bottom.
+- Bottom band below the floor shelf: instead of pipes and pink insulation -> tree roots, soil, small pebbles, a few buried acorns, mushrooms and fallen oak leaves. Keep the area around 50% width just below the floor plain.

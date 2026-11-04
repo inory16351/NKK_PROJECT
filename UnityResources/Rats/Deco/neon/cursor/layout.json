@@ -1,0 +1,40 @@
+[
+ {
+  "src": "../../../../UnityResources/Rats/Cursor/cursor_normal_big.png",
+  "cell": [
+   0,
+   0,
+   768,
+   1024
+  ],
+  "box": [
+   46,
+   174,
+   721,
+   849
+  ],
+  "size": [
+   651,
+   651
+  ]
+ },
+ {
+  "src": "../../../../UnityResources/Rats/Cursor/cursor_pressed_big.png",
+  "cell": [
+   768,
+   0,
+   1536,
+   1024
+  ],
+  "box": [
+   814,
+   174,
+   1489,
+   849
+  ],
+  "size": [
+   651,
+   651
+  ]
+ }
+]
