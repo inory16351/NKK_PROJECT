@@ -1,0 +1,4 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: broom_long.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image: 1536x512, solid completely flat pure magenta #FF00FF background, no text.
+Draw ONE broom exactly like the broom in ref_broom_B2.png (same flat style, same colours: flat warm wooden handle, flat straw-yellow bristles, a small violet ribbon bow tying the bristles, same bristle shape and size), but with a MUCH LONGER HANDLE: the broom is perfectly horizontal, spans about 90% of the image width, the long thin handle on the LEFT is about 3 times as long as the bristle part on the RIGHT. Completely flat colours, crisp edges, no texture, no shading, no outlines, no shadow, no halo.

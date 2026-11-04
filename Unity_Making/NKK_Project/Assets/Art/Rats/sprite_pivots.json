@@ -3666,6 +3666,41 @@
 "y": 0.98
 },
 {
+"path": "Assets/Art/Rats/RatFriends/Witch/tail.png",
+"x": 0.02,
+"y": 0.45
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Witch/cape.png",
+"x": 0.04,
+"y": 0.88
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Witch/broom.png",
+"x": 0.5,
+"y": 0.5
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Witch/body.png",
+"x": 0.3,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Witch/head.png",
+"x": 0.72,
+"y": 0.06
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Witch/hat.png",
+"x": 0.45,
+"y": 0.2
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Witch/arm.png",
+"x": 0.7,
+"y": 0.92
+},
+{
 "path": "Assets/Art/Rats/FrontRig/rs_head.png",
 "x": 0.497,
 "y": 0.05

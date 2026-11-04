@@ -1,0 +1,20 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: witch_parts_v2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 3 rows (each cell 384x341). Each drawing sits centered in its own cell with a clear magenta margin; drawings must NOT touch or cross cell borders. Cells 10, 11, 12 stay EMPTY (only magenta).
+- Character: a WITCH RAT who flies around the rat hideout on a broom (a decoration "rat friend" for the game). Cell 1 shows the whole character assembled; cells 2-9 are its CUT-OUT PARTS for a 2D paper-doll rig. All pieces belong to the same rat at the same scale as cell 1.
+- STYLE IS THE MOST IMPORTANT RULE: it must look like it belongs to the SAME GAME as the attached in-game rat parts ref_ingame_rats.png (brown rat, wizard rat, white lab rat): a real RAT, not a round cartoon mouse - long pointed snout with a small pink nose and fine pale whiskers, one small black dot eye, one rounded pink ear, a longer flat-sided head cut at the neck, a long horizontal torso with a lighter belly, thin legs with pink hands/feet with little fingers, a long pink segmented tail tapering to a point. Same flat soft-muted painting: flat colour areas with one slightly darker tone and a very subtle soft grain, no black outlines, no gloss, no gradients, no glow, no drop shadows. Same proportions and line quality as the reference parts.
+- Colours: soft medium grey-brown rat fur with a pale cream belly; witch outfit = a charcoal-black pointy witch hat with a wide brim, a muted mustard band and a tiny brass buckle; a charcoal-black cape with a muted violet inner lining; broom = warm wooden handle with straw-yellow bristles tied with a dark ribbon. (Do NOT copy the purple starry wizard outfit of the reference.)
+- Side view, the rat FACES LEFT and flies to the LEFT.
+
+Cells (left to right, top to bottom):
+1) WHOLE CHARACTER (preview): the witch rat riding the broom flying left - the broom horizontal (handle tip at the left, bristles at the right), the rat's long body lying forward along the broom like a rat crouching on a branch, both front hands gripping the handle in front, hind legs hugging the broom, cape fluttering back to the right, hat on the head with its tip bending back, long tail trailing behind and curling.
+2) HEAD: rat head WITH NO HAT, side view facing left, exactly like the reference rat heads (long snout, whiskers, ear, dot eye), cut flat at the neck on its right side.
+3) WITCH HAT alone: charcoal-black pointy hat, wide brim, mustard band with tiny buckle, tip bending back to the right, brim horizontal.
+4) TORSO: the long horizontal rat torso like the reference torsos (no head, no legs, no tail), wearing a small charcoal-black witch dress/vest over the back, flat cut at the neck on its left side.
+5) CAPE alone: charcoal-black short cape seen from the side, attached at its top-left corner (neck), flowing back to the right in a gentle wave, violet inner lining visible.
+6) FRONT LEG: one front leg like the reference front legs, the pink hand closed as if gripping a stick; shoulder cut at the TOP.
+7) BACK LEG: one hind leg like the reference back legs, bent, long pink foot; hip cut at the TOP.
+8) TAIL: a long pink segmented rat tail like the reference tails, root (thick end) at the LEFT, curling in a soft S toward the right.
+9) BROOM: the whole broom perfectly horizontal, wooden handle on the LEFT, straw bristles fanning out on the RIGHT, dark ribbon tying the bristles.

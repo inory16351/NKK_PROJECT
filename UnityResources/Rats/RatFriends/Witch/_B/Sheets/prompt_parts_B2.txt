@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: witch_parts_B2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A REDRAW of ref_parts_B_2.png (1536x1024, 4 columns x 2 rows, cells 384x512, magenta #FF00FF background): the WITCH RAT rig parts (cell 1 whole character on a broom, cell 2 head with violet witch hat, cell 3 torso with violet cape, cell 4 front leg with gripping hand, cell 5 back leg, cell 6 pink tail, cell 7 broom, cell 8 empty).
+Keep EXACTLY the same cells, the same parts, the same shapes, sizes, cut lines and joint positions, and EXACTLY THE SAME COLOURS (light grey fur, cream belly, pink ear/nose/hands/feet/tail, dusty-violet hat and cape with lighter violet edge, mustard-yellow hat band, yellow star, mustard clasp, wooden broom handle, straw-yellow bristles, violet ribbon). Only these two changes:
+
+1) MAKE IT FLATTER, exactly like the attached in-game rat parts ref_ingame_flat.png (brown rat, wizard rat, black rat): every area is ONE perfectly flat solid colour with crisp clean edges; no paper grain, no texture, no noise, no soft shading, no light halos or pale rims around the shapes, no inner shadows; at most one slightly darker flat shape for a fold (like the reference torso's hip). Same simple chunky shapes as the reference.
+
+2) MAKE THE BROOM LONGER: in cell 7 and in cell 1 the broom handle is about 1.6 times longer than now (the broom in cell 7 should span about 95% of the cell width: long thin handle on the LEFT, bristles on the RIGHT). In cell 1 the rat sits on the middle of the long broom, the handle sticking out well in front of its hands and the bristles well behind its tail root.
+
+Background: ONE solid, completely flat pure magenta #FF00FF, no shadows, no halos. Drawings must not touch or cross cell borders. No text.

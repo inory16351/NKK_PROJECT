@@ -1,0 +1,18 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: witch_parts_v3.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing sits centered in its own cell with a clear magenta margin; drawings must NOT touch or cross cell borders. Cell 8 stays EMPTY (only magenta).
+- Character: a WITCH RAT, a costume rat of the same game as the attached ref_wizard_parts.png (the WIZARD RAT's cut-out rig parts: cell 2 head with the hat built in, cell 3 torso with the cape built in, cell 4 front leg holding its prop, cell 5 back leg, cell 6 tail). Draw the witch rat with EXACTLY THE SAME RIG PARTS, SAME CELLS AND SAME SHAPES, SIZES, CUT LINES AND JOINT POSITIONS as the wizard rat parts - only the costume and fur colour change. Cell 1 = the whole witch rat assembled; cell 7 = the broom alone.
+- STYLE IS THE MOST IMPORTANT RULE: copy the wizard rat's drawing style exactly - completely FLAT colour fills, big simple chunky shapes, a big round black dot eye, a big round pink ear, a few short pale whiskers, NO fur strokes, NO hair texture, NO individual hairs, NO shading gradients, no outlines, no gloss, no glow, no drop shadows; at most one slightly darker flat tone per area and a very faint paper grain like the reference.
+- Colours: warm medium-brown rat fur with a pale cream belly (not grey, so it differs from the wizard); a charcoal-black pointy witch hat with a wide brim, a flat mustard band with a tiny square buckle and the tip bending back; a charcoal-black cape over the back with a flat muted violet lining and a small mustard clasp at the neck; broom = flat warm wooden handle with flat straw-yellow bristles tied with a dark band. (Do NOT use the wizard's purple starry pattern.)
+- Side view, the rat FACES LEFT.
+
+Cells (left to right, top to bottom):
+1) WHOLE: the witch rat riding the broom flying left - the broom horizontal (handle tip at the left, bristles at the right), the rat's body on the broom, front leg gripping the handle, back leg hanging on the broom, tail trailing behind, cape on the back.
+2) HEAD with the witch hat built in (like the wizard head with its hat), cut flat at the neck on the right exactly like the wizard head.
+3) TORSO with the black cape built in (like the wizard torso with its cape), same shape and size as the wizard torso, neck cut on the left.
+4) FRONT LEG: same shape as the wizard front leg (shoulder cut at the top, arm bending down-left), the pink hand closed as if gripping a broom handle (no wand, empty grip).
+5) BACK LEG: same shape as the wizard back leg, warm-brown fur, pink foot.
+6) TAIL: same as the wizard tail (pink, segmented, root at the left).
+7) BROOM: the whole broom perfectly horizontal, handle on the LEFT, bristles on the RIGHT.

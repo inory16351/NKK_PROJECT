@@ -1,0 +1,19 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: witch_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing sits centered in its own cell with a clear magenta margin; drawings must NOT touch or cross cell borders.
+- Character: ONE small cute WITCH MOUSE who flies around the rat hideout on a broom (a decoration "rat friend" for the game). Cell 1 shows the whole character assembled; cells 2-8 are its CUT-OUT PARTS for a 2D paper-doll rig (separate pieces that will be assembled and animated). All pieces belong to the same mouse at the same scale as cell 1.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference parts sheet ref_parts_style.png exactly (how the rat heads, torsos, tails and legs are drawn). Untitled Goose Game look: completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows. A few flat colour areas with at most one slightly darker flat tone. Soft muted palette, calm picture-book feel.
+- Colours: soft light grey mouse fur with a cream belly, pink round ears inside, small pink nose, one big black dot eye; witch outfit in muted dusty violet with a soft mustard-yellow hat band and a tiny yellow star; broom = warm wooden handle with straw-yellow bristles tied with a small violet ribbon. It must read clearly on the attached hideout background ref_lobby_bg.png (do not copy the background).
+- Side view, the mouse FACES LEFT and flies to the LEFT. Cute, round, small, friendly.
+
+Cells (left to right, top to bottom):
+1) WHOLE CHARACTER (preview): the witch mouse sitting side-saddle on the broom flying left, the broom horizontal with the handle tip at the left and the bristles at the right, the mouse holding the broom with its front paw, cape fluttering back to the right, hat on the head with its tip bending back, long thin tail curling behind.
+2) HEAD WITHOUT HAT: side view facing left, round mouse head, big round ear, short snout with pink nose, big dot eye, happy closed-mouth smile, cut FLAT at the neck on its lower right like the reference rat heads.
+3) WITCH HAT: a tall pointed dusty-violet witch hat with a wide brim, a mustard-yellow band with a tiny star, the tip bending back to the right; seen from the side, brim horizontal.
+4) BODY: the mouse torso sitting (as on a broom): small plump body in a short dusty-violet witch dress with a cream belly showing at the front (left), the two hind legs hanging down together with small pink feet, NO head, NO front arm, NO tail; flat cut at the neck on the upper left.
+5) FRONT ARM: one small grey mouse arm with a pink paw closed as if gripping a stick, shoulder at the TOP, paw at the BOTTOM.
+6) BROOM: the whole broom, perfectly horizontal, wooden handle on the LEFT, straw bristles fanning out on the RIGHT, small violet ribbon tying the bristles.
+7) CAPE: a short dusty-violet cape seen from the side, attached at its top-left corner (neck), flowing back to the right in a gentle wave, darker violet inner side.
+8) TAIL: a long thin pink-grey mouse tail curling in a soft S curve, root at the LEFT end, tip at the right.

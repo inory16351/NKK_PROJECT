@@ -1,0 +1,4 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: witch_parts_B.png (in the current working directory, overwrite it). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+THIS IS A SMALL RECOLOR EDIT of ref_parts_B_1.png (1536x1024). Keep the whole image EXACTLY as it is - every drawing at the same position, size and shape, same flat style, same magenta background.
+Change ONLY ONE thing: the BACK LEG in the lower-left cell (row 2, column 1) is brown - repaint its brown fur with the SAME light soft grey as the front leg and the head in the same sheet (keep its pink foot and its shape exactly). Nothing else changes.
