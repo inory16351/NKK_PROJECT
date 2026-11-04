@@ -1,0 +1,19 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ratdance_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing sits centered in its own cell with a clear magenta margin; drawings must NOT touch or cross cell borders.
+- These are CUT-OUT BODY PARTS of ONE cute brown rat standing UPRIGHT on two legs, seen from the FRONT, for a 2D paper-doll rig (pieces are assembled and animated in the game; it will dance by swaying its hips and swinging its arms). All pieces belong to the same rat at the same scale.
+- STYLE IS THE MOST IMPORTANT RULE: copy the colours and drawing style of the attached ref_style_rats.png exactly (the brown rat: warm grey-brown fur, pale beige belly, pink ears, pink nose, pink paws, pink tail). Untitled Goose Game look: completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows, no painterly fur texture. A few flat colour areas with at most one slightly darker flat tone. Soft muted palette, calm picture-book feel.
+- Use the attached ref_front_layout.png ONLY to understand how a front-view upright character is split into pieces (head, upper body, lower body, arm, leg, tail with flat cut joints). Do NOT copy its painted style, its tuxedo, or its character.
+- It is an ordinary original rat with no clothes, no shoes, no boots, no hat, no accessories.
+
+Cells (left to right, top to bottom):
+1) HEAD, FRONT VIEW: round rat head facing the viewer, two big round pink ears on top, two black dot eyes, small pink nose at the end of a short snout, a few thin whiskers, calm happy small smile. Flat cut at the neck at the bottom centre.
+2) HEAD, DANCING: the same head, eyes closed as two happy upside-down U curves, wide open happy smile showing two small front teeth, slightly tilted, same size.
+3) UPPER BODY: chest and shoulders of the rat (no head, no arms), pear-shaped, beige belly patch in the middle, flat cut at the neck on top and flat cut at the waist at the bottom.
+4) LOWER BODY: round chubby hips and belly bottom (no legs, no tail), beige belly patch continuing, flat cut at the waist on top, flat cuts where the legs attach at the bottom left and right.
+5) ARM, HANGING: one short furry rat arm hanging straight down, flat cut at the shoulder at the top, a small pink rat paw with 4 little fingers at the bottom.
+6) ARM, RAISED: the same arm bent at the elbow and raised up with the paw open at the top, shoulder cut at the bottom, like dancing.
+7) LEG: one short furry rat leg standing, flat cut at the hip at the top, a long flat pink rat foot at the bottom pointing slightly outward.
+8) TAIL: a long thin pink rat tail curving in a gentle S shape, root at the top left.

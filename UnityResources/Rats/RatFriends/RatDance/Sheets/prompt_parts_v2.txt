@@ -1,0 +1,18 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: ratdance_parts_v2.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing sits centered in its own cell with a clear magenta margin; drawings must NOT touch or cross cell borders.
+- One cute brown rat standing UPRIGHT on two legs, front view, in a DANCE POSE. Copy the POSE of the attached ref_pose.png: a wide low stance with both knees bent and legs spread apart, feet turned outward; the body leaning a little to one side; both arms held out to the sides and bent at the elbow with the paws hanging loosely down; the head tilted. Do NOT copy that drawing's colours, linework, anime eyes or character.
+- STYLE IS THE MOST IMPORTANT RULE: copy the colours and drawing style of the attached ref_style_rats.png exactly (the brown rat: warm grey-brown fur, pale beige belly, pink ears, pink nose, pink paws and feet, pink tail, simple black dot eyes). Untitled Goose Game look: completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows. Soft muted palette. Ordinary original rat, no clothes, no shoes, no accessories.
+- Cells 1 to 6 are CUT-OUT BODY PARTS of that rat for a 2D paper-doll rig, all at the same scale. Joint ends are cut flat with the cut face in the SAME brown fur colour (NOT pink, NOT a different colour).
+
+Cells (left to right, top to bottom):
+1) HEAD: front view, slightly tilted, round head, two big round pink ears, two black dot eyes, small pink nose, a few thin whiskers, small happy smile. Cut flat at the neck at the bottom centre.
+2) HEAD, HAPPY: the same head, eyes closed as two happy upside-down U curves, open happy smile with two small front teeth.
+3) BODY: one piece chest + belly + hips, chubby pear shape, big beige belly oval, no head, no arms, no legs, no tail. Flat cut at the neck on top.
+4) ARM: the rat's arm held out to the side and bent: the upper arm goes out horizontally to the LEFT from a flat shoulder cut on the RIGHT end, the elbow bends and the forearm hangs down with a small pink rat paw at the bottom, fingers relaxed.
+5) LEG: the rat's bent leg in the wide dance stance: flat hip cut at the TOP RIGHT, the furry thigh goes down and out to the LEFT, the knee bends, and a long flat pink rat foot rests on the ground at the bottom pointing outward to the LEFT.
+6) TAIL: a long thin pink rat tail curving up in a gentle S shape, root at the bottom left.
+7) FULL POSE: the whole rat assembled in the dance pose (for reference), same colours and style.
+8) leave this cell empty magenta.

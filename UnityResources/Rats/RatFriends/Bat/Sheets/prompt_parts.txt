@@ -1,0 +1,17 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: bat_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 3 columns x 2 rows (each cell 512x512). Each drawing sits centered in its own cell with a clear magenta margin; drawings must NOT touch or cross cell borders.
+- These are CUT-OUT BODY PARTS of ONE small cute BAT for a 2D paper-doll rig (separate pieces that will be assembled and animated in the game). All pieces belong to the same bat at the same scale.
+- STYLE IS THE MOST IMPORTANT RULE: copy the attached reference parts sheet ref_parts_style.png exactly (rat head, torso, tail, legs, a butterfly-eared head and wing). Untitled Goose Game look: completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows. A few flat colour areas with at most one slightly darker flat tone. Soft muted pastel palette, calm picture-book feel.
+- Colours: soft dusty plum-purple fur (muted, low saturation) with a lighter lavender-cream belly, wing membranes a slightly darker muted grey-violet with thin lighter flat finger bones, small pink nose and pink inner ears. It must read clearly against the attached dark warm sewer background ref_alley_bg.png (do not copy the background).
+- Side view, the bat FACES LEFT. Cute, round, small, friendly, not scary.
+
+Cells (left to right, top to bottom):
+1) HEAD: side view facing left, round fuzzy bat head with a short snout and small pink nose, one big black dot eye, one big pointed bat ear with pink inside (the far ear just peeking behind), a tiny white fang, happy face. Cut FLAT at the neck on its lower right, like the reference rat heads.
+2) BODY: a small plump round-oval furry bat body (torso only), slightly taller than wide, lavender-cream belly on the left (front) side, NO head, NO wings, NO legs, flat cut at the neck on the upper left.
+3) NEAR WING, OPEN: one big bat wing fully spread, seen from the side, the wing root (shoulder joint) at the LOWER RIGHT corner of the drawing, the wing spreading up and to the left like a fan: a thin arm bone along the top edge with a tiny claw thumb, 3 long finger bones, and the membrane between them with scalloped lower edge.
+4) FAR WING, OPEN: the same wing shape but narrower and foreshortened (seen at an angle), slightly darker flat tone, root at the lower right corner.
+5) NEAR WING, FOLDED: the same wing folded closed like a tight umbrella / cloak, a long narrow teardrop shape that would wrap the body of a bat hanging upside down, root (shoulder) at the TOP end, tiny claw thumb near the top.
+6) FEET: the bat's two small hind legs together, short thin dark plum legs with small curved pink-grey hooked toes that grip a ceiling pipe; cut flat at the top (hip) end, toes at the bottom.

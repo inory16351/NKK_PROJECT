@@ -18,6 +18,13 @@ for folder in ('Cats/Parts', 'Humans/Parts'):
 _fx = os.path.join(RES, 'BossRework', 'FX', 'pivots.json')
 if os.path.exists(_fx):
     for name, xy in json.load(io.open(_fx, encoding='utf-8')).items(): add(f'BossMeme/{name}.png', xy)
+# 쥐 친구 (도토리 상점, UnityResources/Rats/RatFriends/<이름>/pivots.json 의 pivotUnity → Assets/Art/Rats/RatFriends/<이름>/)
+_rf = os.path.join(RES, 'RatFriends')
+if os.path.isdir(_rf):
+    for name in sorted(os.listdir(_rf)):
+        _pf = os.path.join(_rf, name, 'pivots.json')
+        if os.path.exists(_pf):
+            for part, xy in json.load(io.open(_pf, encoding='utf-8'))['pivotUnity'].items(): add(f'RatFriends/{name}/{part}.png', xy)
 # 필살기 앞모습 파츠 (웹게임 FRONT_PARTS: 좌상단 기준 → 뒤집음)
 src = io.open(HTML, encoding='utf-8').read()
 fp = json.loads(re.search(r'const FRONT_PARTS = (\{.*?\});\n', src).group(1))
