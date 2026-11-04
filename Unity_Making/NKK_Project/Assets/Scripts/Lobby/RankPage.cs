@@ -58,6 +58,8 @@ namespace NKK.Lobby
         [Tooltip("업적 글 (씬 Words): 받을 도토리 +{n} · 받은 도토리 받음 +{n} · 공개 전 분류 ?")] public TMP_Text wAcornGet, wAcornGot, wAchvLocked;
         [Tooltip("분류별 달성 수 줄 ({got} {total})")] public TMP_Text achvCatCount;
         [Tooltip("달성일 형식 (C# 날짜 형식)")] public string achvDateFormat = "MM.dd";
+        [Tooltip("이름 · 설명과 오른쪽 글(도토리 · 달성일 · 진행도 · ×n) 사이 여백")] public float achvTextGap = 6;
+        [Tooltip("이름 · 설명이 오른쪽 글에 닿으면 이 크기까지 글자를 줄임 (긴 번역)")] public float achvMinFont = 9;
         string achvTab = "All";
 
         int selTier;
@@ -219,9 +221,53 @@ namespace NKK.Lobby
                 Show(row, "New", has && !p.AchvSeen(a.achv_id));
                 if (has) shown.Add(a.achv_id);
             }
+            // 줄 폭이 정해진 뒤 글 겹침 맞춤 (긴 번역)
+            if (achvSpawned.Count > 0) LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)achvTemplate.parent);
+            foreach (var g in achvSpawned) FitAchvRow(g.transform);
             if (achvCount) achvCount.text = F(achvCount, ("got", got), ("total", total));
             if (achvCatCount) achvCatCount.text = F(achvCatCount, ("got", catGot), ("total", catTotal));
             p.MarkAchvSeen(shown);       // 다음에 열면 NEW 꺼짐
+        }
+
+        // 업적 줄: 이름(위) · 설명(아래) 칸의 오른쪽 끝을 오른쪽 글이 실제로 그려진 왼쪽 끝 앞까지 줄임 → 자동 크기가 글자를 줄여 안 겹침 (긴 번역, 2026-11-04)
+        // 오른쪽 글은 모두 줄 오른쪽에 붙어 있으므로 '오른쪽 끝에서 거리'로 계산. 가장 작은 크기로도 넘치면 그 글만 두 줄로 (줄 폭이 정해진 뒤 불러야 함)
+        public void FitAchvRow(Transform row)
+        {
+            FitBefore(row, "Name", "Acorn", "Count");
+            FitBefore(row, "Title", "Date", "Progress", "Count");
+        }
+
+        void FitBefore(Transform row, string text, params string[] blockers)
+        {
+            var t = Txt(row, text); var t0 = Txt(achvTemplate, text); if (!t || !t0) return;
+            var rt = (RectTransform)row; float right = t0.rectTransform.offsetMax.x;      // 템플릿 그대로의 오른쪽 끝
+            t.rectTransform.offsetMax = new Vector2(right, t.rectTransform.offsetMax.y); t.textWrappingMode = t0.textWrappingMode; t.ForceMeshUpdate();
+            var (ty0, ty1) = YRange(rt, t);
+            foreach (var b in blockers)
+            {
+                var bt = Txt(row, b); if (!bt || !bt.gameObject.activeSelf || string.IsNullOrEmpty(bt.text)) continue;
+                bt.ForceMeshUpdate(); if (bt.textInfo.characterCount == 0) continue;
+                var (by0, by1) = YRange(rt, bt); if (Mathf.Min(ty1, by1) - Mathf.Max(ty0, by0) < 3) continue;      // 높이가 (거의) 안 겹치면 (설명 아래 달성일 등) 그대로
+                float left = rt.InverseTransformPoint(bt.transform.TransformPoint(new Vector3(bt.textBounds.min.x, 0, 0))).x - rt.rect.xMax;
+                right = Mathf.Min(right, left - achvTextGap);
+            }
+            t.rectTransform.offsetMax = new Vector2(right, t.rectTransform.offsetMax.y);
+            if (t.enableAutoSizing) t.fontSizeMin = Mathf.Min(t0.fontSizeMin, achvMinFont);
+            t.ForceMeshUpdate();
+            if (t.textInfo.characterCount > 0 && t.textBounds.size.x > t.rectTransform.rect.width + 0.5f) { t.textWrappingMode = TextWrappingModes.Normal; t.ForceMeshUpdate(); }
+        }
+
+        // 글자 모양이 실제로 차지한 높이 (줄 기준, 글자 여백 빼고)
+        static (float, float) YRange(RectTransform row, TMP_Text t)
+        {
+            var ti = t.textInfo; float lo = float.MaxValue, hi = float.MinValue;
+            for (int i = 0; i < ti.characterCount; i++)
+            {
+                var c = ti.characterInfo[i]; if (!c.isVisible) continue;
+                float a = row.InverseTransformPoint(t.transform.TransformPoint(c.bottomLeft)).y, b = row.InverseTransformPoint(t.transform.TransformPoint(c.topRight)).y;
+                lo = Mathf.Min(lo, Mathf.Min(a, b)); hi = Mathf.Max(hi, Mathf.Max(a, b));
+            }
+            return lo > hi ? (0, 0) : (lo, hi);
         }
 
         static string AchvDesc(AchievementRow a)

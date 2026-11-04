@@ -7,4 +7,5 @@
 - 지금 업적 40001~40033 = 필살기 30001~30033 을 끝까지 쓰기 (조건 `Ult_Use`)
 - `Sheets/achv_icons_a.png`(24) · `achv_icons_b.png`(9) : Codex 원본 · `prompt_*.txt` · `names_*.txt` · `log_*.txt` (2026-10-08)
 - 시트 b 는 메달이 칸보다 커서 실제 위치(1줄 y 10~325, 2줄 325~630, 가로 256 칸)로 잘랐음. 옅은 번짐(알파 110 미만)은 지움
+- 401xx~404xx (훈장 · 초필살기 · 보스 · 미니게임 69개, 2026-11-04): `Sheets/achv_icons_c/d/e.png` + 사용자 수정 `f`(7개) · `g`(40306) · `h`(40309). 프롬프트 `gen_prompts_cde.py` · `prompt_*.txt`, 자르기 `slice_cde.py`(c·d·e 격자) · `slice_f.py <f|g|h>`(덩어리). 자른 결과 `_new/`, 고치기 전 판 `_new/_old_v1/`
 - 업적을 늘릴 때: 테이블에 줄 추가(조건 타입은 Achv_Cond_Type 시트) → 같은 메달 틀 프롬프트로 상징만 바꿔 생성 → 여기와 유니티에 `ach_<id>.png`

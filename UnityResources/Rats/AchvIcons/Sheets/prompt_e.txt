@@ -1,0 +1,30 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: achv_icons_e.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, TRANSPARENT background (alpha). No text, no letters, no numbers, no labels, no grid lines, no frames.
+- A sheet of 21 game ACHIEVEMENT ICONS in an exact 6 columns x 4 rows grid (each cell 256x256), filled strictly in the listed order left to right, top to bottom (leave the last 3 cells empty). Each cell has ONE achievement medal centered, filling about 70% of the cell, with an empty margin; medals must NOT touch or cross cell borders.
+- EVERY icon uses the SAME medal design as the attached reference sheet: a round gold medal hanging from a short red-and-cream striped ribbon at the top; the medal face is cream with a gold rim. On the medal face draw ONE small emblem (listed below), simple and readable. Only the emblem changes between icons. Same medal size, ribbon and colors as the reference.
+- STYLE IS THE MOST IMPORTANT RULE. Match the attached reference image exactly (existing achievement medals in the art style of Untitled Goose Game). Completely FLAT vector shapes, NO outlines or strokes, NO dark contour lines, no glossy highlights, no gradients, no shine, no glow, no motion lines, no drop shadows. A few flat color areas with at most one slightly darker flat tone. Soft muted pastel palette, low saturation, calm picture-book feel. Readable at 64px.
+
+Emblems:
+1) a plain grey officer peaked cap knocked over, no insignia
+2) an alarm clock with both hands at midnight next to a cat food bowl
+3) a red space helmet with a big pale blue visor
+4) a white space helmet with cat ears and a small cardboard box
+5) a small stack of colorful bricks with a white ball
+6) a flat paddle bar bouncing a white ball
+7) colorful bricks breaking apart with a round grey rat-ear ball
+8) a broken brick wall with a white ball flying through
+9) a brick tower half built
+10) one gold arcade coin
+11) a small retro arcade cabinet
+12) an arcade screen with a big upward arrow
+13) a coin slot with one last gold coin going in
+14) a red flag on top of a tall brick tower
+15) three small grey rat heads side by side
+16) a grey rat head wearing a red-crested Spartan helmet
+17) a pile of many small grey rat heads
+18) a line of tiny grey rats marching
+19) a small arcade cabinet overflowing with grey rats
+20) a big crowd of rat heads with a dust cloud
+21) a red war banner above a crowd of tiny rats
