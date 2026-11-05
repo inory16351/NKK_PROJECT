@@ -23,8 +23,11 @@ namespace NKK.Lobby
         [Tooltip("칸 간격 (픽셀)")] public float step = 190;
         public Vector2 zoomRange = new(0.45f, 1.5f);
         [Tooltip("휠 한 칸 확대 배율")] public float zoomStep = 1.12f;
-        [Tooltip("끌어서 지도 옮기기 (끄면 트리 전체가 보이게 고정, 사용자 2026-10-13)")] public bool allowPan;
-        [Tooltip("휠로 확대·축소 (끄면 고정)")] public bool allowZoom;
+        // 휠 확대 (사용자 2026-11-05): 가장 작게 = 트리 전체가 보이는 크기, 확대한 동안만 끌어서 옮김 (배경판 · 탭은 그대로, 노드 판만 커짐)
+        [Tooltip("확대한 동안 끌어서 지도 옮기기 (전체 보기 크기에서는 고정, 사용자 2026-10-13)")] public bool allowPan = true;
+        [Tooltip("휠로 확대·축소 (끄면 고정)")] public bool allowZoom = true;
+        [Tooltip("가장 크게 = 트리 전체 보기 크기 × 이 값")] public float zoomMaxK = 3f;
+        [Tooltip("옮길 때 트리 가장자리 여유 (픽셀, 노드 반지름 + 글자)")] public float panMargin = 120f;
 
         [Header("훈장 탭 (1~8훈장 순서, 자식 Lock = 못 단 훈장 자물쇠 · Sel = 고른 탭)")]
         public Button[] tierTabs;
@@ -90,7 +93,9 @@ namespace NKK.Lobby
         }
 
         int viewTier = 1, sel;
-        float zoom = 1; bool dragging;
+        float zoom = 1, fitZoom = 1; bool dragging;
+        Vector2 fitPos, treeMin, treeMax;      // 전체 보기 위치 · 트리 범위 (content 좌표)
+        bool Zoomed => zoom > fitZoom * 1.001f;
         readonly List<GameObject> spawned = new();
         readonly Dictionary<TMP_Text, string> tpl = new();
         readonly Dictionary<string, Sprite> icons = new();
@@ -176,9 +181,23 @@ namespace NKK.Lobby
             foreach (var s in l) { var a = At(s); mn = Vector2.Min(mn, a); mx = Vector2.Max(mx, a); }
             var size = mx - mn + new Vector2(step * 1.2f, step * 1.4f);
             var vr = viewport.rect;
-            zoom = Mathf.Clamp(Mathf.Min(vr.width / size.x, vr.height / size.y), zoomRange.x, zoomRange.y);
+            zoom = fitZoom = Mathf.Clamp(Mathf.Min(vr.width / size.x, vr.height / size.y), zoomRange.x, zoomRange.y);
+            treeMin = mn; treeMax = mx;
             content.localScale = Vector3.one * zoom;
-            content.anchoredPosition = -(mn + mx) / 2 * zoom;
+            content.anchoredPosition = fitPos = -(mn + mx) / 2 * zoom;
+        }
+
+        // 확대한 동안: 트리 가장자리가 보이는 영역 안쪽으로 들어오지 않게 (트리가 화면 밖으로 빠지지 않음)
+        Vector2 ClampPan(Vector2 pos)
+        {
+            if (!Zoomed) return fitPos;
+            var vr = viewport.rect;
+            Vector2 c = (treeMin + treeMax) / 2 * zoom, half = (treeMax - treeMin) / 2 * zoom + Vector2.one * panMargin * zoom;
+            float rx = Mathf.Max(0, half.x - vr.width / 2), ry = Mathf.Max(0, half.y - vr.height / 2);
+            Vector2 vc = vr.center;
+            var ctr = pos + c;      // 트리 가운데 (viewport 좌표)
+            ctr.x = Mathf.Clamp(ctr.x, vc.x - rx, vc.x + rx); ctr.y = Mathf.Clamp(ctr.y, vc.y - ry, vc.y + ry);
+            return ctr - c;
         }
 
         void Draw()
@@ -359,21 +378,24 @@ namespace NKK.Lobby
         }
 
         // ── 지도 끌기 · 휠 확대 ──
-        public void OnBeginDrag(PointerEventData e) { if (allowPan) dragging = true; }
+        public void OnBeginDrag(PointerEventData e) { if (allowPan && Zoomed) dragging = true; }
         public void OnDrag(PointerEventData e)
         {
+            if (!dragging || !content || !viewport) return;
             var cv = GetComponentInParent<Canvas>();
-            if (allowPan && content) content.anchoredPosition += e.delta / (cv ? cv.scaleFactor : 1);
+            content.anchoredPosition = ClampPan(content.anchoredPosition + e.delta / (cv ? cv.scaleFactor : 1));
         }
         public void OnEndDrag(PointerEventData e) { Invoke(nameof(EndDrag), 0); }
         void EndDrag() => dragging = false;
         public void OnScroll(PointerEventData e)
         {
             if (!allowZoom || !content || !viewport) return;
-            float z0 = zoom; zoom = Mathf.Clamp(zoom * (e.scrollDelta.y > 0 ? zoomStep : 1 / zoomStep), zoomRange.x, zoomRange.y);
+            if (e.scrollDelta.y == 0) return;
+            float z0 = zoom; zoom = Mathf.Clamp(zoom * (e.scrollDelta.y > 0 ? zoomStep : 1 / zoomStep), fitZoom, fitZoom * zoomMaxK);
+            if (Mathf.Approximately(z0, zoom)) return;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(viewport, e.position, e.pressEventCamera, out var m);
-            content.anchoredPosition = m - (m - content.anchoredPosition) * (zoom / z0);
             content.localScale = Vector3.one * zoom;
+            content.anchoredPosition = ClampPan(m - (m - content.anchoredPosition) * (zoom / z0));     // 마우스 있는 곳 기준, 끝까지 줄이면 전체 보기 자리로
         }
     }
 }

@@ -110539,8 +110539,10 @@ MonoBehaviour:
   step: 190
   zoomRange: {x: 0.32, y: 1.5}
   zoomStep: 1.12
-  allowPan: 0
-  allowZoom: 0
+  allowPan: 1
+  allowZoom: 1
+  zoomMaxK: 3
+  panMargin: 120
   tierTabs:
   - {fileID: 2100922818}
   - {fileID: 273317573}
