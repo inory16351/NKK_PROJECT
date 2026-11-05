@@ -35699,45 +35699,6 @@
    "ar": "الفأرة الساحرة"
   },
   {
-   "string_key": 5095164,
-   "ko": "따봉도치",
-   "en": "Thumbs-Up Hedgehog",
-   "ja": "いいねハリネズミ",
-   "zh": "点赞刺猬",
-   "pt": "Ouriço Joinha",
-   "es": "Erizo Pulgar Arriba",
-   "ru": "Ёжик с пальцем вверх",
-   "fr": "Hérisson pouce levé",
-   "de": "Daumen-hoch-Igel",
-   "ar": "قنفذ الإبهام المرفوع"
-  },
-  {
-   "string_key": 5095165,
-   "ko": "랫 댄스 쥐",
-   "en": "Rat Dance Rat",
-   "ja": "ラットダンスネズミ",
-   "zh": "鼠舞鼠",
-   "pt": "Rato da Dança do Rato",
-   "es": "Ratón de la Danza del Ratón",
-   "ru": "Крыса из крысиного танца",
-   "fr": "Rat de la danse du rat",
-   "de": "Rattentanz-Ratte",
-   "ar": "فأر رقصة الفأر"
-  },
-  {
-   "string_key": 5095166,
-   "ko": "황금 쥐",
-   "en": "Golden Rat",
-   "ja": "金のネズミ",
-   "zh": "黄金鼠",
-   "pt": "Rato Dourado",
-   "es": "Ratón Dorado",
-   "ru": "Золотая крыса",
-   "fr": "Rat doré",
-   "de": "Goldene Ratte",
-   "ar": "الفأر الذهبي"
-  },
-  {
    "string_key": 5100001,
    "ko": "찍찍!! 훈장이 열리면 팔아요",
    "en": "On sale once Squeak!! Badges opens",

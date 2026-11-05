@@ -506,39 +506,6 @@
    "sell_feature": "",
    "asset": "Deco/Rat/witch",
    "sort_order": 163
-  },
-  {
-   "deco_id": 95164,
-   "deco_name": "따봉도치",
-   "deco_name_sk": 5095164,
-   "category": "RatFriend",
-   "theme": "-",
-   "price": 130,
-   "sell_feature": "",
-   "asset": "Deco/Rat/hedgehog",
-   "sort_order": 164
-  },
-  {
-   "deco_id": 95165,
-   "deco_name": "랫 댄스 쥐",
-   "deco_name_sk": 5095165,
-   "category": "RatFriend",
-   "theme": "-",
-   "price": 150,
-   "sell_feature": "",
-   "asset": "Deco/Rat/ratdance",
-   "sort_order": 165
-  },
-  {
-   "deco_id": 95166,
-   "deco_name": "황금 쥐",
-   "deco_name_sk": 5095166,
-   "category": "RatFriend",
-   "theme": "-",
-   "price": 180,
-   "sell_feature": "",
-   "asset": "Deco/Rat/golden",
-   "sort_order": 166
   }
  ],
  "Deco_Lock": [
