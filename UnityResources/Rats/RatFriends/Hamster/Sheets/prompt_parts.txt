@@ -1,0 +1,22 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hamster_parts.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing sits centered in its own cell with a clear magenta margin; drawings must NOT touch or cross cell borders.
+- This is a cute decoration character for the player's cozy hideout room (see the attached ref_lobby_bg.png for the mood: warm, cozy, flat storybook game art).
+- SUBJECT AND POSE: copy the FEELING and POSE of the attached PHOTO (ref_photo_hamster.png): a Syrian golden hamster seen from the FRONT, sitting up on its bottom, chubby pear-shaped body, both small front paws raised up in front of its chest, big round black eyes looking at the viewer, a big happy OPEN-MOUTH smile, round ears. Translate the photo into the flat game style; do NOT copy the photo realism.
+  * Fur colors like the photo: warm GOLDEN ORANGE-BROWN on top of the head, around the ears and on the sides of the body; CREAMY WHITE muzzle, big puffy cheeks, chin, chest and belly; a soft white stripe from the forehead down to the nose.
+  * Big round glossy BLACK eyes each with one small white highlight dot, small PINK nose, open smiling mouth with pink inside and two tiny front teeth, a few thin pale whiskers. Ears round, grey-pink inside with a golden rim. Paws and feet PINK.
+- STYLE IS THE MOST IMPORTANT RULE: copy the drawing style of the attached in-game references (ref_style_rats.png, ref_game_hamsters.png, ref_front_rig_parts.png): Untitled Goose Game look, completely FLAT shapes, NO outlines, NO strokes, NO black linework, no gloss, no gradients, no glow, no drop shadows, only flat color areas with a few simple soft-edged fur tufts. Soft warm palette. No clothes, no accessories.
+- Cells 1 to 6 are CUT-OUT BODY PARTS of that hamster for a 2D paper-doll rig, all at the SAME scale (like the attached ref_front_rig_parts.png). Joint ends are cut flat with the cut face in the same fur colour.
+
+Cells (left to right, top to bottom):
+1) HEAD: front view, big round head with puffy cheeks, two round ears, big black eyes, happy OPEN smile like the photo. Cut flat at the neck at the bottom centre.
+2) HEAD, BLINK: exactly the same head, but the eyes closed as two happy upside-down U curves, the same open smile.
+3) BODY: one piece chubby pear-shaped sitting body (chest + round belly + bottom), golden sides and a big cream belly, no head, no arms, no feet. Flat cut at the neck on top.
+4) ARM: one short chubby front arm raised up in front of the chest like the photo: a flat shoulder cut at the TOP RIGHT, the arm goes down a little then bends UP, ending in a small PINK paw with tiny fingers pointing up. This is the viewer's LEFT arm (the right one will be mirrored).
+5) FOOT: one short hind foot seen from the front as it sticks out under the sitting belly: a small golden-cream furry stub with a flat cut at the TOP, ending in a PINK foot with tiny toes pointing down/forward. Viewer's LEFT foot (mirrored for the other).
+6) TAIL: a tiny short stubby hamster tail tuft, golden with a cream tip, root at the bottom.
+7) FULL POSE: the whole hamster assembled sitting up with both paws raised and the open smile, exactly like the photo pose (for reference), same colours and style.
+8) leave this cell empty magenta.
+- Keep the magenta background perfectly uniform with clean sharp silhouettes (no pink or magenta fringe). Do not use magenta or purple on the drawings.

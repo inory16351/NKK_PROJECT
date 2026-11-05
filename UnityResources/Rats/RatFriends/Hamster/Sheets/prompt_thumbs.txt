@@ -1,0 +1,15 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: hamster_thumbs.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere behind the drawings. No text, no letters, no numbers, no labels, no grid lines, no frames.
+- An exact grid of 4 columns x 2 rows (each cell 384x512). Each drawing sits centered in its own cell with a clear magenta margin; drawings must NOT touch or cross cell borders.
+- The CHARACTER, STYLE, COLOURS AND SCALE must be EXACTLY the same as the attached ref_hamster_parts.png (the same golden hamster: golden orange-brown fur, cream cheeks and belly, white stripe from forehead to nose, big round black eyes with a white highlight, pink nose, round ears with pink inside, pink paws). Completely FLAT shapes, NO outlines, NO strokes, no gloss, no gradients, no drop shadows. Every piece at the SAME size as the matching piece in ref_hamster_parts.png. These are extra cut-out parts for the same 2D paper-doll rig.
+
+Cells (left to right, top to bottom):
+1) HEAD, NEUTRAL: exactly the same front-view head as cell 1 of the reference (same size, same ears, same eyes open), but with a calm BLANK expression: mouth CLOSED, just a small neutral line / tiny "w" shaped hamster mouth under the nose, no teeth, no smile, no open mouth. Cut flat at the neck at the bottom centre, same as the reference.
+2) HEAD, NEUTRAL BLINK: the same neutral head with the eyes closed as two short flat lines (calm, not smiling), mouth closed.
+3) THUMBS-UP ARM: the hamster's short chubby arm raised UP for a "thumbs up": a flat shoulder cut at the BOTTOM LEFT end, the furry arm goes up and slightly to the right, ending in a small round PINK fist with the THUMB clearly pointing straight UP. Same fur colours and same thickness as the arm in the reference. This is the viewer's RIGHT arm.
+4) HEAD, BIG HAPPY SMILE: the same head with eyes closed as happy upside-down U curves and a big open smile with two tiny front teeth (like cell 2 of the reference).
+5) FULL POSE (reference only): the whole hamster sitting up exactly like cell 7 of the reference, but smiling with the big open smile and giving a THUMBS UP with the viewer's right arm raised up beside its head, the other paw resting on its belly.
+6) 7) 8) leave these cells empty magenta.
+- Keep the magenta background perfectly uniform with clean sharp silhouettes (no pink or magenta fringe). Do not use magenta or purple on the drawings.

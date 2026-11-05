@@ -31727,6 +31727,7 @@ Transform:
   - {fileID: 1764752830}
   - {fileID: 231525169}
   - {fileID: 820720414}
+  - {fileID: 534140548}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &437785614
@@ -146860,3 +146861,76 @@ SceneRoots:
   - {fileID: 2055952651}
   - {fileID: 1136163590}
   - {fileID: 306232662}
+--- !u!1 &534140547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 534140548}
+  - component: {fileID: 534140549}
+  m_Layer: 0
+  m_Name: Hamster
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &534140548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534140547}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.35, y: -2.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 435983705}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &534140549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534140547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8531c445f737e74882593d85c550896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.Lobby.LobbyHamster
+  decoId: 95162
+  home: {fileID: 435983704}
+  pan: {fileID: 1136163589}
+  body: {fileID: 21300000, guid: 032befa3b256afb4a8a4f2fb2ba194fc, type: 3}
+  headNeutral: {fileID: 21300000, guid: 1449f1f910bcc77489ede5d15615938f, type: 3}
+  headBlink: {fileID: 21300000, guid: 6ea76b82246a5f546b22ed8c9a40846b, type: 3}
+  headHappy: {fileID: 21300000, guid: 6244ce98fcf2f4940894253cc6db05e0, type: 3}
+  arm: {fileID: 21300000, guid: b7cb0a9c89b3ce64390eb4446c6f570c, type: 3}
+  armThumb: {fileID: 21300000, guid: 6007995d25e1c6d489b6c62664363b14, type: 3}
+  foot: {fileID: 21300000, guid: 4c154d5af064ca44fb04d75fc19caf0f, type: 3}
+  tail: {fileID: 21300000, guid: 806ac7847e421944ebb840c87d9d9cfa, type: 3}
+  height: 1.05
+  baseOrder: 0
+  neck: {x: 0.5, y: 0.33}
+  shoulderL: {x: 0.22, y: 0.24}
+  shoulderR: {x: 0.78, y: 0.24}
+  footL: {x: 0.26, y: 0.86}
+  footR: {x: 0.74, y: 0.86}
+  tailAt: {x: 0.8, y: 0.86}
+  headK: 0.92
+  armK: 0.55
+  footK: 0.5
+  thumbK: 0.6
+  thumbAng0: -80
+  thumbAng1: 0
+  actTime: 2.2
+  hopPx: 34
+  blinkEvery: 3.7
+  hitPad: 1

@@ -3666,6 +3666,46 @@
 "y": 0.98
 },
 {
+"path": "Assets/Art/Rats/RatFriends/Hamster/head_neutral.png",
+"x": 0.5,
+"y": 0.04
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Hamster/head_neutral_blink.png",
+"x": 0.5,
+"y": 0.04
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Hamster/head_happy.png",
+"x": 0.5,
+"y": 0.04
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Hamster/body.png",
+"x": 0.5,
+"y": 0.5
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Hamster/tail.png",
+"x": 0.5,
+"y": 0.08
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Hamster/arm.png",
+"x": 0.76,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Hamster/foot.png",
+"x": 0.5,
+"y": 0.96
+},
+{
+"path": "Assets/Art/Rats/RatFriends/Hamster/arm_thumb.png",
+"x": 0.03,
+"y": 0.2
+},
+{
 "path": "Assets/Art/Rats/RatFriends/Witch/tail.png",
 "x": 0.02,
 "y": 0.45
