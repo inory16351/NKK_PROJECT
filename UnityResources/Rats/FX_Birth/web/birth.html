@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>번식 탄생 연출</title>
+<style>
+  @font-face { font-family: Jua; src: url(Jua-Regular.ttf); }
+  html, body { margin:0; height:100%; background:#1b1b1b; }
+  body { display:flex; align-items:center; justify-content:center; }
+  canvas { max-width:100vw; max-height:100vh; aspect-ratio:16/9; display:block; cursor:pointer; }
+</style>
+</head>
+<body>
+<canvas id="cv" width="1280" height="720" title="클릭 = 다른 쥐로 다시"></canvas>
+<script>
+// 연출만 보기 (가벼운 판). 계산 = 유니티 BirthCutscene · RatPortrait 와 같음, 값 = 인스펙터 기본값.
+// 슬라이더로 값 맞추는 판 = birth_tune.html. 클릭하면 다른 쥐로 처음부터.
+const P = {
+  enterTime: 0.35, bumpTime: 0.28, bumpCount: 3, mergeTime: 0.25, flashTime: 0.3, heartPopTime: 0.3, heartHold: 0.35,
+  growTime: 0.9, nameAt: 0.6, nameTime: 1.2, namePopTime: 0.3, outTime: 0.3,
+  startGap: 760, restGap: 300, touchGap: 140, restShrink: 0.15, hop: 55, squash: 0.18, mergeScale: 0.55,
+  legSwing: 28, legSpeed: 22, headBob: 8, tailSwing: 14,
+  heartBeat: 0.07, heartBeatSpeed: 9, heartGrow: 0.3, heartGone: 0.85, babyStart: 0.15,
+  raySpin: 25, sparkleSpeed: 5, dimAlpha: 0.45,
+};
+const STAGE_Y = 60, PAD = 0.02, BOX = { parent: [430, 320], baby: [480, 360] }, HEART = [500, 428], RAYS = [860, 860];
+const SPARK = [[-300,170,0],[290,200,0],[-340,-90,1],[330,-60,0],[-170,260,0],[190,-190,1]];
+
+const img = src => { const i = new Image(); i.src = src; return i; };
+const IMG = { heart: img('birth_heart.png'), rays: img('birth_rays.png'), sparkle: img('birth_sparkle.png'), small: img('birth_heart_small.png') };
+let RATS = [], A, B, C, babyName = '';
+
+// 먼 쪽 다리 (어둡게) = 미리 한 번 구워 둠 (매 프레임 필터 안 씀)
+const darkCache = new Map();
+function dark(im) {
+  let c = darkCache.get(im); if (c) return c;
+  if (!im.complete || !im.naturalWidth) return im;      // 아직 안 받은 그림은 그대로 (다음에 다시)
+  c = document.createElement('canvas'); c.width = im.naturalWidth; c.height = im.naturalHeight;
+  const x = c.getContext('2d'); x.drawImage(im, 0, 0); x.globalCompositeOperation = 'source-atop'; x.fillStyle = 'rgba(0,0,0,0.21)'; x.fillRect(0, 0, c.width, c.height);
+  darkCache.set(im, c); return c;
+}
+
+// 하트 디졸브 (NKK/UIDissolve 와 같은 노이즈) — 작은 해상도로, 값이 바뀔 때만 다시 그림
+const DW = 160, DH = 137;
+let noise, hctx, hsrc, hdst, lastCut = -1;
+const frac = x => x - Math.floor(x), hash = (x, y) => frac(Math.sin(x * 127.1 + y * 311.7) * 43758.5453);
+function vnoise(x, y) {
+  const ix = Math.floor(x), iy = Math.floor(y); let fx = x - ix, fy = y - iy; fx = fx * fx * (3 - 2 * fx); fy = fy * fy * (3 - 2 * fy);
+  const a = hash(ix, iy), b = hash(ix + 1, iy), c = hash(ix, iy + 1), d = hash(ix + 1, iy + 1), ab = a + (b - a) * fx;
+  return ab + ((c + (d - c) * fx) - ab) * fy;
+}
+const fbm = (x, y) => vnoise(x, y) * 0.55 + vnoise(x * 2.1 + 3.7, y * 2.1 + 3.7) * 0.3 + vnoise(x * 4.3 + 9.1, y * 4.3 + 9.1) * 0.15;
+function prepHeart() {
+  const c = document.createElement('canvas'); c.width = DW; c.height = DH; hctx = c.getContext('2d');
+  hctx.drawImage(IMG.heart, 0, 0, DW, DH); hsrc = hctx.getImageData(0, 0, DW, DH).data; hdst = hctx.createImageData(DW, DH);
+  noise = new Float32Array(DW * DH);
+  for (let y = 0; y < DH; y++) for (let x = 0; x < DW; x++) noise[y * DW + x] = fbm((x + 0.5) / DW * 7, (1 - (y + 0.5) / DH) * 7);
+}
+function dissolved(cut) {
+  if (Math.abs(cut - lastCut) < 0.004) return hctx.canvas;
+  lastCut = cut;
+  const d = hdst.data, k = cut * 1.08, E = [255, 242, 204];
+  for (let i = 0, n = DW * DH; i < n; i++) {
+    const o = i * 4, nv = noise[i];
+    if (nv < k) { d[o + 3] = 0; continue; }
+    const e = cut > 0.001 ? 1 - Math.min(1, (nv - k) / 0.08) : 0;
+    d[o] = hsrc[o] + (E[0] - hsrc[o]) * e; d[o + 1] = hsrc[o + 1] + (E[1] - hsrc[o + 1]) * e; d[o + 2] = hsrc[o + 2] + (E[2] - hsrc[o + 2]) * e; d[o + 3] = hsrc[o + 3];
+  }
+  hctx.putImageData(hdst, 0, 0); return hctx.canvas;
+}
+
+// RatPortrait.Show + Fit (UI 좌표, y 위 +)
+function portrait(r, box, faceRight) {
+  const sp = k => r[k] ? { ...r[k], img: r.img[k] } : null;
+  const head = sp('head'), torso = sp('torso'), tail = sp('tail'), front = sp('front'), back = sp('back');
+  const tw = torso.w, th = torso.h, legLenF = front ? front.py * r.legF : 0;
+  const torsoX = -tw * 0.5, torsoY = -(r.shoulder[1] * th + legLenF);
+  const Place = a => [torsoX + a[0] * tw, torsoY + a[1] * th], L = p => [p[0], -p[1]];
+  const hip = Place(r.hip), neck = Place(r.neck), tailA = Place(r.tailA), shoulder = Place(r.shoulder);
+  const headScale = head ? Math.min(1, 0.62 * tw / head.w) : 1, gap = tw * 0.07;
+  const part = (name, s, pos, scale, far, center) => s ? { name, s, pos, scale, far, center, src: far ? dark(s.img) : s.img } : null;
+  const parts = [
+    part('farBack', back, L([hip[0] + gap, hip[1]]), r.legB, true), part('farFront', front, L([shoulder[0] + gap, shoulder[1]]), r.legF, true),
+    part('tail', tail, L(tailA), 1), part('torso', torso, L([0, torsoY + th * 0.5]), 1, false, true),
+    part('back', back, L(hip), r.legB), part('front', front, L(shoulder), r.legF), part('head', head, L(neck), headScale),
+  ].filter(Boolean);
+  let mn = [1e9, 1e9], mx = [-1e9, -1e9];
+  for (const p of parts) {
+    const px = p.center ? p.s.w / 2 : p.s.px, py = p.center ? p.s.h / 2 : p.s.py;
+    mn = [Math.min(mn[0], p.pos[0] - px * p.scale), Math.min(mn[1], p.pos[1] - py * p.scale)];
+    mx = [Math.max(mx[0], p.pos[0] + (p.s.w - px) * p.scale), Math.max(mx[1], p.pos[1] + (p.s.h - py) * p.scale)];
+  }
+  const k = Math.min(box[0] * (1 - PAD * 2) / Math.max(1, mx[0] - mn[0]), box[1] * (1 - PAD * 2) / Math.max(1, mx[1] - mn[1]));
+  const mid = [(mn[0] + mx[0]) / 2, (mn[1] + mx[1]) / 2];
+  return { parts, k, faceRight, vis: [-mid[0] * (faceRight ? -k : k), -mid[1] * k], rot: {} };
+}
+function drawPortrait(P_, x, y, sx, sy, alpha) {
+  if (!P_ || alpha <= 0.001) return;
+  ctx.save(); ctx.translate(x, y); ctx.scale(sx, sy); ctx.translate(P_.vis[0], P_.vis[1]); ctx.scale(P_.faceRight ? -P_.k : P_.k, P_.k);
+  ctx.globalAlpha = alpha;
+  for (const p of P_.parts) {
+    const px = p.center ? p.s.w / 2 : p.s.px, py = p.center ? p.s.h / 2 : p.s.py;
+    ctx.save(); ctx.translate(p.pos[0], p.pos[1]); ctx.rotate((P_.rot[p.name] || 0) * Math.PI / 180); ctx.scale(p.scale, -p.scale);
+    ctx.drawImage(p.src, -px, -(p.s.h - py), p.s.w, p.s.h); ctx.restore();
+  }
+  ctx.restore();
+}
+
+// BirthCutscene (C# 그대로)
+const EaseIn = u => u * u, EaseOut = u => 1 - (1 - u) * (1 - u);
+const EaseOutBack = u => 1 + 2.70158 * Math.pow(u - 1, 3) + 1.70158 * Math.pow(u - 1, 2);
+const clamp01 = v => Math.min(1, Math.max(0, v)), lerp = (a, b, u) => a + (b - a) * u, M = v => Math.max(0.01, v);
+const Rest = k => Math.max(P.touchGap, P.restGap * (1 - P.restShrink * k));
+function Wiggle(p, time, walk, tail) {
+  const w = Math.sin(time * P.legSpeed) * P.legSwing * walk;
+  p.rot = { front: w, farBack: w, back: -w, farFront: -w, head: Math.sin(time * P.legSpeed * 0.5) * P.headBob * Math.max(walk, 0.4), tail: Math.sin(time * 7) * P.tailSwing * tail };
+}
+const sBump = P.enterTime, sMerge = sBump + P.bumpTime * P.bumpCount, sFlash = sMerge + P.mergeTime;
+const sGrow = sFlash + P.heartHold, sName = sGrow + P.growTime * P.nameAt, sOut = sGrow + P.growTime + P.nameTime, sEnd = sOut + P.outTime;
+
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+// 배경 (게임 바닥 느낌) 미리 한 장
+const bg = document.createElement('canvas'); bg.width = 1920; bg.height = 1080;
+{ const b = bg.getContext('2d'); b.fillStyle = '#dfe3dc'; b.fillRect(0, 0, 1920, 1080); b.strokeStyle = 'rgba(0,0,0,0.06)'; b.lineWidth = 2;
+  for (let x = 0; x < 1920; x += 96) { b.beginPath(); b.moveTo(x, 0); b.lineTo(x, 1080); b.stroke(); }
+  for (let y = 0; y < 1080; y += 96) { b.beginPath(); b.moveTo(0, y); b.lineTo(1920, y); b.stroke(); } }
+
+function text(o, str, dt, content) {
+  if (dt < 0) return; const s = EaseOutBack(clamp01(dt / M(P.namePopTime)));
+  ctx.save(); ctx.translate(0, o.y); ctx.scale(s, -s); ctx.globalAlpha = content;
+  ctx.font = `${o.size}px Jua`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+  ctx.lineWidth = o.size * 0.22; ctx.strokeStyle = '#3a2a22'; ctx.strokeText(str, 0, 0); ctx.fillStyle = o.color; ctx.fillText(str, 0, 0); ctx.restore();
+}
+
+function render(t) {
+  const K = cv.width / 1920;
+  ctx.setTransform(K, 0, 0, K, 0, 0); ctx.globalAlpha = 1; ctx.drawImage(bg, 0, 0);
+  if (t >= sEnd) return;
+  const content = t < sOut ? 1 : 1 - clamp01((t - sOut) / M(P.outTime));
+  ctx.setTransform(K, 0, 0, -K, 960 * K, 540 * K);      // 화면 가운데 원점, y 위 +
+  ctx.globalAlpha = content; ctx.fillStyle = `rgba(0,0,0,${P.dimAlpha * clamp01(t / 0.2)})`; ctx.fillRect(-960, -540, 1920, 1080);
+  ctx.translate(0, STAGE_Y);
+
+  let d, y = 0, sx = 1, sy = 1, alpha = 1, walk = 1;
+  if (t < sBump) { const u = t / M(P.enterTime); d = lerp(P.startGap, P.restGap, EaseOut(u)); alpha = clamp01(u * 3); }
+  else if (t < sMerge) {
+    const k = Math.min(P.bumpCount - 1, Math.floor((t - sBump) / P.bumpTime)), u = (t - sBump - k * P.bumpTime) / P.bumpTime;
+    if (u < 0.4) d = lerp(Rest(k), P.touchGap, EaseIn(u / 0.4));
+    else { const v = (u - 0.4) / 0.6; d = lerp(P.touchGap, Rest(k + 1), EaseOut(v)); y = Math.sin(v * Math.PI) * P.hop; const q = clamp01(1 - v * 3) * P.squash; sx = 1 - q; sy = 1 + q * 0.6; walk = 0.3; }
+  }
+  else if (t < sFlash) { const u = (t - sMerge) / M(P.mergeTime); d = lerp(Rest(P.bumpCount), 0, EaseIn(u)); sx = sy = lerp(1, P.mergeScale, u); alpha = 1 - u * 0.3; }
+  else { d = 0; alpha = 0; }
+
+  if (t >= sFlash) {
+    const ra = clamp01((t - sFlash) / 0.3), s = 0.6 + 0.4 * EaseOut(ra);
+    ctx.save(); ctx.globalAlpha = content * ra; ctx.rotate(-(t - sFlash) * P.raySpin * Math.PI / 180); ctx.scale(s, -s); ctx.drawImage(IMG.rays, -RAYS[0] / 2, -RAYS[1] / 2, RAYS[0], RAYS[1]); ctx.restore();
+    const pop = EaseOutBack(clamp01((t - sFlash) / M(P.heartPopTime))), g = clamp01((t - sGrow) / M(P.growTime * P.heartGone));
+    const hs = pop * (1 + P.heartBeat * Math.pow(Math.abs(Math.sin((t - sFlash) * P.heartBeatSpeed)), 4)) * (1 + P.heartGrow * EaseOut(g));
+    if (g < 1) { ctx.save(); ctx.globalAlpha = content; ctx.scale(hs, -hs); ctx.drawImage(dissolved(g), -HEART[0] / 2, -HEART[1] / 2, HEART[0], HEART[1]); ctx.restore(); }
+  }
+  if (alpha > 0) { Wiggle(A, t, walk, 1); drawPortrait(A, -d, y, sx, sy, alpha * content); Wiggle(B, t + 1.3, walk, 1); drawPortrait(B, d, y, sx, sy, alpha * content); }
+  if (t >= sGrow) {
+    const u = clamp01((t - sGrow) / M(P.growTime)), s = lerp(P.babyStart, 1, EaseOutBack(u));
+    Wiggle(C, t - sGrow, u >= 1 ? 0.5 : 0.2, 0.5);
+    drawPortrait(C, 0, u >= 1 ? Math.abs(Math.sin((t - sGrow) * 6)) * 10 : 0, s, s, clamp01(u / 0.3) * content);
+    SPARK.forEach(([x, yy, h], i) => {
+      const v = Math.max(0, Math.sin((t - sGrow) * P.sparkleSpeed + i * 1.7)); if (v <= 0) return;
+      const im = h ? IMG.small : IMG.sparkle, w = h ? 80 : 90, hh = h ? 70 : 90;
+      ctx.save(); ctx.translate(x, yy); ctx.rotate((t + i) * Math.PI / 2); ctx.scale(v, -v); ctx.globalAlpha = content; ctx.drawImage(im, -w / 2, -hh / 2, w, hh); ctx.restore();
+    });
+  }
+  ctx.translate(0, -STAGE_Y);
+  text({ y: -260, size: 84, color: '#fff' }, '새로운 쥐 탄생 !!', t - sName, content);
+  text({ y: -360, size: 66, color: 'rgb(255,217,89)' }, babyName + '!!', t - sName - 0.15, content);
+  const fl = t < sMerge ? 0 : t < sFlash ? EaseIn((t - sMerge) / M(P.mergeTime)) : 1 - clamp01((t - sFlash) / M(P.flashTime));
+  if (fl > 0) { ctx.globalAlpha = content * fl; ctx.fillStyle = '#fff'; ctx.fillRect(-960, -540, 1920, 1080); }
+  ctx.globalAlpha = 1;
+}
+
+let t = 0, last = 0;
+function next(first) {
+  const R = () => RATS[(Math.random() * RATS.length) | 0];
+  const by = c => RATS.find(r => r.code === c);
+  const a = first ? by('brownrat') : R(), b = first ? by('mouse') : R(), c = first ? by('hamster') : R();
+  A = portrait(a, BOX.parent, true); B = portrait(b, BOX.parent, false); C = portrait(c, BOX.baby, false); babyName = c.name; t = 0;
+}
+cv.onclick = () => next(false);
+function frame(now) {
+  const dt = last ? Math.min(0.05, (now - last) / 1000) : 0; last = now;
+  t += dt; if (t > sEnd + 0.5) next(false);      // 끝나면 다른 쥐로 다시
+  render(t); requestAnimationFrame(frame);
+}
+
+// 불러오기: 쥐 목록 → 그림 (다 기다리지 않음, 첫 세 마리만)
+const wait = (p, ms) => Promise.race([p, new Promise(r => setTimeout(r, ms))]);
+fetch('rats.json').then(r => r.json()).then(async list => {
+  for (const r of list) { r.img = {}; for (const k of ['head', 'torso', 'tail', 'front', 'back']) if (r[k]) r.img[k] = img(r[k].file); }
+  RATS = list;
+  const firsts = list.filter(r => ['brownrat', 'mouse', 'hamster'].includes(r.code)).flatMap(r => Object.values(r.img));
+  await wait(Promise.all([...firsts, ...Object.values(IMG)].map(i => i.decode().catch(() => {}))), 4000);
+  await wait(document.fonts.load('80px Jua'), 2000);
+  // 나머지 쥐 그림은 뒤에서 미리 받아 둠 (먼 쪽 다리 어둡게도 그때 구움)
+  for (const r of list) for (const k of ['front', 'back']) if (r.img[k]) r.img[k].decode().then(() => dark(r.img[k])).catch(() => {});
+  prepHeart(); next(true); requestAnimationFrame(frame);
+});
+</script>
+</body>
+</html>

@@ -43915,6 +43915,19 @@
    "ar": "تلقائي (حسب الوسام)"
   },
   {
+   "string_key": 8000646,
+   "ko": "새로운 쥐 탄생 !!",
+   "en": "A New Rat Is Born!!",
+   "ja": "新しいネズミ誕生!!",
+   "zh": "新老鼠诞生了!!",
+   "pt": "Nasceu um novo rato!!",
+   "es": "¡¡Nació una nueva rata!!",
+   "ru": "Родилась новая крыса!!",
+   "fr": "Un nouveau rat est né !!",
+   "de": "Eine neue Ratte ist geboren!!",
+   "ar": "!!وُلد فأر جديد"
+  },
+  {
    "string_key": 9000001,
    "ko": "찍찍!! {power}",
    "en": "SQUEAK!! {power}",

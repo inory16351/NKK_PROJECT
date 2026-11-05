@@ -1,0 +1,15 @@
+Create ONE image file named birth_fx.png (landscape, about 2048x1024) in the current folder using your image generation tool.
+
+Purpose: effect sprites for a cute 2D game cutscene "a new baby rat is born" (two rats bump together, white flash, a big heart appears, the baby rat grows out of the heart).
+
+Art style: match the attached reference heart exactly — flat cartoon style like Untitled Goose Game, soft pink, NO outlines, NO gradients, NO glossy shine except at most one small simple white highlight blob like the reference, NO text.
+
+Background: solid pure magenta #FF00FF everywhere (it will be chroma-keyed), no shadows on the background, no magenta inside the objects.
+
+Put 4 separate objects, well spaced (at least 80 px of magenta between them), each fully inside its area:
+1. LEFT HALF: one BIG pink heart, same shape/color as the reference heart, filling about 900x800 px. Plain, one small white highlight top-left.
+2. TOP RIGHT: a radial sunburst of 12 soft pale-yellow (#FFF3B0) tapered rays around an empty center (no circle in the middle), about 560x560 px, flat.
+3. BOTTOM RIGHT, left side: a flat 4-pointed sparkle star, pale yellow-white (#FFF8D6), about 220x220 px.
+4. BOTTOM RIGHT, right side: a small simple light-pink heart (#FFB6C8), about 200x180 px, no highlight.
+
+Save as birth_fx.png.

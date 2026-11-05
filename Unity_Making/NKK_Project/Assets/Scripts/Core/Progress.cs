@@ -49,6 +49,7 @@ namespace NKK
             public List<AchvAt> achvAt = new();                      // 업적 달성 시각 (UTC)
             public bool achvIntro;                                   // 업적 안내 뒤 첫 정산 (지난 업적 소급)을 했음
             public List<int> achvSeen = new();                       // 업적 탭에서 확인한 업적 (NEW 표시)
+            public List<string> birthFx = new();                     // 번식 탄생 연출 스위치: 연출을 본 쥐 종 (코드) — 저장 파일마다 종별 한 번 (2026-11-05)
         }
         // ── 쥐구멍 암시장 (상점 기획서 Shop_Save) · 유전자 뽑기 (뽑기 기획서 Gacha_Save) ──
         [Serializable] public class ShopItem { public int slot, goods; public string code; public bool sold; }
@@ -139,6 +140,10 @@ namespace NKK
         bool endingSeen;
         public bool EndingSeen => endingSeen;
         public void MarkEnding() { endingSeen = true; Save(); }
+        // 번식 탄생 연출 스위치 (2026-11-05): 종마다 첫 번식 탄생 연출을 한 번만. 처음 켜면 true (= 연출 틀기)
+        readonly HashSet<string> birthFx = new();
+        public bool BirthFxSeen(string code) => birthFx.Contains(code);
+        public bool MarkBirthFx(string code) { if (string.IsNullOrEmpty(code) || !birthFx.Add(code)) return false; Save(); return true; }
         public void SkipTutorial() { tutoSkip = true; UnlockVersion++; Save(); }      // 밸런스 측정 등: 튜토리얼 안 띄우고 기능 전부 열림
         public bool TutoDone(string stepId) => tutoSkip || tuto.Contains(stepId);
         public void MarkTuto(string stepId) { if (tuto.Add(stepId)) { UnlockVersion++; Save(); } }      // 튜토리얼로 드러나는 기능(뒷골목)이 있어서 FeatureGate 도 다시 그림
@@ -393,6 +398,7 @@ namespace NKK
             d.tuto.AddRange(tuto); d.unlocks.AddRange(unlocks);
             d.nodes.AddRange(skills);
             d.achvOn.AddRange(achvOn);
+            d.birthFx.AddRange(birthFx);
             d.shop = shop; d.gacha = gacha; d.aug = aug;
             SaveAcorn(d);
             foreach (var kv in achvs) d.achvs.Add(new AchvEntry { ult = kv.Key, count = kv.Value });     // 필살기 완주 횟수
@@ -408,7 +414,7 @@ namespace NKK
 
         void Load()
         {
-            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0; judolBest = 0;
+            rats.Clear(); skills.Clear(); achvs.Clear(); achvOn.Clear(); birthFx.Clear(); treeCache.Clear(); cheese = research = 0; tier = maxFloor = 1; runs = 0; judolBest = 0;
             tuto.Clear(); unlocks.Clear(); tutoSkip = tutoQuiet = endingSeen = false; Infinite = false; UnlockVersion++; SkillVersion++; shop = new(); gacha = new(); aug = new();
             ClearAcorn();
             var s = PlayerPrefs.GetString(KeyOf(Slot), "");
@@ -428,6 +434,7 @@ namespace NKK
             SkillVersion++;
             if (d.achvs != null) foreach (var e in d.achvs) achvs[e.ult] = e.count;
             if (d.achvOn != null) foreach (var id in d.achvOn) achvOn.Add(id);
+            if (d.birthFx != null) foreach (var c in d.birthFx) birthFx.Add(c);
             if (d.tuto != null) foreach (var id in d.tuto) tuto.Add(id);
             if (d.unlocks != null) foreach (var id in d.unlocks) unlocks.Add(id);
             tutoSkip = d.tutoSkip || d.ver == 0;      // 튜토리얼이 생기기 전 저장 = 다 본 것으로

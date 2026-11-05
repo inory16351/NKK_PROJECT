@@ -565,6 +565,9 @@ namespace NKK.Rats
         // 번식 확률: 무료 마리 수 이하는 100%, 그 위로는 최대 마리 수 대비 채운 비율로 떨어짐 (최대 마리 수가 늘면 번식도 같이 잘 됨) + 공용 스킬 번식 확률
         float BreedChance(int pop) => Mathf.Clamp((pop <= breedFree ? 1 : 1f / (1 + Mathf.Pow((float)pop / Mathf.Max(1, PopCap) / breedHalfRatio, breedRatioExp))) + CommonSkill.BreedChanceAdd(pop), breedMinChance, 1);
 
+        // 번식으로 이 종을 이 저장 파일에서 처음 얻는가 (탄생 연출 스위치가 아직 꺼져 있을 때만). 뽑기·상점으로 이미 가진 종은 아님
+        static bool FirstBirth(RatCharacterRow row) => Progress.I && !Progress.I.Seen(row.code_id) && !Progress.I.BirthFxSeen(row.code_id);
+
         void Breed()
         {
             if (Game && Game.Floor < 2 && Progress.I && Progress.I.InTutoRound) return;      // 튜토리얼 라운드: 1층은 번식 없음 (2층에서 첫 번식 + 번식 안내)
@@ -604,11 +607,14 @@ namespace NKK.Rats
                 }
             }
             for (int bi = 0; bi < parents.Count; bi++) { var pr = parents[bi]; if (!pr.a.ActTrigger(CondType.Birth)) pr.b.ActTrigger(CondType.Birth); Ults?.Charge(pr.a, CondType.Birth); Ults?.Charge(pr.b, CondType.Birth); }
-            foreach (var p in born)
+            for (int bi = 0; bi < born.Count; bi++)
             {
+                var p = born[bi]; var par = parents[bi];
                 var row = RollSpecies(p.z);
                 if (row == null) continue;
+                bool first = FirstBirth(row);
                 var r = Spawn(row, p.x, p.y);
+                if (r && first) BirthCutscene.Enqueue(row, par.a.codeId, par.b.codeId);      // 이 종을 처음 얻음 → 탄생 연출 (종마다 한 번)
                 if (r) { Births++; LastBorn = r; SfxManager.PlayAt("rat_birth", p.x, p.y); }
                 if (r && r.OnScreen()) FxManager.I?.Hearts(p.x, p.y, birthHearts);     // 번식 하트
                 if (r && (int)row.Grade >= 2) Game.ShowBanner(Loc.T(9000121).Replace("{grade}", GameDatabase.Instance.GradeOf(row).grade_name), row.character_name);
@@ -616,7 +622,10 @@ namespace NKK.Rats
                 if (r && Random.value < CommonSkill.TwinChance && RealCount < PopCap)
                 {
                     var row2 = RollSpecies(p.z);
-                    if (row2 != null && Spawn(row2, p.x + Random.Range(-14f, 14f), p.y + Random.Range(-10f, 10f)) && r.OnScreen()) FxManager.I?.Popup(p.x, p.y, Loc.T(9000122), new Color(1, 0.75f, 0.85f), 18, 1, 60);
+                    bool first2 = row2 != null && FirstBirth(row2);
+                    var r2 = row2 != null ? Spawn(row2, p.x + Random.Range(-14f, 14f), p.y + Random.Range(-10f, 10f)) : null;
+                    if (r2 && first2) BirthCutscene.Enqueue(row2, par.a.codeId, par.b.codeId);
+                    if (r2 && r.OnScreen()) FxManager.I?.Popup(p.x, p.y, Loc.T(9000122), new Color(1, 0.75f, 0.85f), 18, 1, 60);
                 }
                 // 탄생 축제: 주변 쥐 광란
                 float ft = CommonSkill.FrenzyTime;

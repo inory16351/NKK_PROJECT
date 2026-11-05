@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>번식 탄생 연출</title>
+<style>
+  @font-face { font-family: Jua; src: url(Jua-Regular.ttf); }
+  :root { --bg:#f4f2ee; --panel:#fff; --ink:#222; --sub:#777; --line:#ddd; --accent:#3b6fd8; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:13px/1.4 "Malgun Gothic", sans-serif; background:var(--bg); color:var(--ink); display:flex; height:100vh; }
+  #stage { flex:1; position:relative; min-width:0; display:flex; flex-direction:column; }
+  #wrap { flex:1; display:flex; align-items:center; justify-content:center; min-height:0; padding:8px; }
+  canvas { max-width:100%; max-height:100%; aspect-ratio:16/9; background:#000; display:block; }
+  #bar { display:flex; gap:8px; align-items:center; padding:6px 10px; background:var(--panel); border-top:1px solid var(--line); }
+  #bar input[type=range] { flex:1; }
+  #side { width:400px; background:var(--panel); border-left:1px solid var(--line); overflow:auto; padding:10px; }
+  h2 { font-size:14px; margin:12px 0 4px; }
+  .row { display:flex; gap:6px; align-items:center; flex-wrap:wrap; margin:4px 0; }
+  select { max-width:150px; }
+  button { padding:4px 9px; border:1px solid var(--line); background:#fafafa; border-radius:4px; cursor:pointer; }
+  button.on { background:var(--accent); color:#fff; border-color:var(--accent); }
+  .p { display:grid; grid-template-columns: 170px 1fr 58px; gap:4px; align-items:center; margin:1px 0; }
+  .p span { color:#444; font-size:12px; }
+  .p input[type=number] { width:58px; font-size:11px; }
+  textarea { width:100%; height:140px; font:11px Consolas, monospace; }
+  .hint { color:var(--sub); font-size:12px; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <div id="wrap"><canvas id="cv" width="1920" height="1080"></canvas></div>
+  <div id="bar">
+    <button id="play" class="on">재생</button>
+    <input id="scrub" type="range" min="0" max="4.2" step="0.01" value="0">
+    <span id="tv" style="width:120px"></span>
+    느리게 <input id="slow" type="range" min="0.1" max="1" step="0.05" value="1" style="flex:0 0 90px">
+    <label><input id="loop" type="checkbox" checked> 반복</label>
+  </div>
+</div>
+<div id="side">
+  <div class="row">부모 <select id="selA"></select> + <select id="selB"></select></div>
+  <div class="row">새 쥐 <select id="selC"></select> <button id="rand">무작위</button></div>
+  <div class="row"><label><input id="busy" type="checkbox" checked> 게임 화면 흉내 (뒤에 쥐 무리)</label></div>
+  <p class="hint">유니티 <b>BirthCutscene.cs</b> · <b>RatPortrait.cs</b> 와 같은 계산 (UI 1920×1080, 무대 = 가운데에서 위로 60). 하트 디졸브 = <b>NKK/UIDissolve</b> 셰이더와 같은 노이즈. 슬라이더 이름 = 인스펙터 이름.</p>
+  <div id="params"></div>
+  <h2>유니티 값 (BirthCutscene 인스펙터 · JSON)</h2>
+  <div class="row"><button id="copy">복사</button><button id="reset">기본값</button><span class="hint" id="copied"></span></div>
+  <textarea id="out"></textarea>
+  <p class="hint">JSON 을 고쳐 붙여 넣으면 슬라이더에 반영됩니다.</p>
+</div>
+<script>
+// ── 인스펙터 기본값 (BirthCutscene.cs 와 같은 이름) ──
+const DEF = {
+  enterTime: 0.35, bumpTime: 0.28, bumpCount: 3, mergeTime: 0.25, flashTime: 0.3, heartPopTime: 0.3, heartHold: 0.35,
+  growTime: 0.9, nameAt: 0.6, nameTime: 1.2, namePopTime: 0.3, outTime: 0.3,
+  startGap: 760, restGap: 300, touchGap: 140, restShrink: 0.15, hop: 55, squash: 0.18, mergeScale: 0.55,
+  legSwing: 28, legSpeed: 22, headBob: 8, tailSwing: 14,
+  heartBeat: 0.07, heartBeatSpeed: 9, heartGrow: 0.3, heartGone: 0.85, babyStart: 0.15,
+  raySpin: 25, sparkleSpeed: 5, dimAlpha: 0.45,
+};
+const RANGE = {
+  enterTime: [0.05, 1.5, 0.01, '걸어 들어오기 (초)'], bumpTime: [0.08, 1, 0.01, '한 번 부딪힘 (초)'], bumpCount: [1, 6, 1, '부딪히는 횟수'],
+  mergeTime: [0.05, 1, 0.01, '합쳐지며 하얘짐 (초)'], flashTime: [0.05, 1.5, 0.01, '플래시 걷힘 (초)'],
+  heartPopTime: [0.05, 1, 0.01, '하트 톡 (초)'], heartHold: [0, 1.5, 0.01, '하트만 보이는 시간'],
+  growTime: [0.2, 3, 0.01, '쥐 자람·하트 녹음 (초)'], nameAt: [0, 1.5, 0.01, '글 뜨는 시점 (자람 배율)'],
+  nameTime: [0.3, 3, 0.01, '글 떠 있는 시간'], namePopTime: [0.05, 1, 0.01, '글 튀어나옴 (초)'], outTime: [0.05, 1, 0.01, '사라짐 (초)'],
+  startGap: [200, 1100, 5, '시작 거리 (절반 px)'], restGap: [80, 600, 5, '쉬는 자리'], touchGap: [0, 400, 5, '맞닿는 자리'],
+  restShrink: [0, 0.4, 0.01, '부딪힐 때마다 가까워짐'], hop: [0, 200, 1, '튕길 때 뛰는 높이'], squash: [0, 0.5, 0.01, '부딪힐 때 찌그러짐'],
+  mergeScale: [0.1, 1.2, 0.01, '합쳐질 때 크기'],
+  legSwing: [0, 60, 1, '다리 흔들기 (도)'], legSpeed: [2, 50, 0.5, '다리 빠르기'], headBob: [0, 30, 0.5, '머리 끄덕 (도)'], tailSwing: [0, 40, 0.5, '꼬리 흔들기 (도)'],
+  heartBeat: [0, 0.3, 0.005, '하트 두근 크기'], heartBeatSpeed: [1, 20, 0.5, '하트 두근 빠르기'], heartGrow: [0, 1, 0.01, '녹으며 커지는 배율'],
+  heartGone: [0.2, 1.5, 0.01, '하트 다 녹는 시점 (자람 배율)'], babyStart: [0, 1, 0.01, '새 쥐 처음 크기'],
+  raySpin: [0, 120, 1, '햇살 도는 속도 (도/초)'], sparkleSpeed: [0.5, 15, 0.1, '반짝이 빠르기'], dimAlpha: [0, 1, 0.01, '뒤 어둡게'],
+};
+let P = { ...DEF };
+
+// ── 씬 고정값 (Game HUD/BirthCutscene 하이라키) ──
+const STAGE_Y = 60;
+const BOX = { parent: [430, 320], baby: [480, 360] }, PAD = 0.02;
+const HEART = [500, 428], RAYS = [860, 860];
+const SPARK = [[-300,170,0],[290,200,0],[-340,-90,1],[330,-60,0],[-170,260,0],[190,-190,1]];   // x, y, 작은 하트?
+const TITLE = { y: -260, size: 84, text: '새로운 쥐 탄생 !!', color: '#fff' }, NAME = { y: -360, size: 66, color: 'rgb(255,217,89)' };
+const FAR = 'brightness(0.79)';
+
+// ── 그림 ──
+const img = src => { const i = new Image(); i.src = src; return i; };
+const IMG = { heart: img('birth_heart.png'), rays: img('birth_rays.png'), sparkle: img('birth_sparkle.png'), small: img('birth_heart_small.png') };
+let RATS = [], byCode = {}, A, B, C;
+
+// 하트 디졸브: 셰이더와 같은 노이즈 (uv 0~1, 좌하단 기준) — 미리 계산
+const DW = 276, DH = 236;
+let noise = null, hctx = null, hdata = null, heartPix = null;
+const frac = x => x - Math.floor(x);
+const hash = (x, y) => frac(Math.sin(x * 127.1 + y * 311.7) * 43758.5453);
+function vnoise(x, y) {
+  const ix = Math.floor(x), iy = Math.floor(y); let fx = x - ix, fy = y - iy;
+  fx = fx * fx * (3 - 2 * fx); fy = fy * fy * (3 - 2 * fy);
+  const a = hash(ix, iy), b = hash(ix + 1, iy), c = hash(ix, iy + 1), d = hash(ix + 1, iy + 1);
+  return (a + (b - a) * fx) + ((c + (d - c) * fx) - (a + (b - a) * fx)) * fy;
+}
+const fbm = (x, y) => vnoise(x, y) * 0.55 + vnoise(x * 2.1 + 3.7, y * 2.1 + 3.7) * 0.3 + vnoise(x * 4.3 + 9.1, y * 4.3 + 9.1) * 0.15;
+const DIS = { edge: 0.08, edgeColor: [255, 242, 204], scale: 7 };
+function prepHeart() {
+  const c = document.createElement('canvas'); c.width = DW; c.height = DH; hctx = c.getContext('2d');
+  hctx.drawImage(IMG.heart, 0, 0, DW, DH); heartPix = hctx.getImageData(0, 0, DW, DH); hdata = hctx.createImageData(DW, DH);
+  noise = new Float32Array(DW * DH);
+  for (let y = 0; y < DH; y++) for (let x = 0; x < DW; x++) noise[y * DW + x] = fbm((x + 0.5) / DW * DIS.scale, (1 - (y + 0.5) / DH) * DIS.scale);
+}
+function dissolved(cut) {
+  const s = heartPix.data, d = hdata.data, k = cut * (1 + DIS.edge);
+  for (let i = 0, n = DW * DH; i < n; i++) {
+    const nv = noise[i], o = i * 4;
+    if (nv - k + 0.0001 < 0) { d[o + 3] = 0; continue; }
+    let e = 1 - Math.min(1, Math.max(0, (nv - k) / DIS.edge)); if (cut <= 0.001) e = 0;
+    d[o] = s[o] + (DIS.edgeColor[0] - s[o]) * e; d[o + 1] = s[o + 1] + (DIS.edgeColor[1] - s[o + 1]) * e; d[o + 2] = s[o + 2] + (DIS.edgeColor[2] - s[o + 2]) * e; d[o + 3] = s[o + 3];
+  }
+  hctx.putImageData(hdata, 0, 0); return hctx.canvas;
+}
+
+// ── RatPortrait.Show: 파츠를 관절 자리에 (UI 좌표, y 위 +) ──
+function portrait(r, box, faceRight) {
+  if (!r) return null;
+  const sp = k => r[k] ? { ...r[k], img: r.img[k] } : null;
+  const head = sp('head'), torso = sp('torso'), tail = sp('tail'), front = sp('front'), back = sp('back');
+  const tw = torso.w, th = torso.h;
+  const legLenF = front ? front.py * r.legF : 0;
+  const torsoX = -tw * 0.5, torsoY = -(r.shoulder[1] * th + legLenF);
+  const Place = a => [torsoX + a[0] * tw, torsoY + a[1] * th];
+  const L = p => [p[0], -p[1]];
+  const hip = Place(r.hip), neck = Place(r.neck), tailA = Place(r.tailA), shoulder = Place(r.shoulder);
+  const headScale = head ? Math.min(1, 0.62 * tw / head.w) : 1, gap = tw * 0.07;
+  const part = (name, s, pos, scale, far, center) => s ? { name, s, pos, scale, far, center } : null;
+  const parts = [
+    part('farBack', back, L([hip[0] + gap, hip[1]]), r.legB, true), part('farFront', front, L([shoulder[0] + gap, shoulder[1]]), r.legF, true),
+    part('tail', tail, L(tailA), 1), part('torso', torso, L([0, torsoY + th * 0.5]), 1, false, true),
+    part('back', back, L(hip), r.legB), part('front', front, L(shoulder), r.legF), part('head', head, L(neck), headScale),
+  ].filter(Boolean);
+  // Fit: 파츠 테두리 → 칸 안
+  let mn = [1e9, 1e9], mx = [-1e9, -1e9];
+  for (const p of parts) {
+    const px = p.center ? p.s.w / 2 : p.s.px, py = p.center ? p.s.h / 2 : p.s.py;
+    const x0 = p.pos[0] - px * p.scale, x1 = p.pos[0] + (p.s.w - px) * p.scale, y0 = p.pos[1] - py * p.scale, y1 = p.pos[1] + (p.s.h - py) * p.scale;
+    mn = [Math.min(mn[0], x0), Math.min(mn[1], y0)]; mx = [Math.max(mx[0], x1), Math.max(mx[1], y1)];
+  }
+  const bx = box[0] * (1 - PAD * 2), by = box[1] * (1 - PAD * 2), sz = [mx[0] - mn[0], mx[1] - mn[1]];
+  const k = Math.min(bx / Math.max(1, sz[0]), by / Math.max(1, sz[1]));
+  const mid = [(mn[0] + mx[0]) / 2, (mn[1] + mx[1]) / 2];
+  return { parts, k, faceRight, vis: [-mid[0] * (faceRight ? -k : k), -mid[1] * k], rot: {} };
+}
+function drawPortrait(ctx, P_, x, y, sx, sy, alpha) {
+  if (!P_ || alpha <= 0.001) return;
+  ctx.save(); ctx.translate(x, y); ctx.scale(sx, sy);
+  ctx.translate(P_.vis[0], P_.vis[1]); ctx.scale(P_.faceRight ? -P_.k : P_.k, P_.k);
+  for (const p of P_.parts) {
+    if (!p.s.img.complete || !p.s.img.naturalWidth) continue;
+    ctx.save(); ctx.translate(p.pos[0], p.pos[1]); ctx.rotate((P_.rot[p.name] || 0) * Math.PI / 180); ctx.scale(p.scale, p.scale);
+    const px = p.center ? p.s.w / 2 : p.s.px, py = p.center ? p.s.h / 2 : p.s.py;
+    ctx.scale(1, -1); ctx.globalAlpha = alpha; ctx.filter = p.far ? FAR : 'none';
+    ctx.drawImage(p.s.img, -px, -(p.s.h - py), p.s.w, p.s.h);
+    ctx.restore();
+  }
+  ctx.restore();
+}
+
+// ── BirthCutscene 계산 (C# 그대로) ──
+const EaseIn = u => u * u, EaseOut = u => 1 - (1 - u) * (1 - u);
+const EaseOutBack = u => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(u - 1, 3) + c1 * Math.pow(u - 1, 2); };
+const clamp01 = v => Math.min(1, Math.max(0, v)), lerp = (a, b, u) => a + (b - a) * u, M = v => Math.max(0.01, v);
+const Rest = k => Math.max(P.touchGap, P.restGap * (1 - P.restShrink * k));
+function Wiggle(p, time, walk, tail) {
+  if (!p) return;
+  const w = Math.sin(time * P.legSpeed) * P.legSwing * walk;
+  p.rot = { front: w, farBack: w, back: -w, farFront: -w,
+    head: Math.sin(time * P.legSpeed * 0.5) * P.headBob * Math.max(walk, 0.4), tail: Math.sin(time * 7) * P.tailSwing * tail };
+}
+function times() {
+  const sBump = P.enterTime, sMerge = sBump + P.bumpTime * P.bumpCount, sFlash = sMerge + P.mergeTime;
+  const sGrow = sFlash + P.heartHold, sName = sGrow + P.growTime * P.nameAt, sOut = sGrow + P.growTime + P.nameTime, sEnd = sOut + P.outTime;
+  return { sBump, sMerge, sFlash, sGrow, sName, sOut, sEnd };
+}
+
+const cv = document.getElementById('cv'), ctx = cv.getContext('2d');
+let crowd = [];
+function makeCrowd() {
+  crowd = [];
+  if (!RATS.length) return;
+  for (let i = 0; i < 70; i++) { const r = RATS[(Math.random() * RATS.length) | 0]; crowd.push({ p: portrait(r, [110, 80], Math.random() < 0.5), x: Math.random() * 1920, y: Math.random() * 1080, vx: (Math.random() - 0.5) * 160, ph: Math.random() * 9 }); }
+}
+function drawBackground(dt) {
+  ctx.fillStyle = '#dfe3dc'; ctx.fillRect(0, 0, 1920, 1080);
+  ctx.strokeStyle = 'rgba(0,0,0,0.05)'; ctx.lineWidth = 2;
+  for (let x = 0; x < 1920; x += 96) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 1080); ctx.stroke(); }
+  for (let y = 0; y < 1080; y += 96) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(1920, y); ctx.stroke(); }
+  if (!document.getElementById('busy').checked) return;
+  for (const c of crowd) {
+    c.x += c.vx * dt; if (c.x < -60) c.x = 1980; if (c.x > 1980) c.x = -60;
+    c.p.faceRight = c.vx > 0; c.ph += dt; c.p.rot = { front: Math.sin(c.ph * 18) * 25, farBack: Math.sin(c.ph * 18) * 25, back: -Math.sin(c.ph * 18) * 25, farFront: -Math.sin(c.ph * 18) * 25 };
+    ctx.save(); ctx.translate(c.x, c.y); ctx.scale(1, -1); drawPortrait(ctx, c.p, 0, 0, 1, 1, 1); ctx.restore();
+  }
+}
+
+function render(t, dt) {
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.filter = 'none'; ctx.globalAlpha = 1;
+  drawBackground(dt);
+  const T = times();
+  if (t >= T.sEnd) return;
+  const content = t < T.sOut ? 1 : 1 - clamp01((t - T.sOut) / M(P.outTime));
+  // 화면 UI 좌표 (가운데 원점, y 위 +)
+  ctx.setTransform(1, 0, 0, -1, 960, 540);
+  ctx.globalAlpha = content; ctx.fillStyle = `rgba(0,0,0,${P.dimAlpha * clamp01(t / 0.2)})`; ctx.fillRect(-960, -540, 1920, 1080);
+  ctx.translate(0, STAGE_Y);
+
+  // 부모
+  let d, y = 0, sx = 1, sy = 1, alpha = 1, walk = 1;
+  if (t < T.sBump) { const u = t / M(P.enterTime); d = lerp(P.startGap, P.restGap, EaseOut(u)); alpha = clamp01(u * 3); }
+  else if (t < T.sMerge) {
+    const k = Math.min(P.bumpCount - 1, Math.floor((t - T.sBump) / P.bumpTime)); const u = (t - T.sBump - k * P.bumpTime) / P.bumpTime;
+    const rest0 = Rest(k), rest1 = Rest(k + 1);
+    if (u < 0.4) d = lerp(rest0, P.touchGap, EaseIn(u / 0.4));
+    else { const v = (u - 0.4) / 0.6; d = lerp(P.touchGap, rest1, EaseOut(v)); y = Math.sin(v * Math.PI) * P.hop; const q = clamp01(1 - v * 3) * P.squash; sx = 1 - q; sy = 1 + q * 0.6; walk = 0.3; }
+  }
+  else if (t < T.sFlash) { const u = (t - T.sMerge) / M(P.mergeTime); d = lerp(Rest(P.bumpCount), 0, EaseIn(u)); sx = sy = lerp(1, P.mergeScale, u); alpha = 1 - u * 0.3; }
+  else { d = 0; alpha = 0; }
+
+  // 햇살 · 하트 (하이라키 순서: Rays → Heart → ParentA → ParentB → Baby → Sparkle)
+  if (t >= T.sFlash && IMG.rays.complete) {
+    const ra = clamp01((t - T.sFlash) / 0.3);
+    ctx.save(); ctx.globalAlpha = content * ra; ctx.rotate(-(t - T.sFlash) * P.raySpin * Math.PI / 180); const s = 0.6 + 0.4 * EaseOut(ra); ctx.scale(s, -s);
+    ctx.drawImage(IMG.rays, -RAYS[0] / 2, -RAYS[1] / 2, RAYS[0], RAYS[1]); ctx.restore();
+  }
+  if (t >= T.sFlash && noise) {
+    const pop = EaseOutBack(clamp01((t - T.sFlash) / M(P.heartPopTime)));
+    const g = clamp01((t - T.sGrow) / M(P.growTime * P.heartGone));
+    const beat = 1 + P.heartBeat * Math.pow(Math.abs(Math.sin((t - T.sFlash) * P.heartBeatSpeed)), 4);
+    const s = pop * beat * (1 + P.heartGrow * EaseOut(g));
+    if (g < 1) { ctx.save(); ctx.globalAlpha = content; ctx.scale(s, -s); ctx.drawImage(dissolved(g), -HEART[0] / 2, -HEART[1] / 2, HEART[0], HEART[1]); ctx.restore(); }
+  }
+  ctx.globalAlpha = content;
+  Wiggle(A, t, walk, 1); drawPortrait(ctx, A, -d, y, sx, sy, alpha * content);
+  Wiggle(B, t + 1.3, walk, 1); drawPortrait(ctx, B, d, y, sx, sy, alpha * content);
+
+  // 새 쥐
+  if (t >= T.sGrow && C) {
+    const u = clamp01((t - T.sGrow) / M(P.growTime)); const s = lerp(P.babyStart, 1, EaseOutBack(u));
+    Wiggle(C, t - T.sGrow, u >= 1 ? 0.5 : 0.2, 0.5);
+    drawPortrait(ctx, C, 0, u >= 1 ? Math.abs(Math.sin((t - T.sGrow) * 6)) * 10 : 0, s, s, clamp01(u / 0.3) * content);
+  }
+  // 반짝이
+  SPARK.forEach(([x, yy, h], i) => {
+    const v = t < T.sGrow ? 0 : Math.max(0, Math.sin((t - T.sGrow) * P.sparkleSpeed + i * 1.7)); if (v <= 0) return;
+    const im = h ? IMG.small : IMG.sparkle, w = h ? 80 : 90, hh = h ? 70 : 90;
+    ctx.save(); ctx.translate(x, yy); ctx.rotate((t + i) * Math.PI / 2); ctx.scale(v, -v); ctx.globalAlpha = content; ctx.drawImage(im, -w / 2, -hh / 2, w, hh); ctx.restore();
+  });
+  ctx.translate(0, -STAGE_Y);
+
+  // 글
+  const name = (byCode[selC.value] || {}).name || '';
+  const text = (o, str, dt_) => {
+    if (dt_ < 0) return; const s = EaseOutBack(clamp01(dt_ / M(P.namePopTime)));
+    ctx.save(); ctx.translate(0, o.y); ctx.scale(s, -s); ctx.globalAlpha = content;
+    ctx.font = `${o.size}px Jua`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+    ctx.lineWidth = o.size * 0.22; ctx.strokeStyle = '#3a2a22'; ctx.strokeText(str, 0, 0); ctx.fillStyle = o.color; ctx.fillText(str, 0, 0); ctx.restore();
+  };
+  text(TITLE, TITLE.text, t - T.sName); text(NAME, name + '!!', t - T.sName - 0.15);
+
+  // 화이트 플래시 (맨 위)
+  const fl = t < T.sMerge ? 0 : t < T.sFlash ? EaseIn((t - T.sMerge) / M(P.mergeTime)) : 1 - clamp01((t - T.sFlash) / M(P.flashTime));
+  if (fl > 0) { ctx.globalAlpha = content * fl; ctx.fillStyle = '#fff'; ctx.fillRect(-960, -540, 1920, 1080); }
+  ctx.globalAlpha = 1;
+}
+
+// ── 조작 ──
+const selA = document.getElementById('selA'), selB = document.getElementById('selB'), selC = document.getElementById('selC');
+const scrub = document.getElementById('scrub'), tv = document.getElementById('tv'), playBtn = document.getElementById('play');
+let t = 0, playing = true, last = performance.now();
+function rebuild() { A = portrait(byCode[selA.value], BOX.parent, true); B = portrait(byCode[selB.value], BOX.parent, false); C = portrait(byCode[selC.value], BOX.baby, false); }
+function pick() { const R = () => RATS[(Math.random() * RATS.length) | 0].code; selA.value = R(); selB.value = R(); selC.value = R(); rebuild(); t = 0; }
+document.getElementById('rand').onclick = pick;
+[selA, selB, selC].forEach(s => s.onchange = () => { rebuild(); t = 0; });
+playBtn.onclick = () => { playing = !playing; playBtn.classList.toggle('on', playing); playBtn.textContent = playing ? '재생' : '멈춤'; };
+scrub.oninput = () => { t = +scrub.value; if (playing) playBtn.click(); };
+
+function buildParams() {
+  const box = document.getElementById('params'); box.innerHTML = '';
+  const groups = [['시간', ['enterTime','bumpTime','bumpCount','mergeTime','flashTime','heartPopTime','heartHold','growTime','nameAt','nameTime','namePopTime','outTime']],
+    ['부모 움직임', ['startGap','restGap','touchGap','restShrink','hop','squash','mergeScale','legSwing','legSpeed','headBob','tailSwing']],
+    ['하트 · 새 쥐', ['heartBeat','heartBeatSpeed','heartGrow','heartGone','babyStart','raySpin','sparkleSpeed','dimAlpha']]];
+  for (const [title, keys] of groups) {
+    const h = document.createElement('h2'); h.textContent = title; box.appendChild(h);
+    for (const k of keys) {
+      const [mn, mx, st, label] = RANGE[k];
+      const row = document.createElement('div'); row.className = 'p';
+      row.innerHTML = `<span title="${k}">${label}</span><input type="range" min="${mn}" max="${mx}" step="${st}"><input type="number" step="${st}">`;
+      const [r, n] = row.querySelectorAll('input'); r.value = n.value = P[k];
+      r.oninput = () => { P[k] = +r.value; n.value = r.value; sync(); }; n.oninput = () => { P[k] = +n.value; r.value = n.value; sync(); };
+      row.dataset.k = k; box.appendChild(row);
+    }
+  }
+}
+const out = document.getElementById('out');
+function sync() { out.value = JSON.stringify(P, null, 1); }
+out.oninput = () => { try { Object.assign(P, JSON.parse(out.value)); document.querySelectorAll('.p').forEach(row => { const [r, n] = row.querySelectorAll('input'); r.value = n.value = P[row.dataset.k]; }); } catch (e) {} };
+document.getElementById('copy').onclick = () => { navigator.clipboard.writeText(out.value); document.getElementById('copied').textContent = '복사함'; setTimeout(() => document.getElementById('copied').textContent = '', 1200); };
+document.getElementById('reset').onclick = () => { P = { ...DEF }; buildParams(); sync(); };
+buildParams(); sync();
+
+function frame(now) {
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  const end = times().sEnd;
+  if (playing) { t += dt * +document.getElementById('slow').value; if (t > end + 0.4) { if (document.getElementById('loop').checked) t = 0; else { t = end; playBtn.click(); } } }
+  scrub.max = (end + 0.4).toFixed(2); scrub.value = t; tv.textContent = `${t.toFixed(2)} / ${end.toFixed(2)}초`;
+  render(t, playing ? dt : 0);
+  requestAnimationFrame(frame);
+}
+
+// ── 불러오기 ──
+fetch('rats.json').then(r => r.json()).then(async list => {
+  const loads = [];
+  for (const r of list) { r.img = {}; for (const k of ['head', 'torso', 'tail', 'front', 'back']) if (r[k]) { const i = img(r[k].file); r.img[k] = i; loads.push(i.decode().catch(() => {})); } byCode[r.code] = r; }
+  RATS = list;
+  for (const s of [selA, selB, selC]) for (const r of list) s.add(new Option(r.name, r.code));
+  const wait = (p, ms) => Promise.race([p, new Promise(r => setTimeout(r, ms))]);
+  await wait(Promise.all([IMG.heart, IMG.rays, IMG.sparkle, IMG.small].map(i => i.decode().catch(() => {}))), 4000);
+  await wait(document.fonts.load('80px Jua'), 2000);      // 글꼴 · 쥐 그림은 다 기다리지 않음 (다 안 왔으면 그 파츠만 나중에 그려짐)
+  prepHeart();
+  selA.value = 'brownrat'; selB.value = 'mouse'; selC.value = 'hamster'; rebuild(); makeCrowd();
+  requestAnimationFrame(frame);
+});
+</script>
+</body>
+</html>
