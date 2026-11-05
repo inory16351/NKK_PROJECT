@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1024x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+crop.png (1024x1024) is a crop of a cute flat cartoon story illustration: a white lab rat sitting up on wood-shavings bedding, looking up, with another white-and-gray rat at the right edge.
+BUG: the white rat in the center has THREE front paws (two paws raised near its chest plus an extra third paw below them, circled in red in crop_marked.png). A rat must have exactly TWO front paws.
+
+Redraw crop.png EXACTLY the same (same size, framing, colors, flat soft style, bedding, the right-edge rat, lighting, every pixel position as close as possible), and fix ONLY the center white rat's front paws: it has exactly two small pink front paws held together in front of its chest (like a begging pose), and the extra third paw is removed and replaced by the rat's white chest/belly fur. Keep its head, ears, eyes, whiskers, body, hind feet and tail unchanged.
+No text, no red circle, nothing else changed.
