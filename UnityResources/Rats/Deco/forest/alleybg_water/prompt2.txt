@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), 1536x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+base_v1.png (1536x1024) = a cozy flat cartoon ACORN FOREST sewer alley background. Its bottom water band (below the mossy stone ledge, from y=756 down) already looks like water, but it mostly reflects only the warm lamp lights. The TREES are not visible in the reflection.
+
+Redraw base_v1.png EXACTLY as it is above the water (everything identical), and improve ONLY the water band so the FOREST clearly REFLECTS in it, gently WAVERING:
+- Clearly visible, upside-down, wobbly reflections of the big brown TREE TRUNKS / wooden posts / stilts (dark brown vertical shapes), the tree roots and branches, the green MOSS bushes (soft green patches) and the autumn ORANGE leaves, each directly under where it stands above.
+- The reflections are broken into horizontal ripple slices that shift left and right (a calm pond with small waves), with soft edges; keep the warm golden reflections of the lamps and windows too, and the red mushroom caps as reddish wobbly patches.
+- Water base color: deep green-teal; reflections slightly darker/desaturated than the real objects, fading toward the bottom.
+- Keep the two floating orange leaves.
+- Same flat cute cartoon style, soft warm colors, no photo realism. No text, no characters, no UI.

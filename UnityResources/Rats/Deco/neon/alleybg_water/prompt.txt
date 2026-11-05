@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), 1536x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+base_neon.png (1536x1024) = the NEON theme of a cozy cartoon sewer back-alley background (flat, soft, cute game style). Its bottom band (below the stone ledge, from about y=762 to the bottom) is supposed to be sewer WATER, but now it is just flat dark teal with pink/cyan dashes - it does not read as water.
+ref_original.png = the original (non-neon) background in the same layout. Its water band shows how the water should feel: a calm water surface with soft horizontal ripples and long, wobbly, broken vertical REFLECTIONS of the lights above, getting softer and darker toward the bottom, plus two small floating leaves.
+
+Redraw base_neon.png EXACTLY as it is (same everything above the water: pipes, arches, shops, checker floor, stone ledge - identical positions, colors and style), and repaint ONLY the water band as real water in the neon theme:
+- Deep dark violet-teal water surface with gentle horizontal ripple lines.
+- The neon lights above REFLECT in the water: soft glowing pink and cyan (and a little yellow from the ceiling lamp and string lights) reflections as long vertical wobbly streaks broken into ripple pieces, right under where the lights/signs/shops are, like neon signs reflecting on a canal at night. Reflections are blurry and glowy, slightly shimmering, brighter near the ledge and fading toward the bottom.
+- A faint reflection of the checker floor edge / stone ledge right under the ledge.
+- Keep the two small floating leaves.
+- Same flat cute cartoon style as the rest of the image (no photo realism), colors soft and not harsh.
+No text, no characters, no UI.

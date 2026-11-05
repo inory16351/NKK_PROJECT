@@ -1,0 +1,14 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1536x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+ref_grid.png (1536x1024) = the game's 8 NEON UI BUTTON frames on black, in a 4x2 grid (row 1: four wide plank buttons cyan / green / pink / gray-lavender, each with a double-line frame and two small dots; row 2: round cyan button, round green button, cyan pill button, yellow diamond key button). Game text is written inside them, so each piece's OUTER SHAPE, SIZE and POSITION must stay the same, and the inside stays a plain flat dark area.
+
+ref_style.png = STYLE AND COLOR REFERENCE: a real glowing NEON SIGN look. Glass tubes have a smooth soft white-hot core, a colored tube body, and a soft blurry BLOOM / light bleed halo around them. Colors: cyan #67FAF6 and pink #FA62F6 (soft, a little milky, not harsh).
+
+Redraw all 8 pieces in the SAME cells as glowing neon-sign tube frames like ref_style.png:
+- Each frame = one smooth rounded neon glass tube (outer) + one thinner inner tube line, same layout as ref_grid. Perfectly smooth anti-aliased curves and straight edges, NO pixel stair-steps, NO jagged corners.
+- Soft bloom glow: a gentle blurred halo spreading OUTWARD about 10-14 px from the outer tube, and a faint glow inward over the dark body near the edges. Keep the shape a bit inset so the outer halo fits inside the original piece size.
+- Softer, pastel-leaning neon colors (lower saturation than ref_grid, milky): plank 1 / round 1 / pill = soft cyan #67FAF6, plank 2 / round 2 = soft mint green #8AF5B8, plank 3 = soft pink #FA62F6, plank 4 = muted lavender gray #B8B0D8 (dimmer, disabled look, weaker glow), key = soft butter yellow #FFE68A. Tube cores near white tinted with the color.
+- The two small dots on each plank = small glowing neon dots in the tube color.
+- Body inside the frame = flat dark navy-violet #16123A, fully solid, no pattern, no text, no icons.
+- BACKGROUND: pure flat black #000000 everywhere outside the glow (no vignette, no reflections, no floor, no wall).
+- No text, no labels, nothing else in the image.

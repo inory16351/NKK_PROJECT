@@ -16,6 +16,11 @@ namespace NKK
         [Serializable] public class Theme { public int decoId; public Sprite[] sprites; }
         [Tooltip("장식 id (종류 UiButton) → originals 와 같은 순서의 그림 (9-슬라이스 테두리 같게)")] public Theme[] themes;
 
+        [Header("버튼 글자 통일 (2026-11-05 사용자)")]
+        [Tooltip("UI 키트 버튼 위 어두운 글자 (나무 판자용 갈색) → 다른 버튼 글자와 같은 색 · 테두리 재질로 (네온 판자에서도 읽히게)")] public Color labelColor = new(1f, 0.96f, 0.86f, 1f);
+        [Tooltip("다른 버튼 글자가 쓰는 재질 (Jua-Regular SDF Plank: 진한 테두리)")] public Material labelMaterial;
+        [Tooltip("이보다 어두운 글자만 바꿈 (RGB 중 가장 큰 값)")] public float darkBelow = 0.45f;
+
         static UiDecoSkin skin;
         static Dictionary<Sprite, int> index;
         static int applied = -1;
@@ -65,6 +70,21 @@ namespace NKK
             var set = Set(deco);
             foreach (var im in FindObjectsByType<Image>(FindObjectsInactive.Include, FindObjectsSortMode.None)) { var s = Pick(set, im.sprite); if (s && s != im.sprite) im.sprite = s; }
             foreach (var sr in FindObjectsByType<SpriteRenderer>(FindObjectsInactive.Include, FindObjectsSortMode.None)) { var s = Pick(set, sr.sprite); if (s && s != sr.sprite) sr.sprite = s; }
+            if (force) UnifyLabels();
+        }
+
+        // UI 키트 버튼 (판자 · 둥근 · pill · key) 위 어두운 갈색 글자 → 다른 버튼 글자와 같은 크림색 + 테두리 (테마와 상관없이 같게)
+        static void UnifyLabels()
+        {
+            foreach (var t in FindObjectsByType<TMPro.TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None))
+            {
+                var c = t.color; if (Mathf.Max(c.r, c.g, c.b) >= skin.darkBelow) continue;
+                var b = t.GetComponentInParent<Button>(true);
+                var im = b ? b.targetGraphic as Image : null;
+                if (!im || !im.sprite || !index.ContainsKey(im.sprite)) continue;
+                t.color = new Color(skin.labelColor.r, skin.labelColor.g, skin.labelColor.b, c.a);
+                if (skin.labelMaterial && t.font && skin.labelMaterial.mainTexture == t.font.material.mainTexture) t.fontSharedMaterial = skin.labelMaterial;
+            }
         }
 
         class Runner : MonoBehaviour

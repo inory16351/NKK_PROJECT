@@ -42,3 +42,6 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 7c0b9e8aa6ba08d44bde0ce8099256a7, type: 3}
     - {fileID: 21300000, guid: ffec5686cff9fbd4f8db1428c6669c7a, type: 3}
     - {fileID: 21300000, guid: a9dc454912536214990d8ca408f72125, type: 3}
+  labelColor: {r: 1, g: 0.96, b: 0.86, a: 1}
+  labelMaterial: {fileID: 2100000, guid: d6e664104e165ff498ede20d9194f326, type: 2}
+  darkBelow: 0.45

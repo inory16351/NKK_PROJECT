@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), 1536x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+base_forest.png (1536x1024) = the ACORN FOREST theme of a cozy cartoon sewer back-alley background (flat, soft, cute game style): wooden beams, big tree roots and branches, mushroom and acorn houses on stilts, autumn orange leaves and green moss. Its bottom band (below the mossy stone ledge, from about y=756 to the bottom) is supposed to be WATER, but now it is flat teal with simple zig-zag blobs - it does not read as water.
+ref_original.png = the original (non-forest) background in the same layout. Its water band shows how the water should feel: a calm water surface with soft horizontal ripples and long wobbly broken vertical REFLECTIONS of what is above, softer and darker toward the bottom, with two small floating leaves.
+
+Redraw base_forest.png EXACTLY as it is (everything above the water identical: beams, roots, branches, houses, lamps, moss, stone ledge - same positions, colors and style), and repaint ONLY the water band as real water in the forest theme:
+- Calm deep green-teal forest pond water with gentle horizontal ripple lines.
+- The scene above REFLECTS in the water, gently WAVERING / rippling: the brown tree trunks, roots and wooden posts as dark brown wobbly vertical reflections, the autumn orange/yellow leaves and green moss as soft colored ripple patches, the red mushroom caps and the warm lamp lights as warm golden glowing wobbly streaks under where they are. Reflections are broken into horizontal ripple pieces (like a real reflection on slightly moving water), brighter near the ledge and fading/darker toward the bottom.
+- A faint upside-down reflection of the mossy stone ledge edge just under the ledge.
+- Keep two small floating orange autumn leaves on the water.
+- Same flat cute cartoon style as the rest of the image (no photo realism), soft warm colors.
+No text, no characters, no UI.
