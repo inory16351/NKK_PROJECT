@@ -79,11 +79,30 @@ namespace NKK.Rats
             if (heart && heart.material) { heartMat = new Material(heart.material); heart.material = heartMat; }
             if (content) content.gameObject.SetActive(false);
         }
-        void OnDestroy() { if (I == this) I = null; if (heartMat) Destroy(heartMat); }
+        void Start()
+        {
+            ults = FindFirstObjectByType<NKK.Ults.UltimateManager>();
+            stage = FindFirstObjectByType<NKK.Stage.StageManager>();
+            if (stage) stage.FloorEntered += Cancel;
+        }
+        void OnDestroy() { if (stage) stage.FloorEntered -= Cancel; if (I == this) I = null; if (heartMat) Destroy(heartMat); }
+
+        // ── 예외처리 (사용자 2026-11-05): 아래 경우엔 보던 연출 · 줄 선 연출을 모두 지움 (다시 띄우지 않음, 스위치는 켜진 채) ──
+        //   판(층)이 끝남 = 다음 층 시작 · 씬이 바뀜(아지트로) · 게임 오버 · 필살기 컷인 / 슈퍼 필살기 컷신 (컷인이 보이게)
+        NKK.Ults.UltimateManager ults; NKK.Stage.StageManager stage;
+        bool MustClear => GameOver.Active || (ults && ults.CutPhase) || (NKK.Ults.SuperUltManager.I && NKK.Ults.SuperUltManager.I.Busy);
+
+        public void Cancel()
+        {
+            queue.Clear(); wait = 0;
+            if (playing) { playing = false; cur = null; }
+            if (content) content.gameObject.SetActive(false);
+        }
 
         void Update()
         {
             if (!content) return;
+            if (MustClear) { if (playing || queue.Count > 0) Cancel(); return; }
             if (!playing)
             {
                 if (wait > 0) { wait -= Time.unscaledDeltaTime; return; }
