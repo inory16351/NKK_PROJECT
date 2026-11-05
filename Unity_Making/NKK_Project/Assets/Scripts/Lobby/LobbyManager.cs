@@ -27,6 +27,7 @@ namespace NKK.Lobby
         [Tooltip("게임 씬 이름")] public string gameScene = "Game";
         [Tooltip("타이틀 씬 이름 (낮잠 침대 → 저장하고 나가기)")] public string titleScene = "Title";
         [Tooltip("낮잠 침대: 저장하고 타이틀로")] public Button saveExitButton;
+        [Tooltip("낮잠 침대 창 우측 상단 X: 창 닫고 아지트로 (2026-11-05)")] public Button recCloseButton;
 
         [Header("아지트 화면 UI")]
         public GameObject homeUI;
@@ -49,6 +50,8 @@ namespace NKK.Lobby
             if (home) { home.manager = this; home.inputBlocked = () => PrepOpen || NKK.Tutorial.TutorialBox.Showing || GachaShow.Busy || JudolGame.IsOpen; }   // 뽑기 연출 중(지하 장면에선 Prep 를 숨김)에도 막음
             if (homeButton) homeButton.onClick.AddListener(CloseToHome);
             if (saveExitButton) saveExitButton.onClick.AddListener(SaveAndExit);
+            if (!recCloseButton && saveExitButton) recCloseButton = MakeCloseX(saveExitButton.transform.parent as RectTransform);
+            if (recCloseButton) recCloseButton.onClick.AddListener(CloseToHome);
             foreach (var p in pages) { var id = p.id; if (p.tab) p.tab.onClick.AddListener(() => OpenPage(id)); }
             if (prep) prep.SetActive(false);
         }
@@ -142,6 +145,27 @@ namespace NKK.Lobby
         {
             if (Progress.I) Progress.I.Save();
             SceneManager.LoadScene(titleScene);
+        }
+
+        // 낮잠 침대 카드 우측 상단 X (빨간 판자 + 'X'). 글자 = 저장하고 타이틀로 버튼과 같은 글꼴 · 재질 · 색
+        //   판자 그림은 UI 키트 원본이라 UI 버튼 장식(UiDecoSkin)이 테마에 맞게 바꿈
+        Button MakeCloseX(RectTransform card)
+        {
+            if (!card) return null;
+            var skin = Resources.Load<UiDecoSkin>("UiDecoSkin");
+            var go = new GameObject("CloseX", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image), typeof(Button)) { layer = card.gameObject.layer };
+            var rt = (RectTransform)go.transform; rt.SetParent(card, false);
+            rt.anchorMin = rt.anchorMax = rt.pivot = Vector2.one; rt.anchoredPosition = new Vector2(-16, -16); rt.sizeDelta = new Vector2(78, 70);
+            var im = go.GetComponent<Image>();
+            im.sprite = skin && skin.originals != null && skin.originals.Length > 2 ? skin.originals[2] : saveExitButton.targetGraphic is Image si ? si.sprite : null;     // ui_plank_red
+            im.type = Image.Type.Sliced; im.pixelsPerUnitMultiplier = 2.2f;
+            var b = go.GetComponent<Button>(); b.targetGraphic = im;
+            var src = saveExitButton.GetComponentInChildren<TMP_Text>(true);
+            var l = new GameObject("Label", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI)) { layer = go.layer };
+            var lrt = (RectTransform)l.transform; lrt.SetParent(rt, false); lrt.anchorMin = Vector2.zero; lrt.anchorMax = Vector2.one; lrt.offsetMin = new Vector2(0, 4); lrt.offsetMax = new Vector2(0, 4);
+            var t = l.GetComponent<TextMeshProUGUI>(); t.text = "X"; t.fontSize = 36; t.alignment = TextAlignmentOptions.Center; t.raycastTarget = false;
+            if (src) { t.font = src.font; t.fontSharedMaterial = src.fontSharedMaterial; t.color = src.color; }
+            return b;
         }
 
         public static string Fmt(double v) => GameManager.Format(v);
