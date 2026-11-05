@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1024x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+input2.png (1024x1024) = a crop of a cute flat cartoon illustration: a dark gray angry rat behind a gray metal cage bar, gripping the bar with two pink paws LOW on the bar (near the bottom middle, near its chest).
+BUG: there is still one extra pink paw holding the bar up high, next to the dark rat's head / ear (upper middle of the image, on the right side of the bar, at about x=560-640, y=330-430). It must be removed.
+
+Redraw input2.png EXACTLY the same (same size, framing, flat soft style, colors, bars, the white rat on the right with its raised fist, the background rats, the two lower paws), and fix ONLY this: there must be NO paw on the bar anywhere above the dark rat's chin. Fill the removed spot with the plain gray bar and the blurry background behind it. The dark rat keeps exactly its two low paws on the bar.
+No text, nothing else changed.

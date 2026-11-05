@@ -1,0 +1,6 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1024x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+input3.png (1024x1024) = a crop of a cute flat cartoon illustration: a black-and-white lab rat BITING a gray metal cage bar. The small pink paw holding the bar under its mouth (red circle in input4_guide.png) has NO ARM.
+
+Redraw input3.png EXACTLY the same (same size, framing, flat soft style, colors, everything) and fix ONLY this: add one clearly visible, natural cartoon ARM for that paw, following the BLUE guide line in input4_guide.png: it starts at the rat's white chest on the left (around x=180, y=720), runs diagonally up-right in front of the chest, and ends at the pink paw on the bar (around x=355, y=630). The arm is a smooth rounded dark gray (charcoal, like the rat's head fur) limb with soft flat shading, about as thick as the paw (roughly 55-70 px wide), with a clear outline against the white chest, and the pink paw sits at its end gripping the bar.
+Exactly one arm and one paw on this bar. No text, no guide line, no red circle, nothing else changed.

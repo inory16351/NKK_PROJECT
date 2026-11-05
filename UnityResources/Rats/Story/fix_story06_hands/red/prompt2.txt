@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1024x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+input2.png (1024x1024) = a crop of a cute flat cartoon illustration: a black-and-white lab rat BITING a gray metal cage bar (dented spot with metal chips at its mouth). Its OTHER paw is outside this crop on another bar to the left, so in this crop it should hold the bitten bar with exactly ONE paw.
+BUG: on the bitten bar it now has TWO pink paws: one just under its mouth (keep it) and one lower down on the bar with its own extra dark arm coming from the left (circled in red in input2_marked.png). That lower paw and its dark arm are extra.
+
+Redraw input2.png EXACTLY the same (same size, framing, flat soft style, colors, the bar, the metal chips, the white rats behind, the background) and fix ONLY this: remove the lower pink paw and the extra dark arm leading to it. Fill that area naturally with the rat's white chest/belly fur on the left and the gray bar and the white rats behind it on the right. Keep the paw just under its mouth on the bar.
+No text, no red circle, nothing else changed.

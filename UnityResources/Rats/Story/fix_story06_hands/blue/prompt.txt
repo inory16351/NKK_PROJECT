@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1024x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+crop.png (1024x1024) is a crop of a cute flat cartoon story illustration: angry lab rats behind gray cage bars. In the center a dark gray rat with an angry face holds a gray metal bar with two pink paws lower on the bar (near its chest).
+BUG: there is an EXTRA pink paw on the bar right next to the dark rat's head / forehead (upper middle of the crop, at the bar beside its ear). It must be removed.
+
+Redraw crop.png EXACTLY the same (same size, framing, flat soft style, colors, bars, the white rat on the right, the background rats, everything), and fix ONLY this: delete the extra paw next to the dark rat's head, and fill that spot with what is naturally there (the gray bar and the dark rat's head fur / ear). Keep the dark rat's two lower paws gripping the bar exactly as they are.
+No text, nothing else changed.

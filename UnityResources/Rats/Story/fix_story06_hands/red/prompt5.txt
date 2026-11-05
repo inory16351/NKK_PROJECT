@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1024x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+crop.png (1024x1024) = a crop of a cute flat cartoon illustration: a black-and-white lab rat BITING a gray metal cage bar (metal chips at its mouth). input5_marked.png = the same image with marks.
+KEEP (green circle): the rat's ORIGINAL dark gray arm coming up from the lower left in front of its white chest, and the ONE pink paw at the end of that arm gripping the left side of the bar. Keep this arm and paw exactly as in crop.png (same shape, color, size, position).
+REMOVE (red circles):
+1. the pale/white extra arm coming out near its mouth and the pink paw at the top of it (upper red circle) - fill with the gray bar, the rat's dark snout/cheek fur and the blurry background, keeping the bite and the chips.
+2. the extra pink paw on the RIGHT side of the bar next to the kept paw (lower red circle) - fill with the gray bar and the white rat behind.
+
+Redraw crop.png EXACTLY the same except these removals (same size, framing, flat soft style, colors, other rats, background). Result: this rat has only its original dark arm with one paw on the bitten bar.
+No text, no circles, nothing else changed.

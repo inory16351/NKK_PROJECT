@@ -1,0 +1,10 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1024x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+crop.png (1024x1024) = a crop of a cute flat cartoon illustration: a black-and-white lab rat BITING a gray metal cage bar. input6_marked.png = the same image with ONE red outline drawn on it.
+Remove ONLY the pink paws that are INSIDE the red outline:
+- the pink paw at the top of the outline (on the bar right next to the rat's pink nose, around x=470-545, y=285-405),
+- the pink paw at the bottom of the outline (on the RIGHT side of the bar, around x=440-525, y=595-730).
+Fill those spots naturally with what is behind them: the gray metal bar, the blurry warm background / shelf, and the white rat's head behind (for the lower one).
+
+Keep EVERYTHING outside the red outline exactly as in crop.png: the rat's head, its white muzzle/chin, the bite, the metal chips, its dark gray arm from the lower left and the pink paw on the LEFT side of the bar, the other rats, the bars, the background. Same size, framing, flat soft style, colors.
+No text, no red outline, nothing else changed.

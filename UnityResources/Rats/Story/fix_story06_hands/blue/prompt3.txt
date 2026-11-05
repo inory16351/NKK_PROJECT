@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1024x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+input3.png (1024x1024) = a crop of a cute flat cartoon illustration: angry lab rats behind gray cage bars. A dark gray rat in the center holds a bar with two low paws; a big white rat with an open shouting mouth is on the right; blurry brown rats in the back.
+BUG: between the bar and the white rat's face there is a raised pink FIST with a pale arm (upper middle-right, circled in red in input3_marked.png) that belongs to no rat - nobody is raising it.
+
+Redraw input3.png EXACTLY the same (same size, framing, flat soft style, colors, bars, the dark rat and its two low paws, the white rat, everything else) and fix ONLY this: remove that raised fist and its arm completely, and fill the spot naturally with the warm blurry background and the blurry brown rats behind, matching the surroundings.
+No text, no red circle, nothing else changed.

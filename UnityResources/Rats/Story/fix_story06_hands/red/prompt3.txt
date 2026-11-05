@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1024x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+input3.png (1024x1024) = a crop of a cute flat cartoon illustration: a black-and-white lab rat BITING a gray metal cage bar (metal chips at its mouth). Its other paw (outside this crop on the left) grips another bar with a dark gray arm.
+BUG: the small pink paw holding the bitten bar just under its mouth (circled in red in input3_marked.png) is FLOATING - there is only a paw and NO ARM connecting it to the rat's body.
+
+Redraw input3.png EXACTLY the same (same size, framing, flat soft style, colors, the bar, the chips, the white rats behind, the background) and fix ONLY this: naturally draw the rat's own arm reaching from its shoulder / the side of its white chest forward to that pink paw, so the paw is clearly attached and grips the bar. The arm is dark gray fur like the rat's other arm and back (same soft flat style), short and natural for a cartoon rat. Exactly one arm and one paw on this bar; no extra paws.
+No text, no red circle, nothing else changed.

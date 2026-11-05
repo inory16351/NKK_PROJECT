@@ -6,3 +6,4 @@
 - 1536×1024, 아래 25% 는 자막 판이 덮음. 원본·프롬프트·로그 = `Sheets/` (참고 그림 ref_game.png · ref_human.png). `Assets/Art/Rats/Story/` 에 복사
 
 - **story_02 앞발 고침 (2026-11-05 사용자)**: 가운데 흰 쥐 앞발 3개 → 2개. Codex 로 그 쥐 주변(`fix_story02_paws/crop.png`)을 다시 그려 앞발 · 가슴만 원본에 붙임 (`merge.py`). 바로 전 판 = `fix_story02_paws/base.png` (Sheets/story_02.png 는 처음 Codex 원본 그대로).
+- **story_06 손 고침 (2026-11-05 사용자)**: 왼쪽 철창 무는 쥐 = 사용자가 빨간 선으로 표시한 손 2개(코 옆 · 철창 오른편)만 지움, 오른쪽 검은 쥐 = 머리 옆 손 · 흰 쥐 옆 주인 없는 주먹 팔 지움. Codex 로 부분 크롭(`fix_story06_hands/red`, `blue`)을 다시 그려 고친 곳만 원본에 붙임 (`merge.py`). 바로 전 판 = `fix_story06_hands/base.png`.

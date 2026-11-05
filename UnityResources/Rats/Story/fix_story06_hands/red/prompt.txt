@@ -1,0 +1,7 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: sheet.png (in the current working directory), size 1024x1024. Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+crop.png (1024x1024) is a crop of a cute flat cartoon story illustration: angry lab rats behind gray cage bars. On the left, a black-and-white rat is BITING a gray metal bar (a dented spot with metal chips next to its mouth).
+BUG: this black-and-white rat has too many paws/arms around the bar (an extra pale arm coming out near its mouth up to a paw at the top of the bar, and extra paws). A rat must have exactly TWO front paws.
+
+Redraw crop.png EXACTLY the same (same size, framing, flat soft style, colors, the bar positions, the white rats behind, the background, the metal chips), and fix ONLY the black-and-white rat: it keeps biting the bar and grips the bar with exactly TWO small pink front paws (one above the other on the bar, attached to its own dark arms). Remove every other extra paw or arm of this rat and fill those spots with what is naturally behind (the bar, the rat's dark fur or the background). Do not change other rats' paws.
+No text, nothing else changed.
