@@ -91,6 +91,9 @@ namespace NKK.Rats
         public float RushCooldown => Mathf.Max(rushCooldownMin, rushCooldown - CommonSkill.RushCdLess);
         public bool RushReady => rushCdLeft <= 0;
         float rushCdLeft;
+        public float RushCdLeft => rushCdLeft;                 // 쿨타임 게이지 (RushUI)
+        public float RushCdTotal { get; private set; }        // 마지막 총공격 때 잡힌 전체 (돌진 + 쿨타임)
+        public float RushCdAfter { get; private set; }        // 그중 돌진이 끝난 뒤 남는 쿨타임 (게이지는 이 시간만 보여 줌)
 
         [Header("방치 (입력 없음)")]
         [Tooltip("마우스·키보드·터치 입력이 이 초 동안 없으면 방치로 봄 (0 = 끔)")] public float idleSec = 30;
@@ -135,6 +138,7 @@ namespace NKK.Rats
         public bool RushActive => rushLeft > 0;
         public Vector2 RushPoint { get; private set; }
         float rushLeft;
+        public float RushLeft => rushLeft;
         Vector2 pressPos; bool pressed, dragged;
 
         public float RigLength(RatCharacterRow r)
@@ -458,6 +462,7 @@ namespace NKK.Rats
 
         void Start()
         {
+            if (Resources.Load<Sprite>("RushUI/rush_arrow")) rushUI = RushUI.Attach(this, rushMarker);     // 총공격 쿨타임 게이지 + 클릭 위치 화살표
             var db = GameDatabase.Instance;
             // 티어 시작 마릿수 + 공용 스킬 시작 쥐 (전부 지금 훈장의 등급 확률로)
             int n = startCount > 0 ? startCount : (db.Tiers.TryGetValue(Game.Tier, out var t) ? t.start_rat_count : 6) + CommonSkill.StartRatAdd;
@@ -650,8 +655,16 @@ namespace NKK.Rats
             var cat = Cats ? Cats.Current : null;
             if (cat && cat.Alive && cat.BodyDist(p.x, p.y) <= 0) p = new Vector2(cat.x, cat.y);     // 고양이 몸을 누르면 고양이 발밑으로
             else if (Items) foreach (var h in Items.Humans) if (h && h.Alive && h.BodyDist(p.x, p.y) <= 0) { p = new Vector2(h.x, h.y); break; }      // 사람 몸을 누르면 사람 발밑으로
-            StartRush(p); rushCdLeft = RushTime + RushCooldown;
+            RushCdAfter = RushCooldown;
+            StartRush(p); rushCdLeft = RushCdTotal = RushTime + RushCdAfter;
             return true;
+        }
+
+        // 층을 넘어가면 총공격 쿨타임 · 돌진 초기화 (StageManager.EnterFloor). 새 층에서 바로 총공격 가능
+        public void ResetRush()
+        {
+            rushCdLeft = 0; rushLeft = 0;
+            foreach (var r in Rats) { r.rushT = 0; r.rushLock = 0; }
         }
 
         public void StartRush(Vector2 p)
@@ -701,7 +714,8 @@ namespace NKK.Rats
             for (int i = 0; i < Rats.Count; i++) Rats[i].Tick(dt);
             Breed();
             UpdateMeteor(dt);
-            if (rushMarker)
+            // 총공격 지점 표시 · 쿨타임 게이지 = RushUI (그림이 없으면 예전 원 표시)
+            if (rushMarker && !rushUI)
             {
                 rushMarker.enabled = RushActive;
                 if (RushActive)
@@ -714,6 +728,7 @@ namespace NKK.Rats
                 }
             }
         }
+        RushUI rushUI;
     
         // 새로 기절한 쥐 머리 위 "기절!!" (한 프레임 stunPopupPerFrame 개까지)
         public void StunPopup(Rat r)

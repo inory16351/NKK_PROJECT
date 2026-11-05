@@ -223,6 +223,7 @@ namespace NKK.Stage
             Items.FillRoom(Vector2Int.zero, Items.RoomCap);
             Items.OnFloorStart();
             Rats.PlaceAll(World.RW / 2, World.RH / 2);
+            Rats.ResetRush();                                                   // 층을 넘으면 총공격 쿨타임 초기화
             if (Game.cam) Game.cam.CenterOn(World.RW / 2, World.RH / 2);
             Game.ShowBanner(Loc.T(9000124).Replace("{floor}", Game.Floor.ToString()).Replace("{zone}", GameDatabase.Instance.ZoneOf(Game.Floor)?.zone_name ?? ""), Loc.T(9000125));
             if (Boss) { Boss.OnFloorEnter(); RefreshWalls(); }                // 보스 층: 계단 방에 보스 대기 + 배너 부제 (계단 방 어둡게 다시 그림)

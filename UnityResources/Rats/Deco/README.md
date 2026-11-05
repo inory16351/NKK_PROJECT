@@ -14,7 +14,7 @@
 
 - 폴더마다 `ref_grid.png` · `layout.json` · `prompt.txt` · `log.txt` · `sheet.png`(Codex 원본) · `out/<원본 이름>_<테마>.png` · `check.png`(위 원본 / 아래 새 그림). 네온은 초록 바탕 키잉.
 - 도구: `Tools/deco_sheets.py` (ref · cut) · `Tools/deco_run.sh` (여러 폴더 동시).
-- 유니티: `Assets/Art/Rats/Deco/{forest,neon}/` · 커서 = `Assets/Art/Cursor/cursor_{normal,pressed}_{forest,neon}.png` (48px, 끝점 = 원본처럼 왼쪽 위). UI 조각 9-슬라이스 테두리는 원본과 같게 맞춤.
+- 유니티: `Assets/Art/Rats/Deco/{forest,neon}/` · 커서 = `Assets/Art/Cursor/cursor_{normal,pressed}_{forest,neon}.png` (64px = `{forest,neon}/cursor/out_*_big.png` 를 줄임, 게임에서 윈도우 기본 커서 크기로 다시 줄여 씀, 끝점 = 원본처럼 왼쪽 위). UI 조각 9-슬라이스 테두리는 원본과 같게 맞춤.
 - **커서 다시 (2026-11-04, 사용자)**: 숲 = 도토리 모양 · 네온 = 네온사인 화살표. `{forest,neon}/cursor/` (sheet.png · `out_*_big.png` · `out_*_48.png` → `Assets/Art/Cursor/cursor_{normal,pressed}_{테마}.png` 같은 이름으로 덮어씀). 예전 쥐 머리판 = `_old_cursor/`. 미리보기 `_cursor_preview.png`.
 - 아는 점: 숲 판자 오른쪽 아래 도토리가 테두리 안쪽까지 들어와 길게 늘이면 조금 늘어남 · 네온 판자 4색은 가운데가 같은 남색 (테두리 색으로 구분).
 - **숲 UI 버튼 투명도 3% (2026-11-04 사용자)**: `Assets/Art/Rats/Deco/forest/ui_*_forest.png` 8개 알파 × 0.97 (가장 진한 곳 247/255). 바꾸기 전 = `forest/_alpha100/`.
