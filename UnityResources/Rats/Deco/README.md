@@ -16,10 +16,13 @@
 - 도구: `Tools/deco_sheets.py` (ref · cut) · `Tools/deco_run.sh` (여러 폴더 동시).
 - 유니티: `Assets/Art/Rats/Deco/{forest,neon}/` · 커서 = `Assets/Art/Cursor/cursor_{normal,pressed}_{forest,neon}.png` (64px = `{forest,neon}/cursor/out_*_big.png` 를 줄임, 게임에서 윈도우 기본 커서 크기로 다시 줄여 씀, 끝점 = 원본처럼 왼쪽 위). UI 조각 9-슬라이스 테두리는 원본과 같게 맞춤.
 - **커서 다시 (2026-11-04, 사용자)**: 숲 = 도토리 모양 · 네온 = 네온사인 화살표. `{forest,neon}/cursor/` (sheet.png · `out_*_big.png` · `out_*_48.png` → `Assets/Art/Cursor/cursor_{normal,pressed}_{테마}.png` 같은 이름으로 덮어씀). 예전 쥐 머리판 = `_old_cursor/`. 미리보기 `_cursor_preview.png`.
+- **네온 UI 버튼 투명도 8% (2026-11-06 사용자, 전체 방식)**: `Assets/Art/Rats/Deco/neon/ui_*_neon.png` 8개 알파 × 0.92 (테두리 빛까지 함께, 가장 진한 곳 235/255). 바꾸기 전 = `neon/_alpha100/`. `ui4/cut_glow.py` 로 다시 뽑으면 0.92 를 다시 곱할 것.
 - 아는 점: 숲 판자 오른쪽 아래 도토리가 테두리 안쪽까지 들어와 길게 늘이면 조금 늘어남 · 네온 판자 4색은 가운데가 같은 남색 (테두리 색으로 구분).
 - **숲 UI 버튼 투명도 3% (2026-11-04 사용자)**: `Assets/Art/Rats/Deco/forest/ui_*_forest.png` 8개 알파 × 0.97 (가장 진한 곳 247/255). 바꾸기 전 = `forest/_alpha100/`.
 - **투명도 시안 (2026-11-04 사용자, 게임에는 안 넣음)**: `forest/_alpha95/` (5%) · `forest/_alpha92/` (8%) · `_alpha97/` = 지금 게임(3%) 사본. 비교 `forest/_투명도_비교.png` (처음 아지트 배경 위 0 · 3 · 5 · 8%).
 - **투명도 8% 적용 (2026-11-04 사용자)**: `_alpha92/` → `Assets/Art/Rats/Deco/forest/ui_*_forest.png` 8개 (가장 진한 곳 235/255).
+- **채도 −15% 시안 (2026-11-04 사용자, 게임에는 안 넣음)**: 지금 게임 판(8% 투명)의 HSV 채도 × 0.85 → `forest/_sat85/`. 비교 `forest/_채도_비교.png` (처음 아지트 · 도토리 숲 배경 위, 지금 | −15%).
+- **채도 −15% 적용 (2026-11-04 사용자)**: `_sat85/` → `Assets/Art/Rats/Deco/forest/ui_*_forest.png` 8개 (8% 투명 + 채도 × 0.85). 바로 전 판 = `_alpha92/`.
 - **네온 UI 버튼 빛번짐 시안 (2026-11-05 사용자, 적용함 · 바로 전 판 = `ui4/_old_assets/`)**: `neon/ui4/` — 계단(각진 가장자리) 없애고 네온 간판 빛번짐 + 연한 색 (참고 `ref_style.png` 색: 시안 #67FAF6 · 핑크 #FA62F6). Codex `sheet.png` (검은 바탕) → `cut_glow.py` (바깥 빛번짐 = 밝기 → 투명도, 관 안쪽 불투명, 게임 그림과 같은 캔버스 크기) → `out/`. 비교 `C:/Project/NKK3/preview/neon_ui_glow.png` (`preview.py`). 판자 · pill 은 같은 비율로 줄이고 가운데 줄만 늘려 (판자 = 점 위 · 아래 두 줄) 안쪽 글자 칸을 예전만큼 확보 (KFIT 0.75 · pill 0.9).
 - **네온 뒷골목 물 다시 (2026-11-05 사용자, 적용함 · 바로 전 판 = `base_neon.png`)**: `neon/alleybg_water/` — 물에 네온이 비치게. Codex 가 지금 네온 배경(`base_neon.png`) + 원본 물(`ref_original.png`) 을 보고 `sheet.png` → `merge.py` 가 물 부분(y 763~)만 지금 그림에 붙임 → `out/lm_bg_neon.png`. 비교 `C:/Project/NKK3/preview/alley_neon_water.png`.
 - **도토리 숲 뒷골목 물 다시 (2026-11-05 사용자, 적용함 · 바로 전 판 = `base_forest.png`)**: `forest/alleybg_water/` — 물에 나무가 일렁이며 비치게. 1차 `sheet_v1.png` (불빛만 비침) → 2차 `sheet.png` (나무 기둥 · 뿌리 · 이끼 · 버섯집 · 단풍이 거꾸로 일렁이며 비침, `prompt2.txt`). `merge.py` 가 물 부분(y 756~)만 지금 그림에 붙임 → `out/lm_bg_forest.png`. 비교 `C:/Project/NKK3/preview/alley_forest_water.png`.
