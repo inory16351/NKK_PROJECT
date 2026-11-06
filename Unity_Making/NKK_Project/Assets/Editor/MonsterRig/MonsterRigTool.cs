@@ -13,14 +13,14 @@ using UnityEngine.Rendering;
 // 게임과 같은 리그 코드(BossPartRig · RatRig · HumanRig)로 조립해 보여 주고, 끌거나 값을 바꿔 고친 뒤 '게임에 반영' (MonsterRigSave).
 // 파츠 보스 = 파츠마다 붙는 자리(at) · 관절(pivot) · 각도 · 크기 · 순서 · 움직임 / 고양이 · 사람 = 몸통 부착점(목 · 어깨 · 엉덩이 · 꼬리) · 그림 관절 · 다리 · 머리 크기.
 // 마우스: 왼쪽 끌기 = 파츠 옮기기 · Shift+끌기 = 관절은 두고 그림만 옮기기 · Ctrl+끌기 = 돌리기(파츠 보스) · 휠 = 확대 · 오른쪽/가운데 끌기 = 화면 이동
-public class MonsterRigTool : EditorWindow
+public partial class MonsterRigTool : EditorWindow
 {
     [MenuItem("NKK/몬스터 리깅 툴")]
     static void Open() => GetWindow<MonsterRigTool>("몬스터 리깅");
 
     // ── 목록 ──
     enum Kind { Part, Cat, Human }
-    class Mon { public Kind kind; public string code, name; public bool boss; public float scale = 1; public int floor; }
+    class Mon { public Kind kind; public string code, name; public bool boss; public float scale = 1; public int floor; public BossRow row; }
     readonly List<Mon> mons = new();
     string search = "";
     bool bossOnly = true;
@@ -67,6 +67,7 @@ public class MonsterRigTool : EditorWindow
         unlit = new Material(sh) { hideFlags = HideFlags.HideAndDontSave };
         catPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Cat.prefab");
         humanPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Human.prefab");
+        InitMotion();
         Undo.undoRedoPerformed += OnUndo;
         EditorApplication.update += Tick;
         LoadList();
@@ -81,12 +82,14 @@ public class MonsterRigTool : EditorWindow
         pru?.Cleanup(); pru = null;
         if (unlit) DestroyImmediate(unlit);
         if (work) DestroyImmediate(work);
+        if (mwork) DestroyImmediate(mwork);
     }
 
     void OnUndo() { Rebuild(); Repaint(); }
 
     void Tick()
     {
+        if (MotionTick()) return;
         if (!play) return;
         double t = EditorApplication.timeSinceStartup;
         if (t - lastTime < 1 / 30.0) return;
@@ -106,7 +109,7 @@ public class MonsterRigTool : EditorWindow
             {
                 var k = r.rig == "Part" ? Kind.Part : r.rig == "Cat" ? Kind.Cat : Kind.Human;
                 if (!bossCodes.Add(k + r.code_id)) continue;
-                mons.Add(new Mon { kind = k, code = r.code_id, name = r.boss_name, boss = true, scale = r.scale > 0 ? r.scale : 1, floor = r.floor });
+                mons.Add(new Mon { kind = k, code = r.code_id, name = r.boss_name, boss = true, scale = r.scale > 0 ? r.scale : 1, floor = r.floor, row = r });
             }
         var part = AssetDatabase.LoadAssetAtPath<BossPartArt>(MonsterRigSave.PartAsset);
         if (part) foreach (var e in part.entries) if (bossCodes.Add(Kind.Part + e.codeId)) mons.Add(new Mon { kind = Kind.Part, code = e.codeId, name = "(보스 표에 없음)", boss = true });
@@ -118,7 +121,8 @@ public class MonsterRigTool : EditorWindow
         if (cur != null) cur = mons.Find(m => m.kind == cur.kind && m.code == cur.code);
     }
 
-    bool Dirty => cur != null && savedJson != null && EditorJsonUtility.ToJson(work) != savedJson;
+    bool RigDirty => cur != null && savedJson != null && EditorJsonUtility.ToJson(work) != savedJson;
+    bool Dirty => RigDirty || MotionDirty;
 
     void Select(Mon m)
     {
@@ -144,7 +148,7 @@ public class MonsterRigTool : EditorWindow
         }
         savedJson = EditorJsonUtility.ToJson(work);
         fitNext = true;
-        Rebuild();
+        if (motionMode && m.boss && m.row != null) EnterMotion(); else { motionMode = false; Rebuild(); }
     }
 
     void AddPivot(string slot, Sprite s) { if (s) work.pivots.Add(new MonsterRigWork.Pivot { part = slot, tl = new Vector2(s.pivot.x / s.rect.width, 1 - s.pivot.y / s.rect.height) }); }
@@ -168,7 +172,8 @@ public class MonsterRigTool : EditorWindow
         try
         {
             go = Make(work, partOf);
-            if (showGhost && Dirty)
+            if (showGhost && motionMode && curMove != null && mwork.motion.keys.Count > 0) ghost = Make(work, null, true);      // 모션: 코드 기본 모션을 겹쳐 봄
+            else if (showGhost && RigDirty)
             {
                 var saved = CreateInstance<MonsterRigWork>();
                 EditorJsonUtility.FromJsonOverwrite(savedJson, saved);
@@ -180,6 +185,11 @@ public class MonsterRigTool : EditorWindow
                     var g = ghost.GetComponent<SortingGroup>(); if (g) g.sortingOrder = -10;
                     var mg = go ? go.GetComponent<SortingGroup>() : null; if (mg) mg.sortingOrder = 0;
                 }
+            }
+            if (ghost && motionMode)
+            {
+                foreach (var r in ghost.GetComponentsInChildren<SpriteRenderer>()) { r.color = new Color(0.55f, 0.75f, 1f, 0.35f); if (r.name == "Shadow") r.enabled = false; }
+                var g = ghost.GetComponent<SortingGroup>(); if (g) g.sortingOrder = -10;
             }
         }
         catch (Exception ex) { status = "조립 실패: " + ex.Message; Debug.LogException(ex); }
@@ -193,9 +203,11 @@ public class MonsterRigTool : EditorWindow
         if (fitNext && go) { Fit(); fitNext = false; }
     }
 
-    GameObject Make(MonsterRigWork w, Dictionary<SpriteRenderer, string> map)
+    GameObject Make(MonsterRigWork w, Dictionary<SpriteRenderer, string> map, bool codeMotion = false)
     {
         bool moving = pose == Pose.Walk, alt = pose == Pose.Attack;
+        bool mot = motionMode && curMove != null;
+        if (mot) moving = false;
         switch (cur.kind)
         {
             case Kind.Part:
@@ -205,7 +217,9 @@ public class MonsterRigTool : EditorWindow
                 pru.AddSingleGO(o);      // 미리보기 장면으로 먼저 옮김 (열린 씬을 안 건드리게)
                 var pr = o.GetComponent<BossPartRig>();
                 pr.Build(w.part, 1); pr.still = true; pr.open = openK;
+                if (mot) alt = MotionPart(pr, codeMotion);
                 pr.Apply(moving ? walkPhase : 0, moving, alt, 1, -1, 0, 1, 0);
+                if (mot) Lift(o);
                 if (map != null) foreach (var r in o.GetComponentsInChildren<SpriteRenderer>(true)) map[r] = r.transform.parent.name;
                 return o;
             }
@@ -220,7 +234,9 @@ public class MonsterRigTool : EditorWindow
                 var p = new RatRig.Pose { tail = 0.2f, sx = 1, sy = 1 };
                 if (moving) { float sn = Mathf.Sin(walkPhase); p.front = sn * 0.5f; p.farBack = sn * 0.45f; p.farFront = -sn * 0.5f; p.back = -sn * 0.45f; }
                 if (alt) { p.front = 2.1f; p.farFront = 0.5f; p.tilt = -0.3f; p.head = -0.2f; p.tail = 1.1f; rr.headReplace = e.head2; }
+                if (mot) p = MotionCat(rr, e, codeMotion);
                 rr.Apply(p, 1, -1, 1, 0);
+                if (mot) Lift(o);
                 if (map != null)
                 {
                     map[rr.head] = "head"; map[rr.torso] = "torso"; map[rr.tail] = "tail";
@@ -240,7 +256,9 @@ public class MonsterRigTool : EditorWindow
                 var p = new HumanRig.Pose { sx = 1, sy = 1, armN = 0.25f, armF = -0.2f };
                 if (moving) { float sn = Mathf.Sin(walkPhase); p.legN = sn * 0.45f; p.legF = -p.legN; p.armN = -sn * 0.35f; p.armF = -p.armN; }
                 if (alt) { p.angry = true; p.armN = 1.2f; p.armF = -1.2f; }
+                if (mot) p = MotionHuman(codeMotion);
                 hr.Apply(p, 1, -1, 0, 1, 0, 1);
+                if (mot) Lift(o);
                 if (map != null)
                 {
                     map[hr.head] = "head"; map[hr.torso] = "torso"; map[hr.armNear] = "arm"; map[hr.armFar] = e.arm2 ? "arm2" : "arm";
@@ -315,6 +333,7 @@ public class MonsterRigTool : EditorWindow
     }
 
     string Hint() => cur == null ? "왼쪽 목록에서 몬스터를 고르세요"
+        : motionMode ? "모션: ▶ 재생 · 시간 막대 · 몸을 끌면 지금 시간 키의 관절이 돌아감 (키가 없으면 저절로 생김) · 휠 = 확대 · 오른쪽 끌기 = 화면 이동"
         : cur.kind == Kind.Part ? "끌기 = 파츠 옮기기 · Shift+끌기 = 관절은 두고 그림만 · Ctrl+끌기 = 돌리기 · 휠 = 확대 · 오른쪽 끌기 = 화면 이동 · F = 화면 맞춤"
         : "끌기 = 몸통에 붙는 자리 옮기기 (목 · 어깨 · 엉덩이 · 꼬리, 발이 바닥 기준이라 몸통이 대신 움직일 수 있음) · Shift+끌기 = 그림 관절(그림만 옮기기) · 휠 = 확대 · F = 화면 맞춤";
 
@@ -351,6 +370,13 @@ public class MonsterRigTool : EditorWindow
     {
         EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
         EditorGUI.BeginChangeCheck();
+        if (cur != null && cur.boss && cur.row != null)
+        {
+            bool m = GUILayout.Toolbar(motionMode ? 1 : 0, new[] { "리그", "공격 · 필살기 모션" }, EditorStyles.toolbarButton, GUILayout.Width(170)) == 1;
+            if (m != motionMode) { motionMode = m; if (m) EnterMotion(); fitNext = true; }
+        }
+        else motionMode = false;
+        if (motionMode) { MotionToolbar(); if (EditorGUI.EndChangeCheck()) Rebuild(); GUILayout.FlexibleSpace(); EditorGUILayout.EndHorizontal(); return; }
         pose = (Pose)GUILayout.Toolbar((int)pose, new[] { "대기", "걷기", "공격" }, EditorStyles.toolbarButton, GUILayout.Width(170));
         play = GUILayout.Toggle(play, "▶ 걷기 재생", EditorStyles.toolbarButton, GUILayout.Width(80));
         if (play && pose != Pose.Walk) pose = Pose.Walk;
@@ -457,7 +483,8 @@ public class MonsterRigTool : EditorWindow
                 drag = Drag.None;
                 if (sel != null)
                 {
-                    drag = e.shift ? Drag.Image : e.control && cur.kind == Kind.Part ? Drag.Rotate : Drag.Move;
+                    drag = motionMode ? Drag.Rotate : e.shift ? Drag.Image : e.control && cur.kind == Kind.Part ? Drag.Rotate : Drag.Move;
+                    if (motionMode) { motionDragR = PickRenderer(lastWorld); if (!motionDragR || !BeginMotionDrag()) drag = Drag.None; }
                     Undo.IncrementCurrentGroup();
                     if (drag == Drag.Rotate) lastAngle = AngleAt(r, e.mousePosition);
                 }
@@ -471,7 +498,8 @@ public class MonsterRigTool : EditorWindow
                 else if (drag != Drag.None)
                 {
                     Undo.RecordObject(work, "리깅 툴 끌기");
-                    if (drag == Drag.Rotate) { float a = AngleAt(r, e.mousePosition); Rotate(Mathf.DeltaAngle(lastAngle, a)); lastAngle = a; }
+                    if (drag == Drag.Rotate && motionMode) { float a = AngleAt(r, e.mousePosition); MotionRotate(Mathf.DeltaAngle(lastAngle, a)); lastAngle = a; }
+                    else if (drag == Drag.Rotate) { float a = AngleAt(r, e.mousePosition); Rotate(Mathf.DeltaAngle(lastAngle, a)); lastAngle = a; }
                     else DragBy(w - lastWorld, drag == Drag.Image);
                     lastWorld = w;
                     Rebuild();
@@ -489,7 +517,7 @@ public class MonsterRigTool : EditorWindow
 
     float AngleAt(Rect r, Vector2 mouse)
     {
-        var j = Joint(sel); if (!j) return 0;
+        var j = motionMode ? MotionJoint() : Joint(sel); if (!j) return 0;
         var c = ToGui(r, j.position);
         return -Mathf.Atan2(mouse.y - c.y, mouse.x - c.x) * Mathf.Rad2Deg;
     }
@@ -602,7 +630,8 @@ public class MonsterRigTool : EditorWindow
         var bg = GUI.backgroundColor; GUI.backgroundColor = new Color(0.5f, 1f, 0.55f);
         if (GUILayout.Button("게임에 반영", GUILayout.Height(28))) Save();
         GUI.backgroundColor = bg;
-        if (GUILayout.Button("되돌리기", GUILayout.Height(28), GUILayout.Width(70))) { var m = cur; savedJson = EditorJsonUtility.ToJson(work); cur = null; Select(m); }
+        if (motionMode && GUILayout.Button("되돌리기", GUILayout.Height(28), GUILayout.Width(70))) { PickMove(curMove); GUIUtility.ExitGUI(); }
+        if (!motionMode && GUILayout.Button("되돌리기", GUILayout.Height(28), GUILayout.Width(70))) { var m = cur; savedJson = EditorJsonUtility.ToJson(work); cur = null; Select(m); }
         GUI.enabled = true;
         EditorGUILayout.EndHorizontal();
 
@@ -610,7 +639,7 @@ public class MonsterRigTool : EditorWindow
         var so = new SerializedObject(work);
         so.Update();
         EditorGUI.BeginChangeCheck();
-        if (cur.kind == Kind.Part) InspectPart(so); else InspectRig(so);
+        if (motionMode) InspectMotion(); else if (cur.kind == Kind.Part) InspectPart(so); else InspectRig(so);
         if (EditorGUI.EndChangeCheck()) { so.ApplyModifiedProperties(); Rebuild(); }
         else so.ApplyModifiedProperties();
         EditorGUILayout.EndScrollView();
@@ -763,6 +792,12 @@ public class MonsterRigTool : EditorWindow
 
     void Save()
     {
+        if (motionMode && curMove != null)
+        {
+            try { status = "반영함 · " + SaveMotion(); Debug.Log("[리깅 툴] " + cur.code + " " + status); }
+            catch (Exception ex) { status = "반영 실패: " + ex.Message; Debug.LogException(ex); }
+            return;
+        }
         try
         {
             string msg;

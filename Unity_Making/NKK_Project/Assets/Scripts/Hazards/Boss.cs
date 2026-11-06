@@ -1651,8 +1651,19 @@ namespace NKK.Hazards
             if (sp > 12) { p.legN = Mathf.Sin(walk) * 0.45f; p.legF = -p.legN; p.armN = -Mathf.Sin(walk) * 0.35f; p.armF = -p.armN; p.bob = Mathf.Abs(Mathf.Cos(walk)) * 3; }
             if (attacking)
             {
+                var mo = atk != null ? BossMotion.Find(Data.code_id, atkType) : null;          // 리깅 툴에서 고친 모션
+                if (mo != null) return BossMotion.Human(mo, atkT);
+                HumanAttackPose(atkType, atk, atkT, air || z > 0, ref p);
+            }
+            else if (hitT > 0) p.angry = true;
+            return p;
+        }
+
+        // 사람 보스 공격 자세 (코드 기본값, 걷는 자세 위에): 휘두르기 · 퉁퉁퉁 · 던지기 · 그 밖 (리깅 툴 미리보기도 이걸 씀)
+        public static void HumanAttackPose(string atkType, BossAtkRow atk, float atkT, bool up, ref HumanRig.Pose p)
+        {
+            {
                 p.angry = true;
-                bool up = air || z > 0;
                 if ((atkType == "Swing" || atkType == "Baton") && atk != null)
                 {
                     // 주먹 휘두르기: 웅크림 동안 뒤로 젖혔다가 앞으로 크게
@@ -1673,8 +1684,6 @@ namespace NKK.Hazards
                 }
                 else { p.armN = up ? 2.6f : 1.2f; p.armF = up ? -2.6f : -1.2f; p.legN = up ? 0.8f : 0; p.legF = up ? -0.6f : 0; }
             }
-            else if (hitT > 0) p.angry = true;
-            return p;
         }
 
         // 고양이 보스 두 번째 머리 (head2): 팝 캣 = 늘 번갈아 뻐끔, 나머지 = 공격·맞을 때
@@ -1700,18 +1709,31 @@ namespace NKK.Hazards
         }
 
         // 고양이 보스 (웹 drawBossCat · catPose): 걷기 · 웅크림 · 덮치기 · 던지기 · 날아감
+        bool motionOn, motionHead2;      // 이번 프레임 고친 모션을 씀 · 그 키의 두 번째 머리
+
+        // 고양이 보스 공격 자세 (코드 기본값): 덮치기 · 내려찍기 점프 중 · 웅크림 · 앞발 들기. 처리했으면 true (리깅 툴 미리보기도 이걸 씀)
+        public static bool CatAttackPose(string type, BossAtkRow atk, float atkT, bool up, float tt, ref RatRig.Pose p)
+        {
+            bool jump = type == "Pounce" || type == "Stomp" || type == "Happy_Jump";
+            if (jump && up) { p.front = 1.3f; p.farFront = 1.1f; p.back = -1.1f; p.farBack = -0.9f; p.tilt = -0.25f; p.tail = 1; p.head = -0.15f; return true; }
+            if (atkT < atk.windup) { p.front = 0.3f; p.farFront = 0.3f; p.back = 0.4f; p.farBack = 0.4f; p.tilt = 0.12f; p.bob = 6; p.tail = 0.9f + Mathf.Sin(tt * 20) * 0.2f; return true; }
+            if (!jump) { p.front = 2.1f; p.farFront = 0.5f; p.tilt = -0.3f; p.head = -0.2f; p.tail = 1.1f; return true; }
+            return false;
+        }
+        public static bool IsJumpAttack(string type) => type == "Pounce" || type == "Stomp" || type == "Happy_Jump";
+
         RatRig.Pose MakeCatPose()
         {
+            motionOn = motionHead2 = false;
             float tt = Time.time;
             var p = new RatRig.Pose { head = Mathf.Sin(tt * 1.6f) * 0.06f, tail = 0.1f + Mathf.Sin(tt * 3) * 0.25f, sx = 1, sy = 1 };
             if (State == BState.Wait && !disguiseRig) { p.tail = 0.3f + Mathf.Sin(tt * 2) * 0.3f; return p; }
             if (State == BState.Dying) { p.front = Mathf.Sin(tt * 30) * 1.4f; p.farFront = Mathf.Cos(tt * 27) * 1.4f; p.back = Mathf.Sin(tt * 28) * 1.2f; p.farBack = Mathf.Cos(tt * 25) * 1.2f; p.tail = Mathf.Sin(tt * 20); p.head = Mathf.Sin(tt * 15) * 0.4f; return p; }
             if (attacking && atk != null)
             {
-                bool jump = atkType == "Pounce" || atkType == "Stomp" || atkType == "Happy_Jump";
-                if (jump && (air || z > 0)) { p.front = 1.3f; p.farFront = 1.1f; p.back = -1.1f; p.farBack = -0.9f; p.tilt = -0.25f; p.tail = 1; p.head = -0.15f; return p; }
-                if (atkT < atk.windup) { p.front = 0.3f; p.farFront = 0.3f; p.back = 0.4f; p.farBack = 0.4f; p.tilt = 0.12f; p.bob = 6; p.tail = 0.9f + Mathf.Sin(tt * 20) * 0.2f; return p; }
-                if (!jump) { p.front = 2.1f; p.farFront = 0.5f; p.tilt = -0.3f; p.head = -0.2f; p.tail = 1.1f; return p; }
+                var mo = BossMotion.Find(Data.code_id, atkType);          // 리깅 툴에서 고친 모션 (Resources/BossMotion.asset)
+                if (mo != null) { motionOn = true; return BossMotion.Cat(mo, atkT, out motionHead2); }
+                if (CatAttackPose(atkType, atk, atkT, air || z > 0, tt, ref p)) return p;
             }
             if (Mathf.Sqrt(vx * vx + vy * vy) > 12) { float sn = Mathf.Sin(walk); p.front = sn * 0.5f; p.farBack = sn * 0.45f; p.farFront = -sn * 0.5f; p.back = -sn * 0.45f; p.bob = -Mathf.Abs(Mathf.Cos(walk)) * 2.5f; p.tail = Mathf.Sin(walk * 0.5f) * 0.3f + 0.1f; }
             return p;
@@ -1727,12 +1749,20 @@ namespace NKK.Hazards
             if (look == 0) return;
             float jx = jit > 0 ? Random.Range(-jit, jit) : 0;
             transform.position = World.ToUnity(x + jx, y, z);
-            if (Cat) catRig.headReplace = attacking && atkType == "Orbital_Laser" && State == BState.Fight ? laserHeadSprite : ReworkHead() ?? CatHead2();      // 홈랜더: 빨간 눈
-            if (Cat) catRig.Apply(MakeCatPose(), growK, face, sq, World.SortOrder(y), 0, State == BState.Dying ? rot : 0);
+            if (Cat)
+            {
+                var cp = MakeCatPose();
+                catRig.headReplace = attacking && atkType == "Orbital_Laser" && State == BState.Fight ? laserHeadSprite
+                    : ReworkHead() ?? (motionOn ? (motionHead2 ? catArtEntry?.head2 : null) : CatHead2());      // 홈랜더: 빨간 눈 · 고친 모션 = 키의 두 번째 머리
+                catRig.Apply(cp, growK, face, sq, World.SortOrder(y), 0, State == BState.Dying ? rot : 0);
+            }
             else if (Part)
             {
                 ApplyHeadOpen();          // 우주복 쥐 괴물 머리 (Boss.Crew.cs)
-                partRig.Apply(walk, Mathf.Sqrt(vx * vx + vy * vy) > 12, attacking || hitT > 0 || State == BState.Dying, growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), State == BState.Dying ? 6 : 0);
+                bool alt = attacking || hitT > 0 || State == BState.Dying;
+                var mo = attacking && atk != null && State == BState.Fight ? BossMotion.Find(Data.code_id, atkType) : null;      // 리깅 툴에서 고친 모션
+                if (mo != null) alt = BossMotion.Part(mo, atkT, partRig.extra); else if (partRig.extra.Count > 0) partRig.extra.Clear();
+                partRig.Apply(walk, Mathf.Sqrt(vx * vx + vy * vy) > 12, alt, growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), State == BState.Dying ? 6 : 0);
                 UpdateMouth();
             }
             else rig.Apply(MakePose(), growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), 1);

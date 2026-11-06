@@ -19,7 +19,9 @@ namespace NKK.Hazards
         [Tooltip("Neck 물기 순서 (목 번호, 공격 중 한 목씩 차례로)")] public int[] biteOrder = { 3, 0, 5, 1, 6, 2, 4 };
         [Tooltip("Neck IK: 마디가 쉬는 각도에서 벗어날 수 있는 만큼 (°) · 풀이 반복 수")] public float neckLimit = 40; public int neckIters = 8;
         [HideInInspector] public bool still;      // 미리보기용: 시간에 따른 움직임 끔 (BossRigPreview)
-        [HideInInspector] public float open;      // 머리 열림 0~1 (Boss 가 매 프레임 정함, 우주복 쥐 — 웹 미리보기 BossRework/rig_web/crewmate.html)
+        [HideInInspector] public float open;
+        // 파츠마다 더하는 각도 (°) — 보스 공격 모션 (BossMotion, 리깅 툴). 비면 없음
+        [System.NonSerialized] public readonly Dictionary<string, float> extra = new();      // 머리 열림 0~1 (Boss 가 매 프레임 정함, 우주복 쥐 — 웹 미리보기 BossRework/rig_web/crewmate.html)
 
         class J { public BossPartArt.Part p; public Transform j; public SpriteRenderer r; public Vector3 basePos; public float ik; public bool ikAlt; }
         // 히드라 목 사슬 (Neck 파츠, 같은 neck 번호 = 마디 3 + 머리): 부모(몸통) 좌표의 뿌리 · 마디 길이 · 마디 방향 (그림이 왼쪽으로 뻗음 → 약 180°)
@@ -214,6 +216,7 @@ namespace NKK.Hazards
                     }
                 }
                 a += p.open * open;
+                if (extra.Count > 0 && extra.TryGetValue(p.name, out var ea)) a += ea;
                 if (p.show != BossPartArt.Show.Always) { bool vis = (p.show == BossPartArt.Show.Open) == (open >= openSwap); if (j.r.enabled != vis) j.r.enabled = vis; }
                 if (shake > 0) a += Random.Range(-shake, shake);
                 j.j.localRotation = Quaternion.Euler(0, 0, a);
