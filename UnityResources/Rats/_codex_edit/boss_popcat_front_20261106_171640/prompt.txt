@@ -1,0 +1,11 @@
+Use your built-in image generation tool to EDIT the attached image ref.png and save the result as PNG to: out.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+ref.png (1024x1024) shows ONE body-part sprite ("front") of the boss "밈 고양이" (boss_popcat), a cat character in a 2D cutout-rigged game. The flat magenta (#FF00FF) area is empty background, not part of the drawing.
+
+CHANGE REQUESTED BY THE ARTIST (may be Korean):
+새로그린 앞 다리 색상이 다른데 색상 맞춰서 새로 그려
+
+RULES:
+- Output exactly 1024x1024. Keep the part in EXACTLY the same position, size, angle and footprint as in ref.png (unless the change asks otherwise), so it still fits the rig joints 1:1 - the joint/attachment end must not move.
+- Same art style as ref.png: Untitled Goose Game flat look, completely flat color shapes, NO black outlines, no linework, no gradients, no gloss, no texture noise; keep the same palette unless the change asks for new colors.
+- Background: one single flat pure magenta #FF00FF everywhere outside the part. No shadow, no ground, no frame, no other objects, no text.

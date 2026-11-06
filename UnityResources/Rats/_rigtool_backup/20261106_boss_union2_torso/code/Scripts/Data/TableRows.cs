@@ -1,0 +1,251 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
+// JSON(Tools/xlsx2json.py 출력)의 행 구조. 필드 이름 = 엑셀 2행 키.
+// enum 칼럼은 문자열로 받고, 아래 속성(Grade 등)으로 enum 변환해서 씀.
+namespace NKK.Data
+{
+    static class E
+    {
+        public static T P<T>(string s) where T : struct => Enum.TryParse(s, out T v) ? v : default;
+    }
+
+    [Serializable]
+    public class RatCharacterRow
+    {
+        public int character_id; public string character_name; public string code_id; public string grade; public string body_type;
+        public int character_name_sk, character_desc_sk;      // 스트링 테이블 키 (Loc.ApplyFile 이 지금 언어로 바꿔 끼움)
+        public int atk; public int passive_skill; public int action_skill; public int ultimate; public int unlock_rank;
+        public string character_desc; public string asset_folder; public string sub_asset_folder;
+        public Grade Grade => E.P<Grade>(grade);
+        public BodyType Body => E.P<BodyType>(body_type);
+    }
+
+    [Serializable]
+    public class RatSkillRow
+    {
+        public int skill_id; public string skill_name; public string skill_category; public int skill_name_sk, skill_explain_sk;
+        public string cond1_type; public float cond1_value_01, cond1_value_02;
+        public string cond2_type; public float cond2_value_01, cond2_value_02;
+        public string effect_type; public float value_01, value_02, value_03, value_04, value_05, value_06;
+        public float duration, cool_time; public string skill_icon, skill_asset, skill_explain;
+        public SkillCategory Category => E.P<SkillCategory>(skill_category);
+        public CondType Cond1 => E.P<CondType>(cond1_type);
+        public CondType Cond2 => E.P<CondType>(cond2_type);
+        public EffectType Effect => E.P<EffectType>(effect_type);
+        public float V(int i) => i switch { 1 => value_01, 2 => value_02, 3 => value_03, 4 => value_04, 5 => value_05, 6 => value_06, _ => 0 };
+    }
+
+    [Serializable]
+    public class RatUltimateRow
+    {
+        public int ultimate_id; public string ultimate_name, script, dev_desc, asset; public int ultimate_name_sk, dev_desc_sk, ult_line_sk;
+        public int ult_gauge; public string ult_icon, ult_line, ult_achv, ult_color, engine_type;
+        public Color Color => ColorUtility.TryParseHtmlString(ult_color, out var c) ? c : Color.white;
+    }
+
+    // 필살기 자막 (Ult_Caption): 필살기 코드가 키(c1, c2…)로 부름. {n} 같은 자리는 코드가 채움
+    [Serializable] public class UltCaptionRow { public int ultimate_id, text_sk; public string cap_key, text; public float size; public string color; }
+    // 필살기 게이지가 차는 조건 (Ult_Charge): 그 종의 쥐가 cond_type 을 하면 gauge 만큼
+    // 초필살기 (신화 15종, 2026-10-17): 이름 · 본 연출 자막 · 피니시 자막 · 연출 방식(motif, SuperUltManager 가 읽음). 수치는 Super_Config
+    [Serializable]
+    public class SuperUltRow
+    {
+        public int super_id; public string code_id, super_name, super_line, finish_line, motif;
+        public int super_name_sk, super_line_sk, finish_line_sk;
+    }
+
+    [Serializable] public class UltChargeRow { public string cond_type; public float gauge; public CondType Cond => E.P<CondType>(cond_type); }
+
+    [Serializable]
+    public class RatGradeRow
+    {
+        public string grade, grade_name, color; public int grade_name_sk; public float size, move_speed, birth_weight, skill_power, shard_k; public int atk_base;
+        // 승급 필요 마릿수 = 올림(promote_base × promote_grow^k), k = 이번 판 승급 횟수. promote_soft 마리를 넘으면 그 뒤로는 promote_grow2 로 완만하게
+        public float promote_base, promote_grow, promote_soft, promote_grow2;
+        public Grade Grade => E.P<Grade>(grade);
+    }
+
+    [Serializable]
+    public class GrowthNodeRow
+    {
+        public int node_id, node_name_sk, node_desc_sk; public string node_name, code_id; public int max_level, req_node, req_level;
+        public string effect_type; public float value_01, value_02, value_03;
+        public int pos_x, pos_y;                 // 쥐 스킬 트리 창의 칸
+        public string node_icon, node_desc;      // 아이콘: 경로 또는 @action · @passive · @ult (그 쥐의 아이콘) / 설명: {v1}~{v3} · {p1}~{p3}(×100)
+        public GrowthEffectType Effect => E.P<GrowthEffectType>(effect_type);
+    }
+
+    [Serializable] public class GrowthOrderRow { public int order, node_id, is_repeat; }
+
+    [Serializable]
+    public class ActionAwakenRow
+    {
+        public string effect_type; public float value_01, value_02, value_03;
+        public EffectType Effect => E.P<EffectType>(effect_type);
+    }
+
+    [Serializable]
+    public class CatCharacterRow
+    {
+        public int character_id, character_name_sk; public string character_name, code_id, cat_category; public int spawn_floor;
+        public float hp_mul, life_time, size_mul; public int skill, crowd_skill; public string character_desc, asset_folder;
+        public CatCategory Category => E.P<CatCategory>(cat_category);
+    }
+
+    [Serializable]
+    public class CatSkillRow
+    {
+        public int skill_id, skill_name_sk; public string skill_name;
+        public string cond1_type; public float cond1_value_01, cond1_value_02;
+        public string cond2_type; public float cond2_value_01, cond2_value_02;
+        public string effect_type; public float value_01, value_02, value_03, value_04, value_05, value_06;
+        public float duration, cool_time; public string skill_icon, skill_explain;
+        public CatEffectType Effect => E.P<CatEffectType>(effect_type);
+    }
+
+    // 워크북 단위 래퍼 (JSON 최상위 키 = 시트 이름)
+    [Serializable] public class RatTableFile { public List<RatCharacterRow> Character; public List<RatSkillRow> Skill; public List<RatUltimateRow> Ultimate; public List<UltCaptionRow> Ult_Caption; public List<UltChargeRow> Ult_Charge; public List<SuperUltRow> Super_Ult; public List<KeyValueRow> Super_Config; }
+    [Serializable] public class RatGradeTableFile { public List<RatGradeRow> Grade; }
+    [Serializable] public class RatGrowthTableFile { public List<GrowthNodeRow> Growth_Node; public List<GrowthOrderRow> Growth_Order; public List<ActionAwakenRow> Action_Awaken; }
+    [Serializable] public class CatTableFile { public List<CatCharacterRow> Character; public List<CatSkillRow> Skill; }
+
+    [Serializable]
+    public class ItemRow
+    {
+        public int item_id, item_name_sk; public string item_name, code_id, item_category;
+        public float radius, hp_mul, value_mul, spawn_weight, heavy; public int is_big, is_sturdy, is_paper;
+        public int from_floor, to_floor, unlock_skill;      // 등장 층 · 사라지는 층 (0 = 계속) · 해금 스킬 노드 (0 = 없음)
+        public string spill_color; public int drop_01, drop_02, drop_03, drop_04; public string asset;
+        public bool IsFurniture => item_category == "Furniture";
+        public bool IsSpill => item_category == "Spill";        // 쏟아짐 전용 (큰 물건·가구가 부서질 때만 나옴, 평소 생성 안 됨)
+        public IEnumerable<int> Drops() { foreach (var d in new[] { drop_01, drop_02, drop_03, drop_04 }) if (d != 0) yield return d; }
+    }
+
+    [Serializable]
+    public class ZoneRow
+    {
+        public int zone_id, zone_name_sk; public string zone_name; public int from_floor; public string floor_type, tint;
+        public string themes;          // 이 구간 방 가구 테마 (Furniture_Layout room_theme, 쉼표). 비면 테마 전부 (2026-10-19)
+        public int item_01, item_02, item_03, item_04, item_05, item_06, item_07, item_08, item_09, item_10, item_11, item_12, item_13;
+        public IEnumerable<int> Items() { foreach (var d in new[] { item_01, item_02, item_03, item_04, item_05, item_06, item_07, item_08, item_09, item_10, item_11, item_12, item_13 }) if (d != 0) yield return d; }
+    }
+
+    [Serializable] public class FurnitureLayoutRow { public int layout_id; public string room_theme; public int item_id; public float pos_u, pos_v; }
+    [Serializable] public class ItemTableFile { public List<ItemRow> Item; public List<ZoneRow> Zone; public List<FurnitureLayoutRow> Furniture_Layout; }
+
+    // Tools/gen_sprite_pivots.py → Assets/Data/RatRigMeta.json (몸통 부착점 = 몸통 이미지 좌상단 기준 0~1)
+    [Serializable] public class RatRigMetaRow { public string code_id; public float[] neck, tail, shoulder, hip; public float leg_front, leg_back; public float[] wing_anchor, wing2_anchor; public float wing_size, wing2_size, head_scale; public int head_only; public string twin; public List<RigOrderRow> order; public List<RigTweakRow> tweak; }
+    [Serializable] public class RigOrderRow { public string part; public int order; }      // 그리는 순서 덮어쓰기 (몬스터 리깅 툴)
+    [Serializable] public class RigTweakRow { public string part; public float[] offset; public float angle, scale = 1; }      // 파츠별 위치(px) · 회전(°) · 크기 (몬스터 리깅 툴)
+    [Serializable] public class RatRigMetaFile { public List<RatRigMetaRow> items; }
+
+    [Serializable]
+    public class TierRow
+    {
+        public int tier; public string tier_name, icon; public double research_cost; public int tier_name_sk;
+        public string cond1_type; public float cond1_value; public string cond2_type; public float cond2_value; public string cond3_type; public float cond3_value;
+        public string cond4_type; public float cond4_value;        // 4번째 조건 (2026-10-19, 9훈장~)
+        public float birth_grade_k; public int start_rat_count, start_floor_cap; public string badge_asset; public float rat_atk_mul;
+        public float rank_mul;                                      // 승급 배율 누적 (2026-10-26, Tools/tier_gates.rank_mul) — CommonSkill.RankMul
+    }
+    [Serializable] public class TierTableFile { public List<TierRow> Tier; }
+
+    [Serializable] public class HumanRow { public int human_id, human_name_sk; public string human_name, code_id; public float hp_mul, value_mul, speed_mul; public int from_floor, to_floor; public string asset_folder; }
+    [Serializable] public class HumanLineRow { public int line_id, human_id, text_sk; public string situation, text; }
+    // 공용 스킬 노드 (공용 스킬 테이블 Common_Skill, Tools/gen_skill_tree.py 로 생성).
+    // 찍찍!! 훈장(tier)마다 트리 하나, 노드는 한 번만 활성화. link_1/link_2 중 하나라도 활성화되면 열림. 시작점(effect None, 링크 없음)은 그 훈장이면 자동 활성화
+    [Serializable]
+    public class CommonSkillRow
+    {
+        public int skill_id, tier, skill_name_sk, skill_explain_sk; public string skill_name, branch; public int is_key, pos_x, pos_y, link_1, link_2;
+        public float cost_cheese, cost_research; public string effect_type;
+        public float value_01, value_02, value_03;
+        public string skill_asset, skill_explain;
+        public SkillBranch Branch => E.P<SkillBranch>(branch);
+        public CommonEffectType Effect => E.P<CommonEffectType>(effect_type);
+        public bool IsKey => is_key == 1;
+        public bool IsRoot => link_1 == 0 && link_2 == 0;
+        public float V(int i) => i switch { 1 => value_01, 2 => value_02, 3 => value_03, _ => 0 };
+    }
+
+    [Serializable] public class SkillBranchRow { public string branch, branch_name, color; public int branch_name_sk; public SkillBranch Branch => E.P<SkillBranch>(branch); }
+
+    [Serializable] public class CommonSkillTableFile { public List<CommonSkillRow> Common_Skill; public List<SkillBranchRow> Branch; }
+
+    [Serializable] public class HumanTableFile { public List<HumanRow> Human; public List<HumanLineRow> Human_Line; }
+    // 보스 (보스 테이블 Boss · Boss_Line)
+    [Serializable]
+    public class BossRow
+    {
+        public int boss_id, boss_name_sk; public string boss_name, code_id, rig; public int floor; public string atk_type, atk2_type, color, special1_type, special2_type, skill_type;
+        public float skill_cd, skill_first, special_chance, atk2_chance, scale, radius_mul, hp_pow_sec, cheese_mul, move_speed, atk_cd_min, atk_cd_max;
+        public bool IsCat => rig == "Cat";
+        public bool IsPart => rig == "Part";      // 전용 파츠 리그 (BossPartArt)
+        public Color Color => ColorUtility.TryParseHtmlString(color, out var c) ? c : Color.white;
+    }
+    [Serializable] public class BossLineRow { public int line_id, boss_id, text_sk; public string situation, text; }
+    // 보스 공격별 수치 (보스 테이블 Atk_Type 시트)
+    // 밈 기술 (2026-10-19): pattern 이 있으면 Boss.Meme.cs 가 테이블 값만으로 처리 (sprite = Boss.memeSprites 이름, size = 그림 크기, p1·p2 = 패턴별 값)
+    [Serializable] public class BossAtkRow { public string atk_type; public float radius, stun; public int count; public float windup, dur; public string atk_name, line; public int atk_name_sk, line_sk;
+        public string pattern, sprite, color, popup; public float size, p1, p2; public int popup_sk;
+        public float p3; public string opt; }      // 보스 개편 (2026-10-22): p3 = 넉백·남는 시간 등 · opt = 키워드 (Boss.Rework.cs)
+    // 층 밸런스 (스테이지 테이블 Stage, Tools/gen_stage_table.py 로 생성)
+    [Serializable] public class StageRow
+    {
+        public int floor, rooms; public float pow_need, item_hp, cheese, wall_stairs, wall_normal, wall_path, time_add;
+        // 층 별 허들 기획서 (2026-10-12): 층 유형 · 목표 돌파 초 · 보스전 목표 초 · 클리어 연구자료 · 건너뛰기 상한(이 층을 최고로 클리어했을 때) · 기준 전투력 지수
+        public string floor_type; public float target_sec, boss_sec, research; public int skip_cap; public float player_pow;
+    }     // wall_path = 계단까지 경로 벽 배율 합 (판마다 지형이 바뀌어 StageManager 가 경로에 나눔)
+    // 업적 (업적 테이블 Achievement): 조건 타입 cond_type + 대상 target_id + 필요 횟수 need. 설명 {ult} = 대상 필살기 이름
+    // 업적 (2026-11-03 업적 기획서 Ver.05): 분류 Tier · Super · Boss · Minigame · Legacy(기존 필살기) · 도토리 · 공개 훈장 · 진행값 방식 Once · Max · Sum
+    [Serializable] public class AchievementRow { public int achv_id, achv_name_sk, achv_desc_sk; public string achv_name, achv_desc, cond_type; public int target_id, need; public string achv_icon; public int sort_order; public string achv_category, value_mode; public int reward_acorn, reveal_tier; }
+    [Serializable] public class AchvCategoryRow { public string category; public int acorn, reveal; }
+    [Serializable] public class AchievementTableFile { public List<AchievementRow> Achievement; public List<AchvCategoryRow> Achv_Category; }
+    // 도토리 테이블 (2026-11-03 신규 재화 기획서 Ver.05): 설정 · 장식 종류 16 · 장식 상품 36 · 잠긴 상품 해금 조건 글 (판매 조건 기능 id 별)
+    [Serializable] public class DecoCategoryRow { public int cat_no, cat_name_sk; public string category, cat_name, zone; }
+    [Serializable] public class DecoItemRow { public int deco_id, deco_name_sk, price, sort_order; public string deco_name, category, theme, sell_feature, asset; }
+    [Serializable] public class DecoLockRow { public string feature, hint; public int hint_sk; }
+    [Serializable] public class AcornTableFile { public List<KeyValueRow> Acorn_Config; public List<DecoCategoryRow> Deco_Category; public List<DecoItemRow> Deco_Item; public List<DecoLockRow> Deco_Lock; }
+    [Serializable] public class StageTableFile { public List<StageRow> Stage; }
+    // 상점 테이블 (쥐구멍 암시장) · 뽑기 테이블 (유전자 뽑기) — 기획서 2026-10-12
+    [Serializable] public class KeyValueRow { public string key; public float value; }
+    [Serializable] public class ShopSlotRow { public int slot_id, unlock_floor; public float legend_rate, mythic_rate; }
+    [Serializable] public class ShopGoodsRow { public int goods_id, goods_name_sk; public string goods_name, grade; public int pack_size; public float spawn_weight, price_cheese_bc; public Grade Grade => E.P<Grade>(grade); }
+    [Serializable] public class ShopFloorRow { public int floor, free_reroll, slot_count; }
+    [Serializable] public class ShopTableFile { public List<KeyValueRow> Shop_Config; public List<ShopSlotRow> Shop_Slot; public List<ShopGoodsRow> Shop_Goods; public List<ShopFloorRow> Shop_Floor; }
+    [Serializable] public class GachaGradeRow { public string grade; public float rate; public int shard_count; public float guarantee_rate; public Grade Grade => E.P<Grade>(grade); }
+    [Serializable] public class GachaTableFile { public List<KeyValueRow> Gacha_Config; public List<GachaGradeRow> Gacha_Grade; }
+    [Serializable] public class BossTableFile { public List<BossRow> Boss; public List<BossLineRow> Boss_Line; public List<BossAtkRow> Atk_Type; }
+    [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; public int front; public float head_scale = 1; public List<RigOrderRow> order; public List<RigTweakRow> tweak; }
+    [Serializable] public class HumanRigMetaFile { public List<HumanRigMetaRow> items; }
+    // 튜토리얼 (튜토리얼 테이블): 해설 쥐 · 단계(발동 조건 → 대사 → 해금·행동) · 대사 · 오프닝 컷씬
+    [Serializable] public class TutoSpeakerRow { public string speaker_id, speaker_name, code_id, portrait; public int speaker_name_sk; }
+    [Serializable] public class TutoStepRow
+    {
+        public string step_id, scene, trigger; public float trigger_value; public string trigger_text;
+        public string cond1_type, cond1_value, cond2_type, cond2_value, unlock, action, action_value; public int sort;
+    }
+    [Serializable] public class TutoLineRow { public int line_id, text_sk; public string step_id, speaker_id, face, text, highlight; }
+    [Serializable] public class TutoStoryRow { public int line_id, cut; public string image, text; public int text_sk; public string story; }     // story: 비움 = 오프닝 · ending = 엔딩 (2026-10-21)
+    [Serializable] public class TutorialTableFile { public List<TutoSpeakerRow> Speaker; public List<TutoStepRow> Step; public List<TutoLineRow> Line; public List<TutoStoryRow> Story; }
+
+    // 증강 (증강 테이블, 2026-10-19): 효과 = 공용 스킬 효과 타입 두 개 (CommonSkill 이 공용 스킬 노드처럼 더함). 설명 자리표시 {1} {1b} {1c} {2} {2b} {2c}, 뒤에 % = ×100
+    [Serializable]
+    public class AugmentRow
+    {
+        public int augment_id, grade, aug_name_sk, aug_desc_sk, enabled; public string aug_name, aug_desc, effect1, effect2, icon;
+        public float e1_v1, e1_v2, e1_v3, e2_v1, e2_v2, e2_v3;
+        public CommonEffectType Effect1 => E.P<CommonEffectType>(effect1);
+        public CommonEffectType Effect2 => E.P<CommonEffectType>(effect2);
+        public float V(int effect, int i) => effect == 1 ? (i == 1 ? e1_v1 : i == 2 ? e1_v2 : e1_v3) : (i == 1 ? e2_v1 : i == 2 ? e2_v2 : e2_v3);
+    }
+    [Serializable] public class AugGradeRow { public int grade, grade_name_sk, synth_need; public string grade_name, color; public float synth_up, synth_same, synth_down; public Color Color => ColorUtility.TryParseHtmlString(color, out var c) ? c : Color.white; }
+    [Serializable] public class AugOfferRow { public int from_floor; public float w1, w2, w3, w4; public float W(int g) => g switch { 1 => w1, 2 => w2, 3 => w3, 4 => w4, _ => 0 }; }
+    // 증강 특수 효과 (증강 특수 효과 테이블, 칼바람식): 증강 effect1 = Special · e1_v1 = special_id. p1~p5 뜻은 타입별 (Special_Type 시트)
+    [Serializable] public class AugSpecialRow { public int special_id, up_param; public string type; public float p1, p2, p3, p4, p5; public float P(int i) => i switch { 1 => p1, 2 => p2, 3 => p3, 4 => p4, 5 => p5, _ => 0 }; }
+    [Serializable] public class AugSpecialTableFile { public List<AugSpecialRow> Special; }
+    [Serializable] public class AugNoScaleRow { public string effect; public int index; }
+    [Serializable] public class AugmentTableFile { public List<AugmentRow> Augment; public List<AugGradeRow> Grade; public List<AugOfferRow> Offer; public List<KeyValueRow> Aug_Config; public List<AugNoScaleRow> No_Scale; }
+}
