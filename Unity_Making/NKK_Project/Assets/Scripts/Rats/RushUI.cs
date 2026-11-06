@@ -5,16 +5,19 @@ using UnityEngine.UI;
 namespace NKK.Rats
 {
     // 클릭 총공격 UI (RatManager 가 전투 씬에서 붙임)
-    //  ① 쿨타임 게이지: 마우스 포인터를 둘러싼 원. 총공격 직후 빈 원 → 12시부터 시계 방향으로 주황이 참 → 다 차면 치즈색으로 '통' 튀고 사라짐
+    //  ① 쿨타임 게이지: 마우스 커서 그림의 외곽선을 따라 도는 선 (CursorOutline, 커서 스킨마다 그 모양대로).
+    //     총공격 직후 빈 상태 → 코끝(끝점)부터 시계 방향으로 초록 선이 참 → 다 차면 치즈색으로 '통' 굵어지고 사라짐
     //  ② 클릭 위치 표시: 누른 곳으로 화살표 4개가 모여든 뒤, 가운데 납작 원이 돌진 동안 깜빡임 (바닥 기울기 World.TILT)
-    // 그림 = Resources/RushUI/ (Codex, UnityResources/Rats/RushUI/)
+    // 그림 = Resources/RushUI/ (Codex, UnityResources/Rats/RushUI/) — rush_ring_* 는 예전 원 게이지 (지금은 안 씀)
     public class RushUI : MonoBehaviour
     {
-        [Header("쿨타임 게이지")]
-        [Tooltip("원 지름 = 커서 크기 × 이 배율")] public float ringScale = 1.75f;
+        [Header("쿨타임 게이지 (커서 외곽선)")]
+        [Tooltip("선 굵기 = 커서 크기 × 이 비율 (32px 커서 → 4px)")] public float lineK = 1 / 8f;
+        [Tooltip("양옆 번짐 = 선 굵기 × 이 배율")] public float glowK = 1.3f;
+        [Tooltip("차는 동안 선 색")] public Color fillColor = new Color32(112, 226, 64, 255);
+        [Tooltip("다 찼을 때 선 색")] public Color readyColor = new Color32(245, 198, 60, 255);
         [Tooltip("다 찼을 때 '통' 튀는 시간 (초)")] public float popTime = 0.45f;
-        [Tooltip("원 중심 = 커서 끝점에서 커서 크기 × 이 비율만큼 오른쪽 아래 (커서 그림 한가운데)")] public float centerK = 0.45f;
-        [Tooltip("클릭하고 이 초 뒤에 빈 원이 나와 남은 쿨타임 동안 참")] public float gaugeDelay = 0.5f;
+        [Tooltip("클릭하고 이 초 뒤에 선이 나와 남은 쿨타임 동안 참")] public float gaugeDelay = 0.5f;
 
         [Header("클릭 위치 표시 (게임 단위)")]
         [Tooltip("화살표가 출발하는 거리 → 모인 거리")] public float arrowFrom = 126, arrowTo = 31.5f;
@@ -25,8 +28,8 @@ namespace NKK.Rats
         [Tooltip("클릭 표시 전체가 보이는 시간 (초, 돌진 시간보다 길면 돌진 끝까지)")] public float markTime = 1f;
 
         RatManager rm;
-        Sprite sFrame, sFill, sReady, sKnob, sArrow, sCenter;
-        RectTransform ring; Image fill, ready, knob;
+        Sprite sArrow, sCenter;
+        CursorOutline line;
         Transform mark; SpriteRenderer[] arrows = new SpriteRenderer[4]; SpriteRenderer center;
         bool wasCooling; float popT = -1;
         CameraController camCtl;
@@ -44,21 +47,17 @@ namespace NKK.Rats
 
         void Build(SpriteRenderer oldMarker)
         {
-            sFrame = Load("rush_ring_frame"); sFill = Load("rush_ring_fill"); sReady = Load("rush_ring_ready");
-            sKnob = Load("rush_knob"); sArrow = Load("rush_arrow"); sCenter = Load("rush_center");
+            sArrow = Load("rush_arrow"); sCenter = Load("rush_center");
 
-            // ① 화면 맨 위 캔버스 (커서 바로 아래)
+            // ① 화면 맨 위 캔버스 (커서 바로 아래, 1단위 = 1픽셀). 선은 화면 왼쪽 아래를 원점으로 화면 좌표에 바로 그림
             var cgo = new GameObject("RushGauge", typeof(Canvas));
             cgo.transform.SetParent(transform, false);
             var cv = cgo.GetComponent<Canvas>(); cv.renderMode = RenderMode.ScreenSpaceOverlay; cv.sortingOrder = 32000;
-            ring = new GameObject("Ring", typeof(RectTransform)).GetComponent<RectTransform>();
-            ring.SetParent(cgo.transform, false); ring.anchorMin = ring.anchorMax = Vector2.zero;
-            Img(ring, "Frame", sFrame);
-            fill = Img(ring, "Fill", sFill); fill.type = Image.Type.Filled; fill.fillMethod = Image.FillMethod.Radial360;
-            fill.fillOrigin = (int)Image.Origin360.Top; fill.fillClockwise = true;
-            ready = Img(ring, "Ready", sReady);
-            knob = Img(ring, "Knob", sKnob); knob.rectTransform.anchorMin = knob.rectTransform.anchorMax = knob.rectTransform.pivot = new Vector2(0.5f, 0.5f);
-            ring.gameObject.SetActive(false);
+            line = new GameObject("CursorOutline", typeof(RectTransform), typeof(CanvasRenderer)).AddComponent<CursorOutline>();
+            var lt = line.rectTransform;
+            lt.SetParent(cgo.transform, false); lt.anchorMin = lt.anchorMax = lt.pivot = Vector2.zero; lt.anchoredPosition = Vector2.zero;
+            line.raycastTarget = false;
+            line.gameObject.SetActive(false);
 
             // ② 바닥에 깔리는 표시 (예전 rushMarker 와 같은 그리기 순서)
             mark = new GameObject("RushMark").transform; mark.SetParent(transform, false);
@@ -66,14 +65,6 @@ namespace NKK.Rats
             for (int i = 0; i < 4; i++) arrows[i] = Spr("Arrow" + i, sArrow, oldMarker);
             if (oldMarker) oldMarker.enabled = false;
             mark.gameObject.SetActive(false);
-        }
-
-        Image Img(RectTransform parent, string n, Sprite s)
-        {
-            var rt = new GameObject(n, typeof(RectTransform), typeof(Image)).GetComponent<RectTransform>();
-            rt.SetParent(parent, false); rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one; rt.offsetMin = rt.offsetMax = Vector2.zero;
-            var im = rt.GetComponent<Image>(); im.sprite = s; im.raycastTarget = false; im.preserveAspect = true;
-            return im;
         }
 
         SpriteRenderer Spr(string n, Sprite s, SpriteRenderer like)
@@ -101,41 +92,33 @@ namespace NKK.Rats
             wasCooling = cooling;
             if (popT >= 0) popT += Time.unscaledDeltaTime;
             bool pop = popT >= 0 && popT < popTime;
-            bool show = (cooling || pop) && m != null && !GameOver.Active;
-            if (ring.gameObject.activeSelf != show) ring.gameObject.SetActive(show);
+            bool show = (cooling || pop) && m != null && !GameOver.Active && CursorSkin.Current;
+            float px = CursorSkin.PixelSize;
+            // 지금 보이는 커서 그림(스킨 · 누름)의 외곽선에 맞춤. 그림을 못 읽으면 숨김
+            if (show) show = line.Place(CursorSkin.Current, CursorSkin.Hotspot, m.position.ReadValue(), px);
+            if (line.gameObject.activeSelf != show) line.gameObject.SetActive(show);
             if (!show) return;
 
-            float px = CursorSkin.PixelSize, d = px * ringScale;
-            Vector2 mp = m.position.ReadValue();
-            ring.anchoredPosition = mp + new Vector2(px * centerK, -px * centerK);
-            ring.sizeDelta = new Vector2(d, d);
-
+            float w = Mathf.Max(1.6f, px * lineK);
             if (pop)
             {
+                // 다 참 → 치즈색으로 한 바퀴 꽉, 잠깐 굵어졌다가 흐려지며 사라짐
                 float k = popT / popTime;
-                ring.localScale = Vector3.one * (1 + 0.25f * Mathf.Sin(Mathf.Min(k * 1.6f, 1) * Mathf.PI));
-                float a = 1 - Mathf.Clamp01((k - 0.45f) / 0.55f);
-                SetA(a); fill.enabled = false; ready.enabled = true; knob.enabled = false;
+                line.width = w * (1 + 0.6f * Mathf.Sin(Mathf.Min(k * 1.6f, 1) * Mathf.PI));
+                line.glow = line.width * glowK;
+                line.outset = Outset(line.width, px);
+                line.alpha = 1 - Mathf.Clamp01((k - 0.45f) / 0.55f);
+                line.lineColor = readyColor; line.fill = 1; line.knob = false;
                 return;
             }
-            float f = Mathf.Clamp01(1 - rm.RushCdLeft / span);                     // 빈 원 → 남은 쿨타임 동안 참
-            ring.localScale = Vector3.one; SetA(1);
-            fill.enabled = f > 0.001f; fill.fillAmount = f; ready.enabled = false;
-            knob.enabled = f > 0.001f;
-            if (knob.enabled)
-            {
-                // 진행 끝머리 동그란 점 (원 띠 한가운데)
-                float ang = Mathf.PI / 2 - f * Mathf.PI * 2, r = d * 0.5f * 0.86f, ks = d * 0.16f;
-                knob.rectTransform.anchoredPosition = new Vector2(Mathf.Cos(ang), Mathf.Sin(ang)) * r;
-                knob.rectTransform.sizeDelta = new Vector2(ks, ks);
-            }
+            line.width = w; line.glow = w * glowK; line.alpha = 1; line.outset = Outset(w, px);
+            line.lineColor = fillColor; line.knob = true;
+            line.fill = Mathf.Clamp01(1 - rm.RushCdLeft / span);                  // 빈 상태 → 남은 쿨타임 동안 코끝부터 한 바퀴
         }
 
-        void SetA(float a)
-        {
-            foreach (var im in new[] { fill, ready, knob }) { var c = im.color; c.a = a; im.color = c; }
-            var fr = ring.GetChild(0).GetComponent<Image>(); var fc = fr.color; fc.a = a; fr.color = fc;
-        }
+        // 선 안쪽 끝이 커서 그림 테두리에 닿도록 바깥으로 미는 거리. 외곽선 길은 커서에서 px/32 만큼 떨어져 있음 (원본 64px 기준 2px)
+        // → 굵은 선이 커서 그림 밑에 가려지지 않고 굵기 전부가 보임
+        static float Outset(float width, float px) => Mathf.Max(0, width * 0.5f - px / 32f);
 
         // ── ② 클릭 위치 표시
         void UpdateMark()

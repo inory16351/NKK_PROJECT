@@ -45,12 +45,16 @@ namespace NKK
             if (equipped != 0 && decos != null) foreach (var d in decos) if (d != null && d.decoId == equipped && d.normal) { n = d.normal; pr = d.pressed; break; }
             var tex = press && pr ? pr : n;
             PixelSize = CalcSize();
+            Current = tex; Hotspot = hotspot;
             var s = Scaled(tex, PixelSize);
             Cursor.SetCursor(s, hotspot * (PixelSize / (float)tex.width), forceSoftware ? CursorMode.ForceSoftware : CursorMode.Auto);
         }
 
-        // 화면에 보이는 커서 한 변 (픽셀) = 윈도우 기본 커서 32px × 화면 배율 (100% = 32, 150% = 48). 쿨타임 게이지가 이 크기를 둘러쌈
+        // 화면에 보이는 커서 한 변 (픽셀) = 윈도우 기본 커서 32px × 화면 배율 (100% = 32, 150% = 48). 쿨타임 게이지가 이 크기의 외곽선을 따라감
         public static int PixelSize { get; private set; } = 32;
+        // 지금 화면에 보이는 커서 원본 그림 (스킨 · 누름 반영) 과 끝점 (원본 픽셀, 왼쪽 위 기준) → 쿨타임 외곽선 (CursorOutline)
+        public static Texture2D Current { get; private set; }
+        public static Vector2 Hotspot { get; private set; }
         static int CalcSize() { float dpi = Screen.dpi > 0 ? Screen.dpi : 96; return Mathf.Clamp(Mathf.RoundToInt(32 * dpi / 96f), 32, 64); }
 
         // 원본(64px)을 PixelSize 로 줄인 사본 (크기별 캐시)
