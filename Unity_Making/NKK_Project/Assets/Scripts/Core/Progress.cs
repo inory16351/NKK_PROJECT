@@ -50,6 +50,7 @@ namespace NKK
             public bool achvIntro;                                   // 업적 안내 뒤 첫 정산 (지난 업적 소급)을 했음
             public List<int> achvSeen = new();                       // 업적 탭에서 확인한 업적 (NEW 표시)
             public List<string> birthFx = new();                     // 번식 탄생 연출 스위치: 연출을 본 쥐 종 (코드) — 저장 파일마다 종별 한 번 (2026-11-05)
+            public List<FriendPlace> friendPlace = new();            // 아지트에서 끌어 옮긴 쥐 친구 자리 (2026-11-06, 앙기뮤띠쥐)
         }
         // ── 쥐구멍 암시장 (상점 기획서 Shop_Save) · 유전자 뽑기 (뽑기 기획서 Gacha_Save) ──
         [Serializable] public class ShopItem { public int slot, goods; public string code; public bool sold; }

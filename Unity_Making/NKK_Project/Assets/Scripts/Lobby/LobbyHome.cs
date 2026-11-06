@@ -425,10 +425,12 @@ namespace NKK.Lobby
             var blockedBy = main ? main.inputBlocked : inputBlocked;
             bool blocked = blockedBy != null && blockedBy();
             Vector2 w = cam.ScreenToWorldPoint(m.position.ReadValue());
-            if (!blocked && !drag) { var over = AnyRatAt(w) ? null : hots.Find(h => h.Contains(w)); foreach (var h in hots) h.hover = h == over; }
+            // 앙기뮤띠쥐(LobbyHamster)를 누르는 중 · 들고 있거나 그 위면 쥐 · 물건 버튼은 그냥 둠 (2026-11-06 끌어 옮기기)
+            bool ham = LobbyHamster.Busy || LobbyHamster.HitAny(w);
+            if (!blocked && !drag && !ham) { var over = AnyRatAt(w) ? null : hots.Find(h => h.Contains(w)); foreach (var h in hots) h.hover = h == over; }
             else foreach (var h in hots) h.hover = false;
             if (blocked) { drag = null; pressedHot = null; return; }
-            if (m.leftButton.wasPressedThisFrame)
+            if (m.leftButton.wasPressedThisFrame && !ham)
             {
                 var a = HitRat(w);
                 if (a) { drag = a; dragMoved = false; dragStart = w; dragHist.Clear(); dragHist.Add((w, Time.time)); }

@@ -13,6 +13,11 @@ namespace NKK
     {
         [Serializable] public class DecoEquip { public string cat; public int id; }
         [Serializable] public class AchvAt { public int id; public long at; }
+        // 아지트에서 끌어 옮긴 쥐 친구 자리 (LobbyHamster): where 0 = 바닥 · 1 = 벽 · 2 = 자석 자리 (spot = 자리 이름), x · y = 발끝 (월드)
+        [Serializable] public class FriendPlace { public int id, where; public string spot; public float x, y; }
+        readonly Dictionary<int, FriendPlace> friendPlace = new();
+        public FriendPlace FriendPlaceOf(int decoId) => friendPlace.TryGetValue(decoId, out var p) ? p : null;
+        public void SetFriendPlace(FriendPlace p) { if (p == null) return; friendPlace[p.id] = p; Save(); }
 
         // ── 도토리 ──
         [Header("도토리 (저장됨, 보기용)")]
@@ -186,7 +191,7 @@ namespace NKK
         void ClearAcorn()
         {
             acorn = acornTotal = acornMini = acornAchv = judolRats = judolRuns = judolPending = 0; achvIntro = false;
-            decoOwn.Clear(); ratFriendOn.Clear(); superUsed.Clear(); bossKills.Clear(); achvSeen.Clear(); decoEquip.Clear(); achvAt.Clear();
+            decoOwn.Clear(); ratFriendOn.Clear(); superUsed.Clear(); bossKills.Clear(); achvSeen.Clear(); decoEquip.Clear(); achvAt.Clear(); friendPlace.Clear();
         }
         void SaveAcorn(SaveData d)
         {
@@ -194,6 +199,7 @@ namespace NKK
             d.decoOwn.AddRange(decoOwn); d.ratFriendOn.AddRange(ratFriendOn); d.superUsed.AddRange(superUsed); d.bossKills.AddRange(bossKills); d.achvSeen.AddRange(achvSeen);
             foreach (var kv in decoEquip) d.decoEquip.Add(new DecoEquip { cat = kv.Key, id = kv.Value });
             foreach (var kv in achvAt) d.achvAt.Add(new AchvAt { id = kv.Key, at = kv.Value });
+            d.friendPlace.AddRange(friendPlace.Values);
         }
         void LoadAcorn(SaveData d)
         {
@@ -205,6 +211,7 @@ namespace NKK
             if (d.achvSeen != null) foreach (var i in d.achvSeen) achvSeen.Add(i);
             if (d.decoEquip != null) foreach (var e in d.decoEquip) if (!string.IsNullOrEmpty(e.cat)) decoEquip[e.cat] = e.id;
             if (d.achvAt != null) foreach (var e in d.achvAt) achvAt[e.id] = e.at;
+            if (d.friendPlace != null) foreach (var p in d.friendPlace) if (p != null) friendPlace[p.id] = p;
             // 예전 저장의 필살기 업적(achvOn)은 그대로 · 기존 achvIntro 가 없으니 안내 뒤 첫 판정에서 남은 것만 소급
         }
     }
