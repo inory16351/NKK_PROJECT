@@ -30,6 +30,8 @@ namespace NKK.Hazards
             [Header("파츠 보스")]
             [Tooltip("두 번째 그림 (공격 그림)")] public bool alt = true;
             [Tooltip("파츠마다 더하는 각도 (°)")] public List<PartAngle> parts = new();
+            [Header("그리는 순서 (이 키부터 · 뒤 키로 이어짐)")]
+            [Tooltip("파츠 이름 → 순서 (고양이 farBack · farFront · tail · torso · back · front · head / 사람 armFar · legFar · legNear · torso · head · armNear / 파츠 보스 = 파츠 이름). 비면 원래 순서")] public List<PartOrder> orders = new();
         }
 
         [Serializable]
@@ -98,6 +100,22 @@ namespace NKK.Hazards
                 armN = L(a.armN, b.armN), armF = L(a.armF, b.armF), legN = L(a.legN, b.legN), legF = L(a.legF, b.legF), lean = L(a.lean, b.lean),
                 head = L(a.head, b.head), bob = L(a.bob, b.bob), sx = L(a.sx, b.sx), sy = L(a.sy, b.sy), angry = n.angry, scared = n.scared,
             };
+        }
+
+        // 지금 시간의 그리는 순서: 그 시간까지 지난 키들의 순서를 차례로 덮음 (어느 키에서 바꾼 순서는 뒤 키로 이어짐, 되돌리려면 뒤 키에서 다시 정함). 섞지 않고 단계로 바뀜
+        static readonly List<PartOrder> ordersBuf = new();
+        static readonly Dictionary<string, int> ordersMap = new();
+        public static List<PartOrder> Orders(Motion m, float t)
+        {
+            var ks = m.keys; if (ks.Count == 0) return null;
+            float end = ks[ks.Count - 1].t;
+            if (m.loop && t > end && end > m.loopFrom) t = m.loopFrom + Mathf.Repeat(t - m.loopFrom, end - m.loopFrom);
+            ordersMap.Clear();
+            foreach (var k in ks) { if (k.t > t + 1e-4f) break; if (k.orders != null) foreach (var o in k.orders) ordersMap[o.part] = o.order; }
+            if (ordersMap.Count == 0) return null;
+            ordersBuf.Clear();
+            foreach (var kv in ordersMap) ordersBuf.Add(new PartOrder { part = kv.Key, order = kv.Value });
+            return ordersBuf;
         }
 
         // 파츠 보스: 파츠마다 더하는 각도 · 두 번째 그림

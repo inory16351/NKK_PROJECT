@@ -71,6 +71,7 @@ public static class MonsterRigSave
         dst.neck = e.neck; dst.tailAnchor = e.tailAnchor; dst.shoulder = e.shoulder; dst.hip = e.hip;
         dst.legFront = e.legFront; dst.legBack = e.legBack; dst.headScale = e.headScale;
         dst.orders = Clone(new OrderBox { l = e.orders }).l;
+        dst.tweaks = Clone(new TweakBox { l = e.tweaks }).l;
         EditorUtility.SetDirty(lib);
 
         var anchors = new Dictionary<string, Vector2> { ["neck"] = e.neck, ["tail"] = e.tailAnchor, ["shoulder"] = e.shoulder, ["hip"] = e.hip };
@@ -79,6 +80,7 @@ public static class MonsterRigSave
             m["legScale"] = new JObject { ["front"] = R(e.legFront), ["back"] = R(e.legBack) };
             if (e.headScale > 0) m["headScale"] = R(e.headScale); else m.Remove("headScale");
             SourceOrder(m, e.orders);
+            SourceTweak(m, e.tweaks);
         });
         WriteMeta("Assets/Data/CatRigMeta.json", e.codeId, o =>
         {
@@ -86,6 +88,7 @@ public static class MonsterRigSave
             o["leg_front"] = R(e.legFront); o["leg_back"] = R(e.legBack);
             if (e.headScale > 0) o["head_scale"] = R(e.headScale); else o.Remove("head_scale");
             MetaOrder(o, e.orders);
+            MetaTweak(o, e.tweaks);
         });
         var n = WritePivots("Assets/Art/Rats/Cats/Parts/" + e.codeId + "/", pivots);
         AssetDatabase.SaveAssets();
@@ -100,6 +103,7 @@ public static class MonsterRigSave
         Undo.RecordObject(lib, "리깅 툴 반영");
         dst.neck = e.neck; dst.shoulder = e.shoulder; dst.hip = e.hip; dst.front = e.front; dst.headScale = e.headScale;
         dst.orders = Clone(new OrderBox { l = e.orders }).l;
+        dst.tweaks = Clone(new TweakBox { l = e.tweaks }).l;
         EditorUtility.SetDirty(lib);
 
         var anchors = new Dictionary<string, Vector2> { ["neck"] = e.neck, ["shoulder"] = e.shoulder, ["hip"] = e.hip };
@@ -108,12 +112,14 @@ public static class MonsterRigSave
             m["headScale"] = R(e.headScale > 0 ? e.headScale : 1);
             if (e.front) m["front"] = 1; else m.Remove("front");
             SourceOrder(m, e.orders);
+            SourceTweak(m, e.tweaks);
         });
         WriteMeta("Assets/Data/HumanRigMeta.json", e.codeId, o =>
         {
             o["neck"] = A(e.neck); o["shoulder"] = A(e.shoulder); o["hip"] = A(e.hip);
             o["front"] = e.front ? 1 : 0; o["head_scale"] = R(e.headScale > 0 ? e.headScale : 1);
             MetaOrder(o, e.orders);
+            MetaTweak(o, e.tweaks);
         });
         var n = WritePivots("Assets/Art/Rats/Humans/Parts/" + e.codeId + "/", pivots);
         AssetDatabase.SaveAssets();
@@ -131,6 +137,22 @@ public static class MonsterRigSave
     {
         if (l == null || l.Count == 0) { m.Remove("order"); return; }
         var a = new JArray(); foreach (var x in l) a.Add(new JObject { ["part"] = x.part, ["order"] = x.order }); m["order"] = a;
+    }
+
+    [Serializable] class TweakBox { public List<PartTweak> l = new(); }
+    static bool Plain(PartTweak t) => t.offset.sqrMagnitude < 1e-6f && Mathf.Abs(t.angle) < 1e-4f && Mathf.Abs(t.scale - 1) < 1e-4f;
+    // 파츠별 위치 · 회전 · 크기: 원본 pivots.json = {"tweak": {"head": {"offset": [x, y], "angle": a, "scale": s}}} · *RigMeta.json = "tweak": [{part, offset, angle, scale}]
+    static void SourceTweak(JObject m, List<PartTweak> l)
+    {
+        var o = new JObject();
+        if (l != null) foreach (var t in l) if (!Plain(t)) o[t.part] = new JObject { ["offset"] = A(t.offset), ["angle"] = R(t.angle), ["scale"] = R(t.scale) };
+        if (o.Count == 0) m.Remove("tweak"); else m["tweak"] = o;
+    }
+    static void MetaTweak(JObject m, List<PartTweak> l)
+    {
+        var a = new JArray();
+        if (l != null) foreach (var t in l) if (!Plain(t)) a.Add(new JObject { ["part"] = t.part, ["offset"] = A(t.offset), ["angle"] = R(t.angle), ["scale"] = R(t.scale) });
+        if (a.Count == 0) m.Remove("tweak"); else m["tweak"] = a;
     }
 
     static JToken R(float v) => Math.Round((double)v, 4);

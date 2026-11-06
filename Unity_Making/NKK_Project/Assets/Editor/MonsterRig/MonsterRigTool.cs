@@ -48,7 +48,7 @@ public partial class MonsterRigTool : EditorWindow
     GameObject catPrefab, humanPrefab;
 
     // 끌기
-    enum Drag { None, Move, Image, Rotate, Pan }
+    enum Drag { None, Move, Image, Rotate, Scale, Anchor, Pan }
     Drag drag; Vector2 dragStartMouse; Vector3 lastWorld; float lastAngle;
 
     // 고양이 · 사람 파츠 → 몸통 부착점 · 관절을 고칠 수 있는 그림 칸
@@ -236,11 +236,12 @@ public partial class MonsterRigTool : EditorWindow
                 if (alt) { p.front = 2.1f; p.farFront = 0.5f; p.tilt = -0.3f; p.head = -0.2f; p.tail = 1.1f; rr.headReplace = e.head2; }
                 if (mot) p = MotionCat(rr, e, codeMotion);
                 rr.Apply(p, 1, -1, 1, 0);
+                if (mot) rr.SetTempOrders(MotionOrders(codeMotion));      // 모션 키의 그리는 순서
                 if (mot) Lift(o);
                 if (map != null)
                 {
-                    map[rr.head] = "head"; map[rr.torso] = "torso"; map[rr.tail] = "tail";
-                    map[rr.front] = map[rr.farFront] = "front"; map[rr.back] = map[rr.farBack] = "back";
+                    map[rr.head] = "head"; map[rr.torso] = "torso"; map[rr.tail] = "tail";      // 렌더러마다 따로 (가까운 · 먼 다리 하나씩)
+                    map[rr.front] = "front"; map[rr.farFront] = "farFront"; map[rr.back] = "back"; map[rr.farBack] = "farBack";
                 }
                 return o;
             }
@@ -258,11 +259,12 @@ public partial class MonsterRigTool : EditorWindow
                 if (alt) { p.angry = true; p.armN = 1.2f; p.armF = -1.2f; }
                 if (mot) p = MotionHuman(codeMotion);
                 hr.Apply(p, 1, -1, 0, 1, 0, 1);
+                if (mot) hr.SetTempOrders(MotionOrders(codeMotion));
                 if (mot) Lift(o);
                 if (map != null)
                 {
-                    map[hr.head] = "head"; map[hr.torso] = "torso"; map[hr.armNear] = "arm"; map[hr.armFar] = e.arm2 ? "arm2" : "arm";
-                    map[hr.legNear] = map[hr.legFar] = "leg";
+                    map[hr.head] = "head"; map[hr.torso] = "torso"; map[hr.armNear] = "armNear"; map[hr.armFar] = "armFar";
+                    map[hr.legNear] = "legNear"; map[hr.legFar] = "legFar";
                 }
                 return o;
             }
@@ -333,9 +335,9 @@ public partial class MonsterRigTool : EditorWindow
     }
 
     string Hint() => cur == null ? "왼쪽 목록에서 몬스터를 고르세요"
-        : motionMode ? "모션: ▶ 재생 · 시간 막대 · 몸을 끌면 지금 시간 키의 관절이 돌아감 (키가 없으면 저절로 생김) · 휠 = 확대 · 오른쪽 끌기 = 화면 이동"
-        : cur.kind == Kind.Part ? "끌기 = 파츠 옮기기 · Shift+끌기 = 관절은 두고 그림만 · Ctrl+끌기 = 돌리기 · 휠 = 확대 · 오른쪽 끌기 = 화면 이동 · F = 화면 맞춤"
-        : "끌기 = 몸통에 붙는 자리 옮기기 (목 · 어깨 · 엉덩이 · 꼬리, 발이 바닥 기준이라 몸통이 대신 움직일 수 있음) · Shift+끌기 = 그림 관절(그림만 옮기기) · 휠 = 확대 · F = 화면 맞춤";
+        : motionMode ? "모션: ▶ 재생 · 시간 막대 · 몸을 끌면 지금 시간 키의 관절이 돌아감 (키가 없으면 저절로 생김) · ] / [ = 누른 파츠 앞으로 / 뒤로 (이 키부터) · 휠 = 확대 · 오른쪽 끌기 = 화면 이동"
+        : cur.kind == Kind.Part ? "끌기 = 파츠 옮기기 · Shift+끌기 = 관절은 두고 그림만 · Ctrl+끌기 = 돌리기 · Alt+위아래 = 크기 · 휠 = 확대 · 오른쪽 끌기 = 화면 이동 · F = 화면 맞춤"
+        : "끌기 = 그 파츠 하나만 옮기기 (가까운 · 먼 팔다리 따로) · Ctrl = 돌리기 · Alt+위아래 = 크기 · Shift = 그림 관절 (같은 그림 양쪽) · Ctrl+Shift = 몸통에 붙는 자리 (양쪽 같이) · 휠 = 확대 · F = 화면 맞춤";
 
     void DrawList()
     {
@@ -461,6 +463,12 @@ public partial class MonsterRigTool : EditorWindow
     {
         if (cur == null) return;
         var id = GUIUtility.GetControlID(FocusType.Passive);
+        // 글자 칸에 입력 중이 아닐 때만 단축키 (F = 화면 맞춤 · ] [ = 고른 파츠 앞으로 / 뒤로)
+        if (e.type == EventType.KeyDown && !EditorGUIUtility.editingTextField)
+        {
+            if (e.keyCode == KeyCode.F) { Fit(); e.Use(); Repaint(); return; }
+            if ((e.keyCode == KeyCode.RightBracket || e.keyCode == KeyCode.LeftBracket) && sel != null) { StepOrder(sel, e.keyCode == KeyCode.RightBracket ? 1 : -1); e.Use(); Rebuild(); Repaint(); return; }
+        }
         switch (e.GetTypeForControl(id))
         {
             case EventType.ScrollWheel when r.Contains(e.mousePosition):
@@ -472,7 +480,6 @@ public partial class MonsterRigTool : EditorWindow
                 e.Use(); Repaint();
                 break;
             }
-            case EventType.KeyDown when e.keyCode == KeyCode.F: Fit(); e.Use(); Repaint(); break;
             case EventType.MouseDown when r.Contains(e.mousePosition):
             {
                 GUIUtility.hotControl = id;
@@ -483,7 +490,7 @@ public partial class MonsterRigTool : EditorWindow
                 drag = Drag.None;
                 if (sel != null)
                 {
-                    drag = motionMode ? Drag.Rotate : e.shift ? Drag.Image : e.control && cur.kind == Kind.Part ? Drag.Rotate : Drag.Move;
+                    drag = motionMode ? Drag.Rotate : e.control && e.shift && cur.kind != Kind.Part ? Drag.Anchor : e.alt ? Drag.Scale : e.shift ? Drag.Image : e.control ? Drag.Rotate : Drag.Move;
                     if (motionMode) { motionDragR = PickRenderer(lastWorld); if (!motionDragR || !BeginMotionDrag()) drag = Drag.None; }
                     Undo.IncrementCurrentGroup();
                     if (drag == Drag.Rotate) lastAngle = AngleAt(r, e.mousePosition);
@@ -500,6 +507,8 @@ public partial class MonsterRigTool : EditorWindow
                     Undo.RecordObject(work, "리깅 툴 끌기");
                     if (drag == Drag.Rotate && motionMode) { float a = AngleAt(r, e.mousePosition); MotionRotate(Mathf.DeltaAngle(lastAngle, a)); lastAngle = a; }
                     else if (drag == Drag.Rotate) { float a = AngleAt(r, e.mousePosition); Rotate(Mathf.DeltaAngle(lastAngle, a)); lastAngle = a; }
+                    else if (drag == Drag.Scale) Resize(Mathf.Exp(-e.delta.y * 0.01f));
+                    else if (drag == Drag.Anchor) MoveAnchor(w - lastWorld);
                     else DragBy(w - lastWorld, drag == Drag.Image);
                     lastWorld = w;
                     Rebuild();
@@ -544,6 +553,7 @@ public partial class MonsterRigTool : EditorWindow
 
     void Rotate(float deg)
     {
+        if (cur.kind != Kind.Part) { var tw = Tweak(sel, true); if (tw != null) tw.angle = Mathf.Round((tw.angle + deg) * 10) / 10; return; }
         var p = work.part.parts.Find(x => x.name == sel); if (p == null) return;
         // 화면 각도 → 관절 기준 각도 (부모가 뒤집혀 있으면 반대)
         var j = Joint(sel); float sign = j && j.parent && j.parent.lossyScale.x * j.parent.lossyScale.y < 0 ? -1 : 1;
@@ -593,19 +603,68 @@ public partial class MonsterRigTool : EditorWindow
         }
         else
         {
-            var an = AnchorName(sel); var torso = Renderer("torso");
-            if (an == null || !torso || !torso.sprite) { status = "몸통은 다른 파츠가 붙는 기준이라 옮길 수 없어요 (Shift+끌기 = 그림 관절)"; return; }
-            var d = torso.transform.InverseTransformVector(wd) * 100;
-            var a = AnchorOf(an);
-            SetAnchor(an, R4(new Vector2(a.x + d.x / torso.sprite.rect.width, a.y - d.y / torso.sprite.rect.height)));
+            // 이 파츠(렌더러 하나)만 옮김: 부모(몸) 좌표 픽셀
+            var sr = Renderer(sel); var tw = Tweak(sel, true); if (!sr || tw == null) return;
+            var d = sr.transform.parent.InverseTransformVector(wd) * 100;
+            tw.offset = new Vector2(Mathf.Round((tw.offset.x + d.x) * 10) / 10, Mathf.Round((tw.offset.y + d.y) * 10) / 10);
         }
+    }
+
+    // ] = 앞으로 · [ = 뒤로 (고른 파츠 하나). 모션 = 지금 시간 키의 순서 (키가 없으면 만듦), 리그 = 그 몬스터의 순서
+    void StepOrder(string part, int d)
+    {
+        var rr = cur.kind == Kind.Part ? Renderer(part) : RigRenderer(part); if (!rr) return;
+        int now = rr.sortingOrder;
+        if (motionMode && curMove != null)
+        {
+            if (!HasKeys) { status = "모션 키가 없어요 ('코드 모션을 키로 만들기' 먼저)"; return; }
+            selKey = AddKeyNow();
+            Undo.RecordObject(mwork, "그리는 순서");
+            var k = mwork.motion.keys[selKey]; var o = k.orders.Find(x => x.part == part);
+            if (o == null) k.orders.Add(o = new PartOrder { part = part, order = now });
+            o.order = now + d;
+            status = $"키 {selKey + 1} ({k.t:0.00}s): {part} 순서 {o.order}";
+            return;
+        }
+        Undo.RecordObject(work, "그리는 순서");
+        if (cur.kind == Kind.Part) { var p = work.part.parts.Find(x => x.name == part); if (p != null) { p.order += d; status = $"{part} 순서 {p.order}"; } return; }
+        var l = cur.kind == Kind.Cat ? work.cat.orders : work.human.orders;
+        var ov = l.Find(x => x.part == part); if (ov == null) l.Add(ov = new PartOrder { part = part, order = now });
+        ov.order = now + d; status = $"{part} 순서 {ov.order}";
+    }
+
+    // 몸통에 붙는 자리 (양쪽 팔 · 다리가 같이 움직임) — 고양이 · 사람 Ctrl+Shift+끌기
+    void MoveAnchor(Vector3 wd)
+    {
+        var an = AnchorName(sel); var torso = Renderer("torso");
+        if (an == null || !torso || !torso.sprite) { status = "몸통은 다른 파츠가 붙는 기준이라 붙는 자리가 없어요"; return; }
+        var d = torso.transform.InverseTransformVector(wd) * 100;
+        var a = AnchorOf(an);
+        SetAnchor(an, R4(new Vector2(a.x + d.x / torso.sprite.rect.width, a.y - d.y / torso.sprite.rect.height)));
+    }
+
+    // 크기 (Alt+끌기 위아래): 파츠 보스 = scale, 고양이 · 사람 = 그 렌더러만
+    void Resize(float f)
+    {
+        if (cur.kind == Kind.Part) { var p = work.part.parts.Find(x => x.name == sel); if (p != null) p.scale = Mathf.Clamp(Mathf.Round(p.scale * f * 1000) / 1000, 0.05f, 10); return; }
+        var tw = Tweak(sel, true); if (tw != null) tw.scale = Mathf.Clamp(Mathf.Round(tw.scale * f * 1000) / 1000, 0.05f, 10);
+    }
+
+    // 고양이 · 사람 파츠 하나의 위치 · 회전 · 크기 (없으면 만듦)
+    PartTweak Tweak(string part, bool make)
+    {
+        if (string.IsNullOrEmpty(part)) return null;
+        var l = cur.kind == Kind.Cat ? work.cat.tweaks : work.human.tweaks;
+        var t = l.Find(x => x.part == part);
+        if (t == null && make) { t = new PartTweak { part = part }; l.Add(t); }
+        return t;
     }
 
     static Vector2 R4(Vector2 v) => new(Mathf.Round(v.x * 10000) / 10000, Mathf.Round(v.y * 10000) / 10000);
 
     string AnchorName(string part) => cur.kind == Kind.Cat
-        ? part switch { "head" or "head2" => "neck", "tail" => "tailAnchor", "front" => "shoulder", "back" => "hip", _ => null }
-        : part switch { "head" or "scared" or "angry" => "neck", "arm" or "arm2" => "shoulder", "leg" => "hip", _ => null };
+        ? part switch { "head" or "head2" => "neck", "tail" => "tailAnchor", "front" or "farFront" => "shoulder", "back" or "farBack" => "hip", _ => null }
+        : part switch { "head" or "scared" or "angry" => "neck", "armNear" or "armFar" or "arm" or "arm2" => "shoulder", "legNear" or "legFar" or "leg" => "hip", _ => null };
 
     Vector2 AnchorOf(string an)
     {
@@ -732,13 +791,34 @@ public partial class MonsterRigTool : EditorWindow
             var s = cat ? CatSprite(work.cat, pv.part) : HumanSprite(work.human, pv.part);
             EditorGUILayout.BeginHorizontal();
             var st = new GUIStyle(EditorStyles.label); if (pv.part == sel || sel == "arm" && pv.part == "arm2" && false) st.normal.textColor = new Color(1f, 0.8f, 0.3f);
-            if (GUILayout.Button(pv.part, st, GUILayout.Width(52))) { sel = pv.part == "head2" || pv.part == "scared" || pv.part == "angry" ? "head" : pv.part; Repaint(); }
+            if (GUILayout.Button(pv.part, st, GUILayout.Width(52))) { sel = pv.part switch { "head2" or "scared" or "angry" => "head", "arm" => "armNear", "arm2" => "armFar", "leg" => "legNear", _ => pv.part }; Repaint(); }
             EditorGUI.BeginChangeCheck();
             var v = EditorGUILayout.Vector2Field(GUIContent.none, pv.tl);
             if (EditorGUI.EndChangeCheck()) { Undo.RecordObject(work, "관절"); pv.tl = v; GUI.changed = true; }
             if (GUILayout.Button("그림…", GUILayout.Width(46))) ReplaceImage(s);
             EditorGUILayout.EndHorizontal();
         }
+        EditorGUILayout.Space(6);
+        EditorGUILayout.LabelField("파츠 하나씩 위치 · 회전 · 크기 (굵게 = 바꾼 값)", EditorStyles.boldLabel);
+        foreach (var (part, label) in cat ? CatOrders : HumanOrders)
+        {
+            var tw = Tweak(part, false);
+            var st = new GUIStyle(tw != null ? EditorStyles.boldLabel : EditorStyles.label); if (part == sel) st.normal.textColor = new Color(1f, 0.8f, 0.3f);
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button(label, st, GUILayout.Width(80))) { sel = part; Repaint(); }
+            var o = tw != null ? tw.offset : Vector2.zero; float an = tw != null ? tw.angle : 0, sc = tw != null ? tw.scale : 1;
+            EditorGUI.BeginChangeCheck();
+            EditorGUIUtility.labelWidth = 14;
+            o.x = EditorGUILayout.FloatField("x", o.x, GUILayout.Width(52)); o.y = EditorGUILayout.FloatField("y", o.y, GUILayout.Width(52));
+            EditorGUIUtility.labelWidth = 16;
+            an = EditorGUILayout.FloatField("°", an, GUILayout.Width(52)); sc = EditorGUILayout.FloatField("×", sc, GUILayout.Width(50));
+            EditorGUIUtility.labelWidth = 0;
+            if (EditorGUI.EndChangeCheck()) { Undo.RecordObject(work, "파츠 위치 · 회전 · 크기"); var t = Tweak(part, true); t.offset = o; t.angle = an; t.scale = Mathf.Max(0.05f, sc); GUI.changed = true; }
+            if (tw != null && GUILayout.Button("기본", EditorStyles.miniButton, GUILayout.Width(36))) { Undo.RecordObject(work, "파츠 위치 · 회전 · 크기"); (cat ? work.cat.tweaks : work.human.tweaks).Remove(tw); GUI.changed = true; }
+            EditorGUILayout.EndHorizontal();
+        }
+        EditorGUILayout.LabelField("x · y = 픽셀 (오른쪽 · 위 +) · ° = 반시계 + · × = 크기. 끌기 = 옮기기 · Ctrl = 돌리기 · Alt = 크기", EditorStyles.miniLabel);
+
         EditorGUILayout.Space(6);
         EditorGUILayout.LabelField("그리는 순서 (클수록 앞 · 굵게 = 이 몬스터만 바꾼 값)", EditorStyles.boldLabel);
         var orders = cat ? work.cat.orders : work.human.orders;
@@ -762,8 +842,8 @@ public partial class MonsterRigTool : EditorWindow
 
         EditorGUILayout.Space(4);
         EditorGUILayout.HelpBox(cat
-            ? "고양이: 끌기 = 붙는 자리 (머리→목 · 앞다리→어깨 · 뒷다리→엉덩이 · 꼬리), Shift+끌기 = 그 그림의 관절. 먼 쪽 다리 간격 · 그리는 순서는 리그 공통 값 (RatRig)."
-            : "사람: 끌기 = 붙는 자리 (머리→목 · 팔→어깨 · 다리→엉덩이), Shift+끌기 = 그 그림의 관절. 다리는 발이 바닥 기준이라 엉덩이를 옮기면 몸통이 움직여요. 팔 · 다리 앞뒤 간격 · 순서는 리그 공통 값 (HumanRig).",
+            ? "고양이: 끌기 = 그 파츠만 옮기기 (가까운 · 먼 다리 하나씩) · Ctrl = 돌리기 · Alt+위아래 = 크기 · Shift = 그림 관절 (같은 그림을 쓰는 양쪽 다리 같이) · Ctrl+Shift = 몸통에 붙는 자리 (머리→목 · 앞다리→어깨 · 뒷다리→엉덩이 · 꼬리, 양쪽 같이)."
+            : "사람: 끌기 = 그 파츠만 옮기기 (가까운 · 먼 팔다리 하나씩) · Ctrl = 돌리기 · Alt+위아래 = 크기 · Shift = 그림 관절 (같은 그림 양쪽) · Ctrl+Shift = 몸통에 붙는 자리 (양쪽 같이, 다리는 발이 바닥 기준이라 엉덩이를 옮기면 몸통이 움직임).",
             MessageType.None);
     }
 

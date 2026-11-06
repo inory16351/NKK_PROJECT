@@ -6,6 +6,8 @@ namespace NKK.Rats
 {
     // 몬스터별 그리는 순서 덮어쓰기 (몬스터 리깅 툴, 2026-11-06): 파츠 이름 (RatRig: farBack · farFront · tail · torso · back · front · head / HumanRig: armFar · legFar · legNear · torso · head · armNear) → sortingOrder (클수록 앞). 없으면 리그 기본 순서
     [Serializable] public class PartOrder { public string part; public int order; }
+    // 몬스터별 파츠 위치 · 회전 · 크기 (몬스터 리깅 툴, 2026-11-06): 렌더러 하나만 (가까운 · 먼 다리 따로). offset = 리그 픽셀 (오른쪽 · 위 +), angle = 도 (반시계 +), scale = 배율
+    [Serializable] public class PartTweak { public string part; public Vector2 offset; public float angle; public float scale = 1; }
 
     // 종별 리그 그림(파츠 5장) + 몸통 부착점. 메뉴 NKK/Build Rat Art Library 로 Assets/Art/Rats/Parts 와 RatRigMeta.json 에서 채움.
     // 값은 인스펙터에서 바로 고칠 수 있음.
@@ -32,6 +34,7 @@ namespace NKK.Rats
             [Tooltip("두 마리가 붙은 쥐 (콩쥐팥쥐): 위에 거꾸로 붙는 쥐 그림 code_id")] public string twinCodeId;
             [Tooltip("머리만 있는 쥐 (나비쥐): 몸통·다리 없이 머리 + 날개(귀) + 꼬리")] public bool headOnly;
             [Tooltip("그리는 순서 덮어쓰기 (비면 리그 기본 순서) — 몬스터 리깅 툴")] public List<PartOrder> orders = new();
+            [Tooltip("파츠별 위치 · 회전 · 크기 (렌더러 하나만) — 몬스터 리깅 툴")] public List<PartTweak> tweaks = new();
             // 겉모습이 한 장짜리인지 (파츠가 없거나, 화면 속 쥐)
             public bool IsSingle => single && (torso == null || screen);
         }

@@ -86,8 +86,11 @@
   - 파츠 보스 → `Data/BossPartArt.asset` + `Data/BossPartArtEdits.asset` (`NKK/Build Boss Part Art` 로 다시 만들어도 고친 보스는 이 값으로 다시 덮음). `rig_web/*.json` 은 안 바뀜.
   - 고양이 · 사람 → `Cats|Humans/Parts/pivots.json`(원본) · `Data/CatRigMeta|HumanRigMeta.json` · `Art/Rats/sprite_pivots.json` · 그림 `.meta` 피벗(다시 임포트) · `Data/CatArtLibrary|HumanArtLibrary.asset`. 원본 json 은 파이썬 json.dump 모양 그대로 고친 줄만 바뀜 → `Tools/gen_sprite_pivots.py` 를 다시 돌려도 같은 값 (고양이 `headScale` 도 이제 CatRigMeta 로 나감).
 - **그리는 순서(레이어)**: 파츠 보스 = 파츠마다 `order` (▲ 앞으로 · ▼ 뒤로). 고양이 · 사람 = 몬스터마다 덮어쓰기 (2026-11-06): 오른쪽 칸 '그리는 순서' → `CatArtLibrary|HumanArtLibrary` 의 `orders` · `*RigMeta.json` `"order": [{part, order}]` · 원본 pivots.json `"order": {파츠: 순서}` (비면 리그 기본 순서). `RatRig` · `HumanRig` 가 Build 때 적용, 고양이가 앞발을 치켜들면 앞다리는 머리 바로 앞.
-- 리그 공통 값(고양이 먼 다리 간격, 사람 팔 · 다리 앞뒤 간격)은 몬스터마다가 아니라 `RatRig` · `HumanRig` 코드 값.
+- **파츠 하나씩 위치 · 회전 · 크기 (2026-11-06)**: 고양이 · 사람도 렌더러 하나씩 (가까운 · 먼 팔다리 따로). 끌기 = 옮기기 · Ctrl = 돌리기 · Alt+위아래 = 크기 · Shift = 그림 관절 (같은 그림 양쪽) · Ctrl+Shift = 몸통에 붙는 자리 (양쪽 같이). 파츠 보스도 Alt+위아래 = 크기.
+  저장 = `*ArtLibrary` 의 `tweaks` · `*RigMeta.json` `"tweak": [{part, offset, angle, scale}]` · 원본 pivots.json `"tweak": {파츠: {offset, angle, scale}}`. `RatRig` · `HumanRig` 가 Build 때 위치 · 크기, Apply 때 각도를 자세에 더함.
+- 리그 공통 값(고양이 먼 다리 간격, 사람 팔 · 다리 앞뒤 간격)은 몬스터마다가 아니라 `RatRig` · `HumanRig` 코드 값 (툴에선 파츠 하나씩 옮겨서 맞춤).
 - **공격 · 필살기 모션 (2026-11-06)**: 보스를 고르고 위 막대 '공격 · 필살기 모션'. 기술 5칸(일반 · 두 번째 · 필살기(쿨타임 스킬) · 발악 1 · 발악 2)을 시간 막대로 재생 (준비 → 공격 · 점프는 몸이 뜸, opt `head:` 머리 바뀜 포함).
   - 고친 모션이 없으면 게임 코드 자세 그대로 (`Boss.CatAttackPose` · `HumanAttackPose`, 파츠 보스 = 두 번째 그림). '코드 모션을 키로 만들기' → 키 프레임 (공격 시작부터 초)으로 고침: 미리보기 몸을 끌면 지금 시간 키의 관절이 돌아감 (고양이 몸통 = 몸 기울기) · 오른쪽 칸 값 (°) · 키 추가 · 복제 · 삭제 · 반복. 파란 겹침 = 코드 기본 모션.
   - 반영 = `Assets/Resources/BossMotion.asset` (보스 × 기술). 게임은 그 기술 동안 키 사이를 부드럽게 이음 (`BossMotion`, `Boss.MakeCatPose` · `MakePose` · 파츠 `BossPartRig.extra`). 효과(투사체 · 소환)와 판정은 코드 그대로. 키를 다 지우고 반영 = 코드 기본으로.
+  - **모션 중 그리는 순서 (2026-11-06)**: 키마다 파츠 순서 (오른쪽 칸 '그리는 순서' 또는 미리보기에서 파츠를 누르고 `]` 앞으로 · `[` 뒤로). 그 키부터 뒤 키로 이어짐 (되돌리려면 뒤 키에서 다시 정함). 게임 = `BossMotion.Orders` → `RatRig` · `HumanRig.SetTempOrders` · 파츠 `BossPartRig.orderOverride`, 공격이 끝나면 원래 순서.
   - **게임에서 보기**: Game 씬을 플레이해서 그 보스를 테스트 소환(체력 아주 크게) → 그 기술 바로 발동 (`MonsterRigPlayTest`, 플레이 중이면 다시 누를 때마다 발동). 플레이를 멈추면 원래 씬으로. 진짜 게임이 돌아서 지금 슬롯 저장값이 바뀔 수 있음.

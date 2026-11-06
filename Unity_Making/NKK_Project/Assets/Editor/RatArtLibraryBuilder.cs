@@ -39,7 +39,7 @@ public static class RatArtLibraryBuilder
                 neck = V(m.neck), tailAnchor = V(m.tail), shoulder = V(m.shoulder), hip = V(m.hip),
                 legFront = m.leg_front, legBack = m.leg_back,
                 wing = S(d + "wing.png"), wingAnchor = m.wing_anchor != null && m.wing_anchor.Length >= 2 ? V(m.wing_anchor) : new Vector2(0.3f, 0.1f), wingSize = m.wing_size > 0 ? m.wing_size : 1.4f, wing2 = S(d + "wing2.png"), wingFar = S(d + "wing_far.png"), wing2Far = S(d + "wing2_far.png"), wing2Anchor = m.wing2_anchor != null && m.wing2_anchor.Length >= 2 ? V(m.wing2_anchor) : new Vector2(0.3f, 0.7f), wing2Size = m.wing2_size > 0 ? m.wing2_size : 0.7f, headScale = m.head_scale, twinCodeId = m.twin, headOnly = m.head_only == 1,
-                orders = Orders(m.order),
+                orders = Orders(m.order), tweaks = Tweaks(m.tweak),
             });
         }
         foreach (var id in singles)
@@ -77,6 +77,15 @@ public static class RatArtLibraryBuilder
         Debug.Log($"[{assetPath}] {lib.entries.Count}종");
     }
 
+    // 파츠별 위치 · 회전 · 크기 (몬스터 리깅 툴 → *RigMeta.json "tweak")
+    public static System.Collections.Generic.List<PartTweak> Tweaks(System.Collections.Generic.List<RigTweakRow> rows)
+    {
+        var l = new System.Collections.Generic.List<PartTweak>();
+        if (rows != null) foreach (var r in rows)
+                if (!string.IsNullOrEmpty(r.part)) l.Add(new PartTweak { part = r.part, offset = r.offset != null && r.offset.Length >= 2 ? new Vector2(r.offset[0], r.offset[1]) : Vector2.zero, angle = r.angle, scale = r.scale > 0 ? r.scale : 1 });
+        return l;
+    }
+
     // 그리는 순서 덮어쓰기 (몬스터 리깅 툴 → *RigMeta.json "order")
     public static System.Collections.Generic.List<PartOrder> Orders(System.Collections.Generic.List<RigOrderRow> rows)
     {
@@ -108,7 +117,7 @@ public static class HumanArtLibraryBuilder
             {
                 codeId = m.code_id, head = S(d + "head.png"), scared = S(d + "scared.png"), angry = S(d + "angry.png"), torso = S(d + "torso.png"),
                 arm = S(d + "arm.png"), arm2 = S(d + "arm2.png"), leg = S(d + "leg.png"), neck = V(m.neck), shoulder = V(m.shoulder), hip = V(m.hip), front = m.front == 1, headScale = m.head_scale > 0 ? m.head_scale : 1,
-                orders = RatArtLibraryBuilder.Orders(m.order),
+                orders = RatArtLibraryBuilder.Orders(m.order), tweaks = RatArtLibraryBuilder.Tweaks(m.tweak),
             });
         }
         EditorUtility.SetDirty(lib);

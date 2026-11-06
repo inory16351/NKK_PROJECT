@@ -61,6 +61,34 @@ namespace NKK.Humans
             }
             // 몬스터별 그리는 순서 덮어쓰기 (몬스터 리깅 툴)
             if (e.orders != null) foreach (var o in e.orders) { var r = PartRenderer(o.part); if (r) r.sortingOrder = o.order; }
+            // 파츠별 위치 · 회전 · 크기 (몬스터 리깅 툴, 렌더러 하나만): 위치 · 크기는 여기서, 각도는 Apply 가 자세에 더함
+            tweak.Clear(); tempOn = false;
+            foreach (var r in new[] { armFar, legFar, legNear, torso, armNear }) r.transform.localScale = Vector3.one;
+            torso.transform.localRotation = Quaternion.identity;
+            if (e.tweaks != null)
+                foreach (var t in e.tweaks)
+                {
+                    var r = PartRenderer(t.part); if (!r || tweak.ContainsKey(r)) continue;
+                    tweak[r] = t;
+                    r.transform.localPosition += (Vector3)(t.offset / 100f);
+                    r.transform.localScale *= t.scale;
+                    if (r == torso) r.transform.localRotation = Quaternion.Euler(0, 0, t.angle);
+                }
+            baseOrder.Clear(); foreach (var r in new[] { armFar, legFar, legNear, torso, head, armNear }) baseOrder[r] = r.sortingOrder;
+        }
+
+        readonly Dictionary<SpriteRenderer, NKK.Rats.PartTweak> tweak = new();
+        float TA(SpriteRenderer r) => tweak.Count > 0 && tweak.TryGetValue(r, out var t) ? t.angle : 0;
+
+        // 모션 중 그리는 순서 (보스 공격 · 필살기 모션 키, Apply 뒤에 부름). 비우면 원래 순서로
+        readonly Dictionary<SpriteRenderer, int> baseOrder = new();
+        bool tempOn;
+        public void SetTempOrders(List<NKK.Rats.PartOrder> l)
+        {
+            bool any = l != null && l.Count > 0;
+            if (tempOn) foreach (var kv in baseOrder) if (kv.Key) kv.Key.sortingOrder = kv.Value;
+            tempOn = any;
+            if (any) foreach (var o in l) { var r = PartRenderer(o.part); if (r) r.sortingOrder = o.order; }
         }
 
         public SpriteRenderer PartRenderer(string part) => part switch { "armFar" => armFar, "legFar" => legFar, "legNear" => legNear, "torso" => torso, "head" => head, "armNear" => armNear, _ => null };
@@ -90,11 +118,11 @@ namespace NKK.Humans
             head.sprite = p.scared && art.scared ? art.scared : p.angry && art.angry ? art.angry : art.head;
             const float D = Mathf.Rad2Deg;
             body.localRotation = Quaternion.Euler(0, 0, -p.lean * D);
-            armFar.transform.localRotation = Quaternion.Euler(0, 0, p.armF * D);
-            legFar.transform.localRotation = Quaternion.Euler(0, 0, p.legF * D);
-            legNear.transform.localRotation = Quaternion.Euler(0, 0, p.legN * D);
-            head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D);
-            armNear.transform.localRotation = Quaternion.Euler(0, 0, p.armN * D);
+            armFar.transform.localRotation = Quaternion.Euler(0, 0, p.armF * D + TA(armFar));
+            legFar.transform.localRotation = Quaternion.Euler(0, 0, p.legF * D + TA(legFar));
+            legNear.transform.localRotation = Quaternion.Euler(0, 0, p.legN * D + TA(legNear));
+            head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D + TA(head));
+            armNear.transform.localRotation = Quaternion.Euler(0, 0, p.armN * D + TA(armNear));
             var c = new Color(1, 1, 1, alpha);
             torso.color = head.color = legNear.color = armNear.color = c;
             var fc = art.front ? Color.white : farColor;

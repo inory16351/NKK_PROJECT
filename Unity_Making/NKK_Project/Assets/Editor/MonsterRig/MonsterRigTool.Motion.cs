@@ -132,9 +132,13 @@ public partial class MonsterRigTool
         return p;
     }
     HumanRig.Pose MotionHuman(bool code) => !code && HasKeys && mt < End ? BossMotion.Human(mwork.motion, mt) : CodeHuman(mt);
+    // 지금 시간 모션 키의 그리는 순서 (코드 모션 · 공격 끝 뒤 = 없음)
+    List<PartOrder> MotionOrders(bool code) => !code && HasKeys && mt < End ? BossMotion.Orders(mwork.motion, mt) : null;
+
     bool MotionPart(BossPartRig pr, bool code)
     {
-        pr.extra.Clear();
+        pr.extra.Clear(); pr.orderOverride.Clear();
+        var ol = MotionOrders(code); if (ol != null) foreach (var o in ol) pr.orderOverride[o.part] = o.order;
         if (mt >= End) return false;
         if (!code && HasKeys) return BossMotion.Part(mwork.motion, mt, pr.extra);
         return true;
@@ -171,6 +175,7 @@ public partial class MonsterRigTool
     BossMotion.Key KeyNow()
     {
         var k = new BossMotion.Key { t = Mathf.Round(mt * 100) / 100 };
+        // 순서는 앞 키에서 저절로 이어지므로 새 키에는 안 넣음
         switch (cur.kind)
         {
             case Kind.Cat:
@@ -247,7 +252,7 @@ public partial class MonsterRigTool
         else if (go.GetComponent<HumanRig>() is HumanRig hr)
             motionField = r == hr.head ? "head" : r == hr.armNear ? "armN" : r == hr.armFar ? "armF" : r == hr.legNear ? "legN" : r == hr.legFar ? "legF" : r == hr.torso ? "lean" : null;
         if (motionField == null) return false;
-        sel = cur.kind == Kind.Part ? r.transform.parent.name : null;
+        sel = cur.kind == Kind.Part ? r.transform.parent.name : partOf.TryGetValue(r, out var pn) ? pn : null;      // ] [ 로 순서 바꿀 파츠
         selKey = AddKeyNow();
         return true;
     }
@@ -387,6 +392,27 @@ public partial class MonsterRigTool
                 }
                 copy.parts.RemoveAll(x => Mathf.Abs(x.angle) < 0.001f);
                 break;
+        }
+        // 그리는 순서 (이 키부터 다음 키 전까지) — 필살기 도중 레이어 바꾸기
+        EditorGUILayout.Space(4);
+        EditorGUILayout.LabelField("그리는 순서 (이 키부터 뒤로 이어짐 · 클수록 앞 · 굵게 = 이 키에서 바꾼 값 · '기본' = 앞 키 값을 따름)", EditorStyles.miniBoldLabel);
+        var slots = new List<(string, string)>();
+        if (cur.kind == Kind.Part) foreach (var p in work.part.parts) slots.Add((p.name, p.name));
+        else slots.AddRange(cur.kind == Kind.Cat ? CatOrders : HumanOrders);
+        foreach (var (part, label) in slots)
+        {
+            var ov = copy.orders.Find(x => x.part == part);
+            var rr = cur.kind == Kind.Part ? Renderer(part) : RigRenderer(part);
+            int now = rr ? rr.sortingOrder : 0, val = ov != null ? ov.order : now, set;
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label(label, ov != null ? EditorStyles.boldLabel : EditorStyles.label, GUILayout.Width(90));
+            set = EditorGUILayout.IntField(val, GUILayout.Width(40));
+            if (GUILayout.Button("▲", EditorStyles.miniButtonLeft, GUILayout.Width(24))) set = val + 1;
+            if (GUILayout.Button("▼", EditorStyles.miniButtonRight, GUILayout.Width(24))) set = val - 1;
+            bool clear = ov != null && GUILayout.Button("기본", EditorStyles.miniButton, GUILayout.Width(36));
+            EditorGUILayout.EndHorizontal();
+            if (clear) { copy.orders.Remove(ov); GUI.changed = true; }
+            else if (set != val) { if (ov == null) copy.orders.Add(ov = new PartOrder { part = part }); ov.order = set; GUI.changed = true; }
         }
         if (EditorGUI.EndChangeCheck())
         {

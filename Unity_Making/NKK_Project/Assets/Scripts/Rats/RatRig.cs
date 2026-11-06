@@ -59,7 +59,8 @@ namespace NKK.Rats
         public void Build(RatArtLibrary.Entry e, float rigLength, float headScaleOverride = -1, bool legsBehind = false)
         {
             group = GetComponent<SortingGroup>();
-            frontOrder = int.MinValue;
+            frontOrder = int.MinValue; tweak.Clear(); tempOn = false;
+            if (torso) { torso.transform.localScale = Vector3.one; torso.transform.localRotation = Quaternion.identity; }
             bool isSingle = !asScreen && e.IsSingle;
             foreach (var r in new[] { farBack, farFront, tail, torso, back, front, head }) if (r) r.enabled = !isSingle;
             if (single) single.enabled = isSingle;
@@ -116,6 +117,38 @@ namespace NKK.Rats
             if (legsBehind) { back.sortingOrder = 2; front.sortingOrder = 2; tail.sortingOrder = 1; }
             BuildWings(e, tw, hipPx, Place);
             ApplyOrders(e.orders);
+            ApplyTweaks(e.tweaks);
+            CaptureOrders();
+        }
+
+        // ── 파츠별 위치 · 회전 · 크기 (몬스터 리깅 툴): 렌더러 하나만. 위치 · 크기는 여기서, 각도는 Apply 가 자세에 더함 ──
+        readonly System.Collections.Generic.Dictionary<SpriteRenderer, PartTweak> tweak = new();
+        float TA(SpriteRenderer r) => tweak.Count > 0 && tweak.TryGetValue(r, out var t) ? t.angle : 0;      // 없으면 바로 (쥐 수백 마리가 매 프레임 부름)
+        float TS(SpriteRenderer r) => tweak.Count > 0 && tweak.TryGetValue(r, out var t) ? t.scale : 1;
+        Vector3 TO(SpriteRenderer r) => tweak.Count > 0 && tweak.TryGetValue(r, out var t) ? (Vector3)(t.offset / 100f) : Vector3.zero;
+        void ApplyTweaks(System.Collections.Generic.List<PartTweak> l)
+        {
+            if (l == null) return;
+            foreach (var t in l)
+            {
+                var r = PartRenderer(t.part); if (!r || tweak.ContainsKey(r)) continue;
+                tweak[r] = t;
+                if (r != head) r.transform.localPosition += (Vector3)(t.offset / 100f);      // 머리는 Apply 가 매 프레임 자리를 정함
+                r.transform.localScale *= t.scale;
+                if (r == torso) r.transform.localRotation = Quaternion.Euler(0, 0, t.angle);
+            }
+        }
+
+        // ── 모션 중 그리는 순서 (보스 공격 · 필살기 모션 키, Apply 뒤에 부름). 비우면 원래 순서로 ──
+        readonly System.Collections.Generic.Dictionary<SpriteRenderer, int> baseOrder = new();
+        bool tempOn;
+        void CaptureOrders() { baseOrder.Clear(); foreach (var r in new[] { farBack, farFront, tail, torso, back, front, head }) if (r) baseOrder[r] = r.sortingOrder; }
+        public void SetTempOrders(System.Collections.Generic.List<PartOrder> l)
+        {
+            bool any = l != null && l.Count > 0;
+            if (tempOn) foreach (var kv in baseOrder) if (kv.Key && kv.Key != front) kv.Key.sortingOrder = kv.Value;      // 앞다리는 Apply 가 매 프레임 정함
+            tempOn = any;
+            if (any) foreach (var o in l) { var r = PartRenderer(o.part); if (r) r.sortingOrder = o.order; }
         }
 
         // 몬스터별 그리는 순서 덮어쓰기 (몬스터 리깅 툴). 앞다리는 Apply 가 매 프레임 정하므로 따로 기억
@@ -367,25 +400,25 @@ namespace NKK.Rats
             body.localPosition = L(hipPx) + new Vector3(0, -p.bob * u / 100f, 0);
             body.localRotation = Quaternion.Euler(0, 0, p.tilt * Mathf.Rad2Deg);
             const float D = Mathf.Rad2Deg;
-            farBack.transform.localRotation = Quaternion.Euler(0, 0, -p.farBack * D);
-            farFront.transform.localRotation = Quaternion.Euler(0, 0, -p.farFront * D);
-            back.transform.localRotation = Quaternion.Euler(0, 0, -p.back * D);
-            front.transform.localRotation = Quaternion.Euler(0, 0, -p.front * D);
+            farBack.transform.localRotation = Quaternion.Euler(0, 0, -p.farBack * D + TA(farBack));
+            farFront.transform.localRotation = Quaternion.Euler(0, 0, -p.farFront * D + TA(farFront));
+            back.transform.localRotation = Quaternion.Euler(0, 0, -p.back * D + TA(back));
+            front.transform.localRotation = Quaternion.Euler(0, 0, -p.front * D + TA(front));
             ApplyWings(p);
-            tail.transform.localRotation = Quaternion.Euler(0, 0, p.tail * D);
-            tail.transform.localScale = new Vector3(tailLen, 1, 1);
-            head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D);
+            tail.transform.localRotation = Quaternion.Euler(0, 0, p.tail * D + TA(tail));
+            tail.transform.localScale = new Vector3(tailLen, 1, 1) * TS(tail);
+            head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D + TA(head));
             Vector3 hp = L(neckPx) - L(hipPx);
-            head.transform.localPosition = hp + new Vector3(p.headX * u / 100f, 0, 0);
+            head.transform.localPosition = hp + new Vector3(p.headX * u / 100f, 0, 0) + TO(head);
             if (headOverride)
             {
                 // 바꾼 머리: 원래 머리 폭에 맞추고, 쥐 그림(왼쪽을 봄)에 맞게 뒤집고, 목에서 앞(왼쪽)으로
                 float aw = artHead ? artHead.rect.width : headOverride.rect.width, k = aw / headOverride.rect.width * headSwapScale;
                 head.sprite = headOverride;
-                head.transform.localScale = new Vector3(-headScale * k, headScale * k, 1);
+                head.transform.localScale = new Vector3(-headScale * k, headScale * k, 1) * TS(head);
                 head.transform.localPosition += new Vector3(-aw * headScale * headSwapFwd / 100f, 0, 0);
             }
-            else { var want = headReplace ? headReplace : artHead; if (head.sprite != want) { head.sprite = want; head.transform.localScale = Vector3.one * headScale; } }
+            else { var want = headReplace ? headReplace : artHead; if (head.sprite != want) { head.sprite = want; head.transform.localScale = Vector3.one * headScale * TS(head); } }
             front.sortingOrder = p.front > 0.9f ? Mathf.Max(7 + wingOff, head.sortingOrder + 1) : frontOrder != int.MinValue ? frontOrder : legsBehind ? 2 : 5 + wingOff;      // 치켜든 앞발은 얼굴 앞으로
         }
     }
