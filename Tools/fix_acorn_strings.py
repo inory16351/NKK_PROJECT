@@ -51,7 +51,7 @@ MR_EN = ['100 Rats Assembled', 'The 300 Squad', '500-Rat Ruckus', 'March of a Th
 CAT_EN = {'로비 전체 배경': 'Hideout Background', '낮잠침대': 'Nap Bed', '훈장': 'Badges', '회의 테이블': 'Meeting Table', '친구들 책장': 'Friends Bookshelf', '쳇바퀴': 'Wheel',
           '치즈창고': 'Cheese Storage', '뒷골목 입구 맨홀 뚜껑': 'Alley Manhole Cover', '미니게임기': 'Arcade Machine', '암시장': 'Black Market', '실험실': 'Secret Lab',
           '증강연구소': 'Augment Lab', '뒷골목 전체 배경': 'Back Alley Background', 'UI 버튼': 'UI Buttons', '마우스 커서': 'Mouse Cursor', '쥐 친구': 'Rat Pals'}
-MISC_EN = {'박쥐': 'Bat', '앙기뮤띠쥐': 'Yippee Mouse', '마녀 생쥐': 'Witch Mouse',
+MISC_EN = {'박쥐': 'Bat', '햄찌': 'Haemji', '마녀 생쥐': 'Witch Mouse',
            '찍찍!! 훈장이 열리면 팔아요': 'On sale once Squeak!! Badges opens', '친구들!!이 열리면 팔아요': 'On sale once Friends!! opens',
            '쳇바퀴 훈련이 열리면 팔아요': 'On sale once Wheel Training opens', '치즈 창고가 열리면 팔아요': 'On sale once Cheese Storage opens',
            '16층을 클리어하면 뒷골목과 함께 열려요': 'Unlocks with the Back Alley after clearing floor 16',

@@ -152,7 +152,7 @@ DECO = [(1, 'LobbyBg', '로비 전체 배경', 'Lobby', 'LobbyHome 배경판', 2
         (15, 'Cursor', '마우스 커서', 'Common', '포인터 평소 · 누름 (CursorSkin)', 30, 50, ''),
         (16, 'RatFriend', '쥐 친구', 'Lobby', '아지트를 돌아다니는 쥐 (전투 x)', 0, 0, '')]
 THEMES = [(1, 'Forest', '도토리 숲'), (2, 'Neon', '네온 오락실')]
-FRIENDS = [(1, 'bat', '박쥐', 70, '뒷골목 천장에 매달려 있거나 날아다님'), (2, 'thumbs', '앙기뮤띠쥐', 90, '아지트 특정 위치에서 따봉'),
+FRIENDS = [(1, 'bat', '박쥐', 70, '뒷골목 천장에 매달려 있거나 날아다님'), (2, 'thumbs', '햄찌', 90, '아지트 특정 위치에서 따봉'),
            (3, 'witch', '마녀 생쥐', 110, '빗자루를 타고 날아다님')]   # 따봉도치 · 랫 댄스 쥐 · 황금 쥐 = 2026-11-05 사용자 지시로 삭제
 ZONE_DIR = {'Lobby': 'Lobby', 'Alley': 'Alley', 'Common': 'Common'}
 # 판매 조건 기능 → 잠긴 상품에 보일 해금 조건 (기능 id = 튜토리얼 Unlock_Id · Progress.IsUnlocked)

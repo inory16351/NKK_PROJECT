@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace NKK.Lobby
 {
-    // 아지트 햄스터 = 쥐 친구 '앙기뮤띠쥐' (95162, 도토리 상점에서 사면 나타남 · 2026-11-05 사용자).
+    // 아지트 햄스터 = 쥐 친구 '햄찌' (95162, 예전 이름 앙기뮤띠쥐 → 2026-11-06 햄찌, 도토리 상점에서 사면 나타남 · 2026-11-05 사용자).
     // 평소 = 무표정으로 앉아 숨 쉬며 가끔 눈 깜빡 · 누르면 움찔 → 폴짝 뛰며 활짝 웃고 따봉 (actTime 초) → 다시 무표정.
     // 그림 = Codex 로 그린 V2 파츠 (Art/Rats/RatFriends/Hamster). 조립 · 움직임 = 웹 미리보기 (UnityResources/.../Hamster/Sheets/web_template.html) 와 같음.
     // 리그는 Awake 에서 Visual 아래에 만들고, 관절 위치는 몸 그림 좌상단 기준 0~1 (아래 값). 이 오브젝트 위치 = 발끝 (바닥).

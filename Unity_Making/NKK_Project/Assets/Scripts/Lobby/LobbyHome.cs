@@ -425,7 +425,7 @@ namespace NKK.Lobby
             var blockedBy = main ? main.inputBlocked : inputBlocked;
             bool blocked = blockedBy != null && blockedBy();
             Vector2 w = cam.ScreenToWorldPoint(m.position.ReadValue());
-            // 앙기뮤띠쥐(LobbyHamster)를 누르는 중 · 들고 있거나 그 위면 쥐 · 물건 버튼은 그냥 둠 (2026-11-06 끌어 옮기기)
+            // 햄찌(LobbyHamster)를 누르는 중 · 들고 있거나 그 위면 쥐 · 물건 버튼은 그냥 둠 (2026-11-06 끌어 옮기기)
             bool ham = LobbyHamster.Busy || LobbyHamster.HitAny(w);
             if (!blocked && !drag && !ham) { var over = AnyRatAt(w) ? null : hots.Find(h => h.Contains(w)); foreach (var h in hots) h.hover = h == over; }
             else foreach (var h in hots) h.hover = false;

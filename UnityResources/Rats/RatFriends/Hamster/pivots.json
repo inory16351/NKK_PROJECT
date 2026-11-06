@@ -1,5 +1,5 @@
 {
-  "note": "아지트 햄스터 = 쥐 친구 앙기뮤띠쥐 (95162) · V2 파츠 · 관절 = Sheets/build_web.py PIV (좌상단 기준) → pivotUnity 는 좌하단 기준",
+  "note": "아지트 햄스터 = 쥐 친구 햄찌 (95162, 예전 이름 앙기뮤띠쥐) · V2 파츠 · 관절 = Sheets/build_web.py PIV (좌상단 기준) → pivotUnity 는 좌하단 기준",
   "pivotUnity": {
     "head_neutral": [0.5, 0.04], "head_neutral_blink": [0.5, 0.04], "head_happy": [0.5, 0.04],
     "body": [0.5, 0.5], "tail": [0.5, 0.08], "arm": [0.76, 0.96], "foot": [0.5, 0.96], "arm_thumb": [0.03, 0.2]

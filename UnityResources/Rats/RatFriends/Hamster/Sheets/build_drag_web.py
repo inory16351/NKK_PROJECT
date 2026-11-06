@@ -1,4 +1,4 @@
-"""앙기뮤띠쥐 옮기기(자석 배치) 웹 미리보기: 파츠 PNG + 아지트 화면 캡처를 web_drag_template.html 에 넣어 한 파일로
+"""햄찌 옮기기(자석 배치) 웹 미리보기: 파츠 PNG + 아지트 화면 캡처를 web_drag_template.html 에 넣어 한 파일로
 → C:/Project/NKK3/preview/hamster_drag.html
 조립 · 관절 = build_web.py 와 같음. 배경 = ref_lobby_neon_clean.png (플레이 모드 아지트 캡처, 쥐 · 말풍선 숨김, 2배 크기)"""
 import base64, io, json, os
