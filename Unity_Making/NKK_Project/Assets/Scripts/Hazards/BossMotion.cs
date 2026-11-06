@@ -54,6 +54,13 @@ namespace NKK.Hazards
         public const string WalkType = "Walk";
         public const float WalkPeriod = Mathf.PI * 4;
         public static float WalkT(float walkPhase) => Mathf.Repeat(walkPhase, WalkPeriod) / WalkPeriod;
+        // 변신 뒤 (opt head_keep: 패턴 뒤로 머리가 바뀐 채) 의 걷기 · 대기. 걷기 = Walk 와 같은 시간 (0~1 = 걸음 두 번),
+        // 대기 = 초 (변신한 때부터, 키의 '마지막 키 뒤 반복' 으로 돎). 없으면 평소 걷기 · 코드 대기 자세
+        public const string FormWalkType = "FormWalk", FormIdleType = "FormIdle";
+        public const float IdleLength = 4f;      // 코드 대기 자세를 키로 만들 때 한 바퀴 (초)
+        // 변신 뒤에 시작한 공격의 모션 이름 ("Form:" + 기술). 없으면 그 기술의 평소 모션
+        public const string FormAtkPrefix = "Form:";
+        public static string FormAtk(string atkType) => FormAtkPrefix + atkType;
 
         public Motion Get(string code, string atk)
         {

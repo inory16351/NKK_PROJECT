@@ -370,6 +370,10 @@ namespace NKK.Hazards
         }
         string forced;
         bool altSpecial;
+        public bool Attacking => attacking;      // 리깅 툴 '게임에서 보기' (변신 뒤 공격: 변신 패턴이 끝나길 기다림)
+        bool atkInForm;
+        // 리깅 툴에서 고친 지금 공격의 모션: 변신 뒤 공격은 '변신 · 공격' (BossMotion.FormAtk) 이 먼저, 없으면 평소 모션
+        BossMotion.Motion AtkMotion() => (atkInForm ? BossMotion.Find(Data.code_id, BossMotion.FormAtk(atkType)) : null) ?? BossMotion.Find(Data.code_id, atkType);
 
         void Say(string line, float life = 1.2f)
         {
@@ -465,6 +469,7 @@ namespace NKK.Hazards
                     else if (skill) { atkType = Data.skill_type; skillCd = Mathf.Max(1, Data.skill_cd); }
                     else if (sp1Done && sp2Done && Random.value < Data.special_chance) { atkType = altSpecial ? Data.special2_type : Data.special1_type; altSpecial = !altSpecial; }      // 둘 다 쓴 뒤 = 번갈아
                     atk = DB.BossAtk(atkType);
+                    atkInForm = formHead;      // 변신(head_keep) 뒤에 시작한 공격 → 리깅 툴 '변신 · 공격' 모션 (이 공격이 변신시키는 것이면 아님)
                     attacking = true; air = false; atkHit = false; shots = 0; atkT = 0; atkCd = Random.Range(Data.atk_cd_min, Data.atk_cd_max); vx = vy = 0;
                     if (IsSpecial(atkType)) BeginSpecial();
                     else if (IsSkill(atkType)) BeginSkill();
@@ -1657,7 +1662,7 @@ namespace NKK.Hazards
             }
             if (attacking)
             {
-                var mo = atk != null ? BossMotion.Find(Data.code_id, atkType) : null;          // 리깅 툴에서 고친 모션
+                var mo = atk != null ? AtkMotion() : null;          // 리깅 툴에서 고친 모션
                 if (mo != null) { motionOrders = BossMotion.Orders(mo, atkT); motionXf = BossMotion.Xf(mo, atkT); return BossMotion.Human(mo, atkT); }
                 HumanAttackPose(atkType, atk, atkT, air || z > 0, ref p);
             }
@@ -1745,15 +1750,21 @@ namespace NKK.Hazards
             if (State == BState.Dying) { p.front = Mathf.Sin(tt * 30) * 1.4f; p.farFront = Mathf.Cos(tt * 27) * 1.4f; p.back = Mathf.Sin(tt * 28) * 1.2f; p.farBack = Mathf.Cos(tt * 25) * 1.2f; p.tail = Mathf.Sin(tt * 20); p.head = Mathf.Sin(tt * 15) * 0.4f; return p; }
             if (attacking && atk != null)
             {
-                var mo = BossMotion.Find(Data.code_id, atkType);          // 리깅 툴에서 고친 모션 (Resources/BossMotion.asset)
+                var mo = AtkMotion();          // 리깅 툴에서 고친 모션 (Resources/BossMotion.asset)
                 if (mo != null) { motionOn = true; motionOrders = BossMotion.Orders(mo, atkT); motionXf = BossMotion.Xf(mo, atkT); return BossMotion.Cat(mo, atkT, out motionHead2); }
                 if (CatAttackPose(atkType, atk, atkT, air || z > 0, tt, ref p)) return p;
             }
+            bool form = formHead && !attacking;      // 변신 뒤 (opt head_keep): 리깅 툴의 '변신 걷기 · 대기' 가 있으면 그걸로
             if (Mathf.Sqrt(vx * vx + vy * vy) > 12)
             {
-                var wm = BossMotion.Find(Data.code_id, BossMotion.WalkType);          // 리깅 툴에서 고친 걷기 모션
+                var wm = (form ? BossMotion.Find(Data.code_id, BossMotion.FormWalkType) : null) ?? BossMotion.Find(Data.code_id, BossMotion.WalkType);          // 리깅 툴에서 고친 걷기 모션
                 if (wm != null) { float wt = BossMotion.WalkT(walk); motionOn = true; motionOrders = BossMotion.Orders(wm, wt); motionXf = BossMotion.Xf(wm, wt); return BossMotion.Cat(wm, wt, out motionHead2); }
                 CatWalkPose(walk, ref p);
+            }
+            else if (form)
+            {
+                var im = BossMotion.Find(Data.code_id, BossMotion.FormIdleType);
+                if (im != null) { float it = Time.time - formSince; motionOn = true; motionOrders = BossMotion.Orders(im, it); motionXf = BossMotion.Xf(im, it); return BossMotion.Cat(im, it, out motionHead2); }
             }
             return p;
         }
@@ -1787,7 +1798,7 @@ namespace NKK.Hazards
             {
                 ApplyHeadOpen();          // 우주복 쥐 괴물 머리 (Boss.Crew.cs)
                 bool alt = attacking || hitT > 0 || State == BState.Dying;
-                var mo = attacking && atk != null && State == BState.Fight ? BossMotion.Find(Data.code_id, atkType) : null;      // 리깅 툴에서 고친 모션
+                var mo = attacking && atk != null && State == BState.Fight ? AtkMotion() : null;      // 리깅 툴에서 고친 모션
                 float mt = atkT; bool moving = Mathf.Sqrt(vx * vx + vy * vy) > 12;
                 if (mo == null && !attacking && moving && State == BState.Fight) { mo = BossMotion.Find(Data.code_id, BossMotion.WalkType); mt = BossMotion.WalkT(walk); }      // 걷기 모션 (코드 걸음 위에 더함)
                 if (mo != null) alt = BossMotion.Part(mo, mt, partRig.extra) && attacking || hitT > 0; else if (partRig.extra.Count > 0) partRig.extra.Clear();

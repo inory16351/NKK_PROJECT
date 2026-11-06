@@ -47,6 +47,7 @@ namespace NKK.Hazards
         readonly List<Vector2> pathPts = new();
         float orbitT, orbitR, bodyT, bodySize;
         Sprite formHead, atkHead, bodySprite, hideSprite;
+        float formSince;      // 변신(head_keep)한 때 — 변신 대기 모션 시간
         SpriteRenderer formFx;
         bool riding, walkersAll; float walkersStun;
         BossAtkRow growAtk;
@@ -92,7 +93,7 @@ namespace NKK.Hazards
         {
             atkHead = null; hideSprite = null;
             var h = Opt("head"); if (h != null) atkHead = SpriteOrTemp(h);
-            var hk = Opt("head_keep"); if (hk != null) formHead = SpriteOrTemp(hk);
+            var hk = Opt("head_keep"); if (hk != null) { if (!formHead) formSince = Time.time; formHead = SpriteOrTemp(hk); }
             var b = Opt("body"); if (b != null) { var (bn, sz) = SplitAt(b, Height * 1.1f); bodySprite = SpriteOrTemp(bn); bodySize = sz; bodyT = atk.windup + atk.dur + 1.5f; }
             var hd = Opt("hide"); if (hd != null) { hideSprite = SpriteOrTemp(hd); Hidden = true; }
             var rd = Opt("ride"); if (rd != null && !riding) Ride(rd);
