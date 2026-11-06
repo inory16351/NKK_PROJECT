@@ -65,7 +65,10 @@ namespace NKK
 
         // ── 장식 (도토리 상점) ── 그림 적용은 아직 없음 (리소스를 만들 때 구현). 지금은 사기 · 보유 · 적용 기록만
         public enum DecoState { Owned, Buyable, Poor, Locked }
-        public bool OwnsDeco(int id) => decoOwn.Contains(id);
+        public bool OwnsDeco(int id) => decoOwn.Contains(id) || (preview != null && preview.deco_id == id);
+        // 상점 '사기 전 미리보기' (2026-11-06 사용자): 이 장식을 산 것 · 적용한 것처럼 잠깐 보이게 (저장 안 함, 같은 프레임 안에서 찍고 되돌림 — ShopPreview)
+        DecoItemRow preview;
+        public void SetDecoPreview(DecoItemRow d) { preview = d; DecoEquipChanged?.Invoke(); }
         // 판매 조건: 그 장식이 바꾸는 시설(기능 id)이 아직 안 열렸으면 잠김
         public bool DecoLocked(DecoItemRow d) => d != null && !string.IsNullOrEmpty(d.sell_feature) && !IsUnlocked(d.sell_feature);
         public DecoState DecoStateOf(DecoItemRow d)
@@ -85,7 +88,7 @@ namespace NKK
             Debug.Log($"[AcornShop] 구매 {d.deco_id} {d.deco_name} −{d.price} (남은 도토리 {acorn})");
             return true;
         }
-        public int EquippedDeco(string cat) => decoEquip.TryGetValue(cat, out var id) ? id : 0;      // 0 = 기본
+        public int EquippedDeco(string cat) => preview != null && preview.category == cat ? preview.deco_id : decoEquip.TryGetValue(cat, out var id) ? id : 0;      // 0 = 기본
         public bool IsDecoEquipped(DecoItemRow d) => d != null && EquippedDeco(d.category) == d.deco_id;
         // 장식 적용 (종류마다 하나) — 이미 적용 중이면 해제(기본으로). 보유한 것만. 바로 저장
         public event Action DecoEquipChanged;

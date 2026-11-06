@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>도토리 상점 구매 미리보기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+<style>
+  :root { --paper:#f6ead2; --paper2:#efe0c2; --ink:#4a3424; --sub:#8a7360; --acorn:#b5652a; --green:#b9d9a0; --line:#e3cfa8; --dim:rgba(30,20,12,.55); }
+  * { box-sizing:border-box; }
+  body { margin:0; background:#2b2230; font-family:'Jua', 'Malgun Gothic', sans-serif; color:var(--ink); }
+  .bar { display:flex; gap:10px; align-items:center; flex-wrap:wrap; padding:10px 16px; background:#1c1620; color:#f3e6d0; font-size:15px; }
+  .bar b { color:#ffd27a; font-weight:normal; }
+  .bar button { font:inherit; border:1px solid #6b5a74; background:#3a2f42; color:#f3e6d0; border-radius:8px; padding:6px 12px; cursor:pointer; }
+  .bar button.on { background:#ffd27a; color:#3a2410; border-color:#ffd27a; }
+  .bar .note { opacity:.7; font-size:13px; }
+  .stage { position:relative; width:min(1280px, 100%); margin:14px auto; aspect-ratio:16/9; background:#3b2d24 url() center/cover; overflow:hidden; border-radius:6px; }
+  .stage > .bgshot { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.55) blur(1px); }
+  .panel { position:absolute; left:2.4%; right:2.4%; top:5%; bottom:4%; background:var(--paper); border-radius:10px; box-shadow:0 8px 0 #d8c39d, 0 12px 30px rgba(0,0,0,.4); padding:2.2% 2.6%; display:flex; flex-direction:column; }
+  .head { display:flex; align-items:baseline; gap:10px; }
+  .head h1 { margin:0; font-size:clamp(18px,2.4vw,32px); font-weight:normal; }
+  .head .desc { color:var(--sub); font-size:clamp(11px,1.1vw,15px); }
+  .head .acorn { margin-left:auto; color:var(--acorn); font-size:clamp(15px,1.8vw,26px); }
+  .tabs { display:flex; justify-content:center; gap:6px; margin:1.2% 0 1.6%; }
+  .tabs button { font:inherit; font-size:clamp(12px,1.25vw,18px); background:var(--paper2); border:0; border-bottom:3px solid transparent; color:var(--ink); padding:.5% 2.6%; cursor:pointer; border-radius:4px 4px 0 0; }
+  .tabs button.on { border-bottom-color:#e07a2e; }
+  .grid { flex:1; overflow:auto; display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:12px; align-content:start; padding:2px; }
+  .card { background:#fff8ea; border-radius:8px; box-shadow:0 4px 0 #e2cfaa; padding:10px 12px 12px; position:relative; display:flex; flex-direction:column; }
+  .card .row { display:flex; justify-content:space-between; align-items:flex-end; margin-top:auto; padding-top:8px; gap:8px; }
+  .card.own { background:var(--green); box-shadow:0 4px 0 #a5c58b; }
+  .card .nm { font-size:16px; padding-right:44px; }
+  .card .pr { color:var(--acorn); font-size:14px; margin-top:4px; }
+  .card .tag { position:absolute; right:10px; top:8px; font-size:11px; color:#5d8a4a; }
+  .card .thumb { width:64px; height:36px; border-radius:4px; object-fit:cover; opacity:.95; box-shadow:0 0 0 2px #fff; }
+  .buy { font:inherit; font-size:15px; color:#fff; background:#7a5236; border:0; border-radius:8px; padding:6px 18px; box-shadow:0 3px 0 #4f3420; cursor:pointer; }
+  .card.own .buy { background:#5f7a55; box-shadow:0 3px 0 #3f5638; cursor:default; }
+  .foot { text-align:center; color:var(--sub); font-size:12px; margin-top:6px; }
+
+  /* 구매 확인 창 */
+  .dim { position:absolute; inset:0; background:var(--dim); display:none; align-items:center; justify-content:center; }
+  .dim.on { display:flex; }
+  .pop { width:min(64%, 820px); background:var(--paper); border-radius:12px; box-shadow:0 8px 0 #d8c39d, 0 16px 40px rgba(0,0,0,.5); padding:2.2% 2.6% 2%; text-align:center; animation:pop .18s ease-out; }
+  @keyframes pop { from { transform:scale(.92); opacity:0 } to { transform:none; opacity:1 } }
+  .pop .t1 { font-size:clamp(16px,2vw,28px); }
+  .pop .t2 { font-size:clamp(12px,1.4vw,19px); color:var(--sub); margin-top:2px; }
+  .pv { margin:3% 0 2.4%; position:relative; }
+  .pv .lab { position:absolute; top:8px; font-size:13px; color:#fff; background:rgba(40,25,15,.7); padding:2px 9px; border-radius:20px; pointer-events:none; }
+  .pv img { display:block; width:100%; border-radius:8px; }
+  /* A 나란히 */
+  .side { display:grid; grid-template-columns:1fr auto 1fr; gap:8px; align-items:center; }
+  .side .one { position:relative; }
+  .side .one .lab { left:8px; }
+  .side .one.after { box-shadow:0 0 0 3px #ffb347; border-radius:9px; }
+  .side .one.after .lab { background:#e07a2e; }
+  .side .arr { font-size:26px; color:#c08a52; }
+  /* B 밀어서 비교 */
+  .slide { position:relative; overflow:hidden; border-radius:8px; cursor:ew-resize; touch-action:none; user-select:none; }
+  .slide .top { position:absolute; inset:0; overflow:hidden; }
+  .slide .top img { position:absolute; left:0; top:0; height:100%; width:auto; max-width:none; }
+  .slide .bar2 { position:absolute; top:0; bottom:0; width:4px; background:#fff; box-shadow:0 0 6px rgba(0,0,0,.5); transform:translateX(-2px); }
+  .slide .knob { position:absolute; top:50%; width:34px; height:34px; margin:-17px 0 0 -17px; border-radius:50%; background:#fff; color:#7a5236; display:flex; align-items:center; justify-content:center; font-size:15px; box-shadow:0 2px 6px rgba(0,0,0,.4); }
+  .slide .lab.l { left:8px; } .slide .lab.r { right:8px; background:#e07a2e; }
+  /* C 산 뒤 크게 + 지금 버튼 */
+  .hold { position:relative; }
+  .hold .lab { left:8px; background:#e07a2e; transition:background .15s; }
+  .hold.now .lab { background:rgba(40,25,15,.7); }
+  .hold .peek { position:absolute; right:10px; bottom:10px; font:inherit; font-size:14px; background:#fff8ea; color:var(--ink); border:0; border-radius:20px; padding:6px 14px; box-shadow:0 3px 0 #d8c39d; cursor:pointer; user-select:none; }
+  .hold.now .peek { background:#ffd27a; }
+  .pv .where { position:absolute; left:50%; transform:translateX(-50%); bottom:-1px; }
+  .btns { display:flex; justify-content:center; gap:14px; }
+  .btns button { font:inherit; font-size:clamp(14px,1.5vw,20px); border:0; border-radius:10px; padding:.7% 5%; cursor:pointer; color:#fff; }
+  .yes { background:#7a5236; box-shadow:0 4px 0 #4f3420; }
+  .no { background:#a8988a; box-shadow:0 4px 0 #7c6e62; }
+  .hint { font-size:12px; color:var(--sub); margin-top:8px; }
+  .toast { position:absolute; left:50%; top:46%; transform:translate(-50%,-50%); background:rgba(40,25,15,.85); color:#ffe2a8; padding:10px 22px; border-radius:30px; font-size:18px; opacity:0; transition:opacity .25s; pointer-events:none; }
+  .toast.on { opacity:1; }
+  @media (max-width:700px) { .pop { width:94%; } .grid { grid-template-columns:1fr 1fr; } .card .thumb { display:none; } .stage { aspect-ratio:auto; height:640px; } }
+</style>
+</head>
+<body>
+<div class="bar">
+  <span><b>시안</b> 사기 버튼을 누르면 뜨는 확인 창의 그림 보기 방식:</span>
+  <button data-mode="side" class="on">A · 나란히 (지금 → 산 뒤)</button>
+  <button data-mode="slide">B · 밀어서 비교</button>
+  <button data-mode="hold">C · 산 뒤 크게 + '지금' 누르기</button>
+  <button id="reset">보유 초기화</button>
+  <span class="note">그림은 게임 그림 파일을 조립한 것 (지금 = 처음 아지트 · 기본 그림)</span>
+</div>
+
+<div class="stage" id="stage">
+  <img class="bgshot" id="bgshot" alt="">
+  <div class="panel">
+    <div class="head">
+      <h1>도토리 상점</h1>
+      <span class="desc">업적 · 미니게임으로 모은 도토리로 아지트를 꾸며요 (전투에는 영향 없음)</span>
+      <span class="acorn" id="acorn"></span>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div class="grid" id="grid"></div>
+    <div class="foot">사기 전에 바뀐 모습을 미리 볼 수 있어요</div>
+  </div>
+  <div class="dim" id="dim">
+    <div class="pop">
+      <div class="t1" id="pName"></div>
+      <div class="t2" id="pPrice"></div>
+      <div class="pv" id="pv"></div>
+      <div class="btns"><button class="yes" id="yes">살래요</button><button class="no" id="no">그만둘래요</button></div>
+      <div class="hint" id="pHint"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+const IMGS = __IMGS__;
+const ITEMS = __ITEMS__;
+const ZONES = [['Lobby','아지트'],['Alley','뒷골목'],['Common','UI · 커서'],['RatFriend','쥐 친구']];
+let zone = 'Lobby', mode = 'side', acorn = 46870, own = new Set(), pending = null;
+const $ = id => document.getElementById(id);
+$('bgshot').src = IMGS['lobby_base'];
+
+function tabs() {
+  $('tabs').innerHTML = '';
+  for (const [z, n] of ZONES) {
+    const b = document.createElement('button'); b.textContent = n; if (z === zone) b.className = 'on';
+    b.onclick = () => { zone = z; draw(); }; $('tabs').appendChild(b);
+  }
+}
+function draw() {
+  tabs();
+  $('acorn').textContent = '도토리 ' + acorn.toLocaleString();
+  const g = $('grid'); g.innerHTML = '';
+  for (const it of ITEMS.filter(i => i.zone === zone)) {
+    const has = own.has(it.id);
+    const c = document.createElement('div'); c.className = 'card' + (has ? ' own' : '');
+    c.innerHTML = `<div class="nm">${it.name}</div><div class="pr">도토리 ${it.price.toLocaleString()}</div>` +
+      (has ? '<div class="tag">보유 중</div>' : '') + `<div class="row"><img class="thumb" src="${IMGS[it.after]}" alt="">` +
+      `<button class="buy">${has ? '보유' : '사기'}</button></div>`;
+    c.querySelector('.buy').onclick = () => { if (!has) open(it); };
+    g.appendChild(c);
+  }
+}
+function open(it) {
+  pending = it;
+  $('pName').textContent = it.name;
+  $('pPrice').textContent = `도토리 ${it.price.toLocaleString()}개에 살까요?`;
+  $('pHint').textContent = it.cat === 'RatFriend' ? `${it.view}에 친구가 나타나요` : `${it.view} 이렇게 바뀌어요 · 산 뒤 '스킨 적용' 탭에서 언제든 바꿀 수 있어요`;
+  renderPv(); $('dim').classList.add('on');
+}
+function renderPv() {
+  const it = pending; if (!it) return;
+  const pv = $('pv'), B = IMGS[it.before], A = IMGS[it.after];
+  if (mode === 'side') {
+    pv.innerHTML = `<div class="side"><div class="one"><img src="${B}"><span class="lab">지금</span></div><div class="arr">▶</div>` +
+                   `<div class="one after"><img src="${A}"><span class="lab">산 뒤</span></div></div>`;
+  } else if (mode === 'slide') {
+    pv.innerHTML = `<div class="slide" id="sl"><img src="${A}"><div class="top" id="slTop"><img src="${B}" id="slImg"></div>` +
+                   `<div class="bar2" id="slBar"></div><div class="knob" id="slKnob">◀▶</div><span class="lab l">지금</span><span class="lab r">산 뒤</span></div>`;
+    const sl = $('sl');
+    const set = f => { f = Math.min(1, Math.max(0, f)); const w = sl.clientWidth;
+      $('slTop').style.width = (f * 100) + '%'; $('slImg').style.width = w + 'px';
+      $('slBar').style.left = (f * 100) + '%'; $('slKnob').style.left = (f * 100) + '%'; };
+    let drag = false;
+    const at = e => set((e.clientX - sl.getBoundingClientRect().left) / sl.clientWidth);
+    sl.onpointerdown = e => { drag = true; sl.setPointerCapture(e.pointerId); at(e); };
+    sl.onpointermove = e => { if (drag) at(e); };
+    sl.onpointerup = () => drag = false;
+    // 처음엔 살짝 움직여서 밀 수 있다는 걸 보여 줌
+    let t0 = performance.now();
+    const intro = now => { const k = (now - t0) / 1100; if (k >= 1 || drag) { if (!drag) set(.5); return; }
+      set(.5 + .22 * Math.sin(k * Math.PI * 2) * (1 - k)); requestAnimationFrame(intro); };
+    requestAnimationFrame(() => { set(.5); requestAnimationFrame(intro); });
+  } else {
+    pv.innerHTML = `<div class="hold" id="hd"><img src="${A}" id="hdImg"><span class="lab" id="hdLab">산 뒤</span>` +
+                   `<button class="peek" id="peek">누르고 있으면 지금 모습</button></div>`;
+    const on = v => { $('hdImg').src = v ? B : A; $('hdLab').textContent = v ? '지금' : '산 뒤'; $('hd').classList.toggle('now', v); };
+    const p = $('peek');
+    p.onpointerdown = e => { p.setPointerCapture(e.pointerId); on(true); };
+    p.onpointerup = p.onpointercancel = () => on(false);
+  }
+}
+function close() { pending = null; $('dim').classList.remove('on'); }
+$('no').onclick = close;
+$('yes').onclick = () => {
+  const it = pending; if (!it) return;
+  if (acorn < it.price) { toast('도토리가 모자라요'); return; }
+  acorn -= it.price; own.add(it.id); close(); draw(); toast(`${it.name} 샀어요!`);
+};
+$('dim').onclick = e => { if (e.target === $('dim')) close(); };
+document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+function toast(s) { const t = $('toast'); t.textContent = s; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('on'), 1300); }
+for (const b of document.querySelectorAll('.bar button[data-mode]'))
+  b.onclick = () => { mode = b.dataset.mode; document.querySelectorAll('.bar button[data-mode]').forEach(x => x.classList.toggle('on', x === b)); renderPv(); };
+$('reset').onclick = () => { own.clear(); acorn = 46870; draw(); };
+window.addEventListener('resize', () => { if (mode === 'slide') renderPv(); });
+draw();
+</script>
+</body>
+</html>

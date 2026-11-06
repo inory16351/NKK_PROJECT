@@ -23,6 +23,15 @@ namespace NKK
         }
         static int equipped;
 
+        // 커서 장식 그림 (평소 · 누름). 0 = 기본 그림 — 상점 미리보기 (ShopPreview)
+        public static (Texture2D normal, Texture2D pressed) TexturesFor(int decoId)
+        {
+            var s = skin ? skin : Resources.Load<CursorSkin>("CursorSkin");
+            if (!s) return (null, null);
+            if (decoId != 0 && s.decos != null) foreach (var d in s.decos) if (d != null && d.decoId == decoId && d.normal) return (d.normal, d.pressed ? d.pressed : d.normal);
+            return (s.normal, s.pressed ? s.pressed : s.normal);
+        }
+
         static CursorSkin skin;
         static bool down;
 

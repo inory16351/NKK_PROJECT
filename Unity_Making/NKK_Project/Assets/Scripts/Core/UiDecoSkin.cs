@@ -60,6 +60,16 @@ namespace NKK
             return s ? s : skin.originals[i];
         }
 
+        // 상점 '사기 전 미리보기' 가 찍기 직전 · 직후 (같은 프레임): 지금 적용(미리보기 포함)대로 바로 바꿈 (ShopPreview)
+        public static void ApplyNow() => Scan(false);
+        // UI 키트 그림 하나를 그 장식(0 = 기본)의 그림으로 — 상점 미리보기 견본 버튼
+        public static Sprite SpriteFor(Sprite cur, int deco)
+        {
+            if (!skin) skin = Resources.Load<UiDecoSkin>("UiDecoSkin");
+            if (!skin || index == null) return cur;
+            var s = Pick(Set(deco), cur); return s ? s : cur;
+        }
+
         // force = 씬이 새로 열림 (지금 장식이 기본이어도 훑음)
         static void Scan(bool force)
         {

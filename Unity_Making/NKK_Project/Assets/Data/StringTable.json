@@ -45603,6 +45603,19 @@
    "fr": "※ Les compétences seules ne débloquent pas l'étage de départ · termine des étages pour partir de plus haut (voir l'écran de départ)",
    "de": "※ Die Start-Etage wird nicht nur durch Skills freigeschaltet · schließe Etagen ab, um höher zu starten (Infos im Einsatz-Bildschirm)",
    "ar": "※ لا يُفتح طابق البداية بالمهارات وحدها · يجب اجتياز الطوابق للبدء من طابق أعلى (موضح في شاشة الانطلاق)"
+  },
+  {
+   "string_key": 8000647,
+   "ko": "산 뒤",
+   "en": "After",
+   "ja": "購入後",
+   "zh": "购买后",
+   "pt": "Depois",
+   "es": "Después",
+   "ru": "После",
+   "fr": "Après",
+   "de": "Danach",
+   "ar": "بعد الشراء"
   }
  ]
 }

@@ -50,6 +50,18 @@ namespace NKK.Lobby
             homeY = b.center.y; roomY = room.position.y;
         }
 
+        // 맨홀 뚜껑 그림 (장식 · 열림) — 매 프레임 + 상점 미리보기가 찍기 직전 (ShopPreview)
+        public void ApplyManhole()
+        {
+            if (!manhole) return;
+            Sprite cl = manholeClosed, op = manholeOpen;
+            int deco = DecoArt.Equipped("Manhole");
+            if (deco != 0 && decoManholes != null) foreach (var d in decoManholes) if (d != null && d.decoId == deco && d.closed) { cl = d.closed; op = d.open ? d.open : op; break; }
+            bool open = (AtRoom || k > 0) && op;
+            manhole.sprite = open ? op : cl;
+            manhole.transform.localPosition = manholeBase + (open ? (Vector3)manholeOpenOffset : Vector3.zero);
+        }
+
         public void Go(bool toTheRoom)
         {
             if (toTheRoom && Progress.I && !Progress.I.IsUnlocked("alley")) return;
@@ -65,15 +77,7 @@ namespace NKK.Lobby
             float prev = k;
             k = Mathf.MoveTowards(k, AtRoom ? 1 : 0, Time.unscaledDeltaTime / Mathf.Max(0.05f, panTime));
             var p = home.cam.transform.position; p.y = Mathf.Lerp(homeY, roomY, Mathf.SmoothStep(0, 1, k)); home.cam.transform.position = p;
-            if (manhole)
-            {
-                Sprite cl = manholeClosed, op = manholeOpen;
-                int deco = DecoArt.Equipped("Manhole");
-                if (deco != 0 && decoManholes != null) foreach (var d in decoManholes) if (d != null && d.decoId == deco && d.closed) { cl = d.closed; op = d.open ? d.open : op; break; }
-                bool open = (AtRoom || k > 0) && op;
-                manhole.sprite = open ? op : cl;
-                manhole.transform.localPosition = manholeBase + (open ? (Vector3)manholeOpenOffset : Vector3.zero);
-            }
+            ApplyManhole();
             if (prev != k && (k == 0 || k == 1)) Moved?.Invoke(k == 1);
             bool unlocked = !Progress.I || Progress.I.IsUnlocked("alley");
             bool prep = manager && manager.PrepOpen;

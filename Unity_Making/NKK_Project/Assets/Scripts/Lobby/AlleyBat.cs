@@ -42,6 +42,8 @@ namespace NKK.Lobby
         }
 
         bool Owned => Progress.I && Progress.I.OwnsDeco(decoId);
+        // 상점 '사기 전 미리보기' 가 찍기 직전 · 직후 (같은 프레임): 보임 여부 · 매달린 자세만 바로 (ShopPreview)
+        public void PreviewSync() { bool show = Owned; if (visual) visual.gameObject.SetActive(show); if (show && st == St.Hang) Hang(); }
 
         void Update()
         {

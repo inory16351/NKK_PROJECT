@@ -40,6 +40,7 @@ namespace NKK.Lobby
         public GameObject confirmRoot;
         [Tooltip("확인 글 ({name} {price})")] public TMP_Text confirmText;
         public Button confirmYes, confirmNo;
+        [Tooltip("사기 전 미리보기 (지금 / 산 뒤 밀어서 비교, 2026-11-06 사용자) — 비우면 글만")] public ShopPreview preview;
 
         string zone = "Lobby";
         DecoItemRow pending;
@@ -136,6 +137,7 @@ namespace NKK.Lobby
                 pending = d;
                 if (confirmText) confirmText.text = F(confirmText, ("name", d.deco_name), ("price", d.price.ToString("N0")));
                 Confirm(true);
+                if (preview) preview.Show(d);
                 return;
             }
             if (p.BuyDeco(d)) SfxManager.Play("cheese"); else SfxManager.Play("ui_deny");
