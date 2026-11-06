@@ -59,7 +59,11 @@ namespace NKK.Humans
                 armNear.transform.localPosition = Rel(shoulderPx + new Vector2(-tw * 0.05f, 0));
                 armFar.sortingOrder = 0; legFar.sortingOrder = 1; legNear.sortingOrder = 2; torso.sortingOrder = 3; head.sortingOrder = 4; armNear.sortingOrder = 5;
             }
+            // 몬스터별 그리는 순서 덮어쓰기 (몬스터 리깅 툴)
+            if (e.orders != null) foreach (var o in e.orders) { var r = PartRenderer(o.part); if (r) r.sortingOrder = o.order; }
         }
+
+        public SpriteRenderer PartRenderer(string part) => part switch { "armFar" => armFar, "legFar" => legFar, "legNear" => legNear, "torso" => torso, "head" => head, "armNear" => armNear, _ => null };
 
         // 가까운 손 위치 (월드) · 팔 방향 (어깨 → 손, 월드). Apply 뒤에 부름 (보스가 소품을 손에 쥘 때)
         public Vector3 Hand(out Vector2 dir)

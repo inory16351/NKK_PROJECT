@@ -6,7 +6,8 @@ using M = NKK.Hazards.BossPartArt.Move;
 using Sh = NKK.Hazards.BossPartArt.Show;
 
 // Assets/Art/Rats/BossParts/<보스>/*.png (Tools/slice_boss_rework.py) → Assets/Data/BossPartArt.asset
-// 붙는 자리·관절·움직임 기본값 (보스 개편 2026-10-22). 다시 만들면 에셋에서 고친 값은 덮어써짐 → 고친 값은 여기에도 옮길 것.
+// 붙는 자리·관절·움직임 기본값 (보스 개편 2026-10-22). 다시 만들면 에셋에서 직접 고친 값은 덮어써짐 → 고친 값은 여기에도 옮길 것.
+// 단, 몬스터 리깅 툴 (NKK/몬스터 리깅 툴) 에서 '게임에 반영' 한 보스는 Data/BossPartArtEdits.asset 의 값으로 다시 덮음 (2026-11-06).
 public static class BossPartArtBuilder
 {
     const string AssetPath = "Assets/Data/BossPartArt.asset";
@@ -128,6 +129,7 @@ public static class BossPartArtBuilder
         lib.entries.Add(crew);
 
         lib.entries.Add(Hydra());
+        MonsterRigSave.ReapplyPartEdits(lib);      // 몬스터 리깅 툴에서 고친 보스는 고친 값으로 (Data/BossPartArtEdits.asset)
 
         EditorUtility.SetDirty(lib);
         AssetDatabase.SaveAssets();
@@ -199,6 +201,7 @@ public static class BossPartArtBuilder
         var lib = AssetDatabase.LoadAssetAtPath<BossPartArt>(AssetPath);
         lib.entries.RemoveAll(e => e.codeId == "boss_hydra");
         lib.entries.Add(Hydra());
+        MonsterRigSave.ReapplyPartEdits(lib);
         EditorUtility.SetDirty(lib);
         AssetDatabase.SaveAssets();
         var missing = new List<string>();

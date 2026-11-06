@@ -53,7 +53,8 @@ hm = []
 for hid, m in json.load(io.open(os.path.join(RES, 'Humans', 'Parts', 'pivots.json'), encoding='utf-8')).items():
     a = m['anchor']
     # front = 몸통이 정면 그림이면 pivots.json 에 "front": 1 (팔은 몸통 양옆, 다리 벌림, 목 가운데 — HumanRig.Build). 지금은 전부 옆모습
-    hm.append({'code_id': hid, 'neck': a['neck'], 'shoulder': a['shoulder'], 'hip': a['hip'], 'front': int(m.get('front', 0)), 'head_scale': float(m.get('headScale', 1))})   # head_scale = 머리 크기 배율 (보스 머리가 몸통만큼 커서 0.85)
+    hm.append({'code_id': hid, 'neck': a['neck'], 'shoulder': a['shoulder'], 'hip': a['hip'], 'front': int(m.get('front', 0)), 'head_scale': float(m.get('headScale', 1)),
+               **({'order': [{'part': k, 'order': int(v)} for k, v in m['order'].items()]} if m.get('order') else {})})   # head_scale = 머리 크기 배율 (보스 머리가 몸통만큼 커서 0.85)
 OUT3 = os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Data', 'HumanRigMeta.json')
 json.dump({'items': hm}, io.open(OUT3, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 print(len(hm), 'human rigs ->', OUT3)
@@ -64,7 +65,9 @@ for cid, m in json.load(io.open(os.path.join(RES, 'Cats', 'Parts', 'pivots.json'
     if not isinstance(m, dict) or 'anchor' not in m: continue
     a = m['anchor']
     cm.append({'code_id': cid, 'neck': a['neck'], 'tail': a['tail'], 'shoulder': a['shoulder'], 'hip': a['hip'],
-               'leg_front': m.get('legScale', {}).get('front', 1), 'leg_back': m.get('legScale', {}).get('back', 1)})
+               'leg_front': m.get('legScale', {}).get('front', 1), 'leg_back': m.get('legScale', {}).get('back', 1),
+               **({'head_scale': float(m['headScale'])} if m.get('headScale') else {}),   # 머리 크기 고정 (몬스터 리깅 툴, 없으면 자동)
+               **({'order': [{'part': k, 'order': int(v)} for k, v in m['order'].items()]} if m.get('order') else {})})   # 그리는 순서 덮어쓰기 (몬스터 리깅 툴)
 OUT4 = os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Data', 'CatRigMeta.json')
 json.dump({'items': cm}, io.open(OUT4, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 print(len(cm), 'cat rigs ->', OUT4)

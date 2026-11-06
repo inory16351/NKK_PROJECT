@@ -59,6 +59,7 @@ namespace NKK.Rats
         public void Build(RatArtLibrary.Entry e, float rigLength, float headScaleOverride = -1, bool legsBehind = false)
         {
             group = GetComponent<SortingGroup>();
+            frontOrder = int.MinValue;
             bool isSingle = !asScreen && e.IsSingle;
             foreach (var r in new[] { farBack, farFront, tail, torso, back, front, head }) if (r) r.enabled = !isSingle;
             if (single) single.enabled = isSingle;
@@ -114,6 +115,16 @@ namespace NKK.Rats
             back.sortingOrder = 4; front.sortingOrder = 5; head.sortingOrder = 6;
             if (legsBehind) { back.sortingOrder = 2; front.sortingOrder = 2; tail.sortingOrder = 1; }
             BuildWings(e, tw, hipPx, Place);
+            ApplyOrders(e.orders);
+        }
+
+        // 몬스터별 그리는 순서 덮어쓰기 (몬스터 리깅 툴). 앞다리는 Apply 가 매 프레임 정하므로 따로 기억
+        int frontOrder = int.MinValue;
+        public SpriteRenderer PartRenderer(string part) => part switch { "farBack" => farBack, "farFront" => farFront, "tail" => tail, "torso" => torso, "back" => back, "front" => front, "head" => head, _ => null };
+        void ApplyOrders(System.Collections.Generic.List<PartOrder> l)
+        {
+            if (l == null) return;
+            foreach (var o in l) { var r = PartRenderer(o.part); if (!r) continue; r.sortingOrder = o.order; if (o.part == "front") frontOrder = o.order; }
         }
 
         // 머리만 있는 쥐: 리그 원점 = 바닥 (띄우기는 lift), 몸 기준점 body = 머리 중심. 머리가 몸이라 기울기·둥실거림이 머리째 움직임
@@ -375,7 +386,7 @@ namespace NKK.Rats
                 head.transform.localPosition += new Vector3(-aw * headScale * headSwapFwd / 100f, 0, 0);
             }
             else { var want = headReplace ? headReplace : artHead; if (head.sprite != want) { head.sprite = want; head.transform.localScale = Vector3.one * headScale; } }
-            front.sortingOrder = p.front > 0.9f ? 7 + wingOff : legsBehind ? 2 : 5 + wingOff;      // 치켜든 앞발은 얼굴 앞으로
+            front.sortingOrder = p.front > 0.9f ? Mathf.Max(7 + wingOff, head.sortingOrder + 1) : frontOrder != int.MinValue ? frontOrder : legsBehind ? 2 : 5 + wingOff;      // 치켜든 앞발은 얼굴 앞으로
         }
     }
 }

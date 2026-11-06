@@ -136,7 +136,8 @@ namespace NKK.Data
     [Serializable] public class ItemTableFile { public List<ItemRow> Item; public List<ZoneRow> Zone; public List<FurnitureLayoutRow> Furniture_Layout; }
 
     // Tools/gen_sprite_pivots.py → Assets/Data/RatRigMeta.json (몸통 부착점 = 몸통 이미지 좌상단 기준 0~1)
-    [Serializable] public class RatRigMetaRow { public string code_id; public float[] neck, tail, shoulder, hip; public float leg_front, leg_back; public float[] wing_anchor, wing2_anchor; public float wing_size, wing2_size, head_scale; public int head_only; public string twin; }
+    [Serializable] public class RatRigMetaRow { public string code_id; public float[] neck, tail, shoulder, hip; public float leg_front, leg_back; public float[] wing_anchor, wing2_anchor; public float wing_size, wing2_size, head_scale; public int head_only; public string twin; public List<RigOrderRow> order; }
+    [Serializable] public class RigOrderRow { public string part; public int order; }      // 그리는 순서 덮어쓰기 (몬스터 리깅 툴)
     [Serializable] public class RatRigMetaFile { public List<RatRigMetaRow> items; }
 
     [Serializable]
@@ -216,7 +217,7 @@ namespace NKK.Data
     [Serializable] public class GachaGradeRow { public string grade; public float rate; public int shard_count; public float guarantee_rate; public Grade Grade => E.P<Grade>(grade); }
     [Serializable] public class GachaTableFile { public List<KeyValueRow> Gacha_Config; public List<GachaGradeRow> Gacha_Grade; }
     [Serializable] public class BossTableFile { public List<BossRow> Boss; public List<BossLineRow> Boss_Line; public List<BossAtkRow> Atk_Type; }
-    [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; public int front; public float head_scale = 1; }
+    [Serializable] public class HumanRigMetaRow { public string code_id; public float[] neck, shoulder, hip; public int front; public float head_scale = 1; public List<RigOrderRow> order; }
     [Serializable] public class HumanRigMetaFile { public List<HumanRigMetaRow> items; }
     // 튜토리얼 (튜토리얼 테이블): 해설 쥐 · 단계(발동 조건 → 대사 → 해금·행동) · 대사 · 오프닝 컷씬
     [Serializable] public class TutoSpeakerRow { public string speaker_id, speaker_name, code_id, portrait; public int speaker_name_sk; }

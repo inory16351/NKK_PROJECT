@@ -70,6 +70,9 @@ public class RatSpriteImporter : AssetPostprocessor
         ti.SetTextureSettings(s);
     }
 
+    // sprite_pivots.json 을 고친 뒤 (몬스터 리깅 툴) 다시 읽게
+    public static void ResetPivotCache() => pivots = null;
+
     [MenuItem("NKK/Reimport Art Sprites")]
     static void ReimportAll()
     {

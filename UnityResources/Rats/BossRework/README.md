@@ -76,3 +76,14 @@
 - **목 움직임 IK (같은 날, 사용자 "목 움직임이 이상함")**: 머리 관절 목표(떠다님 + 물기 뒤로 → 앞·아래로 찌름)를 먼저 정하고 마디 3개가 CCD 로 따라옴, 머리는 거의 수평. 첫 마디에 amp(떠다님 px)·wind·strike, 머리 amp = 끄덕임. `hydra_rig.py neck_ik` = `hydra.html neckIK` = `BossPartRig.NeckIK`.
 - **목 모양·방향 제각각 (같은 날, 사용자)**: 목마다 S/C 모양 · 머리 고개 숙임/듦 · 4·5·6 은 목 사슬째 뒤집어 뒤를 봄 (배 줄무늬가 머리 턱 쪽과 이어짐).
 - **보관만 (안 씀)**: 쥐 덩어리 목 마디 `Sheets/hy6` → `Parts/boss_hydra/ratneck_a~f` · 쥐 덩어리 머리 `Sheets/hy7` → `ratheadA/B(_bite/_angry)` — 사용자가 이전 모습(매끈한 목)을 고름 (2026-10-23 저녁).
+
+## 몬스터 리깅 툴 (2026-11-06, 유니티 메뉴 `NKK/몬스터 리깅 툴`)
+보스 · 고양이 · 사람 그림이 안 맞는 곳을 유니티 안에서 바로 고치는 창 (`Assets/Editor/MonsterRig/`).
+- 조립 = 게임과 같은 리그 코드 (`BossPartRig` · `RatRig` · `HumanRig`) → 보이는 그대로 게임에 나옴. 자세 대기 · 걷기(재생) · 공격, 머리 열림(우주복 쥐).
+- 고치기: 왼쪽 끌기 = 파츠 옮기기 (파츠 보스 `at` / 고양이 · 사람 = 몸통 부착점 목 · 어깨 · 엉덩이 · 꼬리) · Shift+끌기 = 관절은 두고 그림만 (`pivot`) · Ctrl+끌기 = 돌리기 (파츠 보스 `angle`) · 오른쪽 칸에서 값 직접 · 파츠 복제 · 삭제 · **그림 파일 바꾸기**(같은 GUID 로 덮음, 예전 그림 = `UnityResources/Rats/_rigtool_backup/<시각>/`). Ctrl+Z 됨.
+- '반영 전 모습 겹치기' = 고치기 전 모습을 빨갛게 겹쳐 봄.
+- **게임에 반영** (`MonsterRigSave`):
+  - 파츠 보스 → `Data/BossPartArt.asset` + `Data/BossPartArtEdits.asset` (`NKK/Build Boss Part Art` 로 다시 만들어도 고친 보스는 이 값으로 다시 덮음). `rig_web/*.json` 은 안 바뀜.
+  - 고양이 · 사람 → `Cats|Humans/Parts/pivots.json`(원본) · `Data/CatRigMeta|HumanRigMeta.json` · `Art/Rats/sprite_pivots.json` · 그림 `.meta` 피벗(다시 임포트) · `Data/CatArtLibrary|HumanArtLibrary.asset`. 원본 json 은 파이썬 json.dump 모양 그대로 고친 줄만 바뀜 → `Tools/gen_sprite_pivots.py` 를 다시 돌려도 같은 값 (고양이 `headScale` 도 이제 CatRigMeta 로 나감).
+- **그리는 순서(레이어)**: 파츠 보스 = 파츠마다 `order` (▲ 앞으로 · ▼ 뒤로). 고양이 · 사람 = 몬스터마다 덮어쓰기 (2026-11-06): 오른쪽 칸 '그리는 순서' → `CatArtLibrary|HumanArtLibrary` 의 `orders` · `*RigMeta.json` `"order": [{part, order}]` · 원본 pivots.json `"order": {파츠: 순서}` (비면 리그 기본 순서). `RatRig` · `HumanRig` 가 Build 때 적용, 고양이가 앞발을 치켜들면 앞다리는 머리 바로 앞.
+- 리그 공통 값(고양이 먼 다리 간격, 사람 팔 · 다리 앞뒤 간격)은 몬스터마다가 아니라 `RatRig` · `HumanRig` 코드 값.
