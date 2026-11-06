@@ -32,6 +32,7 @@ namespace NKK.Rats
         public bool IsSingle => single && single.enabled;
 
         Vector2 hipPx, neckPx, tailPx, shoulderPx;
+        float rigTW;      // 리그 기준 몸통 폭 (Build 때 정함)
         float legF = 1, legB = 1, headScale = 1;
         Sprite artHead;
         [Tooltip("머리 바꾸기 (보스 효과) 그림 크기 배율 · 목에서 앞으로 (원래 머리 폭 배율)")] public float headSwapScale = 1.5f, headSwapFwd = 0.35f;
@@ -86,7 +87,7 @@ namespace NKK.Rats
             farFront.color = farBack.color = farLegColor;
             legF = e.legFront; legB = e.legBack;
 
-            float tw = e.torso.rect.width, th = e.torso.rect.height;
+            float tw = rigTW = e.TorsoW, th = e.torso.rect.height;      // 늘린 몸통 그림은 원래 폭 기준 (torsoW)
             float legLenF = e.front ? e.front.rect.height * (1 - PivotTL(e.front).y) * legF : 0;
             float torsoX = -tw * 0.5f, torsoY = -(e.shoulder.y * th + legLenF);
             Vector2 Place(Vector2 a) => new(torsoX + a.x * tw, torsoY + a.y * th);
@@ -119,6 +120,31 @@ namespace NKK.Rats
             ApplyOrders(e.orders);
             ApplyTweaks(e.tweaks);
             CaptureOrders();
+            restBase.Clear(); foreach (var r in new[] { farBack, farFront, tail, torso, back, front, head }) if (r) restBase[r] = (r.transform.localPosition, r.transform.localScale);
+            mxf.Clear(); mxfOn = false;
+        }
+
+        // ── 모션 키의 파츠 위치 · 크기 (보스 공격 · 필살기 모션, Apply 앞에 부름). 비우면 원래대로 ──
+        readonly System.Collections.Generic.Dictionary<SpriteRenderer, (Vector3 pos, Vector3 scale)> restBase = new();
+        readonly System.Collections.Generic.Dictionary<SpriteRenderer, (Vector2 off, float s)> mxf = new();
+        bool mxfOn;
+        Vector3 MO(SpriteRenderer r) => mxfOn && mxf.TryGetValue(r, out var v) ? (Vector3)(v.off / 100f) : Vector3.zero;
+        float MS(SpriteRenderer r) => mxfOn && mxf.TryGetValue(r, out var v) ? v.s : 1;
+        public void SetMotionXf(System.Collections.Generic.List<NKK.Hazards.BossMotion.PartXf> l)
+        {
+            bool any = l != null && l.Count > 0;
+            if (!any && !mxfOn) return;
+            foreach (var kv in restBase) { if (!kv.Key || kv.Key == head) continue; kv.Key.transform.localPosition = kv.Value.pos; if (kv.Key != tail) kv.Key.transform.localScale = kv.Value.scale; }
+            mxf.Clear(); mxfOn = any;
+            if (!any) return;
+            foreach (var x in l)
+            {
+                var r = PartRenderer(x.part); if (!r) continue;
+                mxf[r] = (x.offset, x.scale);
+                if (r == head || !restBase.TryGetValue(r, out var b)) continue;      // 머리 자리 · 크기는 Apply 가 매 프레임 정함
+                r.transform.localPosition = b.pos + (Vector3)(x.offset / 100f);
+                if (r != tail) r.transform.localScale = b.scale * x.scale;      // 꼬리 크기는 Apply (꼬리 길이)
+            }
         }
 
         // ── 파츠별 위치 · 회전 · 크기 (몬스터 리깅 툴): 렌더러 하나만. 위치 · 크기는 여기서, 각도는 Apply 가 자세에 더함 ──
@@ -153,6 +179,7 @@ namespace NKK.Rats
 
         // 몬스터별 그리는 순서 덮어쓰기 (몬스터 리깅 툴). 앞다리는 Apply 가 매 프레임 정하므로 따로 기억
         int frontOrder = int.MinValue;
+        float lastMS = 1;      // 머리 크기를 모션이 바꿨으면 끝날 때 되돌림
         public SpriteRenderer PartRenderer(string part) => part switch { "farBack" => farBack, "farFront" => farFront, "tail" => tail, "torso" => torso, "back" => back, "front" => front, "head" => head, _ => null };
         void ApplyOrders(System.Collections.Generic.List<PartOrder> l)
         {
@@ -368,7 +395,7 @@ namespace NKK.Rats
         {
             if (IsSingle || !front || !back || !front.sprite || !back.sprite || !torso.sprite) return 0;
             float lenF = front.sprite.rect.height * (1 - PivotTL(front.sprite).y) * legF, lenB = back.sprite.rect.height * (1 - PivotTL(back.sprite).y) * legB;
-            float gap = torso.sprite.rect.width * farGap, t = -p.tilt, c = Mathf.Cos(t), s = Mathf.Sin(t), low = float.MinValue;
+            float gap = (rigTW > 0 ? rigTW : torso.sprite.rect.width) * farGap, t = -p.tilt, c = Mathf.Cos(t), s = Mathf.Sin(t), low = float.MinValue;
             void Leg(Vector2 a, float ang, float len, float g)
             {
                 float ax = a.x + g - hipPx.x, ay = a.y - hipPx.y;
@@ -406,19 +433,19 @@ namespace NKK.Rats
             front.transform.localRotation = Quaternion.Euler(0, 0, -p.front * D + TA(front));
             ApplyWings(p);
             tail.transform.localRotation = Quaternion.Euler(0, 0, p.tail * D + TA(tail));
-            tail.transform.localScale = new Vector3(tailLen, 1, 1) * TS(tail);
+            tail.transform.localScale = new Vector3(tailLen, 1, 1) * TS(tail) * MS(tail);
             head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D + TA(head));
             Vector3 hp = L(neckPx) - L(hipPx);
-            head.transform.localPosition = hp + new Vector3(p.headX * u / 100f, 0, 0) + TO(head);
+            head.transform.localPosition = hp + new Vector3(p.headX * u / 100f, 0, 0) + TO(head) + MO(head);
             if (headOverride)
             {
                 // 바꾼 머리: 원래 머리 폭에 맞추고, 쥐 그림(왼쪽을 봄)에 맞게 뒤집고, 목에서 앞(왼쪽)으로
                 float aw = artHead ? artHead.rect.width : headOverride.rect.width, k = aw / headOverride.rect.width * headSwapScale;
                 head.sprite = headOverride;
-                head.transform.localScale = new Vector3(-headScale * k, headScale * k, 1) * TS(head);
+                head.transform.localScale = new Vector3(-headScale * k, headScale * k, 1) * TS(head) * MS(head);
                 head.transform.localPosition += new Vector3(-aw * headScale * headSwapFwd / 100f, 0, 0);
             }
-            else { var want = headReplace ? headReplace : artHead; if (head.sprite != want) { head.sprite = want; head.transform.localScale = Vector3.one * headScale * TS(head); } }
+            else { var want = headReplace ? headReplace : artHead; if (head.sprite != want || mxfOn || lastMS != 1) { head.sprite = want; head.transform.localScale = Vector3.one * headScale * TS(head) * MS(head); } lastMS = MS(head); }
             front.sortingOrder = p.front > 0.9f ? Mathf.Max(7 + wingOff, head.sortingOrder + 1) : frontOrder != int.MinValue ? frontOrder : legsBehind ? 2 : 5 + wingOff;      // 치켜든 앞발은 얼굴 앞으로
         }
     }

@@ -33,6 +33,7 @@ public static class MonsterRigSave
     // ── 파츠 보스 ──
     public static void SavePart(BossPartArt.Entry e)
     {
+        AssetDatabase.ImportAsset(PartAsset);      // 파일이 밖에서 바뀌었으면 먼저 다시 읽음
         var lib = AssetDatabase.LoadAssetAtPath<BossPartArt>(PartAsset);
         Undo.RecordObject(lib, "리깅 툴 반영");
         Put(lib.entries, Clone(e));
@@ -41,7 +42,7 @@ public static class MonsterRigSave
         if (!ed) { ed = ScriptableObject.CreateInstance<BossPartArt>(); AssetDatabase.CreateAsset(ed, PartEdits); }
         Put(ed.entries, Clone(e));
         EditorUtility.SetDirty(ed);
-        AssetDatabase.SaveAssets();
+        AssetDatabase.SaveAssetIfDirty(lib); AssetDatabase.SaveAssetIfDirty(ed);      // 이 두 에셋만 (다른 에셋의 옛 메모리 값을 덮어쓰지 않게)
     }
     static void Put(List<BossPartArt.Entry> l, BossPartArt.Entry e)
     {
@@ -64,6 +65,7 @@ public static class MonsterRigSave
     // pivots: 파츠 이름(head · tail …) → 그림 좌상단 기준 0~1 관절
     public static string SaveCat(RatArtLibrary.Entry e, Dictionary<string, Vector2> pivots)
     {
+        AssetDatabase.ImportAsset(CatAsset);      // 파일이 밖에서 바뀌었으면 먼저 다시 읽음
         var lib = AssetDatabase.LoadAssetAtPath<RatArtLibrary>(CatAsset);
         var dst = lib.Get(e.codeId);
         if (dst == null) return "CatArtLibrary 에 " + e.codeId + " 없음";
@@ -91,12 +93,13 @@ public static class MonsterRigSave
             MetaTweak(o, e.tweaks);
         });
         var n = WritePivots("Assets/Art/Rats/Cats/Parts/" + e.codeId + "/", pivots);
-        AssetDatabase.SaveAssets();
+        AssetDatabase.SaveAssetIfDirty(lib);      // 이 에셋만
         return $"관절 {n}개";
     }
 
     public static string SaveHuman(HumanArtLibrary.Entry e, Dictionary<string, Vector2> pivots)
     {
+        AssetDatabase.ImportAsset(HumanAsset);      // 파일이 밖에서 바뀌었으면 먼저 다시 읽음
         var lib = AssetDatabase.LoadAssetAtPath<HumanArtLibrary>(HumanAsset);
         var dst = lib.Get(e.codeId);
         if (dst == null) return "HumanArtLibrary 에 " + e.codeId + " 없음";
@@ -122,7 +125,7 @@ public static class MonsterRigSave
             MetaTweak(o, e.tweaks);
         });
         var n = WritePivots("Assets/Art/Rats/Humans/Parts/" + e.codeId + "/", pivots);
-        AssetDatabase.SaveAssets();
+        AssetDatabase.SaveAssetIfDirty(lib);      // 이 에셋만
         return $"관절 {n}개";
     }
 

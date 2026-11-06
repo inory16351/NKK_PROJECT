@@ -75,9 +75,29 @@ namespace NKK.Humans
                     if (r == torso) r.transform.localRotation = Quaternion.Euler(0, 0, t.angle);
                 }
             baseOrder.Clear(); foreach (var r in new[] { armFar, legFar, legNear, torso, head, armNear }) baseOrder[r] = r.sortingOrder;
+            restBase.Clear(); foreach (var r in new[] { armFar, legFar, legNear, torso, head, armNear }) restBase[r] = (r.transform.localPosition, r.transform.localScale);
+            mxfOn = false;
         }
 
         readonly Dictionary<SpriteRenderer, NKK.Rats.PartTweak> tweak = new();
+
+        // 모션 키의 파츠 위치 · 크기 (보스 공격 · 필살기 모션). 비우면 원래대로
+        readonly Dictionary<SpriteRenderer, (Vector3 pos, Vector3 scale)> restBase = new();
+        bool mxfOn;
+        public void SetMotionXf(List<NKK.Hazards.BossMotion.PartXf> l)
+        {
+            bool any = l != null && l.Count > 0;
+            if (!any && !mxfOn) return;
+            foreach (var kv in restBase) if (kv.Key) { kv.Key.transform.localPosition = kv.Value.pos; kv.Key.transform.localScale = kv.Value.scale; }
+            mxfOn = any;
+            if (!any) return;
+            foreach (var x in l)
+            {
+                var r = PartRenderer(x.part); if (!r || !restBase.TryGetValue(r, out var b)) continue;
+                r.transform.localPosition = b.pos + (Vector3)(x.offset / 100f);
+                r.transform.localScale = b.scale * x.scale;
+            }
+        }
         float TA(SpriteRenderer r) => tweak.Count > 0 && tweak.TryGetValue(r, out var t) ? t.angle : 0;
 
         // 모션 중 그리는 순서 (보스 공격 · 필살기 모션 키, Apply 뒤에 부름). 비우면 원래 순서로

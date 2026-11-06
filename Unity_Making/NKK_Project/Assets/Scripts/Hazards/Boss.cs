@@ -1644,20 +1644,31 @@ namespace NKK.Hazards
         // ── 그림 (웹 humanPose 보스) ──
         HumanRig.Pose MakePose()
         {
-            motionOrders = null;
+            motionOrders = null; motionXf = null;
             var p = new HumanRig.Pose { sx = 1, sy = 1 };
             float tt = Time.time, sp = Mathf.Sqrt(vx * vx + vy * vy);
             if (State == BState.Wait) { p.armN = 0.25f; p.armF = -0.2f; p.bob = Mathf.Sin(tt * 2) * 2; return p; }
             if (State == BState.Dying || State == BState.Dead) { p.scared = true; p.armN = 2.3f; p.armF = -2.3f; p.legN = 0.55f; p.legF = -0.55f; return p; }
-            if (sp > 12) { p.legN = Mathf.Sin(walk) * 0.45f; p.legF = -p.legN; p.armN = -Mathf.Sin(walk) * 0.35f; p.armF = -p.armN; p.bob = Mathf.Abs(Mathf.Cos(walk)) * 3; }
+            if (sp > 12)
+            {
+                var wm = !attacking ? BossMotion.Find(Data.code_id, BossMotion.WalkType) : null;          // 리깅 툴에서 고친 걷기 모션
+                if (wm != null) { float wt = BossMotion.WalkT(walk); motionOrders = BossMotion.Orders(wm, wt); motionXf = BossMotion.Xf(wm, wt); return BossMotion.Human(wm, wt); }
+                HumanWalkPose(walk, ref p);
+            }
             if (attacking)
             {
                 var mo = atk != null ? BossMotion.Find(Data.code_id, atkType) : null;          // 리깅 툴에서 고친 모션
-                if (mo != null) { motionOrders = BossMotion.Orders(mo, atkT); return BossMotion.Human(mo, atkT); }
+                if (mo != null) { motionOrders = BossMotion.Orders(mo, atkT); motionXf = BossMotion.Xf(mo, atkT); return BossMotion.Human(mo, atkT); }
                 HumanAttackPose(atkType, atk, atkT, air || z > 0, ref p);
             }
             else if (hitT > 0) p.angry = true;
             return p;
+        }
+
+        // 사람 보스 걷는 자세 (코드 기본값, 걸음 위상 라디안) — 리깅 툴 미리보기도 이걸 씀
+        public static void HumanWalkPose(float walk, ref HumanRig.Pose p)
+        {
+            p.legN = Mathf.Sin(walk) * 0.45f; p.legF = -p.legN; p.armN = -Mathf.Sin(walk) * 0.35f; p.armF = -p.armN; p.bob = Mathf.Abs(Mathf.Cos(walk)) * 3;
         }
 
         // 사람 보스 공격 자세 (코드 기본값, 걷는 자세 위에): 휘두르기 · 퉁퉁퉁 · 던지기 · 그 밖 (리깅 툴 미리보기도 이걸 씀)
@@ -1712,6 +1723,7 @@ namespace NKK.Hazards
         // 고양이 보스 (웹 drawBossCat · catPose): 걷기 · 웅크림 · 덮치기 · 던지기 · 날아감
         bool motionOn, motionHead2;      // 이번 프레임 고친 모션을 씀 · 그 키의 두 번째 머리
         System.Collections.Generic.List<PartOrder> motionOrders;      // 그 키의 그리는 순서
+        System.Collections.Generic.List<BossMotion.PartXf> motionXf;  // 그 키의 파츠 위치 · 크기
 
         // 고양이 보스 공격 자세 (코드 기본값): 덮치기 · 내려찍기 점프 중 · 웅크림 · 앞발 들기. 처리했으면 true (리깅 툴 미리보기도 이걸 씀)
         public static bool CatAttackPose(string type, BossAtkRow atk, float atkT, bool up, float tt, ref RatRig.Pose p)
@@ -1726,7 +1738,7 @@ namespace NKK.Hazards
 
         RatRig.Pose MakeCatPose()
         {
-            motionOn = motionHead2 = false; motionOrders = null;
+            motionOn = motionHead2 = false; motionOrders = null; motionXf = null;
             float tt = Time.time;
             var p = new RatRig.Pose { head = Mathf.Sin(tt * 1.6f) * 0.06f, tail = 0.1f + Mathf.Sin(tt * 3) * 0.25f, sx = 1, sy = 1 };
             if (State == BState.Wait && !disguiseRig) { p.tail = 0.3f + Mathf.Sin(tt * 2) * 0.3f; return p; }
@@ -1734,11 +1746,22 @@ namespace NKK.Hazards
             if (attacking && atk != null)
             {
                 var mo = BossMotion.Find(Data.code_id, atkType);          // 리깅 툴에서 고친 모션 (Resources/BossMotion.asset)
-                if (mo != null) { motionOn = true; motionOrders = BossMotion.Orders(mo, atkT); return BossMotion.Cat(mo, atkT, out motionHead2); }
+                if (mo != null) { motionOn = true; motionOrders = BossMotion.Orders(mo, atkT); motionXf = BossMotion.Xf(mo, atkT); return BossMotion.Cat(mo, atkT, out motionHead2); }
                 if (CatAttackPose(atkType, atk, atkT, air || z > 0, tt, ref p)) return p;
             }
-            if (Mathf.Sqrt(vx * vx + vy * vy) > 12) { float sn = Mathf.Sin(walk); p.front = sn * 0.5f; p.farBack = sn * 0.45f; p.farFront = -sn * 0.5f; p.back = -sn * 0.45f; p.bob = -Mathf.Abs(Mathf.Cos(walk)) * 2.5f; p.tail = Mathf.Sin(walk * 0.5f) * 0.3f + 0.1f; }
+            if (Mathf.Sqrt(vx * vx + vy * vy) > 12)
+            {
+                var wm = BossMotion.Find(Data.code_id, BossMotion.WalkType);          // 리깅 툴에서 고친 걷기 모션
+                if (wm != null) { float wt = BossMotion.WalkT(walk); motionOn = true; motionOrders = BossMotion.Orders(wm, wt); motionXf = BossMotion.Xf(wm, wt); return BossMotion.Cat(wm, wt, out motionHead2); }
+                CatWalkPose(walk, ref p);
+            }
             return p;
+        }
+
+        // 고양이 보스 걷는 자세 (코드 기본값, 걸음 위상 라디안) — 리깅 툴 미리보기도 이걸 씀
+        public static void CatWalkPose(float walk, ref RatRig.Pose p)
+        {
+            float sn = Mathf.Sin(walk); p.front = sn * 0.5f; p.farBack = sn * 0.45f; p.farFront = -sn * 0.5f; p.back = -sn * 0.45f; p.bob = -Mathf.Abs(Mathf.Cos(walk)) * 2.5f; p.tail = Mathf.Sin(walk * 0.5f) * 0.3f + 0.1f;
         }
 
         void LateUpdate()
@@ -1756,6 +1779,7 @@ namespace NKK.Hazards
                 var cp = MakeCatPose();
                 catRig.headReplace = attacking && atkType == "Orbital_Laser" && State == BState.Fight ? laserHeadSprite
                     : ReworkHead() ?? (motionOn ? (motionHead2 ? catArtEntry?.head2 : null) : CatHead2());      // 홈랜더: 빨간 눈 · 고친 모션 = 키의 두 번째 머리
+                catRig.SetMotionXf(motionXf);
                 catRig.Apply(cp, growK, face, sq, World.SortOrder(y), 0, State == BState.Dying ? rot : 0);
                 catRig.SetTempOrders(motionOrders);
             }
@@ -1764,13 +1788,17 @@ namespace NKK.Hazards
                 ApplyHeadOpen();          // 우주복 쥐 괴물 머리 (Boss.Crew.cs)
                 bool alt = attacking || hitT > 0 || State == BState.Dying;
                 var mo = attacking && atk != null && State == BState.Fight ? BossMotion.Find(Data.code_id, atkType) : null;      // 리깅 툴에서 고친 모션
-                if (mo != null) alt = BossMotion.Part(mo, atkT, partRig.extra); else if (partRig.extra.Count > 0) partRig.extra.Clear();
+                float mt = atkT; bool moving = Mathf.Sqrt(vx * vx + vy * vy) > 12;
+                if (mo == null && !attacking && moving && State == BState.Fight) { mo = BossMotion.Find(Data.code_id, BossMotion.WalkType); mt = BossMotion.WalkT(walk); }      // 걷기 모션 (코드 걸음 위에 더함)
+                if (mo != null) alt = BossMotion.Part(mo, mt, partRig.extra) && attacking || hitT > 0; else if (partRig.extra.Count > 0) partRig.extra.Clear();
                 partRig.orderOverride.Clear();
-                if (mo != null) { var ol = BossMotion.Orders(mo, atkT); if (ol != null) foreach (var o in ol) partRig.orderOverride[o.part] = o.order; }
-                partRig.Apply(walk, Mathf.Sqrt(vx * vx + vy * vy) > 12, alt, growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), State == BState.Dying ? 6 : 0);
+                if (mo != null) { var ol = BossMotion.Orders(mo, mt); if (ol != null) foreach (var o in ol) partRig.orderOverride[o.part] = o.order; }
+                partRig.xf.Clear();
+                if (mo != null) { var xl = BossMotion.Xf(mo, mt); if (xl != null) foreach (var x in xl) partRig.xf[x.part] = (x.offset, x.scale); }
+                partRig.Apply(walk, moving, alt, growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), State == BState.Dying ? 6 : 0);
                 UpdateMouth();
             }
-            else { rig.Apply(MakePose(), growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), 1); rig.SetTempOrders(motionOrders); }
+            else { var hp = MakePose(); rig.SetMotionXf(motionXf); rig.Apply(hp, growK, face, State == BState.Dying ? rot : 0, sq, World.SortOrder(y), 1); rig.SetTempOrders(motionOrders); }
             ApplyForm();          // 식빵 · 지느러미 등 그림 한 장 모습 (Boss.Rework.cs)
             UpdateMarks(Time.deltaTime);
             if (specialProp && specialProp.gameObject.activeSelf && propHeld) PlaceHeld();

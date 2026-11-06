@@ -38,7 +38,7 @@ public static class RatArtLibraryBuilder
                 front = S(d + "front.png"), back = S(d + "back.png"), head2 = S(d + "head2.png"),
                 neck = V(m.neck), tailAnchor = V(m.tail), shoulder = V(m.shoulder), hip = V(m.hip),
                 legFront = m.leg_front, legBack = m.leg_back,
-                wing = S(d + "wing.png"), wingAnchor = m.wing_anchor != null && m.wing_anchor.Length >= 2 ? V(m.wing_anchor) : new Vector2(0.3f, 0.1f), wingSize = m.wing_size > 0 ? m.wing_size : 1.4f, wing2 = S(d + "wing2.png"), wingFar = S(d + "wing_far.png"), wing2Far = S(d + "wing2_far.png"), wing2Anchor = m.wing2_anchor != null && m.wing2_anchor.Length >= 2 ? V(m.wing2_anchor) : new Vector2(0.3f, 0.7f), wing2Size = m.wing2_size > 0 ? m.wing2_size : 0.7f, headScale = m.head_scale, twinCodeId = m.twin, headOnly = m.head_only == 1,
+                wing = S(d + "wing.png"), wingAnchor = m.wing_anchor != null && m.wing_anchor.Length >= 2 ? V(m.wing_anchor) : new Vector2(0.3f, 0.1f), wingSize = m.wing_size > 0 ? m.wing_size : 1.4f, wing2 = S(d + "wing2.png"), wingFar = S(d + "wing_far.png"), wing2Far = S(d + "wing2_far.png"), wing2Anchor = m.wing2_anchor != null && m.wing2_anchor.Length >= 2 ? V(m.wing2_anchor) : new Vector2(0.3f, 0.7f), wing2Size = m.wing2_size > 0 ? m.wing2_size : 0.7f, headScale = m.head_scale, torsoW = m.torso_w, twinCodeId = m.twin, headOnly = m.head_only == 1,
                 orders = Orders(m.order), tweaks = Tweaks(m.tweak),
             });
         }

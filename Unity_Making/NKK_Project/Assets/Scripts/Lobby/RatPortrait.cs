@@ -48,7 +48,7 @@ namespace NKK.Lobby
                 tail.rectTransform.localRotation = Quaternion.identity;
                 Fit(); return;
             }
-            float tw = e.torso.rect.width, th = e.torso.rect.height;
+            float tw = e.TorsoW, th = e.torso.rect.height;      // 늘린 몸통 그림은 원래 폭 기준 (torsoW)
             float legLenF = e.front ? e.front.rect.height * (1 - PivotTL(e.front).y) * e.legFront : 0;
             float torsoX = -tw * 0.5f, torsoY = -(e.shoulder.y * th + legLenF);
             Vector2 Place(Vector2 a) => new(torsoX + a.x * tw, torsoY + a.y * th);
@@ -58,7 +58,7 @@ namespace NKK.Lobby
             Put(farBack, e.back, L(hip + new Vector2(gap, 0)), e.legBack, far);
             Put(farFront, e.front, L(shoulder + new Vector2(gap, 0)), e.legFront, far);
             Put(tail, e.tail, L(tailA), 1, tint);
-            Put(torso, e.torso, L(new Vector2(0, torsoY + th * 0.5f)), 1, tint, true);
+            Put(torso, e.torso, L(new Vector2(0, torsoY + th * 0.5f)), 1, tint, e.torsoW <= 0);      // 늘린 몸통은 피벗(원래 그림 가운데) 기준
             Put(back, e.back, L(hip), e.legBack, tint);
             Put(front, e.front, L(shoulder), e.legFront, tint);
             Put(head, e.head, L(neck), headScale, tint);

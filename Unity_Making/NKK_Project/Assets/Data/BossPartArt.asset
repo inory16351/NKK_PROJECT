@@ -221,10 +221,10 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 2563a7151d2e0604eb34d2e8d36c1e9e, type: 3}
       alt: {fileID: 21300000, guid: eaa47de84ea54a548a2b4adc04d7c948, type: 3}
       parent: body
-      at: {x: 0.5, y: -0.24}
+      at: {x: 0.424, y: -0.1824}
       pivot: {x: 0.55, y: 0.97}
       angle: 0
-      scale: 0.95
+      scale: 1.087
       flipX: 0
       order: 6
       far: 0
@@ -345,10 +345,10 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: b863deeca2d87cf488fc0150d208037a, type: 3}
       alt: {fileID: 21300000, guid: af8cdbbd74af8dc41af887430fa8bc42, type: 3}
       parent: body
-      at: {x: 0.05, y: 0.5}
+      at: {x: 0.1397, y: 0.6058}
       pivot: {x: 0.85, y: 0.6}
-      angle: 0
-      scale: 1
+      angle: -8.6
+      scale: 0.847
       flipX: 0
       order: 6
       far: 0
@@ -389,7 +389,7 @@ MonoBehaviour:
       sprite: {fileID: 21300000, guid: 0989b69da3e012644ad4c517d97268ac, type: 3}
       alt: {fileID: 0}
       parent: body
-      at: {x: 0.92, y: 0.62}
+      at: {x: 0.8873, y: 0.7442}
       pivot: {x: 0.19, y: 0.86}
       angle: 20
       scale: 1.3

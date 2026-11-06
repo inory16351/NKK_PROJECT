@@ -35,6 +35,8 @@ namespace NKK.Rats
             [Tooltip("머리만 있는 쥐 (나비쥐): 몸통·다리 없이 머리 + 날개(귀) + 꼬리")] public bool headOnly;
             [Tooltip("그리는 순서 덮어쓰기 (비면 리그 기본 순서) — 몬스터 리깅 툴")] public List<PartOrder> orders = new();
             [Tooltip("파츠별 위치 · 회전 · 크기 (렌더러 하나만) — 몬스터 리깅 툴")] public List<PartTweak> tweaks = new();
+            [Tooltip("리그 기준 몸통 폭 px (0 = 몸통 그림 폭). 몸통 그림을 앞뒤로 늘렸을 때 원래 폭을 적어 부착점 · 머리 크기 · 몸 길이를 그대로 둠 (몸통 피벗 = 원래 그림 가운데)")] public float torsoW;
+            public float TorsoW => torsoW > 0 ? torsoW : torso ? torso.rect.width : 0;
             // 겉모습이 한 장짜리인지 (파츠가 없거나, 화면 속 쥐)
             public bool IsSingle => single && (torso == null || screen);
         }

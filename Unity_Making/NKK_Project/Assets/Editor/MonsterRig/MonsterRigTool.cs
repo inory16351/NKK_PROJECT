@@ -78,6 +78,7 @@ public partial class MonsterRigTool : EditorWindow
     {
         Undo.undoRedoPerformed -= OnUndo;
         EditorApplication.update -= Tick;
+        try { if (cjob != null && cjob.running) cjob.proc?.Kill(); } catch { }
         ClearPreview();
         pru?.Cleanup(); pru = null;
         if (unlit) DestroyImmediate(unlit);
@@ -89,6 +90,7 @@ public partial class MonsterRigTool : EditorWindow
 
     void Tick()
     {
+        CodexTick();
         if (MotionTick()) return;
         if (!play) return;
         double t = EditorApplication.timeSinceStartup;
@@ -207,18 +209,25 @@ public partial class MonsterRigTool : EditorWindow
     {
         bool moving = pose == Pose.Walk, alt = pose == Pose.Attack;
         bool mot = motionMode && curMove != null;
-        if (mot) moving = false;
+        if (mot) moving = IsWalk;      // 걷기 모션 = 걷는 중
         switch (cur.kind)
         {
             case Kind.Part:
             {
                 if (w.part.parts.Count == 0 || !w.part.parts[0].sprite) return null;
+                var entry = w.part;
+                if (codexTry && cjob != null && cjob.result && cjob.target)
+                {
+                    // Codex 그림 끼워 보기: 같은 크기 · 같은 관절 비율의 임시 그림으로
+                    var tg = cjob.target; var sw = CodexSwap(tg, new Vector2(tg.pivot.x / tg.rect.width, tg.pivot.y / tg.rect.height));
+                    if (sw) { tempSprites[sw] = (tg, ""); entry = MonsterRigSave.Clone(w.part); foreach (var pp in entry.parts) { if (pp.sprite == tg) pp.sprite = sw; if (pp.alt == tg) pp.alt = sw; } }
+                }
                 var o = EditorUtility.CreateGameObjectWithHideFlags("__RigPreview", HideFlags.HideAndDontSave, typeof(SortingGroup), typeof(BossPartRig));
                 pru.AddSingleGO(o);      // 미리보기 장면으로 먼저 옮김 (열린 씬을 안 건드리게)
                 var pr = o.GetComponent<BossPartRig>();
-                pr.Build(w.part, 1); pr.still = true; pr.open = openK;
+                pr.Build(entry, 1); pr.still = true; pr.open = openK;
                 if (mot) alt = MotionPart(pr, codeMotion);
-                pr.Apply(moving ? walkPhase : 0, moving, alt, 1, -1, 0, 1, 0);
+                pr.Apply(moving ? (mot ? WalkPhaseAt(mt) : walkPhase) : 0, moving, alt, 1, -1, 0, 1, 0);
                 if (mot) Lift(o);
                 if (map != null) foreach (var r in o.GetComponentsInChildren<SpriteRenderer>(true)) map[r] = r.transform.parent.name;
                 return o;
@@ -234,7 +243,7 @@ public partial class MonsterRigTool : EditorWindow
                 var p = new RatRig.Pose { tail = 0.2f, sx = 1, sy = 1 };
                 if (moving) { float sn = Mathf.Sin(walkPhase); p.front = sn * 0.5f; p.farBack = sn * 0.45f; p.farFront = -sn * 0.5f; p.back = -sn * 0.45f; }
                 if (alt) { p.front = 2.1f; p.farFront = 0.5f; p.tilt = -0.3f; p.head = -0.2f; p.tail = 1.1f; rr.headReplace = e.head2; }
-                if (mot) p = MotionCat(rr, e, codeMotion);
+                if (mot) { p = MotionCat(rr, e, codeMotion); rr.SetMotionXf(MotionXf(codeMotion)); }
                 rr.Apply(p, 1, -1, 1, 0);
                 if (mot) rr.SetTempOrders(MotionOrders(codeMotion));      // 모션 키의 그리는 순서
                 if (mot) Lift(o);
@@ -257,7 +266,7 @@ public partial class MonsterRigTool : EditorWindow
                 var p = new HumanRig.Pose { sx = 1, sy = 1, armN = 0.25f, armF = -0.2f };
                 if (moving) { float sn = Mathf.Sin(walkPhase); p.legN = sn * 0.45f; p.legF = -p.legN; p.armN = -sn * 0.35f; p.armF = -p.armN; }
                 if (alt) { p.angry = true; p.armN = 1.2f; p.armF = -1.2f; }
-                if (mot) p = MotionHuman(codeMotion);
+                if (mot) { p = MotionHuman(codeMotion); hr.SetMotionXf(MotionXf(codeMotion)); }
                 hr.Apply(p, 1, -1, 0, 1, 0, 1);
                 if (mot) hr.SetTempOrders(MotionOrders(codeMotion));
                 if (mot) Lift(o);
@@ -293,6 +302,8 @@ public partial class MonsterRigTool : EditorWindow
         // 원본 텍스처 (스프라이트 아틀라스에 묶여 있으면 s.texture 가 아틀라스라 칸이 어긋남)
         var tex = AssetDatabase.LoadAssetAtPath<Texture2D>(AssetDatabase.GetAssetPath(s)) ?? s.texture;
         var rect = tex == s.texture ? s.rect : new Rect(0, 0, tex.width, tex.height);
+        var sw = CodexSwap(s, new Vector2(tl.x, 1 - tl.y));      // Codex 그림 끼워 보기
+        if (sw) { tempSprites[sw] = (s, slot); return sw; }
         var t = Sprite.Create(tex, rect, new Vector2(tl.x, 1 - tl.y), s.pixelsPerUnit, 0, SpriteMeshType.FullRect);
         t.name = s.name; t.hideFlags = HideFlags.HideAndDontSave;
         tempSprites[t] = (s, slot);
@@ -335,7 +346,7 @@ public partial class MonsterRigTool : EditorWindow
     }
 
     string Hint() => cur == null ? "왼쪽 목록에서 몬스터를 고르세요"
-        : motionMode ? "모션: ▶ 재생 · 시간 막대 · 몸을 끌면 지금 시간 키의 관절이 돌아감 (키가 없으면 저절로 생김) · ] / [ = 누른 파츠 앞으로 / 뒤로 (이 키부터) · 휠 = 확대 · 오른쪽 끌기 = 화면 이동"
+        : motionMode ? "모션 (지금 시간 키, 없으면 저절로 생김): 끌기 = 파츠 옮기기 · Ctrl = 돌리기 · Alt+위아래 = 크기 · ] / [ = 앞으로 / 뒤로 · 휠 = 확대 · 오른쪽 끌기 = 화면 이동"
         : cur.kind == Kind.Part ? "끌기 = 파츠 옮기기 · Shift+끌기 = 관절은 두고 그림만 · Ctrl+끌기 = 돌리기 · Alt+위아래 = 크기 · 휠 = 확대 · 오른쪽 끌기 = 화면 이동 · F = 화면 맞춤"
         : "끌기 = 그 파츠 하나만 옮기기 (가까운 · 먼 팔다리 따로) · Ctrl = 돌리기 · Alt+위아래 = 크기 · Shift = 그림 관절 (같은 그림 양쪽) · Ctrl+Shift = 몸통에 붙는 자리 (양쪽 같이) · 휠 = 확대 · F = 화면 맞춤";
 
@@ -448,7 +459,9 @@ public partial class MonsterRigTool : EditorWindow
             if (torso && torso.sprite)
             {
                 var a = AnchorOf(AnchorName(sel)); var sp = torso.sprite;
-                var lp = new Vector3((a.x * sp.rect.width - sp.pivot.x) / 100f, ((1 - a.y) * sp.rect.height - sp.pivot.y) / 100f, 0);
+                float tw = CatTorsoW(sp);      // 늘린 몸통 (torsoW): 피벗 = 원래 그림 가운데
+                float lx = tw != sp.rect.width ? a.x * tw - tw * 0.5f : a.x * sp.rect.width - sp.pivot.x;
+                var lp = new Vector3(lx / 100f, ((1 - a.y) * sp.rect.height - sp.pivot.y) / 100f, 0);
                 var g = ToGui(r, torso.transform.TransformPoint(lp));
                 Handles.color = new Color(0.3f, 0.9f, 1f); Handles.DrawWireDisc(g, Vector3.forward, 7); Handles.DrawWireDisc(g, Vector3.forward, 3);
             }
@@ -490,7 +503,7 @@ public partial class MonsterRigTool : EditorWindow
                 drag = Drag.None;
                 if (sel != null)
                 {
-                    drag = motionMode ? Drag.Rotate : e.control && e.shift && cur.kind != Kind.Part ? Drag.Anchor : e.alt ? Drag.Scale : e.shift ? Drag.Image : e.control ? Drag.Rotate : Drag.Move;
+                    drag = motionMode ? (e.alt ? Drag.Scale : e.control ? Drag.Rotate : Drag.Move) : e.control && e.shift && cur.kind != Kind.Part ? Drag.Anchor : e.alt ? Drag.Scale : e.shift ? Drag.Image : e.control ? Drag.Rotate : Drag.Move;
                     if (motionMode) { motionDragR = PickRenderer(lastWorld); if (!motionDragR || !BeginMotionDrag()) drag = Drag.None; }
                     Undo.IncrementCurrentGroup();
                     if (drag == Drag.Rotate) lastAngle = AngleAt(r, e.mousePosition);
@@ -506,6 +519,8 @@ public partial class MonsterRigTool : EditorWindow
                 {
                     Undo.RecordObject(work, "리깅 툴 끌기");
                     if (drag == Drag.Rotate && motionMode) { float a = AngleAt(r, e.mousePosition); MotionRotate(Mathf.DeltaAngle(lastAngle, a)); lastAngle = a; }
+                    else if (drag == Drag.Scale && motionMode) MotionScale(Mathf.Exp(-e.delta.y * 0.01f));
+                    else if (drag == Drag.Move && motionMode) MotionMove(w - lastWorld);
                     else if (drag == Drag.Rotate) { float a = AngleAt(r, e.mousePosition); Rotate(Mathf.DeltaAngle(lastAngle, a)); lastAngle = a; }
                     else if (drag == Drag.Scale) Resize(Mathf.Exp(-e.delta.y * 0.01f));
                     else if (drag == Drag.Anchor) MoveAnchor(w - lastWorld);
@@ -615,11 +630,19 @@ public partial class MonsterRigTool : EditorWindow
     {
         var rr = cur.kind == Kind.Part ? Renderer(part) : RigRenderer(part); if (!rr) return;
         int now = rr.sortingOrder;
-        if (motionMode && curMove != null)
+        if (motionMode && curMove != null && scope != Scope.All)
         {
-            if (!HasKeys) { status = "모션 키가 없어요 ('코드 모션을 키로 만들기' 먼저)"; return; }
-            selKey = AddKeyNow();
+            if (!HasKeys) KeysFromCode();      // 키가 없으면 코드 모션을 먼저 키로
             Undo.RecordObject(mwork, "그리는 순서");
+            if (scope == Scope.Motion)
+            {
+                // 이 모션 전체: 첫 키에 두고 (뒤 키로 이어짐) 다른 키의 같은 파츠 순서는 지움
+                var ks = mwork.motion.keys; foreach (var kk in ks) kk.orders.RemoveAll(x => x.part == part);
+                ks[0].orders.Add(new PartOrder { part = part, order = now + d });
+                status = $"이 모션 전체: {part} 순서 {now + d}";
+                return;
+            }
+            selKey = AddKeyNow();
             var k = mwork.motion.keys[selKey]; var o = k.orders.Find(x => x.part == part);
             if (o == null) k.orders.Add(o = new PartOrder { part = part, order = now });
             o.order = now + d;
@@ -640,8 +663,11 @@ public partial class MonsterRigTool : EditorWindow
         if (an == null || !torso || !torso.sprite) { status = "몸통은 다른 파츠가 붙는 기준이라 붙는 자리가 없어요"; return; }
         var d = torso.transform.InverseTransformVector(wd) * 100;
         var a = AnchorOf(an);
-        SetAnchor(an, R4(new Vector2(a.x + d.x / torso.sprite.rect.width, a.y - d.y / torso.sprite.rect.height)));
+        SetAnchor(an, R4(new Vector2(a.x + d.x / CatTorsoW(torso.sprite), a.y - d.y / torso.sprite.rect.height)));
     }
+
+    // 부착점 기준 몸통 폭: 고양이가 torsoW (늘린 몸통의 원래 폭) 를 쓰면 그 값, 아니면 그림 폭
+    float CatTorsoW(Sprite sp) => cur.kind == Kind.Cat && work.cat != null && work.cat.torsoW > 0 ? work.cat.torsoW : sp.rect.width;
 
     // 크기 (Alt+끌기 위아래): 파츠 보스 = scale, 고양이 · 사람 = 그 렌더러만
     void Resize(float f)
@@ -699,6 +725,7 @@ public partial class MonsterRigTool : EditorWindow
         so.Update();
         EditorGUI.BeginChangeCheck();
         if (motionMode) InspectMotion(); else if (cur.kind == Kind.Part) InspectPart(so); else InspectRig(so);
+        DrawCodex();
         if (EditorGUI.EndChangeCheck()) { so.ApplyModifiedProperties(); Rebuild(); }
         else so.ApplyModifiedProperties();
         EditorGUILayout.EndScrollView();
@@ -874,10 +901,22 @@ public partial class MonsterRigTool : EditorWindow
     {
         if (motionMode && curMove != null)
         {
-            try { status = "반영함 · " + SaveMotion(); Debug.Log("[리깅 툴] " + cur.code + " " + status); }
-            catch (Exception ex) { status = "반영 실패: " + ex.Message; Debug.LogException(ex); }
+            bool rig = RigDirty;
+            try { if (MotionDirty) { status = "반영함 · " + SaveMotion(); Debug.Log("[리깅 툴] " + cur.code + " " + status); } }
+            catch (Exception ex) { status = "반영 실패: " + ex.Message; Debug.LogException(ex); return; }
+            if (!rig) return;
+            var keep = status; var move = curMove; var t = mt;
+            SaveRig();      // '전체' 범위로 고친 리그 기본값 (모션 화면은 Select 로 다시 열림)
+            var m2 = moves.Find(x => x.type == move?.type); if (m2 != null && m2 != curMove) PickMove(m2);
+            mt = t; Rebuild();
+            status = keep.StartsWith("반영함") ? keep + " · " + status.Replace("반영함 · ", "") : status;
             return;
         }
+        SaveRig();
+    }
+
+    void SaveRig()
+    {
         try
         {
             string msg;

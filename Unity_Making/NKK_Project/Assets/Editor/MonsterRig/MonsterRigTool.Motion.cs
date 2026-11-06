@@ -60,8 +60,10 @@ public partial class MonsterRigTool
         moves.Clear();
         var r = cur?.row; if (r == null) { curMove = null; return; }
         var slots = new[] { ("일반 공격", r.atk_type), ("두 번째 공격", r.atk2_type), ("필살기 (쿨타임 스킬)", r.skill_type), ("발악 1", r.special1_type), ("발악 2", r.special2_type) };
+        // 걷기 (기술이 아님): 시간 0~1 = 걸음 두 번, 반복. 게임은 걸음 위상(속도에 따라 빨라짐)으로 이 시간을 고름
+        moves.Add(new Move { kind = "걷기", type = BossMotion.WalkType, atk = new BossAtkRow { atk_type = BossMotion.WalkType, atk_name = "걸음 두 번 (반복)", windup = 0, dur = 1, opt = "" } });
         foreach (var (k, t) in slots) if (!string.IsNullOrEmpty(t) && t != "None" && atkRows.TryGetValue(t, out var a) && !moves.Exists(m => m.type == t)) moves.Add(new Move { kind = k, type = t, atk = a });
-        PickMove(moves.Count > 0 ? moves[0] : null);
+        PickMove(moves.Count > 1 ? moves[1] : moves.Count > 0 ? moves[0] : null);      // 처음엔 일반 공격 (걷기는 맨 위)
     }
 
     void PickMove(Move m)
@@ -81,7 +83,9 @@ public partial class MonsterRigTool
     bool Jump => curMove != null && Boss.IsJumpAttack(curMove.type);
     float AirT => Jump ? 2 * (curMove.type == "Pounce" ? pounceV : jumpV) / Mathf.Max(1, gravity) : 0;
     float End => A == null ? 0 : A.windup + Mathf.Max(A.dur, AirT);           // 공격이 끝나는 때 (대략: 덮치기는 착지 때 끝남)
-    float Length => Mathf.Max(End, mwork && mwork.motion.keys.Count > 0 ? mwork.motion.Length : 0) + 0.5f;
+    bool IsWalk => curMove != null && curMove.type == BossMotion.WalkType;
+    float WalkPhaseAt(float t) => t * BossMotion.WalkPeriod;
+    float Length => IsWalk ? 1 : Mathf.Max(End, mwork && mwork.motion.keys.Count > 0 ? mwork.motion.Length : 0) + 0.5f;
     bool Up(float t) => Jump && t >= A.windup && t < A.windup + AirT;
     bool HasKeys => mwork && mwork.motion.keys.Count > 0;
 
@@ -96,14 +100,23 @@ public partial class MonsterRigTool
         return true;
     }
 
+    // 관절 옮기기 · 돌리기 · 크기 · 순서를 어디에 적용할지 (모션 화면 위 드롭다운, 기억)
+    enum Scope { Key, Motion, All }
+    static readonly string[] ScopeNames = { "이 키 (프레임)만", "이 모션의 모든 키", "전체 (모든 모션 · 평소 모습)" };
+    const string ScopePref = "nkk_rigtool_scope";
+    Scope scope { get => (Scope)EditorPrefs.GetInt(ScopePref, 0); set => EditorPrefs.SetInt(ScopePref, (int)value); }
+
     void MotionToolbar()
     {
         if (curMove == null) { GUILayout.Label("이 보스는 기술이 없어요"); return; }
+        GUILayout.Label("적용", GUILayout.Width(28));
+        var sc = (Scope)EditorGUILayout.Popup((int)scope, ScopeNames, EditorStyles.toolbarPopup, GUILayout.Width(180));
+        if (sc != scope) { scope = sc; status = "적용 범위: " + ScopeNames[(int)sc]; }
         if (GUILayout.Button(mplay ? "❚❚" : "▶", EditorStyles.toolbarButton, GUILayout.Width(28))) { mplay = !mplay; mlast = EditorApplication.timeSinceStartup; if (mplay && mt >= Length - 0.01f) mt = 0; }
         mrepeat = GUILayout.Toggle(mrepeat, "반복", EditorStyles.toolbarButton, GUILayout.Width(36));
         GUILayout.Label($"{mt:0.00}s", GUILayout.Width(44));
         mt = GUILayout.HorizontalSlider(mt, 0, Length, GUILayout.MinWidth(160));
-        GUILayout.Label(mt < A.windup ? "준비" : mt < End ? (Up(mt) ? "공중" : "공격") : "끝", GUILayout.Width(32));
+        GUILayout.Label(IsWalk ? "걷기" : mt < A.windup ? "준비" : mt < End ? (Up(mt) ? "공중" : "공격") : "끝", GUILayout.Width(32));
         showGhost = GUILayout.Toggle(showGhost, "코드 모션 겹치기", EditorStyles.toolbarButton, GUILayout.Width(100));
         if (GUILayout.Button("화면 맞춤", EditorStyles.toolbarButton, GUILayout.Width(60))) Fit();
     }
@@ -112,6 +125,7 @@ public partial class MonsterRigTool
     RatRig.Pose CodeCat(float t, out bool head2)
     {
         var p = new RatRig.Pose { head = Mathf.Sin(t * 1.6f) * 0.06f, tail = 0.1f + Mathf.Sin(t * 3) * 0.25f, sx = 1, sy = 1 };
+        if (IsWalk) { p.head = 0; Boss.CatWalkPose(WalkPhaseAt(t), ref p); head2 = false; return p; }
         head2 = t < End;
         if (t < End) Boss.CatAttackPose(curMove.type, A, t, Up(t), t, ref p);
         return p;
@@ -119,6 +133,7 @@ public partial class MonsterRigTool
     HumanRig.Pose CodeHuman(float t)
     {
         var p = new HumanRig.Pose { sx = 1, sy = 1 };
+        if (IsWalk) { Boss.HumanWalkPose(WalkPhaseAt(t), ref p); return p; }
         if (t < End) Boss.HumanAttackPose(curMove.type, A, t, Up(t), ref p);
         return p;
     }
@@ -132,16 +147,20 @@ public partial class MonsterRigTool
         return p;
     }
     HumanRig.Pose MotionHuman(bool code) => !code && HasKeys && mt < End ? BossMotion.Human(mwork.motion, mt) : CodeHuman(mt);
+    // 지금 시간 모션 키의 파츠 위치 · 크기 (코드 모션 · 공격 끝 뒤 = 없음)
+    List<BossMotion.PartXf> MotionXf(bool code) => !code && HasKeys && mt < End ? BossMotion.Xf(mwork.motion, mt) : null;
+
     // 지금 시간 모션 키의 그리는 순서 (코드 모션 · 공격 끝 뒤 = 없음)
     List<PartOrder> MotionOrders(bool code) => !code && HasKeys && mt < End ? BossMotion.Orders(mwork.motion, mt) : null;
 
     bool MotionPart(BossPartRig pr, bool code)
     {
-        pr.extra.Clear(); pr.orderOverride.Clear();
+        pr.extra.Clear(); pr.orderOverride.Clear(); pr.xf.Clear();
         var ol = MotionOrders(code); if (ol != null) foreach (var o in ol) pr.orderOverride[o.part] = o.order;
+        var xl = MotionXf(code); if (xl != null) foreach (var x in xl) pr.xf[x.part] = (x.offset, x.scale);
         if (mt >= End) return false;
-        if (!code && HasKeys) return BossMotion.Part(mwork.motion, mt, pr.extra);
-        return true;
+        if (!code && HasKeys) { bool al = BossMotion.Part(mwork.motion, mt, pr.extra); return al && !IsWalk; }      // 걷기 = 두 번째 그림 안 씀 (게임과 같게)
+        return !IsWalk;
     }
 
     // 점프 공격: 몸을 띄움 (게임 z)
@@ -175,7 +194,8 @@ public partial class MonsterRigTool
     BossMotion.Key KeyNow()
     {
         var k = new BossMotion.Key { t = Mathf.Round(mt * 100) / 100 };
-        // 순서는 앞 키에서 저절로 이어지므로 새 키에는 안 넣음
+        // 순서는 앞 키에서 저절로 이어지므로 새 키에는 안 넣음 · 위치 · 크기는 지금 모습 그대로
+        if (HasKeys) { var xl = BossMotion.Xf(mwork.motion, mt); if (xl != null) foreach (var x in xl) k.xf.Add(new BossMotion.PartXf { part = x.part, offset = x.offset, scale = x.scale }); }
         switch (cur.kind)
         {
             case Kind.Cat:
@@ -193,7 +213,7 @@ public partial class MonsterRigTool
             default:
             {
                 var d = new Dictionary<string, float>();
-                k.alt = HasKeys ? BossMotion.Part(mwork.motion, mt, d) : mt < End;
+                k.alt = !IsWalk && (HasKeys ? BossMotion.Part(mwork.motion, mt, d) : mt < End);
                 foreach (var kv in d) if (Mathf.Abs(kv.Value) > 0.01f) k.parts.Add(new BossMotion.PartAngle { part = kv.Key, angle = kv.Value });
                 break;
             }
@@ -218,9 +238,14 @@ public partial class MonsterRigTool
         Undo.RecordObject(mwork, "모션 만들기");
         mwork.motion.keys.Clear();
         float keep = mt;
-        var ts = new List<float> { 0, Mathf.Max(0, A.windup - 0.02f), A.windup };
-        for (float t = A.windup + 0.2f; t < End - 0.05f; t += 0.2f) ts.Add(t);
-        ts.Add(Mathf.Max(A.windup, End - 0.02f));
+        var ts = new List<float>();
+        if (IsWalk) { for (int i = 0; i <= 8; i++) ts.Add(i / 8f); mwork.motion.loop = true; mwork.motion.loopFrom = 0; }      // 걷기: 1/8 마다 (끝 = 처음과 같은 자세 → 이어짐)
+        else
+        {
+            ts.AddRange(new[] { 0, Mathf.Max(0, A.windup - 0.02f), A.windup });
+            for (float t = A.windup + 0.2f; t < End - 0.05f; t += 0.2f) ts.Add(t);
+            ts.Add(Mathf.Max(A.windup, End - 0.02f));
+        }
         var made = new List<BossMotion.Key>();          // 키가 다 생긴 뒤에 넣음 (넣는 도중엔 KeyNow 가 코드 모션을 읽게)
         foreach (var t in ts) { mt = t; var k = KeyNow(); k.t = Mathf.Round(t * 100) / 100; if (!made.Exists(x => Mathf.Abs(x.t - k.t) < 0.005f)) made.Add(k); }
         made.Sort((a, b) => a.t.CompareTo(b.t));
@@ -251,10 +276,43 @@ public partial class MonsterRigTool
             motionField = r == rr.head ? "head" : r == rr.tail ? "tail" : r == rr.front ? "front" : r == rr.back ? "back" : r == rr.farFront ? "farFront" : r == rr.farBack ? "farBack" : r == rr.torso ? "tilt" : null;
         else if (go.GetComponent<HumanRig>() is HumanRig hr)
             motionField = r == hr.head ? "head" : r == hr.armNear ? "armN" : r == hr.armFar ? "armF" : r == hr.legNear ? "legN" : r == hr.legFar ? "legF" : r == hr.torso ? "lean" : null;
-        if (motionField == null) return false;
-        sel = cur.kind == Kind.Part ? r.transform.parent.name : partOf.TryGetValue(r, out var pn) ? pn : null;      // ] [ 로 순서 바꿀 파츠
-        selKey = AddKeyNow();
+        sel = cur.kind == Kind.Part ? r.transform.parent.name : partOf.TryGetValue(r, out var pn) ? pn : null;      // 옮기기 · 크기 · ] [ 순서 바꿀 파츠
+        if (motionField == null && sel == null) return false;
+        if (scope == Scope.All) return true;      // 전체 = 리그 기본값을 고침 (키 안 만듦)
+        if (!HasKeys) KeysFromCode();      // 키가 없으면 코드 모션을 먼저 키로 (키 하나만 생겨 모션이 한 자세로 굳지 않게)
+        if (scope == Scope.Key) selKey = AddKeyNow();
         return true;
+    }
+
+    // 끌어서 옮기기 · 크기 (지금 시간 키의 그 파츠). 고양이 · 사람 = 렌더러 하나, 파츠 보스 = 그 파츠 (자식도 같이)
+    // 범위 안의 키 (이 키 = 고른 키 · 이 모션 = 모든 키)
+    List<BossMotion.Key> ScopeKeys()
+    {
+        var l = new List<BossMotion.Key>(); var ks = mwork.motion.keys;
+        if (scope == Scope.Motion) l.AddRange(ks);
+        else if (scope == Scope.Key && selKey >= 0 && selKey < ks.Count) l.Add(ks[selKey]);
+        return l;
+    }
+    static BossMotion.PartXf XfOf(BossMotion.Key k, string part)
+    {
+        var x = k.xf.Find(v => v.part == part); if (x == null) k.xf.Add(x = new BossMotion.PartXf { part = part, offset = Vector2.zero, scale = 1 });
+        return x;
+    }
+    void MotionMove(Vector3 wd)
+    {
+        if (scope == Scope.All) { DragBy(wd, false); return; }      // 리그: 파츠 보스 = 붙는 자리, 고양이 · 사람 = 그 파츠 위치
+        var sr = cur.kind == Kind.Part ? Renderer(sel) : RigRenderer(sel); if (!sr || string.IsNullOrEmpty(sel)) return;
+        var t = cur.kind == Kind.Part ? sr.transform.parent : sr.transform;      // 파츠 보스 = 관절
+        Undo.RecordObject(mwork, "모션 옮기기");
+        var d = t.parent.InverseTransformVector(wd) * 100;
+        foreach (var k in ScopeKeys()) { var x = XfOf(k, sel); x.offset = new Vector2(Mathf.Round((x.offset.x + d.x) * 10) / 10, Mathf.Round((x.offset.y + d.y) * 10) / 10); }
+    }
+    void MotionScale(float f)
+    {
+        if (scope == Scope.All) { Resize(f); return; }
+        if (string.IsNullOrEmpty(sel)) return;
+        Undo.RecordObject(mwork, "모션 크기");
+        foreach (var k in ScopeKeys()) { var x = XfOf(k, sel); x.scale = Mathf.Clamp(Mathf.Round(x.scale * f * 1000) / 1000, 0.05f, 10); }
     }
 
     // 돌릴 축 (화면 각도 잴 중심)
@@ -272,9 +330,13 @@ public partial class MonsterRigTool
     // 화면에서 돌린 각도 (°, 반시계 +) → 키 값 (리그마다 방향이 다름: RatRig 다리 = −, 꼬리 · 머리 · 기울기 = + / HumanRig 몸 기울기 = −)
     void MotionRotate(float deg)
     {
-        if (selKey < 0 || selKey >= mwork.motion.keys.Count) return;
+        if (scope == Scope.All) { Rotate(deg); return; }      // 리그 기본 각도 (고양이 · 사람 = 그 파츠, 파츠 보스 = angle)
         Undo.RecordObject(mwork, "모션 돌리기");
-        var k = mwork.motion.keys[selKey]; float r = deg * Mathf.Deg2Rad;
+        foreach (var k in ScopeKeys()) RotateKey(k, deg);
+    }
+    void RotateKey(BossMotion.Key k, float deg)
+    {
+        float r = deg * Mathf.Deg2Rad;
         switch (motionField)
         {
             case "head": k.head += r; break;
@@ -303,6 +365,26 @@ public partial class MonsterRigTool
 
     // ── 오른쪽 칸 ──
     Vector2 motionScroll;
+    // 키 목록 칸 높이 (손잡이로 조절, EditorPrefs 에 기억)
+    const string KeyListPref = "nkk_rigtool_keylist_h";
+    float KeyListH { get => EditorPrefs.GetFloat(KeyListPref, 260); set => EditorPrefs.SetFloat(KeyListPref, Mathf.Clamp(value, 60, 900)); }
+    bool keyListDrag;
+    void KeyListHandle()
+    {
+        var r = GUILayoutUtility.GetRect(10, 12, GUILayout.ExpandWidth(true));
+        EditorGUIUtility.AddCursorRect(r, MouseCursor.ResizeVertical);
+        var c = new Color(1, 1, 1, keyListDrag ? 0.6f : 0.3f);
+        EditorGUI.DrawRect(new Rect(r.center.x - 20, r.center.y - 2, 40, 1), c);
+        EditorGUI.DrawRect(new Rect(r.center.x - 20, r.center.y + 1, 40, 1), c);
+        var e = Event.current; int id = GUIUtility.GetControlID(FocusType.Passive);
+        switch (e.GetTypeForControl(id))
+        {
+            case EventType.MouseDown when e.button == 0 && r.Contains(e.mousePosition): GUIUtility.hotControl = id; keyListDrag = true; e.Use(); break;
+            case EventType.MouseDrag when GUIUtility.hotControl == id: KeyListH = KeyListH + e.delta.y; e.Use(); Repaint(); break;
+            case EventType.MouseUp when GUIUtility.hotControl == id: GUIUtility.hotControl = 0; keyListDrag = false; e.Use(); break;
+        }
+    }
+
     void InspectMotion()
     {
         if (curMove == null) { EditorGUILayout.HelpBox("이 보스는 기술 칸(Atk_Type)이 없어요.", MessageType.Info); return; }
@@ -320,7 +402,8 @@ public partial class MonsterRigTool
             }
         }
         var a = A;
-        EditorGUILayout.LabelField($"{curMove.type} · 준비 {a.windup:0.##}s · 지속 {a.dur:0.##}s{(Jump ? $" · 점프 {AirT:0.##}s" : "")}{(string.IsNullOrEmpty(a.pattern) ? "" : " · " + a.pattern)}", EditorStyles.miniLabel);
+        if (IsWalk) EditorGUILayout.LabelField("걷기 · 시간 0~1 = 걸음 두 번 (반복) · 게임은 걷는 빠르기에 맞춰 이 시간을 돎", EditorStyles.miniLabel);
+        else EditorGUILayout.LabelField($"{curMove.type} · 준비 {a.windup:0.##}s · 지속 {a.dur:0.##}s{(Jump ? $" · 점프 {AirT:0.##}s" : "")}{(string.IsNullOrEmpty(a.pattern) ? "" : " · " + a.pattern)}", EditorStyles.miniLabel);
         if (!string.IsNullOrEmpty(a.opt)) EditorGUILayout.LabelField("opt: " + a.opt, EditorStyles.miniLabel);
 
         EditorGUILayout.Space(4);
@@ -344,14 +427,18 @@ public partial class MonsterRigTool
         float lf = mwork.motion.loop ? EditorGUILayout.FloatField("반복 시작 (초)", mwork.motion.loopFrom) : mwork.motion.loopFrom;
         if (EditorGUI.EndChangeCheck()) { Undo.RecordObject(mwork, "모션 반복"); mwork.motion.loop = lp; mwork.motion.loopFrom = Mathf.Max(0, lf); Rebuild(); }
 
-        motionScroll = EditorGUILayout.BeginScrollView(motionScroll, GUILayout.MaxHeight(130));
+        // 키 목록: 줄을 크게 · 아래 손잡이를 끌어 칸 높이 조절 (높이는 기억)
+        const float RowH = 24;
+        float listH = Mathf.Min(KeyListH, ks.Count * (RowH + 2) + 6);
+        motionScroll = EditorGUILayout.BeginScrollView(motionScroll, GUILayout.Height(listH));
         for (int i = 0; i < ks.Count; i++)
         {
-            var st = new GUIStyle(EditorStyles.miniButton) { alignment = TextAnchor.MiddleLeft };
+            var st = new GUIStyle(EditorStyles.miniButton) { alignment = TextAnchor.MiddleLeft, fontSize = 12, fixedHeight = RowH };
             if (i == selKey) st.normal.textColor = st.hover.textColor = new Color(1f, 0.8f, 0.3f);
-            if (GUILayout.Button($"키 {i + 1}   {ks[i].t:0.00}s{(ks[i].t < a.windup ? "  준비" : ks[i].t < End ? "" : "  끝 뒤")}", st)) { selKey = i; mt = ks[i].t; mplay = false; Rebuild(); }
+            if (GUILayout.Button($"키 {i + 1}   {ks[i].t:0.00}s{(ks[i].t < a.windup ? "  준비" : ks[i].t < End ? "" : "  끝 뒤")}", st, GUILayout.Height(RowH))) { selKey = i; mt = ks[i].t; mplay = false; Rebuild(); }
         }
         EditorGUILayout.EndScrollView();
+        KeyListHandle();
         if (selKey < 0 || selKey >= ks.Count) return;
 
         var k = ks[selKey];
@@ -393,6 +480,37 @@ public partial class MonsterRigTool
                 copy.parts.RemoveAll(x => Mathf.Abs(x.angle) < 0.001f);
                 break;
         }
+        // 파츠 위치 · 크기 (이 키, 키 사이를 이음)
+        EditorGUILayout.Space(4);
+        EditorGUILayout.LabelField($"파츠 위치 · 크기 (이 키 값 · 고치면 적용: {ScopeNames[(int)scope]} · x y = 픽셀, × = 크기 · 굵게 = 바꾼 값)", EditorStyles.miniBoldLabel);
+        xfPending.Clear();
+        var xslots = new List<(string, string)>();
+        if (cur.kind == Kind.Part) foreach (var p in work.part.parts) xslots.Add((p.name, p.name));
+        else xslots.AddRange(cur.kind == Kind.Cat ? CatOrders : HumanOrders);
+        foreach (var (part, label) in xslots)
+        {
+            var xv = copy.xf.Find(v => v.part == part);
+            var st = new GUIStyle(xv != null ? EditorStyles.boldLabel : EditorStyles.label); if (part == sel) st.normal.textColor = new Color(1f, 0.8f, 0.3f);
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button(label, st, GUILayout.Width(90))) sel = part;
+            var o = xv != null ? xv.offset : Vector2.zero; float sc = xv != null ? xv.scale : 1;
+            EditorGUIUtility.labelWidth = 14;
+            var o2 = new Vector2(EditorGUILayout.FloatField("x", o.x, GUILayout.Width(56)), EditorGUILayout.FloatField("y", o.y, GUILayout.Width(56)));
+            EditorGUIUtility.labelWidth = 16;
+            float sc2 = EditorGUILayout.FloatField("×", sc, GUILayout.Width(52));
+            EditorGUIUtility.labelWidth = 0;
+            bool clear = xv != null && GUILayout.Button("기본", EditorStyles.miniButton, GUILayout.Width(36));
+            EditorGUILayout.EndHorizontal();
+            if (clear) { copy.xf.Remove(xv); GUI.changed = true; }
+            else if (o2 != o || Mathf.Abs(sc2 - sc) > 1e-5f)
+            {
+                // 적용 범위: 이 키만 = 그 값 그대로 · 이 모션 = 모든 키에 같은 만큼 · 전체 = 리그 기본값 (끌기와 같은 규칙)
+                if (scope == Scope.Key) { if (xv == null) copy.xf.Add(xv = new BossMotion.PartXf { part = part }); xv.offset = o2; xv.scale = Mathf.Max(0.05f, sc2); }
+                else xfPending.Add((part, o2 - o, Mathf.Max(0.05f, sc2) / Mathf.Max(0.05f, sc)));
+                GUI.changed = true;
+            }
+        }
+
         // 그리는 순서 (이 키부터 다음 키 전까지) — 필살기 도중 레이어 바꾸기
         EditorGUILayout.Space(4);
         EditorGUILayout.LabelField("그리는 순서 (이 키부터 뒤로 이어짐 · 클수록 앞 · 굵게 = 이 키에서 바꾼 값 · '기본' = 앞 키 값을 따름)", EditorStyles.miniBoldLabel);
@@ -418,9 +536,43 @@ public partial class MonsterRigTool
         {
             Undo.RecordObject(mwork, "모션 키");
             ks[selKey] = copy; ks.Sort((x, y) => x.t.CompareTo(y.t)); selKey = ks.IndexOf(copy); mt = copy.t;
+            ApplyXfPending();
             Rebuild();
         }
-        EditorGUILayout.HelpBox("미리보기에서 몸을 끌면 지금 시간 키의 관절이 돌아가요 (고양이 몸통 = 몸 기울기). 파란 겹침 = 게임 코드 기본 모션. 효과(투사체 · 소환)는 '게임에서 보기' 로 확인.", MessageType.None);
+        EditorGUILayout.HelpBox("미리보기: 끌기 = 파츠 옮기기 · Ctrl+끌기 = 관절 돌리기 (고양이 몸통 = 몸 기울기) · Alt+위아래 = 크기 · ] [ = 순서. 위 '적용' 드롭다운: 이 키만 (지금 시간에 키가 없으면 저절로 생김) · 이 모션의 모든 키 (같은 만큼 한꺼번에) · 전체 (리그 기본값 = 모든 모션 · 평소 모습). 아래 칸의 숫자는 고른 키 하나 (파츠 위치 · 크기 칸은 고치면 적용 범위를 따름: 이 모션 = 모든 키에 같은 만큼, 전체 = 리그 기본값). 파란 겹침 = 게임 코드 기본 모션. 효과(투사체 · 소환)는 '게임에서 보기' 로 확인.", MessageType.None);
+    }
+
+    // 키 칸에서 바꾼 파츠 위치 · 크기를 적용 범위대로 (이 모션 = 모든 키에 같은 만큼 더하고 곱함 · 전체 = 리그 기본값, 키는 그대로)
+    readonly List<(string part, Vector2 d, float f)> xfPending = new();
+    void ApplyXfPending()
+    {
+        if (xfPending.Count == 0) return;
+        if (scope == Scope.Motion)
+            foreach (var (part, d, f) in xfPending)
+                foreach (var k in mwork.motion.keys)
+                {
+                    var x = XfOf(k, part);
+                    x.offset = new Vector2(Mathf.Round((x.offset.x + d.x) * 10) / 10, Mathf.Round((x.offset.y + d.y) * 10) / 10);
+                    x.scale = Mathf.Clamp(Mathf.Round(x.scale * f * 1000) / 1000, 0.05f, 10);
+                }
+        else if (scope == Scope.All)
+        {
+            Undo.RecordObject(work, "리그 위치 · 크기");
+            var keep = sel;
+            foreach (var (part, d, f) in xfPending)
+            {
+                sel = part;
+                if (Mathf.Abs(f - 1) > 1e-5f) Resize(f);
+                if (d != Vector2.zero)
+                {
+                    var sr = cur.kind == Kind.Part ? Renderer(part) : RigRenderer(part); if (!sr) continue;
+                    var t = cur.kind == Kind.Part ? sr.transform.parent : sr.transform;      // MotionMove 와 같은 좌표 (부모 기준 픽셀)
+                    DragBy(t.parent.TransformVector(d / 100f), false);
+                }
+            }
+            sel = keep;
+        }
+        xfPending.Clear();
     }
 
     static float Deg(string label, float rad) => EditorGUILayout.Slider(label + " (°)", rad * Mathf.Rad2Deg, -200, 200) * Mathf.Deg2Rad;
@@ -428,6 +580,7 @@ public partial class MonsterRigTool
     // ── 반영 ──
     string SaveMotion()
     {
+        if (File.Exists(MotionAsset)) AssetDatabase.ImportAsset(MotionAsset);      // 파일이 밖에서 바뀌었으면 먼저 다시 읽음
         var asset = AssetDatabase.LoadAssetAtPath<BossMotion>(MotionAsset);
         if (!asset) { Directory.CreateDirectory(Path.GetDirectoryName(MotionAsset)); asset = CreateInstance<BossMotion>(); AssetDatabase.CreateAsset(asset, MotionAsset); }
         Undo.RecordObject(asset, "모션 반영");
@@ -440,7 +593,7 @@ public partial class MonsterRigTool
         }
         else msg = $"{curMove.type} 모션 지움 (코드 기본으로)";
         EditorUtility.SetDirty(asset);
-        AssetDatabase.SaveAssets();
+        AssetDatabase.SaveAssetIfDirty(asset);      // 이 에셋만 (다른 에셋의 옛 메모리 값을 덮어쓰지 않게)
         BossMotion.Reload();
         msavedJson = EditorJsonUtility.ToJson(mwork);
         return msg + " → Resources/BossMotion.asset";
@@ -491,7 +644,7 @@ public static class MonsterRigPlayTest
         if (idx < 0) { Debug.LogWarning("[리깅 툴] 보스 표에 없음: " + a[0]); return; }
         if (boss.State != Boss.BState.Fight || boss.Data != db.Bosses[idx]) boss.TestSpawn(idx);
         boss.hp = boss.hpMax = 1e12f;          // 구경용: 쥐들이 바로 잡지 않게 (테스트 보스라 기록 · 보상 없음)
-        bool ok = boss.ForceAttack(a[1]);
+        bool ok = a[1] == BossMotion.WalkType || boss.ForceAttack(a[1]);      // 걷기 = 불러 두기만 (보스가 걸어 다님)
         Debug.Log($"[리깅 툴] 게임에서 보기: {a[0]} · {a[1]} {(ok ? "발동" : "발동 못 함 (보스가 싸우는 중이 아님)")}");
     }
 }

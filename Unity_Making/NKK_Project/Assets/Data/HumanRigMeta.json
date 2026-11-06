@@ -644,7 +644,18 @@
 0.95
 ],
 "front": 0,
-"head_scale": 0.8
+"head_scale": 0.8,
+"tweak": [
+{
+"part": "head",
+"offset": [
+-1.5,
+-3.9
+],
+"angle": 0,
+"scale": 0.79
+}
+]
 },
 {
 "code_id": "boss_dino2",
@@ -661,7 +672,36 @@
 0.95
 ],
 "front": 0,
-"head_scale": 0.8
+"head_scale": 0.8,
+"tweak": [
+{
+"part": "head",
+"offset": [
+-26.6,
+4.2
+],
+"angle": 0,
+"scale": 1.45
+},
+{
+"part": "legNear",
+"offset": [
+54.1,
+15.3
+],
+"angle": 0,
+"scale": 1.0
+},
+{
+"part": "legFar",
+"offset": [
+-102.4,
+22.4
+],
+"angle": 0,
+"scale": 1.0
+}
+]
 },
 {
 "code_id": "boss_trainer",
@@ -678,7 +718,18 @@
 0.95
 ],
 "front": 0,
-"head_scale": 0.516
+"head_scale": 0.516,
+"tweak": [
+{
+"part": "armNear",
+"offset": [
+33.5,
+-0.4
+],
+"angle": 0,
+"scale": 1.0
+}
+]
 },
 {
 "code_id": "boss_operator",
@@ -695,7 +746,18 @@
 0.95
 ],
 "front": 0,
-"head_scale": 0.8
+"head_scale": 0.8,
+"tweak": [
+{
+"part": "armNear",
+"offset": [
+33.0,
+-13.2
+],
+"angle": 0,
+"scale": 1.0
+}
+]
 },
 {
 "code_id": "boss_deepdiver",
@@ -712,7 +774,27 @@
 0.95
 ],
 "front": 0,
-"head_scale": 0.8
+"head_scale": 0.8,
+"tweak": [
+{
+"part": "armNear",
+"offset": [
+78.7,
+-20.8
+],
+"angle": 0.0,
+"scale": 1.0
+},
+{
+"part": "head",
+"offset": [
+-26.1,
+-13.3
+],
+"angle": 0.0,
+"scale": 1.0
+}
+]
 },
 {
 "code_id": "boss_joassu",

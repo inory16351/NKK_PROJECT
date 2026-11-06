@@ -35,6 +35,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: chonk
     head: {fileID: 21300000, guid: 80b714f0de40c1346ab6021d3d83be8c, type: 3}
     torso: {fileID: 21300000, guid: 6924df4eb858a9c4aa58503719269b72, type: 3}
@@ -57,6 +71,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: fire
     head: {fileID: 21300000, guid: 07bff7da3798c764f8e91fbc1a1b6dee, type: 3}
     torso: {fileID: 21300000, guid: 68c4b64c50a0698459e22e8422777513, type: 3}
@@ -79,6 +107,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: gym
     head: {fileID: 21300000, guid: 8c1246b6c191cb142b9aa366b12a427c, type: 3}
     torso: {fileID: 21300000, guid: e64ebc4788e79e34fb7d113bce810c1f, type: 3}
@@ -101,6 +143,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: laser
     head: {fileID: 21300000, guid: a830274366a4dad4e8104d3817db0ea1, type: 3}
     torso: {fileID: 21300000, guid: ec6895ae8149b3d49b48b862b2e5ff55, type: 3}
@@ -123,6 +179,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: loaf
     head: {fileID: 21300000, guid: 1d99498104e0b6041845982fb7c28b45, type: 3}
     torso: {fileID: 21300000, guid: 3f83b0d56df32744db5bec123c39f5fa, type: 3}
@@ -145,6 +215,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: mackerel
     head: {fileID: 21300000, guid: 338c01ed04f03da4fbcef86a8e41442f, type: 3}
     torso: {fileID: 21300000, guid: ca146811c355b734187e7b56e1567636, type: 3}
@@ -167,6 +251,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: ninja
     head: {fileID: 21300000, guid: f0af8041a59d4704dabc8cc6b7d59e37, type: 3}
     torso: {fileID: 21300000, guid: 0e2d4096eb9007148bb7d89cb4b47a0c, type: 3}
@@ -189,6 +287,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: space
     head: {fileID: 21300000, guid: 1eb86285b6b2a6d43bace41c4deaac34, type: 3}
     torso: {fileID: 21300000, guid: 13c7656cc8e5bf94289be2e2921d161f, type: 3}
@@ -211,6 +323,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: tuxedo
     head: {fileID: 21300000, guid: 4467189323fc1a44ebc84e7457b92c07, type: 3}
     torso: {fileID: 21300000, guid: e1f3663706e0aa546aa6d945bd5b879d, type: 3}
@@ -233,6 +359,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_zero
     head: {fileID: 21300000, guid: 2ed6db2f359836348b443d06f9efea2a, type: 3}
     torso: {fileID: 21300000, guid: 5e3d19cba909d3a4b8ca6750043f95fb, type: 3}
@@ -255,6 +395,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_witch
     head: {fileID: 21300000, guid: b7732f6b595391a44bd30041775ae086, type: 3}
     torso: {fileID: 21300000, guid: 8103b183af1786d4ca6a2a00c371fc4f, type: 3}
@@ -277,6 +431,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_commander
     head: {fileID: 21300000, guid: eabe6312f6f606b4a8f7fdd28db566a4, type: 3}
     torso: {fileID: 21300000, guid: 13b200b9f56448946bd4b55e187e78e1, type: 3}
@@ -299,6 +467,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_happy
     head: {fileID: 21300000, guid: 95d0782c94425534e9a1110ffb251854, type: 3}
     torso: {fileID: 21300000, guid: a3cf65556363ffa44bf4abc20f4e0274, type: 3}
@@ -321,6 +503,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_pop
     head: {fileID: 21300000, guid: 02d1601290d531440af89f67c0578717, type: 3}
     torso: {fileID: 21300000, guid: 0d435db53d9600646a75baa9fd512345, type: 3}
@@ -343,6 +539,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_union
     head: {fileID: 21300000, guid: 7cb8e9b9ed6b6cf4eaa54a8522f84783, type: 3}
     torso: {fileID: 21300000, guid: be3a56f05986ca148861334159141e2d, type: 3}
@@ -365,6 +575,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_mermaid
     head: {fileID: 21300000, guid: 53b57006682f4ac42aec6926c56a84f7, type: 3}
     torso: {fileID: 21300000, guid: 188f1b669626a5b40b89d9081735adfd, type: 3}
@@ -387,6 +611,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_diver
     head: {fileID: 21300000, guid: ac69f2a2448184b48ba45863f27f5551, type: 3}
     torso: {fileID: 21300000, guid: 0cdd60441a09d47418e5d1b2548f8438, type: 3}
@@ -409,6 +647,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_shark
     head: {fileID: 21300000, guid: cabdb88599e52ae459d4502c03491803, type: 3}
     torso: {fileID: 21300000, guid: 4fc741281a26c314099ca53c19f0cf52, type: 3}
@@ -431,6 +683,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_lasercat
     head: {fileID: 21300000, guid: 2873f70d4f6e4e649909fccb7f35762d, type: 3}
     torso: {fileID: 21300000, guid: b27d665796b8cf94083fce4d09cab984, type: 3}
@@ -453,6 +719,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_grumpy
     head: {fileID: 21300000, guid: a52996361107bb141a0b66f04e649eb7, type: 3}
     torso: {fileID: 21300000, guid: 38689d05fcad86d4a815886392642d80, type: 3}
@@ -475,6 +755,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_turret
     head: {fileID: 21300000, guid: 2b0e2fa150385c049b78ee0c894630c1, type: 3}
     torso: {fileID: 21300000, guid: 71598fd6fd2a8854098e5de9a62f08de, type: 3}
@@ -497,6 +791,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_ryan
     head: {fileID: 21300000, guid: eeb50d09960c5bc429e85b0826608e6a, type: 3}
     torso: {fileID: 21300000, guid: 412c6e179ed07d0478eb75d39ce15b52, type: 3}
@@ -519,6 +827,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_fuhrer
     head: {fileID: 21300000, guid: 73ac9711c3931d74fb0e07eb2894da77, type: 3}
     torso: {fileID: 21300000, guid: 63a587ccc3e8eeb439e778a621601d0e, type: 3}
@@ -541,6 +863,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_popcat
     head: {fileID: 21300000, guid: e4672356ee3dc9542be3f1d3e92661c1, type: 3}
     torso: {fileID: 21300000, guid: 8db8f456692589342b47ff8ac96005dd, type: 3}
@@ -549,8 +885,8 @@ MonoBehaviour:
     back: {fileID: 21300000, guid: 14ac485f87ae42e4c95e93c2f6d5739b, type: 3}
     head2: {fileID: 21300000, guid: 8efe73e48fe63f845970e3e0d0d17b6b, type: 3}
     single: {fileID: 0}
-    neck: {x: 0.225, y: 0.43}
-    tailAnchor: {x: 0.95, y: 0.563}
+    neck: {x: 0.225, y: 0.4301}
+    tailAnchor: {x: 0.9292, y: 0.5727}
     shoulder: {x: 0.27, y: 0.607}
     hip: {x: 0.8, y: 0.611}
     legFront: 0.908
@@ -563,6 +899,28 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders:
+    - part: head
+      order: 6
+    - part: torso
+      order: 6
+    tweaks:
+    - part: tail
+      offset: {x: -14.8, y: -2.7}
+      angle: 0
+      scale: 1
+    torsoW: 0
   - codeId: boss_union2
     head: {fileID: 21300000, guid: ebc91b8d89c31e547b0a80d5482c7580, type: 3}
     torso: {fileID: 21300000, guid: bca592b0f3391524287a3697727e92a0, type: 3}
@@ -585,6 +943,38 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders:
+    - part: head
+      order: 6
+    tweaks:
+    - part: head
+      offset: {x: -35.6, y: 54.4}
+      angle: 0
+      scale: 1
+    - part: back
+      offset: {x: 24.1, y: 1}
+      angle: 0
+      scale: 1
+    - part: tail
+      offset: {x: -21.1, y: 27.3}
+      angle: 0
+      scale: 1
+    - part: torso
+      offset: {x: 1.3, y: 1.2}
+      angle: 0
+      scale: 1
+    torsoW: 380
   - codeId: boss_joassu
     head: {fileID: 21300000, guid: ab83f9604bf5f7947879794653d00170, type: 3}
     torso: {fileID: 21300000, guid: e41834c224cebfe429bc5c6a7dc75235, type: 3}
@@ -607,6 +997,20 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0
   - codeId: boss_goerem
     head: {fileID: 21300000, guid: ad23e7d47929ebc42af8642a07ad7022, type: 3}
     torso: {fileID: 21300000, guid: 39c2c144e41efb149bba438d00016a9d, type: 3}
@@ -615,10 +1019,10 @@ MonoBehaviour:
     back: {fileID: 21300000, guid: fdcaa764f7945234a8f94ca0c5bb5b4d, type: 3}
     head2: {fileID: 21300000, guid: 8a73b277ccb4d9b46b5a8c9a86bbf136, type: 3}
     single: {fileID: 0}
-    neck: {x: 0.056, y: 0.346}
-    tailAnchor: {x: 0.94, y: 0.382}
+    neck: {x: 0.062, y: 0.3545}
+    tailAnchor: {x: 0.9292, y: 0.3933}
     shoulder: {x: 0.197, y: 0.45}
-    hip: {x: 0.792, y: 0.5}
+    hip: {x: 0.7282, y: 0.519}
     legFront: 1.631
     legBack: 1.38
     screen: 0
@@ -629,6 +1033,28 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders:
+    - part: torso
+      order: 8
+    - part: head
+      order: 8
+    - part: front
+      order: 8
+    - part: back
+      order: 8
+    tweaks: []
+    torsoW: 0
   - codeId: boss_dictator
     head: {fileID: 21300000, guid: f2a5b6b23e01d18439d09305bd96415c, type: 3}
     torso: {fileID: 21300000, guid: 7db3420a4e791034784551a03ac701ca, type: 3}
@@ -651,6 +1077,24 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks:
+    - part: head
+      offset: {x: -20.6, y: 39.2}
+      angle: 0
+      scale: 1
+    torsoW: 0
   - codeId: boss_gremlin
     head: {fileID: 21300000, guid: 7e16109b1b9239e459ebccf1f9ef04c2, type: 3}
     torso: {fileID: 21300000, guid: e13e909e82cb5d04fba59d0c842f24ef, type: 3}
@@ -673,3 +1117,17 @@ MonoBehaviour:
       width: 0.7
       height: 0.6
     screenBg: {fileID: 0}
+    wing: {fileID: 0}
+    wingAnchor: {x: 0.3, y: 0.1}
+    wingSize: 1.4
+    wingFar: {fileID: 0}
+    wing2Far: {fileID: 0}
+    wing2: {fileID: 0}
+    wing2Anchor: {x: 0.3, y: 0.7}
+    wing2Size: 0.7
+    headScale: 0
+    twinCodeId: 
+    headOnly: 0
+    orders: []
+    tweaks: []
+    torsoW: 0

@@ -68,6 +68,7 @@ for cid, m in json.load(io.open(os.path.join(RES, 'Cats', 'Parts', 'pivots.json'
     cm.append({'code_id': cid, 'neck': a['neck'], 'tail': a['tail'], 'shoulder': a['shoulder'], 'hip': a['hip'],
                'leg_front': m.get('legScale', {}).get('front', 1), 'leg_back': m.get('legScale', {}).get('back', 1),
                **({'head_scale': float(m['headScale'])} if m.get('headScale') else {}),   # 머리 크기 고정 (몬스터 리깅 툴, 없으면 자동)
+               **({'torso_w': float(m['torsoW'])} if m.get('torsoW') else {}),   # 리그 기준 몸통 폭 (몸통 그림을 앞으로 늘렸을 때 원래 폭, 없으면 그림 폭)
                **({'order': [{'part': k, 'order': int(v)} for k, v in m['order'].items()]} if m.get('order') else {}),
                **({'tweak': [{'part': k, **v} for k, v in m['tweak'].items()]} if m.get('tweak') else {})})   # 그리는 순서 덮어쓰기 (몬스터 리깅 툴)
 OUT4 = os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Data', 'CatRigMeta.json')

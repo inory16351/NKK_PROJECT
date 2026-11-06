@@ -136,7 +136,7 @@ namespace NKK.Data
     [Serializable] public class ItemTableFile { public List<ItemRow> Item; public List<ZoneRow> Zone; public List<FurnitureLayoutRow> Furniture_Layout; }
 
     // Tools/gen_sprite_pivots.py → Assets/Data/RatRigMeta.json (몸통 부착점 = 몸통 이미지 좌상단 기준 0~1)
-    [Serializable] public class RatRigMetaRow { public string code_id; public float[] neck, tail, shoulder, hip; public float leg_front, leg_back; public float[] wing_anchor, wing2_anchor; public float wing_size, wing2_size, head_scale; public int head_only; public string twin; public List<RigOrderRow> order; public List<RigTweakRow> tweak; }
+    [Serializable] public class RatRigMetaRow { public string code_id; public float[] neck, tail, shoulder, hip; public float leg_front, leg_back; public float[] wing_anchor, wing2_anchor; public float wing_size, wing2_size, head_scale, torso_w; public int head_only; public string twin; public List<RigOrderRow> order; public List<RigTweakRow> tweak; }
     [Serializable] public class RigOrderRow { public string part; public int order; }      // 그리는 순서 덮어쓰기 (몬스터 리깅 툴)
     [Serializable] public class RigTweakRow { public string part; public float[] offset; public float angle, scale = 1; }      // 파츠별 위치(px) · 회전(°) · 크기 (몬스터 리깅 툴)
     [Serializable] public class RatRigMetaFile { public List<RatRigMetaRow> items; }

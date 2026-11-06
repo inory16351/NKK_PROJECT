@@ -23,7 +23,9 @@ namespace NKK.Hazards
         // 파츠마다 더하는 각도 (°) — 보스 공격 모션 (BossMotion, 리깅 툴). 비면 없음
         [System.NonSerialized] public readonly Dictionary<string, float> extra = new();
         // 파츠 그리는 순서 덮어쓰기 — 보스 공격 모션 키 (BossMotion). 비면 파츠 order
-        [System.NonSerialized] public readonly Dictionary<string, int> orderOverride = new();      // 머리 열림 0~1 (Boss 가 매 프레임 정함, 우주복 쥐 — 웹 미리보기 BossRework/rig_web/crewmate.html)
+        [System.NonSerialized] public readonly Dictionary<string, int> orderOverride = new();
+        // 파츠 옮기기(px) · 크기 배율 — 보스 공격 모션 키. 비면 그대로
+        [System.NonSerialized] public readonly Dictionary<string, (Vector2 off, float s)> xf = new();      // 머리 열림 0~1 (Boss 가 매 프레임 정함, 우주복 쥐 — 웹 미리보기 BossRework/rig_web/crewmate.html)
 
         class J { public BossPartArt.Part p; public Transform j; public SpriteRenderer r; public Vector3 basePos; public float ik; public bool ikAlt; }
         // 히드라 목 사슬 (Neck 파츠, 같은 neck 번호 = 마디 3 + 머리): 부모(몸통) 좌표의 뿌리 · 마디 길이 · 마디 방향 (그림이 왼쪽으로 뻗음 → 약 180°)
@@ -224,7 +226,9 @@ namespace NKK.Hazards
                 if (p.show != BossPartArt.Show.Always) { bool vis = (p.show == BossPartArt.Show.Open) == (open >= openSwap); if (j.r.enabled != vis) j.r.enabled = vis; }
                 if (shake > 0) a += Random.Range(-shake, shake);
                 j.j.localRotation = Quaternion.Euler(0, 0, a);
-                j.j.localPosition = j.basePos + new Vector3(dx, dy, 0);      // 그림은 왼쪽을 봄 → dx + = 뒤로
+                var mx = xf.Count > 0 && xf.TryGetValue(p.name, out var xv) ? xv : (Vector2.zero, 1f);
+                j.j.localPosition = j.basePos + new Vector3(dx, dy, 0) + (Vector3)(mx.Item1 / 100f);      // 그림은 왼쪽을 봄 → dx + = 뒤로
+                float js = p.scale * mx.Item2; j.j.localScale = new Vector3(p.flipX ? -js : js, js, 1);
                 if (j.r.sprite != sp) { j.r.sprite = sp; j.r.transform.localPosition = -SpritePoint(sp, p.pivot); }
             }
         }

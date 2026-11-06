@@ -14,6 +14,8 @@ namespace NKK.Hazards
     public class BossMotion : ScriptableObject
     {
         [Serializable] public class PartAngle { public string part; public float angle; }
+        // 키에서 파츠 하나 옮기기 · 크기 (고양이 · 사람 = 렌더러 이름, 파츠 보스 = 파츠 이름). offset = 리그 픽셀 (오른쪽 · 위 +)
+        [Serializable] public class PartXf { public string part; public Vector2 offset; public float scale = 1; }
 
         [Serializable]
         public class Key
@@ -30,6 +32,8 @@ namespace NKK.Hazards
             [Header("파츠 보스")]
             [Tooltip("두 번째 그림 (공격 그림)")] public bool alt = true;
             [Tooltip("파츠마다 더하는 각도 (°)")] public List<PartAngle> parts = new();
+            [Header("파츠 위치 · 크기 (키 사이를 이음)")]
+            [Tooltip("파츠마다 옮기기(px) · 크기 배율")] public List<PartXf> xf = new();
             [Header("그리는 순서 (이 키부터 · 뒤 키로 이어짐)")]
             [Tooltip("파츠 이름 → 순서 (고양이 farBack · farFront · tail · torso · back · front · head / 사람 armFar · legFar · legNear · torso · head · armNear / 파츠 보스 = 파츠 이름). 비면 원래 순서")] public List<PartOrder> orders = new();
         }
@@ -45,6 +49,11 @@ namespace NKK.Hazards
         }
 
         public List<Motion> motions = new();
+
+        // 걷기 모션 (기술 대신 atkType = "Walk"): 툴의 시간 0~1 = 걸음 두 번 (게임 걸음 위상 0~4π). 반복
+        public const string WalkType = "Walk";
+        public const float WalkPeriod = Mathf.PI * 4;
+        public static float WalkT(float walkPhase) => Mathf.Repeat(walkPhase, WalkPeriod) / WalkPeriod;
 
         public Motion Get(string code, string atk)
         {
@@ -116,6 +125,28 @@ namespace NKK.Hazards
             ordersBuf.Clear();
             foreach (var kv in ordersMap) ordersBuf.Add(new PartOrder { part = kv.Key, order = kv.Value });
             return ordersBuf;
+        }
+
+        // 지금 시간의 파츠 위치 · 크기 (두 키 사이를 섞음, 없는 파츠 = 그대로). 비면 null
+        static readonly List<PartXf> xfBuf = new();
+        static readonly Dictionary<string, PartXf> xfMap = new();
+        public static List<PartXf> Xf(Motion m, float t)
+        {
+            Span(m, t, out var a, out var b, out var k);
+            xfMap.Clear();
+            void Add(List<PartXf> l, float w)
+            {
+                if (l == null || w <= 0) return;
+                foreach (var x in l)
+                {
+                    if (!xfMap.TryGetValue(x.part, out var v)) xfMap[x.part] = v = new PartXf { part = x.part, offset = Vector2.zero, scale = 1 };
+                    v.offset += x.offset * w; v.scale += (x.scale - 1) * w;
+                }
+            }
+            Add(a.xf, a == b ? 1 : 1 - k); if (b != a) Add(b.xf, k);
+            if (xfMap.Count == 0) return null;
+            xfBuf.Clear(); xfBuf.AddRange(xfMap.Values);
+            return xfBuf;
         }
 
         // 파츠 보스: 파츠마다 더하는 각도 · 두 번째 그림

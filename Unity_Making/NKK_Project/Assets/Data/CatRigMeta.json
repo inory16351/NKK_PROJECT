@@ -508,11 +508,11 @@
 "code_id": "boss_popcat",
 "neck": [
 0.225,
-0.43
+0.4301
 ],
 "tail": [
-0.95,
-0.563
+0.9292,
+0.5727
 ],
 "shoulder": [
 0.27,
@@ -523,7 +523,28 @@
 0.611
 ],
 "leg_front": 0.908,
-"leg_back": 0.892
+"leg_back": 0.892,
+"order": [
+{
+"part": "head",
+"order": 6
+},
+{
+"part": "torso",
+"order": 6
+}
+],
+"tweak": [
+{
+"part": "tail",
+"offset": [
+-14.8,
+-2.7
+],
+"angle": 0,
+"scale": 1.0
+}
+]
 },
 {
 "code_id": "boss_union2",
@@ -544,7 +565,52 @@
 0.5
 ],
 "leg_front": 0.976,
-"leg_back": 0.93
+"leg_back": 0.93,
+"torso_w": 380.0,
+"order": [
+{
+"part": "head",
+"order": 6
+}
+],
+"tweak": [
+{
+"part": "head",
+"offset": [
+-35.6,
+54.4
+],
+"angle": 0,
+"scale": 1.0
+},
+{
+"part": "back",
+"offset": [
+24.1,
+1.0
+],
+"angle": 0,
+"scale": 1.0
+},
+{
+"part": "tail",
+"offset": [
+-21.1,
+27.3
+],
+"angle": 0,
+"scale": 1.0
+},
+{
+"part": "torso",
+"offset": [
+1.3,
+1.2
+],
+"angle": 0,
+"scale": 1.0
+}
+]
 },
 {
 "code_id": "boss_joassu",
@@ -574,19 +640,37 @@
 0.346
 ],
 "tail": [
-0.94,
-0.382
+0.9292,
+0.3933
 ],
 "shoulder": [
 0.197,
 0.45
 ],
 "hip": [
-0.792,
-0.5
+0.7282,
+0.519
 ],
 "leg_front": 1.631,
-"leg_back": 1.38
+"leg_back": 1.38,
+"order": [
+{
+"part": "torso",
+"order": 8
+},
+{
+"part": "head",
+"order": 10
+},
+{
+"part": "front",
+"order": 8
+},
+{
+"part": "back",
+"order": 8
+}
+]
 },
 {
 "code_id": "boss_dictator",
@@ -607,7 +691,18 @@
 0.5
 ],
 "leg_front": 1.472,
-"leg_back": 1.162
+"leg_back": 1.162,
+"tweak": [
+{
+"part": "head",
+"offset": [
+-20.6,
+39.2
+],
+"angle": 0.0,
+"scale": 1.0
+}
+]
 },
 {
 "code_id": "boss_gremlin",

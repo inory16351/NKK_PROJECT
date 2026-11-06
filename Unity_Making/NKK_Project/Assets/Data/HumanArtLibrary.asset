@@ -26,6 +26,8 @@ MonoBehaviour:
     hip: {x: 0.495, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: guard
     head: {fileID: 21300000, guid: 47be7eed186c5ff4ba940737a9a4c071, type: 3}
     scared: {fileID: 21300000, guid: 2dc6a6888f1e44e458d452f2bdccd0d0, type: 3}
@@ -39,6 +41,8 @@ MonoBehaviour:
     hip: {x: 0.496, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: janitor
     head: {fileID: 21300000, guid: 7fd5a56292f125b42bf67e3cb88c0e13, type: 3}
     scared: {fileID: 21300000, guid: af5d7c2baed42cf4d94f64dead1e20ef, type: 3}
@@ -52,6 +56,8 @@ MonoBehaviour:
     hip: {x: 0.506, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: boss_chief
     head: {fileID: 21300000, guid: 966ceed8b11416541baafe7e29f0e7e6, type: 3}
     scared: {fileID: 21300000, guid: c396234e282f42f4d9b39d810e3131b8, type: 3}
@@ -65,6 +71,8 @@ MonoBehaviour:
     hip: {x: 0.489, y: 0.95}
     front: 0
     headScale: 0.775
+    orders: []
+    tweaks: []
   - codeId: boss_mad
     head: {fileID: 21300000, guid: 7a98e31d07ed7d040aa5db468fda70ba, type: 3}
     scared: {fileID: 21300000, guid: 089e143f6f74ff34185159c1306204c1, type: 3}
@@ -78,6 +86,8 @@ MonoBehaviour:
     hip: {x: 0.522, y: 0.95}
     front: 0
     headScale: 0.85
+    orders: []
+    tweaks: []
   - codeId: boss_director
     head: {fileID: 21300000, guid: e96d819ffc7b98c4999c69e70f656a3a, type: 3}
     scared: {fileID: 21300000, guid: a07f3412da477fe4a99a48a4867bb884, type: 3}
@@ -91,6 +101,8 @@ MonoBehaviour:
     hip: {x: 0.497, y: 0.95}
     front: 0
     headScale: 0.85
+    orders: []
+    tweaks: []
   - codeId: cook
     head: {fileID: 21300000, guid: 0ea6389bf1d7f584891cd98b0697d767, type: 3}
     scared: {fileID: 21300000, guid: 2a4b8163431a5554bb86d8b1b9211e14, type: 3}
@@ -104,6 +116,8 @@ MonoBehaviour:
     hip: {x: 0.394, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: catres
     head: {fileID: 21300000, guid: 27dd5907370fb7f4a988f3a4660a8d1e, type: 3}
     scared: {fileID: 21300000, guid: 6550ff612fd0fa340b4e8af7b997cd34, type: 3}
@@ -117,6 +131,8 @@ MonoBehaviour:
     hip: {x: 0.499, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: vet
     head: {fileID: 21300000, guid: 8813cf64121f2a14cb767ed97981f2aa, type: 3}
     scared: {fileID: 21300000, guid: 94159a24fb71c06479c0ade06608d8ac, type: 3}
@@ -130,6 +146,8 @@ MonoBehaviour:
     hip: {x: 0.471, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: feeder
     head: {fileID: 21300000, guid: 5cc7e055fb21e154e9549f28dc2f44be, type: 3}
     scared: {fileID: 21300000, guid: 1b049afd94234d84880ba16dc3068a96, type: 3}
@@ -143,6 +161,8 @@ MonoBehaviour:
     hip: {x: 0.486, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: allergy
     head: {fileID: 21300000, guid: 3d501512a6fb5734f85a311f05919192, type: 3}
     scared: {fileID: 21300000, guid: 1d4283ea524364749bce6d71ba18f0e4, type: 3}
@@ -156,6 +176,8 @@ MonoBehaviour:
     hip: {x: 0.498, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: paleo
     head: {fileID: 21300000, guid: b66848e74b5fbf64c81cc504dd75adef, type: 3}
     scared: {fileID: 21300000, guid: a2c47abaa6b8a5f45b4ca5f201b33bda, type: 3}
@@ -169,6 +191,8 @@ MonoBehaviour:
     hip: {x: 0.485, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: trainer
     head: {fileID: 21300000, guid: f20a1c8949024044bb804ca05ab238ca, type: 3}
     scared: {fileID: 21300000, guid: b410531d63eb37440bf5bf9ade0e7af3, type: 3}
@@ -182,6 +206,8 @@ MonoBehaviour:
     hip: {x: 0.49, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: kid
     head: {fileID: 21300000, guid: b7a64f414ce3d6e4a80b82214baee552, type: 3}
     scared: {fileID: 21300000, guid: d349682d063c99e499e7aaa860c3f8c3, type: 3}
@@ -195,6 +221,8 @@ MonoBehaviour:
     hip: {x: 0.438, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: nedry
     head: {fileID: 21300000, guid: a8a5347ba15f1314a9e95e490a87a681, type: 3}
     scared: {fileID: 21300000, guid: 27ba4714c604866479ce4f1f57093800, type: 3}
@@ -208,6 +236,8 @@ MonoBehaviour:
     hip: {x: 0.495, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: harold
     head: {fileID: 21300000, guid: 385c9a7028f444343bb10ef7d32d9925, type: 3}
     scared: {fileID: 21300000, guid: 86a531bd9a7825a42b8134b4f7188899, type: 3}
@@ -221,6 +251,8 @@ MonoBehaviour:
     hip: {x: 0.507, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: flagger
     head: {fileID: 21300000, guid: 4d0681a8914ca4c4fbf7443d7cdddc70, type: 3}
     scared: {fileID: 21300000, guid: b89a7fffb9e8dea44b51c3f1c4fded63, type: 3}
@@ -234,6 +266,8 @@ MonoBehaviour:
     hip: {x: 0.503, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: coffeeman
     head: {fileID: 21300000, guid: 4f7568a9090709f4fa2654c07fb1ca24, type: 3}
     scared: {fileID: 21300000, guid: 8e0c3c74c2e3f744b97c104060ae8fd1, type: 3}
@@ -247,6 +281,8 @@ MonoBehaviour:
     hip: {x: 0.507, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: rebar
     head: {fileID: 21300000, guid: 4d8464df9caacf14b8bc83f8dfd07aae, type: 3}
     scared: {fileID: 21300000, guid: f477299532a570145901d31fb80c5b5f, type: 3}
@@ -260,6 +296,8 @@ MonoBehaviour:
     hip: {x: 0.5, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: oceanog
     head: {fileID: 21300000, guid: e45b0da42811bff49a371fc6319bdf8d, type: 3}
     scared: {fileID: 21300000, guid: a21a5f1966d9cd1459724e84587ef6a3, type: 3}
@@ -273,6 +311,8 @@ MonoBehaviour:
     hip: {x: 0.496, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: diver
     head: {fileID: 21300000, guid: e30149526a750a047af2900aae81cd13, type: 3}
     scared: {fileID: 21300000, guid: 9337f5ea66b312449aed5a332245f5fd, type: 3}
@@ -286,6 +326,8 @@ MonoBehaviour:
     hip: {x: 0.501, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: auctioneer
     head: {fileID: 21300000, guid: 385b6a5338adc9c49bd7b841eacb5c40, type: 3}
     scared: {fileID: 21300000, guid: 6ee5b51ace800d84c970f84c0fdb1c77, type: 3}
@@ -299,6 +341,8 @@ MonoBehaviour:
     hip: {x: 0.5, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: saltbae
     head: {fileID: 21300000, guid: 9cd3beb5cdda4424285ec81e429e152f, type: 3}
     scared: {fileID: 21300000, guid: d4c2c48cedd093a478f9e83a4fc1386a, type: 3}
@@ -312,6 +356,8 @@ MonoBehaviour:
     hip: {x: 0.42, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: veteran
     head: {fileID: 21300000, guid: 991be9d45bcf76c4ab1f02dbafaecb1e, type: 3}
     scared: {fileID: 21300000, guid: 996a34d9a8fcea449b313776e64dc75a, type: 3}
@@ -325,6 +371,8 @@ MonoBehaviour:
     hip: {x: 0.496, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: reenactor
     head: {fileID: 21300000, guid: 6e0b94829a667ea44926339b514b3606, type: 3}
     scared: {fileID: 21300000, guid: ffce459b10fae9847b26e8264c406866, type: 3}
@@ -338,6 +386,8 @@ MonoBehaviour:
     hip: {x: 0.507, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: student
     head: {fileID: 21300000, guid: 765c6a4e439875c49be83e4ff14d3d26, type: 3}
     scared: {fileID: 21300000, guid: 9c87d2c7895441b4e9986c656830912f, type: 3}
@@ -351,6 +401,8 @@ MonoBehaviour:
     hip: {x: 0.499, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: radioman
     head: {fileID: 21300000, guid: 3c97ed569ea9ce148a6c30c147c7793f, type: 3}
     scared: {fileID: 21300000, guid: a7dd1ca4c4d0d604fb5ef78951831933, type: 3}
@@ -364,6 +416,8 @@ MonoBehaviour:
     hip: {x: 0.528, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: controller
     head: {fileID: 21300000, guid: 2777e8c34abf2ed46a08ca901b1f4b4a, type: 3}
     scared: {fileID: 21300000, guid: 64c80a9b4cc5a3f4cbb0bdd006f3b619, type: 3}
@@ -377,6 +431,8 @@ MonoBehaviour:
     hip: {x: 0.498, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: astro_banana
     head: {fileID: 21300000, guid: e9913838e74284948a712354cc3915b5, type: 3}
     scared: {fileID: 21300000, guid: 9229a7793225fc543977df931628b734, type: 3}
@@ -390,6 +446,8 @@ MonoBehaviour:
     hip: {x: 0.451, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: astro_set
     head: {fileID: 21300000, guid: c5c3b48522976a8488fc188235a25a17, type: 3}
     scared: {fileID: 21300000, guid: 87e1a2790315cfe40ae26bd94974a4a8, type: 3}
@@ -403,6 +461,8 @@ MonoBehaviour:
     hip: {x: 0.451, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: flightdir
     head: {fileID: 21300000, guid: f57b25d283ee3304eb5e8830dfa98104, type: 3}
     scared: {fileID: 21300000, guid: 02e458ec4a91c334bb1a6d4caafca081, type: 3}
@@ -416,6 +476,8 @@ MonoBehaviour:
     hip: {x: 0.502, y: 0.95}
     front: 0
     headScale: 1
+    orders: []
+    tweaks: []
   - codeId: boss_caveman
     head: {fileID: 21300000, guid: 9becf9ecf4d2c9b48b3818048ab8915d, type: 3}
     scared: {fileID: 21300000, guid: 0842a577889cf214592e11c89b1a3409, type: 3}
@@ -429,6 +491,8 @@ MonoBehaviour:
     hip: {x: 0.557, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks: []
   - codeId: boss_keeper
     head: {fileID: 21300000, guid: 79a3068975be7584da9185eb6ee47c75, type: 3}
     scared: {fileID: 21300000, guid: 6089dd00bf73e8443a2a7f9290afe570, type: 3}
@@ -442,6 +506,8 @@ MonoBehaviour:
     hip: {x: 0.579, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks: []
   - codeId: boss_dino
     head: {fileID: 21300000, guid: 021a42442f7e33c4d846b300a9b3c763, type: 3}
     scared: {fileID: 21300000, guid: 2f7ffa61d084b2444925620f2768ad24, type: 3}
@@ -455,6 +521,8 @@ MonoBehaviour:
     hip: {x: 0.572, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks: []
   - codeId: boss_kim
     head: {fileID: 21300000, guid: 56539ded36ce93d4b8100eb42a7d5e61, type: 3}
     scared: {fileID: 21300000, guid: c25bd9d83939d83458b0fa2213286226, type: 3}
@@ -468,6 +536,8 @@ MonoBehaviour:
     hip: {x: 0.457, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks: []
   - codeId: boss_hamba
     head: {fileID: 21300000, guid: aade1ca34e090814b942a2fe4dd2d41c, type: 3}
     scared: {fileID: 21300000, guid: 52d1250f3171e75469ee48e7cd3a06ae, type: 3}
@@ -481,6 +551,8 @@ MonoBehaviour:
     hip: {x: 0.449, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks: []
   - codeId: boss_red
     head: {fileID: 21300000, guid: ad5502c19dc2d5e42a6644c0527b9696, type: 3}
     scared: {fileID: 21300000, guid: 766dabe8dadddc24dae49aecd07d62bd, type: 3}
@@ -494,6 +566,8 @@ MonoBehaviour:
     hip: {x: 0.459, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks: []
   - codeId: boss_vmouse
     head: {fileID: 21300000, guid: 32515066f89a7064eb9d21e4e87a4317, type: 3}
     scared: {fileID: 21300000, guid: 09cb8c2471fe8604fac1b4fca189cb9b, type: 3}
@@ -507,6 +581,12 @@ MonoBehaviour:
     hip: {x: 0.311, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks:
+    - part: head
+      offset: {x: -1.5, y: -3.9}
+      angle: 0
+      scale: 0.79
   - codeId: boss_dino2
     head: {fileID: 21300000, guid: 7a77e251b68d3554db0f584f60dd7a7f, type: 3}
     scared: {fileID: 21300000, guid: 5b79f883e7316214f9f66e4ff20769a2, type: 3}
@@ -520,6 +600,20 @@ MonoBehaviour:
     hip: {x: 0.431, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks:
+    - part: head
+      offset: {x: -26.6, y: 4.2}
+      angle: 0
+      scale: 1.45
+    - part: legNear
+      offset: {x: 54.1, y: 15.3}
+      angle: 0
+      scale: 1
+    - part: legFar
+      offset: {x: -102.4, y: 22.4}
+      angle: 0
+      scale: 1
   - codeId: boss_trainer
     head: {fileID: 21300000, guid: 2dde49076759c954f8d585223babdcd7, type: 3}
     scared: {fileID: 21300000, guid: 7c7abc0d26376e8468f2318f7eaf763e, type: 3}
@@ -533,6 +627,12 @@ MonoBehaviour:
     hip: {x: 0.507, y: 0.95}
     front: 0
     headScale: 0.516
+    orders: []
+    tweaks:
+    - part: armNear
+      offset: {x: 33.5, y: -0.4}
+      angle: 0
+      scale: 1
   - codeId: boss_operator
     head: {fileID: 21300000, guid: e91fd21de8706e34cba3ea23caab5465, type: 3}
     scared: {fileID: 21300000, guid: 5b3b836182165bb4a9338eaff38a1bb5, type: 3}
@@ -546,6 +646,12 @@ MonoBehaviour:
     hip: {x: 0.487, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks:
+    - part: armNear
+      offset: {x: 33, y: -13.2}
+      angle: 0
+      scale: 1
   - codeId: boss_deepdiver
     head: {fileID: 21300000, guid: 600b92280a769394a97333f81831788f, type: 3}
     scared: {fileID: 21300000, guid: 4318b2d9426134a488a5e53319a609a1, type: 3}
@@ -559,6 +665,16 @@ MonoBehaviour:
     hip: {x: 0.485, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks:
+    - part: armNear
+      offset: {x: 78.7, y: -20.8}
+      angle: 0
+      scale: 1
+    - part: head
+      offset: {x: -26.1, y: -13.3}
+      angle: 0
+      scale: 1
   - codeId: boss_joassu
     head: {fileID: 21300000, guid: b31d0084314ee09429c3e408ab13573c, type: 3}
     scared: {fileID: 21300000, guid: ff172fd280bfe7645bc5216b8d8664c6, type: 3}
@@ -572,3 +688,5 @@ MonoBehaviour:
     hip: {x: 0.423, y: 0.95}
     front: 0
     headScale: 0.8
+    orders: []
+    tweaks: []

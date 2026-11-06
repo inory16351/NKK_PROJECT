@@ -1,0 +1,7271 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a7f50e2791707348a9c1be5b52dcfd7, type: 3}
+  m_Name: BossMotion
+  m_EditorClassIdentifier: Assembly-CSharp::NKK.Hazards.BossMotion
+  motions:
+  - codeId: boss_popcat
+    atkType: Pounce
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0.88
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders:
+      - part: front
+        order: 5
+      - part: back
+        order: 6
+  - codeId: boss_popcat
+    atkType: R_HuhCat
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0.9
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -38.52, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.28
+      head: 0.011926175
+      headX: 0
+      tail: 0.9271109
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -38.52, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.98
+      head: 0.059999764
+      headX: 0
+      tail: 1.0363928
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -38.52, y: 0}
+        scale: 1
+      orders: []
+    - t: 1
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -45.52, y: 0}
+        scale: 1
+      orders: []
+    - t: 1.2
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -45.52, y: 0}
+        scale: 1
+      orders: []
+    - t: 1.4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -45.52, y: 0}
+        scale: 1
+      orders: []
+    - t: 1.57
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -45.52, y: 0}
+        scale: 1
+      orders: []
+    - t: 1.6
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -45.52, y: 0}
+        scale: 1
+      orders: []
+    - t: 1.8
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -45.52, y: 0}
+        scale: 1
+      orders: []
+    - t: 1.98
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -45.52, y: 0}
+        scale: 1
+      orders: []
+  - codeId: boss_goerem
+    atkType: R_SawIt
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0.9
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 42.2, y: -2.4}
+        scale: 1
+      orders: []
+    - t: 1.01
+      head: 0.053962033
+      headX: 0
+      tail: 0.7108187
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 42.2, y: 0}
+        scale: 1
+      orders: []
+    - t: 1.18
+      head: 0.057006676
+      headX: 0
+      tail: 0.70014477
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 42.2, y: 0}
+        scale: 1
+      orders: []
+    - t: 1.2
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.6
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.68
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+  - codeId: boss_dino2
+    atkType: Swing
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: -2.2
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 32.4, y: -54}
+        scale: 1
+      orders: []
+    - t: 0.43
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: -2.2
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 32.4, y: -54}
+        scale: 1
+      orders: []
+    - t: 0.45
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: -2.2
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 32.4, y: -54}
+        scale: 1
+      orders: []
+    - t: 0.65
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 32.4, y: -54}
+        scale: 1
+      orders: []
+    - t: 0.85
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 32.4, y: -54}
+        scale: 1
+      orders: []
+    - t: 1.05
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 32.4, y: -54}
+        scale: 1
+      orders: []
+    - t: 1.25
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 32.4, y: -54}
+        scale: 1
+      orders: []
+    - t: 1.45
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 32.4, y: -54}
+        scale: 1
+      orders: []
+    - t: 1.63
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 32.4, y: -54}
+        scale: 1
+      orders: []
+  - codeId: boss_vmouse
+    atkType: R_ClubSmash
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.38
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.38
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+  - codeId: boss_trainer
+    atkType: Walk
+    loop: 1
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 1.1, y: -1.1}
+        scale: 1
+      - part: legFar
+        offset: {x: 5.6, y: 0}
+        scale: 1
+      orders:
+      - part: head
+        order: 2
+    - t: 0.12
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.00000013113416
+      tilt: 0
+      head2: 0
+      armN: -0.35
+      armF: 0.35
+      legN: 0.45
+      legF: -0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 1.1, y: -1.1}
+        scale: 1
+      - part: legFar
+        offset: {x: 5.6, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.25
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: 0.00000003059797
+      armF: -0.00000003059797
+      legN: -0.00000003934025
+      legF: 0.00000003934025
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 1.1, y: -1.1}
+        scale: 1
+      - part: legFar
+        offset: {x: 5.6, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.38
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.00000003577464
+      tilt: 0
+      head2: 0
+      armN: 0.35
+      armF: -0.35
+      legN: -0.45
+      legF: 0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 1.1, y: -1.1}
+        scale: 1
+      - part: legFar
+        offset: {x: 5.6, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: -0.00000006119594
+      armF: 0.00000006119594
+      legN: 0.0000000786805
+      legF: -0.0000000786805
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 1.1, y: -1.1}
+        scale: 1
+      - part: legFar
+        offset: {x: 5.6, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.62
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.0000010132987
+      tilt: 0
+      head2: 0
+      armN: -0.35
+      armF: 0.35
+      legN: 0.45
+      legF: -0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 1.1, y: -1.1}
+        scale: 1
+      - part: legFar
+        offset: {x: 5.6, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.75
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: 0.000000008347416
+      armF: -0.000000008347416
+      legN: -0.000000010732392
+      legF: 0.000000010732392
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 1.1, y: -1.1}
+        scale: 1
+      - part: legFar
+        offset: {x: 5.6, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.88
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.0000019908227
+      tilt: 0
+      head2: 0
+      armN: 0.35
+      armF: -0.35
+      legN: -0.45
+      legF: 0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 1.1, y: -1.1}
+        scale: 1
+      - part: legFar
+        offset: {x: 5.6, y: 0}
+        scale: 1
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: -0.00000012239188
+      armF: 0.00000012239188
+      legN: 0.000000157361
+      legF: -0.000000157361
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 1.1, y: -1.1}
+        scale: 1
+      - part: legFar
+        offset: {x: 5.6, y: 0}
+        scale: 1
+      orders: []
+  - codeId: boss_trainer
+    atkType: Swing
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: -2.2
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders:
+      - part: head
+        order: 2
+    - t: 0.43
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: -2.2
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.45
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: -2.2
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.65
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.85
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.05
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.25
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.45
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.63
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+  - codeId: boss_trainer
+    atkType: Stomp
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders:
+      - part: head
+        order: 2
+    - t: 0.48
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 0.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 0.7
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 0.9
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 1.1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 1.3
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 1.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 1.7
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 1.9
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 2.1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 2.3
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+    - t: 2.48
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -1.2, y: -24.9}
+        scale: 1
+      orders: []
+  - codeId: boss_trainer
+    atkType: R_Shotgun
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders:
+      - part: head
+        order: 2
+    - t: 0.98
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+  - codeId: boss_trainer
+    atkType: R_Stampede
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders:
+      - part: head
+        order: 2
+    - t: 0.78
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.98
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+  - codeId: boss_trainer
+    atkType: R_Whisperer
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.98
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 1.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders:
+      - part: head
+        order: 2
+    - t: 2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 2.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 3
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 3.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 3.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 3.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 3.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 4.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 4.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 4.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 4.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 5.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 5.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 5.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 5.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+    - t: 5.98
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf: []
+      orders: []
+  - codeId: boss_spider
+    atkType: Walk
+    loop: 1
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts:
+      - part: head
+        angle: -3.3
+      xf: []
+      orders: []
+    - t: 0.12
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts:
+      - part: head
+        angle: -3.3
+      xf: []
+      orders: []
+    - t: 0.25
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts:
+      - part: head
+        angle: -3.3
+      xf: []
+      orders: []
+    - t: 0.38
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts:
+      - part: head
+        angle: -3.3
+      xf: []
+      orders: []
+    - t: 0.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts:
+      - part: head
+        angle: -3.3
+      xf: []
+      orders: []
+    - t: 0.62
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts:
+      - part: head
+        angle: -3.3
+      xf: []
+      orders: []
+    - t: 0.75
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts:
+      - part: head
+        angle: -3.3
+      xf: []
+      orders: []
+    - t: 0.88
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts:
+      - part: head
+        angle: -3.3
+      xf: []
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts:
+      - part: head
+        angle: -3.3
+      xf: []
+      orders: []
+  - codeId: boss_operator
+    atkType: Walk
+    loop: 1
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 17.9, y: -5.3}
+        scale: 1
+      orders: []
+    - t: 0.12
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.00000013113416
+      tilt: 0
+      head2: 0
+      armN: -0.35
+      armF: 0.35
+      legN: 0.45
+      legF: -0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 17.9, y: -5.3}
+        scale: 1
+      orders: []
+    - t: 0.25
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: 0.00000003059797
+      armF: -0.00000003059797
+      legN: -0.00000003934025
+      legF: 0.00000003934025
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 17.9, y: -5.3}
+        scale: 1
+      orders: []
+    - t: 0.38
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.00000003577464
+      tilt: 0
+      head2: 0
+      armN: 0.35
+      armF: -0.35
+      legN: -0.45
+      legF: 0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 17.9, y: -5.3}
+        scale: 1
+      orders: []
+    - t: 0.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: -0.00000006119594
+      armF: 0.00000006119594
+      legN: 0.0000000786805
+      legF: -0.0000000786805
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 17.9, y: -5.3}
+        scale: 1
+      orders: []
+    - t: 0.62
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.0000010132987
+      tilt: 0
+      head2: 0
+      armN: -0.35
+      armF: 0.35
+      legN: 0.45
+      legF: -0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 17.9, y: -5.3}
+        scale: 1
+      orders: []
+    - t: 0.75
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: 0.000000008347416
+      armF: -0.000000008347416
+      legN: -0.000000010732392
+      legF: 0.000000010732392
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 17.9, y: -5.3}
+        scale: 1
+      orders: []
+    - t: 0.88
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.0000019908227
+      tilt: 0
+      head2: 0
+      armN: 0.35
+      armF: -0.35
+      legN: -0.45
+      legF: 0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 17.9, y: -5.3}
+        scale: 1
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: -0.00000012239188
+      armF: 0.00000012239188
+      legN: 0.000000157361
+      legF: -0.000000157361
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 17.9, y: -5.3}
+        scale: 1
+      orders: []
+  - codeId: boss_union2
+    atkType: Walk
+    loop: 1
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0.1
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: -2.5
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -14.4, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.12
+      head: 0
+      headX: 0
+      tail: 0.31213203
+      front: 0.5
+      back: -0.45
+      farFront: -0.5
+      farBack: 0.45
+      bob: -0.000000109278474
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -14.4, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.25
+      head: 0
+      headX: 0
+      tail: 0.4
+      front: -0.00000004371139
+      back: 0.00000003934025
+      farFront: 0.00000004371139
+      farBack: -0.00000003934025
+      bob: -2.5
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -14.4, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.38
+      head: 0
+      headX: 0
+      tail: 0.31213203
+      front: -0.5
+      back: 0.45
+      farFront: 0.5
+      farBack: -0.45
+      bob: -0.000000029812202
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -14.4, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.5
+      head: 0
+      headX: 0
+      tail: 0.09999997
+      front: 0.00000008742278
+      back: -0.0000000786805
+      farFront: -0.00000008742278
+      farBack: 0.0000000786805
+      bob: -2.5
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -14.4, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.62
+      head: 0
+      headX: 0
+      tail: -0.11213207
+      front: 0.5
+      back: -0.45
+      farFront: -0.5
+      farBack: 0.45
+      bob: -0.0000008444156
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -14.4, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.75
+      head: 0
+      headX: 0
+      tail: -0.20000002
+      front: -0.000000011924881
+      back: 0.000000010732392
+      farFront: 0.000000011924881
+      farBack: -0.000000010732392
+      bob: -2.5
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -14.4, y: 0}
+        scale: 1
+      orders: []
+    - t: 0.88
+      head: 0
+      headX: 0
+      tail: -0.11213197
+      front: -0.5
+      back: 0.45
+      farFront: 0.5
+      farBack: -0.45
+      bob: -0.000001659019
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -14.4, y: 0}
+        scale: 1
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0.10000005
+      front: 0.00000017484555
+      back: -0.000000157361
+      farFront: -0.00000017484555
+      farBack: 0.000000157361
+      bob: -2.5
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -14.4, y: 0}
+        scale: 1
+      orders: []
+  - codeId: boss_union2
+    atkType: Pounce
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0.9
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 0.58
+      head: 0.048025362
+      headX: 0
+      tail: 0.7354343
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 0.6
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 0.8
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 1
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 1.2
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 1.4
+      head: 0.047058944
+      headX: 0
+      tail: -0.11789397
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 1.6
+      head: 0.032961316
+      headX: 0
+      tail: -0.14904115
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 1.8
+      head: 0.015517141
+      headX: 0
+      tail: -0.093191035
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 2
+      head: -0.0035024798
+      headX: 0
+      tail: 0.030146353
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 2.2
+      head: -0.022166483
+      headX: 0
+      tail: 0.17788555
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 2.4
+      head: -0.038579952
+      headX: 0
+      tail: 0.2984171
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 2.58
+      head: -0.050042953
+      headX: 0
+      tail: 0.34837776
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.2, y: 0.1}
+        scale: 1
+      orders: []
+  - codeId: boss_union2
+    atkType: Hairball
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0.9
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+    - t: 0.38
+      head: 0.03427362
+      headX: 0
+      tail: 1.093584
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+    - t: 0.4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+    - t: 0.6
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+    - t: 0.8
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+    - t: 1
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+    - t: 1.2
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+    - t: 1.4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+    - t: 1.6
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+    - t: 1.8
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+    - t: 1.98
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -18.8, y: -5.2}
+        scale: 1
+      orders: []
+  - codeId: boss_union2
+    atkType: R_PawSlap
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0.9
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.3, y: -0.7}
+        scale: 1
+      orders: []
+    - t: 0.98
+      head: 0.059999764
+      headX: 0
+      tail: 1.0363928
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.3, y: -0.7}
+        scale: 1
+      orders: []
+    - t: 1
+      head: 0.059974413
+      headX: 0
+      tail: 0.13528
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -17.3, y: -0.7}
+        scale: 1
+      orders: []
+  - codeId: boss_union2
+    atkType: R_Solidarity
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0.9
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 1.18
+      head: 0.057006676
+      headX: 0
+      tail: 0.70014477
+      front: 0.3
+      back: 0.4
+      farFront: 0.3
+      farBack: 0.4
+      bob: 6
+      tilt: 0.12
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 1.2
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 1.4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 1.6
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 1.8
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 2
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 2.2
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 2.4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 2.6
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 2.8
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 3
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 3.2
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 3.4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 3.6
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 3.8
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+    - t: 4.18
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 1
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: tail
+        offset: {x: -20.7, y: -7.7}
+        scale: 1
+      orders: []
+  - codeId: boss_operator
+    atkType: Stomp
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 0.48
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 0.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 0.7
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 0.9
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 1.1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 1.3
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 1.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 1.7
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 1.9
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 2.1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 2.3
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+    - t: 2.48
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -6.3, y: -44.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 8.4, y: -52.4}
+        scale: 1
+      orders: []
+  - codeId: boss_deepdiver
+    atkType: Swing
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: -2.2
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 10.4, y: -20.8}
+        scale: 1
+      orders: []
+    - t: 0.43
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: -2.2
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 10.4, y: -20.8}
+        scale: 1
+      orders: []
+    - t: 0.45
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: -2.2
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 10.4, y: -20.8}
+        scale: 1
+      orders: []
+    - t: 0.65
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 10.4, y: -20.8}
+        scale: 1
+      orders: []
+    - t: 0.85
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 10.4, y: -20.8}
+        scale: 1
+      orders: []
+    - t: 1.05
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 10.4, y: -20.8}
+        scale: 1
+      orders: []
+    - t: 1.25
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 10.4, y: -20.8}
+        scale: 1
+      orders: []
+    - t: 1.45
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 10.4, y: -20.8}
+        scale: 1
+      orders: []
+    - t: 1.63
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.9
+      armF: -0.4
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: 10.4, y: -20.8}
+        scale: 1
+      orders: []
+  - codeId: boss_deepdiver
+    atkType: Stomp
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 0.48
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 0.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 0.7
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 0.9
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 1.1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 1.3
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 2.6
+      armF: -2.6
+      legN: 0.8
+      legF: -0.6
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 1.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 1.7
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 1.9
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 2.1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 2.3
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+    - t: 2.48
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -26, y: -49.4}
+        scale: 1
+      - part: armFar
+        offset: {x: -9.1, y: -52}
+        scale: 1
+      orders: []
+  - codeId: boss_deepdiver
+    atkType: R_Sonar
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+    - t: 0.58
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+    - t: 0.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+    - t: 0.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+    - t: 1.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+    - t: 1.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+    - t: 1.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+    - t: 1.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+    - t: 2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+    - t: 2.08
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -36.4, y: -22.1}
+        scale: 1
+      - part: armFar
+        offset: {x: 5.2, y: -35.1}
+        scale: 1
+      orders: []
+  - codeId: boss_deepdiver
+    atkType: R_AnchorDrop
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -33.8, y: -40.3}
+        scale: 1
+      - part: armFar
+        offset: {x: 0, y: -37.7}
+        scale: 1
+      orders: []
+    - t: 0.98
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -33.8, y: -40.3}
+        scale: 1
+      - part: armFar
+        offset: {x: 0, y: -37.7}
+        scale: 1
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -33.8, y: -40.3}
+        scale: 1
+      - part: armFar
+        offset: {x: 0, y: -37.7}
+        scale: 1
+      orders: []
+    - t: 1.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -33.8, y: -40.3}
+        scale: 1
+      - part: armFar
+        offset: {x: 0, y: -37.7}
+        scale: 1
+      orders: []
+    - t: 1.28
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armNear
+        offset: {x: -33.8, y: -40.3}
+        scale: 1
+      - part: armFar
+        offset: {x: 0, y: -37.7}
+        scale: 1
+      orders: []
+  - codeId: boss_deepdiver
+    atkType: R_DepthCharge
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armFar
+        offset: {x: 6.5, y: -45.5}
+        scale: 1
+      - part: armNear
+        offset: {x: -32.5, y: -29.9}
+        scale: 1
+      orders: []
+    - t: 0.98
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armFar
+        offset: {x: 6.5, y: -45.5}
+        scale: 1
+      - part: armNear
+        offset: {x: -32.5, y: -29.9}
+        scale: 1
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armFar
+        offset: {x: 6.5, y: -45.5}
+        scale: 1
+      - part: armNear
+        offset: {x: -32.5, y: -29.9}
+        scale: 1
+      orders: []
+    - t: 1.2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armFar
+        offset: {x: 6.5, y: -45.5}
+        scale: 1
+      - part: armNear
+        offset: {x: -32.5, y: -29.9}
+        scale: 1
+      orders: []
+    - t: 1.4
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armFar
+        offset: {x: 6.5, y: -45.5}
+        scale: 1
+      - part: armNear
+        offset: {x: -32.5, y: -29.9}
+        scale: 1
+      orders: []
+    - t: 1.6
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armFar
+        offset: {x: 6.5, y: -45.5}
+        scale: 1
+      - part: armNear
+        offset: {x: -32.5, y: -29.9}
+        scale: 1
+      orders: []
+    - t: 1.8
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armFar
+        offset: {x: 6.5, y: -45.5}
+        scale: 1
+      - part: armNear
+        offset: {x: -32.5, y: -29.9}
+        scale: 1
+      orders: []
+    - t: 2
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armFar
+        offset: {x: 6.5, y: -45.5}
+        scale: 1
+      - part: armNear
+        offset: {x: -32.5, y: -29.9}
+        scale: 1
+      orders: []
+    - t: 2.18
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 1.2
+      armF: -1.2
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: armFar
+        offset: {x: 6.5, y: -45.5}
+        scale: 1
+      - part: armNear
+        offset: {x: -32.5, y: -29.9}
+        scale: 1
+      orders: []
+  - codeId: boss_deepdiver
+    atkType: Walk
+    loop: 1
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -3, y: -9.1}
+        scale: 1
+      orders: []
+    - t: 0.12
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.00000013113416
+      tilt: 0
+      head2: 0
+      armN: -0.35
+      armF: 0.35
+      legN: 0.45
+      legF: -0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -3, y: -9.1}
+        scale: 1
+      orders: []
+    - t: 0.25
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: 0.00000003059797
+      armF: -0.00000003059797
+      legN: -0.00000003934025
+      legF: 0.00000003934025
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -3, y: -9.1}
+        scale: 1
+      orders: []
+    - t: 0.38
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.00000003577464
+      tilt: 0
+      head2: 0
+      armN: 0.35
+      armF: -0.35
+      legN: -0.45
+      legF: 0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -3, y: -9.1}
+        scale: 1
+      orders: []
+    - t: 0.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: -0.00000006119594
+      armF: 0.00000006119594
+      legN: 0.0000000786805
+      legF: -0.0000000786805
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -3, y: -9.1}
+        scale: 1
+      orders: []
+    - t: 0.62
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.0000010132987
+      tilt: 0
+      head2: 0
+      armN: -0.35
+      armF: 0.35
+      legN: 0.45
+      legF: -0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -3, y: -9.1}
+        scale: 1
+      orders: []
+    - t: 0.75
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: 0.000000008347416
+      armF: -0.000000008347416
+      legN: -0.000000010732392
+      legF: 0.000000010732392
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -3, y: -9.1}
+        scale: 1
+      orders: []
+    - t: 0.88
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0.0000019908227
+      tilt: 0
+      head2: 0
+      armN: 0.35
+      armF: -0.35
+      legN: -0.45
+      legF: 0.45
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -3, y: -9.1}
+        scale: 1
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 3
+      tilt: 0
+      head2: 0
+      armN: -0.00000012239188
+      armF: 0.00000012239188
+      legN: 0.000000157361
+      legF: -0.000000157361
+      lean: 0
+      angry: 0
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: -3, y: -9.1}
+        scale: 1
+      orders: []
+  - codeId: boss_carrier
+    atkType: Walk
+    loop: 1
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.12
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.25
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.38
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.5
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.62
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.75
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts: []
+      xf: []
+      orders: []
+    - t: 0.88
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts: []
+      xf: []
+      orders: []
+    - t: 1
+      head: 0
+      headX: 0
+      tail: 0
+      front: 0
+      back: 0
+      farFront: 0
+      farBack: 0
+      bob: 0
+      tilt: 0
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 0
+      parts: []
+      xf: []
+      orders: []
