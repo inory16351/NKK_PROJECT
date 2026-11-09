@@ -69,8 +69,8 @@ namespace NKK.Lobby
         Sprite baseBackground;
 
         [Header("도토리 상점 로비 배경 (적용하면 훈장 배경보다 먼저)")]
-        [Tooltip("장식 id (도토리 테이블 Deco_Item, 종류 LobbyBg) → 배경 그림 + 그 테마 소품 (같은 크기·배치)")] public DecoLook[] decoLooks;
-        [Serializable] public class DecoLook { public int decoId; public Sprite sprite; public PropSet props; }
+        [Tooltip("장식 id (도토리 테이블 Deco_Item, 종류 LobbyBg) → 배경 그림 (같은 크기·배치). 소품 4종은 안 바꿈 — 소품은 각자 스킨 (decoProps)")] public DecoLook[] decoLooks;
+        [Serializable] public class DecoLook { public int decoId; public Sprite sprite; }
         [Tooltip("소품 하나만 바꾸는 장식 (종류 NapBed · Table · Bookshelf · CheeseStore) → 그림. 적용하면 배경 테마 소품보다 먼저")] public DecoProp[] decoProps;
         [Serializable] public class DecoProp { public int decoId; public Sprite sprite; }
         // 그림이 준비된 장식 (상점이 '적용하기' 버튼을 낼지 정함)
@@ -207,14 +207,15 @@ namespace NKK.Lobby
             if (manager) foreach (var h in hots) h.Fill(manager.FillTokens, manager.Alert(h.id));
         }
 
-        // 배경 + 그 배경의 소품: 스킨 적용 탭에서 고른 것 (장식 · 훈장 테마 · 처음 아지트) → 자동 = 지금 훈장 배경
+        // 배경 + 소품 묶음: 스킨 적용 탭에서 고른 것 (장식 · 훈장 테마 · 처음 아지트) → 자동 = 지금 훈장 배경
+        // 상점 배경(도토리 숲 · 네온 오락실)은 배경판만 바꿈 (2026-11-09 사용자: 소품 4종은 별도 상품) → 소품 묶음 = 지금 훈장 것
         (Sprite, PropSet) LookFor(int tier)
         {
             int pick = Progress.I ? Progress.I.EquippedDeco("LobbyBg") : 0;
-            if (pick > 0 && decoLooks != null) foreach (var l in decoLooks) if (l != null && l.sprite && l.decoId == pick) return (l.sprite, l.props);
             if (pick < 0) { var t = ThemeOf(-pick, tier); if (t.Item1) return t; }
             Sprite s = baseBackground; PropSet p = baseProps; int best = int.MinValue;
             if (tierLooks != null) foreach (var l in tierLooks) if (l != null && l.sprite && tier >= l.fromTier && l.fromTier > best) { best = l.fromTier; s = l.sprite; p = l.props; }
+            if (pick > 0 && decoLooks != null) foreach (var l in decoLooks) if (l != null && l.sprite && l.decoId == pick) return (l.sprite, p);
             return (s, p);
         }
 

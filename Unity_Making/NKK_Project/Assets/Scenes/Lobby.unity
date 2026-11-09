@@ -17013,7 +17013,7 @@ SpriteRenderer:
   m_SortingOrder: 7108
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: b738e95ece4e65745bb7a977fdc4d58f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -18339,6 +18339,7 @@ MonoBehaviour:
   winkEye: {fileID: 451442296}
   winkSpark: {fileID: 225212098}
   sparkSpin: 90
+  closeOrderBoost: 2200
   dustTemplate: {fileID: 820720415}
   dustFrom: {fileID: 222976255}
   dustSprites:
@@ -32483,18 +32484,8 @@ MonoBehaviour:
   decoLooks:
   - decoId: 95011
     sprite: {fileID: 21300000, guid: a9050fe4cc38b4442b8cb120d4e3dd7b, type: 3}
-    props:
-      bed: {fileID: 21300000, guid: 2bb13526676d85f41a4dc7ddce381b2c, type: 3}
-      table: {fileID: 21300000, guid: 9893547c67311544e88198945912a158, type: 3}
-      books: {fileID: 21300000, guid: 5f9723de84c9c2141a991fb0e2d9bbe9, type: 3}
-      shelf: {fileID: 21300000, guid: e4b73530a7a4dcc4b97cb1e6dbc562b1, type: 3}
   - decoId: 95012
     sprite: {fileID: 21300000, guid: 38dced549faa43744b09d520f972f3bd, type: 3}
-    props:
-      bed: {fileID: 21300000, guid: b44a29541a1547c4298e5977f1e9d678, type: 3}
-      table: {fileID: 21300000, guid: 1808dba0ab4a5c240955aef91c8dcb7b, type: 3}
-      books: {fileID: 21300000, guid: 3a5461bdd9d7bf245a82481209103572, type: 3}
-      shelf: {fileID: 21300000, guid: 8a1be5deb6fd431418aea6ae203d81d3, type: 3}
   decoProps:
   - decoId: 95021
     sprite: {fileID: 21300000, guid: 2bb13526676d85f41a4dc7ddce381b2c, type: 3}
@@ -33747,7 +33738,7 @@ SpriteRenderer:
   m_SortingOrder: 7105
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: d19f4f8ea538a3e49adc53d177155847, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
