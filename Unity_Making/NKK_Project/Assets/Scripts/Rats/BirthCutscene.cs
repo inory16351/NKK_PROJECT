@@ -265,7 +265,8 @@ namespace NKK.Rats
         {
             float w = Mathf.Sin(time * legSpeed) * legSwing * walk;
             Rot(p.front, w); Rot(p.farBack, w); Rot(p.back, -w); Rot(p.farFront, -w);
-            Rot(p.head, Mathf.Sin(time * legSpeed * 0.5f) * headBob * Mathf.Max(walk, 0.4f));
+            float nod = Mathf.Sin(time * legSpeed * 0.5f) * headBob * Mathf.Max(walk, 0.4f);
+            Rot(p.head, nod); p.RotateWings(nod);
             Rot(p.tail, Mathf.Sin(time * 7) * tailSwing * tail);
         }
         static void Rot(Image i, float deg) { if (i) i.rectTransform.localRotation = Quaternion.Euler(0, 0, deg); }
@@ -274,6 +275,7 @@ namespace NKK.Rats
         {
             foreach (var i in new[] { p.farBack, p.farFront, p.tail, p.torso, p.back, p.front, p.head, p.single })
                 if (i) { var c = i.color; c.a = a; i.color = c; }
+            p.SetWingsAlpha(a);
         }
 
         static void Sfx(string n) { if (!string.IsNullOrEmpty(n)) SfxManager.Play(n); }

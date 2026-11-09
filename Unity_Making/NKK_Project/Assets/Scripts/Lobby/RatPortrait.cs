@@ -19,6 +19,12 @@ namespace NKK.Lobby
         [HideInInspector] public bool asScreen;            // 이 그림이 휴대폰 화면 속 쥐 (파츠로 조립)
         RatPortrait screenRat;                              // 휴대폰 화면 안 쥐 (처음 필요할 때 이 칸을 복제해 single 아래에 둠)
         Image screenBgImg;
+        [Tooltip("날개 (나비쥐): 그림에서 펼친 정도 (0 접힘 ~ 1 활짝)")] [Range(0, 1)] public float wingPose = 0.8f;
+        // 날개 각도 = RatRig 기본값과 같음 (라디안, 위 = 0)
+        const float WingClosed = 0.12f, WingOpen = 1.25f, SmallClosed = 3.0f, SmallOpen = 2.2f, WingNarrow = 0.5f;
+        RectTransform wingBack, wingFront;                  // 날개 층: 먼 쪽 (꼬리 뒤) · 가까운 쪽 (머리 바로 뒤). 처음 필요할 때 visual 아래에 만듦
+        readonly Image[] wings = new Image[4];              // 0 = 큰 날개 가까운 쪽 · 1 = 큰 날개 먼 쪽 · 2 = 작은 날개 가까운 쪽 · 3 = 작은 날개 먼 쪽
+        bool wingsOn;
 
         static Vector2 PivotTL(Sprite s) => new(s.pivot.x / s.rect.width, 1 - s.pivot.y / s.rect.height);
         static Vector2 L(Vector2 px) => new(px.x, -px.y);       // 리그 픽셀(y 아래 +) → UI (y 위 +)
@@ -37,15 +43,18 @@ namespace NKK.Lobby
             if (screenBgImg) screenBgImg.enabled = scr && e.screenBg;
             foreach (var r in new[] { farBack, farFront, tail, torso, back, front, head }) if (r) r.enabled = e != null && !isSingle;
             if (single) single.enabled = isSingle;
+            if (e == null || isSingle || !(e.headOnly && e.head)) HideWings();
             if (e == null) return;
             if (isSingle) { Put(single, e.single, Vector2.zero, 1, tint); Fit(); if (scr) ShowScreen(e, tint); return; }
 
             if (e.headOnly && e.head)          // 머리만 있는 쥐 (나비쥐): 머리 가운데 + 꼬리 + 날개 (귀)
             {
+                foreach (var r in new[] { farBack, farFront, torso, back, front }) if (r) r.enabled = false;      // 이 칸이 앞서 보여 준 쥐의 몸통 · 다리가 남지 않게
                 float hw = e.head.rect.width, hh = e.head.rect.height;
                 Put(head, e.head, Vector2.zero, 1, tint, true);
-                Put(tail, e.tail, new Vector2(-hw * 0.42f, -hh * 0.12f), 1, tint);
+                Put(tail, e.tail, new Vector2(hw * 0.42f, -hh * 0.12f), 1, tint);      // 꼬리는 얼굴 반대쪽 (RatRig 와 같음)
                 tail.rectTransform.localRotation = Quaternion.identity;
+                ShowWings(e, tint);
                 Fit(); return;
             }
             float tw = e.TorsoW, th = e.torso.rect.height;      // 늘린 몸통 그림은 원래 폭 기준 (torsoW)
@@ -63,6 +72,86 @@ namespace NKK.Lobby
             Put(front, e.front, L(shoulder), e.legFront, tint);
             Put(head, e.head, L(neck), headScale, tint);
             Fit();
+        }
+
+        // ── 날개 (나비쥐): RatRig.BuildWings 와 같은 자리 · 크기로, wingPose 만큼 펼친 자세로 그림 ──
+        void ShowWings(RatArtLibrary.Entry e, Color tint)
+        {
+            if (!e.wing || !visual) { HideWings(); return; }
+            wingBack = WingLayer(wingBack, "WingsBack", tail);
+            wingFront = WingLayer(wingFront, "WingsFront", head);
+            float o = Mathf.Clamp01(wingPose), o2 = Mathf.Clamp01(o * 0.8f + 0.1f);
+            float ang = Mathf.Lerp(WingClosed, WingOpen, o) * Mathf.Rad2Deg, ang2 = Mathf.Lerp(SmallClosed, SmallOpen, o2) * Mathf.Rad2Deg;
+            float nx = Mathf.Lerp(WingNarrow, 1, o), nx2 = Mathf.Lerp(WingNarrow + 0.15f, 1, o2);
+            static Sprite FarOf(Sprite near, Sprite far) => near && far ? far : near;
+            // 만드는 순서 = 그리는 순서 (RatRig: 먼 큰 날개 → 먼 작은 날개 → 꼬리 → 가까운 작은 날개 → 가까운 큰 날개 → 머리)
+            Wing(1, wingBack, FarOf(e.wing, e.wingFar), e.wingAnchor, e.wingSize, true, ang * 0.96f, nx * 0.96f, e, tint);
+            Wing(3, wingBack, FarOf(e.wing2, e.wing2Far), e.wing2Anchor, e.wing2Size, true, ang2 * 0.96f, nx2 * 0.96f, e, tint);
+            Wing(2, wingFront, e.wing2, e.wing2Anchor, e.wing2Size, false, -ang2, nx2, e, tint);
+            Wing(0, wingFront, e.wing, e.wingAnchor, e.wingSize, false, -ang, nx, e, tint);
+            wingsOn = true;
+        }
+
+        RectTransform WingLayer(RectTransform layer, string layerName, Image before)
+        {
+            if (!layer) layer = visual.Find(layerName) as RectTransform;      // 복제된 칸은 층이 이미 있음
+            if (!layer)
+            {
+                layer = new GameObject(layerName, typeof(RectTransform)).GetComponent<RectTransform>();
+                layer.SetParent(visual, false);
+                layer.anchorMin = layer.anchorMax = layer.pivot = new Vector2(0.5f, 0.5f);
+                layer.sizeDelta = Vector2.zero;
+                layer.SetSiblingIndex(before.transform.GetSiblingIndex());
+            }
+            layer.gameObject.SetActive(true);
+            layer.localRotation = Quaternion.identity; layer.localScale = Vector3.one; layer.anchoredPosition = Vector2.zero;
+            return layer;
+        }
+
+        void Wing(int i, RectTransform layer, Sprite s, Vector2 anchor, float size, bool far, float deg, float nx, RatArtLibrary.Entry e, Color tint)
+        {
+            var found = layer.Find("Wing" + i);
+            var img = found ? found.GetComponent<Image>() : null;
+            if (!img)
+            {
+                var go = new GameObject("Wing" + i, typeof(RectTransform), typeof(Image));
+                go.transform.SetParent(layer, false);
+                img = go.GetComponent<Image>(); img.raycastTarget = false;
+            }
+            wings[i] = img;
+            img.enabled = s; if (!s) return;
+            float hw = e.head.rect.width, hh = e.head.rect.height, k = size * hw / s.rect.height;      // 날개 키 = 머리 폭 × size
+            var c = far ? Color.Lerp(Color.white, farLegColor, 0.45f) * tint : tint; c.a = tint.a;
+            img.sprite = s; img.color = c; img.preserveAspect = false;
+            var rt = img.rectTransform;
+            rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.sizeDelta = s.rect.size;
+            rt.pivot = new Vector2(0.5f, 0.06f);                 // 날개 밑동 = 회전축 (그림 아래 끝, 조금 안쪽)
+            rt.localScale = new Vector3(k * nx, k, 1); rt.localRotation = Quaternion.Euler(0, 0, deg);
+            float ax = far ? 1 - anchor.x : anchor.x;            // 먼 쪽 날개는 머리 반대쪽 (좌우 대칭)
+            rt.anchoredPosition = new Vector2(ax * hw - hw * 0.5f, (1 - anchor.y) * hh - hh * 0.5f);
+        }
+
+        void HideWings()
+        {
+            wingsOn = false;
+            if (!visual) return;
+            if (!wingBack) wingBack = visual.Find("WingsBack") as RectTransform;
+            if (!wingFront) wingFront = visual.Find("WingsFront") as RectTransform;
+            if (wingBack) wingBack.gameObject.SetActive(false);
+            if (wingFront) wingFront.gameObject.SetActive(false);
+        }
+
+        // 연출용 (BirthCutscene): 날개도 머리를 따라 기울고 같이 흐려짐
+        public void RotateWings(float deg)
+        {
+            if (!wingsOn) return;
+            var q = Quaternion.Euler(0, 0, deg);
+            wingBack.localRotation = q; wingFront.localRotation = q;
+        }
+        public void SetWingsAlpha(float a)
+        {
+            foreach (var i in wings) if (i) { var c = i.color; c.a = a; i.color = c; }
         }
 
         // 휴대폰 화면 칸에 배경 + 파츠 쥐 (화면 칸에 꽉 맞춰 가운데)
@@ -120,7 +209,8 @@ namespace NKK.Lobby
             visual.localScale = Vector3.one; visual.anchoredPosition = Vector2.zero;
             Vector2 mn = new(float.MaxValue, float.MaxValue), mx = new(float.MinValue, float.MinValue);
             var corners = new Vector3[4];
-            foreach (var img in new[] { farBack, farFront, tail, torso, back, front, head, single })
+            Image W(int i) => wingsOn ? wings[i] : null;
+            foreach (var img in new[] { farBack, farFront, tail, torso, back, front, head, single, W(0), W(1), W(2), W(3) })
             {
                 if (!img || !img.enabled || !img.sprite) continue;
                 img.rectTransform.GetLocalCorners(corners);
