@@ -1,0 +1,12 @@
+Use your built-in image generation tool to create ONE image and save it as PNG to: space_torso.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.
+
+This is a single cut-out TORSO part for a 2D game rig. The head, tail and legs already exist and are attached by code, so this torso must be one complete, fully solid shape.
+Image spec:
+- 1536x1024, solid flat MAGENTA background (#FF00FF) everywhere around the part. No text, no letters, no numbers, no labels, no grid lines, no shadows on the background.
+- Exactly ONE torso, seen from the side, horizontal, head end on the LEFT, centered in the image, about 1240 pixels wide and 600 pixels tall. No head, no legs, no tail, no paws, no helmet.
+- The FIRST attached reference is the layout guide: keep the same outer silhouette, proportions, position and view angle. The grey collar band at the left end, the grey waist band near the right end, and the light-grey shaded strip along the belly stay in those same places.
+- The whole torso must be painted solid and opaque. In the guide the middle of the body is a plain white area: fill it as white space-suit fabric. There must be NO holes, NO see-through areas and NO magenta anywhere inside the torso.
+- The SECOND attached reference shows the existing head, tail and legs of this same cat. Match their suit material, colors and painting style exactly so the new torso looks like it was always part of this cat.
+- STYLE: flat Untitled Goose Game style, NO outlines or strokes, no dark contour lines, no gradients, no glow, no shine; a few flat color areas with one slightly darker flat tone; soft muted palette.
+
+Design: a plain padded white space suit body for an ordinary cat. Main fabric soft off-white around #EAEAEA, darker flat shade around #D2D2D8 along the belly and under the collar, bands in muted silver-grey around #A0A6B2. Keep it simple and clean: only the collar band, the waist band and at most one small flat grey chest panel with no markings. No red, no navy, no gold, no cape, no epaulettes, no badges, no logos.

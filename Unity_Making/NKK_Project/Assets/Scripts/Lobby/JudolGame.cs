@@ -61,7 +61,7 @@ namespace NKK.Lobby
 
         [Header("왼쪽: 치즈 · 쥐 뽑기 · 보유 쥐")]
         public TMP_Text cheeseText;
-        [Tooltip("쥐 뽑기 (JudolPress id buy: 누름 = 1마리 · 꾹 = 연속 · Ctrl = 일괄) · 아래 글 ({price} {pity})")] public Button buyButton;
+        [Tooltip("쥐 뽑기 (JudolPress id buy: 누름 = 일괄 뽑기) · 아래 글 ({price} {pity})")] public Button buyButton;
         public TMP_Text buySub, ownedText;
         [Tooltip("등급 줄 6개 (자식: Pic(RawImage) · Name · Dmg({n}) · Skill · Count({n}))")] public Image[] gradeRows = new Image[0];
         [Tooltip("등급 줄 바탕 투명도: 있음 · 없음")] public float rowOn = 0.9f, rowOff = 0.4f;
@@ -146,7 +146,7 @@ namespace NKK.Lobby
         List<Rat> rats = new(); List<Brick> bricks = new(); List<Item> items = new(); List<Flyer> flyers = new(); List<Walker> walkers = new(); List<Shot> launchQ = new();
         List<Part> parts = new(); List<Floater> floats = new(); List<CellFx> cellFx = new(); List<Rat> recent = new(); List<Delay> later = new();
         readonly Dictionary<string, int> augs = new();
-        float launchX, launchT, flyT, time, popT, sndHit, sndBreak, holdBuy = -1;
+        float launchX, launchT, flyT, time, popT, sndHit, sndBreak;
         float? firstLandX;
         Vector2 launchDir = new(0, -1), pressAt; Vector2? aim;
         int A(string k) => augs.TryGetValue(k, out var n) ? n : 0;
@@ -183,7 +183,7 @@ namespace NKK.Lobby
 
         public void Close()
         {
-            holdBuy = -1; aim = null;
+            aim = null;
             if (Progress.I) Progress.I.FlushJudol();
             Sfx(sfxClose);
             gameObject.SetActive(false);
@@ -615,10 +615,8 @@ namespace NKK.Lobby
             return true;
         }
         void Recent(Rat r) { recent.Insert(0, r); if (recent.Count > 10) recent.RemoveRange(10, recent.Count - 10); }
-        // 일괄 뽑기 (왼쪽 Ctrl · Ctrl + 뽑기 버튼): 치즈가 되는 만큼, 한 번에 bulk_max 마리까지
+        // 일괄 뽑기 (왼쪽 Shift · 뽑기 버튼): 치즈가 되는 만큼, 한 번에 bulk_max 마리까지
         void PullAll() { int n = 0; for (int i = 0; i < (int)Cf("bulk_max", 100); i++) { if (!PullRat()) break; n++; } if (n == 0) Sfx(sfxDeny); }
-        // 한 마리 뽑고 꾹 누르면 연속 (뽑기 버튼 · 왼쪽 Shift)
-        void PullHold() { if (!PullRat()) Sfx(sfxDeny); holdBuy = Cf("hold_delay", 0.35f); }
 
         // 비용 = aug_base × aug_mul^n, aug_late_from 번째 증강부터는 aug_mul_late 로 늘어남 (후반 비용이 확 뛰지 않게)
         int AugCost()
@@ -701,8 +699,7 @@ namespace NKK.Lobby
             if (paused || !board) return;
             if (id == "buy")
             {
-                if (phase == 0) { var k = Keyboard.current; if (k != null && k.ctrlKey.isPressed) PullAll(); else PullHold(); }
-                if (phase == 2) holdBuy = -1;
+                if (phase == 0) PullAll();          // 마우스로 뽑기 = 일괄 뽑기 (2026-11-09 사용자)
                 return;
             }
             RectTransformUtility.ScreenPointToLocalPointInRectangle(board, e.position, e.pressEventCamera, out var l);
@@ -723,9 +720,7 @@ namespace NKK.Lobby
             }
             if (k.mKey.wasPressedThisFrame) MusicOn = !MusicOn;
             if (paused) return;
-            if (k.leftShiftKey.wasPressedThisFrame) PullHold();          // 왼쪽 Shift = 쥐 뽑기 (꾹 = 연속, 2026-10-30 사용자)
-            if (k.leftShiftKey.wasReleasedThisFrame) holdBuy = -1;
-            if (k.leftCtrlKey.wasPressedThisFrame) PullAll();          // 왼쪽 Ctrl = 일괄 뽑기
+            if (k.leftShiftKey.wasPressedThisFrame) PullAll();          // 왼쪽 Shift = 일괄 뽑기 (2026-11-09 사용자, Ctrl 입력 제거)
             if (k.qKey.wasPressedThisFrame) PullRat();
             if (k.eKey.wasPressedThisFrame) OpenAug();
             if (k.fKey.wasPressedThisFrame) ToggleFast();
@@ -784,7 +779,6 @@ namespace NKK.Lobby
             foreach (var f in floats) { f.t += dt; f.y -= 30 * dt; }
             floats.RemoveAll(f => f.t >= 1.1f);
             foreach (var c in cellFx) c.t -= dt; cellFx.RemoveAll(c => c.t <= 0);
-            if (holdBuy >= 0) { holdBuy -= dt; if (holdBuy <= 0) { holdBuy = Cf("hold_repeat", 0.07f); if (!PullRat()) holdBuy = -1; } }
         }
 
         void Float(float x, float y, string text, Color col, bool small = false) => floats.Add(new Floater { x = x, y = y, text = text, col = col, small = small });
