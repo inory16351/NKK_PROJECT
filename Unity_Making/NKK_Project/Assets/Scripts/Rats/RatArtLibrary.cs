@@ -37,6 +37,7 @@ namespace NKK.Rats
             [Tooltip("파츠별 위치 · 회전 · 크기 (렌더러 하나만) — 몬스터 리깅 툴")] public List<PartTweak> tweaks = new();
             [Tooltip("리그 기준 몸통 폭 px (0 = 몸통 그림 폭). 몸통 그림을 앞뒤로 늘렸을 때 원래 폭을 적어 부착점 · 머리 크기 · 몸 길이를 그대로 둠 (몸통 피벗 = 원래 그림 가운데)")] public float torsoW;
             public float TorsoW => torsoW > 0 ? torsoW : torso ? torso.rect.width : 0;
+            [NonSerialized] public Entry Twin;      // twinCodeId 의 그림 (Get 이 이어 줌)
             // 겉모습이 한 장짜리인지 (파츠가 없거나, 화면 속 쥐)
             public bool IsSingle => single && (torso == null || screen);
         }
@@ -46,7 +47,11 @@ namespace NKK.Rats
         Dictionary<string, Entry> map;
         public Entry Get(string codeId)
         {
-            if (map == null || map.Count != entries.Count) { map = new(); foreach (var e in entries) map[e.codeId] = e; }
+            if (map == null || map.Count != entries.Count)
+            {
+                map = new(); foreach (var e in entries) map[e.codeId] = e;
+                foreach (var e in entries) e.Twin = !string.IsNullOrEmpty(e.twinCodeId) && map.TryGetValue(e.twinCodeId, out var top) ? top : null;
+            }
             return map.TryGetValue(codeId, out var v) ? v : null;
         }
     }

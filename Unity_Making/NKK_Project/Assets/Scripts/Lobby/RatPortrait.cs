@@ -25,6 +25,9 @@ namespace NKK.Lobby
         RectTransform wingBack, wingFront;                  // 날개 층: 먼 쪽 (꼬리 뒤) · 가까운 쪽 (머리 바로 뒤). 처음 필요할 때 visual 아래에 만듦
         readonly Image[] wings = new Image[4];              // 0 = 큰 날개 가까운 쪽 · 1 = 큰 날개 먼 쪽 · 2 = 작은 날개 가까운 쪽 · 3 = 작은 날개 먼 쪽
         bool wingsOn;
+        [HideInInspector] public bool asTwin;               // 이 그림이 두 마리 쥐의 위쪽 쥐 (칸 맞춤은 아래 쥐가 함)
+        RatPortrait twinTop;                                // 콩쥐팥쥐: 위에 거꾸로 붙는 쥐 (처음 필요할 때 이 칸을 복제해 visual 아래에 둠)
+        public RatPortrait TwinTop => twinTop && twinTop.gameObject.activeSelf ? twinTop : null;
 
         static Vector2 PivotTL(Sprite s) => new(s.pivot.x / s.rect.width, 1 - s.pivot.y / s.rect.height);
         static Vector2 L(Vector2 px) => new(px.x, -px.y);       // 리그 픽셀(y 아래 +) → UI (y 위 +)
@@ -44,6 +47,8 @@ namespace NKK.Lobby
             foreach (var r in new[] { farBack, farFront, tail, torso, back, front, head }) if (r) r.enabled = e != null && !isSingle;
             if (single) single.enabled = isSingle;
             if (e == null || isSingle || !(e.headOnly && e.head)) HideWings();
+            bool twin = !asTwin && e != null && !isSingle && e.Twin != null;
+            if (!twin) HideTwin();
             if (e == null) return;
             if (isSingle) { Put(single, e.single, Vector2.zero, 1, tint); Fit(); if (scr) ShowScreen(e, tint); return; }
 
@@ -71,7 +76,43 @@ namespace NKK.Lobby
             Put(back, e.back, L(hip), e.legBack, tint);
             Put(front, e.front, L(shoulder), e.legFront, tint);
             Put(head, e.head, L(neck), headScale, tint);
+            if (twin) ShowTwin(e, torsoY, tint);
             Fit();
+        }
+
+        // ── 두 마리 쥐 (콩쥐팥쥐): 위 쥐 = 쌍의 가운데 (아래 쥐 등 높이) 축으로 180° 돌린 것 (Rat.TwinSplit, twinGap 1 과 같음) ──
+        void ShowTwin(RatArtLibrary.Entry e, float torsoY, Color tint)
+        {
+            if (!visual) return;
+            HideTwin();                                          // 복제된 칸은 위 쥐가 이미 있음
+            if (!twinTop)
+            {
+                twinTop = Instantiate(this, visual);
+                twinTop.name = "TwinTop"; twinTop.asTwin = true;
+                if (twinTop.single) for (int c = twinTop.single.transform.childCount - 1; c >= 0; c--) DestroyImmediate(twinTop.single.transform.GetChild(c).gameObject);      // 이 칸이 휴대폰 쥐를 보여 준 적이 있으면 그 화면은 빼고
+                foreach (var g in twinTop.GetComponentsInChildren<Graphic>(true)) g.raycastTarget = false;
+            }
+            twinTop.gameObject.SetActive(true);
+            twinTop.Show(e.Twin, tint);
+            float H = -torsoY - 4;                               // 등 높이 (그림 둘레 여백 4px 만큼 빼서 등선이 딱 닿게, RatRig.BackHeight)
+            var rt = (RectTransform)twinTop.transform;
+            rt.anchorMin = rt.anchorMax = rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.sizeDelta = Vector2.zero; rt.localScale = Vector3.one;
+            rt.anchoredPosition = new Vector2(0, H * 2); rt.localRotation = Quaternion.Euler(0, 0, 180);
+            float s = RigLength(e) / Mathf.Max(1, RigLength(e.Twin));      // 두 쥐 몸 길이를 게임처럼 맞춤
+            twinTop.visual.localScale = new Vector3(s, s, 1); twinTop.visual.anchoredPosition = Vector2.zero;
+        }
+
+        float RigLength(RatArtLibrary.Entry e)
+        {
+            float tw = e.TorsoW, hs = e.headScale > 0 ? e.headScale : e.head ? Mathf.Min(1, headWidthRatio * tw / e.head.rect.width) : 1;
+            return tw + (e.head ? e.head.rect.width * hs * 0.55f : 0);
+        }
+
+        void HideTwin()
+        {
+            if (!twinTop && visual) { var t = visual.Find("TwinTop"); if (t) twinTop = t.GetComponent<RatPortrait>(); }
+            if (twinTop) twinTop.gameObject.SetActive(false);
         }
 
         // ── 날개 (나비쥐): RatRig.BuildWings 와 같은 자리 · 크기로, wingPose 만큼 펼친 자세로 그림 ──
@@ -202,15 +243,25 @@ namespace NKK.Lobby
             rt.anchoredPosition = pos;
         }
 
+        // 칸 맞춤에 넣을 그림 전부 (날개 · 위쪽 쥐 포함)
+        System.Collections.Generic.List<Image> FitParts()
+        {
+            var l = new System.Collections.Generic.List<Image> { farBack, farFront, tail, torso, back, front, head, single };
+            if (wingsOn) l.AddRange(wings);
+            var top = TwinTop;
+            if (top) l.AddRange(new[] { top.farBack, top.farFront, top.tail, top.torso, top.back, top.front, top.head, top.single });
+            return l;
+        }
+
         // 보이는 파츠 전체 테두리를 이 칸 안에 맞춤
         void Fit()
         {
             if (!visual) return;
+            if (asTwin) return;                                  // 위쪽 쥐는 아래 쥐가 함께 맞춤
             visual.localScale = Vector3.one; visual.anchoredPosition = Vector2.zero;
             Vector2 mn = new(float.MaxValue, float.MaxValue), mx = new(float.MinValue, float.MinValue);
             var corners = new Vector3[4];
-            Image W(int i) => wingsOn ? wings[i] : null;
-            foreach (var img in new[] { farBack, farFront, tail, torso, back, front, head, single, W(0), W(1), W(2), W(3) })
+            foreach (var img in FitParts())
             {
                 if (!img || !img.enabled || !img.sprite) continue;
                 img.rectTransform.GetLocalCorners(corners);
