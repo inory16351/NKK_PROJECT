@@ -64,7 +64,8 @@ namespace NKK.Hazards
             x = px; y = py; hpMax = hp = hpValue; value = cheese;
             life = row.life_time; cd = 1.5f; skillT = Random.Range(2.5f, 4f); slamT = m.slamFirst;
             GameDatabase.Instance.CatSkills.TryGetValue(row.crowd_skill, out var cs); Crowd = cs; crowdFx = cs != null ? cs.Effect : CatEffectType.None;
-            rig.Build(art, m.catLength * row.size_mul, row.code_id == "chonk" ? 0.72f : 1, false);      // 가까운 다리는 몸통 앞 (입체)
+            artEntry = art;
+            rig.Build(art, m.catLength * row.size_mul, art.headScale > 0 ? art.headScale : row.code_id == "chonk" ? 0.72f : 1, false);      // 가까운 다리는 몸통 앞 (입체) · 머리 크기 = 몬스터 리깅 툴 값이 먼저
             if (shadow && m.Rats.shadowRoot) { shadow.transform.SetParent(m.Rats.shadowRoot, true); shadow.sortingOrder = m.Rats.shadowSortOrder; }
         }
 
@@ -131,7 +132,7 @@ namespace NKK.Hazards
                 case CState.Roll:
                 {
                     // 먼치킨 식빵 굴리기: 몸 말고 직선 돌진, 닿는 쥐 나뒹굴기
-                    rollT -= dt; rot += dt * 16 * face;
+                    rollT -= dt; rollE += dt; rot += dt * 16 * face;
                     x += vx * dt; y += vy * dt;
                     if (mgr.Stage.Confine(ref x, ref y, ref vx, ref vy, R, px, py, 1)) FxManager.I?.Shake(0.05f);
                     float pathR = crowdRoll ? CV(4) : R + 6, pathStun = crowdRoll ? CV(2) * 0.6f : V(3);
@@ -284,7 +285,7 @@ namespace NKK.Hazards
                 case CatEffectType.Crowd_Roll:
                 {
                     float dx = tx - x, dy = ty - y, d = Mathf.Max(1, Mathf.Sqrt(dx * dx + dy * dy)), sp = Mathf.Max(200, CV(5));
-                    State = CState.Roll; crowdRoll = true; rollT = d / sp; vx = dx / d * sp; vy = dy / d * sp; face = dx >= 0 ? 1 : -1;
+                    State = CState.Roll; crowdRoll = true; rollE = 0; rollT = d / sp; vx = dx / d * sp; vy = dy / d * sp; face = dx >= 0 ? 1 : -1;
                     return;
                 }
                 case CatEffectType.Crowd_Laser:
@@ -388,7 +389,7 @@ namespace NKK.Hazards
                 case CatEffectType.Crit_Pounce: critNext = true; cd = 0; break;
                 case CatEffectType.Jump_Press: slamming = true; vz = 700; if (r) { vx = (r.x - x) * 0.9f; vy = (r.y - y) * 0.9f; } break;
                 case CatEffectType.Roll_Charge:
-                    if (r) { float a = Mathf.Atan2(r.y - y, r.x - x); State = CState.Roll; rollT = V(1); vx = Mathf.Cos(a) * V(2); vy = Mathf.Sin(a) * V(2); face = Mathf.Cos(a) >= 0 ? 1 : -1; }
+                    if (r) { float a = Mathf.Atan2(r.y - y, r.x - x); State = CState.Roll; rollE = 0; rollT = V(1); vx = Mathf.Cos(a) * V(2); vy = Mathf.Sin(a) * V(2); face = Mathf.Cos(a) >= 0 ? 1 : -1; }
                     break;
                 case CatEffectType.Crowd_Teleport:
                 {
@@ -424,17 +425,62 @@ namespace NKK.Hazards
             }
         }
 
-        // 웹게임 catPose: walk · pounce · crouch · flung · cast
+        // ── 몬스터 리깅 툴 모션 ──
+        RatArtLibrary.Entry artEntry;
+        float rollE;      // 구르기 지난 시간
+        bool motionHead2;
+        List<PartOrder> motionOrders;
+        List<BossMotion.PartXf> motionXf;
+
+        // 코드 기본 자세 (게임 · 리깅 툴 미리보기가 같이 씀). walk = 걸음 위상, tt = 시간(초)
+        public static RatRig.Pose IdlePose(float tt) => new RatRig.Pose { head = Mathf.Sin(tt * 1.6f) * 0.06f, tail = 0.1f + Mathf.Sin(tt * 3) * 0.25f, sx = 1, sy = 1 };
+        public static void MovePose(string move, float walk, float tt, ref RatRig.Pose p)
+        {
+            switch (move)
+            {
+                case BossMotion.CatPounce: case BossMotion.CatLeap: p.front = 1.3f; p.farFront = 1.1f; p.back = -1.1f; p.farBack = -0.9f; p.tilt = -0.25f; p.tail = 1; p.head = -0.15f; break;
+                case BossMotion.CatRoll: case BossMotion.CatAim: p.front = 0.3f; p.farFront = 0.3f; p.back = 0.4f; p.farBack = 0.4f; p.tilt = 0.12f; p.bob = 6; p.tail = 0.9f + Mathf.Sin(tt * 20) * 0.2f; break;
+                case BossMotion.CatCast: p.front = 2.1f; p.farFront = 0.5f; p.tilt = -0.3f; p.head = -0.2f; p.tail = 1.1f; break;
+                case BossMotion.CatWalk: { float s = Mathf.Sin(walk); p.front = s * 0.5f; p.farBack = s * 0.45f; p.farFront = -s * 0.5f; p.back = -s * 0.45f; p.bob = -Mathf.Abs(Mathf.Cos(walk)) * 2.5f; p.tail = Mathf.Sin(walk * 0.5f) * 0.3f + 0.1f; break; }
+            }
+        }
+
+        // 웹게임 catPose: walk · pounce · crouch · flung · cast. 리깅 툴에서 고친 모션(Resources/BossMotion.asset)이 있으면 그 키를 씀
         RatRig.Pose MakePose()
         {
-            float tt = Time.time;
-            var p = new RatRig.Pose { head = Mathf.Sin(tt * 1.6f) * 0.06f, tail = 0.1f + Mathf.Sin(tt * 3) * 0.25f, sx = 1, sy = 1 };
-            if (State == CState.Pounce || State == CState.Leap) { p.front = 1.3f; p.farFront = 1.1f; p.back = -1.1f; p.farBack = -0.9f; p.tilt = -0.25f; p.tail = 1; p.head = -0.15f; }
-            else if (State == CState.Roll || State == CState.Aim || (State == CState.Prowl && cd > 0 && cd < 0.4f)) { p.front = 0.3f; p.farFront = 0.3f; p.back = 0.4f; p.farBack = 0.4f; p.tilt = 0.12f; p.bob = 6; p.tail = 0.9f + Mathf.Sin(tt * 20) * 0.2f; }
-            else if (State == CState.Flung) { p.front = Mathf.Sin(tt * 30) * 1.4f; p.farFront = Mathf.Cos(tt * 27) * 1.4f; p.back = Mathf.Sin(tt * 28) * 1.2f; p.farBack = Mathf.Cos(tt * 25) * 1.2f; p.tail = Mathf.Sin(tt * 20); p.head = Mathf.Sin(tt * 15) * 0.4f; }
-            else if (castT > 0) { p.front = 2.1f; p.farFront = 0.5f; p.tilt = -0.3f; p.head = -0.2f; p.tail = 1.1f; }
-            else if (Mathf.Sqrt(vx * vx + vy * vy) > 20) { float s = Mathf.Sin(walk); p.front = s * 0.5f; p.farBack = s * 0.45f; p.farFront = -s * 0.5f; p.back = -s * 0.45f; p.bob = -Mathf.Abs(Mathf.Cos(walk)) * 2.5f; p.tail = Mathf.Sin(walk * 0.5f) * 0.3f + 0.1f; }
+            motionHead2 = false; motionOrders = null; motionXf = null;
+            float tt = Time.time, mt = 0;
+            var p = IdlePose(tt);
+            string move = null;
+            if (State == CState.Pounce) { move = BossMotion.CatPounce; mt = Mathf.Max(0, 0.35f - pounceT); }
+            else if (State == CState.Leap) { move = BossMotion.CatLeap; mt = leapT; }
+            else if (State == CState.Roll) { move = BossMotion.CatRoll; mt = rollE; }
+            else if (State == CState.Aim) { move = BossMotion.CatAim; mt = aimT; }
+            else if (State == CState.Prowl && cd > 0 && cd < 0.4f) { MovePose(BossMotion.CatAim, walk, tt, ref p); return p; }      // 덮친 뒤 잠깐 웅크림 (코드 그대로)
+            else if (State == CState.Flung) { p.front = Mathf.Sin(tt * 30) * 1.4f; p.farFront = Mathf.Cos(tt * 27) * 1.4f; p.back = Mathf.Sin(tt * 28) * 1.2f; p.farBack = Mathf.Cos(tt * 25) * 1.2f; p.tail = Mathf.Sin(tt * 20); p.head = Mathf.Sin(tt * 15) * 0.4f; return p; }
+            else if (castT > 0) { move = BossMotion.CatCast; mt = 0.5f - castT; }
+            else if (Mathf.Sqrt(vx * vx + vy * vy) > 20) { move = BossMotion.CatWalk; mt = BossMotion.WalkT(walk); }
+            if (move == null) return p;
+            var mo = BossMotion.Find(codeId, move);
+            if (mo != null) { motionOrders = BossMotion.Orders(mo, mt); motionXf = BossMotion.Xf(mo, mt); return BossMotion.Cat(mo, mt, out motionHead2); }
+            MovePose(move, walk, tt, ref p);
             return p;
+        }
+
+        // 리깅 툴 '게임에서 보기': 이 동작을 바로 시작 (구경용으로 체력을 아주 크게)
+        public bool TestMove(string move)
+        {
+            hp = hpMax = 1e12f;
+            switch (move)
+            {
+                case BossMotion.CatWalk: return true;
+                case BossMotion.CatPounce: State = CState.Pounce; pounceT = 0.35f; vx = face * 620; vy = 0; vz = 260; return true;
+                case BossMotion.CatCast: castT = 0.5f; return true;
+                case BossMotion.CatRoll: State = CState.Roll; rollE = 0; rollT = 1; crowdRoll = false; vx = face * 400; vy = 0; return true;
+                case BossMotion.CatAim: if (Crowd == null) return false; tx = x; ty = y; crowdN = 1; BeginAim(); return true;
+                case BossMotion.CatLeap: if (Crowd == null) return false; tx = x + face * 150; ty = y; State = CState.Leap; leapT = 0; sx0 = x; sy0 = y; vz = 1600 * Air / 2; z = 0; return true;
+            }
+            return false;
         }
 
         void LateUpdate()
@@ -443,7 +489,11 @@ namespace NKK.Hazards
             float jx = jit > 0 ? Random.Range(-jit, jit) : 0;
             transform.position = World.ToUnity(x + jx, y, z);
             transform.rotation = Quaternion.Euler(0, 0, -rot * Mathf.Rad2Deg);
-            rig.Apply(MakePose(), 1, face, 1, World.SortOrder(y));
+            var pose = MakePose();
+            rig.headReplace = motionHead2 && artEntry != null ? artEntry.head2 : null;
+            rig.SetMotionXf(motionXf);
+            rig.Apply(pose, 1, face, 1, World.SortOrder(y));
+            rig.SetTempOrders(motionOrders);
             bool has = false; Bounds bd = default;
             foreach (var sr in GetComponentsInChildren<SpriteRenderer>())
             {

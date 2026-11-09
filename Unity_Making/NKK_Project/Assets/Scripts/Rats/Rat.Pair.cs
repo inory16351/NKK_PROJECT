@@ -72,10 +72,13 @@ namespace NKK.Rats
         {
             var m = Manager; float tt = Time.time;
             bool moving = Speed > 30;
-            p.front = p.farFront = p.back = p.farBack = 0; p.bob = 0; p.sx = p.sy = 1;
-            p.tilt = (moving ? m.flyLean : 0) + Mathf.Sin(tt * 2 + seed) * 0.06f;
-            p.head = Mathf.Sin(tt * 3 + seed) * 0.05f;
-            p.tail = 0.1f + Mathf.Sin(tt * 3.4f + seed) * 0.35f;
+            if (!motionOn)      // 리깅 툴에서 고친 모션 중이면 몸은 그 키대로, 날갯짓만
+            {
+                p.front = p.farFront = p.back = p.farBack = 0; p.bob = 0; p.sx = p.sy = 1;
+                p.tilt = (moving ? m.flyLean : 0) + Mathf.Sin(tt * 2 + seed) * 0.06f;
+                p.head = Mathf.Sin(tt * 3 + seed) * 0.05f;
+                p.tail = 0.1f + Mathf.Sin(tt * 3.4f + seed) * 0.35f;
+            }
             float ph = tt * (moving || act.on ? m.flapMove : m.flapIdle) + seed;
             flapPh = ph;
             p.wing = (stun > 0 || sleep > 0) ? -1 : Mathf.Sin(ph);        // −1 접힘 ~ +1 활짝

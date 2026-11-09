@@ -545,11 +545,13 @@ namespace NKK.Rats
         }
 
         // 액션 자세 (웹게임 actPose)
-        void ActionPose(ref RatRig.Pose p)
+        void ActionPose(ref RatRig.Pose p) => ActionPoseOf(ActionType, Time.time, z, bite, act.held, walk, act.done, ref p);
+
+        // 코드 기본 자세 (게임 · 리깅 툴 미리보기가 같이 씀). t = 시간(초)
+        public static void ActionPoseOf(EffectType type, float t, float z, float bite, bool held, float walk, bool done, ref RatRig.Pose p)
         {
-            float t = Time.time, k = act.t / act.dur;
-            if (ActionType >= EffectType.Savory_Smell) { NewActionPose(ref p, t, k); return; }
-            switch (ActionType)
+            if (type >= EffectType.Savory_Smell) { NewActionPose(type, t, bite, walk, done, ref p); return; }
+            switch (type)
             {
                 case EffectType.Thunder: p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; p.front = 2.95f + Mathf.Sin(t * 50) * 0.05f; p.farFront = 2.8f + Mathf.Cos(t * 50) * 0.05f; p.head = -0.55f; p.tail = 1.4f + Mathf.Sin(t * 20) * 0.1f; break;
                 case EffectType.Gun_Kata: p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; p.front = 1.7f + Mathf.Sin(t * 40) * 0.25f; p.farFront = 1.5f - Mathf.Sin(t * 40) * 0.25f; p.head = -0.2f; p.tail = 0.8f + Mathf.Sin(t * 30) * 0.3f; break;
@@ -569,7 +571,7 @@ namespace NKK.Rats
                 case EffectType.Cheese_Fountain: { p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; float s2 = Mathf.Sin(t * 12); p.front = 2.5f + s2 * 0.4f; p.farFront = 2.3f - s2 * 0.4f; p.head = -0.4f + Mathf.Sin(t * 20) * 0.08f; p.tail = 1.3f + Mathf.Sin(t * 16) * 0.3f; p.sy = 1 + Mathf.Abs(Mathf.Sin(t * 10)) * 0.08f; p.sx = 2 - p.sy; break; }
                 case EffectType.Cheer: { p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; float s = Mathf.Sin(t * 9); p.front = 2.6f * Mathf.Max(0.3f, s); p.farFront = 2.6f * Mathf.Max(0.3f, -s); p.head = -0.3f; p.tail = 1.3f; break; }
                 case EffectType.Feast: p.front = 0.9f + Mathf.Sin(t * 50) * 0.5f; p.farFront = 0.8f - Mathf.Sin(t * 50) * 0.5f; p.head = 0.25f; p.tail = 0.6f; break;
-                case EffectType.Throw_Item: p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; p.front = act.held ? 2.9f : 1.4f; p.farFront = act.held ? 2.7f : 1; p.head = -0.35f; p.tail = 1; break;
+                case EffectType.Throw_Item: p.tilt = -0.6f; p.back = -0.25f; p.farBack = 0.25f; p.front = held ? 2.9f : 1.4f; p.farFront = held ? 2.7f : 1; p.head = -0.35f; p.tail = 1; break;
             }
         }
 

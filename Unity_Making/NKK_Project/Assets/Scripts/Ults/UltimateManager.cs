@@ -148,21 +148,26 @@ namespace NKK.Ults
         public bool TestUlt(string code)
         {
             if ((cur != null && (!Concurrent || !RoomForMore)) || (SuperJump && SuperJump.Busy) || !DB.RatsByCode.TryGetValue(code, out var row) || DB.UltOf(row) == null) return false;
-            Rat r = null;
-            foreach (var o in Rats.Rats) if (o.codeId == code && !o.UltOn && o.OnScreen(-0.05f)) { r = o; break; }
-            if (!r)
-            {
-                var c = ViewRect(0).center; float a = Random.Range(0, Mathf.PI * 2);
-                float x = c.x + Mathf.Cos(a) * 220, y = c.y + Mathf.Sin(a) * 140;
-                if (!Stage.Open.Contains(StageManager.RoomOf(x, y))) { x = c.x; y = c.y; }
-                r = Rats.Spawn(row, x, y, false);
-                if (!r) return false;
-                r.temp = 15; r.noBreed = 99; r.breedCD = 99;
-                FxManager.I?.Dust(x, y, 8, 1.2f);
-            }
+            var r = TestRat(code);
+            if (!r) return false;
             r.ultGauge = Need(r);
             queue.Remove(r);
             return TryStart(r);
+        }
+
+        // 화면에 있는 그 종 쥐 (없으면 화면 가운데 근처에 15초짜리로 불러옴) — 테스트 버튼 · 리깅 툴 '게임에서 보기'
+        public Rat TestRat(string code)
+        {
+            if (!DB.RatsByCode.TryGetValue(code, out var row)) return null;
+            foreach (var o in Rats.Rats) if (o.codeId == code && !o.UltOn && o.OnScreen(-0.05f)) return o;
+            var c = ViewRect(0).center; float a = Random.Range(0, Mathf.PI * 2);
+            float x = c.x + Mathf.Cos(a) * 220, y = c.y + Mathf.Sin(a) * 140;
+            if (!Stage.Open.Contains(StageManager.RoomOf(x, y))) { x = c.x; y = c.y; }
+            var r = Rats.Spawn(row, x, y, false);
+            if (!r) return null;
+            r.temp = 15; r.noBreed = 99; r.breedCD = 99;
+            FxManager.I?.Dust(x, y, 8, 1.2f);
+            return r;
         }
 
         public void CancelAll()
@@ -219,7 +224,7 @@ namespace NKK.Ults
         {
             var r = s.R;
             if (s == cur) { cutPhase = false; FxManager.UltFreeze = false; if (cutIn) cutIn.gameObject.SetActive(false); }
-            r.UltPose = null; r.UltJit = 0;
+            r.UltPose = null; r.UltJit = 0; r.UltRun = s;
             var fx = FxManager.I;
             if (fx)
             {

@@ -12,10 +12,11 @@ using UnityEngine;
 // 몬스터 리깅 툴 — 보스 공격 · 필살기 모션 (2026-11-06 사용자: 공격 모션 · 필살기 모션도 수정 · 확인).
 // 보스의 기술 5칸 (일반 · 두 번째 · 필살기(쿨타임 스킬) · 발악 1 · 발악 2) 을 시간 막대로 재생. 고친 모션이 없으면 게임 코드의 자세 (Boss.CatAttackPose · HumanAttackPose) 그대로.
 // 키 프레임으로 고치면 Resources/BossMotion.asset 에 저장 → 게임이 그 기술 동안 키 사이를 이어 씀. 효과(투사체 · 소환)와 판정은 코드 그대로 → '게임에서 보기' 로 확인.
+// 일반 고양이 · 쥐 (2026-11-09 사용자): 같은 방식 · 같은 에셋. 고양이 = 걷기 · 덮치기 · 스킬 · 무리 스킬 / 쥐 = 걷기 · 깨물기 · 특수 액션 · 필살기 · 묘기 5종 (모션 이름 = BossMotion.CatXxx · RatXxx).
 public partial class MonsterRigTool
 {
     const string MotionAsset = "Assets/Resources/BossMotion.asset";
-    class Move { public string kind, type, play, formHead; public BossAtkRow atk; }      // type = 저장 이름 · play = '게임에서 보기' 때 발동할 기술 (변신 모션 = 변신 패턴>그 기술, 비면 type) · formHead = 변신 머리 (공격이 끝난 뒤에도)
+    class Move { public string kind, type, play, formHead; public BossAtkRow atk; public RatSkillRow ratAct; }      // type = 저장 이름 · play = '게임에서 보기' 때 발동할 기술 (변신 모션 = 변신 패턴>그 기술, 비면 type) · formHead = 변신 머리 (공격이 끝난 뒤에도)
     readonly List<Move> moves = new();
     Move curMove;
     bool motionMode;
@@ -58,6 +59,7 @@ public partial class MonsterRigTool
     {
         if (atkRows.Count == 0) InitMotion();
         moves.Clear();
+        if (cur != null && !cur.boss) { CreatureMoves(); PickMove(moves.Find(m => !IsLoopType(m.type)) ?? (moves.Count > 0 ? moves[0] : null)); return; }
         var r = cur?.row; if (r == null) { curMove = null; return; }
         var slots = new[] { ("일반 공격", r.atk_type), ("두 번째 공격", r.atk2_type), ("필살기 (쿨타임 스킬)", r.skill_type), ("발악 1", r.special1_type), ("발악 2", r.special2_type) };
         // 걷기 (기술이 아님): 시간 0~1 = 걸음 두 번, 반복. 게임은 걸음 위상(속도에 따라 빨라짐)으로 이 시간을 고름
@@ -83,6 +85,79 @@ public partial class MonsterRigTool
         PickMove(moves.Find(m => !IsLoopType(m.type)) ?? (moves.Count > 0 ? moves[0] : null));      // 처음엔 일반 공격 (걷기 · 변신 모션은 위)
     }
 
+    // 일반 고양이 · 쥐의 동작 목록 (길이 = 게임 값, 스킬 표에서)
+    void CreatureMoves()
+    {
+        Move Add(string kind, string type, string name, float dur) { var m = new Move { kind = kind, type = type, atk = new BossAtkRow { atk_type = type, atk_name = name, windup = 0, dur = dur, opt = "" } }; moves.Add(m); return m; }
+        if (cur.kind == Kind.Cat)
+        {
+            var row = cur.catRow;
+            Add("걷기", BossMotion.CatWalk, "걸음 두 번 (반복)", 1);
+            Add("공격", BossMotion.CatPounce, "덮치기", 0.35f);
+            if (catSkills.TryGetValue(row.skill, out var s))
+            {
+                Add("스킬", BossMotion.CatCast, s.skill_name, 0.5f);
+                if (s.Effect == CatEffectType.Roll_Charge) Add("스킬 구르기", BossMotion.CatRoll, s.skill_name, s.value_01);
+            }
+            if (catSkills.TryGetValue(row.crowd_skill, out var c))
+            {
+                var e = c.Effect;
+                Add("무리 스킬 웅크림", BossMotion.CatAim, c.skill_name, Mathf.Max(0.15f, c.value_03));
+                if (e == CatEffectType.Crowd_Slam || e == CatEffectType.Crowd_Combo || e == CatEffectType.Crowd_Pinpoint || e == CatEffectType.Crowd_Belly || e == CatEffectType.Crowd_Quake)
+                    Add("무리 스킬 도약", BossMotion.CatLeap, c.skill_name, (e == CatEffectType.Crowd_Slam || e == CatEffectType.Crowd_Pinpoint || e == CatEffectType.Crowd_Belly) && c.value_04 > 0 ? c.value_04 : 0.35f);      // 기본 체공 = CatManager.slamAir
+                if (e == CatEffectType.Crowd_Roll && !moves.Exists(m => m.type == BossMotion.CatRoll)) Add("무리 스킬 구르기", BossMotion.CatRoll, c.skill_name, 1);      // 실제 길이 = 거리 따라
+            }
+            return;
+        }
+        var rr = cur.ratRow;
+        Add("걷기", BossMotion.RatWalk, "걸음 두 번 (반복)", 1);
+        Add("공격", BossMotion.RatBite, "깨물기", 0.2f);
+        if (ratSkills.TryGetValue(rr.action_skill, out var a)) Add("특수 액션", BossMotion.RatAct, a.skill_name, Mathf.Max(0.1f, a.duration)).ratAct = a;
+        if (ratUlts.TryGetValue(rr.ultimate, out var u)) Add("필살기", BossMotion.RatUlt, u.ultimate_name, UltLength(u));
+        foreach (var (t, n) in new[] { (Rat.TrickType.Flip, "백덤블링"), (Rat.TrickType.Windmill, "윈드밀"), (Rat.TrickType.Axel, "트리플 악셀"), (Rat.TrickType.Cannon, "쥐 대포알"), (Rat.TrickType.Wheel, "쳇바퀴 돌기") })
+            Add("묘기", Rat.TrickMove(t), n, Rat.TrickDuration(t));
+    }
+
+    // 필살기 길이: 그 상황극 클래스의 Dur (게임 상태를 읽어 못 구하면 기본 6초)
+    static float UltLength(RatUltimateRow u)
+    {
+        try
+        {
+            var t = typeof(NKK.Ults.UltBase).Assembly.GetType("NKK.Ults." + u.script);
+            return t != null ? Mathf.Max(0.1f, ((NKK.Ults.UltBase)Activator.CreateInstance(t)).Dur) : 6;
+        }
+        catch { return 6; }
+    }
+
+    // 일반 고양이 · 쥐의 코드 자세 (게임과 같은 함수). 필살기는 상황극이 매 프레임 정해서 미리 볼 수 없음 → 대기 자세
+    RatRig.Pose CodeCreature(float t)
+    {
+        string ty = curMove.type;
+        bool on = IsLoop || t < End;
+        if (cur.kind == Kind.Cat)
+        {
+            var c = Cat.IdlePose(t);
+            if (on) Cat.MovePose(ty, WalkPhaseAt(t), t, ref c);
+            return c;
+        }
+        var q = new RatRig.Pose { head = Mathf.Sin(t * 1.7f) * 0.05f, tail = 0.15f + Mathf.Sin(t * 2.6f) * 0.15f, sx = 1, sy = 1 };
+        if (!on) return q;
+        if (ty == BossMotion.RatWalk) RatWalk(ref q, WalkPhaseAt(t));
+        else if (ty == BossMotion.RatBite) Rat.BitePose(Mathf.Max(0, 1 - t * 5), ref q);
+        else if (ty == BossMotion.RatAct && curMove.ratAct != null)
+        {
+            var a = curMove.ratAct; var e = a.Effect;
+            float dur = Mathf.Max(0.01f, a.duration), k = t / dur, z = 0, bite = 0; bool held = false;
+            if (e == EffectType.Jump_Slam) { int hops = Mathf.Max(1, Mathf.RoundToInt(a.V(1))); z = Mathf.Sin((k * hops) % 1 * Mathf.PI) * 75; }
+            else if (e == EffectType.Barrage) { float gap = dur * 0.85f / Mathf.Max(1, a.V(1)); bite = Mathf.Max(0, 1 - (t % gap) * 5); }
+            else if (e == EffectType.Throw_Item) { float cyc = dur / Mathf.Max(1, a.V(1)); held = (t % cyc) / cyc <= 0.62f; }
+            Rat.ActionPoseOf(e, t, z, bite, held, t * 30, k > 0.5f, ref q);
+        }
+        else if (ty.StartsWith(BossMotion.RatTrickPrefix))
+            Rat.TrickPoseOf((Rat.TrickType)Enum.Parse(typeof(Rat.TrickType), ty.Substring(BossMotion.RatTrickPrefix.Length)), t, Mathf.Min(1, t / Mathf.Max(0.01f, A.dur)), ref q);
+        return q;
+    }
+
     void PickMove(Move m)
     {
         curMove = m; selKey = -1; mt = 0;
@@ -101,10 +176,10 @@ public partial class MonsterRigTool
     bool Jump => curMove != null && Boss.IsJumpAttack(AT);
     float AirT => Jump ? 2 * (AT == "Pounce" ? pounceV : jumpV) / Mathf.Max(1, gravity) : 0;
     float End => A == null ? 0 : A.windup + Mathf.Max(A.dur, AirT);           // 공격이 끝나는 때 (대략: 덮치기는 착지 때 끝남)
-    bool IsWalk => curMove != null && (curMove.type == BossMotion.WalkType || curMove.type == BossMotion.FormWalkType);
+    bool IsWalk => curMove != null && BossMotion.IsWalkMotion(curMove.type);
     bool IsIdle => curMove != null && curMove.type == BossMotion.FormIdleType;      // 대기 (초, 반복)
     bool IsLoop => IsWalk || IsIdle;      // 기술이 아닌 반복 모션: 시간 전체가 '모션 중'
-    static bool IsLoopType(string t) => t == BossMotion.WalkType || t == BossMotion.FormWalkType || t == BossMotion.FormIdleType;
+    static bool IsLoopType(string t) => BossMotion.IsWalkMotion(t) || t == BossMotion.FormIdleType;
     bool InMove(float t) => IsLoop || t < End;
     float WalkPhaseAt(float t) => t * BossMotion.WalkPeriod;
     float Length => IsWalk ? 1 : IsIdle ? Mathf.Max(BossMotion.IdleLength, HasKeys ? mwork.motion.Length : 0) : Mathf.Max(End, mwork && mwork.motion.keys.Count > 0 ? mwork.motion.Length : 0) + 0.5f;
@@ -146,6 +221,7 @@ public partial class MonsterRigTool
     // ── 자세 (미리보기) ──
     RatRig.Pose CodeCat(float t, out bool head2)
     {
+        if (!cur.boss) { head2 = false; return CodeCreature(t); }
         var p = new RatRig.Pose { head = Mathf.Sin(t * 1.6f) * 0.06f, tail = 0.1f + Mathf.Sin(t * 3) * 0.25f, sx = 1, sy = 1 };
         if (IsWalk) { p.head = 0; Boss.CatWalkPose(WalkPhaseAt(t), ref p); head2 = false; return p; }
         if (IsIdle) { head2 = false; return p; }      // 대기 = 게임 코드 자세 (머리 · 꼬리 살랑)
@@ -231,6 +307,7 @@ public partial class MonsterRigTool
         switch (cur.kind)
         {
             case Kind.Cat:
+            case Kind.Rat:
             {
                 bool h2; var p = HasKeys ? BossMotion.Cat(mwork.motion, mt, out h2) : CodeCat(mt, out h2);
                 k.head = p.head; k.headX = p.headX; k.tail = p.tail; k.front = p.front; k.back = p.back; k.farFront = p.farFront; k.farBack = p.farBack; k.bob = p.bob; k.tilt = p.tilt; k.sx = p.sx; k.sy = p.sy; k.head2 = h2;
@@ -273,6 +350,7 @@ public partial class MonsterRigTool
         var ts = new List<float>();
         if (IsWalk) { for (int i = 0; i <= 8; i++) ts.Add(i / 8f); mwork.motion.loop = true; mwork.motion.loopFrom = 0; }      // 걷기: 1/8 마다 (끝 = 처음과 같은 자세 → 이어짐)
         else if (IsIdle) { for (float t = 0; t < BossMotion.IdleLength - 0.01f; t += 0.5f) ts.Add(t); mwork.motion.loop = true; mwork.motion.loopFrom = 0; }      // 대기: 0.5초 마다, 끝 키 = 첫 키 (아래)
+        else if (curMove.type == BossMotion.RatUlt) ts.AddRange(new[] { 0, A.dur * 0.5f, Mathf.Max(0, A.dur - 0.02f) });      // 필살기: 코드 자세를 미리 볼 수 없어 대기 자세로 뼈대만
         else
         {
             ts.AddRange(new[] { 0, Mathf.Max(0, A.windup - 0.02f), A.windup });
@@ -421,7 +499,7 @@ public partial class MonsterRigTool
 
     void InspectMotion()
     {
-        if (curMove == null) { EditorGUILayout.HelpBox("이 보스는 기술 칸(Atk_Type)이 없어요.", MessageType.Info); return; }
+        if (curMove == null) { EditorGUILayout.HelpBox("이 몬스터는 기술 칸이 없어요.", MessageType.Info); return; }
         EditorGUILayout.LabelField("기술", EditorStyles.boldLabel);
         foreach (var m in moves)
         {
@@ -440,6 +518,7 @@ public partial class MonsterRigTool
         else if (IsIdle) EditorGUILayout.LabelField("변신 뒤 대기 (서 있을 때) · 초 · 변신한 때부터 '마지막 키 뒤 반복' 으로 돎 · 코드 모션을 키로 = " + BossMotion.IdleLength.ToString("0") + "초 한 바퀴 · 없으면 코드 대기 자세", EditorStyles.miniLabel);
         else EditorGUILayout.LabelField($"{(curMove.formHead != null ? "변신 뒤 " : "")}{AT} · 준비 {a.windup:0.##}s · 지속 {a.dur:0.##}s{(Jump ? $" · 점프 {AirT:0.##}s" : "")}{(string.IsNullOrEmpty(a.pattern) ? "" : " · " + a.pattern)}", EditorStyles.miniLabel);
         if (!string.IsNullOrEmpty(a.opt)) EditorGUILayout.LabelField("opt: " + a.opt, EditorStyles.miniLabel);
+        if (curMove.type == BossMotion.RatUlt) EditorGUILayout.HelpBox("필살기의 코드 자세는 상황극이 매 프레임 정해서 여기서 미리 볼 수 없어요 (겹쳐 보기 · '코드 모션을 키로' = 대기 자세). 키를 만들면 상황극 내내 코드 자세 대신 키를 써요. 소품 · 이동은 '게임에서 보기' 로 확인.", MessageType.None);
 
         EditorGUILayout.Space(4);
         if (GUILayout.Button("▶ 게임에서 보기 (플레이 모드로 이 기술 발동)", GUILayout.Height(24))) MonsterRigPlayTest.Run(cur.code, curMove.play ?? curMove.type);      // 변신 모션 = 변신 패턴을 발동 (그 뒤로 변신 형태로 걷고 섬)
@@ -489,11 +568,13 @@ public partial class MonsterRigTool
         switch (cur.kind)
         {
             case Kind.Cat:
-                copy.head = Deg("머리", copy.head); copy.front = Deg("앞다리", copy.front); copy.back = Deg("뒷다리", copy.back);
-                copy.farFront = Deg("먼 앞다리", copy.farFront); copy.farBack = Deg("먼 뒷다리", copy.farBack); copy.tail = Deg("꼬리", copy.tail); copy.tilt = Deg("몸 기울기", copy.tilt);
+            case Kind.Rat:
+                copy.head = Deg("머리", copy.head);
+                if (!work.cat.headOnly) { copy.front = Deg("앞다리", copy.front); copy.back = Deg("뒷다리", copy.back); copy.farFront = Deg("먼 앞다리", copy.farFront); copy.farBack = Deg("먼 뒷다리", copy.farBack); }
+                copy.tail = Deg("꼬리", copy.tail); copy.tilt = Deg("몸 기울기", copy.tilt);
                 copy.bob = EditorGUILayout.Slider("몸 내림 (px)", copy.bob, -60, 60); copy.headX = EditorGUILayout.Slider("머리 앞뒤 (px)", copy.headX, -60, 60);
                 copy.sx = EditorGUILayout.Slider("가로 늘임", copy.sx, 0.5f, 1.5f); copy.sy = EditorGUILayout.Slider("세로 늘임", copy.sy, 0.5f, 1.5f);
-                copy.head2 = EditorGUILayout.Toggle("두 번째 머리 (head2)", copy.head2);
+                if (work.cat.head2) copy.head2 = EditorGUILayout.Toggle("두 번째 머리 (head2)", copy.head2);
                 break;
             case Kind.Human:
                 copy.armN = Deg("가까운 팔", copy.armN); copy.armF = Deg("먼 팔", copy.armF); copy.legN = Deg("가까운 다리", copy.legN); copy.legF = Deg("먼 다리", copy.legF);
@@ -521,7 +602,7 @@ public partial class MonsterRigTool
         xfPending.Clear();
         var xslots = new List<(string, string)>();
         if (cur.kind == Kind.Part) foreach (var p in work.part.parts) xslots.Add((p.name, p.name));
-        else xslots.AddRange(cur.kind == Kind.Cat ? CatOrders : HumanOrders);
+        else xslots.AddRange(RigSlots);
         foreach (var (part, label) in xslots)
         {
             var xv = copy.xf.Find(v => v.part == part);
@@ -551,7 +632,7 @@ public partial class MonsterRigTool
         EditorGUILayout.LabelField("그리는 순서 (이 키부터 뒤로 이어짐 · 클수록 앞 · 굵게 = 이 키에서 바꾼 값 · '기본' = 앞 키 값을 따름)", EditorStyles.miniBoldLabel);
         var slots = new List<(string, string)>();
         if (cur.kind == Kind.Part) foreach (var p in work.part.parts) slots.Add((p.name, p.name));
-        else slots.AddRange(cur.kind == Kind.Cat ? CatOrders : HumanOrders);
+        else slots.AddRange(RigSlots);
         foreach (var (part, label) in slots)
         {
             var ov = copy.orders.Find(x => x.part == part);
@@ -679,10 +760,47 @@ public static class MonsterRigPlayTest
         EditorApplication.isPlaying = true;
     }
 
+    // 일반 고양이 · 쥐: 불러서 그 동작을 바로 시작 (쥐 = 없으면 15초짜리 임시 쥐, 기록 · 보상 없음). 게임이 아직 준비 안 됐으면 false
+    static bool TestCreature(string code, string move)
+    {
+        var db = GameDatabase.Instance;
+        if (db == null || db.RatsByCode.Count == 0) return false;
+        bool ok;
+        if (move.StartsWith("Cat:"))
+        {
+            var cm = UnityEngine.Object.FindFirstObjectByType<CatManager>(); if (!cm) return false;
+            CatCharacterRow row = null; foreach (var c in db.Cats.Values) if (c.code_id == code) row = c;
+            if (row == null) { Debug.LogWarning("[리깅 툴] 고양이 표에 없음: " + code); return true; }
+            if (!cm.Current || cm.Current.codeId != code) { cm.Clear(); if (!cm.Spawn(row)) return false; }
+            ok = cm.Current.TestMove(move);
+        }
+        else
+        {
+            var um = UnityEngine.Object.FindFirstObjectByType<NKK.Ults.UltimateManager>(); if (!um) return false;
+            if (move == BossMotion.RatUlt) { if (!um.TestUlt(code)) return false; ok = true; }
+            else
+            {
+                var r = um.TestRat(code); if (!r) return false;
+                if (move == BossMotion.RatAct) ok = r.Action != null && r.StartAction();
+                else if (move == BossMotion.RatBite) { r.TestBite(); ok = true; }
+                else if (move.StartsWith(BossMotion.RatTrickPrefix)) ok = r.StartTrick((Rat.TrickType)Enum.Parse(typeof(Rat.TrickType), move.Substring(BossMotion.RatTrickPrefix.Length)), 0);
+                else ok = true;      // 걷기 = 불러 두기만
+            }
+        }
+        Debug.Log($"[리깅 툴] 게임에서 보기: {code} · {move} {(ok ? "발동" : "발동 못 함")}");
+        return true;
+    }
+
     static void Wait()
     {
         if (!EditorApplication.isPlaying) { EditorApplication.update -= Wait; return; }
         if (EditorApplication.timeSinceStartup - startAt < 1.5) return;          // 게임이 다 켜질 때까지
+        var req = SessionState.GetString(Key, "").Split('|');
+        if (req.Length >= 2 && (req[1].StartsWith("Cat:") || req[1].StartsWith("Rat:")))
+        {
+            if (TestCreature(req[0], req[1]) || EditorApplication.timeSinceStartup - startAt > 15) EditorApplication.update -= Wait;      // 준비가 안 됐으면 15초까지 다시
+            return;
+        }
         var boss = UnityEngine.Object.FindFirstObjectByType<Boss>();
         var db = GameDatabase.Instance;
         if (!boss || db == null || db.Bosses == null || db.Bosses.Count == 0) { if (EditorApplication.timeSinceStartup - startAt > 15) EditorApplication.update -= Wait; return; }

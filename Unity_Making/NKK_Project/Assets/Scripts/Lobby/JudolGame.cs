@@ -88,6 +88,9 @@ namespace NKK.Lobby
         public Button startButton, resumeButton, retryButton, againButton, closeButton;
         [Tooltip("재료로 쓴 쥐 ({list}) · 끝 ({turn} {best} {broken} {cheese} {rats} {grade} {augs})")] public TMP_Text augInfo, overBody;
         [Tooltip("증강 고르기 카드 3장 (Image = 등급 색 테두리, 자식: Icon · Name · Tier({tier}{lv}) · Desc)")] public Button[] augCards = new Button[0];
+        [Tooltip("끝 창 제목 (벽돌이 닿았을 때는 씬 글 그대로) · 층 상한까지 갔을 때 제목 ({n} 층)")] public TMP_Text overTitle;
+        public string clearTitle = "{n}층 돌파! 끝까지 올랐어요!";
+        string overLoseText;
 
         [Header("도토리 보상 · 기록 (2026-11-03 미니게임 기획서 Ver.05: 1턴 = 1층, 10층마다 도토리)")]
         [Tooltip("시작 화면 기록 줄 ({best} 최고 층 · {next} 다음 업적 · {rats} 쥐 누적)")] public TMP_Text titleInfo;
@@ -133,7 +136,7 @@ namespace NKK.Lobby
         class Brick { public int c, r, born; public float hp, max, flash, vy; public bool hard, dead; }
         class Item { public int c, r; public bool got; }
         class Shot { public int grade; public string code; public bool giant, blades, clone; }
-        class Flyer : Shot { public float x, y, vx, vy, r; public bool usedFirst, done; public readonly Dictionary<Brick, float> bladeCd = new(); }
+        class Flyer : Shot { public float x, y, vx, vy, r; public bool usedFirst, done; public readonly Dictionary<(Brick, int), float> bladeCd = new(); }
         class Walker { public string code; public int grade, face; public float x; public bool done; }
         class Part { public Sprite s; public float x, y, size, h, life, max, grow, rot, vx, vy, grav, vr; public bool screen; }
         class Floater { public float x, y, t; public string text; public Color col; public bool small; }
@@ -336,13 +339,18 @@ namespace NKK.Lobby
             for (int i = 0; i < 3; i++) parts.Add(new Part { s = Random.value < 0.5f ? debrisBrick : debrisSlab, x = x, y = y, vx = (Random.value - 0.5f) * 6, vy = -2 - Random.value * 3, grav = 0.3f, size = 16 + Random.value * 10, life = 0.7f, max = 0.7f, rot = Random.value * 6, vr = (Random.value - 0.5f) * 0.3f });
             if (time - sndBreak > 0.05f) { sndBreak = time; Sfx(sfxBreak); }
             float dom = AV("domino");
-            if (dom > 0) Later(0.06f, () => { foreach (var (dc, dr) in Dirs) HitBrick(BrickAt(b.c + dc, b.r + dr), dom, true); });
+            if (dom > 0) Later(0.06f, () => { float d = TeamPct(dom); foreach (var (dc, dr) in Dirs) HitBrick(BrickAt(b.c + dc, b.r + dr), d, true); });
         }
         static readonly (int, int)[] Dirs = { (1, 0), (-1, 0), (0, 1), (0, -1) };
         void Later(float t, Action f) => later.Add(new Delay { t = t, f = f });
 
         // ── 쥐 피해 · 고유 스킬 ──
-        float RatDmg(Shot f) => (grades[f.grade].dmg + AV("dmg") + (f.giant ? AV("giant") : 0)) * (1 + AV("legend") / 100f);
+        float BaseDmg(int grade) => (grades[grade].dmg + AV("dmg")) * (1 + AV("legend") / 100f);
+        float RatDmg(Shot f) => BaseDmg(f.grade) + (f.giant ? TeamPct(AV("giant")) : 0);
+        // 전체 쥐 공격력 합 (층 시작 · 발사 때 계산): 벽돌 체력이 크게 늘어도 힘을 잃지 않게 증강 피해의 기준으로 씀 (2026-11-09 밸런스)
+        float team;
+        void CalcTeam() { team = 0; foreach (var r in rats) team += BaseDmg(r.grade); }
+        float TeamPct(float pct) => team * pct / 100f;
 
         void OnBrickHit(Flyer f, Brick b)
         {
@@ -352,7 +360,7 @@ namespace NKK.Lobby
             if (Random.value < AV("zap") / 100f)
             {
                 var nb = new List<Brick>(); foreach (var (dc, dr) in Dirs) { var x = BrickAt(b.c + dc, b.r + dr); if (x != null) nb.Add(x); }
-                if (nb.Count > 0) { var t = nb[Random.Range(0, nb.Count)]; HitBrick(t, Mathf.Max(1, AV2("zap")), true); cellFx.Add(new CellFx { c = t.c, r = t.r, col = zapCol, t = 0.2f }); }
+                if (nb.Count > 0) { var t = nb[Random.Range(0, nb.Count)]; HitBrick(t, d * AV2("zap"), true); cellFx.Add(new CellFx { c = t.c, r = t.r, col = zapCol, t = 0.2f }); }
             }
             if (f.grade >= (int)Cf("skill_grade", 3) && (!f.usedFirst || Random.value < grades[f.grade].skill_p)) { f.usedFirst = true; Skill(f, b); }
         }
@@ -410,18 +418,18 @@ namespace NKK.Lobby
             cheese += Cf("turn_cheese", 10);                                           // 턴마다 기본 치즈 (쥐 1마리 값)
             if (A("rain") > 0) { double g2 = Math.Round(turn * AV("rain")); cheese += g2; cheeseTotal += g2; Float(FX0 + FW / 2, FY0 + 30, rainText.Replace("{n}", g2.ToString("0")), cheeseCol); }
             var alive = bricks.FindAll(b => !b.dead);
-            int top = 0; foreach (var r in rats) top = Mathf.Max(top, r.grade);
-            float topDmg = (grades[top].dmg + AV("dmg")) * (1 + AV("legend") / 100f);
+            CalcTeam();
+            float boltDmg = TeamPct(AV2("storm"));
             if (A("storm") > 0)
                 for (int i = 0; i < (int)AV("storm"); i++)
                 {
                     if (alive.Count == 0) break; var b = alive[Random.Range(0, alive.Count)];
-                    Later(0.1f + i * 0.06f, () => { if (b.dead) return; parts.Add(new Part { s = bolt, x = CellX(b.c) + CELL / 2, y = CellY(b.r) - 40, size = 70, h = 160, life = 0.25f, max = 0.25f }); HitBrick(b, topDmg, true); });
+                    Later(0.1f + i * 0.06f, () => { if (b.dead) return; parts.Add(new Part { s = bolt, x = CellX(b.c) + CELL / 2, y = CellY(b.r) - 40, size = 70, h = 160, life = 0.25f, max = 0.25f }); HitBrick(b, boltDmg, true); });
                 }
             if (A("train") > 0 && alive.Count > 0)
             {
                 int low = 0; foreach (var b in alive) low = Mathf.Max(low, b.r);
-                float dmg = AV("train");
+                float dmg = TeamPct(AV("train"));
                 Later(0.3f, () =>
                 {
                     parts.Add(new Part { s = fxRow, x = FX0 + FW / 2, y = CellY(low) + CELL / 2, size = FW, life = 0.3f, max = 0.3f });
@@ -447,6 +455,7 @@ namespace NKK.Lobby
             launchX = firstLandX ?? launchX; firstLandX = null;
             turn++;
             FloorReward();
+            if (turn >= (int)Cf("max_floor", 1000)) { GameOver(true); return; }          // 층 상한 도달 = 판 끝 (2026-11-09 사용자)
             if (ShiftDown()) { GameOver(); return; }
             SpawnRow(); TurnStart();
             state = St.Aim; ffMul = 1;
@@ -468,15 +477,16 @@ namespace NKK.Lobby
             p.FlushJudol();
         }
 
-        void GameOver()
+        void GameOver(bool clear = false)
         {
             state = St.Over;
+            if (overTitle) { overLoseText ??= overTitle.text; overTitle.text = clear ? clearTitle.Replace("{n}", turn.ToString()) : overLoseText; }
             int best = Best;
             if (turn > best) { best = turn; if (Progress.I) Progress.I.SetJudolBest(turn); }
             if (Progress.I) Progress.I.FlushJudol();
             Fill(overBody, ("turn", turn), ("best", best), ("broken", broken), ("cheese", LobbyManager.Fmt(cheeseTotal)), ("rats", rats.Count), ("grade", GradeName(bestGrade)), ("augs", augCount),
                  ("acorn", runAcorn), ("ratsTotal", Progress.I ? Progress.I.judolRats.ToString("N0") : "0"));
-            Sfx(sfxLose);
+            Sfx(clear ? sfxWin : sfxLose);
             Later(0.4f, () => Show(ovOver));
         }
 
@@ -493,12 +503,14 @@ namespace NKK.Lobby
         void Fire(Vector2 dir)
         {
             var order = new List<Rat>(rats); order.Sort((a, b) => a.id.CompareTo(b.id));
+            CalcTeam();
             launchQ.Clear();
             for (int i = 0; i < order.Count; i++) launchQ.Add(new Shot { grade = order[i].grade, code = order[i].code, giant = i == 0 && A("giant") > 0, blades = i == 0 && A("blades") > 0 });
             if (A("clone") > 0 && order.Count > 0)
             {
                 var top = order[0]; foreach (var r in order) if (r.grade > top.grade) top = r;
-                for (int i = 0; i < (int)AV("clone"); i++) launchQ.Add(new Shot { grade = top.grade, code = top.code, clone = true });
+                int cloneN = Mathf.Max((int)AV2("clone"), Mathf.FloorToInt(order.Count * AV("clone") / 100f));          // 분신 = 보유 쥐의 v% (최소 v2 마리)
+                for (int i = 0; i < cloneN; i++) launchQ.Add(new Shot { grade = top.grade, code = top.code, clone = true });
             }
             launchT = 0; flyT = 0; state = St.Fly; aim = null; firstLandX = null; walkers.Clear();
             launchDir = dir; Sfx(sfxFire);
@@ -580,12 +592,12 @@ namespace NKK.Lobby
                     { it.got = true; cheese += turn; cheeseTotal += turn; Sfx(sfxCoin); Float(CellX(it.c) + CELL / 2, CellY(it.r) + 20, gainText.Replace("{n}", turn.ToString()), cheeseCol); }
                 if (f.blades)            // 회전 치즈 칼날
                 {
-                    int nb = (int)AV("blades"); float rad = Cf("blade_radius", 28), spin = Cf("blade_spin", 8), dmg = Mathf.Max(1, AV2("blades"));
+                    int nb = (int)AV("blades"); float rad = Cf("blade_radius", 28), spin = Cf("blade_spin", 8), dmg = TeamPct(AV2("blades"));
                     for (int i = 0; i < nb; i++)
                     {
                         float a = time * spin + i * Mathf.PI * 2 / nb, bx = f.x + Mathf.Cos(a) * rad, by = f.y + Mathf.Sin(a) * rad;
                         var b = BrickAt(Mathf.FloorToInt((bx - FX0) / CELL), Mathf.FloorToInt((by - FY0) / CELL));
-                        if (b != null && !(f.bladeCd.TryGetValue(b, out var cd) && cd > time)) { f.bladeCd[b] = time + Cf("blade_cd", 0.15f); HitBrick(b, dmg, true); }
+                        if (b != null && !(f.bladeCd.TryGetValue((b, i), out var cd) && cd > time)) { f.bladeCd[(b, i)] = time + Cf("blade_cd", 0.15f); HitBrick(b, dmg, true); }          // 칼날마다 따로 재사용 대기 (단계가 오르면 그만큼 강해지게)
                     }
                 }
             }

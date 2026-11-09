@@ -9965,3 +9965,772 @@ MonoBehaviour:
         offset: {x: 7.8, y: -58.5}
         scale: 1
       orders: []
+  - codeId: fire
+    atkType: Cat:Pounce
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.8, y: -2.1}
+        scale: 1
+      orders: []
+    - t: 0.2
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.8, y: -2.1}
+        scale: 1
+      orders: []
+    - t: 0.33
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.8, y: -2.1}
+        scale: 1
+      orders: []
+  - codeId: fire
+    atkType: Cat:Cast
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.4, y: -2.4}
+        scale: 1
+      orders: []
+    - t: 0.2
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.4, y: -2.4}
+        scale: 1
+      orders: []
+    - t: 0.4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.4, y: -2.4}
+        scale: 1
+      orders: []
+    - t: 0.48
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.4, y: -2.4}
+        scale: 1
+      orders: []
+  - codeId: laser
+    atkType: Cat:Pounce
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 2.4, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 0.2
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 2.4, y: 0.1}
+        scale: 1
+      orders: []
+    - t: 0.33
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 2.4, y: 0.1}
+        scale: 1
+      orders: []
+  - codeId: loaf
+    atkType: Cat:Pounce
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 1.7, y: -2.8}
+        scale: 1
+      orders: []
+    - t: 0.2
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 1.7, y: -2.8}
+        scale: 1
+      orders: []
+    - t: 0.33
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 1.7, y: -2.8}
+        scale: 1
+      orders: []
+  - codeId: loaf
+    atkType: Cat:Cast
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.2, y: 0.4}
+        scale: 1
+      orders: []
+    - t: 0.2
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.2, y: 0.4}
+        scale: 1
+      orders: []
+    - t: 0.4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.2, y: 0.4}
+        scale: 1
+      orders: []
+    - t: 0.48
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 4.2, y: 0.4}
+        scale: 1
+      orders: []
+  - codeId: mackerel
+    atkType: Cat:Pounce
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 1.2, y: -0.8}
+        scale: 1
+      orders: []
+    - t: 0.2
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 1.2, y: -0.8}
+        scale: 1
+      orders: []
+    - t: 0.33
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 1.2, y: -0.8}
+        scale: 1
+      orders: []
+  - codeId: ninja
+    atkType: Cat:Pounce
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 3.3, y: 0.3}
+        scale: 1
+      orders: []
+    - t: 0.2
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 3.3, y: 0.3}
+        scale: 1
+      orders: []
+    - t: 0.33
+      head: -0.15
+      headX: 0
+      tail: 1
+      front: 1.3
+      back: -1.1
+      farFront: 1.1
+      farBack: -0.9
+      bob: 0
+      tilt: -0.25
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 3.3, y: 0.3}
+        scale: 1
+      orders: []
+  - codeId: ninja
+    atkType: Cat:Cast
+    loop: 0
+    loopFrom: 0
+    keys:
+    - t: 0
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 3.6, y: -0.1}
+        scale: 1
+      orders: []
+    - t: 0.2
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 3.6, y: -0.1}
+        scale: 1
+      orders: []
+    - t: 0.4
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 3.6, y: -0.1}
+        scale: 1
+      orders: []
+    - t: 0.48
+      head: -0.2
+      headX: 0
+      tail: 1.1
+      front: 2.1
+      back: 0
+      farFront: 0.5
+      farBack: 0
+      bob: 0
+      tilt: -0.3
+      head2: 0
+      armN: 0
+      armF: 0
+      legN: 0
+      legF: 0
+      lean: 0
+      angry: 1
+      scared: 0
+      sx: 1
+      sy: 1
+      alt: 1
+      parts: []
+      xf:
+      - part: head
+        offset: {x: 3.6, y: -0.1}
+        scale: 1
+      orders: []

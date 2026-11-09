@@ -8,6 +8,7 @@ namespace NKK.Rats
         // ── 필살기 ──
         [HideInInspector] public bool UltOn;               // 필살기가 위치·자세를 정함 (AI 멈춤)
         public RatRig.Pose? UltPose;                       // null 이면 평소 자세
+        [System.NonSerialized] public NKK.Ults.UltBase UltRun;      // 이 쥐가 직접 쓰는 중인 필살기 (붙잡힌 쥐 · 컷인 중 = null) — 리깅 툴 모션의 시간
         [HideInInspector] public float UltRot, UltLift, UltSx = 1, UltSy = 1, UltJit;
         [HideInInspector] public bool HideBody;            // 몸 숨김 (변신·탈것 안 등)
 
@@ -29,7 +30,7 @@ namespace NKK.Rats
         // 필살기 끝: 평소대로
         public void UltRelease()
         {
-            UltOn = false; UltPose = null; UltRot = UltLift = UltJit = 0; UltSx = UltSy = 1; HideBody = false;
+            UltOn = false; UltPose = null; UltRun = null; UltRot = UltLift = UltJit = 0; UltSx = UltSy = 1; HideBody = false;
             if (ghost && temp <= 0) { ghost = false; foreach (var sr in rig.GetComponentsInChildren<SpriteRenderer>()) { var c = sr.color; c.a = 1; sr.color = c; } }   // 필살기 투명 되돌리기
             if (z > 0) vz = 0;
             if (rig && rig.visual) rig.visual.gameObject.SetActive(true);

@@ -60,8 +60,19 @@
 0.734,
 0.515
 ],
-"leg_front": 1,
-"leg_back": 0.787
+"leg_front": 1.0,
+"leg_back": 0.787,
+"tweak": [
+{
+"part": "head",
+"offset": [
+32.7,
+106.1
+],
+"angle": 0.0,
+"scale": 1.0
+}
+]
 },
 {
 "code_id": "builder",
@@ -1909,7 +1920,8 @@
 0.325
 ],
 "leg_front": 1,
-"leg_back": 0.978
+"leg_back": 0.978,
+"twin": "patjwi"
 },
 {
 "code_id": "patjwi",
@@ -1951,7 +1963,19 @@
 0.325
 ],
 "leg_front": 1,
-"leg_back": 1
+"leg_back": 1,
+"head_scale": 1.0,
+"head_only": 1,
+"wing_anchor": [
+0.62,
+0.2
+],
+"wing_size": 1.05,
+"wing2_anchor": [
+0.6,
+0.62
+],
+"wing2_size": 0.65
 }
 ]
 }

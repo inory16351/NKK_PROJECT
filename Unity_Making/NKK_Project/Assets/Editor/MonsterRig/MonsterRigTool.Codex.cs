@@ -122,7 +122,7 @@ public partial class MonsterRigTool
         DestroyImmediate(refTex); DestroyImmediate(tex);
 
         string who = cur.boss ? $"the boss \"{cur.name}\" ({cur.code})" : $"\"{cur.code}\"";
-        string kind = cur.kind == Kind.Part ? "custom part-rig boss" : cur.kind == Kind.Cat ? "cat" : "human";
+        string kind = cur.kind == Kind.Part ? "custom part-rig boss" : cur.kind == Kind.Cat ? "cat" : cur.kind == Kind.Rat ? "rat" : "human";
         var prompt = new StringBuilder();
         prompt.AppendLine("Use your built-in image generation tool to EDIT the attached image ref.png and save the result as PNG to: out.png (in the current working directory). Do not write code to draw it; it must be a generated illustration. After saving, reply only with the file name.");
         prompt.AppendLine();

@@ -47,7 +47,11 @@ MonoBehaviour:
     twinCodeId: 
     headOnly: 0
     orders: []
-    tweaks: []
+    tweaks:
+    - part: head
+      offset: {x: 16.6, y: 5.5}
+      angle: 0
+      scale: 1
     torsoW: 0
   - codeId: chonk
     head: {fileID: 21300000, guid: 80b714f0de40c1346ab6021d3d83be8c, type: 3}
@@ -83,7 +87,11 @@ MonoBehaviour:
     twinCodeId: 
     headOnly: 0
     orders: []
-    tweaks: []
+    tweaks:
+    - part: head
+      offset: {x: 16.7, y: 8.3}
+      angle: 0
+      scale: 1
     torsoW: 0
   - codeId: fire
     head: {fileID: 21300000, guid: 07bff7da3798c764f8e91fbc1a1b6dee, type: 3}
@@ -119,7 +127,15 @@ MonoBehaviour:
     twinCodeId: 
     headOnly: 0
     orders: []
-    tweaks: []
+    tweaks:
+    - part: head
+      offset: {x: 9.6, y: 18.6}
+      angle: 0
+      scale: 0.65
+    - part: torso
+      offset: {x: 0.5, y: 0}
+      angle: 0
+      scale: 1
     torsoW: 0
   - codeId: gym
     head: {fileID: 21300000, guid: 8c1246b6c191cb142b9aa366b12a427c, type: 3}
@@ -155,7 +171,11 @@ MonoBehaviour:
     twinCodeId: 
     headOnly: 0
     orders: []
-    tweaks: []
+    tweaks:
+    - part: head
+      offset: {x: 16.5, y: 1}
+      angle: 0
+      scale: 1
     torsoW: 0
   - codeId: laser
     head: {fileID: 21300000, guid: a830274366a4dad4e8104d3817db0ea1, type: 3}
@@ -191,7 +211,15 @@ MonoBehaviour:
     twinCodeId: 
     headOnly: 0
     orders: []
-    tweaks: []
+    tweaks:
+    - part: head
+      offset: {x: 4.6, y: 12.1}
+      angle: 0
+      scale: 0.74
+    - part: tail
+      offset: {x: 3, y: 0}
+      angle: 0
+      scale: 1
     torsoW: 0
   - codeId: loaf
     head: {fileID: 21300000, guid: 1d99498104e0b6041845982fb7c28b45, type: 3}
@@ -227,7 +255,11 @@ MonoBehaviour:
     twinCodeId: 
     headOnly: 0
     orders: []
-    tweaks: []
+    tweaks:
+    - part: head
+      offset: {x: 11.9, y: 11.5}
+      angle: 0
+      scale: 0.74
     torsoW: 0
   - codeId: mackerel
     head: {fileID: 21300000, guid: 338c01ed04f03da4fbcef86a8e41442f, type: 3}
@@ -263,7 +295,11 @@ MonoBehaviour:
     twinCodeId: 
     headOnly: 0
     orders: []
-    tweaks: []
+    tweaks:
+    - part: head
+      offset: {x: 7.3, y: 10.3}
+      angle: 0
+      scale: 0.65
     torsoW: 0
   - codeId: ninja
     head: {fileID: 21300000, guid: f0af8041a59d4704dabc8cc6b7d59e37, type: 3}
@@ -299,7 +335,11 @@ MonoBehaviour:
     twinCodeId: 
     headOnly: 0
     orders: []
-    tweaks: []
+    tweaks:
+    - part: head
+      offset: {x: 8.1, y: 10.6}
+      angle: 0
+      scale: 0.73
     torsoW: 0
   - codeId: space
     head: {fileID: 21300000, guid: 1eb86285b6b2a6d43bace41c4deaac34, type: 3}
@@ -335,7 +375,11 @@ MonoBehaviour:
     twinCodeId: 
     headOnly: 0
     orders: []
-    tweaks: []
+    tweaks:
+    - part: head
+      offset: {x: 9.5, y: 8.5}
+      angle: 0
+      scale: 0.72
     torsoW: 0
   - codeId: tuxedo
     head: {fileID: 21300000, guid: 4467189323fc1a44ebc84e7457b92c07, type: 3}
@@ -371,7 +415,11 @@ MonoBehaviour:
     twinCodeId: 
     headOnly: 0
     orders: []
-    tweaks: []
+    tweaks:
+    - part: head
+      offset: {x: 0.4, y: 10}
+      angle: 0
+      scale: 0.67
     torsoW: 0
   - codeId: boss_zero
     head: {fileID: 21300000, guid: 2ed6db2f359836348b443d06f9efea2a, type: 3}

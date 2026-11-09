@@ -365,9 +365,9 @@ namespace NKK.Rats
             Manager.RemoveRat(this);
         }
 
-        void NewActionPose(ref RatRig.Pose p, float t, float k)
+        static void NewActionPose(EffectType type, float t, float bite, float walk, bool done, ref RatRig.Pose p)
         {
-            switch (ActionType)
+            switch (type)
             {
                 case EffectType.Savory_Smell: p.head = -0.45f + Mathf.Sin(t * 14) * 0.08f; p.tail = 0.6f + Mathf.Sin(t * 10) * 0.4f; p.front = 0.3f; p.bob = -Mathf.Abs(Mathf.Sin(t * 7)) * 3; break;
                 case EffectType.Tune_Up: p.tilt = -0.35f; p.back = -0.2f; p.farBack = 0.2f; p.front = 1.4f + Mathf.Sin(t * 28) * 0.7f; p.farFront = 0.9f; p.head = -0.1f + Mathf.Sin(t * 28) * 0.05f; p.tail = 0.8f; break;
@@ -375,7 +375,7 @@ namespace NKK.Rats
                 case EffectType.Self_Destruct: { float w = walk; p.front = Mathf.Sin(w) * 1.25f; p.farFront = Mathf.Sin(w + 0.6f) * 1.25f; p.back = Mathf.Sin(w + Mathf.PI) * 1.25f; p.farBack = Mathf.Sin(w + Mathf.PI + 0.6f) * 1.25f; p.head = -0.12f; p.tail = -0.2f; p.sx = 1.1f; p.sy = 0.93f; break; }
                 case EffectType.Ice_Missile: p.tilt = -0.5f; p.front = 2.4f + Mathf.Sin(t * 12) * 0.15f; p.farFront = 2.2f; p.back = -0.3f; p.farBack = 0.3f; p.head = -0.35f; p.tail = 1.2f; break;
                 case EffectType.Data_Boost: p.tilt = -0.25f; p.front = 1.5f; p.farFront = 0.6f; p.head = -0.2f + Mathf.Sin(t * 6) * 0.06f; p.tail = 0.6f + Mathf.Sin(t * 8) * 0.3f; break;
-                case EffectType.Patty_Slam: if (!act.done) { p.front = 2.2f; p.farFront = 2; p.back = -1.2f; p.farBack = -1; p.head = -0.3f; p.tail = 1.1f; } else { p.sy = 0.8f; p.sx = 1.15f; p.head = 0.3f; } break;
+                case EffectType.Patty_Slam: if (!done) { p.front = 2.2f; p.farFront = 2; p.back = -1.2f; p.farBack = -1; p.head = -0.3f; p.tail = 1.1f; } else { p.sy = 0.8f; p.sx = 1.15f; p.head = 0.3f; } break;
             }
         }
     }

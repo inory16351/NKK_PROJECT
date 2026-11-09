@@ -87,7 +87,11 @@ MonoBehaviour:
     front: 0
     headScale: 0.85
     orders: []
-    tweaks: []
+    tweaks:
+    - part: armNear
+      offset: {x: 44.6, y: -1.7}
+      angle: 0
+      scale: 1
   - codeId: boss_director
     head: {fileID: 21300000, guid: e96d819ffc7b98c4999c69e70f656a3a, type: 3}
     scared: {fileID: 21300000, guid: a07f3412da477fe4a99a48a4867bb884, type: 3}
@@ -102,7 +106,11 @@ MonoBehaviour:
     front: 0
     headScale: 0.85
     orders: []
-    tweaks: []
+    tweaks:
+    - part: armNear
+      offset: {x: 44.1, y: -3.4}
+      angle: 0
+      scale: 1
   - codeId: cook
     head: {fileID: 21300000, guid: 0ea6389bf1d7f584891cd98b0697d767, type: 3}
     scared: {fileID: 21300000, guid: 2a4b8163431a5554bb86d8b1b9211e14, type: 3}
@@ -650,6 +658,10 @@ MonoBehaviour:
     tweaks:
     - part: armNear
       offset: {x: 33, y: -13.2}
+      angle: 0
+      scale: 1
+    - part: head
+      offset: {x: -18.1, y: -4.8}
       angle: 0
       scale: 1
   - codeId: boss_deepdiver

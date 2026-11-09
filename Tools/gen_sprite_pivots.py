@@ -43,7 +43,14 @@ meta = []
 for sid, m in rats.items():
     a = m['torsoAnchor']
     meta.append({'code_id': sid, 'neck': a['neck'], 'tail': a['tail'], 'shoulder': a['shoulder'], 'hip': a['hip'],
-                 'leg_front': m.get('legScale', {}).get('front', 1), 'leg_back': m.get('legScale', {}).get('back', 1)})
+                 'leg_front': m.get('legScale', {}).get('front', 1), 'leg_back': m.get('legScale', {}).get('back', 1),
+                 **({'head_scale': float(m['headScale'])} if m.get('headScale') else {}),   # 몬스터 리깅 툴에서 고친 값 (고양이와 같음)
+                 **({'head_only': 1} if m.get('headOnly') else {}),   # 머리만 있는 쥐 (나비쥐): 없으면 Build Rat Art Library 가 몸통 없는 종으로 보고 건너뜀
+                 **({'wing_anchor': m['wingAnchor'], 'wing_size': m['wingSize']} if m.get('wingAnchor') else {}),
+                 **({'wing2_anchor': m['wing2Anchor'], 'wing2_size': m['wing2Size']} if m.get('wing2Anchor') else {}),
+                 **({'twin': m['twin']} if m.get('twin') else {}),   # 위에 붙는 쥐 (콩쥐팥쥐)
+                 **({'order': [{'part': k, 'order': int(v)} for k, v in m['order'].items()]} if m.get('order') else {}),
+                 **({'tweak': [{'part': k, **v} for k, v in m['tweak'].items()]} if m.get('tweak') else {})})
 OUT2 = os.path.join(ROOT, 'Unity_Making', 'NKK_Project', 'Assets', 'Data', 'RatRigMeta.json')
 json.dump({'items': meta}, io.open(OUT2, 'w', encoding='utf-8'), ensure_ascii=False, indent=0)
 print(len(meta), 'rigs ->', OUT2)

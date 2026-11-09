@@ -47,6 +47,7 @@ namespace NKK.Rats
             name = $"Rat_{data.code_id}";
             x = px; y = py; t = Random.Range(0f, 0.5f); walk = Random.Range(0f, 6f); seed = Random.Range(0f, 10f);
             breedCD = Random.Range(1f, 4f);
+            artEntry = art;
             rig.Build(art, m.RigLength(data));
             InitTwin(art);
             born = 0;
@@ -321,8 +322,47 @@ namespace NKK.Rats
             if (spd > 350) vz = 150;           // 세게 들이받으면 작게 튀어오름
         }
 
-        // 웹게임 ratPose (달리기·급정거·킁킁·갉기 박치기·공중·총공격)
+        // ── 몬스터 리깅 툴 모션 (Resources/BossMotion.asset): 있으면 그 동작 동안 코드 자세 대신 키를 씀 ──
+        RatArtLibrary.Entry artEntry;
+        bool motionOn, motionHead2;
+        List<PartOrder> motionOrders;
+        List<NKK.Hazards.BossMotion.PartXf> motionXf;
+
         RatRig.Pose MakePose()
+        {
+            motionOn = motionHead2 = false; motionOrders = null; motionXf = null;
+            var move = MotionNow(out float mt);
+            var mo = move != null ? NKK.Hazards.BossMotion.Find(codeId, move) : null;
+            if (mo == null) return CodePose();
+            motionOn = true; motionOrders = NKK.Hazards.BossMotion.Orders(mo, mt); motionXf = NKK.Hazards.BossMotion.Xf(mo, mt);
+            return NKK.Hazards.BossMotion.Cat(mo, mt, out motionHead2);
+        }
+
+        // 지금 하는 동작의 모션 이름 · 그 시간 (없으면 null). 순서는 CodePose 의 자세 순서와 같음. 잠 · 기절 · 공중 · 공 · 롤러스케이트 · 좀비 · 총공격 달리기는 코드 그대로
+        string MotionNow(out float mt)
+        {
+            mt = 0;
+            if (UltOn) { if (UltRun == null || !UltPose.HasValue) return null; mt = UltRun.T; return NKK.Hazards.BossMotion.RatUlt; }      // 붙잡힌 쥐 · 컷인 중은 코드
+            if (sleep > 0) return null;
+            if (act.on) { mt = act.t; return NKK.Hazards.BossMotion.RatAct; }
+            if (Trick != TrickType.None) { mt = trickT; return TrickMove(Trick); }
+            if ((BallForm && stun <= 0) || stun > 0 || tumbleT > 0 || z > 2) return null;
+            if (bite > 0) { mt = (1 - bite) / 5; return NKK.Hazards.BossMotion.RatBite; }
+            if (Speed > 30 && !Rushing && !SkateForm && zombie <= 0) { mt = NKK.Hazards.BossMotion.WalkT(walk); return NKK.Hazards.BossMotion.RatWalk; }
+            return null;
+        }
+
+        // 깨물기 코드 자세 (게임 · 리깅 툴 미리보기). bite = 1 → 0
+        public static void BitePose(float bite, ref RatRig.Pose p)
+        {
+            float k = Mathf.Sin(bite * Mathf.PI);
+            p.headX -= 9 * k; p.head += 0.35f * k; p.front += 0.7f * k; p.farFront += 0.4f * k; p.tilt += 0.08f * k; p.sx *= 1 + 0.08f * k;
+        }
+
+        public void TestBite() { bite = 1; sq = 1.25f; }      // 리깅 툴 '게임에서 보기'
+
+        // 웹게임 ratPose (달리기·급정거·킁킁·갉기 박치기·공중·총공격)
+        RatRig.Pose CodePose()
         {
             float tt = Time.time;
             var p = new RatRig.Pose { head = Mathf.Sin(tt * 1.7f + seed) * 0.05f, tail = 0.15f + Mathf.Sin(tt * 2.6f + seed) * 0.15f, sx = 1, sy = 1 };
@@ -355,11 +395,7 @@ namespace NKK.Rats
             if (stun > 0) { p.front = 0.6f; p.farFront = 0.5f; p.back = -0.6f; p.farBack = -0.5f; p.head = 0.4f + Mathf.Sin(tt * 6) * 0.1f; p.tail = -0.3f; p.sy = 0.9f; return p; }
             if (zombie > 0) { p.front = 1.5f + Mathf.Sin(tt * 3 + seed) * 0.15f; p.farFront = 1.4f + Mathf.Cos(tt * 3 + seed) * 0.15f; p.head = 0.2f + Mathf.Sin(tt * 2) * 0.1f; p.tilt = Mathf.Sin(tt * 2.5f + seed) * 0.08f; }   // 좀비: 팔을 앞으로
             if (Rushing) { p.head = 0.18f; p.headX = -3; p.tail = 1.1f + Mathf.Sin(tt * 25) * 0.1f; p.tilt = 0.1f; }
-            if (bite > 0)
-            {
-                float k = Mathf.Sin(bite * Mathf.PI);
-                p.headX -= 9 * k; p.head += 0.35f * k; p.front += 0.7f * k; p.farFront += 0.4f * k; p.tilt += 0.08f * k; p.sx *= 1 + 0.08f * k;
-            }
+            if (bite > 0) BitePose(bite, ref p);
             if (z > 2)
             {
                 float k = Mathf.Min(1, z / 30);
@@ -419,7 +455,10 @@ namespace NKK.Rats
             if (IsButterfly) ButterflyPose(ref pose);
             RatRig.Pose poseB = default; float rotB = 0;
             if (twinRig) TwinSplit(scale, ref pose, ref trot, ref pivotH, out poseB, out rotB);       // 콩쥐팥쥐: 위 쥐 거꾸로
+            rig.headReplace = motionHead2 && artEntry != null ? artEntry.head2 : null;
+            rig.SetMotionXf(motionXf);
             rig.Apply(pose, scale, face, sq, World.SortOrder(y), lift, trot, tsx, tsy, pivotH, Trick == TrickType.Windmill);
+            rig.SetTempOrders(motionOrders);
             if (twinRig) twinRig.Apply(poseB, scale, face, sq, World.SortOrder(y) + 1, lift, rotB, tsx, tsy, pivotH);
             TowerApply(pose, World.SortOrder(y), lift, trot);       // 증강 '쥐 탑 쌓기' (Rat.Augment.cs)
             AfterimageApply();                            // 증강 '다다다다' 잔상

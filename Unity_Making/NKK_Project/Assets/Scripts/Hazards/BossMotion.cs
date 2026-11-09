@@ -61,6 +61,10 @@ namespace NKK.Hazards
         // 변신 뒤에 시작한 공격의 모션 이름 ("Form:" + 기술). 없으면 그 기술의 평소 모션
         public const string FormAtkPrefix = "Form:";
         public static string FormAtk(string atkType) => FormAtkPrefix + atkType;
+        // 일반 고양이 · 쥐의 모션 이름 (리깅 툴, 2026-11-09). 보스 기술 이름과 겹치지 않게 앞에 붙임. 걷기 = 보스 Walk 와 같은 시간 (0~1 = 걸음 두 번)
+        public const string CatWalk = "Cat:Walk", CatPounce = "Cat:Pounce", CatCast = "Cat:Cast", CatAim = "Cat:Aim", CatLeap = "Cat:Leap", CatRoll = "Cat:Roll";
+        public const string RatWalk = "Rat:Walk", RatBite = "Rat:Bite", RatAct = "Rat:Act", RatUlt = "Rat:Ult", RatTrickPrefix = "Rat:Trick:";
+        public static bool IsWalkMotion(string t) => t == WalkType || t == FormWalkType || t == CatWalk || t == RatWalk;
 
         public Motion Get(string code, string atk)
         {
@@ -78,8 +82,21 @@ namespace NKK.Hazards
                 return loaded;
             }
         }
-        public static void Reload() { tried = false; loaded = null; }      // 리깅 툴이 고친 뒤
-        public static Motion Find(string code, string atk) => string.IsNullOrEmpty(code) || string.IsNullOrEmpty(atk) ? null : I ? I.Get(code, atk) : null;
+        public static void Reload() { if (loaded) loaded.index = null; tried = false; loaded = null; }      // 리깅 툴이 고친 뒤
+
+        // 쥐 수백 마리가 매 프레임 찾으므로 표로 (키가 있는 모션만, 같은 이름이면 앞의 것 = Get 과 같음)
+        [NonSerialized] Dictionary<(string, string), Motion> index;
+        public static Motion Find(string code, string atk)
+        {
+            if (string.IsNullOrEmpty(code) || string.IsNullOrEmpty(atk)) return null;
+            var a = I; if (!a) return null;
+            if (a.index == null)
+            {
+                a.index = new();
+                foreach (var m in a.motions) if (m.keys.Count > 0) a.index.TryAdd((m.codeId, m.atkType), m);
+            }
+            return a.index.TryGetValue((code, atk), out var v) ? v : null;
+        }
 
         // 시간 t 의 두 키와 섞는 비율 (부드럽게)
         public static void Span(Motion m, float t, out Key a, out Key b, out float k)

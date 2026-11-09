@@ -132,6 +132,7 @@ namespace NKK.Rats
         float MS(SpriteRenderer r) => mxfOn && mxf.TryGetValue(r, out var v) ? v.s : 1;
         public void SetMotionXf(System.Collections.Generic.List<NKK.Hazards.BossMotion.PartXf> l)
         {
+            if (screenOn) { screenRig.SetMotionXf(l); return; }      // 5G: 파츠는 화면 속 쥐
             bool any = l != null && l.Count > 0;
             if (!any && !mxfOn) return;
             foreach (var kv in restBase) { if (!kv.Key || kv.Key == head) continue; kv.Key.transform.localPosition = kv.Value.pos; if (kv.Key != tail) kv.Key.transform.localScale = kv.Value.scale; }
@@ -171,6 +172,7 @@ namespace NKK.Rats
         void CaptureOrders() { baseOrder.Clear(); foreach (var r in new[] { farBack, farFront, tail, torso, back, front, head }) if (r) baseOrder[r] = r.sortingOrder; }
         public void SetTempOrders(System.Collections.Generic.List<PartOrder> l)
         {
+            if (screenOn) { screenRig.SetTempOrders(l); return; }
             bool any = l != null && l.Count > 0;
             if (tempOn) foreach (var kv in baseOrder) if (kv.Key && kv.Key != front) kv.Key.sortingOrder = kv.Value;      // 앞다리는 Apply 가 매 프레임 정함
             tempOn = any;
@@ -203,6 +205,11 @@ namespace NKK.Rats
             tail.sortingOrder = 2; head.sortingOrder = 6;
             BuildWings(e, 0, Vector2.zero, null);
             head.sortingOrder = 6;
+            ApplyOrders(e.orders);
+            ApplyTweaks(e.tweaks);      // 꼬리 · 머리 자리와 꼬리 크기는 ApplyHeadOnly 가 매 프레임 정함
+            CaptureOrders();
+            restBase.Clear(); restBase[head] = (head.transform.localPosition, head.transform.localScale); restBase[tail] = (tail.transform.localPosition, tail.transform.localScale);
+            mxf.Clear(); mxfOn = false;
         }
 
         void ApplyHeadOnly(in Pose p)
@@ -211,11 +218,12 @@ namespace NKK.Rats
             float u = 1f / Mathf.Max(Unit, 1e-5f);
             body.localPosition = headBase + new Vector3(0, -p.bob * u / 100f, 0);
             body.localRotation = Quaternion.Euler(0, 0, p.tilt * D);
-            head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D);
-            head.transform.localPosition = headRel + new Vector3(p.headX * u / 100f, 0, 0);
-            tail.transform.localPosition = tailRel;
-            tail.transform.localRotation = Quaternion.Euler(0, 0, p.tail * D);
-            tail.transform.localScale = new Vector3(tailLen, 1, 1);
+            head.transform.localRotation = Quaternion.Euler(0, 0, p.head * D + TA(head));
+            head.transform.localPosition = headRel + new Vector3(p.headX * u / 100f, 0, 0) + TO(head) + MO(head);
+            head.transform.localScale = Vector3.one * headScale * TS(head) * MS(head);
+            tail.transform.localPosition = tailRel + TO(tail) + MO(tail);
+            tail.transform.localRotation = Quaternion.Euler(0, 0, p.tail * D + TA(tail));
+            tail.transform.localScale = new Vector3(tailLen, 1, 1) * TS(tail) * MS(tail);
             ApplyWings(p);
         }
 

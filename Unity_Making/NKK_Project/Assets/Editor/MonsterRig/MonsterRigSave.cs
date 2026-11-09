@@ -18,6 +18,7 @@ public static class MonsterRigSave
     public const string PartAsset = "Assets/Data/BossPartArt.asset";
     public const string PartEdits = "Assets/Data/BossPartArtEdits.asset";
     public const string CatAsset = "Assets/Data/CatArtLibrary.asset";
+    public const string RatAsset = "Assets/Data/RatArtLibrary.asset";
     public const string HumanAsset = "Assets/Data/HumanArtLibrary.asset";
     const string SpritePivots = "Assets/Art/Rats/sprite_pivots.json";
     static string Res => Path.GetFullPath(Path.Combine(Application.dataPath, "../../../UnityResources/Rats"));
@@ -63,36 +64,49 @@ public static class MonsterRigSave
 
     // ── 고양이 · 사람 ──
     // pivots: 파츠 이름(head · tail …) → 그림 좌상단 기준 0~1 관절
-    public static string SaveCat(RatArtLibrary.Entry e, Dictionary<string, Vector2> pivots)
+    public static string SaveCat(RatArtLibrary.Entry e, Dictionary<string, Vector2> pivots) =>
+        SaveRatRig(CatAsset, "Cats/Parts/pivots.json", "Assets/Data/CatRigMeta.json", "Assets/Art/Rats/Cats/Parts/", e, pivots);
+
+    // 쥐 원본 pivots.json 은 모양이 다름: {"species": {코드: {"torsoAnchor": …}}}, 들여쓰기 1
+    public static string SaveRat(RatArtLibrary.Entry e, Dictionary<string, Vector2> pivots) =>
+        SaveRatRig(RatAsset, "Parts/pivots.json", "Assets/Data/RatRigMeta.json", "Assets/Art/Rats/Parts/", e, pivots, "species", "torsoAnchor", 1);
+
+    static string SaveRatRig(string asset, string source, string meta, string artDir, RatArtLibrary.Entry e, Dictionary<string, Vector2> pivots, string table = null, string anchorKey = "anchor", int indent = 2)
     {
-        AssetDatabase.ImportAsset(CatAsset);      // 파일이 밖에서 바뀌었으면 먼저 다시 읽음
-        var lib = AssetDatabase.LoadAssetAtPath<RatArtLibrary>(CatAsset);
-        var dst = lib.Get(e.codeId);
-        if (dst == null) return "CatArtLibrary 에 " + e.codeId + " 없음";
+        AssetDatabase.ImportAsset(asset);      // 파일이 밖에서 바뀌었으면 먼저 다시 읽음
+        var lib = AssetDatabase.LoadAssetAtPath<RatArtLibrary>(asset);
+        var dst = lib.entries.Find(x => x.codeId == e.codeId);
+        if (dst == null) return Path.GetFileNameWithoutExtension(asset) + " 에 " + e.codeId + " 없음";
         Undo.RecordObject(lib, "리깅 툴 반영");
         dst.neck = e.neck; dst.tailAnchor = e.tailAnchor; dst.shoulder = e.shoulder; dst.hip = e.hip;
         dst.legFront = e.legFront; dst.legBack = e.legBack; dst.headScale = e.headScale;
+        dst.wingAnchor = e.wingAnchor; dst.wingSize = e.wingSize; dst.wing2Anchor = e.wing2Anchor; dst.wing2Size = e.wing2Size;
         dst.orders = Clone(new OrderBox { l = e.orders }).l;
         dst.tweaks = Clone(new TweakBox { l = e.tweaks }).l;
         EditorUtility.SetDirty(lib);
 
         var anchors = new Dictionary<string, Vector2> { ["neck"] = e.neck, ["tail"] = e.tailAnchor, ["shoulder"] = e.shoulder, ["hip"] = e.hip };
-        WriteSource(Path.Combine(Res, "Cats/Parts/pivots.json"), e.codeId, anchors, pivots, m =>
+        WriteSource(Path.Combine(Res, source), e.codeId, anchors, pivots, m =>
         {
             m["legScale"] = new JObject { ["front"] = R(e.legFront), ["back"] = R(e.legBack) };
             if (e.headScale > 0) m["headScale"] = R(e.headScale); else m.Remove("headScale");
+            if (e.wing) { m["wingAnchor"] = A(e.wingAnchor); m["wingSize"] = R(e.wingSize); }
+            if (e.wing2) { m["wing2Anchor"] = A(e.wing2Anchor); m["wing2Size"] = R(e.wing2Size); }
             SourceOrder(m, e.orders);
             SourceTweak(m, e.tweaks);
-        });
-        WriteMeta("Assets/Data/CatRigMeta.json", e.codeId, o =>
+        }, table, anchorKey, indent);
+        WriteMeta(meta, e.codeId, o =>
         {
             o["neck"] = A(e.neck); o["tail"] = A(e.tailAnchor); o["shoulder"] = A(e.shoulder); o["hip"] = A(e.hip);
             o["leg_front"] = R(e.legFront); o["leg_back"] = R(e.legBack);
             if (e.headScale > 0) o["head_scale"] = R(e.headScale); else o.Remove("head_scale");
+            if (e.headOnly) o["head_only"] = 1;
+            if (e.wing) { o["wing_anchor"] = A(e.wingAnchor); o["wing_size"] = R(e.wingSize); }
+            if (e.wing2) { o["wing2_anchor"] = A(e.wing2Anchor); o["wing2_size"] = R(e.wing2Size); }
             MetaOrder(o, e.orders);
             MetaTweak(o, e.tweaks);
         });
-        var n = WritePivots("Assets/Art/Rats/Cats/Parts/" + e.codeId + "/", pivots);
+        var n = WritePivots(artDir + e.codeId + "/", pivots);
         AssetDatabase.SaveAssetIfDirty(lib);      // 이 에셋만
         return $"관절 {n}개";
     }
@@ -162,16 +176,23 @@ public static class MonsterRigSave
     static JArray A(Vector2 v) => new JArray(Math.Round((double)v.x, 4), Math.Round((double)v.y, 4));
 
     // 원본 pivots.json (들여쓰기 2, gen_sprite_pivots.py 가 읽음)
-    static void WriteSource(string path, string code, Dictionary<string, Vector2> anchors, Dictionary<string, Vector2> pivots, Action<JObject> more)
+    // table = 종 목록이 들어 있는 키 (쥐 = "species", 고양이 · 사람 = 맨 위). 쥐는 원본에 없는 종을 새로 만들지 않음 (gen_sprite_pivots.py 가 pivotUnity 를 꼭 찾음)
+    static void WriteSource(string path, string code, Dictionary<string, Vector2> anchors, Dictionary<string, Vector2> pivots, Action<JObject> more, string table = null, string anchorKey = "anchor", int indent = 2)
     {
         if (!File.Exists(path)) { Debug.LogWarning("[리깅 툴] 원본 없음: " + path); return; }
         var root = Load((path));
-        if (root[code] is not JObject m) { m = new JObject(); root[code] = m; }
+        var list = table == null ? root : root[table] as JObject;
+        if (list == null) { Debug.LogWarning($"[리깅 툴] 원본에 {table} 없음: {path}"); return; }
+        if (list[code] is not JObject m)
+        {
+            if (table != null) { Debug.LogWarning($"[리깅 툴] 원본에 {code} 없음 (게임 데이터에만 반영): {path}"); return; }
+            m = new JObject(); list[code] = m;
+        }
         JObject Sub(string k) { if (m[k] is not JObject o) { o = new JObject(); m[k] = o; } return o; }
-        foreach (var kv in anchors) { Sub("anchor")[kv.Key] = A(kv.Value); Sub("anchorUnity")[kv.Key] = A(new Vector2(kv.Value.x, 1 - kv.Value.y)); }
+        foreach (var kv in anchors) { Sub(anchorKey)[kv.Key] = A(kv.Value); Sub(anchorKey + "Unity")[kv.Key] = A(new Vector2(kv.Value.x, 1 - kv.Value.y)); }
         foreach (var kv in pivots) { Sub("pivot")[kv.Key] = A(kv.Value); Sub("pivotUnity")[kv.Key] = A(new Vector2(kv.Value.x, 1 - kv.Value.y)); }
         more(m);
-        Write(path, root, 2);
+        Write(path, root, indent);
     }
 
     // Data/*RigMeta.json (들여쓰기 0)

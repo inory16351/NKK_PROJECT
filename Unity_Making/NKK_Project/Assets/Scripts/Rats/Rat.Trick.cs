@@ -130,10 +130,21 @@ namespace NKK.Rats
         }
 
         // 묘기 중 자세 (웹게임 ratPose 의 trick)
-        void TrickPose(ref RatRig.Pose p)
+        void TrickPose(ref RatRig.Pose p) => TrickPoseOf(Trick, Time.time, Mathf.Min(1, trickT / trickDur), ref p);
+
+        public static float TrickDuration(TrickType t) => Tricks[t].dur;
+        // 리깅 툴 모션 이름 (상수라 매 프레임 글자를 만들지 않음)
+        public static string TrickMove(TrickType t) => t switch
         {
-            float tt = Time.time, k = Mathf.Min(1, trickT / trickDur), f = Mathf.Sin(tt * 28);
-            switch (Trick)
+            TrickType.Flip => NKK.Hazards.BossMotion.RatTrickPrefix + "Flip", TrickType.Axel => NKK.Hazards.BossMotion.RatTrickPrefix + "Axel", TrickType.Windmill => NKK.Hazards.BossMotion.RatTrickPrefix + "Windmill",
+            TrickType.Cannon => NKK.Hazards.BossMotion.RatTrickPrefix + "Cannon", TrickType.Wheel => NKK.Hazards.BossMotion.RatTrickPrefix + "Wheel", _ => null
+        };
+
+        // 코드 기본 자세 (게임 · 리깅 툴 미리보기가 같이 씀). tt = 시간(초), k = 0~1 진행
+        public static void TrickPoseOf(TrickType type, float tt, float k, ref RatRig.Pose p)
+        {
+            float f = Mathf.Sin(tt * 28);
+            switch (type)
             {
                 case TrickType.Flip: { float tuck = Mathf.Sin(k * Mathf.PI); p.front = Mathf.Lerp(0.3f, 1.8f, tuck); p.farFront = Mathf.Lerp(0.2f, 1.6f, tuck); p.back = Mathf.Lerp(-0.2f, -1.6f, tuck); p.farBack = Mathf.Lerp(-0.1f, -1.4f, tuck); p.tail = 1.3f * tuck; p.head = 0.5f * tuck; break; }
                 case TrickType.Axel:

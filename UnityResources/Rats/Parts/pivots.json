@@ -252,8 +252,18 @@
     ]
    },
    "legScale": {
-    "front": 1,
+    "front": 1.0,
     "back": 0.787
+   },
+   "tweak": {
+    "head": {
+     "offset": [
+      32.7,
+      106.1
+     ],
+     "angle": 0.0,
+     "scale": 1.0
+    }
    }
   },
   "builder": {
@@ -7734,7 +7744,8 @@
    "legScale": {
     "front": 1,
     "back": 0.978
-   }
+   },
+   "twin": "patjwi"
   },
   "patjwi": {
    "parts": [
@@ -7869,7 +7880,19 @@
    "legScale": {
     "front": 1,
     "back": 1
-   }
+   },
+   "headOnly": 1,
+   "headScale": 1.0,
+   "wingAnchor": [
+    0.62,
+    0.2
+   ],
+   "wingSize": 1.05,
+   "wing2Anchor": [
+    0.6,
+    0.62
+   ],
+   "wing2Size": 0.65
   }
  }
 }

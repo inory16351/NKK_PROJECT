@@ -11,7 +11,7 @@ using UnityEngine.Rendering;
 
 // 몬스터 리깅 툴 (2026-11-06 사용자: 보스 몬스터 그림이 안 맞는 부분을 고치는 툴). 메뉴 NKK/몬스터 리깅 툴.
 // 게임과 같은 리그 코드(BossPartRig · RatRig · HumanRig)로 조립해 보여 주고, 끌거나 값을 바꿔 고친 뒤 '게임에 반영' (MonsterRigSave).
-// 파츠 보스 = 파츠마다 붙는 자리(at) · 관절(pivot) · 각도 · 크기 · 순서 · 움직임 / 고양이 · 사람 = 몸통 부착점(목 · 어깨 · 엉덩이 · 꼬리) · 그림 관절 · 다리 · 머리 크기.
+// 파츠 보스 = 파츠마다 붙는 자리(at) · 관절(pivot) · 각도 · 크기 · 순서 · 움직임 / 고양이 · 쥐 · 사람 = 몸통 부착점(목 · 어깨 · 엉덩이 · 꼬리) · 그림 관절 · 다리 · 머리 크기.
 // 마우스: 왼쪽 끌기 = 파츠 옮기기 · Shift+끌기 = 관절은 두고 그림만 옮기기 · Ctrl+끌기 = 돌리기(파츠 보스) · 휠 = 확대 · 오른쪽/가운데 끌기 = 화면 이동
 public partial class MonsterRigTool : EditorWindow
 {
@@ -19,11 +19,20 @@ public partial class MonsterRigTool : EditorWindow
     static void Open() => GetWindow<MonsterRigTool>("몬스터 리깅");
 
     // ── 목록 ──
-    enum Kind { Part, Cat, Human }
-    class Mon { public Kind kind; public string code, name; public bool boss; public float scale = 1; public int floor; public BossRow row; }
+    enum Kind { Part, Cat, Rat, Human }      // 이 순서로 목록에 나옴 · 쥐는 고양이와 같은 리그 (RatRig, work.cat 에 담음)
+    class Mon { public Kind kind; public string code, name; public bool boss; public float scale = 1; public int floor; public BossRow row; public CatCharacterRow catRow; public RatCharacterRow ratRow; }
+    readonly Dictionary<int, CatSkillRow> catSkills = new();
+    readonly Dictionary<int, RatSkillRow> ratSkills = new();
+    readonly Dictionary<int, RatUltimateRow> ratUlts = new();
     readonly List<Mon> mons = new();
     string search = "";
-    bool bossOnly = true;
+    enum ListFilter { All, Boss, Cat, Rat, Human }
+    static readonly string[] FilterNames = { "전체", "보스", "고양이", "쥐", "사람" };
+    const string FilterPref = "nkk_rigtool_filter";
+    ListFilter filter { get => (ListFilter)EditorPrefs.GetInt(FilterPref, 0); set => EditorPrefs.SetInt(FilterPref, (int)value); }
+    bool Shown(Mon m) => filter switch { ListFilter.Boss => m.boss, ListFilter.Cat => m.kind == Kind.Cat, ListFilter.Rat => m.kind == Kind.Rat, ListFilter.Human => m.kind == Kind.Human, _ => true };
+    static string KindName(Kind k) => k switch { Kind.Part => "파츠", Kind.Cat => "고양이", Kind.Rat => "쥐", _ => "사람" };
+    bool CatRig => cur.kind == Kind.Cat || cur.kind == Kind.Rat;      // RatRig 로 조립 · 값은 work.cat
     Vector2 listScroll, inspScroll;
     Mon cur;
 
@@ -45,7 +54,7 @@ public partial class MonsterRigTool : EditorWindow
     float openK;
     bool showJoints = true, showGhost = true;
     string sel;                 // 고른 파츠 이름
-    GameObject catPrefab, humanPrefab;
+    GameObject catPrefab, ratPrefab, humanPrefab;
 
     // 끌기
     enum Drag { None, Move, Image, Rotate, Scale, Anchor, Pan }
@@ -66,6 +75,7 @@ public partial class MonsterRigTool : EditorWindow
         var sh = Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default") ?? Shader.Find("Sprites/Default");
         unlit = new Material(sh) { hideFlags = HideFlags.HideAndDontSave };
         catPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Cat.prefab");
+        ratPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Rat.prefab");
         humanPrefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Human.prefab");
         InitMotion();
         Undo.undoRedoPerformed += OnUndo;
@@ -116,10 +126,28 @@ public partial class MonsterRigTool : EditorWindow
         var part = AssetDatabase.LoadAssetAtPath<BossPartArt>(MonsterRigSave.PartAsset);
         if (part) foreach (var e in part.entries) if (bossCodes.Add(Kind.Part + e.codeId)) mons.Add(new Mon { kind = Kind.Part, code = e.codeId, name = "(보스 표에 없음)", boss = true });
         var cats = AssetDatabase.LoadAssetAtPath<RatArtLibrary>(MonsterRigSave.CatAsset);
-        if (cats) foreach (var e in cats.entries) if (bossCodes.Add(Kind.Cat + e.codeId)) mons.Add(new Mon { kind = Kind.Cat, code = e.codeId, name = "고양이" });
+        var catRows = new Dictionary<string, CatCharacterRow>();
+        catSkills.Clear(); ratSkills.Clear(); ratUlts.Clear();
+        if (File.Exists("Assets/Data/CatTable.json"))
+        {
+            var ct = JsonUtility.FromJson<CatTableFile>(File.ReadAllText("Assets/Data/CatTable.json"));
+            foreach (var c in ct.Character) catRows[c.code_id] = c;
+            foreach (var s in ct.Skill) catSkills[s.skill_id] = s;
+        }
+        if (cats) foreach (var e in cats.entries) if (bossCodes.Add(Kind.Cat + e.codeId)) { catRows.TryGetValue(e.codeId, out var row); mons.Add(new Mon { kind = Kind.Cat, code = e.codeId, name = row?.character_name, catRow = row, scale = row != null && row.size_mul > 0 ? row.size_mul : 1 }); }
+        var ratRows = new Dictionary<string, RatCharacterRow>();
+        if (File.Exists("Assets/Data/RatTable.json"))
+        {
+            var rt = JsonUtility.FromJson<RatTableFile>(File.ReadAllText("Assets/Data/RatTable.json"));
+            foreach (var c in rt.Character) ratRows[c.code_id] = c;
+            foreach (var s in rt.Skill) ratSkills[s.skill_id] = s;
+            foreach (var u in rt.Ultimate) ratUlts[u.ultimate_id] = u;
+        }
+        var rats = AssetDatabase.LoadAssetAtPath<RatArtLibrary>(MonsterRigSave.RatAsset);
+        if (rats) foreach (var e in rats.entries) if (bossCodes.Add(Kind.Rat + e.codeId)) { ratRows.TryGetValue(e.codeId, out var row); mons.Add(new Mon { kind = Kind.Rat, code = e.codeId, name = row?.character_name, ratRow = row }); }
         var hum = AssetDatabase.LoadAssetAtPath<HumanArtLibrary>(MonsterRigSave.HumanAsset);
-        if (hum) foreach (var e in hum.entries) if (bossCodes.Add(Kind.Human + e.codeId)) mons.Add(new Mon { kind = Kind.Human, code = e.codeId, name = "사람" });
-        mons.Sort((a, b) => a.boss != b.boss ? (a.boss ? -1 : 1) : a.boss ? (a.floor == 0 ? 999 : a.floor).CompareTo(b.floor == 0 ? 999 : b.floor) : string.CompareOrdinal(a.code, b.code));
+        if (hum) foreach (var e in hum.entries) if (bossCodes.Add(Kind.Human + e.codeId)) mons.Add(new Mon { kind = Kind.Human, code = e.codeId });
+        mons.Sort((a, b) => a.boss != b.boss ? (a.boss ? -1 : 1) : a.boss ? (a.floor == 0 ? 999 : a.floor).CompareTo(b.floor == 0 ? 999 : b.floor) : a.kind != b.kind ? a.kind.CompareTo(b.kind) : string.CompareOrdinal(a.code, b.code));
         if (cur != null) cur = mons.Find(m => m.kind == cur.kind && m.code == cur.code);
     }
 
@@ -140,7 +168,8 @@ public partial class MonsterRigTool : EditorWindow
                 if (pa != null) work.part = MonsterRigSave.Clone(pa);
                 break;
             case Kind.Cat:
-                var ca = AssetDatabase.LoadAssetAtPath<RatArtLibrary>(MonsterRigSave.CatAsset).Get(m.code);
+            case Kind.Rat:
+                var ca = AssetDatabase.LoadAssetAtPath<RatArtLibrary>(m.kind == Kind.Rat ? MonsterRigSave.RatAsset : MonsterRigSave.CatAsset).entries.Find(x => x.codeId == m.code);
                 if (ca != null) { work.cat = MonsterRigSave.Clone(ca); foreach (var s in CatSlots) AddPivot(s, CatSprite(work.cat, s)); }
                 break;
             case Kind.Human:
@@ -150,8 +179,11 @@ public partial class MonsterRigTool : EditorWindow
         }
         savedJson = EditorJsonUtility.ToJson(work);
         fitNext = true;
-        if (motionMode && m.boss && m.row != null) EnterMotion(); else { motionMode = false; Rebuild(); }
+        if (motionMode && CanMotion) EnterMotion(); else { motionMode = false; Rebuild(); }
     }
+
+    // 모션 칸을 쓸 수 있는지: 기술이 있는 보스 · 표에 있고 파츠가 있는 일반 고양이 · 쥐 (한 장짜리 그림은 파츠가 없음)
+    bool CanMotion => cur != null && (cur.boss ? cur.row != null : (cur.catRow != null || cur.ratRow != null) && (work.cat.torso || work.cat.headOnly));
 
     void AddPivot(string slot, Sprite s) { if (s) work.pivots.Add(new MonsterRigWork.Pivot { part = slot, tl = new Vector2(s.pivot.x / s.rect.width, 1 - s.pivot.y / s.rect.height) }); }
 
@@ -233,15 +265,20 @@ public partial class MonsterRigTool : EditorWindow
                 return o;
             }
             case Kind.Cat:
+            case Kind.Rat:
             {
-                if (!catPrefab || !w.cat.torso && !w.cat.single) return null;
-                var o = Inst(catPrefab, out RatRig rr);
+                bool rat = cur.kind == Kind.Rat;
+                var prefab = rat ? ratPrefab : catPrefab;
+                if (!prefab || !w.cat.torso && !w.cat.single && !w.cat.headOnly) return null;
+                var o = Inst(prefab, out RatRig rr);
                 var e = MonsterRigSave.Clone(w.cat);
+                if (e.screen && e.torso) { e.screen = false; e.single = null; }      // 5G: 겉 휴대폰 말고 화면 속 파츠 쥐를 고침
                 e.head = Temp(e.head, "head", w); e.head2 = Temp(e.head2, "head2", w); e.tail = Temp(e.tail, "tail", w); e.front = Temp(e.front, "front", w); e.back = Temp(e.back, "back", w);
-                float hs = cur.boss ? -1 : cur.code == "chonk" ? 0.72f : 1;
+                float hs = rat || cur.boss ? -1 : e.headScale > 0 ? e.headScale : cur.code == "chonk" ? 0.72f : 1;      // 게임과 같게 (Rat.Init · Cat.Init · Boss)
                 rr.Build(e, 115 * cur.scale, hs, false);
                 var p = new RatRig.Pose { tail = 0.2f, sx = 1, sy = 1 };
-                if (moving) { float sn = Mathf.Sin(walkPhase); p.front = sn * 0.5f; p.farBack = sn * 0.45f; p.farFront = -sn * 0.5f; p.back = -sn * 0.45f; }
+                if (moving && rat) RatWalk(ref p, walkPhase);
+                else if (moving) { float sn = Mathf.Sin(walkPhase); p.front = sn * 0.5f; p.farBack = sn * 0.45f; p.farFront = -sn * 0.5f; p.back = -sn * 0.45f; }
                 if (alt) { p.front = 2.1f; p.farFront = 0.5f; p.tilt = -0.3f; p.head = -0.2f; p.tail = 1.1f; rr.headReplace = e.head2; }
                 if (mot) { p = MotionCat(rr, e, codeMotion); rr.SetMotionXf(MotionXf(codeMotion)); }
                 rr.Apply(p, 1, -1, 1, 0);
@@ -278,6 +315,17 @@ public partial class MonsterRigTool : EditorWindow
                 return o;
             }
         }
+    }
+
+    // 쥐 걸음 (Rat.cs 의 걷는 자세와 같은 식, 보통 빠르기)
+    static void RatWalk(ref RatRig.Pose p, float w)
+    {
+        const float amp = 0.7f;
+        p.front = Mathf.Sin(w) * amp; p.farFront = Mathf.Sin(w + 0.6f) * amp;
+        p.back = Mathf.Sin(w + Mathf.PI) * amp; p.farBack = Mathf.Sin(w + Mathf.PI + 0.6f) * amp;
+        p.bob = -Mathf.Abs(Mathf.Sin(w)) * 3.5f; p.tilt = Mathf.Sin(w) * 0.06f;
+        p.tail = 0.05f + Mathf.Sin(w * 0.5f) * 0.25f; p.head = Mathf.Cos(w) * 0.05f - 0.05f;
+        p.wing = Mathf.Sin(w);
     }
 
     // 프리팹을 복제해 리그 오브젝트만 남김 (게임 오브젝트 스크립트는 편집 모드라 안 돎)
@@ -357,20 +405,20 @@ public partial class MonsterRigTool : EditorWindow
         search = EditorGUILayout.TextField(search, EditorStyles.toolbarSearchField);
         if (GUILayout.Button("↻", GUILayout.Width(24))) LoadList();
         EditorGUILayout.EndHorizontal();
-        bossOnly = EditorGUILayout.ToggleLeft("보스만", bossOnly);
+        var pickFilter = (ListFilter)GUILayout.Toolbar((int)filter, FilterNames, EditorStyles.miniButton);
+        if (pickFilter != filter) filter = pickFilter;
         listScroll = EditorGUILayout.BeginScrollView(listScroll);
         Kind? head = null; bool? bossHead = null;
         foreach (var m in mons)
         {
-            if (bossOnly && !m.boss) continue;
+            if (!Shown(m)) continue;
             if (search.Length > 0 && m.code.IndexOf(search, StringComparison.OrdinalIgnoreCase) < 0 && (m.name ?? "").IndexOf(search, StringComparison.OrdinalIgnoreCase) < 0) continue;
             if (bossHead != m.boss || (!m.boss && head != m.kind))
             {
                 bossHead = m.boss; head = m.kind;
-                EditorGUILayout.LabelField(m.boss ? "보스" : m.kind == Kind.Cat ? "고양이" : m.kind == Kind.Human ? "사람" : "파츠", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField(m.boss ? "보스" : KindName(m.kind), EditorStyles.boldLabel);
             }
-            string kind = m.kind == Kind.Part ? "파츠" : m.kind == Kind.Cat ? "고양이" : "사람";
-            string label = m.boss ? $"{(m.floor > 0 ? m.floor + "층 " : "")}{m.name}  ·  {kind}\n<size=9>{m.code}</size>" : m.code;
+            string label = m.boss ? $"{(m.floor > 0 ? m.floor + "층 " : "")}{m.name}  ·  {KindName(m.kind)}\n<size=9>{m.code}</size>" : string.IsNullOrEmpty(m.name) ? m.code : $"{m.name}  <size=9>{m.code}</size>";
             var st = new GUIStyle(EditorStyles.label) { richText = true, wordWrap = false };
             if (cur == m) st.normal.textColor = new Color(1f, 0.8f, 0.3f);
             if (GUILayout.Button(label, st)) Select(m);
@@ -383,9 +431,9 @@ public partial class MonsterRigTool : EditorWindow
     {
         EditorGUILayout.BeginHorizontal(EditorStyles.toolbar);
         EditorGUI.BeginChangeCheck();
-        if (cur != null && cur.boss && cur.row != null)
+        if (CanMotion)
         {
-            bool m = GUILayout.Toolbar(motionMode ? 1 : 0, new[] { "리그", "공격 · 필살기 모션" }, EditorStyles.toolbarButton, GUILayout.Width(170)) == 1;
+            bool m = GUILayout.Toolbar(motionMode ? 1 : 0, new[] { "리그", "공격 · 스킬 모션" }, EditorStyles.toolbarButton, GUILayout.Width(170)) == 1;
             if (m != motionMode) { motionMode = m; if (m) EnterMotion(); fitNext = true; }
         }
         else motionMode = false;
@@ -651,7 +699,7 @@ public partial class MonsterRigTool : EditorWindow
         }
         Undo.RecordObject(work, "그리는 순서");
         if (cur.kind == Kind.Part) { var p = work.part.parts.Find(x => x.name == part); if (p != null) { p.order += d; status = $"{part} 순서 {p.order}"; } return; }
-        var l = cur.kind == Kind.Cat ? work.cat.orders : work.human.orders;
+        var l = CatRig ? work.cat.orders : work.human.orders;
         var ov = l.Find(x => x.part == part); if (ov == null) l.Add(ov = new PartOrder { part = part, order = now });
         ov.order = now + d; status = $"{part} 순서 {ov.order}";
     }
@@ -667,7 +715,7 @@ public partial class MonsterRigTool : EditorWindow
     }
 
     // 부착점 기준 몸통 폭: 고양이가 torsoW (늘린 몸통의 원래 폭) 를 쓰면 그 값, 아니면 그림 폭
-    float CatTorsoW(Sprite sp) => cur.kind == Kind.Cat && work.cat != null && work.cat.torsoW > 0 ? work.cat.torsoW : sp.rect.width;
+    float CatTorsoW(Sprite sp) => CatRig && work.cat != null && work.cat.torsoW > 0 ? work.cat.torsoW : sp.rect.width;
 
     // 크기 (Alt+끌기 위아래): 파츠 보스 = scale, 고양이 · 사람 = 그 렌더러만
     void Resize(float f)
@@ -680,7 +728,7 @@ public partial class MonsterRigTool : EditorWindow
     PartTweak Tweak(string part, bool make)
     {
         if (string.IsNullOrEmpty(part)) return null;
-        var l = cur.kind == Kind.Cat ? work.cat.tweaks : work.human.tweaks;
+        var l = CatRig ? work.cat.tweaks : work.human.tweaks;
         var t = l.Find(x => x.part == part);
         if (t == null && make) { t = new PartTweak { part = part }; l.Add(t); }
         return t;
@@ -688,18 +736,18 @@ public partial class MonsterRigTool : EditorWindow
 
     static Vector2 R4(Vector2 v) => new(Mathf.Round(v.x * 10000) / 10000, Mathf.Round(v.y * 10000) / 10000);
 
-    string AnchorName(string part) => cur.kind == Kind.Cat
+    string AnchorName(string part) => CatRig
         ? part switch { "head" or "head2" => "neck", "tail" => "tailAnchor", "front" or "farFront" => "shoulder", "back" or "farBack" => "hip", _ => null }
         : part switch { "head" or "scared" or "angry" => "neck", "armNear" or "armFar" or "arm" or "arm2" => "shoulder", "legNear" or "legFar" or "leg" => "hip", _ => null };
 
     Vector2 AnchorOf(string an)
     {
-        if (cur.kind == Kind.Cat) return an switch { "neck" => work.cat.neck, "tailAnchor" => work.cat.tailAnchor, "shoulder" => work.cat.shoulder, _ => work.cat.hip };
+        if (CatRig) return an switch { "neck" => work.cat.neck, "tailAnchor" => work.cat.tailAnchor, "shoulder" => work.cat.shoulder, _ => work.cat.hip };
         return an switch { "neck" => work.human.neck, "shoulder" => work.human.shoulder, _ => work.human.hip };
     }
     void SetAnchor(string an, Vector2 v)
     {
-        if (cur.kind == Kind.Cat) { if (an == "neck") work.cat.neck = v; else if (an == "tailAnchor") work.cat.tailAnchor = v; else if (an == "shoulder") work.cat.shoulder = v; else work.cat.hip = v; }
+        if (CatRig) { if (an == "neck") work.cat.neck = v; else if (an == "tailAnchor") work.cat.tailAnchor = v; else if (an == "shoulder") work.cat.shoulder = v; else work.cat.hip = v; }
         else { if (an == "neck") work.human.neck = v; else if (an == "shoulder") work.human.shoulder = v; else work.human.hip = v; }
     }
 
@@ -708,8 +756,8 @@ public partial class MonsterRigTool : EditorWindow
     {
         EditorGUILayout.BeginVertical(GUILayout.Width(330));
         if (cur == null) { EditorGUILayout.HelpBox("왼쪽에서 몬스터를 고르세요.", MessageType.Info); EditorGUILayout.EndVertical(); return; }
-        EditorGUILayout.LabelField(cur.boss ? $"{cur.name}  ({cur.code})" : cur.code, EditorStyles.boldLabel);
-        EditorGUILayout.LabelField(cur.kind == Kind.Part ? "파츠 보스 리그 (BossPartArt)" : cur.kind == Kind.Cat ? "고양이 리그 (CatArtLibrary)" : "사람 리그 (HumanArtLibrary)", EditorStyles.miniLabel);
+        EditorGUILayout.LabelField(string.IsNullOrEmpty(cur.name) ? cur.code : $"{cur.name}  ({cur.code})", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField(cur.kind == Kind.Part ? "파츠 보스 리그 (BossPartArt)" : cur.kind == Kind.Cat ? "고양이 리그 (CatArtLibrary)" : cur.kind == Kind.Rat ? "쥐 리그 (RatArtLibrary)" : "사람 리그 (HumanArtLibrary)", EditorStyles.miniLabel);
         EditorGUILayout.BeginHorizontal();
         GUI.enabled = Dirty;
         var bg = GUI.backgroundColor; GUI.backgroundColor = new Color(0.5f, 1f, 0.55f);
@@ -798,24 +846,35 @@ public partial class MonsterRigTool : EditorWindow
 
     void InspectRig(SerializedObject so)
     {
-        bool cat = cur.kind == Kind.Cat;
+        bool cat = CatRig, headOnly = cat && work.cat.headOnly;
+        if (cat && work.cat.single && !work.cat.torso) { EditorGUILayout.HelpBox("한 장짜리 그림이라 고칠 파츠가 없어요. 그림 자체를 바꾸려면 원본 그림을 교체하세요.", MessageType.Info); return; }
         var e = so.FindProperty(cat ? "cat" : "human");
-        EditorGUILayout.LabelField("몸통에 붙는 자리 (몸통 그림 좌상단 기준 0~1)", EditorStyles.boldLabel);
-        Field(e, "neck", "목 (머리)");
-        if (cat) Field(e, "tailAnchor", "꼬리");
-        Field(e, "shoulder", cat ? "어깨 (앞다리)" : "어깨 (팔)");
-        Field(e, "hip", cat ? "엉덩이 (뒷다리)" : "엉덩이 (다리)");
-        EditorGUILayout.Space(4);
-        if (cat) { Field(e, "legFront", "앞다리 크기"); Field(e, "legBack", "뒷다리 크기"); }
+        if (!headOnly)
+        {
+            EditorGUILayout.LabelField("몸통에 붙는 자리 (몸통 그림 좌상단 기준 0~1)", EditorStyles.boldLabel);
+            Field(e, "neck", "목 (머리)");
+            if (cat) Field(e, "tailAnchor", "꼬리");
+            Field(e, "shoulder", cat ? "어깨 (앞다리)" : "어깨 (팔)");
+            Field(e, "hip", cat ? "엉덩이 (뒷다리)" : "엉덩이 (다리)");
+            EditorGUILayout.Space(4);
+        }
+        if (cat && !headOnly) { Field(e, "legFront", "앞다리 크기"); Field(e, "legBack", "뒷다리 크기"); }
         Field(e, "headScale", cat ? "머리 크기 (0 = 자동)" : "머리 크기");
         if (!cat) Field(e, "front", "정면 몸통");
+        if (cat && work.cat.wing)
+        {
+            EditorGUILayout.Space(4);
+            EditorGUILayout.LabelField("날개 (머리 그림 좌상단 기준 0~1 · 키 = 머리 폭 배율)", EditorStyles.boldLabel);
+            Field(e, "wingAnchor", "큰 날개 자리"); Field(e, "wingSize", "큰 날개 키");
+            if (work.cat.wing2) { Field(e, "wing2Anchor", "작은 날개 자리"); Field(e, "wing2Size", "작은 날개 키"); }
+        }
         if (cat && cur.boss) EditorGUILayout.HelpBox("고양이 보스 머리 크기: 0 = 몸통 폭 × 0.62 이하로 자동 (게임과 같음).", MessageType.None);
 
         EditorGUILayout.Space(6);
         EditorGUILayout.LabelField("그림 관절 (그림 좌상단 기준 0~1, 이 점이 몸통 자리에 붙음)", EditorStyles.boldLabel);
         foreach (var pv in work.pivots)
         {
-            var s = cat ? CatSprite(work.cat, pv.part) : HumanSprite(work.human, pv.part);
+            var s = CatRig ? CatSprite(work.cat, pv.part) : HumanSprite(work.human, pv.part);
             EditorGUILayout.BeginHorizontal();
             var st = new GUIStyle(EditorStyles.label); if (pv.part == sel || sel == "arm" && pv.part == "arm2" && false) st.normal.textColor = new Color(1f, 0.8f, 0.3f);
             if (GUILayout.Button(pv.part, st, GUILayout.Width(52))) { sel = pv.part switch { "head2" or "scared" or "angry" => "head", "arm" => "armNear", "arm2" => "armFar", "leg" => "legNear", _ => pv.part }; Repaint(); }
@@ -827,7 +886,7 @@ public partial class MonsterRigTool : EditorWindow
         }
         EditorGUILayout.Space(6);
         EditorGUILayout.LabelField("파츠 하나씩 위치 · 회전 · 크기 (굵게 = 바꾼 값)", EditorStyles.boldLabel);
-        foreach (var (part, label) in cat ? CatOrders : HumanOrders)
+        foreach (var (part, label) in !cat ? HumanOrders : headOnly ? HeadOnlyOrders : CatOrders)
         {
             var tw = Tweak(part, false);
             var st = new GUIStyle(tw != null ? EditorStyles.boldLabel : EditorStyles.label); if (part == sel) st.normal.textColor = new Color(1f, 0.8f, 0.3f);
@@ -849,7 +908,7 @@ public partial class MonsterRigTool : EditorWindow
         EditorGUILayout.Space(6);
         EditorGUILayout.LabelField("그리는 순서 (클수록 앞 · 굵게 = 이 몬스터만 바꾼 값)", EditorStyles.boldLabel);
         var orders = cat ? work.cat.orders : work.human.orders;
-        foreach (var (part, label) in cat ? CatOrders : HumanOrders)
+        foreach (var (part, label) in !cat ? HumanOrders : headOnly ? HeadOnlyOrders : CatOrders)
         {
             var rr = RigRenderer(part); int now = rr ? rr.sortingOrder : 0;
             var ov = orders.Find(x => x.part == part);
@@ -869,13 +928,15 @@ public partial class MonsterRigTool : EditorWindow
 
         EditorGUILayout.Space(4);
         EditorGUILayout.HelpBox(cat
-            ? "고양이: 끌기 = 그 파츠만 옮기기 (가까운 · 먼 다리 하나씩) · Ctrl = 돌리기 · Alt+위아래 = 크기 · Shift = 그림 관절 (같은 그림을 쓰는 양쪽 다리 같이) · Ctrl+Shift = 몸통에 붙는 자리 (머리→목 · 앞다리→어깨 · 뒷다리→엉덩이 · 꼬리, 양쪽 같이)."
+            ? KindName(cur.kind) + ": 끌기 = 그 파츠만 옮기기 (가까운 · 먼 다리 하나씩) · Ctrl = 돌리기 · Alt+위아래 = 크기 · Shift = 그림 관절 (같은 그림을 쓰는 양쪽 다리 같이) · Ctrl+Shift = 몸통에 붙는 자리 (머리→목 · 앞다리→어깨 · 뒷다리→엉덩이 · 꼬리, 양쪽 같이)."
             : "사람: 끌기 = 그 파츠만 옮기기 (가까운 · 먼 팔다리 하나씩) · Ctrl = 돌리기 · Alt+위아래 = 크기 · Shift = 그림 관절 (같은 그림 양쪽) · Ctrl+Shift = 몸통에 붙는 자리 (양쪽 같이, 다리는 발이 바닥 기준이라 엉덩이를 옮기면 몸통이 움직임).",
             MessageType.None);
     }
 
     // 그리는 순서를 고칠 수 있는 렌더러 (RatRig · HumanRig 파츠 이름)
     static readonly (string, string)[] CatOrders = { ("head", "머리"), ("front", "앞다리"), ("back", "뒷다리"), ("torso", "몸통"), ("tail", "꼬리"), ("farFront", "먼 앞다리"), ("farBack", "먼 뒷다리") };
+    static readonly (string, string)[] HeadOnlyOrders = { ("head", "머리"), ("tail", "꼬리") };      // 머리만 있는 쥐 (나비쥐)
+    (string, string)[] RigSlots => !CatRig ? HumanOrders : work.cat.headOnly ? HeadOnlyOrders : CatOrders;
     static readonly (string, string)[] HumanOrders = { ("armNear", "가까운 팔"), ("head", "머리"), ("torso", "몸통"), ("legNear", "가까운 다리"), ("legFar", "먼 다리"), ("armFar", "먼 팔") };
     SpriteRenderer RigRenderer(string part)
     {
@@ -927,12 +988,12 @@ public partial class MonsterRigTool : EditorWindow
                 // 바뀐 관절만
                 foreach (var pv in work.pivots)
                 {
-                    var s = cur.kind == Kind.Cat ? CatSprite(work.cat, pv.part) : HumanSprite(work.human, pv.part);
+                    var s = CatRig ? CatSprite(work.cat, pv.part) : HumanSprite(work.human, pv.part);
                     if (!s) continue;
                     var old = new Vector2(s.pivot.x / s.rect.width, 1 - s.pivot.y / s.rect.height);
                     if ((old - pv.tl).sqrMagnitude > 1e-9f) piv[pv.part] = pv.tl;
                 }
-                msg = cur.kind == Kind.Cat ? MonsterRigSave.SaveCat(work.cat, piv) : MonsterRigSave.SaveHuman(work.human, piv);
+                msg = cur.kind == Kind.Cat ? MonsterRigSave.SaveCat(work.cat, piv) : cur.kind == Kind.Rat ? MonsterRigSave.SaveRat(work.cat, piv) : MonsterRigSave.SaveHuman(work.human, piv);
             }
             status = "반영함 · " + msg;
             Debug.Log($"[리깅 툴] {cur.code} 게임에 반영 ({msg})");
