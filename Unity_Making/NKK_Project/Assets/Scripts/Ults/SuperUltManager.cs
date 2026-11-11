@@ -327,7 +327,7 @@ namespace NKK.Ults
                 float p = t >= Ta && punchFinish ? (t - Ta) / punchTime : t >= Te && t < Tc ? (t - Te) / punchTime : 1;
                 frame.localScale = Vector3.one * Mathf.Lerp(punchFrom, 1, Ease(Mathf.Clamp01(p)));
                 c.uiShake = Mathf.Max(0, c.uiShake - Time.unscaledDeltaTime * 90);
-                frame.anchoredPosition = c.uiShake > 0 ? Random.insideUnitCircle * c.uiShake : Vector2.zero;
+                frame.anchoredPosition = c.uiShake > 0 && ScreenShake.On ? Random.insideUnitCircle * c.uiShake : Vector2.zero;
             }
             // 제목 띠: ② 에 들어오고 ③ 시작에 나감
             if (band)

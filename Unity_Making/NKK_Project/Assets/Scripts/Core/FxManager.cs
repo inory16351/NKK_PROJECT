@@ -608,7 +608,7 @@ namespace NKK
         }
 
         // ── 화면 ──
-        public void Shake(float v) => shake = Mathf.Min(shakeMax, shake + v);
+        public void Shake(float v) { if (ScreenShake.On) shake = Mathf.Min(shakeMax, shake + v); }   // 설정에서 끄면 무시
         public void Hitstop(float t) => hitstopT = Mathf.Max(hitstopT, t);
 
         // ── 체력바 (물건·사람이 매 프레임 요청) ──
@@ -729,7 +729,7 @@ namespace NKK
                 var c = g.col; c.a *= a; g.r.color = c;
             }
             // 흔들림
-            shake = Mathf.Max(0, shake - dt * 1.6f);
+            shake = ScreenShake.On ? Mathf.Max(0, shake - dt * 1.6f) : 0;   // 흔들리는 중에 꺼도 바로 멈춤
             if (cam) cam.shakeOffset = shake > 0 ? new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0) * shake * shake * 40 * World.U : Vector3.zero;
         }
     }

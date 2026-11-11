@@ -52,7 +52,7 @@ namespace NKK.Lobby
                     frame.localScale = Vector3.one * Mathf.Lerp(trans.punchFrom, 1, p);
                     CutFx.Alpha(flash, 1 - p);
                     float sh = s.shake * Mathf.Max(0, 1 - x / Mathf.Max(0.01f, s.shakeTime));
-                    frame.anchoredPosition = sh > 0 ? Random.insideUnitCircle * sh : Vector2.zero;
+                    frame.anchoredPosition = sh > 0 && ScreenShake.On ? Random.insideUnitCircle * sh : Vector2.zero;
                     snow.Tick(Time.unscaledDeltaTime);
                     yield return null;
                 }

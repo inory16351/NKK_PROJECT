@@ -193,7 +193,7 @@ namespace NKK.Lobby
             if (stage) { stage.anchoredPosition = Vector2.zero; stage.localScale = Vector3.one; }
         }
 
-        void Shake(float amount) { if (stage) stage.anchoredPosition = Random.insideUnitCircle * amount; }
+        void Shake(float amount) { if (stage) stage.anchoredPosition = ScreenShake.On ? Random.insideUnitCircle * amount : Vector2.zero; }
 
         // 컷 전환 (CutFx, 고유 컷씬과 같은 방식): 끝 = 앞으로 빨려 들며 하얗게 · 시작 = 하얀 화면에서 크게 시작해 자리 잡음
         bool Stopping() => skipping;

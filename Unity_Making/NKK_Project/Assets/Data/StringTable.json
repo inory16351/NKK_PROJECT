@@ -45629,6 +45629,45 @@
    "fr": "Étage {n} franchi ! Tu as atteint le sommet !",
    "de": "Ebene {n} geschafft! Du bist ganz oben angekommen!",
    "ar": "تجاوزت الطابق {n}! وصلت إلى القمة!"
+  },
+  {
+   "string_key": 8000649,
+   "ko": "화면 흔들림",
+   "en": "Screen Shake",
+   "ja": "画面の揺れ",
+   "zh": "屏幕震动",
+   "pt": "Tremor da Tela",
+   "es": "Vibración de Pantalla",
+   "ru": "Тряска экрана",
+   "fr": "Tremblement de l'écran",
+   "de": "Bildschirmwackeln",
+   "ar": "اهتزاز الشاشة"
+  },
+  {
+   "string_key": 8000650,
+   "ko": "켜짐",
+   "en": "On",
+   "ja": "オン",
+   "zh": "开",
+   "pt": "Ligado",
+   "es": "Activado",
+   "ru": "Вкл.",
+   "fr": "Activé",
+   "de": "An",
+   "ar": "تشغيل"
+  },
+  {
+   "string_key": 8000651,
+   "ko": "꺼짐",
+   "en": "Off",
+   "ja": "オフ",
+   "zh": "关",
+   "pt": "Desligado",
+   "es": "Desactivado",
+   "ru": "Выкл.",
+   "fr": "Désactivé",
+   "de": "Aus",
+   "ar": "إيقاف"
   }
  ]
 }
