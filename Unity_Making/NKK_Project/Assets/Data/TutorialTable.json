@@ -979,6 +979,15 @@
    "line_id": 20,
    "step_id": "g_boss_ult",
    "speaker_id": "hero",
+   "face": "surprised",
+   "text": "참! 필살기 연출 중엔 화면이 필살기 쓰는 쥐를 따라가. 화면이 움직이는 게 싫으면 Y 키로 화면 고정을 켜고 끌 수 있어!",
+   "text_sk": 3900129,
+   "highlight": ""
+  },
+  {
+   "line_id": 129,
+   "step_id": "g_boss_ult",
+   "speaker_id": "hero",
    "face": "happy",
    "text": "그럼 건투를 빈다 찍!!",
    "text_sk": 3900020,

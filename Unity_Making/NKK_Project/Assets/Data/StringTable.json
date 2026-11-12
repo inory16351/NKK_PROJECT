@@ -31201,6 +31201,19 @@
    "ar": "يمنحك محطم الفئران حبات بلوط كلما تجاوزت 10 طوابق! كما فُتحت إنجازات اللعبة المصغرة في علامة تبويب الإنجازات أيضاً."
   },
   {
+   "string_key": 3900129,
+   "ko": "참! 필살기 연출 중엔 화면이 필살기 쓰는 쥐를 따라가. 화면이 움직이는 게 싫으면 Y 키로 화면 고정을 켜고 끌 수 있어!",
+   "en": "Oh right! During an Ultimate, the screen follows the rat using it. If you don't like it moving, turn camera lock on/off with the Y key!",
+   "ja": "そうだ！必殺技の演出中は画面が使ったネズミを追いかけるよ。画面が動くのが嫌なら、Yキーでカメラ固定をON/OFFできるよ！",
+   "zh": "对了！必杀技演出时画面会跟随使用必杀技的老鼠。不喜欢画面移动的话，按Y键就能开关镜头锁定！",
+   "pt": "Ah! Durante o Ultimate, a tela segue o rato que o usa. Se não gostar do movimento, ligue ou desligue a câmera fixa com a tecla Y!",
+   "es": "¡Ah! Durante la Definitiva, la pantalla sigue a la rata que la usa. ¡Si no te gusta que se mueva, activa o desactiva la cámara fija con la tecla Y!",
+   "ru": "Ах да! Во время ульты экран следует за применяющей её крысой. Не нравится движение? Включи или выключи фиксацию камеры клавишей Y!",
+   "fr": "Ah oui ! Pendant un Ultime, l'écran suit le rat qui l'utilise. Si tu n'aimes pas que ça bouge, active ou désactive la caméra fixe avec la touche Y !",
+   "de": "Ach ja! Beim Ultimativ folgt das Bild der Ratte, die es nutzt. Magst du die Bewegung nicht, schalte den Kamerafokus per Y-Taste ein oder aus!",
+   "ar": "صحيح! أثناء عرض المهارة القاضية، تتبع الشاشة الفأر الذي يستخدمها. إن لم تعجبك حركتها، فعّل أو أوقف تثبيت الكاميرا بمفتاح Y!"
+  },
+  {
    "string_key": 4000001,
    "ko": "찍... 찍찍찍...! (우리들은 그저 이곳이 낙원인 줄만 알고 있었지...)",
    "en": "Squeak... squeak squeak squeak...! (We truly believed this place was paradise...)",
