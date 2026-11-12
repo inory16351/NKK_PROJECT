@@ -716,7 +716,7 @@ public partial class MonsterRigTool
     }
 }
 
-// '게임에서 보기': Game 씬을 플레이해서 이 보스를 테스트 소환 → 이 기술 바로 발동 (UltTestPanel 과 같은 Boss.TestSpawn · ForceAttack). 플레이를 멈추면 원래 씬으로
+// '게임에서 보기': Game 씬을 플레이해서 이 보스를 테스트 소환 → 이 기술 바로 발동 (Boss.TestSpawn · ForceAttack). 플레이를 멈추면 원래 씬으로
 [InitializeOnLoad]
 public static class MonsterRigPlayTest
 {
